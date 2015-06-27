@@ -837,8 +837,8 @@ elements:
       - osm.pbf
       - shp.zip
     parent: france
-  georgia:
-    id: georgia
+  georgia-eu:
+    id: georgia-eu
     name: Georgia (Eastern Europe)
     files:
       - osm.bz2
@@ -1799,3 +1799,543 @@ elements:
       - osm.pbf
       - shp.zip
     parent: canada
+  greenland:
+    id: greenland
+    name: Greenland
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: north-america
+  mexico:
+    id: mexico
+    name: Mexico
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: north-america
+  us:
+    id: us
+    name: United States of America
+    parent: north-america
+  alabama:
+    id: alabama
+    name: Alabama
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  alaska:
+    id: alaska
+    name: Alaska
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  arizona:
+    id: arizona
+    name: Arizona
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  arkansas:
+    id: arkansas
+    name: Arkansas
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  california:
+    id: california
+    name: California
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  colorado:
+    id: colorado
+    name: Colorado
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  connecticut:
+    id: connecticut
+    name: Connecticut
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  delaware:
+    id: delaware
+    name: Delaware
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  district-of-columbia:
+    id: district-of-columbia
+    name: District of Columbia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  florida:
+    id: florida
+    name: Florida
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  georgia-us:
+    id: georgia-us
+    name: Georgia (US State)
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  hawaii:
+    id: hawaii
+    name: Hawaii
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  idaho:
+    id: idaho
+    name: Idaho
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  illinois:
+    id: illinois
+    name: Illinois
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  indiana:
+    id: indiana
+    name: Indiana
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  iowa:
+    id: iowa
+    name: Iowa
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  kansas:
+    id: kansas
+    name: Kansas
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  kentucky:
+    id: kentucky
+    name: Kentucky
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  louisiana:
+    id: louisiana
+    name: Louisiana
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  maine:
+    id: maine
+    name: Maine
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  maryland:
+    id: maryland
+    name: Maryland
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  massachusetts:
+    id: massachusetts
+    name: Massachusetts
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  michigan:
+    id: michigan
+    name: Michigan
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  minnesota:
+    id: minnesota
+    name: Minnesota
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  mississippi:
+    id: mississippi
+    name: Mississippi
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  missouri:
+    id: missouri
+    name: Missouri
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  montana:
+    id: montana
+    name: Montana
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  nebraska:
+    id: nebraska
+    name: Nebraska
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  nevada:
+    id: nevada
+    name: Nevada
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  new-hampshire:
+    id: new-hampshire
+    name: New Hampshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  new-jersey:
+    id: new-jersey
+    name: New Jersey
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  new-mexico:
+    id: new-mexico
+    name: New Mexico
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  new-york:
+    id: new-york
+    name: New York
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  north-carolina:
+    id: north-carolina
+    name: North Carolina
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  north-dakota:
+    id: north-dakota
+    name: North Dakota
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  ohio:
+    id: ohio
+    name: Ohio
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  oklahoma:
+    id: oklahoma
+    name: Oklahoma
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  oregon:
+    id: oregon
+    name: Oregon
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  pennsylvania:
+    id: pennsylvania
+    name: Pennsylvania
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  rhode-island:
+    id: rhode-island
+    name: Rhode Island
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  south-carolina:
+    id: south-carolina
+    name: South Carolina
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  south-dakota:
+    id: south-dakota
+    name: South Dakota
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  tennessee:
+    id: tennessee
+    name: Tennessee
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  texas:
+    id: texas
+    name: Texas
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  utah:
+    id: utah
+    name: Utah
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  vermont:
+    id: vermont
+    name: Vermont
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  virginia:
+    id: virginia
+    name: Virginia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  washington:
+    id: washington
+    name: Washington
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  west-virginia:
+    id: west-virginia
+    name: West Virginia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  wisconsin:
+    id: wisconsin
+    name: Wisconsin
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  wyoming:
+    id: wyoming
+    name: Wyoming
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: us
+  us-midwest:
+    id: us-midwest
+    name: US Midwest
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: north-america
+  us-northeast:
+    id: us-northeast
+    name: US Northeast
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: north-america
+  us-pacific:
+    id: us-pacific
+    name: US Pacific
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: north-america
+  us-south:
+    id: us-south
+    name: US South
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: north-america
+  us-west:
+    id: us-west
+    name: US West
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: north-america
+  south-america:
+    id: south-america
+    name: South America
+    files:
+      - osm.bz2
+      - osm.pbf
+  argentina:
+    id: argentina
+    name: Argentina
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: south-america
+  bolivia:
+    id: bolivia
+    name: Bolivia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: south-america
+  brazil:
+    id: brazil
+    name: Brazil
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: south-america
+  chile:
+    id: chile
+    name: Chile
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: south-america
+  colombia:
+    id: colombia
+    name: Colombia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: south-america
+  ecuador:
+    id: ecuador
+    name: Ecuador
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: south-america
+  paraguay:
+    id: paraguay
+    name: Paraguay
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: south-america
+  peru:
+    id: peru
+    name: Peru
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: south-america
+  uruguay:
+    id: uruguay
+    name : Uruguay
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: south-america
