@@ -1,0 +1,636 @@
+baseURL: 'http://download.geofabrik.de'
+elements:
+  africa:
+    id: africa
+    name: Africa
+    files:
+      - osm.bz2
+      - osm.pbf
+  botswana:
+    id: botswana
+    name: Botswana
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  burkina-faso:
+    id: burkina-faso
+    name: Burkina Faso
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: africa
+  cameroon:
+    id: cameroon
+    name: Cameroon
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: africa
+  canary-islands:
+    id: canary-islands
+    name: Canary Islands
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  congo-democratic-republic:
+    id: congo-democratic-republic
+    name: Congo (Democratic Republic)
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: africa
+  egypt:
+    id: egypt
+    name: Egypt
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: africa
+  ethiopia:
+    id: ethiopia
+    name: Ethiopia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  guinea:
+    id: guinea
+    name: Guinea
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  guinea-bissau:
+    id: guinea-bissau
+    name: Guinea-Bissau
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: africa
+  ivory-coast:
+    id: ivory-coast
+    name: Ivory Coast
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  kenya:
+    id: kenya
+    name: Kenya
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  lesotho:
+    id: lesotho
+    name: Lesotho
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  liberia:
+    id: liberia
+    name: Liberia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  libya:
+    id: libya
+    name: Libya
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  madagascar:
+    id: madagascar
+    name: Madagascar
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  morocco:
+    id: morocco
+    name: Morocco
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  nigeria:
+    id: nigeria
+    name: Nigeria
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: africa
+  sierra-leone:
+    id: sierra-leone
+    name: Sierra Leone
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  somalia:
+    id: somalia
+    name: Somalia
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: africa
+  south-africa-and-lesotho:
+    id: south-africa-and-lesotho
+    name: South Africa (includes Lesotho)
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  tanzania:
+    id: tanzania
+    name: Tanzania
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: africa
+  antarctica:
+    id: antarctica
+    name: Antarctica
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+  asia:
+    id: asia
+    name: Asia
+    files:
+      - osm.bz2
+      - osm.pbf
+  azerbaijan:
+    id: azerbaijan
+    name: Azerbaijan
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  bangladesh:
+    id: bangladesh
+    name: Bangladesh
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  china:
+    id: china
+    name: China
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  gcc-states:
+    id: gcc-states
+    name: GCC States
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  india:
+    id: india
+    name: India
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  indonesia:
+    id: indonesia
+    name: Indonesia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  iran:
+    id: iran
+    name: Iran
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  irak:
+    id: irak
+    name: Irak
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  israel-and-palestine:
+    id: israel-and-palestine
+    name: Israel and Palestine
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  japan:
+    id: japan
+    name: Japan
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  jordan:
+    id: jordan
+    name: Jordan
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  kazakhstan:
+    id: kazakhstan
+    name: Kazakhstan
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  kyrgyzstan:
+    id: kyrgyzstan
+    name: Kyrgyzstan
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  lebanon:
+    id: lebanon
+    name: Lebanon
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  malaysia-singapore-brunei:
+    id: malaysia-singapore-brunei
+    name: Malaysia, Singapore, and Brunei
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: asia
+  mongolia:
+    id: mongolia
+    name: Mongolia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  nepal:
+    id: nepal
+    name: Nepal
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  north-korea:
+    id: north-korea
+    name: North Korea
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  pakistan:
+    id: pakistan
+    name: Pakistan
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  philippines:
+    id: philippines
+    name: Philippines
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  russia-asian-part:
+    id: russia-asian-part
+    name: Russia (Asian part)
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  south-korea:
+    id: south-korea
+    name: South Korea
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  sri-lanka:
+    id: sri-lanka
+    name: Sri Lanka
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  syria:
+    id: syria
+    name: Syria
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  taiwan:
+    id: taiwan
+    name: Taiwan
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  tajikistan:
+    id: tajikistan
+    name: Tajikistan
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: asia
+  thailand:
+    id: thailand
+    name: Thailand
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  turkmenistan:
+    id: turkmenistan
+    name: Turkmenistan
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  uzbekistan:
+    id: uzbekistan
+    name: Uzbekistan
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  vietnam:
+    id: vietnam
+    name: Vietnam
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: asia
+  australia-oceania:
+    id: australia-oceania
+    name: Australia and Oceania
+    files:
+      - osm.bz2
+      - osm.pbf
+  australia:
+    id: australia
+    name: Australia
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: australia-oceania
+  fiji:
+    id: fiji
+    name: Fiji
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: australia-oceania
+  new-caledonia:
+    id: new-caledonia
+    name: New Caledonia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: australia-oceania
+  new-zealand:
+    id: new-zealand
+    name: New Zealand
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: australia-oceania
+  central-america:
+    id: central-america
+    name: Central America
+    files:
+      - osm.bz2
+      - osm.pbf
+  belize:
+    id: belize
+    name: Belize
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: central-america
+  cuba:
+    id: cuba
+    name: Cuba
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: central-america
+  guatemala:
+    id: guatemala
+    name: Guatemala
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: central-america
+  haiti-and-domrep:
+    id: haiti-and-domrep
+    name: Haiti and Dominican Republic
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: central-america
+  europe:
+    id: europe
+    name: Europe
+    files:
+      - osm.bz2
+      - osm.pbf
+  albania:
+    id: albania
+    name: Albania
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  andorra:
+    id: andorra
+    name: Andorra
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  austria:
+    id: austria
+    name: Austria
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  azores:
+    id: azores
+    name: Azores
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  belarus:
+    id: belarus
+    name: Belarus
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  belgium:
+    id: belgium
+    name: Belgium
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  bosnia-herzegovina:
+    id: bosnia-herzegovina
+    name: Bosnia-Herzegovina
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  bulgaria:
+    id: bulgaria
+    name: Bulgaria
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  croatia:
+    id: croatia
+    name: Croatia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  cyprus:
+    id: cyprus
+    name: Cyprus
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  czech-republic:
+    id: czech-republic
+    name: Czech Republic
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  denmark:
+    id: denmark
+    name: Denmark
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  estonia:
+    id: estonia
+    name: Estonia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  faroe-islands:
+    id: faroe-islands
+    name: Faroe Islands
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  finland:
+    id: finland
+    name: Finland
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  france:
+    id: france
+    name: France
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: europe
+  alsace:
+    id: alsace
+    name: Alsace
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
