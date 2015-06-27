@@ -1682,4 +1682,120 @@ elements:
       - osm.bz2
       - osm.pbf
     parent: europe
-  
+  north-america:
+    id: north-america
+    name: North America
+    files:
+      - osm.bz2
+      - osm.pbf
+  canada:
+    id: canada
+    name: Canada
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: north-america
+  alberta:
+    id: alberta
+    name: Alberta
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
+  british-columbia:
+    id: british-columbia
+    name: British Columbia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
+  manitoba:
+    id: manitoba
+    name: Manitoba
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
+  new-brunswick:
+    id: new-brunswick
+    name: New Brunswick
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
+  newfoundland-and-labrador:
+    id: newfoundland-and-labrador
+    name: Newfoundland and Labrador
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
+  northwest-territories:
+    id: northwest-territories
+    name: Northwest Territories
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
+  nova-scotia:
+    id: nova-scotia
+    name: Nova Scotia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
+  nunavut:
+    id: nunavut
+    name: Nunavut
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
+  ontario:
+    id: ontario
+    name: Ontario
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
+  prince-edward-island:
+    id: prince-edward-island
+    name: Prince Edward Island
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
+  quebec:
+    id: quebec
+    name: Quebec
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
+  saskatchewan:
+    id: saskatchewan
+    name: Saskatchewan
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
+  yukon:
+    id: yukon
+    name: Yukon
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: canada
