@@ -3,9 +3,18 @@
 *.a
 *.so
 
+download-geofabrik*.zip
+download-geofabrik
+
 # Folders
 _obj
 _test
+darwin32
+darwin64
+linux32
+linux64
+win32
+win64
 
 # Architecture specific extensions/prefixes
 *.[568vq]
