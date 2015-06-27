@@ -634,3 +634,206 @@ elements:
       - osm.pbf
       - shp.zip
     parent: france
+  aquitaine:
+    id: aquitaine
+    name: Aquitaine
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  auvergne:
+    id: auvergne
+    name: Auvergne
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  basse-normandie:
+    id: basse-normandie
+    name: Basse-Normandie
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  bourgogne:
+    id: bourgogne
+    name: Bourgogne
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  bretagne:
+    id: bretagne
+    name: Bretagne
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  centre:
+    id: centre
+    name: Centre
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  champagne-ardenne:
+    id: champagne-ardenne
+    name: Champagne Ardenne
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  corse:
+    id: corse
+    name: Corse
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  franche-comte:
+    id: franche-comte
+    name: Franche Comte
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  guadeloupe:
+    id: guadeloupe
+    name: Guadeloupe
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: france
+  guyane:
+    id: guyane
+    name: Guyane
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: france
+  haute-normandie:
+    id: haute-normandie
+    name: Haute-Normandie
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  ile-de-france:
+    id: ile-de-france
+    name: Ile-de-France
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  languedoc-roussillon:
+    id: languedoc-roussillon
+    name: Languedoc-Roussillon
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  limousin:
+    id: limousin
+    name: Limousin
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  lorraine:
+    id: lorraine
+    name: Lorraine
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  martinique:
+    id: martinique
+    name: Martinique
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: france
+  mayotte:
+    id: mayotte
+    name: Mayotte
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: france
+  midi-pyrenees:
+    id: midi-pyrenees
+    name: Midi-Pyrenees
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  nord-pas-de-calais:
+    id: nord-pas-de-calais
+    name: Nord-Pas-de-Calais
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  pays-de-la-loire:
+    id: pays-de-la-loire
+    name: Pays de la Loire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  picardie:
+    id: picardie
+    name: Picardie
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  poitou-charentes:
+    id: poitou-charentes
+    name: Poitou-Charentes
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  provence-alpes-cote-d-azur:
+    id: provence-alpes-cote-d-azur
+    name : Provence Alpes-Cote-d'Azur
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
+  reunion:
+    id: reunion
+    name: Reunion
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: france
+  rhone-alpes:
+    id: rhone-alpes
+    name: Rhone-Alpes
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: france
