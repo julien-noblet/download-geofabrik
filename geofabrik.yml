@@ -837,3 +837,586 @@ elements:
       - osm.pbf
       - shp.zip
     parent: france
+  georgia:
+    id: georgia
+    name: Georgia (Eastern Europe)
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  germany:
+    id: germany
+    name: Germany
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: europe
+  baden-wuerttemberg:
+    id: baden-wuerttemberg
+    name: Baden-Württemberg
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  freiburg-regbez:
+    id: freiburg-regbez
+    name: Regierungsbezirk Freiburg
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: baden-wuerttemberg
+  karlsruhe-regbez:
+    id: karlsruhe-regbez
+    name: Regierungsbezirk Karlsruhe
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: baden-wuerttemberg
+  stuttgart-regbez:
+    id: stuttgart-regbez
+    name: Regierungsbezirk Stuttgart
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: baden-wuerttemberg
+  tuebingen-regbez:
+    id: tuebingen-regbez
+    name: Regierungsbezirk Tübingen
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: baden-wuerttemberg
+  bayern:
+    id: bayern
+    name: Bayern
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  mittelfranken:
+    id: mittelfranken
+    name: Mittelfranken
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: bayern
+  niederbayern:
+    id: niederbayern
+    name: Niederbayern
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: bayern
+  oberbayern:
+    id: oberbayern
+    name: Oberbayern
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: bayern
+  oberfranken:
+    id: oberfranken
+    name: Oberfranken
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: bayern
+  oberpfalz:
+    id: oberpfalz
+    name: Oberpfalz
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: bayern
+  schwaben:
+    id: schwaben
+    name: Schwaben
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: bayern
+  unterfranken:
+    id: unterfranken
+    name: Unterfranken
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: bayern
+  berlin:
+    id: berlin
+    name: Berlin
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  brandenburg:
+    id: brandenburg
+    name: Brandenburg
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  bremen:
+    id: bremen
+    name: Bremen
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  hamburg:
+    id: hamburg
+    name: Hamburg
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  hessen:
+    id: hessen
+    name: Hessen
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  mecklenburg-vorpommern:
+    id: mecklenburg-vorpommern
+    name: Mecklenburg-Vorpommern
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  niedersachsen:
+    id: niedersachsen
+    name: Niedersachsen
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  nordrhein-westfalen:
+    id: nordrhein-westfalen
+    name: Nordrhein-Westfalen
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  arnsberg-regbez:
+    id: arnsberg-regbez
+    name: Regierungsbezirk Arnsberg
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: nordrhein-westfalen
+  detmold-regbez:
+    id: detmold-regbez
+    name: Regierungsbezirk Detmold
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: nordrhein-westfalen
+  duesseldorf-regbez:
+    id: duesseldorf-regbez
+    name: Regierungsbezirk Düsseldorf
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: nordrhein-westfalen
+  koeln-regbez:
+    id: koeln-regbez
+    name: Regierungsbezirk Köln
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: nordrhein-westfalen
+  muenster-regbez:
+    id: muenster-regbez
+    name: Regierungsbezirk Münster
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: nordrhein-westfalen
+  rheinland-pfalz:
+    id: rheinland-pfalz
+    name: Rheinland-Pfalz
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  saarland:
+    id: saarland
+    name: Saarland
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  sachsen:
+    id: sachsen
+    name: Sachsen
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  sachsen-anhalt:
+    id: sachsen-anhalt
+    name: Sachsen-Anhalt
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  schleswig-holstein:
+    id: schleswig-holstein
+    name: Schleswig-Holstein
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  thueringen:
+    id: thueringen
+    name: Thüringen
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: germany
+  great-britain:
+    id: great-britain
+    name: Great Britain
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  england:
+    id: england
+    name: England
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: great-britain
+  buckinghamshire:
+    id: buckinghamshire
+    name: Buckinghamshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  cambridgeshire:
+    id: cambridgeshire
+    name: Cambridgeshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  cheshire:
+    id: cheshire
+    name: Cheshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  cornwall:
+    id: cornwall
+    name: Cornwall
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  cumbria:
+    id: cumbria
+    name: Cumbria
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  derbyshire:
+    id: derbyshire
+    name: Derbyshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  devon:
+    id: devon
+    name: Devon
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  dorset:
+    id: dorset
+    name: Dorset
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  east-sussex:
+    id: east-sussex
+    name: East Sussex
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  east-yorkshire-with-hull:
+    id: east-yorkshire-with-hull
+    name: East Yorkshire with Hull
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  essex:
+    id: essex
+    name: Essex
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  gloucestershire:
+    id: gloucestershire
+    name: Gloucestershire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  greater-london:
+    id: greater-london
+    name: Greater London
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  greater-manchester:
+    id: greater-manchester
+    name: Greater Manchester
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  hampshire:
+    id: hampshire
+    name: Hampshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  herefordshire:
+    id: herefordshire
+    name: Herefordshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  hertfordshire:
+    id: hertfordshire
+    name: Hertfordshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  isle-of-wight:
+    id: isle-of-wight
+    name: Isle of Wight
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  kent:
+    id: kent
+    name: Kent
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  lancashire:
+    id: lancashire
+    name: Lancashire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  leicestershire:
+    id: leicestershire
+    name: Leicestershire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  norfolk:
+    id: norfolk
+    name: Norfolk
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  north-yorkshire:
+    id: north-yorkshire
+    name: North Yorkshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  nottinghamshire:
+    id: nottinghamshire
+    name: Nottinghamshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  oxfordshire:
+    id: oxfordshire
+    name: Oxfordshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  shropshire:
+    id: shropshire
+    name: Shropshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  somerset:
+    id: somerset
+    name: Somerset
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  south-yorkshire:
+    id: south-yorkshire
+    name: South Yorkshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  staffordshire:
+    id: staffordshire
+    name: Staffordshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  suffolk:
+    id: suffolk
+    name: Suffolk
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  surrey:
+    id: surrey
+    name: Surrey
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  west-midlands:
+    id: west-midlands
+    name: West Midlands
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  west-sussex:
+    id: west-sussex
+    name: West Sussex
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  west-yorkshire:
+    id: west-yorkshire
+    name: West Yorkshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  wiltshire:
+    id: wiltshire
+    name: Wiltshire
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: england
+  scotland:
+    id: scotland
+    name: Scotland
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: great-britain
+  wales:
+    id: wales
+    name: Wales
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: great-britain
