@@ -1420,3 +1420,266 @@ elements:
       - osm.pbf
       - shp.zip
     parent: great-britain
+  greece:
+    id: greece
+    name: Greece
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  hungary:
+    id: hungary
+    name: Hungary
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  iceland:
+    id: iceland
+    name: Iceland
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  ireland-and-northern-ireland:
+    id: ireland-and-northern-ireland
+    name: Ireland and Northern Ireland
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  isle-of-man:
+    id: isle-of-man
+    name: Isle of Man
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  italy:
+    id: italy
+    name: Italy
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  kosovo:
+    id: kosovo
+    name: Kosovo
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  latvia:
+    id: latvia
+    name: Latvia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  liechtenstein:
+    id: liechtenstein
+    name: Liechtenstein
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  lithuania:
+    id: lithuania
+    name: Lithuania
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  luxembourg:
+    id: luxembourg
+    name: Luxembourg
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  macedonia:
+    id: macedonia
+    name: Macedonia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  malta:
+    id: malta
+    name: Malta
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  moldova:
+    id: moldova
+    name: Moldova
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  monaco:
+    id: monaco
+    name: Monaco
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  montenegro:
+    id: montenegro
+    name: Montenegro
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  netherlands:
+    id: netherlands
+    name: Netherlands
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  norway:
+    id: norway
+    name: Norway
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  poland:
+    id: poland
+    name: Poland
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  portugal:
+    id: portugal
+    name: Portugal
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  romania:
+    id: romania
+    name: Romania
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  russia-european-part:
+    id: russia-european-part
+    name: Russia (European part)
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  serbia:
+    id: serbia
+    name: Serbia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  slovakia:
+    id: slovakia
+    name: Slovakia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  slovenia:
+    id: slovenia
+    name: Slovenia
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  spain:
+    id: spain
+    name: Spain
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  sweden:
+    id: sweden
+    name: Sweden
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  switzerland:
+    id: switzerland
+    name: Switzerland
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  turkey:
+    id: turkey
+    name: Turkey
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  ukraine:
+    id: ukraine
+    name: Ukraine
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  alps:
+    id: alps
+    name: Alps
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: europe
+  british-isles:
+    id: british-isles
+    name: British Isles
+    files:
+      - osm.bz2
+      - osm.pbf
+      - shp.zip
+    parent: europe
+  dach:
+    id: dach
+    name: Germany, Austria, Switzerland
+    files:
+      - osm.bz2
+      - osm.pbf
+    parent: europe
+  
