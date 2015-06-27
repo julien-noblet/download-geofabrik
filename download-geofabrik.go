@@ -87,7 +87,12 @@ func findElem(c *config, e string) element {
 func elem2preURL(c *config, e element) string {
 	var res string
 	if e.hasParent() {
-		res = elem2preURL(c, findElem(c, e.Parent)) + "/" + e.ID
+		res = elem2preURL(c, findElem(c, e.Parent)) + "/"
+		if e.ID == "georgia-eu" || e.ID == "georgia-us" {
+			res = res + "georgia"
+		} else {
+			res = res + e.ID
+		}
 	} else {
 		res = c.BaseURL + "/" + e.ID
 	}
@@ -95,7 +100,9 @@ func elem2preURL(c *config, e element) string {
 }
 
 func elem2URL(c *config, e element, ext string) string {
-	res := elem2preURL(c, e) + "-latest." + ext
+	res := elem2preURL(c, e)
+
+	res += "-latest." + ext
 	if !stringInSlice(ext, e.Files) {
 		fmt.Println("Error!!!\n" + res + " not exist")
 	}
