@@ -52,7 +52,14 @@ func miniFormats(s []string) string {
 
 func downloadFromURL(url string) {
 	tokens := strings.Split(url, "/")
-	fileName := tokens[len(tokens)-1]
+	fileName := ""
+	if (tokens[len(tokens)-1] == "state.txt"){// exception, another...
+		temp := strings.Split(tokens[len(tokens)-2],"-")
+		temp = temp[:len(temp)-1] //pop
+		fileName += strings.Join(temp,"-")+".state.txt"
+	}	else{
+		fileName += tokens[len(tokens)-1]
+	}
 	fmt.Println("Downloading", url, "to", fileName)
 
 	// TODO: check file existence first with io.IsExist
@@ -101,8 +108,11 @@ func elem2preURL(c *config, e element) string {
 
 func elem2URL(c *config, e element, ext string) string {
 	res := elem2preURL(c, e)
-
-	res += "-latest." + ext
+	if (ext == "state"){
+		res += "-updates/state.txt"
+	}	else {
+		res += "-latest." + ext
+	}
 	if !stringInSlice(ext, e.Files) {
 		fmt.Println("Error!!!\n" + res + " not exist")
 	}
@@ -138,10 +148,12 @@ func listAllRegions(c config) {
 
 func main() {
 	configFile := flag.String("config", "./geofabrik.yml", "Config for downloading OSMFiles")
-	nodownload := flag.Bool("n", false, "Download")
+	nodownload := flag.Bool("n", false, "Dont download")
 	osmBz2 := flag.Bool("osm.bz2", false, "Download osm.bz2 if available")
 	shpZip := flag.Bool("shp.zip", false, "Download shp.zip if available")
 	osmPbf := flag.Bool("osm.pbf", false, "Download osm.pbf (default)")
+	state := flag.Bool("state", false, "Download state.txt file")
+	poly := flag.Bool("poly", false, "Download poly file")
 	list := flag.Bool("list", false, "list all elements")
 	update := flag.Bool("update", false, "Update geofabrik.yml from github")
 
@@ -182,6 +194,12 @@ func main() {
 	}
 	if *shpZip {
 		formatFile = append(formatFile, "shp.zip")
+	}
+	if *state {
+		formatFile = append(formatFile, "state")
+	}
+	if *poly {
+		formatFile = append(formatFile, "poly")
 	}
 	if len(formatFile) == 0 {
 		formatFile = append(formatFile, "osm.pbf")
