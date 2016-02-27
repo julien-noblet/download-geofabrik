@@ -1,7 +1,6 @@
 package main
 
 import (
-	//"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -36,9 +35,9 @@ var (
 	Fconfig    = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String()
 	nodownload = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
 	verbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
-	update     = app.Command("update", "Update geofabrik.yml from github")
-	url = update.Flag("url","Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml").String()
-	//TODO specify source as flag or arg
+
+	update = app.Command("update", "Update geofabrik.yml from github")
+	url    = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml").String()
 
 	list = app.Command("list", "Show elements available")
 
@@ -104,15 +103,6 @@ func downloadFromURL(url string, fileName string) {
 		}
 	}
 }
-
-func findElem(c config, e string) element {
-	res := c.Elements[e]
-	if res.ID == "" {
-		log.Fatalln(" "+e+" is not in config! Please use \"list\" command!")
-	}
-	return res
-}
-
 func elem2preURL(c config, e element) string {
 	var res string
 	if e.hasParent() {
@@ -145,53 +135,13 @@ func elem2URL(c config, e element, ext string) string {
 	return res
 }
 
-func stringInSlice(a string, list []string) bool {
-	for _, b := range list {
-		if b == a {
-			return true
-		}
+func findElem(c config, e string) element {
+	res := c.Elements[e]
+	if res.ID == "" {
+		log.Fatalln(" " + e + " is not in config! Please use \"list\" command!")
 	}
-	return false
+	return res
 }
-
-func loadConfig(configFile string) config {
-	filename, _ := filepath.Abs(configFile)
-	file, err := ioutil.ReadFile(filename)
-	if err != nil {
-		log.Fatalln(" File error: %v", err)
-		os.Exit(1)
-	}
-	var myConfig config
-	err = yaml.Unmarshal(file, &myConfig)
-	if err != nil {
-		panic(err)
-	}
-	return myConfig
-
-}
-func listAllRegions(c config) {
-	table := tablewriter.NewWriter(os.Stdout)
-	table.SetAlignment(tablewriter.ALIGN_LEFT)
-	table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
-	keys := make(sort.StringSlice, len(c.Elements))
-	i := 0
-	for k := range c.Elements {
-		keys[i] = k
-		i++
-	}
-	keys.Sort()
-	for _, item := range keys {
-		table.Append([]string{item, c.Elements[c.Elements[item].Parent].Name, c.Elements[item].Name, miniFormats(c.Elements[item].Files)})
-	}
-	table.Render()
-	fmt.Printf("Total elements: %#v\n", len(c.Elements))
-}
-
-func UpdateConfig(url string, myconfig string) {
-	downloadFromURL(url, myconfig)
-	fmt.Println("Congratulation, you have the latest geofabrik.yml\n")
-}
-
 func getFormats() []string {
 	var formatFile []string
 	if *dosmPbf {
@@ -213,6 +163,53 @@ func getFormats() []string {
 		formatFile = append(formatFile, "osm.pbf")
 	}
 	return formatFile
+}
+
+func listAllRegions(c config) {
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetAlignment(tablewriter.ALIGN_LEFT)
+	table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
+	keys := make(sort.StringSlice, len(c.Elements))
+	i := 0
+	for k := range c.Elements {
+		keys[i] = k
+		i++
+	}
+	keys.Sort()
+	for _, item := range keys {
+		table.Append([]string{item, c.Elements[c.Elements[item].Parent].Name, c.Elements[item].Name, miniFormats(c.Elements[item].Files)})
+	}
+	table.Render()
+	fmt.Printf("Total elements: %#v\n", len(c.Elements))
+}
+
+func loadConfig(configFile string) config {
+	filename, _ := filepath.Abs(configFile)
+	file, err := ioutil.ReadFile(filename)
+	if err != nil {
+		log.Fatalln(" File error: %v", err)
+		os.Exit(1)
+	}
+	var myConfig config
+	err = yaml.Unmarshal(file, &myConfig)
+	if err != nil {
+		panic(err)
+	}
+	return myConfig
+
+}
+func stringInSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
+}
+
+func UpdateConfig(url string, myconfig string) {
+	downloadFromURL(url, myconfig)
+	fmt.Println("Congratulation, you have the latest geofabrik.yml\n")
 }
 
 func main() {
