@@ -1,4 +1,5 @@
 baseURL: 'http://download.geofabrik.de'
+statefile: -updates/state.txt
 elements:
   africa:
     id: africa
