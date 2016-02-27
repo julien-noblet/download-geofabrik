@@ -4,8 +4,18 @@ go:
   - 1.5
   - 1.6
   - tip
+
+env:
+  - GIMME_OS=linux GIMME_ARCH=386
+  - GIMME_OS=linux GIMME_ARCH=amd64
+  - GIMME_OS=linux GIMME_ARCH=arm
+  - GIMME_OS=darwin GIMME_ARCH=386
+  - GIMME_OS=darwin GIMME_ARCH=amd64
+  - GIMME_OS=windows GIMME_ARCH=386
+  - GIMME_OS=windows GIMME_ARCH=amd64
+
 install:
-  - go get github.com/olekukonko/tablewriter
-  - go get gopkg.in/alecthomas/kingpin.v2
-  - go get gopkg.in/yaml.v2
-script: make all
+    - go get -d -v ./...
+
+script:
+    - go build -v ./...
