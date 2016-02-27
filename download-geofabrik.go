@@ -19,6 +19,7 @@ import (
 
 type config struct {
 	BaseURL  string             `yaml:"baseURL"`
+	StateFileLoc string         `yaml:"statefile"`
 	Elements map[string]element `yaml:"elements,flow"`
 }
 
@@ -122,7 +123,7 @@ func elem2URL(c config, e element, ext string) string {
 	res := elem2preURL(c, e)
 	switch ext {
 	case "state":
-		res += "-updates/state.txt"
+		res += c.StateFileLoc
 	case "poly":
 		res += "." + ext
 	default:
