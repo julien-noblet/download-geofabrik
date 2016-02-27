@@ -839,6 +839,7 @@ elements:
     parent: france
   georgia-eu:
     id: georgia-eu
+    file: georgia
     name: Georgia (Eastern Europe)
     files:
       - osm.bz2
@@ -1901,6 +1902,7 @@ elements:
     parent: us
   georgia-us:
     id: georgia-us
+    file: georgia
     name: Georgia (US State)
     files:
       - osm.bz2

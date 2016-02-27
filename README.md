@@ -2,21 +2,52 @@
 
 [![Join the chat at https://gitter.im/julien-noblet/download-geofabrik](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/julien-noblet/download-geofabrik?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## Version 2
+Warning! command line have changed from V1
+see [Usage](#Usage)
+
 ## Usage
 ```shell
-./download-geofabrik element
+./download-geofabrik download element
 ```
 where ```element``` is one of geofabrik's files.
 ```shell
-./download-geofabrik -h
-Usage of ./download-geofabrik:
-  -config="./geofabrik.yml": Config for downloading OSMFiles
-  -n=false: Don't download (testing only)
-  -list=false: list all elements
-  -osm.bz2=false: Download osm.bz2 if available
-  -osm.pbf=false: Download osm.pbf (default)
-  -shp.zip=false: Download shp.zip if available
-  -update=false: Update geofabrik.yml from github
+./download-geofabrik --help-long
+usage: download-geofabrik [<flags>] <command> [<args> ...]
+
+A command-line tool for downloading OSM files.
+
+Flags:
+      --help        Show context-sensitive help (also try --help-long and
+                    --help-man).
+  -c, --config="./geofabrik.yml"
+                    Set Config file.
+  -n, --nodownload  Do not download file (test only)
+  -v, --verbose     Be verbose
+
+Commands:
+  help [<command>...]
+    Show help.
+
+
+  update [<flags>]
+    Update geofabrik.yml from github
+
+    --url="https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml"
+      Url for config source
+
+  list
+    Show elements available
+
+
+  download [<flags>] <element>
+    Download element
+
+    -B, --osm.bz2  Download osm.bz2 if available
+    -S, --shp.zip  Download shp.zip if available
+    -P, --osm.pbf  Download osm.pbf (default)
+    -s, --state    Download state.txt file
+    -p, --poly     Download poly file
 ```
 
 ## List of elements
