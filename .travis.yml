@@ -1,9 +1,9 @@
 language: go
 
 go:
+  - 1.4
   - 1.5
   - 1.6
-  - tip
 
 env:
   - GIMME_OS=linux GIMME_ARCH=386
@@ -15,7 +15,9 @@ env:
   - GIMME_OS=windows GIMME_ARCH=amd64
 
 install:
-    - go get -d -v ./...
+  - go get -u github.com/golang/lint/golint
+  - go get -d -v ./...
 
 script:
-    - go build -v ./...
+  - golint -min_confidence=0.8 ./...
+  - go build -v ./...
