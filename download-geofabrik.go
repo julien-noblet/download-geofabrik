@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -14,89 +13,112 @@ import (
 
 	"github.com/olekukonko/tablewriter"
 
+	"gopkg.in/alecthomas/kingpin.v2"
 	"gopkg.in/yaml.v2"
 )
 
 type config struct {
 	BaseURL  string             `yaml:"baseURL"`
+	Formats map[string]format   `yaml:"formats,flow"`
 	Elements map[string]element `yaml:"elements,flow"`
 }
 
 type element struct {
 	ID     string   `yaml:"id"`
+	File   string   `yaml:"file"`
+	Meta   bool     `yaml:"meta"`
 	Name   string   `yaml:"name"`
 	Files  []string `yaml:"files"`
 	Parent string   `yaml:"parent"`
 }
+
+type format struct {
+	ID  string `yaml:"ext"`
+  Loc string `yaml:"loc"`
+}
+
+var (
+	app        = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
+	Fconfig    = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String()
+	nodownload = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
+	verbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
+
+	update = app.Command("update", "Update geofabrik.yml from github")
+	url    = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml").String()
+
+	list = app.Command("list", "Show elements available")
+
+	download = app.Command("download", "Download element") //TODO : add d as command
+	delement = download.Arg("element", "OSM element").Required().String()
+	dosmBz2  = download.Flag("osm.bz2", "Download osm.bz2 if available").Short('B').Bool()
+	dshpZip  = download.Flag("shp.zip", "Download shp.zip if available").Short('S').Bool()
+	dosmPbf  = download.Flag("osm.pbf", "Download osm.pbf (default)").Short('P').Bool()
+	dstate   = download.Flag("state", "Download state.txt file").Short('s').Bool()
+	dpoly    = download.Flag("poly", "Download poly file").Short('p').Bool()
+)
 
 func (e *element) hasParent() bool {
 	return len(e.Parent) != 0
 }
 
 func miniFormats(s []string) string {
-	res := make([]string, 3)
+	res := make([]string, 5)
 	for _, item := range s {
-		if item == "osm.pbf" {
-			res[0] = "p"
-		}
-		if item == "osm.bz2" {
-			res[1] = "b"
-		}
-		if item == "shp.zip" {
-			res[2] = "s"
+		switch item {
+		case "osm.pbf":
+			res[1] = "P"
+		case "osm.bz2":
+			res[2] = "B"
+		case "shp.zip":
+			res[4] = "S"
+		case "poly":
+			res[3] = "p"
+		case "state":
+			res[0] = "s"
 		}
 	}
 
 	return strings.Join(res, "")
 }
 
-func downloadFromURL(url string) {
-	tokens := strings.Split(url, "/")
-	fileName := ""
-	if (tokens[len(tokens)-1] == "state.txt"){// exception, another...
-		temp := strings.Split(tokens[len(tokens)-2],"-")
-		temp = temp[:len(temp)-1] //pop
-		fileName += strings.Join(temp,"-")+".state.txt"
-	}	else{
-		fileName += tokens[len(tokens)-1]
-	}
-	fmt.Println("Downloading", url, "to", fileName)
-
-	// TODO: check file existence first with io.IsExist
-	output, err := os.Create(fileName)
-	if err != nil {
-		fmt.Println("Error while creating", fileName, "-", err)
-		return
-	}
-	defer output.Close()
-
-	response, err := http.Get(url)
-	if err != nil {
-		fmt.Println("Error while downloading", url, "-", err)
-		return
-	}
-	defer response.Body.Close()
-
-	n, err := io.Copy(output, response.Body)
-	if err != nil {
-		fmt.Println("Error while downloading", url, "-", err)
-		return
+func downloadFromURL(url string, fileName string) {
+	if *verbose == true {
+		log.Println(" Downloading", url, "to", fileName)
 	}
 
-	fmt.Println(n, "bytes downloaded.")
+	if *nodownload == false {
+		// TODO: check file existence first with io.IsExist
+		output, err := os.Create(fileName)
+		if err != nil {
+			log.Fatalln(" Error while creating ", fileName, "-", err)
+			return
+		}
+		defer output.Close()
+
+		response, err := http.Get(url)
+		if err != nil {
+			log.Fatalln(" Error while downloading ", url, "-", err)
+			return
+		}
+		defer response.Body.Close()
+
+		n, err := io.Copy(output, response.Body)
+		if err != nil {
+			log.Fatalln(" Error while downloading ", url, "-", err)
+			return
+		}
+
+		if *verbose == true {
+			log.Println(" ", n, "bytes downloaded.")
+		}
+	}
 }
-
-func findElem(c *config, e string) element {
-	res := c.Elements[e]
-	return res
-}
-
-func elem2preURL(c *config, e element) string {
+func elem2preURL(c config, e element) string {
 	var res string
 	if e.hasParent() {
 		res = elem2preURL(c, findElem(c, e.Parent)) + "/"
-		if e.ID == "georgia-eu" || e.ID == "georgia-us" {
-			res = res + "georgia"
+		if e.File != "" { //TODO use file in config???
+			res = res + e.File
 		} else {
 			res = res + e.ID
 		}
@@ -106,26 +128,44 @@ func elem2preURL(c *config, e element) string {
 	return res
 }
 
-func elem2URL(c *config, e element, ext string) string {
+func elem2URL(c config, e element, ext string) string {
 	res := elem2preURL(c, e)
-	if (ext == "state"){
-		res += "-updates/state.txt"
-	}	else {
-		res += "-latest." + ext
-	}
+	res += c.Formats[ext].Loc
 	if !stringInSlice(ext, e.Files) {
-		fmt.Println("Error!!!\n" + res + " not exist")
+		log.Fatalln(" Error!!! " + res + " not exist")
 	}
+
 	return res
 }
 
-func stringInSlice(a string, list []string) bool {
-	for _, b := range list {
-		if b == a {
-			return true
-		}
+func findElem(c config, e string) element {
+	res := c.Elements[e]
+	if res.ID == "" {
+		log.Fatalln(" " + e + " is not in config! Please use \"list\" command!")
 	}
-	return false
+	return res
+}
+func getFormats() []string {
+	var formatFile []string
+	if *dosmPbf {
+		formatFile = append(formatFile, "osm.pbf")
+	}
+	if *dosmBz2 {
+		formatFile = append(formatFile, "osm.bz2")
+	}
+	if *dshpZip {
+		formatFile = append(formatFile, "shp.zip")
+	}
+	if *dstate {
+		formatFile = append(formatFile, "state")
+	}
+	if *dpoly {
+		formatFile = append(formatFile, "poly")
+	}
+	if len(formatFile) == 0 {
+		formatFile = append(formatFile, "osm.pbf")
+	}
+	return formatFile
 }
 
 func listAllRegions(c config) {
@@ -146,77 +186,46 @@ func listAllRegions(c config) {
 	fmt.Printf("Total elements: %#v\n", len(c.Elements))
 }
 
-func main() {
-	configFile := flag.String("config", "./geofabrik.yml", "Config for downloading OSMFiles")
-	nodownload := flag.Bool("n", false, "Dont download")
-	osmBz2 := flag.Bool("osm.bz2", false, "Download osm.bz2 if available")
-	shpZip := flag.Bool("shp.zip", false, "Download shp.zip if available")
-	osmPbf := flag.Bool("osm.pbf", false, "Download osm.pbf (default)")
-	state := flag.Bool("state", false, "Download state.txt file")
-	poly := flag.Bool("poly", false, "Download poly file")
-	list := flag.Bool("list", false, "list all elements")
-	update := flag.Bool("update", false, "Update geofabrik.yml from github")
-
-	flag.Parse()
-
-	if *update {
-		downloadFromURL("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml")
-		log.Fatalln("\nCongratulation, you have the latest geofabrik.yml\n")
-	}
-
-	if (flag.NArg() < 1) && !*list && !*update {
-		log.Fatalln("\nThis program needs one argument or more\nMore info at: https://github.com/julien-noblet/download-geofabrik\n")
-	}
-
-	filename, _ := filepath.Abs(*configFile)
+func loadConfig(configFile string) config {
+	filename, _ := filepath.Abs(configFile)
 	file, err := ioutil.ReadFile(filename)
 	if err != nil {
-		fmt.Printf("File error: %v\n", err)
+		log.Fatalln(" File error: %v ", err)
 		os.Exit(1)
 	}
-
 	var myConfig config
 	err = yaml.Unmarshal(file, &myConfig)
 	if err != nil {
 		panic(err)
 	}
+	return myConfig
 
-	if *list {
-		listAllRegions(myConfig)
-	}
-
-	var formatFile []string
-	if *osmPbf {
-		formatFile = append(formatFile, "osm.pbf")
-	}
-	if *osmBz2 {
-		formatFile = append(formatFile, "osm.bz2")
-	}
-	if *shpZip {
-		formatFile = append(formatFile, "shp.zip")
-	}
-	if *state {
-		formatFile = append(formatFile, "state")
-	}
-	if *poly {
-		formatFile = append(formatFile, "poly")
-	}
-	if len(formatFile) == 0 {
-		formatFile = append(formatFile, "osm.pbf")
-	}
-
-	if !*nodownload {
-		for _, elname := range flag.Args() {
-			for _, format := range formatFile {
-				downloadFromURL(elem2URL(&myConfig, findElem(&myConfig, elname), format))
-			}
-		}
-	} else {
-		for _, elname := range flag.Args() {
-			for _, format := range formatFile {
-				fmt.Printf("(not) Downloading : %#v", elem2URL(&myConfig, findElem(&myConfig, elname), format))
-			}
+}
+func stringInSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
 		}
 	}
+	return false
+}
 
+func UpdateConfig(url string, myconfig string) {
+	downloadFromURL(url, myconfig)
+	fmt.Println("Congratulation, you have the latest geofabrik.yml\n")
+}
+
+func main() {
+	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
+
+	case list.FullCommand():
+		listAllRegions(loadConfig(*Fconfig))
+	case update.FullCommand():
+		UpdateConfig(*url, *Fconfig)
+	case download.FullCommand():
+		formatFile := getFormats()
+		for _, format := range formatFile {
+			downloadFromURL(elem2URL(loadConfig(*Fconfig), findElem(loadConfig(*Fconfig), *delement), format), *delement+"."+format)
+		}
+	}
 }
