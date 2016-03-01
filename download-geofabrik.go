@@ -62,17 +62,19 @@ func (e *element) hasParent() bool {
 }
 
 func miniFormats(s []string) string {
-	res := make([]string, 3)
+	res := make([]string, 5)
 	for _, item := range s {
 		switch item {
 		case "osm.pbf":
-			res[0] = "P"
+			res[1] = "P"
 		case "osm.bz2":
-			res[1] = "B"
+			res[2] = "B"
 		case "shp.zip":
-			res[2] = "S"
+			res[4] = "S"
 		case "poly":
 			res[3] = "p"
+		case "state":
+			res[0] = "s"
 		}
 	}
 
