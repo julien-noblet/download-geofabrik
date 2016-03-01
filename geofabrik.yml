@@ -1,5 +1,20 @@
 baseURL: 'http://download.geofabrik.de'
-statefile: -updates/state.txt
+formats:
+  osm.bz2:
+    ext: osm.bz2
+    loc: "-latest.osm.bz2"
+  osm.pbf:
+    ext: osm.pbf
+    loc: "-latest.osm.pbf"
+  poly:
+    ext: poly
+    loc: .poly
+  shp.zip:
+    ext: shp.zip
+    loc: "-latest.shp.zip"
+  state:
+    ext: state
+    loc: "-updates/state.txt"
 elements:
   africa:
     id: africa
@@ -7,6 +22,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
   botswana:
     id: botswana
     name: Botswana
@@ -14,6 +31,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   burkina-faso:
     id: burkina-faso
@@ -21,6 +40,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: africa
   cameroon:
     id: cameroon
@@ -28,14 +49,18 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
-    parent: africa
+      - poly
+      - state
   canary-islands:
+    parent: africa
     id: canary-islands
     name: Canary Islands
     files:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   congo-democratic-republic:
     id: congo-democratic-republic
@@ -43,6 +68,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: africa
   egypt:
     id: egypt
@@ -50,6 +77,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: africa
   ethiopia:
     id: ethiopia
@@ -58,6 +87,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   guinea:
     id: guinea
@@ -66,6 +97,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   guinea-bissau:
     id: guinea-bissau
@@ -73,6 +106,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: africa
   ivory-coast:
     id: ivory-coast
@@ -81,6 +116,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   kenya:
     id: kenya
@@ -89,6 +126,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   lesotho:
     id: lesotho
@@ -97,6 +136,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   liberia:
     id: liberia
@@ -105,6 +146,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   libya:
     id: libya
@@ -113,6 +156,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   madagascar:
     id: madagascar
@@ -121,6 +166,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   morocco:
     id: morocco
@@ -129,6 +176,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   nigeria:
     id: nigeria
@@ -136,6 +185,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: africa
   sierra-leone:
     id: sierra-leone
@@ -144,6 +195,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   somalia:
     id: somalia
@@ -151,6 +204,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: africa
   south-africa-and-lesotho:
     id: south-africa-and-lesotho
@@ -159,6 +214,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   tanzania:
     id: tanzania
@@ -167,6 +224,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: africa
   antarctica:
     id: antarctica
@@ -175,12 +234,16 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
   asia:
     id: asia
     name: Asia
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
   azerbaijan:
     id: azerbaijan
     name: Azerbaijan
@@ -188,6 +251,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   bangladesh:
     id: bangladesh
@@ -196,6 +261,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   china:
     id: china
@@ -204,6 +271,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   gcc-states:
     id: gcc-states
@@ -212,6 +281,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   india:
     id: india
@@ -220,6 +291,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   indonesia:
     id: indonesia
@@ -228,6 +301,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   iran:
     id: iran
@@ -236,6 +311,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   irak:
     id: irak
@@ -244,6 +321,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   israel-and-palestine:
     id: israel-and-palestine
@@ -252,6 +331,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   japan:
     id: japan
@@ -260,6 +341,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   jordan:
     id: jordan
@@ -268,6 +351,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   kazakhstan:
     id: kazakhstan
@@ -276,6 +361,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   kyrgyzstan:
     id: kyrgyzstan
@@ -284,6 +371,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   lebanon:
     id: lebanon
@@ -292,6 +381,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   malaysia-singapore-brunei:
     id: malaysia-singapore-brunei
@@ -299,6 +390,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: asia
   mongolia:
     id: mongolia
@@ -307,6 +400,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   nepal:
     id: nepal
@@ -315,6 +410,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   north-korea:
     id: north-korea
@@ -323,6 +420,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   pakistan:
     id: pakistan
@@ -331,6 +430,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   philippines:
     id: philippines
@@ -339,6 +440,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   russia-asian-part:
     id: russia-asian-part
@@ -347,6 +450,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   south-korea:
     id: south-korea
@@ -355,6 +460,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   sri-lanka:
     id: sri-lanka
@@ -363,6 +470,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   syria:
     id: syria
@@ -371,6 +480,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   taiwan:
     id: taiwan
@@ -379,6 +490,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   tajikistan:
     id: tajikistan
@@ -386,6 +499,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: asia
   thailand:
     id: thailand
@@ -394,6 +509,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   turkmenistan:
     id: turkmenistan
@@ -402,6 +519,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   uzbekistan:
     id: uzbekistan
@@ -410,6 +529,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   vietnam:
     id: vietnam
@@ -418,6 +539,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: asia
   australia-oceania:
     id: australia-oceania
@@ -425,12 +548,16 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
   australia:
     id: australia
     name: Australia
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: australia-oceania
   fiji:
     id: fiji
@@ -439,6 +566,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: australia-oceania
   new-caledonia:
     id: new-caledonia
@@ -447,6 +576,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: australia-oceania
   new-zealand:
     id: new-zealand
@@ -455,6 +586,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: australia-oceania
   central-america:
     id: central-america
@@ -462,6 +595,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
   belize:
     id: belize
     name: Belize
@@ -469,6 +604,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: central-america
   cuba:
     id: cuba
@@ -477,6 +614,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: central-america
   guatemala:
     id: guatemala
@@ -485,6 +624,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: central-america
   haiti-and-domrep:
     id: haiti-and-domrep
@@ -493,6 +634,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: central-america
   europe:
     id: europe
@@ -500,6 +643,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
   albania:
     id: albania
     name: Albania
@@ -507,6 +652,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   andorra:
     id: andorra
@@ -515,6 +662,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   austria:
     id: austria
@@ -523,6 +672,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   azores:
     id: azores
@@ -531,6 +682,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   belarus:
     id: belarus
@@ -539,6 +692,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   belgium:
     id: belgium
@@ -547,6 +702,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   bosnia-herzegovina:
     id: bosnia-herzegovina
@@ -555,6 +712,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   bulgaria:
     id: bulgaria
@@ -563,6 +722,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   croatia:
     id: croatia
@@ -571,6 +732,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   cyprus:
     id: cyprus
@@ -579,6 +742,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   czech-republic:
     id: czech-republic
@@ -587,6 +752,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   denmark:
     id: denmark
@@ -595,6 +762,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   estonia:
     id: estonia
@@ -603,6 +772,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   faroe-islands:
     id: faroe-islands
@@ -611,6 +782,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   finland:
     id: finland
@@ -619,6 +792,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   france:
     id: france
@@ -626,6 +801,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: europe
   alsace:
     id: alsace
@@ -634,6 +811,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   aquitaine:
     id: aquitaine
@@ -642,6 +821,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   auvergne:
     id: auvergne
@@ -650,6 +831,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   basse-normandie:
     id: basse-normandie
@@ -658,6 +841,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   bourgogne:
     id: bourgogne
@@ -666,6 +851,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   bretagne:
     id: bretagne
@@ -674,6 +861,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   centre:
     id: centre
@@ -682,6 +871,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   champagne-ardenne:
     id: champagne-ardenne
@@ -690,6 +881,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   corse:
     id: corse
@@ -698,6 +891,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   franche-comte:
     id: franche-comte
@@ -706,6 +901,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   guadeloupe:
     id: guadeloupe
@@ -713,6 +910,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: france
   guyane:
     id: guyane
@@ -720,6 +919,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: france
   haute-normandie:
     id: haute-normandie
@@ -728,6 +929,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   ile-de-france:
     id: ile-de-france
@@ -736,6 +939,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   languedoc-roussillon:
     id: languedoc-roussillon
@@ -744,6 +949,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   limousin:
     id: limousin
@@ -752,6 +959,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   lorraine:
     id: lorraine
@@ -760,6 +969,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   martinique:
     id: martinique
@@ -767,6 +978,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: france
   mayotte:
     id: mayotte
@@ -774,6 +987,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: france
   midi-pyrenees:
     id: midi-pyrenees
@@ -782,6 +997,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   nord-pas-de-calais:
     id: nord-pas-de-calais
@@ -790,6 +1007,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   pays-de-la-loire:
     id: pays-de-la-loire
@@ -798,6 +1017,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   picardie:
     id: picardie
@@ -806,6 +1027,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   poitou-charentes:
     id: poitou-charentes
@@ -814,6 +1037,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   provence-alpes-cote-d-azur:
     id: provence-alpes-cote-d-azur
@@ -822,6 +1047,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   reunion:
     id: reunion
@@ -829,6 +1056,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: france
   rhone-alpes:
     id: rhone-alpes
@@ -837,6 +1066,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: france
   georgia-eu:
     id: georgia-eu
@@ -846,6 +1077,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   germany:
     id: germany
@@ -853,6 +1086,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: europe
   baden-wuerttemberg:
     id: baden-wuerttemberg
@@ -861,6 +1096,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   freiburg-regbez:
     id: freiburg-regbez
@@ -869,6 +1106,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: baden-wuerttemberg
   karlsruhe-regbez:
     id: karlsruhe-regbez
@@ -877,6 +1116,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: baden-wuerttemberg
   stuttgart-regbez:
     id: stuttgart-regbez
@@ -885,6 +1126,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: baden-wuerttemberg
   tuebingen-regbez:
     id: tuebingen-regbez
@@ -893,6 +1136,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: baden-wuerttemberg
   bayern:
     id: bayern
@@ -901,6 +1146,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   mittelfranken:
     id: mittelfranken
@@ -909,6 +1156,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: bayern
   niederbayern:
     id: niederbayern
@@ -917,6 +1166,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: bayern
   oberbayern:
     id: oberbayern
@@ -925,6 +1176,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: bayern
   oberfranken:
     id: oberfranken
@@ -933,6 +1186,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: bayern
   oberpfalz:
     id: oberpfalz
@@ -941,6 +1196,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: bayern
   schwaben:
     id: schwaben
@@ -949,6 +1206,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: bayern
   unterfranken:
     id: unterfranken
@@ -957,6 +1216,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: bayern
   berlin:
     id: berlin
@@ -965,6 +1226,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   brandenburg:
     id: brandenburg
@@ -973,6 +1236,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   bremen:
     id: bremen
@@ -981,6 +1246,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   hamburg:
     id: hamburg
@@ -989,6 +1256,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   hessen:
     id: hessen
@@ -997,6 +1266,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   mecklenburg-vorpommern:
     id: mecklenburg-vorpommern
@@ -1005,6 +1276,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   niedersachsen:
     id: niedersachsen
@@ -1013,6 +1286,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   nordrhein-westfalen:
     id: nordrhein-westfalen
@@ -1021,6 +1296,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   arnsberg-regbez:
     id: arnsberg-regbez
@@ -1029,6 +1306,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: nordrhein-westfalen
   detmold-regbez:
     id: detmold-regbez
@@ -1037,6 +1316,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: nordrhein-westfalen
   duesseldorf-regbez:
     id: duesseldorf-regbez
@@ -1045,6 +1326,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: nordrhein-westfalen
   koeln-regbez:
     id: koeln-regbez
@@ -1053,6 +1336,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: nordrhein-westfalen
   muenster-regbez:
     id: muenster-regbez
@@ -1061,6 +1346,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: nordrhein-westfalen
   rheinland-pfalz:
     id: rheinland-pfalz
@@ -1069,6 +1356,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   saarland:
     id: saarland
@@ -1077,6 +1366,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   sachsen:
     id: sachsen
@@ -1085,6 +1376,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   sachsen-anhalt:
     id: sachsen-anhalt
@@ -1093,6 +1386,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   schleswig-holstein:
     id: schleswig-holstein
@@ -1101,6 +1396,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   thueringen:
     id: thueringen
@@ -1109,6 +1406,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: germany
   great-britain:
     id: great-britain
@@ -1117,6 +1416,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   england:
     id: england
@@ -1125,6 +1426,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: great-britain
   buckinghamshire:
     id: buckinghamshire
@@ -1133,6 +1436,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   cambridgeshire:
     id: cambridgeshire
@@ -1141,6 +1446,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   cheshire:
     id: cheshire
@@ -1149,6 +1456,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   cornwall:
     id: cornwall
@@ -1157,6 +1466,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   cumbria:
     id: cumbria
@@ -1165,6 +1476,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   derbyshire:
     id: derbyshire
@@ -1173,6 +1486,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   devon:
     id: devon
@@ -1181,6 +1496,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   dorset:
     id: dorset
@@ -1189,6 +1506,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   east-sussex:
     id: east-sussex
@@ -1197,6 +1516,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   east-yorkshire-with-hull:
     id: east-yorkshire-with-hull
@@ -1205,6 +1526,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   essex:
     id: essex
@@ -1213,6 +1536,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   gloucestershire:
     id: gloucestershire
@@ -1221,6 +1546,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   greater-london:
     id: greater-london
@@ -1229,6 +1556,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   greater-manchester:
     id: greater-manchester
@@ -1237,6 +1566,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   hampshire:
     id: hampshire
@@ -1245,6 +1576,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   herefordshire:
     id: herefordshire
@@ -1253,6 +1586,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   hertfordshire:
     id: hertfordshire
@@ -1261,6 +1596,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   isle-of-wight:
     id: isle-of-wight
@@ -1269,6 +1606,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   kent:
     id: kent
@@ -1277,6 +1616,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   lancashire:
     id: lancashire
@@ -1285,6 +1626,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   leicestershire:
     id: leicestershire
@@ -1293,6 +1636,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   norfolk:
     id: norfolk
@@ -1301,6 +1646,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   north-yorkshire:
     id: north-yorkshire
@@ -1309,6 +1656,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   nottinghamshire:
     id: nottinghamshire
@@ -1317,6 +1666,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   oxfordshire:
     id: oxfordshire
@@ -1325,6 +1676,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   shropshire:
     id: shropshire
@@ -1333,6 +1686,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   somerset:
     id: somerset
@@ -1341,6 +1696,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   south-yorkshire:
     id: south-yorkshire
@@ -1349,6 +1706,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   staffordshire:
     id: staffordshire
@@ -1357,6 +1716,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   suffolk:
     id: suffolk
@@ -1365,6 +1726,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   surrey:
     id: surrey
@@ -1373,6 +1736,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   west-midlands:
     id: west-midlands
@@ -1381,6 +1746,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   west-sussex:
     id: west-sussex
@@ -1389,6 +1756,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   west-yorkshire:
     id: west-yorkshire
@@ -1397,6 +1766,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   wiltshire:
     id: wiltshire
@@ -1405,6 +1776,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: england
   scotland:
     id: scotland
@@ -1413,6 +1786,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: great-britain
   wales:
     id: wales
@@ -1421,6 +1796,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: great-britain
   greece:
     id: greece
@@ -1429,6 +1806,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   hungary:
     id: hungary
@@ -1437,6 +1816,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   iceland:
     id: iceland
@@ -1445,6 +1826,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   ireland-and-northern-ireland:
     id: ireland-and-northern-ireland
@@ -1453,6 +1836,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   isle-of-man:
     id: isle-of-man
@@ -1461,6 +1846,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   italy:
     id: italy
@@ -1469,6 +1856,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   kosovo:
     id: kosovo
@@ -1477,6 +1866,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   latvia:
     id: latvia
@@ -1485,6 +1876,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   liechtenstein:
     id: liechtenstein
@@ -1493,6 +1886,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   lithuania:
     id: lithuania
@@ -1501,6 +1896,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   luxembourg:
     id: luxembourg
@@ -1509,6 +1906,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   macedonia:
     id: macedonia
@@ -1517,6 +1916,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   malta:
     id: malta
@@ -1525,6 +1926,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   moldova:
     id: moldova
@@ -1533,6 +1936,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   monaco:
     id: monaco
@@ -1541,6 +1946,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   montenegro:
     id: montenegro
@@ -1549,6 +1956,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   netherlands:
     id: netherlands
@@ -1557,6 +1966,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   norway:
     id: norway
@@ -1565,6 +1976,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   poland:
     id: poland
@@ -1573,6 +1986,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   portugal:
     id: portugal
@@ -1581,6 +1996,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   romania:
     id: romania
@@ -1589,6 +2006,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   russia-european-part:
     id: russia-european-part
@@ -1597,6 +2016,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   serbia:
     id: serbia
@@ -1605,6 +2026,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   slovakia:
     id: slovakia
@@ -1613,6 +2036,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   slovenia:
     id: slovenia
@@ -1621,6 +2046,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   spain:
     id: spain
@@ -1629,6 +2056,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   sweden:
     id: sweden
@@ -1637,6 +2066,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   switzerland:
     id: switzerland
@@ -1645,6 +2076,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   turkey:
     id: turkey
@@ -1653,6 +2086,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   ukraine:
     id: ukraine
@@ -1661,6 +2096,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   alps:
     id: alps
@@ -1668,6 +2105,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: europe
   british-isles:
     id: british-isles
@@ -1676,6 +2115,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: europe
   dach:
     id: dach
@@ -1683,6 +2124,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: europe
   north-america:
     id: north-america
@@ -1690,12 +2133,16 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
   canada:
     id: canada
     name: Canada
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: north-america
   alberta:
     id: alberta
@@ -1704,6 +2151,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   british-columbia:
     id: british-columbia
@@ -1712,6 +2161,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   manitoba:
     id: manitoba
@@ -1720,6 +2171,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   new-brunswick:
     id: new-brunswick
@@ -1728,6 +2181,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   newfoundland-and-labrador:
     id: newfoundland-and-labrador
@@ -1736,6 +2191,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   northwest-territories:
     id: northwest-territories
@@ -1744,6 +2201,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   nova-scotia:
     id: nova-scotia
@@ -1752,6 +2211,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   nunavut:
     id: nunavut
@@ -1760,6 +2221,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   ontario:
     id: ontario
@@ -1768,6 +2231,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   prince-edward-island:
     id: prince-edward-island
@@ -1776,6 +2241,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   quebec:
     id: quebec
@@ -1784,6 +2251,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   saskatchewan:
     id: saskatchewan
@@ -1792,6 +2261,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   yukon:
     id: yukon
@@ -1800,6 +2271,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: canada
   greenland:
     id: greenland
@@ -1808,6 +2281,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: north-america
   mexico:
     id: mexico
@@ -1816,10 +2291,13 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: north-america
   us:
     id: us
     name: United States of America
+    meta: true
     parent: north-america
   alabama:
     id: alabama
@@ -1828,6 +2306,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   alaska:
     id: alaska
@@ -1836,6 +2316,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   arizona:
     id: arizona
@@ -1844,6 +2326,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   arkansas:
     id: arkansas
@@ -1852,6 +2336,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   california:
     id: california
@@ -1860,6 +2346,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   colorado:
     id: colorado
@@ -1868,6 +2356,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   connecticut:
     id: connecticut
@@ -1876,6 +2366,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   delaware:
     id: delaware
@@ -1884,6 +2376,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   district-of-columbia:
     id: district-of-columbia
@@ -1892,6 +2386,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   florida:
     id: florida
@@ -1900,6 +2396,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   georgia-us:
     id: georgia-us
@@ -1909,6 +2407,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   hawaii:
     id: hawaii
@@ -1917,6 +2417,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   idaho:
     id: idaho
@@ -1925,6 +2427,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   illinois:
     id: illinois
@@ -1933,6 +2437,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   indiana:
     id: indiana
@@ -1941,6 +2447,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   iowa:
     id: iowa
@@ -1949,6 +2457,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   kansas:
     id: kansas
@@ -1957,6 +2467,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   kentucky:
     id: kentucky
@@ -1965,6 +2477,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   louisiana:
     id: louisiana
@@ -1973,6 +2487,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   maine:
     id: maine
@@ -1981,6 +2497,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   maryland:
     id: maryland
@@ -1989,6 +2507,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   massachusetts:
     id: massachusetts
@@ -1997,6 +2517,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   michigan:
     id: michigan
@@ -2005,6 +2527,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   minnesota:
     id: minnesota
@@ -2013,6 +2537,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   mississippi:
     id: mississippi
@@ -2021,6 +2547,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   missouri:
     id: missouri
@@ -2029,6 +2557,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   montana:
     id: montana
@@ -2037,6 +2567,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   nebraska:
     id: nebraska
@@ -2045,6 +2577,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   nevada:
     id: nevada
@@ -2053,6 +2587,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   new-hampshire:
     id: new-hampshire
@@ -2061,6 +2597,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   new-jersey:
     id: new-jersey
@@ -2069,6 +2607,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   new-mexico:
     id: new-mexico
@@ -2077,6 +2617,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   new-york:
     id: new-york
@@ -2085,6 +2627,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   north-carolina:
     id: north-carolina
@@ -2093,6 +2637,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   north-dakota:
     id: north-dakota
@@ -2101,6 +2647,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   ohio:
     id: ohio
@@ -2109,6 +2657,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   oklahoma:
     id: oklahoma
@@ -2117,6 +2667,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   oregon:
     id: oregon
@@ -2125,6 +2677,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   pennsylvania:
     id: pennsylvania
@@ -2133,6 +2687,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   rhode-island:
     id: rhode-island
@@ -2141,6 +2697,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   south-carolina:
     id: south-carolina
@@ -2149,6 +2707,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   south-dakota:
     id: south-dakota
@@ -2157,6 +2717,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   tennessee:
     id: tennessee
@@ -2165,6 +2727,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   texas:
     id: texas
@@ -2173,6 +2737,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   utah:
     id: utah
@@ -2181,6 +2747,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   vermont:
     id: vermont
@@ -2189,6 +2757,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   virginia:
     id: virginia
@@ -2197,6 +2767,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   washington:
     id: washington
@@ -2205,6 +2777,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   west-virginia:
     id: west-virginia
@@ -2213,6 +2787,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   wisconsin:
     id: wisconsin
@@ -2221,6 +2797,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   wyoming:
     id: wyoming
@@ -2229,6 +2807,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: us
   us-midwest:
     id: us-midwest
@@ -2236,6 +2816,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: north-america
   us-northeast:
     id: us-northeast
@@ -2243,6 +2825,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: north-america
   us-pacific:
     id: us-pacific
@@ -2250,6 +2834,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: north-america
   us-south:
     id: us-south
@@ -2257,6 +2843,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: north-america
   us-west:
     id: us-west
@@ -2264,6 +2852,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: north-america
   south-america:
     id: south-america
@@ -2271,6 +2861,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
   argentina:
     id: argentina
     name: Argentina
@@ -2278,6 +2870,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: south-america
   bolivia:
     id: bolivia
@@ -2286,6 +2880,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: south-america
   brazil:
     id: brazil
@@ -2294,6 +2890,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: south-america
   chile:
     id: chile
@@ -2302,6 +2900,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: south-america
   colombia:
     id: colombia
@@ -2310,6 +2910,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: south-america
   ecuador:
     id: ecuador
@@ -2317,6 +2919,8 @@ elements:
     files:
       - osm.bz2
       - osm.pbf
+      - poly
+      - state
     parent: south-america
   paraguay:
     id: paraguay
@@ -2325,6 +2929,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: south-america
   peru:
     id: peru
@@ -2333,6 +2939,8 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: south-america
   uruguay:
     id: uruguay
@@ -2341,4 +2949,6 @@ elements:
       - osm.bz2
       - osm.pbf
       - shp.zip
+      - poly
+      - state
     parent: south-america
