@@ -1,0 +1,756 @@
+baseURL: 'http://download.openstreetmap.fr/extracts'
+formats:
+  osm.pbf:
+    ext: osm.pbf
+    loc: ".osm.pbf"
+  state:
+    ext: state
+    loc: ".state.txt"
+elements:
+  africa:
+    id: africa
+    name: Africa
+    meta: true
+  algeria:
+    id: algeria
+    name: Algeria
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  angola:
+    id: angola
+    name: Angola
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  benin:
+    id: benin
+    name: Benin
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  burkina_faso:
+    id: burkina_faso
+    name: Burkina Faso
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  burundi:
+    id: burundi
+    name: Burundi
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  cameroon:
+    id: cameroon
+    name: Cameroon
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  cape_verde:
+    id: cape_verde
+    name: Cape Verde
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  central_african_republic:
+    id: central_african_republic
+    name: Central African Republic
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  chad:
+    id: chad
+    name: Chad
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  comoros:
+    id: comoros
+    name: Comoros
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  congo_brazzaville:
+    id: congo_brazzaville
+    name: Congo Brazzaville
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  congo_kinshasa:
+    id: congo_kinshasa
+    name: Congo Kinshasa
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  djibouti:
+    id: djibouti
+    name: Djibouti
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  equatorial_guinea:
+    id: equatorial_guinea
+    name: Equatorial Guinea
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  eritrea:
+    id: eritrea
+    name: Eritrea
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  gabon:
+    id: gabon
+    name: Gabon
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  gambia:
+    id: gambia
+    name: Gambia
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  ghana:
+    id: ghana
+    name: Ghana
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  guinea:
+    id: guinea
+    name: Guinea
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  ivory-coast:
+    id: ivory-coast
+    name: Ivory Coast
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  kenya:
+    id: kenya
+    name: Kenya
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  lesotho:
+    id: lesotho
+    name: Lesotho
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  malawi:
+    id: malawi
+    name: Malawi
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  mali:
+    id: mali
+    name: Mali
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  mauritania:
+    id: mauritania
+    name: Mauritania
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  mauritius:
+    id: mauritius
+    name: Mauritius
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  mayotte:
+    id: mayotte
+    name: Mayotte
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  mozambique:
+    id: mozambique
+    name: Mozambique
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  nambia:
+    id: nambia
+    name: Nambia
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  niger:
+    id: niger
+    name: Niger
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  reunion:
+    id: reunion
+    name: Reunion
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  rwanda:
+    id: rwanada
+    name: Rwanada
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  sao_tome_and_principe:
+    id: sao_tome_and_principe
+    name: Sao Tome and Principe
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  senegal:
+    id: senegal
+    name: Senegal
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  seychelles:
+    id: seychelles
+    name: Seychelles
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  south_africa:
+    id: south_africa
+    name: South Africa
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  south_sudan:
+    id: south_sudan
+    name: South Sudan
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  spain-africa:
+    id: spain-africa
+    name: Spain
+    meta: true
+    file: spain
+    parent: africa
+  canarias:
+    id: canarias
+    name: canarias
+    files:
+      - osm.pbf
+      - state
+    parent: spain-africa
+  ceuta:
+    id: ceuta
+    name: Ceuta
+    files:
+      - osm.pbf
+      - state
+    parent: spain-africa
+  melilla:
+    id: melilla
+    name: Melilla
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  sudan:
+    id: sudan
+    name: Sudan
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  swaziland:
+    id: swaziland
+    name: Swaziland
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  togo:
+    id: togo
+    name: Togo
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  tunisia:
+    id: tunisia
+    name: Tunisia
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  ugnanda:
+    id: ugnanda
+    name: Ugnanda
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  western_sahara:
+    id: western_sahara
+    name: Western Sahara
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  zambia:
+    id: zambia
+    name: Zambia
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  zimbabwe:
+    id: zimbabwe
+    name: Zimbabwe
+    files:
+      - osm.pbf
+      - state
+    parent: africa
+  asia:
+    id: asia
+    name: Asia
+    meta: yes
+  armenia:
+    id: armenia
+    name: Armenia
+    files:
+      - osm.pbf
+      - state
+    parent: asia
+  brunei:
+    id: brunei
+    name: Brunei
+    files:
+      - osm.pbf
+      - state
+    parent: asia
+  cambodia:
+    id: cambodia
+    name: Cambodia
+    files:
+      - osm.pbf
+      - state
+    parent: asia
+  israel:
+    id: israel
+    name: Israel
+    files:
+      - osm.pbf
+      - state
+    parent: asia
+  laos:
+    id: laos
+    name: Laos
+    files:
+      - osm.pbf
+      - state
+    parent: asia
+  malaysia:
+    id: malaysia
+    name: Malaysia
+    files:
+      - osm.pbf
+      - state
+    parent: asia
+  myanmar:
+    id: myanmar
+    name: Myanmar
+    files:
+      - osm.pbf
+      - state
+    parent: asia
+  palestine:
+    id: palestine
+    name: Palestine
+    files:
+      - osm.pbf
+      - state
+    parent: asia
+  singapore:
+    id: singapore
+    name: Singapore
+    files:
+      - osm.pbf
+      - state
+    parent: asia
+  central-america:
+    id: central-america
+    name: Central America
+    meta: yes
+  anguilla:
+    id: anguilla
+    name: Anguilla
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  antigua_and_barbuda:
+    id: antigua_and_barbuda
+    name: Antigua and Barbuda
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  aruba:
+    id: aruba
+    name: Aruba
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  bahamas:
+    id: bahamas
+    name: Bahamas
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  barbados:
+    id: barbados
+    name: Barbados
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  british_virgin_islands:
+    id: british_virgin_islands
+    name: British Vigin Islands
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  caribbean:
+    id: caribbean
+    name: Caribbean
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  cayman_islands:
+    id: cayman_islands
+    name: Cayman Islands
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  costa_rica:
+    id: costa_rica
+    name: Costa Rica
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  curacao:
+    id: curacao
+    name: Curacao
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  dominica:
+    id: dominica
+    name: Dominica
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  dominican_republic:
+    id: dominican_republic
+    name: Dominican Republic
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  el_savador:
+    id: el_salvador
+    name: El Salvador
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  grenada:
+    id: grenada
+    name: Grenada
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  guadeloupe:
+    id: guadeloupe
+    name: Guadeloupe
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  honduras:
+    id: honduras
+    name: Honduras
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  jamaica:
+    id: jamaica
+    name: Jamaica
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  martinique:
+    id: martinique
+    name: Martinique
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  montserrat:
+    id: montserrat
+    name: Montserrat
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  nicaragua:
+    id: nicaragua
+    name: Nicaragua
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  panama:
+    id: panama
+    name: Panama
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  puerto_rico:
+    id: puerto_rico
+    name: Puerto Rico
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  saint_barthelemy:
+    id: saint_barthelemy
+    name: Saint-Barthelemy
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  saint_kitts_and_nevis:
+    id: saint_kitts_and_nevis
+    name: Saint-Kitts and Nevis
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  saint_lucia:
+    id: saint_lucia
+    name: Saint-Lucia
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  saint_martin:
+    id: saint_martin
+    name: Saint-Martin
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  saint_vincent_and_the_grenadines:
+    id: saint_vincent_and_the_grenadines
+    name: Saint-Vincent and the Grenadines
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  sint_maarten:
+    id: sint_maarten
+    name: Sint Maarten
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  turks_and_caicos_islands:
+    id: turks_and_caicos_islands
+    name: Turks and Caicos Islands
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  united_states_virgin_islands:
+    id: united_states_virgin_islands
+    name: United States Virgin Islands
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  usa_virgin_islands:
+    id: usa_virgin_islands
+    name: USA Virgin Islands
+    files:
+      - osm.pbf
+      - state
+    parent: central-america
+  europe:
+    id: europe
+    name: Europe
+    files:
+      - osm.pbf
+      - state
+  austria:
+    id: austria
+    name: Austria
+    files:
+      - osm.pbf
+      - state
+    parent: europe
+  burgenland:
+    id: burgenland
+    name: Burgenland
+    files:
+      - osm.pbf
+      - state
+    parent: austria
+  karnten:
+    id: karnten
+    name: Karnten
+    files:
+      - osm.pbf
+      - state
+    parent: austria
+  niederosterreich:
+    id: niederosterreich
+    name: Niederosterreich
+    files:
+      - osm.pbf
+      - state
+    parent: austria
+  obersterreich:
+    id: obersterreich
+    name: Obersterreich
+    files:
+      - osm.pbf
+      - state
+    parent: austria
+  salzburg:
+    id: salzburg
+    name: Salzburg
+    files:
+      - osm.pbf
+      - state
+    parent: austria
+  steiermark:
+    id: steiermark
+    name: Steiermark
+    files:
+      - osm.pbf
+      - state
+    parent: austria
+  tirol:
+    id: tirol
+    name: Tirol
+    files:
+      - osm.pbf
+      - state
+    parent: austria
+  vorarlberg:
+    id: vorarlberg
+    name: Vorarlberg
+    files:
+      - osm.pbf
+      - state
+    parent: austria
+  wien:
+    id: wien
+    name: Wien
+    files:
+      - osm.pbf
+      - state
+    parent: austria
+  belgium:
+    id: belgium
+    name: Belgium
+    files:
+      - osm.pbf
+      - state
+    parent: europe
+  brussels_capital_region:
+    id: brussels_capital_region
+    name: Brussels, Capital Region
+    files:
+      - osm.pbf
+      - state
+    parent: belgium
+  flanders:
+    id: flanders
+    name: Flanders
+    files:
+      - osm.pbf
+      - state
+    parent: belgium
+  wallonia_french_community:
+    id: wallonia_french_community
+    name: Wallonia French Community
+    files:
+      - osm.pbf
+      - state
+    parent: belgium
+  wallonia_german_community:
+    id: wallonia_german_community
+    name: Wallonia German Community
+    files:
+      - osm.pbf
+      - state
+    parent: belgium
+
+  
