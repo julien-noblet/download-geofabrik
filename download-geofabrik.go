@@ -19,16 +19,22 @@ import (
 
 type config struct {
 	BaseURL  string             `yaml:"baseURL"`
-	StateFileLoc string         `yaml:"statefile"`
+	Formats map[string]format   `yaml:"formats,flow"`
 	Elements map[string]element `yaml:"elements,flow"`
 }
 
 type element struct {
 	ID     string   `yaml:"id"`
 	File   string   `yaml:"file"`
+	Meta   bool     `yaml:"meta"`
 	Name   string   `yaml:"name"`
 	Files  []string `yaml:"files"`
 	Parent string   `yaml:"parent"`
+}
+
+type format struct {
+	ID  string `yaml:"ext"`
+  Loc string `yaml:"loc"`
 }
 
 var (
@@ -56,16 +62,19 @@ func (e *element) hasParent() bool {
 }
 
 func miniFormats(s []string) string {
-	res := make([]string, 3)
+	res := make([]string, 5)
 	for _, item := range s {
-		if item == "osm.pbf" {
-			res[0] = "p"
-		}
-		if item == "osm.bz2" {
-			res[1] = "b"
-		}
-		if item == "shp.zip" {
-			res[2] = "s"
+		switch item {
+		case "osm.pbf":
+			res[1] = "P"
+		case "osm.bz2":
+			res[2] = "B"
+		case "shp.zip":
+			res[4] = "S"
+		case "poly":
+			res[3] = "p"
+		case "state":
+			res[0] = "s"
 		}
 	}
 
@@ -81,21 +90,21 @@ func downloadFromURL(url string, fileName string) {
 		// TODO: check file existence first with io.IsExist
 		output, err := os.Create(fileName)
 		if err != nil {
-			log.Fatalln(" Error while creating", fileName, "-", err)
+			log.Fatalln(" Error while creating ", fileName, "-", err)
 			return
 		}
 		defer output.Close()
 
 		response, err := http.Get(url)
 		if err != nil {
-			log.Fatalln(" Error while downloading", url, "-", err)
+			log.Fatalln(" Error while downloading ", url, "-", err)
 			return
 		}
 		defer response.Body.Close()
 
 		n, err := io.Copy(output, response.Body)
 		if err != nil {
-			log.Fatalln(" Error while downloading", url, "-", err)
+			log.Fatalln(" Error while downloading ", url, "-", err)
 			return
 		}
 
@@ -121,16 +130,9 @@ func elem2preURL(c config, e element) string {
 
 func elem2URL(c config, e element, ext string) string {
 	res := elem2preURL(c, e)
-	switch ext {
-	case "state":
-		res += c.StateFileLoc
-	case "poly":
-		res += "." + ext
-	default:
-		res += "-latest." + ext
-		if !stringInSlice(ext, e.Files) {
-			log.Fatalln(" Error!!!" + res + "not exist")
-		}
+	res += c.Formats[ext].Loc
+	if !stringInSlice(ext, e.Files) {
+		log.Fatalln(" Error!!! " + res + " not exist")
 	}
 
 	return res
@@ -188,7 +190,7 @@ func loadConfig(configFile string) config {
 	filename, _ := filepath.Abs(configFile)
 	file, err := ioutil.ReadFile(filename)
 	if err != nil {
-		log.Fatalln(" File error: %v", err)
+		log.Fatalln(" File error: %v ", err)
 		os.Exit(1)
 	}
 	var myConfig config
