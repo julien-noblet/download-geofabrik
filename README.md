@@ -5,7 +5,7 @@
 
 ## Version 2
 Warning! command line have changed from V1
-see [Usage](#Usage)
+see [Usage](#usage)
 
 ## Usage
 ```shell
