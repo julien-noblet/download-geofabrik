@@ -23,8 +23,9 @@ type config struct {
 }
 
 type format struct {
-	ID  string `yaml:"ext"`
-	Loc string `yaml:"loc"`
+	ID       string `yaml:"ext"`
+	Loc      string `yaml:"loc"`
+	BasePath string `yaml:"basepath,omitempty"`
 }
 
 type Element struct {
@@ -38,15 +39,8 @@ type Element struct {
 
 type ElementSlice map[string]Element
 
-func (e ElementSlice) Generate() ([]byte, error) {
-	var myConfig config
-	myConfig.BaseURL = "http://download.geofabrik.de"
-	myConfig.Formats = make(map[string]format)
-	myConfig.Formats["osm.bz2"] = format{ID: "osm.bz2", Loc: "-latest.osm.bz2"}
-	myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
-	myConfig.Formats["poly"] = format{ID: "poly", Loc: ".poly"}
-	myConfig.Formats["state"] = format{ID: "state", Loc: ".state"}
-	myConfig.Formats["shp.zip"] = format{ID: "shp.zip", Loc: "-latest.shp.zip"}
+func (e ElementSlice) Generate(myConfig *config) ([]byte, error) {
+
 	myConfig.Elements = e
 	return yaml.Marshal(myConfig)
 }
@@ -56,14 +50,13 @@ type Ext struct {
 	Elements ElementSlice
 }
 
-func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
-	fmt.Printf("Visit: %s\n", ctx.URL())
+func (e *Ext) parse_geofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
 	var thisElement Element
 	downloadMain := doc.Find("div#download-main")
 	parent, haveParent := doc.Find("p a").Attr("href")
 	if haveParent && strings.Index(parent, "http://www.geofabrik.de/") == -1 {
-		parent = parent[0 : len(parent)-5]
-		if parent == "index" {
+		parent = parent[0 : len(parent)-5] // remove ".html"
+		if parent == "index" {             //first level
 			parent = ""
 		} else {
 			temp := strings.Split(parent, "/")
@@ -82,6 +75,7 @@ func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Do
 				if link {
 					switch index {
 					case 0: // osm.pbf
+						thisElement.ID = linkval[0 : len(linkval)-15]
 						thisElement.Files = append(thisElement.Files, "osm.pbf")
 					case 1: // shp.zip
 						thisElement.Files = append(thisElement.Files, "shp.zip")
@@ -89,8 +83,6 @@ func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Do
 						thisElement.Files = append(thisElement.Files, "osm.bz2")
 					case 3: // poly
 						thisElement.Files = append(thisElement.Files, "poly")
-						thisElement.ID = linkval[0 : len(linkval)-5]
-
 					case 4: //-updates
 						thisElement.Files = append(thisElement.Files, "state")
 					}
@@ -101,7 +93,7 @@ func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Do
 		if len(thisElement.Files) == 0 {
 			thisElement.Meta = true
 		}
-		//Execptions!
+		//Exceptions!
 		// Only Georgia (EU and US)
 		if thisElement.ID == "georgia" {
 			thisElement.File = "georgia"
@@ -115,27 +107,104 @@ func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Do
 		}
 		e.Elements[thisElement.ID] = thisElement
 	}
-	fmt.Println("OK")
-	fmt.Printf("Elements: %d\n", len(e.Elements))
-
 	return nil, true
+}
+
+func (e *Ext) mergeElement(element *Element) {
+	if cE, ok := e.Elements[element.ID]; ok {
+		//cE := &e.Elements[element.ID]
+
+		if cE.Parent != element.Parent {
+			panic(fmt.Sprintln("Error! : Parent mismatch!"))
+		}
+		cE.Files = append(cE.Files, element.Files...)
+		if len(cE.Files) == 0 {
+			cE.Meta = true
+		} else {
+			cE.Meta = false
+		}
+		e.Elements[element.ID] = cE
+	} else {
+		e.Elements[element.ID] = *element
+	}
+}
+
+func (e *Ext) parse_dosmfr(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
+	//var thisElement Element
+	parent := doc.Find("h1").Text()
+	fmt.Println(parent)
+
+	list := doc.Find("table tr")
+	for line := range list.Nodes {
+		singleElement := list.Eq(line)
+		lien := singleElement.Find("a")
+		//index := 0
+		for aa := range lien.Nodes {
+			var element Element
+			element.Parent = parent
+			a := lien.Eq(aa)
+			vallink, link := a.Attr("href")
+			if link {
+				if strings.Index(vallink, "/") != -1 {
+					// /!\ meta! or levelup
+					if vallink[0:1] != "/" {
+						//meta
+						// looking if already in e.Elements
+						element.Meta = true
+						t := strings.Split(vallink, "/")
+						element.ID = t[len(t)-1]
+					}
+				}
+			}
+			e.mergeElement(&element)
+		}
+	}
+	return nil, true
+}
+
+func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
+	fmt.Printf("Visit: %s\n", ctx.URL())
+	switch ctx.URL().Host {
+	case "download.geofabrik.de":
+		return e.parse_geofabrik(ctx, res, doc)
+	case "download.openstreetmap.fr":
+		return e.parse_dosmfr(ctx, res, doc)
+	default:
+		panic(fmt.Sprintln("Panic! " + ctx.URL().Host + " is not supported!"))
+		return nil, true
+	}
+
 }
 
 func (e *Ext) Filter(ctx *gocrawl.URLContext, isVisited bool) bool {
 	if isVisited {
 		return false
 	}
-	if strings.Index(ctx.URL().Path, ".html") != -1 {
-		return true
-		//	} else if strings.Index(ctx.URL().Path, ".pbf") != -1 {
-		//		return false
-		//	} else if strings.Index(ctx.URL().Path, ".poly") != -1 {
-		//		return false
-		//	} else if strings.Index(ctx.URL().Path, ".bz2") != -1 {
-		//		return false
-		//	} else if strings.Index(ctx.URL().Path, ".zip") != -1 {
-		//		return false
+	if len(ctx.URL().RawQuery) != 0 {
+		return false
+	} else if strings.Index(ctx.URL().Path, "newshapes.html") != -1 {
+		return false
+	} else if strings.Index(ctx.URL().Path, "technical.html") != -1 {
+		return false
+	} else if strings.Index(ctx.URL().Path, "robots.txt") != -1 {
+		return false
+	} else if strings.Index(ctx.URL().Path, "replication") != -1 {
+		return false
+	} else if strings.Index(ctx.URL().Path, "cgi-bin") != -1 {
+		return false
+	} else if strings.Index(ctx.URL().Path, ".pdf") != -1 {
+		return false
+	} else if strings.Index(ctx.URL().Path, ".pbf") != -1 {
+		return false
+	} else if strings.Index(ctx.URL().Path, ".poly") != -1 {
+		return false
+	} else if strings.Index(ctx.URL().Path, ".bz2") != -1 {
+		return false
+	} else if strings.Index(ctx.URL().Path, ".zip") != -1 {
+		return false
 	} else if ctx.URL().Path[len(ctx.URL().Path)-1:] == "/" {
+		return true
+	} else if strings.Index(ctx.URL().Path, ".html") != -1 {
 		return true
 		//	} else if ctx.URL().Path[len(ctx.URL().Path)-8:] == "-updates" {
 		//		return false
@@ -145,26 +214,45 @@ func (e *Ext) Filter(ctx *gocrawl.URLContext, isVisited bool) bool {
 	return false
 }
 
-func main() {
+func generate(url string, fname string, myConfig *config) {
 	ext := &Ext{&gocrawl.DefaultExtender{}, make(map[string]Element)}
 	// Set custom options
 	opts := gocrawl.NewOptions(ext)
-	opts.CrawlDelay = time.Duration(1000) * time.Microsecond
+	opts.CrawlDelay = 100 * time.Millisecond
 	opts.LogFlags = gocrawl.LogError
+  //	opts.LogFlags = gocrawl.LogAll
 	opts.SameHostOnly = true //false
-	//opts.MaxVisits = 5
+	opts.UserAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36"
+	opts.MaxVisits = 15000
 
-	c := gocrawl.NewCrawlerWithOptions(opts)
-	c.Run("http://download.geofabrik.de/")
-	// Done so wee need to generate yml :)
-	out, _ := ext.Elements.Generate()
-	//fmt.Printf("%q\n", out)
-
-	filename, _ := filepath.Abs("geofabrik.yml")
+	file := gocrawl.NewCrawlerWithOptions(opts)
+	file.Run(url)
+	out, _ := ext.Elements.Generate(myConfig)
+	filename, _ := filepath.Abs(fname)
 	err := ioutil.WriteFile(filename, out, 0644)
 	if err != nil {
 		log.Fatalln(" File error: %v ", err)
 		os.Exit(1)
 	}
+}
 
+func main() {
+
+	//Generate geofabrik.yml
+	var geofabrik config
+	geofabrik.BaseURL = "http://download.geofabrik.de"
+	geofabrik.Formats = make(map[string]format)
+	geofabrik.Formats["osm.bz2"] = format{ID: "osm.bz2", Loc: "-latest.osm.bz2"}
+	geofabrik.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
+	geofabrik.Formats["poly"] = format{ID: "poly", Loc: ".poly"}
+	geofabrik.Formats["state"] = format{ID: "state", Loc: ".state"}
+	geofabrik.Formats["shp.zip"] = format{ID: "shp.zip", Loc: "-latest-free.shp.zip"}
+	generate("http://download.geofabrik.de/", "geofabrik.yml", &geofabrik)
+	var myConfig config
+	myConfig.BaseURL = "http://download.openstreetmap.fr/extracts"
+	myConfig.Formats = make(map[string]format)
+	myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: ".osm.pbf"}
+	myConfig.Formats["poly"] = format{ID: "poly", Loc: ".poly", BasePath: "../polygons/"}
+	myConfig.Formats["state"] = format{ID: "state", Loc: ".state.txt"}
+	//generate("http://download.openstreetmap.fr/", "openstreetmap_fr.yml", &myConfig)
 }
