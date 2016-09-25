@@ -19,7 +19,7 @@ import (
 
 type config struct {
 	BaseURL  string             `yaml:"baseURL"`
-	Formats map[string]format   `yaml:"formats,flow"`
+	Formats  map[string]format  `yaml:"formats,flow"`
 	Elements map[string]element `yaml:"elements,flow"`
 }
 
@@ -34,7 +34,7 @@ type element struct {
 
 type format struct {
 	ID  string `yaml:"ext"`
-  Loc string `yaml:"loc"`
+	Loc string `yaml:"loc"`
 }
 
 var (
@@ -212,7 +212,7 @@ func stringInSlice(a string, list []string) bool {
 
 func UpdateConfig(url string, myconfig string) {
 	downloadFromURL(url, myconfig)
-	fmt.Println("Congratulation, you have the latest geofabrik.yml\n")
+	fmt.Println("Congratulation, you have the latest geofabrik.yml")
 }
 
 func main() {
