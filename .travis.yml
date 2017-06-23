@@ -13,10 +13,10 @@ env:
   #- GIMME_OS=linux GIMME_ARCH=arm
 
 install:
-  - go get -u github.com/golang/lint/golint
-  - go install -u github.com/golang/lint/golint
+  #- go get -u github.com/golang/lint/golint
+  #- go install -u github.com/golang/lint/golint
   - go get -d -v ./...
 
 script:
-  - golint -min_confidence=0.8 ./...
+  # - golint -min_confidence=0.8 ./...
   - go build -v ./...
