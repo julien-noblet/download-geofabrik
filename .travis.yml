@@ -4,12 +4,12 @@ go:
   - 1.8.3
 
 env:
-  - GIMME_OS=linux GIMME_ARCH=386
-  - GIMME_OS=linux GIMME_ARCH=amd64
-  - GIMME_OS=darwin GIMME_ARCH=386
-  - GIMME_OS=darwin GIMME_ARCH=amd64
-  - GIMME_OS=windows GIMME_ARCH=386
-  - GIMME_OS=windows GIMME_ARCH=amd64
+  - GIMME_OS=linux GIMME_ARCH=386 GIMME_DEBUG=1 GIMME_TYPE=source
+  - GIMME_OS=linux GIMME_ARCH=amd64 GIMME_DEBUG=1 GIMME_TYPE=source
+  - GIMME_OS=darwin GIMME_ARCH=386 GIMME_DEBUG=1 GIMME_TYPE=source
+  - GIMME_OS=darwin GIMME_ARCH=amd64 GIMME_DEBUG=1 GIMME_TYPE=source
+  - GIMME_OS=windows GIMME_ARCH=386 GIMME_DEBUG=1 GIMME_TYPE=source
+  - GIMME_OS=windows GIMME_ARCH=amd64 GIMME_DEBUG=1 GIMME_TYPE=source
   #- GIMME_OS=linux GIMME_ARCH=arm
 
 install:
@@ -17,6 +17,5 @@ install:
   - go get -d -v ./...
 
 script:
-  - gimme 1.8.3
   - golint -min_confidence=0.8 ./...
   - go build -v ./...
