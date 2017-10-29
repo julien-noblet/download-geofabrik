@@ -53,6 +53,7 @@ var (
 	dosmBz2  = download.Flag("osm.bz2", "Download osm.bz2 if available").Short('B').Bool()
 	dshpZip  = download.Flag("shp.zip", "Download shp.zip if available").Short('S').Bool()
 	dosmPbf  = download.Flag("osm.pbf", "Download osm.pbf (default)").Short('P').Bool()
+	doshPbf  = download.Flag("osh.pbf", "Download osh.pbf (default)").Short('H').Bool()
 	dstate   = download.Flag("state", "Download state.txt file").Short('s').Bool()
 	dpoly    = download.Flag("poly", "Download poly file").Short('p').Bool()
 )
@@ -62,19 +63,21 @@ func (e *element) hasParent() bool {
 }
 
 func miniFormats(s []string) string {
-	res := make([]string, 5)
+	res := make([]string, 6)
 	for _, item := range s {
 		switch item {
+		case "state":
+			res[0] = "s"
 		case "osm.pbf":
 			res[1] = "P"
 		case "osm.bz2":
 			res[2] = "B"
-		case "shp.zip":
-			res[4] = "S"
+		case "osh.pbf":
+			res[3] = "H"
 		case "poly":
-			res[3] = "p"
-		case "state":
-			res[0] = "s"
+			res[4] = "p"
+		case "shp.zip":
+			res[5] = "S"
 		}
 	}
 
@@ -149,6 +152,9 @@ func getFormats() []string {
 	var formatFile []string
 	if *dosmPbf {
 		formatFile = append(formatFile, "osm.pbf")
+	}
+	if *doshPbf {
+		formatFile = append(formatFile, "osh.pbf")
 	}
 	if *dosmBz2 {
 		formatFile = append(formatFile, "osm.bz2")

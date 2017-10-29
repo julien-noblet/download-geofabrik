@@ -48,6 +48,7 @@ Commands:
     -B, --osm.bz2  Download osm.bz2 if available
     -S, --shp.zip  Download shp.zip if available
     -P, --osm.pbf  Download osm.pbf (default)
+    -H, --osh.pbf  Download osh.pbf (default)
     -s, --state    Download state.txt file
     -p, --poly     Download poly file
 ```
