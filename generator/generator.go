@@ -81,9 +81,11 @@ func (e *Ext) parse_geofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *
 						thisElement.Files = append(thisElement.Files, "shp.zip")
 					case 2: // osm.bz2
 						thisElement.Files = append(thisElement.Files, "osm.bz2")
-					case 3: // poly
+					case 3: // osh.pbf
+						thisElement.Files = append(thisElement.Files, "osh.pbf")
+					case 4: // poly
 						thisElement.Files = append(thisElement.Files, "poly")
-					case 4: //-updates
+					case 5: //-updates
 						thisElement.Files = append(thisElement.Files, "state")
 					}
 				}
@@ -242,6 +244,7 @@ func main() {
 	var geofabrik config
 	geofabrik.BaseURL = "http://download.geofabrik.de"
 	geofabrik.Formats = make(map[string]format)
+	geofabrik.Formats["osh.pbf"] = format{ID: "osh.pbf", Loc: ".osh.pbf"}
 	geofabrik.Formats["osm.bz2"] = format{ID: "osm.bz2", Loc: "-latest.osm.bz2"}
 	geofabrik.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
 	geofabrik.Formats["poly"] = format{ID: "poly", Loc: ".poly"}
