@@ -47,6 +47,7 @@ var (
 	url    = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml").String()
 
 	list = app.Command("list", "Show elements available")
+	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool()
 
 	download = app.Command("download", "Download element") //TODO : add d as command
 	delement = download.Arg("element", "OSM element").Required().String()
@@ -174,10 +175,14 @@ func getFormats() []string {
 	return formatFile
 }
 
-func listAllRegions(c config) {
+func listAllRegions(c config,format string) {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetAlignment(tablewriter.ALIGN_LEFT)
 	table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
+	if format == "Markdown"{
+		table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
+		table.SetCenterSeparator("|")
+	}
 	keys := make(sort.StringSlice, len(c.Elements))
 	i := 0
 	for k := range c.Elements {
@@ -225,7 +230,11 @@ func main() {
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
 
 	case list.FullCommand():
-		listAllRegions(loadConfig(*Fconfig))
+		var format = ""
+		if *lmd {
+			format = "Markdown"
+		}
+		listAllRegions(loadConfig(*Fconfig),format)
 	case update.FullCommand():
 		UpdateConfig(*url, *Fconfig)
 	case download.FullCommand():
