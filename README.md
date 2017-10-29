@@ -54,343 +54,409 @@ Commands:
 ```
 
 ## List of elements
-|          SHORTNAME           |         IS IN         |           LONG NAME                    | FORMATS |
-|------------------------------|-----------------------|----------------------------------------|---------|
-| afghanistan                  | Asia                  | Afghanistan                            | sPBpS   |
-| africa                       |                       | Africa                                 | sPBp    |
-| alabama                      | North America         | Alabama                                | sPBpS   |
-| alaska                       | North America         | Alaska                                 | sPBpS   |
-| albania                      | Europe                | Albania                                | sPBpS   |
-| alberta                      | Canada                | Alberta                                | sPBpS   |
-| alps                         | Europe                | Alps                                   | sPBp    |
-| alsace                       | France                | Alsace                                 | sPBpS   |
-| andorra                      | Europe                | Andorra                                | sPBpS   |
-| antarctica                   |                       | Antarctica                             | sPBpS   |
-| aquitaine                    | France                | Aquitaine                              | sPBpS   |
-| argentina                    | South America         | Argentina                              | sPBpS   |
-| arizona                      | North America         | Arizona                                | sPBpS   |
-| arkansas                     | North America         | Arkansas                               | sPBpS   |
-| arnsberg-regbez              | Nordrhein-Westfalen   | Regierungsbezirk Arnsberg              | sPBpS   |
-| asia                         |                       | Asia                                   | sPBp    |
-| australia                    | Australia and Oceania | Australia                              | sPBp    |
-| australia-oceania            |                       | Australia and Oceania                  | sPBp    |
-| austria                      | Europe                | Austria                                | sPBpS   |
-| auvergne                     | France                | Auvergne                               | sPBpS   |
-| azerbaijan                   | Asia                  | Azerbaijan                             | sPBpS   |
-| azores                       | Europe                | Azores                                 | sPBpS   |
-| baden-wuerttemberg           | Germany               | Baden-Württemberg                      | sPBpS   |
-| bangladesh                   | Asia                  | Bangladesh                             | sPBpS   |
-| basse-normandie              | France                | Basse-Normandie                        | sPBpS   |
-| bayern                       | Germany               | Bayern                                 | sPBpS   |
-| belarus                      | Europe                | Belarus                                | sPBpS   |
-| belgium                      | Europe                | Belgium                                | sPBpS   |
-| belize                       | Central America       | Belize                                 | sPBpS   |
-| benin                        | Africa                | Benin                                  | sPBp    |
-| berkshire                    | England               | Berkshire                              | sPBpS   |
-| berlin                       | Germany               | Berlin                                 | sPBpS   |
-| bolivia                      | South America         | Bolivia                                | sPBpS   |
-| bosnia-herzegovina           | Europe                | Bosnia-Herzegovina                     | sPBpS   |
-| botswana                     | Africa                | Botswana                               | sPBpS   |
-| bourgogne                    | France                | Bourgogne                              | sPBpS   |
-| brandenburg                  | Germany               | Brandenburg                            | sPBpS   |
-| brazil                       | South America         | Brazil                                 | sPBpS   |
-| bremen                       | Germany               | Bremen                                 | sPBpS   |
-| bretagne                     | France                | Bretagne                               | sPBpS   |
-| british-columbia             | Canada                | British Columbia                       | sPBpS   |
-| british-isles                | Europe                | British Isles                          | sPBp    |
-| buckinghamshire              | England               | Buckinghamshire                        | sPBpS   |
-| bulgaria                     | Europe                | Bulgaria                               | sPBpS   |
-| burkina-faso                 | Africa                | Burkina Faso                           | sPBp    |
-| california                   | North America         | California                             | sPBpS   |
-| cambodia                     | Asia                  | Cambodia                               | sPBpS   |
-| cambridgeshire               | England               | Cambridgeshire                         | sPBpS   |
-| cameroon                     | Africa                | Cameroon                               | sPBp    |
-| canada                       | North America         | Canada                                 | sPBp    |
-| canary-islands               | Africa                | Canary Islands                         | sPBpS   |
-| central-america              |                       | Central America                        | sPBp    |
-| central-fed-district         | Russian Federation    | Central Federal District               | sPBpS   |
-| centre                       | France                | Centre                                 | sPBpS   |
-| centro                       | Italy                 | Centro                                 | sPBpS   |
-| chad                         | Africa                | Chad                                   | sPBpS   |
-| champagne-ardenne            | France                | Champagne Ardenne                      | sPBpS   |
-| cheshire                     | England               | Cheshire                               | sPBpS   |
-| chile                        | South America         | Chile                                  | sPBpS   |
-| china                        | Asia                  | China                                  | sPBpS   |
-| colombia                     | South America         | Colombia                               | sPBpS   |
-| colorado                     | North America         | Colorado                               | sPBpS   |
-| congo-democratic-republic    | Africa                | Congo (Democratic Republic)            | sPBp    |
-| connecticut                  | North America         | Connecticut                            | sPBpS   |
-| cornwall                     | England               | Cornwall                               | sPBpS   |
-| corse                        | France                | Corse                                  | sPBpS   |
-| crimean-fed-district         | Russian Federation    | Crimean Federal District               | sPBpS   |
-| croatia                      | Europe                | Croatia                                | sPBpS   |
-| cuba                         | Central America       | Cuba                                   | sPBpS   |
-| cumbria                      | England               | Cumbria                                | sPBpS   |
-| cyprus                       | Europe                | Cyprus                                 | sPBpS   |
-| czech-republic               | Europe                | Czech Republic                         | sPBpS   |
-| dach                         | Europe                | Germany, Austria, Switzerland          | sPBp    |
-| delaware                     | North America         | Delaware                               | sPBpS   |
-| denmark                      | Europe                | Denmark                                | sPBpS   |
-| derbyshire                   | England               | Derbyshire                             | sPBpS   |
-| detmold-regbez               | Nordrhein-Westfalen   | Regierungsbezirk Detmold               | sPBpS   |
-| devon                        | England               | Devon                                  | sPBpS   |
-| district-of-columbia         | North America         | District of Columbia                   | sPBpS   |
-| dolnoslaskie                 | Poland                | Województwo dolnośląskie(Lower Silesian Voivodeship) | sPBpS   |
-| dorset                       | England               | Dorset                                 | sPBpS   |
-| duesseldorf-regbez           | Nordrhein-Westfalen   | Regierungsbezirk Düsseldorf            | sPBpS   |
-| east-sussex                  | England               | East Sussex                            | sPBpS   |
-| east-yorkshire-with-hull     | England               | East Yorkshire with Hull               | sPBpS   |
-| ecuador                      | South America         | Ecuador                                | sPBp    |
-| egypt                        | Africa                | Egypt                                  | sPBp    |
-| england                      | Great Britain         | England                                | sPBpS   |
-| essex                        | England               | Essex                                  | sPBpS   |
-| estonia                      | Europe                | Estonia                                | sPBpS   |
-| ethiopia                     | Africa                | Ethiopia                               | sPBpS   |
-| europe                       |                       | Europe                                 | sPBp    |
-| far-eastern-fed-district     | Russian Federation    | Far Eastern Federal District           | sPBpS   |
-| faroe-islands                | Europe                | Faroe Islands                          | sPBpS   |
-| fiji                         | Australia and Oceania | Fiji                                   | sPBpS   |
-| finland                      | Europe                | Finland                                | sPBpS   |
-| florida                      | North America         | Florida                                | sPBpS   |
-| france                       | Europe                | France                                 | sPBp    |
-| franche-comte                | France                | Franche Comte                          | sPBpS   |
-| freiburg-regbez              | Baden-Württemberg     | Regierungsbezirk Freiburg              | sPBpS   |
-| gcc-states                   | Asia                  | GCC States                             | sPBpS   |
-| georgia-eu                   | Europe                | Georgia (Europe country)               | sPBpS   |
-| georgia-us                   | North America         | Georgia (US State)                     | sPBpS   |
-| germany                      | Europe                | Germany                                | sPBp    |
-| gloucestershire              | England               | Gloucestershire                        | sPBpS   |
-| great-britain                | Europe                | Great Britain                          | sPBp    |
-| greater-london               | England               | Greater London                         | sPBpS   |
-| greater-manchester           | England               | Greater Manchester                     | sPBpS   |
-| greece                       | Europe                | Greece                                 | sPBpS   |
-| greenland                    | North America         | Greenland                              | sPBpS   |
-| guadeloupe                   | France                | Guadeloupe                             | sPBp    |
-| guatemala                    | Central America       | Guatemala                              | sPBpS   |
-| guinea                       | Africa                | Guinea                                 | sPBpS   |
-| guinea-bissau                | Africa                | Guinea-Bissau                          | sPBp    |
-| guyane                       | France                | Guyane                                 | sPBp    |
-| haiti-and-domrep             | Central America       | Haiti and Dominican Republic           | sPBpS   |
-| hamburg                      | Germany               | Hamburg                                | sPBpS   |
-| hampshire                    | England               | Hampshire                              | sPBpS   |
-| haute-normandie              | France                | Haute-Normandie                        | sPBpS   |
-| hawaii                       | North America         | Hawaii                                 | sPBpS   |
-| herefordshire                | England               | Herefordshire                          | sPBpS   |
-| hertfordshire                | England               | Hertfordshire                          | sPBpS   |
-| hessen                       | Germany               | Hessen                                 | sPBpS   |
-| hungary                      | Europe                | Hungary                                | sPBpS   |
-| iceland                      | Europe                | Iceland                                | sPBpS   |
-| idaho                        | North America         | Idaho                                  | sPBpS   |
-| ile-de-france                | France                | Ile-de-France                          | sPBpS   |
-| illinois                     | North America         | Illinois                               | sPBpS   |
-| india                        | Asia                  | India                                  | sPBpS   |
-| indiana                      | North America         | Indiana                                | sPBpS   |
-| indonesia                    | Asia                  | Indonesia                              | sPBpS   |
-| iowa                         | North America         | Iowa                                   | sPBpS   |
-| iran                         | Asia                  | Iran                                   | sPBpS   |
-| iraq                         | Asia                  | Iraq                                   | sPBpS   |
-| ireland-and-northern-ireland | Europe                | Ireland and Northern Ireland           | sPBpS   |
-| isle-of-man                  | Europe                | Isle of Man                            | sPBpS   |
-| isle-of-wight                | England               | Isle of Wight                          | sPBpS   |
-| isole                        | Italy                 | Isole                                  | sPBpS   |
-| israel-and-palestine         | Asia                  | Israel and Palestine                   | sPBpS   |
-| italy                        | Europe                | Italy                                  | sPBp    |
-| ivory-coast                  | Africa                | Ivory Coast                            | sPBpS   |
-| japan                        | Asia                  | Japan                                  | sPBpS   |
-| jordan                       | Asia                  | Jordan                                 | sPBpS   |
-| kansas                       | North America         | Kansas                                 | sPBpS   |
-| karlsruhe-regbez             | Baden-Württemberg     | Regierungsbezirk Karlsruhe             | sPBpS   |
-| kazakhstan                   | Asia                  | Kazakhstan                             | sPBpS   |
-| kent                         | England               | Kent                                   | sPBpS   |
-| kentucky                     | North America         | Kentucky                               | sPBpS   |
-| kenya                        | Africa                | Kenya                                  | sPBpS   |
-| koeln-regbez                 | Nordrhein-Westfalen   | Regierungsbezirk Köln                  | sPBpS   |
-| kosovo                       | Europe                | Kosovo                                 | sPBpS   |
-| kujawsko-pomorskie           | Poland                | Województwo kujawsko-pomorskie(Kuyavian-Pomeranian Voivodeship) | sPBpS   |
-| kyrgyzstan                   | Asia                  | Kyrgyzstan                             | sPBpS   |
-| lancashire                   | England               | Lancashire                             | sPBpS   |
-| languedoc-roussillon         | France                | Languedoc-Roussillon                   | sPBpS   |
-| latvia                       | Europe                | Latvia                                 | sPBpS   |
-| lebanon                      | Asia                  | Lebanon                                | sPBpS   |
-| leicestershire               | England               | Leicestershire                         | sPBpS   |
-| lesotho                      | Africa                | Lesotho                                | sPBpS   |
-| liberia                      | Africa                | Liberia                                | sPBpS   |
-| libya                        | Africa                | Libya                                  | sPBpS   |
-| liechtenstein                | Europe                | Liechtenstein                          | sPBpS   |
-| limousin                     | France                | Limousin                               | sPBpS   |
-| lithuania                    | Europe                | Lithuania                              | sPBpS   |
-| lodzkie                      | Poland                | Województwo łódzkie(Łódź Voivodeship)  | sPBpS   |
-| lorraine                     | France                | Lorraine                               | sPBpS   |
-| louisiana                    | North America         | Louisiana                              | sPBpS   |
-| lubelskie                    | Poland                | Województwo lubelskie(Lublin Voivodeship) | sPBpS   |
-| lubuskie                     | Poland                | Województwo lubuskie(Lubusz Voivodeship) | sPBpS   |
-| luxembourg                   | Europe                | Luxembourg                             | sPBpS   |
-| macedonia                    | Europe                | Macedonia                              | sPBpS   |
-| madagascar                   | Africa                | Madagascar                             | sPBpS   |
-| maine                        | North America         | Maine                                  | sPBpS   |
-| malaysia-singapore-brunei    | Asia                  | Malaysia, Singapore, and Brunei        | sPBp    |
-| maldives                     | Asia                  | Maldives                               | sPBpS   |
-| mali                         | Africa                | Mali                                   | sPBpS   |
-| malopolskie                  | Poland                | Województwo małopolskie(Lesser Poland Voivodeship) | sPBpS   |
-| malta                        | Europe                | Malta                                  | sPBpS   |
-| manitoba                     | Canada                | Manitoba                               | sPBpS   |
-| martinique                   | France                | Martinique                             | sPBp    |
-| maryland                     | North America         | Maryland                               | sPBpS   |
-| massachusetts                | North America         | Massachusetts                          | sPBpS   |
-| mayotte                      | France                | Mayotte                                | sPBp    |
-| mazowieckie                  | Poland                | Województwo mazowieckie(Mazovian Voivodeship) | sPBpS   |
-| mecklenburg-vorpommern       | Germany               | Mecklenburg-Vorpommern                 | sPBpS   |
-| mexico                       | North America         | Mexico                                 | sPBpS   |
-| michigan                     | North America         | Michigan                               | sPBpS   |
-| midi-pyrenees                | France                | Midi-Pyrenees                          | sPBpS   |
-| minnesota                    | North America         | Minnesota                              | sPBpS   |
-| mississippi                  | North America         | Mississippi                            | sPBpS   |
-| missouri                     | North America         | Missouri                               | sPBpS   |
-| mittelfranken                | Bayern                | Mittelfranken                          | sPBpS   |
-| moldova                      | Europe                | Moldova                                | sPBpS   |
-| monaco                       | Europe                | Monaco                                 | sPBpS   |
-| mongolia                     | Asia                  | Mongolia                               | sPBpS   |
-| montana                      | North America         | Montana                                | sPBpS   |
-| montenegro                   | Europe                | Montenegro                             | sPBpS   |
-| morocco                      | Africa                | Morocco                                | sPBpS   |
-| muenster-regbez              | Nordrhein-Westfalen   | Regierungsbezirk Münster               | sPBpS   |
-| namibia                      | Africa                | Namibia                                | sPBpS   |
-| nebraska                     | North America         | Nebraska                               | sPBpS   |
-| nepal                        | Asia                  | Nepal                                  | sPBpS   |
-| netherlands                  | Europe                | Netherlands                            | sPBpS   |
-| nevada                       | North America         | Nevada                                 | sPBpS   |
-| new-brunswick                | Canada                | New Brunswick                          | sPBpS   |
-| new-caledonia                | Australia and Oceania | New Caledonia                          | sPBpS   |
-| new-hampshire                | North America         | New Hampshire                          | sPBpS   |
-| new-jersey                   | North America         | New Jersey                             | sPBpS   |
-| new-mexico                   | North America         | New Mexico                             | sPBpS   |
-| new-york                     | North America         | New York                               | sPBpS   |
-| new-zealand                  | Australia and Oceania | New Zealand                            | sPBpS   |
-| newfoundland-and-labrador    | Canada                | Newfoundland and Labrador              | sPBpS   |
-| nicaragua                    | Central America       | Nicaragua                              | sPBp    |
-| niederbayern                 | Bayern                | Niederbayern                           | sPBpS   |
-| niedersachsen                | Germany               | Niedersachsen                          | sPBpS   |
-| niger                        | Africa                | Niger                                  | sPBpS   |
-| nigeria                      | Africa                | Nigeria                                | sPBpS   |
-| nord-est                     | Italy                 | Nord-Est                               | sPBpS   |
-| nord-ovest                   | Italy                 | Nord-Ovest                             | sPBpS   |
-| nord-pas-de-calais           | France                | Nord-Pas-de-Calais                     | sPBpS   |
-| nordrhein-westfalen          | Germany               | Nordrhein-Westfalen                    | sPBpS   |
-| norfolk                      | England               | Norfolk                                | sPBpS   |
-| north-america                |                       | North America                          | sPBp    |
-| north-carolina               | North America         | North Carolina                         | sPBpS   |
-| north-caucasus-fed-district  | Russian Federation    | North Caucasus Federal District        | sPBpS   |
-| north-dakota                 | North America         | North Dakota                           | sPBpS   |
-| north-korea                  | Asia                  | North Korea                            | sPBpS   |
-| north-yorkshire              | England               | North Yorkshire                        | sPBpS   |
-| northwest-territories        | Canada                | Northwest Territories                  | sPBpS   |
-| northwestern-fed-district    | Russian Federation    | Northwestern Federal District          | sPBpS   |
-| norway                       | Europe                | Norway                                 | sPBpS   |
-| nottinghamshire              | England               | Nottinghamshire                        | sPBpS   |
-| nova-scotia                  | Canada                | Nova Scotia                            | sPBpS   |
-| nunavut                      | Canada                | Nunavut                                | sPBpS   |
-| oberbayern                   | Bayern                | Oberbayern                             | sPBpS   |
-| oberfranken                  | Bayern                | Oberfranken                            | sPBpS   |
-| oberpfalz                    | Bayern                | Oberpfalz                              | sPBpS   |
-| ohio                         | North America         | Ohio                                   | sPBpS   |
-| oklahoma                     | North America         | Oklahoma                               | sPBpS   |
-| ontario                      | Canada                | Ontario                                | sPBpS   |
-| opolskie                     | Poland                | Województwo opolskie(Opole Voivodeship) | sPBpS   |
-| oregon                       | North America         | Oregon                                 | sPBpS   |
-| oxfordshire                  | England               | Oxfordshire                            | sPBpS   |
-| pakistan                     | Asia                  | Pakistan                               | sPBpS   |
-| paraguay                     | South America         | Paraguay                               | sPBpS   |
-| pays-de-la-loire             | France                | Pays de la Loire                       | sPBpS   |
-| pennsylvania                 | North America         | Pennsylvania                           | sPBpS   |
-| peru                         | South America         | Peru                                   | sPBpS   |
-| philippines                  | Asia                  | Philippines                            | sPBpS   |
-| picardie                     | France                | Picardie                               | sPBpS   |
-| podkarpackie                 | Poland                | Województwo podkarpackie(Subcarpathian Voivodeship) | sPBpS   |
-| podlaskie                    | Poland                | Województwo podlaskie(Podlaskie Voivodeship) | sPBpS   |
-| poitou-charentes             | France                | Poitou-Charentes                       | sPBpS   |
-| poland                       | Europe                | Poland                                 | sPBp    |
-| pomorskie                    | Poland                | Województwo pomorskie(Pomeranian Voivodeship) | sPBpS   |
-| portugal                     | Europe                | Portugal                               | sPBpS   |
-| prince-edward-island         | Canada                | Prince Edward Island                   | sPBpS   |
-| provence-alpes-cote-d-azur   | France                | Provence Alpes-Cote-d'Azur             | sPBpS   |
-| quebec                       | Canada                | Quebec                                 | sPBpS   |
-| reunion                      | France                | Reunion                                | sPBp    |
-| rheinland-pfalz              | Germany               | Rheinland-Pfalz                        | sPBpS   |
-| rhode-island                 | North America         | Rhode Island                           | sPBpS   |
-| rhone-alpes                  | France                | Rhone-Alpes                            | sPBpS   |
-| romania                      | Europe                | Romania                                | sPBpS   |
-| russia                       |                       | Russian Federation                     | sPBp    |
-| saarland                     | Germany               | Saarland                               | sPBpS   |
-| sachsen                      | Germany               | Sachsen                                | sPBpS   |
-| sachsen-anhalt               | Germany               | Sachsen-Anhalt                         | sPBpS   |
-| saskatchewan                 | Canada                | Saskatchewan                           | sPBpS   |
-| schleswig-holstein           | Germany               | Schleswig-Holstein                     | sPBpS   |
-| schwaben                     | Bayern                | Schwaben                               | sPBpS   |
-| scotland                     | Great Britain         | Scotland                               | sPBpS   |
-| serbia                       | Europe                | Serbia                                 | sPBpS   |
-| shropshire                   | England               | Shropshire                             | sPBpS   |
-| siberian-fed-district        | Russian Federation    | Siberian Federal District              | sPBpS   |
-| sierra-leone                 | Africa                | Sierra Leone                           | sPBpS   |
-| slaskie                      | Poland                | Województwo śląskie(Silesian Voivodeship) | sPBpS   |
-| slovakia                     | Europe                | Slovakia                               | sPBpS   |
-| slovenia                     | Europe                | Slovenia                               | sPBpS   |
-| somalia                      | Africa                | Somalia                                | sPBp    |
-| somerset                     | England               | Somerset                               | sPBpS   |
-| south-africa-and-lesotho     | Africa                | South Africa (includes Lesotho)        | sPBpS   |
-| south-america                |                       | South America                          | sPBp    |
-| south-carolina               | North America         | South Carolina                         | sPBpS   |
-| south-dakota                 | North America         | South Dakota                           | sPBpS   |
-| south-fed-district           | Russian Federation    | South Federal District                 | sPBpS   |
-| south-korea                  | Asia                  | South Korea                            | sPBpS   |
-| south-yorkshire              | England               | South Yorkshire                        | sPBpS   |
-| spain                        | Europe                | Spain                                  | sPBpS   |
-| sri-lanka                    | Asia                  | Sri Lanka                              | sPBpS   |
-| staffordshire                | England               | Staffordshire                          | sPBpS   |
-| stuttgart-regbez             | Baden-Württemberg     | Regierungsbezirk Stuttgart             | sPBpS   |
-| sud                          | Italy                 | Sud                                    | sPBpS   |
-| suffolk                      | England               | Suffolk                                | sPBpS   |
-| suriname                     | South America         | suriname                               | sPBpS   |
-| surrey                       | England               | Surrey                                 | sPBpS   |
-| sweden                       | Europe                | Sweden                                 | sPBpS   |
-| swietokrzyskie               | Poland                | Województwo                            | sPBpS   |
-|                              |                       | świętokrzyskie(Świętokrzyskie Voivodeship) |         |
-| switzerland                  | Europe                | Switzerland                            | sPBpS   |
-| syria                        | Asia                  | Syria                                  | sPBpS   |
-| taiwan                       | Asia                  | Taiwan                                 | sPBpS   |
-| tajikistan                   | Asia                  | Tajikistan                             | sPBp    |
-| tanzania                     | Africa                | Tanzania                               | sPBpS   |
-| tennessee                    | North America         | Tennessee                              | sPBpS   |
-| texas                        | North America         | Texas                                  | sPBpS   |
-| thailand                     | Asia                  | Thailand                               | sPBpS   |
-| thueringen                   | Germany               | Thüringen                              | sPBpS   |
-| tuebingen-regbez             | Baden-Württemberg     | Regierungsbezirk Tübingen              | sPBpS   |
-| turkey                       | Europe                | Turkey                                 | sPBpS   |
-| turkmenistan                 | Asia                  | Turkmenistan                           | sPBpS   |
-| ukraine                      | Europe                | Ukraine                                | sPBpS   |
-| unterfranken                 | Bayern                | Unterfranken                           | sPBpS   |
-| ural-fed-district            | Russian Federation    | Ural Federal District                  | sPBpS   |
-| uruguay                      | South America         | Uruguay                                | sPBpS   |
-| us-midwest                   | North America         | US Midwest                             | sPBp    |
-| us-northeast                 | North America         | US Northeast                           | sPBp    |
-| us-pacific                   | North America         | US Pacific                             | sPBp    |
-| us-south                     | North America         | US South                               | sPBp    |
-| us-west                      | North America         | US West                                | sPBp    |
-| utah                         | North America         | Utah                                   | sPBpS   |
-| uzbekistan                   | Asia                  | Uzbekistan                             | sPBpS   |
-| vermont                      | North America         | Vermont                                | sPBpS   |
-| vietnam                      | Asia                  | Vietnam                                | sPBpS   |
-| virginia                     | North America         | Virginia                               | sPBpS   |
-| volga-fed-district           | Russian Federation    | Volga Federal District                 | sPBpS   |
-| wales                        | Great Britain         | Wales                                  | sPBpS   |
-| warminsko-mazurskie          | Poland                | Województwo warmińsko-mazurskie(Warmian-Masurian Voivodeship) | sPBpS   |
-| washington                   | North America         | Washington                             | sPBpS   |
-| west-midlands                | England               | West Midlands                          | sPBpS   |
-| west-sussex                  | England               | West Sussex                            | sPBpS   |
-| west-virginia                | North America         | West Virginia                          | sPBpS   |
-| west-yorkshire               | England               | West Yorkshire                         | sPBpS   |
-| wielkopolskie                | Poland                | Województwo wielkopolskie(Greater Poland Voivodeship) | sPBpS   |
-| wiltshire                    | England               | Wiltshire                              | sPBpS   |
-| wisconsin                    | North America         | Wisconsin                              | sPBpS   |
-| wyoming                      | North America         | Wyoming                                | sPBpS   |
-| yukon                        | Canada                | Yukon                                  | sPBpS   |
-| zachodniopomorskie           | Poland                | Województwo zachodniopomorskie(West Pomeranian Voivodeship) | sPBpS   |
+|                  SHORTNAME                  |         IS IN         |               LONG NAME                | FORMATS |
+|---------------------------------------------|-----------------------|----------------------------------------|---------|
+| afghanistan                                 | Asia                  | Afghanistan                            | sPBHpS  |
+| africa                                      |                       | Africa                                 | sPBHp   |
+| alabama                                     | North America         | Alabama                                | sPBHpS  |
+| alaska                                      | North America         | Alaska                                 | sPBHpS  |
+| albania                                     | Europe                | Albania                                | sPBHpS  |
+| alberta                                     | Canada                | Alberta                                | sPBHpS  |
+| algeria                                     | Africa                | Algeria                                | sPBHpS  |
+| alps                                        | Europe                | Alps                                   | sPBHp   |
+| alsace                                      | France                | Alsace                                 | sPBHpS  |
+| andorra                                     | Europe                | Andorra                                | sPBHpS  |
+| angola                                      | Africa                | Angola                                 | sPBHpS  |
+| antarctica                                  |                       | Antarctica                             | sPBHpS  |
+| aquitaine                                   | France                | Aquitaine                              | sPBHpS  |
+| argentina                                   | South America         | Argentina                              | sPBHpS  |
+| arizona                                     | North America         | Arizona                                | sPBHpS  |
+| arkansas                                    | North America         | Arkansas                               | sPBHpS  |
+| arnsberg-regbez                             | Nordrhein-Westfalen   | Regierungsbezirk Arnsberg              | sPBHpS  |
+| asia                                        |                       | Asia                                   | sPBHp   |
+| australia                                   | Australia and Oceania | Australia                              | sPBHp   |
+| australia-oceania                           |                       | Australia and Oceania                  | sPBHp   |
+| austria                                     | Europe                | Austria                                | sPBHpS  |
+| auvergne                                    | France                | Auvergne                               | sPBHpS  |
+| azerbaijan                                  | Asia                  | Azerbaijan                             | sPBHpS  |
+| azores                                      | Europe                | Azores                                 | sPBHpS  |
+| baden-wuerttemberg                          | Germany               | Baden-Württemberg                      | sPBHpS  |
+| bangladesh                                  | Asia                  | Bangladesh                             | sPBHpS  |
+| basse-normandie                             | France                | Basse-Normandie                        | sPBHpS  |
+| bayern                                      | Germany               | Bayern                                 | sPBHpS  |
+| belarus                                     | Europe                | Belarus                                | sPBHpS  |
+| belgium                                     | Europe                | Belgium                                | sPBHpS  |
+| belize                                      | Central America       | Belize                                 | sPBHpS  |
+| benin                                       | Africa                | Benin                                  | sPBHpS  |
+| berkshire                                   | England               | Berkshire                              | sPBHpS  |
+| berlin                                      | Germany               | Berlin                                 | sPBHpS  |
+| bhutan                                      | Asia                  | Bhutan                                 | sPBHpS  |
+| bolivia                                     | South America         | Bolivia                                | sPBHpS  |
+| bosnia-herzegovina                          | Europe                | Bosnia-Herzegovina                     | sPBHpS  |
+| botswana                                    | Africa                | Botswana                               | sPBHpS  |
+| bourgogne                                   | France                | Bourgogne                              | sPBHpS  |
+| brandenburg                                 | Germany               | Brandenburg (mit Berlin)               | sPBHpS  |
+| brazil                                      | South America         | Brazil                                 | sPBHpS  |
+| bremen                                      | Germany               | Bremen                                 | sPBHpS  |
+| bretagne                                    | France                | Bretagne                               | sPBHpS  |
+| british-columbia                            | Canada                | British Columbia                       | sPBHpS  |
+| british-isles                               | Europe                | British Isles                          | sPBHp   |
+| buckinghamshire                             | England               | Buckinghamshire                        | sPBHpS  |
+| bulgaria                                    | Europe                | Bulgaria                               | sPBHpS  |
+| burkina-faso                                | Africa                | Burkina Faso                           | sPBHpS  |
+| burundi                                     | Africa                | Burundi                                | sPBHpS  |
+| california                                  | North America         | California                             | sPBHpS  |
+| cambodia                                    | Asia                  | Cambodia                               | sPBHpS  |
+| cambridgeshire                              | England               | Cambridgeshire                         | sPBHpS  |
+| cameroon                                    | Africa                | Cameroon                               | sPBHpS  |
+| canada                                      | North America         | Canada                                 | sPBHp   |
+| canary-islands                              | Africa                | Canary Islands                         | sPBHpS  |
+| cape-verde                                  | Africa                | Cape Verde                             | sPBHpS  |
+| central-african-republic                    | Africa                | Central African Republic               | sPBHpS  |
+| central-america                             |                       | Central America                        | sPBHp   |
+| central-fed-district                        | Russian Federation    | Central Federal District               | sPBHpS  |
+| centre                                      | France                | Centre                                 | sPBHpS  |
+| centro                                      | Italy                 | Centro                                 | sPBHpS  |
+| chad                                        | Africa                | Chad                                   | sPBHpS  |
+| champagne-ardenne                           | France                | Champagne Ardenne                      | sPBHpS  |
+| cheshire                                    | England               | Cheshire                               | sPBHpS  |
+| chile                                       | South America         | Chile                                  | sPBHpS  |
+| china                                       | Asia                  | China                                  | sPBHpS  |
+| chubu                                       | Japan                 | Chūbu region                           | sPBHpS  |
+| chugoku                                     | Japan                 | Chūgoku region                         | sPBHpS  |
+| colombia                                    | South America         | Colombia                               | sPBHpS  |
+| colorado                                    | North America         | Colorado                               | sPBHpS  |
+| comores                                     | Africa                | Comores                                | sPBHpS  |
+| congo-brazzaville                           | Africa                | Congo (Republic/Brazzaville)           | sPBHpS  |
+| congo-democratic-republic                   | Africa                | Congo (Democratic                      | sPBHpS  |
+|                                             |                       | Republic/Kinshasa)                     |         |
+| connecticut                                 | North America         | Connecticut                            | sPBHpS  |
+| cornwall                                    | England               | Cornwall                               | sPBHpS  |
+| corse                                       | France                | Corse                                  | sPBHpS  |
+| crimean-fed-district                        | Russian Federation    | Crimean Federal District               | sPBHpS  |
+| croatia                                     | Europe                | Croatia                                | sPBHpS  |
+| cuba                                        | Central America       | Cuba                                   | sPBHpS  |
+| cumbria                                     | England               | Cumbria                                | sPBHpS  |
+| cyprus                                      | Europe                | Cyprus                                 | sPBHpS  |
+| czech-republic                              | Europe                | Czech Republic                         | sPBHpS  |
+| dach                                        | Europe                | Germany, Austria, Switzerland          | sPBHp   |
+| delaware                                    | North America         | Delaware                               | sPBHpS  |
+| denmark                                     | Europe                | Denmark                                | sPBHpS  |
+| derbyshire                                  | England               | Derbyshire                             | sPBHpS  |
+| detmold-regbez                              | Nordrhein-Westfalen   | Regierungsbezirk Detmold               | sPBHpS  |
+| devon                                       | England               | Devon                                  | sPBHpS  |
+| district-of-columbia                        | North America         | District of Columbia                   | sPBHpS  |
+| djibouti                                    | Africa                | Djibouti                               | sPBHpS  |
+| dolnoslaskie                                | Poland                | Województwo dolnośląskie(Lower         | sPBHpS  |
+|                                             |                       | Silesian Voivodeship)                  |         |
+| dorset                                      | England               | Dorset                                 | sPBHpS  |
+| duesseldorf-regbez                          | Nordrhein-Westfalen   | Regierungsbezirk Düsseldorf            | sPBHpS  |
+| east-sussex                                 | England               | East Sussex                            | sPBHpS  |
+| east-yorkshire-with-hull                    | England               | East Yorkshire with Hull               | sPBHpS  |
+| ecuador                                     | South America         | Ecuador                                | sPBHp   |
+| egypt                                       | Africa                | Egypt                                  | sPBHpS  |
+| england                                     | Great Britain         | England                                | sPBHpS  |
+| equatorial-guinea                           | Africa                | Equatorial Guinea                      | sPBHpS  |
+| eritrea                                     | Africa                | Eritrea                                | sPBHpS  |
+| essex                                       | England               | Essex                                  | sPBHpS  |
+| estonia                                     | Europe                | Estonia                                | sPBHpS  |
+| ethiopia                                    | Africa                | Ethiopia                               | sPBHpS  |
+| europe                                      |                       | Europe                                 | sPBHp   |
+| far-eastern-fed-district                    | Russian Federation    | Far Eastern Federal District           | sPBHpS  |
+| faroe-islands                               | Europe                | Faroe Islands                          | sPBHpS  |
+| fiji                                        | Australia and Oceania | Fiji                                   | sPBHpS  |
+| finland                                     | Europe                | Finland                                | sPBHpS  |
+| florida                                     | North America         | Florida                                | sPBHpS  |
+| france                                      | Europe                | France                                 | sPBHp   |
+| franche-comte                               | France                | Franche Comte                          | sPBHpS  |
+| freiburg-regbez                             | Baden-Württemberg     | Regierungsbezirk Freiburg              | sPBHpS  |
+| gabon                                       | Africa                | Gabon                                  | sPBHpS  |
+| gcc-states                                  | Asia                  | GCC States                             | sPBHpS  |
+| georgia-eu                                  | Europe                | Georgia (Europe country)               | sPBHpS  |
+| georgia-us                                  | North America         | Georgia (US State)                     | sPBHpS  |
+| germany                                     | Europe                | Germany                                | sPBHp   |
+| ghana                                       | Africa                | Ghana                                  | sPBHpS  |
+| gloucestershire                             | England               | Gloucestershire                        | sPBHpS  |
+| great-britain                               | Europe                | Great Britain                          | sPBHp   |
+| greater-london                              | England               | Greater London                         | sPBHpS  |
+| greater-manchester                          | England               | Greater Manchester                     | sPBHpS  |
+| greece                                      | Europe                | Greece                                 | sPBHpS  |
+| greenland                                   | North America         | Greenland                              | sPBHpS  |
+| guadeloupe                                  | France                | Guadeloupe                             | sPBHp   |
+| guatemala                                   | Central America       | Guatemala                              | sPBHpS  |
+| guinea                                      | Africa                | Guinea                                 | sPBHpS  |
+| guinea-bissau                               | Africa                | Guinea-Bissau                          | sPBHpS  |
+| guyane                                      | France                | Guyane                                 | sPBHp   |
+| haiti-and-domrep                            | Central America       | Haiti and Dominican Republic           | sPBHpS  |
+| hamburg                                     | Germany               | Hamburg                                | sPBHpS  |
+| hampshire                                   | England               | Hampshire                              | sPBHpS  |
+| haute-normandie                             | France                | Haute-Normandie                        | sPBHpS  |
+| hawaii                                      | North America         | Hawaii                                 | sPBHpS  |
+| herefordshire                               | England               | Herefordshire                          | sPBHpS  |
+| hertfordshire                               | England               | Hertfordshire                          | sPBHpS  |
+| hessen                                      | Germany               | Hessen                                 | sPBHpS  |
+| hokkaido                                    | Japan                 | Hokkaidō                               | sPBHpS  |
+| hungary                                     | Europe                | Hungary                                | sPBHpS  |
+| iceland                                     | Europe                | Iceland                                | sPBHpS  |
+| idaho                                       | North America         | Idaho                                  | sPBHpS  |
+| ile-de-france                               | France                | Ile-de-France                          | sPBHpS  |
+| illinois                                    | North America         | Illinois                               | sPBHpS  |
+| india                                       | Asia                  | India                                  | sPBHpS  |
+| indiana                                     | North America         | Indiana                                | sPBHpS  |
+| indonesia                                   | Asia                  | Indonesia                              | sPBHpS  |
+| iowa                                        | North America         | Iowa                                   | sPBHpS  |
+| iran                                        | Asia                  | Iran                                   | sPBHpS  |
+| iraq                                        | Asia                  | Iraq                                   | sPBHpS  |
+| ireland-and-northern-ireland                | Europe                | Ireland and Northern Ireland           | sPBHpS  |
+| isle-of-man                                 | Europe                | Isle of Man                            | sPBHpS  |
+| isle-of-wight                               | England               | Isle of Wight                          | sPBHpS  |
+| isole                                       | Italy                 | Isole                                  | sPBHpS  |
+| israel-and-palestine                        | Asia                  | Israel and Palestine                   | sPBHpS  |
+| italy                                       | Europe                | Italy                                  | sPBHp   |
+| ivory-coast                                 | Africa                | Ivory Coast                            | sPBHpS  |
+| japan                                       | Asia                  | Japan                                  | sPBHp   |
+| jordan                                      | Asia                  | Jordan                                 | sPBHpS  |
+| kaliningrad                                 | Russian Federation    | Kaliningrad                            | sPBHpS  |
+| kansai                                      | Japan                 | Kansai region (a.k.a. Kinki            | sPBHpS  |
+|                                             |                       | region)                                |         |
+| kansas                                      | North America         | Kansas                                 | sPBHpS  |
+| kanto                                       | Japan                 | Kantō region                           | sPBHpS  |
+| karlsruhe-regbez                            | Baden-Württemberg     | Regierungsbezirk Karlsruhe             | sPBHpS  |
+| kazakhstan                                  | Asia                  | Kazakhstan                             | sPBHpS  |
+| kent                                        | England               | Kent                                   | sPBHpS  |
+| kentucky                                    | North America         | Kentucky                               | sPBHpS  |
+| kenya                                       | Africa                | Kenya                                  | sPBHpS  |
+| koeln-regbez                                | Nordrhein-Westfalen   | Regierungsbezirk Köln                  | sPBHpS  |
+| kosovo                                      | Europe                | Kosovo                                 | sPBHpS  |
+| kujawsko-pomorskie                          | Poland                | Województwo                            | sPBHpS  |
+|                                             |                       | kujawsko-pomorskie(Kuyavian-Pomeranian |         |
+|                                             |                       | Voivodeship)                           |         |
+| kyrgyzstan                                  | Asia                  | Kyrgyzstan                             | sPBHpS  |
+| kyushu                                      | Japan                 | Kyūshū                                 | sPBHpS  |
+| lancashire                                  | England               | Lancashire                             | sPBHpS  |
+| languedoc-roussillon                        | France                | Languedoc-Roussillon                   | sPBHpS  |
+| latvia                                      | Europe                | Latvia                                 | sPBHpS  |
+| lebanon                                     | Asia                  | Lebanon                                | sPBHpS  |
+| leicestershire                              | England               | Leicestershire                         | sPBHpS  |
+| lesotho                                     | Africa                | Lesotho                                | sPBHpS  |
+| liberia                                     | Africa                | Liberia                                | sPBHpS  |
+| libya                                       | Africa                | Libya                                  | sPBHpS  |
+| liechtenstein                               | Europe                | Liechtenstein                          | sPBHpS  |
+| limousin                                    | France                | Limousin                               | sPBHpS  |
+| lithuania                                   | Europe                | Lithuania                              | sPBHpS  |
+| lodzkie                                     | Poland                | Województwo łódzkie(Łódź Voivodeship)  | sPBHpS  |
+| lorraine                                    | France                | Lorraine                               | sPBHpS  |
+| louisiana                                   | North America         | Louisiana                              | sPBHpS  |
+| lubelskie                                   | Poland                | Województwo lubelskie(Lublin           | sPBHpS  |
+|                                             |                       | Voivodeship)                           |         |
+| lubuskie                                    | Poland                | Województwo lubuskie(Lubusz            | sPBHpS  |
+|                                             |                       | Voivodeship)                           |         |
+| luxembourg                                  | Europe                | Luxembourg                             | sPBHpS  |
+| macedonia                                   | Europe                | Macedonia                              | sPBHpS  |
+| madagascar                                  | Africa                | Madagascar                             | sPBHpS  |
+| maine                                       | North America         | Maine                                  | sPBHpS  |
+| malawi                                      | Africa                | Malawi                                 | sPBHpS  |
+| malaysia-singapore-brunei                   | Asia                  | Malaysia, Singapore, and Brunei        | sPBHp   |
+| maldives                                    | Asia                  | Maldives                               | sPBHpS  |
+| mali                                        | Africa                | Mali                                   | sPBHpS  |
+| malopolskie                                 | Poland                | Województwo małopolskie(Lesser Poland  | sPBHpS  |
+|                                             |                       | Voivodeship)                           |         |
+| malta                                       | Europe                | Malta                                  | sPBHpS  |
+| manitoba                                    | Canada                | Manitoba                               | sPBHpS  |
+| martinique                                  | France                | Martinique                             | sPBHp   |
+| maryland                                    | North America         | Maryland                               | sPBHpS  |
+| massachusetts                               | North America         | Massachusetts                          | sPBHpS  |
+| mauritania                                  | Africa                | Mauritania                             | sPBHpS  |
+| mauritius                                   | Africa                | Mauritius                              | sPBHpS  |
+| mayotte                                     | France                | Mayotte                                | sPBHp   |
+| mazowieckie                                 | Poland                | Województwo mazowieckie(Mazovian       | sPBHpS  |
+|                                             |                       | Voivodeship)                           |         |
+| mecklenburg-vorpommern                      | Germany               | Mecklenburg-Vorpommern                 | sPBHpS  |
+| mexico                                      | North America         | Mexico                                 | sPBHpS  |
+| michigan                                    | North America         | Michigan                               | sPBHpS  |
+| midi-pyrenees                               | France                | Midi-Pyrenees                          | sPBHpS  |
+| minnesota                                   | North America         | Minnesota                              | sPBHpS  |
+| mississippi                                 | North America         | Mississippi                            | sPBHpS  |
+| missouri                                    | North America         | Missouri                               | sPBHpS  |
+| mittelfranken                               | Bayern                | Mittelfranken                          | sPBHpS  |
+| moldova                                     | Europe                | Moldova                                | sPBHpS  |
+| monaco                                      | Europe                | Monaco                                 | sPBHpS  |
+| mongolia                                    | Asia                  | Mongolia                               | sPBHpS  |
+| montana                                     | North America         | Montana                                | sPBHpS  |
+| montenegro                                  | Europe                | Montenegro                             | sPBHpS  |
+| morocco                                     | Africa                | Morocco                                | sPBHpS  |
+| mozambique                                  | Africa                | Mozambique                             | sPBHpS  |
+| muenster-regbez                             | Nordrhein-Westfalen   | Regierungsbezirk Münster               | sPBHpS  |
+| myanmar                                     | Asia                  | Myanmar (a.k.a. Burma)                 | sPBHpS  |
+| namibia                                     | Africa                | Namibia                                | sPBHpS  |
+| nebraska                                    | North America         | Nebraska                               | sPBHpS  |
+| nepal                                       | Asia                  | Nepal                                  | sPBHpS  |
+| netherlands                                 | Europe                | Netherlands                            | sPBHpS  |
+| nevada                                      | North America         | Nevada                                 | sPBHpS  |
+| new-brunswick                               | Canada                | New Brunswick                          | sPBHpS  |
+| new-caledonia                               | Australia and Oceania | New Caledonia                          | sPBHpS  |
+| new-hampshire                               | North America         | New Hampshire                          | sPBHpS  |
+| new-jersey                                  | North America         | New Jersey                             | sPBHpS  |
+| new-mexico                                  | North America         | New Mexico                             | sPBHpS  |
+| new-york                                    | North America         | New York                               | sPBHpS  |
+| new-zealand                                 | Australia and Oceania | New Zealand                            | sPBHpS  |
+| newfoundland-and-labrador                   | Canada                | Newfoundland and Labrador              | sPBHpS  |
+| nicaragua                                   | Central America       | Nicaragua                              | sPBHp   |
+| niederbayern                                | Bayern                | Niederbayern                           | sPBHpS  |
+| niedersachsen                               | Germany               | Niedersachsen                          | sPBHpS  |
+| niger                                       | Africa                | Niger                                  | sPBHpS  |
+| nigeria                                     | Africa                | Nigeria                                | sPBHpS  |
+| nord-est                                    | Italy                 | Nord-Est                               | sPBHpS  |
+| nord-ovest                                  | Italy                 | Nord-Ovest                             | sPBHpS  |
+| nord-pas-de-calais                          | France                | Nord-Pas-de-Calais                     | sPBHpS  |
+| nordrhein-westfalen                         | Germany               | Nordrhein-Westfalen                    | sPBHpS  |
+| norfolk                                     | England               | Norfolk                                | sPBHpS  |
+| north-america                               |                       | North America                          | sPBHp   |
+| north-carolina                              | North America         | North Carolina                         | sPBHpS  |
+| north-caucasus-fed-district                 | Russian Federation    | North Caucasus Federal District        | sPBHpS  |
+| north-dakota                                | North America         | North Dakota                           | sPBHpS  |
+| north-korea                                 | Asia                  | North Korea                            | sPBHpS  |
+| north-yorkshire                             | England               | North Yorkshire                        | sPBHpS  |
+| northumberland                              | England               | Northumberland                         | sPBHpS  |
+| northwest-territories                       | Canada                | Northwest Territories                  | sPBHpS  |
+| northwestern-fed-district                   | Russian Federation    | Northwestern Federal District          | sPBHpS  |
+| norway                                      | Europe                | Norway                                 | sPBHpS  |
+| nottinghamshire                             | England               | Nottinghamshire                        | sPBHpS  |
+| nova-scotia                                 | Canada                | Nova Scotia                            | sPBHpS  |
+| nunavut                                     | Canada                | Nunavut                                | sPBHpS  |
+| oberbayern                                  | Bayern                | Oberbayern                             | sPBHpS  |
+| oberfranken                                 | Bayern                | Oberfranken                            | sPBHpS  |
+| oberpfalz                                   | Bayern                | Oberpfalz                              | sPBHpS  |
+| ohio                                        | North America         | Ohio                                   | sPBHpS  |
+| oklahoma                                    | North America         | Oklahoma                               | sPBHpS  |
+| ontario                                     | Canada                | Ontario                                | sPBHpS  |
+| opolskie                                    | Poland                | Województwo opolskie(Opole             | sPBHpS  |
+|                                             |                       | Voivodeship)                           |         |
+| oregon                                      | North America         | Oregon                                 | sPBHpS  |
+| oxfordshire                                 | England               | Oxfordshire                            | sPBHpS  |
+| pakistan                                    | Asia                  | Pakistan                               | sPBHpS  |
+| papua-new-guinea                            | Australia and Oceania | Papua New Guinea                       | sPBHpS  |
+| paraguay                                    | South America         | Paraguay                               | sPBHpS  |
+| pays-de-la-loire                            | France                | Pays de la Loire                       | sPBHpS  |
+| pennsylvania                                | North America         | Pennsylvania                           | sPBHpS  |
+| peru                                        | South America         | Peru                                   | sPBHpS  |
+| philippines                                 | Asia                  | Philippines                            | sPBHpS  |
+| picardie                                    | France                | Picardie                               | sPBHpS  |
+| podkarpackie                                | Poland                | Województwo podkarpackie(Subcarpathian | sPBHpS  |
+|                                             |                       | Voivodeship)                           |         |
+| podlaskie                                   | Poland                | Województwo podlaskie(Podlaskie        | sPBHpS  |
+|                                             |                       | Voivodeship)                           |         |
+| poitou-charentes                            | France                | Poitou-Charentes                       | sPBHpS  |
+| poland                                      | Europe                | Poland                                 | sPBHp   |
+| pomorskie                                   | Poland                | Województwo pomorskie(Pomeranian       | sPBHpS  |
+|                                             |                       | Voivodeship)                           |         |
+| portugal                                    | Europe                | Portugal                               | sPBHpS  |
+| prince-edward-island                        | Canada                | Prince Edward Island                   | sPBHpS  |
+| provence-alpes-cote-d-azur                  | France                | Provence Alpes-Cote-d'Azur             | sPBHpS  |
+| puerto-rico                                 | North America         | Puerto Rico                            | sPBHpS  |
+| quebec                                      | Canada                | Quebec                                 | sPBHpS  |
+| reunion                                     | France                | Reunion                                | sPBHp   |
+| rheinland-pfalz                             | Germany               | Rheinland-Pfalz                        | sPBHpS  |
+| rhode-island                                | North America         | Rhode Island                           | sPBHpS  |
+| rhone-alpes                                 | France                | Rhone-Alpes                            | sPBHpS  |
+| romania                                     | Europe                | Romania                                | sPBHpS  |
+| russia                                      |                       | Russian Federation                     | sPBHp   |
+| rwanda                                      | Africa                | Rwanda                                 | sPBHpS  |
+| saarland                                    | Germany               | Saarland                               | sPBHpS  |
+| sachsen                                     | Germany               | Sachsen                                | sPBHpS  |
+| sachsen-anhalt                              | Germany               | Sachsen-Anhalt                         | sPBHpS  |
+| saint-helena-ascension-and-tristan-da-cunha | Africa                | Saint Helena, Ascension, and Tristan   | sPBHpS  |
+|                                             |                       | da Cunha                               |         |
+| sao-tome-and-principe                       | Africa                | Sao Tome and Principe                  | sPBHpS  |
+| saskatchewan                                | Canada                | Saskatchewan                           | sPBHpS  |
+| schleswig-holstein                          | Germany               | Schleswig-Holstein                     | sPBHpS  |
+| schwaben                                    | Bayern                | Schwaben                               | sPBHpS  |
+| scotland                                    | Great Britain         | Scotland                               | sPBHpS  |
+| senegal-and-gambia                          | Africa                | Senegal and Gambia                     | sPBHpS  |
+| serbia                                      | Europe                | Serbia                                 | sPBHpS  |
+| seychelles                                  | Africa                | Seychelles                             | sPBHpS  |
+| shikoku                                     | Japan                 | Shikoku                                | sPBHpS  |
+| shropshire                                  | England               | Shropshire                             | sPBHpS  |
+| siberian-fed-district                       | Russian Federation    | Siberian Federal District              | sPBHpS  |
+| sierra-leone                                | Africa                | Sierra Leone                           | sPBHpS  |
+| slaskie                                     | Poland                | Województwo śląskie(Silesian           | sPBHpS  |
+|                                             |                       | Voivodeship)                           |         |
+| slovakia                                    | Europe                | Slovakia                               | sPBHpS  |
+| slovenia                                    | Europe                | Slovenia                               | sPBHpS  |
+| somalia                                     | Africa                | Somalia                                | sPBHpS  |
+| somerset                                    | England               | Somerset                               | sPBHpS  |
+| south-africa                                | Africa                | South Africa                           | sPBHpS  |
+| south-africa-and-lesotho                    | Africa                | South Africa (includes Lesotho)        | sPBHp   |
+| south-america                               |                       | South America                          | sPBHp   |
+| south-carolina                              | North America         | South Carolina                         | sPBHpS  |
+| south-dakota                                | North America         | South Dakota                           | sPBHpS  |
+| south-fed-district                          | Russian Federation    | South Federal District                 | sPBHpS  |
+| south-korea                                 | Asia                  | South Korea                            | sPBHpS  |
+| south-sudan                                 | Africa                | South Sudan                            | sPBHpS  |
+| south-yorkshire                             | England               | South Yorkshire                        | sPBHpS  |
+| spain                                       | Europe                | Spain                                  | sPBHpS  |
+| sri-lanka                                   | Asia                  | Sri Lanka                              | sPBHpS  |
+| staffordshire                               | England               | Staffordshire                          | sPBHpS  |
+| stuttgart-regbez                            | Baden-Württemberg     | Regierungsbezirk Stuttgart             | sPBHpS  |
+| sud                                         | Italy                 | Sud                                    | sPBHpS  |
+| sudan                                       | Africa                | Sudan                                  | sPBHpS  |
+| suffolk                                     | England               | Suffolk                                | sPBHpS  |
+| suriname                                    | South America         | suriname                               | sPBHpS  |
+| surrey                                      | England               | Surrey                                 | sPBHpS  |
+| swaziland                                   | Africa                | Swaziland                              | sPBHpS  |
+| sweden                                      | Europe                | Sweden                                 | sPBHpS  |
+| swietokrzyskie                              | Poland                | Województwo                            | sPBHpS  |
+|                                             |                       | świętokrzyskie(Świętokrzyskie          |         |
+|                                             |                       | Voivodeship)                           |         |
+| switzerland                                 | Europe                | Switzerland                            | sPBHpS  |
+| syria                                       | Asia                  | Syria                                  | sPBHpS  |
+| taiwan                                      | Asia                  | Taiwan                                 | sPBHpS  |
+| tajikistan                                  | Asia                  | Tajikistan                             | sPBHp   |
+| tanzania                                    | Africa                | Tanzania                               | sPBHpS  |
+| tennessee                                   | North America         | Tennessee                              | sPBHpS  |
+| texas                                       | North America         | Texas                                  | sPBHpS  |
+| thailand                                    | Asia                  | Thailand                               | sPBHpS  |
+| thueringen                                  | Germany               | Thüringen                              | sPBHpS  |
+| togo                                        | Africa                | Togo                                   | sPBHpS  |
+| tohoku                                      | Japan                 | Tōhoku region                          | sPBHpS  |
+| tuebingen-regbez                            | Baden-Württemberg     | Regierungsbezirk Tübingen              | sPBHpS  |
+| tunisia                                     | Africa                | Tunisia                                | sPBHpS  |
+| turkey                                      | Europe                | Turkey                                 | sPBHpS  |
+| turkmenistan                                | Asia                  | Turkmenistan                           | sPBHpS  |
+| uganda                                      | Africa                | Uganda                                 | sPBHpS  |
+| ukraine                                     | Europe                | Ukraine                                | sPBHpS  |
+| unterfranken                                | Bayern                | Unterfranken                           | sPBHpS  |
+| ural-fed-district                           | Russian Federation    | Ural Federal District                  | sPBHpS  |
+| uruguay                                     | South America         | Uruguay                                | sPBHpS  |
+| us-midwest                                  | North America         | US Midwest                             | sPBHp   |
+| us-northeast                                | North America         | US Northeast                           | sPBHp   |
+| us-pacific                                  | North America         | US Pacific                             | sPBHp   |
+| us-south                                    | North America         | US South                               | sPBHp   |
+| us-west                                     | North America         | US West                                | sPBHp   |
+| utah                                        | North America         | Utah                                   | sPBHpS  |
+| uzbekistan                                  | Asia                  | Uzbekistan                             | sPBHpS  |
+| vermont                                     | North America         | Vermont                                | sPBHpS  |
+| vietnam                                     | Asia                  | Vietnam                                | sPBHpS  |
+| virginia                                    | North America         | Virginia                               | sPBHpS  |
+| volga-fed-district                          | Russian Federation    | Volga Federal District                 | sPBHpS  |
+| wales                                       | Great Britain         | Wales                                  | sPBHpS  |
+| warminsko-mazurskie                         | Poland                | Województwo                            | sPBHpS  |
+|                                             |                       | warmińsko-mazurskie(Warmian-Masurian   |         |
+|                                             |                       | Voivodeship)                           |         |
+| washington                                  | North America         | Washington                             | sPBHpS  |
+| west-midlands                               | England               | West Midlands                          | sPBHpS  |
+| west-sussex                                 | England               | West Sussex                            | sPBHpS  |
+| west-virginia                               | North America         | West Virginia                          | sPBHpS  |
+| west-yorkshire                              | England               | West Yorkshire                         | sPBHpS  |
+| wielkopolskie                               | Poland                | Województwo wielkopolskie(Greater      | sPBHpS  |
+|                                             |                       | Poland Voivodeship)                    |         |
+| wiltshire                                   | England               | Wiltshire                              | sPBHpS  |
+| wisconsin                                   | North America         | Wisconsin                              | sPBHpS  |
+| worcestershire                              | England               | worcestershire                         | sPBHpS  |
+| wyoming                                     | North America         | Wyoming                                | sPBHpS  |
+| yemen                                       | Asia                  | Yemen                                  | sPBHpS  |
+| yukon                                       | Canada                | Yukon                                  | sPBHpS  |
+| zachodniopomorskie                          | Poland                | Województwo zachodniopomorskie(West    | sPBHpS  |
+|                                             |                       | Pomeranian Voivodeship)                |         |
+| zambia                                      | Africa                | Zambia                                 | sPBHpS  |
+| zimbabwe                                    | Africa                | Zimbabwe                               | sPBHpS  |
