@@ -28,6 +28,7 @@ type format struct {
 	BasePath string `yaml:"basepath,omitempty"`
 }
 
+// Element define file path, name ...
 type Element struct {
 	ID     string   `yaml:"id"`
 	File   string   `yaml:"file,omitempty"`
@@ -37,20 +38,23 @@ type Element struct {
 	Parent string   `yaml:"parent,omitempty"`
 }
 
+// ElementSlice contain all Elements
 type ElementSlice map[string]Element
 
+// Generate make the slice which contain all Elements
 func (e ElementSlice) Generate(myConfig *config) ([]byte, error) {
 
 	myConfig.Elements = e
 	return yaml.Marshal(myConfig)
 }
 
+// Ext simple struct for managing ElementSlice and crawler
 type Ext struct {
 	*gocrawl.DefaultExtender
 	Elements ElementSlice
 }
 
-func (e *Ext) parse_geofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
+func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
 	var thisElement Element
 	downloadMain := doc.Find("div#download-main")
 	parent, haveParent := doc.Find("p a").Attr("href")
@@ -131,7 +135,7 @@ func (e *Ext) mergeElement(element *Element) {
 	}
 }
 
-func (e *Ext) parse_dosmfr(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
+func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
 	//var thisElement Element
 	parent := doc.Find("h1").Text()
 	fmt.Println(parent)
@@ -164,26 +168,28 @@ func (e *Ext) parse_dosmfr(ctx *gocrawl.URLContext, res *http.Response, doc *goq
 	return nil, true
 }
 
+// Visit launch right crawler
 func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
 	fmt.Printf("Visit: %s\n", ctx.URL())
 	switch ctx.URL().Host {
 	case "download.geofabrik.de":
-		return e.parse_geofabrik(ctx, res, doc)
+		return e.parseGeofabrik(ctx, res, doc)
 	case "download.openstreetmap.fr":
-		return e.parse_dosmfr(ctx, res, doc)
+		return e.parseOSMfr(ctx, res, doc)
 	default:
 		panic(fmt.Sprintln("Panic! " + ctx.URL().Host + " is not supported!"))
-		return nil, true
 	}
 
 }
 
+// Filter remove non needed urls.
 func (e *Ext) Filter(ctx *gocrawl.URLContext, isVisited bool) bool {
 	if isVisited {
 		return false
 	}
 	if len(ctx.URL().RawQuery) != 0 {
 		return false
+		// TODO: refactorize? Use config file?
 	} else if strings.Index(ctx.URL().Path, "newshapes.html") != -1 {
 		return false
 	} else if strings.Index(ctx.URL().Path, "technical.html") != -1 {
@@ -222,7 +228,7 @@ func generate(url string, fname string, myConfig *config) {
 	opts := gocrawl.NewOptions(ext)
 	opts.CrawlDelay = 100 * time.Millisecond
 	opts.LogFlags = gocrawl.LogError
-  //	opts.LogFlags = gocrawl.LogAll
+	//	opts.LogFlags = gocrawl.LogAll
 	opts.SameHostOnly = true //false
 	opts.UserAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36"
 	opts.MaxVisits = 15000
