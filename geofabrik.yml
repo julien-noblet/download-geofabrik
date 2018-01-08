@@ -1,2954 +1,4193 @@
-baseURL: 'http://download.geofabrik.de'
+baseURL: http://download.geofabrik.de
 formats:
+  osh.pbf:
+    ext: osh.pbf
+    loc: .osh.pbf
   osm.bz2:
     ext: osm.bz2
-    loc: "-latest.osm.bz2"
+    loc: -latest.osm.bz2
   osm.pbf:
     ext: osm.pbf
-    loc: "-latest.osm.pbf"
+    loc: -latest.osm.pbf
   poly:
     ext: poly
     loc: .poly
   shp.zip:
     ext: shp.zip
-    loc: "-latest.shp.zip"
+    loc: -latest-free.shp.zip
   state:
     ext: state
-    loc: "-updates/state.txt"
+    loc: .state
 elements:
+  afghanistan:
+    id: afghanistan
+    name: Afghanistan
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
   africa:
     id: africa
     name: Africa
     files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-  botswana:
-    id: botswana
-    name: Botswana
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  burkina-faso:
-    id: burkina-faso
-    name: Burkina Faso
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: africa
-  cameroon:
-    id: cameroon
-    name: Cameroon
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-  canary-islands:
-    parent: africa
-    id: canary-islands
-    name: Canary Islands
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  congo-democratic-republic:
-    id: congo-democratic-republic
-    name: Congo (Democratic Republic)
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: africa
-  egypt:
-    id: egypt
-    name: Egypt
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: africa
-  ethiopia:
-    id: ethiopia
-    name: Ethiopia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  guinea:
-    id: guinea
-    name: Guinea
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  guinea-bissau:
-    id: guinea-bissau
-    name: Guinea-Bissau
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: africa
-  ivory-coast:
-    id: ivory-coast
-    name: Ivory Coast
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  kenya:
-    id: kenya
-    name: Kenya
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  lesotho:
-    id: lesotho
-    name: Lesotho
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  liberia:
-    id: liberia
-    name: Liberia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  libya:
-    id: libya
-    name: Libya
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  madagascar:
-    id: madagascar
-    name: Madagascar
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  morocco:
-    id: morocco
-    name: Morocco
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  nigeria:
-    id: nigeria
-    name: Nigeria
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: africa
-  sierra-leone:
-    id: sierra-leone
-    name: Sierra Leone
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  somalia:
-    id: somalia
-    name: Somalia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: africa
-  south-africa-and-lesotho:
-    id: south-africa-and-lesotho
-    name: South Africa (includes Lesotho)
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  tanzania:
-    id: tanzania
-    name: Tanzania
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: africa
-  antarctica:
-    id: antarctica
-    name: Antarctica
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-  asia:
-    id: asia
-    name: Asia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-  azerbaijan:
-    id: azerbaijan
-    name: Azerbaijan
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  bangladesh:
-    id: bangladesh
-    name: Bangladesh
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  china:
-    id: china
-    name: China
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  gcc-states:
-    id: gcc-states
-    name: GCC States
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  india:
-    id: india
-    name: India
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  indonesia:
-    id: indonesia
-    name: Indonesia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  iran:
-    id: iran
-    name: Iran
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  irak:
-    id: irak
-    name: Irak
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  israel-and-palestine:
-    id: israel-and-palestine
-    name: Israel and Palestine
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  japan:
-    id: japan
-    name: Japan
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  jordan:
-    id: jordan
-    name: Jordan
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  kazakhstan:
-    id: kazakhstan
-    name: Kazakhstan
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  kyrgyzstan:
-    id: kyrgyzstan
-    name: Kyrgyzstan
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  lebanon:
-    id: lebanon
-    name: Lebanon
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  malaysia-singapore-brunei:
-    id: malaysia-singapore-brunei
-    name: Malaysia, Singapore, and Brunei
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: asia
-  mongolia:
-    id: mongolia
-    name: Mongolia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  nepal:
-    id: nepal
-    name: Nepal
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  north-korea:
-    id: north-korea
-    name: North Korea
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  pakistan:
-    id: pakistan
-    name: Pakistan
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  philippines:
-    id: philippines
-    name: Philippines
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  russia-asian-part:
-    id: russia-asian-part
-    name: Russia (Asian part)
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  south-korea:
-    id: south-korea
-    name: South Korea
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  sri-lanka:
-    id: sri-lanka
-    name: Sri Lanka
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  syria:
-    id: syria
-    name: Syria
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  taiwan:
-    id: taiwan
-    name: Taiwan
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  tajikistan:
-    id: tajikistan
-    name: Tajikistan
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: asia
-  thailand:
-    id: thailand
-    name: Thailand
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  turkmenistan:
-    id: turkmenistan
-    name: Turkmenistan
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  uzbekistan:
-    id: uzbekistan
-    name: Uzbekistan
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  vietnam:
-    id: vietnam
-    name: Vietnam
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: asia
-  australia-oceania:
-    id: australia-oceania
-    name: Australia and Oceania
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-  australia:
-    id: australia
-    name: Australia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: australia-oceania
-  fiji:
-    id: fiji
-    name: Fiji
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: australia-oceania
-  new-caledonia:
-    id: new-caledonia
-    name: New Caledonia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: australia-oceania
-  new-zealand:
-    id: new-zealand
-    name: New Zealand
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: australia-oceania
-  central-america:
-    id: central-america
-    name: Central America
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-  belize:
-    id: belize
-    name: Belize
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: central-america
-  cuba:
-    id: cuba
-    name: Cuba
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: central-america
-  guatemala:
-    id: guatemala
-    name: Guatemala
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: central-america
-  haiti-and-domrep:
-    id: haiti-and-domrep
-    name: Haiti and Dominican Republic
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: central-america
-  europe:
-    id: europe
-    name: Europe
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+  alabama:
+    id: alabama
+    name: Alabama
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  alaska:
+    id: alaska
+    name: Alaska
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
   albania:
     id: albania
     name: Albania
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: europe
-  andorra:
-    id: andorra
-    name: Andorra
+  alberta:
+    id: alberta
+    name: Alberta
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  austria:
-    id: austria
-    name: Austria
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
+  algeria:
+    id: algeria
+    name: Algeria
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  azores:
-    id: azores
-    name: Azores
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  alps:
+    id: alps
+    name: Alps
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  belarus:
-    id: belarus
-    name: Belarus
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  belgium:
-    id: belgium
-    name: Belgium
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  bosnia-herzegovina:
-    id: bosnia-herzegovina
-    name: Bosnia-Herzegovina
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  bulgaria:
-    id: bulgaria
-    name: Bulgaria
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  croatia:
-    id: croatia
-    name: Croatia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  cyprus:
-    id: cyprus
-    name: Cyprus
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  czech-republic:
-    id: czech-republic
-    name: Czech Republic
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  denmark:
-    id: denmark
-    name: Denmark
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  estonia:
-    id: estonia
-    name: Estonia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  faroe-islands:
-    id: faroe-islands
-    name: Faroe Islands
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  finland:
-    id: finland
-    name: Finland
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  france:
-    id: france
-    name: France
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: europe
   alsace:
     id: alsace
     name: Alsace
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: france
+  andorra:
+    id: andorra
+    name: Andorra
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  angola:
+    id: angola
+    name: Angola
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  antarctica:
+    id: antarctica
+    name: Antarctica
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
   aquitaine:
     id: aquitaine
     name: Aquitaine
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: france
+  argentina:
+    id: argentina
+    name: Argentina
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: south-america
+  arizona:
+    id: arizona
+    name: Arizona
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  arkansas:
+    id: arkansas
+    name: Arkansas
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  arnsberg-regbez:
+    id: arnsberg-regbez
+    name: Regierungsbezirk Arnsberg
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: nordrhein-westfalen
+  asia:
+    id: asia
+    name: Asia
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+  australia:
+    id: australia
+    name: Australia
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: australia-oceania
+  australia-oceania:
+    id: australia-oceania
+    name: Australia and Oceania
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+  austria:
+    id: austria
+    name: Austria
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
   auvergne:
     id: auvergne
     name: Auvergne
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: france
-  basse-normandie:
-    id: basse-normandie
-    name: Basse-Normandie
+  azerbaijan:
+    id: azerbaijan
+    name: Azerbaijan
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  bourgogne:
-    id: bourgogne
-    name: Bourgogne
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  azores:
+    id: azores
+    name: Azores
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  bretagne:
-    id: bretagne
-    name: Bretagne
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  centre:
-    id: centre
-    name: Centre
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  champagne-ardenne:
-    id: champagne-ardenne
-    name: Champagne Ardenne
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  corse:
-    id: corse
-    name: Corse
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  franche-comte:
-    id: franche-comte
-    name: Franche Comte
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  guadeloupe:
-    id: guadeloupe
-    name: Guadeloupe
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: france
-  guyane:
-    id: guyane
-    name: Guyane
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: france
-  haute-normandie:
-    id: haute-normandie
-    name: Haute-Normandie
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  ile-de-france:
-    id: ile-de-france
-    name: Ile-de-France
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  languedoc-roussillon:
-    id: languedoc-roussillon
-    name: Languedoc-Roussillon
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  limousin:
-    id: limousin
-    name: Limousin
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  lorraine:
-    id: lorraine
-    name: Lorraine
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  martinique:
-    id: martinique
-    name: Martinique
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: france
-  mayotte:
-    id: mayotte
-    name: Mayotte
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: france
-  midi-pyrenees:
-    id: midi-pyrenees
-    name: Midi-Pyrenees
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  nord-pas-de-calais:
-    id: nord-pas-de-calais
-    name: Nord-Pas-de-Calais
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  pays-de-la-loire:
-    id: pays-de-la-loire
-    name: Pays de la Loire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  picardie:
-    id: picardie
-    name: Picardie
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  poitou-charentes:
-    id: poitou-charentes
-    name: Poitou-Charentes
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  provence-alpes-cote-d-azur:
-    id: provence-alpes-cote-d-azur
-    name : Provence Alpes-Cote-d'Azur
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  reunion:
-    id: reunion
-    name: Reunion
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: france
-  rhone-alpes:
-    id: rhone-alpes
-    name: Rhone-Alpes
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: france
-  georgia-eu:
-    id: georgia-eu
-    file: georgia
-    name: Georgia (Eastern Europe)
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  germany:
-    id: germany
-    name: Germany
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: europe
   baden-wuerttemberg:
     id: baden-wuerttemberg
     name: Baden-Württemberg
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: germany
-  freiburg-regbez:
-    id: freiburg-regbez
-    name: Regierungsbezirk Freiburg
+  bangladesh:
+    id: bangladesh
+    name: Bangladesh
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: baden-wuerttemberg
-  karlsruhe-regbez:
-    id: karlsruhe-regbez
-    name: Regierungsbezirk Karlsruhe
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  basse-normandie:
+    id: basse-normandie
+    name: Basse-Normandie
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: baden-wuerttemberg
-  stuttgart-regbez:
-    id: stuttgart-regbez
-    name: Regierungsbezirk Stuttgart
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: baden-wuerttemberg
-  tuebingen-regbez:
-    id: tuebingen-regbez
-    name: Regierungsbezirk Tübingen
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: baden-wuerttemberg
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
   bayern:
     id: bayern
     name: Bayern
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: germany
-  mittelfranken:
-    id: mittelfranken
-    name: Mittelfranken
+  belarus:
+    id: belarus
+    name: Belarus
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: bayern
-  niederbayern:
-    id: niederbayern
-    name: Niederbayern
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  belgium:
+    id: belgium
+    name: Belgium
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: bayern
-  oberbayern:
-    id: oberbayern
-    name: Oberbayern
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  belize:
+    id: belize
+    name: Belize
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: bayern
-  oberfranken:
-    id: oberfranken
-    name: Oberfranken
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: central-america
+  benin:
+    id: benin
+    name: Benin
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: bayern
-  oberpfalz:
-    id: oberpfalz
-    name: Oberpfalz
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  berkshire:
+    id: berkshire
+    name: Berkshire
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: bayern
-  schwaben:
-    id: schwaben
-    name: Schwaben
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: bayern
-  unterfranken:
-    id: unterfranken
-    name: Unterfranken
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: bayern
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
   berlin:
     id: berlin
     name: Berlin
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: germany
+  bhutan:
+    id: bhutan
+    name: Bhutan
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  bolivia:
+    id: bolivia
+    name: Bolivia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: south-america
+  bosnia-herzegovina:
+    id: bosnia-herzegovina
+    name: Bosnia-Herzegovina
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  botswana:
+    id: botswana
+    name: Botswana
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  bourgogne:
+    id: bourgogne
+    name: Bourgogne
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
   brandenburg:
     id: brandenburg
-    name: Brandenburg
+    name: Brandenburg (mit Berlin)
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: germany
+  brazil:
+    id: brazil
+    name: Brazil
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: south-america
   bremen:
     id: bremen
     name: Bremen
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: germany
-  hamburg:
-    id: hamburg
-    name: Hamburg
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: germany
-  hessen:
-    id: hessen
-    name: Hessen
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: germany
-  mecklenburg-vorpommern:
-    id: mecklenburg-vorpommern
-    name: Mecklenburg-Vorpommern
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: germany
-  niedersachsen:
-    id: niedersachsen
-    name: Niedersachsen
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: germany
-  nordrhein-westfalen:
-    id: nordrhein-westfalen
-    name: Nordrhein-Westfalen
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: germany
-  arnsberg-regbez:
-    id: arnsberg-regbez
-    name: Regierungsbezirk Arnsberg
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: nordrhein-westfalen
-  detmold-regbez:
-    id: detmold-regbez
-    name: Regierungsbezirk Detmold
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: nordrhein-westfalen
-  duesseldorf-regbez:
-    id: duesseldorf-regbez
-    name: Regierungsbezirk Düsseldorf
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: nordrhein-westfalen
-  koeln-regbez:
-    id: koeln-regbez
-    name: Regierungsbezirk Köln
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: nordrhein-westfalen
-  muenster-regbez:
-    id: muenster-regbez
-    name: Regierungsbezirk Münster
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: nordrhein-westfalen
-  rheinland-pfalz:
-    id: rheinland-pfalz
-    name: Rheinland-Pfalz
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: germany
-  saarland:
-    id: saarland
-    name: Saarland
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: germany
-  sachsen:
-    id: sachsen
-    name: Sachsen
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: germany
-  sachsen-anhalt:
-    id: sachsen-anhalt
-    name: Sachsen-Anhalt
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: germany
-  schleswig-holstein:
-    id: schleswig-holstein
-    name: Schleswig-Holstein
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: germany
-  thueringen:
-    id: thueringen
-    name: Thüringen
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: germany
-  great-britain:
-    id: great-britain
-    name: Great Britain
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  england:
-    id: england
-    name: England
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: great-britain
-  buckinghamshire:
-    id: buckinghamshire
-    name: Buckinghamshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  cambridgeshire:
-    id: cambridgeshire
-    name: Cambridgeshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  cheshire:
-    id: cheshire
-    name: Cheshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  cornwall:
-    id: cornwall
-    name: Cornwall
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  cumbria:
-    id: cumbria
-    name: Cumbria
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  derbyshire:
-    id: derbyshire
-    name: Derbyshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  devon:
-    id: devon
-    name: Devon
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  dorset:
-    id: dorset
-    name: Dorset
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  east-sussex:
-    id: east-sussex
-    name: East Sussex
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  east-yorkshire-with-hull:
-    id: east-yorkshire-with-hull
-    name: East Yorkshire with Hull
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  essex:
-    id: essex
-    name: Essex
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  gloucestershire:
-    id: gloucestershire
-    name: Gloucestershire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  greater-london:
-    id: greater-london
-    name: Greater London
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  greater-manchester:
-    id: greater-manchester
-    name: Greater Manchester
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  hampshire:
-    id: hampshire
-    name: Hampshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  herefordshire:
-    id: herefordshire
-    name: Herefordshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  hertfordshire:
-    id: hertfordshire
-    name: Hertfordshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  isle-of-wight:
-    id: isle-of-wight
-    name: Isle of Wight
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  kent:
-    id: kent
-    name: Kent
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  lancashire:
-    id: lancashire
-    name: Lancashire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  leicestershire:
-    id: leicestershire
-    name: Leicestershire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  norfolk:
-    id: norfolk
-    name: Norfolk
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  north-yorkshire:
-    id: north-yorkshire
-    name: North Yorkshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  nottinghamshire:
-    id: nottinghamshire
-    name: Nottinghamshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  oxfordshire:
-    id: oxfordshire
-    name: Oxfordshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  shropshire:
-    id: shropshire
-    name: Shropshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  somerset:
-    id: somerset
-    name: Somerset
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  south-yorkshire:
-    id: south-yorkshire
-    name: South Yorkshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  staffordshire:
-    id: staffordshire
-    name: Staffordshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  suffolk:
-    id: suffolk
-    name: Suffolk
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  surrey:
-    id: surrey
-    name: Surrey
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  west-midlands:
-    id: west-midlands
-    name: West Midlands
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  west-sussex:
-    id: west-sussex
-    name: West Sussex
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  west-yorkshire:
-    id: west-yorkshire
-    name: West Yorkshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  wiltshire:
-    id: wiltshire
-    name: Wiltshire
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: england
-  scotland:
-    id: scotland
-    name: Scotland
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: great-britain
-  wales:
-    id: wales
-    name: Wales
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: great-britain
-  greece:
-    id: greece
-    name: Greece
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  hungary:
-    id: hungary
-    name: Hungary
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  iceland:
-    id: iceland
-    name: Iceland
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  ireland-and-northern-ireland:
-    id: ireland-and-northern-ireland
-    name: Ireland and Northern Ireland
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  isle-of-man:
-    id: isle-of-man
-    name: Isle of Man
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  italy:
-    id: italy
-    name: Italy
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  kosovo:
-    id: kosovo
-    name: Kosovo
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  latvia:
-    id: latvia
-    name: Latvia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  liechtenstein:
-    id: liechtenstein
-    name: Liechtenstein
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  lithuania:
-    id: lithuania
-    name: Lithuania
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  luxembourg:
-    id: luxembourg
-    name: Luxembourg
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  macedonia:
-    id: macedonia
-    name: Macedonia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  malta:
-    id: malta
-    name: Malta
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  moldova:
-    id: moldova
-    name: Moldova
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  monaco:
-    id: monaco
-    name: Monaco
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  montenegro:
-    id: montenegro
-    name: Montenegro
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  netherlands:
-    id: netherlands
-    name: Netherlands
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  norway:
-    id: norway
-    name: Norway
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  poland:
-    id: poland
-    name: Poland
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  portugal:
-    id: portugal
-    name: Portugal
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  romania:
-    id: romania
-    name: Romania
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  russia-european-part:
-    id: russia-european-part
-    name: Russia (European part)
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  serbia:
-    id: serbia
-    name: Serbia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  slovakia:
-    id: slovakia
-    name: Slovakia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  slovenia:
-    id: slovenia
-    name: Slovenia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  spain:
-    id: spain
-    name: Spain
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  sweden:
-    id: sweden
-    name: Sweden
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  switzerland:
-    id: switzerland
-    name: Switzerland
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  turkey:
-    id: turkey
-    name: Turkey
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  ukraine:
-    id: ukraine
-    name: Ukraine
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: europe
-  alps:
-    id: alps
-    name: Alps
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: europe
+  bretagne:
+    id: bretagne
+    name: Bretagne
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  british-columbia:
+    id: british-columbia
+    name: British Columbia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
   british-isles:
     id: british-isles
     name: British Isles
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  buckinghamshire:
+    id: buckinghamshire
+    name: Buckinghamshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  bulgaria:
+    id: bulgaria
+    name: Bulgaria
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  burkina-faso:
+    id: burkina-faso
+    name: Burkina Faso
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  burundi:
+    id: burundi
+    name: Burundi
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  california:
+    id: california
+    name: California
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  cambodia:
+    id: cambodia
+    name: Cambodia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  cambridgeshire:
+    id: cambridgeshire
+    name: Cambridgeshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  cameroon:
+    id: cameroon
+    name: Cameroon
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  canada:
+    id: canada
+    name: Canada
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  canary-islands:
+    id: canary-islands
+    name: Canary Islands
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  cape-verde:
+    id: cape-verde
+    name: Cape Verde
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  central-african-republic:
+    id: central-african-republic
+    name: Central African Republic
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  central-america:
+    id: central-america
+    name: Central America
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+  central-fed-district:
+    id: central-fed-district
+    name: Central Federal District
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: russia
+  centre:
+    id: centre
+    name: Centre
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  centro:
+    id: centro
+    name: Centro
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: italy
+  chad:
+    id: chad
+    name: Chad
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  champagne-ardenne:
+    id: champagne-ardenne
+    name: Champagne Ardenne
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  cheshire:
+    id: cheshire
+    name: Cheshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  chile:
+    id: chile
+    name: Chile
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: south-america
+  china:
+    id: china
+    name: China
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  chubu:
+    id: chubu
+    name: Chūbu region
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: japan
+  chugoku:
+    id: chugoku
+    name: Chūgoku region
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: japan
+  colombia:
+    id: colombia
+    name: Colombia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: south-america
+  colorado:
+    id: colorado
+    name: Colorado
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  comores:
+    id: comores
+    name: Comores
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  congo-brazzaville:
+    id: congo-brazzaville
+    name: Congo (Republic/Brazzaville)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  congo-democratic-republic:
+    id: congo-democratic-republic
+    name: Congo (Democratic Republic/Kinshasa)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  connecticut:
+    id: connecticut
+    name: Connecticut
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  cornwall:
+    id: cornwall
+    name: Cornwall
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  corse:
+    id: corse
+    name: Corse
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  crimean-fed-district:
+    id: crimean-fed-district
+    name: Crimean Federal District
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: russia
+  croatia:
+    id: croatia
+    name: Croatia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  cuba:
+    id: cuba
+    name: Cuba
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: central-america
+  cumbria:
+    id: cumbria
+    name: Cumbria
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  cyprus:
+    id: cyprus
+    name: Cyprus
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  czech-republic:
+    id: czech-republic
+    name: Czech Republic
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: europe
   dach:
     id: dach
     name: Germany, Austria, Switzerland
     files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: europe
-  north-america:
-    id: north-america
-    name: North America
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-  canada:
-    id: canada
-    name: Canada
-    files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: north-america
-  alberta:
-    id: alberta
-    name: Alberta
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  british-columbia:
-    id: british-columbia
-    name: British Columbia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  manitoba:
-    id: manitoba
-    name: Manitoba
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  new-brunswick:
-    id: new-brunswick
-    name: New Brunswick
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  newfoundland-and-labrador:
-    id: newfoundland-and-labrador
-    name: Newfoundland and Labrador
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  northwest-territories:
-    id: northwest-territories
-    name: Northwest Territories
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  nova-scotia:
-    id: nova-scotia
-    name: Nova Scotia
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  nunavut:
-    id: nunavut
-    name: Nunavut
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  ontario:
-    id: ontario
-    name: Ontario
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  prince-edward-island:
-    id: prince-edward-island
-    name: Prince Edward Island
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  quebec:
-    id: quebec
-    name: Quebec
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  saskatchewan:
-    id: saskatchewan
-    name: Saskatchewan
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  yukon:
-    id: yukon
-    name: Yukon
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: canada
-  greenland:
-    id: greenland
-    name: Greenland
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: north-america
-  mexico:
-    id: mexico
-    name: Mexico
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: north-america
-  us:
-    id: us
-    name: United States of America
-    meta: true
-    parent: north-america
-  alabama:
-    id: alabama
-    name: Alabama
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  alaska:
-    id: alaska
-    name: Alaska
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  arizona:
-    id: arizona
-    name: Arizona
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  arkansas:
-    id: arkansas
-    name: Arkansas
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  california:
-    id: california
-    name: California
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  colorado:
-    id: colorado
-    name: Colorado
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  connecticut:
-    id: connecticut
-    name: Connecticut
-    files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
   delaware:
     id: delaware
     name: Delaware
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  denmark:
+    id: denmark
+    name: Denmark
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  derbyshire:
+    id: derbyshire
+    name: Derbyshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  detmold-regbez:
+    id: detmold-regbez
+    name: Regierungsbezirk Detmold
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: nordrhein-westfalen
+  devon:
+    id: devon
+    name: Devon
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
   district-of-columbia:
     id: district-of-columbia
     name: District of Columbia
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  djibouti:
+    id: djibouti
+    name: Djibouti
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  dolnoslaskie:
+    id: dolnoslaskie
+    name: Województwo dolnośląskie(Lower Silesian Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  dorset:
+    id: dorset
+    name: Dorset
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  duesseldorf-regbez:
+    id: duesseldorf-regbez
+    name: Regierungsbezirk Düsseldorf
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: nordrhein-westfalen
+  east-sussex:
+    id: east-sussex
+    name: East Sussex
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  east-yorkshire-with-hull:
+    id: east-yorkshire-with-hull
+    name: East Yorkshire with Hull
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  ecuador:
+    id: ecuador
+    name: Ecuador
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: south-america
+  egypt:
+    id: egypt
+    name: Egypt
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  england:
+    id: england
+    name: England
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: great-britain
+  equatorial-guinea:
+    id: equatorial-guinea
+    name: Equatorial Guinea
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  eritrea:
+    id: eritrea
+    name: Eritrea
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  essex:
+    id: essex
+    name: Essex
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  estonia:
+    id: estonia
+    name: Estonia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  ethiopia:
+    id: ethiopia
+    name: Ethiopia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  europe:
+    id: europe
+    name: Europe
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+  far-eastern-fed-district:
+    id: far-eastern-fed-district
+    name: Far Eastern Federal District
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: russia
+  faroe-islands:
+    id: faroe-islands
+    name: Faroe Islands
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  fiji:
+    id: fiji
+    name: Fiji
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: australia-oceania
+  finland:
+    id: finland
+    name: Finland
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
   florida:
     id: florida
     name: Florida
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  france:
+    id: france
+    name: France
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  franche-comte:
+    id: franche-comte
+    name: Franche Comte
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  freiburg-regbez:
+    id: freiburg-regbez
+    name: Regierungsbezirk Freiburg
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: baden-wuerttemberg
+  gabon:
+    id: gabon
+    name: Gabon
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  gcc-states:
+    id: gcc-states
+    name: GCC States
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  georgia-eu:
+    id: georgia-eu
+    file: georgia
+    name: Georgia (Europe country)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
   georgia-us:
     id: georgia-us
     file: georgia
     name: Georgia (US State)
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  germany:
+    id: germany
+    name: Germany
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  ghana:
+    id: ghana
+    name: Ghana
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  gloucestershire:
+    id: gloucestershire
+    name: Gloucestershire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  great-britain:
+    id: great-britain
+    name: Great Britain
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  greater-london:
+    id: greater-london
+    name: Greater London
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  greater-manchester:
+    id: greater-manchester
+    name: Greater Manchester
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  greece:
+    id: greece
+    name: Greece
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  greenland:
+    id: greenland
+    name: Greenland
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  guadeloupe:
+    id: guadeloupe
+    name: Guadeloupe
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  guatemala:
+    id: guatemala
+    name: Guatemala
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: central-america
+  guinea:
+    id: guinea
+    name: Guinea
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  guinea-bissau:
+    id: guinea-bissau
+    name: Guinea-Bissau
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  guyane:
+    id: guyane
+    name: Guyane
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  haiti-and-domrep:
+    id: haiti-and-domrep
+    name: Haiti and Dominican Republic
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: central-america
+  hamburg:
+    id: hamburg
+    name: Hamburg
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: germany
+  hampshire:
+    id: hampshire
+    name: Hampshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  haute-normandie:
+    id: haute-normandie
+    name: Haute-Normandie
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
   hawaii:
     id: hawaii
     name: Hawaii
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  herefordshire:
+    id: herefordshire
+    name: Herefordshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  hertfordshire:
+    id: hertfordshire
+    name: Hertfordshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  hessen:
+    id: hessen
+    name: Hessen
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: germany
+  hokkaido:
+    id: hokkaido
+    name: Hokkaidō
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: japan
+  hungary:
+    id: hungary
+    name: Hungary
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  iceland:
+    id: iceland
+    name: Iceland
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
   idaho:
     id: idaho
     name: Idaho
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  ile-de-france:
+    id: ile-de-france
+    name: Ile-de-France
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
   illinois:
     id: illinois
     name: Illinois
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  india:
+    id: india
+    name: India
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
   indiana:
     id: indiana
     name: Indiana
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  indonesia:
+    id: indonesia
+    name: Indonesia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
   iowa:
     id: iowa
     name: Iowa
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  iran:
+    id: iran
+    name: Iran
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  iraq:
+    id: iraq
+    name: Iraq
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  ireland-and-northern-ireland:
+    id: ireland-and-northern-ireland
+    name: Ireland and Northern Ireland
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  isle-of-man:
+    id: isle-of-man
+    name: Isle of Man
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  isle-of-wight:
+    id: isle-of-wight
+    name: Isle of Wight
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  isole:
+    id: isole
+    name: Isole
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: italy
+  israel-and-palestine:
+    id: israel-and-palestine
+    name: Israel and Palestine
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  italy:
+    id: italy
+    name: Italy
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  ivory-coast:
+    id: ivory-coast
+    name: Ivory Coast
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  japan:
+    id: japan
+    name: Japan
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  jordan:
+    id: jordan
+    name: Jordan
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  kaliningrad:
+    id: kaliningrad
+    name: Kaliningrad
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: russia
+  kansai:
+    id: kansai
+    name: Kansai region (a.k.a. Kinki region)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: japan
   kansas:
     id: kansas
     name: Kansas
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  kanto:
+    id: kanto
+    name: Kantō region
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: japan
+  karlsruhe-regbez:
+    id: karlsruhe-regbez
+    name: Regierungsbezirk Karlsruhe
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: baden-wuerttemberg
+  kazakhstan:
+    id: kazakhstan
+    name: Kazakhstan
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  kent:
+    id: kent
+    name: Kent
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
   kentucky:
     id: kentucky
     name: Kentucky
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  kenya:
+    id: kenya
+    name: Kenya
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  koeln-regbez:
+    id: koeln-regbez
+    name: Regierungsbezirk Köln
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: nordrhein-westfalen
+  kosovo:
+    id: kosovo
+    name: Kosovo
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  kujawsko-pomorskie:
+    id: kujawsko-pomorskie
+    name: Województwo kujawsko-pomorskie(Kuyavian-Pomeranian Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  kyrgyzstan:
+    id: kyrgyzstan
+    name: Kyrgyzstan
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  kyushu:
+    id: kyushu
+    name: Kyūshū
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: japan
+  lancashire:
+    id: lancashire
+    name: Lancashire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  languedoc-roussillon:
+    id: languedoc-roussillon
+    name: Languedoc-Roussillon
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  latvia:
+    id: latvia
+    name: Latvia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  lebanon:
+    id: lebanon
+    name: Lebanon
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  leicestershire:
+    id: leicestershire
+    name: Leicestershire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  lesotho:
+    id: lesotho
+    name: Lesotho
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  liberia:
+    id: liberia
+    name: Liberia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  libya:
+    id: libya
+    name: Libya
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  liechtenstein:
+    id: liechtenstein
+    name: Liechtenstein
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  limousin:
+    id: limousin
+    name: Limousin
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  lithuania:
+    id: lithuania
+    name: Lithuania
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  lodzkie:
+    id: lodzkie
+    name: Województwo łódzkie(Łódź Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  lorraine:
+    id: lorraine
+    name: Lorraine
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
   louisiana:
     id: louisiana
     name: Louisiana
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  lubelskie:
+    id: lubelskie
+    name: Województwo lubelskie(Lublin Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  lubuskie:
+    id: lubuskie
+    name: Województwo lubuskie(Lubusz Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  luxembourg:
+    id: luxembourg
+    name: Luxembourg
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  macedonia:
+    id: macedonia
+    name: Macedonia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  madagascar:
+    id: madagascar
+    name: Madagascar
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
   maine:
     id: maine
     name: Maine
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  malawi:
+    id: malawi
+    name: Malawi
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  malaysia-singapore-brunei:
+    id: malaysia-singapore-brunei
+    name: Malaysia, Singapore, and Brunei
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  maldives:
+    id: maldives
+    name: Maldives
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  mali:
+    id: mali
+    name: Mali
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  malopolskie:
+    id: malopolskie
+    name: Województwo małopolskie(Lesser Poland Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  malta:
+    id: malta
+    name: Malta
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  manitoba:
+    id: manitoba
+    name: Manitoba
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
+  martinique:
+    id: martinique
+    name: Martinique
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
   maryland:
     id: maryland
     name: Maryland
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
   massachusetts:
     id: massachusetts
     name: Massachusetts
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  mauritania:
+    id: mauritania
+    name: Mauritania
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  mauritius:
+    id: mauritius
+    name: Mauritius
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  mayotte:
+    id: mayotte
+    name: Mayotte
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  mazowieckie:
+    id: mazowieckie
+    name: Województwo mazowieckie(Mazovian Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  mecklenburg-vorpommern:
+    id: mecklenburg-vorpommern
+    name: Mecklenburg-Vorpommern
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: germany
+  mexico:
+    id: mexico
+    name: Mexico
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
   michigan:
     id: michigan
     name: Michigan
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  midi-pyrenees:
+    id: midi-pyrenees
+    name: Midi-Pyrenees
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
   minnesota:
     id: minnesota
     name: Minnesota
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
   mississippi:
     id: mississippi
     name: Mississippi
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
   missouri:
     id: missouri
     name: Missouri
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  mittelfranken:
+    id: mittelfranken
+    name: Mittelfranken
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: bayern
+  moldova:
+    id: moldova
+    name: Moldova
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  monaco:
+    id: monaco
+    name: Monaco
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  mongolia:
+    id: mongolia
+    name: Mongolia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
   montana:
     id: montana
     name: Montana
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  montenegro:
+    id: montenegro
+    name: Montenegro
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  morocco:
+    id: morocco
+    name: Morocco
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  mozambique:
+    id: mozambique
+    name: Mozambique
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  muenster-regbez:
+    id: muenster-regbez
+    name: Regierungsbezirk Münster
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: nordrhein-westfalen
+  myanmar:
+    id: myanmar
+    name: Myanmar (a.k.a. Burma)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  namibia:
+    id: namibia
+    name: Namibia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
   nebraska:
     id: nebraska
     name: Nebraska
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  nepal:
+    id: nepal
+    name: Nepal
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  netherlands:
+    id: netherlands
+    name: Netherlands
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
   nevada:
     id: nevada
     name: Nevada
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  new-brunswick:
+    id: new-brunswick
+    name: New Brunswick
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
+  new-caledonia:
+    id: new-caledonia
+    name: New Caledonia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: australia-oceania
   new-hampshire:
     id: new-hampshire
     name: New Hampshire
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
   new-jersey:
     id: new-jersey
     name: New Jersey
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
   new-mexico:
     id: new-mexico
     name: New Mexico
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
   new-york:
     id: new-york
     name: New York
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  new-zealand:
+    id: new-zealand
+    name: New Zealand
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: australia-oceania
+  newfoundland-and-labrador:
+    id: newfoundland-and-labrador
+    name: Newfoundland and Labrador
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
+  nicaragua:
+    id: nicaragua
+    name: Nicaragua
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: central-america
+  niederbayern:
+    id: niederbayern
+    name: Niederbayern
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: bayern
+  niedersachsen:
+    id: niedersachsen
+    name: Niedersachsen
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: germany
+  niger:
+    id: niger
+    name: Niger
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  nigeria:
+    id: nigeria
+    name: Nigeria
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  nord-est:
+    id: nord-est
+    name: Nord-Est
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: italy
+  nord-ovest:
+    id: nord-ovest
+    name: Nord-Ovest
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: italy
+  nord-pas-de-calais:
+    id: nord-pas-de-calais
+    name: Nord-Pas-de-Calais
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  nordrhein-westfalen:
+    id: nordrhein-westfalen
+    name: Nordrhein-Westfalen
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: germany
+  norfolk:
+    id: norfolk
+    name: Norfolk
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  north-america:
+    id: north-america
+    name: North America
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
   north-carolina:
     id: north-carolina
     name: North Carolina
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  north-caucasus-fed-district:
+    id: north-caucasus-fed-district
+    name: North Caucasus Federal District
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: russia
   north-dakota:
     id: north-dakota
     name: North Dakota
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  north-korea:
+    id: north-korea
+    name: North Korea
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  north-yorkshire:
+    id: north-yorkshire
+    name: North Yorkshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  northumberland:
+    id: northumberland
+    name: Northumberland
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  northwest-territories:
+    id: northwest-territories
+    name: Northwest Territories
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
+  northwestern-fed-district:
+    id: northwestern-fed-district
+    name: Northwestern Federal District
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: russia
+  norway:
+    id: norway
+    name: Norway
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  nottinghamshire:
+    id: nottinghamshire
+    name: Nottinghamshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  nova-scotia:
+    id: nova-scotia
+    name: Nova Scotia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
+  nunavut:
+    id: nunavut
+    name: Nunavut
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
+  oberbayern:
+    id: oberbayern
+    name: Oberbayern
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: bayern
+  oberfranken:
+    id: oberfranken
+    name: Oberfranken
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: bayern
+  oberpfalz:
+    id: oberpfalz
+    name: Oberpfalz
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: bayern
   ohio:
     id: ohio
     name: Ohio
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
   oklahoma:
     id: oklahoma
     name: Oklahoma
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  ontario:
+    id: ontario
+    name: Ontario
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
+  opolskie:
+    id: opolskie
+    name: Województwo opolskie(Opole Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
   oregon:
     id: oregon
     name: Oregon
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  oxfordshire:
+    id: oxfordshire
+    name: Oxfordshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  pakistan:
+    id: pakistan
+    name: Pakistan
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  papua-new-guinea:
+    id: papua-new-guinea
+    name: Papua New Guinea
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: australia-oceania
+  paraguay:
+    id: paraguay
+    name: Paraguay
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: south-america
+  pays-de-la-loire:
+    id: pays-de-la-loire
+    name: Pays de la Loire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
   pennsylvania:
     id: pennsylvania
     name: Pennsylvania
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  peru:
+    id: peru
+    name: Peru
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: south-america
+  philippines:
+    id: philippines
+    name: Philippines
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  picardie:
+    id: picardie
+    name: Picardie
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  podkarpackie:
+    id: podkarpackie
+    name: Województwo podkarpackie(Subcarpathian Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  podlaskie:
+    id: podlaskie
+    name: Województwo podlaskie(Podlaskie Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  poitou-charentes:
+    id: poitou-charentes
+    name: Poitou-Charentes
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  poland:
+    id: poland
+    name: Poland
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  pomorskie:
+    id: pomorskie
+    name: Województwo pomorskie(Pomeranian Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  portugal:
+    id: portugal
+    name: Portugal
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  prince-edward-island:
+    id: prince-edward-island
+    name: Prince Edward Island
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
+  provence-alpes-cote-d-azur:
+    id: provence-alpes-cote-d-azur
+    name: Provence Alpes-Cote-d'Azur
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  puerto-rico:
+    id: puerto-rico
+    name: Puerto Rico
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  quebec:
+    id: quebec
+    name: Quebec
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
+  reunion:
+    id: reunion
+    name: Reunion
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  rheinland-pfalz:
+    id: rheinland-pfalz
+    name: Rheinland-Pfalz
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: germany
   rhode-island:
     id: rhode-island
     name: Rhode Island
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  rhone-alpes:
+    id: rhone-alpes
+    name: Rhone-Alpes
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: france
+  romania:
+    id: romania
+    name: Romania
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  russia:
+    id: russia
+    name: Russian Federation
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+  rwanda:
+    id: rwanda
+    name: Rwanda
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  saarland:
+    id: saarland
+    name: Saarland
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: germany
+  sachsen:
+    id: sachsen
+    name: Sachsen
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: germany
+  sachsen-anhalt:
+    id: sachsen-anhalt
+    name: Sachsen-Anhalt
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: germany
+  saint-helena-ascension-and-tristan-da-cunha:
+    id: saint-helena-ascension-and-tristan-da-cunha
+    name: Saint Helena, Ascension, and Tristan da Cunha
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  sao-tome-and-principe:
+    id: sao-tome-and-principe
+    name: Sao Tome and Principe
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  saskatchewan:
+    id: saskatchewan
+    name: Saskatchewan
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
+  schleswig-holstein:
+    id: schleswig-holstein
+    name: Schleswig-Holstein
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: germany
+  schwaben:
+    id: schwaben
+    name: Schwaben
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: bayern
+  scotland:
+    id: scotland
+    name: Scotland
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: great-britain
+  senegal-and-gambia:
+    id: senegal-and-gambia
+    name: Senegal and Gambia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  serbia:
+    id: serbia
+    name: Serbia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  seychelles:
+    id: seychelles
+    name: Seychelles
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  shikoku:
+    id: shikoku
+    name: Shikoku
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: japan
+  shropshire:
+    id: shropshire
+    name: Shropshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  siberian-fed-district:
+    id: siberian-fed-district
+    name: Siberian Federal District
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: russia
+  sierra-leone:
+    id: sierra-leone
+    name: Sierra Leone
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  slaskie:
+    id: slaskie
+    name: Województwo śląskie(Silesian Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  slovakia:
+    id: slovakia
+    name: Slovakia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  slovenia:
+    id: slovenia
+    name: Slovenia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  somalia:
+    id: somalia
+    name: Somalia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  somerset:
+    id: somerset
+    name: Somerset
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  south-africa:
+    id: south-africa
+    name: South Africa
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  south-africa-and-lesotho:
+    id: south-africa-and-lesotho
+    name: South Africa (includes Lesotho)
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  south-america:
+    id: south-america
+    name: South America
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
   south-carolina:
     id: south-carolina
     name: South Carolina
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
   south-dakota:
     id: south-dakota
     name: South Dakota
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  south-fed-district:
+    id: south-fed-district
+    name: South Federal District
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: russia
+  south-korea:
+    id: south-korea
+    name: South Korea
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  south-sudan:
+    id: south-sudan
+    name: South Sudan
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  south-yorkshire:
+    id: south-yorkshire
+    name: South Yorkshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  spain:
+    id: spain
+    name: Spain
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  sri-lanka:
+    id: sri-lanka
+    name: Sri Lanka
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  staffordshire:
+    id: staffordshire
+    name: Staffordshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  stuttgart-regbez:
+    id: stuttgart-regbez
+    name: Regierungsbezirk Stuttgart
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: baden-wuerttemberg
+  sud:
+    id: sud
+    name: Sud
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: italy
+  sudan:
+    id: sudan
+    name: Sudan
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  suffolk:
+    id: suffolk
+    name: Suffolk
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  suriname:
+    id: suriname
+    name: suriname
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: south-america
+  surrey:
+    id: surrey
+    name: Surrey
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  swaziland:
+    id: swaziland
+    name: Swaziland
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  sweden:
+    id: sweden
+    name: Sweden
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  swietokrzyskie:
+    id: swietokrzyskie
+    name: Województwo świętokrzyskie(Świętokrzyskie Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  switzerland:
+    id: switzerland
+    name: Switzerland
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  syria:
+    id: syria
+    name: Syria
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  taiwan:
+    id: taiwan
+    name: Taiwan
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  tajikistan:
+    id: tajikistan
+    name: Tajikistan
+    files:
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  tanzania:
+    id: tanzania
+    name: Tanzania
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
   tennessee:
     id: tennessee
     name: Tennessee
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
   texas:
     id: texas
     name: Texas
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  utah:
-    id: utah
-    name: Utah
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  thailand:
+    id: thailand
+    name: Thailand
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  vermont:
-    id: vermont
-    name: Vermont
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  thueringen:
+    id: thueringen
+    name: Thüringen
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  virginia:
-    id: virginia
-    name: Virginia
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: germany
+  togo:
+    id: togo
+    name: Togo
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  washington:
-    id: washington
-    name: Washington
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  tohoku:
+    id: tohoku
+    name: Tōhoku region
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  west-virginia:
-    id: west-virginia
-    name: West Virginia
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: japan
+  tuebingen-regbez:
+    id: tuebingen-regbez
+    name: Regierungsbezirk Tübingen
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  wisconsin:
-    id: wisconsin
-    name: Wisconsin
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: baden-wuerttemberg
+  tunisia:
+    id: tunisia
+    name: Tunisia
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
-  wyoming:
-    id: wyoming
-    name: Wyoming
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  turkey:
+    id: turkey
+    name: Turkey
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: us
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  turkmenistan:
+    id: turkmenistan
+    name: Turkmenistan
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  uganda:
+    id: uganda
+    name: Uganda
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  ukraine:
+    id: ukraine
+    name: Ukraine
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: europe
+  unterfranken:
+    id: unterfranken
+    name: Unterfranken
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: bayern
+  ural-fed-district:
+    id: ural-fed-district
+    name: Ural Federal District
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: russia
+  uruguay:
+    id: uruguay
+    name: Uruguay
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: south-america
   us-midwest:
     id: us-midwest
     name: US Midwest
     files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: north-america
   us-northeast:
     id: us-northeast
     name: US Northeast
     files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: north-america
   us-pacific:
     id: us-pacific
     name: US Pacific
     files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: north-america
   us-south:
     id: us-south
     name: US South
     files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: north-america
   us-west:
     id: us-west
     name: US West
     files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
+    - osm.pbf
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
     parent: north-america
-  south-america:
-    id: south-america
-    name: South America
+  utah:
+    id: utah
+    name: Utah
     files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-  argentina:
-    id: argentina
-    name: Argentina
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  uzbekistan:
+    id: uzbekistan
+    name: Uzbekistan
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: south-america
-  bolivia:
-    id: bolivia
-    name: Bolivia
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  vermont:
+    id: vermont
+    name: Vermont
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: south-america
-  brazil:
-    id: brazil
-    name: Brazil
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  vietnam:
+    id: vietnam
+    name: Vietnam
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: south-america
-  chile:
-    id: chile
-    name: Chile
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  virginia:
+    id: virginia
+    name: Virginia
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: south-america
-  colombia:
-    id: colombia
-    name: Colombia
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  volga-fed-district:
+    id: volga-fed-district
+    name: Volga Federal District
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: south-america
-  ecuador:
-    id: ecuador
-    name: Ecuador
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: russia
+  wales:
+    id: wales
+    name: Wales
     files:
-      - osm.bz2
-      - osm.pbf
-      - poly
-      - state
-    parent: south-america
-  paraguay:
-    id: paraguay
-    name: Paraguay
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: great-britain
+  warminsko-mazurskie:
+    id: warminsko-mazurskie
+    name: Województwo warmińsko-mazurskie(Warmian-Masurian Voivodeship)
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: south-america
-  peru:
-    id: peru
-    name: Peru
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  washington:
+    id: washington
+    name: Washington
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: south-america
-  uruguay:
-    id: uruguay
-    name : Uruguay
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  west-midlands:
+    id: west-midlands
+    name: West Midlands
     files:
-      - osm.bz2
-      - osm.pbf
-      - shp.zip
-      - poly
-      - state
-    parent: south-america
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  west-sussex:
+    id: west-sussex
+    name: West Sussex
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  west-virginia:
+    id: west-virginia
+    name: West Virginia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  west-yorkshire:
+    id: west-yorkshire
+    name: West Yorkshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  wielkopolskie:
+    id: wielkopolskie
+    name: Województwo wielkopolskie(Greater Poland Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  wiltshire:
+    id: wiltshire
+    name: Wiltshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  wisconsin:
+    id: wisconsin
+    name: Wisconsin
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  worcestershire:
+    id: worcestershire
+    name: worcestershire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
+  wyoming:
+    id: wyoming
+    name: Wyoming
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: north-america
+  yemen:
+    id: yemen
+    name: Yemen
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
+  yukon:
+    id: yukon
+    name: Yukon
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: canada
+  zachodniopomorskie:
+    id: zachodniopomorskie
+    name: Województwo zachodniopomorskie(West Pomeranian Voivodeship)
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: poland
+  zambia:
+    id: zambia
+    name: Zambia
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
+  zimbabwe:
+    id: zimbabwe
+    name: Zimbabwe
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: africa
