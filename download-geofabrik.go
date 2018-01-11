@@ -19,7 +19,7 @@ import (
 
 type config struct {
 	BaseURL  string             `yaml:"baseURL"`
-	Formats map[string]format   `yaml:"formats,flow"`
+	Formats  map[string]format  `yaml:"formats,flow"`
 	Elements map[string]element `yaml:"elements,flow"`
 }
 
@@ -34,7 +34,7 @@ type element struct {
 
 type format struct {
 	ID  string `yaml:"ext"`
-  Loc string `yaml:"loc"`
+	Loc string `yaml:"loc"`
 }
 
 var (
@@ -47,12 +47,14 @@ var (
 	url    = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml").String()
 
 	list = app.Command("list", "Show elements available")
+	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool()
 
 	download = app.Command("download", "Download element") //TODO : add d as command
 	delement = download.Arg("element", "OSM element").Required().String()
 	dosmBz2  = download.Flag("osm.bz2", "Download osm.bz2 if available").Short('B').Bool()
 	dshpZip  = download.Flag("shp.zip", "Download shp.zip if available").Short('S').Bool()
 	dosmPbf  = download.Flag("osm.pbf", "Download osm.pbf (default)").Short('P').Bool()
+	doshPbf  = download.Flag("osh.pbf", "Download osh.pbf (default)").Short('H').Bool()
 	dstate   = download.Flag("state", "Download state.txt file").Short('s').Bool()
 	dpoly    = download.Flag("poly", "Download poly file").Short('p').Bool()
 )
@@ -62,19 +64,21 @@ func (e *element) hasParent() bool {
 }
 
 func miniFormats(s []string) string {
-	res := make([]string, 5)
+	res := make([]string, 6)
 	for _, item := range s {
 		switch item {
+		case "state":
+			res[0] = "s"
 		case "osm.pbf":
 			res[1] = "P"
 		case "osm.bz2":
 			res[2] = "B"
-		case "shp.zip":
-			res[4] = "S"
+		case "osh.pbf":
+			res[3] = "H"
 		case "poly":
-			res[3] = "p"
-		case "state":
-			res[0] = "s"
+			res[4] = "p"
+		case "shp.zip":
+			res[5] = "S"
 		}
 	}
 
@@ -150,6 +154,9 @@ func getFormats() []string {
 	if *dosmPbf {
 		formatFile = append(formatFile, "osm.pbf")
 	}
+	if *doshPbf {
+		formatFile = append(formatFile, "osh.pbf")
+	}
 	if *dosmBz2 {
 		formatFile = append(formatFile, "osm.bz2")
 	}
@@ -168,10 +175,14 @@ func getFormats() []string {
 	return formatFile
 }
 
-func listAllRegions(c config) {
+func listAllRegions(c config,format string) {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetAlignment(tablewriter.ALIGN_LEFT)
 	table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
+	if format == "Markdown"{
+		table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
+		table.SetCenterSeparator("|")
+	}
 	keys := make(sort.StringSlice, len(c.Elements))
 	i := 0
 	for k := range c.Elements {
@@ -212,14 +223,18 @@ func stringInSlice(a string, list []string) bool {
 
 func UpdateConfig(url string, myconfig string) {
 	downloadFromURL(url, myconfig)
-	fmt.Println("Congratulation, you have the latest geofabrik.yml\n")
+	fmt.Println("Congratulation, you have the latest geofabrik.yml")
 }
 
 func main() {
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
 
 	case list.FullCommand():
-		listAllRegions(loadConfig(*Fconfig))
+		var format = ""
+		if *lmd {
+			format = "Markdown"
+		}
+		listAllRegions(loadConfig(*Fconfig),format)
 	case update.FullCommand():
 		UpdateConfig(*url, *Fconfig)
 	case download.FullCommand():
