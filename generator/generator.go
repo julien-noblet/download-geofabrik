@@ -99,6 +99,14 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 		if len(thisElement.Files) == 0 {
 			thisElement.Meta = true
 		}
+		// Workaround to fix #10
+		var us Element
+		us.Meta = true
+		us.ID = "us"
+		us.Name = "us"
+		us.Parent = "north-america"
+		e.Elements[us.Name] = us
+
 		//Exceptions!
 		// Only Georgia (EU and US)
 		if thisElement.ID == "georgia" {
@@ -109,8 +117,68 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 			} else {
 				thisElement.Name = "Georgia (US State)"
 				thisElement.ID = "georgia-us"
+				thisElement.Parent = "us"
 			}
 		}
+		// List of US to fix #10
+		usList := map[string]bool{
+			"alabama":              true,
+			"alaska":               true,
+			"arizona":              true,
+			"arkansas":             true,
+			"california":           true,
+			"colorado":             true,
+			"connecticut":          true,
+			"delaware":             true,
+			"district-of-columbia": true,
+			"florida":              true,
+			"georgia":              false, // Since there is also georgia in europe....
+			"hawaii":               true,
+			"idaho":                true,
+			"illinois":             true,
+			"indiana":              true,
+			"iowa":                 true,
+			"kansas":               true,
+			"kentucky":             true,
+			"louisiana":            true,
+			"maine":                true,
+			"maryland":             true,
+			"massachusetts":        true,
+			"michigan":             true,
+			"minnesota":            true,
+			"mississippi":          true,
+			"missouri":             true,
+			"montana":              true,
+			"nebraska":             true,
+			"nevada":               true,
+			"new-hampshire":        true,
+			"new-jersey":           true,
+			"new-mexico":           true,
+			"new-york":             true,
+			"north-carolina":       true,
+			"north-dakota":         true,
+			"ohio":                 true,
+			"oklahoma":             true,
+			"oregon":               true,
+			"pennsylvania":         true,
+			"puerto-rico":          true,
+			"rhode-island":         true,
+			"south-carolina":       true,
+			"south-dakota":         true,
+			"tennessee":            true,
+			"texas":                true,
+			"utah":                 true,
+			"vermont":              true,
+			"virginia":             true,
+			"washington":           true,
+			"west-virginia":        true,
+			"wisconsin":            true,
+			"wyoming":              true}
+
+		if usList[thisElement.ID] {
+			thisElement.Parent = "us"
+		}
+
 		e.Elements[thisElement.ID] = thisElement
 	}
 	return nil, true
