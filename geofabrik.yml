@@ -49,7 +49,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   alaska:
     id: alaska
     name: Alaska
@@ -60,7 +60,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   albania:
     id: albania
     name: Albania
@@ -179,7 +179,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   arkansas:
     id: arkansas
     name: Arkansas
@@ -190,7 +190,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   arnsberg-regbez:
     id: arnsberg-regbez
     name: Regierungsbezirk Arnsberg
@@ -558,7 +558,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   cambodia:
     id: cambodia
     name: Cambodia
@@ -775,7 +775,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   comores:
     id: comores
     name: Comores
@@ -819,7 +819,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   cornwall:
     id: cornwall
     name: Cornwall
@@ -928,7 +928,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   denmark:
     id: denmark
     name: Denmark
@@ -983,7 +983,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   djibouti:
     id: djibouti
     name: Djibouti
@@ -1200,7 +1200,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   france:
     id: france
     name: France
@@ -1278,7 +1278,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   germany:
     id: germany
     name: Germany
@@ -1472,7 +1472,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   herefordshire:
     id: herefordshire
     name: Herefordshire
@@ -1549,7 +1549,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   ile-de-france:
     id: ile-de-france
     name: Ile-de-France
@@ -1571,7 +1571,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   india:
     id: india
     name: India
@@ -1593,7 +1593,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   indonesia:
     id: indonesia
     name: Indonesia
@@ -1615,7 +1615,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   iran:
     id: iran
     name: Iran
@@ -1714,6 +1714,17 @@ elements:
     - poly
     - state
     parent: africa
+  jamaica:
+    id: jamaica
+    name: jamaica
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: central-america
   japan:
     id: japan
     name: Japan
@@ -1767,7 +1778,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   kanto:
     id: kanto
     name: Kantō region
@@ -1822,7 +1833,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   kenya:
     id: kenya
     name: Kenya
@@ -1911,6 +1922,17 @@ elements:
     - poly
     - state
     parent: france
+  laos:
+    id: laos
+    name: Laos
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: asia
   latvia:
     id: latvia
     name: Latvia
@@ -2042,7 +2064,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   lubelskie:
     id: lubelskie
     name: Województwo lubelskie(Lublin Voivodeship)
@@ -2108,7 +2130,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   malawi:
     id: malawi
     name: Malawi
@@ -2205,7 +2227,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   massachusetts:
     id: massachusetts
     name: Massachusetts
@@ -2216,7 +2238,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   mauritania:
     id: mauritania
     name: Mauritania
@@ -2292,7 +2314,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   midi-pyrenees:
     id: midi-pyrenees
     name: Midi-Pyrenees
@@ -2314,7 +2336,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   mississippi:
     id: mississippi
     name: Mississippi
@@ -2325,7 +2347,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   missouri:
     id: missouri
     name: Missouri
@@ -2336,7 +2358,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   mittelfranken:
     id: mittelfranken
     name: Mittelfranken
@@ -2391,7 +2413,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   montenegro:
     id: montenegro
     name: Montenegro
@@ -2468,7 +2490,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   nepal:
     id: nepal
     name: Nepal
@@ -2501,7 +2523,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   new-brunswick:
     id: new-brunswick
     name: New Brunswick
@@ -2534,7 +2556,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   new-jersey:
     id: new-jersey
     name: New Jersey
@@ -2545,7 +2567,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   new-mexico:
     id: new-mexico
     name: New Mexico
@@ -2556,7 +2578,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   new-york:
     id: new-york
     name: New York
@@ -2567,7 +2589,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   new-zealand:
     id: new-zealand
     name: New Zealand
@@ -2718,7 +2740,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   north-caucasus-fed-district:
     id: north-caucasus-fed-district
     name: North Caucasus Federal District
@@ -2740,7 +2762,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   north-korea:
     id: north-korea
     name: North Korea
@@ -2883,7 +2905,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   oklahoma:
     id: oklahoma
     name: Oklahoma
@@ -2894,7 +2916,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   ontario:
     id: ontario
     name: Ontario
@@ -2927,7 +2949,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   oxfordshire:
     id: oxfordshire
     name: Oxfordshire
@@ -2993,7 +3015,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   peru:
     id: peru
     name: Peru
@@ -3124,7 +3146,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   quebec:
     id: quebec
     name: Quebec
@@ -3167,7 +3189,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   rhone-alpes:
     id: rhone-alpes
     name: Rhone-Alpes
@@ -3481,7 +3503,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   south-dakota:
     id: south-dakota
     name: South Dakota
@@ -3492,7 +3514,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   south-fed-district:
     id: south-fed-district
     name: South Federal District
@@ -3733,7 +3755,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   texas:
     id: texas
     name: Texas
@@ -3744,7 +3766,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   thailand:
     id: thailand
     name: Thailand
@@ -3888,6 +3910,11 @@ elements:
     - poly
     - state
     parent: south-america
+  us:
+    id: us
+    meta: true
+    name: us
+    parent: north-america
   us-midwest:
     id: us-midwest
     name: US Midwest
@@ -3948,7 +3975,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   uzbekistan:
     id: uzbekistan
     name: Uzbekistan
@@ -3970,7 +3997,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   vietnam:
     id: vietnam
     name: Vietnam
@@ -3992,7 +4019,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   volga-fed-district:
     id: volga-fed-district
     name: Volga Federal District
@@ -4036,7 +4063,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   west-midlands:
     id: west-midlands
     name: West Midlands
@@ -4069,7 +4096,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   west-yorkshire:
     id: west-yorkshire
     name: West Yorkshire
@@ -4113,7 +4140,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   worcestershire:
     id: worcestershire
     name: worcestershire
@@ -4135,7 +4162,7 @@ elements:
     - osh.pbf
     - poly
     - state
-    parent: north-america
+    parent: us
   yemen:
     id: yemen
     name: Yemen
