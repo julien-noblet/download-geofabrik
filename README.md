@@ -4,6 +4,8 @@
 [![Join the chat at https://gitter.im/julien-noblet/download-geofabrik](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/julien-noblet/download-geofabrik?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Go Report Card](https://goreportcard.com/badge/github.com/julien-noblet/download-geofabrik)](https://goreportcard.com/report/github.com/julien-noblet/download-geofabrik)
 
+[![Donate](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/Julien_N/donate)
+
 ## Version 2
 Warning! command line have changed from V1
 see [Usage](#usage)
