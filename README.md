@@ -20,12 +20,16 @@ usage: download-geofabrik [<flags>] <command> [<args> ...]
 A command-line tool for downloading OSM files.
 
 Flags:
-      --help        Show context-sensitive help (also try --help-long and
-                    --help-man).
+      --help            Show context-sensitive help (also try --help-long and
+                        --help-man).
   -c, --config="./geofabrik.yml"  
-                    Set Config file.
-  -n, --nodownload  Do not download file (test only)
-  -v, --verbose     Be verbose
+                        Set Config file.
+  -n, --nodownload      Do not download file (test only)
+  -v, --verbose         Be verbose
+      --proxy-http=""   Use http proxy, format: proxy_address:port
+      --proxy-sock5=""  Use Sock5 proxy, format: proxy_address:port
+      --proxy-user=""   Proxy user
+      --proxy-pass=""   Proxy password
 
 Commands:
   help [<command>...]
@@ -35,7 +39,7 @@ Commands:
   update [<flags>]
     Update geofabrik.yml from github
 
-    --url="https://raw.githubusercontent.com/julien-noblet/download-geofabrik/master/geofabrik.yml"  
+    --url="https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml"  
       Url for config source
 
   list [<flags>]
