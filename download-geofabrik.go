@@ -44,7 +44,7 @@ var (
 	verbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
 
 	update = app.Command("update", "Update geofabrik.yml from github")
-	url    = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml").String()
+	url    = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/master/geofabrik.yml").String()
 
 	list = app.Command("list", "Show elements available")
 	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool()
