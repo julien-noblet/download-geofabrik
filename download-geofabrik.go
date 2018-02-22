@@ -41,16 +41,16 @@ type format struct {
 
 var (
 	app         = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
-	Fconfig     = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String()
+	fConfig     = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String()
 	nodownload  = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
 	verbose     = app.Flag("verbose", "Be verbose").Short('v').Bool()
-	FproxyHTTP  = app.Flag("proxy-http", "Use http proxy, format: proxy_address:port").Default("").String()
-	FproxySock5 = app.Flag("proxy-sock5", "Use Sock5 proxy, format: proxy_address:port").Default("").String()
-	FproxyUser  = app.Flag("proxy-user", "Proxy user").Default("").String()
-	FproxyPass  = app.Flag("proxy-pass", "Proxy password").Default("").String()
+	fProxyHTTP  = app.Flag("proxy-http", "Use http proxy, format: proxy_address:port").Default("").String()
+	fProxySock5 = app.Flag("proxy-sock5", "Use Sock5 proxy, format: proxy_address:port").Default("").String()
+	fProxyUser  = app.Flag("proxy-user", "Proxy user").Default("").String()
+	fProxyPass  = app.Flag("proxy-pass", "Proxy password").Default("").String()
 
 	update = app.Command("update", "Update geofabrik.yml from github")
-	Furl   = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml").String()
+	fURL   = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml").String()
 
 	list = app.Command("list", "Show elements available")
 	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool()
@@ -91,9 +91,9 @@ func miniFormats(s []string) string {
 	return strings.Join(res, "")
 }
 
-func downloadFromURL(myUrl string, fileName string) {
+func downloadFromURL(myURL string, fileName string) {
 	if *verbose == true {
-		log.Println(" Downloading", myUrl, "to", fileName)
+		log.Println(" Downloading", myURL, "to", fileName)
 	}
 
 	if *nodownload == false {
@@ -105,10 +105,10 @@ func downloadFromURL(myUrl string, fileName string) {
 		}
 		defer output.Close()
 		transport := &http.Transport{}
-		if *FproxyHTTP != "" {
-			u, err := url.Parse(myUrl)
-			//log.Println(u.Scheme +"://"+ *FproxyHTTP)
-			proxyURL, err := url.Parse(u.Scheme + "://" + *FproxyHTTP)
+		if *fProxyHTTP != "" {
+			u, err := url.Parse(myURL)
+			//log.Println(u.Scheme +"://"+ *fProxyHTTP)
+			proxyURL, err := url.Parse(u.Scheme + "://" + *fProxyHTTP)
 			if err != nil {
 				log.Fatalln(" Wrong proxy url, please use format proxy_address:port")
 				return
@@ -116,25 +116,25 @@ func downloadFromURL(myUrl string, fileName string) {
 			transport = &http.Transport{Proxy: http.ProxyURL(proxyURL)}
 		}
 		client := &http.Client{Transport: transport}
-		if *FproxySock5 != "" {
-			auth := proxy.Auth{*FproxyUser, *FproxyPass}
-			dialer, err := proxy.SOCKS5("tcp", *FproxySock5, &auth, proxy.Direct)
+		if *fProxySock5 != "" {
+			auth := proxy.Auth{*fProxyUser, *fProxyPass}
+			dialer, err := proxy.SOCKS5("tcp", *fProxySock5, &auth, proxy.Direct)
 			if err != nil {
 				log.Fatalln(" can't connect to the proxy:", err)
 				return
 			}
 			transport.Dial = dialer.Dial
 		}
-		response, err := client.Get(myUrl)
+		response, err := client.Get(myURL)
 		if err != nil {
-			log.Fatalln(" Error while downloading ", myUrl, "-", err)
+			log.Fatalln(" Error while downloading ", myURL, "-", err)
 			return
 		}
 		defer response.Body.Close()
 
 		n, err := io.Copy(output, response.Body)
 		if err != nil {
-			log.Fatalln(" Error while downloading ", myUrl, "-", err)
+			log.Fatalln(" Error while downloading ", myURL, "-", err)
 			return
 		}
 
@@ -247,8 +247,9 @@ func stringInSlice(a string, list []string) bool {
 	return false
 }
 
-func UpdateConfig(myUrl string, myconfig string) {
-	downloadFromURL(myUrl, myconfig)
+// UpdateConfig : simple script to download lastest config from repo
+func UpdateConfig(myURL string, myconfig string) {
+	downloadFromURL(myURL, myconfig)
 	fmt.Println("Congratulation, you have the latest geofabrik.yml")
 }
 
@@ -260,13 +261,13 @@ func main() {
 		if *lmd {
 			format = "Markdown"
 		}
-		listAllRegions(loadConfig(*Fconfig), format)
+		listAllRegions(loadConfig(*fConfig), format)
 	case update.FullCommand():
-		UpdateConfig(*Furl, *Fconfig)
+		UpdateConfig(*fURL, *fConfig)
 	case download.FullCommand():
 		formatFile := getFormats()
 		for _, format := range formatFile {
-			downloadFromURL(elem2URL(loadConfig(*Fconfig), findElem(loadConfig(*Fconfig), *delement), format), *delement+"."+format)
+			downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), format), *delement+"."+format)
 		}
 	}
 }
