@@ -175,11 +175,11 @@ func getFormats() []string {
 	return formatFile
 }
 
-func listAllRegions(c config,format string) {
+func listAllRegions(c config, format string) {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetAlignment(tablewriter.ALIGN_LEFT)
 	table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
-	if format == "Markdown"{
+	if format == "Markdown" {
 		table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
 		table.SetCenterSeparator("|")
 	}
@@ -234,7 +234,7 @@ func main() {
 		if *lmd {
 			format = "Markdown"
 		}
-		listAllRegions(loadConfig(*Fconfig),format)
+		listAllRegions(loadConfig(*Fconfig), format)
 	case update.FullCommand():
 		UpdateConfig(*url, *Fconfig)
 	case download.FullCommand():
