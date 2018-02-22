@@ -22,7 +22,7 @@ A command-line tool for downloading OSM files.
 Flags:
       --help        Show context-sensitive help (also try --help-long and
                     --help-man).
-  -c, --config="./geofabrik.yml"
+  -c, --config="./geofabrik.yml"  
                     Set Config file.
   -n, --nodownload  Do not download file (test only)
   -v, --verbose     Be verbose
@@ -35,12 +35,13 @@ Commands:
   update [<flags>]
     Update geofabrik.yml from github
 
-    --url="https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml"
+    --url="https://raw.githubusercontent.com/julien-noblet/download-geofabrik/master/geofabrik.yml"  
       Url for config source
 
-  list
+  list [<flags>]
     Show elements available
 
+    --markdown  generate list in Markdown format
 
   download [<flags>] <element>
     Download element
