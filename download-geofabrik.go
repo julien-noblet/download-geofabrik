@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"golang.org/x/net/proxy"
 	"io"
 	"io/ioutil"
 	"log"
@@ -12,6 +11,8 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+
+	"golang.org/x/net/proxy"
 
 	"github.com/olekukonko/tablewriter"
 
@@ -50,7 +51,7 @@ var (
 	fProxyPass  = app.Flag("proxy-pass", "Proxy password").Default("").String()
 
 	update = app.Command("update", "Update geofabrik.yml from github")
-	fURL   = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml").String()
+	fURL   = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/master/geofabrik.yml").String()
 
 	list = app.Command("list", "Show elements available")
 	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool()
