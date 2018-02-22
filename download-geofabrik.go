@@ -44,7 +44,7 @@ var (
 	verbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
 
 	update = app.Command("update", "Update geofabrik.yml from github")
-	url    = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/master/geofabrik.yml").String()
+	Furl   = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml").String()
 
 	list = app.Command("list", "Show elements available")
 	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool()
@@ -85,9 +85,9 @@ func miniFormats(s []string) string {
 	return strings.Join(res, "")
 }
 
-func downloadFromURL(url string, fileName string) {
+func downloadFromURL(myUrl string, fileName string) {
 	if *verbose == true {
-		log.Println(" Downloading", url, "to", fileName)
+		log.Println(" Downloading", myUrl, "to", fileName)
 	}
 
 	if *nodownload == false {
@@ -98,17 +98,16 @@ func downloadFromURL(url string, fileName string) {
 			return
 		}
 		defer output.Close()
-
-		response, err := http.Get(url)
+		response, err := client.Get(myUrl)
 		if err != nil {
-			log.Fatalln(" Error while downloading ", url, "-", err)
+			log.Fatalln(" Error while downloading ", myUrl, "-", err)
 			return
 		}
 		defer response.Body.Close()
 
 		n, err := io.Copy(output, response.Body)
 		if err != nil {
-			log.Fatalln(" Error while downloading ", url, "-", err)
+			log.Fatalln(" Error while downloading ", myUrl, "-", err)
 			return
 		}
 
@@ -221,8 +220,8 @@ func stringInSlice(a string, list []string) bool {
 	return false
 }
 
-func UpdateConfig(url string, myconfig string) {
-	downloadFromURL(url, myconfig)
+func UpdateConfig(myUrl string, myconfig string) {
+	downloadFromURL(myUrl, myconfig)
 	fmt.Println("Congratulation, you have the latest geofabrik.yml")
 }
 
@@ -236,7 +235,7 @@ func main() {
 		}
 		listAllRegions(loadConfig(*Fconfig), format)
 	case update.FullCommand():
-		UpdateConfig(*url, *Fconfig)
+		UpdateConfig(*Furl, *Fconfig)
 	case download.FullCommand():
 		formatFile := getFormats()
 		for _, format := range formatFile {
