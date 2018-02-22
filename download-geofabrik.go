@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
+	"golang.org/x/net/proxy"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"sort"
@@ -38,10 +40,14 @@ type format struct {
 }
 
 var (
-	app        = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
-	Fconfig    = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String()
-	nodownload = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
-	verbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
+	app         = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
+	Fconfig     = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String()
+	nodownload  = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
+	verbose     = app.Flag("verbose", "Be verbose").Short('v').Bool()
+	FproxyHTTP  = app.Flag("proxy-http", "Use http proxy, format: proxy_address:port").Default("").String()
+	FproxySock5 = app.Flag("proxy-sock5", "Use Sock5 proxy, format: proxy_address:port").Default("").String()
+	FproxyUser  = app.Flag("proxy-user", "Proxy user").Default("").String()
+	FproxyPass  = app.Flag("proxy-pass", "Proxy password").Default("").String()
 
 	update = app.Command("update", "Update geofabrik.yml from github")
 	Furl   = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml").String()
@@ -98,6 +104,27 @@ func downloadFromURL(myUrl string, fileName string) {
 			return
 		}
 		defer output.Close()
+		transport := &http.Transport{}
+		if *FproxyHTTP != "" {
+			u, err := url.Parse(myUrl)
+			//log.Println(u.Scheme +"://"+ *FproxyHTTP)
+			proxyURL, err := url.Parse(u.Scheme + "://" + *FproxyHTTP)
+			if err != nil {
+				log.Fatalln(" Wrong proxy url, please use format proxy_address:port")
+				return
+			}
+			transport = &http.Transport{Proxy: http.ProxyURL(proxyURL)}
+		}
+		client := &http.Client{Transport: transport}
+		if *FproxySock5 != "" {
+			auth := proxy.Auth{*FproxyUser, *FproxyPass}
+			dialer, err := proxy.SOCKS5("tcp", *FproxySock5, &auth, proxy.Direct)
+			if err != nil {
+				log.Fatalln(" can't connect to the proxy:", err)
+				return
+			}
+			transport.Dial = dialer.Dial
+		}
 		response, err := client.Get(myUrl)
 		if err != nil {
 			log.Fatalln(" Error while downloading ", myUrl, "-", err)
