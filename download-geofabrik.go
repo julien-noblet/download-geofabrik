@@ -110,6 +110,9 @@ func downloadFromURL(myURL string, fileName string) {
 			u, err := url.Parse(myURL)
 			//log.Println(u.Scheme +"://"+ *fProxyHTTP)
 			proxyURL, err := url.Parse(u.Scheme + "://" + *fProxyHTTP)
+			if *fProxyUser != "" && *fProxyPass != "" {
+				proxyURL, err = url.Parse(u.Scheme + "://" + *fProxyUser + ":" + *fProxyPass + *fProxyHTTP)
+			}
 			if err != nil {
 				log.Fatalln(" Wrong proxy url, please use format proxy_address:port")
 				return
