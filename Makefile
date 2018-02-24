@@ -9,6 +9,7 @@ gox:
 package: gox
 	for i in download-geofabrik_* ;\
 	do \
+		  echo "Compressing $$i";\
           cp README.md LICENSE geofabrik.yml $$i/ && cd $$i && zip -9 $$i.zip download-geofabrik* generator* geofabrik.yml LICENSE README.md && mv $$i.zip ../ && cd ..;\
         done
 
