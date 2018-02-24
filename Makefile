@@ -5,8 +5,10 @@ clean:
 gox:
 	gox --output="download-geofabrik_{{.OS}}_{{.Arch}}/{{.Dir}}"
 	cd generator && gox --output="../download-geofabrik_{{.OS}}_{{.Arch}}/{{.Dir}}"
-
-package: gox
+geofabrik:
+	echo "Generating geofabrik.yml"
+	go run generator/generator.go
+package: gox geofabrik
 	for i in download-geofabrik_* ;\
 	do \
 		  echo "Compressing $$i";\
