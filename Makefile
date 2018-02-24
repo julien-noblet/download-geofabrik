@@ -1,9 +1,10 @@
+default: clean all
 clean:
 	go clean
 	rm -rf download-geofabrik_* *.zip
 gox:
-	~/go/bin/gox --output="download-geofabrik_{{.OS}}_{{.Arch}}/{{.Dir}}"
-	cd generator && ~/go/bin/gox --output="../download-geofabrik_{{.OS}}_{{.Arch}}/{{.Dir}}"
+	gox --output="download-geofabrik_{{.OS}}_{{.Arch}}/{{.Dir}}"
+	cd generator && gox --output="../download-geofabrik_{{.OS}}_{{.Arch}}/{{.Dir}}"
 
 package: gox
 	for i in download-geofabrik_* ;\
