@@ -103,9 +103,9 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 		var us Element
 		us.Meta = true
 		us.ID = "us"
-		us.Name = "us"
+		us.Name = "United States of America"
 		us.Parent = "north-america"
-		e.Elements[us.Name] = us
+		e.Elements[us.ID] = us
 
 		//Exceptions!
 		// Only Georgia (EU and US)

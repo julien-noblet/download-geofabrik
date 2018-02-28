@@ -1,7 +1,14 @@
 # Change Log
 
 ## [fix#16](https://github.com/julien-noblet/download-geofabrik/tree/fix#16) (2018-02-28)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0-alpha...fix#16)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.4...fix#16)
+
+## [v2.0.4](https://github.com/julien-noblet/download-geofabrik/tree/v2.0.4) (2018-02-28)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0-alpha...v2.0.4)
+
+**Implemented enhancements:**
+
+- Use https instead of http [\#17](https://github.com/julien-noblet/download-geofabrik/pull/17) ([julien-noblet](https://github.com/julien-noblet))
 
 ## [v2.1.0-alpha](https://github.com/julien-noblet/download-geofabrik/tree/v2.1.0-alpha) (2018-02-24)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.3...v2.1.0-alpha)
