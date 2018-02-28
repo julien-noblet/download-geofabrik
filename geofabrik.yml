@@ -3982,7 +3982,7 @@ elements:
   us:
     id: us
     meta: true
-    name: us
+    name: United States of America
     parent: north-america
   us-midwest:
     id: us-midwest
