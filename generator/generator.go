@@ -58,7 +58,7 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 	var thisElement Element
 	downloadMain := doc.Find("div#download-main")
 	parent, haveParent := doc.Find("p a").Attr("href")
-	if haveParent && strings.Index(parent, "http://www.geofabrik.de/") == -1 {
+	if haveParent && strings.Index(parent, "https://www.geofabrik.de/") == -1 {
 		parent = parent[0 : len(parent)-5] // remove ".html"
 		if parent == "index" {             //first level
 			parent = ""
@@ -316,7 +316,7 @@ func main() {
 
 	//Generate geofabrik.yml
 	var geofabrik config
-	geofabrik.BaseURL = "http://download.geofabrik.de"
+	geofabrik.BaseURL = "https://download.geofabrik.de"
 	geofabrik.Formats = make(map[string]format)
 	geofabrik.Formats["osh.pbf"] = format{ID: "osh.pbf", Loc: ".osh.pbf"}
 	geofabrik.Formats["osm.bz2"] = format{ID: "osm.bz2", Loc: "-latest.osm.bz2"}
@@ -324,12 +324,12 @@ func main() {
 	geofabrik.Formats["poly"] = format{ID: "poly", Loc: ".poly"}
 	geofabrik.Formats["state"] = format{ID: "state", Loc: ".state"}
 	geofabrik.Formats["shp.zip"] = format{ID: "shp.zip", Loc: "-latest-free.shp.zip"}
-	generate("http://download.geofabrik.de/", "geofabrik.yml", &geofabrik)
+	generate("https://download.geofabrik.de/", "geofabrik.yml", &geofabrik)
 	var myConfig config
-	myConfig.BaseURL = "http://download.openstreetmap.fr/extracts"
+	myConfig.BaseURL = "https://download.openstreetmap.fr/extracts"
 	myConfig.Formats = make(map[string]format)
 	myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: ".osm.pbf"}
 	myConfig.Formats["poly"] = format{ID: "poly", Loc: ".poly", BasePath: "../polygons/"}
 	myConfig.Formats["state"] = format{ID: "state", Loc: ".state.txt"}
-	//generate("http://download.openstreetmap.fr/", "openstreetmap_fr.yml", &myConfig)
+	//generate("https://download.openstreetmap.fr/", "openstreetmap_fr.yml", &myConfig)
 }
