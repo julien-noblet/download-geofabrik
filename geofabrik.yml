@@ -318,6 +318,17 @@ elements:
     - poly
     - state
     parent: germany
+  bedfordshire:
+    id: bedfordshire
+    name: Bedfordshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
   belarus:
     id: belarus
     name: Belarus
@@ -483,6 +494,17 @@ elements:
     - poly
     - state
     parent: france
+  bristol:
+    id: bristol
+    name: Bristol
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
   british-columbia:
     id: british-columbia
     name: British Columbia
@@ -749,7 +771,6 @@ elements:
     files:
     - osm.pbf
     - shp.zip
-    - osm.bz2
     - osh.pbf
     - poly
     - state
@@ -2021,6 +2042,17 @@ elements:
     - poly
     - state
     parent: france
+  lincolnshire:
+    id: lincolnshire
+    name: Lincolnshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
   lithuania:
     id: lithuania
     name: Lithuania
@@ -2293,6 +2325,17 @@ elements:
     - poly
     - state
     parent: germany
+  merseyside:
+    id: merseyside
+    name: Merseyside
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
   mexico:
     id: mexico
     name: Mexico
@@ -2785,6 +2828,17 @@ elements:
     - poly
     - state
     parent: england
+  northamptonshire:
+    id: northamptonshire
+    name: Northamptonshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
   northumberland:
     id: northumberland
     name: Northumberland
@@ -3221,6 +3275,16 @@ elements:
     - osh.pbf
     - poly
     - state
+  rutland:
+    id: rutland
+    name: Rutland
+    files:
+    - osm.pbf
+    - shp.zip
+    - osh.pbf
+    - poly
+    - state
+    parent: england
   rwanda:
     id: rwanda
     name: Rwanda
@@ -4053,6 +4117,17 @@ elements:
     - poly
     - state
     parent: poland
+  warwickshire:
+    id: warwickshire
+    name: Warwickshire
+    files:
+    - osm.pbf
+    - shp.zip
+    - osm.bz2
+    - osh.pbf
+    - poly
+    - state
+    parent: england
   washington:
     id: washington
     name: Washington
@@ -4143,7 +4218,7 @@ elements:
     parent: us
   worcestershire:
     id: worcestershire
-    name: worcestershire
+    name: Worcestershire
     files:
     - osm.pbf
     - shp.zip

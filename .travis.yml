@@ -18,8 +18,12 @@ go:
 install:
   #- go get -u github.com/golang/lint/golint
   #- go install -u github.com/golang/lint/golint
+  - gem install github_changelog_generator
   - go get -v github.com/mitchellh/gox
   - go get -t -v ./...
+
+before_script:
+  - github_changelog_generator
 
 # Use Makefile
 #script:
