@@ -52,6 +52,8 @@ Commands:
     -H, --osh.pbf  Download osh.pbf (default)
     -s, --state    Download state.txt file
     -p, --poly     Download poly file
+
+
 ```
 
 ## List of elements
@@ -85,6 +87,7 @@ Commands:
 | bangladesh                                  | Asia                  | Bangladesh                             | sPBHpS  |
 | basse-normandie                             | France                | Basse-Normandie                        | sPBHpS  |
 | bayern                                      | Germany               | Bayern                                 | sPBHpS  |
+| bedfordshire                                | England               | Bedfordshire                           | sPBHpS  |
 | belarus                                     | Europe                | Belarus                                | sPBHpS  |
 | belgium                                     | Europe                | Belgium                                | sPBHpS  |
 | belize                                      | Central America       | Belize                                 | sPBHpS  |
@@ -100,6 +103,7 @@ Commands:
 | brazil                                      | South America         | Brazil                                 | sPBHpS  |
 | bremen                                      | Germany               | Bremen                                 | sPBHpS  |
 | bretagne                                    | France                | Bretagne                               | sPBHpS  |
+| bristol                                     | England               | Bristol                                | sPBHpS  |
 | british-columbia                            | Canada                | British Columbia                       | sPBHpS  |
 | british-isles                               | Europe                | British Isles                          | sPBHp   |
 | buckinghamshire                             | England               | Buckinghamshire                        | sPBHpS  |
@@ -124,7 +128,7 @@ Commands:
 | chile                                       | South America         | Chile                                  | sPBHpS  |
 | china                                       | Asia                  | China                                  | sPBHpS  |
 | chubu                                       | Japan                 | Chūbu region                           | sPBHpS  |
-| chugoku                                     | Japan                 | Chūgoku region                         | sPBHpS  |
+| chugoku                                     | Japan                 | Chūgoku region                         | sPHpS   |
 | colombia                                    | South America         | Colombia                               | sPBHpS  |
 | colorado                                    | us                    | Colorado                               | sPBHpS  |
 | comores                                     | Africa                | Comores                                | sPBHpS  |
@@ -246,6 +250,7 @@ Commands:
 | libya                                       | Africa                | Libya                                  | sPBHpS  |
 | liechtenstein                               | Europe                | Liechtenstein                          | sPBHpS  |
 | limousin                                    | France                | Limousin                               | sPBHpS  |
+| lincolnshire                                | England               | Lincolnshire                           | sPBHpS  |
 | lithuania                                   | Europe                | Lithuania                              | sPBHpS  |
 | lodzkie                                     | Poland                | Województwo łódzkie(Łódź Voivodeship)  | sPBHpS  |
 | lorraine                                    | France                | Lorraine                               | sPBHpS  |
@@ -275,6 +280,7 @@ Commands:
 | mazowieckie                                 | Poland                | Województwo mazowieckie(Mazovian       | sPBHpS  |
 |                                             |                       | Voivodeship)                           |         |
 | mecklenburg-vorpommern                      | Germany               | Mecklenburg-Vorpommern                 | sPBHpS  |
+| merseyside                                  | England               | Merseyside                             | sPBHpS  |
 | mexico                                      | North America         | Mexico                                 | sPBHpS  |
 | michigan                                    | us                    | Michigan                               | sPBHpS  |
 | midi-pyrenees                               | France                | Midi-Pyrenees                          | sPBHpS  |
@@ -320,6 +326,7 @@ Commands:
 | north-dakota                                | us                    | North Dakota                           | sPBHpS  |
 | north-korea                                 | Asia                  | North Korea                            | sPBHpS  |
 | north-yorkshire                             | England               | North Yorkshire                        | sPBHpS  |
+| northamptonshire                            | England               | Northamptonshire                       | sPBHpS  |
 | northumberland                              | England               | Northumberland                         | sPBHpS  |
 | northwest-territories                       | Canada                | Northwest Territories                  | sPBHpS  |
 | northwestern-fed-district                   | Russian Federation    | Northwestern Federal District          | sPBHpS  |
@@ -364,6 +371,7 @@ Commands:
 | rhone-alpes                                 | France                | Rhone-Alpes                            | sPBHpS  |
 | romania                                     | Europe                | Romania                                | sPBHpS  |
 | russia                                      |                       | Russian Federation                     | sPBHp   |
+| rutland                                     | England               | Rutland                                | sPHpS   |
 | rwanda                                      | Africa                | Rwanda                                 | sPBHpS  |
 | saarland                                    | Germany               | Saarland                               | sPBHpS  |
 | sachsen                                     | Germany               | Sachsen                                | sPBHpS  |
@@ -447,6 +455,7 @@ Commands:
 | warminsko-mazurskie                         | Poland                | Województwo                            | sPBHpS  |
 |                                             |                       | warmińsko-mazurskie(Warmian-Masurian   |         |
 |                                             |                       | Voivodeship)                           |         |
+| warwickshire                                | England               | Warwickshire                           | sPBHpS  |
 | washington                                  | us                    | Washington                             | sPBHpS  |
 | west-midlands                               | England               | West Midlands                          | sPBHpS  |
 | west-sussex                                 | England               | West Sussex                            | sPBHpS  |
@@ -456,7 +465,7 @@ Commands:
 |                                             |                       | Poland Voivodeship)                    |         |
 | wiltshire                                   | England               | Wiltshire                              | sPBHpS  |
 | wisconsin                                   | us                    | Wisconsin                              | sPBHpS  |
-| worcestershire                              | England               | worcestershire                         | sPBHpS  |
+| worcestershire                              | England               | Worcestershire                         | sPBHpS  |
 | wyoming                                     | us                    | Wyoming                                | sPBHpS  |
 | yemen                                       | Asia                  | Yemen                                  | sPBHpS  |
 | yukon                                       | Canada                | Yukon                                  | sPBHpS  |
@@ -464,3 +473,4 @@ Commands:
 |                                             |                       | Pomeranian Voivodeship)                |         |
 | zambia                                      | Africa                | Zambia                                 | sPBHpS  |
 | zimbabwe                                    | Africa                | Zimbabwe                               | sPBHpS  |
+Total elements: 393
