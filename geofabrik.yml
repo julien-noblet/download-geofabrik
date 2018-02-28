@@ -17,7 +17,7 @@ formats:
     loc: -latest-free.shp.zip
   state:
     ext: state
-    loc: .state
+    loc: -updates/state.txt
 elements:
   "":
     id: ""
