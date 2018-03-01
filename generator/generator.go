@@ -322,7 +322,7 @@ func main() {
 	geofabrik.Formats["osm.bz2"] = format{ID: "osm.bz2", Loc: "-latest.osm.bz2"}
 	geofabrik.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
 	geofabrik.Formats["poly"] = format{ID: "poly", Loc: ".poly"}
-	geofabrik.Formats["state"] = format{ID: "state", Loc: ".state"}
+	geofabrik.Formats["state"] = format{ID: "state", Loc: "-updates/state.txt"}
 	geofabrik.Formats["shp.zip"] = format{ID: "shp.zip", Loc: "-latest-free.shp.zip"}
 	generate("http://download.geofabrik.de/", "geofabrik.yml", &geofabrik)
 	var myConfig config
