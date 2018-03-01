@@ -1,10 +1,18 @@
 # Change Log
 
-## [fix#16](https://github.com/julien-noblet/download-geofabrik/tree/fix#16) (2018-02-28)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.4...fix#16)
+## [Unreleased](https://github.com/julien-noblet/download-geofabrik/tree/HEAD)
+
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.4...HEAD)
+
+**Fixed bugs:**
+
+- Fix \#16 [\#18](https://github.com/julien-noblet/download-geofabrik/pull/18) ([julien-noblet](https://github.com/julien-noblet))
 
 ## [v2.0.4](https://github.com/julien-noblet/download-geofabrik/tree/v2.0.4) (2018-02-28)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0-alpha...v2.0.4)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/fix#16...v2.0.4)
+
+## [fix#16](https://github.com/julien-noblet/download-geofabrik/tree/fix#16) (2018-02-28)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0-alpha...fix#16)
 
 **Implemented enhancements:**
 
