@@ -39,7 +39,7 @@ Commands:
   update [<flags>]
     Update geofabrik.yml from github
 
-    --url="https://raw.githubusercontent.com/julien-noblet/download-geofabrik/stable/geofabrik.yml"  
+    --url="https://raw.githubusercontent.com/julien-noblet/download-geofabrik/master/geofabrik.yml"  
       Url for config source
 
   list [<flags>]
