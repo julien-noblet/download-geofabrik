@@ -376,7 +376,7 @@ Commands:
 | rhone-alpes                                 | France                      | Rhone-Alpes                            | sPBHpS  |
 | romania                                     | Europe                      | Romania                                | sPBHpS  |
 | russia                                      | OpenStreetMap Data Extracts | Russian Federation                     | sPBHp   |
-| rutland                                     | England                     | Rutland                                | sPHpS   |
+| rutland                                     | England                     | Rutland                                | sPBHpS  |
 | rwanda                                      | Africa                      | Rwanda                                 | sPBHpS  |
 | saarland                                    | Germany                     | Saarland                               | sPBHpS  |
 | sachsen                                     | Germany                     | Sachsen                                | sPBHpS  |

@@ -1,12 +1,22 @@
 # Change Log
 
-## [Unreleased](https://github.com/julien-noblet/download-geofabrik/tree/HEAD)
+## [v2.1.0-pr](https://github.com/julien-noblet/download-geofabrik/tree/v2.1.0-pr) (2018-03-01)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0...v2.1.0-pr)
 
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.4...HEAD)
+## [v2.1.0](https://github.com/julien-noblet/download-geofabrik/tree/v2.1.0) (2018-03-01)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.4...v2.1.0)
+
+**Implemented enhancements:**
+
+- Use https instead of http [\#17](https://github.com/julien-noblet/download-geofabrik/pull/17) ([julien-noblet](https://github.com/julien-noblet))
+- v2.1.0 [\#14](https://github.com/julien-noblet/download-geofabrik/pull/14) ([julien-noblet](https://github.com/julien-noblet))
 
 **Fixed bugs:**
 
+- download state file - url problem [\#16](https://github.com/julien-noblet/download-geofabrik/issues/16)
+- proxy setting [\#8](https://github.com/julien-noblet/download-geofabrik/issues/8)
 - Fix \#16 [\#18](https://github.com/julien-noblet/download-geofabrik/pull/18) ([julien-noblet](https://github.com/julien-noblet))
+- v2.1.0 [\#14](https://github.com/julien-noblet/download-geofabrik/pull/14) ([julien-noblet](https://github.com/julien-noblet))
 
 ## [v2.0.4](https://github.com/julien-noblet/download-geofabrik/tree/v2.0.4) (2018-02-28)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/fix#16...v2.0.4)
@@ -14,16 +24,8 @@
 ## [fix#16](https://github.com/julien-noblet/download-geofabrik/tree/fix#16) (2018-02-28)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0-alpha...fix#16)
 
-**Implemented enhancements:**
-
-- Use https instead of http [\#17](https://github.com/julien-noblet/download-geofabrik/pull/17) ([julien-noblet](https://github.com/julien-noblet))
-
 ## [v2.1.0-alpha](https://github.com/julien-noblet/download-geofabrik/tree/v2.1.0-alpha) (2018-02-24)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.3...v2.1.0-alpha)
-
-**Fixed bugs:**
-
-- proxy setting [\#8](https://github.com/julien-noblet/download-geofabrik/issues/8)
 
 ## [v2.0.3](https://github.com/julien-noblet/download-geofabrik/tree/v2.0.3) (2018-02-24)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.2...v2.0.3)
