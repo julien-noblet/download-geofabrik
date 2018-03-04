@@ -93,11 +93,11 @@ func miniFormats(s []string) string {
 }
 
 func downloadFromURL(myURL string, fileName string) {
-	if *verbose == true {
+	if *verbose {
 		log.Println(" Downloading", myURL, "to", fileName)
 	}
 
-	if *nodownload == false {
+	if !*nodownload {
 		// TODO: check file existence first with io.IsExist
 		output, err := os.Create(fileName)
 		if err != nil {
@@ -107,7 +107,7 @@ func downloadFromURL(myURL string, fileName string) {
 		defer output.Close()
 		transport := &http.Transport{}
 		if *fProxyHTTP != "" {
-			u, err := url.Parse(myURL)
+			u, _ := url.Parse(myURL)
 			//log.Println(u.Scheme +"://"+ *fProxyHTTP)
 			proxyURL, err := url.Parse(u.Scheme + "://" + *fProxyHTTP)
 			if *fProxyUser != "" && *fProxyPass != "" {
@@ -121,7 +121,7 @@ func downloadFromURL(myURL string, fileName string) {
 		}
 		client := &http.Client{Transport: transport}
 		if *fProxySock5 != "" {
-			auth := proxy.Auth{*fProxyUser, *fProxyPass}
+			auth := proxy.Auth{User: *fProxyUser, Password: *fProxyPass}
 			dialer, err := proxy.SOCKS5("tcp", *fProxySock5, &auth, proxy.Direct)
 			if err != nil {
 				log.Fatalln(fmt.Errorf(" Can't connect to the proxy: %v", err))
@@ -142,11 +142,12 @@ func downloadFromURL(myURL string, fileName string) {
 			return
 		}
 
-		if *verbose == true {
+		if *verbose {
 			log.Println(" ", n, "bytes downloaded.")
 		}
 	}
 }
+
 func elem2preURL(c config, e element) string {
 	var res string
 	if e.hasParent() {
