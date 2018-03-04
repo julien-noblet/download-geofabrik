@@ -776,6 +776,7 @@ elements:
     files:
     - osm.pbf
     - shp.zip
+    - osm.bz2
     - osh.pbf
     - poly
     - state
