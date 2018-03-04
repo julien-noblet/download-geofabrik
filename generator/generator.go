@@ -43,7 +43,6 @@ type ElementSlice map[string]Element
 
 // Generate make the slice which contain all Elements
 func (e ElementSlice) Generate(myConfig *config) ([]byte, error) {
-
 	myConfig.Elements = e
 	return yaml.Marshal(myConfig)
 }
@@ -58,7 +57,7 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 	var thisElement Element
 	downloadMain := doc.Find("div#download-main")
 	parent, haveParent := doc.Find("p a").Attr("href")
-	if haveParent && strings.Index(parent, "https://www.geofabrik.de/") == -1 {
+	if haveParent && !strings.Contains(parent, "https://www.geofabrik.de/") {
 		parent = parent[0 : len(parent)-5] // remove ".html"
 		if parent == "index" {             //first level
 			parent = ""
@@ -219,7 +218,7 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 			a := lien.Eq(aa)
 			vallink, link := a.Attr("href")
 			if link {
-				if strings.Index(vallink, "/") != -1 {
+				if strings.Contains(vallink, "/") {
 					// /!\ meta! or levelup
 					if vallink[0:1] != "/" {
 						//meta
@@ -258,29 +257,29 @@ func (e *Ext) Filter(ctx *gocrawl.URLContext, isVisited bool) bool {
 	if len(ctx.URL().RawQuery) != 0 {
 		return false
 		// TODO: refactorize? Use config file?
-	} else if strings.Index(ctx.URL().Path, "newshapes.html") != -1 {
+	} else if strings.Contains(ctx.URL().Path, "newshapes.html") {
 		return false
-	} else if strings.Index(ctx.URL().Path, "technical.html") != -1 {
+	} else if strings.Contains(ctx.URL().Path, "technical.html") {
 		return false
-	} else if strings.Index(ctx.URL().Path, "robots.txt") != -1 {
+	} else if strings.Contains(ctx.URL().Path, "robots.txt") {
 		return false
-	} else if strings.Index(ctx.URL().Path, "replication") != -1 {
+	} else if strings.Contains(ctx.URL().Path, "replication") {
 		return false
-	} else if strings.Index(ctx.URL().Path, "cgi-bin") != -1 {
+	} else if strings.Contains(ctx.URL().Path, "cgi-bin") {
 		return false
-	} else if strings.Index(ctx.URL().Path, ".pdf") != -1 {
+	} else if strings.Contains(ctx.URL().Path, ".pdf") {
 		return false
-	} else if strings.Index(ctx.URL().Path, ".pbf") != -1 {
+	} else if strings.Contains(ctx.URL().Path, ".pbf") {
 		return false
-	} else if strings.Index(ctx.URL().Path, ".poly") != -1 {
+	} else if strings.Contains(ctx.URL().Path, ".poly") {
 		return false
-	} else if strings.Index(ctx.URL().Path, ".bz2") != -1 {
+	} else if strings.Contains(ctx.URL().Path, ".bz2") {
 		return false
-	} else if strings.Index(ctx.URL().Path, ".zip") != -1 {
+	} else if strings.Contains(ctx.URL().Path, ".zip") {
 		return false
 	} else if ctx.URL().Path[len(ctx.URL().Path)-1:] == "/" {
 		return true
-	} else if strings.Index(ctx.URL().Path, ".html") != -1 {
+	} else if strings.Contains(ctx.URL().Path, ".html") {
 		return true
 		//	} else if ctx.URL().Path[len(ctx.URL().Path)-8:] == "-updates" {
 		//		return false
@@ -313,7 +312,6 @@ func generate(url string, fname string, myConfig *config) {
 }
 
 func main() {
-
 	//Generate geofabrik.yml
 	var geofabrik config
 	geofabrik.BaseURL = "https://download.geofabrik.de"
