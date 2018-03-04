@@ -101,7 +101,7 @@ func downloadFromURL(myURL string, fileName string) {
 		// TODO: check file existence first with io.IsExist
 		output, err := os.Create(fileName)
 		if err != nil {
-			log.Fatalln(" Error while creating ", fileName, "-", err)
+			log.Fatalln(fmt.Errorf(" Error while creating %s - %v", fileName, err))
 			return
 		}
 		defer output.Close()
@@ -114,7 +114,7 @@ func downloadFromURL(myURL string, fileName string) {
 				proxyURL, err = url.Parse(u.Scheme + "://" + *fProxyUser + ":" + *fProxyPass + *fProxyHTTP)
 			}
 			if err != nil {
-				log.Fatalln(" Wrong proxy url, please use format proxy_address:port")
+				log.Fatalln(fmt.Errorf(" Wrong proxy url, please use format proxy_address:port"))
 				return
 			}
 			transport = &http.Transport{Proxy: http.ProxyURL(proxyURL)}
@@ -124,21 +124,21 @@ func downloadFromURL(myURL string, fileName string) {
 			auth := proxy.Auth{*fProxyUser, *fProxyPass}
 			dialer, err := proxy.SOCKS5("tcp", *fProxySock5, &auth, proxy.Direct)
 			if err != nil {
-				log.Fatalln(" can't connect to the proxy:", err)
+				log.Fatalln(fmt.Errorf(" Can't connect to the proxy: %v", err))
 				return
 			}
 			transport.Dial = dialer.Dial
 		}
 		response, err := client.Get(myURL)
 		if err != nil {
-			log.Fatalln(" Error while downloading ", myURL, "-", err)
+			log.Fatalln(fmt.Errorf(" Error while downloading %s - %v", myURL, err))
 			return
 		}
 		defer response.Body.Close()
 
 		n, err := io.Copy(output, response.Body)
 		if err != nil {
-			log.Fatalln(" Error while downloading ", myURL, "-", err)
+			log.Fatalln(fmt.Errorf(" Error while downloading %s - %v", myURL, err))
 			return
 		}
 
@@ -166,7 +166,7 @@ func elem2URL(c config, e element, ext string) string {
 	res := elem2preURL(c, e)
 	res += c.Formats[ext].Loc
 	if !stringInSlice(ext, e.Files) {
-		log.Fatalln(" Error!!! " + res + " not exist")
+		log.Fatalln(fmt.Errorf(" Error!!! %s not exist", res))
 	}
 
 	return res
@@ -175,7 +175,7 @@ func elem2URL(c config, e element, ext string) string {
 func findElem(c config, e string) element {
 	res := c.Elements[e]
 	if res.ID == "" {
-		log.Fatalln(" " + e + " is not in config! Please use \"list\" command!")
+		log.Fatalln(fmt.Errorf(" %s is not in config\n Please use \"list\" command", e))
 	}
 	return res
 }
@@ -231,7 +231,7 @@ func loadConfig(configFile string) config {
 	filename, _ := filepath.Abs(configFile)
 	file, err := ioutil.ReadFile(filename)
 	if err != nil {
-		log.Fatalln(" File error: %v ", err)
+		log.Fatalln(fmt.Errorf(" File error: %v ", err))
 		os.Exit(1)
 	}
 	var myConfig config

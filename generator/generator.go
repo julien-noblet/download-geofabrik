@@ -307,7 +307,7 @@ func generate(url string, fname string, myConfig *config) {
 	filename, _ := filepath.Abs(fname)
 	err := ioutil.WriteFile(filename, out, 0644)
 	if err != nil {
-		log.Fatalln(" File error: %v ", err)
+		log.Fatalln(fmt.Errorf(" File error: %v ", err))
 		os.Exit(1)
 	}
 }

@@ -133,7 +133,7 @@ Commands:
 | chile                                       | South America               | Chile                                  | sPBHpS  |
 | china                                       | Asia                        | China                                  | sPBHpS  |
 | chubu                                       | Japan                       | Chūbu region                           | sPBHpS  |
-| chugoku                                     | Japan                       | Chūgoku region                         | sPHpS   |
+| chugoku                                     | Japan                       | Chūgoku region                         | sPBHpS  |
 | colombia                                    | South America               | Colombia                               | sPBHpS  |
 | colorado                                    | United States of America    | Colorado                               | sPBHpS  |
 | comores                                     | Africa                      | Comores                                | sPBHpS  |
