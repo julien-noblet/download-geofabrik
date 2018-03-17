@@ -41,6 +41,7 @@ var (
 	doshPbf  = download.Flag("osh.pbf", "Download osh.pbf (default)").Short('H').Bool()
 	dstate   = download.Flag("state", "Download state.txt file").Short('s').Bool()
 	dpoly    = download.Flag("poly", "Download poly file").Short('p').Bool()
+	dkml     = download.Flag("kml", "Download kml file").Short('k').Bool()
 	dCheck   = download.Flag("check", "control with checksum").Bool()
 
 	generate = app.Command("generate", "Generate a new config file")
