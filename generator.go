@@ -63,8 +63,9 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 						thisElement.Formats = append(thisElement.Formats, "osm.bz2")
 					case 3: // osh.pbf
 						thisElement.Formats = append(thisElement.Formats, "osh.pbf")
-					case 4: // poly
+					case 4: // poly & kml
 						thisElement.Formats = append(thisElement.Formats, "poly")
+						thisElement.Formats = append(thisElement.Formats, "kml")
 					case 5: //-updates
 						thisElement.Formats = append(thisElement.Formats, "state")
 					}
@@ -253,6 +254,8 @@ func (e *Ext) Filter(ctx *gocrawl.URLContext, isVisited bool) bool {
 		return false
 	} else if strings.Contains(ctx.URL().Path, ".poly") {
 		return false
+	} else if strings.Contains(ctx.URL().Path, ".kml") {
+		return false
 	} else if strings.Contains(ctx.URL().Path, ".bz2") {
 		return false
 	} else if strings.Contains(ctx.URL().Path, ".zip") {
@@ -303,6 +306,7 @@ func Generate(configfile string) {
 	geofabrik.Formats["osm.bz2"] = format{ID: "osm.bz2", Loc: "-latest.osm.bz2"}
 	geofabrik.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
 	geofabrik.Formats["poly"] = format{ID: "poly", Loc: ".poly"}
+	geofabrik.Formats["kml"] = format{ID: "kml", Loc: ".kml"}
 	geofabrik.Formats["state"] = format{ID: "state", Loc: "-updates/state.txt"}
 	geofabrik.Formats["shp.zip"] = format{ID: "shp.zip", Loc: "-latest-free.shp.zip"}
 	GenerateCrawler("https://download.geofabrik.de/", configfile, &geofabrik)
