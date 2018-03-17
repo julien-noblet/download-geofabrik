@@ -20,17 +20,20 @@ usage: download-geofabrik [<flags>] <command> [<args> ...]
 A command-line tool for downloading OSM files.
 
 Flags:
-      --help            Show context-sensitive help (also try --help-long and
-                        --help-man).
+      --help                 Show context-sensitive help (also try --help-long
+                             and --help-man).
+      --service="geofabrik"  Can switch to another service. You can use
+                             geofabrik or openstreetmap.fr. It automatically
+                             change config file if -c is unused.
   -c, --config="./geofabrik.yml"  
-                        Set Config file.
-  -n, --nodownload      Do not download file (test only)
-  -v, --verbose         Be verbose
-  -q, --quiet           Be quiet
-      --proxy-http=""   Use http proxy, format: proxy_address:port
-      --proxy-sock5=""  Use Sock5 proxy, format: proxy_address:port
-      --proxy-user=""   Proxy user
-      --proxy-pass=""   Proxy password
+                             Set Config file.
+  -n, --nodownload           Do not download file (test only)
+  -v, --verbose              Be verbose
+  -q, --quiet                Be quiet
+      --proxy-http=""        Use http proxy, format: proxy_address:port
+      --proxy-sock5=""       Use Sock5 proxy, format: proxy_address:port
+      --proxy-user=""        Proxy user
+      --proxy-pass=""        Proxy password
 
 Commands:
   help [<command>...]
