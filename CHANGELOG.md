@@ -1,5 +1,19 @@
 # Change Log
 
+## [v2.2.0-beta-fix#19](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#19) (2018-03-17)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#20...v2.2.0-beta-fix#19)
+
+**Closed issues:**
+
+- .kml file support   + current    [\#20](https://github.com/julien-noblet/download-geofabrik/issues/20)
+
+**Merged pull requests:**
+
+- Add kml in format that download-geofabrik can handle. [\#22](https://github.com/julien-noblet/download-geofabrik/pull/22) ([julien-noblet](https://github.com/julien-noblet))
+
+## [v2.2.0-beta-fix#20](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#20) (2018-03-17)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0...v2.2.0-beta-fix#20)
+
 ## [v2.1.0](https://github.com/julien-noblet/download-geofabrik/tree/v2.1.0) (2018-03-01)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0-pr...v2.1.0)
 

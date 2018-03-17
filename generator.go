@@ -206,32 +206,66 @@ func (e *Ext) mergeElement(element *Element) {
 
 func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
 	//var thisElement Element
-	parent := doc.Find("h1").Text()
-	fmt.Println(parent)
-
+	//parent := doc.Find("h1").Text()
+	//log.Println("Parent : ", parent)
+	parents := strings.Split(ctx.URL().Path, "/")
+	parent := parents[len(parents)-2]
+	if strings.EqualFold(parent, "extracts") {
+		parent = ""
+	}
+	if strings.EqualFold(parent, "polygons") {
+		parent = ""
+	}
 	list := doc.Find("table tr")
 	for line := range list.Nodes {
 		singleElement := list.Eq(line)
-		lien := singleElement.Find("a")
+		link := singleElement.Find("a")
 		//index := 0
-		for aa := range lien.Nodes {
-			var element Element
-			element.Parent = parent
-			a := lien.Eq(aa)
+		for aa := range link.Nodes {
+			a := link.Eq(aa)
 			vallink, link := a.Attr("href")
 			if link {
-				if strings.Contains(vallink, "/") {
-					// /!\ meta! or levelup
-					if vallink[0:1] != "/" {
-						//meta
-						// looking if already in e.Elements
-						element.Meta = true
-						t := strings.Split(vallink, "/")
-						element.ID = t[len(t)-1]
+				// Filtering
+				if !strings.Contains(vallink, "?") && !strings.Contains(vallink, "-latest") && (vallink[0] != '/') && !strings.EqualFold(vallink, "cgi-bin/") && vallink[len(vallink)-1] != '/' {
+					element := *(new(Element))
+					element.Parent = parent
+					if *fVerbose {
+						log.Println("a href=", vallink)
 					}
+					// If it's a folder, it's a meta
+					//					element.Meta = true
+					valsplit := strings.Split(vallink, ".")
+					name := valsplit[0]
+					//log.Println("name", name)
+					ext := strings.Join(valsplit[1:], ".")
+					if strings.Contains(ext, "state.txt") {
+						ext = "state"
+					}
+					element.ID = name
+					element.Name = name
+					if *fVerbose {
+						log.Println("parsing", vallink)
+					}
+					if !strings.EqualFold(e.Elements[name].ID, name) {
+						element.Formats = append(element.Formats, ext)
+						e.mergeElement(&element)
+					} else {
+						if *fVerbose {
+							log.Println(name, "already exist")
+							log.Println("Merging formats")
+						}
+						et := e.Elements[name]
+						if len(et.Formats) == 0 {
+							et.Meta = true
+						} else {
+							et.Meta = false
+						}
+						et.Formats = append(et.Formats, ext)
+						e.Elements[name] = et
+					}
+
 				}
 			}
-			e.mergeElement(&element)
 		}
 	}
 	return nil, true
@@ -283,6 +317,8 @@ func (e *Ext) Filter(ctx *gocrawl.URLContext, isVisited bool) bool {
 		return false
 	} else if strings.Contains(ctx.URL().Path, ".zip") {
 		return false
+	} else if strings.Contains(ctx.URL().Path, "?") {
+		return false
 	} else if ctx.URL().Path[len(ctx.URL().Path)-1:] == "/" {
 		return true
 	} else if strings.Contains(ctx.URL().Path, ".html") {
@@ -320,32 +356,38 @@ func GenerateCrawler(url string, fname string, myConfig *Config) {
 
 //Generate main function
 func Generate(configfile string) {
-	//Generate geofabrik.yml
-	var geofabrik Config
-	geofabrik.BaseURL = "https://download.geofabrik.de"
-	geofabrik.Formats = make(map[string]format)
-	//TODO: make a function for adding formats
-	geofabrik.Formats["osh.pbf"] = format{ID: "osh.pbf", Loc: ".osh.pbf"}
-	geofabrik.Formats["osh.pbf.md5"] = format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"}
-	geofabrik.Formats["osm.bz2"] = format{ID: "osm.bz2", Loc: "-latest.osm.bz2"}
-	geofabrik.Formats["osm.bz2.md5"] = format{ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"}
-	geofabrik.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
-	geofabrik.Formats["osm.pbf.md5"] = format{ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"}
-	geofabrik.Formats["poly"] = format{ID: "poly", Loc: ".poly"}
-	geofabrik.Formats["kml"] = format{ID: "kml", Loc: ".kml"}
-	geofabrik.Formats["state"] = format{ID: "state", Loc: "-updates/state.txt"}
-	geofabrik.Formats["shp.zip"] = format{ID: "shp.zip", Loc: "-latest-free.shp.zip"}
-	GenerateCrawler("https://download.geofabrik.de/", configfile, &geofabrik)
-	if !*fQuiet {
-		log.Println(configfile, " generated.")
-	}
-	/*
-		var myConfig config
+	switch *fService {
+	case "geofabrik":
+		//Generate geofabrik.yml
+		var geofabrik Config
+		geofabrik.BaseURL = "https://download.geofabrik.de"
+		geofabrik.Formats = make(map[string]format)
+		//TODO: make a function for adding formats
+		geofabrik.Formats["osh.pbf"] = format{ID: "osh.pbf", Loc: ".osh.pbf"}
+		geofabrik.Formats["osh.pbf.md5"] = format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"}
+		geofabrik.Formats["osm.bz2"] = format{ID: "osm.bz2", Loc: "-latest.osm.bz2"}
+		geofabrik.Formats["osm.bz2.md5"] = format{ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"}
+		geofabrik.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
+		geofabrik.Formats["osm.pbf.md5"] = format{ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"}
+		geofabrik.Formats["poly"] = format{ID: "poly", Loc: ".poly"}
+		geofabrik.Formats["kml"] = format{ID: "kml", Loc: ".kml"}
+		geofabrik.Formats["state"] = format{ID: "state", Loc: "-updates/state.txt"}
+		geofabrik.Formats["shp.zip"] = format{ID: "shp.zip", Loc: "-latest-free.shp.zip"}
+		GenerateCrawler("https://download.geofabrik.de/", configfile, &geofabrik)
+		if !*fQuiet {
+			log.Println(configfile, " generated.")
+		}
+
+	case "openstreetmap.fr":
+		var myConfig Config
 		myConfig.BaseURL = "https://download.openstreetmap.fr/extracts"
 		myConfig.Formats = make(map[string]format)
-		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: ".osm.pbf"}
-		myConfig.Formats["poly"] = format{ID: "poly", Loc: ".poly", BasePath: "../polygons/"}
-		myConfig.Formats["state"] = format{ID: "state", Loc: ".state.txt"}
-		generate("https://download.openstreetmap.fr/", "openstreetmap_fr.yml", &myConfig) // TODO: Not Working!
-	*/
+		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
+		myConfig.Formats["poly"] = format{ID: "poly", Loc: "poly", BasePath: "../polygons/"}
+		myConfig.Formats["state"] = format{ID: "state", Loc: "state.txt"}
+		GenerateCrawler("https://download.openstreetmap.fr/", configfile, &myConfig)
+		if !*fQuiet {
+			log.Println(configfile, " generated.")
+		}
+	}
 }
