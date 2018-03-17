@@ -30,6 +30,21 @@ type Ext struct {
 	Elements ElementSlice
 }
 
+func (e *Element) addHash(myel *goquery.Selection) {
+	validHash := []string{"md5"}
+	if myel.Find("a").Length() == 2 {
+		l2v, l2z := myel.Find("a").Eq(1).Attr("href")
+		if l2z {
+			hash := strings.Split(l2v, ".")[len(strings.Split(l2v, "."))-1]
+			if stringInSlice(&hash, &validHash) {
+				hashfile := strings.Join(strings.Split(l2v, ".")[1:], ".")
+				//fmt.Println(hashfile)
+				e.Formats = append(e.Formats, hashfile)
+			}
+		}
+	}
+}
+
 func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
 	var thisElement Element
 	downloadMain := doc.Find("div#download-main")
@@ -51,22 +66,30 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 			li := singleElement.Find("li")
 			for el := range li.Nodes {
 				myel := li.Eq(el)
+
 				linkval, link := myel.Find("a").Attr("href")
+
 				if link {
 					switch index {
 					case 0: // osm.pbf
 						thisElement.ID = linkval[0 : len(linkval)-15]
 						thisElement.Formats = append(thisElement.Formats, "osm.pbf")
+						thisElement.addHash(myel)
 					case 1: // shp.zip
 						thisElement.Formats = append(thisElement.Formats, "shp.zip")
+						thisElement.addHash(myel)
 					case 2: // osm.bz2
 						thisElement.Formats = append(thisElement.Formats, "osm.bz2")
+						thisElement.addHash(myel)
 					case 3: // osh.pbf
 						thisElement.Formats = append(thisElement.Formats, "osh.pbf")
+						thisElement.addHash(myel)
 					case 4: // poly
 						thisElement.Formats = append(thisElement.Formats, "poly")
+						thisElement.addHash(myel)
 					case 5: //-updates
 						thisElement.Formats = append(thisElement.Formats, "state")
+						thisElement.addHash(myel)
 					}
 				}
 				index++
@@ -300,8 +323,11 @@ func Generate(configfile string) {
 	geofabrik.Formats = make(map[string]format)
 	//TODO: make a function for adding formats
 	geofabrik.Formats["osh.pbf"] = format{ID: "osh.pbf", Loc: ".osh.pbf"}
+	geofabrik.Formats["osh.pbf.md5"] = format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"}
 	geofabrik.Formats["osm.bz2"] = format{ID: "osm.bz2", Loc: "-latest.osm.bz2"}
+	geofabrik.Formats["osm.bz2.md5"] = format{ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"}
 	geofabrik.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
+	geofabrik.Formats["osm.pbf.md5"] = format{ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"}
 	geofabrik.Formats["poly"] = format{ID: "poly", Loc: ".poly"}
 	geofabrik.Formats["state"] = format{ID: "state", Loc: "-updates/state.txt"}
 	geofabrik.Formats["shp.zip"] = format{ID: "shp.zip", Loc: "-latest-free.shp.zip"}
