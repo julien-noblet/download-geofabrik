@@ -19,11 +19,6 @@ formats:
     ext: state
     loc: -updates/state.txt
 elements:
-  "":
-    id: ""
-    meta: true
-    name: OpenStreetMap Data Extracts
-    parent: www.geofabri
   afghanistan:
     id: afghanistan
     name: Afghanistan

@@ -2,11 +2,11 @@
 #
 
 github_changelog_generator
-go run generator/generator.go
+go run download-geofabrik.go config.go download.go element.go formats.go generator.go generate
 cat .README.md1 > README.md
-go run download-geofabrik.go --help-long >> README.md 
+go run download-geofabrik.go config.go download.go element.go formats.go generator.go --help-long >> README.md 
 cat .README.md2 >> README.md
-go run download-geofabrik.go list --markdown >> README.md 
+go run download-geofabrik.go config.go download.go element.go formats.go generator.go list --markdown >> README.md 
 git add CHANGELOG.md
 git add geofabrik.yml
 git add README.md
