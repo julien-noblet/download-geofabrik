@@ -1,5 +1,8 @@
 baseURL: https://download.geofabrik.de
 formats:
+  kml:
+    ext: kml
+    loc: .kml
   osh.pbf:
     ext: osh.pbf
     loc: .osh.pbf
@@ -28,6 +31,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   africa:
@@ -38,6 +42,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
   alabama:
     id: alabama
@@ -48,6 +53,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   alaska:
@@ -59,6 +65,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   albania:
@@ -70,6 +77,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   alberta:
@@ -81,6 +89,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   algeria:
@@ -92,6 +101,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   alps:
@@ -102,6 +112,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   alsace:
@@ -113,6 +124,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   andorra:
@@ -124,6 +136,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   angola:
@@ -135,6 +148,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   antarctica:
@@ -146,6 +160,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
   aquitaine:
     id: aquitaine
@@ -156,6 +171,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   argentina:
@@ -167,6 +183,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: south-america
   arizona:
@@ -178,6 +195,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   arkansas:
@@ -189,6 +207,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   arnsberg-regbez:
@@ -200,6 +219,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: nordrhein-westfalen
   asia:
@@ -210,6 +230,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
   australia:
     id: australia
@@ -219,6 +240,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: australia-oceania
   australia-oceania:
@@ -229,6 +251,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
   austria:
     id: austria
@@ -239,6 +262,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   auvergne:
@@ -250,6 +274,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   azerbaijan:
@@ -261,6 +286,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   azores:
@@ -272,6 +298,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   baden-wuerttemberg:
@@ -283,6 +310,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   bangladesh:
@@ -294,6 +322,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   basse-normandie:
@@ -305,6 +334,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   bayern:
@@ -316,6 +346,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   bedfordshire:
@@ -327,6 +358,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   belarus:
@@ -338,6 +370,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   belgium:
@@ -349,6 +382,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   belize:
@@ -360,6 +394,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: central-america
   benin:
@@ -371,6 +406,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   berkshire:
@@ -382,6 +418,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   berlin:
@@ -393,6 +430,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   bhutan:
@@ -404,6 +442,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   bolivia:
@@ -415,6 +454,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: south-america
   bosnia-herzegovina:
@@ -426,6 +466,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   botswana:
@@ -437,6 +478,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   bourgogne:
@@ -448,6 +490,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   brandenburg:
@@ -459,6 +502,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   brazil:
@@ -470,6 +514,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: south-america
   bremen:
@@ -481,6 +526,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   bretagne:
@@ -492,6 +538,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   bristol:
@@ -503,6 +550,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   british-columbia:
@@ -514,6 +562,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   british-isles:
@@ -524,6 +573,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   buckinghamshire:
@@ -535,6 +585,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   bulgaria:
@@ -546,6 +597,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   burkina-faso:
@@ -557,6 +609,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   burundi:
@@ -568,6 +621,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   california:
@@ -579,6 +633,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   cambodia:
@@ -590,6 +645,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   cambridgeshire:
@@ -601,6 +657,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   cameroon:
@@ -612,6 +669,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   canada:
@@ -622,6 +680,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: north-america
   canary-islands:
@@ -633,6 +692,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   cape-verde:
@@ -644,6 +704,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   central-african-republic:
@@ -655,6 +716,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   central-america:
@@ -665,6 +727,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
   central-fed-district:
     id: central-fed-district
@@ -675,6 +738,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: russia
   centre:
@@ -686,6 +750,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   centro:
@@ -697,6 +762,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: italy
   chad:
@@ -708,6 +774,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   champagne-ardenne:
@@ -719,6 +786,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   cheshire:
@@ -730,6 +798,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   chile:
@@ -741,6 +810,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: south-america
   china:
@@ -752,6 +822,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   chubu:
@@ -763,6 +834,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: japan
   chugoku:
@@ -774,6 +846,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: japan
   colombia:
@@ -785,6 +858,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: south-america
   colorado:
@@ -796,6 +870,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   comores:
@@ -807,6 +882,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   congo-brazzaville:
@@ -818,6 +894,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   congo-democratic-republic:
@@ -829,6 +906,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   connecticut:
@@ -840,6 +918,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   cornwall:
@@ -851,6 +930,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   corse:
@@ -862,6 +942,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   crimean-fed-district:
@@ -873,6 +954,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: russia
   croatia:
@@ -884,6 +966,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   cuba:
@@ -895,6 +978,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: central-america
   cumbria:
@@ -906,6 +990,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   cyprus:
@@ -917,6 +1002,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   czech-republic:
@@ -928,6 +1014,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   dach:
@@ -938,6 +1025,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   delaware:
@@ -949,6 +1037,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   denmark:
@@ -960,6 +1049,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   derbyshire:
@@ -971,6 +1061,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   detmold-regbez:
@@ -982,6 +1073,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: nordrhein-westfalen
   devon:
@@ -993,6 +1085,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   district-of-columbia:
@@ -1004,6 +1097,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   djibouti:
@@ -1015,6 +1109,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   dolnoslaskie:
@@ -1026,6 +1121,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   dorset:
@@ -1037,6 +1133,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   duesseldorf-regbez:
@@ -1048,6 +1145,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: nordrhein-westfalen
   east-sussex:
@@ -1059,6 +1157,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   east-yorkshire-with-hull:
@@ -1070,6 +1169,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   ecuador:
@@ -1080,6 +1180,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: south-america
   egypt:
@@ -1091,6 +1192,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   england:
@@ -1102,6 +1204,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: great-britain
   equatorial-guinea:
@@ -1113,6 +1216,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   eritrea:
@@ -1124,6 +1228,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   essex:
@@ -1135,6 +1240,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   estonia:
@@ -1146,6 +1252,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   ethiopia:
@@ -1157,6 +1264,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   europe:
@@ -1167,6 +1275,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
   far-eastern-fed-district:
     id: far-eastern-fed-district
@@ -1177,6 +1286,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: russia
   faroe-islands:
@@ -1188,6 +1298,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   fiji:
@@ -1199,6 +1310,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: australia-oceania
   finland:
@@ -1210,6 +1322,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   florida:
@@ -1221,6 +1334,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   france:
@@ -1231,6 +1345,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   franche-comte:
@@ -1242,6 +1357,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   freiburg-regbez:
@@ -1253,6 +1369,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: baden-wuerttemberg
   gabon:
@@ -1264,6 +1381,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   gcc-states:
@@ -1275,6 +1393,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   georgia-eu:
@@ -1287,6 +1406,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   georgia-us:
@@ -1299,6 +1419,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   germany:
@@ -1309,6 +1430,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   ghana:
@@ -1320,6 +1442,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   gloucestershire:
@@ -1331,6 +1454,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   great-britain:
@@ -1341,6 +1465,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   greater-london:
@@ -1352,6 +1477,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   greater-manchester:
@@ -1363,6 +1489,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   greece:
@@ -1374,6 +1501,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   greenland:
@@ -1385,6 +1513,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: north-america
   guadeloupe:
@@ -1395,6 +1524,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   guatemala:
@@ -1406,6 +1536,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: central-america
   guinea:
@@ -1417,6 +1548,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   guinea-bissau:
@@ -1428,6 +1560,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   guyane:
@@ -1438,6 +1571,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   haiti-and-domrep:
@@ -1449,6 +1583,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: central-america
   hamburg:
@@ -1460,6 +1595,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   hampshire:
@@ -1471,6 +1607,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   haute-normandie:
@@ -1482,6 +1619,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   hawaii:
@@ -1493,6 +1631,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   herefordshire:
@@ -1504,6 +1643,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   hertfordshire:
@@ -1515,6 +1655,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   hessen:
@@ -1526,6 +1667,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   hokkaido:
@@ -1537,6 +1679,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: japan
   hungary:
@@ -1548,6 +1691,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   iceland:
@@ -1559,6 +1703,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   idaho:
@@ -1570,6 +1715,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   ile-de-france:
@@ -1581,6 +1727,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   illinois:
@@ -1592,6 +1739,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   india:
@@ -1603,6 +1751,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   indiana:
@@ -1614,6 +1763,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   indonesia:
@@ -1625,6 +1775,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   iowa:
@@ -1636,6 +1787,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   iran:
@@ -1647,6 +1799,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   iraq:
@@ -1658,6 +1811,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   ireland-and-northern-ireland:
@@ -1669,6 +1823,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   isle-of-man:
@@ -1680,6 +1835,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   isle-of-wight:
@@ -1691,6 +1847,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   isole:
@@ -1702,6 +1859,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: italy
   israel-and-palestine:
@@ -1713,6 +1871,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   italy:
@@ -1723,6 +1882,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   ivory-coast:
@@ -1734,6 +1894,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   jamaica:
@@ -1745,6 +1906,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: central-america
   japan:
@@ -1755,6 +1917,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   jordan:
@@ -1766,6 +1929,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   kaliningrad:
@@ -1777,6 +1941,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: russia
   kansai:
@@ -1788,6 +1953,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: japan
   kansas:
@@ -1799,6 +1965,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   kanto:
@@ -1810,6 +1977,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: japan
   karlsruhe-regbez:
@@ -1821,6 +1989,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: baden-wuerttemberg
   kazakhstan:
@@ -1832,6 +2001,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   kent:
@@ -1843,6 +2013,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   kentucky:
@@ -1854,6 +2025,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   kenya:
@@ -1865,6 +2037,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   koeln-regbez:
@@ -1876,6 +2049,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: nordrhein-westfalen
   kosovo:
@@ -1887,6 +2061,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   kujawsko-pomorskie:
@@ -1898,6 +2073,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   kyrgyzstan:
@@ -1909,6 +2085,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   kyushu:
@@ -1920,6 +2097,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: japan
   lancashire:
@@ -1931,6 +2109,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   languedoc-roussillon:
@@ -1942,6 +2121,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   laos:
@@ -1953,6 +2133,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   latvia:
@@ -1964,6 +2145,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   lebanon:
@@ -1975,6 +2157,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   leicestershire:
@@ -1986,6 +2169,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   lesotho:
@@ -1997,6 +2181,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   liberia:
@@ -2008,6 +2193,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   libya:
@@ -2019,6 +2205,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   liechtenstein:
@@ -2030,6 +2217,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   limousin:
@@ -2041,6 +2229,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   lincolnshire:
@@ -2052,6 +2241,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   lithuania:
@@ -2063,6 +2253,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   lodzkie:
@@ -2074,6 +2265,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   lorraine:
@@ -2085,6 +2277,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   louisiana:
@@ -2096,6 +2289,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   lubelskie:
@@ -2107,6 +2301,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   lubuskie:
@@ -2118,6 +2313,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   luxembourg:
@@ -2129,6 +2325,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   macedonia:
@@ -2140,6 +2337,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   madagascar:
@@ -2151,6 +2349,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   maine:
@@ -2162,6 +2361,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   malawi:
@@ -2173,6 +2373,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   malaysia-singapore-brunei:
@@ -2183,6 +2384,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   maldives:
@@ -2194,6 +2396,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   mali:
@@ -2205,6 +2408,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   malopolskie:
@@ -2216,6 +2420,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   malta:
@@ -2227,6 +2432,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   manitoba:
@@ -2238,6 +2444,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   martinique:
@@ -2248,6 +2455,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   maryland:
@@ -2259,6 +2467,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   massachusetts:
@@ -2270,6 +2479,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   mauritania:
@@ -2281,6 +2491,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   mauritius:
@@ -2292,6 +2503,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   mayotte:
@@ -2302,6 +2514,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   mazowieckie:
@@ -2313,6 +2526,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   mecklenburg-vorpommern:
@@ -2324,6 +2538,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   merseyside:
@@ -2335,6 +2550,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   mexico:
@@ -2346,6 +2562,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: north-america
   michigan:
@@ -2357,6 +2574,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   midi-pyrenees:
@@ -2368,6 +2586,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   minnesota:
@@ -2379,6 +2598,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   mississippi:
@@ -2390,6 +2610,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   missouri:
@@ -2401,6 +2622,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   mittelfranken:
@@ -2412,6 +2634,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: bayern
   moldova:
@@ -2423,6 +2646,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   monaco:
@@ -2434,6 +2658,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   mongolia:
@@ -2445,6 +2670,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   montana:
@@ -2456,6 +2682,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   montenegro:
@@ -2467,6 +2694,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   morocco:
@@ -2478,6 +2706,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   mozambique:
@@ -2489,6 +2718,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   muenster-regbez:
@@ -2500,6 +2730,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: nordrhein-westfalen
   myanmar:
@@ -2511,6 +2742,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   namibia:
@@ -2522,6 +2754,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   nebraska:
@@ -2533,6 +2766,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   nepal:
@@ -2544,6 +2778,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   netherlands:
@@ -2555,6 +2790,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   nevada:
@@ -2566,6 +2802,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   new-brunswick:
@@ -2577,6 +2814,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   new-caledonia:
@@ -2588,6 +2826,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: australia-oceania
   new-hampshire:
@@ -2599,6 +2838,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   new-jersey:
@@ -2610,6 +2850,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   new-mexico:
@@ -2621,6 +2862,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   new-york:
@@ -2632,6 +2874,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   new-zealand:
@@ -2643,6 +2886,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: australia-oceania
   newfoundland-and-labrador:
@@ -2654,6 +2898,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   nicaragua:
@@ -2664,6 +2909,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: central-america
   niederbayern:
@@ -2675,6 +2921,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: bayern
   niedersachsen:
@@ -2686,6 +2933,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   niger:
@@ -2697,6 +2945,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   nigeria:
@@ -2708,6 +2957,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   nord-est:
@@ -2719,6 +2969,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: italy
   nord-ovest:
@@ -2730,6 +2981,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: italy
   nord-pas-de-calais:
@@ -2741,6 +2993,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   nordrhein-westfalen:
@@ -2752,6 +3005,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   norfolk:
@@ -2763,6 +3017,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   north-america:
@@ -2773,6 +3028,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
   north-carolina:
     id: north-carolina
@@ -2783,6 +3039,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   north-caucasus-fed-district:
@@ -2794,6 +3051,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: russia
   north-dakota:
@@ -2805,6 +3063,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   north-korea:
@@ -2816,6 +3075,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   north-yorkshire:
@@ -2827,6 +3087,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   northamptonshire:
@@ -2838,6 +3099,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   northumberland:
@@ -2849,6 +3111,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   northwest-territories:
@@ -2860,6 +3123,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   northwestern-fed-district:
@@ -2871,6 +3135,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: russia
   norway:
@@ -2882,6 +3147,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   nottinghamshire:
@@ -2893,6 +3159,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   nova-scotia:
@@ -2904,6 +3171,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   nunavut:
@@ -2915,6 +3183,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   oberbayern:
@@ -2926,6 +3195,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: bayern
   oberfranken:
@@ -2937,6 +3207,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: bayern
   oberpfalz:
@@ -2948,6 +3219,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: bayern
   ohio:
@@ -2959,6 +3231,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   oklahoma:
@@ -2970,6 +3243,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   ontario:
@@ -2981,6 +3255,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   opolskie:
@@ -2992,6 +3267,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   oregon:
@@ -3003,6 +3279,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   oxfordshire:
@@ -3014,6 +3291,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   pakistan:
@@ -3025,6 +3303,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   papua-new-guinea:
@@ -3036,6 +3315,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: australia-oceania
   paraguay:
@@ -3047,6 +3327,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: south-america
   pays-de-la-loire:
@@ -3058,6 +3339,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   pennsylvania:
@@ -3069,6 +3351,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   peru:
@@ -3080,6 +3363,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: south-america
   philippines:
@@ -3091,6 +3375,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   picardie:
@@ -3102,6 +3387,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   podkarpackie:
@@ -3113,6 +3399,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   podlaskie:
@@ -3124,6 +3411,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   poitou-charentes:
@@ -3135,6 +3423,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   poland:
@@ -3145,6 +3434,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   pomorskie:
@@ -3156,6 +3446,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   portugal:
@@ -3167,6 +3458,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   prince-edward-island:
@@ -3178,6 +3470,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   provence-alpes-cote-d-azur:
@@ -3189,6 +3482,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   puerto-rico:
@@ -3200,6 +3494,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   quebec:
@@ -3211,6 +3506,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   reunion:
@@ -3221,6 +3517,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   rheinland-pfalz:
@@ -3232,6 +3529,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   rhode-island:
@@ -3243,6 +3541,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   rhone-alpes:
@@ -3254,6 +3553,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: france
   romania:
@@ -3265,6 +3565,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   russia:
@@ -3275,6 +3576,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
   rutland:
     id: rutland
@@ -3285,6 +3587,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   rwanda:
@@ -3296,6 +3599,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   saarland:
@@ -3307,6 +3611,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   sachsen:
@@ -3318,6 +3623,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   sachsen-anhalt:
@@ -3329,6 +3635,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   saint-helena-ascension-and-tristan-da-cunha:
@@ -3340,6 +3647,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   sao-tome-and-principe:
@@ -3351,6 +3659,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   saskatchewan:
@@ -3362,6 +3671,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   schleswig-holstein:
@@ -3373,6 +3683,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   schwaben:
@@ -3384,6 +3695,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: bayern
   scotland:
@@ -3395,6 +3707,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: great-britain
   senegal-and-gambia:
@@ -3406,6 +3719,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   serbia:
@@ -3417,6 +3731,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   seychelles:
@@ -3428,6 +3743,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   shikoku:
@@ -3439,6 +3755,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: japan
   shropshire:
@@ -3450,6 +3767,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   siberian-fed-district:
@@ -3461,6 +3779,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: russia
   sierra-leone:
@@ -3472,6 +3791,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   slaskie:
@@ -3483,6 +3803,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   slovakia:
@@ -3494,6 +3815,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   slovenia:
@@ -3505,6 +3827,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   somalia:
@@ -3516,6 +3839,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   somerset:
@@ -3527,6 +3851,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   south-africa:
@@ -3538,6 +3863,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   south-africa-and-lesotho:
@@ -3548,6 +3874,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   south-america:
@@ -3558,6 +3885,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
   south-carolina:
     id: south-carolina
@@ -3568,6 +3896,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   south-dakota:
@@ -3579,6 +3908,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   south-fed-district:
@@ -3590,6 +3920,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: russia
   south-korea:
@@ -3601,6 +3932,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   south-sudan:
@@ -3612,6 +3944,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   south-yorkshire:
@@ -3623,6 +3956,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   spain:
@@ -3634,6 +3968,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   sri-lanka:
@@ -3645,6 +3980,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   staffordshire:
@@ -3656,6 +3992,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   stuttgart-regbez:
@@ -3667,6 +4004,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: baden-wuerttemberg
   sud:
@@ -3678,6 +4016,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: italy
   sudan:
@@ -3689,6 +4028,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   suffolk:
@@ -3700,6 +4040,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   suriname:
@@ -3711,6 +4052,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: south-america
   surrey:
@@ -3722,6 +4064,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   swaziland:
@@ -3733,6 +4076,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   sweden:
@@ -3744,6 +4088,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   swietokrzyskie:
@@ -3755,6 +4100,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   switzerland:
@@ -3766,6 +4112,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   syria:
@@ -3777,6 +4124,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   taiwan:
@@ -3788,6 +4136,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   tajikistan:
@@ -3798,6 +4147,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   tanzania:
@@ -3809,6 +4159,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   tennessee:
@@ -3820,6 +4171,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   texas:
@@ -3831,6 +4183,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   thailand:
@@ -3842,6 +4195,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   thueringen:
@@ -3853,6 +4207,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: germany
   togo:
@@ -3864,6 +4219,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   tohoku:
@@ -3875,6 +4231,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: japan
   tuebingen-regbez:
@@ -3886,6 +4243,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: baden-wuerttemberg
   tunisia:
@@ -3897,6 +4255,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   turkey:
@@ -3908,6 +4267,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   turkmenistan:
@@ -3919,6 +4279,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   uganda:
@@ -3930,6 +4291,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   ukraine:
@@ -3941,6 +4303,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: europe
   unterfranken:
@@ -3952,6 +4315,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: bayern
   ural-fed-district:
@@ -3963,6 +4327,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: russia
   uruguay:
@@ -3974,6 +4339,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: south-america
   us:
@@ -3989,6 +4355,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: north-america
   us-northeast:
@@ -3999,6 +4366,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: north-america
   us-pacific:
@@ -4009,6 +4377,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: north-america
   us-south:
@@ -4019,6 +4388,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: north-america
   us-west:
@@ -4029,6 +4399,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: north-america
   utah:
@@ -4040,6 +4411,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   uzbekistan:
@@ -4051,6 +4423,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   vermont:
@@ -4062,6 +4435,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   vietnam:
@@ -4073,6 +4447,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   virginia:
@@ -4084,6 +4459,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   volga-fed-district:
@@ -4095,6 +4471,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: russia
   wales:
@@ -4106,6 +4483,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: great-britain
   warminsko-mazurskie:
@@ -4117,6 +4495,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   warwickshire:
@@ -4128,6 +4507,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   washington:
@@ -4139,6 +4519,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   west-midlands:
@@ -4150,6 +4531,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   west-sussex:
@@ -4161,6 +4543,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   west-virginia:
@@ -4172,6 +4555,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   west-yorkshire:
@@ -4183,6 +4567,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   wielkopolskie:
@@ -4194,6 +4579,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   wiltshire:
@@ -4205,6 +4591,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   wisconsin:
@@ -4216,6 +4603,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   worcestershire:
@@ -4227,6 +4615,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: england
   wyoming:
@@ -4238,6 +4627,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: us
   yemen:
@@ -4249,6 +4639,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: asia
   yukon:
@@ -4260,6 +4651,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: canada
   zachodniopomorskie:
@@ -4271,6 +4663,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: poland
   zambia:
@@ -4282,6 +4675,7 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
   zimbabwe:
@@ -4293,5 +4687,6 @@ elements:
     - osm.bz2
     - osh.pbf
     - poly
+    - kml
     - state
     parent: africa
