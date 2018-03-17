@@ -9,7 +9,7 @@ type format struct {
 }
 
 func miniFormats(s []string) string {
-	res := make([]string, 6)
+	res := make([]string, 7)
 	for _, item := range s {
 		switch item {
 		case "state":
@@ -24,9 +24,10 @@ func miniFormats(s []string) string {
 			res[4] = "p"
 		case "shp.zip":
 			res[5] = "S"
+		case "kml":
+			res[6] = "k"
 		}
 	}
-
 	return strings.Join(res, "")
 }
 
@@ -49,6 +50,9 @@ func getFormats() *[]string {
 	}
 	if *dpoly {
 		formatFile = append(formatFile, "poly")
+	}
+	if *dkml {
+		formatFile = append(formatFile, "kml")
 	}
 	if len(formatFile) == 0 {
 		formatFile = append(formatFile, "osm.pbf")
