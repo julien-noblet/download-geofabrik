@@ -58,6 +58,7 @@ Commands:
     -H, --osh.pbf  Download osh.pbf (default)
     -s, --state    Download state.txt file
     -p, --poly     Download poly file
+        --check    control with checksum
 
   generate
     Generate a new config file

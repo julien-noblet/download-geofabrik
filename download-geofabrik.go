@@ -1,10 +1,15 @@
 package main
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"fmt"
+	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"sort"
+	"strings"
 
 	"github.com/olekukonko/tablewriter"
 
@@ -36,6 +41,7 @@ var (
 	doshPbf  = download.Flag("osh.pbf", "Download osh.pbf (default)").Short('H').Bool()
 	dstate   = download.Flag("state", "Download state.txt file").Short('s').Bool()
 	dpoly    = download.Flag("poly", "Download poly file").Short('p').Bool()
+	dCheck   = download.Flag("check", "control with checksum").Bool()
 
 	generate = app.Command("generate", "Generate a new config file")
 )
@@ -87,10 +93,97 @@ func main() {
 	case download.FullCommand():
 		formatFile := getFormats()
 		for _, format := range *formatFile {
-			downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), format), *delement+"."+format)
+			if *dCheck {
+				if !(downloadChecksum(format)) {
+					if *fVerbose {
+						log.Println("Checksum mismatch, redownloading ", *delement, ".", format)
+					}
+					downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), format), *delement+"."+format)
+					downloadChecksum(format)
+
+				} else {
+					if *fVerbose {
+						log.Printf("Checksum match, no download!")
+					}
+				}
+			} else {
+				downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), format), *delement+"."+format)
+				downloadChecksum(format)
+			}
 		}
 	case generate.FullCommand():
 		Generate(*fConfig)
 	}
 
+}
+
+func hash_file_md5(filePath string) (string, error) {
+	var returnMD5String string
+	if _, err := os.Stat(filePath); err == nil {
+		file, err := os.Open(filePath)
+		if err != nil {
+			return returnMD5String, err
+		}
+		defer file.Close()
+		hash := md5.New()
+		if _, err := io.Copy(hash, file); err != nil {
+			return returnMD5String, err
+		}
+		hashInBytes := hash.Sum(nil)[:16]
+		returnMD5String = hex.EncodeToString(hashInBytes)
+		return returnMD5String, nil
+	}
+	return returnMD5String, nil // TODO Raise a new error: File not exist!
+}
+
+func controlHash(hashfile string, hash string) (bool, error) {
+	file, err := ioutil.ReadFile(hashfile)
+	if err != nil {
+		return false, err
+	}
+	filehash := strings.Split(string(file), " ")[0]
+	if *fVerbose {
+		log.Println("Hash from file : ", filehash)
+	}
+	if strings.EqualFold(hash, filehash) {
+		return true, nil
+	}
+	return false, nil
+}
+
+func downloadChecksum(format string) bool {
+	ret := false
+	if *dCheck {
+		hash := "md5"
+		fhash := format + "." + hash
+		if stringInSlice(&fhash, &findElem(loadConfig(*fConfig), *delement).Formats) {
+			downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), fhash), *delement+"."+fhash)
+			if *fVerbose {
+				log.Println("Hashing " + *delement + "." + format)
+			}
+			hashed, err := hash_file_md5(*delement + "." + format)
+			if err != nil {
+				log.Panic(fmt.Errorf(err.Error()))
+			}
+			if *fVerbose {
+				log.Println("MD5 : " + hashed)
+			}
+			ret, err := controlHash(*delement+"."+fhash, hashed)
+			if err != nil {
+				log.Panic(fmt.Errorf(err.Error()))
+			}
+			if *fVerbose {
+				if ret {
+					log.Println("Checksum OK for " + *delement + "." + format)
+				} else {
+					log.Println("Checksum is WRONG for " + *delement + "." + format)
+				}
+			}
+			return ret
+		}
+		if !*fQuiet {
+			log.Printf("No checksum provided for " + *delement + "." + format)
+		}
+	}
+	return ret
 }
