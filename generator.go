@@ -12,37 +12,14 @@ import (
 
 	"github.com/PuerkitoBio/gocrawl"
 	"github.com/PuerkitoBio/goquery"
-
-	"gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v2"
 )
-
-type config struct {
-	BaseURL  string             `yaml:"baseURL"`
-	Formats  map[string]format  `yaml:"formats"`
-	Elements map[string]Element `yaml:"elements"`
-}
-
-type format struct {
-	ID       string `yaml:"ext"`
-	Loc      string `yaml:"loc"`
-	BasePath string `yaml:"basepath,omitempty"`
-}
-
-// Element define file path, name ...
-type Element struct {
-	ID     string   `yaml:"id"`
-	File   string   `yaml:"file,omitempty"`
-	Meta   bool     `yaml:"meta,omitempty"`
-	Name   string   `yaml:"name"`
-	Files  []string `yaml:"files,omitempty"`
-	Parent string   `yaml:"parent,omitempty"`
-}
 
 // ElementSlice contain all Elements
 type ElementSlice map[string]Element
 
 // Generate make the slice which contain all Elements
-func (e ElementSlice) Generate(myConfig *config) ([]byte, error) {
+func (e ElementSlice) Generate(myConfig *Config) ([]byte, error) {
 	myConfig.Elements = e
 	return yaml.Marshal(myConfig)
 }
@@ -79,23 +56,23 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 					switch index {
 					case 0: // osm.pbf
 						thisElement.ID = linkval[0 : len(linkval)-15]
-						thisElement.Files = append(thisElement.Files, "osm.pbf")
+						thisElement.Formats = append(thisElement.Formats, "osm.pbf")
 					case 1: // shp.zip
-						thisElement.Files = append(thisElement.Files, "shp.zip")
+						thisElement.Formats = append(thisElement.Formats, "shp.zip")
 					case 2: // osm.bz2
-						thisElement.Files = append(thisElement.Files, "osm.bz2")
+						thisElement.Formats = append(thisElement.Formats, "osm.bz2")
 					case 3: // osh.pbf
-						thisElement.Files = append(thisElement.Files, "osh.pbf")
+						thisElement.Formats = append(thisElement.Formats, "osh.pbf")
 					case 4: // poly
-						thisElement.Files = append(thisElement.Files, "poly")
+						thisElement.Formats = append(thisElement.Formats, "poly")
 					case 5: //-updates
-						thisElement.Files = append(thisElement.Files, "state")
+						thisElement.Formats = append(thisElement.Formats, "state")
 					}
 				}
 				index++
 			}
 		}
-		if len(thisElement.Files) == 0 {
+		if len(thisElement.Formats) == 0 {
 			thisElement.Meta = true
 		}
 		// Workaround to fix #10
@@ -177,8 +154,9 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 		if usList[thisElement.ID] {
 			thisElement.Parent = "us"
 		}
-
-		e.Elements[thisElement.ID] = thisElement
+		if thisElement.Name != "OpenStreetMap Data Extracts" {
+			e.Elements[thisElement.ID] = thisElement
+		}
 	}
 	return nil, true
 }
@@ -190,8 +168,8 @@ func (e *Ext) mergeElement(element *Element) {
 		if cE.Parent != element.Parent {
 			panic(fmt.Sprintln("Error! : Parent mismatch!"))
 		}
-		cE.Files = append(cE.Files, element.Files...)
-		if len(cE.Files) == 0 {
+		cE.Formats = append(cE.Formats, element.Formats...)
+		if len(cE.Formats) == 0 {
 			cE.Meta = true
 		} else {
 			cE.Meta = false
@@ -237,7 +215,9 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 
 // Visit launch right crawler
 func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
-	fmt.Printf("Visit: %s\n", ctx.URL())
+	if *fVerbose {
+		fmt.Printf("Visit: %s\n", ctx.URL())
+	}
 	switch ctx.URL().Host {
 	case "download.geofabrik.de":
 		return e.parseGeofabrik(ctx, res, doc)
@@ -289,7 +269,8 @@ func (e *Ext) Filter(ctx *gocrawl.URLContext, isVisited bool) bool {
 	return false
 }
 
-func generate(url string, fname string, myConfig *config) {
+// GenerateCrawler creating a gocrawl to parse the website.
+func GenerateCrawler(url string, fname string, myConfig *Config) {
 	ext := &Ext{&gocrawl.DefaultExtender{}, make(map[string]Element)}
 	// Set custom options
 	opts := gocrawl.NewOptions(ext)
@@ -311,23 +292,30 @@ func generate(url string, fname string, myConfig *config) {
 	}
 }
 
-func main() {
+//Generate main function
+func Generate(configfile string) {
 	//Generate geofabrik.yml
-	var geofabrik config
+	var geofabrik Config
 	geofabrik.BaseURL = "https://download.geofabrik.de"
 	geofabrik.Formats = make(map[string]format)
+	//TODO: make a function for adding formats
 	geofabrik.Formats["osh.pbf"] = format{ID: "osh.pbf", Loc: ".osh.pbf"}
 	geofabrik.Formats["osm.bz2"] = format{ID: "osm.bz2", Loc: "-latest.osm.bz2"}
 	geofabrik.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
 	geofabrik.Formats["poly"] = format{ID: "poly", Loc: ".poly"}
 	geofabrik.Formats["state"] = format{ID: "state", Loc: "-updates/state.txt"}
 	geofabrik.Formats["shp.zip"] = format{ID: "shp.zip", Loc: "-latest-free.shp.zip"}
-	generate("https://download.geofabrik.de/", "geofabrik.yml", &geofabrik)
-	var myConfig config
-	myConfig.BaseURL = "https://download.openstreetmap.fr/extracts"
-	myConfig.Formats = make(map[string]format)
-	myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: ".osm.pbf"}
-	myConfig.Formats["poly"] = format{ID: "poly", Loc: ".poly", BasePath: "../polygons/"}
-	myConfig.Formats["state"] = format{ID: "state", Loc: ".state.txt"}
-	//generate("https://download.openstreetmap.fr/", "openstreetmap_fr.yml", &myConfig)
+	GenerateCrawler("https://download.geofabrik.de/", configfile, &geofabrik)
+	if !*fQuiet {
+		log.Println(configfile, " generated.")
+	}
+	/*
+		var myConfig config
+		myConfig.BaseURL = "https://download.openstreetmap.fr/extracts"
+		myConfig.Formats = make(map[string]format)
+		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: ".osm.pbf"}
+		myConfig.Formats["poly"] = format{ID: "poly", Loc: ".poly", BasePath: "../polygons/"}
+		myConfig.Formats["state"] = format{ID: "state", Loc: ".state.txt"}
+		generate("https://download.openstreetmap.fr/", "openstreetmap_fr.yml", &myConfig) // TODO: Not Working!
+	*/
 }
