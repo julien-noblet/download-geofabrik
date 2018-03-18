@@ -1,5 +1,8 @@
 # Change Log
 
+## [v2.2.0-beta-fix#19-2](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#19-2) (2018-03-18)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#19...v2.2.0-beta-fix#19-2)
+
 ## [v2.2.0-beta-fix#19](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#19) (2018-03-17)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#20...v2.2.0-beta-fix#19)
 

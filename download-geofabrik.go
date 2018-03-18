@@ -170,14 +170,14 @@ func downloadChecksum(format string) bool {
 		if stringInSlice(&fhash, &findElem(loadConfig(*fConfig), *delement).Formats) {
 			downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), fhash), *delement+"."+fhash)
 			if *fVerbose {
-				log.Println("Hashing" , *delement + "." + format)
+				log.Println("Hashing", *delement+"."+format)
 			}
 			hashed, err := hashFileMD5(*delement + "." + format)
 			if err != nil {
 				log.Panic(fmt.Errorf(err.Error()))
 			}
 			if *fVerbose {
-				log.Println("MD5 :" , hashed)
+				log.Println("MD5 :", hashed)
 			}
 			ret, err := controlHash(*delement+"."+fhash, hashed)
 			if err != nil {
