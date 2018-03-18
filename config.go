@@ -20,7 +20,7 @@ func loadConfig(configFile string) *Config {
 	filename, _ := filepath.Abs(configFile)
 	file, err := ioutil.ReadFile(filename)
 	if err != nil {
-		log.Fatalln(fmt.Errorf(" File error: %v ", err))
+		log.Fatalln(fmt.Errorf("File error: %v ", err))
 		os.Exit(1)
 	}
 	var myConfig Config

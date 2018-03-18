@@ -13,14 +13,14 @@ import (
 
 func downloadFromURL(myURL *string, fileName string) {
 	if *fVerbose {
-		log.Println(" Downloading", myURL, "to", fileName)
+		log.Println("Downloading", *myURL, "to", fileName)
 	}
 
 	if !*fNodownload {
 		// TODO: check file existence first with io.IsExist
 		output, err := os.Create(fileName)
 		if err != nil {
-			log.Fatalln(fmt.Errorf(" Error while creating %s - %v", fileName, err))
+			log.Fatalln(fmt.Errorf("Error while creating %s - %v", fileName, err))
 			return
 		}
 		defer output.Close()
@@ -50,21 +50,21 @@ func downloadFromURL(myURL *string, fileName string) {
 		}
 		response, err := client.Get(*myURL)
 		if err != nil {
-			log.Fatalln(fmt.Errorf(" Error while downloading %s - %v", *myURL, err))
+			log.Fatalln(fmt.Errorf("Error while downloading %s - %v", *myURL, err))
 			return
 		}
 		defer response.Body.Close()
 
 		n, err := io.Copy(output, response.Body)
 		if err != nil {
-			log.Fatalln(fmt.Errorf(" Error while downloading %s - %v", *myURL, err))
+			log.Fatalln(fmt.Errorf("Error while downloading %s - %v", *myURL, err))
 			return
 		}
 		if !*fQuiet {
 			log.Println(fileName, " downloaded.")
 		}
 		if *fVerbose {
-			log.Println(" ", n, " bytes downloaded.")
+			log.Println(n, " bytes downloaded.")
 		}
 	}
 }
