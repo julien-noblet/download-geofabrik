@@ -46,7 +46,7 @@ func elem2preURL(c *Config, e *Element) string {
 func findElem(c *Config, e string) *Element {
 	res := c.Elements[e]
 	if res.ID == "" {
-		log.Fatalln(fmt.Errorf(" %s is not in config\n Please use \"list\" command", e))
+		log.Fatalln(fmt.Errorf("%s is not in config\n Please use \"list\" command", e))
 	}
 	return &res
 }
