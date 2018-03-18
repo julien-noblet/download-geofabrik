@@ -1,13 +1,10 @@
 #!/bin/sh
 #
-
+gofmt -s -w *.go
 github_changelog_generator
-go run download-geofabrik.go config.go download.go element.go formats.go generator.go generate
-go run download-geofabrik.go config.go download.go element.go formats.go generator.go --service="openstreetmap.fr" generate
-cat .README.md1 > README.md
-go run download-geofabrik.go config.go download.go element.go formats.go generator.go --help-long >> README.md 
-cat .README.md2 >> README.md
-go run download-geofabrik.go config.go download.go element.go formats.go generator.go list --markdown >> README.md 
+make geofabrik
+make osmfr
+make readme
 git add CHANGELOG.md
 git add geofabrik.yml
 git add README.md
