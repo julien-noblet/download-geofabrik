@@ -229,9 +229,7 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 				if !strings.Contains(vallink, "?") && !strings.Contains(vallink, "-latest") && (vallink[0] != '/') && !strings.EqualFold(vallink, "cgi-bin/") && vallink[len(vallink)-1] != '/' {
 					element := *(new(Element))
 					element.Parent = parent
-					if *fVerbose {
-						log.Println("a href=", vallink)
-					}
+
 					// If it's a folder, it's a meta
 					//					element.Meta = true
 					valsplit := strings.Split(vallink, ".")

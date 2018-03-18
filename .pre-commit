@@ -2,9 +2,6 @@
 #
 gofmt -s -w *.go
 github_changelog_generator
-make geofabrik
-make osmfr
 make readme
 git add CHANGELOG.md
-git add geofabrik.yml
 git add README.md
