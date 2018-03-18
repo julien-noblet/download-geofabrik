@@ -17,6 +17,9 @@ readme:
 	go run $(gofiles) --help-long >> README.md 
 	cat .README.md2 >> README.md
 	go run $(gofiles) list --markdown >> README.md 
+	echo "" >> README.md
+	echo "## List of elements from openstreetmap.fr" >> README.md
+	go run $(gofiles) --service "openstreetmap.fr" list --markdown >> README.md
 package: gox geofabrik osmfr 
 	for i in download-geofabrik_* ;\
 	do \
