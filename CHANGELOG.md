@@ -7,6 +7,7 @@
 **Implemented enhancements:**
 
 - Add download.openstreetmap.fr/extracts/ [\#2](https://github.com/julien-noblet/download-geofabrik/issues/2)
+- Openstreetmap.fr [\#24](https://github.com/julien-noblet/download-geofabrik/pull/24) ([julien-noblet](https://github.com/julien-noblet))
 
 ## [v2.2.0-beta-fix#19-2](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#19-2) (2018-03-18)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#19...v2.2.0-beta-fix#19-2)

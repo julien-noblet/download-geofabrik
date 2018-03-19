@@ -12,7 +12,7 @@ geofabrik:
 osmfr:
 	echo "Generating openstreetmap.fr.yml"
 	go run $(gofiles) --service="openstreetmap.fr" generate -v
-readme:
+readme: geofabrik osmfr
 	cat .README.md1 > README.md
 	go run $(gofiles) --help-long >> README.md 
 	cat .README.md2 >> README.md
