@@ -23,7 +23,7 @@ func elem2URL(c *Config, e *Element, ext string) string {
 	res += c.Formats[ext].Loc
 	// TODO check if valid URL
 	if !stringInSlice(&ext, &e.Formats) {
-		log.Fatalln(fmt.Errorf(" Error!!! %s not exist", res))
+		log.Fatalln(fmt.Errorf(" Error!!! %s not exist", res)) // should raise a new error
 	}
 	return res
 }
@@ -62,6 +62,9 @@ func findElem(c *Config, e string) (*Element, error) {
 	return &res, nil
 }*/
 
+// stringInSlice : Check if a sting is present in a slice
+// should be more easy to access to a map!
+// TODO: remove it!
 func stringInSlice(a *string, list *[]string) bool {
 	for _, b := range *list {
 		if b == *a {

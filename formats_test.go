@@ -10,10 +10,13 @@ var sampleFormatValidPtr = map[string]format{
 		ID:       "",
 		Loc:      "",
 		BasePath: "",
-	}, "pbf": {
-		ID:       "pbf",
-		Loc:      ".osm.pbf",
-		BasePath: "/",
+	}, "osm.pbf": {
+		ID:  "osm.pbf",
+		Loc: ".osm.pbf",
+		//BasePath: "/",
+	}, "state": {
+		ID:  "state",
+		Loc: "-updates/state.txt",
 	},
 }
 
