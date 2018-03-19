@@ -11,9 +11,9 @@ import (
 	"golang.org/x/net/proxy"
 )
 
-func downloadFromURL(myURL *string, fileName string) {
+func downloadFromURL(myURL string, fileName string) {
 	if *fVerbose {
-		log.Println("Downloading", *myURL, "to", fileName)
+		log.Println("Downloading", myURL, "to", fileName)
 	}
 
 	if !*fNodownload {
@@ -26,7 +26,7 @@ func downloadFromURL(myURL *string, fileName string) {
 		defer output.Close()
 		transport := &http.Transport{}
 		if *fProxyHTTP != "" {
-			u, _ := url.Parse(*myURL)
+			u, _ := url.Parse(myURL)
 			//log.Println(u.Scheme +"://"+ *fProxyHTTP)
 			proxyURL, err := url.Parse(u.Scheme + "://" + *fProxyHTTP)
 			if *fProxyUser != "" && *fProxyPass != "" {
@@ -48,16 +48,16 @@ func downloadFromURL(myURL *string, fileName string) {
 			}
 			transport.Dial = dialer.Dial
 		}
-		response, err := client.Get(*myURL)
+		response, err := client.Get(myURL)
 		if err != nil {
-			log.Fatalln(fmt.Errorf("Error while downloading %s - %v", *myURL, err))
+			log.Fatalln(fmt.Errorf("Error while downloading %s - %v", myURL, err))
 			return
 		}
 		defer response.Body.Close()
 
 		n, err := io.Copy(output, response.Body)
 		if err != nil {
-			log.Fatalln(fmt.Errorf("Error while downloading %s - %v", *myURL, err))
+			log.Fatalln(fmt.Errorf("Error while downloading %s - %v", myURL, err))
 			return
 		}
 		if !*fQuiet {

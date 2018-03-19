@@ -70,7 +70,7 @@ func listAllRegions(c Config, format string) {
 }
 
 // UpdateConfig : simple script to download lastest config from repo
-func UpdateConfig(myURL *string, myconfig string) {
+func UpdateConfig(myURL string, myconfig string) {
 	downloadFromURL(myURL, myconfig)
 	if !*fQuiet {
 		log.Println("*** DEPRECATED you should prefer use generate ***")
@@ -113,7 +113,7 @@ func main() {
 		listAllRegions(*configPtr, format)
 	case update.FullCommand():
 		checkService()
-		UpdateConfig(fURL, *fConfig)
+		UpdateConfig(*fURL, *fConfig)
 	case download.FullCommand():
 		checkService()
 		configPtr, err := loadConfig(*fConfig)
