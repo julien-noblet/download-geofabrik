@@ -5,6 +5,26 @@ import (
 	"testing"
 )
 
+var SampleConfigValidPtr = Config{
+	BaseURL:  "https://my.base.url/",
+	Formats:  sampleFormatValidPtr,
+	Elements: sampleElementValidPtr,
+}
+
+func Benchmark_loadConfig_geofabrik_yml(b *testing.B) {
+	// run the Fib function b.N times
+	for n := 0; n < b.N; n++ {
+		loadConfig("./geofabrik.yml")
+	}
+}
+
+func Benchmark_loadConfig_osmfr_yml(b *testing.B) {
+	// run the Fib function b.N times
+	for n := 0; n < b.N; n++ {
+		loadConfig("./openstreetmap.fr.yml")
+	}
+}
+
 func Test_loadConfig(t *testing.T) {
 	type args struct {
 		configFile string
@@ -27,8 +47,8 @@ func Test_loadConfig(t *testing.T) {
 			args: args{configFile: "./geofabrik.yml"},
 			want: &Config{
 				BaseURL:  "https://download.geofabrik.de",
-				Formats:  *new(map[string]format),  // TODO : create a Formats test
-				Elements: *new(map[string]Element), // TODO: create a Element test
+				Formats:  sampleFormatValidPtr,
+				Elements: sampleElementValidPtr,
 			},
 			wantErr: false,
 		},
@@ -51,12 +71,10 @@ func Test_loadConfig(t *testing.T) {
 				if got.BaseURL != tt.want.BaseURL {
 					t.Errorf("loadConfig().BaseURL = %v, want %v", got.BaseURL, tt.want.BaseURL)
 				}
-				// TODO: Check Formats
 				// Must have formats but ne need to check if they are valids!
 				if reflect.TypeOf(got.Formats) != reflect.TypeOf(tt.want.Formats) {
 					t.Errorf("loadConfig().Formats is a %v, want %v", reflect.TypeOf(got.Formats), reflect.TypeOf(tt.want.Formats))
 				}
-				// TODO: Check Elements
 				// Must have Elements but no check if they are valids
 				if reflect.TypeOf(got.Elements) != reflect.TypeOf(tt.want.Elements) {
 					t.Errorf("loadConfig().Elements is a %v, want %v", reflect.TypeOf(got.Elements), reflect.TypeOf(tt.want.Elements))
