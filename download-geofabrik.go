@@ -12,7 +12,6 @@ import (
 	"strings"
 
 	"github.com/olekukonko/tablewriter"
-
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
@@ -94,6 +93,12 @@ func checkService() bool {
 	return false
 }
 
+func catch(err error) {
+	if err != nil {
+		log.Panic(err.Error())
+	}
+}
+
 func main() {
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
 
@@ -103,12 +108,16 @@ func main() {
 		if *lmd {
 			format = "Markdown"
 		}
-		listAllRegions(*loadConfig(*fConfig), format)
+		configPtr, err := loadConfig(*fConfig)
+		catch(err)
+		listAllRegions(*configPtr, format)
 	case update.FullCommand():
 		checkService()
 		UpdateConfig(fURL, *fConfig)
 	case download.FullCommand():
 		checkService()
+		configPtr, err := loadConfig(*fConfig)
+		catch(err)
 		formatFile := getFormats()
 		for _, format := range *formatFile {
 			if *dCheck && fileExist(*delement+"."+format) {
@@ -116,7 +125,7 @@ func main() {
 					if !*fQuiet {
 						log.Println("Checksum mismatch, re-downloading", *delement+"."+format)
 					}
-					downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), format), *delement+"."+format)
+					downloadFromURL(elem2URL(configPtr, findElem(configPtr, *delement), format), *delement+"."+format)
 					downloadChecksum(format)
 
 				} else {
@@ -125,7 +134,8 @@ func main() {
 					}
 				}
 			} else {
-				downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), format), *delement+"."+format)
+
+				downloadFromURL(elem2URL(configPtr, findElem(configPtr, *delement), format), *delement+"."+format)
 				downloadChecksum(format)
 			}
 		}
@@ -185,8 +195,10 @@ func downloadChecksum(format string) bool {
 	if *dCheck {
 		hash := "md5"
 		fhash := format + "." + hash
-		if stringInSlice(&fhash, &findElem(loadConfig(*fConfig), *delement).Formats) {
-			downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), fhash), *delement+"."+fhash)
+		configPtr, err := loadConfig(*fConfig)
+		catch(err)
+		if stringInSlice(&fhash, &findElem(configPtr, *delement).Formats) {
+			downloadFromURL(elem2URL(configPtr, findElem(configPtr, *delement), fhash), *delement+"."+fhash)
 			if *fVerbose {
 				log.Println("Hashing", *delement+"."+format)
 			}
