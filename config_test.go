@@ -6,7 +6,7 @@ import (
 )
 
 var SampleConfigValidPtr = Config{
-	BaseURL:  "https://my.base.url/",
+	BaseURL:  "https://my.base.url",
 	Formats:  sampleFormatValidPtr,
 	Elements: sampleElementValidPtr,
 }
