@@ -51,6 +51,17 @@ func findElem(c *Config, e string) *Element {
 	return &res
 }
 
+/*
+//Prepare large benchmark before get error!
+func findElem(c *Config, e string) (*Element, error) {
+	res := c.Elements[e]
+	if res.ID == "" {
+		return &res, errors.New("Element not found")
+		//log.Fatalln(fmt.Errorf("%s is not in config\n Please use \"list\" command", e))
+	}
+	return &res, nil
+}*/
+
 func stringInSlice(a *string, list *[]string) bool {
 	for _, b := range *list {
 		if b == *a {

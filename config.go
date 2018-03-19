@@ -27,13 +27,15 @@ func loadConfig(configFile string) (*Config, error) {
 	filename, _ := filepath.Abs(configFile)       // Get absolute path
 	fileContent, err := ioutil.ReadFile(filename) // Open file as string
 	if err != nil {
-		return nil, err //if error , return it!
+		return nil, err
 	}
-	myConfigPtr := new(Config)                     // Create a Config ptr
-	err = yaml.Unmarshal(fileContent, myConfigPtr) // Charging fileContent -> myConfigPtr
+	// Create a Config ptr
+	myConfigPtr := new(Config)
+	// Charging fileContent into myConfigPtr
+	err = yaml.Unmarshal(fileContent, myConfigPtr)
 	if err != nil {
-		return nil, err //if error , return it!
+		return nil, err
 	}
-	return myConfigPtr, nil // Everything is OK, returning myConfigPtr
-
+	// Everything is OK, returning myConfigPtr
+	return myConfigPtr, nil
 }

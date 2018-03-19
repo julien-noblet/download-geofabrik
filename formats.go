@@ -8,6 +8,9 @@ type format struct {
 	BasePath string `yaml:"basepath,omitempty"`
 }
 
+//miniFormats get formats of an Element
+// and return a string
+// according to download-geofabrik short flags.
 func miniFormats(s []string) string {
 	res := make([]string, 7)
 	for _, item := range s {
@@ -31,6 +34,7 @@ func miniFormats(s []string) string {
 	return strings.Join(res, "")
 }
 
+// getFormats return a pointer to a slice with formats
 func getFormats() *[]string {
 	var formatFile []string
 	if *dosmPbf {
