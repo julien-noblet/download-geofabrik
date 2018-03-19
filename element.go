@@ -18,14 +18,14 @@ func (e *Element) hasParent() bool {
 	return len(e.Parent) != 0
 }
 
-func elem2URL(c *Config, e *Element, ext string) *string {
+func elem2URL(c *Config, e *Element, ext string) string {
 	res := elem2preURL(c, e)
 	res += c.Formats[ext].Loc
 	// TODO check if valid URL
 	if !stringInSlice(&ext, &e.Formats) {
 		log.Fatalln(fmt.Errorf(" Error!!! %s not exist", res))
 	}
-	return &res
+	return res
 }
 
 func elem2preURL(c *Config, e *Element) string {
