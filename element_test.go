@@ -206,6 +206,14 @@ func Benchmark_stringInSlice_parse_geofabrik_yml(b *testing.B) {
 		}
 	}
 }
+func Benchmark_stringInSlice_parse_geofabrik_yml_France_formats_osm_pbf(b *testing.B) {
+	c, _ := loadConfig("./geofabrik.yml")
+	formats := c.Elements["france"].Formats
+	format := "osm.pbf"
+	for n := 0; n < b.N; n++ {
+		stringInSlice(&format, &formats)
+	}
+}
 func Test_stringInSlice(t *testing.T) {
 	testString := "test"
 	bString := "b"
