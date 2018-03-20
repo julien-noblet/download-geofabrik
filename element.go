@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 )
 
 type Element struct {
@@ -18,49 +17,58 @@ func (e *Element) hasParent() bool {
 	return len(e.Parent) != 0
 }
 
-func elem2URL(c *Config, e *Element, ext string) string {
-	res := elem2preURL(c, e)
+func elem2URL(c *Config, e *Element, ext string) (string, error) {
+	res, err := elem2preURL(c, e)
+	if err != nil {
+		return "", err
+	}
 	res += c.Formats[ext].Loc
 	// TODO check if valid URL
 	if !stringInSlice(&ext, &e.Formats) {
-		log.Fatalln(fmt.Errorf(" Error!!! %s not exist", res)) // should raise a new error
+		return "", fmt.Errorf("Error!!! %s not exist, config file corrupted", res)
 	}
-	return res
+	return res, nil
 }
 
-func elem2preURL(c *Config, e *Element) string {
+func elem2preURL(c *Config, e *Element) (string, error) {
 	var res string
 	if e.hasParent() {
-		res = elem2preURL(c, findElem(c, e.Parent)) + "/"
-		if e.File != "" { //TODO use file in config???
-			res = res + e.File
-		} else {
-			res = res + e.ID
+		myElem, err := findElem(c, e.ID)
+		if err != nil {
+			return "", err
 		}
-	} else {
-		res = c.BaseURL + "/" + e.ID
+		parent, err := findElem(c, myElem.Parent)
+		if err != nil {
+			return "", err
+		}
+		res, err = elem2preURL(c, parent)
+		if err != nil {
+			return "", err
+		}
+		res = res + "/"
+		if myElem.File != "" { //TODO use file in config???
+			res = res + myElem.File
+		} else {
+			res = res + myElem.ID
+		}
+		return res, nil
 	}
-	return res
+	myElem, err := findElem(c, e.ID)
+	if err != nil {
+		return "", err
+	}
+	res = c.BaseURL + "/" + myElem.ID
+	return res, nil
 }
 
-func findElem(c *Config, e string) *Element {
-	res := c.Elements[e]
-	if res.ID == "" {
-		log.Fatalln(fmt.Errorf("%s is not in config\n Please use \"list\" command", e))
-	}
-	return &res
-}
-
-/*
-//Prepare large benchmark before get error!
 func findElem(c *Config, e string) (*Element, error) {
 	res := c.Elements[e]
-	if res.ID == "" {
-		return &res, errors.New("Element not found")
-		//log.Fatalln(fmt.Errorf("%s is not in config\n Please use \"list\" command", e))
+	//fmt.Println("findElem", res.ID, e)
+	if res.ID == "" || res.ID != e {
+		return nil, fmt.Errorf("%s is not in config\n Please use \"list\" command", e)
 	}
 	return &res, nil
-}*/
+}
 
 // stringInSlice : Check if a sting is present in a slice
 // should be more easy to access to a map!
