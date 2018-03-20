@@ -74,9 +74,10 @@ func UpdateConfig(myURL string, myconfig string) {
 	downloadFromURL(myURL, myconfig)
 	if !*fQuiet {
 		log.Println("*** DEPRECATED you should prefer use generate ***")
-	}
-	if !*fVerbose {
-		log.Println("Congratulation, you have the latest geofabrik.yml")
+
+		if !*fVerbose {
+			log.Println("Congratulation, you have the latest geofabrik.yml")
+		}
 	}
 }
 
@@ -180,7 +181,7 @@ func controlHash(hashfile string, hash string) (bool, error) {
 			return false, err
 		}
 		filehash := strings.Split(string(file), " ")[0]
-		if *fVerbose {
+		if *fVerbose && !*fQuiet {
 			log.Println("Hash from file :", filehash)
 		}
 		if strings.EqualFold(hash, filehash) {
@@ -199,14 +200,14 @@ func downloadChecksum(format string) bool {
 		catch(err)
 		if stringInSlice(&fhash, &findElem(configPtr, *delement).Formats) {
 			downloadFromURL(elem2URL(configPtr, findElem(configPtr, *delement), fhash), *delement+"."+fhash)
-			if *fVerbose {
+			if *fVerbose && !*fQuiet {
 				log.Println("Hashing", *delement+"."+format)
 			}
 			hashed, err := hashFileMD5(*delement + "." + format)
 			if err != nil {
 				log.Panic(fmt.Errorf(err.Error()))
 			}
-			if *fVerbose {
+			if *fVerbose && !*fQuiet {
 				log.Println("MD5 :", hashed)
 			}
 			ret, err := controlHash(*delement+"."+fhash, hashed)

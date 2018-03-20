@@ -12,7 +12,7 @@ import (
 )
 
 func downloadFromURL(myURL string, fileName string) {
-	if *fVerbose {
+	if *fVerbose && !*fQuiet {
 		log.Println("Downloading", myURL, "to", fileName)
 	}
 
