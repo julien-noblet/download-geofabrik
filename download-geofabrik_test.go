@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"testing"
 )
 
@@ -67,7 +68,10 @@ func Test_catch(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			defer func() {
 				if r := recover(); r != nil {
-					fmt.Println("Recovered in f", r)
+					_, err := fmt.Println("Recovered in f", r)
+					if err != nil {
+						t.Errorf(err.Error())
+					}
 				}
 			}()
 			catch(tt.args.err)
@@ -150,6 +154,7 @@ func Test_controlHash(t *testing.T) {
 }
 
 func Test_downloadChecksum(t *testing.T) {
+	*fQuiet = true // be silent!
 	type args struct {
 		format string
 	}
@@ -173,6 +178,7 @@ func Test_downloadChecksum(t *testing.T) {
 			if got := downloadChecksum(tt.args.format); got != tt.want {
 				t.Errorf("downloadChecksum() = %v, want %v", got, tt.want)
 			}
+			os.Remove("andorra.osm.pbf.md5") // clean
 		})
 	}
 }
