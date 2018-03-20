@@ -43,6 +43,12 @@ func Test_loadConfig(t *testing.T) {
 			wantErr: true,
 		},
 		{
+			name:    "Check config not yaml",
+			args:    args{configFile: "./LICENSE"},
+			want:    nil,
+			wantErr: true,
+		},
+		{
 			name: "Check config valid geofabrik.yml",
 			args: args{configFile: "./geofabrik.yml"},
 			want: &Config{
