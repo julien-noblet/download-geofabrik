@@ -11,7 +11,7 @@ import (
 	"golang.org/x/net/proxy"
 )
 
-func downloadFromURL(myURL string, fileName string) {
+func downloadFromURL(myURL string, fileName string) error {
 	if *fVerbose && !*fQuiet {
 		log.Println("Downloading", myURL, "to", fileName)
 	}
@@ -20,8 +20,7 @@ func downloadFromURL(myURL string, fileName string) {
 		// TODO: check file existence first with io.IsExist
 		output, err := os.Create(fileName)
 		if err != nil {
-			log.Fatalln(fmt.Errorf("Error while creating %s - %v", fileName, err))
-			return
+			return fmt.Errorf("Error while creating %s - %v", fileName, err)
 		}
 		defer output.Close()
 		transport := &http.Transport{}
@@ -33,8 +32,7 @@ func downloadFromURL(myURL string, fileName string) {
 				proxyURL, err = url.Parse(u.Scheme + "://" + *fProxyUser + ":" + *fProxyPass + *fProxyHTTP)
 			}
 			if err != nil {
-				log.Fatalln(fmt.Errorf(" Wrong proxy url, please use format proxy_address:port"))
-				return
+				return fmt.Errorf("Wrong proxy url, please use format proxy_address:port")
 			}
 			transport = &http.Transport{Proxy: http.ProxyURL(proxyURL)}
 		}
@@ -43,28 +41,29 @@ func downloadFromURL(myURL string, fileName string) {
 			auth := proxy.Auth{User: *fProxyUser, Password: *fProxyPass}
 			dialer, err := proxy.SOCKS5("tcp", *fProxySock5, &auth, proxy.Direct)
 			if err != nil {
-				log.Fatalln(fmt.Errorf(" Can't connect to the proxy: %v", err))
-				return
+				return fmt.Errorf("Can't connect to the proxy: %v", err)
 			}
 			transport.Dial = dialer.Dial
 		}
 		response, err := client.Get(myURL)
 		if err != nil {
-			log.Fatalln(fmt.Errorf("Error while downloading %s - %v", myURL, err))
-			return
+			return fmt.Errorf("Error while downloading %s - %v", myURL, err)
+		}
+		if response.StatusCode != 200 {
+			return fmt.Errorf("Error while downloading %v, server return code %d", myURL, response.StatusCode)
 		}
 		defer response.Body.Close()
 
 		n, err := io.Copy(output, response.Body)
 		if err != nil {
-			log.Fatalln(fmt.Errorf("Error while downloading %s - %v", myURL, err))
-			return
+			return fmt.Errorf("Error while writing %s - %v", fileName, err)
 		}
 		if !*fQuiet {
 			log.Println(fileName, "downloaded.")
-		}
-		if *fVerbose {
-			log.Println(n, "bytes downloaded.")
+			if *fVerbose {
+				log.Println(n, "bytes downloaded.")
+			}
 		}
 	}
+	return nil // Everything is ok
 }
