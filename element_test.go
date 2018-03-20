@@ -303,6 +303,12 @@ func Test_elem2URL(t *testing.T) {
 			wantErr: false,
 		},
 		{
+			name:    "sub level test config wrong format",
+			args:    args{c: &SampleConfigValidPtr, e: &georgia, ext: "wrongFmt"},
+			want:    "",
+			wantErr: true,
+		},
+		{
 			name:    "sub level test config not exists in config",
 			args:    args{c: &SampleConfigValidPtr, e: &fakeGeorgia, ext: "state"},
 			want:    "",
@@ -333,7 +339,7 @@ func Test_elem2preURL(t *testing.T) {
 	africa := sampleElementValidPtr["africa"]
 	georgia := sampleElementValidPtr["georgia-us"]
 	fakeGeorgia := Element{
-		ID:   "georgia-us2",
+		ID:   "georgia-usf",
 		File: "georgia-fake",
 		Name: "Georgia (US State) - fake test",
 		Formats: []string{
