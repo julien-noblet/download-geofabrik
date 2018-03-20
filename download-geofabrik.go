@@ -126,7 +126,11 @@ func main() {
 					if !*fQuiet {
 						log.Println("Checksum mismatch, re-downloading", *delement+"."+format)
 					}
-					downloadFromURL(elem2URL(configPtr, findElem(configPtr, *delement), format), *delement+"."+format)
+					myElem, err := findElem(configPtr, *delement)
+					catch(err)
+					myURL, err := elem2URL(configPtr, myElem, format)
+					catch(err)
+					downloadFromURL(myURL, *delement+"."+format)
 					downloadChecksum(format)
 
 				} else {
@@ -135,8 +139,11 @@ func main() {
 					}
 				}
 			} else {
-
-				downloadFromURL(elem2URL(configPtr, findElem(configPtr, *delement), format), *delement+"."+format)
+				myElem, err := findElem(configPtr, *delement)
+				catch(err)
+				myURL, err := elem2URL(configPtr, myElem, format)
+				catch(err)
+				downloadFromURL(myURL, *delement+"."+format)
 				downloadChecksum(format)
 			}
 		}
@@ -198,8 +205,12 @@ func downloadChecksum(format string) bool {
 		fhash := format + "." + hash
 		configPtr, err := loadConfig(*fConfig)
 		catch(err)
-		if stringInSlice(&fhash, &findElem(configPtr, *delement).Formats) {
-			downloadFromURL(elem2URL(configPtr, findElem(configPtr, *delement), fhash), *delement+"."+fhash)
+		myElem, err := findElem(configPtr, *delement)
+		catch(err)
+		if stringInSlice(&fhash, &myElem.Formats) {
+			myURL, err := elem2URL(configPtr, myElem, fhash)
+			catch(err)
+			downloadFromURL(myURL, *delement+"."+fhash)
 			if *fVerbose && !*fQuiet {
 				log.Println("Hashing", *delement+"."+format)
 			}
