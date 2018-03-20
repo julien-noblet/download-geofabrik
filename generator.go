@@ -16,6 +16,7 @@ import (
 )
 
 // ElementSlice contain all Elements
+// TODO: It's not a slice but a MAP!!!!
 type ElementSlice map[string]Element
 
 // Generate make the slice which contain all Elements
