@@ -242,14 +242,14 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 					}
 					element.ID = name
 					element.Name = name
-					if *fVerbose {
+					if *fVerbose && !*fQuiet {
 						log.Println("parsing", vallink)
 					}
 					if !strings.EqualFold(e.Elements[name].ID, name) {
 						element.Formats = append(element.Formats, ext)
 						e.mergeElement(&element)
 					} else {
-						if *fVerbose {
+						if *fVerbose && !*fQuiet {
 							log.Println(name, "already exist")
 							log.Println("Merging formats")
 						}
@@ -272,7 +272,7 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 
 // Visit launch right crawler
 func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
-	if *fVerbose {
+	if *fVerbose && !*fQuiet {
 		fmt.Printf("Visit: %s\n", ctx.URL())
 	}
 	switch ctx.URL().Host {
