@@ -7,21 +7,29 @@ import (
 
 func Test_checkService(t *testing.T) {
 	tests := []struct {
-		name    string
-		service string
-		want    bool
+		name       string
+		service    string
+		config     string
+		want       bool
+		wantConfig string
 	}{
 		// TODO: Add test cases.
 		{name: "checkService(), fService = geofabrik", service: "geofabrik", want: true},
-		{name: "checkService(), fService = openstreetmap.fr", service: "openstreetmap.fr", want: true},
+		{name: "checkService(), fService = openstreetmap.fr", service: "openstreetmap.fr", config: "./geofabrik.yml", want: true, wantConfig: "./openstreetmap.fr.yml"},
 		{name: "checkService(), fService = anothermap", service: "anothermap", want: false},
 		{name: "checkService(), fService = \"\"", service: "", want: false},
 	}
 	for _, tt := range tests {
 		*fService = tt.service
 		t.Run(tt.name, func(t *testing.T) {
+			if tt.config != "" {
+				*fConfig = tt.config
+			}
 			if got := checkService(); got != tt.want {
 				t.Errorf("checkService() = %v, want %v", got, tt.want)
+			}
+			if tt.wantConfig != "" && *fConfig != tt.wantConfig {
+				t.Errorf("checkService() haven't change fConfig, want %v have %v", tt.wantConfig, *fConfig)
 			}
 		})
 	}
