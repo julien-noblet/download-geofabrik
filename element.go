@@ -25,18 +25,18 @@ func elem2URL(c *Config, e *Element, ext string) (string, error) {
 	res += c.Formats[ext].Loc
 	// TODO check if valid URL
 	if !stringInSlice(&ext, &e.Formats) {
-		return "", fmt.Errorf("Error!!! %s not exist, config file corrupted", res)
+		return "", fmt.Errorf("Error!!! %s format not exist", ext)
 	}
 	return res, nil
 }
 
 func elem2preURL(c *Config, e *Element) (string, error) {
 	var res string
-	if e.hasParent() {
-		myElem, err := findElem(c, e.ID)
-		if err != nil {
-			return "", err
-		}
+	myElem, err := findElem(c, e.ID)
+	if err != nil {
+		return "", err
+	}
+	if myElem.hasParent() {
 		parent, err := findElem(c, myElem.Parent)
 		if err != nil {
 			return "", err
@@ -52,10 +52,6 @@ func elem2preURL(c *Config, e *Element) (string, error) {
 			res = res + myElem.ID
 		}
 		return res, nil
-	}
-	myElem, err := findElem(c, e.ID)
-	if err != nil {
-		return "", err
 	}
 	res = c.BaseURL + "/" + myElem.ID
 	return res, nil
