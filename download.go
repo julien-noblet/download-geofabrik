@@ -61,10 +61,10 @@ func downloadFromURL(myURL *string, fileName string) {
 			return
 		}
 		if !*fQuiet {
-			log.Println(fileName, " downloaded.")
+			log.Println(fileName, "downloaded.")
 		}
 		if *fVerbose {
-			log.Println(n, " bytes downloaded.")
+			log.Println(n, "bytes downloaded.")
 		}
 	}
 }
