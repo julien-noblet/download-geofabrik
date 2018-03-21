@@ -111,16 +111,16 @@ func main() {
 		checkService()
 		formatFile := getFormats()
 		for _, format := range *formatFile {
-			if *dCheck {
+			if *dCheck && fileExist(*delement+"."+format) {
 				if !(downloadChecksum(format)) {
-					if *fVerbose {
-						log.Println("Checksum mismatch, redownloading ", *delement, ".", format)
+					if !*fQuiet {
+						log.Println("Checksum mismatch, re-downloading", *delement+"."+format)
 					}
 					downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), format), *delement+"."+format)
 					downloadChecksum(format)
 
 				} else {
-					if *fVerbose {
+					if !*fQuiet {
 						log.Printf("Checksum match, no download!")
 					}
 				}
@@ -136,15 +136,23 @@ func main() {
 
 }
 
-func hash_file_md5(filePath string) (string, error) {
-	var returnMD5String string
+func fileExist(filePath string) bool {
 	if _, err := os.Stat(filePath); err == nil {
+		return true
+	}
+	return false
+}
+
+func hashFileMD5(filePath string) (string, error) {
+	var returnMD5String string
+	if fileExist(filePath) {
 		file, err := os.Open(filePath)
 		if err != nil {
 			return returnMD5String, err
 		}
 		defer file.Close()
 		hash := md5.New()
+
 		if _, err := io.Copy(hash, file); err != nil {
 			return returnMD5String, err
 		}
@@ -152,20 +160,22 @@ func hash_file_md5(filePath string) (string, error) {
 		returnMD5String = hex.EncodeToString(hashInBytes)
 		return returnMD5String, nil
 	}
-	return returnMD5String, nil // TODO Raise a new error: File not exist!
+	return returnMD5String, nil
 }
 
 func controlHash(hashfile string, hash string) (bool, error) {
-	file, err := ioutil.ReadFile(hashfile)
-	if err != nil {
-		return false, err
-	}
-	filehash := strings.Split(string(file), " ")[0]
-	if *fVerbose {
-		log.Println("Hash from file : ", filehash)
-	}
-	if strings.EqualFold(hash, filehash) {
-		return true, nil
+	if fileExist(hashfile) {
+		file, err := ioutil.ReadFile(hashfile)
+		if err != nil {
+			return false, err
+		}
+		filehash := strings.Split(string(file), " ")[0]
+		if *fVerbose {
+			log.Println("Hash from file :", filehash)
+		}
+		if strings.EqualFold(hash, filehash) {
+			return true, nil
+		}
 	}
 	return false, nil
 }
@@ -178,30 +188,30 @@ func downloadChecksum(format string) bool {
 		if stringInSlice(&fhash, &findElem(loadConfig(*fConfig), *delement).Formats) {
 			downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), fhash), *delement+"."+fhash)
 			if *fVerbose {
-				log.Println("Hashing " + *delement + "." + format)
+				log.Println("Hashing", *delement+"."+format)
 			}
-			hashed, err := hash_file_md5(*delement + "." + format)
+			hashed, err := hashFileMD5(*delement + "." + format)
 			if err != nil {
 				log.Panic(fmt.Errorf(err.Error()))
 			}
 			if *fVerbose {
-				log.Println("MD5 : " + hashed)
+				log.Println("MD5 :", hashed)
 			}
 			ret, err := controlHash(*delement+"."+fhash, hashed)
 			if err != nil {
 				log.Panic(fmt.Errorf(err.Error()))
 			}
-			if *fVerbose {
+			if !*fQuiet {
 				if ret {
-					log.Println("Checksum OK for " + *delement + "." + format)
+					log.Println("Checksum OK for", *delement+"."+format)
 				} else {
-					log.Println("Checksum is WRONG for " + *delement + "." + format)
+					log.Println("Checksum MISMATCH for", *delement+"."+format)
 				}
 			}
 			return ret
 		}
 		if !*fQuiet {
-			log.Printf("No checksum provided for " + *delement + "." + format)
+			log.Printf("No checksum provided for" + *delement + "." + format)
 		}
 	}
 	return ret
