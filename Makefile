@@ -1,5 +1,5 @@
 gofiles  = download-geofabrik.go config.go download.go element.go formats.go generator.go
-pkgfiles = CHANGELOG.md README.md LICENSE geofabrik.yml 
+pkgfiles = CHANGELOG.md README.md LICENSE geofabrik.yml openstreetmap.fr.yml 
 default: clean all
 clean:
 	go clean
@@ -9,12 +9,18 @@ gox:
 geofabrik:
 	echo "Generating geofabrik.yml"
 	go run $(gofiles) generate -v
-readme:
+osmfr:
+	echo "Generating openstreetmap.fr.yml"
+	go run $(gofiles) --service="openstreetmap.fr" generate -v
+readme: geofabrik osmfr
 	cat .README.md1 > README.md
 	go run $(gofiles) --help-long >> README.md 
 	cat .README.md2 >> README.md
 	go run $(gofiles) list --markdown >> README.md 
-package: gox geofabrik
+	echo "" >> README.md
+	echo "## List of elements from openstreetmap.fr" >> README.md
+	go run $(gofiles) --service "openstreetmap.fr" list --markdown >> README.md
+package: gox geofabrik osmfr 
 	for i in download-geofabrik_* ;\
 	do \
 		  echo "Compressing $$i";\

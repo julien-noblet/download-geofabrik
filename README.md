@@ -20,17 +20,20 @@ usage: download-geofabrik [<flags>] <command> [<args> ...]
 A command-line tool for downloading OSM files.
 
 Flags:
-      --help            Show context-sensitive help (also try --help-long and
-                        --help-man).
+      --help                 Show context-sensitive help (also try --help-long
+                             and --help-man).
+      --service="geofabrik"  Can switch to another service. You can use
+                             "geofabrik" or "openstreetmap.fr". It automatically
+                             change config file if -c is unused.
   -c, --config="./geofabrik.yml"  
-                        Set Config file.
-  -n, --nodownload      Do not download file (test only)
-  -v, --verbose         Be verbose
-  -q, --quiet           Be quiet
-      --proxy-http=""   Use http proxy, format: proxy_address:port
-      --proxy-sock5=""  Use Sock5 proxy, format: proxy_address:port
-      --proxy-user=""   Proxy user
-      --proxy-pass=""   Proxy password
+                             Set Config file.
+  -n, --nodownload           Do not download file (test only)
+  -v, --verbose              Be verbose
+  -q, --quiet                Be quiet
+      --proxy-http=""        Use http proxy, format: proxy_address:port
+      --proxy-sock5=""       Use Sock5 proxy, format: proxy_address:port
+      --proxy-user=""        Proxy user
+      --proxy-pass=""        Proxy password
 
 Commands:
   help [<command>...]
@@ -55,7 +58,7 @@ Commands:
     -B, --osm.bz2  Download osm.bz2 if available
     -S, --shp.zip  Download shp.zip if available
     -P, --osm.pbf  Download osm.pbf (default)
-    -H, --osh.pbf  Download osh.pbf (default)
+    -H, --osh.pbf  Download osh.pbf
     -s, --state    Download state.txt file
     -p, --poly     Download poly file
     -k, --kml      Download kml file
@@ -486,3 +489,365 @@ Commands:
 | zambia                                      | Africa                   | Zambia                                 | sPBHpSk |
 | zimbabwe                                    | Africa                   | Zimbabwe                               | sPBHpSk |
 Total elements: 393
+
+## List of elements from openstreetmap.fr
+|                SHORTNAME                |        IS IN        |                LONG NAME                | FORMATS |
+|-----------------------------------------|---------------------|-----------------------------------------|---------|
+| afghanistan                             | asia                | afghanistan                             | sPp     |
+| africa                                  |                     | africa                                  | sPp     |
+| algeria                                 | africa              | algeria                                 | sPp     |
+| american_samoa                          | south-america       | american_samoa                          | sPp     |
+| andalucia                               | spain               | andalucia                               | sPp     |
+| andaman_and_nicobar_islands             | india               | andaman_and_nicobar_islands             | sPp     |
+| andhra_pradesh                          | india               | andhra_pradesh                          | sPp     |
+| angola                                  | africa              | angola                                  | sPp     |
+| anguilla                                | central-america     | anguilla                                | sPp     |
+| anhui                                   | china               | anhui                                   | sPp     |
+| antigua_and_barbuda                     | central-america     | antigua_and_barbuda                     | sPp     |
+| aragon                                  | spain               | aragon                                  | sPp     |
+| armenia                                 | asia                | armenia                                 | sPp     |
+| arnsberg                                | nordrhein_westfalen | arnsberg                                | sPp     |
+| aruba                                   | central-america     | aruba                                   | sPp     |
+| arunachal_pradesh                       | india               | arunachal_pradesh                       | sPp     |
+| asia                                    |                     | asia                                    | sPp     |
+| assam                                   | india               | assam                                   | sPp     |
+| asturias                                | spain               | asturias                                | sPp     |
+| australia                               | oceania             | australia                               | sPp     |
+| australian_capital_territory            | australia           | australian_capital_territory            | sPp     |
+| austria                                 | europe              | austria                                 | sPp     |
+| bahamas                                 | central-america     | bahamas                                 | sPp     |
+| bahrain                                 | asia                | bahrain                                 | sPp     |
+| banskobystricky                         | slovakia            | banskobystricky                         | sPp     |
+| barbados                                | central-america     | barbados                                | sPp     |
+| beijing                                 | china               | beijing                                 | sPp     |
+| belgium                                 | europe              | belgium                                 | sPp     |
+| benin                                   | africa              | benin                                   | sPp     |
+| bermuda                                 | north-america       | bermuda                                 | sPp     |
+| bhutan                                  | asia                | bhutan                                  | sPp     |
+| bihar                                   | india               | bihar                                   | sPp     |
+| bouvet_island                           | africa              | bouvet_island                           | sPp     |
+| bratislavsky                            | slovakia            | bratislavsky                            | sPp     |
+| british_indian_ocean_territory          | asia                | british_indian_ocean_territory          | sPp     |
+| british_virgin_islands                  | central-america     | british_virgin_islands                  | sPp     |
+| brunei                                  | asia                | brunei                                  | sPp     |
+| brussels_capital_region                 | belgium             | brussels_capital_region                 | sPp     |
+| burgenland                              | austria             | burgenland                              | sPp     |
+| burkina_faso                            | africa              | burkina_faso                            | sPp     |
+| burundi                                 | africa              | burundi                                 | sPp     |
+| cambodia                                | asia                | cambodia                                | sPp     |
+| cameroon                                | africa              | cameroon                                | sPp     |
+| canada                                  | north-america       | canada                                  | p       |
+| canarias                                | spain               | canarias                                | sPp     |
+| cantabria                               | spain               | cantabria                               | sPp     |
+| cape_verde                              | africa              | cape_verde                              | sPp     |
+| caribbean                               | central-america     | caribbean                               | sPp     |
+| castilla_la_mancha                      | spain               | castilla_la_mancha                      | sPp     |
+| castilla_y_leon                         | spain               | castilla_y_leon                         | sPp     |
+| catalunya                               | spain               | catalunya                               | sPp     |
+| cayman_islands                          | central-america     | cayman_islands                          | sPp     |
+| central-america                         |                     | central-america                         | sPp     |
+| central_african_republic                | africa              | central_african_republic                | sPp     |
+| ceuta                                   | spain               | ceuta                                   | sPp     |
+| chad                                    | africa              | chad                                    | sPp     |
+| chandigarh                              | india               | chandigarh                              | sPp     |
+| chhattisgarh                            | india               | chhattisgarh                            | sPp     |
+| china                                   | asia                | china                                   | sPp     |
+| chongqing                               | china               | chongqing                               | sPp     |
+| christmas_island                        | australia           | christmas_island                        | sPp     |
+| chubu                                   | japan               | chubu                                   | sPp     |
+| chugoku                                 | japan               | chugoku                                 | sPp     |
+| cocos_islands                           | australia           | cocos_islands                           | sPp     |
+| comoros                                 | africa              | comoros                                 | sPp     |
+| comunidad_de_madrid                     | spain               | comunidad_de_madrid                     | sPp     |
+| comunidad_foral_de_navarra              | spain               | comunidad_foral_de_navarra              | sPp     |
+| comunitat_valenciana                    | spain               | comunitat_valenciana                    | sPp     |
+| congo_brazzaville                       | africa              | congo_brazzaville                       | sPp     |
+| congo_kinshasa                          | africa              | congo_kinshasa                          | sPp     |
+| cook_islands                            | south-america       | cook_islands                            | sPp     |
+| coral_sea_islands                       | australia           | coral_sea_islands                       | sPp     |
+| costa_rica                              | central-america     | costa_rica                              | sPp     |
+| curacao                                 | central-america     | curacao                                 | sPp     |
+| czech_republic                          | europe              | czech_republic                          | sPp     |
+| dadra_and_nagar_haveli                  | india               | dadra_and_nagar_haveli                  | sPp     |
+| daman_and_diu                           | india               | daman_and_diu                           | sPp     |
+| detmold                                 | nordrhein_westfalen | detmold                                 | sPp     |
+| djibouti                                | africa              | djibouti                                | sPp     |
+| dolnoslaskie                            | poland              | dolnoslaskie                            | sPp     |
+| dominica                                | central-america     | dominica                                | sPp     |
+| dominican_republic                      | central-america     | dominican_republic                      | sPp     |
+| drenthe                                 | netherlands         | drenthe                                 | sPp     |
+| dusseldorf                              | nordrhein_westfalen | dusseldorf                              | sPp     |
+| east                                    | england             | east                                    | sPp     |
+| east_midlands                           | england             | east_midlands                           | sPp     |
+| east_timor                              | asia                | east_timor                              | sPp     |
+| el_salvador                             | central-america     | el_salvador                             | sPp     |
+| england                                 | united_kingdom      | england                                 | sPp     |
+| equatorial_guinea                       | africa              | equatorial_guinea                       | sPp     |
+| eritrea                                 | africa              | eritrea                                 | sPp     |
+| europe                                  |                     | europe                                  | sPp     |
+| euskadi                                 | spain               | euskadi                                 | sPp     |
+| extremadura                             | spain               | extremadura                             | sPp     |
+| falkland                                | south-america       | falkland                                | sPp     |
+| fiji                                    |                     | fiji                                    | sP      |
+| fiji_east                               | south-america       | fiji_east                               | sPp     |
+| fiji_west                               | oceania             | fiji_west                               | sPp     |
+| flanders                                | belgium             | flanders                                | sPp     |
+| flevoland                               | netherlands         | flevoland                               | sPp     |
+| france                                  | europe              | france                                  | sPp     |
+| france_metro_dom_com_nc                 |                     | france_metro_dom_com_nc                 | sP      |
+| france_taaf                             | africa              | france_taaf                             | sPp     |
+| friesland                               | netherlands         | friesland                               | sPp     |
+| fujian                                  | china               | fujian                                  | sPp     |
+| gabon                                   | africa              | gabon                                   | sPp     |
+| galicia                                 | spain               | galicia                                 | sPp     |
+| gambia                                  | africa              | gambia                                  | sPp     |
+| gansu                                   | china               | gansu                                   | sPp     |
+| gelderland                              | netherlands         | gelderland                              | sPp     |
+| georgia                                 | asia                | georgia                                 | sPp     |
+| germany                                 | europe              | germany                                 | sPp     |
+| ghana                                   | africa              | ghana                                   | sPp     |
+| gibraltar                               | europe              | gibraltar                               | sPp     |
+| goa                                     | india               | goa                                     | sPp     |
+| greater_london                          | england             | greater_london                          | sPp     |
+| grenada                                 | central-america     | grenada                                 | sPp     |
+| groningen                               | netherlands         | groningen                               | sPp     |
+| guadeloupe                              | central-america     | guadeloupe                              | sPp     |
+| guam                                    | oceania             | guam                                    | sPp     |
+| guangdong                               | china               | guangdong                               | sPp     |
+| guangxi                                 | china               | guangxi                                 | sPp     |
+| guernesey                               | europe              | guernesey                               | sPp     |
+| guinea                                  | africa              | guinea                                  | sPp     |
+| guizhou                                 | china               | guizhou                                 | sPp     |
+| gujarat                                 | india               | gujarat                                 | sPp     |
+| guyana                                  | south-america       | guyana                                  | sPp     |
+| guyane                                  | south-america       | guyane                                  | sPp     |
+| hainan                                  | china               | hainan                                  | sPp     |
+| haryana                                 | india               | haryana                                 | sPp     |
+| hebei                                   | china               | hebei                                   | sPp     |
+| heilongjiang                            | china               | heilongjiang                            | sPp     |
+| henan                                   | china               | henan                                   | sPp     |
+| himachal_pradesh                        | india               | himachal_pradesh                        | sPp     |
+| hokkaido                                | japan               | hokkaido                                | sPp     |
+| honduras                                | central-america     | honduras                                | sPp     |
+| hong_kong                               | china               | hong_kong                               | sPp     |
+| hubei                                   | china               | hubei                                   | sPp     |
+| hunan                                   | china               | hunan                                   | sPp     |
+| illes_balears                           | spain               | illes_balears                           | sPp     |
+| india                                   | asia                | india                                   | sPp     |
+| inner_mongolia                          | china               | inner_mongolia                          | sPp     |
+| ireland                                 | europe              | ireland                                 | sPp     |
+| israel                                  | asia                | israel                                  | sPp     |
+| israel_and_palestine                    | asia                | israel_and_palestine                    | sPp     |
+| ivory_coast                             | africa              | ivory_coast                             | sPp     |
+| jamaica                                 | central-america     | jamaica                                 | sPp     |
+| jammu_and_kashmir                       | india               | jammu_and_kashmir                       | sPp     |
+| japan                                   | asia                | japan                                   | sPp     |
+| jersey                                  | europe              | jersey                                  | sPp     |
+| jharkhand                               | india               | jharkhand                               | sPp     |
+| jiangsu                                 | china               | jiangsu                                 | sPp     |
+| jiangxi                                 | china               | jiangxi                                 | sPp     |
+| jihocesky                               | czech_republic      | jihocesky                               | sPp     |
+| jihomoravsky                            | czech_republic      | jihomoravsky                            | sPp     |
+| jilin                                   | china               | jilin                                   | sPp     |
+| kansai                                  | japan               | kansai                                  | sPp     |
+| kanto                                   | japan               | kanto                                   | sPp     |
+| karlovarsky                             | czech_republic      | karlovarsky                             | sPp     |
+| karnataka                               | india               | karnataka                               | sPp     |
+| karnten                                 | austria             | karnten                                 | sPp     |
+| kenya                                   | africa              | kenya                                   | sPp     |
+| kerala                                  | india               | kerala                                  | sPp     |
+| kiribati                                |                     | kiribati                                | sP      |
+| kiribati_east                           | south-america       | kiribati_east                           | sPp     |
+| kiribati_west                           | oceania             | kiribati_west                           | sPp     |
+| koln                                    | nordrhein_westfalen | koln                                    | sPp     |
+| kosicky                                 | slovakia            | kosicky                                 | sPp     |
+| kralovehradecky                         | czech_republic      | kralovehradecky                         | sPp     |
+| kujawsko_pomorskie                      | poland              | kujawsko_pomorskie                      | sPp     |
+| kuwait                                  | asia                | kuwait                                  | sPp     |
+| kyushu                                  | japan               | kyushu                                  | sPp     |
+| la_rioja                                | spain               | la_rioja                                | sPp     |
+| lakshadweep                             | india               | lakshadweep                             | sPp     |
+| laos                                    | asia                | laos                                    | sPp     |
+| lesotho                                 | africa              | lesotho                                 | sPp     |
+| liaoning                                | china               | liaoning                                | sPp     |
+| liberecky                               | czech_republic      | liberecky                               | sPp     |
+| limburg                                 | netherlands         | limburg                                 | sPp     |
+| lodzkie                                 | poland              | lodzkie                                 | sPp     |
+| lubelskie                               | poland              | lubelskie                               | sPp     |
+| lubuskie                                | poland              | lubuskie                                | sPp     |
+| macau                                   | china               | macau                                   | sPp     |
+| madhya_pradesh                          | india               | madhya_pradesh                          | sPp     |
+| maharashtra                             | india               | maharashtra                             | sPp     |
+| malawi                                  | africa              | malawi                                  | sPp     |
+| malaysia                                | asia                | malaysia                                | sPp     |
+| maldives                                | asia                | maldives                                | sPp     |
+| mali                                    | africa              | mali                                    | sPp     |
+| malopolskie                             | poland              | malopolskie                             | sPp     |
+| manipur                                 | india               | manipur                                 | sPp     |
+| marshall-islands                        | south-america       | marshall-islands                        | sPp     |
+| marshall_islands                        | oceania             | marshall_islands                        | sPp     |
+| martinique                              | central-america     | martinique                              | sPp     |
+| mauritania                              | africa              | mauritania                              | sPp     |
+| mauritius                               | africa              | mauritius                               | sPp     |
+| mayotte                                 | africa              | mayotte                                 | sPp     |
+| mazowieckie                             | poland              | mazowieckie                             | sPp     |
+| meghalaya                               | india               | meghalaya                               | sPp     |
+| melilla                                 | spain               | melilla                                 | sPp     |
+| micronesia                              | oceania             | micronesia                              | sPp     |
+| mizoram                                 | india               | mizoram                                 | sPp     |
+| monaco                                  | europe              | monaco                                  | sPp     |
+| montserrat                              | central-america     | montserrat                              | sPp     |
+| moravskoslezsky                         | czech_republic      | moravskoslezsky                         | sPp     |
+| mozambique                              | africa              | mozambique                              | sPp     |
+| munster                                 | nordrhein_westfalen | munster                                 | sPp     |
+| myanmar                                 | asia                | myanmar                                 | sPp     |
+| nagaland                                | india               | nagaland                                | sPp     |
+| namibia                                 | africa              | namibia                                 | sPp     |
+| national_capital_territory_of_delhi     | india               | national_capital_territory_of_delhi     | sPp     |
+| nauri                                   | south-america       | nauri                                   | sPp     |
+| nauru                                   | oceania             | nauru                                   | sPp     |
+| netherlands                             | europe              | netherlands                             | sPp     |
+| new_caledonia                           | oceania             | new_caledonia                           | sPp     |
+| new_south_wales                         | australia           | new_south_wales                         | sPp     |
+| nicaragua                               | central-america     | nicaragua                               | sPp     |
+| niederosterreich                        | austria             | niederosterreich                        | sPp     |
+| niger                                   | africa              | niger                                   | sPp     |
+| ningxia                                 | china               | ningxia                                 | sPp     |
+| nitriansky                              | slovakia            | nitriansky                              | sPp     |
+| niue                                    | south-america       | niue                                    | sPp     |
+| noord_brabant                           | netherlands         | noord_brabant                           | sPp     |
+| noord_holland                           | netherlands         | noord_holland                           | sPp     |
+| nordrhein_westfalen                     | germany             | nordrhein_westfalen                     | sPp     |
+| norfolk_island                          | australia           | norfolk_island                          | sPp     |
+| north-america                           |                     | north-america                           | p       |
+| north_east                              | england             | north_east                              | sPp     |
+| north_west                              | england             | north_west                              | sPp     |
+| northern_ireland                        | united_kingdom      | northern_ireland                        | sPp     |
+| northern_mariana_islands                | oceania             | northern_mariana_islands                | sPp     |
+| northern_territory                      | australia           | northern_territory                      | sPp     |
+| oberosterreich                          | austria             | oberosterreich                          | sPp     |
+| oceania                                 |                     | oceania                                 | sPp     |
+| odisha                                  | india               | odisha                                  | sPp     |
+| olomoucky                               | czech_republic      | olomoucky                               | sPp     |
+| oman                                    | asia                | oman                                    | sPp     |
+| opolskie                                | poland              | opolskie                                | sPp     |
+| overijssel                              | netherlands         | overijssel                              | sPp     |
+| palau                                   | oceania             | palau                                   | sPp     |
+| palestine                               | asia                | palestine                               | sPp     |
+| panama                                  | central-america     | panama                                  | sPp     |
+| papua_new_guinea                        | oceania             | papua_new_guinea                        | sPp     |
+| paraguay                                | south-america       | paraguay                                | sPp     |
+| pardubicky                              | czech_republic      | pardubicky                              | sPp     |
+| pitcairn                                | south-america       | pitcairn                                | sPp     |
+| plzensky                                | czech_republic      | plzensky                                | sPp     |
+| podkarpackie                            | poland              | podkarpackie                            | sPp     |
+| podlaskie                               | poland              | podlaskie                               | sPp     |
+| poland                                  | europe              | poland                                  | sPp     |
+| polynesie                               | oceania             | polynesie                               | sPp     |
+| pomorskie                               | poland              | pomorskie                               | sPp     |
+| praha                                   | czech_republic      | praha                                   | sPp     |
+| presovsky                               | slovakia            | presovsky                               | sPp     |
+| puducherry                              | india               | puducherry                              | sPp     |
+| puerto_rico                             | central-america     | puerto_rico                             | sPp     |
+| punjab                                  | india               | punjab                                  | sPp     |
+| qatar                                   | asia                | qatar                                   | sPp     |
+| qinghai                                 | china               | qinghai                                 | sPp     |
+| quebec                                  | canada              | quebec                                  | sPp     |
+| queensland                              | australia           | queensland                              | sPp     |
+| rajasthan                               | india               | rajasthan                               | sPp     |
+| region_de_murcia                        | spain               | region_de_murcia                        | sPp     |
+| reunion                                 | africa              | reunion                                 | sPp     |
+| rwanda                                  | africa              | rwanda                                  | sPp     |
+| saint_barthelemy                        | central-america     | saint_barthelemy                        | sPp     |
+| saint_helena_ascension_tristan_da_cunha | africa              | saint_helena_ascension_tristan_da_cunha | sPp     |
+| saint_kitts_and_nevis                   | central-america     | saint_kitts_and_nevis                   | sPp     |
+| saint_lucia                             | central-america     | saint_lucia                             | sPp     |
+| saint_martin                            | central-america     | saint_martin                            | sPp     |
+| saint_pierre_et_miquelon                | north-america       | saint_pierre_et_miquelon                | sPp     |
+| saint_vincent_and_the_grenadines        | central-america     | saint_vincent_and_the_grenadines        | sPp     |
+| salzburg                                | austria             | salzburg                                | sPp     |
+| samoa                                   | south-america       | samoa                                   | sPp     |
+| sao_tome_and_principe                   | africa              | sao_tome_and_principe                   | sPp     |
+| saudi_arabia                            | asia                | saudi_arabia                            | sPp     |
+| senegal                                 | africa              | senegal                                 | sPp     |
+| seychelles                              | africa              | seychelles                              | sPp     |
+| shaanxi                                 | china               | shaanxi                                 | sPp     |
+| shandong                                | china               | shandong                                | sPp     |
+| shanghai                                | china               | shanghai                                | sPp     |
+| shanxi                                  | china               | shanxi                                  | sPp     |
+| shikoku                                 | japan               | shikoku                                 | sPp     |
+| sichuan                                 | china               | sichuan                                 | sPp     |
+| sikkim                                  | india               | sikkim                                  | sPp     |
+| singapore                               | asia                | singapore                               | sPp     |
+| sint_maarten                            | central-america     | sint_maarten                            | sPp     |
+| slaskie                                 | poland              | slaskie                                 | sPp     |
+| slovakia                                | europe              | slovakia                                | sPp     |
+| solomon_islands                         | oceania             | solomon_islands                         | sPp     |
+| south-america                           |                     | south-america                           | sPp     |
+| south_africa                            | africa              | south_africa                            | sPp     |
+| south_australia                         | australia           | south_australia                         | sPp     |
+| south_east                              | england             | south_east                              | sPp     |
+| south_georgia_and_south_sandwich        | south-america       | south_georgia_and_south_sandwich        | sPp     |
+| south_sudan                             | africa              | south_sudan                             | sPp     |
+| south_west                              | england             | south_west                              | sPp     |
+| spain                                   | europe              | spain                                   | sPp     |
+| steiermark                              | austria             | steiermark                              | sPp     |
+| stredocesky                             | czech_republic      | stredocesky                             | sPp     |
+| sudan                                   | africa              | sudan                                   | sPp     |
+| suriname                                | south-america       | suriname                                | sPp     |
+| swaziland                               | africa              | swaziland                               | sPp     |
+| swietokrzyskie                          | poland              | swietokrzyskie                          | sPp     |
+| taaf                                    | south-america       | taaf                                    | sPp     |
+| tamil_nadu                              | india               | tamil_nadu                              | sPp     |
+| tasmania                                | australia           | tasmania                                | sPp     |
+| telangana                               | india               | telangana                               | sPp     |
+| tianjin                                 | china               | tianjin                                 | sPp     |
+| tibet                                   | china               | tibet                                   | sPp     |
+| tirol                                   | austria             | tirol                                   | sPp     |
+| togo                                    | africa              | togo                                    | sPp     |
+| tohoku                                  | japan               | tohoku                                  | sPp     |
+| tokelau                                 | south-america       | tokelau                                 | sPp     |
+| tonga                                   | south-america       | tonga                                   | sPp     |
+| trenciansky                             | slovakia            | trenciansky                             | sPp     |
+| trinidad_and_tobago                     | south-america       | trinidad_and_tobago                     | sPp     |
+| tripura                                 | india               | tripura                                 | sPp     |
+| trnavsky                                | slovakia            | trnavsky                                | sPp     |
+| tunisia                                 | africa              | tunisia                                 | sPp     |
+| turks_and_caicos_islands                | central-america     | turks_and_caicos_islands                | sPp     |
+| tuvalu                                  | oceania             | tuvalu                                  | sPp     |
+| uganda                                  | africa              | uganda                                  | sPp     |
+| united_arab_emirates                    | asia                | united_arab_emirates                    | sPp     |
+| united_kingdom                          | europe              | united_kingdom                          | sPp     |
+| united_states_virgin_islands            | central-america     | united_states_virgin_islands            | sPp     |
+| usa_virgin_islands                      | central-america     | usa_virgin_islands                      | sPp     |
+| ustecky                                 | czech_republic      | ustecky                                 | sPp     |
+| utrecht                                 | netherlands         | utrecht                                 | sPp     |
+| uttar_pradesh                           | india               | uttar_pradesh                           | sPp     |
+| uttarakhand                             | india               | uttarakhand                             | sPp     |
+| vanuatu                                 | oceania             | vanuatu                                 | sPp     |
+| venezuela                               | south-america       | venezuela                               | sPp     |
+| victoria                                | australia           | victoria                                | sPp     |
+| vorarlberg                              | austria             | vorarlberg                              | sPp     |
+| vysocina                                | czech_republic      | vysocina                                | sPp     |
+| wallis_et_futuna                        | oceania             | wallis_et_futuna                        | sPp     |
+| wallonia_french_community               | belgium             | wallonia_french_community               | sPp     |
+| wallonia_german_community               | belgium             | wallonia_german_community               | sPp     |
+| warminsko_mazurskie                     | poland              | warminsko_mazurskie                     | sPp     |
+| west_bengal                             | india               | west_bengal                             | sPp     |
+| west_midlands                           | england             | west_midlands                           | sPp     |
+| western_australia                       | australia           | western_australia                       | sPp     |
+| western_sahara                          | africa              | western_sahara                          | sPp     |
+| wielkopolskie                           | poland              | wielkopolskie                           | sPp     |
+| wien                                    | austria             | wien                                    | sPp     |
+| xinjiang                                | china               | xinjiang                                | sPp     |
+| yorkshire_and_the_humber                | england             | yorkshire_and_the_humber                | sPp     |
+| yunnan                                  | china               | yunnan                                  | sPp     |
+| zachodniopomorskie                      | poland              | zachodniopomorskie                      | sPp     |
+| zambia                                  | africa              | zambia                                  | sPp     |
+| zeeland                                 | netherlands         | zeeland                                 | sPp     |
+| zhejiang                                | china               | zhejiang                                | sPp     |
+| zilinsky                                | slovakia            | zilinsky                                | sPp     |
+| zimbabwe                                | africa              | zimbabwe                                | sPp     |
+| zlinsky                                 | czech_republic      | zlinsky                                 | sPp     |
+| zuid_holland                            | netherlands         | zuid_holland                            | sPp     |
+Total elements: 357
