@@ -18,6 +18,7 @@ import (
 
 var (
 	app         = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
+	fService    = app.Flag("service", "Can switch to another service. You can use \"geofabrik\" or \"openstreetmap.fr\". It automatically change config file if -c is unused.").Default("geofabrik").String()
 	fConfig     = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String()
 	fNodownload = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
 	fVerbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
@@ -38,7 +39,7 @@ var (
 	dosmBz2  = download.Flag("osm.bz2", "Download osm.bz2 if available").Short('B').Bool()
 	dshpZip  = download.Flag("shp.zip", "Download shp.zip if available").Short('S').Bool()
 	dosmPbf  = download.Flag("osm.pbf", "Download osm.pbf (default)").Short('P').Bool()
-	doshPbf  = download.Flag("osh.pbf", "Download osh.pbf (default)").Short('H').Bool()
+	doshPbf  = download.Flag("osh.pbf", "Download osh.pbf").Short('H').Bool()
 	dstate   = download.Flag("state", "Download state.txt file").Short('s').Bool()
 	dpoly    = download.Flag("poly", "Download poly file").Short('p').Bool()
 	dkml     = download.Flag("kml", "Download kml file").Short('k').Bool()
@@ -80,18 +81,34 @@ func UpdateConfig(myURL *string, myconfig string) {
 	}
 }
 
+func checkService() bool {
+	switch *fService {
+	case "geofabrik":
+		return true
+	case "openstreetmap.fr":
+		if strings.EqualFold(*fConfig, "./geofabrik.yml") {
+			*fConfig = "./openstreetmap.fr.yml"
+		}
+		return true
+	}
+	return false
+}
+
 func main() {
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
 
 	case list.FullCommand():
+		checkService()
 		var format = ""
 		if *lmd {
 			format = "Markdown"
 		}
 		listAllRegions(*loadConfig(*fConfig), format)
 	case update.FullCommand():
+		checkService()
 		UpdateConfig(fURL, *fConfig)
 	case download.FullCommand():
+		checkService()
 		formatFile := getFormats()
 		for _, format := range *formatFile {
 			if *dCheck && fileExist(*delement+"."+format) {
@@ -113,6 +130,7 @@ func main() {
 			}
 		}
 	case generate.FullCommand():
+		checkService()
 		Generate(*fConfig)
 	}
 
