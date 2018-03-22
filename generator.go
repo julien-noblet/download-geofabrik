@@ -207,10 +207,7 @@ func (e *Ext) mergeElement(element *Element) error {
 }
 
 func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
-	//var thisElement Element
-	//parent := doc.Find("h1").Text()
-	//log.Println("Parent : ", parent)
-	parents := strings.Split(ctx.URL().Path, "/")
+	parents := strings.Split(doc.Url.Path, "/")
 	parent := parents[len(parents)-2]
 	if strings.EqualFold(parent, "extracts") {
 		parent = ""
