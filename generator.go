@@ -32,13 +32,15 @@ type Ext struct {
 }
 
 func (e *Element) addHash(myel *goquery.Selection) {
-	validHash := []string{"md5"}
-	if myel.Find("a").Length() == 2 {
-		l2v, l2z := myel.Find("a").Eq(1).Attr("href")
-		if l2z {
-			hash := strings.Split(l2v, ".")[len(strings.Split(l2v, "."))-1]
+	a := myel.Find("a")
+	if a.Length() == 2 { // If only 1 a there is no hash
+		validHash := []string{"md5"}
+		val, exist := a.Eq(1).Attr("href")
+		if exist {
+			splitted := strings.Split(val, ".")
+			hash := splitted[len(splitted)-1]
 			if stringInSlice(&hash, &validHash) {
-				hashfile := strings.Join(strings.Split(l2v, ".")[1:], ".")
+				hashfile := strings.Join(splitted[1:], ".")
 				//fmt.Println(hashfile)
 				e.Formats = append(e.Formats, hashfile)
 			}
