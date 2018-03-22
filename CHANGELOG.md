@@ -4,16 +4,20 @@
 
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#19-2...HEAD)
 
-**Closed issues:**
-
-- .kml file support   + current    [\#20](https://github.com/julien-noblet/download-geofabrik/issues/20)
-
-**Merged pull requests:**
-
 **Implemented enhancements:**
 
 - Add download.openstreetmap.fr/extracts/ [\#2](https://github.com/julien-noblet/download-geofabrik/issues/2)
 - Openstreetmap.fr [\#24](https://github.com/julien-noblet/download-geofabrik/pull/24) ([julien-noblet](https://github.com/julien-noblet))
+- WIP: Support md5sum [\#23](https://github.com/julien-noblet/download-geofabrik/pull/23) ([julien-noblet](https://github.com/julien-noblet))
+
+## [v2.2.0-beta-fix#19-2](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#19-2) (2018-03-18)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#19...v2.2.0-beta-fix#19-2)
+
+## [v2.2.0-beta-fix#19](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#19) (2018-03-17)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#20...v2.2.0-beta-fix#19)
+
+**Implemented enhancements:**
+
 - .kml file support   + current    [\#20](https://github.com/julien-noblet/download-geofabrik/issues/20)
 - Add kml in format that download-geofabrik can handle. [\#22](https://github.com/julien-noblet/download-geofabrik/pull/22) ([julien-noblet](https://github.com/julien-noblet))
 
