@@ -70,15 +70,21 @@ func listAllRegions(c Config, format string) {
 }
 
 // UpdateConfig : simple script to download lastest config from repo
-func UpdateConfig(myURL string, myconfig string) {
-	downloadFromURL(myURL, myconfig)
+func UpdateConfig(myURL string, myconfig string) error {
 	if !*fQuiet {
-		log.Println("*** DEPRECATED you should prefer use generate ***")
-
-		if !*fVerbose {
-			log.Println("Congratulation, you have the latest geofabrik.yml")
-		}
+		log.Print("*** DEPRECATED you should prefer use generate ***")
 	}
+	err := downloadFromURL(myURL, myconfig)
+	if err != nil {
+		if *fVerbose {
+			log.Println(err)
+		}
+		return (fmt.Errorf("Can't updating %v please use generate", myconfig))
+	}
+	if *fVerbose && !*fQuiet {
+		log.Println("Congratulation, you have the latest geofabrik.yml")
+	}
+	return nil
 }
 
 func checkService() bool {

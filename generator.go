@@ -186,12 +186,10 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 	return nil, true
 }
 
-func (e *Ext) mergeElement(element *Element) {
+func (e *Ext) mergeElement(element *Element) error {
 	if cE, ok := e.Elements[element.ID]; ok {
-		//cE := &e.Elements[element.ID]
-
 		if cE.Parent != element.Parent {
-			panic(fmt.Sprintln("Error! : Parent mismatch!"))
+			return fmt.Errorf("Cant merge : Parent mismatch")
 		}
 		cE.Formats = append(cE.Formats, element.Formats...)
 		if len(cE.Formats) == 0 {
@@ -203,6 +201,7 @@ func (e *Ext) mergeElement(element *Element) {
 	} else {
 		e.Elements[element.ID] = *element
 	}
+	return nil
 }
 
 func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
