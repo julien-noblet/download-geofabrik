@@ -242,7 +242,7 @@ func TestElement_addHash(t *testing.T) {
 }
 
 func TestExt_parseOSMfr(t *testing.T) {
-	osm_valid1 := `
+	osmfrValid1 := `
 	<h1>Index of /extracts</h1>
 	<table><tbody><tr><th><img src="/icons/blank.gif" alt="[ICO]"></th><th><a href="?C=N;O=D">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=A">Size</a></th><th><a href="?C=D;O=A">Description</a></th></tr><tr><th colspan="5"><hr></th></tr>
 	<tr><td valign="top"><img src="/icons/back.gif" alt="[DIR]"></td><td><a href="/">Parent Directory</a></td><td>&nbsp;</td><td align="right">  - </td><td>&nbsp;</td></tr>
@@ -276,7 +276,8 @@ func TestExt_parseOSMfr(t *testing.T) {
 	</tbody></table>
 	<address>Apache/2.2.22 (Debian) Server at download.openstreetmap.fr Port 80</address>
 	`
-	osm_valid2 := `
+
+	osmfrValid2 := `
 	<h1>Index of /extracts/merge</h1>
 	<table><tbody><tr><th><img src="/icons/blank.gif" alt="[ICO]"></th><th><a href="?C=N;O=D">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=A">Size</a></th><th><a href="?C=D;O=A">Description</a></th></tr><tr><th colspan="5"><hr></th></tr>
 	<tr><td valign="top"><img src="/icons/back.gif" alt="[DIR]"></td><td><a href="/extracts/">Parent Directory</a></td><td>&nbsp;</td><td align="right">  - </td><td>&nbsp;</td></tr>
@@ -322,21 +323,36 @@ func TestExt_parseOSMfr(t *testing.T) {
 		name   string
 		fields Ext
 		args   args
-		want   interface{} // not tested...
+		want   ElementSlice
 		want1  bool
 	}{
 		// TODO: Add test cases.
 		{
 			name:   "osm valid1",
 			fields: Ext{Elements: ElementSlice{}},
-			args:   args{doc: f(osm_valid1, "http://download.openstreetmap.fr/extracts/")},
+			args:   args{doc: f(osmfrValid1, "http://download.openstreetmap.fr/extracts/")},
 			want1:  true,
+			want: ElementSlice{
+				"africa":          {ID: "africa", Meta: false, Name: "africa", Formats: []string{"osm.pbf", "state"}, Parent: "", File: ""},
+				"asia":            {ID: "asia", Meta: false, Name: "asia", Formats: []string{"osm.pbf", "state"}, Parent: "", File: ""},
+				"central-america": {ID: "central-america", Meta: false, Name: "central-america", Formats: []string{"osm.pbf", "state"}, Parent: "", File: ""},
+				"europe":          {ID: "europe", Meta: false, Name: "europe", Formats: []string{"osm.pbf", "state"}, Parent: "", File: ""},
+				"oceania":         {ID: "oceania", Meta: false, Name: "oceania", Formats: []string{"osm.pbf", "state"}, Parent: "", File: ""},
+				"south-america":   {ID: "south-america", Meta: false, Name: "south-america", Formats: []string{"osm.pbf", "state"}, Parent: "", File: ""},
+			},
 		},
 		{
 			name:   "osm valid2",
 			fields: Ext{Elements: ElementSlice{}},
-			args:   args{doc: f(osm_valid2, "http://download.openstreetmap.fr/extracts/merge")},
-			want1:  true,
+			args:   args{doc: f(osmfrValid2, "http://download.openstreetmap.fr/extracts/merge/")},
+			want: ElementSlice{
+				"france_metro_dom_com_nc": {ID: "france_metro_dom_com_nc", File: "", Meta: false, Name: "france_metro_dom_com_nc", Formats: []string{"osm.pbf", "state"}, Parent: "merge"},
+				"france_taaf":             {ID: "france_taaf", File: "", Meta: false, Name: "france_taaf", Formats: []string{"osm.pbf", "state"}, Parent: "merge"},
+				"israel_and_palestine":    {ID: "israel_and_palestine", File: "", Meta: false, Name: "israel_and_palestine", Formats: []string{"osm.pbf", "state"}, Parent: "merge"},
+				"kiribati":                {ID: "kiribati", File: "", Meta: false, Name: "kiribati", Formats: []string{"osm.pbf", "state"}, Parent: "merge"},
+				"fiji":                    {ID: "fiji", File: "", Meta: false, Name: "fiji", Formats: []string{"osm.pbf", "state"}, Parent: "merge"},
+			},
+			want1: true,
 		},
 	}
 	for _, tt := range tests {
@@ -345,9 +361,9 @@ func TestExt_parseOSMfr(t *testing.T) {
 				DefaultExtender: tt.fields.DefaultExtender,
 				Elements:        tt.fields.Elements,
 			}
-			got, got1 := e.parseOSMfr(tt.args.ctx, tt.args.res, tt.args.doc)
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Ext.parseOSMfr() got = %v, want %v", got, tt.want)
+			_, got1 := e.parseOSMfr(tt.args.ctx, tt.args.res, tt.args.doc)
+			if !reflect.DeepEqual(e.Elements, tt.want) {
+				t.Errorf("Ext.parseOSMfr() \nExt.Elements= %+v, want %+v", e.Elements, tt.want)
 			}
 			if got1 != tt.want1 {
 				t.Errorf("Ext.parseOSMfr() got1 = %v, want %v", got1, tt.want1)
