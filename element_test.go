@@ -5,61 +5,103 @@ import (
 	"testing"
 )
 
+var sampleAfricaElementPtr = Element{
+	ID:   "africa",
+	Name: "Africa",
+	Formats: []string{
+		"osm.pbf",
+		"osm.pbf.md5",
+		"osm.bz2",
+		"osm.bz2.md5",
+		"osh.pbf",
+		"osh.pbf.md5",
+		"poly",
+		"kml",
+		"state",
+	},
+}
+var sampleGeorgiaUsElementPtr = Element{
+	ID:   "georgia-us",
+	File: "georgia",
+	Name: "Georgia (US State)",
+	Formats: []string{
+		"osm.pbf",
+		"osm.pbf.md5",
+		"shp.zip",
+		"osm.bz2",
+		"osm.bz2.md5",
+		"osh.pbf",
+		"osh.pbf.md5",
+		"poly",
+		"kml",
+		"state",
+	},
+	Parent: "us",
+}
+var sampleUsElementPtr = Element{
+	ID:     "us",
+	Meta:   true,
+	Name:   "United States of America",
+	Parent: "north-america",
+}
+var sampleNorthAmericaElementPtr = Element{
+	ID:   "north-america",
+	Name: "North America",
+	Formats: []string{
+		"osm.pbf",
+		"osm.pbf.md5",
+		"osm.bz2",
+		"osm.bz2.md5",
+		"osh.pbf",
+		"osh.pbf.md5",
+		"poly",
+		"kml",
+		"state",
+	},
+}
 var sampleElementValidPtr = map[string]Element{
-	"africa": {
-		ID:   "africa",
-		Name: "Africa",
-		Formats: []string{
-			"osm.pbf",
-			"osm.pbf.md5",
-			"osm.bz2",
-			"osm.bz2.md5",
-			"osh.pbf",
-			"osh.pbf.md5",
-			"poly",
-			"kml",
-			"state",
-		},
+	"africa":        sampleAfricaElementPtr,
+	"georgia-us":    sampleGeorgiaUsElementPtr,
+	"us":            sampleUsElementPtr,
+	"north-america": sampleNorthAmericaElementPtr,
+}
+
+//Creating some fake samples
+var sampleFakeGeorgiaPtr = Element{
+	ID:   "georgia-usf",
+	File: "georgia-fake",
+	Name: "Georgia (US State) - fake test",
+	Formats: []string{
+		"osm.pbf",
+		"osm.pbf.md5",
+		"shp.zip",
+		"osm.bz2",
+		"osm.bz2.md5",
+		"osh.pbf",
+		"osh.pbf.md5",
+		"poly",
+		"kml",
+		"state",
 	},
-	"georgia-us": {
-		ID:   "georgia-us",
-		File: "georgia",
-		Name: "Georgia (US State)",
-		Formats: []string{
-			"osm.pbf",
-			"osm.pbf.md5",
-			"shp.zip",
-			"osm.bz2",
-			"osm.bz2.md5",
-			"osh.pbf",
-			"osh.pbf.md5",
-			"poly",
-			"kml",
-			"state",
-		},
-		Parent: "us",
+	Parent: "us", // keep good parent!
+}
+var sampleFakeGeorgia2Ptr = Element{
+	ID:   "georgia-us2",
+	File: "georgia",
+	Name: "Georgia (US State)",
+	Formats: []string{
+		"osm.pbf",
+		"osm.pbf.md5",
+		"shp.zip",
+		"osm.bz2",
+		"osm.bz2.md5",
+		"osh.pbf",
+		"osh.pbf.md5",
+		"poly",
+		"kml",
+		"state",
 	},
-	"us": {
-		ID:     "us",
-		Meta:   true,
-		Name:   "United States of America",
-		Parent: "north-america",
-	},
-	"north-america": {
-		ID:   "north-america",
-		Name: "North America",
-		Formats: []string{
-			"osm.pbf",
-			"osm.pbf.md5",
-			"osm.bz2",
-			"osm.bz2.md5",
-			"osh.pbf",
-			"osh.pbf.md5",
-			"poly",
-			"kml",
-			"state",
-		},
-	},
+	Parent: "notus", // bad parent not exist!
 }
 
 func Benchmark_hasParent_parse_geofabrik_yml(b *testing.B) {
@@ -248,45 +290,8 @@ func Test_stringInSlice(t *testing.T) {
 }
 
 func Test_elem2URL(t *testing.T) {
-	africa := sampleElementValidPtr["africa"]
-	georgia := sampleElementValidPtr["georgia-us"]
-	fakeGeorgia := Element{
-		ID:   "georgia-us2",
-		File: "georgia-fake",
-		Name: "Georgia (US State) - fake test",
-		Formats: []string{
-			"osm.pbf",
-			"osm.pbf.md5",
-			"shp.zip",
-			"osm.bz2",
-			"osm.bz2.md5",
-			"osh.pbf",
-			"osh.pbf.md5",
-			"poly",
-			"kml",
-			"state",
-		},
-		Parent: "us", // keep good parent!
-	}
-	fakeGeorgia2 := Element{
-		ID:   "georgia-us2",
-		File: "georgia",
-		Name: "Georgia (US State)",
-		Formats: []string{
-			"osm.pbf",
-			"osm.pbf.md5",
-			"shp.zip",
-			"osm.bz2",
-			"osm.bz2.md5",
-			"osh.pbf",
-			"osh.pbf.md5",
-			"poly",
-			"kml",
-			"state",
-		},
-		Parent: "notus", // bad parent not exist!
-	}
-	SampleConfigValidPtr.Elements["georgia-us2"] = fakeGeorgia2 // add it into config
+	localSampleConfigValidPtr := SampleConfigValidPtr
+	localSampleConfigValidPtr.Elements["georgia-us2"] = sampleFakeGeorgiaPtr // add it into config
 	type args struct {
 		c   *Config
 		e   *Element
@@ -301,30 +306,30 @@ func Test_elem2URL(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name:    "top level test config",
-			args:    args{c: &SampleConfigValidPtr, e: &africa, ext: "osm.pbf"},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleAfricaElementPtr, ext: "osm.pbf"},
 			want:    "https://my.base.url/africa.osm.pbf",
 			wantErr: false,
 		}, {
 			name:    "sub level test config",
-			args:    args{c: &SampleConfigValidPtr, e: &georgia, ext: "state"},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: "state"},
 			want:    "https://my.base.url/north-america/us/georgia-updates/state.txt",
 			wantErr: false,
 		},
 		{
 			name:    "sub level test config wrong format",
-			args:    args{c: &SampleConfigValidPtr, e: &georgia, ext: "wrongFmt"},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: "wrongFmt"},
 			want:    "",
 			wantErr: true,
 		},
 		{
 			name:    "sub level test config not exists in config",
-			args:    args{c: &SampleConfigValidPtr, e: &fakeGeorgia, ext: "state"},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgiaPtr, ext: "state"},
 			want:    "",
 			wantErr: true,
 		},
 		{
 			name:    "sub level test config not exists parent",
-			args:    args{c: &SampleConfigValidPtr, e: &fakeGeorgia2, ext: "state"},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgia2Ptr, ext: "state"},
 			want:    "",
 			wantErr: true,
 		},
@@ -344,45 +349,8 @@ func Test_elem2URL(t *testing.T) {
 }
 
 func Test_elem2preURL(t *testing.T) {
-	africa := sampleElementValidPtr["africa"]
-	georgia := sampleElementValidPtr["georgia-us"]
-	fakeGeorgia := Element{
-		ID:   "georgia-usf",
-		File: "georgia-fake",
-		Name: "Georgia (US State) - fake test",
-		Formats: []string{
-			"osm.pbf",
-			"osm.pbf.md5",
-			"shp.zip",
-			"osm.bz2",
-			"osm.bz2.md5",
-			"osh.pbf",
-			"osh.pbf.md5",
-			"poly",
-			"kml",
-			"state",
-		},
-		Parent: "us", // keep good parent!
-	}
-	fakeGeorgia2 := Element{
-		ID:   "georgia-us2",
-		File: "georgia",
-		Name: "Georgia (US State)",
-		Formats: []string{
-			"osm.pbf",
-			"osm.pbf.md5",
-			"shp.zip",
-			"osm.bz2",
-			"osm.bz2.md5",
-			"osh.pbf",
-			"osh.pbf.md5",
-			"poly",
-			"kml",
-			"state",
-		},
-		Parent: "notus", // bad parent not exist!
-	}
-	SampleConfigValidPtr.Elements["georgia-us2"] = fakeGeorgia2 // add it into config
+	localSampleConfigValidPtr := SampleConfigValidPtr
+	localSampleConfigValidPtr.Elements["georgia-us2"] = sampleFakeGeorgia2Ptr // add it into config
 	type args struct {
 		c *Config
 		e *Element
@@ -396,23 +364,23 @@ func Test_elem2preURL(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name:    "top level test config",
-			args:    args{c: &SampleConfigValidPtr, e: &africa},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleAfricaElementPtr},
 			want:    "https://my.base.url/africa",
 			wantErr: false,
 		}, {
 			name:    "sub level test config",
-			args:    args{c: &SampleConfigValidPtr, e: &georgia},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr},
 			want:    "https://my.base.url/north-america/us/georgia",
 			wantErr: false,
 		}, {
 			name:    "sub level test config not exists in config",
-			args:    args{c: &SampleConfigValidPtr, e: &fakeGeorgia},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgiaPtr},
 			want:    "",
 			wantErr: true,
 		},
 		{
 			name:    "sub level test config not exists parent",
-			args:    args{c: &SampleConfigValidPtr, e: &fakeGeorgia2},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgia2Ptr},
 			want:    "",
 			wantErr: true,
 		},
