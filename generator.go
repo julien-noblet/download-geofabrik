@@ -31,6 +31,7 @@ type Ext struct {
 	Elements ElementSlice
 }
 
+// addHash find if a hash is available and append it to e
 func (e *Element) addHash(myel *goquery.Selection) {
 	a := myel.Find("a")
 	if a.Length() == 2 { // If only 1 a there is no hash
@@ -51,10 +52,11 @@ func (e *Element) addHash(myel *goquery.Selection) {
 func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
 	var thisElement Element
 	downloadMain := doc.Find("div#download-main")
-	parent, haveParent := doc.Find("p a").Attr("href")
-	if haveParent && !strings.Contains(parent, "https://www.geofabrik.de/") {
+	parent, haveParent := doc.Find("p a").Attr("href")                        // I'm not shure it is parent
+	if haveParent && !strings.Contains(parent, "https://www.geofabrik.de/") { // Removing https?
+		// or try with slicer and == should be quicker?
 		parent = parent[0 : len(parent)-5] // remove ".html"
-		if parent == "index" {             //first level
+		if parent == "index" {             // first level
 			parent = ""
 		} else {
 			temp := strings.Split(parent, "/")
@@ -108,6 +110,7 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 		us.ID = "us"
 		us.Name = "United States of America"
 		us.Parent = "north-america"
+		us.Formats = []string{}
 		e.Elements[us.ID] = us
 
 		//Exceptions!
@@ -208,11 +211,10 @@ func (e *Ext) mergeElement(element *Element) error {
 
 func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
 	parents := strings.Split(doc.Url.Path, "/")
-	parent := parents[len(parents)-2]
-	if strings.EqualFold(parent, "extracts") {
+	parent := parents[len(parents)-2]          // Get x in this kind of url http(s)://1/2/.../x/
+	if strings.EqualFold(parent, "extracts") { // should I try == or a switch?
 		parent = ""
-	}
-	if strings.EqualFold(parent, "polygons") {
+	} else if strings.EqualFold(parent, "polygons") {
 		parent = ""
 	}
 	list := doc.Find("table tr")
@@ -222,20 +224,17 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 		//index := 0
 		for aa := range link.Nodes {
 			a := link.Eq(aa)
-			vallink, link := a.Attr("href")
+			vallink, link := a.Attr("href") // get first link
 			if link {
 				// Filtering
 				if !strings.Contains(vallink, "?") && !strings.Contains(vallink, "-latest") && (vallink[0] != '/') && !strings.EqualFold(vallink, "cgi-bin/") && vallink[len(vallink)-1] != '/' {
 					element := *(new(Element))
 					element.Parent = parent
-
-					// If it's a folder, it's a meta
-					//					element.Meta = true
 					valsplit := strings.Split(vallink, ".")
 					name := valsplit[0]
 					//log.Println("name", name)
 					ext := strings.Join(valsplit[1:], ".")
-					if strings.Contains(ext, "state.txt") {
+					if strings.Contains(ext, "state.txt") { // I'm shure it can be refactorized
 						ext = "state"
 					}
 					element.ID = name
@@ -260,7 +259,6 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 						et.Formats = append(et.Formats, ext)
 						e.Elements[name] = et
 					}
-
 				}
 			}
 		}
