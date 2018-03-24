@@ -62,7 +62,8 @@ Commands:
     -s, --state    Download state.txt file
     -p, --poly     Download poly file
     -k, --kml      Download kml file
-        --check    Control with checksum
+        --check    Control with checksum (default) Use --no-check to discard
+                   control
 
   generate
     Generate a new config file
