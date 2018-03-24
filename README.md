@@ -55,14 +55,14 @@ Commands:
   download [<flags>] <element>
     Download element
 
-    -B, --osm.bz2  Download osm.bz2 if available
-    -S, --shp.zip  Download shp.zip if available
-    -P, --osm.pbf  Download osm.pbf (default)
-    -H, --osh.pbf  Download osh.pbf
-    -s, --state    Download state.txt file
-    -p, --poly     Download poly file
-    -k, --kml      Download kml file
-        --check    control with checksum
+    -B, --osm.bz2   Download osm.bz2 if available
+    -S, --shp.zip   Download shp.zip if available
+    -P, --osm.pbf   Download osm.pbf (default)
+    -H, --osh.pbf   Download osh.pbf
+    -s, --state     Download state.txt file
+    -p, --poly      Download poly file
+    -k, --kml       Download kml file
+        --no-check  dont control downloaded file with checksum
 
   generate
     Generate a new config file

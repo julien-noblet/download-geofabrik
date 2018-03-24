@@ -7,6 +7,7 @@
 **Implemented enhancements:**
 
 - Add download.openstreetmap.fr/extracts/ [\#2](https://github.com/julien-noblet/download-geofabrik/issues/2)
+- Coverage error handling [\#25](https://github.com/julien-noblet/download-geofabrik/pull/25) ([julien-noblet](https://github.com/julien-noblet))
 - Openstreetmap.fr [\#24](https://github.com/julien-noblet/download-geofabrik/pull/24) ([julien-noblet](https://github.com/julien-noblet))
 - WIP: Support md5sum [\#23](https://github.com/julien-noblet/download-geofabrik/pull/23) ([julien-noblet](https://github.com/julien-noblet))
 
