@@ -1,10 +1,13 @@
 language: go
+sudo: false
 
 go:
   - "1.9"
   - "1.10"
   - master
-
+  - tip
+before_install:
+  - go get github.com/mattn/goveralls
 # use gox
 #env:
 #  - GIMME_OS=linux GIMME_ARCH=386 GIMME_DEBUG=1 GIMME_TYPE=source
@@ -25,6 +28,12 @@ install:
 #script:
 #  - golint -min_confidence=0.8 ./...
 #  - go build -v ./...
+script:
+  - make geofabrik
+  - make osmfr
+  - go test -bench=. -benchmem -v ./...
+  - $GOPATH/bin/goveralls -service=travis-ci
+  - make
 
 deploy:
   provider: releases

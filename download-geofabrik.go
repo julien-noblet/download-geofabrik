@@ -12,7 +12,6 @@ import (
 	"strings"
 
 	"github.com/olekukonko/tablewriter"
-
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
@@ -71,14 +70,21 @@ func listAllRegions(c Config, format string) {
 }
 
 // UpdateConfig : simple script to download lastest config from repo
-func UpdateConfig(myURL *string, myconfig string) {
-	downloadFromURL(myURL, myconfig)
+func UpdateConfig(myURL string, myconfig string) error {
 	if !*fQuiet {
-		log.Println("*** DEPRECATED you should prefer use generate ***")
+		log.Print("*** DEPRECATED you should prefer use generate ***")
 	}
-	if !*fVerbose {
+	err := downloadFromURL(myURL, myconfig)
+	if err != nil {
+		if *fVerbose {
+			log.Println(err)
+		}
+		return (fmt.Errorf("Can't updating %v please use generate", myconfig))
+	}
+	if *fVerbose && !*fQuiet {
 		log.Println("Congratulation, you have the latest geofabrik.yml")
 	}
+	return nil
 }
 
 func checkService() bool {
@@ -94,6 +100,12 @@ func checkService() bool {
 	return false
 }
 
+func catch(err error) {
+	if err != nil {
+		log.Panic(err.Error())
+	}
+}
+
 func main() {
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
 
@@ -103,12 +115,16 @@ func main() {
 		if *lmd {
 			format = "Markdown"
 		}
-		listAllRegions(*loadConfig(*fConfig), format)
+		configPtr, err := loadConfig(*fConfig)
+		catch(err)
+		listAllRegions(*configPtr, format)
 	case update.FullCommand():
 		checkService()
-		UpdateConfig(fURL, *fConfig)
+		UpdateConfig(*fURL, *fConfig)
 	case download.FullCommand():
 		checkService()
+		configPtr, err := loadConfig(*fConfig)
+		catch(err)
 		formatFile := getFormats()
 		for _, format := range *formatFile {
 			if *dCheck && fileExist(*delement+"."+format) {
@@ -116,7 +132,11 @@ func main() {
 					if !*fQuiet {
 						log.Println("Checksum mismatch, re-downloading", *delement+"."+format)
 					}
-					downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), format), *delement+"."+format)
+					myElem, err := findElem(configPtr, *delement)
+					catch(err)
+					myURL, err := elem2URL(configPtr, myElem, format)
+					catch(err)
+					downloadFromURL(myURL, *delement+"."+format)
 					downloadChecksum(format)
 
 				} else {
@@ -125,7 +145,11 @@ func main() {
 					}
 				}
 			} else {
-				downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), format), *delement+"."+format)
+				myElem, err := findElem(configPtr, *delement)
+				catch(err)
+				myURL, err := elem2URL(configPtr, myElem, format)
+				catch(err)
+				downloadFromURL(myURL, *delement+"."+format)
 				downloadChecksum(format)
 			}
 		}
@@ -170,7 +194,7 @@ func controlHash(hashfile string, hash string) (bool, error) {
 			return false, err
 		}
 		filehash := strings.Split(string(file), " ")[0]
-		if *fVerbose {
+		if *fVerbose && !*fQuiet {
 			log.Println("Hash from file :", filehash)
 		}
 		if strings.EqualFold(hash, filehash) {
@@ -185,16 +209,22 @@ func downloadChecksum(format string) bool {
 	if *dCheck {
 		hash := "md5"
 		fhash := format + "." + hash
-		if stringInSlice(&fhash, &findElem(loadConfig(*fConfig), *delement).Formats) {
-			downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), fhash), *delement+"."+fhash)
-			if *fVerbose {
+		configPtr, err := loadConfig(*fConfig)
+		catch(err)
+		myElem, err := findElem(configPtr, *delement)
+		catch(err)
+		if stringInSlice(&fhash, &myElem.Formats) {
+			myURL, err := elem2URL(configPtr, myElem, fhash)
+			catch(err)
+			downloadFromURL(myURL, *delement+"."+fhash)
+			if *fVerbose && !*fQuiet {
 				log.Println("Hashing", *delement+"."+format)
 			}
 			hashed, err := hashFileMD5(*delement + "." + format)
 			if err != nil {
 				log.Panic(fmt.Errorf(err.Error()))
 			}
-			if *fVerbose {
+			if *fVerbose && !*fQuiet {
 				log.Println("MD5 :", hashed)
 			}
 			ret, err := controlHash(*delement+"."+fhash, hashed)
