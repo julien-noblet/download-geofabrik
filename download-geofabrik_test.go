@@ -194,6 +194,7 @@ func Test_downloadChecksum(t *testing.T) {
 			if got := downloadChecksum(tt.args.format); got != tt.want {
 				t.Errorf("downloadChecksum() = %v, want %v", got, tt.want)
 			}
+			os.Remove("andorra.osm.pbf")     // clean
 			os.Remove("andorra.osm.pbf.md5") // clean
 		})
 	}
