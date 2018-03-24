@@ -16,6 +16,7 @@ import (
 )
 
 // ElementSlice contain all Elements
+// TODO: It's not a slice but a MAP!!!!
 type ElementSlice map[string]Element
 
 // Generate make the slice which contain all Elements
@@ -30,14 +31,17 @@ type Ext struct {
 	Elements ElementSlice
 }
 
+// addHash find if a hash is available and append it to e
 func (e *Element) addHash(myel *goquery.Selection) {
-	validHash := []string{"md5"}
-	if myel.Find("a").Length() == 2 {
-		l2v, l2z := myel.Find("a").Eq(1).Attr("href")
-		if l2z {
-			hash := strings.Split(l2v, ".")[len(strings.Split(l2v, "."))-1]
+	a := myel.Find("a")
+	if a.Length() == 2 { // If only 1 a there is no hash
+		validHash := []string{"md5"}
+		val, exist := a.Eq(1).Attr("href")
+		if exist {
+			splitted := strings.Split(val, ".")
+			hash := splitted[len(splitted)-1]
 			if stringInSlice(&hash, &validHash) {
-				hashfile := strings.Join(strings.Split(l2v, ".")[1:], ".")
+				hashfile := strings.Join(splitted[1:], ".")
 				//fmt.Println(hashfile)
 				e.Formats = append(e.Formats, hashfile)
 			}
@@ -48,10 +52,11 @@ func (e *Element) addHash(myel *goquery.Selection) {
 func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
 	var thisElement Element
 	downloadMain := doc.Find("div#download-main")
-	parent, haveParent := doc.Find("p a").Attr("href")
-	if haveParent && !strings.Contains(parent, "https://www.geofabrik.de/") {
+	parent, haveParent := doc.Find("p a").Attr("href")                        // I'm not shure it is parent
+	if haveParent && !strings.Contains(parent, "https://www.geofabrik.de/") { // Removing https?
+		// or try with slicer and == should be quicker?
 		parent = parent[0 : len(parent)-5] // remove ".html"
-		if parent == "index" {             //first level
+		if parent == "index" {             // first level
 			parent = ""
 		} else {
 			temp := strings.Split(parent, "/")
@@ -105,6 +110,7 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 		us.ID = "us"
 		us.Name = "United States of America"
 		us.Parent = "north-america"
+		us.Formats = []string{}
 		e.Elements[us.ID] = us
 
 		//Exceptions!
@@ -185,12 +191,10 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 	return nil, true
 }
 
-func (e *Ext) mergeElement(element *Element) {
+func (e *Ext) mergeElement(element *Element) error {
 	if cE, ok := e.Elements[element.ID]; ok {
-		//cE := &e.Elements[element.ID]
-
 		if cE.Parent != element.Parent {
-			panic(fmt.Sprintln("Error! : Parent mismatch!"))
+			return fmt.Errorf("Cant merge : Parent mismatch")
 		}
 		cE.Formats = append(cE.Formats, element.Formats...)
 		if len(cE.Formats) == 0 {
@@ -202,18 +206,15 @@ func (e *Ext) mergeElement(element *Element) {
 	} else {
 		e.Elements[element.ID] = *element
 	}
+	return nil
 }
 
 func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
-	//var thisElement Element
-	//parent := doc.Find("h1").Text()
-	//log.Println("Parent : ", parent)
-	parents := strings.Split(ctx.URL().Path, "/")
-	parent := parents[len(parents)-2]
-	if strings.EqualFold(parent, "extracts") {
+	parents := strings.Split(doc.Url.Path, "/")
+	parent := parents[len(parents)-2]          // Get x in this kind of url http(s)://1/2/.../x/
+	if strings.EqualFold(parent, "extracts") { // should I try == or a switch?
 		parent = ""
-	}
-	if strings.EqualFold(parent, "polygons") {
+	} else if strings.EqualFold(parent, "polygons") {
 		parent = ""
 	}
 	list := doc.Find("table tr")
@@ -223,32 +224,29 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 		//index := 0
 		for aa := range link.Nodes {
 			a := link.Eq(aa)
-			vallink, link := a.Attr("href")
+			vallink, link := a.Attr("href") // get first link
 			if link {
 				// Filtering
 				if !strings.Contains(vallink, "?") && !strings.Contains(vallink, "-latest") && (vallink[0] != '/') && !strings.EqualFold(vallink, "cgi-bin/") && vallink[len(vallink)-1] != '/' {
 					element := *(new(Element))
 					element.Parent = parent
-
-					// If it's a folder, it's a meta
-					//					element.Meta = true
 					valsplit := strings.Split(vallink, ".")
 					name := valsplit[0]
 					//log.Println("name", name)
 					ext := strings.Join(valsplit[1:], ".")
-					if strings.Contains(ext, "state.txt") {
+					if strings.Contains(ext, "state.txt") { // I'm shure it can be refactorized
 						ext = "state"
 					}
 					element.ID = name
 					element.Name = name
-					if *fVerbose {
+					if *fVerbose && !*fQuiet {
 						log.Println("parsing", vallink)
 					}
 					if !strings.EqualFold(e.Elements[name].ID, name) {
 						element.Formats = append(element.Formats, ext)
 						e.mergeElement(&element)
 					} else {
-						if *fVerbose {
+						if *fVerbose && !*fQuiet {
 							log.Println(name, "already exist")
 							log.Println("Merging formats")
 						}
@@ -261,7 +259,6 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 						et.Formats = append(et.Formats, ext)
 						e.Elements[name] = et
 					}
-
 				}
 			}
 		}
@@ -271,7 +268,7 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 
 // Visit launch right crawler
 func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
-	if *fVerbose {
+	if *fVerbose && !*fQuiet {
 		fmt.Printf("Visit: %s\n", ctx.URL())
 	}
 	switch ctx.URL().Host {
@@ -382,7 +379,7 @@ func Generate(configfile string) {
 		myConfig.Formats = make(map[string]format)
 		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
 		myConfig.Formats["poly"] = format{ID: "poly", Loc: "poly", BasePath: "../polygons/"}
-		myConfig.Formats["state"] = format{ID: "state", Loc: "state.txt"}
+		myConfig.Formats["state"] = format{ID: "state", Loc: ".state.txt"}
 		GenerateCrawler("https://download.openstreetmap.fr/", configfile, &myConfig)
 		if !*fQuiet {
 			log.Println(configfile, " generated.")

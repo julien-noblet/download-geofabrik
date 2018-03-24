@@ -267,7 +267,8 @@ Commands:
 | limousin                                    | France                   | Limousin                               | sPBHpSk |
 | lincolnshire                                | England                  | Lincolnshire                           | sPBHpSk |
 | lithuania                                   | Europe                   | Lithuania                              | sPBHpSk |
-| lodzkie                                     | Poland                   | Województwo łódzkie(Łódź Voivodeship)  | sPBHpSk |
+| lodzkie                                     | Poland                   | Województwo łódzkie(Łódź               | sPBHpSk |
+|                                             |                          | Voivodeship)                           |         |
 | lorraine                                    | France                   | Lorraine                               | sPBHpSk |
 | louisiana                                   | United States of America | Louisiana                              | sPBHpSk |
 | lubelskie                                   | Poland                   | Województwo lubelskie(Lublin           | sPBHpSk |
@@ -279,11 +280,12 @@ Commands:
 | madagascar                                  | Africa                   | Madagascar                             | sPBHpSk |
 | maine                                       | United States of America | Maine                                  | sPBHpSk |
 | malawi                                      | Africa                   | Malawi                                 | sPBHpSk |
-| malaysia-singapore-brunei                   | Asia                     | Malaysia, Singapore, and Brunei        | sPBHpk  |
+| malaysia-singapore-brunei                   | Asia                     | Malaysia, Singapore, and               | sPBHpk  |
+|                                             |                          | Brunei                                 |         |
 | maldives                                    | Asia                     | Maldives                               | sPBHpSk |
 | mali                                        | Africa                   | Mali                                   | sPBHpSk |
-| malopolskie                                 | Poland                   | Województwo małopolskie(Lesser Poland  | sPBHpSk |
-|                                             |                          | Voivodeship)                           |         |
+| malopolskie                                 | Poland                   | Województwo małopolskie(Lesser         | sPBHpSk |
+|                                             |                          | Poland Voivodeship)                    |         |
 | malta                                       | Europe                   | Malta                                  | sPBHpSk |
 | manitoba                                    | Canada                   | Manitoba                               | sPBHpSk |
 | martinique                                  | France                   | Martinique                             | sPBHpk  |
@@ -292,7 +294,8 @@ Commands:
 | mauritania                                  | Africa                   | Mauritania                             | sPBHpSk |
 | mauritius                                   | Africa                   | Mauritius                              | sPBHpSk |
 | mayotte                                     | France                   | Mayotte                                | sPBHpk  |
-| mazowieckie                                 | Poland                   | Województwo mazowieckie(Mazovian       | sPBHpSk |
+| mazowieckie                                 | Poland                   | Województwo                            | sPBHpSk |
+|                                             |                          | mazowieckie(Mazovian                   |         |
 |                                             |                          | Voivodeship)                           |         |
 | mecklenburg-vorpommern                      | Germany                  | Mecklenburg-Vorpommern                 | sPBHpSk |
 | merseyside                                  | England                  | Merseyside                             | sPBHpSk |
@@ -337,7 +340,8 @@ Commands:
 | norfolk                                     | England                  | Norfolk                                | sPBHpSk |
 | north-america                               |                          | North America                          | sPBHpk  |
 | north-carolina                              | United States of America | North Carolina                         | sPBHpSk |
-| north-caucasus-fed-district                 | Russian Federation       | North Caucasus Federal District        | sPBHpSk |
+| north-caucasus-fed-district                 | Russian Federation       | North Caucasus Federal                 | sPBHpSk |
+|                                             |                          | District                               |         |
 | north-dakota                                | United States of America | North Dakota                           | sPBHpSk |
 | north-korea                                 | Asia                     | North Korea                            | sPBHpSk |
 | north-yorkshire                             | England                  | North Yorkshire                        | sPBHpSk |
@@ -367,13 +371,16 @@ Commands:
 | peru                                        | South America            | Peru                                   | sPBHpSk |
 | philippines                                 | Asia                     | Philippines                            | sPBHpSk |
 | picardie                                    | France                   | Picardie                               | sPBHpSk |
-| podkarpackie                                | Poland                   | Województwo podkarpackie(Subcarpathian | sPBHpSk |
+| podkarpackie                                | Poland                   | Województwo                            | sPBHpSk |
+|                                             |                          | podkarpackie(Subcarpathian             |         |
 |                                             |                          | Voivodeship)                           |         |
-| podlaskie                                   | Poland                   | Województwo podlaskie(Podlaskie        | sPBHpSk |
+| podlaskie                                   | Poland                   | Województwo                            | sPBHpSk |
+|                                             |                          | podlaskie(Podlaskie                    |         |
 |                                             |                          | Voivodeship)                           |         |
 | poitou-charentes                            | France                   | Poitou-Charentes                       | sPBHpSk |
 | poland                                      | Europe                   | Poland                                 | sPBHpk  |
-| pomorskie                                   | Poland                   | Województwo pomorskie(Pomeranian       | sPBHpSk |
+| pomorskie                                   | Poland                   | Województwo                            | sPBHpSk |
+|                                             |                          | pomorskie(Pomeranian                   |         |
 |                                             |                          | Voivodeship)                           |         |
 | portugal                                    | Europe                   | Portugal                               | sPBHpSk |
 | prince-edward-island                        | Canada                   | Prince Edward Island                   | sPBHpSk |
@@ -391,8 +398,8 @@ Commands:
 | saarland                                    | Germany                  | Saarland                               | sPBHpSk |
 | sachsen                                     | Germany                  | Sachsen                                | sPBHpSk |
 | sachsen-anhalt                              | Germany                  | Sachsen-Anhalt                         | sPBHpSk |
-| saint-helena-ascension-and-tristan-da-cunha | Africa                   | Saint Helena, Ascension, and Tristan   | sPBHpSk |
-|                                             |                          | da Cunha                               |         |
+| saint-helena-ascension-and-tristan-da-cunha | Africa                   | Saint Helena, Ascension, and           | sPBHpSk |
+|                                             |                          | Tristan da Cunha                       |         |
 | sao-tome-and-principe                       | Africa                   | Sao Tome and Principe                  | sPBHpSk |
 | saskatchewan                                | Canada                   | Saskatchewan                           | sPBHpSk |
 | schleswig-holstein                          | Germany                  | Schleswig-Holstein                     | sPBHpSk |
@@ -412,7 +419,8 @@ Commands:
 | somalia                                     | Africa                   | Somalia                                | sPBHpSk |
 | somerset                                    | England                  | Somerset                               | sPBHpSk |
 | south-africa                                | Africa                   | South Africa                           | sPBHpSk |
-| south-africa-and-lesotho                    | Africa                   | South Africa (includes Lesotho)        | sPBHpk  |
+| south-africa-and-lesotho                    | Africa                   | South Africa (includes                 | sPBHpk  |
+|                                             |                          | Lesotho)                               |         |
 | south-america                               |                          | South America                          | sPBHpk  |
 | south-carolina                              | United States of America | South Carolina                         | sPBHpSk |
 | south-dakota                                | United States of America | South Dakota                           | sPBHpSk |
@@ -476,15 +484,17 @@ Commands:
 | west-sussex                                 | England                  | West Sussex                            | sPBHpSk |
 | west-virginia                               | United States of America | West Virginia                          | sPBHpSk |
 | west-yorkshire                              | England                  | West Yorkshire                         | sPBHpSk |
-| wielkopolskie                               | Poland                   | Województwo wielkopolskie(Greater      | sPBHpSk |
-|                                             |                          | Poland Voivodeship)                    |         |
+| wielkopolskie                               | Poland                   | Województwo                            | sPBHpSk |
+|                                             |                          | wielkopolskie(Greater Poland           |         |
+|                                             |                          | Voivodeship)                           |         |
 | wiltshire                                   | England                  | Wiltshire                              | sPBHpSk |
 | wisconsin                                   | United States of America | Wisconsin                              | sPBHpSk |
 | worcestershire                              | England                  | Worcestershire                         | sPBHpSk |
 | wyoming                                     | United States of America | Wyoming                                | sPBHpSk |
 | yemen                                       | Asia                     | Yemen                                  | sPBHpSk |
 | yukon                                       | Canada                   | Yukon                                  | sPBHpSk |
-| zachodniopomorskie                          | Poland                   | Województwo zachodniopomorskie(West    | sPBHpSk |
+| zachodniopomorskie                          | Poland                   | Województwo                            | sPBHpSk |
+|                                             |                          | zachodniopomorskie(West                |         |
 |                                             |                          | Pomeranian Voivodeship)                |         |
 | zambia                                      | Africa                   | Zambia                                 | sPBHpSk |
 | zimbabwe                                    | Africa                   | Zimbabwe                               | sPBHpSk |
