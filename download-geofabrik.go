@@ -15,6 +15,8 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
+const version = "2.2.0-beta"
+
 var (
 	app         = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
 	fService    = app.Flag("service", "Can switch to another service. You can use \"geofabrik\" or \"openstreetmap.fr\". It automatically change config file if -c is unused.").Default("geofabrik").String()
@@ -107,6 +109,8 @@ func catch(err error) {
 }
 
 func main() {
+	app.Version(version) // Add version flag
+
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
 
 	case list.FullCommand():
