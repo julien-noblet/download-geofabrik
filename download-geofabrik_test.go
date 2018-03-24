@@ -167,14 +167,29 @@ func Test_downloadChecksum(t *testing.T) {
 		want     bool
 	}{
 		// TODO: Add test cases.
-		{name: "dCheck = false", dCheck: false, want: false},
-		{name: "dCheck = true andorra.osm.pbf from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "andorra", args: args{format: "osm.pbf"}, want: false},
+		{name: "dCheck = false andorra.osm.pbf from geofabrik", dCheck: false, fConfig: "./geofabrik.yml", delement: "andorra", args: args{format: "osm.pbf"}, want: false},
+		{name: "dCheck = true andorra.osm.pbf from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "andorra", args: args{format: "osm.pbf"}, want: true},
 	}
 	for _, tt := range tests {
 		*dCheck = tt.dCheck
 		*fConfig = tt.fConfig
 		*delement = tt.delement
 		t.Run(tt.name, func(t *testing.T) {
+			// Download file
+			configPtr, err := loadConfig(*fConfig)
+			if err != nil {
+				t.Error(err)
+			}
+			myElem, err := findElem(configPtr, *delement)
+			if err != nil {
+				t.Error(err)
+			}
+			myURL, err := elem2URL(configPtr, myElem, tt.args.format)
+			if err != nil {
+				t.Error(err)
+			}
+			downloadFromURL(myURL, *delement+"."+tt.args.format)
+			// now real test
 			if got := downloadChecksum(tt.args.format); got != tt.want {
 				t.Errorf("downloadChecksum() = %v, want %v", got, tt.want)
 			}

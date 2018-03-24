@@ -42,7 +42,7 @@ var (
 	dstate   = download.Flag("state", "Download state.txt file").Short('s').Bool()
 	dpoly    = download.Flag("poly", "Download poly file").Short('p').Bool()
 	dkml     = download.Flag("kml", "Download kml file").Short('k').Bool()
-	dCheck   = download.Flag("check", "control with checksum").Bool()
+	dCheck   = download.Flag("check", "Control with checksum").Default("true").Bool()
 
 	generate = app.Command("generate", "Generate a new config file")
 )
@@ -127,22 +127,32 @@ func main() {
 		catch(err)
 		formatFile := getFormats()
 		for _, format := range *formatFile {
-			if *dCheck && fileExist(*delement+"."+format) {
-				if !(downloadChecksum(format)) {
-					if !*fQuiet {
-						log.Println("Checksum mismatch, re-downloading", *delement+"."+format)
-					}
-					myElem, err := findElem(configPtr, *delement)
-					catch(err)
-					myURL, err := elem2URL(configPtr, myElem, format)
-					catch(err)
-					downloadFromURL(myURL, *delement+"."+format)
-					downloadChecksum(format)
+			if *dCheck {
+				if fileExist(*delement + "." + format) {
+					if !(downloadChecksum(format)) {
+						if !*fQuiet {
+							log.Println("Checksum mismatch, re-downloading", *delement+"."+format)
+						}
+						myElem, err := findElem(configPtr, *delement)
+						catch(err)
+						myURL, err := elem2URL(configPtr, myElem, format)
+						catch(err)
+						downloadFromURL(myURL, *delement+"."+format)
+						downloadChecksum(format)
 
-				} else {
-					if !*fQuiet {
-						log.Printf("Checksum match, no download!")
+					} else {
+						if !*fQuiet {
+							log.Printf("Checksum match, no download!")
+						}
 					}
+				}
+				myElem, err := findElem(configPtr, *delement)
+				catch(err)
+				myURL, err := elem2URL(configPtr, myElem, format)
+				catch(err)
+				downloadFromURL(myURL, *delement+"."+format)
+				if !(downloadChecksum(format)) && !*fQuiet {
+					log.Println("Checksum mismatch, please re-download", *delement+"."+format)
 				}
 			} else {
 				myElem, err := findElem(configPtr, *delement)
@@ -150,7 +160,6 @@ func main() {
 				myURL, err := elem2URL(configPtr, myElem, format)
 				catch(err)
 				downloadFromURL(myURL, *delement+"."+format)
-				downloadChecksum(format)
 			}
 		}
 	case generate.FullCommand():
