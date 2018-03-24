@@ -137,7 +137,8 @@ func main() {
 						catch(err)
 						myURL, err := elem2URL(configPtr, myElem, format)
 						catch(err)
-						downloadFromURL(myURL, *delement+"."+format)
+						err = downloadFromURL(myURL, *delement+"."+format)
+						catch(err)
 						downloadChecksum(format)
 
 					} else {
@@ -150,7 +151,8 @@ func main() {
 					catch(err)
 					myURL, err := elem2URL(configPtr, myElem, format)
 					catch(err)
-					downloadFromURL(myURL, *delement+"."+format)
+					err = downloadFromURL(myURL, *delement+"."+format)
+					catch(err)
 					if !(downloadChecksum(format)) && !*fQuiet {
 						log.Println("Checksum mismatch, please re-download", *delement+"."+format)
 					}
@@ -160,7 +162,8 @@ func main() {
 				catch(err)
 				myURL, err := elem2URL(configPtr, myElem, format)
 				catch(err)
-				downloadFromURL(myURL, *delement+"."+format)
+				err = downloadFromURL(myURL, *delement+"."+format)
+				catch(err)
 			}
 		}
 	case generate.FullCommand():

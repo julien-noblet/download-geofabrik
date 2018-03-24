@@ -17,12 +17,7 @@ func downloadFromURL(myURL string, fileName string) error {
 	}
 
 	if !*fNodownload {
-		// TODO: check file existence first with io.IsExist
-		output, err := os.Create(fileName)
-		if err != nil {
-			return fmt.Errorf("Error while creating %s - %v", fileName, err)
-		}
-		defer output.Close()
+
 		transport := &http.Transport{}
 		if *fProxyHTTP != "" {
 			u, _ := url.Parse(myURL)
@@ -53,6 +48,14 @@ func downloadFromURL(myURL string, fileName string) error {
 			return fmt.Errorf("Error while downloading %v, server return code %d", myURL, response.StatusCode)
 		}
 		defer response.Body.Close()
+		// If no error, create file
+		// TODO: check file existence first with io.IsExist
+		// and use a new flag (like f) to force overwrite
+		output, err := os.Create(fileName)
+		if err != nil {
+			return fmt.Errorf("Error while creating %s - %v", fileName, err)
+		}
+		defer output.Close()
 
 		n, err := io.Copy(output, response.Body)
 		if err != nil {
