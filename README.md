@@ -34,6 +34,7 @@ Flags:
       --proxy-sock5=""       Use Sock5 proxy, format: proxy_address:port
       --proxy-user=""        Proxy user
       --proxy-pass=""        Proxy password
+      --version              Show application version.
 
 Commands:
   help [<command>...]
