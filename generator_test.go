@@ -485,17 +485,12 @@ func TestExt_mergeElement(t *testing.T) {
 	}
 	tests := []struct {
 		name    string
-		fields  Ext
 		args    args
 		wantErr bool
 	}{
 		// TODO: Add test cases.
 		{
 			name: "adding a new element",
-			fields: Ext{
-				DefaultExtender: new(gocrawl.DefaultExtender),
-				Elements:        sampleElementValidPtr,
-			},
 			args: args{
 				element: &sampleFakeGeorgiaPtr,
 			},
@@ -503,10 +498,6 @@ func TestExt_mergeElement(t *testing.T) {
 		},
 		{
 			name: "adding a same element",
-			fields: Ext{
-				DefaultExtender: new(gocrawl.DefaultExtender),
-				Elements:        sampleElementValidPtr,
-			},
 			args: args{
 				element: &sampleAfricaElementPtr,
 			},
@@ -514,10 +505,6 @@ func TestExt_mergeElement(t *testing.T) {
 		},
 		{
 			name: "adding a meta element",
-			fields: Ext{
-				DefaultExtender: new(gocrawl.DefaultExtender),
-				Elements:        sampleElementValidPtr,
-			},
 			args: args{
 				element: &sampleUsElementPtr,
 			},
@@ -525,10 +512,6 @@ func TestExt_mergeElement(t *testing.T) {
 		},
 		{
 			name: "adding a same element parent differ",
-			fields: Ext{
-				DefaultExtender: new(gocrawl.DefaultExtender),
-				Elements:        sampleElementValidPtr,
-			},
 			args: args{
 				element: &myFakeGeorgia,
 			},
@@ -537,9 +520,9 @@ func TestExt_mergeElement(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e := &Ext{
-				DefaultExtender: tt.fields.DefaultExtender,
-				Elements:        tt.fields.Elements,
+			e := Ext{
+				DefaultExtender: new(gocrawl.DefaultExtender),
+				Elements:        sampleElementValidPtr,
 			}
 			if err := e.mergeElement(tt.args.element); (err != nil) != tt.wantErr {
 				t.Errorf("Ext.mergeElement() error = %v, wantErr %v", err, tt.wantErr)
@@ -785,21 +768,16 @@ func TestExt_parseGeofabrik(t *testing.T) {
 		}
 		return doc
 	}
-	type fields struct {
-		DefaultExtender *gocrawl.DefaultExtender
-		Elements        ElementSlice
-	}
 	type args struct {
 		ctx *gocrawl.URLContext // not used
 		res *http.Response      // not used
 		doc *goquery.Document
 	}
 	tests := []struct {
-		name   string
-		fields Ext          // not used?
-		args   args         // Contain tests
-		want   ElementSlice // to compare with e.Elements
-		want1  bool         // always true
+		name  string
+		args  args         // Contain tests
+		want  ElementSlice // to compare with e.Elements
+		want1 bool         // always true
 	}{
 		// TODO: Add test cases.
 		{
