@@ -42,7 +42,7 @@ var (
 	dstate   = download.Flag("state", "Download state.txt file").Short('s').Bool()
 	dpoly    = download.Flag("poly", "Download poly file").Short('p').Bool()
 	dkml     = download.Flag("kml", "Download kml file").Short('k').Bool()
-	dCheck   = download.Flag("check", "Control with checksum").Default("true").Bool()
+	dCheck   = download.Flag("check", "Control with checksum (default) Use --no-check to discard control").Default("true").Bool()
 
 	generate = app.Command("generate", "Generate a new config file")
 )
@@ -145,14 +145,15 @@ func main() {
 							log.Printf("Checksum match, no download!")
 						}
 					}
-				}
-				myElem, err := findElem(configPtr, *delement)
-				catch(err)
-				myURL, err := elem2URL(configPtr, myElem, format)
-				catch(err)
-				downloadFromURL(myURL, *delement+"."+format)
-				if !(downloadChecksum(format)) && !*fQuiet {
-					log.Println("Checksum mismatch, please re-download", *delement+"."+format)
+				} else {
+					myElem, err := findElem(configPtr, *delement)
+					catch(err)
+					myURL, err := elem2URL(configPtr, myElem, format)
+					catch(err)
+					downloadFromURL(myURL, *delement+"."+format)
+					if !(downloadChecksum(format)) && !*fQuiet {
+						log.Println("Checksum mismatch, please re-download", *delement+"."+format)
+					}
 				}
 			} else {
 				myElem, err := findElem(configPtr, *delement)
