@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -53,6 +52,7 @@ func Benchmark_listAllRegions_parse_geofabrik_yml_md(b *testing.B) {
 	}
 }
 */
+/* // Code not panic anymore !
 func Test_catch(t *testing.T) {
 	type args struct {
 		err error
@@ -78,7 +78,7 @@ func Test_catch(t *testing.T) {
 			t.Errorf("The code did not panic")
 		})
 	}
-}
+}*/
 
 func Test_hashFileMD5(t *testing.T) {
 	type args struct {
