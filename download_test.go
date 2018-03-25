@@ -37,6 +37,17 @@ func Test_downloadFromURL(t *testing.T) {
 			},
 			wantErr: false,
 		},
+		{
+			name:        "OK download from geofabrik",
+			fNodownload: false,
+			fQuiet:      false,
+			fProgress:   true,
+			args: args{
+				myURL:    "https://download.geofabrik.de/europe/monaco-latest.osm.pbf",
+				fileName: "/tmp/download-geofabrik.test",
+			},
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		*fNodownload = tt.fNodownload
