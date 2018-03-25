@@ -14,6 +14,8 @@ import (
 	"golang.org/x/net/proxy"
 )
 
+const progressMinimal = 512 * 1024 // Don't display progress bar if size < 512kb
+
 func downloadFromURL(myURL string, fileName string) error {
 	if *fVerbose && !*fQuiet {
 		log.Println("Downloading", myURL, "to", fileName)
@@ -65,8 +67,8 @@ func downloadFromURL(myURL string, fileName string) error {
 		var output io.Writer
 		output = f
 		var n int64
-		if !*fQuiet && *fProgress {
 		var progressBar *pb.ProgressBar
+		if !*fQuiet && *fProgress && response.ContentLength > progressMinimal {
 
 			progressBar = pb.New64(response.ContentLength)
 			progressBar.SetUnits(pb.U_BYTES)
