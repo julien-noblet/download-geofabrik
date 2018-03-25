@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/julien-noblet/download-geofabrik/tree/HEAD)
-
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#19-2...HEAD)
+## [v2.2.0-beta-fix#27](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#27) (2018-03-24)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#19-2...v2.2.0-beta-fix#27)
 
 **Implemented enhancements:**
 
