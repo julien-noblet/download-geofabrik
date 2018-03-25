@@ -7,6 +7,9 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"time"
+
+	pb "gopkg.in/cheggaaa/pb.v1"
 
 	"golang.org/x/net/proxy"
 )
@@ -48,16 +51,32 @@ func downloadFromURL(myURL string, fileName string) error {
 			return fmt.Errorf("Error while downloading %v, server return code %d", myURL, response.StatusCode)
 		}
 		defer response.Body.Close()
+
 		// If no error, create file
 		// TODO: check file existence first with io.IsExist
 		// and use a new flag (like f) to force overwrite
-		output, err := os.Create(fileName)
+		flags := os.O_CREATE | os.O_WRONLY
+		var f *os.File
+		f, err = os.OpenFile(fileName, flags, 0666)
 		if err != nil {
 			return fmt.Errorf("Error while creating %s - %v", fileName, err)
 		}
-		defer output.Close()
+		defer f.Close()
+		var output io.Writer
+		output = f
+		var n int64
+		if !*fQuiet && *fProgress {
 
-		n, err := io.Copy(output, response.Body)
+			progressBar := pb.New64(response.ContentLength)
+			progressBar.SetUnits(pb.U_BYTES)
+			progressBar.ShowTimeLeft = true
+			progressBar.ShowSpeed = true
+			progressBar.RefreshRate = time.Millisecond * 1
+			progressBar.Start()
+			defer progressBar.Finish()
+			output = io.MultiWriter(output, progressBar)
+		}
+		n, err = io.Copy(output, response.Body)
 		if err != nil {
 			return fmt.Errorf("Error while writing %s - %v", fileName, err)
 		}

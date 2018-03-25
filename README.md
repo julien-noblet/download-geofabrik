@@ -30,6 +30,7 @@ Flags:
   -n, --nodownload           Do not download file (test only)
   -v, --verbose              Be verbose
   -q, --quiet                Be quiet
+      --progress             Add a progress bar
       --proxy-http=""        Use http proxy, format: proxy_address:port
       --proxy-sock5=""       Use Sock5 proxy, format: proxy_address:port
       --proxy-user=""        Proxy user
