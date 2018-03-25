@@ -6,9 +6,6 @@
 download-geofabrik*/
 download-geofabrik
 
-#yml
-*.yml
-
 # Folders
 _obj
 _test
