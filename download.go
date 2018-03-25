@@ -66,8 +66,9 @@ func downloadFromURL(myURL string, fileName string) error {
 		output = f
 		var n int64
 		if !*fQuiet && *fProgress {
+		var progressBar *pb.ProgressBar
 
-			progressBar := pb.New64(response.ContentLength)
+			progressBar = pb.New64(response.ContentLength)
 			progressBar.SetUnits(pb.U_BYTES)
 			progressBar.ShowTimeLeft = true
 			progressBar.ShowSpeed = true
@@ -81,6 +82,9 @@ func downloadFromURL(myURL string, fileName string) error {
 			return fmt.Errorf("Error while writing %s - %v", fileName, err)
 		}
 		if !*fQuiet {
+			if progressBar != nil {
+				progressBar.Finish() // Force finish
+			}
 			log.Println(fileName, "downloaded.")
 			if *fVerbose {
 				log.Println(n, "bytes downloaded.")
