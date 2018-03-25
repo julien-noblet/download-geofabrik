@@ -15,7 +15,7 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
-const version = "2.2.0"
+const version = "2.2.1"
 
 var (
 	app         = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
@@ -258,7 +258,7 @@ func downloadChecksum(format string) bool {
 			return ret
 		}
 		if !*fQuiet {
-			log.Printf("No checksum provided for" + *delement + "." + format)
+			log.Println("No checksum provided for", *delement+"."+format)
 		}
 	}
 	return ret
