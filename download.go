@@ -72,7 +72,7 @@ func downloadFromURL(myURL string, fileName string) error {
 			progressBar.SetUnits(pb.U_BYTES)
 			progressBar.ShowTimeLeft = true
 			progressBar.ShowSpeed = true
-			progressBar.RefreshRate = time.Millisecond * 1
+			progressBar.RefreshRate = time.Millisecond * 100 // reduce cpu usage, 100 seems to be a good value
 			progressBar.Start()
 			defer progressBar.Finish()
 			output = io.MultiWriter(output, progressBar)
