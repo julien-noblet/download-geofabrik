@@ -45,6 +45,9 @@ func downloadFromURL(myURL string, fileName string) error {
 			return fmt.Errorf("Error while downloading %s - %v", myURL, err)
 		}
 		if response.StatusCode != 200 {
+			if response.StatusCode == 404 {
+				return fmt.Errorf("Error while downloading %v, server return code %d\nPlease use 'download-geofabrik generate' to re-create your yml file", myURL, response.StatusCode)
+			}
 			return fmt.Errorf("Error while downloading %v, server return code %d", myURL, response.StatusCode)
 		}
 		defer response.Body.Close()
