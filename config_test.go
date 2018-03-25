@@ -62,7 +62,7 @@ func Test_loadConfig(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := loadConfig(tt.args.configFile)
-			if (err != nil) != tt.wantErr {
+			if err != nil != tt.wantErr {
 				t.Errorf("loadConfig() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}

@@ -449,7 +449,7 @@ func TestElementSlice_Generate(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := tt.e.Generate(tt.args.myConfig)
-			if (err != nil) != tt.wantErr {
+			if err != nil != tt.wantErr {
 				t.Errorf("ElementSlice.Generate() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
@@ -524,7 +524,7 @@ func TestExt_mergeElement(t *testing.T) {
 				DefaultExtender: new(gocrawl.DefaultExtender),
 				Elements:        sampleElementValidPtr,
 			}
-			if err := e.mergeElement(tt.args.element); (err != nil) != tt.wantErr {
+			if err := e.mergeElement(tt.args.element); err != nil != tt.wantErr {
 				t.Errorf("Ext.mergeElement() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})

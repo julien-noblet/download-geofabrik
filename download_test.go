@@ -37,7 +37,7 @@ func Test_downloadFromURL(t *testing.T) {
 	for _, tt := range tests {
 		*fNodownload = tt.fNodownload
 		t.Run(tt.name, func(t *testing.T) {
-			if err := downloadFromURL(tt.args.myURL, tt.args.fileName); (err != nil) != tt.wantErr {
+			if err := downloadFromURL(tt.args.myURL, tt.args.fileName); err != nil != tt.wantErr {
 				t.Errorf("downloadFromURL() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
