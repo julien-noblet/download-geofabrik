@@ -1,56 +1,35 @@
 package main
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
-	"net/http"
-	"net/url"
 	"os"
-	"path/filepath"
 	"sort"
 	"strings"
 
-	"golang.org/x/net/proxy"
-
 	"github.com/olekukonko/tablewriter"
-
 	"gopkg.in/alecthomas/kingpin.v2"
-	"gopkg.in/yaml.v2"
 )
 
-type config struct {
-	BaseURL  string             `yaml:"baseURL"`
-	Formats  map[string]format  `yaml:"formats,flow"`
-	Elements map[string]element `yaml:"elements,flow"`
-}
-
-type element struct {
-	ID     string   `yaml:"id"`
-	File   string   `yaml:"file"`
-	Meta   bool     `yaml:"meta"`
-	Name   string   `yaml:"name"`
-	Files  []string `yaml:"files"`
-	Parent string   `yaml:"parent"`
-}
-
-type format struct {
-	ID  string `yaml:"ext"`
-	Loc string `yaml:"loc"`
-}
+const version = "2.2.0-beta"
 
 var (
 	app         = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
+	fService    = app.Flag("service", "Can switch to another service. You can use \"geofabrik\" or \"openstreetmap.fr\". It automatically change config file if -c is unused.").Default("geofabrik").String()
 	fConfig     = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String()
-	nodownload  = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
-	verbose     = app.Flag("verbose", "Be verbose").Short('v').Bool()
+	fNodownload = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
+	fVerbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
+	fQuiet      = app.Flag("quiet", "Be quiet").Short('q').Bool()
 	fProxyHTTP  = app.Flag("proxy-http", "Use http proxy, format: proxy_address:port").Default("").String()
 	fProxySock5 = app.Flag("proxy-sock5", "Use Sock5 proxy, format: proxy_address:port").Default("").String()
 	fProxyUser  = app.Flag("proxy-user", "Proxy user").Default("").String()
 	fProxyPass  = app.Flag("proxy-pass", "Proxy password").Default("").String()
 
-	update = app.Command("update", "Update geofabrik.yml from github")
+	update = app.Command("update", "Update geofabrik.yml from github *** DEPRECATED you should prefer use generate ***")
 	fURL   = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/master/geofabrik.yml").String()
 
 	list = app.Command("list", "Show elements available")
@@ -61,151 +40,16 @@ var (
 	dosmBz2  = download.Flag("osm.bz2", "Download osm.bz2 if available").Short('B').Bool()
 	dshpZip  = download.Flag("shp.zip", "Download shp.zip if available").Short('S').Bool()
 	dosmPbf  = download.Flag("osm.pbf", "Download osm.pbf (default)").Short('P').Bool()
-	doshPbf  = download.Flag("osh.pbf", "Download osh.pbf (default)").Short('H').Bool()
+	doshPbf  = download.Flag("osh.pbf", "Download osh.pbf").Short('H').Bool()
 	dstate   = download.Flag("state", "Download state.txt file").Short('s').Bool()
 	dpoly    = download.Flag("poly", "Download poly file").Short('p').Bool()
+	dkml     = download.Flag("kml", "Download kml file").Short('k').Bool()
+	dCheck   = download.Flag("check", "Control with checksum (default) Use --no-check to discard control").Default("true").Bool()
+
+	generate = app.Command("generate", "Generate a new config file")
 )
 
-func (e *element) hasParent() bool {
-	return len(e.Parent) != 0
-}
-
-func miniFormats(s []string) string {
-	res := make([]string, 6)
-	for _, item := range s {
-		switch item {
-		case "state":
-			res[0] = "s"
-		case "osm.pbf":
-			res[1] = "P"
-		case "osm.bz2":
-			res[2] = "B"
-		case "osh.pbf":
-			res[3] = "H"
-		case "poly":
-			res[4] = "p"
-		case "shp.zip":
-			res[5] = "S"
-		}
-	}
-
-	return strings.Join(res, "")
-}
-
-func downloadFromURL(myURL string, fileName string) {
-	if *verbose == true {
-		log.Println(" Downloading", myURL, "to", fileName)
-	}
-
-	if *nodownload == false {
-		// TODO: check file existence first with io.IsExist
-		output, err := os.Create(fileName)
-		if err != nil {
-			log.Fatalln(" Error while creating ", fileName, "-", err)
-			return
-		}
-		defer output.Close()
-		transport := &http.Transport{}
-		if *fProxyHTTP != "" {
-			u, err := url.Parse(myURL)
-			//log.Println(u.Scheme +"://"+ *fProxyHTTP)
-			proxyURL, err := url.Parse(u.Scheme + "://" + *fProxyHTTP)
-			if *fProxyUser != "" && *fProxyPass != "" {
-				proxyURL, err = url.Parse(u.Scheme + "://" + *fProxyUser + ":" + *fProxyPass + *fProxyHTTP)
-			}
-			if err != nil {
-				log.Fatalln(" Wrong proxy url, please use format proxy_address:port")
-				return
-			}
-			transport = &http.Transport{Proxy: http.ProxyURL(proxyURL)}
-		}
-		client := &http.Client{Transport: transport}
-		if *fProxySock5 != "" {
-			auth := proxy.Auth{*fProxyUser, *fProxyPass}
-			dialer, err := proxy.SOCKS5("tcp", *fProxySock5, &auth, proxy.Direct)
-			if err != nil {
-				log.Fatalln(" can't connect to the proxy:", err)
-				return
-			}
-			transport.Dial = dialer.Dial
-		}
-		response, err := client.Get(myURL)
-		if err != nil {
-			log.Fatalln(" Error while downloading ", myURL, "-", err)
-			return
-		}
-		defer response.Body.Close()
-
-		n, err := io.Copy(output, response.Body)
-		if err != nil {
-			log.Fatalln(" Error while downloading ", myURL, "-", err)
-			return
-		}
-
-		if *verbose == true {
-			log.Println(" ", n, "bytes downloaded.")
-		}
-	}
-}
-func elem2preURL(c config, e element) string {
-	var res string
-	if e.hasParent() {
-		res = elem2preURL(c, findElem(c, e.Parent)) + "/"
-		if e.File != "" { //TODO use file in config???
-			res = res + e.File
-		} else {
-			res = res + e.ID
-		}
-	} else {
-		res = c.BaseURL + "/" + e.ID
-	}
-	return res
-}
-
-func elem2URL(c config, e element, ext string) string {
-	res := elem2preURL(c, e)
-	res += c.Formats[ext].Loc
-	if !stringInSlice(ext, e.Files) {
-		log.Fatalln(" Error!!! " + res + " not exist")
-	}
-
-	return res
-}
-
-func findElem(c config, e string) element {
-	res := c.Elements[e]
-	if res.ID == "" {
-		log.Fatalln(" " + e + " is not in config! Please use \"list\" command!")
-	}
-	return res
-}
-func getFormats() []string {
-	var formatFile []string
-	if *dosmPbf {
-		formatFile = append(formatFile, "osm.pbf")
-	}
-	if *doshPbf {
-		formatFile = append(formatFile, "osh.pbf")
-	}
-	if *dosmBz2 {
-		formatFile = append(formatFile, "osm.bz2")
-	}
-	if *dshpZip {
-		formatFile = append(formatFile, "shp.zip")
-	}
-	if *dstate {
-		formatFile = append(formatFile, "state")
-	}
-	if *dpoly {
-		formatFile = append(formatFile, "poly")
-	}
-	if len(formatFile) == 0 {
-		formatFile = append(formatFile, "osm.pbf")
-	}
-	return formatFile
-}
-
-func listAllRegions(c config, format string) {
+func listAllRegions(c Config, format string) {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetAlignment(tablewriter.ALIGN_LEFT)
 	table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
@@ -221,57 +65,201 @@ func listAllRegions(c config, format string) {
 	}
 	keys.Sort()
 	for _, item := range keys {
-		table.Append([]string{item, c.Elements[c.Elements[item].Parent].Name, c.Elements[item].Name, miniFormats(c.Elements[item].Files)})
+		table.Append([]string{item, c.Elements[c.Elements[item].Parent].Name, c.Elements[item].Name, miniFormats(c.Elements[item].Formats)})
 	}
 	table.Render()
 	fmt.Printf("Total elements: %#v\n", len(c.Elements))
 }
 
-func loadConfig(configFile string) config {
-	filename, _ := filepath.Abs(configFile)
-	file, err := ioutil.ReadFile(filename)
-	if err != nil {
-		log.Fatalln(" File error: %v ", err)
-		os.Exit(1)
+// UpdateConfig : simple script to download lastest config from repo
+func UpdateConfig(myURL string, myconfig string) error {
+	if !*fQuiet {
+		log.Print("*** DEPRECATED you should prefer use generate ***")
 	}
-	var myConfig config
-	err = yaml.Unmarshal(file, &myConfig)
+	err := downloadFromURL(myURL, myconfig)
 	if err != nil {
-		panic(err)
-	}
-	return myConfig
-
-}
-func stringInSlice(a string, list []string) bool {
-	for _, b := range list {
-		if b == a {
-			return true
+		if *fVerbose {
+			log.Println(err)
 		}
+		return (fmt.Errorf("Can't updating %v please use generate", myconfig))
+	}
+	if *fVerbose && !*fQuiet {
+		log.Println("Congratulation, you have the latest geofabrik.yml")
+	}
+	return nil
+}
+
+func checkService() bool {
+	switch *fService {
+	case "geofabrik":
+		return true
+	case "openstreetmap.fr":
+		if strings.EqualFold(*fConfig, "./geofabrik.yml") {
+			*fConfig = "./openstreetmap.fr.yml"
+		}
+		return true
 	}
 	return false
 }
 
-// UpdateConfig : simple script to download lastest config from repo
-func UpdateConfig(myURL string, myconfig string) {
-	downloadFromURL(myURL, myconfig)
-	fmt.Println("Congratulation, you have the latest geofabrik.yml")
+func catch(err error) {
+	if err != nil {
+		log.Panic(err.Error())
+	}
 }
 
 func main() {
+	app.Version(version) // Add version flag
+
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
 
 	case list.FullCommand():
+		checkService()
 		var format = ""
 		if *lmd {
 			format = "Markdown"
 		}
-		listAllRegions(loadConfig(*fConfig), format)
+		configPtr, err := loadConfig(*fConfig)
+		catch(err)
+		listAllRegions(*configPtr, format)
 	case update.FullCommand():
+		checkService()
 		UpdateConfig(*fURL, *fConfig)
 	case download.FullCommand():
+		checkService()
+		configPtr, err := loadConfig(*fConfig)
+		catch(err)
 		formatFile := getFormats()
-		for _, format := range formatFile {
-			downloadFromURL(elem2URL(loadConfig(*fConfig), findElem(loadConfig(*fConfig), *delement), format), *delement+"."+format)
+		for _, format := range *formatFile {
+			if *dCheck {
+				if fileExist(*delement + "." + format) {
+					if !(downloadChecksum(format)) {
+						if !*fQuiet {
+							log.Println("Checksum mismatch, re-downloading", *delement+"."+format)
+						}
+						myElem, err := findElem(configPtr, *delement)
+						catch(err)
+						myURL, err := elem2URL(configPtr, myElem, format)
+						catch(err)
+						err = downloadFromURL(myURL, *delement+"."+format)
+						catch(err)
+						downloadChecksum(format)
+
+					} else {
+						if !*fQuiet {
+							log.Printf("Checksum match, no download!")
+						}
+					}
+				} else {
+					myElem, err := findElem(configPtr, *delement)
+					catch(err)
+					myURL, err := elem2URL(configPtr, myElem, format)
+					catch(err)
+					err = downloadFromURL(myURL, *delement+"."+format)
+					catch(err)
+					if !(downloadChecksum(format)) && !*fQuiet {
+						log.Println("Checksum mismatch, please re-download", *delement+"."+format)
+					}
+				}
+			} else {
+				myElem, err := findElem(configPtr, *delement)
+				catch(err)
+				myURL, err := elem2URL(configPtr, myElem, format)
+				catch(err)
+				err = downloadFromURL(myURL, *delement+"."+format)
+				catch(err)
+			}
+		}
+	case generate.FullCommand():
+		checkService()
+		Generate(*fConfig)
+	}
+
+}
+
+func fileExist(filePath string) bool {
+	if _, err := os.Stat(filePath); err == nil {
+		return true
+	}
+	return false
+}
+
+func hashFileMD5(filePath string) (string, error) {
+	var returnMD5String string
+	if fileExist(filePath) {
+		file, err := os.Open(filePath)
+		if err != nil {
+			return returnMD5String, err
+		}
+		defer file.Close()
+		hash := md5.New()
+
+		if _, err := io.Copy(hash, file); err != nil {
+			return returnMD5String, err
+		}
+		hashInBytes := hash.Sum(nil)[:16]
+		returnMD5String = hex.EncodeToString(hashInBytes)
+		return returnMD5String, nil
+	}
+	return returnMD5String, nil
+}
+
+func controlHash(hashfile string, hash string) (bool, error) {
+	if fileExist(hashfile) {
+		file, err := ioutil.ReadFile(hashfile)
+		if err != nil {
+			return false, err
+		}
+		filehash := strings.Split(string(file), " ")[0]
+		if *fVerbose && !*fQuiet {
+			log.Println("Hash from file :", filehash)
+		}
+		if strings.EqualFold(hash, filehash) {
+			return true, nil
 		}
 	}
+	return false, nil
+}
+
+func downloadChecksum(format string) bool {
+	ret := false
+	if *dCheck {
+		hash := "md5"
+		fhash := format + "." + hash
+		configPtr, err := loadConfig(*fConfig)
+		catch(err)
+		myElem, err := findElem(configPtr, *delement)
+		catch(err)
+		if stringInSlice(&fhash, &myElem.Formats) {
+			myURL, err := elem2URL(configPtr, myElem, fhash)
+			catch(err)
+			downloadFromURL(myURL, *delement+"."+fhash)
+			if *fVerbose && !*fQuiet {
+				log.Println("Hashing", *delement+"."+format)
+			}
+			hashed, err := hashFileMD5(*delement + "." + format)
+			if err != nil {
+				log.Panic(fmt.Errorf(err.Error()))
+			}
+			if *fVerbose && !*fQuiet {
+				log.Println("MD5 :", hashed)
+			}
+			ret, err := controlHash(*delement+"."+fhash, hashed)
+			if err != nil {
+				log.Panic(fmt.Errorf(err.Error()))
+			}
+			if !*fQuiet {
+				if ret {
+					log.Println("Checksum OK for", *delement+"."+format)
+				} else {
+					log.Println("Checksum MISMATCH for", *delement+"."+format)
+				}
+			}
+			return ret
+		}
+		if !*fQuiet {
+			log.Printf("No checksum provided for" + *delement + "." + format)
+		}
+	}
+	return ret
 }

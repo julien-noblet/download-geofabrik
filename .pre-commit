@@ -1,12 +1,9 @@
 #!/bin/sh
 #
-
+gofmt -s -w *.go
 github_changelog_generator
-go run generator/generator.go
-cat .README.md1 > README.md
-go run download-geofabrik.go --help-long >> README.md 
-cat .README.md2 >> README.md
-go run download-geofabrik.go list --markdown >> README.md 
-git add CHANGELOG.md
+make readme
 git add geofabrik.yml
+git add openstreetmap.fr.yml
+git add CHANGELOG.md
 git add README.md
