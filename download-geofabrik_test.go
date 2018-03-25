@@ -99,7 +99,7 @@ func Test_hashFileMD5(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := hashFileMD5(tt.args.filePath)
-			if (err != nil) != tt.wantErr {
+			if err != nil != tt.wantErr {
 				t.Errorf("hashFileMD5(%v) error = %v, wantErr %v", tt.args.filePath, err, tt.wantErr)
 				return
 			}
@@ -145,7 +145,7 @@ func Test_controlHash(t *testing.T) {
 		ioutil.WriteFile(tt.args.hashfile, []byte(hash), 0644)
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := controlHash(tt.args.hashfile, tt.args.hash)
-			if (err != nil) != tt.wantErr {
+			if err != nil != tt.wantErr {
 				t.Errorf("controlHash() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}

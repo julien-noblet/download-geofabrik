@@ -81,7 +81,7 @@ func UpdateConfig(myURL string, myconfig string) error {
 		if *fVerbose {
 			log.Println(err)
 		}
-		return (fmt.Errorf("Can't updating %v please use generate", myconfig))
+		return fmt.Errorf("Can't updating %v please use generate", myconfig)
 	}
 	if *fVerbose && !*fQuiet {
 		log.Println("Congratulation, you have the latest geofabrik.yml")
@@ -135,7 +135,7 @@ func main() {
 		for _, format := range *formatFile {
 			if ok, _, _ := isHashable(configPtr, format); *dCheck && ok {
 				if fileExist(*delement + "." + format) {
-					if !(downloadChecksum(format)) {
+					if !downloadChecksum(format) {
 						if !*fQuiet {
 							log.Println("Checksum mismatch, re-downloading", *delement+"."+format)
 						}
@@ -159,7 +159,7 @@ func main() {
 					catch(err)
 					err = downloadFromURL(myURL, *delement+"."+format)
 					catch(err)
-					if !(downloadChecksum(format)) && !*fQuiet {
+					if !downloadChecksum(format) && !*fQuiet {
 						log.Println("Checksum mismatch, please re-download", *delement+"."+format)
 					}
 				}

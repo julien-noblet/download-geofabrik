@@ -227,8 +227,8 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 			vallink, link := a.Attr("href") // get first link
 			if link {
 				// Filtering
-				if !strings.Contains(vallink, "?") && !strings.Contains(vallink, "-latest") && (vallink[0] != '/') && !strings.EqualFold(vallink, "cgi-bin/") && vallink[len(vallink)-1] != '/' {
-					element := *(new(Element))
+				if !strings.Contains(vallink, "?") && !strings.Contains(vallink, "-latest") && vallink[0] != '/' && !strings.EqualFold(vallink, "cgi-bin/") && vallink[len(vallink)-1] != '/' {
+					element := *new(Element)
 					element.Parent = parent
 					valsplit := strings.Split(vallink, ".")
 					name := valsplit[0]

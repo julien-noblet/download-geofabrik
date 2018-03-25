@@ -225,7 +225,7 @@ func Test_findElem(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := findElem(tt.args.c, tt.args.e)
-			if (err != nil) != tt.wantErr {
+			if err != nil != tt.wantErr {
 				t.Errorf("findElem() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
@@ -337,7 +337,7 @@ func Test_elem2URL(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := elem2URL(tt.args.c, tt.args.e, tt.args.ext)
-			if (err != nil) != tt.wantErr {
+			if err != nil != tt.wantErr {
 				t.Errorf("elem2URL() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
@@ -393,8 +393,8 @@ func Test_elem2preURL(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := elem2preURL(tt.args.c, tt.args.e, tt.args.b...)
-			if (err != nil) != tt.wantErr {
+			if err != nil != tt.wantErr {
+				got, err := elem2preURL(tt.args.c, tt.args.e, tt.args.b...)
 				t.Errorf("elem2preURL() =%v error = %v, wantErr %v", got, err, tt.wantErr)
 				return
 			}
