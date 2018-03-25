@@ -3,7 +3,7 @@
 *.a
 *.so
 
-download-geofabrik*
+download-geofabrik*/
 download-geofabrik
 
 # Folders

@@ -1,10 +1,46 @@
 # Change Log
 
-## [v2.1.0-pr](https://github.com/julien-noblet/download-geofabrik/tree/v2.1.0-pr) (2018-03-01)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0...v2.1.0-pr)
+## [Unreleased](https://github.com/julien-noblet/download-geofabrik/tree/HEAD)
+
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-rc0...HEAD)
+
+**Implemented enhancements:**
+
+- Show program version [\#27](https://github.com/julien-noblet/download-geofabrik/issues/27)
+- .md5 file [\#19](https://github.com/julien-noblet/download-geofabrik/issues/19)
+
+## [v2.2.0-rc0](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-rc0) (2018-03-25)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#26...v2.2.0-rc0)
+
+## [v2.2.0-beta-fix#26](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#26) (2018-03-25)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#27...v2.2.0-beta-fix#26)
+
+## [v2.2.0-beta-fix#27](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#27) (2018-03-24)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#19-2...v2.2.0-beta-fix#27)
+
+**Implemented enhancements:**
+
+- Add download.openstreetmap.fr/extracts/ [\#2](https://github.com/julien-noblet/download-geofabrik/issues/2)
+- Coverage error handling [\#25](https://github.com/julien-noblet/download-geofabrik/pull/25) ([julien-noblet](https://github.com/julien-noblet))
+- Openstreetmap.fr [\#24](https://github.com/julien-noblet/download-geofabrik/pull/24) ([julien-noblet](https://github.com/julien-noblet))
+- WIP: Support md5sum [\#23](https://github.com/julien-noblet/download-geofabrik/pull/23) ([julien-noblet](https://github.com/julien-noblet))
+
+## [v2.2.0-beta-fix#19-2](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#19-2) (2018-03-18)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#19...v2.2.0-beta-fix#19-2)
+
+## [v2.2.0-beta-fix#19](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#19) (2018-03-17)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#20...v2.2.0-beta-fix#19)
+
+**Implemented enhancements:**
+
+- .kml file support   + current    [\#20](https://github.com/julien-noblet/download-geofabrik/issues/20)
+- Add kml in format that download-geofabrik can handle. [\#22](https://github.com/julien-noblet/download-geofabrik/pull/22) ([julien-noblet](https://github.com/julien-noblet))
+
+## [v2.2.0-beta-fix#20](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#20) (2018-03-17)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0...v2.2.0-beta-fix#20)
 
 ## [v2.1.0](https://github.com/julien-noblet/download-geofabrik/tree/v2.1.0) (2018-03-01)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.4...v2.1.0)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0-pr...v2.1.0)
 
 **Implemented enhancements:**
 
@@ -15,8 +51,14 @@
 
 - download state file - url problem [\#16](https://github.com/julien-noblet/download-geofabrik/issues/16)
 - proxy setting [\#8](https://github.com/julien-noblet/download-geofabrik/issues/8)
-- Fix \#16 [\#18](https://github.com/julien-noblet/download-geofabrik/pull/18) ([julien-noblet](https://github.com/julien-noblet))
 - v2.1.0 [\#14](https://github.com/julien-noblet/download-geofabrik/pull/14) ([julien-noblet](https://github.com/julien-noblet))
+
+## [v2.1.0-pr](https://github.com/julien-noblet/download-geofabrik/tree/v2.1.0-pr) (2018-03-01)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.4...v2.1.0-pr)
+
+**Fixed bugs:**
+
+- Fix \#16 [\#18](https://github.com/julien-noblet/download-geofabrik/pull/18) ([julien-noblet](https://github.com/julien-noblet))
 
 ## [v2.0.4](https://github.com/julien-noblet/download-geofabrik/tree/v2.0.4) (2018-02-28)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/fix#16...v2.0.4)
