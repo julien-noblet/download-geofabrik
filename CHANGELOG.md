@@ -1,5 +1,17 @@
 # Change Log
 
+## [Unreleased](https://github.com/julien-noblet/download-geofabrik/tree/HEAD)
+
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-rc0...HEAD)
+
+**Implemented enhancements:**
+
+- Show program version [\#27](https://github.com/julien-noblet/download-geofabrik/issues/27)
+- .md5 file [\#19](https://github.com/julien-noblet/download-geofabrik/issues/19)
+
+## [v2.2.0-rc0](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-rc0) (2018-03-25)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#26...v2.2.0-rc0)
+
 ## [v2.2.0-beta-fix#26](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#26) (2018-03-25)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#27...v2.2.0-beta-fix#26)
 
