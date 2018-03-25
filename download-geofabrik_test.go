@@ -1,9 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"testing"
+
+	"github.com/bouk/monkey"
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_checkService(t *testing.T) {
@@ -52,7 +57,7 @@ func Benchmark_listAllRegions_parse_geofabrik_yml_md(b *testing.B) {
 	}
 }
 */
-/* // Code not panic anymore !
+
 func Test_catch(t *testing.T) {
 	type args struct {
 		err error
@@ -60,25 +65,23 @@ func Test_catch(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
+		want string
 	}{
 		// TODO: Add test cases.
-		{name: "should panic", args: args{err: fmt.Errorf("test")}},
+		{name: "should display error", args: args{err: fmt.Errorf("test")}, want: "test"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			defer func() {
-				if r := recover(); r != nil {
-					_, err := fmt.Println("Recovered in f", r)
-					if err != nil {
-						t.Errorf(err.Error())
-					}
-				}
-			}()
+			// For testing log, need to use Monkey patching
+			fakeLogFatal := func(msg ...interface{}) {
+				assert.Equal(t, tt.want, msg[0])
+			}
+			patch := monkey.Patch(log.Fatalln, fakeLogFatal)
+			defer patch.Unpatch()
 			catch(tt.args.err)
-			t.Errorf("The code did not panic")
 		})
 	}
-}*/
+}
 
 func Test_hashFileMD5(t *testing.T) {
 	type args struct {
