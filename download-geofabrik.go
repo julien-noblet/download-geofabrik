@@ -15,7 +15,7 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
-const version = "2.2.0-beta"
+const version = "2.2.0"
 
 var (
 	app         = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
