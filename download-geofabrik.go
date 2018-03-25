@@ -104,7 +104,9 @@ func checkService() bool {
 
 func catch(err error) {
 	if err != nil {
-		log.Panic(err.Error())
+		log.Fatalln(err.Error()) // Fatalln is better than Panic or Println
+		// Println only log but dont do exit(1),
+		// Panic add a lot of verbose detail for debug but it's too aggressive!
 	}
 }
 
