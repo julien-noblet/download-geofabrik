@@ -277,9 +277,9 @@ func (e *Ext) parseGisLab(ctx *gocrawl.URLContext, res *http.Response, doc *goqu
 			element := *(new(Element))
 			element.ID = tds.Eq(0).Text()
 			element.Name = tds.Eq(1).Text()
-			element.Formats = append(element.Formats, "osm.pbf")
-			element.Formats = append(element.Formats, "osm.bz2")
-
+			element.Formats = append(element.Formats, "osm.pbf") // Not checked elements
+			element.Formats = append(element.Formats, "osm.bz2") // Pray for non changing data structure...
+			element.Formats = append(element.Formats, "poly")    // Not checked but seems to be used for generating osm.pbf/osm.bz2
 			if *fVerbose && !*fQuiet {
 				log.Println("Adding", element.Name)
 			}
