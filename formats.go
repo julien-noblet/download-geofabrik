@@ -1,6 +1,8 @@
 package main
 
-import "strings"
+import (
+	"strings"
+)
 
 type format struct {
 	ID       string `yaml:"ext"`
@@ -32,6 +34,20 @@ func miniFormats(s []string) string {
 		}
 	}
 	return strings.Join(res, "")
+}
+
+func isHashable(c *Config, format string) (bool, string, string) {
+	hashs := []string{"md5"} // had to be globalized?
+	//h := "md5"
+	if _, ok := c.Formats[format]; ok {
+		for _, h := range hashs {
+			hash := format + "." + h
+			if _, ok := c.Formats[hash]; ok {
+				return true, hash, h
+			}
+		}
+	}
+	return false, "", ""
 }
 
 // getFormats return a pointer to a slice with formats

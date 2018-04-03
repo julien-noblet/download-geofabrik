@@ -69,3 +69,49 @@ func Test_miniFormats(t *testing.T) {
 		})
 	}
 }
+
+func Test_isHashable(t *testing.T) {
+	type args struct {
+		c      *Config
+		format string
+		file   string
+	}
+	tests := []struct {
+		name  string
+		args  args
+		want  bool
+		want1 string
+		want2 string
+	}{
+		// TODO: Add test cases.
+		{name: "Test is osm.pbf is hashable", args: args{format: "osm.pbf", file: "./geofabrik.yml"}, want: true, want1: "osm.pbf.md5", want2: "md5"},
+		{name: "Test is kml is hashable", args: args{format: "kml", file: "./geofabrik.yml"}, want: false, want1: "", want2: ""},
+	}
+	for _, tt := range tests {
+		c, err := loadConfig(tt.args.file)
+		if err != nil {
+			t.Error(err)
+		}
+		t.Run(tt.name, func(t *testing.T) {
+			got, got1, got2 := isHashable(c, tt.args.format)
+			if got != tt.want {
+				t.Errorf("isHashable() got = %v, want %v", got, tt.want)
+			}
+			if got1 != tt.want1 {
+				t.Errorf("isHashable() got1 = %v, want %v", got1, tt.want1)
+			}
+			if got2 != tt.want2 {
+				t.Errorf("isHashable() got2 = %v, want %v", got2, tt.want2)
+			}
+		})
+	}
+}
+func Benchmark_isHashable_geofabrik_yml(b *testing.B) {
+	// run the Fib function b.N times
+	c, _ := loadConfig("./geofabrik.yml")
+	for n := 0; n < b.N; n++ {
+		for f := range c.Formats {
+			isHashable(c, f)
+		}
+	}
+}
