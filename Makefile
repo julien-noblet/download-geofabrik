@@ -1,5 +1,5 @@
 gofiles  = download-geofabrik.go config.go download.go element.go formats.go generator.go
-pkgfiles = CHANGELOG.md README.md LICENSE geofabrik.yml openstreetmap.fr.yml gislab
+pkgfiles = CHANGELOG.md README.md LICENSE geofabrik.yml openstreetmap.fr.yml gislab.yml
 default: clean all
 clean:
 	go clean
