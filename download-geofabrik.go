@@ -110,6 +110,7 @@ func catch(err error) {
 }
 
 func main() {
+
 	app.Version(version) // Add version flag
 
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
