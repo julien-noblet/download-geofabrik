@@ -418,8 +418,8 @@ func Generate(configfile string) {
 		var myConfig Config
 		myConfig.BaseURL = "http://be.gis-lab.info/project/osm_dump"
 		myConfig.Formats = make(map[string]format)
-		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", BasePath: "/latest/", Loc: ".osm.pbf"}
-		myConfig.Formats["osm.bz2"] = format{ID: "osm.bz2", BasePath: "/latest/", Loc: ".osm.bz2"}
+		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", BaseURL: "http://data.gis-lab.info/osm_dump/dump", BasePath: "latest/", Loc: ".osm.pbf"}
+		myConfig.Formats["osm.bz2"] = format{ID: "osm.bz2", BaseURL: "http://data.gis-lab.info/osm_dump/dump", BasePath: "latest/", Loc: ".osm.bz2"}
 		myConfig.Formats["poly"] = format{ID: "poly", BaseURL: "https://raw.githubusercontent.com/nextgis/osmdump_poly/master", Loc: ".poly"}
 		GenerateCrawler("http://be.gis-lab.info/project/osm_dump/iframe.php", configfile, &myConfig)
 		if !*fQuiet {
