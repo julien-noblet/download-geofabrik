@@ -1,5 +1,13 @@
 # Change Log
 
+## [Unreleased](https://github.com/julien-noblet/download-geofabrik/tree/HEAD)
+
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.2...HEAD)
+
+**Fixed bugs:**
+
+- checksum for kml  : `Checksum mismatch, please re-download africa.kml` [\#31](https://github.com/julien-noblet/download-geofabrik/issues/31)
+
 ## [v2.2.2](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.2) (2018-03-25)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.1...v2.2.2)
 
