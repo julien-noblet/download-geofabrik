@@ -12,8 +12,11 @@ import (
 
 	"github.com/PuerkitoBio/gocrawl"
 	"github.com/PuerkitoBio/goquery"
+	pb "gopkg.in/cheggaaa/pb.v1"
 	yaml "gopkg.in/yaml.v2"
 )
+
+var bar *pb.ProgressBar
 
 // ElementSlice contain all Elements
 // TODO: It's not a slice but a MAP!!!!
@@ -239,14 +242,14 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 					}
 					element.ID = name
 					element.Name = name
-					if *fVerbose && !*fQuiet {
+					if *fVerbose && !*fQuiet && !*fProgress {
 						log.Println("parsing", vallink)
 					}
 					if !strings.EqualFold(e.Elements[name].ID, name) {
 						element.Formats = append(element.Formats, ext)
 						e.mergeElement(&element)
 					} else {
-						if *fVerbose && !*fQuiet {
+						if *fVerbose && !*fQuiet && !*fProgress {
 							log.Println(name, "already exist")
 							log.Println("Merging formats")
 						}
@@ -268,8 +271,11 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 
 // Visit launch right crawler
 func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
-	if *fVerbose && !*fQuiet {
+	if *fVerbose && !*fQuiet && !*fProgress {
 		fmt.Printf("Visit: %s\n", ctx.URL())
+	}
+	if *fProgress {
+		bar.Increment()
 	}
 	switch ctx.URL().Host {
 	case "download.geofabrik.de":
@@ -339,6 +345,17 @@ func GenerateCrawler(url string, fname string, myConfig *Config) {
 	opts.MaxVisits = 15000
 
 	file := gocrawl.NewCrawlerWithOptions(opts)
+	if *fProgress {
+		maxPb := 400 // default value is a realy magicaly set :)
+		switch url { // Todo: found a better way!
+		case "https://download.geofabrik.de/":
+			maxPb = 392 //Magical!
+		case "https://download.openstreetmap.fr/":
+			maxPb = 51 // Magical
+		}
+		bar = pb.New(maxPb)
+		bar.Start()
+	}
 	file.Run(url)
 	out, _ := ext.Elements.Generate(myConfig)
 	filename, _ := filepath.Abs(fname)
