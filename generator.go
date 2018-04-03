@@ -244,7 +244,10 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 					}
 					if !strings.EqualFold(e.Elements[name].ID, name) {
 						element.Formats = append(element.Formats, ext)
-						e.mergeElement(&element)
+						err := e.mergeElement(&element)
+						if err != nil {
+							log.Panicln("Can't merge element,", err)
+						}
 					} else {
 						if *fVerbose && !*fQuiet {
 							log.Println(name, "already exist")
@@ -280,9 +283,11 @@ func (e *Ext) parseGisLab(ctx *gocrawl.URLContext, res *http.Response, doc *goqu
 			if *fVerbose && !*fQuiet {
 				log.Println("Adding", element.Name)
 			}
-			e.mergeElement(&element)
+			err := e.mergeElement(&element)
+			if err != nil {
+				log.Panicln("Can't merge element,", err)
+			}
 		}
-
 	}
 	return nil, true
 }

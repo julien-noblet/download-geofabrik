@@ -157,7 +157,8 @@ func Test_controlHash(t *testing.T) {
 	}
 }
 
-// Test_downloadChecksum I don'y know why sometimes controlHash fail :'(
+// Test_downloadChecksum I don't know why sometimes controlHash fail :'(
+// seems geofabrik have a limit download I reach sometimes :/
 func Test_downloadChecksum(t *testing.T) {
 	*fQuiet = true // be silent!
 	type args struct {
