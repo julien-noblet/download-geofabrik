@@ -312,7 +312,7 @@ func Test_elem2URL(t *testing.T) {
 		}, {
 			name:    "sub level test config",
 			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: "state"},
-			want:    "https://my.base.url/north-america/us/georgia-updates/state.txt",
+			want:    "https://my.base.url/../state/north-america/us/georgia-updates/state.txt",
 			wantErr: false,
 		},
 		{
@@ -354,6 +354,7 @@ func Test_elem2preURL(t *testing.T) {
 	type args struct {
 		c *Config
 		e *Element
+		b []string
 	}
 	tests := []struct {
 		name    string
@@ -366,6 +367,11 @@ func Test_elem2preURL(t *testing.T) {
 			name:    "top level test config",
 			args:    args{c: &localSampleConfigValidPtr, e: &sampleAfricaElementPtr},
 			want:    "https://my.base.url/africa",
+			wantErr: false,
+		}, {
+			name:    "top level test config with basePath base/",
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleAfricaElementPtr, b: []string{"base/"}},
+			want:    "https://my.base.url/base/africa",
 			wantErr: false,
 		}, {
 			name:    "sub level test config",
@@ -387,7 +393,7 @@ func Test_elem2preURL(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := elem2preURL(tt.args.c, tt.args.e)
+			got, err := elem2preURL(tt.args.c, tt.args.e, tt.args.b...)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("elem2preURL() =%v error = %v, wantErr %v", got, err, tt.wantErr)
 				return
@@ -422,5 +428,19 @@ func Benchmark_elem2URL_parse_France_geofabrik_yml(b *testing.B) {
 	}
 	for n := 0; n < b.N; n++ {
 		elem2URL(c, france, "state")
+	}
+}
+
+func Benchmark_elem2URL_parse_France_openstreetmap_fr_yml(b *testing.B) {
+	c, err := loadConfig("./openstreetmap.fr.yml")
+	if err != nil {
+		b.Errorf(err.Error())
+	}
+	france, err := findElem(c, "france")
+	if err != nil {
+		b.Errorf(err.Error())
+	}
+	for n := 0; n < b.N; n++ {
+		elem2URL(c, france, "poly")
 	}
 }
