@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 type Element struct {
@@ -18,19 +19,26 @@ func (e *Element) hasParent() bool {
 }
 
 func elem2URL(c *Config, e *Element, ext string) (string, error) {
-	res, err := elem2preURL(c, e)
-	if err != nil {
-		return "", err
-	}
-	res += c.Formats[ext].Loc
-	// TODO check if valid URL
+	var res string
+	var err error
 	if !stringInSlice(&ext, &e.Formats) {
 		return "", fmt.Errorf("Error!!! %s format not exist", ext)
 	}
+	format := c.Formats[ext]
+	if format.BasePath != "" {
+		res, err = elem2preURL(c, e, format.BasePath)
+	} else {
+		res, err = elem2preURL(c, e)
+	}
+	// TODO check if valid URL
+	if err != nil {
+		return "", err
+	}
+	res += format.Loc
 	return res, nil
 }
 
-func elem2preURL(c *Config, e *Element) (string, error) {
+func elem2preURL(c *Config, e *Element, b ...string) (string, error) {
 	var res string
 	myElem, err := findElem(c, e.ID)
 	if err != nil {
@@ -41,7 +49,7 @@ func elem2preURL(c *Config, e *Element) (string, error) {
 		if err != nil {
 			return "", err
 		}
-		res, err = elem2preURL(c, parent)
+		res, err = elem2preURL(c, parent, b...)
 		if err != nil {
 			return "", err
 		}
@@ -53,7 +61,11 @@ func elem2preURL(c *Config, e *Element) (string, error) {
 		}
 		return res, nil
 	}
-	res = c.BaseURL + "/" + myElem.ID
+	if len(b) > 0 {
+		res = c.BaseURL + "/" + strings.Join(b, "/") + myElem.ID
+	} else {
+		res = c.BaseURL + "/" + myElem.ID
+	}
 	return res, nil
 }
 

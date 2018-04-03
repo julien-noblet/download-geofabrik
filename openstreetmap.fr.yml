@@ -5,7 +5,7 @@ formats:
     loc: -latest.osm.pbf
   poly:
     ext: poly
-    loc: poly
+    loc: .poly
     basepath: ../polygons/
   state:
     ext: state

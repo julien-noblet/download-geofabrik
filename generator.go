@@ -378,7 +378,7 @@ func Generate(configfile string) {
 		myConfig.BaseURL = "https://download.openstreetmap.fr/extracts"
 		myConfig.Formats = make(map[string]format)
 		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
-		myConfig.Formats["poly"] = format{ID: "poly", Loc: "poly", BasePath: "../polygons/"}
+		myConfig.Formats["poly"] = format{ID: "poly", Loc: ".poly", BasePath: "../polygons/"}
 		myConfig.Formats["state"] = format{ID: "state", Loc: ".state.txt"}
 		GenerateCrawler("https://download.openstreetmap.fr/", configfile, &myConfig)
 		if !*fQuiet {
