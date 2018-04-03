@@ -266,6 +266,27 @@ func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goque
 	return nil, true
 }
 
+func (e *Ext) parseGisLab(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
+	list := doc.Find("table tr")
+	for line := range list.Nodes {
+		tds := list.Eq(line).Find("td")
+		if tds.Length() == 6 {
+			element := *(new(Element))
+			element.ID = tds.Eq(0).Text()
+			element.Name = tds.Eq(1).Text()
+			element.Formats = append(element.Formats, "osm.pbf")
+			element.Formats = append(element.Formats, "osm.bz2")
+
+			if *fVerbose && !*fQuiet {
+				log.Println("Adding", element.Name)
+			}
+			e.mergeElement(&element)
+		}
+
+	}
+	return nil, true
+}
+
 // Visit launch right crawler
 func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
 	if *fVerbose && !*fQuiet {
@@ -276,6 +297,8 @@ func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Do
 		return e.parseGeofabrik(ctx, res, doc)
 	case "download.openstreetmap.fr":
 		return e.parseOSMfr(ctx, res, doc)
+	case "be.gis-lab.info":
+		return e.parseGisLab(ctx, res, doc)
 	default:
 		panic(fmt.Sprintln("Panic! " + ctx.URL().Host + " is not supported!"))
 	}
@@ -317,6 +340,8 @@ func (e *Ext) Filter(ctx *gocrawl.URLContext, isVisited bool) bool {
 	} else if ctx.URL().Path[len(ctx.URL().Path)-1:] == "/" {
 		return true
 	} else if strings.Contains(ctx.URL().Path, ".html") {
+		return true
+	} else if strings.Contains(ctx.URL().Path, ".php") {
 		return true
 		//	} else if ctx.URL().Path[len(ctx.URL().Path)-8:] == "-updates" {
 		//		return false
@@ -384,5 +409,19 @@ func Generate(configfile string) {
 		if !*fQuiet {
 			log.Println(configfile, " generated.")
 		}
+	case "gislab":
+		var myConfig Config
+		myConfig.BaseURL = "http://be.gis-lab.info/project/osm_dump"
+		myConfig.Formats = make(map[string]format)
+		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", BasePath: "/latest/", Loc: ".osm.pbf"}
+		myConfig.Formats["osm.bz2"] = format{ID: "osm.bz2", BasePath: "/latest/", Loc: ".osm.bz2"}
+		myConfig.Formats["poly"] = format{ID: "poly", BaseURL: "https://raw.githubusercontent.com/nextgis/osmdump_poly/master", Loc: ".poly"}
+		GenerateCrawler("http://be.gis-lab.info/project/osm_dump/iframe.php", configfile, &myConfig)
+		if !*fQuiet {
+			log.Println(configfile, " generated.")
+		}
+	default:
+		log.Panicln("Service not reconized")
 	}
+
 }
