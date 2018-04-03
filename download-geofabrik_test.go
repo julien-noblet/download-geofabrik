@@ -156,6 +156,7 @@ func Test_controlHash(t *testing.T) {
 	}
 }
 
+// Test_downloadChecksum I don'y know why sometimes controlHash fail :'(
 func Test_downloadChecksum(t *testing.T) {
 	*fQuiet = true // be silent!
 	type args struct {
@@ -172,6 +173,7 @@ func Test_downloadChecksum(t *testing.T) {
 		// TODO: Add test cases.
 		{name: "dCheck = false andorra.osm.pbf from geofabrik", dCheck: false, fConfig: "./geofabrik.yml", delement: "andorra", args: args{format: "osm.pbf"}, want: false},
 		{name: "dCheck = true andorra.osm.pbf from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "andorra", args: args{format: "osm.pbf"}, want: true},
+		{name: "dCheck = true andorra.poly from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "andorra", args: args{format: "poly"}, want: false},
 	}
 	for _, tt := range tests {
 		*dCheck = tt.dCheck

@@ -133,7 +133,7 @@ func main() {
 		catch(err)
 		formatFile := getFormats()
 		for _, format := range *formatFile {
-			if *dCheck {
+			if ok, _, _ := isHashable(configPtr, format); *dCheck && ok {
 				if fileExist(*delement + "." + format) {
 					if !(downloadChecksum(format)) {
 						if !*fQuiet {
@@ -216,9 +216,7 @@ func controlHash(hashfile string, hash string) (bool, error) {
 		if *fVerbose && !*fQuiet {
 			log.Println("Hash from file :", filehash)
 		}
-		if strings.EqualFold(hash, filehash) {
-			return true, nil
-		}
+		return strings.EqualFold(hash, filehash), nil
 	}
 	return false, nil
 }
@@ -230,9 +228,9 @@ func downloadChecksum(format string) bool {
 		fhash := format + "." + hash
 		configPtr, err := loadConfig(*fConfig)
 		catch(err)
-		myElem, err := findElem(configPtr, *delement)
-		catch(err)
-		if stringInSlice(&fhash, &myElem.Formats) {
+		if ok, _, _ := isHashable(configPtr, format); ok {
+			myElem, err := findElem(configPtr, *delement)
+			catch(err)
 			myURL, err := elem2URL(configPtr, myElem, fhash)
 			catch(err)
 			downloadFromURL(myURL, *delement+"."+fhash)
