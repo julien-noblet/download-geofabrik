@@ -314,6 +314,16 @@ func Test_elem2URL(t *testing.T) {
 			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: "state"},
 			want:    "https://my.base.url/../state/north-america/us/georgia-updates/state.txt",
 			wantErr: false,
+		}, {
+			name:    "BaseUrl test config",
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: "poly"},
+			want:    "http://my.new.url/folder/north-america/us/georgia.poly",
+			wantErr: false,
+		}, {
+			name:    "BaseUrl + BasePath test config",
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: "osm.bz2"},
+			want:    "http://my.new.url/folder/../osmbz2/north-america/us/georgia.osm.bz2",
+			wantErr: false,
 		},
 		{
 			name:    "sub level test config wrong format",

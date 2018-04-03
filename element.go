@@ -26,9 +26,17 @@ func elem2URL(c *Config, e *Element, ext string) (string, error) {
 	}
 	format := c.Formats[ext]
 	if format.BasePath != "" {
-		res, err = elem2preURL(c, e, format.BasePath)
+		if format.BaseURL != "" {
+			res, err = elem2preURL(c, e, format.BaseURL, format.BasePath)
+		} else {
+			res, err = elem2preURL(c, e, format.BasePath)
+		}
 	} else {
-		res, err = elem2preURL(c, e)
+		if format.BaseURL != "" {
+			res, err = elem2preURL(c, e, format.BaseURL, "")
+		} else {
+			res, err = elem2preURL(c, e)
+		}
 	}
 	// TODO check if valid URL
 	if err != nil {
@@ -61,12 +69,14 @@ func elem2preURL(c *Config, e *Element, b ...string) (string, error) {
 		}
 		return res, nil
 	}
-	if len(b) > 0 {
-		res = c.BaseURL + "/" + strings.Join(b, "/") + myElem.ID
-	} else {
-		res = c.BaseURL + "/" + myElem.ID
+	switch len(b) {
+	case 1:
+		return c.BaseURL + "/" + strings.Join(b, "/") + myElem.ID, nil
+	case 2:
+		return strings.Join(b, "/") + myElem.ID, nil
+	default:
+		return c.BaseURL + "/" + myElem.ID, nil
 	}
-	return res, nil
 }
 
 func findElem(c *Config, e string) (*Element, error) {

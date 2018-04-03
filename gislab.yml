@@ -1,0 +1,621 @@
+baseURL: http://be.gis-lab.info/project/osm_dump
+formats:
+  osm.bz2:
+    ext: osm.bz2
+    loc: .osm.bz2
+    basepath: /latest/
+  osm.pbf:
+    ext: osm.pbf
+    loc: .osm.pbf
+    basepath: /latest/
+  poly:
+    ext: poly
+    loc: .poly
+    baseurl: https://raw.githubusercontent.com/nextgis/osmdump_poly/master
+elements:
+  AM:
+    id: AM
+    name: Армения
+    files:
+    - osm.pbf
+    - osm.bz2
+  AZ:
+    id: AZ
+    name: Азербайджан
+    files:
+    - osm.pbf
+    - osm.bz2
+  BY:
+    id: BY
+    name: Беларусь
+    files:
+    - osm.pbf
+    - osm.bz2
+  EE:
+    id: EE
+    name: Эстония
+    files:
+    - osm.pbf
+    - osm.bz2
+  GE:
+    id: GE
+    name: Грузия
+    files:
+    - osm.pbf
+    - osm.bz2
+  KG:
+    id: KG
+    name: Киргизия
+    files:
+    - osm.pbf
+    - osm.bz2
+  KZ:
+    id: KZ
+    name: Казахстан
+    files:
+    - osm.pbf
+    - osm.bz2
+  LT:
+    id: LT
+    name: Литва
+    files:
+    - osm.pbf
+    - osm.bz2
+  LV:
+    id: LV
+    name: Латвия
+    files:
+    - osm.pbf
+    - osm.bz2
+  MD:
+    id: MD
+    name: Молдова
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU:
+    id: RU
+    name: Российская Федерация
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-AD:
+    id: RU-AD
+    name: Адыгея
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-AL:
+    id: RU-AL
+    name: Алтай
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-ALT:
+    id: RU-ALT
+    name: Алтайский край
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-AMU:
+    id: RU-AMU
+    name: Амурская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-ARK:
+    id: RU-ARK
+    name: Архангельская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-AST:
+    id: RU-AST
+    name: Астраханская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-BA:
+    id: RU-BA
+    name: Башкирия
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-BEL:
+    id: RU-BEL
+    name: Белгородская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-BRY:
+    id: RU-BRY
+    name: Брянская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-BU:
+    id: RU-BU
+    name: Бурятия
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-CE:
+    id: RU-CE
+    name: Чечня
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-CHE:
+    id: RU-CHE
+    name: Челябинская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-CHU:
+    id: RU-CHU
+    name: Чукотский автономный округ
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-CR:
+    id: RU-CR
+    name: Крым
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-CU:
+    id: RU-CU
+    name: Чувашия
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-DA:
+    id: RU-DA
+    name: Дагестан
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-IN:
+    id: RU-IN
+    name: Ингушетия
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-IRK:
+    id: RU-IRK
+    name: Иркутская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-IVA:
+    id: RU-IVA
+    name: Ивановская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KAM:
+    id: RU-KAM
+    name: Камчатский край
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KB:
+    id: RU-KB
+    name: Кабардино-Балкария
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KC:
+    id: RU-KC
+    name: Карачаево-Черкессия
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KDA:
+    id: RU-KDA
+    name: Краснодарский край
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KEM:
+    id: RU-KEM
+    name: Кемеровская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KGD:
+    id: RU-KGD
+    name: Калининградская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KGN:
+    id: RU-KGN
+    name: Курганская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KHA:
+    id: RU-KHA
+    name: Хабаровский край
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KHM:
+    id: RU-KHM
+    name: Ханты-Мансийский автономный округ
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KIR:
+    id: RU-KIR
+    name: Кировская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KK:
+    id: RU-KK
+    name: Хакасия
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KL:
+    id: RU-KL
+    name: Калмыкия
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KLU:
+    id: RU-KLU
+    name: Калужская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KO:
+    id: RU-KO
+    name: Коми
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KOS:
+    id: RU-KOS
+    name: Костромская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KR:
+    id: RU-KR
+    name: Карелия
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KRS:
+    id: RU-KRS
+    name: Курская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-KYA:
+    id: RU-KYA
+    name: Красноярский край
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-LEN:
+    id: RU-LEN
+    name: Ленинградская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-LIP:
+    id: RU-LIP
+    name: Липецкая область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-MAG:
+    id: RU-MAG
+    name: Магаданская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-ME:
+    id: RU-ME
+    name: Марий Эл
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-MO:
+    id: RU-MO
+    name: Мордовия
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-MOS:
+    id: RU-MOS
+    name: Московская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-MOW:
+    id: RU-MOW
+    name: Москва
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-MUR:
+    id: RU-MUR
+    name: Мурманская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-NEN:
+    id: RU-NEN
+    name: Ненецкий автономный округ
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-NGR:
+    id: RU-NGR
+    name: Новгородская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-NIZ:
+    id: RU-NIZ
+    name: Нижегородская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-NVS:
+    id: RU-NVS
+    name: Новосибирская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-OMS:
+    id: RU-OMS
+    name: Омская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-ORE:
+    id: RU-ORE
+    name: Оренбургская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-ORL:
+    id: RU-ORL
+    name: Орловская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-PER:
+    id: RU-PER
+    name: Пермский край
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-PNZ:
+    id: RU-PNZ
+    name: Пензенская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-PRI:
+    id: RU-PRI
+    name: Приморский край
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-PSK:
+    id: RU-PSK
+    name: Псковская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-ROS:
+    id: RU-ROS
+    name: Ростовская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-RYA:
+    id: RU-RYA
+    name: Рязанская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-SA:
+    id: RU-SA
+    name: Якутия
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-SAK:
+    id: RU-SAK
+    name: Сахалинская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-SAM:
+    id: RU-SAM
+    name: Самарская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-SAR:
+    id: RU-SAR
+    name: Саратовская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-SE:
+    id: RU-SE
+    name: Северная Осетия
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-SEV:
+    id: RU-SEV
+    name: Севастополь
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-SMO:
+    id: RU-SMO
+    name: Смоленская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-SPE:
+    id: RU-SPE
+    name: Санкт-Петербург
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-STA:
+    id: RU-STA
+    name: Ставропольский край
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-SVE:
+    id: RU-SVE
+    name: Свердловская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-TA:
+    id: RU-TA
+    name: Татарстан
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-TAM:
+    id: RU-TAM
+    name: Тамбовская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-TOM:
+    id: RU-TOM
+    name: Томская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-TUL:
+    id: RU-TUL
+    name: Тульская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-TVE:
+    id: RU-TVE
+    name: Тверская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-TY:
+    id: RU-TY
+    name: Тува
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-TYU:
+    id: RU-TYU
+    name: Тюменская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-UD:
+    id: RU-UD
+    name: Удмуртия
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-ULY:
+    id: RU-ULY
+    name: Ульяновская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-VGG:
+    id: RU-VGG
+    name: Волгоградская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-VLA:
+    id: RU-VLA
+    name: Владимирская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-VLG:
+    id: RU-VLG
+    name: Вологодская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-VOR:
+    id: RU-VOR
+    name: Воронежская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-YAN:
+    id: RU-YAN
+    name: Ямало-Ненецкий автономный округ
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-YAR:
+    id: RU-YAR
+    name: Ярославская область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-YEV:
+    id: RU-YEV
+    name: Еврейская автономная область
+    files:
+    - osm.pbf
+    - osm.bz2
+  RU-ZAB:
+    id: RU-ZAB
+    name: Забайкальский край
+    files:
+    - osm.pbf
+    - osm.bz2
+  TJ:
+    id: TJ
+    name: Таджикистан
+    files:
+    - osm.pbf
+    - osm.bz2
+  TM:
+    id: TM
+    name: Туркмения
+    files:
+    - osm.pbf
+    - osm.bz2
+  UA:
+    id: UA
+    name: Украина
+    files:
+    - osm.pbf
+    - osm.bz2
+  UZ:
+    id: UZ
+    name: Узбекистан
+    files:
+    - osm.pbf
+    - osm.bz2
+  local:
+    id: local
+    name: локальное покрытие
+    files:
+    - osm.pbf
+    - osm.bz2
