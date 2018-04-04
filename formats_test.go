@@ -1,6 +1,7 @@
 package main
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -113,5 +114,123 @@ func Benchmark_isHashable_geofabrik_yml(b *testing.B) {
 		for f := range c.Formats {
 			isHashable(c, f)
 		}
+	}
+}
+
+func Test_getFormats(t *testing.T) {
+	type dflags struct {
+		dosmPbf bool
+		doshPbf bool
+		dosmBz2 bool
+		dshpZip bool
+		dstate  bool
+		dpoly   bool
+		dkml    bool
+	}
+	tests := []struct {
+		name  string
+		want  []string
+		flags dflags
+	}{
+		// TODO: Add test cases.
+		{
+			name: "none",
+			flags: dflags{
+				dosmPbf: false,
+				doshPbf: false,
+				dosmBz2: false,
+				dshpZip: false,
+				dstate:  false,
+				dpoly:   false,
+				dkml:    false,
+			},
+			want: []string{"osm.pbf"},
+		}, {
+			name: "dosmPbf",
+			flags: dflags{
+				dosmPbf: true,
+				doshPbf: false,
+				dosmBz2: false,
+				dshpZip: false,
+				dstate:  false,
+				dpoly:   false,
+				dkml:    false,
+			},
+			want: []string{"osm.pbf"},
+		}, {
+			name: "doshPbf",
+			flags: dflags{
+				dosmPbf: false,
+				doshPbf: true,
+				dosmBz2: false,
+				dshpZip: false,
+				dstate:  false,
+				dpoly:   false,
+				dkml:    false,
+			},
+			want: []string{"osh.pbf"},
+		}, {
+			name: "dosmPbf doshPbf",
+			flags: dflags{
+				dosmPbf: true,
+				doshPbf: true,
+				dosmBz2: false,
+				dshpZip: false,
+				dstate:  false,
+				dpoly:   false,
+				dkml:    false,
+			},
+			want: []string{"osm.pbf", "osh.pbf"},
+		}, {
+			name: "dosmBz2 dshpZip",
+			flags: dflags{
+				dosmPbf: false,
+				doshPbf: false,
+				dosmBz2: true,
+				dshpZip: true,
+				dstate:  false,
+				dpoly:   false,
+				dkml:    false,
+			},
+			want: []string{"osm.bz2", "shp.zip"},
+		}, {
+			name: "dstate dpoly",
+			flags: dflags{
+				dosmPbf: false,
+				doshPbf: false,
+				dosmBz2: false,
+				dshpZip: false,
+				dstate:  true,
+				dpoly:   true,
+				dkml:    false,
+			},
+			want: []string{"state", "poly"},
+		}, {
+			name: "dkml",
+			flags: dflags{
+				dosmPbf: false,
+				doshPbf: false,
+				dosmBz2: false,
+				dshpZip: false,
+				dstate:  false,
+				dpoly:   false,
+				dkml:    true,
+			},
+			want: []string{"kml"},
+		},
+	}
+	for _, tt := range tests {
+		*dosmPbf = tt.flags.dosmPbf
+		*doshPbf = tt.flags.doshPbf
+		*dosmBz2 = tt.flags.dosmBz2
+		*dshpZip = tt.flags.dshpZip
+		*dstate = tt.flags.dstate
+		*dpoly = tt.flags.dpoly
+		*dkml = tt.flags.dkml
+		t.Run(tt.name, func(t *testing.T) {
+			if got := getFormats(); !reflect.DeepEqual(*got, tt.want) {
+				t.Errorf("getFormats() = %v, want %v", *got, tt.want)
+			}
+		})
 	}
 }
