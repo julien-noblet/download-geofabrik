@@ -116,58 +116,38 @@ func catch(err error) {
 	}
 }
 
-func main() {
+func listCommand() {
+	var format = ""
+	if *lmd {
+		format = "Markdown"
+	}
+	configPtr, err := loadConfig(*fConfig)
+	catch(err)
+	listAllRegions(*configPtr, format)
+}
 
-	app.Version(version) // Add version flag
-
-	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
-
-	case list.FullCommand():
-		checkService()
-		var format = ""
-		if *lmd {
-			format = "Markdown"
-		}
-		configPtr, err := loadConfig(*fConfig)
-		catch(err)
-		listAllRegions(*configPtr, format)
-	case update.FullCommand():
-		checkService()
-		UpdateConfig(*fURL, *fConfig)
-	case download.FullCommand():
-		checkService()
-		configPtr, err := loadConfig(*fConfig)
-		catch(err)
-		formatFile := getFormats()
-		for _, format := range *formatFile {
-			if ok, _, _ := isHashable(configPtr, format); *dCheck && ok {
-				if fileExist(*delement + "." + format) {
-					if !downloadChecksum(format) {
-						if !*fQuiet {
-							log.Println("Checksum mismatch, re-downloading", *delement+"."+format)
-						}
-						myElem, err := findElem(configPtr, *delement)
-						catch(err)
-						myURL, err := elem2URL(configPtr, myElem, format)
-						catch(err)
-						err = downloadFromURL(myURL, *delement+"."+format)
-						catch(err)
-						downloadChecksum(format)
-
-					} else {
-						if !*fQuiet {
-							log.Printf("Checksum match, no download!")
-						}
+func downloadCommand() {
+	configPtr, err := loadConfig(*fConfig)
+	catch(err)
+	formatFile := getFormats()
+	for _, format := range *formatFile {
+		if ok, _, _ := isHashable(configPtr, format); *dCheck && ok {
+			if fileExist(*delement + "." + format) {
+				if !downloadChecksum(format) {
+					if !*fQuiet {
+						log.Println("Checksum mismatch, re-downloading", *delement+"."+format)
 					}
-				} else {
 					myElem, err := findElem(configPtr, *delement)
 					catch(err)
 					myURL, err := elem2URL(configPtr, myElem, format)
 					catch(err)
 					err = downloadFromURL(myURL, *delement+"."+format)
 					catch(err)
-					if !downloadChecksum(format) && !*fQuiet {
-						log.Println("Checksum mismatch, please re-download", *delement+"."+format)
+					downloadChecksum(format)
+
+				} else {
+					if !*fQuiet {
+						log.Printf("Checksum match, no download!")
 					}
 				}
 			} else {
@@ -177,10 +157,34 @@ func main() {
 				catch(err)
 				err = downloadFromURL(myURL, *delement+"."+format)
 				catch(err)
+				if !downloadChecksum(format) && !*fQuiet {
+					log.Println("Checksum mismatch, please re-download", *delement+"."+format)
+				}
 			}
+		} else {
+			myElem, err := findElem(configPtr, *delement)
+			catch(err)
+			myURL, err := elem2URL(configPtr, myElem, format)
+			catch(err)
+			err = downloadFromURL(myURL, *delement+"."+format)
+			catch(err)
 		}
+	}
+}
+
+func main() {
+
+	app.Version(version) // Add version flag
+	commands := kingpin.MustParse(app.Parse(os.Args[1:]))
+	checkService()
+	switch commands {
+	case list.FullCommand():
+		listCommand()
+	case update.FullCommand():
+		UpdateConfig(*fURL, *fConfig)
+	case download.FullCommand():
+		downloadCommand()
 	case generate.FullCommand():
-		checkService()
 		Generate(*fConfig)
 	}
 
