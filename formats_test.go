@@ -82,7 +82,6 @@ func Test_miniFormats(t *testing.T) {
 
 func Test_isHashable(t *testing.T) {
 	type args struct {
-		c      *Config
 		format string
 		file   string
 	}
