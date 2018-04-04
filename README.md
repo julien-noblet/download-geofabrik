@@ -24,8 +24,8 @@ Flags:
       --help                 Show context-sensitive help (also try --help-long
                              and --help-man).
       --service="geofabrik"  Can switch to another service. You can use
-                             "geofabrik" or "openstreetmap.fr". It automatically
-                             change config file if -c is unused.
+                             "geofabrik", "openstreetmap.fr" or "gislab". It
+                             automatically change config file if -c is unused.
   -c, --config="./geofabrik.yml"  
                              Set Config file.
   -n, --nodownload           Do not download file (test only)
