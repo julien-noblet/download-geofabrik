@@ -206,3 +206,26 @@ func Test_downloadChecksum(t *testing.T) {
 		})
 	}
 }
+
+func Test_listCommand(t *testing.T) {
+	tests := []struct {
+		name string
+		want string
+		lmd  bool
+	}{
+		// TODO: Add test cases.
+		{name: "List normal", want: ""},
+		{name: "List Markdown", lmd: true, want: "Markdown"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			*lmd = tt.lmd
+			fakelistAllRegions := func(configPtr Config, format string) {
+				assert.Equal(t, tt.want, format)
+			}
+			patch := monkey.Patch(listAllRegions, fakelistAllRegions)
+			defer patch.Unpatch()
+			listCommand()
+		})
+	}
+}
