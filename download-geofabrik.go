@@ -24,6 +24,7 @@ var (
 	fNodownload = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
 	fVerbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
 	fQuiet      = app.Flag("quiet", "Be quiet").Short('q').Bool()
+	fProgress   = app.Flag("progress", "Add a progress bar").Bool()
 	fProxyHTTP  = app.Flag("proxy-http", "Use http proxy, format: proxy_address:port").Default("").String()
 	fProxySock5 = app.Flag("proxy-sock5", "Use Sock5 proxy, format: proxy_address:port").Default("").String()
 	fProxyUser  = app.Flag("proxy-user", "Proxy user").Default("").String()
@@ -111,6 +112,7 @@ func catch(err error) {
 }
 
 func main() {
+
 	app.Version(version) // Add version flag
 
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {

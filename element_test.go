@@ -393,8 +393,8 @@ func Test_elem2preURL(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			got, err := elem2preURL(tt.args.c, tt.args.e, tt.args.b...)
 			if err != nil != tt.wantErr {
-				got, err := elem2preURL(tt.args.c, tt.args.e, tt.args.b...)
 				t.Errorf("elem2preURL() =%v error = %v, wantErr %v", got, err, tt.wantErr)
 				return
 			}
