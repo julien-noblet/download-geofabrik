@@ -422,6 +422,31 @@ and
 </div>
 `
 
+const gislabSampleHTML = `
+<table>
+  <tbody><tr>
+    <th>ISO&nbsp;3166</th>
+    <th>Страна/регион</th>
+    <th>osm.pbf</th>
+    <th>osm.bz2</th>
+    <th colspan="2">&nbsp;</th>
+  </tr>
+    <tr><td>AM</td><td>Армения</td>
+  <td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/AM.osm.pbf">03 Apr (20 MB)</a></td><td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/AM.osm.bz2">03 Apr (38 MB)</a></td><td><a href="http://data.gis-lab.info/osm_dump/dump/AM/" target="_blank">архив</a></td><td><a href="http://data.gis-lab.info/osm_dump/diff/AM/" target="_blank">обновления</a></td></tr>    <tr><td>AZ</td><td>Азербайджан</td>
+  <td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/AZ.osm.pbf">03 Apr (20 MB)</a></td><td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/AZ.osm.bz2">03 Apr (37 MB)</a></td><td><a href="http://data.gis-lab.info/osm_dump/dump/AZ/" target="_blank">архив</a></td><td><a href="http://data.gis-lab.info/osm_dump/diff/AZ/" target="_blank">обновления</a></td></tr>    <tr><td>BY</td><td>Беларусь</td>
+  <td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/BY.osm.pbf">03 Apr (194 MB)</a></td><td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/BY.osm.bz2">03 Apr (319 MB)</a></td><td><a href="http://data.gis-lab.info/osm_dump/dump/BY/" target="_blank">архив</a></td><td><a href="http://data.gis-lab.info/osm_dump/diff/BY/" target="_blank">обновления</a></td></tr>    <tr><td>EE</td><td>Эстония</td>
+  <td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/EE.osm.pbf">03 Apr (70 MB)</a></td><td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/EE.osm.bz2">03 Apr (127 MB)</a></td><td><a href="http://data.gis-lab.info/osm_dump/dump/EE/" target="_blank">архив</a></td><td><a href="http://data.gis-lab.info/osm_dump/diff/EE/" target="_blank">обновления</a></td></tr>   <tr><td>RU</td><td>Российская Федерация</td>
+  <td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/RU.osm.pbf">03 Apr (2313 MB)</a></td><td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/RU.osm.bz2">03 Apr (4084 MB)</a></td><td><a href="http://data.gis-lab.info/osm_dump/dump/RU/" target="_blank">архив</a></td><td><a href="http://data.gis-lab.info/osm_dump/diff/RU/" target="_blank">обновления</a></td></tr>    <tr><td>TJ</td><td>Таджикистан</td>
+  <td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/TJ.osm.pbf">03 Apr (19 MB)</a></td><td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/TJ.osm.bz2">03 Apr (37 MB)</a></td><td><a href="http://data.gis-lab.info/osm_dump/dump/TJ/" target="_blank">архив</a></td><td><a href="http://data.gis-lab.info/osm_dump/diff/TJ/" target="_blank">обновления</a></td></tr>    <tr><td>TM</td><td>Туркмения</td>
+  <td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/TM.osm.pbf">03 Apr (9 MB)</a></td><td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/TM.osm.bz2">03 Apr (16 MB)</a></td><td><a href="http://data.gis-lab.info/osm_dump/dump/TM/" target="_blank">архив</a></td><td><a href="http://data.gis-lab.info/osm_dump/diff/TM/" target="_blank">обновления</a></td></tr>    <tr><td>UA</td><td>Украина</td>
+  <td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/UA.osm.pbf">03 Apr (476 MB)</a></td><td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/UA.osm.bz2">03 Apr (844 MB)</a></td><td><a href="http://data.gis-lab.info/osm_dump/dump/UA/" target="_blank">архив</a></td><td><a href="http://data.gis-lab.info/osm_dump/diff/UA/" target="_blank">обновления</a></td></tr>    <tr><td>UZ</td><td>Узбекистан</td>
+  <td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/UZ.osm.pbf">03 Apr (37 MB)</a></td><td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/UZ.osm.bz2">03 Apr (65 MB)</a></td><td><a href="http://data.gis-lab.info/osm_dump/dump/UZ/" target="_blank">архив</a></td><td><a href="http://data.gis-lab.info/osm_dump/diff/UZ/" target="_blank">обновления</a></td></tr>    <tr><td>local</td><td>локальное покрытие</td>
+  <td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/local.osm.pbf">03 Apr (3444 MB)</a></td><td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/local.osm.bz2">03 Apr (5999 MB)</a></td><td><a href="http://data.gis-lab.info/osm_dump/dump/local/" target="_blank">архив</a></td><td><a href="http://data.gis-lab.info/osm_dump/diff/local/" target="_blank">обновления</a></td></tr><tr><th colspan="6">Регионы России</th></tr>    <tr><td>RU-AD</td><td>Адыгея</td>
+  <td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/RU-AD.osm.pbf">03 Apr (16 MB)</a></td><td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/RU-AD.osm.bz2">03 Apr (26 MB)</a></td><td><a href="http://data.gis-lab.info/osm_dump/dump/RU-AD/" target="_blank">архив</a></td><td>&nbsp;</td></tr>    <tr><td>RU-AL</td><td>Алтай</td>
+  <td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/RU-AL.osm.pbf">03 Apr (11 MB)</a></td><td style="white-space:nowrap;"><a href="http://data.gis-lab.info/osm_dump/dump/latest/RU-AL.osm.bz2">03 Apr (22 MB)</a></td><td><a href="http://data.gis-lab.info/osm_dump/dump/RU-AL/" target="_blank">архив</a></td><td>&nbsp;</td></tr>   
+</tbody></table>
+`
+
 func TestElementSlice_Generate(t *testing.T) {
 	myConfig := &SampleConfigValidPtr
 	myYaml, _ := yaml.Marshal(*myConfig)
@@ -712,6 +737,67 @@ func TestExt_parseOSMfr(t *testing.T) {
 			}
 			if got1 != tt.want1 {
 				t.Errorf("Ext.parseOSMfr() got1 = %v, want %v", got1, tt.want1)
+			}
+		})
+	}
+}
+
+func TestExt_parseGisLab(t *testing.T) {
+	var f func(s string, myUrl string) *goquery.Document
+	f = func(s string, myUrl string) *goquery.Document {
+		doc, err := goquery.NewDocumentFromReader(strings.NewReader(s))
+		doc.Url, err = url.Parse(myUrl)
+		if err != nil {
+			t.Error(err)
+		}
+		return doc
+	}
+	type args struct {
+		ctx *gocrawl.URLContext // not used
+		res *http.Response      // not used
+		doc *goquery.Document
+	}
+	tests := []struct {
+		name   string
+		fields Ext
+		args   args
+		want   ElementSlice
+		want1  bool
+	}{
+		// TODO: Add test cases.
+		{
+			name:   "osm valid1",
+			fields: Ext{Elements: ElementSlice{}},
+			args:   args{doc: f(gislabSampleHTML, "http://be.gis-lab.info/project/osm_dump/iframe.php")},
+			want1:  true,
+			want: ElementSlice{
+				"local": {ID: "local", Name: "локальное покрытие", Formats: []string{"osm.pbf", "osm.bz2", "poly"}, File: "", Meta: false, Parent: ""},
+				"AM":    {ID: "AM", Name: "Армения", Formats: []string{"osm.pbf", "osm.bz2", "poly"}, File: "", Meta: false, Parent: ""},
+				"AZ":    {ID: "AZ", Name: "Азербайджан", Formats: []string{"osm.pbf", "osm.bz2", "poly"}, File: "", Meta: false, Parent: ""},
+				"BY":    {ID: "BY", Name: "Беларусь", Formats: []string{"osm.pbf", "osm.bz2", "poly"}, File: "", Meta: false, Parent: ""},
+				"EE":    {ID: "EE", Name: "Эстония", Formats: []string{"osm.pbf", "osm.bz2", "poly"}, File: "", Meta: false, Parent: ""},
+				"TJ":    {ID: "TJ", Name: "Таджикистан", Formats: []string{"osm.pbf", "osm.bz2", "poly"}, File: "", Meta: false, Parent: ""},
+				"TM":    {ID: "TM", Name: "Туркмения", Formats: []string{"osm.pbf", "osm.bz2", "poly"}, File: "", Meta: false, Parent: ""},
+				"UA":    {ID: "UA", Name: "Украина", Formats: []string{"osm.pbf", "osm.bz2", "poly"}, File: "", Meta: false, Parent: ""},
+				"UZ":    {ID: "UZ", Name: "Узбекистан", Formats: []string{"osm.pbf", "osm.bz2", "poly"}, File: "", Meta: false, Parent: ""},
+				"RU-AD": {ID: "RU-AD", Name: "Адыгея", Formats: []string{"osm.pbf", "osm.bz2", "poly"}, File: "", Meta: false, Parent: ""},
+				"RU-AL": {ID: "RU-AL", Name: "Алтай", Formats: []string{"osm.pbf", "osm.bz2", "poly"}, File: "", Meta: false, Parent: ""},
+				"RU":    {ID: "RU", Name: "Российская Федерация", Formats: []string{"osm.pbf", "osm.bz2", "poly"}, File: "", Meta: false, Parent: ""},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			e := &Ext{
+				DefaultExtender: tt.fields.DefaultExtender,
+				Elements:        tt.fields.Elements,
+			}
+			_, got1 := e.parseGisLab(tt.args.ctx, tt.args.res, tt.args.doc)
+			if !reflect.DeepEqual(e.Elements, tt.want) {
+				t.Errorf("Ext.parseGisLab() \nExt.Elements= %+v, want %+v", e.Elements, tt.want)
+			}
+			if got1 != tt.want1 {
+				t.Errorf("Ext.parseGisLab() got1 = %v, want %v", got1, tt.want1)
 			}
 		})
 	}

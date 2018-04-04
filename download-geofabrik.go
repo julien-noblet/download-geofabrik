@@ -99,6 +99,11 @@ func checkService() bool {
 			*fConfig = "./openstreetmap.fr.yml"
 		}
 		return true
+	case "gislab":
+		if strings.EqualFold(*fConfig, "./geofabrik.yml") {
+			*fConfig = "./gislab.yml"
+		}
+		return true
 	}
 	return false
 }

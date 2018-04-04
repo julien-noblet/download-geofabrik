@@ -22,6 +22,7 @@ func Test_checkService(t *testing.T) {
 		// TODO: Add test cases.
 		{name: "checkService(), fService = geofabrik", service: "geofabrik", want: true},
 		{name: "checkService(), fService = openstreetmap.fr", service: "openstreetmap.fr", config: "./geofabrik.yml", want: true, wantConfig: "./openstreetmap.fr.yml"},
+		{name: "checkService(), fService = gislab", service: "gislab", config: "./geofabrik.yml", want: true, wantConfig: "./gislab.yml"},
 		{name: "checkService(), fService = anothermap", service: "anothermap", want: false},
 		{name: "checkService(), fService = \"\"", service: "", want: false},
 	}
@@ -156,7 +157,8 @@ func Test_controlHash(t *testing.T) {
 	}
 }
 
-// Test_downloadChecksum I don'y know why sometimes controlHash fail :'(
+// Test_downloadChecksum I don't know why sometimes controlHash fail :'(
+// seems geofabrik have a limit download I reach sometimes :/
 func Test_downloadChecksum(t *testing.T) {
 	*fQuiet = true // be silent!
 	type args struct {

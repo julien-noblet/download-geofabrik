@@ -19,6 +19,15 @@ var sampleFormatValidPtr = map[string]format{
 		ID:       "state",
 		Loc:      "-updates/state.txt",
 		BasePath: "../state/",
+	}, "poly": {
+		ID:      "poly",
+		Loc:     ".poly",
+		BaseURL: "http://my.new.url/folder",
+	}, "osm.bz2": {
+		ID:       "osm.bz2",
+		Loc:      ".osm.bz2",
+		BasePath: "../osmbz2/",
+		BaseURL:  "http://my.new.url/folder",
 	},
 }
 
