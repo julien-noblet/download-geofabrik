@@ -8,6 +8,7 @@ type format struct {
 	ID       string `yaml:"ext"`
 	Loc      string `yaml:"loc"`
 	BasePath string `yaml:"basepath,omitempty"`
+	BaseURL  string `yaml:"baseurl,omitempty"`
 }
 
 //miniFormats get formats of an Element
