@@ -229,3 +229,125 @@ func Test_listCommand(t *testing.T) {
 		})
 	}
 }
+
+func Test_downloadCommand(t *testing.T) {
+	type fFlags struct {
+		dosmPbf bool
+		doshPbf bool
+		dosmBz2 bool
+		dshpZip bool
+		dstate  bool
+		dpoly   bool
+		dkml    bool
+	}
+
+	tests := []struct {
+		name          string
+		fConfig       string
+		dCheck        bool
+		delement      string
+		formatsFlags  fFlags
+		wantURL       string
+		wantOutput    string
+		checksumValid bool
+		fakefileExist bool
+	}{
+		// TODO: Add test cases.
+		{
+			name:     "andorra.osm.pbf from geofabrik.yml no Check",
+			fConfig:  "geofabrik.yml",
+			dCheck:   false,
+			delement: "andorra",
+			formatsFlags: fFlags{
+				dosmPbf: true,
+			},
+			wantURL:    "https://download.geofabrik.de/europe/andorra-latest.osm.pbf",
+			wantOutput: "andorra.osm.pbf",
+		},
+		{
+			name:     "andorra.osm.pbf from geofabrik.yml with Check",
+			fConfig:  "geofabrik.yml",
+			dCheck:   true,
+			delement: "andorra",
+			formatsFlags: fFlags{
+				dosmPbf: true,
+			},
+			wantURL:       "https://download.geofabrik.de/europe/andorra-latest.osm.pbf",
+			wantOutput:    "andorra.osm.pbf",
+			fakefileExist: false,
+			checksumValid: true,
+		},
+		{
+			name:     "andorra.osm.pbf from geofabrik.yml with Check file exist",
+			fConfig:  "geofabrik.yml",
+			dCheck:   true,
+			delement: "andorra",
+			formatsFlags: fFlags{
+				dosmPbf: true,
+			},
+			wantURL:       "https://download.geofabrik.de/europe/andorra-latest.osm.pbf",
+			wantOutput:    "andorra.osm.pbf",
+			fakefileExist: true,
+			checksumValid: true,
+		},
+		{
+			name:     "andorra.osm.pbf from geofabrik.yml with Check checksum mismatch",
+			fConfig:  "geofabrik.yml",
+			dCheck:   true,
+			delement: "andorra",
+			formatsFlags: fFlags{
+				dosmPbf: true,
+			},
+			wantURL:       "https://download.geofabrik.de/europe/andorra-latest.osm.pbf",
+			wantOutput:    "andorra.osm.pbf",
+			fakefileExist: false,
+			checksumValid: false,
+		},
+		{
+			name:     "andorra.osm.pbf from geofabrik.yml with Check file exist checksum mismatch",
+			fConfig:  "geofabrik.yml",
+			dCheck:   true,
+			delement: "andorra",
+			formatsFlags: fFlags{
+				dosmPbf: true,
+			},
+			wantURL:       "https://download.geofabrik.de/europe/andorra-latest.osm.pbf",
+			wantOutput:    "andorra.osm.pbf",
+			fakefileExist: true,
+			checksumValid: false,
+		},
+	}
+	for _, tt := range tests {
+		*dosmPbf = tt.formatsFlags.dosmPbf || false
+		*doshPbf = tt.formatsFlags.doshPbf || false
+		*dosmBz2 = tt.formatsFlags.dosmBz2 || false
+		*dshpZip = tt.formatsFlags.dshpZip || false
+		*dstate = tt.formatsFlags.dstate || false
+		*dpoly = tt.formatsFlags.dpoly || false
+		*dkml = tt.formatsFlags.dkml || false
+		*fConfig = tt.fConfig
+		*dCheck = tt.dCheck || false
+		*delement = tt.delement
+		t.Run(tt.name, func(t *testing.T) {
+			fakedownloadFromURL := func(myURL string, output string) error {
+				assert.Equal(t, tt.wantURL, myURL)
+				assert.Equal(t, tt.wantOutput, output)
+				return nil
+			}
+			fakedownloadChecksum := func(f string) bool {
+				return tt.checksumValid
+			}
+			fakefileExist := func(f string) bool {
+				return tt.fakefileExist
+			}
+			patch := monkey.Patch(downloadFromURL, fakedownloadFromURL)
+			patch2 := monkey.Patch(downloadChecksum, fakedownloadChecksum)
+			patch3 := monkey.Patch(fileExist, fakefileExist)
+			defer patch.Unpatch()
+			defer patch2.Unpatch()
+			defer patch3.Unpatch()
+			downloadCommand()
+			//			izefnof // real error should not compile
+		})
+	}
+}
