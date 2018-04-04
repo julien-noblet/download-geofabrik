@@ -443,7 +443,7 @@ func Generate(configfile string) {
 			log.Println(configfile, " generated.")
 		}
 	default:
-		log.Panicln("Service not reconized")
+		log.Println("Service not reconized, please use one of geofabrik, openstreetmap.fr or gislab")
 	}
 
 }
