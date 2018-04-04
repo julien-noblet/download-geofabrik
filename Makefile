@@ -8,10 +8,10 @@ gox:
 	gox --output="download-geofabrik_{{.OS}}_{{.Arch}}/{{.Dir}}"
 geofabrik:
 	echo "Generating geofabrik.yml"
-	go run $(gofiles) generate -v
+	go run $(gofiles) generate --progress
 osmfr:
 	echo "Generating openstreetmap.fr.yml"
-	go run $(gofiles) --service="openstreetmap.fr" generate -v
+	go run $(gofiles) --service="openstreetmap.fr" generate --progress
 readme: geofabrik osmfr
 	cat .README.md1 > README.md
 	go run $(gofiles) --help-long >> README.md 
