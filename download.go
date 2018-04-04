@@ -55,7 +55,10 @@ func downloadFromURL(myURL string, fileName string) error {
 			}
 			return fmt.Errorf("Error while downloading %v, server return code %d", myURL, response.StatusCode)
 		}
-		defer response.Body.Close()
+		defer func() {
+			err := response.Body.Close()
+			catch(err)
+		}()
 
 		// If no error, create file
 		// TODO: check file existence first with io.IsExist
@@ -66,7 +69,10 @@ func downloadFromURL(myURL string, fileName string) error {
 		if err != nil {
 			return fmt.Errorf("Error while creating %s - %v", fileName, err)
 		}
-		defer f.Close()
+		defer func() {
+			err := f.Close()
+			catch(err)
+		}()
 		var output io.Writer
 		output = f
 		var n int64

@@ -181,7 +181,8 @@ func main() {
 	case list.FullCommand():
 		listCommand()
 	case update.FullCommand():
-		UpdateConfig(*fURL, *fConfig)
+		err := UpdateConfig(*fURL, *fConfig)
+		catch(err)
 	case download.FullCommand():
 		downloadCommand()
 	case generate.FullCommand():
@@ -204,7 +205,10 @@ func hashFileMD5(filePath string) (string, error) {
 		if err != nil {
 			return returnMD5String, err
 		}
-		defer file.Close()
+		defer func() {
+			err := file.Close()
+			catch(err)
+		}()
 		hash := md5.New()
 
 		if _, err := io.Copy(hash, file); err != nil {
@@ -244,7 +248,8 @@ func downloadChecksum(format string) bool {
 			catch(err)
 			myURL, err := elem2URL(configPtr, myElem, fhash)
 			catch(err)
-			downloadFromURL(myURL, *delement+"."+fhash)
+			err = downloadFromURL(myURL, *delement+"."+fhash)
+			catch(err)
 			if *fVerbose && !*fQuiet {
 				log.Println("Hashing", *delement+"."+format)
 			}

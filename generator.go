@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 	"path/filepath"
 	"strings"
 	"time"
@@ -386,13 +385,15 @@ func GenerateCrawler(url string, fname string, myConfig *Config) {
 		bar = pb.New(maxPb)
 		bar.Start()
 	}
-	file.Run(url)
+	err := file.Run(url)
+	if err != nil {
+		log.Panicln(err)
+	}
 	out, _ := ext.Elements.Generate(myConfig)
 	filename, _ := filepath.Abs(fname)
-	err := ioutil.WriteFile(filename, out, 0644)
+	err = ioutil.WriteFile(filename, out, 0644)
 	if err != nil {
-		log.Fatalln(fmt.Errorf(" File error: %v ", err))
-		os.Exit(1)
+		log.Panicln(fmt.Errorf(" File error: %v ", err))
 	}
 }
 
