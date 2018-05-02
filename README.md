@@ -94,6 +94,7 @@ Commands:
 | argentina                                   | South America            | Argentina                              | sPBHpSk |
 | arizona                                     | United States of America | Arizona                                | sPBHpSk |
 | arkansas                                    | United States of America | Arkansas                               | sPBHpSk |
+| armenia                                     | Asia                     | Armenia                                | sPBHpSk |
 | arnsberg-regbez                             | Nordrhein-Westfalen      | Regierungsbezirk Arnsberg              | sPBHpSk |
 | asia                                        |                          | Asia                                   | sPBHpk  |
 | australia                                   | Australia and Oceania    | Australia                              | sPBHpk  |
@@ -502,7 +503,7 @@ Commands:
 |                                             |                          | Pomeranian Voivodeship)                |         |
 | zambia                                      | Africa                   | Zambia                                 | sPBHpSk |
 | zimbabwe                                    | Africa                   | Zimbabwe                               | sPBHpSk |
-Total elements: 393
+Total elements: 394
 
 ## List of elements from openstreetmap.fr
 |                SHORTNAME                |        IS IN        |                LONG NAME                | FORMATS |

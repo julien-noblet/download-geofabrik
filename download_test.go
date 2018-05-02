@@ -38,12 +38,12 @@ func Test_downloadFromURL(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name:        "OK download from geofabrik",
+			name:        "OK download from osmfr",
 			fNodownload: false,
 			fQuiet:      false,
 			fProgress:   true,
 			args: args{
-				myURL:    "https://download.geofabrik.de/europe/monaco-latest.osm.pbf",
+				myURL:    "http://download.openstreetmap.fr/extracts/europe/spain/canarias.osm.pbf",
 				fileName: "/tmp/download-geofabrik.test",
 			},
 			wantErr: false,
