@@ -53,7 +53,7 @@ func (e *Element) addHash(myel *goquery.Selection) {
 
 func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
 	var thisElement Element
-	downloadMain := doc.Find("div#download-main")
+	downloadMain := doc.Find("div.download-main")
 	parent, haveParent := doc.Find("p a").Attr("href")                        // I'm not shure it is parent
 	if haveParent && !strings.Contains(parent, "https://www.geofabrik.de/") { // Removing https?
 		// or try with slicer and == should be quicker?
@@ -70,7 +70,7 @@ func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *g
 			name := singleElement.Find("h2").Text()
 			thisElement.Name = name
 			index := 0
-			li := singleElement.Find("li")
+			li := singleElement.Find("div#download-left").Find("li")
 			for el := range li.Nodes {
 				myel := li.Eq(el)
 
@@ -276,7 +276,7 @@ func (e *Ext) parseGisLab(ctx *gocrawl.URLContext, res *http.Response, doc *goqu
 	for line := range list.Nodes {
 		tds := list.Eq(line).Find("td")
 		if tds.Length() == 6 {
-			element := *(new(Element))
+			element := *new(Element)
 			element.ID = tds.Eq(0).Text()
 			element.Name = tds.Eq(1).Text()
 			element.Formats = append(element.Formats, "osm.pbf") // Not checked elements
@@ -378,9 +378,9 @@ func GenerateCrawler(url string, fname string, myConfig *Config) {
 		maxPb := 400 // default value is a realy magicaly set :)
 		switch url { // Todo: found a better way!
 		case "https://download.geofabrik.de/":
-			maxPb = 392 // Magical!
+			maxPb = 393 // Magical!
 		case "https://download.openstreetmap.fr/":
-			maxPb = 51 // Magical
+			maxPb = 52 // Magical
 		}
 		bar = pb.New(maxPb)
 		bar.Start()

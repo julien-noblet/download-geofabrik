@@ -267,6 +267,21 @@ elements:
     - kml
     - state
     parent: us
+  armenia:
+    id: armenia
+    name: Armenia
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - osh.pbf
+    - osh.pbf.md5
+    - poly
+    - kml
+    - state
+    parent: asia
   arnsberg-regbez:
     id: arnsberg-regbez
     name: Regierungsbezirk Arnsberg
