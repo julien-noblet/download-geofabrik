@@ -469,7 +469,7 @@ func TestExt_parseGeofabrik(t *testing.T) {
 			want1: true,
 			want: ElementSlice{
 				"us":            {ID: "us", File: "", Meta: true, Name: "United States of America", Formats: []string{}, Parent: "north-america"},
-				"south-america": {ID: "south-america", File: "", Meta: false, Name: "South America", Formats: []string{"osm.pbf", "osm.pbf.md5", "osm.bz2", "osm.bz2.md5", "osh.pbf", "osh.pbf.md5", "poly", "kml", "state"}, Parent: ""},
+				"south-america": {ID: "south-america", File: "", Meta: false, Name: "South America", Formats: []string{"osm.pbf", "osm.pbf.md5", "poly", "kml", "state"}, Parent: ""},
 			},
 		},
 		{
@@ -478,7 +478,7 @@ func TestExt_parseGeofabrik(t *testing.T) {
 			want1: true,
 			want: ElementSlice{
 				"us": {ID: "us", File: "", Meta: true, Name: "United States of America", Formats: []string{}, Parent: "north-america"},
-				"district-of-columbia": {ID: "district-of-columbia", File: "", Meta: false, Name: "District of Columbia", Formats: []string{"osm.pbf", "osm.pbf.md5", "shp.zip", "osm.bz2", "osm.bz2.md5", "osh.pbf", "osh.pbf.md5", "poly", "kml", "state"}, Parent: "us"},
+				"district-of-columbia": {ID: "district-of-columbia", File: "", Meta: false, Name: "District of Columbia", Formats: []string{"osm.pbf", "osm.pbf.md5", "shp.zip", "osm.bz2", "osm.bz2.md5", "poly", "kml", "state"}, Parent: "us"},
 			},
 		},
 		{
@@ -487,7 +487,7 @@ func TestExt_parseGeofabrik(t *testing.T) {
 			want1: true,
 			want: ElementSlice{
 				"us":      {ID: "us", File: "", Meta: true, Name: "United States of America", Formats: []string{}, Parent: "north-america"},
-				"shikoku": {ID: "shikoku", File: "", Meta: false, Name: "Shikoku", Formats: []string{"osm.pbf", "osm.pbf.md5", "shp.zip", "osm.bz2", "osm.bz2.md5", "osh.pbf", "osh.pbf.md5", "poly", "kml", "state"}, Parent: "japan"},
+				"shikoku": {ID: "shikoku", File: "", Meta: false, Name: "Shikoku", Formats: []string{"osm.pbf", "osm.pbf.md5", "shp.zip", "osm.bz2", "osm.bz2.md5", "poly", "kml", "state"}, Parent: "japan"},
 			},
 		},
 	}
