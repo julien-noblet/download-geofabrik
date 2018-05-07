@@ -173,9 +173,9 @@ func Test_downloadChecksum(t *testing.T) {
 		want     bool
 	}{
 		// TODO: Add test cases.
-		{name: "dCheck = false andorra.osm.pbf from geofabrik", dCheck: false, fConfig: "./geofabrik.yml", delement: "andorra", args: args{format: "osm.pbf"}, want: false},
-		{name: "dCheck = true andorra.osm.pbf from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "andorra", args: args{format: "osm.pbf"}, want: true},
-		{name: "dCheck = true andorra.poly from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "andorra", args: args{format: "poly"}, want: false},
+		{name: "dCheck = false monaco.osm.pbf from geofabrik", dCheck: false, fConfig: "./geofabrik.yml", delement: "monaco", args: args{format: "osm.pbf"}, want: false},
+		{name: "dCheck = true monaco.osm.pbf from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: "osm.pbf"}, want: true},
+		{name: "dCheck = true monaco.poly from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: "poly"}, want: false},
 	}
 	for _, tt := range tests {
 		*dCheck = tt.dCheck
@@ -201,8 +201,8 @@ func Test_downloadChecksum(t *testing.T) {
 			if got := downloadChecksum(tt.args.format); got != tt.want {
 				t.Errorf("downloadChecksum() = %v, want %v", got, tt.want)
 			}
-			os.Remove("andorra.osm.pbf")     // clean
-			os.Remove("andorra.osm.pbf.md5") // clean
+			os.Remove("monaco.osm.pbf")     // clean
+			os.Remove("monaco.osm.pbf.md5") // clean
 		})
 	}
 }
@@ -254,65 +254,65 @@ func Test_downloadCommand(t *testing.T) {
 	}{
 		// TODO: Add test cases.
 		{
-			name:     "andorra.osm.pbf from geofabrik.yml no Check",
+			name:     "monaco.osm.pbf from geofabrik.yml no Check",
 			fConfig:  "geofabrik.yml",
 			dCheck:   false,
-			delement: "andorra",
+			delement: "monaco",
 			formatsFlags: fFlags{
 				dosmPbf: true,
 			},
-			wantURL:    "https://download.geofabrik.de/europe/andorra-latest.osm.pbf",
-			wantOutput: "andorra.osm.pbf",
+			wantURL:    "https://download.geofabrik.de/europe/monaco-latest.osm.pbf",
+			wantOutput: "monaco.osm.pbf",
 		},
 		{
-			name:     "andorra.osm.pbf from geofabrik.yml with Check",
+			name:     "monaco.osm.pbf from geofabrik.yml with Check",
 			fConfig:  "geofabrik.yml",
 			dCheck:   true,
-			delement: "andorra",
+			delement: "monaco",
 			formatsFlags: fFlags{
 				dosmPbf: true,
 			},
-			wantURL:       "https://download.geofabrik.de/europe/andorra-latest.osm.pbf",
-			wantOutput:    "andorra.osm.pbf",
+			wantURL:       "https://download.geofabrik.de/europe/monaco-latest.osm.pbf",
+			wantOutput:    "monaco.osm.pbf",
 			fakefileExist: false,
 			checksumValid: true,
 		},
 		{
-			name:     "andorra.osm.pbf from geofabrik.yml with Check file exist",
+			name:     "monaco.osm.pbf from geofabrik.yml with Check file exist",
 			fConfig:  "geofabrik.yml",
 			dCheck:   true,
-			delement: "andorra",
+			delement: "monaco",
 			formatsFlags: fFlags{
 				dosmPbf: true,
 			},
-			wantURL:       "https://download.geofabrik.de/europe/andorra-latest.osm.pbf",
-			wantOutput:    "andorra.osm.pbf",
+			wantURL:       "https://download.geofabrik.de/europe/monaco-latest.osm.pbf",
+			wantOutput:    "monaco.osm.pbf",
 			fakefileExist: true,
 			checksumValid: true,
 		},
 		{
-			name:     "andorra.osm.pbf from geofabrik.yml with Check checksum mismatch",
+			name:     "monaco.osm.pbf from geofabrik.yml with Check checksum mismatch",
 			fConfig:  "geofabrik.yml",
 			dCheck:   true,
-			delement: "andorra",
+			delement: "monaco",
 			formatsFlags: fFlags{
 				dosmPbf: true,
 			},
-			wantURL:       "https://download.geofabrik.de/europe/andorra-latest.osm.pbf",
-			wantOutput:    "andorra.osm.pbf",
+			wantURL:       "https://download.geofabrik.de/europe/monaco-latest.osm.pbf",
+			wantOutput:    "monaco.osm.pbf",
 			fakefileExist: false,
 			checksumValid: false,
 		},
 		{
-			name:     "andorra.osm.pbf from geofabrik.yml with Check file exist checksum mismatch",
+			name:     "monaco.osm.pbf from geofabrik.yml with Check file exist checksum mismatch",
 			fConfig:  "geofabrik.yml",
 			dCheck:   true,
-			delement: "andorra",
+			delement: "monaco",
 			formatsFlags: fFlags{
 				dosmPbf: true,
 			},
-			wantURL:       "https://download.geofabrik.de/europe/andorra-latest.osm.pbf",
-			wantOutput:    "andorra.osm.pbf",
+			wantURL:       "https://download.geofabrik.de/europe/monaco-latest.osm.pbf",
+			wantOutput:    "monaco.osm.pbf",
 			fakefileExist: true,
 			checksumValid: false,
 		},

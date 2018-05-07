@@ -1,10 +1,31 @@
 # Change Log
 
+## [Unreleased](https://github.com/julien-noblet/download-geofabrik/tree/HEAD)
+
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.0-rc0...HEAD)
+
+**Implemented enhancements:**
+
+- idea:  http://gis-lab.info/projects/osm\_dump/  extracts [\#32](https://github.com/julien-noblet/download-geofabrik/issues/32)
+- progress bar  - usability [\#26](https://github.com/julien-noblet/download-geofabrik/issues/26)
+
+## [v2.3.0-rc0](https://github.com/julien-noblet/download-geofabrik/tree/v2.3.0-rc0) (2018-05-02)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/fix#32...v2.3.0-rc0)
+
+**Merged pull requests:**
+
+- Prepare next release 2.3.0 [\#34](https://github.com/julien-noblet/download-geofabrik/pull/34) ([julien-noblet](https://github.com/julien-noblet))
+- Fix\#32 [\#33](https://github.com/julien-noblet/download-geofabrik/pull/33) ([julien-noblet](https://github.com/julien-noblet))
+
 ## [fix#32](https://github.com/julien-noblet/download-geofabrik/tree/fix#32) (2018-04-03)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/fix#26-2...fix#32)
 
 ## [fix#26-2](https://github.com/julien-noblet/download-geofabrik/tree/fix#26-2) (2018-04-03)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.3...fix#26-2)
+
+**Implemented enhancements:**
+
+- Progress bar [\#28](https://github.com/julien-noblet/download-geofabrik/pull/28) ([julien-noblet](https://github.com/julien-noblet))
 
 ## [v2.2.3](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.3) (2018-04-03)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.2...v2.2.3)

@@ -32,7 +32,7 @@ func Test_downloadFromURL(t *testing.T) {
 			fQuiet:      false,
 			fProgress:   true,
 			args: args{
-				myURL:    "https://download.geofabrik.de/europe/andorra.osh.pbf.md5",
+				myURL:    "https://download.geofabrik.de/europe/andorra.poly",
 				fileName: "/tmp/download-geofabrik.test",
 			},
 			wantErr: false,
