@@ -469,7 +469,7 @@ func TestExt_parseGeofabrik(t *testing.T) {
 			want1: true,
 			want: ElementSlice{
 				"us":            {ID: "us", File: "", Meta: true, Name: "United States of America", Formats: []string{}, Parent: "north-america"},
-				"south-america": {ID: "south-america", File: "", Meta: false, Name: "South America", Formats: []string{"osm.pbf", "osm.pbf.md5", "poly", "kml", "state"}, Parent: ""},
+				"south-america": {ID: "south-america", File: "", Meta: false, Name: "South America", Formats: []string{"osm.pbf", "osm.pbf.md5", "osm.bz2", "osm.bz2.md5", "poly", "kml", "state"}, Parent: ""},
 			},
 		},
 		{

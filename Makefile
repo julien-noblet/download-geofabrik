@@ -3,7 +3,7 @@ pkgfiles = CHANGELOG.md README.md LICENSE geofabrik.yml openstreetmap.fr.yml gis
 default: clean all
 clean:
 	go clean
-	rm -rf download-geofabrik_* *.zip
+	rm -rf download-geofabrik_*/ *.zip
 gox:
 	gox --output="download-geofabrik_{{.OS}}_{{.Arch}}/{{.Dir}}"
 geofabrik:
@@ -26,7 +26,7 @@ readme: geofabrik osmfr gislab
 	echo "" >> README.md
 	echo "## List of elements from glis-lab.info" >> README.md
 	go run $(gofiles) --service "gislab" list --markdown >> README.md
-package: gox geofabrik osmfr
+package: gox geofabrik osmfr gislab
 	for i in download-geofabrik_* ;\
 	do \
 		  echo "Compressing $$i";\
