@@ -97,7 +97,7 @@ Commands:
 | armenia                                     | Asia                     | Armenia                                | sPBpSk  |
 | arnsberg-regbez                             | Nordrhein-Westfalen      | Regierungsbezirk Arnsberg              | sPBpSk  |
 | asia                                        |                          | Asia                                   | sPBpk   |
-| australia                                   | Australia and Oceania    | Australia                              | sPBpSk  |
+| australia                                   | Australia and Oceania    | Australia                              | sPBpk   |
 | australia-oceania                           |                          | Australia and Oceania                  | sPBpk   |
 | austria                                     | Europe                   | Austria                                | sPBpSk  |
 | auvergne                                    | France                   | Auvergne                               | sPBpSk  |
@@ -176,7 +176,7 @@ Commands:
 |                                             |                          | Silesian Voivodeship)                  |         |
 | dorset                                      | England                  | Dorset                                 | sPBpSk  |
 | duesseldorf-regbez                          | Nordrhein-Westfalen      | Regierungsbezirk Düsseldorf            | sPBpSk  |
-| durham                                      | England                  | Durham                                 | sPBpSk  |
+| durham                                      | England                  | durham                                 | sPBpSk  |
 | east-sussex                                 | England                  | East Sussex                            | sPBpSk  |
 | east-yorkshire-with-hull                    | England                  | East Yorkshire with Hull               | sPBpSk  |
 | ecuador                                     | South America            | Ecuador                                | sPBpk   |
@@ -463,7 +463,7 @@ Commands:
 | tunisia                                     | Africa                   | Tunisia                                | sPBpSk  |
 | turkey                                      | Europe                   | Turkey                                 | sPBpSk  |
 | turkmenistan                                | Asia                     | Turkmenistan                           | sPBpSk  |
-| tyne-and-wear                               | England                  | Tyne and Wear                          | sPBpSk  |
+| tyne-and-wear                               | England                  | tyne-and-wear                          | sPBpSk  |
 | uganda                                      | Africa                   | Uganda                                 | sPBpSk  |
 | ukraine                                     | Europe                   | Ukraine                                | sPBpSk  |
 | unterfranken                                | Bayern                   | Unterfranken                           | sPBpSk  |
@@ -506,7 +506,7 @@ Commands:
 |                                             |                          | Pomeranian Voivodeship)                |         |
 | zambia                                      | Africa                   | Zambia                                 | sPBpSk  |
 | zimbabwe                                    | Africa                   | Zimbabwe                               | sPBpSk  |
-Total elements: 397
+Total elements: 396
 
 ## List of elements from openstreetmap.fr
 |                SHORTNAME                |              IS IN               |                LONG NAME                | FORMATS |

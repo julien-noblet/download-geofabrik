@@ -1,65 +1,132 @@
 language: go
 sudo: false
-
 go:
-  - "1.9"
-  - "1.10"
-  - "1.11"
-  - master
-  - tip
+- '1.11'
+- '1.10'
+- '1.9'
+- '1.8'
+- '1.7'
+- stable
+- master
+- tip
 before_install:
-  - go get github.com/mattn/goveralls
-# use gox
-#env:
-#  - GIMME_OS=linux GIMME_ARCH=386 GIMME_DEBUG=1 GIMME_TYPE=source
-#  - GIMME_OS=linux GIMME_ARCH=amd64 GIMME_DEBUG=1 GIMME_TYPE=source
-#  - GIMME_OS=darwin GIMME_ARCH=386 GIMME_DEBUG=1 GIMME_TYPE=source
-#  - GIMME_OS=darwin GIMME_ARCH=amd64 GIMME_DEBUG=1 GIMME_TYPE=source
-#  - GIMME_OS=windows GIMME_ARCH=386 GIMME_DEBUG=1 GIMME_TYPE=source
-#  - GIMME_OS=windows GIMME_ARCH=amd64 GIMME_DEBUG=1 GIMME_TYPE=source
-#  #- GIMME_OS=linux GIMME_ARCH=arm
-
+- go get github.com/mattn/goveralls
 install:
-  #- go get -u github.com/golang/lint/golint
-  #- go install -u github.com/golang/lint/golint
-  - go get -v github.com/mitchellh/gox
-  - go get -t -v ./...
+- go get -v github.com/mitchellh/gox
+- go get -t -v ./...
+script: go test -bench=. -benchmem -v ./...
+stages:
+- test
+- goveralls
+- Geofabrik
+- OSMfr
+- GisLab
+- Readme
+- build stable
+- build 1.7
+- build 1.8
+- build 1.9
+- build 1.10
+- build 1.11
+- build tip
+- deploy
+jobs:
+  include:
+  - stage: Geofabrik
+    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|geofabrik|Geofabrik)/
+      OR commit_message !~ /(ci|chore|docs|refactor|perf|style)/
+    go: stable
+    script: make geofabrik
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      github-token: $GITHUB_TOKEN
+      keep-history: true
+      target-branch: $branch
 
-# Use Makefile
-#script:
-#  - golint -min_confidence=0.8 ./...
-#  - go build -v ./...
-script:
-  - make geofabrik
-    if: commit_message !~ /(ci|chore|docs|refactor|perf|style)/
-  - make osmfr
-    if: commit_message !~ /(ci|chore|docs|refactor|perf|style)/
-  - go test -bench=. -benchmem -v ./...
-  - $GOPATH/bin/goveralls -service=travis-ci
-  - make
-
-deploy:
-  provider: releases
-  api_key:
-    secure: "o+lsHtm1FV0Hu/FHOyujZE11pTJuexUwWQtbiYr21Z4+BEcDzVN+Pxr2s1JnmNKcl7wqNBVSyNAnXUpqUWcgwi9liM9dOn+DcHUAT4eMM/zTm9vgf1qjxfoDJK3suXLQlzRNGkygz6PFGZvICjSmJTDsGTNpEIezFdXupOvZgnc5CT7qp+xBB95tQlWfaRVeCkSKqRyOK09J+scliwJR6SZlGqBUSDkb9RPMxpZ2wjNYf8fWQFHtzBcutT9gFJZLE2WPei6or6jOm7i6Haaa7Pg4Lhrlge7N1fq6FsQbcHqLX3F349voN5Nt+TtxY3sIeACNHqNkEuxkQnjAkTKoF+DTODXnwOjp6Mp1xb4LK+ejfYUppF6384sFDmKIc7xNJU1Mmwp+Bqw1q3WNyYqAbwLTC/UIlADIVglOH9r8bLJGikRPJPR3QnEznIL06l5lM34wNicvhqSKSIf06kxAXwAK7QD6prBPuTmlCZFNDASDw7E/IjUd3tXTgYvj8Fb8pMa4jsb7Bafgbo2sliicFuC+ua7CWvTWjlsMSJPLkdbEJku1VSdTTTV/rK8sqRbgc/Q/8BOQm/6ZCGntWtHacsefopaMuJR7hhMUaviNZOsjUunn+fkTNWByLX2nHHJAuyNbAXgpxwIkGGZONvfNxgi8Dw2Oz5sM6EUcKxSxTBM="
-  file:
-    - "download-geofabrik_darwin_386.zip"
-    - "download-geofabrik_darwin_amd64.zip"
-    - "download-geofabrik_freebsd_386.zip"
-    - "download-geofabrik_freebsd_amd64.zip"
-    - "download-geofabrik_freebsd_arm.zip"
-    - "download-geofabrik_linux_386.zip"
-    - "download-geofabrik_linux_amd64.zip"
-    - "download-geofabrik_linux_arm.zip"
-    - "download-geofabrik_netbsd_386.zip"
-    - "download-geofabrik_netbsd_amd64.zip"
-    - "download-geofabrik_netbsd_arm.zip"
-    - "download-geofabrik_openbsd_386.zip"
-    - "download-geofabrik_openbsd_amd64.zip"
-    - "download-geofabrik_windows_386.zip"
-    - "download-geofabrik_windows_amd64.zip"
-
-  skip_cleanup: true
-  on:
-    tags: true
-    go: "1.11"
+  - stage: OSMfr
+    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmap\.fr)/
+      OR commit_message !~ /(ci|chore|docs|refactor|perf|style)/
+    go: stable
+    script: make osmfr
+  - stage: GisLab
+    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|gislab|GisLab)/ OR commit_message
+      !~ /(ci|chore|docs|refactor|perf|style)/
+    go: stable
+    script: make gislab
+  - stage: Readme
+    if: tag IS present OR commit_message =~ /(Readme|readme)/
+    go: stable
+    script: make readme
+  - stage: goveralls
+    if: tag IS present OR commit_message !~ /(no-coverage|no-test)/
+    go: stable
+    script: "$GOPATH/bin/goveralls -service=travis-ci"
+  - stage: build 1.10
+    if: tag IS present OR ( commit_message =~ /(force-build|ci|chore|refactor|style|perf)/
+      AND commit_message !~ /(no-build|no-1_10)/ )
+    go: stable
+    script: make
+  - stage: build 1.9
+    if: tag IS present OR ( commit_message =~ /(force-build|ci|chore|refactor|style|perf)/
+      AND commit_message !~ /(no-build|no-1_9)/ )
+    go: '1.9'
+    script: make
+  - stage: build 1.8
+    if: tag IS present OR ( commit_message =~ /(force-build|ci|chore|refactor|style|perf)/
+      AND commit_message !~ /(no-build|no-1_8)/ )
+    go: '1.8'
+    script: make
+  - stage: build 1.7
+    if: tag IS present OR ( commit_message =~ /(force-build|ci|chore|refactor|style|perf)/
+      AND commit_message !~ /(no-build|no-1_7)/ )
+    go: '1.7'
+    script: make
+  - stage: build 1.11
+    if: tag IS present OR commit_message !~ /(no-build)/
+    go: '1.11'
+    script: make
+  - stage: build tip
+    if: tag IS present OR commit_message !~ /(no-build)/
+    go: tip
+    script: make
+  - stage: build stable
+    if: tag IS present OR commit_message !~ /(no-build)/
+    go: stable
+    script: make
+  - stage: deploy
+    if: commit_message =~ /(test-deploy|ci)/ OR (tag IS present AND tag !~ /(no-deploy)/
+      AND commit_message !~ /(no-deploy)/)
+    script: make
+    go: stable
+    deploy:
+      provider: releases
+      api_key:
+        secure: o+lsHtm1FV0Hu/FHOyujZE11pTJuexUwWQtbiYr21Z4+BEcDzVN+Pxr2s1JnmNKcl7wqNBVSyNAnXUpqUWcgwi9liM9dOn+DcHUAT4eMM/zTm9vgf1qjxfoDJK3suXLQlzRNGkygz6PFGZvICjSmJTDsGTNpEIezFdXupOvZgnc5CT7qp+xBB95tQlWfaRVeCkSKqRyOK09J+scliwJR6SZlGqBUSDkb9RPMxpZ2wjNYf8fWQFHtzBcutT9gFJZLE2WPei6or6jOm7i6Haaa7Pg4Lhrlge7N1fq6FsQbcHqLX3F349voN5Nt+TtxY3sIeACNHqNkEuxkQnjAkTKoF+DTODXnwOjp6Mp1xb4LK+ejfYUppF6384sFDmKIc7xNJU1Mmwp+Bqw1q3WNyYqAbwLTC/UIlADIVglOH9r8bLJGikRPJPR3QnEznIL06l5lM34wNicvhqSKSIf06kxAXwAK7QD6prBPuTmlCZFNDASDw7E/IjUd3tXTgYvj8Fb8pMa4jsb7Bafgbo2sliicFuC+ua7CWvTWjlsMSJPLkdbEJku1VSdTTTV/rK8sqRbgc/Q/8BOQm/6ZCGntWtHacsefopaMuJR7hhMUaviNZOsjUunn+fkTNWByLX2nHHJAuyNbAXgpxwIkGGZONvfNxgi8Dw2Oz5sM6EUcKxSxTBM=
+      file:
+      - download-geofabrik_darwin_386.zip
+      - download-geofabrik_darwin_amd64.zip
+      - download-geofabrik_freebsd_386.zip
+      - download-geofabrik_freebsd_amd64.zip
+      - download-geofabrik_freebsd_arm.zip
+      - download-geofabrik_linux_386.zip
+      - download-geofabrik_linux_amd64.zip
+      - download-geofabrik_linux_arm.zip
+      - download-geofabrik_linux_mips.zip
+      - download-geofabrik_linux_mips64.zip
+      - download-geofabrik_linux_mips64le.zip
+      - download-geofabrik_linux_mipsle.zip
+      - download-geofabrik_linux_s390x.zip
+      - download-geofabrik_netbsd_386.zip
+      - download-geofabrik_netbsd_amd64.zip
+      - download-geofabrik_netbsd_arm.zip
+      - download-geofabrik_openbsd_386.zip
+      - download-geofabrik_openbsd_amd64.zip
+      - download-geofabrik_windows_386.zip
+      - download-geofabrik_windows_amd64.zip
+      skip_cleanup: true
+      on:
+        tags: true
+env:
+  global:
+    secure: RDB5xi5zZQNqMbOMAG2hX25UyGWGcCjjuOtmtoMSVKhwvvfJgSp840UaT1X4fNlQWb9MXI2f/nWDA1j2XXLJCkCyBWlWgPAsWLi9DwalEFYBVlrAeT9prWHGfsAPa4UbMVnGFfWdNy3rcfOTJUt2FC77S9sxm0kHP4LyCKE459QdmTc5sn9Cb9LuVLtanzb19NImi3F00Wc9g2KoD1CZXncde6iv34NfKgdUGvFhMofensGgD3qAJsjiREC4Vk2oO+9z5dCQ/GmNlFDG/FVst80gsQYsi6m5K5suC+jvYAmFDaENDwgTsRuqYSVnlSxB3IRYkXUPtllKfvx1Z+8ARFxRrX1DWcUkxb2CKq/DIVFPYillA8Wpcr3iBw+S5Tc9Q1G7LQLbc6g0NohdUrIrORP3TwLkq8pmyd+w4SMurGDod1kNfmprNTbgVlLvhCNSpRtyA1YZ74/nRzti+a/TG8zwCbXrlBkSyVw3xmPehEQ0Uu8R3UssvymN1fxKpBDpvcub6nv0k+mRT7mnZvM8uclojrq1rS/2ecq0E0fCdHBZcpwzDG7E7k4KC8e122sLNe4sdscEQUh050gTBF2PkLy7fQF6P+UzkFgJvzd7EPJ99gwxwiMMfKQiR/qFZHZ+j+qIxipc91fA4l0Qn9J89wHVzXJJ5GSCWIX0gb8TNNw=

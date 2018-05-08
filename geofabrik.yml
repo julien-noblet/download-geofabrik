@@ -1262,7 +1262,7 @@ elements:
     parent: nordrhein-westfalen
   durham:
     id: durham
-    name: Durham
+    name: durham
     files:
     - osm.pbf
     - osm.pbf.md5
@@ -4673,7 +4673,7 @@ elements:
     parent: asia
   tyne-and-wear:
     id: tyne-and-wear
-    name: Tyne and Wear
+    name: tyne-and-wear
     files:
     - osm.pbf
     - osm.pbf.md5
