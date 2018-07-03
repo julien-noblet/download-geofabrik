@@ -3,7 +3,7 @@ pkgfiles = CHANGELOG.md README.md LICENSE geofabrik.yml openstreetmap.fr.yml gis
 default: clean all
 clean:
 	go clean
-	rm -rf download-geofabrik_* *.zip
+	rm -rf download-geofabrik_*/ *.zip
 gox:
 	gox --output="download-geofabrik_{{.OS}}_{{.Arch}}/{{.Dir}}"
 geofabrik:

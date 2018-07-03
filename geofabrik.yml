@@ -261,6 +261,8 @@ elements:
     files:
     - osm.pbf
     - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -515,6 +517,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -565,6 +569,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -627,6 +633,8 @@ elements:
     files:
     - osm.pbf
     - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -792,6 +800,8 @@ elements:
     files:
     - osm.pbf
     - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -1049,6 +1059,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -1099,6 +1111,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -1245,6 +1259,19 @@ elements:
     - kml
     - state
     parent: nordrhein-westfalen
+  durham:
+    id: durham
+    name: Durham
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    - kml
+    - state
+    parent: england
   east-sussex:
     id: east-sussex
     name: East Sussex
@@ -1431,6 +1458,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -1894,6 +1923,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -2034,6 +2065,8 @@ elements:
     files:
     - osm.pbf
     - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -2434,6 +2467,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -2510,6 +2545,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -2739,6 +2776,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -3514,6 +3553,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -4195,6 +4236,8 @@ elements:
     files:
     - osm.pbf
     - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -4322,6 +4365,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -4579,6 +4624,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -4603,6 +4650,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -4620,6 +4669,19 @@ elements:
     - kml
     - state
     parent: asia
+  tyne-and-wear:
+    id: tyne-and-wear
+    name: Tyne and Wear
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    - kml
+    - state
+    parent: england
   uganda:
     id: uganda
     name: Uganda
@@ -4822,6 +4884,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
