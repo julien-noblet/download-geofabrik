@@ -1,5 +1,13 @@
 # Change Log
 
+## [Unreleased](https://github.com/julien-noblet/download-geofabrik/tree/HEAD)
+
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.0...HEAD)
+
+**Fixed bugs:**
+
+- download-geofabrik\_test.go is deleted by "make clean" [\#36](https://github.com/julien-noblet/download-geofabrik/issues/36)
+
 ## [v2.3.0](https://github.com/julien-noblet/download-geofabrik/tree/v2.3.0) (2018-05-09)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.0-rc0...v2.3.0)
 
