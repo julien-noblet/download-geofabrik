@@ -97,7 +97,7 @@ Commands:
 | armenia                                     | Asia                     | Armenia                                | sPBpSk  |
 | arnsberg-regbez                             | Nordrhein-Westfalen      | Regierungsbezirk Arnsberg              | sPBpSk  |
 | asia                                        |                          | Asia                                   | sPBpk   |
-| australia                                   | Australia and Oceania    | Australia                              | sPBpk   |
+| australia                                   | Australia and Oceania    | Australia                              | sPBpSk  |
 | australia-oceania                           |                          | Australia and Oceania                  | sPBpk   |
 | austria                                     | Europe                   | Austria                                | sPBpSk  |
 | auvergne                                    | France                   | Auvergne                               | sPBpSk  |
@@ -510,6 +510,8 @@ Total elements: 396
 ## List of elements from openstreetmap.fr
 |                SHORTNAME                |        IS IN        |                LONG NAME                | FORMATS |
 |-----------------------------------------|---------------------|-----------------------------------------|---------|
+| abruzzo                                 | italy               | abruzzo                                 | sPp     |
+| aceh                                    | indonesia           | aceh                                    | sPp     |
 | afghanistan                             | asia                | afghanistan                             | sPp     |
 | africa                                  |                     | africa                                  | sPp     |
 | algeria                                 | africa              | algeria                                 | sPp     |
@@ -534,10 +536,15 @@ Total elements: 396
 | austria                                 | europe              | austria                                 | sPp     |
 | bahamas                                 | central-america     | bahamas                                 | sPp     |
 | bahrain                                 | asia                | bahrain                                 | sPp     |
+| bali                                    | indonesia           | bali                                    | sPp     |
+| bangka_belitung_islands                 | indonesia           | bangka_belitung_islands                 | sPp     |
 | banskobystricky                         | slovakia            | banskobystricky                         | sPp     |
+| banten                                  | indonesia           | banten                                  | sPp     |
 | barbados                                | central-america     | barbados                                | sPp     |
+| basilicata                              | italy               | basilicata                              | sPp     |
 | beijing                                 | china               | beijing                                 | sPp     |
 | belgium                                 | europe              | belgium                                 | sPp     |
+| bengkulu                                | indonesia           | bengkulu                                | sPp     |
 | benin                                   | africa              | benin                                   | sPp     |
 | bermuda                                 | north-america       | bermuda                                 | sPp     |
 | bhutan                                  | asia                | bhutan                                  | sPp     |
@@ -551,8 +558,10 @@ Total elements: 396
 | burgenland                              | austria             | burgenland                              | sPp     |
 | burkina_faso                            | africa              | burkina_faso                            | sPp     |
 | burundi                                 | africa              | burundi                                 | sPp     |
+| calabria                                | italy               | calabria                                | sPp     |
 | cambodia                                | asia                | cambodia                                | sPp     |
 | cameroon                                | africa              | cameroon                                | sPp     |
+| campania                                | italy               | campania                                | sPp     |
 | canada                                  | north-america       | canada                                  | p       |
 | canarias                                | spain               | canarias                                | sPp     |
 | cantabria                               | spain               | cantabria                               | sPp     |
@@ -564,6 +573,9 @@ Total elements: 396
 | cayman_islands                          | central-america     | cayman_islands                          | sPp     |
 | central-america                         |                     | central-america                         | sPp     |
 | central_african_republic                | africa              | central_african_republic                | sPp     |
+| central_java                            | indonesia           | central_java                            | sPp     |
+| central_kalimantan                      | indonesia           | central_kalimantan                      | sPp     |
+| central_sulawesi                        | indonesia           | central_sulawesi                        | sPp     |
 | ceuta                                   | spain               | ceuta                                   | sPp     |
 | chad                                    | africa              | chad                                    | sPp     |
 | chandigarh                              | india               | chandigarh                              | sPp     |
@@ -595,9 +607,13 @@ Total elements: 396
 | drenthe                                 | netherlands         | drenthe                                 | sPp     |
 | dusseldorf                              | nordrhein_westfalen | dusseldorf                              | sPp     |
 | east                                    | england             | east                                    | sPp     |
+| east_java                               | indonesia           | east_java                               | sPp     |
+| east_kalimantan                         | indonesia           | east_kalimantan                         | sPp     |
 | east_midlands                           | england             | east_midlands                           | sPp     |
+| east_nusa_tenggara                      | indonesia           | east_nusa_tenggara                      | sPp     |
 | east_timor                              | asia                | east_timor                              | sPp     |
 | el_salvador                             | central-america     | el_salvador                             | sPp     |
+| emilia_romagna                          | italy               | emilia_romagna                          | sPp     |
 | england                                 | united_kingdom      | england                                 | sPp     |
 | equatorial_guinea                       | africa              | equatorial_guinea                       | sPp     |
 | eritrea                                 | africa              | eritrea                                 | sPp     |
@@ -614,6 +630,7 @@ Total elements: 396
 | france_metro_dom_com_nc                 |                     | france_metro_dom_com_nc                 | sP      |
 | france_taaf                             | africa              | france_taaf                             | sPp     |
 | friesland                               | netherlands         | friesland                               | sPp     |
+| friuli_venezia_giulia                   | italy               | friuli_venezia_giulia                   | sPp     |
 | fujian                                  | china               | fujian                                  | sPp     |
 | gabon                                   | africa              | gabon                                   | sPp     |
 | galicia                                 | spain               | galicia                                 | sPp     |
@@ -625,6 +642,7 @@ Total elements: 396
 | ghana                                   | africa              | ghana                                   | sPp     |
 | gibraltar                               | europe              | gibraltar                               | sPp     |
 | goa                                     | india               | goa                                     | sPp     |
+| gorontalo                               | indonesia           | gorontalo                               | sPp     |
 | greater_london                          | england             | greater_london                          | sPp     |
 | grenada                                 | central-america     | grenada                                 | sPp     |
 | groningen                               | netherlands         | groningen                               | sPp     |
@@ -651,12 +669,16 @@ Total elements: 396
 | hunan                                   | china               | hunan                                   | sPp     |
 | illes_balears                           | spain               | illes_balears                           | sPp     |
 | india                                   | asia                | india                                   | sPp     |
+| indonesia                               | asia                | indonesia                               | sPp     |
 | inner_mongolia                          | china               | inner_mongolia                          | sPp     |
 | ireland                                 | europe              | ireland                                 | sPp     |
 | israel                                  | asia                | israel                                  | sPp     |
 | israel_and_palestine                    | asia                | israel_and_palestine                    | sPp     |
+| italy                                   | europe              | italy                                   | sPp     |
 | ivory_coast                             | africa              | ivory_coast                             | sPp     |
+| jakarta                                 | indonesia           | jakarta                                 | sPp     |
 | jamaica                                 | central-america     | jamaica                                 | sPp     |
+| jambi                                   | indonesia           | jambi                                   | sPp     |
 | jammu_and_kashmir                       | india               | jammu_and_kashmir                       | sPp     |
 | japan                                   | asia                | japan                                   | sPp     |
 | jersey                                  | europe              | jersey                                  | sPp     |
@@ -684,14 +706,19 @@ Total elements: 396
 | kyushu                                  | japan               | kyushu                                  | sPp     |
 | la_rioja                                | spain               | la_rioja                                | sPp     |
 | lakshadweep                             | india               | lakshadweep                             | sPp     |
+| lampung                                 | indonesia           | lampung                                 | sPp     |
 | laos                                    | asia                | laos                                    | sPp     |
+| lazio                                   | italy               | lazio                                   | sPp     |
 | lesotho                                 | africa              | lesotho                                 | sPp     |
 | liaoning                                | china               | liaoning                                | sPp     |
 | liberecky                               | czech_republic      | liberecky                               | sPp     |
+| liguria                                 | italy               | liguria                                 | sPp     |
 | limburg                                 | netherlands         | limburg                                 | sPp     |
 | lodzkie                                 | poland              | lodzkie                                 | sPp     |
+| lombardia                               | italy               | lombardia                               | sPp     |
 | lubelskie                               | poland              | lubelskie                               | sPp     |
 | lubuskie                                | poland              | lubuskie                                | sPp     |
+| luxembourg                              | europe              | luxembourg                              | sPp     |
 | macau                                   | china               | macau                                   | sPp     |
 | madhya_pradesh                          | india               | madhya_pradesh                          | sPp     |
 | maharashtra                             | india               | maharashtra                             | sPp     |
@@ -700,7 +727,9 @@ Total elements: 396
 | maldives                                | asia                | maldives                                | sPp     |
 | mali                                    | africa              | mali                                    | sPp     |
 | malopolskie                             | poland              | malopolskie                             | sPp     |
+| maluku                                  | indonesia           | maluku                                  | sPp     |
 | manipur                                 | india               | manipur                                 | sPp     |
+| marche                                  | italy               | marche                                  | sPp     |
 | marshall-islands                        | south-america       | marshall-islands                        | sPp     |
 | marshall_islands                        | oceania             | marshall_islands                        | sPp     |
 | martinique                              | central-america     | martinique                              | sPp     |
@@ -712,6 +741,7 @@ Total elements: 396
 | melilla                                 | spain               | melilla                                 | sPp     |
 | micronesia                              | oceania             | micronesia                              | sPp     |
 | mizoram                                 | india               | mizoram                                 | sPp     |
+| molise                                  | italy               | molise                                  | sPp     |
 | monaco                                  | europe              | monaco                                  | sPp     |
 | montserrat                              | central-america     | montserrat                              | sPp     |
 | moravskoslezsky                         | czech_republic      | moravskoslezsky                         | sPp     |
@@ -738,6 +768,10 @@ Total elements: 396
 | norfolk_island                          | australia           | norfolk_island                          | sPp     |
 | north-america                           |                     | north-america                           | p       |
 | north_east                              | england             | north_east                              | sPp     |
+| north_kalimantan                        | indonesia           | north_kalimantan                        | sPp     |
+| north_maluku                            | indonesia           | north_maluku                            | sPp     |
+| north_sulawesi                          | indonesia           | north_sulawesi                          | sPp     |
+| north_sumatra                           | indonesia           | north_sumatra                           | sPp     |
 | north_west                              | england             | north_west                              | sPp     |
 | northern_ireland                        | united_kingdom      | northern_ireland                        | sPp     |
 | northern_mariana_islands                | oceania             | northern_mariana_islands                | sPp     |
@@ -752,9 +786,11 @@ Total elements: 396
 | palau                                   | oceania             | palau                                   | sPp     |
 | palestine                               | asia                | palestine                               | sPp     |
 | panama                                  | central-america     | panama                                  | sPp     |
+| papua                                   | indonesia           | papua                                   | sPp     |
 | papua_new_guinea                        | oceania             | papua_new_guinea                        | sPp     |
 | paraguay                                | south-america       | paraguay                                | sPp     |
 | pardubicky                              | czech_republic      | pardubicky                              | sPp     |
+| piemonte                                | italy               | piemonte                                | sPp     |
 | pitcairn                                | south-america       | pitcairn                                | sPp     |
 | plzensky                                | czech_republic      | plzensky                                | sPp     |
 | podkarpackie                            | poland              | podkarpackie                            | sPp     |
@@ -766,6 +802,7 @@ Total elements: 396
 | presovsky                               | slovakia            | presovsky                               | sPp     |
 | puducherry                              | india               | puducherry                              | sPp     |
 | puerto_rico                             | central-america     | puerto_rico                             | sPp     |
+| puglia                                  | italy               | puglia                                  | sPp     |
 | punjab                                  | india               | punjab                                  | sPp     |
 | qatar                                   | asia                | qatar                                   | sPp     |
 | qinghai                                 | china               | qinghai                                 | sPp     |
@@ -774,6 +811,9 @@ Total elements: 396
 | rajasthan                               | india               | rajasthan                               | sPp     |
 | region_de_murcia                        | spain               | region_de_murcia                        | sPp     |
 | reunion                                 | africa              | reunion                                 | sPp     |
+| riau                                    | indonesia           | riau                                    | sPp     |
+| riau_islands                            | indonesia           | riau_islands                            | sPp     |
+| russia                                  |                     | russia                                  | p       |
 | rwanda                                  | africa              | rwanda                                  | sPp     |
 | saint_barthelemy                        | central-america     | saint_barthelemy                        | sPp     |
 | saint_helena_ascension_tristan_da_cunha | africa              | saint_helena_ascension_tristan_da_cunha | sPp     |
@@ -785,6 +825,7 @@ Total elements: 396
 | salzburg                                | austria             | salzburg                                | sPp     |
 | samoa                                   | south-america       | samoa                                   | sPp     |
 | sao_tome_and_principe                   | africa              | sao_tome_and_principe                   | sPp     |
+| sardegna                                | italy               | sardegna                                | sPp     |
 | saudi_arabia                            | asia                | saudi_arabia                            | sPp     |
 | senegal                                 | africa              | senegal                                 | sPp     |
 | seychelles                              | africa              | seychelles                              | sPp     |
@@ -794,6 +835,7 @@ Total elements: 396
 | shanxi                                  | china               | shanxi                                  | sPp     |
 | shikoku                                 | japan               | shikoku                                 | sPp     |
 | sichuan                                 | china               | sichuan                                 | sPp     |
+| sicilia                                 | italy               | sicilia                                 | sPp     |
 | sikkim                                  | india               | sikkim                                  | sPp     |
 | singapore                               | asia                | singapore                               | sPp     |
 | sint_maarten                            | central-america     | sint_maarten                            | sPp     |
@@ -805,8 +847,12 @@ Total elements: 396
 | south_australia                         | australia           | south_australia                         | sPp     |
 | south_east                              | england             | south_east                              | sPp     |
 | south_georgia_and_south_sandwich        | south-america       | south_georgia_and_south_sandwich        | sPp     |
+| south_kalimantan                        | indonesia           | south_kalimantan                        | sPp     |
 | south_sudan                             | africa              | south_sudan                             | sPp     |
+| south_sulawesi                          | indonesia           | south_sulawesi                          | sPp     |
+| south_sumatra                           | indonesia           | south_sumatra                           | sPp     |
 | south_west                              | england             | south_west                              | sPp     |
+| southeast_sulawesi                      | indonesia           | southeast_sulawesi                      | sPp     |
 | spain                                   | europe              | spain                                   | sPp     |
 | steiermark                              | austria             | steiermark                              | sPp     |
 | stredocesky                             | czech_republic      | stredocesky                             | sPp     |
@@ -825,14 +871,17 @@ Total elements: 396
 | tohoku                                  | japan               | tohoku                                  | sPp     |
 | tokelau                                 | south-america       | tokelau                                 | sPp     |
 | tonga                                   | south-america       | tonga                                   | sPp     |
+| toscana                                 | italy               | toscana                                 | sPp     |
 | trenciansky                             | slovakia            | trenciansky                             | sPp     |
-| trinidad_and_tobago                     | south-america       | trinidad_and_tobago                     | sPp     |
+| trentino_alto_adige                     | italy               | trentino_alto_adige                     | sPp     |
+| trinidad_and_tobago                     | central-america     | trinidad_and_tobago                     | sPp     |
 | tripura                                 | india               | tripura                                 | sPp     |
 | trnavsky                                | slovakia            | trnavsky                                | sPp     |
 | tunisia                                 | africa              | tunisia                                 | sPp     |
 | turks_and_caicos_islands                | central-america     | turks_and_caicos_islands                | sPp     |
 | tuvalu                                  | oceania             | tuvalu                                  | sPp     |
 | uganda                                  | africa              | uganda                                  | sPp     |
+| umbria                                  | italy               | umbria                                  | sPp     |
 | united_arab_emirates                    | asia                | united_arab_emirates                    | sPp     |
 | united_kingdom                          | europe              | united_kingdom                          | sPp     |
 | united_states_virgin_islands            | central-america     | united_states_virgin_islands            | sPp     |
@@ -841,7 +890,9 @@ Total elements: 396
 | utrecht                                 | netherlands         | utrecht                                 | sPp     |
 | uttar_pradesh                           | india               | uttar_pradesh                           | sPp     |
 | uttarakhand                             | india               | uttarakhand                             | sPp     |
+| valle_aosta                             | italy               | valle_aosta                             | sPp     |
 | vanuatu                                 | oceania             | vanuatu                                 | sPp     |
+| veneto                                  | italy               | veneto                                  | sPp     |
 | venezuela                               | south-america       | venezuela                               | sPp     |
 | victoria                                | australia           | victoria                                | sPp     |
 | vorarlberg                              | austria             | vorarlberg                              | sPp     |
@@ -851,12 +902,19 @@ Total elements: 396
 | wallonia_german_community               | belgium             | wallonia_german_community               | sPp     |
 | warminsko_mazurskie                     | poland              | warminsko_mazurskie                     | sPp     |
 | west_bengal                             | india               | west_bengal                             | sPp     |
+| west_java                               | indonesia           | west_java                               | sPp     |
+| west_kalimantan                         | indonesia           | west_kalimantan                         | sPp     |
 | west_midlands                           | england             | west_midlands                           | sPp     |
+| west_nusa_tenggara                      | indonesia           | west_nusa_tenggara                      | sPp     |
+| west_papua                              | indonesia           | west_papua                              | sPp     |
+| west_sulawesi                           | indonesia           | west_sulawesi                           | sPp     |
+| west_sumatra                            | indonesia           | west_sumatra                            | sPp     |
 | western_australia                       | australia           | western_australia                       | sPp     |
 | western_sahara                          | africa              | western_sahara                          | sPp     |
 | wielkopolskie                           | poland              | wielkopolskie                           | sPp     |
 | wien                                    | austria             | wien                                    | sPp     |
 | xinjiang                                | china               | xinjiang                                | sPp     |
+| yogyakarta                              | indonesia           | yogyakarta                              | sPp     |
 | yorkshire_and_the_humber                | england             | yorkshire_and_the_humber                | sPp     |
 | yunnan                                  | china               | yunnan                                  | sPp     |
 | zachodniopomorskie                      | poland              | zachodniopomorskie                      | sPp     |
@@ -867,7 +925,7 @@ Total elements: 396
 | zimbabwe                                | africa              | zimbabwe                                | sPp     |
 | zlinsky                                 | czech_republic      | zlinsky                                 | sPp     |
 | zuid_holland                            | netherlands         | zuid_holland                            | sPp     |
-Total elements: 357
+Total elements: 415
 
 ## List of elements from glis-lab.info
 | SHORTNAME | IS IN |           LONG NAME            | FORMATS |
