@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/stretchr/testify/assert"
 )
 
