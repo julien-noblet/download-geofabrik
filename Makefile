@@ -15,7 +15,7 @@ osmfr:
 gislab:
 	echo "Generating gislab.yml"
 	go run $(gofiles) --service="gislab" generate -v
-readme: geofabrik osmfr gislab
+readme: 
 	cat .README.md1 > README.md
 	go run $(gofiles) --help-long >> README.md 
 	cat .README.md2 >> README.md
@@ -26,7 +26,7 @@ readme: geofabrik osmfr gislab
 	echo "" >> README.md
 	echo "## List of elements from glis-lab.info" >> README.md
 	go run $(gofiles) --service "gislab" list --markdown >> README.md
-package: gox geofabrik osmfr gislab
+package: gox 
 	for i in download-geofabrik_* ;\
 	do \
 		  echo "Compressing $$i";\
