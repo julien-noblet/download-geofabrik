@@ -42,7 +42,7 @@ jobs:
       skip-cleanup: true
       github-token: $GITHUB_TOKEN
       keep-history: true
-      target-branch: $branch
+      target-branch: $TRAVIS_BRANCH
       on:
         all_branches: true
   - stage: OSMfr
