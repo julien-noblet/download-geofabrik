@@ -30,9 +30,10 @@ install:
 #  - golint -min_confidence=0.8 ./...
 #  - go build -v ./...
 script:
-  - if: commit_message !~ /(ci|chore|docs|refactor|perf|style)/
-    - make geofabrik
-    - make osmfr
+  - make geofabrik
+    if: commit_message !~ /(ci|chore|docs|refactor|perf|style)/
+  - make osmfr
+    if: commit_message !~ /(ci|chore|docs|refactor|perf|style)/
   - go test -bench=. -benchmem -v ./...
   - $GOPATH/bin/goveralls -service=travis-ci
   - make
