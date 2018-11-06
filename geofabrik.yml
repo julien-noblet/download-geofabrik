@@ -4839,6 +4839,19 @@ elements:
     - kml
     - state
     parent: asia
+  venezuela:
+    id: venezuela
+    name: Venezuela
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    - kml
+    - state
+    parent: south-america
   vermont:
     id: vermont
     name: Vermont
