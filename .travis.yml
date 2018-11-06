@@ -43,7 +43,7 @@ jobs:
       github-token: $GITHUB_TOKEN
       keep-history: true
       target-branch: $branch
-
+      all_branches: true
   - stage: OSMfr
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmap\.fr)/
       OR commit_message !~ /(ci|chore|docs|refactor|perf|style)/
