@@ -478,7 +478,7 @@ func TestExt_parseGeofabrik(t *testing.T) {
 			args:  args{doc: f(geofabrikDistrictOfColumbiaHTML)},
 			want1: true,
 			want: ElementSlice{
-				"us": {ID: "us", File: "", Meta: true, Name: "United States of America", Formats: []string{}, Parent: "north-america"},
+				"us":                   {ID: "us", File: "", Meta: true, Name: "United States of America", Formats: []string{}, Parent: "north-america"},
 				"district-of-columbia": {ID: "district-of-columbia", File: "", Meta: false, Name: "District of Columbia", Formats: []string{"osm.pbf", "osm.pbf.md5", "shp.zip", "osm.bz2", "osm.bz2.md5", "poly", "kml", "state"}, Parent: "us"},
 			},
 		},

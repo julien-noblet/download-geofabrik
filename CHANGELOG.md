@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/julien-noblet/download-geofabrik/tree/HEAD)
-
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.0...HEAD)
+## [test](https://github.com/julien-noblet/download-geofabrik/tree/test) (2018-09-15)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.0...test)
 
 **Fixed bugs:**
 
