@@ -286,7 +286,7 @@ Commands:
 | madagascar                                  | Africa                   | Madagascar                             | sPBpSk  |
 | maine                                       | United States of America | Maine                                  | sPBpSk  |
 | malawi                                      | Africa                   | Malawi                                 | sPBpSk  |
-| malaysia-singapore-brunei                   | Asia                     | Malaysia, Singapore, and               | sPBpk   |
+| malaysia-singapore-brunei                   | Asia                     | Malaysia, Singapore, and               | sPBpSk  |
 |                                             |                          | Brunei                                 |         |
 | maldives                                    | Asia                     | Maldives                               | sPBpSk  |
 | mali                                        | Africa                   | Mali                                   | sPBpSk  |

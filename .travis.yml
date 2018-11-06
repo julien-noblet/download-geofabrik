@@ -31,7 +31,9 @@ install:
 #  - go build -v ./...
 script:
   - make geofabrik
+    if: commit_message !~ /(ci|chore|docs|refactor|perf|style)/
   - make osmfr
+    if: commit_message !~ /(ci|chore|docs|refactor|perf|style)/
   - go test -bench=. -benchmem -v ./...
   - $GOPATH/bin/goveralls -service=travis-ci
   - make
