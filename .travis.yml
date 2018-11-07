@@ -15,7 +15,7 @@ install:
 - go get -v github.com/mitchellh/gox
 - go get -t -v ./...
 script: go test -bench=. -benchmem -v ./...
-stages:
+  if: tag IS present OR commit_message !~ /(no-test)/
 - test
 - goveralls
 - Geofabrik
@@ -34,7 +34,7 @@ jobs:
   include:
   - stage: Geofabrik
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|geofabrik|Geofabrik)/
-      OR commit_message !~ /(ci|chore|docs|refactor|perf|style)/
+      AND commit_message !~ /(deploy)/
     go: stable
     script: make geofabrik
     deploy:
@@ -47,12 +47,10 @@ jobs:
         all_branches: true
   - stage: OSMfr
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmap\.fr)/
-      OR commit_message !~ /(ci|chore|docs|refactor|perf|style)/
     go: stable
     script: make osmfr
   - stage: GisLab
-    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|gislab|GisLab)/ OR commit_message
-      !~ /(ci|chore|docs|refactor|perf|style)/
+    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|gislab|GisLab)/
     go: stable
     script: make gislab
   - stage: Readme
@@ -64,27 +62,28 @@ jobs:
     go: stable
     script: "$GOPATH/bin/goveralls -service=travis-ci"
   - stage: build 1.10
-    if: tag IS present OR ( commit_message =~ /(force-build|ci|chore|refactor|style|perf)/
+    if: tag IS present OR ( commit_message =~ /(force-build|1_10)/
       AND commit_message !~ /(no-build|no-1_10)/ )
     go: stable
     script: make
   - stage: build 1.9
-    if: tag IS present OR ( commit_message =~ /(force-build|ci|chore|refactor|style|perf)/
+    if: tag IS present OR ( commit_message =~ /(force-build|1_9)/
       AND commit_message !~ /(no-build|no-1_9)/ )
     go: '1.9'
     script: make
   - stage: build 1.8
-    if: tag IS present OR ( commit_message =~ /(force-build|ci|chore|refactor|style|perf)/
+    if: tag IS present OR ( commit_message =~ /(force-build|1_8)/
       AND commit_message !~ /(no-build|no-1_8)/ )
     go: '1.8'
     script: make
   - stage: build 1.7
-    if: tag IS present OR ( commit_message =~ /(force-build|ci|chore|refactor|style|perf)/
+    if: tag IS present OR ( commit_message =~ /(force-build|1_9)/
       AND commit_message !~ /(no-build|no-1_7)/ )
     go: '1.7'
     script: make
   - stage: build 1.11
-    if: tag IS present OR commit_message !~ /(no-build)/
+    if: tag IS present OR ( commit_message =~ /(force-build|1_11)/
+      AND commit_message !~ /(no-build|no-1_11)/ )
     go: '1.11'
     script: make
   - stage: build tip
