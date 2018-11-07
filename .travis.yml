@@ -7,14 +7,13 @@ go:
 - '1.8'
 - '1.7'
 - stable
-- master
 - tip
 before_install:
 - go get github.com/mattn/goveralls
 install:
 - go get -v github.com/mitchellh/gox
 - go get -t -v ./...
-
+script: go test -bench=. -benchmem -v ./...
 
 stages:
 - test
@@ -24,7 +23,6 @@ stages:
 - GisLab
 - Readme
 - build stable
-- build master
 - build 1.7
 - build 1.8
 - build 1.9
@@ -34,8 +32,6 @@ stages:
 - deploy
 jobs:
   include:
-  - script: go test -bench=. -benchmem -v ./...
-    if: tag IS present OR commit_message !~ /(no-test)/
   - stage: Geofabrik
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|geofabrik|Geofabrik)/
       AND commit_message !~ /(Deploy)/
@@ -53,18 +49,42 @@ jobs:
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmap\.fr)/
     go: stable
     script: make osmfr
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      github-token: $GITHUB_TOKEN
+      keep-history: true
+      target-branch: $TRAVIS_BRANCH
+      on:
+        all_branches: true
   - stage: GisLab
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|gislab|GisLab)/
     go: stable
     script: make gislab
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      github-token: $GITHUB_TOKEN
+      keep-history: true
+      target-branch: $TRAVIS_BRANCH
+      on:
+        all_branches: true
   - stage: Readme
     if: tag IS present OR commit_message =~ /(Readme|readme)/
     go: stable
     script: make readme
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      github-token: $GITHUB_TOKEN
+      keep-history: true
+      target-branch: $TRAVIS_BRANCH
+      on:
+        all_branches: true
   - stage: goveralls
     if: tag IS present OR commit_message !~ /(no-coverage|no-test)/
     go: stable
-    script: "$GOPATH/bin/goveralls -service=travis-ci"
+    script: go test -bench=. -benchmem -v ./... && "$GOPATH/bin/goveralls -service=travis-ci"
   - stage: build 1.10
     if: tag IS present OR ( commit_message =~ /(force-build|1_10)/
       AND commit_message !~ /(no-build|no-1_10)/ )
