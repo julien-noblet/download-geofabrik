@@ -1247,6 +1247,17 @@ elements:
     - kml
     - state
     parent: england
+  drenthe:
+    id: drenthe
+    name: Drenthe
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - poly
+    - kml
+    - state
+    parent: netherlands
   duesseldorf-regbez:
     id: duesseldorf-regbez
     name: Regierungsbezirk Düsseldorf
@@ -1465,6 +1476,17 @@ elements:
     - kml
     - state
     parent: europe
+  flevoland:
+    id: flevoland
+    name: Flevoland
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - poly
+    - kml
+    - state
+    parent: netherlands
   florida:
     id: florida
     name: Florida
@@ -1516,6 +1538,19 @@ elements:
     - kml
     - state
     parent: baden-wuerttemberg
+  friesland:
+    id: friesland
+    name: Friesland
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    - kml
+    - state
+    parent: netherlands
   gabon:
     id: gabon
     name: Gabon
@@ -1542,6 +1577,19 @@ elements:
     - kml
     - state
     parent: asia
+  gelderland:
+    id: gelderland
+    name: Gelderland
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    - kml
+    - state
+    parent: netherlands
   georgia-eu:
     id: georgia-eu
     file: georgia
@@ -1672,6 +1720,17 @@ elements:
     - kml
     - state
     parent: north-america
+  groningen:
+    id: groningen
+    name: Groningen
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - poly
+    - kml
+    - state
+    parent: netherlands
   guadeloupe:
     id: guadeloupe
     name: Guadeloupe
@@ -2435,6 +2494,17 @@ elements:
     - kml
     - state
     parent: europe
+  limburg:
+    id: limburg
+    name: Limburg
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - poly
+    - kml
+    - state
+    parent: netherlands
   limousin:
     id: limousin
     name: Limousin
@@ -3238,6 +3308,28 @@ elements:
     - kml
     - state
     parent: africa
+  noord-brabant:
+    id: noord-brabant
+    name: Noord-Brabant
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - poly
+    - kml
+    - state
+    parent: netherlands
+  noord-holland:
+    id: noord-holland
+    name: Noord-Holland
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - poly
+    - kml
+    - state
+    parent: netherlands
   nord-est:
     id: nord-est
     name: Nord-Est
@@ -3587,6 +3679,17 @@ elements:
     - kml
     - state
     parent: us
+  overijssel:
+    id: overijssel
+    name: Overijssel
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - poly
+    - kml
+    - state
+    parent: netherlands
   oxfordshire:
     id: oxfordshire
     name: Oxfordshire
@@ -4827,6 +4930,17 @@ elements:
     - kml
     - state
     parent: us
+  utrecht:
+    id: utrecht
+    name: Utrecht
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - poly
+    - kml
+    - state
+    parent: netherlands
   uzbekistan:
     id: uzbekistan
     name: Uzbekistan
@@ -5126,6 +5240,19 @@ elements:
     - kml
     - state
     parent: africa
+  zeeland:
+    id: zeeland
+    name: Zeeland
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    - kml
+    - state
+    parent: netherlands
   zimbabwe:
     id: zimbabwe
     name: Zimbabwe
@@ -5139,3 +5266,14 @@ elements:
     - kml
     - state
     parent: africa
+  zuid-holland:
+    id: zuid-holland
+    name: Zuid-Holland
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - poly
+    - kml
+    - state
+    parent: netherlands
