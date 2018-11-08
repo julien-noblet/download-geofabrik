@@ -34,7 +34,7 @@ jobs:
   include:
   - stage: Geofabrik
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|geofabrik|Geofabrik)/
-      AND commit_message !~ /(Deploy)/
+      AND $TRAVIS_PULL_REQUEST = false
     go: stable
     script: make geofabrik
     deploy:
@@ -47,6 +47,7 @@ jobs:
         all_branches: true
   - stage: OSMfr
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmap\.fr)/
+      AND $TRAVIS_PULL_REQUEST = false
     go: stable
     script: make osmfr
     deploy:
@@ -59,6 +60,7 @@ jobs:
         all_branches: true
   - stage: GisLab
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|gislab|GisLab)/
+      AND $TRAVIS_PULL_REQUEST = false
     go: stable
     script: make gislab
     deploy:
@@ -70,7 +72,8 @@ jobs:
       on:
         all_branches: true
   - stage: Readme
-    if: tag IS present OR commit_message =~ /(Readme|readme)/
+    if: tag IS present
+      AND $TRAVIS_PULL_REQUEST = false
     go: stable
     script: make readme
     deploy:
