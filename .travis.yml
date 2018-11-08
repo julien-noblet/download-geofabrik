@@ -84,7 +84,9 @@ jobs:
   - stage: goveralls
     if: tag IS present OR commit_message !~ /(no-coverage|no-test)/
     go: stable
-    script: go test -bench=. -benchmem -v ./... && "$GOPATH/bin/goveralls -service=travis-ci"
+    script: 
+    - go test -bench=. -benchmem -v ./...
+    - "$GOPATH/bin/goveralls -service=travis-ci"
   - stage: build 1.10
     if: tag IS present OR ( commit_message =~ /(force-build|1_10)/
       AND commit_message !~ /(no-build|no-1_10)/ )

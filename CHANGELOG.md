@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- ci\(Travis\): Don't generate .yml files for all commits! [\#44](https://github.com/julien-noblet/download-geofabrik/pull/44) ([julien-noblet](https://github.com/julien-noblet))
 - chore\(deps\): update golang.org/x/net commit hash to 10aee18 [\#39](https://github.com/julien-noblet/download-geofabrik/pull/39) ([renovate[bot]](https://github.com/apps/renovate))
 - Configure Renovate [\#37](https://github.com/julien-noblet/download-geofabrik/pull/37) ([renovate[bot]](https://github.com/apps/renovate))
 
