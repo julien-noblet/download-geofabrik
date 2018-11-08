@@ -29,12 +29,11 @@ stages:
 - build 1.10
 - build 1.11
 - build tip
-- deploy
 jobs:
   include:
   - stage: Geofabrik
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|geofabrik|Geofabrik)/
-      AND $TRAVIS_PULL_REQUEST = false
+      AND type != pull_request
     go: stable
     script: make geofabrik
     deploy:
@@ -47,7 +46,7 @@ jobs:
         all_branches: true
   - stage: OSMfr
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmap\.fr)/
-      AND $TRAVIS_PULL_REQUEST = false
+      AND type != pull_request
     go: stable
     script: make osmfr
     deploy:
@@ -60,7 +59,7 @@ jobs:
         all_branches: true
   - stage: GisLab
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|gislab|GisLab)/
-      AND $TRAVIS_PULL_REQUEST = false
+      AND type != pull_request
     go: stable
     script: make gislab
     deploy:
@@ -73,7 +72,7 @@ jobs:
         all_branches: true
   - stage: Readme
     if: tag IS present
-      AND $TRAVIS_PULL_REQUEST = false
+      AND type != pull_request
     go: stable
     script: make readme
     deploy:
@@ -123,11 +122,6 @@ jobs:
     if: tag IS present OR commit_message !~ /(no-build)/
     go: stable
     script: make
-  - stage: deploy
-    if: commit_message =~ /(test-deploy|ci)/ OR (tag IS present AND tag !~ /(no-deploy)/
-      AND commit_message !~ /(no-deploy)/)
-    script: make
-    go: stable
     deploy:
       provider: releases
       api_key:
