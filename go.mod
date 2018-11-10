@@ -15,7 +15,7 @@ require (
 	github.com/mattn/go-colorable v0.0.9 // indirect
 	github.com/mattn/go-isatty v0.0.4 // indirect
 	github.com/mattn/go-runewidth v0.0.3 // indirect
-	github.com/olekukonko/tablewriter v0.0.0-20180912035003-be2c049b30cc
+	github.com/olekukonko/tablewriter v0.0.1
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/stretchr/testify v1.2.2
 	github.com/temoto/robotstxt.go v0.0.0-20180810133444-97ee4a9ee6ea // indirect
