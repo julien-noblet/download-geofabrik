@@ -19,7 +19,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/stretchr/testify v1.2.2
 	github.com/temoto/robotstxt.go v0.0.0-20180810133444-97ee4a9ee6ea // indirect
-	golang.org/x/net v0.0.0-20181106080244-10aee1819953
+	golang.org/x/net v0.0.0-20181110093104-03003ca0c849
 	golang.org/x/sys v0.0.0-20181108122342-66b7b1311ac8 // indirect
 	golang.org/x/text v0.3.0 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
