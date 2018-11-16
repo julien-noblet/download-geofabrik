@@ -3,7 +3,7 @@ module github.com/julien-noblet/download-geofabrik
 require (
 	bou.ke/monkey v1.0.1
 	github.com/PuerkitoBio/gocrawl v1.0.0
-	github.com/PuerkitoBio/goquery v1.4.1
+	github.com/PuerkitoBio/goquery v1.5.0
 	github.com/PuerkitoBio/purell v1.1.0 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc // indirect
