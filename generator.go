@@ -371,9 +371,9 @@ func GenerateCrawler(url string, fname string, myConfig *Config) {
 		maxPb := 400 // default value is a realy magicaly set :)
 		switch url { // Todo: found a better way!
 		case "https://download.geofabrik.de/":
-			maxPb = 396 // Magical!
+			maxPb = 409 // Magical!
 		case "https://download.openstreetmap.fr/":
-			maxPb = 73 // Magical
+			maxPb = 85 // Magical
 		}
 		bar = pb.New(maxPb)
 		bar.Start()

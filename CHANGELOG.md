@@ -6,7 +6,15 @@
 
 **Merged pull requests:**
 
+- chore\(deps\): update golang.org/x/sys commit hash to 0cf1ed9 [\#49](https://github.com/julien-noblet/download-geofabrik/pull/49) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/sys commit hash to 93218de [\#48](https://github.com/julien-noblet/download-geofabrik/pull/48) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update module puerkitobio/goquery to v1.5.0 [\#47](https://github.com/julien-noblet/download-geofabrik/pull/47) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/net commit hash to adae6a3 [\#46](https://github.com/julien-noblet/download-geofabrik/pull/46) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/net commit hash to 03003ca [\#45](https://github.com/julien-noblet/download-geofabrik/pull/45) ([renovate[bot]](https://github.com/apps/renovate))
 - ci\(Travis\): Don't generate .yml files for all commits! [\#44](https://github.com/julien-noblet/download-geofabrik/pull/44) ([julien-noblet](https://github.com/julien-noblet))
+- chore\(deps\): update module olekukonko/tablewriter to v0.0.1 [\#42](https://github.com/julien-noblet/download-geofabrik/pull/42) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update module cheggaaa/pb to v1.0.26 [\#41](https://github.com/julien-noblet/download-geofabrik/pull/41) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/sys commit hash to 66b7b13 [\#40](https://github.com/julien-noblet/download-geofabrik/pull/40) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/net commit hash to 10aee18 [\#39](https://github.com/julien-noblet/download-geofabrik/pull/39) ([renovate[bot]](https://github.com/apps/renovate))
 - Configure Renovate [\#37](https://github.com/julien-noblet/download-geofabrik/pull/37) ([renovate[bot]](https://github.com/apps/renovate))
 

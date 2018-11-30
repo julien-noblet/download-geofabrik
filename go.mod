@@ -8,22 +8,27 @@ require (
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc // indirect
 	github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf // indirect
-	github.com/andybalholm/cascadia v1.0.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.7.0 // indirect
+	github.com/kisielk/gotool v1.0.0 // indirect
 	github.com/kr/pretty v0.1.0 // indirect
+	github.com/kr/pty v1.1.3 // indirect
 	github.com/mattn/go-colorable v0.0.9 // indirect
 	github.com/mattn/go-isatty v0.0.4 // indirect
 	github.com/mattn/go-runewidth v0.0.3 // indirect
+	github.com/mitchellh/gox v0.4.0 // indirect
+	github.com/mitchellh/iochan v1.0.0 // indirect
 	github.com/olekukonko/tablewriter v0.0.1
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/stretchr/testify v1.2.2
 	github.com/temoto/robotstxt.go v0.0.0-20180810133444-97ee4a9ee6ea // indirect
-	golang.org/x/net v0.0.0-20181114235856-adae6a3d119a
-	golang.org/x/sys v0.0.0-20181121045609-0cf1ed9e522b // indirect
+	golang.org/x/net v0.0.0-20181129055619-fae4c4e3ad76
+	golang.org/x/sys v0.0.0-20181128092732-4ed8d59d0b35 // indirect
 	golang.org/x/text v0.3.0 // indirect
+	golang.org/x/tools v0.0.0-20181130052023-1c3d964395ce // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/cheggaaa/pb.v1 v1.0.26
-	gopkg.in/yaml.v2 v2.2.1
+	gopkg.in/yaml.v2 v2.2.2
+	honnef.co/go/tools v0.0.0-20180920025451-e3ad64cb4ed3 // indirect
 )
