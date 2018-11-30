@@ -694,11 +694,10 @@ elements:
     parent: africa
   california:
     id: california
-    name: California
+    name: california
     files:
     - osm.pbf
     - osm.pbf.md5
-    - shp.zip
     - osm.bz2
     - osm.bz2.md5
     - poly
@@ -1254,6 +1253,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -1273,7 +1274,7 @@ elements:
     parent: nordrhein-westfalen
   durham:
     id: durham
-    name: durham
+    name: Durham
     files:
     - osm.pbf
     - osm.pbf.md5
@@ -1483,6 +1484,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -1727,6 +1730,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -2146,7 +2151,7 @@ elements:
     parent: africa
   jamaica:
     id: jamaica
-    name: jamaica
+    name: Jamaica
     files:
     - osm.pbf
     - osm.pbf.md5
@@ -2501,6 +2506,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -3315,6 +3322,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -3326,10 +3335,25 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
     parent: netherlands
+  norcal:
+    id: norcal
+    name: Northern California
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    - kml
+    - state
+    parent: california
   nord-est:
     id: nord-est
     name: Nord-Est
@@ -3686,6 +3710,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -4284,6 +4310,19 @@ elements:
     - kml
     - state
     parent: europe
+  socal:
+    id: socal
+    name: Southern California
+    files:
+    - osm.pbf
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    - kml
+    - state
+    parent: california
   somalia:
     id: somalia
     name: Somalia
@@ -4517,7 +4556,7 @@ elements:
     parent: england
   suriname:
     id: suriname
-    name: suriname
+    name: Suriname
     files:
     - osm.pbf
     - osm.pbf.md5
@@ -4776,7 +4815,7 @@ elements:
     parent: asia
   tyne-and-wear:
     id: tyne-and-wear
-    name: tyne-and-wear
+    name: Tyne and Wear
     files:
     - osm.pbf
     - osm.pbf.md5
@@ -4802,7 +4841,7 @@ elements:
     parent: africa
   ukraine:
     id: ukraine
-    name: Ukraine
+    name: Ukraine (with Crimea)
     files:
     - osm.pbf
     - osm.pbf.md5
@@ -4937,6 +4976,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
@@ -5273,6 +5314,8 @@ elements:
     - osm.pbf
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     - kml
     - state
