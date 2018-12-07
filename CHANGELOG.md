@@ -2,7 +2,18 @@
 
 ## [Unreleased](https://github.com/julien-noblet/download-geofabrik/tree/HEAD)
 
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/test...HEAD)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.1...HEAD)
+
+**Merged pull requests:**
+
+- chore\(deps\): update golang.org/x/net commit hash to 351d144 [\#54](https://github.com/julien-noblet/download-geofabrik/pull/54) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [v2.3.1](https://github.com/julien-noblet/download-geofabrik/tree/v2.3.1) (2018-11-30)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.0...v2.3.1)
+
+**Fixed bugs:**
+
+- download-geofabrik\_test.go is deleted by "make clean" [\#36](https://github.com/julien-noblet/download-geofabrik/issues/36)
 
 **Merged pull requests:**
 
@@ -17,13 +28,6 @@
 - chore\(deps\): update golang.org/x/sys commit hash to 66b7b13 [\#40](https://github.com/julien-noblet/download-geofabrik/pull/40) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/net commit hash to 10aee18 [\#39](https://github.com/julien-noblet/download-geofabrik/pull/39) ([renovate[bot]](https://github.com/apps/renovate))
 - Configure Renovate [\#37](https://github.com/julien-noblet/download-geofabrik/pull/37) ([renovate[bot]](https://github.com/apps/renovate))
-
-## [test](https://github.com/julien-noblet/download-geofabrik/tree/test) (2018-09-15)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.0...test)
-
-**Fixed bugs:**
-
-- download-geofabrik\_test.go is deleted by "make clean" [\#36](https://github.com/julien-noblet/download-geofabrik/issues/36)
 
 ## [v2.3.0](https://github.com/julien-noblet/download-geofabrik/tree/v2.3.0) (2018-05-09)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.0-rc0...v2.3.0)

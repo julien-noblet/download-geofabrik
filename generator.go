@@ -373,7 +373,9 @@ func GenerateCrawler(url string, fname string, myConfig *Config) {
 		case "https://download.geofabrik.de/":
 			maxPb = 409 // Magical!
 		case "https://download.openstreetmap.fr/":
-			maxPb = 85 // Magical
+			maxPb = 88 // Magical
+		case "http://be.gis-lab.info/project/osm_dump/iframe.php":
+			maxPb = 1 // Single page!
 		}
 		bar = pb.New(maxPb)
 		bar.Start()
