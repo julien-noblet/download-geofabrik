@@ -22,7 +22,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/stretchr/testify v1.2.2
 	github.com/temoto/robotstxt.go v0.0.0-20180810133444-97ee4a9ee6ea // indirect
-	golang.org/x/net v0.0.0-20181201015538-351d144fa1fc
+	golang.org/x/net v0.0.0-20181207154849-610586996380
 	golang.org/x/sys v0.0.0-20181206074257-70b957f3b65e // indirect
 	golang.org/x/text v0.3.0 // indirect
 	golang.org/x/tools v0.0.0-20181206225053-bcd4e47d0288 // indirect
