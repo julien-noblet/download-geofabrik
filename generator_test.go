@@ -283,6 +283,7 @@ func TestExt_parseOSMfr(t *testing.T) {
 				"asia":            {ID: "asia", Meta: false, Name: "asia", Formats: []string{"osm.pbf", "osm.pbf.md5", "state"}, Parent: "", File: ""},
 				"central-america": {ID: "central-america", Meta: false, Name: "central-america", Formats: []string{"osm.pbf", "osm.pbf.md5", "state"}, Parent: "", File: ""},
 				"europe":          {ID: "europe", Meta: false, Name: "europe", Formats: []string{"osm.pbf", "osm.pbf.md5", "state"}, Parent: "", File: ""},
+				"north-america":   {ID: "north-america", Meta: false, Name: "north-america", Formats: []string{"osm.pbf", "osm.pbf.md5", "state"}, Parent: "", File: ""},
 				"oceania":         {ID: "oceania", Meta: false, Name: "oceania", Formats: []string{"osm.pbf", "osm.pbf.md5", "state"}, Parent: "", File: ""},
 				"russia":          {ID: "russia", Meta: false, Name: "russia", Formats: []string{"osm.pbf", "osm.pbf.md5", "state"}, Parent: "", File: ""},
 				"south-america":   {ID: "south-america", Meta: false, Name: "south-america", Formats: []string{"osm.pbf", "osm.pbf.md5", "state"}, Parent: "", File: ""},
