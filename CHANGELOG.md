@@ -6,7 +6,23 @@
 
 **Merged pull requests:**
 
+- chore\(deps\): update module stretchr/testify to v1.3.0 [\#73](https://github.com/julien-noblet/download-geofabrik/pull/73) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to d00ac6d [\#70](https://github.com/julien-noblet/download-geofabrik/pull/70) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update module mattn/go-runewidth to v0.0.4 [\#69](https://github.com/julien-noblet/download-geofabrik/pull/69) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/sys commit hash to b4a75ba [\#67](https://github.com/julien-noblet/download-geofabrik/pull/67) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 3c39ce7 [\#66](https://github.com/julien-noblet/download-geofabrik/pull/66) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/sys commit hash to 73d4af5 [\#65](https://github.com/julien-noblet/download-geofabrik/pull/65) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 49db546 [\#64](https://github.com/julien-noblet/download-geofabrik/pull/64) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 59cd96f [\#63](https://github.com/julien-noblet/download-geofabrik/pull/63) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/sys commit hash to b05ddf5 [\#62](https://github.com/julien-noblet/download-geofabrik/pull/62) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 6a3e9aa [\#61](https://github.com/julien-noblet/download-geofabrik/pull/61) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/sys commit hash to 2a47403 [\#60](https://github.com/julien-noblet/download-geofabrik/pull/60) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/sys commit hash to ad97f36 [\#59](https://github.com/julien-noblet/download-geofabrik/pull/59) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 8634b1e [\#57](https://github.com/julien-noblet/download-geofabrik/pull/57) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/net commit hash to 6105869 [\#56](https://github.com/julien-noblet/download-geofabrik/pull/56) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/net commit hash to 351d144 [\#54](https://github.com/julien-noblet/download-geofabrik/pull/54) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to bcd4e47 [\#53](https://github.com/julien-noblet/download-geofabrik/pull/53) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update module cheggaaa/pb to v2 [\#43](https://github.com/julien-noblet/download-geofabrik/pull/43) ([renovate[bot]](https://github.com/apps/renovate))
 
 ## [v2.3.1](https://github.com/julien-noblet/download-geofabrik/tree/v2.3.1) (2018-11-30)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.0...v2.3.1)
@@ -38,22 +54,16 @@
 - progress bar  - usability [\#26](https://github.com/julien-noblet/download-geofabrik/issues/26)
 
 ## [v2.3.0-rc0](https://github.com/julien-noblet/download-geofabrik/tree/v2.3.0-rc0) (2018-05-02)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/fix#32...v2.3.0-rc0)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.3...v2.3.0-rc0)
+
+**Implemented enhancements:**
+
+- Progress bar [\#28](https://github.com/julien-noblet/download-geofabrik/pull/28) ([julien-noblet](https://github.com/julien-noblet))
 
 **Merged pull requests:**
 
 - Prepare next release 2.3.0 [\#34](https://github.com/julien-noblet/download-geofabrik/pull/34) ([julien-noblet](https://github.com/julien-noblet))
 - Fix\#32 [\#33](https://github.com/julien-noblet/download-geofabrik/pull/33) ([julien-noblet](https://github.com/julien-noblet))
-
-## [fix#32](https://github.com/julien-noblet/download-geofabrik/tree/fix#32) (2018-04-03)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/fix#26-2...fix#32)
-
-## [fix#26-2](https://github.com/julien-noblet/download-geofabrik/tree/fix#26-2) (2018-04-03)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.3...fix#26-2)
-
-**Implemented enhancements:**
-
-- Progress bar [\#28](https://github.com/julien-noblet/download-geofabrik/pull/28) ([julien-noblet](https://github.com/julien-noblet))
 
 ## [v2.2.3](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.3) (2018-04-03)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.2...v2.2.3)
@@ -87,26 +97,11 @@
 - Split gofiles and add generator in download-geofabrik [\#21](https://github.com/julien-noblet/download-geofabrik/pull/21) ([julien-noblet](https://github.com/julien-noblet))
 
 ## [v2.2.0-rc0](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-rc0) (2018-03-25)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#26...v2.2.0-rc0)
-
-## [v2.2.0-beta-fix#26](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#26) (2018-03-25)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#27...v2.2.0-beta-fix#26)
-
-## [v2.2.0-beta-fix#27](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#27) (2018-03-24)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#19-2...v2.2.0-beta-fix#27)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0...v2.2.0-rc0)
 
 **Implemented enhancements:**
 
 - Add download.openstreetmap.fr/extracts/ [\#2](https://github.com/julien-noblet/download-geofabrik/issues/2)
-
-## [v2.2.0-beta-fix#19-2](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#19-2) (2018-03-18)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#19...v2.2.0-beta-fix#19-2)
-
-## [v2.2.0-beta-fix#19](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#19) (2018-03-17)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.0-beta-fix#20...v2.2.0-beta-fix#19)
-
-## [v2.2.0-beta-fix#20](https://github.com/julien-noblet/download-geofabrik/tree/v2.2.0-beta-fix#20) (2018-03-17)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0...v2.2.0-beta-fix#20)
 
 ## [v2.1.0](https://github.com/julien-noblet/download-geofabrik/tree/v2.1.0) (2018-03-01)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0-pr...v2.1.0)
@@ -130,10 +125,7 @@
 - Fix \#16 [\#18](https://github.com/julien-noblet/download-geofabrik/pull/18) ([julien-noblet](https://github.com/julien-noblet))
 
 ## [v2.0.4](https://github.com/julien-noblet/download-geofabrik/tree/v2.0.4) (2018-02-28)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/fix#16...v2.0.4)
-
-## [fix#16](https://github.com/julien-noblet/download-geofabrik/tree/fix#16) (2018-02-28)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0-alpha...fix#16)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.1.0-alpha...v2.0.4)
 
 ## [v2.1.0-alpha](https://github.com/julien-noblet/download-geofabrik/tree/v2.1.0-alpha) (2018-02-24)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.3...v2.1.0-alpha)
@@ -152,10 +144,7 @@
 - Stable [\#11](https://github.com/julien-noblet/download-geofabrik/pull/11) ([julien-noblet](https://github.com/julien-noblet))
 
 ## [v2.0.2](https://github.com/julien-noblet/download-geofabrik/tree/v2.0.2) (2018-02-08)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/fix#10...v2.0.2)
-
-## [fix#10](https://github.com/julien-noblet/download-geofabrik/tree/fix#10) (2018-02-08)
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.1...fix#10)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.1...v2.0.2)
 
 ## [v2.0.1](https://github.com/julien-noblet/download-geofabrik/tree/v2.0.1) (2018-01-11)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.0...v2.0.1)
