@@ -1,6 +1,7 @@
 language: go
 sudo: false
 go:
+- '1.12'
 - '1.11'
 - '1.10'
 - '1.9'
@@ -27,6 +28,7 @@ stages:
 - build 1.9
 - build 1.10
 - build 1.11
+- build 1.12
 - build tip
 jobs:
   include:
@@ -112,6 +114,11 @@ jobs:
     if: tag IS present OR ( commit_message =~ /(force-build|1_11)/
       AND commit_message !~ /(no-build|no-1_11)/ )
     go: '1.11'
+    script: make
+  - stage: build 1.12
+    if: tag IS present OR ( commit_message =~ /(force-build|1_11)/
+      AND commit_message !~ /(no-build|no-1_11)/ )
+    go: '1.12'
     script: make
   - stage: build tip
     if: tag IS present OR commit_message !~ /(no-build)/
