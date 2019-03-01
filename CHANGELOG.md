@@ -6,9 +6,20 @@
 
 **Merged pull requests:**
 
+- build\(Travis\): Update to go 1.12 [\#82](https://github.com/julien-noblet/download-geofabrik/pull/82) ([julien-noblet](https://github.com/julien-noblet))
+- chore\(deps\): update module mattn/go-isatty to v0.0.6 [\#81](https://github.com/julien-noblet/download-geofabrik/pull/81) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update module mattn/go-isatty to v0.0.5 [\#80](https://github.com/julien-noblet/download-geofabrik/pull/80) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update module mattn/go-colorable to v0.1.1 [\#79](https://github.com/julien-noblet/download-geofabrik/pull/79) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update module puerkitobio/purell to v1.1.1 [\#78](https://github.com/julien-noblet/download-geofabrik/pull/78) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update module mattn/go-colorable to v0.1.0 [\#77](https://github.com/julien-noblet/download-geofabrik/pull/77) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 589c23e [\#75](https://github.com/julien-noblet/download-geofabrik/pull/75) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/sys commit hash to 775f819 [\#74](https://github.com/julien-noblet/download-geofabrik/pull/74) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update module stretchr/testify to v1.3.0 [\#73](https://github.com/julien-noblet/download-geofabrik/pull/73) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to fc1d57b [\#72](https://github.com/julien-noblet/download-geofabrik/pull/72) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/sys commit hash to 48ac38b [\#71](https://github.com/julien-noblet/download-geofabrik/pull/71) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/tools commit hash to d00ac6d [\#70](https://github.com/julien-noblet/download-geofabrik/pull/70) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update module mattn/go-runewidth to v0.0.4 [\#69](https://github.com/julien-noblet/download-geofabrik/pull/69) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/net commit hash to 915654e [\#68](https://github.com/julien-noblet/download-geofabrik/pull/68) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/sys commit hash to b4a75ba [\#67](https://github.com/julien-noblet/download-geofabrik/pull/67) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/tools commit hash to 3c39ce7 [\#66](https://github.com/julien-noblet/download-geofabrik/pull/66) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/sys commit hash to 73d4af5 [\#65](https://github.com/julien-noblet/download-geofabrik/pull/65) ([renovate[bot]](https://github.com/apps/renovate))
