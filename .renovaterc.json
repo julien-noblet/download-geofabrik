@@ -7,11 +7,12 @@
   "devDependencies": {
     "automerge": true
   },
-  "rebaseStalePrs": true
+  "rebaseStalePrs": true,
   "packageRules": [
     {
       "packagePatterns": [ "golang.org/x" ],
       "groupName": "golang.org/x"
     }
   ]
+
 }
