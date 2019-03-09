@@ -8,4 +8,10 @@
     "automerge": true
   },
   "rebaseStalePrs": true
+  "packageRules": [
+    {
+      "packagePatterns": [ "golang.org/x" ],
+      "groupName": "golang.org/x"
+    }
+  ]
 }
