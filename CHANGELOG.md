@@ -4,8 +4,13 @@
 
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.1...HEAD)
 
+**Closed issues:**
+
+- Action required: Add a Renovate config [\#90](https://github.com/julien-noblet/download-geofabrik/issues/90)
+
 **Merged pull requests:**
 
+- Update Renovate Configuration [\#91](https://github.com/julien-noblet/download-geofabrik/pull/91) ([julien-noblet](https://github.com/julien-noblet))
 - chore\(deps\): update golang.org/x/tools commit hash to fd53dfa [\#87](https://github.com/julien-noblet/download-geofabrik/pull/87) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/sys commit hash to e844e01 [\#86](https://github.com/julien-noblet/download-geofabrik/pull/86) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/net commit hash to 16b79f2 [\#85](https://github.com/julien-noblet/download-geofabrik/pull/85) ([renovate[bot]](https://github.com/apps/renovate))
