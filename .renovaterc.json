@@ -2,10 +2,10 @@
   "extends": ["config:base"],
   "automerge": true,
   "major": {
-    "automerge": false,
+    "automerge": false
   },
   "devDependencies": {
-    "automerge": true,
+    "automerge": true
   },
-  "rebaseStalePrs": true,
+  "rebaseStalePrs": true
 }
