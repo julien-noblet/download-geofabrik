@@ -25,7 +25,7 @@ require (
 	golang.org/x/net v0.0.0-20190318224907-d196dffd7c2b
 	golang.org/x/sys v0.0.0-20190318224907-6c81ef8f67ca // indirect
 	golang.org/x/text v0.3.0 // indirect
-	golang.org/x/tools v0.0.0-20190318224907-bb1270c20edf // indirect
+	golang.org/x/tools v0.0.0-20190320013808-3f1ed9edd1b4 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/cheggaaa/pb.v2 v2.0.6
