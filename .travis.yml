@@ -13,6 +13,8 @@ before_install:
 install:
 - go get -v github.com/mitchellh/gox
 - go get -t -v ./...
+before_script:
+	- "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | sudo bash"
 script: go test -bench=. -benchmem -v ./...
 
 stages:
@@ -30,6 +32,7 @@ stages:
 - build 1.11
 - build 1.12
 - build tip
+- FOSSA
 jobs:
   include:
   - stage: Geofabrik
@@ -124,6 +127,12 @@ jobs:
     if: tag IS present OR commit_message !~ /(no-build)/
     go: tip
     script: make
+  - stage: FOSSA
+    script:
+      - fossa init
+      - fossa analyze
+    notifications:
+      webhooks: https://app.fossa.io/hooks/travisci
   - stage: build stable
     if: tag IS present OR commit_message !~ /(no-build)/
     go: stable
