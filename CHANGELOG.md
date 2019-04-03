@@ -10,6 +10,11 @@
 
 **Merged pull requests:**
 
+- chore\(deps\): update golang.org/x [\#128](https://github.com/julien-noblet/download-geofabrik/pull/128) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/sys commit hash to e409398 [\#127](https://github.com/julien-noblet/download-geofabrik/pull/127) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 4c644d7 [\#126](https://github.com/julien-noblet/download-geofabrik/pull/126) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to aef51cc [\#125](https://github.com/julien-noblet/download-geofabrik/pull/125) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to a68386b [\#124](https://github.com/julien-noblet/download-geofabrik/pull/124) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/tools commit hash to a96101f [\#122](https://github.com/julien-noblet/download-geofabrik/pull/122) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/sys commit hash to 9eb1bfa [\#121](https://github.com/julien-noblet/download-geofabrik/pull/121) ([renovate[bot]](https://github.com/apps/renovate))
 - Add license scan report and status [\#120](https://github.com/julien-noblet/download-geofabrik/pull/120) ([fossabot](https://github.com/fossabot))
