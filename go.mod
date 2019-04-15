@@ -22,10 +22,10 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/stretchr/testify v1.3.0
 	github.com/temoto/robotstxt.go v0.0.0-20180810133444-97ee4a9ee6ea // indirect
-	golang.org/x/net v0.0.0-20190415155419-4a65cf94b679
+	golang.org/x/net v0.0.0-20190415215425-1da14a5a36f2
 	golang.org/x/sys v0.0.0-20190415155419-3fd5a3612ccd // indirect
 	golang.org/x/text v0.3.0 // indirect
-	golang.org/x/tools v0.0.0-20190415155419-2b5498619ef1 // indirect
+	golang.org/x/tools v0.0.0-20190415215425-2e9de471ebd3 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/cheggaaa/pb.v2 v2.0.6
