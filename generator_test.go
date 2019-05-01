@@ -23,16 +23,6 @@ func getHTML(url string) string {
 	return string(body)
 }
 
-var osmfrValidHTML1 = getHTML("http://download.openstreetmap.fr/extracts/")
-var osmfrValidHTML2 = getHTML("http://download.openstreetmap.fr/extracts/merge/")
-var osmfrPolygonJapanValidHTML = getHTML("http://download.openstreetmap.fr/polygons/asia/japan/")
-var geofabrikSouthAmericaHTML = getHTML("https://download.geofabrik.de/south-america.html")
-var geofabrikDistrictOfColumbiaHTML = getHTML("https://download.geofabrik.de/north-america/us/district-of-columbia.html")
-var geofabrikGeorgiaUSHTML = getHTML("https://download.geofabrik.de/north-america/us/georgia.html")
-var geofabrikGeorgiaEUHTML = getHTML("https://download.geofabrik.de/europe/georgia.html")
-var geofabrikShikokuHTML = getHTML("https://download.geofabrik.de/asia/japan/shikoku.html")
-var gislabSampleHTML = getHTML("http://be.gis-lab.info/project/osm_dump/iframe.php")
-
 func TestElementSlice_Generate(t *testing.T) {
 	myConfig := &SampleConfigValidPtr
 	myYaml, _ := yaml.Marshal(*myConfig)
