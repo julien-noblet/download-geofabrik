@@ -28,6 +28,11 @@ var sampleFormatValidPtr = map[string]format{
 		Loc:      ".osm.bz2",
 		BasePath: "../osmbz2/",
 		BaseURL:  "http://my.new.url/folder",
+	}, "osm.gz": {
+		ID:       "osm.gz",
+		Loc:      ".osm.gz",
+		BasePath: "../osmgz/",
+		BaseURL:  "http://my.new.url/folder",
 	},
 }
 
@@ -54,6 +59,7 @@ func Test_miniFormats(t *testing.T) {
 		{name: "state only", args: args{s: []string{"state"}}, want: "s"},
 		{name: "osm.pbf only", args: args{s: []string{"osm.pbf"}}, want: "P"},
 		{name: "osm.bz2 only", args: args{s: []string{"osm.bz2"}}, want: "B"},
+		{name: "osm.gz only", args: args{s: []string{"osm.gz"}}, want: "G"},
 		{name: "osh.pbf only", args: args{s: []string{"osh.pbf"}}, want: "H"},
 		{name: "poly only", args: args{s: []string{"poly"}}, want: "p"},
 		{name: "shp.zip only", args: args{s: []string{"shp.zip"}}, want: "S"},
@@ -130,6 +136,7 @@ func Test_getFormats(t *testing.T) {
 		dosmPbf bool
 		doshPbf bool
 		dosmBz2 bool
+		dosmGz  bool
 		dshpZip bool
 		dstate  bool
 		dpoly   bool
@@ -147,6 +154,7 @@ func Test_getFormats(t *testing.T) {
 				dosmPbf: false,
 				doshPbf: false,
 				dosmBz2: false,
+				dosmGz:  false,
 				dshpZip: false,
 				dstate:  false,
 				dpoly:   false,
@@ -159,6 +167,7 @@ func Test_getFormats(t *testing.T) {
 				dosmPbf: true,
 				doshPbf: false,
 				dosmBz2: false,
+				dosmGz:  false,
 				dshpZip: false,
 				dstate:  false,
 				dpoly:   false,
@@ -171,6 +180,7 @@ func Test_getFormats(t *testing.T) {
 				dosmPbf: false,
 				doshPbf: true,
 				dosmBz2: false,
+				dosmGz:  false,
 				dshpZip: false,
 				dstate:  false,
 				dpoly:   false,
@@ -183,6 +193,7 @@ func Test_getFormats(t *testing.T) {
 				dosmPbf: true,
 				doshPbf: true,
 				dosmBz2: false,
+				dosmGz:  false,
 				dshpZip: false,
 				dstate:  false,
 				dpoly:   false,
@@ -195,6 +206,7 @@ func Test_getFormats(t *testing.T) {
 				dosmPbf: false,
 				doshPbf: false,
 				dosmBz2: true,
+				dosmGz:  false,
 				dshpZip: true,
 				dstate:  false,
 				dpoly:   false,
@@ -207,6 +219,7 @@ func Test_getFormats(t *testing.T) {
 				dosmPbf: false,
 				doshPbf: false,
 				dosmBz2: false,
+				dosmGz:  false,
 				dshpZip: false,
 				dstate:  true,
 				dpoly:   true,
@@ -219,6 +232,7 @@ func Test_getFormats(t *testing.T) {
 				dosmPbf: false,
 				doshPbf: false,
 				dosmBz2: false,
+				dosmGz:  false,
 				dshpZip: false,
 				dstate:  false,
 				dpoly:   false,
@@ -226,11 +240,26 @@ func Test_getFormats(t *testing.T) {
 			},
 			want: []string{"kml"},
 		},
+		{
+			name: "dosmGz",
+			flags: dflags{
+				dosmPbf: false,
+				doshPbf: false,
+				dosmBz2: false,
+				dosmGz:  true,
+				dshpZip: false,
+				dstate:  false,
+				dpoly:   false,
+				dkml:    false,
+			},
+			want: []string{"osm.gz"},
+		},
 	}
 	for _, tt := range tests {
 		*dosmPbf = tt.flags.dosmPbf
 		*doshPbf = tt.flags.doshPbf
 		*dosmBz2 = tt.flags.dosmBz2
+		*dosmGz = tt.flags.dosmGz
 		*dshpZip = tt.flags.dshpZip
 		*dstate = tt.flags.dstate
 		*dpoly = tt.flags.dpoly
