@@ -32,10 +32,7 @@ func (e *Ext) Exist(id string) bool {
 	e.ElementsMutex.RLock()
 	r := reflect.DeepEqual(e.Elements[id], Element{})
 	e.ElementsMutex.RUnlock()
-	if !r {
-		return true
-	}
-	return false
+	return r
 }
 
 // Ext simple struct for managing ElementSlice and crawler
