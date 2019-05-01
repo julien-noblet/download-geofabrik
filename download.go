@@ -73,8 +73,7 @@ func downloadFromURL(myURL string, fileName string) error {
 			err := f.Close()
 			catch(err)
 		}()
-		var output io.Writer
-		output = f
+		var output io.Writer = f
 		var n int64
 		var progressBar *pb.ProgressBar
 		if !*fQuiet && *fProgress && response.ContentLength > progressMinimal {

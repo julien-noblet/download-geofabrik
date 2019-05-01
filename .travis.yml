@@ -20,6 +20,7 @@ stages:
 - goveralls
 - Geofabrik
 - OSMfr
+- bbbike
 - GisLab
 - Readme
 - build stable
@@ -50,6 +51,19 @@ jobs:
       AND type != pull_request
     go: stable
     script: make osmfr
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      github-token: $GITHUB_TOKEN
+      keep-history: true
+      target-branch: $TRAVIS_BRANCH
+      on:
+        all_branches: true
+  - stage: bbbike
+    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|bbbike)/
+      AND type != pull_request
+    go: stable
+    script: make bbbike
     deploy:
       provider: pages
       skip-cleanup: true

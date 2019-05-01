@@ -22,7 +22,7 @@ func elem2URL(c *Config, e *Element, ext string) (string, error) {
 	var res string
 	var err error
 	if !stringInSlice(&ext, &e.Formats) {
-		return "", fmt.Errorf("Error!!! %s format not exist", ext)
+		return "", fmt.Errorf("error!!! %s format not exist", ext)
 	}
 	format := c.Formats[ext]
 	if format.BasePath != "" {

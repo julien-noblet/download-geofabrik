@@ -1,5 +1,5 @@
-gofiles  = download-geofabrik.go config.go download.go element.go formats.go generator.go
-pkgfiles = CHANGELOG.md README.md LICENSE geofabrik.yml openstreetmap.fr.yml gislab.yml
+gofiles  = download-geofabrik.go config.go download.go element.go formats.go generator.go bbbike.go gislab.go geofabrik.go openstreetmap.fr.go
+pkgfiles = CHANGELOG.md README.md LICENSE geofabrik.yml openstreetmap.fr.yml gislab.yml bbbike.yml
 default: clean all
 clean:
 	go clean
@@ -15,6 +15,9 @@ osmfr:
 gislab:
 	echo "Generating gislab.yml"
 	go run $(gofiles) --service="gislab" generate -v
+bbbike:
+	echo "Generating bbbike.yml"
+	go run $(gofiles) --service="bbbike" generate -v
 readme: 
 	cat .README.md1 > README.md
 	go run $(gofiles) --help-long >> README.md 
@@ -23,6 +26,9 @@ readme:
 	echo "" >> README.md
 	echo "## List of elements from openstreetmap.fr" >> README.md
 	go run $(gofiles) --service "openstreetmap.fr" list --markdown >> README.md
+	echo "" >> README.md
+	echo "## List of elements from bbbike.org" >> README.md
+	go run $(gofiles) --service "bbbike" list --markdown >> README.md
 	echo "" >> README.md
 	echo "## List of elements from glis-lab.info" >> README.md
 	go run $(gofiles) --service "gislab" list --markdown >> README.md

@@ -1,0 +1,1654 @@
+baseURL: https://download.bbbike.org/osm/bbbike/
+formats:
+  osm.pbf:
+    ext: osm.pbf
+    loc: .osm.pbf
+  shp.zip:
+    ext: shp.zip
+    loc: .osm.shp.zip
+elements:
+  Aachen:
+    id: Aachen
+    file: Aachen/Aachen
+    name: Aachen
+    files:
+    - osm.pbf
+    - shp.zip
+  Aarhus:
+    id: Aarhus
+    file: Aarhus/Aarhus
+    name: Aarhus
+    files:
+    - osm.pbf
+    - shp.zip
+  Adelaide:
+    id: Adelaide
+    file: Adelaide/Adelaide
+    name: Adelaide
+    files:
+    - osm.pbf
+    - shp.zip
+  Albuquerque:
+    id: Albuquerque
+    file: Albuquerque/Albuquerque
+    name: Albuquerque
+    files:
+    - osm.pbf
+    - shp.zip
+  Alexandria:
+    id: Alexandria
+    file: Alexandria/Alexandria
+    name: Alexandria
+    files:
+    - osm.pbf
+    - shp.zip
+  Amsterdam:
+    id: Amsterdam
+    file: Amsterdam/Amsterdam
+    name: Amsterdam
+    files:
+    - osm.pbf
+    - shp.zip
+  Antwerpen:
+    id: Antwerpen
+    file: Antwerpen/Antwerpen
+    name: Antwerpen
+    files:
+    - osm.pbf
+    - shp.zip
+  Arnhem:
+    id: Arnhem
+    file: Arnhem/Arnhem
+    name: Arnhem
+    files:
+    - osm.pbf
+    - shp.zip
+  Auckland:
+    id: Auckland
+    file: Auckland/Auckland
+    name: Auckland
+    files:
+    - osm.pbf
+    - shp.zip
+  Augsburg:
+    id: Augsburg
+    file: Augsburg/Augsburg
+    name: Augsburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Austin:
+    id: Austin
+    file: Austin/Austin
+    name: Austin
+    files:
+    - osm.pbf
+    - shp.zip
+  Baghdad:
+    id: Baghdad
+    file: Baghdad/Baghdad
+    name: Baghdad
+    files:
+    - osm.pbf
+    - shp.zip
+  Baku:
+    id: Baku
+    file: Baku/Baku
+    name: Baku
+    files:
+    - osm.pbf
+    - shp.zip
+  Balaton:
+    id: Balaton
+    file: Balaton/Balaton
+    name: Balaton
+    files:
+    - osm.pbf
+    - shp.zip
+  Bamberg:
+    id: Bamberg
+    file: Bamberg/Bamberg
+    name: Bamberg
+    files:
+    - osm.pbf
+    - shp.zip
+  Bangkok:
+    id: Bangkok
+    file: Bangkok/Bangkok
+    name: Bangkok
+    files:
+    - osm.pbf
+    - shp.zip
+  Barcelona:
+    id: Barcelona
+    file: Barcelona/Barcelona
+    name: Barcelona
+    files:
+    - osm.pbf
+    - shp.zip
+  Basel:
+    id: Basel
+    file: Basel/Basel
+    name: Basel
+    files:
+    - osm.pbf
+    - shp.zip
+  Beijing:
+    id: Beijing
+    file: Beijing/Beijing
+    name: Beijing
+    files:
+    - osm.pbf
+    - shp.zip
+  Beirut:
+    id: Beirut
+    file: Beirut/Beirut
+    name: Beirut
+    files:
+    - osm.pbf
+    - shp.zip
+  Berkeley:
+    id: Berkeley
+    file: Berkeley/Berkeley
+    name: Berkeley
+    files:
+    - osm.pbf
+    - shp.zip
+  Berlin:
+    id: Berlin
+    file: Berlin/Berlin
+    name: Berlin
+    files:
+    - osm.pbf
+    - shp.zip
+  Bern:
+    id: Bern
+    file: Bern/Bern
+    name: Bern
+    files:
+    - osm.pbf
+    - shp.zip
+  Bielefeld:
+    id: Bielefeld
+    file: Bielefeld/Bielefeld
+    name: Bielefeld
+    files:
+    - osm.pbf
+    - shp.zip
+  Birmingham:
+    id: Birmingham
+    file: Birmingham/Birmingham
+    name: Birmingham
+    files:
+    - osm.pbf
+    - shp.zip
+  Bochum:
+    id: Bochum
+    file: Bochum/Bochum
+    name: Bochum
+    files:
+    - osm.pbf
+    - shp.zip
+  Bogota:
+    id: Bogota
+    file: Bogota/Bogota
+    name: Bogota
+    files:
+    - osm.pbf
+    - shp.zip
+  Bombay:
+    id: Bombay
+    file: Bombay/Bombay
+    name: Bombay
+    files:
+    - osm.pbf
+    - shp.zip
+  Bonn:
+    id: Bonn
+    file: Bonn/Bonn
+    name: Bonn
+    files:
+    - osm.pbf
+    - shp.zip
+  Bordeaux:
+    id: Bordeaux
+    file: Bordeaux/Bordeaux
+    name: Bordeaux
+    files:
+    - osm.pbf
+    - shp.zip
+  Boulder:
+    id: Boulder
+    file: Boulder/Boulder
+    name: Boulder
+    files:
+    - osm.pbf
+    - shp.zip
+  BrandenburgHavel:
+    id: BrandenburgHavel
+    file: BrandenburgHavel/BrandenburgHavel
+    name: BrandenburgHavel
+    files:
+    - osm.pbf
+    - shp.zip
+  Braunschweig:
+    id: Braunschweig
+    file: Braunschweig/Braunschweig
+    name: Braunschweig
+    files:
+    - osm.pbf
+    - shp.zip
+  Bremen:
+    id: Bremen
+    file: Bremen/Bremen
+    name: Bremen
+    files:
+    - osm.pbf
+    - shp.zip
+  Bremerhaven:
+    id: Bremerhaven
+    file: Bremerhaven/Bremerhaven
+    name: Bremerhaven
+    files:
+    - osm.pbf
+    - shp.zip
+  Brisbane:
+    id: Brisbane
+    file: Brisbane/Brisbane
+    name: Brisbane
+    files:
+    - osm.pbf
+    - shp.zip
+  Bristol:
+    id: Bristol
+    file: Bristol/Bristol
+    name: Bristol
+    files:
+    - osm.pbf
+    - shp.zip
+  Brno:
+    id: Brno
+    file: Brno/Brno
+    name: Brno
+    files:
+    - osm.pbf
+    - shp.zip
+  Bruegge:
+    id: Bruegge
+    file: Bruegge/Bruegge
+    name: Bruegge
+    files:
+    - osm.pbf
+    - shp.zip
+  Bruessel:
+    id: Bruessel
+    file: Bruessel/Bruessel
+    name: Bruessel
+    files:
+    - osm.pbf
+    - shp.zip
+  Budapest:
+    id: Budapest
+    file: Budapest/Budapest
+    name: Budapest
+    files:
+    - osm.pbf
+    - shp.zip
+  BuenosAires:
+    id: BuenosAires
+    file: BuenosAires/BuenosAires
+    name: BuenosAires
+    files:
+    - osm.pbf
+    - shp.zip
+  Cairo:
+    id: Cairo
+    file: Cairo/Cairo
+    name: Cairo
+    files:
+    - osm.pbf
+    - shp.zip
+  Calgary:
+    id: Calgary
+    file: Calgary/Calgary
+    name: Calgary
+    files:
+    - osm.pbf
+    - shp.zip
+  Cambridge:
+    id: Cambridge
+    file: Cambridge/Cambridge
+    name: Cambridge
+    files:
+    - osm.pbf
+    - shp.zip
+  CambridgeMa:
+    id: CambridgeMa
+    file: CambridgeMa/CambridgeMa
+    name: CambridgeMa
+    files:
+    - osm.pbf
+    - shp.zip
+  Canberra:
+    id: Canberra
+    file: Canberra/Canberra
+    name: Canberra
+    files:
+    - osm.pbf
+    - shp.zip
+  CapeTown:
+    id: CapeTown
+    file: CapeTown/CapeTown
+    name: CapeTown
+    files:
+    - osm.pbf
+    - shp.zip
+  Chemnitz:
+    id: Chemnitz
+    file: Chemnitz/Chemnitz
+    name: Chemnitz
+    files:
+    - osm.pbf
+    - shp.zip
+  Chicago:
+    id: Chicago
+    file: Chicago/Chicago
+    name: Chicago
+    files:
+    - osm.pbf
+    - shp.zip
+  ClermontFerrand:
+    id: ClermontFerrand
+    file: ClermontFerrand/ClermontFerrand
+    name: ClermontFerrand
+    files:
+    - osm.pbf
+    - shp.zip
+  Colmar:
+    id: Colmar
+    file: Colmar/Colmar
+    name: Colmar
+    files:
+    - osm.pbf
+    - shp.zip
+  Copenhagen:
+    id: Copenhagen
+    file: Copenhagen/Copenhagen
+    name: Copenhagen
+    files:
+    - osm.pbf
+    - shp.zip
+  Cork:
+    id: Cork
+    file: Cork/Cork
+    name: Cork
+    files:
+    - osm.pbf
+    - shp.zip
+  Corsica:
+    id: Corsica
+    file: Corsica/Corsica
+    name: Corsica
+    files:
+    - osm.pbf
+    - shp.zip
+  Corvallis:
+    id: Corvallis
+    file: Corvallis/Corvallis
+    name: Corvallis
+    files:
+    - osm.pbf
+    - shp.zip
+  Cottbus:
+    id: Cottbus
+    file: Cottbus/Cottbus
+    name: Cottbus
+    files:
+    - osm.pbf
+    - shp.zip
+  Cracow:
+    id: Cracow
+    file: Cracow/Cracow
+    name: Cracow
+    files:
+    - osm.pbf
+    - shp.zip
+  CraterLake:
+    id: CraterLake
+    file: CraterLake/CraterLake
+    name: CraterLake
+    files:
+    - osm.pbf
+    - shp.zip
+  Curitiba:
+    id: Curitiba
+    file: Curitiba/Curitiba
+    name: Curitiba
+    files:
+    - osm.pbf
+    - shp.zip
+  Cusco:
+    id: Cusco
+    file: Cusco/Cusco
+    name: Cusco
+    files:
+    - osm.pbf
+    - shp.zip
+  Dallas:
+    id: Dallas
+    file: Dallas/Dallas
+    name: Dallas
+    files:
+    - osm.pbf
+    - shp.zip
+  Darmstadt:
+    id: Darmstadt
+    file: Darmstadt/Darmstadt
+    name: Darmstadt
+    files:
+    - osm.pbf
+    - shp.zip
+  Davis:
+    id: Davis
+    file: Davis/Davis
+    name: Davis
+    files:
+    - osm.pbf
+    - shp.zip
+  DenHaag:
+    id: DenHaag
+    file: DenHaag/DenHaag
+    name: DenHaag
+    files:
+    - osm.pbf
+    - shp.zip
+  Denver:
+    id: Denver
+    file: Denver/Denver
+    name: Denver
+    files:
+    - osm.pbf
+    - shp.zip
+  Dessau:
+    id: Dessau
+    file: Dessau/Dessau
+    name: Dessau
+    files:
+    - osm.pbf
+    - shp.zip
+  Dortmund:
+    id: Dortmund
+    file: Dortmund/Dortmund
+    name: Dortmund
+    files:
+    - osm.pbf
+    - shp.zip
+  Dresden:
+    id: Dresden
+    file: Dresden/Dresden
+    name: Dresden
+    files:
+    - osm.pbf
+    - shp.zip
+  Dublin:
+    id: Dublin
+    file: Dublin/Dublin
+    name: Dublin
+    files:
+    - osm.pbf
+    - shp.zip
+  Duesseldorf:
+    id: Duesseldorf
+    file: Duesseldorf/Duesseldorf
+    name: Duesseldorf
+    files:
+    - osm.pbf
+    - shp.zip
+  Duisburg:
+    id: Duisburg
+    file: Duisburg/Duisburg
+    name: Duisburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Edinburgh:
+    id: Edinburgh
+    file: Edinburgh/Edinburgh
+    name: Edinburgh
+    files:
+    - osm.pbf
+    - shp.zip
+  Eindhoven:
+    id: Eindhoven
+    file: Eindhoven/Eindhoven
+    name: Eindhoven
+    files:
+    - osm.pbf
+    - shp.zip
+  Emden:
+    id: Emden
+    file: Emden/Emden
+    name: Emden
+    files:
+    - osm.pbf
+    - shp.zip
+  Erfurt:
+    id: Erfurt
+    file: Erfurt/Erfurt
+    name: Erfurt
+    files:
+    - osm.pbf
+    - shp.zip
+  Erlangen:
+    id: Erlangen
+    file: Erlangen/Erlangen
+    name: Erlangen
+    files:
+    - osm.pbf
+    - shp.zip
+  Eugene:
+    id: Eugene
+    file: Eugene/Eugene
+    name: Eugene
+    files:
+    - osm.pbf
+    - shp.zip
+  Flensburg:
+    id: Flensburg
+    file: Flensburg/Flensburg
+    name: Flensburg
+    files:
+    - osm.pbf
+    - shp.zip
+  FortCollins:
+    id: FortCollins
+    file: FortCollins/FortCollins
+    name: FortCollins
+    files:
+    - osm.pbf
+    - shp.zip
+  Frankfurt:
+    id: Frankfurt
+    file: Frankfurt/Frankfurt
+    name: Frankfurt
+    files:
+    - osm.pbf
+    - shp.zip
+  FrankfurtOder:
+    id: FrankfurtOder
+    file: FrankfurtOder/FrankfurtOder
+    name: FrankfurtOder
+    files:
+    - osm.pbf
+    - shp.zip
+  Freiburg:
+    id: Freiburg
+    file: Freiburg/Freiburg
+    name: Freiburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Gdansk:
+    id: Gdansk
+    file: Gdansk/Gdansk
+    name: Gdansk
+    files:
+    - osm.pbf
+    - shp.zip
+  Genf:
+    id: Genf
+    file: Genf/Genf
+    name: Genf
+    files:
+    - osm.pbf
+    - shp.zip
+  Gent:
+    id: Gent
+    file: Gent/Gent
+    name: Gent
+    files:
+    - osm.pbf
+    - shp.zip
+  Gera:
+    id: Gera
+    file: Gera/Gera
+    name: Gera
+    files:
+    - osm.pbf
+    - shp.zip
+  Glasgow:
+    id: Glasgow
+    file: Glasgow/Glasgow
+    name: Glasgow
+    files:
+    - osm.pbf
+    - shp.zip
+  Gliwice:
+    id: Gliwice
+    file: Gliwice/Gliwice
+    name: Gliwice
+    files:
+    - osm.pbf
+    - shp.zip
+  Goerlitz:
+    id: Goerlitz
+    file: Goerlitz/Goerlitz
+    name: Goerlitz
+    files:
+    - osm.pbf
+    - shp.zip
+  Goeteborg:
+    id: Goeteborg
+    file: Goeteborg/Goeteborg
+    name: Goeteborg
+    files:
+    - osm.pbf
+    - shp.zip
+  Goettingen:
+    id: Goettingen
+    file: Goettingen/Goettingen
+    name: Goettingen
+    files:
+    - osm.pbf
+    - shp.zip
+  Graz:
+    id: Graz
+    file: Graz/Graz
+    name: Graz
+    files:
+    - osm.pbf
+    - shp.zip
+  Groningen:
+    id: Groningen
+    file: Groningen/Groningen
+    name: Groningen
+    files:
+    - osm.pbf
+    - shp.zip
+  Halifax:
+    id: Halifax
+    file: Halifax/Halifax
+    name: Halifax
+    files:
+    - osm.pbf
+    - shp.zip
+  Halle:
+    id: Halle
+    file: Halle/Halle
+    name: Halle
+    files:
+    - osm.pbf
+    - shp.zip
+  Hamburg:
+    id: Hamburg
+    file: Hamburg/Hamburg
+    name: Hamburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Hamm:
+    id: Hamm
+    file: Hamm/Hamm
+    name: Hamm
+    files:
+    - osm.pbf
+    - shp.zip
+  Hannover:
+    id: Hannover
+    file: Hannover/Hannover
+    name: Hannover
+    files:
+    - osm.pbf
+    - shp.zip
+  Heilbronn:
+    id: Heilbronn
+    file: Heilbronn/Heilbronn
+    name: Heilbronn
+    files:
+    - osm.pbf
+    - shp.zip
+  Helsinki:
+    id: Helsinki
+    file: Helsinki/Helsinki
+    name: Helsinki
+    files:
+    - osm.pbf
+    - shp.zip
+  Hertogenbosch:
+    id: Hertogenbosch
+    file: Hertogenbosch/Hertogenbosch
+    name: Hertogenbosch
+    files:
+    - osm.pbf
+    - shp.zip
+  Huntsville:
+    id: Huntsville
+    file: Huntsville/Huntsville
+    name: Huntsville
+    files:
+    - osm.pbf
+    - shp.zip
+  Innsbruck:
+    id: Innsbruck
+    file: Innsbruck/Innsbruck
+    name: Innsbruck
+    files:
+    - osm.pbf
+    - shp.zip
+  Istanbul:
+    id: Istanbul
+    file: Istanbul/Istanbul
+    name: Istanbul
+    files:
+    - osm.pbf
+    - shp.zip
+  Jena:
+    id: Jena
+    file: Jena/Jena
+    name: Jena
+    files:
+    - osm.pbf
+    - shp.zip
+  Jerusalem:
+    id: Jerusalem
+    file: Jerusalem/Jerusalem
+    name: Jerusalem
+    files:
+    - osm.pbf
+    - shp.zip
+  Johannesburg:
+    id: Johannesburg
+    file: Johannesburg/Johannesburg
+    name: Johannesburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Kaiserslautern:
+    id: Kaiserslautern
+    file: Kaiserslautern/Kaiserslautern
+    name: Kaiserslautern
+    files:
+    - osm.pbf
+    - shp.zip
+  Karlsruhe:
+    id: Karlsruhe
+    file: Karlsruhe/Karlsruhe
+    name: Karlsruhe
+    files:
+    - osm.pbf
+    - shp.zip
+  Kassel:
+    id: Kassel
+    file: Kassel/Kassel
+    name: Kassel
+    files:
+    - osm.pbf
+    - shp.zip
+  Katowice:
+    id: Katowice
+    file: Katowice/Katowice
+    name: Katowice
+    files:
+    - osm.pbf
+    - shp.zip
+  Kaunas:
+    id: Kaunas
+    file: Kaunas/Kaunas
+    name: Kaunas
+    files:
+    - osm.pbf
+    - shp.zip
+  Kiel:
+    id: Kiel
+    file: Kiel/Kiel
+    name: Kiel
+    files:
+    - osm.pbf
+    - shp.zip
+  Kiew:
+    id: Kiew
+    file: Kiew/Kiew
+    name: Kiew
+    files:
+    - osm.pbf
+    - shp.zip
+  Koblenz:
+    id: Koblenz
+    file: Koblenz/Koblenz
+    name: Koblenz
+    files:
+    - osm.pbf
+    - shp.zip
+  Koeln:
+    id: Koeln
+    file: Koeln/Koeln
+    name: Koeln
+    files:
+    - osm.pbf
+    - shp.zip
+  Konstanz:
+    id: Konstanz
+    file: Konstanz/Konstanz
+    name: Konstanz
+    files:
+    - osm.pbf
+    - shp.zip
+  LaPaz:
+    id: LaPaz
+    file: LaPaz/LaPaz
+    name: LaPaz
+    files:
+    - osm.pbf
+    - shp.zip
+  LaPlata:
+    id: LaPlata
+    file: LaPlata/LaPlata
+    name: LaPlata
+    files:
+    - osm.pbf
+    - shp.zip
+  LakeGarda:
+    id: LakeGarda
+    file: LakeGarda/LakeGarda
+    name: LakeGarda
+    files:
+    - osm.pbf
+    - shp.zip
+  Lausanne:
+    id: Lausanne
+    file: Lausanne/Lausanne
+    name: Lausanne
+    files:
+    - osm.pbf
+    - shp.zip
+  Leeds:
+    id: Leeds
+    file: Leeds/Leeds
+    name: Leeds
+    files:
+    - osm.pbf
+    - shp.zip
+  Leipzig:
+    id: Leipzig
+    file: Leipzig/Leipzig
+    name: Leipzig
+    files:
+    - osm.pbf
+    - shp.zip
+  Lima:
+    id: Lima
+    file: Lima/Lima
+    name: Lima
+    files:
+    - osm.pbf
+    - shp.zip
+  Linz:
+    id: Linz
+    file: Linz/Linz
+    name: Linz
+    files:
+    - osm.pbf
+    - shp.zip
+  Lisbon:
+    id: Lisbon
+    file: Lisbon/Lisbon
+    name: Lisbon
+    files:
+    - osm.pbf
+    - shp.zip
+  Liverpool:
+    id: Liverpool
+    file: Liverpool/Liverpool
+    name: Liverpool
+    files:
+    - osm.pbf
+    - shp.zip
+  Ljubljana:
+    id: Ljubljana
+    file: Ljubljana/Ljubljana
+    name: Ljubljana
+    files:
+    - osm.pbf
+    - shp.zip
+  Lodz:
+    id: Lodz
+    file: Lodz/Lodz
+    name: Lodz
+    files:
+    - osm.pbf
+    - shp.zip
+  London:
+    id: London
+    file: London/London
+    name: London
+    files:
+    - osm.pbf
+    - shp.zip
+  Luebeck:
+    id: Luebeck
+    file: Luebeck/Luebeck
+    name: Luebeck
+    files:
+    - osm.pbf
+    - shp.zip
+  Luxemburg:
+    id: Luxemburg
+    file: Luxemburg/Luxemburg
+    name: Luxemburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Lyon:
+    id: Lyon
+    file: Lyon/Lyon
+    name: Lyon
+    files:
+    - osm.pbf
+    - shp.zip
+  Maastricht:
+    id: Maastricht
+    file: Maastricht/Maastricht
+    name: Maastricht
+    files:
+    - osm.pbf
+    - shp.zip
+  Madison:
+    id: Madison
+    file: Madison/Madison
+    name: Madison
+    files:
+    - osm.pbf
+    - shp.zip
+  Madrid:
+    id: Madrid
+    file: Madrid/Madrid
+    name: Madrid
+    files:
+    - osm.pbf
+    - shp.zip
+  Magdeburg:
+    id: Magdeburg
+    file: Magdeburg/Magdeburg
+    name: Magdeburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Mainz:
+    id: Mainz
+    file: Mainz/Mainz
+    name: Mainz
+    files:
+    - osm.pbf
+    - shp.zip
+  Malmoe:
+    id: Malmoe
+    file: Malmoe/Malmoe
+    name: Malmoe
+    files:
+    - osm.pbf
+    - shp.zip
+  Manchester:
+    id: Manchester
+    file: Manchester/Manchester
+    name: Manchester
+    files:
+    - osm.pbf
+    - shp.zip
+  Mannheim:
+    id: Mannheim
+    file: Mannheim/Mannheim
+    name: Mannheim
+    files:
+    - osm.pbf
+    - shp.zip
+  Marseille:
+    id: Marseille
+    file: Marseille/Marseille
+    name: Marseille
+    files:
+    - osm.pbf
+    - shp.zip
+  Melbourne:
+    id: Melbourne
+    file: Melbourne/Melbourne
+    name: Melbourne
+    files:
+    - osm.pbf
+    - shp.zip
+  Memphis:
+    id: Memphis
+    file: Memphis/Memphis
+    name: Memphis
+    files:
+    - osm.pbf
+    - shp.zip
+  MexicoCity:
+    id: MexicoCity
+    file: MexicoCity/MexicoCity
+    name: MexicoCity
+    files:
+    - osm.pbf
+    - shp.zip
+  Miami:
+    id: Miami
+    file: Miami/Miami
+    name: Miami
+    files:
+    - osm.pbf
+    - shp.zip
+  Moenchengladbach:
+    id: Moenchengladbach
+    file: Moenchengladbach/Moenchengladbach
+    name: Moenchengladbach
+    files:
+    - osm.pbf
+    - shp.zip
+  Montevideo:
+    id: Montevideo
+    file: Montevideo/Montevideo
+    name: Montevideo
+    files:
+    - osm.pbf
+    - shp.zip
+  Montpellier:
+    id: Montpellier
+    file: Montpellier/Montpellier
+    name: Montpellier
+    files:
+    - osm.pbf
+    - shp.zip
+  Montreal:
+    id: Montreal
+    file: Montreal/Montreal
+    name: Montreal
+    files:
+    - osm.pbf
+    - shp.zip
+  Moscow:
+    id: Moscow
+    file: Moscow/Moscow
+    name: Moscow
+    files:
+    - osm.pbf
+    - shp.zip
+  Muenchen:
+    id: Muenchen
+    file: Muenchen/Muenchen
+    name: Muenchen
+    files:
+    - osm.pbf
+    - shp.zip
+  Muenster:
+    id: Muenster
+    file: Muenster/Muenster
+    name: Muenster
+    files:
+    - osm.pbf
+    - shp.zip
+  NewDelhi:
+    id: NewDelhi
+    file: NewDelhi/NewDelhi
+    name: NewDelhi
+    files:
+    - osm.pbf
+    - shp.zip
+  NewOrleans:
+    id: NewOrleans
+    file: NewOrleans/NewOrleans
+    name: NewOrleans
+    files:
+    - osm.pbf
+    - shp.zip
+  NewYork:
+    id: NewYork
+    file: NewYork/NewYork
+    name: NewYork
+    files:
+    - osm.pbf
+    - shp.zip
+  Nuernberg:
+    id: Nuernberg
+    file: Nuernberg/Nuernberg
+    name: Nuernberg
+    files:
+    - osm.pbf
+    - shp.zip
+  Oldenburg:
+    id: Oldenburg
+    file: Oldenburg/Oldenburg
+    name: Oldenburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Oranienburg:
+    id: Oranienburg
+    file: Oranienburg/Oranienburg
+    name: Oranienburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Orlando:
+    id: Orlando
+    file: Orlando/Orlando
+    name: Orlando
+    files:
+    - osm.pbf
+    - shp.zip
+  Oslo:
+    id: Oslo
+    file: Oslo/Oslo
+    name: Oslo
+    files:
+    - osm.pbf
+    - shp.zip
+  Osnabrueck:
+    id: Osnabrueck
+    file: Osnabrueck/Osnabrueck
+    name: Osnabrueck
+    files:
+    - osm.pbf
+    - shp.zip
+  Ostrava:
+    id: Ostrava
+    file: Ostrava/Ostrava
+    name: Ostrava
+    files:
+    - osm.pbf
+    - shp.zip
+  Ottawa:
+    id: Ottawa
+    file: Ottawa/Ottawa
+    name: Ottawa
+    files:
+    - osm.pbf
+    - shp.zip
+  Paderborn:
+    id: Paderborn
+    file: Paderborn/Paderborn
+    name: Paderborn
+    files:
+    - osm.pbf
+    - shp.zip
+  Palma:
+    id: Palma
+    file: Palma/Palma
+    name: Palma
+    files:
+    - osm.pbf
+    - shp.zip
+  PaloAlto:
+    id: PaloAlto
+    file: PaloAlto/PaloAlto
+    name: PaloAlto
+    files:
+    - osm.pbf
+    - shp.zip
+  Paris:
+    id: Paris
+    file: Paris/Paris
+    name: Paris
+    files:
+    - osm.pbf
+    - shp.zip
+  Perth:
+    id: Perth
+    file: Perth/Perth
+    name: Perth
+    files:
+    - osm.pbf
+    - shp.zip
+  Philadelphia:
+    id: Philadelphia
+    file: Philadelphia/Philadelphia
+    name: Philadelphia
+    files:
+    - osm.pbf
+    - shp.zip
+  PhnomPenh:
+    id: PhnomPenh
+    file: PhnomPenh/PhnomPenh
+    name: PhnomPenh
+    files:
+    - osm.pbf
+    - shp.zip
+  Portland:
+    id: Portland
+    file: Portland/Portland
+    name: Portland
+    files:
+    - osm.pbf
+    - shp.zip
+  PortlandME:
+    id: PortlandME
+    file: PortlandME/PortlandME
+    name: PortlandME
+    files:
+    - osm.pbf
+    - shp.zip
+  Porto:
+    id: Porto
+    file: Porto/Porto
+    name: Porto
+    files:
+    - osm.pbf
+    - shp.zip
+  PortoAlegre:
+    id: PortoAlegre
+    file: PortoAlegre/PortoAlegre
+    name: PortoAlegre
+    files:
+    - osm.pbf
+    - shp.zip
+  Potsdam:
+    id: Potsdam
+    file: Potsdam/Potsdam
+    name: Potsdam
+    files:
+    - osm.pbf
+    - shp.zip
+  Poznan:
+    id: Poznan
+    file: Poznan/Poznan
+    name: Poznan
+    files:
+    - osm.pbf
+    - shp.zip
+  Prag:
+    id: Prag
+    file: Prag/Prag
+    name: Prag
+    files:
+    - osm.pbf
+    - shp.zip
+  Providence:
+    id: Providence
+    file: Providence/Providence
+    name: Providence
+    files:
+    - osm.pbf
+    - shp.zip
+  Regensburg:
+    id: Regensburg
+    file: Regensburg/Regensburg
+    name: Regensburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Riga:
+    id: Riga
+    file: Riga/Riga
+    name: Riga
+    files:
+    - osm.pbf
+    - shp.zip
+  RiodeJaneiro:
+    id: RiodeJaneiro
+    file: RiodeJaneiro/RiodeJaneiro
+    name: RiodeJaneiro
+    files:
+    - osm.pbf
+    - shp.zip
+  Rostock:
+    id: Rostock
+    file: Rostock/Rostock
+    name: Rostock
+    files:
+    - osm.pbf
+    - shp.zip
+  Rotterdam:
+    id: Rotterdam
+    file: Rotterdam/Rotterdam
+    name: Rotterdam
+    files:
+    - osm.pbf
+    - shp.zip
+  Ruegen:
+    id: Ruegen
+    file: Ruegen/Ruegen
+    name: Ruegen
+    files:
+    - osm.pbf
+    - shp.zip
+  Saarbruecken:
+    id: Saarbruecken
+    file: Saarbruecken/Saarbruecken
+    name: Saarbruecken
+    files:
+    - osm.pbf
+    - shp.zip
+  Sacramento:
+    id: Sacramento
+    file: Sacramento/Sacramento
+    name: Sacramento
+    files:
+    - osm.pbf
+    - shp.zip
+  Saigon:
+    id: Saigon
+    file: Saigon/Saigon
+    name: Saigon
+    files:
+    - osm.pbf
+    - shp.zip
+  Salzburg:
+    id: Salzburg
+    file: Salzburg/Salzburg
+    name: Salzburg
+    files:
+    - osm.pbf
+    - shp.zip
+  SanFrancisco:
+    id: SanFrancisco
+    file: SanFrancisco/SanFrancisco
+    name: SanFrancisco
+    files:
+    - osm.pbf
+    - shp.zip
+  SanJose:
+    id: SanJose
+    file: SanJose/SanJose
+    name: SanJose
+    files:
+    - osm.pbf
+    - shp.zip
+  SanktPetersburg:
+    id: SanktPetersburg
+    file: SanktPetersburg/SanktPetersburg
+    name: SanktPetersburg
+    files:
+    - osm.pbf
+    - shp.zip
+  SantaBarbara:
+    id: SantaBarbara
+    file: SantaBarbara/SantaBarbara
+    name: SantaBarbara
+    files:
+    - osm.pbf
+    - shp.zip
+  SantaCruz:
+    id: SantaCruz
+    file: SantaCruz/SantaCruz
+    name: SantaCruz
+    files:
+    - osm.pbf
+    - shp.zip
+  Santiago:
+    id: Santiago
+    file: Santiago/Santiago
+    name: Santiago
+    files:
+    - osm.pbf
+    - shp.zip
+  Sarajewo:
+    id: Sarajewo
+    file: Sarajewo/Sarajewo
+    name: Sarajewo
+    files:
+    - osm.pbf
+    - shp.zip
+  Schwerin:
+    id: Schwerin
+    file: Schwerin/Schwerin
+    name: Schwerin
+    files:
+    - osm.pbf
+    - shp.zip
+  Seattle:
+    id: Seattle
+    file: Seattle/Seattle
+    name: Seattle
+    files:
+    - osm.pbf
+    - shp.zip
+  Seoul:
+    id: Seoul
+    file: Seoul/Seoul
+    name: Seoul
+    files:
+    - osm.pbf
+    - shp.zip
+  Sheffield:
+    id: Sheffield
+    file: Sheffield/Sheffield
+    name: Sheffield
+    files:
+    - osm.pbf
+    - shp.zip
+  Singapore:
+    id: Singapore
+    file: Singapore/Singapore
+    name: Singapore
+    files:
+    - osm.pbf
+    - shp.zip
+  Sofia:
+    id: Sofia
+    file: Sofia/Sofia
+    name: Sofia
+    files:
+    - osm.pbf
+    - shp.zip
+  Stockholm:
+    id: Stockholm
+    file: Stockholm/Stockholm
+    name: Stockholm
+    files:
+    - osm.pbf
+    - shp.zip
+  Stockton:
+    id: Stockton
+    file: Stockton/Stockton
+    name: Stockton
+    files:
+    - osm.pbf
+    - shp.zip
+  Strassburg:
+    id: Strassburg
+    file: Strassburg/Strassburg
+    name: Strassburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Stuttgart:
+    id: Stuttgart
+    file: Stuttgart/Stuttgart
+    name: Stuttgart
+    files:
+    - osm.pbf
+    - shp.zip
+  Sucre:
+    id: Sucre
+    file: Sucre/Sucre
+    name: Sucre
+    files:
+    - osm.pbf
+    - shp.zip
+  Sydney:
+    id: Sydney
+    file: Sydney/Sydney
+    name: Sydney
+    files:
+    - osm.pbf
+    - shp.zip
+  Szczecin:
+    id: Szczecin
+    file: Szczecin/Szczecin
+    name: Szczecin
+    files:
+    - osm.pbf
+    - shp.zip
+  Tallinn:
+    id: Tallinn
+    file: Tallinn/Tallinn
+    name: Tallinn
+    files:
+    - osm.pbf
+    - shp.zip
+  Tehran:
+    id: Tehran
+    file: Tehran/Tehran
+    name: Tehran
+    files:
+    - osm.pbf
+    - shp.zip
+  Tilburg:
+    id: Tilburg
+    file: Tilburg/Tilburg
+    name: Tilburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Tokyo:
+    id: Tokyo
+    file: Tokyo/Tokyo
+    name: Tokyo
+    files:
+    - osm.pbf
+    - shp.zip
+  Toronto:
+    id: Toronto
+    file: Toronto/Toronto
+    name: Toronto
+    files:
+    - osm.pbf
+    - shp.zip
+  Toulouse:
+    id: Toulouse
+    file: Toulouse/Toulouse
+    name: Toulouse
+    files:
+    - osm.pbf
+    - shp.zip
+  Trondheim:
+    id: Trondheim
+    file: Trondheim/Trondheim
+    name: Trondheim
+    files:
+    - osm.pbf
+    - shp.zip
+  Tucson:
+    id: Tucson
+    file: Tucson/Tucson
+    name: Tucson
+    files:
+    - osm.pbf
+    - shp.zip
+  Turin:
+    id: Turin
+    file: Turin/Turin
+    name: Turin
+    files:
+    - osm.pbf
+    - shp.zip
+  UlanBator:
+    id: UlanBator
+    file: UlanBator/UlanBator
+    name: UlanBator
+    files:
+    - osm.pbf
+    - shp.zip
+  Ulm:
+    id: Ulm
+    file: Ulm/Ulm
+    name: Ulm
+    files:
+    - osm.pbf
+    - shp.zip
+  Usedom:
+    id: Usedom
+    file: Usedom/Usedom
+    name: Usedom
+    files:
+    - osm.pbf
+    - shp.zip
+  Utrecht:
+    id: Utrecht
+    file: Utrecht/Utrecht
+    name: Utrecht
+    files:
+    - osm.pbf
+    - shp.zip
+  Vancouver:
+    id: Vancouver
+    file: Vancouver/Vancouver
+    name: Vancouver
+    files:
+    - osm.pbf
+    - shp.zip
+  Victoria:
+    id: Victoria
+    file: Victoria/Victoria
+    name: Victoria
+    files:
+    - osm.pbf
+    - shp.zip
+  WarenMueritz:
+    id: WarenMueritz
+    file: WarenMueritz/WarenMueritz
+    name: WarenMueritz
+    files:
+    - osm.pbf
+    - shp.zip
+  Warsaw:
+    id: Warsaw
+    file: Warsaw/Warsaw
+    name: Warsaw
+    files:
+    - osm.pbf
+    - shp.zip
+  WashingtonDC:
+    id: WashingtonDC
+    file: WashingtonDC/WashingtonDC
+    name: WashingtonDC
+    files:
+    - osm.pbf
+    - shp.zip
+  Waterloo:
+    id: Waterloo
+    file: Waterloo/Waterloo
+    name: Waterloo
+    files:
+    - osm.pbf
+    - shp.zip
+  Wien:
+    id: Wien
+    file: Wien/Wien
+    name: Wien
+    files:
+    - osm.pbf
+    - shp.zip
+  Wroclaw:
+    id: Wroclaw
+    file: Wroclaw/Wroclaw
+    name: Wroclaw
+    files:
+    - osm.pbf
+    - shp.zip
+  Wuerzburg:
+    id: Wuerzburg
+    file: Wuerzburg/Wuerzburg
+    name: Wuerzburg
+    files:
+    - osm.pbf
+    - shp.zip
+  Wuppertal:
+    id: Wuppertal
+    file: Wuppertal/Wuppertal
+    name: Wuppertal
+    files:
+    - osm.pbf
+    - shp.zip
+  Zagreb:
+    id: Zagreb
+    file: Zagreb/Zagreb
+    name: Zagreb
+    files:
+    - osm.pbf
+    - shp.zip
+  Zuerich:
+    id: Zuerich
+    file: Zuerich/Zuerich
+    name: Zuerich
+    files:
+    - osm.pbf
+    - shp.zip

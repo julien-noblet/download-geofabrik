@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"path/filepath"
-	"strings"
+	"reflect"
+	"regexp"
+	"sync"
 	"time"
 
-	"github.com/PuerkitoBio/gocrawl"
-	"github.com/PuerkitoBio/goquery"
+	"github.com/gocolly/colly"
 	pb "gopkg.in/cheggaaa/pb.v1"
 	yaml "gopkg.in/yaml.v2"
 )
@@ -27,369 +27,62 @@ func (e ElementSlice) Generate(myConfig *Config) ([]byte, error) {
 	return yaml.Marshal(myConfig)
 }
 
+// Generate make the slice which contain all Elements
+func (e *Ext) Exist(id string) bool {
+	e.ElementsMutex.RLock()
+	r := reflect.DeepEqual(e.Elements[id], Element{})
+	e.ElementsMutex.RUnlock()
+	if !r {
+		return true
+	}
+	return false
+}
+
 // Ext simple struct for managing ElementSlice and crawler
 type Ext struct {
-	*gocrawl.DefaultExtender
-	Elements ElementSlice
+	//*gocrawl.DefaultExtender
+	Elements      ElementSlice
+	ElementsMutex sync.RWMutex
 }
 
-// addHash find if a hash is available and append it to e
-func (e *Element) addHash(myel *goquery.Selection) {
-	a := myel.Find("a")
-	if a.Length() == 2 { // If only 1 a there is no hash
-		validHash := []string{"md5"}
-		val, exist := a.Eq(1).Attr("href")
-		if exist {
-			splitted := strings.Split(val, ".")
-			hash := splitted[len(splitted)-1]
-			if stringInSlice(&hash, &validHash) {
-				hashfile := strings.Join(splitted[1:], ".")
-				//fmt.Println(hashfile)
-				e.Formats = append(e.Formats, hashfile)
-			}
+func contains(s []string, e string) bool {
+	for _, a := range s {
+		if reflect.DeepEqual(a, e) {
+			return true
 		}
 	}
-}
-
-func (e *Ext) parseGeofabrik(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
-	var thisElement Element
-	downloadMain := doc.Find("div.download-main")
-	parent, haveParent := doc.Find("p a").Attr("href")                        // I'm not shure it is parent
-	if haveParent && !strings.Contains(parent, "https://www.geofabrik.de/") { // Removing https?
-		// or try with slicer and == should be quicker?
-		parent = parent[0 : len(parent)-5]             // remove ".html"
-		if parent == "index" || parent == "../index" { // first level
-			parent = ""
-		} else {
-			temp := strings.Split(parent, "/")
-			parent = temp[len(temp)-1]
-		}
-		thisElement.Parent = parent
-		for element := range downloadMain.Nodes {
-			singleElement := downloadMain.Eq(element)
-			name := singleElement.Find("h2").Text()
-			thisElement.Name = name
-			li := singleElement.Find("div.leftColumn").Find("li")
-			for el := range li.Nodes {
-				myel := li.Eq(el)
-				linkval, link := myel.Find("a").Attr("href")
-				if link {
-					for _, v := range []string{"osm.pbf", "shp.zip", "osm.bz2", "osh.pbf", "poly", "-updates"} {
-						extFound := strings.Contains(linkval, v)
-						if extFound {
-							switch v {
-							case "osm.pbf":
-								thisElement.ID = linkval[0 : len(linkval)-15]
-								thisElement.Formats = append(thisElement.Formats, v)
-								thisElement.addHash(myel)
-							case "poly":
-								thisElement.Formats = append(thisElement.Formats, v)
-								thisElement.Formats = append(thisElement.Formats, "kml")
-							case "-updates":
-								thisElement.Formats = append(thisElement.Formats, "state")
-							default:
-								thisElement.Formats = append(thisElement.Formats, v)
-								thisElement.addHash(myel)
-							}
-						}
-					}
-				}
-			}
-		}
-		if len(thisElement.Formats) == 0 {
-			thisElement.Meta = true
-		}
-		// Workaround to fix #10
-		var us Element
-		us.Meta = true
-		us.ID = "us"
-		us.Name = "United States of America"
-		us.Parent = "north-america"
-		us.Formats = []string{}
-		e.Elements[us.ID] = us
-
-		//Exceptions!
-		// Only Georgia (EU and US)
-		if thisElement.ID == "georgia" {
-			thisElement.File = "georgia"
-			if thisElement.Parent == "europe" {
-				thisElement.Name = "Georgia (Europe country)"
-				thisElement.ID = "georgia-eu"
-			} else {
-				thisElement.Name = "Georgia (US State)"
-				thisElement.ID = "georgia-us"
-				thisElement.Parent = "us"
-			}
-		}
-		// List of US to fix #10
-		usList := map[string]bool{
-			"alabama":              true,
-			"alaska":               true,
-			"arizona":              true,
-			"arkansas":             true,
-			"california":           true,
-			"colorado":             true,
-			"connecticut":          true,
-			"delaware":             true,
-			"district-of-columbia": true,
-			"florida":              true,
-			"georgia":              false, // Since there is also georgia in europe....
-			"hawaii":               true,
-			"idaho":                true,
-			"illinois":             true,
-			"indiana":              true,
-			"iowa":                 true,
-			"kansas":               true,
-			"kentucky":             true,
-			"louisiana":            true,
-			"maine":                true,
-			"maryland":             true,
-			"massachusetts":        true,
-			"michigan":             true,
-			"minnesota":            true,
-			"mississippi":          true,
-			"missouri":             true,
-			"montana":              true,
-			"nebraska":             true,
-			"nevada":               true,
-			"new-hampshire":        true,
-			"new-jersey":           true,
-			"new-mexico":           true,
-			"new-york":             true,
-			"north-carolina":       true,
-			"north-dakota":         true,
-			"ohio":                 true,
-			"oklahoma":             true,
-			"oregon":               true,
-			"pennsylvania":         true,
-			"puerto-rico":          true,
-			"rhode-island":         true,
-			"south-carolina":       true,
-			"south-dakota":         true,
-			"tennessee":            true,
-			"texas":                true,
-			"utah":                 true,
-			"vermont":              true,
-			"virginia":             true,
-			"washington":           true,
-			"west-virginia":        true,
-			"wisconsin":            true,
-			"wyoming":              true}
-
-		if usList[thisElement.ID] {
-			thisElement.Parent = "us"
-		}
-		if thisElement.Name != "OpenStreetMap Data Extracts" {
-			e.Elements[thisElement.ID] = thisElement
-		}
-	}
-	return nil, true
+	return false
 }
 
 func (e *Ext) mergeElement(element *Element) error {
-	if cE, ok := e.Elements[element.ID]; ok {
+	e.ElementsMutex.RLock()
+	cE, ok := e.Elements[element.ID]
+	e.ElementsMutex.RUnlock()
+	if ok {
 		if cE.Parent != element.Parent {
 			return fmt.Errorf("Cant merge : Parent mismatch")
 		}
-		cE.Formats = append(cE.Formats, element.Formats...)
+		e.ElementsMutex.Lock()
+		for _, f := range element.Formats {
+			if !contains(cE.Formats, f) {
+				cE.Formats = append(cE.Formats, f)
+			}
+		}
+		e.ElementsMutex.Unlock()
 		if len(cE.Formats) == 0 {
 			cE.Meta = true
 		} else {
 			cE.Meta = false
 		}
+		e.ElementsMutex.Lock()
 		e.Elements[element.ID] = cE
+		e.ElementsMutex.Unlock()
 	} else {
+		e.ElementsMutex.Lock()
 		e.Elements[element.ID] = *element
+		e.ElementsMutex.Unlock()
 	}
 	return nil
-}
-
-func (e *Ext) parseOSMfr(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
-	parents := strings.Split(doc.Url.Path, "/")
-	parent := parents[len(parents)-2]          // Get x in this kind of url http(s)://1/2/.../x/
-	if strings.EqualFold(parent, "extracts") { // should I try == or a switch?
-		parent = ""
-	} else if strings.EqualFold(parent, "polygons") {
-		parent = ""
-	}
-	list := doc.Find("table tr")
-	for line := range list.Nodes {
-		singleElement := list.Eq(line)
-		link := singleElement.Find("a")
-		//index := 0
-		for aa := range link.Nodes {
-			a := link.Eq(aa)
-			vallink, link := a.Attr("href") // get first link
-			if link {
-				// Filtering
-				if !strings.Contains(vallink, "?") && !strings.Contains(vallink, "-latest") && vallink[0] != '/' && !strings.EqualFold(vallink, "cgi-bin/") && vallink[len(vallink)-1] != '/' {
-					element := *new(Element)
-					element.Parent = parent
-					valsplit := strings.Split(vallink, ".")
-					name := valsplit[0]
-					//log.Println("name", name)
-					ext := strings.Join(valsplit[1:], ".")
-					if strings.Contains(ext, "state.txt") { // I'm shure it can be refactorized
-						ext = "state"
-					}
-					element.ID = name
-					element.Name = name
-					if *fVerbose && !*fQuiet && !*fProgress {
-						log.Println("parsing", vallink)
-					}
-					if !strings.EqualFold(e.Elements[name].ID, name) {
-						element.Formats = append(element.Formats, ext)
-						err := e.mergeElement(&element)
-						if err != nil {
-							log.Panicln("Can't merge element,", err)
-						}
-					} else {
-						if *fVerbose && !*fQuiet && !*fProgress {
-							log.Println(name, "already exist")
-							log.Println("Merging formats")
-						}
-						et := e.Elements[name]
-						if len(et.Formats) == 0 {
-							et.Meta = true
-						} else {
-							et.Meta = false
-						}
-						et.Formats = append(et.Formats, ext)
-						e.Elements[name] = et
-					}
-				}
-			}
-		}
-	}
-	return nil, true
-}
-
-func (e *Ext) parseGisLab(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
-	list := doc.Find("table tr")
-	for line := range list.Nodes {
-		tds := list.Eq(line).Find("td")
-		if tds.Length() == 6 {
-			element := *new(Element)
-			element.ID = tds.Eq(0).Text()
-			element.Name = tds.Eq(1).Text()
-			element.Formats = append(element.Formats, "osm.pbf") // Not checked elements
-			element.Formats = append(element.Formats, "osm.bz2") // Pray for non changing data structure...
-			element.Formats = append(element.Formats, "poly")    // Not checked but seems to be used for generating osm.pbf/osm.bz2
-			if *fVerbose && !*fQuiet {
-				log.Println("Adding", element.Name)
-			}
-			err := e.mergeElement(&element)
-			if err != nil {
-				log.Panicln("Can't merge element,", err)
-			}
-		}
-	}
-	return nil, true
-}
-
-// Visit launch right crawler
-func (e *Ext) Visit(ctx *gocrawl.URLContext, res *http.Response, doc *goquery.Document) (interface{}, bool) {
-	if *fVerbose && !*fQuiet && !*fProgress {
-		fmt.Printf("Visit: %s\n", ctx.URL())
-	}
-	if *fProgress {
-		bar.Increment()
-	}
-	switch ctx.URL().Host {
-	case "download.geofabrik.de":
-		return e.parseGeofabrik(ctx, res, doc)
-	case "download.openstreetmap.fr":
-		return e.parseOSMfr(ctx, res, doc)
-	case "be.gis-lab.info":
-		return e.parseGisLab(ctx, res, doc)
-	default:
-		panic(fmt.Sprintln("Panic! " + ctx.URL().Host + " is not supported!"))
-	}
-
-}
-
-// Filter remove non needed urls.
-func (e *Ext) Filter(ctx *gocrawl.URLContext, isVisited bool) bool {
-	if isVisited {
-		return false
-	}
-	if len(ctx.URL().RawQuery) != 0 {
-		return false
-		// TODO: refactorize? Use config file?
-	} else if strings.Contains(ctx.URL().Path, "newshapes.html") {
-		return false
-	} else if strings.Contains(ctx.URL().Path, "technical.html") {
-		return false
-	} else if strings.Contains(ctx.URL().Path, "robots.txt") {
-		return false
-	} else if strings.Contains(ctx.URL().Path, "replication") {
-		return false
-	} else if strings.Contains(ctx.URL().Path, "cgi-bin") {
-		return false
-	} else if strings.Contains(ctx.URL().Path, ".pdf") {
-		return false
-	} else if strings.Contains(ctx.URL().Path, ".pbf") {
-		return false
-	} else if strings.Contains(ctx.URL().Path, ".poly") {
-		return false
-	} else if strings.Contains(ctx.URL().Path, ".kml") {
-		return false
-	} else if strings.Contains(ctx.URL().Path, ".bz2") {
-		return false
-	} else if strings.Contains(ctx.URL().Path, ".zip") {
-		return false
-	} else if strings.Contains(ctx.URL().Path, "?") {
-		return false
-	} else if ctx.URL().Path[len(ctx.URL().Path)-1:] == "/" {
-		return true
-	} else if strings.Contains(ctx.URL().Path, ".html") {
-		return true
-	} else if strings.Contains(ctx.URL().Path, ".php") {
-		return true
-		//	} else if ctx.URL().Path[len(ctx.URL().Path)-8:] == "-updates" {
-		//		return false
-		//	} else {
-		//		return false
-	}
-	return false
-}
-
-// GenerateCrawler creating a gocrawl to parse the website.
-func GenerateCrawler(url string, fname string, myConfig *Config) {
-	ext := &Ext{&gocrawl.DefaultExtender{}, make(map[string]Element)}
-	// Set custom options
-	opts := gocrawl.NewOptions(ext)
-	opts.CrawlDelay = 100 * time.Millisecond
-	opts.LogFlags = gocrawl.LogError
-	//	opts.LogFlags = gocrawl.LogAll
-	opts.SameHostOnly = true //false
-	opts.UserAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36"
-	opts.MaxVisits = 15000
-
-	file := gocrawl.NewCrawlerWithOptions(opts)
-	if *fProgress {
-		maxPb := 400 // default value is a realy magicaly set :)
-		switch url { // Todo: found a better way!
-		case "https://download.geofabrik.de/":
-			maxPb = 411 // Magical!
-		case "https://download.openstreetmap.fr/":
-			maxPb = 144 // Magical
-		case "http://be.gis-lab.info/project/osm_dump/iframe.php":
-			maxPb = 1 // Single page!
-		}
-		bar = pb.New(maxPb)
-		bar.Start()
-	}
-	err := file.Run(url)
-	if err != nil {
-		log.Panicln(err)
-	}
-	out, _ := ext.Elements.Generate(myConfig)
-	filename, _ := filepath.Abs(fname)
-	err = ioutil.WriteFile(filename, out, 0644)
-	if err != nil {
-		log.Panicln(fmt.Errorf(" File error: %v ", err))
-	}
 }
 
 //Generate main function
@@ -411,7 +104,61 @@ func Generate(configfile string) {
 		geofabrik.Formats["kml"] = format{ID: "kml", Loc: ".kml"}
 		geofabrik.Formats["state"] = format{ID: "state", Loc: "-updates/state.txt"}
 		geofabrik.Formats["shp.zip"] = format{ID: "shp.zip", Loc: "-latest-free.shp.zip"}
-		GenerateCrawler("https://download.geofabrik.de/", configfile, &geofabrik)
+		ext := Ext{Elements: make(map[string]Element), ElementsMutex: sync.RWMutex{}}
+		if *fProgress {
+			bar = pb.New(geofabrikPb)
+			bar.Start()
+		}
+		c := colly.NewCollector(
+			// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
+			colly.AllowedDomains("download.geofabrik.de"),
+			colly.URLFilters(
+				regexp.MustCompile("https://download.geofabrik.de/.+.html"),
+				regexp.MustCompile("https://download.geofabrik.de/$"),
+			),
+			colly.Async(true),
+		)
+		c.Limit(&colly.LimitRule{
+			Parallelism: 2,
+			RandomDelay: 5 * time.Second,
+			//Delay: 5 * time.Second,
+		})
+		/*c.WithTransport(&http.Transport{
+			Proxy: http.ProxyFromEnvironment,
+			DialContext: (&net.Dialer{
+				Timeout:   60 * time.Second,
+				KeepAlive: 30 * time.Second,
+				DualStack: true,
+			}).DialContext,
+			MaxIdleConns:          0,
+			IdleConnTimeout:       5 * time.Second,
+			TLSHandshakeTimeout:   10 * time.Second,
+			ExpectContinueTimeout: 5 * time.Second,
+		})*/
+
+		c.OnError(func(r *colly.Response, err error) {
+			fmt.Println("Request URL:", r.Request.URL, "failed with response:", r, "\nError:", err.Error())
+		})
+
+		c.OnHTML("#subregions", func(e *colly.HTMLElement) {
+			geofabrikParseSubregion(e, &ext, c)
+		})
+		c.OnHTML("li", func(e *colly.HTMLElement) {
+			geofabrikParseLi(e, &ext, c)
+		})
+		c.OnScraped(func(*colly.Response) {
+			if *fProgress {
+				bar.Increment()
+			}
+		})
+		c.Visit("https://download.geofabrik.de/")
+		c.Wait()
+		out, _ := ext.Elements.Generate(&geofabrik)
+		filename, _ := filepath.Abs(configfile)
+		err := ioutil.WriteFile(filename, out, 0644)
+		if err != nil {
+			log.Panicln(fmt.Errorf(" File error: %v ", err))
+		}
 		if !*fQuiet {
 			log.Println(configfile, " generated.")
 		}
@@ -423,7 +170,48 @@ func Generate(configfile string) {
 		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
 		myConfig.Formats["poly"] = format{ID: "poly", Loc: ".poly", BasePath: "../polygons/"}
 		myConfig.Formats["state"] = format{ID: "state", Loc: ".state.txt"}
-		GenerateCrawler("https://download.openstreetmap.fr/", configfile, &myConfig)
+		ext := Ext{Elements: make(map[string]Element), ElementsMutex: sync.RWMutex{}}
+		if *fProgress {
+			bar = pb.New(openstreetmapFRPb)
+			bar.Start()
+		}
+		//GenerateCrawler("https://download.openstreetmap.fr/", configfile, &myConfig)
+		c := colly.NewCollector(
+			// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
+			colly.AllowedDomains("download.openstreetmap.fr"),
+			colly.URLFilters(
+				regexp.MustCompile("https://download.openstreetmap.fr/extracts/.+"),
+				regexp.MustCompile("https://download.openstreetmap.fr/extracts/.+"),
+				regexp.MustCompile("https://download.openstreetmap.fr/"),
+			),
+			colly.Async(true),
+		)
+		c.Limit(&colly.LimitRule{
+			Parallelism: 2,
+			RandomDelay: 5 * time.Second,
+		})
+
+		c.OnError(func(r *colly.Response, err error) {
+			fmt.Println("Request URL:", r.Request.URL, "failed with response:", r, "\nError:", err)
+		})
+		c.OnHTML("a", func(e *colly.HTMLElement) {
+			openstreetmapFRParse(e, &ext, bar, func(arg interface{}) {
+				c.Visit(arg.(string))
+			})
+		})
+		c.OnScraped(func(*colly.Response) {
+			if *fProgress {
+				bar.Increment()
+			}
+		})
+		c.Visit("https://download.openstreetmap.fr/")
+		c.Wait()
+		out, _ := ext.Elements.Generate(&myConfig)
+		filename, _ := filepath.Abs(configfile)
+		err := ioutil.WriteFile(filename, out, 0644)
+		if err != nil {
+			log.Panicln(fmt.Errorf(" File error: %v ", err))
+		}
 		if !*fQuiet {
 			log.Println(configfile, " generated.")
 		}
@@ -434,12 +222,92 @@ func Generate(configfile string) {
 		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", BaseURL: "http://data.gis-lab.info/osm_dump/dump", BasePath: "latest/", Loc: ".osm.pbf"}
 		myConfig.Formats["osm.bz2"] = format{ID: "osm.bz2", BaseURL: "http://data.gis-lab.info/osm_dump/dump", BasePath: "latest/", Loc: ".osm.bz2"}
 		myConfig.Formats["poly"] = format{ID: "poly", BaseURL: "https://raw.githubusercontent.com/nextgis/osmdump_poly/master", Loc: ".poly"}
-		GenerateCrawler("http://be.gis-lab.info/project/osm_dump/iframe.php", configfile, &myConfig)
+		ext := Ext{Elements: make(map[string]Element)}
+		c := colly.NewCollector(
+			// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
+			colly.AllowedDomains("be.gis-lab.info"),
+		)
+		c.OnHTML("table", func(e *colly.HTMLElement) {
+			gislabParse(e, &ext)
+		})
+		c.Visit("http://be.gis-lab.info/project/osm_dump/iframe.php")
+		c.Wait()
+		//GenerateCrawler("http://be.gis-lab.info/project/osm_dump/iframe.php", configfile, &myConfig)
+		out, _ := ext.Elements.Generate(&myConfig)
+		filename, _ := filepath.Abs(configfile)
+		err := ioutil.WriteFile(filename, out, 0644)
+		if err != nil {
+			log.Panicln(fmt.Errorf(" File error: %v ", err))
+		}
+		if !*fQuiet {
+			log.Println(configfile, " generated.")
+		}
+	case "bbbike":
+		var myConfig Config
+		myConfig.BaseURL = "https://download.bbbike.org/osm/bbbike/"
+		myConfig.Formats = make(map[string]format)
+		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: ".osm.pbf"}
+		myConfig.Formats["shp.zip"] = format{ID: "shp.zip", Loc: ".osm.shp.zip"}
+		ext := Ext{Elements: make(map[string]Element), ElementsMutex: sync.RWMutex{}}
+		if *fProgress {
+			bar = pb.New(bbbikePb)
+			bar.Start()
+		}
+		c := colly.NewCollector(
+			// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
+			colly.AllowedDomains("download.bbbike.org"),
+			colly.URLFilters(
+				regexp.MustCompile("https://download.bbbike.org/osm/bbbike/[A-Z].+"),
+				regexp.MustCompile("https://download.bbbike.org/osm/bbbike/"),
+			),
+			//colly.Async(true),
+		)
+		c.Limit(&colly.LimitRule{
+			Parallelism: 1,
+			RandomDelay: 5 * time.Second,
+			//Delay: 5 * time.Second,
+		})
+		/*c.WithTransport(&http.Transport{
+			Proxy: http.ProxyFromEnvironment,
+			DialContext: (&net.Dialer{
+				Timeout:   60 * time.Second,
+				KeepAlive: 30 * time.Second,
+				DualStack: true,
+			}).DialContext,
+			MaxIdleConns:          0,
+			IdleConnTimeout:       5 * time.Second,
+			TLSHandshakeTimeout:   10 * time.Second,
+			ExpectContinueTimeout: 5 * time.Second,
+		})*/
+
+		c.OnError(func(r *colly.Response, err error) {
+			fmt.Println("Request URL:", r.Request.URL, "failed with response:", r, "\nError:", err.Error())
+		})
+
+		c.OnHTML("div.list", func(e *colly.HTMLElement) {
+			bbbikeParseList(e, &ext, c)
+		})
+		c.OnHTML("#sidebar", func(e *colly.HTMLElement) {
+			bbbikeParseSidebar(e, &ext, c)
+		})
+
+		c.OnScraped(func(*colly.Response) {
+			if *fProgress {
+				bar.Increment()
+			}
+		})
+		c.Visit("https://download.bbbike.org/osm/bbbike/")
+		c.Wait()
+		out, _ := ext.Elements.Generate(&myConfig)
+		filename, _ := filepath.Abs(configfile)
+		err := ioutil.WriteFile(filename, out, 0644)
+		if err != nil {
+			log.Panicln(fmt.Errorf(" File error: %v ", err))
+		}
 		if !*fQuiet {
 			log.Println(configfile, " generated.")
 		}
 	default:
 		log.Println("Service not reconized, please use one of geofabrik, openstreetmap.fr or gislab")
 	}
-
 }

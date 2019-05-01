@@ -39,6 +39,7 @@ var (
 	download = app.Command("download", "Download element") //TODO : add d as command
 	delement = download.Arg("element", "OSM element").Required().String()
 	dosmBz2  = download.Flag("osm.bz2", "Download osm.bz2 if available").Short('B').Bool()
+	dosmGz   = download.Flag("osm.gz", "Download osm.gz if available").Short('G').Bool()
 	dshpZip  = download.Flag("shp.zip", "Download shp.zip if available").Short('S').Bool()
 	dosmPbf  = download.Flag("osm.pbf", "Download osm.pbf (default)").Short('P').Bool()
 	doshPbf  = download.Flag("osh.pbf", "Download osh.pbf").Short('H').Bool()
@@ -102,6 +103,11 @@ func checkService() bool {
 	case "gislab":
 		if strings.EqualFold(*fConfig, "./geofabrik.yml") {
 			*fConfig = "./gislab.yml"
+		}
+		return true
+	case "bbbike":
+		if strings.EqualFold(*fConfig, "./geofabrik.yml") {
+			*fConfig = "./bbbike.yml"
 		}
 		return true
 	}
