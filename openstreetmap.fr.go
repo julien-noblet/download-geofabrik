@@ -18,23 +18,29 @@ func openstreetmapFRGetNext(href string, callback func(interface{})) {
 	callback(href)
 }
 
+func openstreetmapFRGetParent(href string) (string, []string) {
+	parents := strings.Split(href, "/")
+	var parent string
+	if len(parents) > 4 {
+		parent = parents[len(parents)-2] // Get x in this kind of url http(s)://1/2/.../x/
+	} else {
+		parent = ""
+	}
+	if strings.EqualFold(parent, "extracts") { // should I try == or a switch?
+		parent = ""
+	} else if strings.EqualFold(parent, "polygons") {
+		parent = ""
+	}
+	return parent, parents
+}
+
 func openstreetmapFRParseHref(href string, ext *Ext) {
 	if *fVerbose && !*fQuiet && !*fProgress {
 		log.Println("Parsing:", href)
 	}
-	if !strings.Contains(href, "?") && !strings.Contains(href, "-latest") && href[0] != '/' && !strings.EqualFold(href, "cgi-bin/") {
-		parents := strings.Split(href, "/")
-		var parent string
-		if len(parents) > 2 {
-			parent = parents[len(parents)-2] // Get x in this kind of url http(s)://1/2/.../x/
-		} else {
-			parent = ""
-		}
-		if strings.EqualFold(parent, "extracts") { // should I try == or a switch?
-			parent = ""
-		} else if strings.EqualFold(parent, "polygons") {
-			parent = ""
-		}
+	//	if !strings.Contains(href, "?") && !strings.Contains(href, "-latest") && href[0] != '/' && !strings.EqualFold(href, "cgi-bin/") {
+	if !strings.Contains(href, "?") && !strings.Contains(href, "-latest") && href[0] != '/' {
+		parent, parents := openstreetmapFRGetParent(href)
 		valsplit := strings.Split(parents[len(parents)-1], ".")
 		if valsplit[0] != "" {
 			if *fVerbose && !*fQuiet && !*fProgress {
@@ -88,9 +94,8 @@ func openstreetmapFRParseHref(href string, ext *Ext) {
 
 func openstreetmapFRParse(e *colly.HTMLElement, ext *Ext, bar *pb.ProgressBar, callback func(interface{})) {
 	href := e.Request.AbsoluteURL(e.Attr("href"))
-	if href[len(href)-1] == '/' && !strings.Contains(href, "cgi-bin/") && !strings.Contains(href, "replication/") {
+	if href[len(href)-1] == '/' {
 		openstreetmapFRGetNext(href, callback)
-
 	} else {
 		openstreetmapFRParseHref(href, ext)
 	}

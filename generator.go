@@ -177,9 +177,11 @@ func Generate(configfile string) {
 			// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
 			colly.AllowedDomains("download.openstreetmap.fr"),
 			colly.URLFilters(
-				regexp.MustCompile("https://download.openstreetmap.fr/extracts/.+"),
-				regexp.MustCompile("https://download.openstreetmap.fr/extracts/.+"),
-				regexp.MustCompile("https://download.openstreetmap.fr/"),
+				regexp.MustCompile("https://download.openstreetmap.fr/$"),
+				regexp.MustCompile("https://download.openstreetmap.fr/extracts/$"),
+				regexp.MustCompile("https://download.openstreetmap.fr/polygons/$"),
+				regexp.MustCompile("https://download.openstreetmap.fr/extracts/[a-zA-Z].+"),
+				regexp.MustCompile("https://download.openstreetmap.fr/polygons/[a-zA-Z].+"),
 			),
 			colly.Async(true),
 		)
