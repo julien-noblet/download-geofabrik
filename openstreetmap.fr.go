@@ -8,7 +8,9 @@ import (
 	pb "gopkg.in/cheggaaa/pb.v1"
 )
 
-const openstreetmapFRPb = 144
+const (
+	openstreetmapFRPb = 144
+)
 
 // Example:
 func openstreetmapFRGetNext(href string, callback func(interface{})) {

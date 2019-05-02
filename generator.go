@@ -27,7 +27,7 @@ func (e ElementSlice) Generate(myConfig *Config) ([]byte, error) {
 	return yaml.Marshal(myConfig)
 }
 
-// Generate make the slice which contain all Elements
+//Exist check if id is in e.Elements
 func (e *Ext) Exist(id string) bool {
 	e.ElementsMutex.RLock()
 	r := reflect.DeepEqual(e.Elements[id], Element{})

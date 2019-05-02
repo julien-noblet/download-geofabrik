@@ -112,6 +112,13 @@ func TestExt_mergeElement(t *testing.T) {
 			wantErr: false,
 		},
 		{
+			name: "adding a format to a meta element",
+			args: args{
+				element: &Element{ID: "us", Parent: "north-america", Formats: []string{"osm.pbf"}},
+			},
+			wantErr: false,
+		},
+		{
 			name: "adding a same element parent differ",
 			args: args{
 				element: &myFakeGeorgia,
@@ -153,4 +160,31 @@ func createHTMLElement(t *testing.T, in string) *colly.HTMLElement {
 		}
 	})
 	return elements[0]
+}
+
+func Test_contains(t *testing.T) {
+	type args struct {
+		s []string
+		e string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		// TODO: Add test cases.
+		{name: "Contain", args: args{s: []string{"a"}, e: "a"}, want: true},
+		{name: "Contain", args: args{s: []string{"a", "b"}, e: "a"}, want: true},
+		{name: "Not Contain", args: args{s: []string{"a", "b"}, e: "c"}, want: false},
+		{name: "Void s", args: args{s: []string{}, e: "c"}, want: false},
+		{name: "Void e", args: args{s: []string{"a", "b"}, e: ""}, want: false},
+		{name: "Void s,e", args: args{s: []string{}, e: ""}, want: false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := contains(tt.args.s, tt.args.e); got != tt.want {
+				t.Errorf("contains() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }
