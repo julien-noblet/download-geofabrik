@@ -65,7 +65,10 @@ func geofabrikParseSubregion(e *colly.HTMLElement, ext *Ext, c *colly.Collector)
 				if *fVerbose && !*fQuiet && !*fProgress {
 					log.Println("Add:", href)
 				}
-				c.Visit(href)
+				err := c.Visit(href)
+				if err != nil {
+					log.Panicln(err)
+				}
 			}
 		})
 	})

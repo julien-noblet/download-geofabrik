@@ -115,11 +115,14 @@ func Generate(configfile string) {
 			),
 			colly.Async(true),
 		)
-		c.Limit(&colly.LimitRule{
+		err := c.Limit(&colly.LimitRule{
 			Parallelism: 2,
 			RandomDelay: 5 * time.Second,
 			//Delay: 5 * time.Second,
 		})
+		if err != nil {
+			log.Panicln(err)
+		}
 		/*c.WithTransport(&http.Transport{
 			Proxy: http.ProxyFromEnvironment,
 			DialContext: (&net.Dialer{
@@ -148,11 +151,14 @@ func Generate(configfile string) {
 				bar.Increment()
 			}
 		})
-		c.Visit("https://download.geofabrik.de/")
+		err = c.Visit("https://download.geofabrik.de/")
+		if err != nil {
+			log.Panicln(err)
+		}
 		c.Wait()
 		out, _ := ext.Elements.Generate(&geofabrik)
 		filename, _ := filepath.Abs(configfile)
-		err := ioutil.WriteFile(filename, out, 0644)
+		err = ioutil.WriteFile(filename, out, 0644)
 		if err != nil {
 			log.Panicln(fmt.Errorf(" File error: %v ", err))
 		}
@@ -185,17 +191,23 @@ func Generate(configfile string) {
 			),
 			colly.Async(true),
 		)
-		c.Limit(&colly.LimitRule{
+		err := c.Limit(&colly.LimitRule{
 			Parallelism: 2,
 			RandomDelay: 5 * time.Second,
 		})
+		if err != nil {
+			log.Panicln(err)
+		}
 
 		c.OnError(func(r *colly.Response, err error) {
 			fmt.Println("Request URL:", r.Request.URL, "failed with response:", r, "\nError:", err)
 		})
 		c.OnHTML("a", func(e *colly.HTMLElement) {
 			openstreetmapFRParse(e, &ext, bar, func(arg interface{}) {
-				c.Visit(arg.(string))
+				err = c.Visit(arg.(string))
+				if err != nil {
+					log.Panicln(err)
+				}
 			})
 		})
 		c.OnScraped(func(*colly.Response) {
@@ -203,11 +215,14 @@ func Generate(configfile string) {
 				bar.Increment()
 			}
 		})
-		c.Visit("https://download.openstreetmap.fr/")
+		err = c.Visit("https://download.openstreetmap.fr/")
+		if err != nil {
+			log.Panicln(err)
+		}
 		c.Wait()
 		out, _ := ext.Elements.Generate(&myConfig)
 		filename, _ := filepath.Abs(configfile)
-		err := ioutil.WriteFile(filename, out, 0644)
+		err = ioutil.WriteFile(filename, out, 0644)
 		if err != nil {
 			log.Panicln(fmt.Errorf(" File error: %v ", err))
 		}
@@ -229,12 +244,15 @@ func Generate(configfile string) {
 		c.OnHTML("table", func(e *colly.HTMLElement) {
 			gislabParse(e, &ext)
 		})
-		c.Visit("http://be.gis-lab.info/project/osm_dump/iframe.php")
+		err := c.Visit("http://be.gis-lab.info/project/osm_dump/iframe.php")
+		if err != nil {
+			log.Panicln(err)
+		}
 		c.Wait()
 		//GenerateCrawler("http://be.gis-lab.info/project/osm_dump/iframe.php", configfile, &myConfig)
 		out, _ := ext.Elements.Generate(&myConfig)
 		filename, _ := filepath.Abs(configfile)
-		err := ioutil.WriteFile(filename, out, 0644)
+		err = ioutil.WriteFile(filename, out, 0644)
 		if err != nil {
 			log.Panicln(fmt.Errorf(" File error: %v ", err))
 		}
@@ -261,11 +279,14 @@ func Generate(configfile string) {
 			),
 			//colly.Async(true),
 		)
-		c.Limit(&colly.LimitRule{
+		err := c.Limit(&colly.LimitRule{
 			Parallelism: 1,
 			RandomDelay: 5 * time.Second,
 			//Delay: 5 * time.Second,
 		})
+		if err != nil {
+			log.Panicln(err)
+		}
 		/*c.WithTransport(&http.Transport{
 			Proxy: http.ProxyFromEnvironment,
 			DialContext: (&net.Dialer{
@@ -295,11 +316,14 @@ func Generate(configfile string) {
 				bar.Increment()
 			}
 		})
-		c.Visit("https://download.bbbike.org/osm/bbbike/")
+		err = c.Visit("https://download.bbbike.org/osm/bbbike/")
+		if err != nil {
+			log.Panicln(err)
+		}
 		c.Wait()
 		out, _ := ext.Elements.Generate(&myConfig)
 		filename, _ := filepath.Abs(configfile)
-		err := ioutil.WriteFile(filename, out, 0644)
+		err = ioutil.WriteFile(filename, out, 0644)
 		if err != nil {
 			log.Panicln(fmt.Errorf(" File error: %v ", err))
 		}

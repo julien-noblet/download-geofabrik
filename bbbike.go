@@ -14,7 +14,10 @@ func bbbikeParseList(e *colly.HTMLElement, ext *Ext, c *colly.Collector) {
 		if *fVerbose && !*fQuiet && !*fProgress {
 			log.Println("Parse:", href)
 		}
-		c.Visit(href)
+		err := c.Visit(href)
+		if err != nil {
+			log.Panicln(err)
+		}
 	})
 }
 
