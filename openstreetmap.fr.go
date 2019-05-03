@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"strings"
 
@@ -69,7 +70,7 @@ func openstreetmapFRParseHref(href string, ext *Ext) {
 				element.Formats = append(element.Formats, extention)
 				err := ext.mergeElement(&element)
 				if err != nil {
-					log.Panicln("can't merge element,", err)
+					catch(fmt.Errorf("can't merge element, %v", err))
 					// Panic
 				}
 			} else {

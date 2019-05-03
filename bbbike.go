@@ -22,8 +22,7 @@ func bbbikeParseList(e *colly.HTMLElement, ext *Ext, c *colly.Collector) {
 }
 
 func bbbikeGetName(h3 string) string {
-	// remove "OSM extracts for "
-	ret := h3[17:]
+	ret := h3[17:] // remove "OSM extracts for "
 	return ret
 }
 
@@ -35,21 +34,10 @@ func bbbikeParseSidebar(e *colly.HTMLElement, ext *Ext, c *colly.Collector) {
 		File: name + "/" + name,
 		Formats: []string{
 			"osm.pbf",
+			"osm.gz",
 			"shp.zip",
 		},
 	}
-	/*e.ForEach("a.download_link", func(_ int, el *colly.HTMLElement) {
-		switch el.Text {
-		case " Protocolbuffer (PBF) ":
-			element.Formats = append(element.Formats, "osm.pbf")
-		case " OSM XML gzip'd ":
-			element.Formats = append(element.Formats, "osm.gz")
-		case " Shapefile (Esri) ":
-			element.Formats = append(element.Formats, "shp.zip")
-		}
-
-	})
-	*/
 	if *fVerbose && !*fQuiet && !*fProgress {
 		log.Println("Add", name)
 	}

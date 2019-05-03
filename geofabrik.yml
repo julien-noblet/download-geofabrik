@@ -1557,8 +1557,8 @@ elements:
     - osm.bz2.md5
     - poly
     parent: netherlands
-  georgia:
-    id: georgia
+  georgia-eu:
+    id: georgia-eu
     name: Georgia (Eastern Europe)
     files:
     - osm.pbf
@@ -1570,6 +1570,19 @@ elements:
     - osm.bz2.md5
     - poly
     parent: europe
+  georgia-us:
+    id: georgia-us
+    name: Georgia (US State)
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    parent: us
   germany:
     id: germany
     name: Germany
@@ -4815,11 +4828,6 @@ elements:
     - osm.bz2.md5
     - poly
     parent: south-america
-  us:
-    id: us
-    meta: true
-    name: us
-    parent: north-america
   utah:
     id: utah
     name: Utah

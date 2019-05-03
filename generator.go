@@ -116,12 +116,12 @@ func Generate(configfile string) {
 			colly.Async(true),
 		)
 		err := c.Limit(&colly.LimitRule{
-			Parallelism: 2,
+			DomainGlob:  "*",
+			Parallelism: 20,
 			RandomDelay: 5 * time.Second,
-			//Delay: 5 * time.Second,
 		})
 		if err != nil {
-			log.Panicln(err)
+			catch(err)
 		}
 		/*c.WithTransport(&http.Transport{
 			Proxy: http.ProxyFromEnvironment,
@@ -153,14 +153,14 @@ func Generate(configfile string) {
 		})
 		err = c.Visit("https://download.geofabrik.de/")
 		if err != nil {
-			log.Panicln(err)
+			catch(err)
 		}
 		c.Wait()
 		out, _ := ext.Elements.Generate(&geofabrik)
 		filename, _ := filepath.Abs(configfile)
 		err = ioutil.WriteFile(filename, out, 0644)
 		if err != nil {
-			log.Panicln(fmt.Errorf(" File error: %v ", err))
+			catch(fmt.Errorf(" File error: %v ", err))
 		}
 		if !*fQuiet {
 			log.Println(configfile, " generated.")
@@ -192,11 +192,12 @@ func Generate(configfile string) {
 			colly.Async(true),
 		)
 		err := c.Limit(&colly.LimitRule{
+			DomainGlob:  "*",
 			Parallelism: 2,
 			RandomDelay: 5 * time.Second,
 		})
 		if err != nil {
-			log.Panicln(err)
+			catch(err)
 		}
 
 		c.OnError(func(r *colly.Response, err error) {
@@ -206,7 +207,7 @@ func Generate(configfile string) {
 			openstreetmapFRParse(e, &ext, bar, func(arg interface{}) {
 				err = c.Visit(arg.(string))
 				if err != nil {
-					log.Panicln(err)
+					catch(err)
 				}
 			})
 		})
@@ -217,14 +218,14 @@ func Generate(configfile string) {
 		})
 		err = c.Visit("https://download.openstreetmap.fr/")
 		if err != nil {
-			log.Panicln(err)
+			catch(err)
 		}
 		c.Wait()
 		out, _ := ext.Elements.Generate(&myConfig)
 		filename, _ := filepath.Abs(configfile)
 		err = ioutil.WriteFile(filename, out, 0644)
 		if err != nil {
-			log.Panicln(fmt.Errorf(" File error: %v ", err))
+			catch(fmt.Errorf(" File error: %v ", err))
 		}
 		if !*fQuiet {
 			log.Println(configfile, " generated.")
@@ -246,7 +247,7 @@ func Generate(configfile string) {
 		})
 		err := c.Visit("http://be.gis-lab.info/project/osm_dump/iframe.php")
 		if err != nil {
-			log.Panicln(err)
+			catch(err)
 		}
 		c.Wait()
 		//GenerateCrawler("http://be.gis-lab.info/project/osm_dump/iframe.php", configfile, &myConfig)
@@ -254,7 +255,7 @@ func Generate(configfile string) {
 		filename, _ := filepath.Abs(configfile)
 		err = ioutil.WriteFile(filename, out, 0644)
 		if err != nil {
-			log.Panicln(fmt.Errorf(" File error: %v ", err))
+			catch(fmt.Errorf(" File error: %v ", err))
 		}
 		if !*fQuiet {
 			log.Println(configfile, " generated.")
@@ -280,12 +281,13 @@ func Generate(configfile string) {
 			//colly.Async(true),
 		)
 		err := c.Limit(&colly.LimitRule{
+			DomainGlob:  "*",
 			Parallelism: 1,
 			RandomDelay: 5 * time.Second,
 			//Delay: 5 * time.Second,
 		})
 		if err != nil {
-			log.Panicln(err)
+			catch(err)
 		}
 		/*c.WithTransport(&http.Transport{
 			Proxy: http.ProxyFromEnvironment,
@@ -318,14 +320,14 @@ func Generate(configfile string) {
 		})
 		err = c.Visit("https://download.bbbike.org/osm/bbbike/")
 		if err != nil {
-			log.Panicln(err)
+			catch(err)
 		}
 		c.Wait()
 		out, _ := ext.Elements.Generate(&myConfig)
 		filename, _ := filepath.Abs(configfile)
 		err = ioutil.WriteFile(filename, out, 0644)
 		if err != nil {
-			log.Panicln(fmt.Errorf(" File error: %v ", err))
+			catch(fmt.Errorf(" File error: %v ", err))
 		}
 		if !*fQuiet {
 			log.Println(configfile, " generated.")

@@ -1,6 +1,8 @@
 package main
 
 import (
+	"reflect"
+	"sync"
 	"testing"
 )
 
@@ -52,6 +54,385 @@ func Test_geofabrikFileWOExt(t *testing.T) {
 			}
 			if ext != tt.want2 {
 				t.Errorf("geofabrikFileWOExt() = %v, want %v", ext, tt.want2)
+			}
+		})
+	}
+}
+
+func Test_geofabrikMakeParent(t *testing.T) {
+	type args struct {
+		e       Element
+		gparent string
+	}
+	tests := []struct {
+		name string
+		args args
+		want *Element
+	}{
+		{name: "No Parents", args: args{e: Element{ID: "a", Name: "a"}, gparent: ""}, want: nil},
+		{name: "Have Parent with no gparent", args: args{e: Element{ID: "a", Name: "a", Parent: "p"}, gparent: ""}, want: &Element{ID: "p", Name: "p", Meta: true}},
+		{name: "Have Parent with gparent", args: args{e: Element{ID: "a", Name: "a", Parent: "p"}, gparent: "gp"}, want: &Element{ID: "p", Name: "p", Meta: true, Parent: "gp"}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := geofabrikMakeParent(tt.args.e, tt.args.gparent); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("geofabrikMakeParent() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_geofabrikAddExtension(t *testing.T) {
+	type args struct {
+		id     string
+		format string
+		ext    Ext
+	}
+	tests := []struct {
+		name string
+		args args
+		want ElementSlice
+	}{
+		{
+			name: "Add osm.pbf but already in",
+			args: args{
+				id:     "a",
+				format: "osm.pbf",
+				ext: Ext{
+					Elements: ElementSlice{
+						"a": Element{
+							ID:      "a",
+							Name:    "a",
+							Formats: []string{"osm.pbf"},
+							Meta:    false,
+						},
+					},
+					ElementsMutex: sync.RWMutex{},
+				},
+			},
+			want: ElementSlice{
+				"a": Element{
+					ID:      "a",
+					Name:    "a",
+					Formats: []string{"osm.pbf"},
+					Meta:    false,
+				},
+			},
+		},
+		{
+			name: "Add osm.pbf",
+			args: args{
+				id:     "a",
+				format: "osm.pbf",
+				ext: Ext{
+					Elements: ElementSlice{
+						"a": Element{
+							ID:      "a",
+							Name:    "a",
+							Formats: []string{},
+							Meta:    false,
+						},
+					},
+					ElementsMutex: sync.RWMutex{},
+				},
+			},
+			want: ElementSlice{
+				"a": Element{
+					ID:      "a",
+					Name:    "a",
+					Formats: []string{"osm.pbf"},
+					Meta:    false,
+				},
+			},
+		},
+		{
+			name: "Add osm.pbf on meta",
+			args: args{
+				id:     "a",
+				format: "osm.pbf",
+				ext: Ext{
+					Elements: ElementSlice{
+						"a": Element{
+							ID:      "a",
+							Name:    "a",
+							Formats: []string{},
+							Meta:    true,
+						},
+					},
+					ElementsMutex: sync.RWMutex{},
+				},
+			},
+			want: ElementSlice{
+				"a": Element{
+					ID:      "a",
+					Name:    "a",
+					Formats: []string{"osm.pbf"},
+					Meta:    false,
+				},
+			},
+		},
+	}
+	for tn := range tests {
+		t.Run(tests[tn].name, func(t *testing.T) {
+			geofabrikAddExtension(tests[tn].args.id, tests[tn].args.format, &tests[tn].args.ext)
+			if !reflect.DeepEqual(tests[tn].args.ext.Elements, tests[tn].want) {
+				t.Errorf("geofabrikAddExtension() got %v, want %v", tests[tn].args.ext.Elements, tests[tn].want)
+			}
+		})
+	}
+}
+
+func Test_geofabrikParseFormat(t *testing.T) {
+	type args struct {
+		id     string
+		format string
+		ext    Ext
+	}
+	tests := []struct {
+		name string
+		args args
+		want ElementSlice
+	}{
+		{
+			name: "Add osm.pbf but already in",
+			args: args{
+				id:     "a",
+				format: "osm.pbf",
+				ext: Ext{
+					Elements: ElementSlice{
+						"a": Element{
+							ID:      "a",
+							Name:    "a",
+							Formats: []string{"osm.pbf"},
+							Meta:    false,
+						},
+					},
+					ElementsMutex: sync.RWMutex{},
+				},
+			},
+			want: ElementSlice{
+				"a": Element{
+					ID:      "a",
+					Name:    "a",
+					Formats: []string{"osm.pbf", "kml", "state"},
+					Meta:    false,
+				},
+			},
+		},
+		{
+			name: "Add osm.pbf",
+			args: args{
+				id:     "a",
+				format: "osm.pbf",
+				ext: Ext{
+					Elements: ElementSlice{
+						"a": Element{
+							ID:      "a",
+							Name:    "a",
+							Formats: []string{},
+							Meta:    false,
+						},
+					},
+					ElementsMutex: sync.RWMutex{},
+				},
+			},
+			want: ElementSlice{
+				"a": Element{
+					ID:      "a",
+					Name:    "a",
+					Formats: []string{"osm.pbf", "kml", "state"},
+					Meta:    false,
+				},
+			},
+		},
+		{
+			name: "Add osm.pbf.md5",
+			args: args{
+				id:     "a",
+				format: "osm.pbf.md5",
+				ext: Ext{
+					Elements: ElementSlice{
+						"a": Element{
+							ID:      "a",
+							Name:    "a",
+							Formats: []string{"osm.pbf", "kml", "state"},
+							Meta:    false,
+						},
+					},
+					ElementsMutex: sync.RWMutex{},
+				},
+			},
+			want: ElementSlice{
+				"a": Element{
+					ID:      "a",
+					Name:    "a",
+					Formats: []string{"osm.pbf", "kml", "state", "osm.pbf.md5"},
+					Meta:    false,
+				},
+			},
+		},
+		{
+			name: "Add osm.bz2",
+			args: args{
+				id:     "a",
+				format: "osm.bz2",
+				ext: Ext{
+					Elements: ElementSlice{
+						"a": Element{
+							ID:      "a",
+							Name:    "a",
+							Formats: []string{"osm.pbf", "kml", "state"},
+							Meta:    false,
+						},
+					},
+					ElementsMutex: sync.RWMutex{},
+				},
+			},
+			want: ElementSlice{
+				"a": Element{
+					ID:      "a",
+					Name:    "a",
+					Formats: []string{"osm.pbf", "kml", "state", "osm.bz2"},
+					Meta:    false,
+				},
+			},
+		},
+		{
+			name: "Add osm.bz2.md5",
+			args: args{
+				id:     "a",
+				format: "osm.bz2.md5",
+				ext: Ext{
+					Elements: ElementSlice{
+						"a": Element{
+							ID:      "a",
+							Name:    "a",
+							Formats: []string{"osm.pbf", "kml", "state"},
+							Meta:    false,
+						},
+					},
+					ElementsMutex: sync.RWMutex{},
+				},
+			},
+			want: ElementSlice{
+				"a": Element{
+					ID:      "a",
+					Name:    "a",
+					Formats: []string{"osm.pbf", "kml", "state", "osm.bz2.md5"},
+					Meta:    false,
+				},
+			},
+		},
+		{
+			name: "Add poly",
+			args: args{
+				id:     "a",
+				format: "poly",
+				ext: Ext{
+					Elements: ElementSlice{
+						"a": Element{
+							ID:      "a",
+							Name:    "a",
+							Formats: []string{"osm.pbf", "kml", "state"},
+							Meta:    false,
+						},
+					},
+					ElementsMutex: sync.RWMutex{},
+				},
+			},
+			want: ElementSlice{
+				"a": Element{
+					ID:      "a",
+					Name:    "a",
+					Formats: []string{"osm.pbf", "kml", "state", "poly"},
+					Meta:    false,
+				},
+			},
+		},
+		{
+			name: "Add shp.zip",
+			args: args{
+				id:     "a",
+				format: "shp.zip",
+				ext: Ext{
+					Elements: ElementSlice{
+						"a": Element{
+							ID:      "a",
+							Name:    "a",
+							Formats: []string{"osm.pbf", "kml", "state"},
+							Meta:    false,
+						},
+					},
+					ElementsMutex: sync.RWMutex{},
+				},
+			},
+			want: ElementSlice{
+				"a": Element{
+					ID:      "a",
+					Name:    "a",
+					Formats: []string{"osm.pbf", "kml", "state", "shp.zip"},
+					Meta:    false,
+				},
+			},
+		},
+		{
+			name: "Add unk format",
+			args: args{
+				id:     "a",
+				format: "unk",
+				ext: Ext{
+					Elements: ElementSlice{
+						"a": Element{
+							ID:      "a",
+							Name:    "a",
+							Formats: []string{"osm.pbf", "kml", "state"},
+							Meta:    false,
+						},
+					},
+					ElementsMutex: sync.RWMutex{},
+				},
+			},
+			want: ElementSlice{
+				"a": Element{
+					ID:      "a",
+					Name:    "a",
+					Formats: []string{"osm.pbf", "kml", "state"},
+					Meta:    false,
+				},
+			},
+		},
+		{
+			name: "Add osm.pbf on meta",
+			args: args{
+				id:     "a",
+				format: "osm.pbf",
+				ext: Ext{
+					Elements: ElementSlice{
+						"a": Element{
+							ID:      "a",
+							Name:    "a",
+							Formats: []string{},
+							Meta:    true,
+						},
+					},
+					ElementsMutex: sync.RWMutex{},
+				},
+			},
+			want: ElementSlice{
+				"a": Element{
+					ID:      "a",
+					Name:    "a",
+					Formats: []string{"osm.pbf", "kml", "state"},
+					Meta:    false,
+				},
+			},
+		},
+	}
+	for tn := range tests {
+		t.Run(tests[tn].name, func(t *testing.T) {
+			geofabrikParseFormat(tests[tn].args.id, tests[tn].args.format, &tests[tn].args.ext)
+			if !reflect.DeepEqual(tests[tn].args.ext.Elements, tests[tn].want) {
+				t.Errorf("geofabrikParseFormat() got %v, want %v", tests[tn].args.ext.Elements, tests[tn].want)
 			}
 		})
 	}

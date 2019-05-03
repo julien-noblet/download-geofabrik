@@ -261,14 +261,14 @@ func downloadChecksum(format string) bool {
 			}
 			hashed, err := hashFileMD5(*delement + "." + format)
 			if err != nil {
-				log.Panic(fmt.Errorf(err.Error()))
+				catch(fmt.Errorf(err.Error()))
 			}
 			if *fVerbose && !*fQuiet {
 				log.Println("MD5 :", hashed)
 			}
 			ret, err := controlHash(*delement+"."+fhash, hashed)
 			if err != nil {
-				log.Panic(fmt.Errorf(err.Error()))
+				catch(fmt.Errorf(err.Error()))
 			}
 			if !*fQuiet {
 				if ret {
