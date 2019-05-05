@@ -90,15 +90,6 @@ func findElem(c *Config, e string) (*Element, error) {
 	return &res, nil
 }
 
-func findElem2(es ElementSlice, e string) (*Element, error) {
-	res := es[e]
-	//fmt.Println("findElem", res.ID, e)
-	if res.ID == "" || res.ID != e {
-		return nil, fmt.Errorf("%s is not in config\n Please use \"list\" command", e)
-	}
-	return &res, nil
-}
-
 // stringInSlice : Check if a sting is present in a slice
 // should be more easy to access to a map!
 // TODO: remove it!

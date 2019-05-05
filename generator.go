@@ -28,11 +28,11 @@ func write(config *Config, filename string) {
 //Generate main function
 func Generate(configfile string) {
 	var bar *pb.ProgressBar
-
+	var myConfig *Config
 	switch *fService {
 	case "geofabrik":
 		//Generate geofabrik.yml
-		geofabrik := geofabrikConfig
+		myConfig = geofabrikConfig
 		if *fProgress {
 			bar = pb.New(geofabrikPb)
 			bar.Start()
@@ -52,10 +52,10 @@ func Generate(configfile string) {
 		})*/
 
 		c.OnHTML("#subregions", func(e *colly.HTMLElement) {
-			geofabrikParseSubregion(e, geofabrik, c)
+			geofabrikParseSubregion(e, myConfig, c)
 		})
 		c.OnHTML("li", func(e *colly.HTMLElement) {
-			geofabrikParseLi(e, geofabrik, c)
+			geofabrikParseLi(e, myConfig, c)
 		})
 
 		c.OnScraped(func(*colly.Response) {
@@ -63,17 +63,13 @@ func Generate(configfile string) {
 				bar.Increment()
 			}
 		})
-
 		err := c.Visit("https://download.geofabrik.de/")
 		if err != nil {
 			catch(err)
 		}
-
 		c.Wait()
-		write(geofabrik, configfile)
-
 	case "openstreetmap.fr":
-		myConfig := &Config{
+		myConfig = &Config{
 			BaseURL:       "https://download.openstreetmap.fr/extracts",
 			Formats:       make(map[string]format),
 			Elements:      ElementSlice{},
@@ -124,10 +120,8 @@ func Generate(configfile string) {
 			catch(err)
 		}
 		c.Wait()
-		write(myConfig, configfile)
 
 	case "gislab":
-		var myConfig *Config
 		myConfig.BaseURL = "http://be.gis-lab.info/project/osm_dump"
 		myConfig.Formats = make(map[string]format)
 		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", BaseURL: "http://data.gis-lab.info/osm_dump/dump", BasePath: "latest/", Loc: ".osm.pbf"}
@@ -146,10 +140,8 @@ func Generate(configfile string) {
 		}
 		c.Wait()
 		//GenerateCrawler("http://be.gis-lab.info/project/osm_dump/iframe.php", configfile, &myConfig)
-		write(myConfig, configfile)
 
 	case "bbbike":
-		var myConfig *Config
 		myConfig.BaseURL = "https://download.bbbike.org/osm/bbbike/"
 		myConfig.Formats = make(map[string]format)
 		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: ".osm.pbf"}
@@ -210,9 +202,9 @@ func Generate(configfile string) {
 			catch(err)
 		}
 		c.Wait()
-		write(myConfig, configfile)
 
 	default:
-		log.Println("Service not reconized, please use one of geofabrik, openstreetmap.fr or gislab")
+		catch(fmt.Errorf("Service not reconized, please use one of geofabrik, openstreetmap.fr or gislab"))
 	}
+	write(myConfig, configfile)
 }

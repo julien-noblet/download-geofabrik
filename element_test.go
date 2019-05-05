@@ -162,15 +162,6 @@ func Benchmark_findElem_parse_all_geofabrik_yml(b *testing.B) {
 	}
 }
 
-func Benchmark_findElem2_parse_all_geofabrik_yml(b *testing.B) {
-	c, _ := loadConfig("./geofabrik.yml")
-	for n := 0; n < b.N; n++ {
-		for k := range c.Elements {
-			findElem2(c.Elements, k)
-		}
-	}
-}
-
 func Benchmark_GetElement_parse_all_geofabrik_yml(b *testing.B) {
 	c, _ := loadConfig("./geofabrik.yml")
 	for n := 0; n < b.N; n++ {
