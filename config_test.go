@@ -200,3 +200,52 @@ func Test_AddExtension(t *testing.T) {
 		})
 	}
 }
+
+func Benchmark_GetElement_geofabrik_yml(b *testing.B) {
+	// run the Fib function b.N times
+	c, _ := loadConfig("./geofabrik.yml")
+	e := "france"
+	for n := 0; n < b.N; n++ {
+		c.GetElement(e)
+	}
+}
+
+func TestConfig_GetElement(t *testing.T) {
+
+	tests := []struct {
+		name    string
+		file    string
+		id      string
+		want    *Element
+		wantErr bool
+	}{
+		// TODO: Add test cases.
+		{
+			name:    "France from geofabrik",
+			file:    "./geofabrik.yml",
+			id:      "france",
+			want:    &Element{ID: "france", Name: "France", Parent: "europe", Formats: elementFormats{"osm.pbf", "kml", "state", "osm.pbf.md5", "osm.bz2", "osm.bz2.md5", "poly"}},
+			wantErr: false,
+		},
+		{
+			name:    "Franc from geofabrik",
+			file:    "./geofabrik.yml",
+			id:      "franc",
+			want:    nil,
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c, _ := loadConfig(tt.file)
+			got, err := c.GetElement(tt.id)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Config.GetElement() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Config.GetElement() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
