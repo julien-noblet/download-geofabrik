@@ -16,8 +16,7 @@ import (
 func write(config *Config, filename string) {
 	out, _ := config.Generate()
 	filename, _ = filepath.Abs(filename)
-	err := ioutil.WriteFile(filename, out, 0644)
-	if err != nil {
+	if err := ioutil.WriteFile(filename, out, 0644); err != nil {
 		catch(fmt.Errorf(" File error: %v ", err))
 	}
 	if !*fQuiet {
@@ -63,10 +62,7 @@ func Generate(configfile string) {
 				bar.Increment()
 			}
 		})
-		err := c.Visit("https://download.geofabrik.de/")
-		if err != nil {
-			catch(err)
-		}
+		catch(c.Visit("https://download.geofabrik.de/"))
 		c.Wait()
 	case "openstreetmap.fr":
 		myConfig = &Config{
@@ -95,14 +91,11 @@ func Generate(configfile string) {
 			colly.Async(true),
 			colly.MaxDepth(0),
 		)
-		err := c.Limit(&colly.LimitRule{
+		catch(c.Limit(&colly.LimitRule{
 			DomainGlob:  "*",
 			Parallelism: 20,
 			RandomDelay: 5 * time.Second,
-		})
-		if err != nil {
-			catch(err)
-		}
+		}))
 
 		c.OnError(func(r *colly.Response, err error) {
 			fmt.Println("Request URL:", r.Request.URL, "failed with response:", r, "\nError:", err)
@@ -115,10 +108,7 @@ func Generate(configfile string) {
 				bar.Increment()
 			}
 		})
-		err = c.Visit("https://download.openstreetmap.fr/")
-		if err != nil {
-			catch(err)
-		}
+		catch(c.Visit("https://download.openstreetmap.fr/"))
 		c.Wait()
 
 	case "gislab":
@@ -132,12 +122,10 @@ func Generate(configfile string) {
 			colly.AllowedDomains("be.gis-lab.info"),
 		)
 		c.OnHTML("table", func(e *colly.HTMLElement) {
-			gislabParse(e, myConfig)
+			catch(gislabParse(e, myConfig))
 		})
-		err := c.Visit("http://be.gis-lab.info/project/osm_dump/iframe.php")
-		if err != nil {
-			catch(err)
-		}
+		catch(c.Visit("http://be.gis-lab.info/project/osm_dump/iframe.php"))
+
 		c.Wait()
 		//GenerateCrawler("http://be.gis-lab.info/project/osm_dump/iframe.php", configfile, &myConfig)
 
@@ -159,15 +147,12 @@ func Generate(configfile string) {
 			),
 			//colly.Async(true),
 		)
-		err := c.Limit(&colly.LimitRule{
+		catch(c.Limit(&colly.LimitRule{
 			DomainGlob:  "*",
 			Parallelism: 1,
 			RandomDelay: 5 * time.Second,
 			//Delay: 5 * time.Second,
-		})
-		if err != nil {
-			catch(err)
-		}
+		}))
 		/*c.WithTransport(&http.Transport{
 			Proxy: http.ProxyFromEnvironment,
 			DialContext: (&net.Dialer{
@@ -197,10 +182,8 @@ func Generate(configfile string) {
 				bar.Increment()
 			}
 		})
-		err = c.Visit("https://download.bbbike.org/osm/bbbike/")
-		if err != nil {
-			catch(err)
-		}
+		catch(c.Visit("https://download.bbbike.org/osm/bbbike/"))
+
 		c.Wait()
 
 	default:

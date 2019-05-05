@@ -14,10 +14,7 @@ func bbbikeParseList(e *colly.HTMLElement, config *Config, c *colly.Collector) {
 		if *fVerbose && !*fQuiet && !*fProgress {
 			log.Println("Parse:", href)
 		}
-		err := c.Visit(href)
-		if err != nil {
-			catch(err)
-		}
+		catch(c.Visit(href))
 	})
 }
 
@@ -41,8 +38,7 @@ func bbbikeParseSidebar(e *colly.HTMLElement, config *Config, c *colly.Collector
 	if *fVerbose && !*fQuiet && !*fProgress {
 		log.Println("Add", name)
 	}
-	err := config.mergeElement(&element)
-	if err != nil {
+	if err := config.mergeElement(&element); err != nil {
 		panic(err)
 	}
 }

@@ -36,10 +36,7 @@ func gislabParse(e *colly.HTMLElement, config *Config) error {
 			if *fVerbose && !*fQuiet && !*fProgress {
 				log.Println("Adding", element.Name)
 			}
-			err := config.mergeElement(&element)
-			if err != nil {
-				panic(err)
-			}
+			catch(config.mergeElement(&element))
 		}
 	})
 	return nil

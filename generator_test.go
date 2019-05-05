@@ -19,8 +19,15 @@ func getHTML(url string) string {
 	if err != nil {
 		// handle error
 	}
-	defer resp.Body.Close()
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			panic(err)
+		}
+	}()
 	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
 	return string(body)
 }
 

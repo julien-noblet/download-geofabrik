@@ -78,8 +78,7 @@ func UpdateConfig(myURL string, myconfig string) error {
 	if !*fQuiet {
 		log.Print("*** DEPRECATED you should prefer use generate ***")
 	}
-	err := downloadFromURL(myURL, myconfig)
-	if err != nil {
+	if err := downloadFromURL(myURL, myconfig); err != nil {
 		if *fVerbose {
 			log.Println(err)
 		}

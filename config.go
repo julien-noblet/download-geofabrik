@@ -86,7 +86,7 @@ func (c *Config) AddExtension(id, format string) {
 		c.ElementsMutex.Lock()
 		element.Formats = append(element.Formats, format)
 		c.ElementsMutex.Unlock()
-		c.mergeElement(&element)
+		catch(c.mergeElement(&element))
 	}
 }
 
@@ -112,8 +112,7 @@ func loadConfig(configFile string) (*Config, error) {
 	// Create a Config ptr
 	myConfigPtr := &Config{ElementsMutex: &sync.RWMutex{}}
 	// Charging fileContent into myConfigPtr
-	err = yaml.Unmarshal(fileContent, myConfigPtr)
-	if err != nil {
+	if err = yaml.Unmarshal(fileContent, myConfigPtr); err != nil {
 		return nil, err
 	}
 	// Everything is OK, returning myConfigPtr

@@ -58,10 +58,7 @@ func geofabrikGetColly() *colly.Collector {
 		colly.Async(geofabrikAsync),
 		colly.MaxDepth(geofabrikMaxDepth),
 	)
-	err := c.Limit(geofabrikLimit)
-	if err != nil {
-		catch(err)
-	}
+	catch(c.Limit(geofabrikLimit))
 	c.OnError(func(r *colly.Response, err error) {
 		catch(fmt.Errorf("request URL: %v failed with response: %v\nerror: %v", r.Request.URL, r, err.Error()))
 	})
@@ -121,17 +118,15 @@ func geofabrikParseSubregion(e *colly.HTMLElement, config *Config, c *colly.Coll
 					if *fVerbose && !*fQuiet && !*fProgress {
 						log.Println("Create Meta", element.Parent, "parent:", gparent, pp)
 					}
-					gp := geofabrikMakeParent(element, gparent)
-					if gp != nil {
-						config.mergeElement(gp)
+					if gp := geofabrikMakeParent(element, gparent); gp != nil {
+						catch(config.mergeElement(gp))
 					}
 				}
-				config.mergeElement(&element)
+				catch(config.mergeElement(&element))
 				if *fVerbose && !*fQuiet && !*fProgress {
 					log.Println("Add:", href)
 				}
-				err := c.Visit(href)
-				if err != nil && err != colly.ErrAlreadyVisited {
+				if err := c.Visit(href); err != nil && err != colly.ErrAlreadyVisited {
 					catch(err)
 				}
 			}

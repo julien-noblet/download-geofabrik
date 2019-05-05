@@ -27,11 +27,11 @@ func downloadFromURL(myURL string, fileName string) error {
 			u, _ := url.Parse(myURL)
 			//log.Println(u.Scheme +"://"+ *fProxyHTTP)
 			proxyURL, err := url.Parse(u.Scheme + "://" + *fProxyHTTP)
-			if *fProxyUser != "" && *fProxyPass != "" {
-				proxyURL, err = url.Parse(u.Scheme + "://" + *fProxyUser + ":" + *fProxyPass + *fProxyHTTP)
-			}
 			if err != nil {
 				return fmt.Errorf("Wrong proxy url, please use format proxy_address:port")
+			}
+			if *fProxyUser != "" && *fProxyPass != "" {
+				proxyURL, err = url.Parse(u.Scheme + "://" + *fProxyUser + ":" + *fProxyPass + *fProxyHTTP)
 			}
 			transport = &http.Transport{Proxy: http.ProxyURL(proxyURL)}
 		}
@@ -55,8 +55,7 @@ func downloadFromURL(myURL string, fileName string) error {
 			return fmt.Errorf("Error while downloading %v, server return code %d", myURL, response.StatusCode)
 		}
 		defer func() {
-			err := response.Body.Close()
-			catch(err)
+			catch(response.Body.Close())
 		}()
 
 		// If no error, create file
@@ -69,8 +68,7 @@ func downloadFromURL(myURL string, fileName string) error {
 			return fmt.Errorf("Error while creating %s - %v", fileName, err)
 		}
 		defer func() {
-			err := f.Close()
-			catch(err)
+			catch(f.Close())
 		}()
 		var output io.Writer = f
 		var n int64

@@ -81,8 +81,7 @@ func openstreetmapFRParse(e *colly.HTMLElement, config *Config, c *colly.Collect
 		if *fVerbose && !*fQuiet && !*fProgress {
 			log.Println("Next:", href)
 		}
-		err := c.Visit(href)
-		if err != nil && err != colly.ErrAlreadyVisited {
+		if err := c.Visit(href); err != nil && err != colly.ErrAlreadyVisited {
 			catch(err)
 		}
 	} else {

@@ -85,7 +85,9 @@ func Test_gislabParse(t *testing.T) {
 		element := createHTMLElement(t, tt.in)
 		c := Config{Elements: make(map[string]Element), ElementsMutex: &sync.RWMutex{}}
 		t.Run(tt.name, func(t *testing.T) {
-			gislabParse(element, &c)
+			if err := gislabParse(element, &c); err != nil {
+				t.Errorf("gislabParse crash : %v", err)
+			}
 			if !reflect.DeepEqual(c.Elements, tt.want) {
 				t.Errorf("gislabParse() = %v len:%d, want %v len:%d", c.Elements, len(c.Elements), tt.want, len(tt.want))
 			}
