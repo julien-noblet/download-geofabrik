@@ -21,24 +21,24 @@ const (
 )
 
 var (
-	geofabrikAllowedDomains = []string{"download.geofabrik.de"}
+	geofabrikAllowedDomains = []string{`download.geofabrik.de`}
 	geofabrikURLFilters     = []*regexp.Regexp{
-		regexp.MustCompile("https://download\\.geofabrik\\.de/.+\\.html$"),
-		regexp.MustCompile("https://download\\.geofabrik\\.de/$"),
+		regexp.MustCompile(`https://download\.geofabrik\.de/.+\.html$`),
+		regexp.MustCompile(`https://download\.geofabrik\.de/$`),
 	}
 	geofabrikConfig = &Config{
-		BaseURL: "https://download.geofabrik.de",
+		BaseURL: `https://download.geofabrik.de`,
 		Formats: map[string]format{
 			//geofabrik.Formats["osh.pbf"] = format{ID: "osh.pbf", Loc: ".osh.pbf"}
 			//geofabrik.Formats["osh.pbf.md5"] = format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"}
-			"osm.bz2":     format{ID: "osm.bz2", Loc: "-latest.osm.bz2"},
-			"osm.bz2.md5": format{ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
-			"osm.pbf":     format{ID: "osm.pbf", Loc: "-latest.osm.pbf"},
-			"osm.pbf.md5": format{ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-			"poly":        format{ID: "poly", Loc: ".poly"},
-			"kml":         format{ID: "kml", Loc: ".kml"},
-			"state":       format{ID: "state", Loc: "-updates/state.txt"},
-			"shp.zip":     format{ID: "shp.zip", Loc: "-latest-free.shp.zip"},
+			"osm.bz2":     {ID: "osm.bz2", Loc: "-latest.osm.bz2"},
+			"osm.bz2.md5": {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
+			"osm.pbf":     {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
+			"osm.pbf.md5": {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+			"poly":        {ID: "poly", Loc: ".poly"},
+			"kml":         {ID: "kml", Loc: ".kml"},
+			"state":       {ID: "state", Loc: "-updates/state.txt"},
+			"shp.zip":     {ID: "shp.zip", Loc: "-latest-free.shp.zip"},
 		},
 		Elements:      ElementSlice{},
 		ElementsMutex: &sync.RWMutex{},
