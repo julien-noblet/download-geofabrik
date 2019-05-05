@@ -32,6 +32,7 @@ func downloadFromURL(myURL string, fileName string) error {
 			}
 			if *fProxyUser != "" && *fProxyPass != "" {
 				proxyURL, err = url.Parse(u.Scheme + "://" + *fProxyUser + ":" + *fProxyPass + *fProxyHTTP)
+				catch(err)
 			}
 			transport = &http.Transport{Proxy: http.ProxyURL(proxyURL)}
 		}
@@ -60,7 +61,7 @@ func downloadFromURL(myURL string, fileName string) error {
 
 		// If no error, create file
 		// TODO: check file existence first with io.IsExist
-		// and use a new flag (like f) to force overwrite
+		// and use a new cmd flag (like f) to force overwrite
 		flags := os.O_CREATE | os.O_WRONLY
 		var f *os.File
 		f, err = os.OpenFile(fileName, flags, 0666)
