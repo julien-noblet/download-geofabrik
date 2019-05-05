@@ -1,13 +1,72 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"regexp"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/gocolly/colly"
 )
 
-const geofabrikPb = 401
+const (
+	geofabrikPb          = 401
+	geofabrikAsync       = true
+	geofabrikDomainGlob  = "*"
+	geofabrikParallelism = 20
+	geofabrikRandomDelay = 5 * time.Second
+	geofabrikMaxDepth    = 0 // infinite
+)
+
+var (
+	geofabrikAllowedDomains = []string{"download.geofabrik.de"}
+	geofabrikURLFilters     = []*regexp.Regexp{
+		regexp.MustCompile("https://download\\.geofabrik\\.de/.+\\.html$"),
+		regexp.MustCompile("https://download\\.geofabrik\\.de/$"),
+	}
+	geofabrikConfig = &Config{
+		BaseURL: "https://download.geofabrik.de",
+		Formats: map[string]format{
+			//geofabrik.Formats["osh.pbf"] = format{ID: "osh.pbf", Loc: ".osh.pbf"}
+			//geofabrik.Formats["osh.pbf.md5"] = format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"}
+			"osm.bz2":     format{ID: "osm.bz2", Loc: "-latest.osm.bz2"},
+			"osm.bz2.md5": format{ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
+			"osm.pbf":     format{ID: "osm.pbf", Loc: "-latest.osm.pbf"},
+			"osm.pbf.md5": format{ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+			"poly":        format{ID: "poly", Loc: ".poly"},
+			"kml":         format{ID: "kml", Loc: ".kml"},
+			"state":       format{ID: "state", Loc: "-updates/state.txt"},
+			"shp.zip":     format{ID: "shp.zip", Loc: "-latest-free.shp.zip"},
+		},
+		Elements:      ElementSlice{},
+		ElementsMutex: &sync.RWMutex{},
+	}
+	geofabrikLimit = &colly.LimitRule{
+		DomainGlob:  geofabrikDomainGlob,
+		Parallelism: geofabrikParallelism,
+		RandomDelay: geofabrikRandomDelay,
+	}
+)
+
+func geofabrikGetColly() *colly.Collector {
+	c := colly.NewCollector(
+		// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
+		colly.AllowedDomains(geofabrikAllowedDomains...),
+		colly.URLFilters(geofabrikURLFilters...),
+		colly.Async(geofabrikAsync),
+		colly.MaxDepth(geofabrikMaxDepth),
+	)
+	err := c.Limit(geofabrikLimit)
+	if err != nil {
+		catch(err)
+	}
+	c.OnError(func(r *colly.Response, err error) {
+		catch(fmt.Errorf("request URL: %v failed with response: %v\nerror: %v", r.Request.URL, r, err.Error()))
+	})
+	return c
+}
 
 func geofabrikGetParent(url string) (string, string) {
 	r := strings.Split(url, "/")
@@ -36,7 +95,7 @@ func geofabrikMakeParent(e Element, gparent string) *Element {
 	return nil
 }
 
-func geofabrikParseSubregion(e *colly.HTMLElement, ext *Ext, c *colly.Collector) {
+func geofabrikParseSubregion(e *colly.HTMLElement, config *Config, c *colly.Collector) {
 	e.ForEach("td.subregion", func(_ int, el *colly.HTMLElement) {
 		el.ForEach("a", func(_ int, sub *colly.HTMLElement) {
 			href := sub.Request.AbsoluteURL(sub.Attr("href"))
@@ -57,17 +116,17 @@ func geofabrikParseSubregion(e *colly.HTMLElement, ext *Ext, c *colly.Collector)
 					Parent: parent,
 					Meta:   true,
 				}
-				if !ext.Exist(parent) && parent != "" {
+				if !config.Exist(parent) && parent != "" {
 					gparent, _ := geofabrikGetParent(pp)
 					if *fVerbose && !*fQuiet && !*fProgress {
 						log.Println("Create Meta", element.Parent, "parent:", gparent, pp)
 					}
 					gp := geofabrikMakeParent(element, gparent)
 					if gp != nil {
-						ext.mergeElement(gp)
+						config.mergeElement(gp)
 					}
 				}
-				ext.mergeElement(&element)
+				config.mergeElement(&element)
 				if *fVerbose && !*fQuiet && !*fProgress {
 					log.Println("Add:", href)
 				}
@@ -80,39 +139,26 @@ func geofabrikParseSubregion(e *colly.HTMLElement, ext *Ext, c *colly.Collector)
 	})
 }
 
-func geofabrikAddExtension(id, format string, ext *Ext) {
-	ext.ElementsMutex.RLock()
-	element := ext.Elements[id]
-	ext.ElementsMutex.RUnlock()
-	if !contains(element.Formats, format) {
-		if *fVerbose && !*fQuiet && !*fProgress {
-			log.Println("Add", format, "to", element.ID)
-		}
-		element.Formats = append(element.Formats, format)
-		ext.mergeElement(&element)
-	}
-}
-
-func geofabrikParseFormat(id, format string, ext *Ext) {
+func geofabrikParseFormat(id, format string, config *Config) {
 	switch format {
 	case "osm.pbf":
-		geofabrikAddExtension(id, format, ext)
-		geofabrikAddExtension(id, "kml", ext)   // not checked!
-		geofabrikAddExtension(id, "state", ext) // not checked!
+		config.AddExtension(id, format)
+		config.AddExtension(id, "kml")   // not checked!
+		config.AddExtension(id, "state") // not checked!
 	case "osm.pbf.md5":
-		geofabrikAddExtension(id, format, ext)
+		config.AddExtension(id, format)
 	case "osm.bz2":
-		geofabrikAddExtension(id, format, ext)
+		config.AddExtension(id, format)
 	case "osm.bz2.md5":
-		geofabrikAddExtension(id, format, ext)
+		config.AddExtension(id, format)
 	case "poly":
-		geofabrikAddExtension(id, format, ext)
+		config.AddExtension(id, format)
 	case "shp.zip":
-		geofabrikAddExtension(id, format, ext)
+		config.AddExtension(id, format)
 	}
 }
 
-func geofabrikParseLi(e *colly.HTMLElement, ext *Ext, c *colly.Collector) {
+func geofabrikParseLi(e *colly.HTMLElement, config *Config, c *colly.Collector) {
 	e.ForEach("a", func(_ int, el *colly.HTMLElement) {
 		_, format := geofabrikFile(el.Attr("href"))
 		id, _ := geofabrikFile(el.Request.URL.String())
@@ -125,6 +171,6 @@ func geofabrikParseLi(e *colly.HTMLElement, ext *Ext, c *colly.Collector) {
 				id = "georgia-eu"
 			}
 		}
-		geofabrikParseFormat(id, format, ext)
+		geofabrikParseFormat(id, format, config)
 	})
 }

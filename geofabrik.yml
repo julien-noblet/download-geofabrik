@@ -4828,6 +4828,11 @@ elements:
     - osm.bz2.md5
     - poly
     parent: south-america
+  us:
+    id: us
+    meta: true
+    name: us
+    parent: north-america
   utah:
     id: utah
     name: Utah

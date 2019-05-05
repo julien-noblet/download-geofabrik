@@ -22,7 +22,6 @@ func downloadFromURL(myURL string, fileName string) error {
 	}
 
 	if !*fNodownload {
-
 		transport := &http.Transport{}
 		if *fProxyHTTP != "" {
 			u, _ := url.Parse(myURL)

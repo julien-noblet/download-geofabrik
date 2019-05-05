@@ -6,13 +6,15 @@ import (
 )
 
 type Element struct {
-	ID      string   `yaml:"id"`
-	File    string   `yaml:"file,omitempty"`
-	Meta    bool     `yaml:"meta,omitempty"`
-	Name    string   `yaml:"name,omitempty"`
-	Formats []string `yaml:"files,omitempty"`
-	Parent  string   `yaml:"parent,omitempty"`
+	ID      string         `yaml:"id"`
+	File    string         `yaml:"file,omitempty"`
+	Meta    bool           `yaml:"meta,omitempty"`
+	Name    string         `yaml:"name,omitempty"`
+	Formats elementFormats `yaml:"files,omitempty"`
+	Parent  string         `yaml:"parent,omitempty"`
 }
+
+type elementFormats []string
 
 func (e *Element) hasParent() bool {
 	return len(e.Parent) != 0
@@ -21,7 +23,7 @@ func (e *Element) hasParent() bool {
 func elem2URL(c *Config, e *Element, ext string) (string, error) {
 	var res string
 	var err error
-	if !stringInSlice(&ext, &e.Formats) {
+	if !e.Formats.contains(ext) {
 		return "", fmt.Errorf("error!!! %s format not exist", ext)
 	}
 	format := c.Formats[ext]
@@ -88,12 +90,30 @@ func findElem(c *Config, e string) (*Element, error) {
 	return &res, nil
 }
 
+func findElem2(es ElementSlice, e string) (*Element, error) {
+	res := es[e]
+	//fmt.Println("findElem", res.ID, e)
+	if res.ID == "" || res.ID != e {
+		return nil, fmt.Errorf("%s is not in config\n Please use \"list\" command", e)
+	}
+	return &res, nil
+}
+
 // stringInSlice : Check if a sting is present in a slice
 // should be more easy to access to a map!
 // TODO: remove it!
-func stringInSlice(a *string, list *[]string) bool {
+func stringInSlice(a *string, list *elementFormats) bool {
 	for _, b := range *list {
 		if b == *a {
+			return true
+		}
+	}
+	return false
+}
+
+func (f *elementFormats) contains(e string) bool {
+	for _, a := range *f {
+		if e == a {
 			return true
 		}
 	}

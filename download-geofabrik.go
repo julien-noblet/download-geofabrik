@@ -51,7 +51,7 @@ var (
 	generate = app.Command("generate", "Generate a new config file")
 )
 
-func listAllRegions(c Config, format string) {
+func listAllRegions(c *Config, format string) {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetAlignment(tablewriter.ALIGN_LEFT)
 	table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
@@ -129,7 +129,7 @@ func listCommand() {
 	}
 	configPtr, err := loadConfig(*fConfig)
 	catch(err)
-	listAllRegions(*configPtr, format)
+	listAllRegions(configPtr, format)
 }
 
 func downloadCommand() {

@@ -2,13 +2,14 @@ package main
 
 import (
 	"reflect"
+	"sync"
 	"testing"
 )
 
-var tests = []struct {
+var openstreetmapFRtests = []struct {
 	name    string
 	href    string
-	ext     Ext
+	c       Config
 	want    ElementSlice
 	parent  string
 	parents []string
@@ -18,7 +19,7 @@ var tests = []struct {
 		name:    "Void ",
 		href:    "http://osm.fr/",
 		want:    ElementSlice{},
-		ext:     Ext{Elements: make(map[string]Element)},
+		c:       Config{Elements: make(map[string]Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "",
 		parents: []string{"http:", "", "osm.fr", ""},
 	},
@@ -26,7 +27,7 @@ var tests = []struct {
 		name:    "1st level subfolder",
 		href:    "http://osm.fr/one/",
 		want:    ElementSlice{},
-		ext:     Ext{Elements: make(map[string]Element)},
+		c:       Config{Elements: make(map[string]Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "one",
 		parents: []string{"http:", "", "osm.fr", "one", ""},
 	},
@@ -34,7 +35,7 @@ var tests = []struct {
 		name:    "2nd level subfolder",
 		href:    "http://osm.fr/one/two/",
 		want:    ElementSlice{},
-		ext:     Ext{Elements: make(map[string]Element)},
+		c:       Config{Elements: make(map[string]Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "two",
 		parents: []string{"http:", "", "osm.fr", "one", "two", ""},
 	},
@@ -48,7 +49,7 @@ var tests = []struct {
 				Formats: []string{"osm.pbf"},
 			},
 		},
-		ext:     Ext{Elements: make(map[string]Element)},
+		c:       Config{Elements: make(map[string]Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "",
 		parents: []string{"http:", "", "osm.fr", "extracts", "object.osm.pbf"},
 	},
@@ -62,7 +63,7 @@ var tests = []struct {
 				Formats: []string{"osm.pbf"},
 			},
 		},
-		ext:     Ext{Elements: make(map[string]Element)},
+		c:       Config{Elements: make(map[string]Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "",
 		parents: []string{"http:", "", "osm.fr", "polygons", "object.osm.pbf"},
 	},
@@ -77,7 +78,7 @@ var tests = []struct {
 				Parent:  "one",
 			},
 		},
-		ext:     Ext{Elements: make(map[string]Element)},
+		c:       Config{Elements: make(map[string]Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "one",
 		parents: []string{"http:", "", "osm.fr", "extracts", "one", "object.osm.pbf"},
 	},
@@ -88,11 +89,12 @@ var tests = []struct {
 			"object": Element{
 				ID:      "object",
 				Name:    "object",
+				Meta:    false,
 				Formats: []string{"osm.pbf"},
 				Parent:  "one",
 			},
 		},
-		ext:     Ext{Elements: make(map[string]Element)},
+		c:       Config{Elements: make(map[string]Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "one",
 		parents: []string{"http:", "", "osm.fr", "polygons", "one", "object.osm.pbf"},
 	},
@@ -107,7 +109,7 @@ var tests = []struct {
 				Parent:  "two",
 			},
 		},
-		ext:     Ext{Elements: make(map[string]Element)},
+		c:       Config{Elements: make(map[string]Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "two",
 		parents: []string{"http:", "", "osm.fr", "polygons", "one", "two", "object.osm.pbf"},
 	},
@@ -122,7 +124,7 @@ var tests = []struct {
 				Parent:  "one",
 			},
 		},
-		ext: Ext{
+		c: Config{
 			Elements: ElementSlice{
 				"object": Element{
 					ID:      "object",
@@ -131,6 +133,7 @@ var tests = []struct {
 					Parent:  "one",
 				},
 			},
+			ElementsMutex: &sync.RWMutex{},
 		},
 		parent:  "one",
 		parents: []string{"http:", "", "osm.fr", "extracts", "one", "object.state.txt"},
@@ -138,26 +141,25 @@ var tests = []struct {
 }
 
 func Test_openstreetmapFRParseHref(t *testing.T) {
-	for tn := range tests {
-		t.Run(tests[tn].name, func(t *testing.T) {
-			openstreetmapFRParseHref(tests[tn].href, &tests[tn].ext)
-			if !reflect.DeepEqual(tests[tn].ext.Elements, tests[tn].want) {
-				t.Errorf("openstreetmapFRParseHref() = %v len:%d, want %v len:%d", tests[tn].ext.Elements, len(tests[tn].ext.Elements), tests[tn].want, len(tests[tn].want))
+	for tn := range openstreetmapFRtests {
+		t.Run(openstreetmapFRtests[tn].name, func(t *testing.T) {
+			openstreetmapFRParseHref(openstreetmapFRtests[tn].href, &openstreetmapFRtests[tn].c)
+			if !reflect.DeepEqual(openstreetmapFRtests[tn].c.Elements, openstreetmapFRtests[tn].want) {
+				t.Errorf("openstreetmapFRParseHref() = %v len:%d, want %v len:%d", openstreetmapFRtests[tn].c.Elements, len(openstreetmapFRtests[tn].c.Elements), openstreetmapFRtests[tn].want, len(openstreetmapFRtests[tn].want))
 			}
-
 		})
 	}
 }
 
 func Test_openstreetmapFRGetParent(t *testing.T) {
-	for tn := range tests {
-		t.Run(tests[tn].name, func(t *testing.T) {
-			p, ps := openstreetmapFRGetParent(tests[tn].href)
-			if !reflect.DeepEqual(p, tests[tn].parent) {
-				t.Errorf("openstreetmapFRGetParent() = %v want %v ", p, tests[tn].parent)
+	for tn := range openstreetmapFRtests {
+		t.Run(openstreetmapFRtests[tn].name, func(t *testing.T) {
+			p, ps := openstreetmapFRGetParent(openstreetmapFRtests[tn].href)
+			if !reflect.DeepEqual(p, openstreetmapFRtests[tn].parent) {
+				t.Errorf("openstreetmapFRGetParent() = %v want %v ", p, openstreetmapFRtests[tn].parent)
 			}
-			if !reflect.DeepEqual(ps, tests[tn].parents) {
-				t.Errorf("openstreetmapFRGetParent() = %v want %v ", ps, tests[tn].parents)
+			if !reflect.DeepEqual(ps, openstreetmapFRtests[tn].parents) {
+				t.Errorf("openstreetmapFRGetParent() = %v want %v ", ps, openstreetmapFRtests[tn].parents)
 			}
 
 		})

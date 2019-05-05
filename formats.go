@@ -11,6 +11,8 @@ type format struct {
 	BaseURL  string `yaml:"baseurl,omitempty"`
 }
 
+type formatDefinitions map[string]format
+
 //miniFormats get formats of an Element
 // and return a string
 // according to download-geofabrik short flags.

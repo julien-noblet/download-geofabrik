@@ -6,20 +6,11 @@ import (
 	"strings"
 
 	"github.com/gocolly/colly"
-	pb "gopkg.in/cheggaaa/pb.v1"
 )
 
 const (
 	openstreetmapFRPb = 144
 )
-
-// Example:
-func openstreetmapFRGetNext(href string, callback func(interface{})) {
-	if *fVerbose && !*fQuiet && !*fProgress {
-		log.Println("Next:", href)
-	}
-	callback(href)
-}
 
 func openstreetmapFRGetParent(href string) (string, []string) {
 	parents := strings.Split(href, "/")
@@ -37,7 +28,7 @@ func openstreetmapFRGetParent(href string) (string, []string) {
 	return parent, parents
 }
 
-func openstreetmapFRParseHref(href string, ext *Ext) {
+func openstreetmapFRParseHref(href string, config *Config) {
 	if *fVerbose && !*fQuiet && !*fProgress {
 		log.Println("Parsing:", href)
 	}
@@ -62,45 +53,40 @@ func openstreetmapFRParseHref(href string, ext *Ext) {
 				Parent: parent,
 				Name:   valsplit[0],
 				ID:     valsplit[0],
+				Meta:   false,
 			}
-			ext.ElementsMutex.RLock()
-			eq := strings.EqualFold(ext.Elements[valsplit[0]].ID, valsplit[0])
-			ext.ElementsMutex.RUnlock()
-			if !eq {
+			if !config.Exist(valsplit[0]) {
 				element.Formats = append(element.Formats, extention)
-				err := ext.mergeElement(&element)
+				err := config.mergeElement(&element)
 				if err != nil {
 					catch(fmt.Errorf("can't merge element, %v", err))
 					// Panic
 				}
 			} else {
+				e, _ := config.GetElement(valsplit[0])
+				fmt.Println(valsplit[0], "Exists, ID: ", e)
 				if *fVerbose && !*fQuiet && !*fProgress {
 					log.Println(valsplit[0], "already exist")
 					log.Println("Merging formats")
 				}
-				ext.ElementsMutex.RLock()
-				et := ext.Elements[valsplit[0]]
-				ext.ElementsMutex.RUnlock()
-				if len(et.Formats) == 0 {
-					et.Meta = true
-				} else {
-					et.Meta = false
-				}
-				et.Formats = append(et.Formats, extention)
-				ext.ElementsMutex.Lock()
-				ext.Elements[valsplit[0]] = et
-				ext.ElementsMutex.Unlock()
+				config.AddExtension(valsplit[0], extention)
 			}
 		}
 	}
 }
 
-func openstreetmapFRParse(e *colly.HTMLElement, ext *Ext, bar *pb.ProgressBar, callback func(interface{})) {
+func openstreetmapFRParse(e *colly.HTMLElement, config *Config, c *colly.Collector) {
 	href := e.Request.AbsoluteURL(e.Attr("href"))
 	if href[len(href)-1] == '/' {
-		openstreetmapFRGetNext(href, callback)
+		if *fVerbose && !*fQuiet && !*fProgress {
+			log.Println("Next:", href)
+		}
+		err := c.Visit(href)
+		if err != nil && err != colly.ErrAlreadyVisited {
+			catch(err)
+		}
 	} else {
-		openstreetmapFRParseHref(href, ext)
+		openstreetmapFRParseHref(href, config)
 	}
 
 }

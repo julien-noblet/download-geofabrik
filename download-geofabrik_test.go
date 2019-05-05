@@ -221,7 +221,7 @@ func Test_listCommand(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			*lmd = tt.lmd
-			fakelistAllRegions := func(configPtr Config, format string) {
+			fakelistAllRegions := func(configPtr *Config, format string) {
 				assert.Equal(t, tt.want, format)
 			}
 			patch := monkey.Patch(listAllRegions, fakelistAllRegions)

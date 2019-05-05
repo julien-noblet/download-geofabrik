@@ -2,6 +2,7 @@ package main
 
 import (
 	"reflect"
+	"sync"
 	"testing"
 )
 
@@ -82,11 +83,11 @@ func Test_gislabParse(t *testing.T) {
 	}
 	for _, tt := range tests {
 		element := createHTMLElement(t, tt.in)
-		e := Ext{Elements: make(map[string]Element)}
+		c := Config{Elements: make(map[string]Element), ElementsMutex: &sync.RWMutex{}}
 		t.Run(tt.name, func(t *testing.T) {
-			gislabParse(element, &e)
-			if !reflect.DeepEqual(e.Elements, tt.want) {
-				t.Errorf("gislabParse() = %v len:%d, want %v len:%d", e.Elements, len(e.Elements), tt.want, len(tt.want))
+			gislabParse(element, &c)
+			if !reflect.DeepEqual(c.Elements, tt.want) {
+				t.Errorf("gislabParse() = %v len:%d, want %v len:%d", c.Elements, len(c.Elements), tt.want, len(tt.want))
 			}
 		})
 	}

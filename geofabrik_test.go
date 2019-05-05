@@ -82,111 +82,11 @@ func Test_geofabrikMakeParent(t *testing.T) {
 	}
 }
 
-func Test_geofabrikAddExtension(t *testing.T) {
-	type args struct {
-		id     string
-		format string
-		ext    Ext
-	}
-	tests := []struct {
-		name string
-		args args
-		want ElementSlice
-	}{
-		{
-			name: "Add osm.pbf but already in",
-			args: args{
-				id:     "a",
-				format: "osm.pbf",
-				ext: Ext{
-					Elements: ElementSlice{
-						"a": Element{
-							ID:      "a",
-							Name:    "a",
-							Formats: []string{"osm.pbf"},
-							Meta:    false,
-						},
-					},
-					ElementsMutex: sync.RWMutex{},
-				},
-			},
-			want: ElementSlice{
-				"a": Element{
-					ID:      "a",
-					Name:    "a",
-					Formats: []string{"osm.pbf"},
-					Meta:    false,
-				},
-			},
-		},
-		{
-			name: "Add osm.pbf",
-			args: args{
-				id:     "a",
-				format: "osm.pbf",
-				ext: Ext{
-					Elements: ElementSlice{
-						"a": Element{
-							ID:      "a",
-							Name:    "a",
-							Formats: []string{},
-							Meta:    false,
-						},
-					},
-					ElementsMutex: sync.RWMutex{},
-				},
-			},
-			want: ElementSlice{
-				"a": Element{
-					ID:      "a",
-					Name:    "a",
-					Formats: []string{"osm.pbf"},
-					Meta:    false,
-				},
-			},
-		},
-		{
-			name: "Add osm.pbf on meta",
-			args: args{
-				id:     "a",
-				format: "osm.pbf",
-				ext: Ext{
-					Elements: ElementSlice{
-						"a": Element{
-							ID:      "a",
-							Name:    "a",
-							Formats: []string{},
-							Meta:    true,
-						},
-					},
-					ElementsMutex: sync.RWMutex{},
-				},
-			},
-			want: ElementSlice{
-				"a": Element{
-					ID:      "a",
-					Name:    "a",
-					Formats: []string{"osm.pbf"},
-					Meta:    false,
-				},
-			},
-		},
-	}
-	for tn := range tests {
-		t.Run(tests[tn].name, func(t *testing.T) {
-			geofabrikAddExtension(tests[tn].args.id, tests[tn].args.format, &tests[tn].args.ext)
-			if !reflect.DeepEqual(tests[tn].args.ext.Elements, tests[tn].want) {
-				t.Errorf("geofabrikAddExtension() got %v, want %v", tests[tn].args.ext.Elements, tests[tn].want)
-			}
-		})
-	}
-}
-
 func Test_geofabrikParseFormat(t *testing.T) {
 	type args struct {
 		id     string
 		format string
-		ext    Ext
+		c      Config
 	}
 	tests := []struct {
 		name string
@@ -198,7 +98,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "osm.pbf",
-				ext: Ext{
+				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
@@ -207,7 +107,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 							Meta:    false,
 						},
 					},
-					ElementsMutex: sync.RWMutex{},
+					ElementsMutex: &sync.RWMutex{},
 				},
 			},
 			want: ElementSlice{
@@ -224,7 +124,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "osm.pbf",
-				ext: Ext{
+				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
@@ -233,7 +133,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 							Meta:    false,
 						},
 					},
-					ElementsMutex: sync.RWMutex{},
+					ElementsMutex: &sync.RWMutex{},
 				},
 			},
 			want: ElementSlice{
@@ -250,7 +150,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "osm.pbf.md5",
-				ext: Ext{
+				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
@@ -259,7 +159,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 							Meta:    false,
 						},
 					},
-					ElementsMutex: sync.RWMutex{},
+					ElementsMutex: &sync.RWMutex{},
 				},
 			},
 			want: ElementSlice{
@@ -276,7 +176,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "osm.bz2",
-				ext: Ext{
+				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
@@ -285,7 +185,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 							Meta:    false,
 						},
 					},
-					ElementsMutex: sync.RWMutex{},
+					ElementsMutex: &sync.RWMutex{},
 				},
 			},
 			want: ElementSlice{
@@ -302,7 +202,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "osm.bz2.md5",
-				ext: Ext{
+				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
@@ -311,7 +211,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 							Meta:    false,
 						},
 					},
-					ElementsMutex: sync.RWMutex{},
+					ElementsMutex: &sync.RWMutex{},
 				},
 			},
 			want: ElementSlice{
@@ -328,7 +228,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "poly",
-				ext: Ext{
+				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
@@ -337,7 +237,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 							Meta:    false,
 						},
 					},
-					ElementsMutex: sync.RWMutex{},
+					ElementsMutex: &sync.RWMutex{},
 				},
 			},
 			want: ElementSlice{
@@ -354,7 +254,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "shp.zip",
-				ext: Ext{
+				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
@@ -363,7 +263,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 							Meta:    false,
 						},
 					},
-					ElementsMutex: sync.RWMutex{},
+					ElementsMutex: &sync.RWMutex{},
 				},
 			},
 			want: ElementSlice{
@@ -380,7 +280,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "unk",
-				ext: Ext{
+				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
@@ -389,7 +289,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 							Meta:    false,
 						},
 					},
-					ElementsMutex: sync.RWMutex{},
+					ElementsMutex: &sync.RWMutex{},
 				},
 			},
 			want: ElementSlice{
@@ -406,7 +306,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "osm.pbf",
-				ext: Ext{
+				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
@@ -415,7 +315,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 							Meta:    true,
 						},
 					},
-					ElementsMutex: sync.RWMutex{},
+					ElementsMutex: &sync.RWMutex{},
 				},
 			},
 			want: ElementSlice{
@@ -430,9 +330,9 @@ func Test_geofabrikParseFormat(t *testing.T) {
 	}
 	for tn := range tests {
 		t.Run(tests[tn].name, func(t *testing.T) {
-			geofabrikParseFormat(tests[tn].args.id, tests[tn].args.format, &tests[tn].args.ext)
-			if !reflect.DeepEqual(tests[tn].args.ext.Elements, tests[tn].want) {
-				t.Errorf("geofabrikParseFormat() got %v, want %v", tests[tn].args.ext.Elements, tests[tn].want)
+			geofabrikParseFormat(tests[tn].args.id, tests[tn].args.format, &tests[tn].args.c)
+			if !reflect.DeepEqual(tests[tn].args.c.Elements, tests[tn].want) {
+				t.Errorf("geofabrikParseFormat() got %v, want %v", tests[tn].args.c.Elements, tests[tn].want)
 			}
 		})
 	}

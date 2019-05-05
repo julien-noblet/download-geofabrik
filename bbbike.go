@@ -8,7 +8,7 @@ import (
 
 const bbbikePb = 236
 
-func bbbikeParseList(e *colly.HTMLElement, ext *Ext, c *colly.Collector) {
+func bbbikeParseList(e *colly.HTMLElement, config *Config, c *colly.Collector) {
 	e.ForEach("a", func(_ int, el *colly.HTMLElement) {
 		href := el.Request.AbsoluteURL(el.Attr("href"))
 		if *fVerbose && !*fQuiet && !*fProgress {
@@ -16,7 +16,7 @@ func bbbikeParseList(e *colly.HTMLElement, ext *Ext, c *colly.Collector) {
 		}
 		err := c.Visit(href)
 		if err != nil {
-			log.Panicln(err)
+			catch(err)
 		}
 	})
 }
@@ -26,13 +26,13 @@ func bbbikeGetName(h3 string) string {
 	return ret
 }
 
-func bbbikeParseSidebar(e *colly.HTMLElement, ext *Ext, c *colly.Collector) {
+func bbbikeParseSidebar(e *colly.HTMLElement, config *Config, c *colly.Collector) {
 	name := bbbikeGetName(e.ChildText("h3"))
 	element := Element{
 		ID:   name,
 		Name: name,
 		File: name + "/" + name,
-		Formats: []string{
+		Formats: elementFormats{
 			"osm.pbf",
 			"osm.gz",
 			"shp.zip",
@@ -41,7 +41,7 @@ func bbbikeParseSidebar(e *colly.HTMLElement, ext *Ext, c *colly.Collector) {
 	if *fVerbose && !*fQuiet && !*fProgress {
 		log.Println("Add", name)
 	}
-	err := ext.mergeElement(&element)
+	err := config.mergeElement(&element)
 	if err != nil {
 		panic(err)
 	}

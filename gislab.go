@@ -22,7 +22,7 @@ func gislabAddExt(td *colly.HTMLElement, element *Element) {
 	}
 }
 
-func gislabParse(e *colly.HTMLElement, ext *Ext) error {
+func gislabParse(e *colly.HTMLElement, config *Config) error {
 	e.ForEach("tr", func(_ int, el *colly.HTMLElement) {
 		if el.ChildText("a:nth-child(1)") != "" {
 			element := Element{
@@ -36,7 +36,7 @@ func gislabParse(e *colly.HTMLElement, ext *Ext) error {
 			if *fVerbose && !*fQuiet && !*fProgress {
 				log.Println("Adding", element.Name)
 			}
-			err := ext.mergeElement(&element)
+			err := config.mergeElement(&element)
 			if err != nil {
 				panic(err)
 			}

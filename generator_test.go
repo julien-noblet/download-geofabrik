@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"reflect"
+	"sync"
 	"testing"
 
 	"github.com/PuerkitoBio/goquery"
@@ -24,17 +25,9 @@ func getHTML(url string) string {
 }
 
 func TestElementSlice_Generate(t *testing.T) {
-	myConfig := &SampleConfigValidPtr
-	myYaml, _ := yaml.Marshal(*myConfig)
-	myConfig.Elements = map[string]Element{} // void Elements
-
-	type args struct {
-		myConfig *Config
-	}
 	tests := []struct {
 		name    string
 		e       ElementSlice
-		args    args
 		want    []byte
 		wantErr bool
 	}{
@@ -42,14 +35,17 @@ func TestElementSlice_Generate(t *testing.T) {
 		{
 			name:    "Marshalling OK, no error",
 			e:       sampleElementValidPtr,
-			args:    args{myConfig: myConfig},
-			want:    myYaml,
+			want:    []byte{},
 			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
+		myConfig := &SampleConfigValidPtr
+		myConfig.Elements = map[string]Element{} // void Elements
+		myConfig.Elements = tt.e
+		tt.want, _ = yaml.Marshal(*myConfig)
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.e.Generate(tt.args.myConfig)
+			got, err := myConfig.Generate()
 			if err != nil != tt.wantErr {
 				t.Errorf("ElementSlice.Generate() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -78,7 +74,7 @@ func TestGenerate(t *testing.T) {
 	}
 }
 
-func TestExt_mergeElement(t *testing.T) {
+func TestConfig_mergeElement(t *testing.T) {
 	myFakeGeorgia := sampleFakeGeorgia2Ptr
 	myFakeGeorgia.ID = "georgia-us"
 	type args struct {
@@ -128,10 +124,11 @@ func TestExt_mergeElement(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e := Ext{
-				Elements: sampleElementValidPtr,
+			c := Config{
+				Elements:      sampleElementValidPtr,
+				ElementsMutex: &sync.RWMutex{},
 			}
-			if err := e.mergeElement(tt.args.element); err != nil != tt.wantErr {
+			if err := c.mergeElement(tt.args.element); err != nil != tt.wantErr {
 				t.Errorf("Ext.mergeElement() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
@@ -160,31 +157,4 @@ func createHTMLElement(t *testing.T, in string) *colly.HTMLElement {
 		}
 	})
 	return elements[0]
-}
-
-func Test_contains(t *testing.T) {
-	type args struct {
-		s []string
-		e string
-	}
-	tests := []struct {
-		name string
-		args args
-		want bool
-	}{
-		// TODO: Add test cases.
-		{name: "Contain", args: args{s: []string{"a"}, e: "a"}, want: true},
-		{name: "Contain", args: args{s: []string{"a", "b"}, e: "a"}, want: true},
-		{name: "Not Contain", args: args{s: []string{"a", "b"}, e: "c"}, want: false},
-		{name: "Void s", args: args{s: []string{}, e: "c"}, want: false},
-		{name: "Void e", args: args{s: []string{"a", "b"}, e: ""}, want: false},
-		{name: "Void s,e", args: args{s: []string{}, e: ""}, want: false},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := contains(tt.args.s, tt.args.e); got != tt.want {
-				t.Errorf("contains() = %v, want %v", got, tt.want)
-			}
-		})
-	}
 }
