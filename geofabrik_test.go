@@ -1,86 +1,16 @@
 package main
 
 import (
+	"net/url"
 	"reflect"
+	"regexp"
+	"strings"
 	"sync"
 	"testing"
+
+	"github.com/PuerkitoBio/goquery"
+	"github.com/gocolly/colly"
 )
-
-func Test_geofabrikGetParent(t *testing.T) {
-
-	tests := []struct {
-		name  string
-		url   string
-		want  string
-		want2 string
-	}{
-		// TODO: Add test cases.
-		{name: "No Parent", url: "https://download.geofabrik.de/test.html", want: "", want2: "https://download.geofabrik.de"},
-		{name: "1 parent", url: "https://download.geofabrik.de/parent1/test.html", want: "parent1", want2: "https://download.geofabrik.de/parent1"},
-		{name: "2 parents", url: "https://download.geofabrik.de/parent1/parent2/test.html", want: "parent2", want2: "https://download.geofabrik.de/parent1/parent2"},
-		{name: "grand parents", url: "https://download.geofabrik.de/parent1/parent2", want: "parent1", want2: "https://download.geofabrik.de/parent1"},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, got2 := geofabrikGetParent(tt.url)
-			if got != tt.want {
-				t.Errorf("geofabrikGetParent() = %v, want %v", got, tt.want)
-			}
-			if got2 != tt.want2 {
-				t.Errorf("geofabrikGetParent() = %v, want %v", got2, tt.want2)
-			}
-		})
-	}
-}
-
-func Test_geofabrikFileWOExt(t *testing.T) {
-	tests := []struct {
-		name  string
-		url   string
-		want  string
-		want2 string
-	}{
-		// TODO: Add test cases.
-		{name: "No Parent", url: "https://download.geofabrik.de/test.html", want: "test", want2: "html"},
-		{name: "No Parent long ext", url: "https://download.geofabrik.de/test.ext.html", want: "test", want2: "ext.html"},
-		{name: "1 Parent", url: "https://download.geofabrik.de/parent/test.html", want: "test", want2: "html"},
-		{name: "1 Parent long ext", url: "https://download.geofabrik.de/parent/test.ext.html", want: "test", want2: "ext.html"},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, ext := geofabrikFile(tt.url)
-			if got != tt.want {
-				t.Errorf("geofabrikFileWOExt() = %v, want %v", got, tt.want)
-			}
-			if ext != tt.want2 {
-				t.Errorf("geofabrikFileWOExt() = %v, want %v", ext, tt.want2)
-			}
-		})
-	}
-}
-
-func Test_geofabrikMakeParent(t *testing.T) {
-	type args struct {
-		e       Element
-		gparent string
-	}
-	tests := []struct {
-		name string
-		args args
-		want *Element
-	}{
-		{name: "No Parents", args: args{e: Element{ID: "a", Name: "a"}, gparent: ""}, want: nil},
-		{name: "Have Parent with no gparent", args: args{e: Element{ID: "a", Name: "a", Parent: "p"}, gparent: ""}, want: &Element{ID: "p", Name: "p", Meta: true}},
-		{name: "Have Parent with gparent", args: args{e: Element{ID: "a", Name: "a", Parent: "p"}, gparent: "gp"}, want: &Element{ID: "p", Name: "p", Meta: true, Parent: "gp"}},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := geofabrikMakeParent(tt.args.e, tt.args.gparent); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("geofabrikMakeParent() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
 
 func Test_geofabrikParseFormat(t *testing.T) {
 	type args struct {
@@ -330,10 +260,118 @@ func Test_geofabrikParseFormat(t *testing.T) {
 	}
 	for tn := range tests {
 		t.Run(tests[tn].name, func(t *testing.T) {
-			geofabrikParseFormat(tests[tn].args.id, tests[tn].args.format, &tests[tn].args.c)
-			if !reflect.DeepEqual(tests[tn].args.c.Elements, tests[tn].want) {
-				t.Errorf("geofabrikParseFormat() got %v, want %v", tests[tn].args.c.Elements, tests[tn].want)
+			s := Geofabrik{Scrapper: &Scrapper{}}
+			s.Scrapper.Config = &tests[tn].args.c
+			s.Scrapper.Config.Formats = formatDefinitions{
+				"osh.pbf":     {ID: "osh.pbf", Loc: ".osh.pbf"},
+				"osh.pbf.md5": format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
+				"osm.bz2":     {ID: "osm.bz2", Loc: "-latest.osm.bz2"},
+				"osm.bz2.md5": {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
+				"osm.pbf":     {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
+				"osm.pbf.md5": {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+				"poly":        {ID: "poly", Loc: ".poly"},
+				"kml":         {ID: "kml", Loc: ".kml"},
+				"state":       {ID: "state", Loc: "-updates/state.txt"},
+				"shp.zip":     {ID: "shp.zip", Loc: "-latest-free.shp.zip"},
 			}
+
+			s.ParseFormat(tests[tn].args.id, tests[tn].args.format)
+			if !reflect.DeepEqual(tests[tn].args.c.Elements, tests[tn].want) {
+				t.Errorf("ParseFormat() got %v, want %v", tests[tn].args.c.Elements, tests[tn].want)
+			}
+		})
+	}
+}
+
+func TestGeofabrik_parseLi(t *testing.T) {
+	type fields struct {
+		Scrapper *Scrapper
+	}
+
+	tests := []struct {
+		name    string
+		fields  fields
+		html    string
+		url     string
+		want    ElementSlice
+		element *Element
+	}{
+		{name: "sample",
+			html: `
+			<li>
+				<p>some text</p>
+				<a href="toto.osm.pbf">anotherText</a>
+			</li>`,
+			url:     `http://download.geofabrik.de/toto.html`,
+			element: &Element{ID: "toto"},
+			want:    ElementSlice{"toto": Element{ID: "toto", Formats: elementFormats{"osm.pbf", "kml", "state"}}},
+		},
+		{name: "georgia-us",
+			html: `
+			<li>
+				<p>some text</p>
+				<a href="georgia.osm.pbf">anotherText</a>
+			</li>`,
+			url:     `http://download.geofabrik.de/north-america/us/georgia.html`,
+			element: &Element{ID: "georgia-us"},
+			want:    ElementSlice{"georgia-us": Element{ID: "georgia-us", Formats: elementFormats{"osm.pbf", "kml", "state"}}},
+		},
+		{name: "georgia-eu",
+			html: `
+			<li>
+				<p>some text</p>
+				<a href="georgia.osm.pbf">anotherText</a>
+			</li>`,
+			url:     `http://download.geofabrik.de/europe/georgia.html`,
+			element: &Element{ID: "georgia-eu"},
+			want:    ElementSlice{"georgia-eu": Element{ID: "georgia-eu", Formats: elementFormats{"osm.pbf", "kml", "state"}}},
+		},
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(tt.html))
+			url, _ := url.Parse(tt.url)
+			e := &colly.HTMLElement{
+				DOM: dom.Selection,
+				Response: &colly.Response{
+					Request: &colly.Request{URL: url},
+				},
+			}
+			g := Geofabrik{
+				Scrapper: &Scrapper{
+					PB:             401,
+					Async:          true,
+					Parallelism:    20,
+					MaxDepth:       0,
+					AllowedDomains: []string{`download.geofabrik.de`},
+					BaseURL:        `https://download.geofabrik.de`,
+					StartURL:       `https://download.geofabrik.de/`,
+					URLFilters: []*regexp.Regexp{
+						regexp.MustCompile(`https://download\.geofabrik\.de/.+\.html$`),
+						regexp.MustCompile(`https://download\.geofabrik\.de/$`),
+					},
+					FormatDefinition: formatDefinitions{
+						//geofabrik.Formats["osh.pbf"] = format{ID: "osh.pbf", Loc: ".osh.pbf"}
+						//geofabrik.Formats["osh.pbf.md5"] = format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"}
+						"osm.bz2":     {ID: "osm.bz2", Loc: "-latest.osm.bz2"},
+						"osm.bz2.md5": {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
+						"osm.pbf":     {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
+						"osm.pbf.md5": {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+						"poly":        {ID: "poly", Loc: ".poly"},
+						"kml":         {ID: "kml", Loc: ".kml"},
+						"state":       {ID: "state", Loc: "-updates/state.txt"},
+						"shp.zip":     {ID: "shp.zip", Loc: "-latest-free.shp.zip"},
+					},
+				},
+			}
+			g.GetConfig()
+			g.Config.mergeElement(tt.element)
+			g.parseLi(e, nil)
+			if !reflect.DeepEqual(g.Config.Elements, tt.want) {
+				t.Errorf("parseLi() fail, got %v, want %v", g.Config.Elements, tt.want)
+			}
+
 		})
 	}
 }

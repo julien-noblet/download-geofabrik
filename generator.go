@@ -28,42 +28,10 @@ func write(config *Config, filename string) {
 func Generate(configfile string) {
 	var bar *pb.ProgressBar
 	var myConfig *Config
+	var scrapper IScrapper
 	switch *fService {
 	case "geofabrik":
-		//Generate geofabrik.yml
-		myConfig = geofabrikConfig
-		if *fProgress {
-			bar = pb.New(geofabrikPb)
-			bar.Start()
-		}
-		c := geofabrikGetColly()
-		/*c.WithTransport(&http.Transport{
-			Proxy: http.ProxyFromEnvironment,
-			DialContext: (&net.Dialer{
-				Timeout:   60 * time.Second,
-				KeepAlive: 30 * time.Second,
-				DualStack: true,
-			}).DialContext,
-			MaxIdleConns:          0,
-			IdleConnTimeout:       5 * time.Second,
-			TLSHandshakeTimeout:   10 * time.Second,
-			ExpectContinueTimeout: 5 * time.Second,
-		})*/
-
-		c.OnHTML("#subregions", func(e *colly.HTMLElement) {
-			geofabrikParseSubregion(e, myConfig, c)
-		})
-		c.OnHTML("li", func(e *colly.HTMLElement) {
-			geofabrikParseLi(e, myConfig, c)
-		})
-
-		c.OnScraped(func(*colly.Response) {
-			if *fProgress {
-				bar.Increment()
-			}
-		})
-		catch(c.Visit("https://download.geofabrik.de/"))
-		c.Wait()
+		scrapper = &geofabrik
 	case "openstreetmap.fr":
 		myConfig = &Config{
 			BaseURL:       "https://download.openstreetmap.fr/extracts",
@@ -189,5 +157,30 @@ func Generate(configfile string) {
 	default:
 		catch(fmt.Errorf("Service not reconized, please use one of geofabrik, openstreetmap.fr or gislab"))
 	}
-	write(myConfig, configfile)
+	if *fProgress {
+		bar = pb.New(scrapper.GetPB())
+		bar.Start()
+	}
+	c := scrapper.Collector()
+	/*c.WithTransport(&http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout:   60 * time.Second,
+			KeepAlive: 30 * time.Second,
+			DualStack: true,
+		}).DialContext,
+		MaxIdleConns:          0,
+		IdleConnTimeout:       5 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ExpectContinueTimeout: 5 * time.Second,
+	})*/
+
+	c.OnScraped(func(*colly.Response) {
+		if *fProgress {
+			bar.Increment()
+		}
+	})
+	catch(c.Visit(scrapper.GetStartURL()))
+	c.Wait()
+	write(scrapper.GetConfig(), configfile)
 }

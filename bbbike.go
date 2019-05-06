@@ -2,11 +2,19 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"github.com/gocolly/colly"
 )
 
-const bbbikePb = 236
+const (
+	bbbikePb          = 236
+	bbbikeAsync       = true
+	bbbikeDomainGlob  = "*"
+	bbbikeParallelism = 20
+	bbbikeRandomDelay = 5 * time.Second
+	bbbikeMaxDepth    = 0 // infinite
+)
 
 func bbbikeParseList(e *colly.HTMLElement, config *Config, c *colly.Collector) {
 	e.ForEach("a", func(_ int, el *colly.HTMLElement) {

@@ -103,6 +103,30 @@ var sampleFakeGeorgia2Ptr = Element{
 	},
 	Parent: "notus", // bad parent not exist!
 }
+var sampleFakeGeorgia3Ptr = Element{
+	ID:   "georgia-us3",
+	File: "georgia",
+	Name: "Georgia (US State)",
+	Formats: []string{
+		"osm.pbf",
+		"osm.pbf.md5",
+		"shp.zip",
+		"osm.bz2",
+		"osm.bz2.md5",
+		"osh.pbf",
+		"osh.pbf.md5",
+		"poly",
+		"kml",
+		"state",
+	},
+	Parent: "notus2",
+}
+var sampleNotUS2Ptr = Element{
+	ID:     "notus2",
+	Name:   "notus2",
+	Meta:   true,
+	Parent: "north", // bad parent not exist!
+}
 
 func Benchmark_hasParent_parse_geofabrik_yml(b *testing.B) {
 	c, _ := loadConfig("./geofabrik.yml")
@@ -390,6 +414,8 @@ func Test_elem2URL(t *testing.T) {
 func Test_elem2preURL(t *testing.T) {
 	localSampleConfigValidPtr := SampleConfigValidPtr
 	localSampleConfigValidPtr.Elements["georgia-us2"] = sampleFakeGeorgia2Ptr // add it into config
+	localSampleConfigValidPtr.Elements["georgia-us3"] = sampleFakeGeorgia3Ptr // add it into config
+	localSampleConfigValidPtr.Elements["notus2"] = sampleNotUS2Ptr            // add it into config
 	type args struct {
 		c *Config
 		e *Element
@@ -426,6 +452,12 @@ func Test_elem2preURL(t *testing.T) {
 		{
 			name:    "sub level test config not exists parent",
 			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgia2Ptr},
+			want:    "",
+			wantErr: true,
+		},
+		{
+			name:    "sub level test config parent exist but not grandparent",
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgia3Ptr},
 			want:    "",
 			wantErr: true,
 		},
@@ -481,5 +513,27 @@ func Benchmark_elem2URL_parse_France_openstreetmap_fr_yml(b *testing.B) {
 	}
 	for n := 0; n < b.N; n++ {
 		elem2URL(c, france, "poly")
+	}
+}
+func Test_MakeParent(t *testing.T) {
+	type args struct {
+		e       Element
+		gparent string
+	}
+	tests := []struct {
+		name string
+		args args
+		want *Element
+	}{
+		{name: "No Parents", args: args{e: Element{ID: "a", Name: "a"}, gparent: ""}, want: nil},
+		{name: "Have Parent with no gparent", args: args{e: Element{ID: "a", Name: "a", Parent: "p"}, gparent: ""}, want: &Element{ID: "p", Name: "p", Meta: true}},
+		{name: "Have Parent with gparent", args: args{e: Element{ID: "a", Name: "a", Parent: "p"}, gparent: "gp"}, want: &Element{ID: "p", Name: "p", Meta: true, Parent: "gp"}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := MakeParent(tt.args.e, tt.args.gparent); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("MakeParent() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }

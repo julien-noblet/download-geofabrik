@@ -110,3 +110,17 @@ func (f *elementFormats) contains(e string) bool {
 	}
 	return false
 }
+
+//MakeParent make e parent(id=name=gparent)
+//Usefule for meta parents
+func MakeParent(e Element, gparent string) *Element {
+	if e.hasParent() {
+		return &Element{
+			ID:     e.Parent,
+			Name:   e.Parent,
+			Parent: gparent,
+			Meta:   true,
+		}
+	}
+	return nil
+}
