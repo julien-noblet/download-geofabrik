@@ -408,11 +408,6 @@ func TestScrapper_Limit(t *testing.T) {
 }
 
 func TestScrapper_GetConfig(t *testing.T) {
-	type fields struct {
-		BaseURL          string
-		Config           *Config
-		FormatDefinition formatDefinitions
-	}
 	tests := []struct {
 		name   string
 		fields Scrapper

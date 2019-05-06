@@ -284,13 +284,8 @@ func Test_geofabrikParseFormat(t *testing.T) {
 }
 
 func TestGeofabrik_parseLi(t *testing.T) {
-	type fields struct {
-		Scrapper *Scrapper
-	}
-
 	tests := []struct {
 		name    string
-		fields  fields
 		html    string
 		url     string
 		want    ElementSlice
@@ -366,7 +361,10 @@ func TestGeofabrik_parseLi(t *testing.T) {
 				},
 			}
 			g.GetConfig()
-			g.Config.mergeElement(tt.element)
+			err := g.Config.mergeElement(tt.element)
+			if err != nil {
+				t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", tt.element, err)
+			}
 			g.parseLi(e, nil)
 			if !reflect.DeepEqual(g.Config.Elements, tt.want) {
 				t.Errorf("parseLi() fail, got %v, want %v", g.Config.Elements, tt.want)
