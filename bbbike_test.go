@@ -318,7 +318,6 @@ func TestBbbike_parseList(t *testing.T) {
 				},
 			}
 
-			b.GetConfig()      // Initialise
 			c := b.Collector() // Need a Collector to visit
 			for _, elemem := range *tt.elements {
 				err := b.Config.mergeElement(&elemem)
@@ -451,7 +450,6 @@ func TestBbbike_parseSidebar(t *testing.T) {
 				},
 			}
 
-			b.GetConfig()      // Initialise
 			c := b.Collector() // Need a Collector to visit
 			for _, elemem := range *tt.elements {
 				err := b.Config.mergeElement(&elemem)

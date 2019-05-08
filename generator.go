@@ -80,23 +80,7 @@ func Generate(configfile string) {
 		c.Wait()
 
 	case "gislab":
-		myConfig.BaseURL = "http://be.gis-lab.info/project/osm_dump"
-		myConfig.Formats = make(map[string]format)
-		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", BaseURL: "http://data.gis-lab.info/osm_dump/dump", BasePath: "latest/", Loc: ".osm.pbf"}
-		myConfig.Formats["osm.bz2"] = format{ID: "osm.bz2", BaseURL: "http://data.gis-lab.info/osm_dump/dump", BasePath: "latest/", Loc: ".osm.bz2"}
-		myConfig.Formats["poly"] = format{ID: "poly", BaseURL: "https://raw.githubusercontent.com/nextgis/osmdump_poly/master", Loc: ".poly"}
-		c := colly.NewCollector(
-			// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
-			colly.AllowedDomains("be.gis-lab.info"),
-		)
-		c.OnHTML("table", func(e *colly.HTMLElement) {
-			catch(gislabParse(e, myConfig))
-		})
-		catch(c.Visit("http://be.gis-lab.info/project/osm_dump/iframe.php"))
-
-		c.Wait()
-		//GenerateCrawler("http://be.gis-lab.info/project/osm_dump/iframe.php", configfile, &myConfig)
-
+		scrapper = &gislab
 	case "bbbike":
 		scrapper = &bbbike
 

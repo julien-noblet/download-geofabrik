@@ -539,7 +539,7 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 					},
 				},
 			}
-			g.GetConfig()      // Initialise
+			//g.GetConfig()      // Initialise
 			c := g.Collector() // Need a Collector to visit
 			for _, elemem := range *tt.elements {
 				err := g.Config.mergeElement(&elemem)

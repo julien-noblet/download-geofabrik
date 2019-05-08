@@ -26,8 +26,6 @@ var geofabrik = Geofabrik{
 			regexp.MustCompile(`https://download\.geofabrik\.de/$`),
 		},
 		FormatDefinition: formatDefinitions{
-			//geofabrik.Formats["osh.pbf"] = format{ID: "osh.pbf", Loc: ".osh.pbf"}
-			//geofabrik.Formats["osh.pbf.md5"] = format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"}
 			"osm.bz2":     {ID: "osm.bz2", Loc: "-latest.osm.bz2"},
 			"osm.bz2.md5": {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
 			"osm.pbf":     {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
