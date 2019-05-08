@@ -98,61 +98,7 @@ func Generate(configfile string) {
 		//GenerateCrawler("http://be.gis-lab.info/project/osm_dump/iframe.php", configfile, &myConfig)
 
 	case "bbbike":
-		myConfig.BaseURL = "https://download.bbbike.org/osm/bbbike/"
-		myConfig.Formats = make(map[string]format)
-		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: ".osm.pbf"}
-		myConfig.Formats["shp.zip"] = format{ID: "shp.zip", Loc: ".osm.shp.zip"}
-		if *fProgress {
-			bar = pb.New(bbbikePb)
-			bar.Start()
-		}
-		c := colly.NewCollector(
-			// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
-			colly.AllowedDomains("download.bbbike.org"),
-			colly.URLFilters(
-				regexp.MustCompile("https://download.bbbike.org/osm/bbbike/[A-Z].+"),
-				regexp.MustCompile("https://download.bbbike.org/osm/bbbike/"),
-			),
-			//colly.Async(true),
-		)
-		catch(c.Limit(&colly.LimitRule{
-			DomainGlob:  "*",
-			Parallelism: 1,
-			RandomDelay: 5 * time.Second,
-			//Delay: 5 * time.Second,
-		}))
-		/*c.WithTransport(&http.Transport{
-			Proxy: http.ProxyFromEnvironment,
-			DialContext: (&net.Dialer{
-				Timeout:   60 * time.Second,
-				KeepAlive: 30 * time.Second,
-				DualStack: true,
-			}).DialContext,
-			MaxIdleConns:          0,
-			IdleConnTimeout:       5 * time.Second,
-			TLSHandshakeTimeout:   10 * time.Second,
-			ExpectContinueTimeout: 5 * time.Second,
-		})*/
-
-		c.OnError(func(r *colly.Response, err error) {
-			fmt.Println("Request URL:", r.Request.URL, "failed with response:", r, "\nError:", err.Error())
-		})
-
-		c.OnHTML("div.list", func(e *colly.HTMLElement) {
-			bbbikeParseList(e, myConfig, c)
-		})
-		c.OnHTML("#sidebar", func(e *colly.HTMLElement) {
-			bbbikeParseSidebar(e, myConfig, c)
-		})
-
-		c.OnScraped(func(*colly.Response) {
-			if *fProgress {
-				bar.Increment()
-			}
-		})
-		catch(c.Visit("https://download.bbbike.org/osm/bbbike/"))
-
-		c.Wait()
+		scrapper = &bbbike
 
 	default:
 		catch(fmt.Errorf("Service not reconized, please use one of geofabrik, openstreetmap.fr or gislab"))
