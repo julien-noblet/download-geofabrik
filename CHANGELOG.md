@@ -10,6 +10,7 @@
 
 **Merged pull requests:**
 
+- ci\(Travis\): Add cache [\#166](https://github.com/julien-noblet/download-geofabrik/pull/166) ([julien-noblet](https://github.com/julien-noblet))
 - chore\(deps\): update golang.org/x [\#163](https://github.com/julien-noblet/download-geofabrik/pull/163) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/tools commit hash to 9e44c1c [\#162](https://github.com/julien-noblet/download-geofabrik/pull/162) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/sys commit hash to 18eb32c [\#161](https://github.com/julien-noblet/download-geofabrik/pull/161) ([renovate[bot]](https://github.com/apps/renovate))
