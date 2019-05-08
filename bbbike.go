@@ -27,7 +27,7 @@ var bbbike = Bbbike{
 		},
 		FormatDefinition: formatDefinitions{
 			"osm.pbf": {ID: "osm.pbf", Loc: ".osm.pbf"},
-			"shp.zip": {ID: "shp.zip", Loc: ".shp.zip"},
+			"shp.zip": {ID: "shp.zip", Loc: ".osm.shp.zip"},
 			"osm.gz":  {ID: "osm.gz", Loc: ".osm.gz"},
 		},
 	},
