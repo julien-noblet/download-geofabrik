@@ -1,4 +1,4 @@
-gofiles  = download-geofabrik.go config.go download.go element.go formats.go generator.go bbbike.go gislab.go geofabrik.go openstreetmap.fr.go
+gofiles  = download-geofabrik.go config.go download.go element.go formats.go generator.go bbbike.go gislab.go geofabrik.go openstreetmap.fr.go scrapper.go
 pkgfiles = CHANGELOG.md README.md LICENSE geofabrik.yml openstreetmap.fr.yml gislab.yml bbbike.yml
 default: clean all
 clean:
