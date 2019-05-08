@@ -51,8 +51,6 @@ func (b *Bbbike) parseList(e *colly.HTMLElement, c *colly.Collector) {
 		if *fVerbose && !*fQuiet && !*fProgress {
 			log.Println("Parse:", href)
 		}
-		log.Println("Parse:", el.Attr("href"))
-		log.Println("Parse:", href)
 		err := c.Visit(href)
 		if err != nil && err != colly.ErrNoURLFiltersMatch { // Not matching
 			catch(err)
