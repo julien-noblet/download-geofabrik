@@ -8,7 +8,7 @@ formats:
     loc: .osm.pbf
   shp.zip:
     ext: shp.zip
-    loc: .shp.zip
+    loc: .osm.shp.zip
 elements:
   Aachen:
     id: Aachen
