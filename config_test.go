@@ -206,7 +206,9 @@ func Benchmark_GetElement_geofabrik_yml(b *testing.B) {
 	c, _ := loadConfig("./geofabrik.yml")
 	e := "france"
 	for n := 0; n < b.N; n++ {
-		c.GetElement(e)
+		if _, err := c.GetElement(e); err != nil {
+			panic(err)
+		}
 	}
 }
 

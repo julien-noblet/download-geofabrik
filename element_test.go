@@ -190,7 +190,9 @@ func Benchmark_GetElement_parse_all_geofabrik_yml(b *testing.B) {
 	c, _ := loadConfig("./geofabrik.yml")
 	for n := 0; n < b.N; n++ {
 		for k := range c.Elements {
-			c.GetElement(k)
+			if _, err := c.GetElement(k); err != nil {
+				panic(err)
+			}
 		}
 	}
 }
