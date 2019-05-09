@@ -144,13 +144,16 @@
 ## [v2.3.0](https://github.com/julien-noblet/download-geofabrik/tree/v2.3.0) (2018-05-09)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.0-rc0...v2.3.0)
 
+**Implemented enhancements:**
+
+- idea:  http://gis-lab.info/projects/osm\_dump/  extracts [\#32](https://github.com/julien-noblet/download-geofabrik/issues/32)
+- progress bar  - usability [\#26](https://github.com/julien-noblet/download-geofabrik/issues/26)
+
 ## [v2.3.0-rc0](https://github.com/julien-noblet/download-geofabrik/tree/v2.3.0-rc0) (2018-05-02)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.2.3...v2.3.0-rc0)
 
 **Implemented enhancements:**
 
-- idea:  http://gis-lab.info/projects/osm\_dump/  extracts [\#32](https://github.com/julien-noblet/download-geofabrik/issues/32)
-- progress bar  - usability [\#26](https://github.com/julien-noblet/download-geofabrik/issues/26)
 - Progress bar [\#28](https://github.com/julien-noblet/download-geofabrik/pull/28) ([julien-noblet](https://github.com/julien-noblet))
 
 **Merged pull requests:**
@@ -226,6 +229,10 @@
 ## [v2.0.3](https://github.com/julien-noblet/download-geofabrik/tree/v2.0.3) (2018-02-24)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.2...v2.0.3)
 
+**Closed issues:**
+
+- US states 404 [\#10](https://github.com/julien-noblet/download-geofabrik/issues/10)
+
 **Merged pull requests:**
 
 - Updating travis [\#15](https://github.com/julien-noblet/download-geofabrik/pull/15) ([julien-noblet](https://github.com/julien-noblet))
@@ -234,10 +241,6 @@
 
 ## [v2.0.2](https://github.com/julien-noblet/download-geofabrik/tree/v2.0.2) (2018-02-08)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.1...v2.0.2)
-
-**Closed issues:**
-
-- US states 404 [\#10](https://github.com/julien-noblet/download-geofabrik/issues/10)
 
 ## [v2.0.1](https://github.com/julien-noblet/download-geofabrik/tree/v2.0.1) (2018-01-11)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.0.0...v2.0.1)

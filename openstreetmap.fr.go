@@ -3,14 +3,45 @@ package main
 import (
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	"github.com/gocolly/colly"
 )
 
-const (
-	openstreetmapFRPb = 144
-)
+//OpenstreetmapFR Scrapper
+type OpenstreetmapFR struct {
+	*Scrapper
+}
+
+var openstreetmapFR = OpenstreetmapFR{
+	Scrapper: &Scrapper{
+		PB:             144,
+		Async:          true,
+		Parallelism:    20,
+		MaxDepth:       0,
+		AllowedDomains: []string{`download.openstreetmap.fr`},
+		BaseURL:        `https://download.openstreetmap.fr/extracts`,
+		StartURL:       `https://download.openstreetmap.fr/`,
+		URLFilters: []*regexp.Regexp{
+			regexp.MustCompile(`https://download.openstreetmap.fr/([^cgi\-bin][^replication]\w.+|)`),
+		},
+		FormatDefinition: formatDefinitions{
+			"osm.pbf": {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
+			"poly":    {ID: "poly", Loc: ".poly", BasePath: "../polygons/"},
+			"state":   {ID: "state", Loc: ".state.txt"},
+		},
+	},
+}
+
+//Collector represent geofabrik's scrapper
+func (o *OpenstreetmapFR) Collector(options ...interface{}) *colly.Collector {
+	c := o.Scrapper.Collector(options)
+	c.OnHTML("a", func(e *colly.HTMLElement) {
+		o.parse(e, c)
+	})
+	return c
+}
 
 func openstreetmapFRGetParent(href string) (string, []string) {
 	parents := strings.Split(href, "/")
@@ -28,13 +59,46 @@ func openstreetmapFRGetParent(href string) (string, []string) {
 	return parent, parents
 }
 
-func openstreetmapFRParseHref(href string, config *Config) {
+func (o *OpenstreetmapFR) makeParents(parent string, gparents []string) {
+	if parent != "" {
+		var gparent string
+		if gparents == nil || len(gparents) < 3 {
+			gparent = ""
+		} else {
+			gparent = gparents[len(gparents)-3] // Remove 2 last
+			if gparent == "http:" || gparent == "osm.fr" || gparent == "extracts" || gparent == "polygons" {
+				gparent = ""
+			}
+		}
+		if !o.Config.Exist(parent) {
+			element := Element{
+				Parent: gparent,
+				Name:   parent,
+				ID:     parent,
+				Meta:   true,
+			}
+			err := o.Config.mergeElement(&element)
+			if err != nil {
+				catch(fmt.Errorf("can't merge element, %v", err))
+				// Panic
+			}
+			if gparent != "" {
+				o.makeParents(gparent, gparents[:len(gparents)-1])
+			}
+		}
+	}
+}
+
+func (o *OpenstreetmapFR) parseHref(href string) {
 	if *fVerbose && !*fQuiet && !*fProgress {
 		log.Println("Parsing:", href)
 	}
 	//	if !strings.Contains(href, "?") && !strings.Contains(href, "-latest") && href[0] != '/' && !strings.EqualFold(href, "cgi-bin/") {
 	if !strings.Contains(href, "?") && !strings.Contains(href, "-latest") && href[0] != '/' {
 		parent, parents := openstreetmapFRGetParent(href)
+		if !o.Config.Exist(parent) {
+			o.makeParents(parent, parents)
+		}
 		valsplit := strings.Split(parents[len(parents)-1], ".")
 		if valsplit[0] != "" {
 			if *fVerbose && !*fQuiet && !*fProgress {
@@ -55,27 +119,27 @@ func openstreetmapFRParseHref(href string, config *Config) {
 				ID:     valsplit[0],
 				Meta:   false,
 			}
-			if !config.Exist(valsplit[0]) {
+			if !o.Config.Exist(valsplit[0]) {
 				element.Formats = append(element.Formats, extention)
-				err := config.mergeElement(&element)
+				err := o.Config.mergeElement(&element)
 				if err != nil {
 					catch(fmt.Errorf("can't merge element, %v", err))
 					// Panic
 				}
 			} else {
-				e, _ := config.GetElement(valsplit[0])
+				e, _ := o.Config.GetElement(valsplit[0])
 				fmt.Println(valsplit[0], "Exists, ID: ", e)
 				if *fVerbose && !*fQuiet && !*fProgress {
 					log.Println(valsplit[0], "already exist")
 					log.Println("Merging formats")
 				}
-				config.AddExtension(valsplit[0], extention)
+				o.Config.AddExtension(valsplit[0], extention)
 			}
 		}
 	}
 }
 
-func openstreetmapFRParse(e *colly.HTMLElement, config *Config, c *colly.Collector) {
+func (o *OpenstreetmapFR) parse(e *colly.HTMLElement, c *colly.Collector) {
 	href := e.Request.AbsoluteURL(e.Attr("href"))
 	if href[len(href)-1] == '/' {
 		if *fVerbose && !*fQuiet && !*fProgress {
@@ -85,7 +149,7 @@ func openstreetmapFRParse(e *colly.HTMLElement, config *Config, c *colly.Collect
 			catch(err)
 		}
 	} else {
-		openstreetmapFRParseHref(href, config)
+		o.parseHref(href)
 	}
 
 }

@@ -5,9 +5,6 @@ import (
 	"io/ioutil"
 	"log"
 	"path/filepath"
-	"regexp"
-	"sync"
-	"time"
 
 	"github.com/gocolly/colly"
 	pb "gopkg.in/cheggaaa/pb.v1"
@@ -27,64 +24,17 @@ func write(config *Config, filename string) {
 //Generate main function
 func Generate(configfile string) {
 	var bar *pb.ProgressBar
-	var myConfig *Config
 	var scrapper IScrapper
 	switch *fService {
 	case "geofabrik":
 		scrapper = &geofabrik
 	case "openstreetmap.fr":
-		myConfig = &Config{
-			BaseURL:       "https://download.openstreetmap.fr/extracts",
-			Formats:       make(map[string]format),
-			Elements:      ElementSlice{},
-			ElementsMutex: &sync.RWMutex{},
-		}
-		myConfig.Formats["osm.pbf"] = format{ID: "osm.pbf", Loc: "-latest.osm.pbf"}
-		myConfig.Formats["poly"] = format{ID: "poly", Loc: ".poly", BasePath: "../polygons/"}
-		myConfig.Formats["state"] = format{ID: "state", Loc: ".state.txt"}
-		if *fProgress {
-			bar = pb.New(openstreetmapFRPb)
-			bar.Start()
-		}
-		//GenerateCrawler("https://download.openstreetmap.fr/", configfile, &myConfig)
-		c := colly.NewCollector(
-			// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
-			colly.AllowedDomains("download.openstreetmap.fr"),
-			colly.URLFilters(
-				regexp.MustCompile(`https://download.openstreetmap.fr/([^cgi\-bin][^replication]\w.+|)`),
-				//				regexp.MustCompile(`https://download.openstreetmap.fr/[a-z][^cgi\-bin^replication].+`),
-				//regexp.MustCompile(`https://download.openstreetmap.fr/extracts/[a-z].+`),
-				//regexp.MustCompile(`https://download.openstreetmap.fr/polygons/[a-z].+`),
-			),
-			colly.Async(true),
-			colly.MaxDepth(0),
-		)
-		catch(c.Limit(&colly.LimitRule{
-			DomainGlob:  "*",
-			Parallelism: 20,
-			RandomDelay: 5 * time.Second,
-		}))
 
-		c.OnError(func(r *colly.Response, err error) {
-			fmt.Println("Request URL:", r.Request.URL, "failed with response:", r, "\nError:", err)
-		})
-		c.OnHTML("a", func(e *colly.HTMLElement) {
-			openstreetmapFRParse(e, myConfig, c)
-		})
-		c.OnScraped(func(*colly.Response) {
-			if *fProgress {
-				bar.Increment()
-			}
-		})
-		catch(c.Visit("https://download.openstreetmap.fr/"))
-		c.Wait()
+		scrapper = &openstreetmapFR
 
-	case "gislab":
-		scrapper = &gislab
 	case "bbbike":
 		scrapper = &bbbike
 
-	default:
 		catch(fmt.Errorf("Service not reconized, please use one of geofabrik, openstreetmap.fr or gislab"))
 	}
 	if *fProgress {
