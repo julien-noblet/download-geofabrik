@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net"
+	"net/http"
 	"regexp"
 	"strings"
 	"sync"
@@ -79,10 +82,28 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector {
 		colly.Async(s.Async),
 		colly.MaxDepth(s.MaxDepth),
 	)
+	c.WithTransport(&http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout:   60 * time.Second,
+			KeepAlive: 30 * time.Second,
+			DualStack: true,
+		}).DialContext,
+		MaxIdleConns:          0,
+		IdleConnTimeout:       5 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ExpectContinueTimeout: 5 * time.Second,
+	})
 	s.Config = s.GetConfig() // ensure initialisation
 	catch(c.Limit(s.Limit()))
 	c.OnError(func(r *colly.Response, err error) {
-		catch(fmt.Errorf("request URL: %v failed with response: %v\nerror: %v", r.Request.URL, r, err.Error()))
+		if err == colly.ErrForbiddenURL {
+			if *fVerbose == true && *fProgress == false && *fQuiet == false {
+				log.Printf("URL: %v is forbidden\n", r.Request.URL)
+			}
+		} else {
+			catch(fmt.Errorf("request URL: %v failed with response: %v\nerror: %v", r.Request.URL, r, err.Error()))
+		}
 	})
 	return c
 }

@@ -143,7 +143,7 @@ func (o *OpenstreetmapFR) parse(e *colly.HTMLElement, c *colly.Collector) {
 		if *fVerbose && !*fQuiet && !*fProgress {
 			log.Println("Next:", href)
 		}
-		if err := c.Visit(href); err != nil && err != colly.ErrAlreadyVisited && err != colly.ErrForbiddenURL {
+		if err := c.Visit(href); err != nil && err != colly.ErrAlreadyVisited {
 			catch(err)
 		}
 	} else {

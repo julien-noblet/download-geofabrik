@@ -42,18 +42,6 @@ func Generate(configfile string) {
 		bar.Start()
 	}
 	c := scrapper.Collector()
-	/*c.WithTransport(&http.Transport{
-		Proxy: http.ProxyFromEnvironment,
-		DialContext: (&net.Dialer{
-			Timeout:   60 * time.Second,
-			KeepAlive: 30 * time.Second,
-			DualStack: true,
-		}).DialContext,
-		MaxIdleConns:          0,
-		IdleConnTimeout:       5 * time.Second,
-		TLSHandshakeTimeout:   10 * time.Second,
-		ExpectContinueTimeout: 5 * time.Second,
-	})*/
 
 	c.OnScraped(func(*colly.Response) {
 		if *fProgress {

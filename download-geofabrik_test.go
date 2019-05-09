@@ -196,7 +196,10 @@ func Test_downloadChecksum(t *testing.T) {
 				if err != nil {
 					t.Error(err)
 				}
-				downloadFromURL(myURL, *delement+"."+tt.args.format)
+				err = downloadFromURL(myURL, *delement+"."+tt.args.format)
+				if err != nil {
+					t.Error(err)
+				}
 			}
 			// now real test
 			if got := downloadChecksum(tt.args.format); got != tt.want {
