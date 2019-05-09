@@ -127,8 +127,6 @@ func (o *OpenstreetmapFR) parseHref(href string) {
 					// Panic
 				}
 			} else {
-				e, _ := o.Config.GetElement(valsplit[0])
-				fmt.Println(valsplit[0], "Exists, ID: ", e)
 				if *fVerbose && !*fQuiet && !*fProgress {
 					log.Println(valsplit[0], "already exist")
 					log.Println("Merging formats")
@@ -145,7 +143,7 @@ func (o *OpenstreetmapFR) parse(e *colly.HTMLElement, c *colly.Collector) {
 		if *fVerbose && !*fQuiet && !*fProgress {
 			log.Println("Next:", href)
 		}
-		if err := c.Visit(href); err != nil && err != colly.ErrAlreadyVisited {
+		if err := c.Visit(href); err != nil && err != colly.ErrAlreadyVisited && err != colly.ErrForbiddenURL {
 			catch(err)
 		}
 	} else {

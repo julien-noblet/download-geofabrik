@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/url"
 	"reflect"
 	"regexp"
@@ -31,7 +30,6 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 				<table>
 					<tbody><tr><th valign="top"><img src="/icons/blank.gif" alt="[ICO]"></th><th><a href="?C=N;O=D">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=A">Size</a></th><th><a href="?C=D;O=A">Description</a></th></tr>
 					<tr><th colspan="5"><hr></th></tr>
-					<tr><td valign="top"><img src="/icons/back.gif" alt="[PARENTDIR]"></td><td><a href="/extracts/">Parent Directory</a></td><td>&nbsp;</td><td align="right">  - </td><td>&nbsp;</td></tr>
 					<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="fiji-latest.osm.pbf">fiji-latest.osm.pbf</a></td><td align="right">2019-05-09 08:14  </td><td align="right">7.6M</td><td>&nbsp;</td></tr>
 					<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="fiji.osm.pbf">fiji.osm.pbf</a></td><td align="right">2019-05-09 08:14  </td><td align="right">7.6M</td><td>&nbsp;</td></tr>
 					<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="fiji.state.txt">fiji.state.txt</a></td><td align="right">2019-05-09 08:13  </td><td align="right"> 87 </td><td>&nbsp;</td></tr>
@@ -54,7 +52,18 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 				"france_taaf":             Element{ID: "france_taaf", Name: "france_taaf", Formats: elementFormats{"osm.pbf", "state"}, Parent: "merge"},
 				"kiribati":                Element{ID: "kiribati", Name: "kiribati", Formats: elementFormats{"osm.pbf", "state"}, Parent: "merge"}},
 		},
-
+		{name: "cgi-bin and replication",
+			html: `
+				<tbody>
+					<tr><th valign="top"><img src="/icons/blank.gif" alt="[ICO]"></th><th><a href="?C=N;O=D">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=A">Size</a></th><th><a href="?C=D;O=A">Description</a></th></tr>
+					<tr><th colspan="5"><hr></th></tr>
+					<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="cgi-bin/">cgi-bin/</a></td><td align="right">2014-07-26 18:40  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+					<tr><td valign="top"><img src="/icons/folder.gif" alt="[DIR]"></td><td><a href="replication/">replication/</a></td><td align="right">2014-01-17 20:12  </td><td align="right">  - </td><td>&nbsp;</td></tr>
+					<tr><th colspan="5"><hr></th></tr>
+				</tbody>`,
+			url:  `https://download.openstreetmap.fr/`,
+			want: ElementSlice{},
+		},
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
@@ -96,7 +105,7 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 					}
 				}
 			}
-			fmt.Printf("%#v", e)
+			//fmt.Printf("%#v", e)
 			e.ForEach("a", func(_ int, elmt *colly.HTMLElement) {
 				o.parse(elmt, c)
 			})
