@@ -37,23 +37,12 @@ Flags:
   -v, --verbose              Be verbose
   -q, --quiet                Be quiet
       --progress             Add a progress bar
-      --proxy-http=""        Use http proxy, format: proxy_address:port
-      --proxy-sock5=""       Use Sock5 proxy, format: proxy_address:port
-      --proxy-user=""        Proxy user
-      --proxy-pass=""        Proxy password
       --version              Show application version.
 
 Commands:
   help [<command>...]
     Show help.
 
-
-  update [<flags>]
-    Update geofabrik.yml from github *** DEPRECATED you should prefer use
-    generate ***
-
-    --url="https://raw.githubusercontent.com/julien-noblet/download-geofabrik/master/geofabrik.yml"  
-      Url for config source
 
   list [<flags>]
     Show elements available

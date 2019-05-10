@@ -25,13 +25,6 @@ var (
 	fVerbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
 	fQuiet      = app.Flag("quiet", "Be quiet").Short('q').Bool()
 	fProgress   = app.Flag("progress", "Add a progress bar").Bool()
-	fProxyHTTP  = app.Flag("proxy-http", "Use http proxy, format: proxy_address:port").Default("").String()
-	fProxySock5 = app.Flag("proxy-sock5", "Use Sock5 proxy, format: proxy_address:port").Default("").String()
-	fProxyUser  = app.Flag("proxy-user", "Proxy user").Default("").String()
-	fProxyPass  = app.Flag("proxy-pass", "Proxy password").Default("").String()
-
-	update = app.Command("update", "Update geofabrik.yml from github *** DEPRECATED you should prefer use generate ***")
-	fURL   = update.Flag("url", "Url for config source").Default("https://raw.githubusercontent.com/julien-noblet/download-geofabrik/master/geofabrik.yml").String()
 
 	list = app.Command("list", "Show elements available")
 	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool()
@@ -71,23 +64,6 @@ func listAllRegions(c *Config, format string) {
 	}
 	table.Render()
 	fmt.Printf("Total elements: %#v\n", len(c.Elements))
-}
-
-// UpdateConfig : simple script to download lastest config from repo
-func UpdateConfig(myURL string, myconfig string) error {
-	if !*fQuiet {
-		log.Print("*** DEPRECATED you should prefer use generate ***")
-	}
-	if err := downloadFromURL(myURL, myconfig); err != nil {
-		if *fVerbose {
-			log.Println(err)
-		}
-		return fmt.Errorf("Can't updating %v please use generate", myconfig)
-	}
-	if *fVerbose && !*fQuiet {
-		log.Println("Congratulation, you have the latest geofabrik.yml")
-	}
-	return nil
 }
 
 func checkService() bool {
@@ -185,9 +161,6 @@ func main() {
 	switch commands {
 	case list.FullCommand():
 		listCommand()
-	case update.FullCommand():
-		err := UpdateConfig(*fURL, *fConfig)
-		catch(err)
 	case download.FullCommand():
 		downloadCommand()
 	case generate.FullCommand():

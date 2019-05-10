@@ -4,14 +4,12 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"net"
 	"net/http"
-	"net/url"
 	"os"
 	"time"
 
 	pb "gopkg.in/cheggaaa/pb.v1"
-
-	"golang.org/x/net/proxy"
 )
 
 const progressMinimal = 512 * 1024 // Don't display progress bar if size < 512kb
@@ -22,35 +20,26 @@ func downloadFromURL(myURL string, fileName string) error {
 	}
 
 	if !*fNodownload {
-		transport := &http.Transport{}
-		if *fProxyHTTP != "" {
-			u, _ := url.Parse(myURL)
-			//log.Println(u.Scheme +"://"+ *fProxyHTTP)
-			proxyURL, err := url.Parse(u.Scheme + "://" + *fProxyHTTP)
-			if err != nil {
-				return fmt.Errorf("Wrong proxy url, please use format proxy_address:port")
-			}
-			if *fProxyUser != "" && *fProxyPass != "" {
-				proxyURL, err = url.Parse(u.Scheme + "://" + *fProxyUser + ":" + *fProxyPass + *fProxyHTTP)
-				catch(err)
-			}
-			transport = &http.Transport{Proxy: http.ProxyURL(proxyURL)}
-		}
-		client := &http.Client{Transport: transport}
-		if *fProxySock5 != "" {
-			auth := proxy.Auth{User: *fProxyUser, Password: *fProxyPass}
-			dialer, err := proxy.SOCKS5("tcp", *fProxySock5, &auth, proxy.Direct)
-			if err != nil {
-				return fmt.Errorf("Can't connect to the proxy: %v", err)
-			}
-			transport.Dial = dialer.Dial
-		}
+
+		client := &http.Client{Transport: &http.Transport{
+			Proxy: http.ProxyFromEnvironment,
+			DialContext: (&net.Dialer{
+				Timeout:   60 * time.Second,
+				KeepAlive: 30 * time.Second,
+				DualStack: true,
+			}).DialContext,
+			MaxIdleConns:          0,
+			IdleConnTimeout:       5 * time.Second,
+			TLSHandshakeTimeout:   10 * time.Second,
+			ExpectContinueTimeout: 5 * time.Second,
+		}}
+
 		response, err := client.Get(myURL)
 		if err != nil {
 			return fmt.Errorf("Error while downloading %s - %v", myURL, err)
 		}
-		if response.StatusCode != 200 {
-			if response.StatusCode == 404 {
+		if response.StatusCode != http.StatusOK {
+			if response.StatusCode == http.StatusNotFound {
 				return fmt.Errorf("Error while downloading %v, server return code %d\nPlease use 'download-geofabrik generate' to re-create your yml file", myURL, response.StatusCode)
 			}
 			return fmt.Errorf("Error while downloading %v, server return code %d", myURL, response.StatusCode)
