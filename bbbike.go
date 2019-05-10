@@ -29,6 +29,7 @@ var bbbike = Bbbike{
 			"osm.pbf": {ID: "osm.pbf", Loc: ".osm.pbf"},
 			"shp.zip": {ID: "shp.zip", Loc: ".osm.shp.zip"},
 			"osm.gz":  {ID: "osm.gz", Loc: ".osm.gz"},
+			"poly":    {ID: "poly", Loc: ".poly"},
 		},
 	},
 }

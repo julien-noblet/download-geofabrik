@@ -6,6 +6,9 @@ formats:
   osm.pbf:
     ext: osm.pbf
     loc: .osm.pbf
+  poly:
+    ext: poly
+    loc: .poly
   shp.zip:
     ext: shp.zip
     loc: .osm.shp.zip

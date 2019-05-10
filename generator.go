@@ -29,13 +29,12 @@ func Generate(configfile string) {
 	case "geofabrik":
 		scrapper = &geofabrik
 	case "openstreetmap.fr":
-
 		scrapper = &openstreetmapFR
-
 	case "bbbike":
 		scrapper = &bbbike
 
-		catch(fmt.Errorf("Service not reconized, please use one of geofabrik, openstreetmap.fr or gislab"))
+	default:
+		catch(fmt.Errorf("Service not reconized, please use one of geofabrik, openstreetmapfr, bbbike or gislab"))
 	}
 	if *fProgress {
 		bar = pb.New(scrapper.GetPB())
