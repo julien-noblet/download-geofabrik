@@ -7,7 +7,7 @@ go:
 - '1.9'
 - '1.8'
 - stable
-- tip
+#- tip
 before_install:
 - go get github.com/mattn/goveralls
 install:
@@ -30,7 +30,7 @@ stages:
 - build 1.10
 - build 1.11
 - build 1.12
-- build tip
+#- build tip
 jobs:
   include:
   - stage: Geofabrik
@@ -47,7 +47,7 @@ jobs:
       on:
         all_branches: true
   - stage: OSMfr
-    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmap\.fr)/
+    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmapFR|openstreetmap\.fr)/
       AND type != pull_request
     go: stable
     script: make osmfr
