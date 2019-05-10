@@ -26,8 +26,8 @@ var openstreetmapFR = OpenstreetmapFR{
 		URLFilters: []*regexp.Regexp{
 			//regexp.MustCompile(`https://download\.openstreetmap\.fr/([extracts|polygons]\w.+|)`),
 			regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
-			regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/`),
-			regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/`),
+			regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/\w.+$`),
+			regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/\w.+$`),
 		},
 		FormatDefinition: formatDefinitions{
 			"osm.pbf": {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
