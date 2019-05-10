@@ -76,7 +76,6 @@ func (s *Scrapper) Limit() *colly.LimitRule {
 //Collector *colly.Collector // Init Collector
 func (s *Scrapper) Collector(options ...interface{}) *colly.Collector {
 	c := colly.NewCollector(
-		// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
 		colly.AllowedDomains(s.AllowedDomains...),
 		colly.URLFilters(s.URLFilters...),
 		colly.Async(s.Async),
