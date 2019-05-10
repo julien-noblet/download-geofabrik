@@ -726,7 +726,7 @@ Total elements: 401
 | extremadura                             | spain                            | extremadura                             | sPp     |
 | falkland                                | south-america                    | falkland                                | sPp     |
 | far_eastern_federal_district            | russia                           | far_eastern_federal_district            | sPp     |
-| fiji                                    |                                  | fiji                                    | sP      |
+| fiji                                    | merge                            | fiji                                    | sP      |
 | fiji_east                               | south-america                    | fiji_east                               | sPp     |
 | fiji_west                               | oceania                          | fiji_west                               | sPp     |
 | finistere                               | bretagne                         | finistere                               | sPp     |
@@ -735,8 +735,8 @@ Total elements: 401
 | flevoland                               | netherlands                      | flevoland                               | sPp     |
 | formosa                                 | argentina                        | formosa                                 | sPp     |
 | france                                  | europe                           | france                                  | sPp     |
-| france_metro_dom_com_nc                 |                                  | france_metro_dom_com_nc                 | sP      |
-| france_taaf                             | africa                           | france_taaf                             | sPp     |
+| france_metro_dom_com_nc                 | merge                            | france_metro_dom_com_nc                 | sP      |
+| france_taaf                             | merge                            | france_taaf                             | sPp     |
 | franche_comte                           | france                           | franche_comte                           | sPp     |
 | fresno                                  | california                       | fresno                                  | sPp     |
 | friesland                               | netherlands                      | friesland                               | sPp     |
@@ -809,7 +809,7 @@ Total elements: 401
 | ingushetia_republic                     | north_caucasian_federal_district | ingushetia_republic                     | sPp     |
 | inner_mongolia                          | china                            | inner_mongolia                          | sPp     |
 | inyo                                    | california                       | inyo                                    | sPp     |
-| ionian_sea                              |                                  | ionian_sea                              | sPp     |
+| ionian_sea                              | seas                             | ionian_sea                              | sPp     |
 | ireland                                 | europe                           | ireland                                 | sPp     |
 | irkutsk_oblast                          | siberian_federal_district        | irkutsk_oblast                          | sPp     |
 | isere                                   | rhone_alpes                      | isere                                   | sPp     |
@@ -860,7 +860,7 @@ Total elements: 401
 | kiev                                    | ukraine                          | kiev                                    | sPp     |
 | kiev_oblast                             | ukraine                          | kiev_oblast                             | sPp     |
 | kings                                   | california                       | kings                                   | sPp     |
-| kiribati                                |                                  | kiribati                                | sP      |
+| kiribati                                | merge                            | kiribati                                | sP      |
 | kiribati_east                           | south-america                    | kiribati_east                           | sPp     |
 | kiribati_west                           | oceania                          | kiribati_west                           | sPp     |
 | kirov_oblast                            | volga_federal_district           | kirov_oblast                            | sPp     |
@@ -946,6 +946,7 @@ Total elements: 401
 | mendocino                               | california                       | mendocino                               | sPp     |
 | mendoza                                 | argentina                        | mendoza                                 | sPp     |
 | merced                                  | california                       | merced                                  | sPp     |
+| merge                                   |                                  | merge                                   |         |
 | meurthe_et_moselle                      | lorraine                         | meurthe_et_moselle                      | sPp     |
 | meuse                                   | lorraine                         | meuse                                   | sPp     |
 | micronesia                              | oceania                          | micronesia                              | sPp     |
@@ -1005,7 +1006,7 @@ Total elements: 401
 | north_kalimantan                        | indonesia                        | north_kalimantan                        | sPp     |
 | north_maluku                            | indonesia                        | north_maluku                            | sPp     |
 | north_ossetia_alania_republic           | north_caucasian_federal_district | north_ossetia_alania_republic           | sPp     |
-| north_sea                               |                                  | north_sea                               | sPp     |
+| north_sea                               | seas                             | north_sea                               | sPp     |
 | north_sulawesi                          | indonesia                        | north_sulawesi                          | sPp     |
 | north_sumatra                           | indonesia                        | north_sumatra                           | sPp     |
 | north_west                              | england                          | north_west                              | sPp     |
@@ -1062,7 +1063,7 @@ Total elements: 401
 | poitou_charentes                        | france                           | poitou_charentes                        | sPp     |
 | poland                                  | europe                           | poland                                  | sPp     |
 | poltava_oblast                          | ukraine                          | poltava_oblast                          | sPp     |
-| polynesie                               | oceania                          | polynesie                               | sPp     |
+| polynesie                               | south-america                    | polynesie                               | sPp     |
 | pomorskie                               | poland                           | pomorskie                               | sPp     |
 | portugal                                | europe                           | portugal                                | sPp     |
 | praha                                   | czech_republic                   | praha                                   | sPp     |
@@ -1139,12 +1140,13 @@ Total elements: 401
 | sarthe                                  | pays_de_la_loire                 | sarthe                                  | sPp     |
 | saudi_arabia                            | asia                             | saudi_arabia                            | sPp     |
 | savoie                                  | rhone_alpes                      | savoie                                  | sPp     |
+| seas                                    | europe                           | seas                                    |         |
 | seine_et_marne                          | ile_de_france                    | seine_et_marne                          | sPp     |
 | seine_maritime                          | haute_normandie                  | seine_maritime                          | sPp     |
 | seine_saint_denis                       | ile_de_france                    | seine_saint_denis                       | sPp     |
 | senegal                                 | africa                           | senegal                                 | sPp     |
 | sergipe                                 | northeast                        | sergipe                                 | sPp     |
-| sevastopol                              | ukraine                          | sevastopol                              | sPp     |
+| sevastopol                              | southern_federal_district        | sevastopol                              | sPp     |
 | seychelles                              | africa                           | seychelles                              | sPp     |
 | shaanxi                                 | china                            | shaanxi                                 | sPp     |
 | shandong                                | china                            | shandong                                | sPp     |
@@ -1275,7 +1277,7 @@ Total elements: 401
 | voronezh_oblast                         | central_federal_district         | voronezh_oblast                         | sPp     |
 | vosges                                  | lorraine                         | vosges                                  | sPp     |
 | vysocina                                | czech_republic                   | vysocina                                | sPp     |
-| wallis_et_futuna                        | oceania                          | wallis_et_futuna                        | sPp     |
+| wallis_et_futuna                        | south-america                    | wallis_et_futuna                        | sPp     |
 | wallonia_french_community               | belgium                          | wallonia_french_community               | sPp     |
 | wallonia_german_community               | belgium                          | wallonia_german_community               | sPp     |
 | warminsko_mazurskie                     | poland                           | warminsko_mazurskie                     | sPp     |
@@ -1313,7 +1315,7 @@ Total elements: 401
 | zimbabwe                                | africa                           | zimbabwe                                | sPp     |
 | zlinsky                                 | czech_republic                   | zlinsky                                 | sPp     |
 | zuid_holland                            | netherlands                      | zuid_holland                            | sPp     |
-Total elements: 793
+Total elements: 795
 
 ## List of elements from bbbike.org
 |    SHORTNAME     | IS IN |    LONG NAME     | FORMATS |

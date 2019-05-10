@@ -97,12 +97,12 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector {
 	s.Config = s.GetConfig() // ensure initialisation
 	catch(c.Limit(s.Limit()))
 	c.OnError(func(r *colly.Response, err error) {
-		if err == colly.ErrForbiddenURL {
+		if err != colly.ErrForbiddenURL && err != colly.ErrForbiddenDomain && err.Error() != "Forbidden" {
+			catch(fmt.Errorf("request URL: %v failed with response: %v\nerror: %v", r.Request.URL, r, err.Error()))
+		} else {
 			if *fVerbose == true && *fProgress == false && *fQuiet == false {
 				log.Printf("URL: %v is forbidden\n", r.Request.URL)
 			}
-		} else {
-			catch(fmt.Errorf("request URL: %v failed with response: %v\nerror: %v", r.Request.URL, r, err.Error()))
 		}
 	})
 	return c

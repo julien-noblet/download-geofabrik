@@ -24,7 +24,10 @@ var openstreetmapFR = OpenstreetmapFR{
 		BaseURL:        `https://download.openstreetmap.fr/extracts`,
 		StartURL:       `https://download.openstreetmap.fr/`,
 		URLFilters: []*regexp.Regexp{
-			regexp.MustCompile(`https://download.openstreetmap.fr/([^cgi\-bin][^replication]\w.+|)`),
+			//regexp.MustCompile(`https://download\.openstreetmap\.fr/([extracts|polygons]\w.+|)`),
+			regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
+			regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/`),
+			regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/`),
 		},
 		FormatDefinition: formatDefinitions{
 			"osm.pbf": {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
@@ -144,7 +147,13 @@ func (o *OpenstreetmapFR) parse(e *colly.HTMLElement, c *colly.Collector) {
 			log.Println("Next:", href)
 		}
 		if err := c.Visit(href); err != nil && err != colly.ErrAlreadyVisited {
-			catch(err)
+			if err != colly.ErrNoURLFiltersMatch {
+				catch(err)
+			} else {
+				if *fVerbose == true && *fProgress == false && *fQuiet == false {
+					log.Printf("URL: %v is not matching URLFilters\n", href)
+				}
+			}
 		}
 	} else {
 		o.parseHref(href)
