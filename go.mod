@@ -21,7 +21,7 @@ require (
 	github.com/olekukonko/tablewriter v0.0.1
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/stretchr/testify v1.3.0
-	github.com/temoto/robotstxt.go v0.0.0-20180810133444-97ee4a9ee6ea // indirect
+	github.com/temoto/robotstxt.go v0.0.0-20190703224651-3f668f68d41c // indirect
 	golang.org/x/net v0.0.0-20190424114502-4829fb13d2c6
 	golang.org/x/sys v0.0.0-20190425164742-16072639606e // indirect
 	golang.org/x/text v0.3.1 // indirect
