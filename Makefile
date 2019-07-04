@@ -1,5 +1,5 @@
-gofiles  = download-geofabrik.go config.go download.go element.go formats.go generator.go bbbike.go gislab.go geofabrik.go openstreetmap.fr.go scrapper.go
-pkgfiles = CHANGELOG.md README.md LICENSE geofabrik.yml openstreetmap.fr.yml gislab.yml bbbike.yml
+gofiles  = download-geofabrik.go config.go download.go element.go formats.go generator.go bbbike.go geofabrik.go openstreetmap.fr.go scrapper.go
+pkgfiles = CHANGELOG.md README.md LICENSE geofabrik.yml openstreetmap.fr.yml bbbike.yml
 default: clean all
 clean:
 	go clean
@@ -12,9 +12,6 @@ geofabrik:
 osmfr:
 	echo "Generating openstreetmap.fr.yml"
 	go run $(gofiles) --service="openstreetmap.fr" generate --progress
-gislab:
-	echo "Generating gislab.yml"
-	go run $(gofiles) --service="gislab" generate -v
 bbbike:
 	echo "Generating bbbike.yml"
 	go run $(gofiles) --service="bbbike" generate -v
@@ -30,8 +27,6 @@ readme:
 	echo "## List of elements from bbbike.org" >> README.md
 	go run $(gofiles) --service "bbbike" list --markdown >> README.md
 	echo "" >> README.md
-	echo "## List of elements from glis-lab.info" >> README.md
-	go run $(gofiles) --service "gislab" list --markdown >> README.md
 package: gox 
 	for i in download-geofabrik_* ;\
 	do \

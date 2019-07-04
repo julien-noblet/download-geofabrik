@@ -22,7 +22,6 @@ func Test_checkService(t *testing.T) {
 		// TODO: Add test cases.
 		{name: "checkService(), fService = geofabrik", service: "geofabrik", want: true},
 		{name: "checkService(), fService = openstreetmap.fr", service: "openstreetmap.fr", config: "./geofabrik.yml", want: true, wantConfig: "./openstreetmap.fr.yml"},
-		{name: "checkService(), fService = gislab", service: "gislab", config: "./geofabrik.yml", want: true, wantConfig: "./gislab.yml"},
 		{name: "checkService(), fService = bbbike", service: "bbbike", config: "./geofabrik.yml", want: true, wantConfig: "./bbbike.yml"},
 		{name: "checkService(), fService = anothermap", service: "anothermap", want: false},
 		{name: "checkService(), fService = \"\"", service: "", want: false},

@@ -21,7 +21,6 @@ stages:
 - Geofabrik
 - OSMfr
 - bbbike
-- GisLab
 - Readme
 - build stable
 - build 1.7
@@ -64,19 +63,6 @@ jobs:
       AND type != pull_request
     go: stable
     script: make bbbike
-    deploy:
-      provider: pages
-      skip-cleanup: true
-      github-token: $GITHUB_TOKEN
-      keep-history: true
-      target-branch: $TRAVIS_BRANCH
-      on:
-        all_branches: true
-  - stage: GisLab
-    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|gislab|GisLab)/
-      AND type != pull_request
-    go: stable
-    script: make gislab
     deploy:
       provider: pages
       skip-cleanup: true

@@ -19,7 +19,7 @@ const version = "2.3.0"
 
 var (
 	app         = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
-	fService    = app.Flag("service", "Can switch to another service. You can use \"geofabrik\", \"openstreetmap.fr\", \"bbbike\" or \"gislab\". It automatically change config file if -c is unused.").Default("geofabrik").String()
+	fService    = app.Flag("service", "Can switch to another service. You can use \"geofabrik\", \"openstreetmap.fr\" or \"bbbike\". It automatically change config file if -c is unused.").Default("geofabrik").String()
 	fConfig     = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String()
 	fNodownload = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
 	fVerbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
@@ -73,11 +73,6 @@ func checkService() bool {
 	case "openstreetmap.fr":
 		if strings.EqualFold(*fConfig, "./geofabrik.yml") {
 			*fConfig = "./openstreetmap.fr.yml"
-		}
-		return true
-	case "gislab":
-		if strings.EqualFold(*fConfig, "./geofabrik.yml") {
-			*fConfig = "./gislab.yml"
 		}
 		return true
 	case "bbbike":

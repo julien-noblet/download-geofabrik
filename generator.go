@@ -34,7 +34,7 @@ func Generate(configfile string) {
 		scrapper = &bbbike
 
 	default:
-		catch(fmt.Errorf("Service not reconized, please use one of geofabrik, openstreetmapfr, bbbike or gislab"))
+		catch(fmt.Errorf("Service not reconized, please use one of geofabrik, openstreetmapfr or bbbike"))
 	}
 	if *fProgress {
 		bar = pb.New(scrapper.GetPB())
