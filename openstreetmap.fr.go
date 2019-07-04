@@ -150,7 +150,7 @@ func (o *OpenstreetmapFR) parse(e *colly.HTMLElement, c *colly.Collector) {
 			if err != colly.ErrNoURLFiltersMatch {
 				catch(err)
 			} else {
-				if *fVerbose == true && *fProgress == false && *fQuiet == false {
+				if *fVerbose && *fProgress == false && *fQuiet == false {
 					log.Printf("URL: %v is not matching URLFilters\n", href)
 				}
 			}

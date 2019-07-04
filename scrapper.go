@@ -99,7 +99,7 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector {
 		if err != colly.ErrForbiddenURL && err != colly.ErrForbiddenDomain && err.Error() != "Forbidden" {
 			catch(fmt.Errorf("request URL: %v failed with response: %v\nerror: %v", r.Request.URL, r, err.Error()))
 		} else {
-			if *fVerbose == true && *fProgress == false && *fQuiet == false {
+			if *fVerbose && *fProgress == false && *fQuiet == false {
 				log.Printf("URL: %v is forbidden\n", r.Request.URL)
 			}
 		}
