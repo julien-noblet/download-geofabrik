@@ -10,7 +10,7 @@ require (
 	github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf // indirect
 	github.com/antchfx/htmlquery v1.0.0 // indirect
 	github.com/antchfx/xmlquery v1.0.0 // indirect
-	github.com/antchfx/xpath v0.0.0-20190319080838-ce1d48779e67 // indirect
+	github.com/antchfx/xpath v1.0.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
@@ -26,13 +26,11 @@ require (
 	github.com/olekukonko/tablewriter v0.0.1
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
 	github.com/stretchr/testify v1.3.0
-	github.com/temoto/robotstxt v0.0.0-20180810133444-97ee4a9ee6ea // indirect
+	github.com/temoto/robotstxt v1.1.1 // indirect
 	github.com/temoto/robotstxt.go v0.0.0-20180810133444-97ee4a9ee6ea // indirect
-	golang.org/x/net v0.0.0-20190424114502-4829fb13d2c6
-	golang.org/x/sys v0.0.0-20190425164742-16072639606e // indirect
-	golang.org/x/text v0.3.1 // indirect
-	golang.org/x/tools v0.0.0-20190425164742-31fd60d6bfdc // indirect
-	google.golang.org/appengine v1.5.0 // indirect
+	golang.org/x/net v0.0.0-20190628185345-da137c7871d7
+	golang.org/x/sys v0.0.0-20190626221950-04f50cda93cb // indirect
+	google.golang.org/appengine v1.6.1 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/cheggaaa/pb.v1 v1.0.28
@@ -40,3 +38,5 @@ require (
 	gopkg.in/yaml.v2 v2.2.2
 	honnef.co/go/tools v0.0.0-20180920025451-e3ad64cb4ed3 // indirect
 )
+
+go 1.13
