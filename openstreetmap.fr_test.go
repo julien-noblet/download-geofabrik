@@ -85,8 +85,16 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 					AllowedDomains: []string{`download.openstreetmap.fr`},
 					BaseURL:        `https://download.openstreetmap.fr/extracts`,
 					StartURL:       `https://download.openstreetmap.fr/`,
+					// URLFilters: []*regexp.Regexp{
+					// regexp.MustCompile(`https://download.openstreetmap.fr/([^cgi\-bin][^replication]\w.+|)`),
+					// },
 					URLFilters: []*regexp.Regexp{
-						regexp.MustCompile(`https://download.openstreetmap.fr/([^cgi\-bin][^replication]\w.+|)`),
+						//regexp.MustCompile(`https://download\.openstreetmap\.fr/([extracts|polygons]\w.+|)`),
+						regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
+						regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`),
+						regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`),
+						regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),
+						regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
 					},
 					FormatDefinition: formatDefinitions{
 						"osm.pbf": {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
@@ -298,8 +306,16 @@ func TestOpenstreetmapFR_parseHref(t *testing.T) {
 				AllowedDomains: []string{`download.openstreetmap.fr`},
 				BaseURL:        `https://download.openstreetmap.fr/extracts`,
 				StartURL:       `https://download.openstreetmap.fr/`,
+				// URLFilters: []*regexp.Regexp{
+				// 	regexp.MustCompile(`https://download.openstreetmap.fr/([^cgi\-bin][^replication]\w.+|)`),
+				// },
 				URLFilters: []*regexp.Regexp{
-					regexp.MustCompile(`https://download.openstreetmap.fr/([^cgi\-bin][^replication]\w.+|)`),
+					//regexp.MustCompile(`https://download\.openstreetmap\.fr/([extracts|polygons]\w.+|)`),
+					regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
+					regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`),
+					regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`),
+					regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),
+					regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
 				},
 				FormatDefinition: formatDefinitions{
 					"osm.pbf": {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
@@ -390,8 +406,16 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 					AllowedDomains: []string{`download.openstreetmap.fr`},
 					BaseURL:        `https://download.openstreetmap.fr/extracts`,
 					StartURL:       `https://download.openstreetmap.fr/`,
+					// URLFilters: []*regexp.Regexp{
+					// 	regexp.MustCompile(`https://download.openstreetmap.fr/([^cgi\-bin][^replication]\w.+|)`),
+					// },
 					URLFilters: []*regexp.Regexp{
-						regexp.MustCompile(`https://download.openstreetmap.fr/([^cgi\-bin][^replication]\w.+|)`),
+						//regexp.MustCompile(`https://download\.openstreetmap\.fr/([extracts|polygons]\w.+|)`),
+						regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
+						regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`),
+						regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`),
+						regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),
+						regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
 					},
 					FormatDefinition: formatDefinitions{
 						"osm.pbf": {ID: "osm.pbf", Loc: "-latest.osm.pbf"},

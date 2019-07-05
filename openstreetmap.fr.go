@@ -28,6 +28,8 @@ var openstreetmapFR = OpenstreetmapFR{
 			regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
 			regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`),
 			regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`),
+			regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),
+			regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
 		},
 		FormatDefinition: formatDefinitions{
 			"osm.pbf": {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
