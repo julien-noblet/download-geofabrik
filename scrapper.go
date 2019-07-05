@@ -13,6 +13,7 @@ import (
 	"github.com/gocolly/colly"
 )
 
+// IScrapper represent a colly Scrapper
 type IScrapper interface {
 	GetConfig() *Config
 	Collector(options ...interface{}) *colly.Collector
@@ -107,6 +108,7 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector {
 	return c
 }
 
+//GetStartURL return StartURL
 func (s *Scrapper) GetStartURL() string {
 	return s.StartURL
 }

@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+//Element represent a part to download whit formats, name, parent...
 type Element struct {
 	ID      string         `yaml:"id"`
 	File    string         `yaml:"file,omitempty"`
