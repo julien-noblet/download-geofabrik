@@ -11,6 +11,8 @@ type format struct {
 	BaseURL  string `yaml:"baseurl,omitempty"`
 }
 
+type formatDefinitions map[string]format
+
 //miniFormats get formats of an Element
 // and return a string
 // according to download-geofabrik short flags.
@@ -22,6 +24,8 @@ func miniFormats(s []string) string {
 			res[0] = "s"
 		case "osm.pbf":
 			res[1] = "P"
+		case "osm.gz":
+			res[2] = "G"
 		case "osm.bz2":
 			res[2] = "B"
 		case "osh.pbf":
@@ -59,6 +63,9 @@ func getFormats() *[]string {
 	}
 	if *doshPbf {
 		formatFile = append(formatFile, "osh.pbf")
+	}
+	if *dosmGz {
+		formatFile = append(formatFile, "osm.gz")
 	}
 	if *dosmBz2 {
 		formatFile = append(formatFile, "osm.bz2")

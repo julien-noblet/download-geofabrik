@@ -7,29 +7,28 @@ go:
 - '1.9'
 - '1.8'
 - stable
-- tip
+#- tip
 before_install:
 - go get github.com/mattn/goveralls
 install:
 - go get -v github.com/mitchellh/gox
 - go get -t -v ./...
-script: go test -bench=. -benchmem -v ./...
+script: go test -v ./...
 
 stages:
 - test
 - goveralls
 - Geofabrik
 - OSMfr
-- GisLab
+- bbbike
 - Readme
 - build stable
-- build 1.7
 - build 1.8
 - build 1.9
 - build 1.10
 - build 1.11
 - build 1.12
-- build tip
+#- build tip
 jobs:
   include:
   - stage: Geofabrik
@@ -46,7 +45,7 @@ jobs:
       on:
         all_branches: true
   - stage: OSMfr
-    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmap\.fr)/
+    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmapFR|openstreetmap\.fr)/
       AND type != pull_request
     go: stable
     script: make osmfr
@@ -58,11 +57,11 @@ jobs:
       target-branch: $TRAVIS_BRANCH
       on:
         all_branches: true
-  - stage: GisLab
-    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|gislab|GisLab)/
+  - stage: bbbike
+    if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|bbbike)/
       AND type != pull_request
     go: stable
-    script: make gislab
+    script: make bbbike
     deploy:
       provider: pages
       skip-cleanup: true
@@ -104,11 +103,6 @@ jobs:
     if: tag IS present OR ( commit_message =~ /(force-build|1_8)/
       AND commit_message !~ /(no-build|no-1_8)/ )
     go: '1.8'
-    script: make
-  - stage: build 1.7
-    if: tag IS present OR ( commit_message =~ /(force-build|1_9)/
-      AND commit_message !~ /(no-build|no-1_7)/ )
-    go: '1.7'
     script: make
   - stage: build 1.11
     if: tag IS present OR ( commit_message =~ /(force-build|1_11)/
