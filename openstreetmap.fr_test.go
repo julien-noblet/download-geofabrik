@@ -427,7 +427,10 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 			o.GetConfig()
 			if len(tt.elements) > 0 {
 				for _, e := range tt.elements {
-					o.Config.mergeElement(&e)
+					err := o.Config.mergeElement(&e)
+					if err != nil {
+						t.Error(err)
+					}
 				}
 			}
 			o.makeParents(tt.parent, tt.gparents)
