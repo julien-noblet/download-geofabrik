@@ -1,15 +1,12 @@
 package main
 
 import (
-	"bytes"
 	"io/ioutil"
 	"net/http"
 	"reflect"
 	"sync"
 	"testing"
 
-	"github.com/PuerkitoBio/goquery"
-	"github.com/gocolly/colly"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -142,26 +139,27 @@ func TestConfig_mergeElement(t *testing.T) {
 	}
 }
 
-func createHTMLElement(t *testing.T, in string) *colly.HTMLElement {
-	sel := "*"
-	ctx := &colly.Context{}
-	resp := &colly.Response{
-		Request: &colly.Request{
-			Ctx: ctx,
-		},
-		Ctx: ctx,
-	}
-	doc, err := goquery.NewDocumentFromReader(bytes.NewBuffer([]byte(in)))
-	if err != nil {
-		t.Fatal(err)
-	}
-	elements := []*colly.HTMLElement{}
-	i := 0
-	doc.Find(sel).Each(func(_ int, s *goquery.Selection) {
-		for _, n := range s.Nodes {
-			elements = append(elements, colly.NewHTMLElementFromSelectionNode(resp, s, n, i))
-			i++
-		}
-	})
-	return elements[0]
-}
+// createHTMLElement is not used --- removing dead code!
+// func createHTMLElement(t *testing.T, in string) *colly.HTMLElement {
+// 	sel := "*"
+// 	ctx := &colly.Context{}
+// 	resp := &colly.Response{
+// 		Request: &colly.Request{
+// 			Ctx: ctx,
+// 		},
+// 		Ctx: ctx,
+// 	}
+// 	doc, err := goquery.NewDocumentFromReader(bytes.NewBuffer([]byte(in)))
+// 	if err != nil {
+// 		t.Fatal(err)
+// 	}
+// 	elements := []*colly.HTMLElement{}
+// 	i := 0
+// 	doc.Find(sel).Each(func(_ int, s *goquery.Selection) {
+// 		for _, n := range s.Nodes {
+// 			elements = append(elements, colly.NewHTMLElementFromSelectionNode(resp, s, n, i))
+// 			i++
+// 		}
+// 	})
+// 	return elements[0]
+// }
