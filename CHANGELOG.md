@@ -2,7 +2,14 @@
 
 ## [Unreleased](https://github.com/julien-noblet/download-geofabrik/tree/HEAD)
 
-[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.1...HEAD)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.4.0...HEAD)
+
+**Implemented enhancements:**
+
+- WIP: feat\(Generate\): Use colly to improve speed and code review [\#165](https://github.com/julien-noblet/download-geofabrik/pull/165) ([julien-noblet](https://github.com/julien-noblet))
+
+## [v2.4.0](https://github.com/julien-noblet/download-geofabrik/tree/v2.4.0) (2019-05-08)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.1...v2.4.0)
 
 **Closed issues:**
 

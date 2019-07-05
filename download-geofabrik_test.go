@@ -22,7 +22,7 @@ func Test_checkService(t *testing.T) {
 		// TODO: Add test cases.
 		{name: "checkService(), fService = geofabrik", service: "geofabrik", want: true},
 		{name: "checkService(), fService = openstreetmap.fr", service: "openstreetmap.fr", config: "./geofabrik.yml", want: true, wantConfig: "./openstreetmap.fr.yml"},
-		{name: "checkService(), fService = gislab", service: "gislab", config: "./geofabrik.yml", want: true, wantConfig: "./gislab.yml"},
+		{name: "checkService(), fService = bbbike", service: "bbbike", config: "./geofabrik.yml", want: true, wantConfig: "./bbbike.yml"},
 		{name: "checkService(), fService = anothermap", service: "anothermap", want: false},
 		{name: "checkService(), fService = \"\"", service: "", want: false},
 	}
@@ -195,7 +195,10 @@ func Test_downloadChecksum(t *testing.T) {
 				if err != nil {
 					t.Error(err)
 				}
-				downloadFromURL(myURL, *delement+"."+tt.args.format)
+				err = downloadFromURL(myURL, *delement+"."+tt.args.format)
+				if err != nil {
+					t.Error(err)
+				}
 			}
 			// now real test
 			if got := downloadChecksum(tt.args.format); got != tt.want {
@@ -220,7 +223,7 @@ func Test_listCommand(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			*lmd = tt.lmd
-			fakelistAllRegions := func(configPtr Config, format string) {
+			fakelistAllRegions := func(configPtr *Config, format string) {
 				assert.Equal(t, tt.want, format)
 			}
 			patch := monkey.Patch(listAllRegions, fakelistAllRegions)
