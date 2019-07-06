@@ -3,13 +3,16 @@
 ## [v2.4.0](https://github.com/julien-noblet/download-geofabrik/tree/v2.4.0) (2019-07-06)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.1...v2.4.0)
 
+**Implemented enhancements:**
+
+- WIP: feat\(Generate\): Use colly to improve speed and code review [\#165](https://github.com/julien-noblet/download-geofabrik/pull/165) ([julien-noblet](https://github.com/julien-noblet))
+
 **Closed issues:**
 
 - Action required: Add a Renovate config [\#90](https://github.com/julien-noblet/download-geofabrik/issues/90)
 
 **Merged pull requests:**
 
-- feat\(Generate\): Use colly to improve speed and code review [\#165](https://github.com/julien-noblet/download-geofabrik/pull/165) ([julien-noblet](https://github.com/julien-noblet))
 - ci\(Travis\): Add cache [\#166](https://github.com/julien-noblet/download-geofabrik/pull/166) ([julien-noblet](https://github.com/julien-noblet))
 - chore\(deps\): update golang.org/x [\#163](https://github.com/julien-noblet/download-geofabrik/pull/163) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update golang.org/x/tools commit hash to 9e44c1c [\#162](https://github.com/julien-noblet/download-geofabrik/pull/162) ([renovate[bot]](https://github.com/apps/renovate))

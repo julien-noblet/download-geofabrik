@@ -32,9 +32,10 @@ var openstreetmapFR = OpenstreetmapFR{
 			regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
 		},
 		FormatDefinition: formatDefinitions{
-			"osm.pbf": {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
-			"poly":    {ID: "poly", Loc: ".poly", BasePath: "../polygons/"},
-			"state":   {ID: "state", Loc: ".state.txt"},
+			"osm.pbf":     {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
+			"osm.pbf.md5": {ID: "osm.pbf", Loc: "-latest.osm.pbf.md5"},
+			"poly":        {ID: "poly", Loc: ".poly", BasePath: "../polygons/"},
+			"state":       {ID: "state", Loc: ".state.txt"},
 		},
 	},
 }
