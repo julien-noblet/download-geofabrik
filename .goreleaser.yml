@@ -7,7 +7,7 @@ before:
     # you may remove this if you don't need go generate
     # - go generate ./...
 builds:
-- 
+-
   goos:
     # - android # Not working and I'm not sure ther is anyone using download-geofabrik on android :D
     - darwin
@@ -19,7 +19,7 @@ builds:
     #- plan9
     - solaris
     - windows
-  goarch: 
+  goarch:
     - 386
     - amd64
     - arm
@@ -40,7 +40,7 @@ builds:
       goarch: 386
 
 archives:
-- 
+-
   replacements:
     darwin: Darwin
     linux: Linux
