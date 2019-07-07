@@ -1,11 +1,4 @@
 gofiles  = download-geofabrik.go config.go download.go element.go formats.go generator.go bbbike.go geofabrik.go openstreetmap.fr.go scrapper.go
-pkgfiles = CHANGELOG.md README.md LICENSE geofabrik.yml openstreetmap.fr.yml bbbike.yml
-default: clean all
-clean:
-	go clean
-	rm -rf download-geofabrik_*/ *.zip
-gox:
-	gox --output="download-geofabrik_{{.OS}}_{{.Arch}}/{{.Dir}}"
 geofabrik:
 	echo "Generating geofabrik.yml"
 	go run $(gofiles) generate --progress
@@ -27,11 +20,4 @@ readme:
 	echo "## List of elements from bbbike.org" >> README.md
 	go run $(gofiles) --service "bbbike" list --markdown >> README.md
 	echo "" >> README.md
-package: gox 
-	for i in download-geofabrik_* ;\
-	do \
-		  echo "Compressing $$i";\
-          cp $(pkgfiles) $$i/ && cd $$i && zip -9 $$i.zip download-geofabrik* $(pkgfiles) && mv $$i.zip ../ && cd ..;\
-        done
 
-all: package
