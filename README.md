@@ -727,7 +727,7 @@ Total elements: 401
 | formosa                                 | argentina                        | formosa                                 | sPp     |
 | france                                  | europe                           | france                                  | sPp     |
 | france_metro_dom_com_nc                 | merge                            | france_metro_dom_com_nc                 | sP      |
-| france_taaf                             | africa                           | france_taaf                             | sPp     |
+| france_taaf                             | oceania                          | france_taaf                             | sPp     |
 | franche_comte                           | france                           | franche_comte                           | sPp     |
 | fresno                                  | california                       | fresno                                  | sPp     |
 | friesland                               | netherlands                      | friesland                               | sPp     |
@@ -1128,7 +1128,7 @@ Total elements: 401
 | santa-catarina                          | south                            | santa-catarina                          | sPp     |
 | santa_barbara                           | california                       | santa_barbara                           | sPp     |
 | santa_clara                             | california                       | santa_clara                             | sPp     |
-| santa_cruz                              | california                       | santa_cruz                              | sPp     |
+| santa_cruz                              | argentina                        | santa_cruz                              | sPp     |
 | santa_fe                                | argentina                        | santa_fe                                | sPp     |
 | santiago_del_estero                     | argentina                        | santiago_del_estero                     | sPp     |
 | sao-paulo                               | southeast                        | sao-paulo                               | sPp     |
@@ -1146,7 +1146,7 @@ Total elements: 401
 | seine_saint_denis                       | ile_de_france                    | seine_saint_denis                       | sPp     |
 | senegal                                 | africa                           | senegal                                 | sPp     |
 | sergipe                                 | northeast                        | sergipe                                 | sPp     |
-| sevastopol                              | southern_federal_district        | sevastopol                              | sPp     |
+| sevastopol                              | ukraine                          | sevastopol                              | sPp     |
 | seychelles                              | africa                           | seychelles                              | sPp     |
 | shaanxi                                 | china                            | shaanxi                                 | sPp     |
 | shandong                                | china                            | shandong                                | sPp     |
