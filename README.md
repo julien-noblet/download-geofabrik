@@ -727,7 +727,7 @@ Total elements: 401
 | formosa                                 | argentina                        | formosa                                 | sPp     |
 | france                                  | europe                           | france                                  | sPp     |
 | france_metro_dom_com_nc                 | merge                            | france_metro_dom_com_nc                 | sP      |
-| france_taaf                             | merge                            | france_taaf                             | sPp     |
+| france_taaf                             | oceania                          | france_taaf                             | sPp     |
 | franche_comte                           | france                           | franche_comte                           | sPp     |
 | fresno                                  | california                       | fresno                                  | sPp     |
 | friesland                               | netherlands                      | friesland                               | sPp     |
@@ -1061,7 +1061,7 @@ Total elements: 401
 | poitou_charentes                        | france                           | poitou_charentes                        | sPp     |
 | poland                                  | europe                           | poland                                  | sPp     |
 | poltava_oblast                          | ukraine                          | poltava_oblast                          | sPp     |
-| polynesie                               | south-america                    | polynesie                               | sPp     |
+| polynesie                               | oceania                          | polynesie                               | sPp     |
 | pomorskie                               | poland                           | pomorskie                               | sPp     |
 | portugal                                | europe                           | portugal                                | sPp     |
 | praha                                   | czech_republic                   | praha                                   | sPp     |
@@ -1128,7 +1128,7 @@ Total elements: 401
 | santa-catarina                          | south                            | santa-catarina                          | sPp     |
 | santa_barbara                           | california                       | santa_barbara                           | sPp     |
 | santa_clara                             | california                       | santa_clara                             | sPp     |
-| santa_cruz                              | argentina                        | santa_cruz                              | sPp     |
+| santa_cruz                              | california                       | santa_cruz                              | sPp     |
 | santa_fe                                | argentina                        | santa_fe                                | sPp     |
 | santiago_del_estero                     | argentina                        | santiago_del_estero                     | sPp     |
 | sao-paulo                               | southeast                        | sao-paulo                               | sPp     |
@@ -1146,7 +1146,7 @@ Total elements: 401
 | seine_saint_denis                       | ile_de_france                    | seine_saint_denis                       | sPp     |
 | senegal                                 | africa                           | senegal                                 | sPp     |
 | sergipe                                 | northeast                        | sergipe                                 | sPp     |
-| sevastopol                              | ukraine                          | sevastopol                              | sPp     |
+| sevastopol                              | southern_federal_district        | sevastopol                              | sPp     |
 | seychelles                              | africa                           | seychelles                              | sPp     |
 | shaanxi                                 | china                            | shaanxi                                 | sPp     |
 | shandong                                | china                            | shandong                                | sPp     |
@@ -1222,7 +1222,7 @@ Total elements: 401
 | toscana                                 | italy                            | toscana                                 | sPp     |
 | trenciansky                             | slovakia                         | trenciansky                             | sPp     |
 | trentino_alto_adige                     | italy                            | trentino_alto_adige                     | sPp     |
-| trinidad_and_tobago                     | south-america                    | trinidad_and_tobago                     | sPp     |
+| trinidad_and_tobago                     | central-america                  | trinidad_and_tobago                     | sPp     |
 | trinity                                 | california                       | trinity                                 | sPp     |
 | tripura                                 | india                            | tripura                                 | sPp     |
 | trnavsky                                | slovakia                         | trnavsky                                | sPp     |
@@ -1277,7 +1277,7 @@ Total elements: 401
 | voronezh_oblast                         | central_federal_district         | voronezh_oblast                         | sPp     |
 | vosges                                  | lorraine                         | vosges                                  | sPp     |
 | vysocina                                | czech_republic                   | vysocina                                | sPp     |
-| wallis_et_futuna                        | south-america                    | wallis_et_futuna                        | sPp     |
+| wallis_et_futuna                        | oceania                          | wallis_et_futuna                        | sPp     |
 | wallonia_french_community               | belgium                          | wallonia_french_community               | sPp     |
 | wallonia_german_community               | belgium                          | wallonia_german_community               | sPp     |
 | warminsko_mazurskie                     | poland                           | warminsko_mazurskie                     | sPp     |
