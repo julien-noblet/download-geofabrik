@@ -85,7 +85,6 @@ jobs:
   - stage: build
     if: tag IS present OR commit_message !~ /(no-build)/
     go: stable
-    script: make
     deploy:
       provider: script
       skip_cleanup: true
