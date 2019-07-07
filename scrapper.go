@@ -37,6 +37,7 @@ type Scrapper struct {
 	AllowedDomains   []string
 	URLFilters       []*regexp.Regexp
 	FormatDefinition formatDefinitions
+	Timeout          *time.Duration
 }
 
 //GetConfig init a *Config from fields
@@ -82,6 +83,9 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector {
 		colly.Async(s.Async),
 		colly.MaxDepth(s.MaxDepth),
 	)
+	if s.Timeout != nil {
+		c.SetRequestTimeout(*s.Timeout)
+	}
 	c.WithTransport(&http.Transport{
 		Proxy: http.ProxyFromEnvironment,
 		DialContext: (&net.Dialer{

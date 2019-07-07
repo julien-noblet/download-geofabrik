@@ -5,6 +5,7 @@ import (
 	"log"
 	"regexp"
 	"strings"
+	"time"
 
 	"github.com/gocolly/colly"
 )
@@ -13,6 +14,8 @@ import (
 type OpenstreetmapFR struct {
 	*Scrapper
 }
+
+var t = time.Second * 30
 
 var openstreetmapFR = OpenstreetmapFR{
 	Scrapper: &Scrapper{
@@ -37,6 +40,7 @@ var openstreetmapFR = OpenstreetmapFR{
 			"poly":        {ID: "poly", Loc: ".poly", BasePath: "../polygons/"},
 			"state":       {ID: "state", Loc: ".state.txt"},
 		},
+		Timeout: &t,
 	},
 }
 
