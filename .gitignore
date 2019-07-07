@@ -7,6 +7,7 @@ download-geofabrik*/
 download-geofabrik
 
 # Folders
+dist
 _obj
 _test
 darwin32

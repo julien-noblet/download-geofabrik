@@ -1,0 +1,75 @@
+# This is an example goreleaser.yaml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+before:
+  hooks:
+    # you may remove this if you don't use vgo
+    # - go mod download
+    # you may remove this if you don't need go generate
+    # - go generate ./...
+builds:
+- 
+  goos:
+    # - android # Not working and I'm not sure ther is anyone using download-geofabrik on android :D
+    - darwin
+    - dragonfly
+    - freebsd
+    - linux
+    - netbsd
+    - openbsd
+    #- plan9
+    - solaris
+    - windows
+  goarch: 
+    - 386
+    - amd64
+    - arm
+    - arm64
+    - mips
+    - mips64
+    - mips64le
+    - mipsle
+    - ppc64
+    - ppc64le
+    - s390x
+  goarm:
+    - 5
+    - 6
+    - 7
+  ignore:
+    - goos: darwin
+      goarch: 386
+
+archives:
+- 
+  replacements:
+    darwin: Darwin
+    linux: Linux
+    windows: Windows
+    386: i386
+    amd64: x86_64
+  files:
+  - licence*
+  - LICENCE*
+  - license*
+  - LICENSE*
+  - readme*
+  - README*
+  - changelog*
+  - CHANGELOG*
+  - bbbike.yml
+  - geofabrik.yml
+  - openstreetmap.fr.yml
+
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+    - '^refactor'
+    - '^chore(deps):'
+
