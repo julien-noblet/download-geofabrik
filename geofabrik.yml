@@ -3364,8 +3364,16 @@ elements:
     - poly
   north-carolina:
     id: north-carolina
-    meta: true
     name: North Carolina
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
     parent: us
   north-caucasus-fed-district:
     id: north-caucasus-fed-district
