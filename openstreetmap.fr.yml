@@ -1763,7 +1763,7 @@ elements:
     - osm.pbf
     - state
     - poly
-    parent: africa
+    parent: merge
   franche_comte:
     id: franche_comte
     name: franche_comte
