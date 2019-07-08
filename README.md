@@ -1146,7 +1146,7 @@ Total elements: 401
 | seine_saint_denis                       | ile_de_france                    | seine_saint_denis                       | sPp     |
 | senegal                                 | africa                           | senegal                                 | sPp     |
 | sergipe                                 | northeast                        | sergipe                                 | sPp     |
-| sevastopol                              | southern_federal_district        | sevastopol                              | sPp     |
+| sevastopol                              | ukraine                          | sevastopol                              | sPp     |
 | seychelles                              | africa                           | seychelles                              | sPp     |
 | shaanxi                                 | china                            | shaanxi                                 | sPp     |
 | shandong                                | china                            | shandong                                | sPp     |
@@ -1222,7 +1222,7 @@ Total elements: 401
 | toscana                                 | italy                            | toscana                                 | sPp     |
 | trenciansky                             | slovakia                         | trenciansky                             | sPp     |
 | trentino_alto_adige                     | italy                            | trentino_alto_adige                     | sPp     |
-| trinidad_and_tobago                     | central-america                  | trinidad_and_tobago                     | sPp     |
+| trinidad_and_tobago                     | south-america                    | trinidad_and_tobago                     | sPp     |
 | trinity                                 | california                       | trinity                                 | sPp     |
 | tripura                                 | india                            | tripura                                 | sPp     |
 | trnavsky                                | slovakia                         | trnavsky                                | sPp     |
