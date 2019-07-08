@@ -421,19 +421,6 @@ elements:
     - osm.bz2.md5
     - poly
     parent: europe
-  belize:
-    id: belize
-    name: Belize
-    files:
-    - osm.pbf
-    - kml
-    - state
-    - osm.pbf.md5
-    - shp.zip
-    - osm.bz2
-    - osm.bz2.md5
-    - poly
-    parent: central-america
   benin:
     id: benin
     name: Benin
@@ -772,15 +759,8 @@ elements:
     parent: africa
   central-america:
     id: central-america
+    meta: true
     name: Central America
-    files:
-    - osm.pbf
-    - kml
-    - state
-    - osm.pbf.md5
-    - osm.bz2
-    - osm.bz2.md5
-    - poly
   central-fed-district:
     id: central-fed-district
     name: Central Federal District
@@ -1041,19 +1021,6 @@ elements:
     - osm.bz2.md5
     - poly
     parent: europe
-  cuba:
-    id: cuba
-    name: Cuba
-    files:
-    - osm.pbf
-    - kml
-    - state
-    - osm.pbf.md5
-    - shp.zip
-    - osm.bz2
-    - osm.bz2.md5
-    - poly
-    parent: central-america
   cumbria:
     id: cumbria
     name: Cumbria
@@ -1710,19 +1677,6 @@ elements:
     - osm.bz2.md5
     - poly
     parent: france
-  guatemala:
-    id: guatemala
-    name: Guatemala
-    files:
-    - osm.pbf
-    - kml
-    - state
-    - osm.pbf.md5
-    - shp.zip
-    - osm.bz2
-    - osm.bz2.md5
-    - poly
-    parent: central-america
   guinea:
     id: guinea
     name: Guinea
@@ -1761,19 +1715,6 @@ elements:
     - osm.bz2.md5
     - poly
     parent: france
-  haiti-and-domrep:
-    id: haiti-and-domrep
-    name: Haiti and Dominican Republic
-    files:
-    - osm.pbf
-    - kml
-    - state
-    - osm.pbf.md5
-    - shp.zip
-    - osm.bz2
-    - osm.bz2.md5
-    - poly
-    parent: central-america
   hamburg:
     id: hamburg
     name: Hamburg
@@ -2111,19 +2052,6 @@ elements:
     - osm.bz2.md5
     - poly
     parent: africa
-  jamaica:
-    id: jamaica
-    name: Jamaica
-    files:
-    - osm.pbf
-    - kml
-    - state
-    - osm.pbf.md5
-    - shp.zip
-    - osm.bz2
-    - osm.bz2.md5
-    - poly
-    parent: central-america
   japan:
     id: japan
     name: Japan
@@ -3200,18 +3128,6 @@ elements:
     - osm.bz2.md5
     - poly
     parent: canada
-  nicaragua:
-    id: nicaragua
-    name: Nicaragua
-    files:
-    - osm.pbf
-    - kml
-    - state
-    - osm.pbf.md5
-    - osm.bz2
-    - osm.bz2.md5
-    - poly
-    parent: central-america
   niederbayern:
     id: niederbayern
     name: Niederbayern
