@@ -306,7 +306,7 @@ Commands:
 | michigan                                    | us                    | Michigan                               | sPBpSk  |
 | midi-pyrenees                               | France                | Midi-Pyrenees                          | sPBpSk  |
 | minnesota                                   | us                    | Minnesota                              | sPBpSk  |
-| mississippi                                 | us                    | Mississippi                            |         |
+| mississippi                                 | us                    | Mississippi                            | sPBpSk  |
 | missouri                                    | us                    | Missouri                               | sPBpSk  |
 | mittelfranken                               | Bayern                | Mittelfranken                          | sPBpSk  |
 | moldova                                     | Europe                | Moldova                                | sPBpSk  |
@@ -325,10 +325,10 @@ Commands:
 | nevada                                      | us                    | Nevada                                 | sPBpSk  |
 | new-brunswick                               | Canada                | New Brunswick                          | sPBpSk  |
 | new-caledonia                               | Australia and Oceania | New Caledonia                          | sPBpSk  |
-| new-hampshire                               | us                    | New Hampshire                          | sPBSk   |
+| new-hampshire                               | us                    | New Hampshire                          | sPBpSk  |
 | new-jersey                                  | us                    | New Jersey                             | sPBpSk  |
 | new-mexico                                  | us                    | New Mexico                             | sPBpSk  |
-| new-york                                    | us                    | New York                               |         |
+| new-york                                    | us                    | New York                               | sPBpSk  |
 | new-zealand                                 | Australia and Oceania | New Zealand                            | sPBpSk  |
 | newfoundland-and-labrador                   | Canada                | Newfoundland and Labrador              | sPBpSk  |
 | nicaragua                                   | Central America       | Nicaragua                              | sPBpk   |
@@ -374,7 +374,7 @@ Commands:
 | papua-new-guinea                            | Australia and Oceania | Papua New Guinea                       | sPBpSk  |
 | paraguay                                    | South America         | Paraguay                               | sPBpSk  |
 | pays-de-la-loire                            | France                | Pays de la Loire                       | sPBpSk  |
-| pennsylvania                                | us                    | Pennsylvania                           | sPBSk   |
+| pennsylvania                                | us                    | Pennsylvania                           | sPBpSk  |
 | peru                                        | South America         | Peru                                   | sPBpSk  |
 | philippines                                 | Asia                  | Philippines                            | sPBpSk  |
 | picardie                                    | France                | Picardie                               | sPBpSk  |
@@ -428,7 +428,7 @@ Commands:
 | somerset                                    | England               | Somerset                               | sPBpSk  |
 | south-africa                                | Africa                | South Africa                           | sPBpSk  |
 | south-america                               |                       | South America                          | sPBpk   |
-| south-carolina                              | us                    | South Carolina                         |         |
+| south-carolina                              | us                    | South Carolina                         | sPBpSk  |
 | south-dakota                                | us                    | South Dakota                           | sPBpSk  |
 | south-fed-district                          | Russian Federation    | South Federal District                 | sPBpSk  |
 | south-korea                                 | Asia                  | South Korea                            | sPBpSk  |
@@ -454,7 +454,7 @@ Commands:
 | tajikistan                                  | Asia                  | Tajikistan                             | sPBpk   |
 | tanzania                                    | Africa                | Tanzania                               | sPBpSk  |
 | tennessee                                   | us                    | Tennessee                              | sPBpSk  |
-| texas                                       | us                    | Texas                                  |         |
+| texas                                       | us                    | Texas                                  | sPBpSk  |
 | thailand                                    | Asia                  | Thailand                               | sPBpSk  |
 | thueringen                                  | Germany               | Thüringen                              | sPBpSk  |
 | togo                                        | Africa                | Togo                                   | sPBpSk  |
@@ -1128,7 +1128,7 @@ Total elements: 401
 | santa-catarina                          | south                            | santa-catarina                          | sPp     |
 | santa_barbara                           | california                       | santa_barbara                           | sPp     |
 | santa_clara                             | california                       | santa_clara                             | sPp     |
-| santa_cruz                              | california                       | santa_cruz                              | sPp     |
+| santa_cruz                              | argentina                        | santa_cruz                              | sPp     |
 | santa_fe                                | argentina                        | santa_fe                                | sPp     |
 | santiago_del_estero                     | argentina                        | santiago_del_estero                     | sPp     |
 | sao-paulo                               | southeast                        | sao-paulo                               | sPp     |
