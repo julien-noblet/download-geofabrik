@@ -869,7 +869,7 @@ Total elements: 401
 | kuwait                                  | asia                             | kuwait                                  | sPp     |
 | kyushu                                  | japan                            | kyushu                                  | sPp     |
 | la_pampa                                | argentina                        | la_pampa                                | sPp     |
-| la_rioja                                | argentina                        | la_rioja                                | sPp     |
+| la_rioja                                | spain                            | la_rioja                                | sPp     |
 | lake                                    | california                       | lake                                    | sPp     |
 | lakshadweep                             | india                            | lakshadweep                             | sPp     |
 | lampung                                 | indonesia                        | lampung                                 | sPp     |
@@ -1128,7 +1128,7 @@ Total elements: 401
 | santa-catarina                          | south                            | santa-catarina                          | sPp     |
 | santa_barbara                           | california                       | santa_barbara                           | sPp     |
 | santa_clara                             | california                       | santa_clara                             | sPp     |
-| santa_cruz                              | california                       | santa_cruz                              | sPp     |
+| santa_cruz                              | argentina                        | santa_cruz                              | sPp     |
 | santa_fe                                | argentina                        | santa_fe                                | sPp     |
 | santiago_del_estero                     | argentina                        | santiago_del_estero                     | sPp     |
 | sao-paulo                               | southeast                        | sao-paulo                               | sPp     |
@@ -1146,7 +1146,7 @@ Total elements: 401
 | seine_saint_denis                       | ile_de_france                    | seine_saint_denis                       | sPp     |
 | senegal                                 | africa                           | senegal                                 | sPp     |
 | sergipe                                 | northeast                        | sergipe                                 | sPp     |
-| sevastopol                              | southern_federal_district        | sevastopol                              | sPp     |
+| sevastopol                              | ukraine                          | sevastopol                              | sPp     |
 | seychelles                              | africa                           | seychelles                              | sPp     |
 | shaanxi                                 | china                            | shaanxi                                 | sPp     |
 | shandong                                | china                            | shandong                                | sPp     |
