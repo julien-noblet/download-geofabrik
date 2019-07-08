@@ -104,6 +104,7 @@ Commands:
 | bedfordshire                                | England               | Bedfordshire                           | sPBpSk  |
 | belarus                                     | Europe                | Belarus                                | sPBpSk  |
 | belgium                                     | Europe                | Belgium                                | sPBpSk  |
+| belize                                      | Central America       | Belize                                 | sPBpSk  |
 | benin                                       | Africa                | Benin                                  | sPBpSk  |
 | berkshire                                   | England               | Berkshire                              | sPBpSk  |
 | berlin                                      | Germany               | Berlin                                 | sPBpSk  |
@@ -130,7 +131,7 @@ Commands:
 | canary-islands                              | Africa                | Canary Islands                         | sPBpSk  |
 | cape-verde                                  | Africa                | Cape Verde                             | sPBpSk  |
 | central-african-republic                    | Africa                | Central African Republic               | sPBpSk  |
-| central-america                             |                       | Central America                        |         |
+| central-america                             |                       | Central America                        | sPBpk   |
 | central-fed-district                        | Russian Federation    | Central Federal District               | sPBpSk  |
 | centre                                      | France                | Centre                                 | sPBpSk  |
 | centro                                      | Italy                 | Centro                                 | sPBpSk  |
@@ -152,6 +153,7 @@ Commands:
 | corse                                       | France                | Corse                                  | sPBpSk  |
 | crimean-fed-district                        | Russian Federation    | Crimean Federal District               | sPBpSk  |
 | croatia                                     | Europe                | Croatia                                | sPBpSk  |
+| cuba                                        | Central America       | Cuba                                   | sPBpSk  |
 | cumbria                                     | England               | Cumbria                                | sPBpSk  |
 | cyprus                                      | Europe                | Cyprus                                 | sPBpSk  |
 | czech-republic                              | Europe                | Czech Republic                         | sPBpSk  |
@@ -204,9 +206,11 @@ Commands:
 | greenland                                   | North America         | Greenland                              | sPBpSk  |
 | groningen                                   | Netherlands           | Groningen                              | sPBpSk  |
 | guadeloupe                                  | France                | Guadeloupe                             | sPBpk   |
+| guatemala                                   | Central America       | Guatemala                              | sPBpSk  |
 | guinea                                      | Africa                | Guinea                                 | sPBpSk  |
 | guinea-bissau                               | Africa                | Guinea-Bissau                          | sPBpSk  |
 | guyane                                      | France                | Guyane                                 | sPBpk   |
+| haiti-and-domrep                            | Central America       | Haiti and Dominican Republic           | sPBpSk  |
 | hamburg                                     | Germany               | Hamburg                                | sPBpSk  |
 | hampshire                                   | England               | Hampshire                              | sPBpSk  |
 | haute-normandie                             | France                | Haute-Normandie                        | sPBpSk  |
@@ -233,6 +237,7 @@ Commands:
 | israel-and-palestine                        | Asia                  | Israel and Palestine                   | sPBpSk  |
 | italy                                       | Europe                | Italy                                  | sPBpk   |
 | ivory-coast                                 | Africa                | Ivory Coast                            | sPBpSk  |
+| jamaica                                     | Central America       | Jamaica                                | sPBpSk  |
 | japan                                       | Asia                  | Japan                                  | sPBpk   |
 | jordan                                      | Asia                  | Jordan                                 | sPBpSk  |
 | kansai                                      | Japan                 | Kansai region (a.k.a. Kinki            | sPBpSk  |
@@ -326,6 +331,7 @@ Commands:
 | new-york                                    | us                    | New York                               | sPBpSk  |
 | new-zealand                                 | Australia and Oceania | New Zealand                            | sPBpSk  |
 | newfoundland-and-labrador                   | Canada                | Newfoundland and Labrador              | sPBpSk  |
+| nicaragua                                   | Central America       | Nicaragua                              | sPBpk   |
 | niederbayern                                | Bayern                | Niederbayern                           | sPBpSk  |
 | niedersachsen                               | Germany               | Niedersachsen                          | sPBpSk  |
 | niger                                       | Africa                | Niger                                  | sPBpSk  |
@@ -498,7 +504,7 @@ Commands:
 | zeeland                                     | Netherlands           | Zeeland                                | sPBpSk  |
 | zimbabwe                                    | Africa                | Zimbabwe                               | sPBpSk  |
 | zuid-holland                                | Netherlands           | Zuid-Holland                           | sPBpSk  |
-Total elements: 395
+Total elements: 401
 
 ## List of elements from openstreetmap.fr
 |                SHORTNAME                |              IS IN               |                LONG NAME                | FORMATS |
@@ -721,7 +727,7 @@ Total elements: 395
 | formosa                                 | argentina                        | formosa                                 | sPp     |
 | france                                  | europe                           | france                                  | sPp     |
 | france_metro_dom_com_nc                 | merge                            | france_metro_dom_com_nc                 | sP      |
-| france_taaf                             | merge                            | france_taaf                             | sPp     |
+| france_taaf                             | africa                           | france_taaf                             | sPp     |
 | franche_comte                           | france                           | franche_comte                           | sPp     |
 | fresno                                  | california                       | fresno                                  | sPp     |
 | friesland                               | netherlands                      | friesland                               | sPp     |
@@ -1140,7 +1146,7 @@ Total elements: 395
 | seine_saint_denis                       | ile_de_france                    | seine_saint_denis                       | sPp     |
 | senegal                                 | africa                           | senegal                                 | sPp     |
 | sergipe                                 | northeast                        | sergipe                                 | sPp     |
-| sevastopol                              | ukraine                          | sevastopol                              | sPp     |
+| sevastopol                              | southern_federal_district        | sevastopol                              | sPp     |
 | seychelles                              | africa                           | seychelles                              | sPp     |
 | shaanxi                                 | china                            | shaanxi                                 | sPp     |
 | shandong                                | china                            | shandong                                | sPp     |
