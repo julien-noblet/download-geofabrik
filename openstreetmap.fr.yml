@@ -34,9 +34,9 @@ elements:
     id: acre
     name: acre
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: north
   adygea_republic:
     id: adygea_republic
@@ -186,17 +186,17 @@ elements:
     id: amapa
     name: amapa
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: north
   amazonas:
     id: amazonas
     name: amazonas
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: north
   american_samoa:
     id: american_samoa
@@ -4243,9 +4243,9 @@ elements:
     id: para
     name: para
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: north
   paraguay:
     id: paraguay
@@ -4699,17 +4699,17 @@ elements:
     id: rondonia
     name: rondonia
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: north
   roraima:
     id: roraima
     name: roraima
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: north
   rostov_oblast:
     id: rostov_oblast
@@ -5107,7 +5107,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: ukraine
+    parent: southern_federal_district
   seychelles:
     id: seychelles
     name: seychelles
@@ -5640,9 +5640,9 @@ elements:
     id: tocantins
     name: tocantins
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: north
   togo:
     id: togo
