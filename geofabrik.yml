@@ -2877,8 +2877,16 @@ elements:
     parent: us
   mississippi:
     id: mississippi
-    meta: true
     name: Mississippi
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
     parent: us
   missouri:
     id: missouri
@@ -3125,6 +3133,7 @@ elements:
     - shp.zip
     - osm.bz2
     - osm.bz2.md5
+    - poly
     parent: us
   new-jersey:
     id: new-jersey
@@ -3154,8 +3163,16 @@ elements:
     parent: us
   new-york:
     id: new-york
-    meta: true
     name: New York
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
     parent: us
   new-zealand:
     id: new-zealand
@@ -3724,6 +3741,7 @@ elements:
     - shp.zip
     - osm.bz2
     - osm.bz2.md5
+    - poly
     parent: us
   peru:
     id: peru
@@ -4306,8 +4324,16 @@ elements:
     - poly
   south-carolina:
     id: south-carolina
-    meta: true
     name: South Carolina
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
     parent: us
   south-dakota:
     id: south-dakota
@@ -4609,8 +4635,16 @@ elements:
     parent: us
   texas:
     id: texas
-    meta: true
     name: Texas
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
     parent: us
   thailand:
     id: thailand
