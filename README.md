@@ -727,7 +727,7 @@ Total elements: 401
 | formosa                                 | argentina                        | formosa                                 | sPp     |
 | france                                  | europe                           | france                                  | sPp     |
 | france_metro_dom_com_nc                 | merge                            | france_metro_dom_com_nc                 | sP      |
-| france_taaf                             | oceania                          | france_taaf                             | sPp     |
+| france_taaf                             | merge                            | france_taaf                             | sPp     |
 | franche_comte                           | france                           | franche_comte                           | sPp     |
 | fresno                                  | california                       | fresno                                  | sPp     |
 | friesland                               | netherlands                      | friesland                               | sPp     |
@@ -1222,7 +1222,7 @@ Total elements: 401
 | toscana                                 | italy                            | toscana                                 | sPp     |
 | trenciansky                             | slovakia                         | trenciansky                             | sPp     |
 | trentino_alto_adige                     | italy                            | trentino_alto_adige                     | sPp     |
-| trinidad_and_tobago                     | central-america                  | trinidad_and_tobago                     | sPp     |
+| trinidad_and_tobago                     | south-america                    | trinidad_and_tobago                     | sPp     |
 | trinity                                 | california                       | trinity                                 | sPp     |
 | tripura                                 | india                            | tripura                                 | sPp     |
 | trnavsky                                | slovakia                         | trnavsky                                | sPp     |
