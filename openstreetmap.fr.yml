@@ -1130,9 +1130,9 @@ elements:
     id: chubu
     name: chubu
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   chubut:
     id: chubut
@@ -1146,9 +1146,9 @@ elements:
     id: chugoku
     name: chugoku
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   chukotka_autonomous_okrug:
     id: chukotka_autonomous_okrug
@@ -2200,9 +2200,9 @@ elements:
     id: hokkaido
     name: hokkaido
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   honduras:
     id: honduras
@@ -2592,17 +2592,17 @@ elements:
     id: kansai
     name: kansai
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   kanto:
     id: kanto
     name: kanto
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   karachay_cherkess_republic:
     id: karachay_cherkess_republic
@@ -2879,9 +2879,9 @@ elements:
     id: kyushu
     name: kyushu
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   la_pampa:
     id: la_pampa
@@ -2898,7 +2898,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: spain
+    parent: argentina
   lake:
     id: lake
     name: lake
@@ -5160,9 +5160,9 @@ elements:
     id: shikoku
     name: shikoku
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   siberian_federal_district:
     id: siberian_federal_district
@@ -5656,9 +5656,9 @@ elements:
     id: tohoku
     name: tohoku
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   tokelau:
     id: tokelau
@@ -5715,7 +5715,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: central-america
+    parent: south-america
   trinity:
     id: trinity
     name: trinity
