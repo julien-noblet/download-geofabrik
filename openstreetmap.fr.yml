@@ -42,9 +42,9 @@ elements:
     id: adygea_republic
     name: adygea_republic
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: southern_federal_district
   afghanistan:
     id: afghanistan
@@ -378,9 +378,9 @@ elements:
     id: astrakhan_oblast
     name: astrakhan_oblast
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: southern_federal_district
   asturias:
     id: asturias
@@ -1338,9 +1338,9 @@ elements:
     id: crimea_republic
     name: crimea_republic
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: southern_federal_district
   curacao:
     id: curacao
@@ -2568,9 +2568,9 @@ elements:
     id: kalmykia_republic
     name: kalmykia_republic
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: southern_federal_district
   kaluga_oblast:
     id: kaluga_oblast
@@ -2831,9 +2831,9 @@ elements:
     id: krasnodar_krai
     name: krasnodar_krai
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: southern_federal_district
   krasnoyarsk_krai:
     id: krasnoyarsk_krai
@@ -4715,9 +4715,9 @@ elements:
     id: rostov_oblast
     name: rostov_oblast
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: southern_federal_district
   russia:
     id: russia
@@ -6096,9 +6096,9 @@ elements:
     id: volgograd_oblast
     name: volgograd_oblast
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: southern_federal_district
   vologda_oblast:
     id: vologda_oblast
