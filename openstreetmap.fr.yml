@@ -5715,7 +5715,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: south-america
+    parent: central-america
   trinity:
     id: trinity
     name: trinity
