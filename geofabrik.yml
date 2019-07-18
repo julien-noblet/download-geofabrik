@@ -60,7 +60,6 @@ elements:
     - shp.zip
     - osm.bz2
     - osm.bz2.md5
-    - poly
     parent: us
   alaska:
     id: alaska
@@ -215,7 +214,6 @@ elements:
     - shp.zip
     - osm.bz2
     - osm.bz2.md5
-    - poly
     parent: us
   armenia:
     id: armenia
@@ -3137,16 +3135,8 @@ elements:
     parent: us
   new-jersey:
     id: new-jersey
+    meta: true
     name: New Jersey
-    files:
-    - osm.pbf
-    - kml
-    - state
-    - osm.pbf.md5
-    - shp.zip
-    - osm.bz2
-    - osm.bz2.md5
-    - poly
     parent: us
   new-mexico:
     id: new-mexico
@@ -4493,16 +4483,8 @@ elements:
     parent: england
   suriname:
     id: suriname
+    meta: true
     name: Suriname
-    files:
-    - osm.pbf
-    - kml
-    - state
-    - osm.pbf.md5
-    - shp.zip
-    - osm.bz2
-    - osm.bz2.md5
-    - poly
     parent: south-america
   surrey:
     id: surrey
