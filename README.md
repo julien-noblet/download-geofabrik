@@ -306,7 +306,7 @@ Commands:
 | michigan                                    | us                    | Michigan                               | sPBpSk  |
 | midi-pyrenees                               | France                | Midi-Pyrenees                          | sPBpSk  |
 | minnesota                                   | us                    | Minnesota                              | sPBpSk  |
-| mississippi                                 | us                    | Mississippi                            | sPBpSk  |
+| mississippi                                 | us                    | Mississippi                            |         |
 | missouri                                    | us                    | Missouri                               | sPBpSk  |
 | mittelfranken                               | Bayern                | Mittelfranken                          | sPBpSk  |
 | moldova                                     | Europe                | Moldova                                | sPBpSk  |
@@ -325,10 +325,10 @@ Commands:
 | nevada                                      | us                    | Nevada                                 | sPBpSk  |
 | new-brunswick                               | Canada                | New Brunswick                          | sPBpSk  |
 | new-caledonia                               | Australia and Oceania | New Caledonia                          | sPBpSk  |
-| new-hampshire                               | us                    | New Hampshire                          | sPBpSk  |
+| new-hampshire                               | us                    | New Hampshire                          | sPBSk   |
 | new-jersey                                  | us                    | New Jersey                             | sPBpSk  |
 | new-mexico                                  | us                    | New Mexico                             | sPBpSk  |
-| new-york                                    | us                    | New York                               | sPBpSk  |
+| new-york                                    | us                    | New York                               |         |
 | new-zealand                                 | Australia and Oceania | New Zealand                            | sPBpSk  |
 | newfoundland-and-labrador                   | Canada                | Newfoundland and Labrador              | sPBpSk  |
 | nicaragua                                   | Central America       | Nicaragua                              | sPBpk   |
@@ -374,7 +374,7 @@ Commands:
 | papua-new-guinea                            | Australia and Oceania | Papua New Guinea                       | sPBpSk  |
 | paraguay                                    | South America         | Paraguay                               | sPBpSk  |
 | pays-de-la-loire                            | France                | Pays de la Loire                       | sPBpSk  |
-| pennsylvania                                | us                    | Pennsylvania                           | sPBpSk  |
+| pennsylvania                                | us                    | Pennsylvania                           | sPBSk   |
 | peru                                        | South America         | Peru                                   | sPBpSk  |
 | philippines                                 | Asia                  | Philippines                            | sPBpSk  |
 | picardie                                    | France                | Picardie                               | sPBpSk  |
@@ -428,7 +428,7 @@ Commands:
 | somerset                                    | England               | Somerset                               | sPBpSk  |
 | south-africa                                | Africa                | South Africa                           | sPBpSk  |
 | south-america                               |                       | South America                          | sPBpk   |
-| south-carolina                              | us                    | South Carolina                         | sPBpSk  |
+| south-carolina                              | us                    | South Carolina                         |         |
 | south-dakota                                | us                    | South Dakota                           | sPBpSk  |
 | south-fed-district                          | Russian Federation    | South Federal District                 | sPBpSk  |
 | south-korea                                 | Asia                  | South Korea                            | sPBpSk  |
@@ -454,7 +454,7 @@ Commands:
 | tajikistan                                  | Asia                  | Tajikistan                             | sPBpk   |
 | tanzania                                    | Africa                | Tanzania                               | sPBpSk  |
 | tennessee                                   | us                    | Tennessee                              | sPBpSk  |
-| texas                                       | us                    | Texas                                  | sPBpSk  |
+| texas                                       | us                    | Texas                                  |         |
 | thailand                                    | Asia                  | Thailand                               | sPBpSk  |
 | thueringen                                  | Germany               | Thüringen                              | sPBpSk  |
 | togo                                        | Africa                | Togo                                   | sPBpSk  |
@@ -727,7 +727,7 @@ Total elements: 401
 | formosa                                 | argentina                        | formosa                                 | sPp     |
 | france                                  | europe                           | france                                  | sPp     |
 | france_metro_dom_com_nc                 | merge                            | france_metro_dom_com_nc                 | sP      |
-| france_taaf                             | africa                           | france_taaf                             | sPp     |
+| france_taaf                             | oceania                          | france_taaf                             | sPp     |
 | franche_comte                           | france                           | franche_comte                           | sPp     |
 | fresno                                  | california                       | fresno                                  | sPp     |
 | friesland                               | netherlands                      | friesland                               | sPp     |
@@ -869,7 +869,7 @@ Total elements: 401
 | kuwait                                  | asia                             | kuwait                                  | sPp     |
 | kyushu                                  | japan                            | kyushu                                  | sPp     |
 | la_pampa                                | argentina                        | la_pampa                                | sPp     |
-| la_rioja                                | spain                            | la_rioja                                | sPp     |
+| la_rioja                                | argentina                        | la_rioja                                | sPp     |
 | lake                                    | california                       | lake                                    | sPp     |
 | lakshadweep                             | india                            | lakshadweep                             | sPp     |
 | lampung                                 | indonesia                        | lampung                                 | sPp     |
@@ -1061,7 +1061,7 @@ Total elements: 401
 | poitou_charentes                        | france                           | poitou_charentes                        | sPp     |
 | poland                                  | europe                           | poland                                  | sPp     |
 | poltava_oblast                          | ukraine                          | poltava_oblast                          | sPp     |
-| polynesie                               | south-america                    | polynesie                               | sPp     |
+| polynesie                               | oceania                          | polynesie                               | sPp     |
 | pomorskie                               | poland                           | pomorskie                               | sPp     |
 | portugal                                | europe                           | portugal                                | sPp     |
 | praha                                   | czech_republic                   | praha                                   | sPp     |
@@ -1222,7 +1222,7 @@ Total elements: 401
 | toscana                                 | italy                            | toscana                                 | sPp     |
 | trenciansky                             | slovakia                         | trenciansky                             | sPp     |
 | trentino_alto_adige                     | italy                            | trentino_alto_adige                     | sPp     |
-| trinidad_and_tobago                     | south-america                    | trinidad_and_tobago                     | sPp     |
+| trinidad_and_tobago                     | central-america                  | trinidad_and_tobago                     | sPp     |
 | trinity                                 | california                       | trinity                                 | sPp     |
 | tripura                                 | india                            | tripura                                 | sPp     |
 | trnavsky                                | slovakia                         | trnavsky                                | sPp     |
@@ -1277,7 +1277,7 @@ Total elements: 401
 | voronezh_oblast                         | central_federal_district         | voronezh_oblast                         | sPp     |
 | vosges                                  | lorraine                         | vosges                                  | sPp     |
 | vysocina                                | czech_republic                   | vysocina                                | sPp     |
-| wallis_et_futuna                        | south-america                    | wallis_et_futuna                        | sPp     |
+| wallis_et_futuna                        | oceania                          | wallis_et_futuna                        | sPp     |
 | wallonia_french_community               | belgium                          | wallonia_french_community               | sPp     |
 | wallonia_german_community               | belgium                          | wallonia_german_community               | sPp     |
 | warminsko_mazurskie                     | poland                           | warminsko_mazurskie                     | sPp     |
