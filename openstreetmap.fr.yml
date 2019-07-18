@@ -130,17 +130,17 @@ elements:
     id: alpes_de_haute_provence
     name: alpes_de_haute_provence
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: provence_alpes_cote_d_azur
   alpes_maritimes:
     id: alpes_maritimes
     name: alpes_maritimes
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: provence_alpes_cote_d_azur
   alpine:
     id: alpine
@@ -338,9 +338,9 @@ elements:
     id: arnsberg
     name: arnsberg
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: nordrhein_westfalen
   aruba:
     id: aruba
@@ -618,9 +618,9 @@ elements:
     id: bouches_du_rhone
     name: bouches_du_rhone
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: provence_alpes_cote_d_azur
   bourgogne:
     id: bourgogne
@@ -1394,9 +1394,9 @@ elements:
     id: detmold
     name: detmold
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: nordrhein_westfalen
   deux_sevres:
     id: deux_sevres
@@ -1466,9 +1466,9 @@ elements:
     id: dordogne
     name: dordogne
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: aquitaine
   doubs:
     id: doubs
@@ -1498,9 +1498,9 @@ elements:
     id: dusseldorf
     name: dusseldorf
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: nordrhein_westfalen
   east:
     id: east
@@ -1896,9 +1896,9 @@ elements:
     id: gironde
     name: gironde
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: aquitaine
   glenn:
     id: glenn
@@ -2128,9 +2128,9 @@ elements:
     id: hautes_alpes
     name: hautes_alpes
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: provence_alpes_cote_d_azur
   hautes_pyrenees:
     id: hautes_pyrenees
@@ -2791,9 +2791,9 @@ elements:
     id: koln
     name: koln
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: nordrhein_westfalen
   komi_republic:
     id: komi_republic
@@ -2898,7 +2898,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: argentina
+    parent: spain
   lake:
     id: lake
     name: lake
@@ -2927,9 +2927,9 @@ elements:
     id: landes
     name: landes
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: aquitaine
   languedoc_roussillon:
     id: languedoc_roussillon
@@ -3103,9 +3103,9 @@ elements:
     id: lot_et_garonne
     name: lot_et_garonne
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: aquitaine
   lozere:
     id: lozere
@@ -3619,9 +3619,9 @@ elements:
     id: munster
     name: munster
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: nordrhein_westfalen
   murmansk_oblast:
     id: murmansk_oblast
@@ -4539,9 +4539,9 @@ elements:
     id: pyrenees_atlantiques
     name: pyrenees_atlantiques
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: aquitaine
   pyrenees_orientales:
     id: pyrenees_orientales
@@ -5107,7 +5107,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: southern_federal_district
+    parent: ukraine
   seychelles:
     id: seychelles
     name: seychelles
@@ -5992,17 +5992,17 @@ elements:
     id: var
     name: var
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: provence_alpes_cote_d_azur
   vaucluse:
     id: vaucluse
     name: vaucluse
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: provence_alpes_cote_d_azur
   vendee:
     id: vendee
