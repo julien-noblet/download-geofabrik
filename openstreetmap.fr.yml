@@ -298,9 +298,9 @@ elements:
     id: ardennes
     name: ardennes
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: champagne_ardenne
   argentina:
     id: argentina
@@ -394,9 +394,9 @@ elements:
     id: aube
     name: aube
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: champagne_ardenne
   aude:
     id: aude
@@ -1506,9 +1506,9 @@ elements:
     id: east
     name: east
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: england
   east_java:
     id: east_java
@@ -1530,9 +1530,9 @@ elements:
     id: east_midlands
     name: east_midlands
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: england
   east_nusa_tenggara:
     id: east_nusa_tenggara
@@ -1936,9 +1936,9 @@ elements:
     id: greater_london
     name: greater_london
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: england
   grenada:
     id: grenada
@@ -2088,9 +2088,9 @@ elements:
     id: haute_marne
     name: haute_marne
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: champagne_ardenne
   haute_normandie:
     id: haute_normandie
@@ -2898,7 +2898,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: spain
+    parent: argentina
   lake:
     id: lake
     name: lake
@@ -3319,9 +3319,9 @@ elements:
     id: marne
     name: marne
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: champagne_ardenne
   marshall-islands:
     id: marshall-islands
@@ -3451,17 +3451,17 @@ elements:
     id: meurthe_et_moselle
     name: meurthe_et_moselle
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: lorraine
   meuse:
     id: meuse
     name: meuse
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: lorraine
   micronesia:
     id: micronesia
@@ -3603,9 +3603,9 @@ elements:
     id: moselle
     name: moselle
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: lorraine
   mozambique:
     id: mozambique
@@ -3907,9 +3907,9 @@ elements:
     id: north_east
     name: north_east
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: england
   north_kalimantan:
     id: north_kalimantan
@@ -3963,9 +3963,9 @@ elements:
     id: north_west
     name: north_west
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: england
   northeast:
     id: northeast
@@ -5328,9 +5328,9 @@ elements:
     id: south_east
     name: south_east
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: england
   south_georgia_and_south_sandwich:
     id: south_georgia_and_south_sandwich
@@ -5376,9 +5376,9 @@ elements:
     id: south_west
     name: south_west
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: england
   southeast:
     id: southeast
@@ -6136,9 +6136,9 @@ elements:
     id: vosges
     name: vosges
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: lorraine
   vysocina:
     id: vysocina
@@ -6208,9 +6208,9 @@ elements:
     id: west_midlands
     name: west_midlands
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: england
   west_nusa_tenggara:
     id: west_nusa_tenggara
@@ -6328,9 +6328,9 @@ elements:
     id: yorkshire_and_the_humber
     name: yorkshire_and_the_humber
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: england
   yuba:
     id: yuba
