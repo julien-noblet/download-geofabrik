@@ -114,9 +114,9 @@ elements:
     id: algeria
     name: algeria
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   allier:
     id: allier
@@ -130,17 +130,17 @@ elements:
     id: alpes_de_haute_provence
     name: alpes_de_haute_provence
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: provence_alpes_cote_d_azur
   alpes_maritimes:
     id: alpes_maritimes
     name: alpes_maritimes
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: provence_alpes_cote_d_azur
   alpine:
     id: alpine
@@ -242,9 +242,9 @@ elements:
     id: angola
     name: angola
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   anguilla:
     id: anguilla
@@ -586,9 +586,9 @@ elements:
     id: benin
     name: benin
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   bermuda:
     id: bermuda
@@ -618,9 +618,9 @@ elements:
     id: bouches_du_rhone
     name: bouches_du_rhone
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: provence_alpes_cote_d_azur
   bourgogne:
     id: bourgogne
@@ -634,9 +634,9 @@ elements:
     id: bouvet_island
     name: bouvet_island
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   bratislavsky:
     id: bratislavsky
@@ -738,17 +738,17 @@ elements:
     id: burkina_faso
     name: burkina_faso
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   burundi:
     id: burundi
     name: burundi
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   buryatia_republic:
     id: buryatia_republic
@@ -818,9 +818,9 @@ elements:
     id: cameroon
     name: cameroon
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   campania:
     id: campania
@@ -866,9 +866,9 @@ elements:
     id: cape_verde
     name: cape_verde
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   caribbean:
     id: caribbean
@@ -946,9 +946,9 @@ elements:
     id: central_african_republic
     name: central_african_republic
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   central_federal_district:
     id: central_federal_district
@@ -994,9 +994,9 @@ elements:
     id: ceuta
     name: ceuta
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: spain
   chaco:
     id: chaco
@@ -1010,9 +1010,9 @@ elements:
     id: chad
     name: chad
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   champagne_ardenne:
     id: champagne_ardenne
@@ -1186,9 +1186,9 @@ elements:
     id: comoros
     name: comoros
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   comunidad_de_madrid:
     id: comunidad_de_madrid
@@ -1218,17 +1218,17 @@ elements:
     id: congo_brazzaville
     name: congo_brazzaville
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   congo_kinshasa:
     id: congo_kinshasa
     name: congo_kinshasa
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   contra_costa:
     id: contra_costa
@@ -1418,9 +1418,9 @@ elements:
     id: djibouti
     name: djibouti
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   dnipropetrovsk_oblast:
     id: dnipropetrovsk_oblast
@@ -1594,17 +1594,17 @@ elements:
     id: equatorial_guinea
     name: equatorial_guinea
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   eritrea:
     id: eritrea
     name: eritrea
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   espirito-santo:
     id: espirito-santo
@@ -1808,9 +1808,9 @@ elements:
     id: gabon
     name: gabon
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   galicia:
     id: galicia
@@ -1824,9 +1824,9 @@ elements:
     id: gambia
     name: gambia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   gansu:
     id: gansu
@@ -1880,9 +1880,9 @@ elements:
     id: ghana
     name: ghana
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   gibraltar:
     id: gibraltar
@@ -2000,9 +2000,9 @@ elements:
     id: guinea
     name: guinea
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   guizhou:
     id: guizhou
@@ -2128,9 +2128,9 @@ elements:
     id: hautes_alpes
     name: hautes_alpes
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: provence_alpes_cote_d_azur
   hautes_pyrenees:
     id: hautes_pyrenees
@@ -2416,9 +2416,9 @@ elements:
     id: ivory_coast
     name: ivory_coast
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   jakarta:
     id: jakarta
@@ -2656,9 +2656,9 @@ elements:
     id: kenya
     name: kenya
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   kerala:
     id: kerala
@@ -2898,7 +2898,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: spain
+    parent: argentina
   lake:
     id: lake
     name: lake
@@ -2975,9 +2975,9 @@ elements:
     id: lesotho
     name: lesotho
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   liaoning:
     id: liaoning
@@ -3207,9 +3207,9 @@ elements:
     id: malawi
     name: malawi
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   malaysia:
     id: malaysia
@@ -3231,9 +3231,9 @@ elements:
     id: mali
     name: mali
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   malopolskie:
     id: malopolskie
@@ -3367,17 +3367,17 @@ elements:
     id: mauritania
     name: mauritania
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   mauritius:
     id: mauritius
     name: mauritius
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   mayenne:
     id: mayenne
@@ -3391,9 +3391,9 @@ elements:
     id: mayotte
     name: mayotte
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   mazowieckie:
     id: mazowieckie
@@ -3415,9 +3415,9 @@ elements:
     id: melilla
     name: melilla
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: spain
   mendocino:
     id: mendocino
@@ -3611,9 +3611,9 @@ elements:
     id: mozambique
     name: mozambique
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   munster:
     id: munster
@@ -3659,9 +3659,9 @@ elements:
     id: namibia
     name: namibia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   napa:
     id: napa
@@ -3787,9 +3787,9 @@ elements:
     id: niger
     name: niger
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   ningxia:
     id: ningxia
@@ -4603,9 +4603,9 @@ elements:
     id: reunion
     name: reunion
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   rhone:
     id: rhone
@@ -4731,9 +4731,9 @@ elements:
     id: rwanda
     name: rwanda
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   ryazan_oblast:
     id: ryazan_oblast
@@ -4763,9 +4763,9 @@ elements:
     id: saint_helena_ascension_tristan_da_cunha
     name: saint_helena_ascension_tristan_da_cunha
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   saint_kitts_and_nevis:
     id: saint_kitts_and_nevis
@@ -4995,9 +4995,9 @@ elements:
     id: sao_tome_and_principe
     name: sao_tome_and_principe
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   saone_et_loire:
     id: saone_et_loire
@@ -5088,9 +5088,9 @@ elements:
     id: senegal
     name: senegal
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   sergipe:
     id: sergipe
@@ -5107,14 +5107,14 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: southern_federal_district
+    parent: ukraine
   seychelles:
     id: seychelles
     name: seychelles
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   shaanxi:
     id: shaanxi
@@ -5312,9 +5312,9 @@ elements:
     id: south_africa
     name: south_africa
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   south_australia:
     id: south_australia
@@ -5352,9 +5352,9 @@ elements:
     id: south_sudan
     name: south_sudan
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   south_sulawesi:
     id: south_sulawesi
@@ -5448,9 +5448,9 @@ elements:
     id: sudan
     name: sudan
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   sumy_oblast:
     id: sumy_oblast
@@ -5496,9 +5496,9 @@ elements:
     id: swaziland
     name: swaziland
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   swietokrzyskie:
     id: swietokrzyskie
@@ -5648,9 +5648,9 @@ elements:
     id: togo
     name: togo
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   tohoku:
     id: tohoku
@@ -5784,9 +5784,9 @@ elements:
     id: tunisia
     name: tunisia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   tuolumne:
     id: tuolumne
@@ -5848,9 +5848,9 @@ elements:
     id: uganda
     name: uganda
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   ukraine:
     id: ukraine
@@ -5992,17 +5992,17 @@ elements:
     id: var
     name: var
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: provence_alpes_cote_d_azur
   vaucluse:
     id: vaucluse
     name: vaucluse
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: provence_alpes_cote_d_azur
   vendee:
     id: vendee
@@ -6256,9 +6256,9 @@ elements:
     id: western_sahara
     name: western_sahara
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   wielkopolskie:
     id: wielkopolskie
@@ -6392,9 +6392,9 @@ elements:
     id: zambia
     name: zambia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   zaporizhia_oblast:
     id: zaporizhia_oblast
@@ -6440,9 +6440,9 @@ elements:
     id: zimbabwe
     name: zimbabwe
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: africa
   zlinsky:
     id: zlinsky
