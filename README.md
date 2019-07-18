@@ -727,7 +727,7 @@ Total elements: 401
 | formosa                                 | argentina                        | formosa                                 | sPp     |
 | france                                  | europe                           | france                                  | sPp     |
 | france_metro_dom_com_nc                 | merge                            | france_metro_dom_com_nc                 | sP      |
-| france_taaf                             | africa                           | france_taaf                             | sPp     |
+| france_taaf                             | merge                            | france_taaf                             | sPp     |
 | franche_comte                           | france                           | franche_comte                           | sPp     |
 | fresno                                  | california                       | fresno                                  | sPp     |
 | friesland                               | netherlands                      | friesland                               | sPp     |
@@ -1184,7 +1184,7 @@ Total elements: 401
 | southeast                               | brazil                           | southeast                               | sPp     |
 | southeast_sulawesi                      | indonesia                        | southeast_sulawesi                      | sPp     |
 | southern_federal_district               | russia                           | southern_federal_district               | sPp     |
-| spain                                   | africa                           | spain                                   | sPp     |
+| spain                                   | europe                           | spain                                   | sPp     |
 | stanislaus                              | california                       | stanislaus                              | sPp     |
 | stavropol_krai                          | north_caucasian_federal_district | stavropol_krai                          | sPp     |
 | steiermark                              | austria                          | steiermark                              | sPp     |
