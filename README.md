@@ -727,7 +727,7 @@ Total elements: 401
 | formosa                                 | argentina                        | formosa                                 | sPp     |
 | france                                  | europe                           | france                                  | sPp     |
 | france_metro_dom_com_nc                 | merge                            | france_metro_dom_com_nc                 | sP      |
-| france_taaf                             | africa                           | france_taaf                             | sPp     |
+| france_taaf                             | merge                            | france_taaf                             | sPp     |
 | franche_comte                           | france                           | franche_comte                           | sPp     |
 | fresno                                  | california                       | fresno                                  | sPp     |
 | friesland                               | netherlands                      | friesland                               | sPp     |
@@ -869,7 +869,7 @@ Total elements: 401
 | kuwait                                  | asia                             | kuwait                                  | sPp     |
 | kyushu                                  | japan                            | kyushu                                  | sPp     |
 | la_pampa                                | argentina                        | la_pampa                                | sPp     |
-| la_rioja                                | argentina                        | la_rioja                                | sPp     |
+| la_rioja                                | spain                            | la_rioja                                | sPp     |
 | lake                                    | california                       | lake                                    | sPp     |
 | lakshadweep                             | india                            | lakshadweep                             | sPp     |
 | lampung                                 | indonesia                        | lampung                                 | sPp     |
@@ -1061,7 +1061,7 @@ Total elements: 401
 | poitou_charentes                        | france                           | poitou_charentes                        | sPp     |
 | poland                                  | europe                           | poland                                  | sPp     |
 | poltava_oblast                          | ukraine                          | poltava_oblast                          | sPp     |
-| polynesie                               | south-america                    | polynesie                               | sPp     |
+| polynesie                               | oceania                          | polynesie                               | sPp     |
 | pomorskie                               | poland                           | pomorskie                               | sPp     |
 | portugal                                | europe                           | portugal                                | sPp     |
 | praha                                   | czech_republic                   | praha                                   | sPp     |
@@ -1146,7 +1146,7 @@ Total elements: 401
 | seine_saint_denis                       | ile_de_france                    | seine_saint_denis                       | sPp     |
 | senegal                                 | africa                           | senegal                                 | sPp     |
 | sergipe                                 | northeast                        | sergipe                                 | sPp     |
-| sevastopol                              | southern_federal_district        | sevastopol                              | sPp     |
+| sevastopol                              | ukraine                          | sevastopol                              | sPp     |
 | seychelles                              | africa                           | seychelles                              | sPp     |
 | shaanxi                                 | china                            | shaanxi                                 | sPp     |
 | shandong                                | china                            | shandong                                | sPp     |
@@ -1277,7 +1277,7 @@ Total elements: 401
 | voronezh_oblast                         | central_federal_district         | voronezh_oblast                         | sPp     |
 | vosges                                  | lorraine                         | vosges                                  | sPp     |
 | vysocina                                | czech_republic                   | vysocina                                | sPp     |
-| wallis_et_futuna                        | south-america                    | wallis_et_futuna                        | sPp     |
+| wallis_et_futuna                        | oceania                          | wallis_et_futuna                        | sPp     |
 | wallonia_french_community               | belgium                          | wallonia_french_community               | sPp     |
 | wallonia_german_community               | belgium                          | wallonia_german_community               | sPp     |
 | warminsko_mazurskie                     | poland                           | warminsko_mazurskie                     | sPp     |
