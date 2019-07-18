@@ -1222,7 +1222,7 @@ Total elements: 401
 | toscana                                 | italy                            | toscana                                 | sPp     |
 | trenciansky                             | slovakia                         | trenciansky                             | sPp     |
 | trentino_alto_adige                     | italy                            | trentino_alto_adige                     | sPp     |
-| trinidad_and_tobago                     | south-america                    | trinidad_and_tobago                     | sPp     |
+| trinidad_and_tobago                     | central-america                  | trinidad_and_tobago                     | sPp     |
 | trinity                                 | california                       | trinity                                 | sPp     |
 | tripura                                 | india                            | tripura                                 | sPp     |
 | trnavsky                                | slovakia                         | trnavsky                                | sPp     |
