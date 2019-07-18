@@ -58,17 +58,17 @@ elements:
     id: africa
     name: africa
     files:
-    - poly
     - osm.pbf
     - osm.pbf.md5
     - state
+    - poly
   ain:
     id: ain
     name: ain
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: rhone_alpes
   aisne:
     id: aisne
@@ -90,9 +90,9 @@ elements:
     id: alagoas
     name: alagoas
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: northeast
   alameda:
     id: alameda
@@ -106,9 +106,9 @@ elements:
     id: alberta
     name: alberta
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   algeria:
     id: algeria
@@ -130,17 +130,17 @@ elements:
     id: alpes_de_haute_provence
     name: alpes_de_haute_provence
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: provence_alpes_cote_d_azur
   alpes_maritimes:
     id: alpes_maritimes
     name: alpes_maritimes
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: provence_alpes_cote_d_azur
   alpine:
     id: alpine
@@ -226,17 +226,17 @@ elements:
     id: andaman_and_nicobar_islands
     name: andaman_and_nicobar_islands
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   andhra_pradesh:
     id: andhra_pradesh
     name: andhra_pradesh
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   angola:
     id: angola
@@ -250,9 +250,9 @@ elements:
     id: anguilla
     name: anguilla
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   anhui:
     id: anhui
@@ -266,9 +266,9 @@ elements:
     id: antigua_and_barbuda
     name: antigua_and_barbuda
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   aquitaine:
     id: aquitaine
@@ -290,9 +290,9 @@ elements:
     id: ardeche
     name: ardeche
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: rhone_alpes
   ardennes:
     id: ardennes
@@ -346,33 +346,33 @@ elements:
     id: aruba
     name: aruba
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   arunachal_pradesh:
     id: arunachal_pradesh
     name: arunachal_pradesh
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   asia:
     id: asia
     name: asia
     files:
-    - poly
     - osm.pbf
     - osm.pbf.md5
     - state
+    - poly
   assam:
     id: assam
     name: assam
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   astrakhan_oblast:
     id: astrakhan_oblast
@@ -426,9 +426,9 @@ elements:
     id: australian_capital_territory
     name: australian_capital_territory
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: australia
   austria:
     id: austria
@@ -458,17 +458,17 @@ elements:
     id: bahamas
     name: bahamas
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   bahia:
     id: bahia
     name: bahia
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: northeast
   bahrain:
     id: bahrain
@@ -514,9 +514,9 @@ elements:
     id: barbados
     name: barbados
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   bas_rhin:
     id: bas_rhin
@@ -594,9 +594,9 @@ elements:
     id: bermuda
     name: bermuda
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: north-america
   bhutan:
     id: bhutan
@@ -610,17 +610,17 @@ elements:
     id: bihar
     name: bihar
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   bouches_du_rhone:
     id: bouches_du_rhone
     name: bouches_du_rhone
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: provence_alpes_cote_d_azur
   bourgogne:
     id: bourgogne
@@ -666,9 +666,9 @@ elements:
     id: british_columbia
     name: british_columbia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   british_indian_ocean_territory:
     id: british_indian_ocean_territory
@@ -682,9 +682,9 @@ elements:
     id: british_virgin_islands
     name: british_virgin_islands
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   brunei:
     id: brunei
@@ -794,9 +794,9 @@ elements:
     id: california
     name: california
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: us-west
   calvados:
     id: calvados
@@ -834,9 +834,9 @@ elements:
     id: canada
     name: canada
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: north-america
   canarias:
     id: canarias
@@ -874,9 +874,9 @@ elements:
     id: caribbean
     name: caribbean
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   castilla_la_mancha:
     id: castilla_la_mancha
@@ -914,26 +914,26 @@ elements:
     id: cayman_islands
     name: cayman_islands
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   ceara:
     id: ceara
     name: ceara
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: northeast
   central-america:
     id: central-america
     name: central-america
     files:
-    - poly
     - osm.pbf
     - osm.pbf.md5
     - state
+    - poly
   central-west:
     id: central-west
     name: central-west
@@ -1026,9 +1026,9 @@ elements:
     id: chandigarh
     name: chandigarh
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   charente:
     id: charente
@@ -1098,9 +1098,9 @@ elements:
     id: chhattisgarh
     name: chhattisgarh
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   china:
     id: china
@@ -1122,17 +1122,17 @@ elements:
     id: christmas_island
     name: christmas_island
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: australia
   chubu:
     id: chubu
     name: chubu
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   chubut:
     id: chubut
@@ -1146,9 +1146,9 @@ elements:
     id: chugoku
     name: chugoku
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   chukotka_autonomous_okrug:
     id: chukotka_autonomous_okrug
@@ -1170,9 +1170,9 @@ elements:
     id: cocos_islands
     name: cocos_islands
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: australia
   colusa:
     id: colusa
@@ -1250,9 +1250,9 @@ elements:
     id: coral_sea_islands
     name: coral_sea_islands
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: australia
   cordoba:
     id: cordoba
@@ -1298,17 +1298,17 @@ elements:
     id: costa_rica
     name: costa_rica
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   cote_d_or:
     id: cote_d_or
     name: cote_d_or
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: bourgogne
   cotes_d_armor:
     id: cotes_d_armor
@@ -1346,9 +1346,9 @@ elements:
     id: curacao
     name: curacao
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   czech_republic:
     id: czech_republic
@@ -1362,9 +1362,9 @@ elements:
     id: dadra_and_nagar_haveli
     name: dadra_and_nagar_haveli
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   dagestan_republic:
     id: dagestan_republic
@@ -1378,9 +1378,9 @@ elements:
     id: daman_and_diu
     name: daman_and_diu
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   del_norte:
     id: del_norte
@@ -1434,25 +1434,25 @@ elements:
     id: dolnoslaskie
     name: dolnoslaskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   dominica:
     id: dominica
     name: dominica
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   dominican_republic:
     id: dominican_republic
     name: dominican_republic
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   donetsk_oblast:
     id: donetsk_oblast
@@ -1490,9 +1490,9 @@ elements:
     id: drome
     name: drome
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: rhone_alpes
   dusseldorf:
     id: dusseldorf
@@ -1562,9 +1562,9 @@ elements:
     id: el_salvador
     name: el_salvador
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   emilia_romagna:
     id: emilia_romagna
@@ -1626,9 +1626,9 @@ elements:
     id: eure
     name: eure
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: haute_normandie
   eure_et_loir:
     id: eure_et_loir
@@ -1642,10 +1642,10 @@ elements:
     id: europe
     name: europe
     files:
-    - poly
     - osm.pbf
     - osm.pbf.md5
     - state
+    - poly
   euskadi:
     id: euskadi
     name: euskadi
@@ -1763,7 +1763,7 @@ elements:
     - osm.pbf
     - state
     - poly
-    parent: africa
+    parent: merge
   franche_comte:
     id: franche_comte
     name: franche_comte
@@ -1912,9 +1912,9 @@ elements:
     id: goa
     name: goa
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   goias:
     id: goias
@@ -1944,9 +1944,9 @@ elements:
     id: grenada
     name: grenada
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   groningen:
     id: groningen
@@ -1960,9 +1960,9 @@ elements:
     id: guadeloupe
     name: guadeloupe
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   guam:
     id: guam
@@ -2016,9 +2016,9 @@ elements:
     id: gujarat
     name: gujarat
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   guyana:
     id: guyana
@@ -2048,9 +2048,9 @@ elements:
     id: haryana
     name: haryana
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   haut_rhin:
     id: haut_rhin
@@ -2112,9 +2112,9 @@ elements:
     id: haute_savoie
     name: haute_savoie
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: rhone_alpes
   haute_vienne:
     id: haute_vienne
@@ -2128,9 +2128,9 @@ elements:
     id: hautes_alpes
     name: hautes_alpes
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: provence_alpes_cote_d_azur
   hautes_pyrenees:
     id: hautes_pyrenees
@@ -2192,25 +2192,25 @@ elements:
     id: himachal_pradesh
     name: himachal_pradesh
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   hokkaido:
     id: hokkaido
     name: hokkaido
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   honduras:
     id: honduras
     name: honduras
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   hong_kong:
     id: hong_kong
@@ -2368,9 +2368,9 @@ elements:
     id: isere
     name: isere
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: rhone_alpes
   israel:
     id: israel
@@ -2432,9 +2432,9 @@ elements:
     id: jamaica
     name: jamaica
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   jambi:
     id: jambi
@@ -2448,9 +2448,9 @@ elements:
     id: jammu_and_kashmir
     name: jammu_and_kashmir
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   jan_mayen:
     id: jan_mayen
@@ -2488,9 +2488,9 @@ elements:
     id: jharkhand
     name: jharkhand
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   jiangsu:
     id: jiangsu
@@ -2592,17 +2592,17 @@ elements:
     id: kansai
     name: kansai
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   kanto:
     id: kanto
     name: kanto
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   karachay_cherkess_republic:
     id: karachay_cherkess_republic
@@ -2632,9 +2632,9 @@ elements:
     id: karnataka
     name: karnataka
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   karnten:
     id: karnten
@@ -2664,9 +2664,9 @@ elements:
     id: kerala
     name: kerala
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   kern:
     id: kern
@@ -2847,9 +2847,9 @@ elements:
     id: kujawsko_pomorskie
     name: kujawsko_pomorskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   kurgan_oblast:
     id: kurgan_oblast
@@ -2879,9 +2879,9 @@ elements:
     id: kyushu
     name: kyushu
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   la_pampa:
     id: la_pampa
@@ -2911,9 +2911,9 @@ elements:
     id: lakshadweep
     name: lakshadweep
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   lampung:
     id: lampung
@@ -3031,9 +3031,9 @@ elements:
     id: lodzkie
     name: lodzkie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   loir_et_cher:
     id: loir_et_cher
@@ -3047,9 +3047,9 @@ elements:
     id: loire
     name: loire
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: rhone_alpes
   loire_atlantique:
     id: loire_atlantique
@@ -3119,17 +3119,17 @@ elements:
     id: lubelskie
     name: lubelskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   lubuskie:
     id: lubuskie
     name: lubuskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   luhansk_oblast:
     id: luhansk_oblast
@@ -3175,9 +3175,9 @@ elements:
     id: madhya_pradesh
     name: madhya_pradesh
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   magadan_oblast:
     id: magadan_oblast
@@ -3191,9 +3191,9 @@ elements:
     id: maharashtra
     name: maharashtra
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   maine_et_loire:
     id: maine_et_loire
@@ -3239,9 +3239,9 @@ elements:
     id: malopolskie
     name: malopolskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   maluku:
     id: maluku
@@ -3263,25 +3263,25 @@ elements:
     id: manipur
     name: manipur
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   manitoba:
     id: manitoba
     name: manitoba
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   maranhao:
     id: maranhao
     name: maranhao
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: northeast
   marche:
     id: marche
@@ -3343,9 +3343,9 @@ elements:
     id: martinique
     name: martinique
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   mato-grosso:
     id: mato-grosso
@@ -3399,17 +3399,17 @@ elements:
     id: mazowieckie
     name: mazowieckie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   meghalaya:
     id: meghalaya
     name: meghalaya
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   melilla:
     id: melilla
@@ -3499,9 +3499,9 @@ elements:
     id: mizoram
     name: mizoram
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   modoc:
     id: modoc
@@ -3555,9 +3555,9 @@ elements:
     id: montserrat
     name: montserrat
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   moravskoslezsky:
     id: moravskoslezsky
@@ -3651,9 +3651,9 @@ elements:
     id: nagaland
     name: nagaland
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   namibia:
     id: namibia
@@ -3675,9 +3675,9 @@ elements:
     id: national_capital_territory_of_delhi
     name: national_capital_territory_of_delhi
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   nauri:
     id: nauri
@@ -3731,9 +3731,9 @@ elements:
     id: new_brunswick
     name: new_brunswick
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   new_caledonia:
     id: new_caledonia
@@ -3747,25 +3747,25 @@ elements:
     id: new_south_wales
     name: new_south_wales
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: australia
   newfoundland_and_labrador:
     id: newfoundland_and_labrador
     name: newfoundland_and_labrador
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   nicaragua:
     id: nicaragua
     name: nicaragua
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   niederosterreich:
     id: niederosterreich
@@ -3779,9 +3779,9 @@ elements:
     id: nievre
     name: nievre
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: bourgogne
   niger:
     id: niger
@@ -3875,9 +3875,9 @@ elements:
     id: norfolk_island
     name: norfolk_island
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: australia
   north:
     id: north
@@ -3891,10 +3891,10 @@ elements:
     id: north-america
     name: north-america
     files:
-    - poly
     - osm.pbf
     - osm.pbf.md5
     - state
+    - poly
   north_caucasian_federal_district:
     id: north_caucasian_federal_district
     name: north_caucasian_federal_district
@@ -3995,17 +3995,17 @@ elements:
     id: northern_territory
     name: northern_territory
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: australia
   northwest_territories:
     id: northwest_territories
     name: northwest_territories
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   northwestern_federal_district:
     id: northwestern_federal_district
@@ -4027,9 +4027,9 @@ elements:
     id: nova_scotia
     name: nova_scotia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   novgorod_oblast:
     id: novgorod_oblast
@@ -4051,9 +4051,9 @@ elements:
     id: nunavut
     name: nunavut
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   oberosterreich:
     id: oberosterreich
@@ -4067,10 +4067,10 @@ elements:
     id: oceania
     name: oceania
     files:
-    - poly
     - osm.pbf
     - osm.pbf.md5
     - state
+    - poly
   odessa_oblast:
     id: odessa_oblast
     name: odessa_oblast
@@ -4083,9 +4083,9 @@ elements:
     id: odisha
     name: odisha
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   oestfold:
     id: oestfold
@@ -4131,17 +4131,17 @@ elements:
     id: ontario
     name: ontario
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   opolskie:
     id: opolskie
     name: opolskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   oppland:
     id: oppland
@@ -4219,9 +4219,9 @@ elements:
     id: panama
     name: panama
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   papua:
     id: papua
@@ -4259,17 +4259,17 @@ elements:
     id: paraiba
     name: paraiba
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: northeast
   parana:
     id: parana
     name: parana
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: south
   pardubicky:
     id: pardubicky
@@ -4323,17 +4323,17 @@ elements:
     id: pernambuco
     name: pernambuco
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: northeast
   piaui:
     id: piaui
     name: piaui
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: northeast
   picardie:
     id: picardie
@@ -4387,17 +4387,17 @@ elements:
     id: podkarpackie
     name: podkarpackie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   podlaskie:
     id: podlaskie
     name: podlaskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   poitou_charentes:
     id: poitou_charentes
@@ -4435,9 +4435,9 @@ elements:
     id: pomorskie
     name: pomorskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   portugal:
     id: portugal
@@ -4475,9 +4475,9 @@ elements:
     id: prince_edward_island
     name: prince_edward_island
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   provence_alpes_cote_d_azur:
     id: provence_alpes_cote_d_azur
@@ -4499,17 +4499,17 @@ elements:
     id: puducherry
     name: puducherry
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   puerto_rico:
     id: puerto_rico
     name: puerto_rico
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   puglia:
     id: puglia
@@ -4523,9 +4523,9 @@ elements:
     id: punjab
     name: punjab
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   puy_de_dome:
     id: puy_de_dome
@@ -4571,25 +4571,25 @@ elements:
     id: quebec
     name: quebec
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   queensland:
     id: queensland
     name: queensland
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: australia
   rajasthan:
     id: rajasthan
     name: rajasthan
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   region_de_murcia:
     id: region_de_murcia
@@ -4611,9 +4611,9 @@ elements:
     id: rhone
     name: rhone
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: rhone_alpes
   rhone_alpes:
     id: rhone_alpes
@@ -4651,17 +4651,17 @@ elements:
     id: rio-grande-do-norte
     name: rio-grande-do-norte
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: northeast
   rio-grande-do-sul:
     id: rio-grande-do-sul
     name: rio-grande-do-sul
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: south
   rio_negro:
     id: rio_negro
@@ -4723,10 +4723,10 @@ elements:
     id: russia
     name: russia
     files:
-    - poly
     - osm.pbf
     - osm.pbf.md5
     - state
+    - poly
   rwanda:
     id: rwanda
     name: rwanda
@@ -4755,9 +4755,9 @@ elements:
     id: saint_barthelemy
     name: saint_barthelemy
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   saint_helena_ascension_tristan_da_cunha:
     id: saint_helena_ascension_tristan_da_cunha
@@ -4771,25 +4771,25 @@ elements:
     id: saint_kitts_and_nevis
     name: saint_kitts_and_nevis
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   saint_lucia:
     id: saint_lucia
     name: saint_lucia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   saint_martin:
     id: saint_martin
     name: saint_martin
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   saint_petersburg:
     id: saint_petersburg
@@ -4803,17 +4803,17 @@ elements:
     id: saint_pierre_et_miquelon
     name: saint_pierre_et_miquelon
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: north-america
   saint_vincent_and_the_grenadines:
     id: saint_vincent_and_the_grenadines
     name: saint_vincent_and_the_grenadines
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   sakha_republic:
     id: sakha_republic
@@ -4939,9 +4939,9 @@ elements:
     id: santa-catarina
     name: santa-catarina
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: south
   santa_barbara:
     id: santa_barbara
@@ -5003,9 +5003,9 @@ elements:
     id: saone_et_loire
     name: saone_et_loire
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: bourgogne
   saratov_oblast:
     id: saratov_oblast
@@ -5035,9 +5035,9 @@ elements:
     id: saskatchewan
     name: saskatchewan
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   saudi_arabia:
     id: saudi_arabia
@@ -5051,9 +5051,9 @@ elements:
     id: savoie
     name: savoie
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: rhone_alpes
   seas:
     id: seas
@@ -5072,9 +5072,9 @@ elements:
     id: seine_maritime
     name: seine_maritime
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: haute_normandie
   seine_saint_denis:
     id: seine_saint_denis
@@ -5096,9 +5096,9 @@ elements:
     id: sergipe
     name: sergipe
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: northeast
   sevastopol:
     id: sevastopol
@@ -5160,9 +5160,9 @@ elements:
     id: shikoku
     name: shikoku
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   siberian_federal_district:
     id: siberian_federal_district
@@ -5200,9 +5200,9 @@ elements:
     id: sikkim
     name: sikkim
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   singapore:
     id: singapore
@@ -5216,9 +5216,9 @@ elements:
     id: sint_maarten
     name: sint_maarten
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   siskiyou:
     id: siskiyou
@@ -5232,9 +5232,9 @@ elements:
     id: slaskie
     name: slaskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   slovakia:
     id: slovakia
@@ -5304,10 +5304,10 @@ elements:
     id: south-america
     name: south-america
     files:
-    - poly
     - osm.pbf
     - osm.pbf.md5
     - state
+    - poly
   south_africa:
     id: south_africa
     name: south_africa
@@ -5320,9 +5320,9 @@ elements:
     id: south_australia
     name: south_australia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: australia
   south_east:
     id: south_east
@@ -5504,9 +5504,9 @@ elements:
     id: swietokrzyskie
     name: swietokrzyskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   taaf:
     id: taaf
@@ -5528,9 +5528,9 @@ elements:
     id: tamil_nadu
     name: tamil_nadu
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   tarn:
     id: tarn
@@ -5552,9 +5552,9 @@ elements:
     id: tasmania
     name: tasmania
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: australia
   tatarstan_republic:
     id: tatarstan_republic
@@ -5576,9 +5576,9 @@ elements:
     id: telangana
     name: telangana
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   telemark:
     id: telemark
@@ -5656,9 +5656,9 @@ elements:
     id: tohoku
     name: tohoku
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: japan
   tokelau:
     id: tokelau
@@ -5715,7 +5715,7 @@ elements:
     - osm.pbf
     - state
     - poly
-    parent: south-america
+    parent: central-america
   trinity:
     id: trinity
     name: trinity
@@ -5728,9 +5728,9 @@ elements:
     id: tripura
     name: tripura
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   trnavsky:
     id: trnavsky
@@ -5800,9 +5800,9 @@ elements:
     id: turks_and_caicos_islands
     name: turks_and_caicos_islands
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   tuva_republic:
     id: tuva_republic
@@ -5896,9 +5896,9 @@ elements:
     id: united_states_virgin_islands
     name: united_states_virgin_islands
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   ural_federal_district:
     id: ural_federal_district
@@ -5912,17 +5912,17 @@ elements:
     id: us-west
     name: us-west
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: north-america
   usa_virgin_islands:
     id: usa_virgin_islands
     name: usa_virgin_islands
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: central-america
   ustecky:
     id: ustecky
@@ -5944,17 +5944,17 @@ elements:
     id: uttar_pradesh
     name: uttar_pradesh
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   uttarakhand:
     id: uttarakhand
     name: uttarakhand
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   val_d_oise:
     id: val_d_oise
@@ -5992,17 +5992,17 @@ elements:
     id: var
     name: var
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: provence_alpes_cote_d_azur
   vaucluse:
     id: vaucluse
     name: vaucluse
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: provence_alpes_cote_d_azur
   vendee:
     id: vendee
@@ -6056,9 +6056,9 @@ elements:
     id: victoria
     name: victoria
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: australia
   vienne:
     id: vienne
@@ -6176,17 +6176,17 @@ elements:
     id: warminsko_mazurskie
     name: warminsko_mazurskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   west_bengal:
     id: west_bengal
     name: west_bengal
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: india
   west_java:
     id: west_java
@@ -6248,9 +6248,9 @@ elements:
     id: western_australia
     name: western_australia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: australia
   western_sahara:
     id: western_sahara
@@ -6264,9 +6264,9 @@ elements:
     id: wielkopolskie
     name: wielkopolskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   wien:
     id: wien
@@ -6320,9 +6320,9 @@ elements:
     id: yonne
     name: yonne
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: bourgogne
   yorkshire_and_the_humber:
     id: yorkshire_and_the_humber
@@ -6344,9 +6344,9 @@ elements:
     id: yukon
     name: yukon
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: canada
   yunnan:
     id: yunnan
@@ -6376,9 +6376,9 @@ elements:
     id: zachodniopomorskie
     name: zachodniopomorskie
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: poland
   zakarpattia_oblast:
     id: zakarpattia_oblast
