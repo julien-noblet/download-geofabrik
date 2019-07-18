@@ -1184,7 +1184,7 @@ Total elements: 401
 | southeast                               | brazil                           | southeast                               | sPp     |
 | southeast_sulawesi                      | indonesia                        | southeast_sulawesi                      | sPp     |
 | southern_federal_district               | russia                           | southern_federal_district               | sPp     |
-| spain                                   | europe                           | spain                                   | sPp     |
+| spain                                   | africa                           | spain                                   | sPp     |
 | stanislaus                              | california                       | stanislaus                              | sPp     |
 | stavropol_krai                          | north_caucasian_federal_district | stavropol_krai                          | sPp     |
 | steiermark                              | austria                          | steiermark                              | sPp     |
