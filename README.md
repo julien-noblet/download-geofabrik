@@ -869,7 +869,7 @@ Total elements: 401
 | kuwait                                  | asia                             | kuwait                                  | sPp     |
 | kyushu                                  | japan                            | kyushu                                  | sPp     |
 | la_pampa                                | argentina                        | la_pampa                                | sPp     |
-| la_rioja                                | spain                            | la_rioja                                | sPp     |
+| la_rioja                                | argentina                        | la_rioja                                | sPp     |
 | lake                                    | california                       | lake                                    | sPp     |
 | lakshadweep                             | india                            | lakshadweep                             | sPp     |
 | lampung                                 | indonesia                        | lampung                                 | sPp     |
@@ -1184,7 +1184,7 @@ Total elements: 401
 | southeast                               | brazil                           | southeast                               | sPp     |
 | southeast_sulawesi                      | indonesia                        | southeast_sulawesi                      | sPp     |
 | southern_federal_district               | russia                           | southern_federal_district               | sPp     |
-| spain                                   | europe                           | spain                                   | sPp     |
+| spain                                   | africa                           | spain                                   | sPp     |
 | stanislaus                              | california                       | stanislaus                              | sPp     |
 | stavropol_krai                          | north_caucasian_federal_district | stavropol_krai                          | sPp     |
 | steiermark                              | austria                          | steiermark                              | sPp     |
