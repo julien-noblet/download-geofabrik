@@ -338,9 +338,9 @@ elements:
     id: arnsberg
     name: arnsberg
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: nordrhein_westfalen
   aruba:
     id: aruba
@@ -426,9 +426,9 @@ elements:
     id: australian_capital_territory
     name: australian_capital_territory
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: australia
   austria:
     id: austria
@@ -730,9 +730,9 @@ elements:
     id: burgenland
     name: burgenland
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: austria
   burkina_faso:
     id: burkina_faso
@@ -842,9 +842,9 @@ elements:
     id: canarias
     name: canarias
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: spain
   cantabria:
     id: cantabria
@@ -1122,9 +1122,9 @@ elements:
     id: christmas_island
     name: christmas_island
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: australia
   chubu:
     id: chubu
@@ -1170,9 +1170,9 @@ elements:
     id: cocos_islands
     name: cocos_islands
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: australia
   colusa:
     id: colusa
@@ -1250,9 +1250,9 @@ elements:
     id: coral_sea_islands
     name: coral_sea_islands
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: australia
   cordoba:
     id: cordoba
@@ -1266,9 +1266,9 @@ elements:
     id: correze
     name: correze
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: limousin
   corrientes:
     id: corrientes
@@ -1322,9 +1322,9 @@ elements:
     id: creuse
     name: creuse
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: limousin
   crimea:
     id: crimea
@@ -1394,9 +1394,9 @@ elements:
     id: detmold
     name: detmold
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: nordrhein_westfalen
   deux_sevres:
     id: deux_sevres
@@ -1498,9 +1498,9 @@ elements:
     id: dusseldorf
     name: dusseldorf
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: nordrhein_westfalen
   east:
     id: east
@@ -1578,9 +1578,9 @@ elements:
     id: england
     name: england
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: united_kingdom
   entre_rios:
     id: entre_rios
@@ -1626,9 +1626,9 @@ elements:
     id: eure
     name: eure
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: haute_normandie
   eure_et_loir:
     id: eure_et_loir
@@ -2120,9 +2120,9 @@ elements:
     id: haute_vienne
     name: haute_vienne
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: limousin
   hautes_alpes:
     id: hautes_alpes
@@ -2640,9 +2640,9 @@ elements:
     id: karnten
     name: karnten
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: austria
   kemerovo_oblast:
     id: kemerovo_oblast
@@ -2791,9 +2791,9 @@ elements:
     id: koln
     name: koln
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: nordrhein_westfalen
   komi_republic:
     id: komi_republic
@@ -3451,17 +3451,17 @@ elements:
     id: meurthe_et_moselle
     name: meurthe_et_moselle
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: lorraine
   meuse:
     id: meuse
     name: meuse
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: lorraine
   micronesia:
     id: micronesia
@@ -3603,9 +3603,9 @@ elements:
     id: moselle
     name: moselle
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: lorraine
   mozambique:
     id: mozambique
@@ -3619,9 +3619,9 @@ elements:
     id: munster
     name: munster
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: nordrhein_westfalen
   murmansk_oblast:
     id: murmansk_oblast
@@ -3747,9 +3747,9 @@ elements:
     id: new_south_wales
     name: new_south_wales
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: australia
   newfoundland_and_labrador:
     id: newfoundland_and_labrador
@@ -3771,9 +3771,9 @@ elements:
     id: niederosterreich
     name: niederosterreich
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: austria
   nievre:
     id: nievre
@@ -3867,17 +3867,17 @@ elements:
     id: nordrhein_westfalen
     name: nordrhein_westfalen
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: germany
   norfolk_island:
     id: norfolk_island
     name: norfolk_island
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: australia
   north:
     id: north
@@ -3979,9 +3979,9 @@ elements:
     id: northern_ireland
     name: northern_ireland
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: united_kingdom
   northern_mariana_islands:
     id: northern_mariana_islands
@@ -3995,9 +3995,9 @@ elements:
     id: northern_territory
     name: northern_territory
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: australia
   northwest_territories:
     id: northwest_territories
@@ -4059,9 +4059,9 @@ elements:
     id: oberosterreich
     name: oberosterreich
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: austria
   oceania:
     id: oceania
@@ -4579,9 +4579,9 @@ elements:
     id: queensland
     name: queensland
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: australia
   rajasthan:
     id: rajasthan
@@ -4843,9 +4843,9 @@ elements:
     id: salzburg
     name: salzburg
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: austria
   samara_oblast:
     id: samara_oblast
@@ -5072,9 +5072,9 @@ elements:
     id: seine_maritime
     name: seine_maritime
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: haute_normandie
   seine_saint_denis:
     id: seine_saint_denis
@@ -5320,9 +5320,9 @@ elements:
     id: south_australia
     name: south_australia
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: australia
   south_east:
     id: south_east
@@ -5432,9 +5432,9 @@ elements:
     id: steiermark
     name: steiermark
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: austria
   stredocesky:
     id: stredocesky
@@ -5552,9 +5552,9 @@ elements:
     id: tasmania
     name: tasmania
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: australia
   tatarstan_republic:
     id: tatarstan_republic
@@ -5632,9 +5632,9 @@ elements:
     id: tirol
     name: tirol
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: austria
   tocantins:
     id: tocantins
@@ -6056,9 +6056,9 @@ elements:
     id: victoria
     name: victoria
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: australia
   vienne:
     id: vienne
@@ -6120,9 +6120,9 @@ elements:
     id: vorarlberg
     name: vorarlberg
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: austria
   voronezh_oblast:
     id: voronezh_oblast
@@ -6136,9 +6136,9 @@ elements:
     id: vosges
     name: vosges
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: lorraine
   vysocina:
     id: vysocina
@@ -6248,9 +6248,9 @@ elements:
     id: western_australia
     name: western_australia
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: australia
   western_sahara:
     id: western_sahara
@@ -6272,9 +6272,9 @@ elements:
     id: wien
     name: wien
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: austria
   xinjiang:
     id: xinjiang
