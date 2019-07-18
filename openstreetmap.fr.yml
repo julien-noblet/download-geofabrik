@@ -18,9 +18,9 @@ elements:
     id: abruzzo
     name: abruzzo
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   aceh:
     id: aceh
@@ -122,9 +122,9 @@ elements:
     id: allier
     name: allier
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: auvergne
   alpes_de_haute_provence:
     id: alpes_de_haute_provence
@@ -538,9 +538,9 @@ elements:
     id: basilicata
     name: basilicata
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   basse_normandie:
     id: basse_normandie
@@ -778,9 +778,9 @@ elements:
     id: calabria
     name: calabria
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   calaveras:
     id: calaveras
@@ -826,9 +826,9 @@ elements:
     id: campania
     name: campania
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   canada:
     id: canada
@@ -858,9 +858,9 @@ elements:
     id: cantal
     name: cantal
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: auvergne
   cape_verde:
     id: cape_verde
@@ -1570,9 +1570,9 @@ elements:
     id: emilia_romagna
     name: emilia_romagna
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   england:
     id: england
@@ -1763,7 +1763,7 @@ elements:
     - osm.pbf
     - state
     - poly
-    parent: africa
+    parent: merge
   franche_comte:
     id: franche_comte
     name: franche_comte
@@ -1792,9 +1792,9 @@ elements:
     id: friuli_venezia_giulia
     name: friuli_venezia_giulia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   fujian:
     id: fujian
@@ -2080,9 +2080,9 @@ elements:
     id: haute_loire
     name: haute_loire
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: auvergne
   haute_marne:
     id: haute_marne
@@ -2898,7 +2898,7 @@ elements:
     - osm.pbf
     - state
     - poly
-    parent: spain
+    parent: argentina
   lake:
     id: lake
     name: lake
@@ -2959,9 +2959,9 @@ elements:
     id: lazio
     name: lazio
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   leningrad_oblast:
     id: leningrad_oblast
@@ -2999,9 +2999,9 @@ elements:
     id: liguria
     name: liguria
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   limburg:
     id: limburg
@@ -3071,9 +3071,9 @@ elements:
     id: lombardia
     name: lombardia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   lorraine:
     id: lorraine
@@ -3287,9 +3287,9 @@ elements:
     id: marche
     name: marche
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   mari_el_republic:
     id: mari_el_republic
@@ -3523,9 +3523,9 @@ elements:
     id: molise
     name: molise
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   monaco:
     id: monaco
@@ -4347,9 +4347,9 @@ elements:
     id: piemonte
     name: piemonte
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   pitcairn:
     id: pitcairn
@@ -4430,7 +4430,7 @@ elements:
     - osm.pbf
     - state
     - poly
-    parent: oceania
+    parent: south-america
   pomorskie:
     id: pomorskie
     name: pomorskie
@@ -4515,9 +4515,9 @@ elements:
     id: puglia
     name: puglia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   punjab:
     id: punjab
@@ -4531,9 +4531,9 @@ elements:
     id: puy_de_dome
     name: puy_de_dome
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: auvergne
   pyrenees_atlantiques:
     id: pyrenees_atlantiques
@@ -5019,9 +5019,9 @@ elements:
     id: sardegna
     name: sardegna
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   sarthe:
     id: sarthe
@@ -5184,9 +5184,9 @@ elements:
     id: sicilia
     name: sicilia
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   sierra:
     id: sierra
@@ -5688,9 +5688,9 @@ elements:
     id: toscana
     name: toscana
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   trenciansky:
     id: trenciansky
@@ -5704,9 +5704,9 @@ elements:
     id: trentino_alto_adige
     name: trentino_alto_adige
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   trinidad_and_tobago:
     id: trinidad_and_tobago
@@ -5872,9 +5872,9 @@ elements:
     id: umbria
     name: umbria
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   united_arab_emirates:
     id: united_arab_emirates
@@ -5976,9 +5976,9 @@ elements:
     id: valle_aosta
     name: valle_aosta
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   vanuatu:
     id: vanuatu
@@ -6016,9 +6016,9 @@ elements:
     id: veneto
     name: veneto
     files:
-    - poly
     - osm.pbf
     - state
+    - poly
     parent: italy
   venezuela:
     id: venezuela
@@ -6155,7 +6155,7 @@ elements:
     - osm.pbf
     - state
     - poly
-    parent: oceania
+    parent: south-america
   wallonia_french_community:
     id: wallonia_french_community
     name: wallonia_french_community
