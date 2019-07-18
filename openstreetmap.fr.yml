@@ -1763,7 +1763,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: oceania
+    parent: africa
   franche_comte:
     id: franche_comte
     name: franche_comte
@@ -2898,7 +2898,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: argentina
+    parent: spain
   lake:
     id: lake
     name: lake
