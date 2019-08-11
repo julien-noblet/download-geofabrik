@@ -36,3 +36,4 @@ _testmain.go
 *.poly
 *.osm.*
 *.zip
+snap.login
