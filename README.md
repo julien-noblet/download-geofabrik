@@ -75,7 +75,7 @@ Commands:
 |---------------------------------------------|-----------------------|----------------------------------------|---------|
 | afghanistan                                 | Asia                  | Afghanistan                            | sPBpSk  |
 | africa                                      |                       | Africa                                 | sPBpk   |
-| alabama                                     | us                    | Alabama                                | sPBpSk  |
+| alabama                                     | us                    | Alabama                                | sPBSk   |
 | alaska                                      | us                    | Alaska                                 | sPBpSk  |
 | albania                                     | Europe                | Albania                                | sPBpSk  |
 | alberta                                     | Canada                | Alberta                                | sPBpSk  |
@@ -87,7 +87,7 @@ Commands:
 | aquitaine                                   | France                | Aquitaine                              | sPBpSk  |
 | argentina                                   | South America         | Argentina                              | sPBpSk  |
 | arizona                                     | us                    | Arizona                                | sPBpSk  |
-| arkansas                                    | us                    | Arkansas                               | sPBpSk  |
+| arkansas                                    | us                    | Arkansas                               | sPBSk   |
 | armenia                                     | Asia                  | Armenia                                | sPBpSk  |
 | arnsberg-regbez                             | Nordrhein-Westfalen   | Regierungsbezirk Arnsberg              | sPBpSk  |
 | asia                                        |                       | Asia                                   | sPBpk   |
@@ -326,7 +326,7 @@ Commands:
 | new-brunswick                               | Canada                | New Brunswick                          | sPBpSk  |
 | new-caledonia                               | Australia and Oceania | New Caledonia                          | sPBpSk  |
 | new-hampshire                               | us                    | New Hampshire                          | sPBpSk  |
-| new-jersey                                  | us                    | New Jersey                             | sPBpSk  |
+| new-jersey                                  | us                    | New Jersey                             |         |
 | new-mexico                                  | us                    | New Mexico                             | sPBpSk  |
 | new-york                                    | us                    | New York                               | sPBpSk  |
 | new-zealand                                 | Australia and Oceania | New Zealand                            | sPBpSk  |
@@ -441,7 +441,7 @@ Commands:
 | sud                                         | Italy                 | Sud                                    | sPBpSk  |
 | sudan                                       | Africa                | Sudan                                  | sPBpSk  |
 | suffolk                                     | England               | Suffolk                                | sPBpSk  |
-| suriname                                    | South America         | Suriname                               | sPBpSk  |
+| suriname                                    | South America         | Suriname                               |         |
 | surrey                                      | England               | Surrey                                 | sPBpSk  |
 | swaziland                                   | Africa                | Swaziland                              | sPBpSk  |
 | sweden                                      | Europe                | Sweden                                 | sPBpSk  |
