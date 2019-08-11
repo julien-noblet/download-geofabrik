@@ -7,12 +7,20 @@ go:
 - '1.10'
 - '1.9'
 - stable
+addons:
+  apt:
+    packages:
+    # needed for the nfpm pipe:
+    #- rpm
+    # needed for the snap pipe:
+    - snapd
 before_install:
 - openssl aes-256-cbc -K $encrypted_61ea798ca9ef_key -iv $encrypted_61ea798ca9ef_iv
   -in snap.login.enc -out snap.login -d
 - go get github.com/mattn/goveralls
 install:
 - go get -t -v ./...
+- sudo snap install snapcraft --classic
 script: go test -v ./...
 stages:
 - test
@@ -84,6 +92,8 @@ jobs:
   - stage: buildTag
     if: tag IS present AND commit_message !~ /(no-build)/
     go: stable
+    after_success:
+      - test -n "$TRAVIS_TAG" && snapcraft login --with snap.login
     deploy:
       provider: script
       skip_cleanup: true
@@ -105,6 +115,7 @@ env:
   - GO111MODULE=on
   - GO111MODULE=off
   global:
+  - PATH=/snap/bin:$PATH
   - secure: RDB5xi5zZQNqMbOMAG2hX25UyGWGcCjjuOtmtoMSVKhwvvfJgSp840UaT1X4fNlQWb9MXI2f/nWDA1j2XXLJCkCyBWlWgPAsWLi9DwalEFYBVlrAeT9prWHGfsAPa4UbMVnGFfWdNy3rcfOTJUt2FC77S9sxm0kHP4LyCKE459QdmTc5sn9Cb9LuVLtanzb19NImi3F00Wc9g2KoD1CZXncde6iv34NfKgdUGvFhMofensGgD3qAJsjiREC4Vk2oO+9z5dCQ/GmNlFDG/FVst80gsQYsi6m5K5suC+jvYAmFDaENDwgTsRuqYSVnlSxB3IRYkXUPtllKfvx1Z+8ARFxRrX1DWcUkxb2CKq/DIVFPYillA8Wpcr3iBw+S5Tc9Q1G7LQLbc6g0NohdUrIrORP3TwLkq8pmyd+w4SMurGDod1kNfmprNTbgVlLvhCNSpRtyA1YZ74/nRzti+a/TG8zwCbXrlBkSyVw3xmPehEQ0Uu8R3UssvymN1fxKpBDpvcub6nv0k+mRT7mnZvM8uclojrq1rS/2ecq0E0fCdHBZcpwzDG7E7k4KC8e122sLNe4sdscEQUh050gTBF2PkLy7fQF6P+UzkFgJvzd7EPJ99gwxwiMMfKQiR/qFZHZ+j+qIxipc91fA4l0Qn9J89wHVzXJJ5GSCWIX0gb8TNNw=
 cache:
   directories:
