@@ -26,9 +26,9 @@ require (
 	github.com/stretchr/testify v1.3.0
 	github.com/temoto/robotstxt v1.1.1 // indirect
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
-	golang.org/x/net v0.0.0-20190628185345-da137c7871d7
-	golang.org/x/sys v0.0.0-20190626221950-04f50cda93cb // indirect
-	golang.org/x/tools v0.0.0-20190703212419-2214986f1668 // indirect
+	golang.org/x/net v0.0.0-20190811111127-ca1201d0de80
+	golang.org/x/sys v0.0.0-20190811111127-51ab0e2deafa // indirect
+	golang.org/x/tools v0.0.0-20190811111127-6d4652c779c4 // indirect
 	google.golang.org/appengine v1.6.1 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
