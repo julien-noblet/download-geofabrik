@@ -7,20 +7,12 @@ go:
 - '1.10'
 - '1.9'
 - stable
-addons:
-  apt:
-    packages:
-    # needed for the nfpm pipe:
-    #- rpm
-    # needed for the snap pipe:
-    - snapd
 before_install:
 - openssl aes-256-cbc -K $encrypted_61ea798ca9ef_key -iv $encrypted_61ea798ca9ef_iv
   -in snap.login.enc -out snap.login -d
 - go get github.com/mattn/goveralls
 install:
 - go get -t -v ./...
-- sudo snap install snapcraft --classic
 script: go test -v ./...
 stages:
 - test
@@ -93,6 +85,9 @@ jobs:
     if: tag IS present AND commit_message !~ /(no-build)/
     go: stable
     script:
+    - sudo apt-get update
+    - sudo apt-get install snapd
+    - sudo snap install snapcraft --classic
     - test -n "$TRAVIS_TAG" && snapcraft login --with snap.login
     - curl -sL https://git.io/goreleaser | bash
 matrix:
