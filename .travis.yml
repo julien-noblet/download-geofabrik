@@ -83,13 +83,14 @@ jobs:
     - go test -bench=. -benchmem -v ./...
     - "$GOPATH/bin/goveralls -service=travis-ci"
   - stage: build
-    if: brach = master AND tag IS NOT present OR commit_message !~ /(no-build)/
+    if: branch = master AND tag IS NOT present OR commit_message !~ /(no-build)/
     go: stable
     deploy:
       provider: script
       skip_cleanup: true
       script: go get github.com/goreleaser/goreleaser && goreleaser release --snapshot
       on:
+        all_branches: true
         condition: $TRAVIS_OS_NAME = linux && type=pull_request
   - stage: buildTag
     if: tag IS present AND commit_message !~ /(no-build)/
