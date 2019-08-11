@@ -92,6 +92,7 @@ jobs:
       on:
         all_branches: true
         condition: $TRAVIS_OS_NAME = linux && type=pull_request
+        all_branches: true
   - stage: buildTag
     if: tag IS present AND commit_message !~ /(no-build)/
     go: stable
@@ -100,6 +101,7 @@ jobs:
       skip_cleanup: true
       script: curl -sL https://git.io/goreleaser | bash
       on:
+        all_branches: true
         tags: true
         all_branches: true
         condition: $TRAVIS_OS_NAME = linux
