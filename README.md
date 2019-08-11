@@ -564,6 +564,7 @@ Total elements: 401
 | austria                                 | europe                           | austria                                 | sPp     |
 | auvergne                                | france                           | auvergne                                | sPp     |
 | aveyron                                 | midi_pyrenees                    | aveyron                                 | sPp     |
+| azores                                  | portugal                         | azores                                  | sPp     |
 | bahamas                                 | central-america                  | bahamas                                 | sPp     |
 | bahia                                   | northeast                        | bahia                                   | sPp     |
 | bahrain                                 | asia                             | bahrain                                 | sPp     |
@@ -629,6 +630,7 @@ Total elements: 401
 | central_federal_district                | russia                           | central_federal_district                | sPp     |
 | central_java                            | indonesia                        | central_java                            | sPp     |
 | central_kalimantan                      | indonesia                        | central_kalimantan                      | sPp     |
+| central_ontario                         | ontario                          | central_ontario                         | sPp     |
 | central_sulawesi                        | indonesia                        | central_sulawesi                        | sPp     |
 | centre                                  | france                           | centre                                  | sPp     |
 | ceuta                                   | spain                            | ceuta                                   | sPp     |
@@ -701,6 +703,7 @@ Total elements: 401
 | east_midlands                           | england                          | east_midlands                           | sPp     |
 | east_nusa_tenggara                      | indonesia                        | east_nusa_tenggara                      | sPp     |
 | east_timor                              | asia                             | east_timor                              | sPp     |
+| eastern_ontario                         | ontario                          | eastern_ontario                         | sPp     |
 | el_dorado                               | california                       | el_dorado                               | sPp     |
 | el_salvador                             | central-america                  | el_salvador                             | sPp     |
 | emilia_romagna                          | italy                            | emilia_romagna                          | sPp     |
@@ -748,6 +751,7 @@ Total elements: 401
 | glenn                                   | california                       | glenn                                   | sPp     |
 | goa                                     | india                            | goa                                     | sPp     |
 | goias                                   | central-west                     | goias                                   | sPp     |
+| golden_horseshoe                        | ontario                          | golden_horseshoe                        | sPp     |
 | gorontalo                               | indonesia                        | gorontalo                               | sPp     |
 | greater_london                          | england                          | greater_london                          | sPp     |
 | grenada                                 | central-america                  | grenada                                 | sPp     |
@@ -903,6 +907,7 @@ Total elements: 401
 | luxembourg                              | europe                           | luxembourg                              | sPp     |
 | lviv_oblast                             | ukraine                          | lviv_oblast                             | sPp     |
 | macau                                   | china                            | macau                                   | sPp     |
+| madeira                                 | portugal                         | madeira                                 | sPp     |
 | madera                                  | california                       | madera                                  | sPp     |
 | madhya_pradesh                          | india                            | madhya_pradesh                          | sPp     |
 | magadan_oblast                          | far_eastern_federal_district     | magadan_oblast                          | sPp     |
@@ -1005,11 +1010,13 @@ Total elements: 401
 | north_sumatra                           | indonesia                        | north_sumatra                           | sPp     |
 | north_west                              | england                          | north_west                              | sPp     |
 | northeast                               | brazil                           | northeast                               | sPp     |
+| northeastern_ontario                    | ontario                          | northeastern_ontario                    | sPp     |
 | northern_ireland                        | united_kingdom                   | northern_ireland                        | sPp     |
 | northern_mariana_islands                | oceania                          | northern_mariana_islands                | sPp     |
 | northern_territory                      | australia                        | northern_territory                      | sPp     |
 | northwest_territories                   | canada                           | northwest_territories                   | sPp     |
 | northwestern_federal_district           | russia                           | northwestern_federal_district           | sPp     |
+| northwestern_ontario                    | ontario                          | northwestern_ontario                    | sPp     |
 | norway                                  | europe                           | norway                                  | sPp     |
 | nova_scotia                             | canada                           | nova_scotia                             | sPp     |
 | novgorod_oblast                         | northwestern_federal_district    | novgorod_oblast                         | sPp     |
@@ -1061,7 +1068,7 @@ Total elements: 401
 | poitou_charentes                        | france                           | poitou_charentes                        | sPp     |
 | poland                                  | europe                           | poland                                  | sPp     |
 | poltava_oblast                          | ukraine                          | poltava_oblast                          | sPp     |
-| polynesie                               | oceania                          | polynesie                               | sPp     |
+| polynesie                               | south-america                    | polynesie                               | sPp     |
 | pomorskie                               | poland                           | pomorskie                               | sPp     |
 | portugal                                | europe                           | portugal                                | sPp     |
 | praha                                   | czech_republic                   | praha                                   | sPp     |
@@ -1094,6 +1101,7 @@ Total elements: 401
 | rio_negro                               | argentina                        | rio_negro                               | sPp     |
 | riverside                               | california                       | riverside                               | sPp     |
 | rivne_oblast                            | ukraine                          | rivne_oblast                            | sPp     |
+| robots                                  |                                  | robots                                  |         |
 | rogaland                                | norway                           | rogaland                                | sPp     |
 | rondonia                                | north                            | rondonia                                | sPp     |
 | roraima                                 | north                            | roraima                                 | sPp     |
@@ -1128,7 +1136,7 @@ Total elements: 401
 | santa-catarina                          | south                            | santa-catarina                          | sPp     |
 | santa_barbara                           | california                       | santa_barbara                           | sPp     |
 | santa_clara                             | california                       | santa_clara                             | sPp     |
-| santa_cruz                              | argentina                        | santa_cruz                              | sPp     |
+| santa_cruz                              | california                       | santa_cruz                              | sPp     |
 | santa_fe                                | argentina                        | santa_fe                                | sPp     |
 | santiago_del_estero                     | argentina                        | santiago_del_estero                     | sPp     |
 | sao-paulo                               | southeast                        | sao-paulo                               | sPp     |
@@ -1146,7 +1154,7 @@ Total elements: 401
 | seine_saint_denis                       | ile_de_france                    | seine_saint_denis                       | sPp     |
 | senegal                                 | africa                           | senegal                                 | sPp     |
 | sergipe                                 | northeast                        | sergipe                                 | sPp     |
-| sevastopol                              | ukraine                          | sevastopol                              | sPp     |
+| sevastopol                              | southern_federal_district        | sevastopol                              | sPp     |
 | seychelles                              | africa                           | seychelles                              | sPp     |
 | shaanxi                                 | china                            | shaanxi                                 | sPp     |
 | shandong                                | china                            | shandong                                | sPp     |
@@ -1184,6 +1192,7 @@ Total elements: 401
 | southeast                               | brazil                           | southeast                               | sPp     |
 | southeast_sulawesi                      | indonesia                        | southeast_sulawesi                      | sPp     |
 | southern_federal_district               | russia                           | southern_federal_district               | sPp     |
+| southwestern_ontario                    | ontario                          | southwestern_ontario                    | sPp     |
 | spain                                   | europe                           | spain                                   | sPp     |
 | stanislaus                              | california                       | stanislaus                              | sPp     |
 | stavropol_krai                          | north_caucasian_federal_district | stavropol_krai                          | sPp     |
@@ -1277,7 +1286,7 @@ Total elements: 401
 | voronezh_oblast                         | central_federal_district         | voronezh_oblast                         | sPp     |
 | vosges                                  | lorraine                         | vosges                                  | sPp     |
 | vysocina                                | czech_republic                   | vysocina                                | sPp     |
-| wallis_et_futuna                        | oceania                          | wallis_et_futuna                        | sPp     |
+| wallis_et_futuna                        | south-america                    | wallis_et_futuna                        | sPp     |
 | wallonia_french_community               | belgium                          | wallonia_french_community               | sPp     |
 | wallonia_german_community               | belgium                          | wallonia_german_community               | sPp     |
 | warminsko_mazurskie                     | poland                           | warminsko_mazurskie                     | sPp     |
@@ -1316,7 +1325,7 @@ Total elements: 401
 | zimbabwe                                | africa                           | zimbabwe                                | sPp     |
 | zlinsky                                 | czech_republic                   | zlinsky                                 | sPp     |
 | zuid_holland                            | netherlands                      | zuid_holland                            | sPp     |
-Total elements: 807
+Total elements: 816
 
 ## List of elements from bbbike.org
 |    SHORTNAME     | IS IN |    LONG NAME     | FORMATS |
