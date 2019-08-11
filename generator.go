@@ -6,8 +6,8 @@ import (
 	"log"
 	"path/filepath"
 
+	pb "github.com/cheggaaa/pb/v3"
 	"github.com/gocolly/colly"
-	pb "gopkg.in/cheggaaa/pb.v1"
 )
 
 func write(config *Config, filename string) {
