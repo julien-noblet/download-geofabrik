@@ -21,6 +21,7 @@ stages:
 - bbbike
 - Readme
 - build
+- buildTag
 jobs:
   include:
   - stage: Geofabrik
@@ -82,7 +83,16 @@ jobs:
     - go test -bench=. -benchmem -v ./...
     - "$GOPATH/bin/goveralls -service=travis-ci"
   - stage: build
-    if: branch = master OR tag IS present OR commit_message !~ /(no-build)/
+    if: brach = master OR commit_message !~ /(no-build)/
+    go: stable
+    deploy:
+      provider: script
+      skip_cleanup: true
+      script: go get github.com/goreleaser/goreleaser && goreleaser release --snapshot
+      on:
+        condition: $TRAVIS_OS_NAME = linux && type=pull_request
+  - stage: buildTag
+    if: tag IS present OR commit_message !~ /(no-build)/
     go: stable
     deploy:
       provider: script
