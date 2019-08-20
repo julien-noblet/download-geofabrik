@@ -25,10 +25,10 @@ require (
 	github.com/stretchr/objx v0.2.0 // indirect
 	github.com/stretchr/testify v1.4.0
 	github.com/temoto/robotstxt v1.1.1 // indirect
-	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
+	golang.org/x/crypto v0.0.0-20190820215902-60c769a6c586 // indirect
 	golang.org/x/net v0.0.0-20190814173513-74dc4d7220e7
 	golang.org/x/sys v0.0.0-20190814173513-fde4db37ae7a // indirect
-	golang.org/x/tools v0.0.0-20190820043834-85edb9ef3283 // indirect
+	golang.org/x/tools v0.0.0-20190820215902-547ecf7b1ef1 // indirect
 	google.golang.org/appengine v1.6.1 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
