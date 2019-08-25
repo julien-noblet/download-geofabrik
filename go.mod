@@ -27,7 +27,7 @@ require (
 	github.com/temoto/robotstxt v1.1.1 // indirect
 	golang.org/x/crypto v0.0.0-20190820215902-60c769a6c586 // indirect
 	golang.org/x/net v0.0.0-20190814173513-74dc4d7220e7
-	golang.org/x/sys v0.0.0-20190814173513-fde4db37ae7a // indirect
+	golang.org/x/sys v0.0.0-20190825165525-fb81701db80f // indirect
 	golang.org/x/tools v0.0.0-20190825034818-d72b05d2b1b6 // indirect
 	google.golang.org/appengine v1.6.1 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
