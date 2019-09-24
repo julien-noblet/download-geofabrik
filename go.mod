@@ -7,7 +7,7 @@ require (
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/alecthomas/template v0.0.0-20190718013635-fb15b899a751 // indirect
-	github.com/alecthomas/units v0.0.0-20190717044735-c3de453c63f4 // indirect
+	github.com/alecthomas/units f65c72e2690d // indirect
 	github.com/antchfx/htmlquery v1.0.0 // indirect
 	github.com/antchfx/xmlquery v1.0.0 // indirect
 	github.com/antchfx/xpath v1.0.0 // indirect
