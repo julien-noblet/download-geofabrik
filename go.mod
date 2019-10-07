@@ -29,7 +29,7 @@ require (
 	golang.org/x/net v0.0.0-20190827162352-ba9fcec4b297
 	golang.org/x/sys v0.0.0-20190826192420-c7b8b68b1456 // indirect
 	golang.org/x/tools v0.0.0-20190829051458-42f498d34c4d // indirect
-	google.golang.org/appengine v1.6.2 // indirect
+	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/yaml.v2 v2.2.2
