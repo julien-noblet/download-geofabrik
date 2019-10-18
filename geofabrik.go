@@ -14,7 +14,7 @@ type Geofabrik struct {
 
 var geofabrik = Geofabrik{
 	Scrapper: &Scrapper{
-		PB:             401,
+		PB:             402,
 		Async:          true,
 		Parallelism:    20,
 		MaxDepth:       0,
@@ -63,6 +63,11 @@ func (g *Geofabrik) parseSubregion(e *colly.HTMLElement, c *colly.Collector) {
 						id = "georgia-us"
 					case "europe":
 						id = "georgia-eu"
+					}
+				}
+				if id == "guatemala" {
+					if parent == "south-america" {
+						id = "guatemala-south-america"
 					}
 				}
 				element := Element{
