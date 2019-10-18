@@ -19,7 +19,7 @@ var t = time.Second * 30
 
 var openstreetmapFR = OpenstreetmapFR{
 	Scrapper: &Scrapper{
-		PB:             144,
+		PB:             149,
 		Async:          true,
 		Parallelism:    20,
 		MaxDepth:       0,
