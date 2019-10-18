@@ -25,7 +25,7 @@ jobs:
   include:
   - stage: Geofabrik
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|geofabrik|Geofabrik)/
-      AND type != pull_request
+      AND NOT commit_message =~ /Deploy/ AND type != pull_request
     go: stable
     script: make geofabrik
     deploy:
@@ -38,7 +38,7 @@ jobs:
         all_branches: true
   - stage: OSMfr
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmapFR|openstreetmap\.fr)/
-      AND type != pull_request
+      AND NOT commit_message =~ /Deploy/ AND type != pull_request
     go: stable
     script: make osmfr
     deploy:
@@ -51,7 +51,7 @@ jobs:
         all_branches: true
   - stage: bbbike
     if: tag IS present OR commit_message =~ /(yaml|YAML|\.yml|bbbike)/
-      AND type != pull_request
+      AND NOT commit_message =~ /Deploy/ AND type != pull_request
     go: stable
     script: make bbbike
     deploy:
