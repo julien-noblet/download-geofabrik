@@ -343,6 +343,19 @@ elements:
     - osm.bz2.md5
     - poly
     parent: germany
+  bahamas:
+    id: bahamas
+    name: bahamas
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    parent: central-america
   bangladesh:
     id: bangladesh
     name: Bangladesh
@@ -1723,6 +1736,11 @@ elements:
     - osm.bz2.md5
     - poly
     parent: central-america
+  guatemala-south-america:
+    id: guatemala-south-america
+    meta: true
+    name: Guatemala
+    parent: south-america
   guinea:
     id: guinea
     name: Guinea
