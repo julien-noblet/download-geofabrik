@@ -3,7 +3,10 @@
 *.a
 *.so
 
+# Makefile build folder
 download-geofabrik*/
+
+# Linux binary
 download-geofabrik
 
 # Folders
@@ -29,10 +32,22 @@ _cgo_export.*
 
 _testmain.go
 
+# Binaries for programs and plugins
+*.dll
+*.dylib
 *.exe
-*.test
+*.exe~
 *.prof
 
+# Downloaded files
 *.poly
 *.osm.*
 *.zip
+snap.login
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+

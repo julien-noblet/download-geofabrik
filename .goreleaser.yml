@@ -48,8 +48,6 @@ archives:
     386: i386
     amd64: x86_64
   files:
-  - licence*
-  - LICENCE*
   - license*
   - LICENSE*
   - readme*
@@ -72,4 +70,17 @@ changelog:
     - '^test:'
     - '^refactor'
     - '^chore(deps):'
+snapcrafts:
+  -
+    replacements:
+      amd64: 64-bit
+      386: 32-bit
+      darwin: macOS
+    summary: A simple tool for downloading osm files.
+    description: A simple tool for downloading OpenStreetMap files from Geofabrik, BBBike and openstreetmap-fr.
+    license: MPL-2.0
+    publish: true
+    apps:
+      download-geofabrik:
+        plugs: ["home", "network", "personal-files"]
 
