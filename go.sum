@@ -16,8 +16,6 @@ github.com/antchfx/xmlquery v1.1.0 h1:vj0kZ1y3Q6my4AV+a9xbWrMYzubw+84zuiKgvfV8vb
 github.com/antchfx/xmlquery v1.1.0/go.mod h1:/+CnyD/DzHRnv2eRxrVbieRU/FIF6N0C+7oTtyUtCKk=
 github.com/antchfx/xpath v1.1.0 h1:mJTvYpiHvxNQRD4Lbfin/FodHVCHh2a5KrOFr4ZxMOI=
 github.com/antchfx/xpath v1.1.0/go.mod h1:Yee4kTMuNiPYJ7nSNorELQMr1J33uOpXDMByNYhvtNk=
-github.com/cheggaaa/pb/v3 v3.0.1 h1:m0BngUk2LuSRYdx4fujDKNRXNDpbNCfptPfVT2m6OJY=
-github.com/cheggaaa/pb/v3 v3.0.1/go.mod h1:SqqeMF/pMOIu3xgGoxtPYhMNQP258xE4x/XRTYua+KU=
 github.com/cheggaaa/pb/v3 v3.0.2 h1:/u+zw5RBzW1CxRpVIqrZv4PpZpN+yaRPdsRORKyDjv4=
 github.com/cheggaaa/pb/v3 v3.0.2/go.mod h1:SqqeMF/pMOIu3xgGoxtPYhMNQP258xE4x/XRTYua+KU=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=

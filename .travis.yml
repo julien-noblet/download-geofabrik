@@ -10,7 +10,7 @@ go:
 before_install:
 - openssl aes-256-cbc -K $encrypted_61ea798ca9ef_key -iv $encrypted_61ea798ca9ef_iv
   -in snap.login.enc -out snap.login -d
-- go get github.com/mattn/goveralls
+- GO111MODULE=off go get github.com/mattn/goveralls
 install:
 - go get -t -v ./...
 script: go test -v ./...
