@@ -106,4 +106,21 @@ snapcrafts:
         plugs: ["home", "network"]
 release:
   prerelease: auto
+dockers:
+  -
+    goos: linux
+    goarch: amd64
+    binaries:
+      - download-geofabrik
+    image_templates:
+      - "juliennoblet/{{.ProjectName}}:latest"
+      - "juliennoblet/{{.ProjectName}}:{{ .Tag }}"
+      - "juliennoblet/{{.ProjectName}}:v{{ .Major }}"
+      - "juliennoblet/{{.ProjectName}}:v{{ .Major }}.{{ .Minor }}"
+    skip_push: auto
+    dockerfile: Dockerfile
+    extra_files:
+      - geofabrik.yml
+      - openstreetmap.fr.yml
+      - bbbike.yml
 
