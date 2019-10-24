@@ -99,5 +99,5 @@ snapcrafts:
     publish: true
     apps:
       download-geofabrik:
-        plugs: ["home", "network", "personal-files"]
+        plugs: ["home", "network"]
 
