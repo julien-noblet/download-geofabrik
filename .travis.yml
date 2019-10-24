@@ -89,6 +89,7 @@ jobs:
     - sudo apt-get install snapd
     - sudo snap install snapcraft --classic
     - test -n "$TRAVIS_TAG" && snapcraft login --with snap.login
+    - make geofabrik osmfr bbbike readme && git commit -a -m "yaml update for release"
     - curl -sL https://git.io/goreleaser | bash
 matrix:
   exclude:
