@@ -54,8 +54,11 @@ builds:
 
 archives:
 -
+  format_overrides:
+  - goos: windows
+    format: zip
   replacements:
-    darwin: Darwin
+    darwin: MacOS
     linux: Linux
     windows: Windows
     386: i386
