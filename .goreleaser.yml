@@ -6,7 +6,6 @@ before:
     # - go mod download
     # you may remove this if you don't need go generate
     # - go generate ./...
-  - make geofabrik osmfr bbbike readme
 builds:
 - id: snap
   goos:
