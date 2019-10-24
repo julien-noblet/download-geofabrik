@@ -9,16 +9,11 @@ before:
 builds:
 - id: snap
   goos:
-    -linux
+    - linux
   goarch:
     - 386
     - amd64
-    - arm
-    - arm64
-  goarm:
-    - 5
-    - 6
-    - 7
+  ldflags: "-X main.version={{ .Version }}"
 - id: no-snap
   goos:
     # - android # Not working and I'm not sure ther is anyone using download-geofabrik on android :D
@@ -51,6 +46,11 @@ builds:
   ignore:
     - goos: darwin
       goarch: 386
+    - goos: linux
+      goarch: 386
+    - goos: linux
+      goarch: amd64
+  ldflags: "-X main.version={{ .Version }}"
 
 archives:
 -
