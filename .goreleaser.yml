@@ -13,6 +13,7 @@ builds:
   goarch:
     - 386
     - amd64
+    - arm64
   ldflags: "-X main.version={{ .Version }}"
 - id: no-snap
   goos:
@@ -50,6 +51,8 @@ builds:
       goarch: 386
     - goos: linux
       goarch: amd64
+    - goos: linux
+      goarch: arm64
   ldflags: "-X main.version={{ .Version }}"
 
 archives:
@@ -86,6 +89,7 @@ changelog:
     - '^test:'
     - '^refactor'
     - '^chore(deps):'
+    - '^Deploy'
 snapcrafts:
   - builds:
     - snap
@@ -100,4 +104,6 @@ snapcrafts:
     apps:
       download-geofabrik:
         plugs: ["home", "network"]
+release:
+  prerelease: auto
 
