@@ -10,7 +10,6 @@ go:
 before_install:
 - openssl aes-256-cbc -K $encrypted_61ea798ca9ef_key -iv $encrypted_61ea798ca9ef_iv
   -in snap.login.enc -out snap.login -d
-- GO111MODULE=off go get github.com/mattn/goveralls
 install:
 - go get -t -v ./...
 script: go test -v ./...
@@ -79,6 +78,7 @@ jobs:
     if: tag IS present OR commit_message !~ /(no-coverage|no-test)/
     go: stable
     script:
+    - GO111MODULE=off go get github.com/mattn/goveralls
     - go test -bench=. -benchmem -v ./...
     - "$GOPATH/bin/goveralls -service=travis-ci"
   - stage: buildTag
@@ -89,7 +89,6 @@ jobs:
     - sudo apt-get install snapd
     - sudo snap install snapcraft --classic
     - test -n "$TRAVIS_TAG" && snapcraft login --with snap.login
-    - make geofabrik osmfr bbbike readme && git commit -a -m "yaml update for release"
     - curl -sL https://git.io/goreleaser | bash
 matrix:
   exclude:
