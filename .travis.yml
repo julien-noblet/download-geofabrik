@@ -88,6 +88,7 @@ jobs:
     script:
     - sudo apt-get update
     - sudo apt-get install snapd
+    - sudo apt-get install upx
     - sudo snap install snapcraft --classic
     - test -n "$TRAVIS_TAG" && snapcraft login --with snap.login
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD

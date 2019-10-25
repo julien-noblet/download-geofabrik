@@ -15,6 +15,12 @@ builds:
     - amd64
     - arm64
   ldflags: "-s -w -X main.version={{ .Version }}"
+  hooks:
+    post:
+      upx
+        dist/snap_linux_386/download-geofabrik
+        dist/snap_linux_amd64/download-geofabrik
+        dist/snap_linux_arm64/download-geofabrik
 - id: no-snap
   goos:
     # - android # Not working and I'm not sure ther is anyone using download-geofabrik on android :D
@@ -54,6 +60,15 @@ builds:
     - goos: linux
       goarch: arm64
   ldflags: "-s -w -X main.version={{ .Version }}"
+  hooks:
+    post:
+      upx
+        dist/no-snap_linux_arm_5/download-geofabrik
+        dist/no-snap_linux_arm_6/download-geofabrik
+        dist/no-snap_linux_arm_7/download-geofabrik
+        dist/no-snap_windows_amd64/download-geofabrik.exe
+        dist/no-snap_windows_386/download-geofabrik.exe
+        dist/no-snap_darwin_amd64/download-geofabrik
 
 archives:
 -
