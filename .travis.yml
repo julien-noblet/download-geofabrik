@@ -1,5 +1,4 @@
 language: go
-sudo: false
 go:
 - '1.13'
 - '1.12'
@@ -13,6 +12,8 @@ before_install:
 install:
 - go get -t -v ./...
 script: go test -v ./...
+services:
+- docker
 stages:
 - test
 - goveralls
@@ -88,10 +89,10 @@ jobs:
     script:
     - sudo apt-get update
     - sudo apt-get install snapd
-    - sudo apt-get install upx
     - sudo snap install snapcraft --classic
+    - curl -sL https://github.com/upx/upx/releases/download/v3.95/upx-3.95-amd64_linux.tar.xz | tar -Jx && sudo mv upx-3.95-amd64_linux/upx /usr/bin && rm -rf upx-3.95-amd64_linux/
     - test -n "$TRAVIS_TAG" && snapcraft login --with snap.login
-    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
     - curl -sL https://git.io/goreleaser | bash
 matrix:
   exclude:
@@ -108,7 +109,6 @@ env:
   global:
   - PATH=/snap/bin:$PATH
   - secure: RDB5xi5zZQNqMbOMAG2hX25UyGWGcCjjuOtmtoMSVKhwvvfJgSp840UaT1X4fNlQWb9MXI2f/nWDA1j2XXLJCkCyBWlWgPAsWLi9DwalEFYBVlrAeT9prWHGfsAPa4UbMVnGFfWdNy3rcfOTJUt2FC77S9sxm0kHP4LyCKE459QdmTc5sn9Cb9LuVLtanzb19NImi3F00Wc9g2KoD1CZXncde6iv34NfKgdUGvFhMofensGgD3qAJsjiREC4Vk2oO+9z5dCQ/GmNlFDG/FVst80gsQYsi6m5K5suC+jvYAmFDaENDwgTsRuqYSVnlSxB3IRYkXUPtllKfvx1Z+8ARFxRrX1DWcUkxb2CKq/DIVFPYillA8Wpcr3iBw+S5Tc9Q1G7LQLbc6g0NohdUrIrORP3TwLkq8pmyd+w4SMurGDod1kNfmprNTbgVlLvhCNSpRtyA1YZ74/nRzti+a/TG8zwCbXrlBkSyVw3xmPehEQ0Uu8R3UssvymN1fxKpBDpvcub6nv0k+mRT7mnZvM8uclojrq1rS/2ecq0E0fCdHBZcpwzDG7E7k4KC8e122sLNe4sdscEQUh050gTBF2PkLy7fQF6P+UzkFgJvzd7EPJ99gwxwiMMfKQiR/qFZHZ+j+qIxipc91fA4l0Qn9J89wHVzXJJ5GSCWIX0gb8TNNw=
-  - secure: US6Gxb+6vTrhEELevkiQfRrpWZDUy6PKQfojCTxdYd8f2ejHQbWqqxt6iz5koyQBJIgUZrhCt/a1UKxFoflV0f8Vrnox3t7noG0AtM/Cq5cZVElG7tMN4EDDKAjVYlduX5Kn4EmeetOJL9u75zYt34i9OiKs1IR4W9dewT3582ix/jkz690WG+cVKEp8SSO5RHIiPvYWSctIxhqUSi9in/eXPf1osLk9obWlWaFC6vAjaFCrg7dcrRgyAtxBFlirqHVa4HulvYNFzg+NFfvkiyXLCNTWYnljqnT+DwkcwLY85JaS80q+DE2yRXzyhurl6YQstWkLR7rbxvTTcZGZuTTngQxtX7KvrXUtBXgwbhpyDHrdnG2brBEr5pjpIBvz0PVpVgccUaa8+8V4Jo9Pt9daupEnLWWpdwWqnVPYeG/VtfoRMZq5VaWGZ3vmeOs5IqF5XqkVhOAE+GkpR2g8c15kl4vnxGuwCpwkJVj3djWp1h4xZ89tjmyfyKSxdY+HR8BLKEM1DqC1FX7Q7JXUWT4u4CEnqjhKACUtC9vBwqKq3QWdLuTMiPEcVNFTHZ57tojaBtHaDA0SBN+zLIW+5XCCEAFw4Sj5so8GnUP+Hfw9AcpbH/V7/qLh5s3eEHKLRLeL5RDe0h/oMyQE9s6ltpN4N2U2gFGHi4osd2BVUC8=
 cache:
   directories:
   - "$HOME/.cache/go-build"
