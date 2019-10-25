@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/base
+FROM scratch
 COPY download-geofabrik /
 COPY bbbike.yml /
 COPY geofabrik.yml /

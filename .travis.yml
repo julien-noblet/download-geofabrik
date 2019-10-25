@@ -24,8 +24,8 @@ stages:
 jobs:
   include:
   - stage: Geofabrik
-    if: commit_message =~ /(yaml|YAML|\.yml|geofabrik|Geofabrik)/
-      AND NOT commit_message =~ /Deploy/ AND type != pull_request
+    if: commit_message =~ /(yaml|YAML|\.yml|geofabrik|Geofabrik)/ AND NOT commit_message
+      =~ /Deploy/ AND type != pull_request
     go: stable
     script: make geofabrik
     deploy:
@@ -50,8 +50,8 @@ jobs:
       on:
         all_branches: true
   - stage: bbbike
-    if: commit_message =~ /(yaml|YAML|\.yml|bbbike)/
-      AND NOT commit_message =~ /Deploy/ AND type != pull_request
+    if: commit_message =~ /(yaml|YAML|\.yml|bbbike)/ AND NOT commit_message =~ /Deploy/
+      AND type != pull_request
     go: stable
     script: make bbbike
     deploy:
@@ -84,20 +84,22 @@ jobs:
   - stage: buildTag
     if: tag IS present AND commit_message !~ /(no-build)/
     go: stable
+    env: DOCKER_USERNAME=juliennoblet
     script:
     - sudo apt-get update
     - sudo apt-get install snapd
     - sudo snap install snapcraft --classic
     - test -n "$TRAVIS_TAG" && snapcraft login --with snap.login
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - curl -sL https://git.io/goreleaser | bash
 matrix:
   exclude:
-    - go: '1.9'
-      env: GO111MODULE=on
-    - go: '1.10'
-      env: GO111MODULE=on
-    - go: '1.11' # Should work but in fact it fail :/
-      env: GO111MODULE=on
+  - go: '1.9'
+    env: GO111MODULE=on
+  - go: '1.10'
+    env: GO111MODULE=on
+  - go: '1.11'
+    env: GO111MODULE=on
 env:
   matrix:
   - GO111MODULE=on
@@ -105,6 +107,7 @@ env:
   global:
   - PATH=/snap/bin:$PATH
   - secure: RDB5xi5zZQNqMbOMAG2hX25UyGWGcCjjuOtmtoMSVKhwvvfJgSp840UaT1X4fNlQWb9MXI2f/nWDA1j2XXLJCkCyBWlWgPAsWLi9DwalEFYBVlrAeT9prWHGfsAPa4UbMVnGFfWdNy3rcfOTJUt2FC77S9sxm0kHP4LyCKE459QdmTc5sn9Cb9LuVLtanzb19NImi3F00Wc9g2KoD1CZXncde6iv34NfKgdUGvFhMofensGgD3qAJsjiREC4Vk2oO+9z5dCQ/GmNlFDG/FVst80gsQYsi6m5K5suC+jvYAmFDaENDwgTsRuqYSVnlSxB3IRYkXUPtllKfvx1Z+8ARFxRrX1DWcUkxb2CKq/DIVFPYillA8Wpcr3iBw+S5Tc9Q1G7LQLbc6g0NohdUrIrORP3TwLkq8pmyd+w4SMurGDod1kNfmprNTbgVlLvhCNSpRtyA1YZ74/nRzti+a/TG8zwCbXrlBkSyVw3xmPehEQ0Uu8R3UssvymN1fxKpBDpvcub6nv0k+mRT7mnZvM8uclojrq1rS/2ecq0E0fCdHBZcpwzDG7E7k4KC8e122sLNe4sdscEQUh050gTBF2PkLy7fQF6P+UzkFgJvzd7EPJ99gwxwiMMfKQiR/qFZHZ+j+qIxipc91fA4l0Qn9J89wHVzXJJ5GSCWIX0gb8TNNw=
+  - secure: US6Gxb+6vTrhEELevkiQfRrpWZDUy6PKQfojCTxdYd8f2ejHQbWqqxt6iz5koyQBJIgUZrhCt/a1UKxFoflV0f8Vrnox3t7noG0AtM/Cq5cZVElG7tMN4EDDKAjVYlduX5Kn4EmeetOJL9u75zYt34i9OiKs1IR4W9dewT3582ix/jkz690WG+cVKEp8SSO5RHIiPvYWSctIxhqUSi9in/eXPf1osLk9obWlWaFC6vAjaFCrg7dcrRgyAtxBFlirqHVa4HulvYNFzg+NFfvkiyXLCNTWYnljqnT+DwkcwLY85JaS80q+DE2yRXzyhurl6YQstWkLR7rbxvTTcZGZuTTngQxtX7KvrXUtBXgwbhpyDHrdnG2brBEr5pjpIBvz0PVpVgccUaa8+8V4Jo9Pt9daupEnLWWpdwWqnVPYeG/VtfoRMZq5VaWGZ3vmeOs5IqF5XqkVhOAE+GkpR2g8c15kl4vnxGuwCpwkJVj3djWp1h4xZ89tjmyfyKSxdY+HR8BLKEM1DqC1FX7Q7JXUWT4u4CEnqjhKACUtC9vBwqKq3QWdLuTMiPEcVNFTHZ57tojaBtHaDA0SBN+zLIW+5XCCEAFw4Sj5so8GnUP+Hfw9AcpbH/V7/qLh5s3eEHKLRLeL5RDe0h/oMyQE9s6ltpN4N2U2gFGHi4osd2BVUC8=
 cache:
   directories:
   - "$HOME/.cache/go-build"
