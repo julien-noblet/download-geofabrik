@@ -14,7 +14,7 @@ builds:
     - 386
     - amd64
     - arm64
-  ldflags: "-X main.version={{ .Version }}"
+  ldflags: "-s -w -X main.version={{ .Version }}"
 - id: no-snap
   goos:
     # - android # Not working and I'm not sure ther is anyone using download-geofabrik on android :D
@@ -53,7 +53,7 @@ builds:
       goarch: amd64
     - goos: linux
       goarch: arm64
-  ldflags: "-X main.version={{ .Version }}"
+  ldflags: "-s -w -X main.version={{ .Version }}"
 
 archives:
 -
