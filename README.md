@@ -10,6 +10,14 @@
 Warning! command line have changed from V1
 see [Usage](#usage)
 
+## Docker
+```shell
+docker run -it --rm -v $PWD:/data download-geofabrik:latest download element
+```
+where ```element``` is one of geofabrik's files.
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjulien-noblet%2Fdownload-geofabrik.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjulien-noblet%2Fdownload-geofabrik?ref=badge_large)
+
 ## Usage
 ```shell
 ./download-geofabrik download element
@@ -17,9 +25,6 @@ see [Usage](#usage)
 where ```element``` is one of geofabrik's files.
 ```shell
 ./download-geofabrik --help-long
-
-## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjulien-noblet%2Fdownload-geofabrik.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjulien-noblet%2Fdownload-geofabrik?ref=badge_large)
 
 usage: download-geofabrik [<flags>] <command> [<args> ...]
 
