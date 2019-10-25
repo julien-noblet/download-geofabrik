@@ -29,17 +29,18 @@ var (
 	list = app.Command("list", "Show elements available")
 	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool()
 
-	download = app.Command("download", "Download element") //TODO : add d as command
-	delement = download.Arg("element", "OSM element").Required().String()
-	dosmBz2  = download.Flag("osm.bz2", "Download osm.bz2 if available").Short('B').Bool()
-	dosmGz   = download.Flag("osm.gz", "Download osm.gz if available").Short('G').Bool()
-	dshpZip  = download.Flag("shp.zip", "Download shp.zip if available").Short('S').Bool()
-	dosmPbf  = download.Flag("osm.pbf", "Download osm.pbf (default)").Short('P').Bool()
-	doshPbf  = download.Flag("osh.pbf", "Download osh.pbf").Short('H').Bool()
-	dstate   = download.Flag("state", "Download state.txt file").Short('s').Bool()
-	dpoly    = download.Flag("poly", "Download poly file").Short('p').Bool()
-	dkml     = download.Flag("kml", "Download kml file").Short('k').Bool()
-	dCheck   = download.Flag("check", "Control with checksum (default) Use --no-check to discard control").Default("true").Bool()
+	download   = app.Command("download", "Download element") //TODO : add d as command
+	delement   = download.Arg("element", "OSM element").Required().String()
+	dosmBz2    = download.Flag("osm.bz2", "Download osm.bz2 if available").Short('B').Bool()
+	dosmGz     = download.Flag("osm.gz", "Download osm.gz if available").Short('G').Bool()
+	dshpZip    = download.Flag("shp.zip", "Download shp.zip if available").Short('S').Bool()
+	dosmPbf    = download.Flag("osm.pbf", "Download osm.pbf (default)").Short('P').Bool()
+	doshPbf    = download.Flag("osh.pbf", "Download osh.pbf").Short('H').Bool()
+	dstate     = download.Flag("state", "Download state.txt file").Short('s').Bool()
+	dpoly      = download.Flag("poly", "Download poly file").Short('p').Bool()
+	dkml       = download.Flag("kml", "Download kml file").Short('k').Bool()
+	dCheck     = download.Flag("check", "Control with checksum (default) Use --no-check to discard control").Default("true").Bool()
+	dOutputDir = download.Flag("output_directory", "Set output directory, you can use also OUTPUT_DIR env variable").Short('d').String()
 
 	generate = app.Command("generate", "Generate a new config file")
 )
@@ -108,16 +109,16 @@ func downloadCommand() {
 	formatFile := getFormats()
 	for _, format := range *formatFile {
 		if ok, _, _ := isHashable(configPtr, format); *dCheck && ok {
-			if fileExist(*delement + "." + format) {
+			if fileExist(*dOutputDir + *delement + "." + format) {
 				if !downloadChecksum(format) {
 					if !*fQuiet {
-						log.Println("Checksum mismatch, re-downloading", *delement+"."+format)
+						log.Println("Checksum mismatch, re-downloading", *dOutputDir+*delement+"."+format)
 					}
 					myElem, err := findElem(configPtr, *delement)
 					catch(err)
 					myURL, err := elem2URL(configPtr, myElem, format)
 					catch(err)
-					err = downloadFromURL(myURL, *delement+"."+format)
+					err = downloadFromURL(myURL, *dOutputDir+*delement+"."+format)
 					catch(err)
 					downloadChecksum(format)
 
@@ -131,10 +132,10 @@ func downloadCommand() {
 				catch(err)
 				myURL, err := elem2URL(configPtr, myElem, format)
 				catch(err)
-				err = downloadFromURL(myURL, *delement+"."+format)
+				err = downloadFromURL(myURL, *dOutputDir+*delement+"."+format)
 				catch(err)
 				if !downloadChecksum(format) && !*fQuiet {
-					log.Println("Checksum mismatch, please re-download", *delement+"."+format)
+					log.Println("Checksum mismatch, please re-download", *dOutputDir+*delement+"."+format)
 				}
 			}
 		} else {
@@ -142,7 +143,7 @@ func downloadCommand() {
 			catch(err)
 			myURL, err := elem2URL(configPtr, myElem, format)
 			catch(err)
-			err = downloadFromURL(myURL, *delement+"."+format)
+			err = downloadFromURL(myURL, *dOutputDir+*delement+"."+format)
 			catch(err)
 		}
 	}
@@ -152,6 +153,16 @@ func main() {
 
 	app.Version(version) // Add version flag
 	commands := kingpin.MustParse(app.Parse(os.Args[1:]))
+	if *dOutputDir == "" {
+		if *dOutputDir = os.Getenv("OUTPUT_DIR"); *dOutputDir == "" {
+			var err error
+			*dOutputDir, err = os.Getwd() // TODO: use ENV var ?
+			if err != nil {
+				panic(err)
+			}
+		}
+	}
+	*dOutputDir = *dOutputDir + string(os.PathSeparator)
 	checkService()
 	switch commands {
 	case list.FullCommand():
@@ -221,29 +232,29 @@ func downloadChecksum(format string) bool {
 			catch(err)
 			myURL, err := elem2URL(configPtr, myElem, fhash)
 			catch(err)
-			err = downloadFromURL(myURL, *delement+"."+fhash)
+			err = downloadFromURL(myURL, *dOutputDir+*delement+"."+fhash)
 			catch(err)
 			if *fVerbose && !*fQuiet {
-				log.Println("Hashing", *delement+"."+format)
+				log.Println("Hashing", *dOutputDir+*delement+"."+format)
 			}
-			hashed, err := hashFileMD5(*delement + "." + format)
+			hashed, err := hashFileMD5(*dOutputDir + *delement + "." + format)
 			catch(err)
 			if *fVerbose && !*fQuiet {
 				log.Println("MD5 :", hashed)
 			}
-			ret, err := controlHash(*delement+"."+fhash, hashed)
+			ret, err := controlHash(*dOutputDir+*delement+"."+fhash, hashed)
 			catch(err)
 			if !*fQuiet {
 				if ret {
-					log.Println("Checksum OK for", *delement+"."+format)
+					log.Println("Checksum OK for", *dOutputDir+*delement+"."+format)
 				} else {
-					log.Println("Checksum MISMATCH for", *delement+"."+format)
+					log.Println("Checksum MISMATCH for", *dOutputDir+*delement+"."+format)
 				}
 			}
 			return ret
 		}
 		if !*fQuiet {
-			log.Println("No checksum provided for", *delement+"."+format)
+			log.Println("No checksum provided for", *dOutputDir+*delement+"."+format)
 		}
 	}
 	return ret

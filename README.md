@@ -62,6 +62,9 @@ Commands:
     -k, --kml      Download kml file
         --check    Control with checksum (default) Use --no-check to discard
                    control
+    -d, --output_directory=OUTPUT_DIRECTORY  
+                   Set output directory, you can use also OUTPUT_DIR env
+                   variable
 
   generate
     Generate a new config file
