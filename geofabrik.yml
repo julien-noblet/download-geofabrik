@@ -25,6 +25,17 @@ formats:
     ext: state
     loc: -updates/state.txt
 elements:
+  "":
+    id: ""
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
   afghanistan:
     id: afghanistan
     name: Afghanistan
