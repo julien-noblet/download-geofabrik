@@ -1,0 +1,189 @@
+[
+  {
+    "Version": "50edc4183043ca3b83c69395871e7c5fbe8f4157",
+    "Date": 1572116886,
+    "Tags": [
+      "ref=refs/heads/julien-noblet-patch-1"
+    ],
+    "Suites": [
+      {
+        "Goos": "linux",
+        "Goarch": "amd64",
+        "Pkg": "github.com/julien-noblet/download-geofabrik",
+        "Benchmarks": [
+          {
+            "Name": "Benchmark_Exist_geofabrik_yml-2",
+            "Runs": 3304832,
+            "NsPerOp": 345,
+            "Mem": {
+              "BytesPerOp": 195,
+              "AllocsPerOp": 2
+            }
+          },
+          {
+            "Name": "Benchmark_loadConfig_geofabrik_yml-2",
+            "Runs": 128,
+            "NsPerOp": 9436873,
+            "Mem": {
+              "BytesPerOp": 1842963,
+              "AllocsPerOp": 40506
+            }
+          },
+          {
+            "Name": "Benchmark_loadConfig_osmfr_yml-2",
+            "Runs": 91,
+            "NsPerOp": 13782907,
+            "Mem": {
+              "BytesPerOp": 3041962,
+              "AllocsPerOp": 57567
+            }
+          },
+          {
+            "Name": "Benchmark_GetElement_geofabrik_yml-2",
+            "Runs": 2561893,
+            "NsPerOp": 470,
+            "Mem": {
+              "BytesPerOp": 292,
+              "AllocsPerOp": 3
+            }
+          },
+          {
+            "Name": "Benchmark_hashFileMD5_LICENSE-2",
+            "Runs": 23318,
+            "NsPerOp": 52364,
+            "Mem": {
+              "BytesPerOp": 33936,
+              "AllocsPerOp": 17
+            }
+          },
+          {
+            "Name": "Benchmark_controlHash_LICENSE-2",
+            "Runs": 85747,
+            "NsPerOp": 13569,
+            "Mem": {
+              "BytesPerOp": 1374,
+              "AllocsPerOp": 11
+            }
+          },
+          {
+            "Name": "Benchmark_hasParent_parse_geofabrik_yml-2",
+            "Runs": 126654,
+            "NsPerOp": 8594,
+            "Mem": {
+              "BytesPerOp": 108,
+              "AllocsPerOp": 1
+            }
+          },
+          {
+            "Name": "Benchmark_findElem_parse_all_geofabrik_yml-2",
+            "Runs": 18488,
+            "NsPerOp": 64836,
+            "Mem": {
+              "BytesPerOp": 39248,
+              "AllocsPerOp": 409
+            }
+          },
+          {
+            "Name": "Benchmark_GetElement_parse_all_geofabrik_yml-2",
+            "Runs": 5384,
+            "NsPerOp": 216258,
+            "Mem": {
+              "BytesPerOp": 117955,
+              "AllocsPerOp": 1230
+            }
+          },
+          {
+            "Name": "Benchmark_findElem_parse_France_geofabrik_yml-2",
+            "Runs": 9302908,
+            "NsPerOp": 122,
+            "Mem": {
+              "BytesPerOp": 96,
+              "AllocsPerOp": 1
+            }
+          },
+          {
+            "Name": "Benchmark_stringInSlice_parse_geofabrik_yml-2",
+            "Runs": 8709,
+            "NsPerOp": 137144,
+            "Mem": {
+              "BytesPerOp": 1199,
+              "AllocsPerOp": 13
+            }
+          },
+          {
+            "Name": "Benchmark_contains_parse_geofabrik_yml-2",
+            "Runs": 8464,
+            "NsPerOp": 137906,
+            "Mem": {
+              "BytesPerOp": 775,
+              "AllocsPerOp": 11
+            }
+          },
+          {
+            "Name": "Benchmark_stringInSlice_parse_geofabrik_yml_France_formats_osm_pbf-2",
+            "Runs": 138882249,
+            "NsPerOp": 8.55,
+            "Mem": {
+              "BytesPerOp": 0,
+              "AllocsPerOp": 0
+            }
+          },
+          {
+            "Name": "Benchmark_contain_parse_geofabrik_yml_France_formats_osm_pbf-2",
+            "Runs": 141399919,
+            "NsPerOp": 8.43,
+            "Mem": {
+              "BytesPerOp": 0,
+              "AllocsPerOp": 0
+            }
+          },
+          {
+            "Name": "Benchmark_elem2preURL_parse_France_geofabrik_yml-2",
+            "Runs": 1966480,
+            "NsPerOp": 625,
+            "Mem": {
+              "BytesPerOp": 438,
+              "AllocsPerOp": 6
+            }
+          },
+          {
+            "Name": "Benchmark_elem2URL_parse_France_geofabrik_yml-2",
+            "Runs": 1593219,
+            "NsPerOp": 722,
+            "Mem": {
+              "BytesPerOp": 500,
+              "AllocsPerOp": 7
+            }
+          },
+          {
+            "Name": "Benchmark_elem2URL_parse_France_openstreetmap_fr_yml-2",
+            "Runs": 1485324,
+            "NsPerOp": 766,
+            "Mem": {
+              "BytesPerOp": 584,
+              "AllocsPerOp": 7
+            }
+          },
+          {
+            "Name": "Benchmark_miniFormats_parse_geofabrik_yml-2",
+            "Runs": 12984,
+            "NsPerOp": 91370,
+            "Mem": {
+              "BytesPerOp": 4115,
+              "AllocsPerOp": 411
+            }
+          },
+          {
+            "Name": "Benchmark_isHashable_geofabrik_yml-2",
+            "Runs": 1167702,
+            "NsPerOp": 1022,
+            "Mem": {
+              "BytesPerOp": 113,
+              "AllocsPerOp": 8
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
