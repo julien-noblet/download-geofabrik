@@ -1,32 +1,12 @@
 package main
 
 import (
-	"io/ioutil"
-	"net/http"
 	"reflect"
 	"sync"
 	"testing"
 
 	yaml "gopkg.in/yaml.v2"
 )
-
-//Sample data:
-func getHTML(url string) string {
-	resp, err := http.Get(url)
-	if err != nil {
-		// handle error
-	}
-	defer func() {
-		if err := resp.Body.Close(); err != nil {
-			panic(err)
-		}
-	}()
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err)
-	}
-	return string(body)
-}
 
 func TestElementSlice_Generate(t *testing.T) {
 	tests := []struct {
@@ -37,13 +17,14 @@ func TestElementSlice_Generate(t *testing.T) {
 	}{
 		// TODO: Add test cases.
 		{
-			name:    "Marshalling OK, no error",
+			name:    "Marshaling OK, no error",
 			e:       sampleElementValidPtr,
 			want:    []byte{},
 			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		myConfig := &SampleConfigValidPtr
 		myConfig.Elements = map[string]Element{} // void Elements
 		myConfig.Elements = tt.e
@@ -65,13 +46,16 @@ func TestGenerate(t *testing.T) {
 	type args struct {
 		configfile string
 	}
+
 	tests := []struct {
 		name string
 		args args
 	}{
 		// TODO: Add test cases.
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			Generate(tt.args.configfile)
 		})
@@ -79,11 +63,12 @@ func TestGenerate(t *testing.T) {
 }
 
 func TestConfig_mergeElement(t *testing.T) {
-	myFakeGeorgia := sampleFakeGeorgia2Ptr
-	myFakeGeorgia.ID = "georgia-us"
 	type args struct {
 		element *Element
 	}
+
+	myFakeGeorgia := sampleFakeGeorgia2Ptr
+	myFakeGeorgia.ID = "georgia-us"
 	tests := []struct {
 		name    string
 		args    args
@@ -114,7 +99,7 @@ func TestConfig_mergeElement(t *testing.T) {
 		{
 			name: "adding a format to a meta element",
 			args: args{
-				element: &Element{ID: "us", Parent: "north-america", Formats: []string{"osm.pbf"}},
+				element: &Element{ID: "us", Parent: "north-america", Formats: []string{formatOsmPbf}},
 			},
 			wantErr: false,
 		},
@@ -126,7 +111,9 @@ func TestConfig_mergeElement(t *testing.T) {
 			wantErr: true,
 		},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			c := Config{
 				Elements:      sampleElementValidPtr,
@@ -138,28 +125,3 @@ func TestConfig_mergeElement(t *testing.T) {
 		})
 	}
 }
-
-// createHTMLElement is not used --- removing dead code!
-// func createHTMLElement(t *testing.T, in string) *colly.HTMLElement {
-// 	sel := "*"
-// 	ctx := &colly.Context{}
-// 	resp := &colly.Response{
-// 		Request: &colly.Request{
-// 			Ctx: ctx,
-// 		},
-// 		Ctx: ctx,
-// 	}
-// 	doc, err := goquery.NewDocumentFromReader(bytes.NewBuffer([]byte(in)))
-// 	if err != nil {
-// 		t.Fatal(err)
-// 	}
-// 	elements := []*colly.HTMLElement{}
-// 	i := 0
-// 	doc.Find(sel).Each(func(_ int, s *goquery.Selection) {
-// 		for _, n := range s.Nodes {
-// 			elements = append(elements, colly.NewHTMLElementFromSelectionNode(resp, s, n, i))
-// 			i++
-// 		}
-// 	})
-// 	return elements[0]
-// }

@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-//Element represent a part to download whit formats, name, parent...
+// Element represent a part to download whit formats, name, parent...
 type Element struct {
 	ID      string         `yaml:"id"`
 	File    string         `yaml:"file,omitempty"`
@@ -18,15 +18,19 @@ type Element struct {
 type elementFormats []string
 
 func (e *Element) hasParent() bool {
-	return len(e.Parent) != 0
+	return e.Parent != ""
 }
 
 func elem2URL(c *Config, e *Element, ext string) (string, error) {
-	var res string
-	var err error
+	var (
+		res string
+		err error
+	)
+
 	if !e.Formats.contains(ext) {
 		return "", fmt.Errorf("error!!! %s format not exist", ext)
 	}
+
 	format := c.Formats[ext]
 	if format.BasePath != "" {
 		if format.BaseURL != "" {
@@ -45,33 +49,39 @@ func elem2URL(c *Config, e *Element, ext string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	res += format.Loc
+
 	return res, nil
 }
 
 func elem2preURL(c *Config, e *Element, b ...string) (string, error) {
-	var res string
 	myElem, err := findElem(c, e.ID)
 	if err != nil {
 		return "", err
 	}
+
 	if myElem.hasParent() {
 		parent, err := findElem(c, myElem.Parent)
 		if err != nil {
 			return "", err
 		}
-		res, err = elem2preURL(c, parent, b...)
+
+		res, err := elem2preURL(c, parent, b...)
 		if err != nil {
 			return "", err
 		}
-		res = res + "/"
-		if myElem.File != "" { //TODO use file in config???
-			res = res + myElem.File
+
+		res += "/"
+		if myElem.File != "" { // TODO use file in config???
+			res += myElem.File
 		} else {
-			res = res + myElem.ID
+			res += myElem.ID
 		}
+
 		return res, nil
 	}
+
 	switch len(b) {
 	case 1:
 		return c.BaseURL + "/" + strings.Join(b, "/") + myElem.ID, nil
@@ -84,10 +94,10 @@ func elem2preURL(c *Config, e *Element, b ...string) (string, error) {
 
 func findElem(c *Config, e string) (*Element, error) {
 	res := c.Elements[e]
-	//fmt.Println("findElem", res.ID, e)
 	if res.ID == "" || res.ID != e {
 		return nil, fmt.Errorf("%s is not in config\n Please use \"list\" command", e)
 	}
+
 	return &res, nil
 }
 
@@ -100,6 +110,7 @@ func stringInSlice(a *string, list *elementFormats) bool {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -109,12 +120,13 @@ func (f *elementFormats) contains(e string) bool {
 			return true
 		}
 	}
+
 	return false
 }
 
-//MakeParent make e parent(id=name=gparent)
-//Usefule for meta parents
-func MakeParent(e Element, gparent string) *Element {
+// MakeParent make e parent(id=name=gparent)
+// Useful for meta parents
+func MakeParent(e *Element, gparent string) *Element {
 	if e.hasParent() {
 		return &Element{
 			ID:     e.Parent,
@@ -123,5 +135,6 @@ func MakeParent(e Element, gparent string) *Element {
 			Meta:   true,
 		}
 	}
+
 	return nil
 }

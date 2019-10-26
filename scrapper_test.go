@@ -24,6 +24,7 @@ func TestGetParent(t *testing.T) {
 		{name: "grand parents", url: "https://download.geofabrik.de/parent1/parent2", want: "parent1", want2: "https://download.geofabrik.de/parent1"},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			got, got2 := GetParent(tt.url)
 			if got != tt.want {
@@ -50,6 +51,7 @@ func Test_FileExt(t *testing.T) {
 		{name: "1 Parent long ext", url: "https://download.geofabrik.de/parent/test.ext.html", want: "test", want2: "ext.html"},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			got, ext := FileExt(tt.url)
 			if got != tt.want {
@@ -68,6 +70,7 @@ func Test_ParseFormat(t *testing.T) {
 		format string
 		c      Config
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -76,13 +79,13 @@ func Test_ParseFormat(t *testing.T) {
 		{name: "Add osm.pbf but already in",
 			args: args{
 				id:     "a",
-				format: "osm.pbf",
+				format: formatOsmPbf,
 				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf"},
+							Formats: []string{formatOsmPbf},
 							Meta:    false,
 						},
 					},
@@ -93,7 +96,7 @@ func Test_ParseFormat(t *testing.T) {
 				"a": Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf"},
+					Formats: []string{formatOsmPbf},
 					Meta:    false,
 				},
 			},
@@ -101,7 +104,7 @@ func Test_ParseFormat(t *testing.T) {
 		{name: "Add osm.pbf",
 			args: args{
 				id:     "a",
-				format: "osm.pbf",
+				format: formatOsmPbf,
 				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
@@ -118,7 +121,7 @@ func Test_ParseFormat(t *testing.T) {
 				"a": Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf"},
+					Formats: []string{formatOsmPbf},
 					Meta:    false,
 				},
 			},
@@ -133,7 +136,7 @@ func Test_ParseFormat(t *testing.T) {
 						"a": Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf", "kml", "state"},
+							Formats: []string{formatOsmPbf, formatKml, formatState},
 							Meta:    false,
 						},
 					},
@@ -144,7 +147,7 @@ func Test_ParseFormat(t *testing.T) {
 				"a": Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf", "kml", "state", "osm.pbf.md5"},
+					Formats: []string{formatOsmPbf, formatKml, formatState, "osm.pbf.md5"},
 					Meta:    false,
 				},
 			},
@@ -153,13 +156,13 @@ func Test_ParseFormat(t *testing.T) {
 			name: "Add osm.bz2",
 			args: args{
 				id:     "a",
-				format: "osm.bz2",
+				format: formatOsmBz2,
 				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf", "kml", "state"},
+							Formats: []string{formatOsmPbf, formatKml, formatState},
 							Meta:    false,
 						},
 					},
@@ -170,7 +173,7 @@ func Test_ParseFormat(t *testing.T) {
 				"a": Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf", "kml", "state", "osm.bz2"},
+					Formats: []string{formatOsmPbf, formatKml, formatState, formatOsmBz2},
 					Meta:    false,
 				},
 			},
@@ -185,7 +188,7 @@ func Test_ParseFormat(t *testing.T) {
 						"a": Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf", "kml", "state"},
+							Formats: []string{formatOsmPbf, formatKml, formatState},
 							Meta:    false,
 						},
 					},
@@ -196,7 +199,7 @@ func Test_ParseFormat(t *testing.T) {
 				"a": Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf", "kml", "state", "osm.bz2.md5"},
+					Formats: []string{formatOsmPbf, formatKml, formatState, "osm.bz2.md5"},
 					Meta:    false,
 				},
 			},
@@ -205,13 +208,13 @@ func Test_ParseFormat(t *testing.T) {
 			name: "Add poly",
 			args: args{
 				id:     "a",
-				format: "poly",
+				format: formatPoly,
 				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf", "kml", "state"},
+							Formats: []string{formatOsmPbf, formatKml, formatState},
 							Meta:    false,
 						},
 					},
@@ -222,7 +225,7 @@ func Test_ParseFormat(t *testing.T) {
 				"a": Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf", "kml", "state", "poly"},
+					Formats: []string{formatOsmPbf, formatKml, formatState, formatPoly},
 					Meta:    false,
 				},
 			},
@@ -230,13 +233,13 @@ func Test_ParseFormat(t *testing.T) {
 		{name: "Add shp.zip",
 			args: args{
 				id:     "a",
-				format: "shp.zip",
+				format: formatShpZip,
 				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf", "kml", "state"},
+							Formats: []string{formatOsmPbf, formatKml, formatState},
 							Meta:    false,
 						},
 					},
@@ -247,7 +250,7 @@ func Test_ParseFormat(t *testing.T) {
 				"a": Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf", "kml", "state", "shp.zip"},
+					Formats: []string{formatOsmPbf, formatKml, formatState, formatShpZip},
 					Meta:    false,
 				},
 			},
@@ -261,7 +264,7 @@ func Test_ParseFormat(t *testing.T) {
 						"a": Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf", "kml", "state"},
+							Formats: []string{formatOsmPbf, formatKml, formatState},
 							Meta:    false,
 						},
 					},
@@ -272,7 +275,7 @@ func Test_ParseFormat(t *testing.T) {
 				"a": Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf", "kml", "state"},
+					Formats: []string{formatOsmPbf, formatKml, formatState},
 					Meta:    false,
 				},
 			},
@@ -280,7 +283,7 @@ func Test_ParseFormat(t *testing.T) {
 		{name: "Add osm.pbf on meta",
 			args: args{
 				id:     "a",
-				format: "osm.pbf",
+				format: formatOsmPbf,
 				c: Config{
 					Elements: ElementSlice{
 						"a": Element{
@@ -297,28 +300,29 @@ func Test_ParseFormat(t *testing.T) {
 				"a": Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf"},
+					Formats: []string{formatOsmPbf},
 					Meta:    false,
 				},
 			},
 		},
 	}
 	for tn := range tests {
+		tn := tn
 		t.Run(tests[tn].name, func(t *testing.T) {
 			s := Scrapper{
 				Config: &tests[tn].args.c,
 			}
 			s.Config.Formats = formatDefinitions{
-				"osh.pbf":     {ID: "osh.pbf", Loc: ".osh.pbf"},
+				formatOshPbf:  {ID: formatOshPbf, Loc: ".osh.pbf"},
 				"osh.pbf.md5": format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
-				"osm.bz2":     {ID: "osm.bz2", Loc: "-latest.osm.bz2"},
+				formatOsmBz2:  {ID: formatOsmBz2, Loc: "-latest.osm.bz2"},
 				"osm.bz2.md5": {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
-				"osm.pbf":     {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
+				formatOsmPbf:  {ID: formatOsmPbf, Loc: "-latest.osm.pbf"},
 				"osm.pbf.md5": {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-				"poly":        {ID: "poly", Loc: ".poly"},
-				"kml":         {ID: "kml", Loc: ".kml"},
-				"state":       {ID: "state", Loc: "-updates/state.txt"},
-				"shp.zip":     {ID: "shp.zip", Loc: "-latest-free.shp.zip"},
+				formatPoly:    {ID: formatPoly, Loc: ".poly"},
+				formatKml:     {ID: formatKml, Loc: ".kml"},
+				formatState:   {ID: formatState, Loc: "-updates/state.txt"},
+				formatShpZip:  {ID: formatShpZip, Loc: "-latest-free.shp.zip"},
 			}
 
 			s.ParseFormat(tests[tn].args.id, tests[tn].args.format)
@@ -331,10 +335,11 @@ func Test_ParseFormat(t *testing.T) {
 
 func TestScrapper_PB(t *testing.T) {
 	for i := 0; i < 10; i++ {
-		want := rand.Int()
+		want := rand.Int() //nolint:gosec
 		s := Scrapper{
 			PB: want,
 		}
+
 		out := s.GetPB()
 		if out != want {
 			t.Errorf("GetPB() got %d, want %d", out, want)
@@ -352,6 +357,7 @@ func TestScrapper_GetStartURL(t *testing.T) {
 		s := Scrapper{
 			StartURL: want,
 		}
+
 		out := s.GetStartURL()
 		if out != want {
 			t.Errorf("GetStartURL() got %v, want %v", out, want)
@@ -364,11 +370,11 @@ func stringWithCharset(seededRand *rand.Rand, length int, charset string) string
 	for i := range b {
 		b[i] = charset[seededRand.Intn(len(charset))]
 	}
+
 	return string(b)
 }
 
 func TestScrapper_Limit(t *testing.T) {
-
 	tests := []struct {
 		name   string
 		fields Scrapper
@@ -385,6 +391,7 @@ func TestScrapper_Limit(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			s := &Scrapper{
 				BaseURL:          tt.fields.BaseURL,
@@ -502,6 +509,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			s := &Scrapper{
 				BaseURL:          tt.fields.BaseURL,

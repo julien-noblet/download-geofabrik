@@ -27,6 +27,7 @@ func Test_checkService(t *testing.T) {
 		{name: "checkService(), fService = \"\"", service: "", want: false},
 	}
 	for _, tt := range tests {
+		tt := tt
 		*fService = tt.service
 		t.Run(tt.name, func(t *testing.T) {
 			if tt.config != "" {
@@ -63,6 +64,7 @@ func Test_catch(t *testing.T) {
 	type args struct {
 		err error
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -71,7 +73,9 @@ func Test_catch(t *testing.T) {
 		// TODO: Add test cases.
 		{name: "should display error", args: args{err: fmt.Errorf("test")}, want: "test"},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			// For testing log, need to use Monkey patching
 			fakeLogFatal := func(msg ...interface{}) {
@@ -88,6 +92,7 @@ func Test_hashFileMD5(t *testing.T) {
 	type args struct {
 		filePath string
 	}
+
 	tests := []struct {
 		name    string
 		args    args
@@ -97,7 +102,9 @@ func Test_hashFileMD5(t *testing.T) {
 		// TODO: Add test cases.
 		{name: "Check with LICENSE file", args: args{filePath: "./LICENSE"}, want: "65d26fcc2f35ea6a181ac777e42db1ea", wantErr: false},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := hashFileMD5(tt.args.filePath)
 			if err != nil != tt.wantErr {
@@ -113,15 +120,23 @@ func Test_hashFileMD5(t *testing.T) {
 
 func Benchmark_hashFileMD5_LICENSE(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		hashFileMD5("./LICENSE")
+		if _, err := hashFileMD5("./LICENSE"); err != nil {
+			b.Error(err.Error())
+		}
 	}
 }
 func Benchmark_controlHash_LICENSE(b *testing.B) {
 	hash, _ := hashFileMD5("./LICENSE")
 	hashfile := "/tmp/download-geofabrik-test.hash"
-	ioutil.WriteFile(hashfile, []byte(hash), 0644)
+
+	if err := ioutil.WriteFile(hashfile, []byte(hash), 0644); err != nil {
+		b.Errorf("Can't write file %s err: %v", hashfile, err)
+	}
+
 	for n := 0; n < b.N; n++ {
-		controlHash(hashfile, hash)
+		if _, err := controlHash(hashfile, hash); err != nil {
+			b.Error(err.Error())
+		}
 	}
 }
 
@@ -130,6 +145,7 @@ func Test_controlHash(t *testing.T) {
 		hashfile string
 		hash     string
 	}
+
 	tests := []struct {
 		name       string
 		args       args
@@ -141,9 +157,15 @@ func Test_controlHash(t *testing.T) {
 		{name: "Check with LICENSE file", fileToHash: "./LICENSE", args: args{hashfile: "/tmp/download-geofabrik-test.hash", hash: "65d26fcc2f35ea6a181ac777e42db1ea"}, want: true, wantErr: false},
 		{name: "Check with LICENSE file wrong hash", fileToHash: "./LICENSE", args: args{hashfile: "/tmp/download-geofabrik-test.hash", hash: "65d26fcc2f35ea6a181ac777e42db1eb"}, want: false, wantErr: false},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		hash, _ := hashFileMD5(tt.fileToHash)
-		ioutil.WriteFile(tt.args.hashfile, []byte(hash), 0644)
+
+		if err := ioutil.WriteFile(tt.args.hashfile, []byte(hash), 0644); err != nil {
+			t.Errorf("can't write file %s err: %v", tt.args.hashfile, err)
+		}
+
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := controlHash(tt.args.hashfile, tt.args.hash)
 			if err != nil != tt.wantErr {
@@ -160,24 +182,27 @@ func Test_controlHash(t *testing.T) {
 // Test_downloadChecksum I don't know why sometimes controlHash fail :'(
 // seems geofabrik have a limit download I reach sometimes :/
 func Test_downloadChecksum(t *testing.T) {
-	*fQuiet = true // be silent!
 	type args struct {
 		format string
 	}
+
+	*fQuiet = true // be silent!
 	tests := []struct {
 		name     string
 		fConfig  string
-		dCheck   bool
 		delement string
 		args     args
+		dCheck   bool
 		want     bool
 	}{
 		// TODO: Add test cases.
-		{name: "dCheck = false monaco.osm.pbf from geofabrik", dCheck: false, fConfig: "./geofabrik.yml", delement: "monaco", args: args{format: "osm.pbf"}, want: false},
-		{name: "dCheck = true monaco.osm.pbf from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: "osm.pbf"}, want: true},
-		{name: "dCheck = true monaco.poly from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: "poly"}, want: false},
+		{name: "dCheck = false monaco.osm.pbf from geofabrik", dCheck: false, fConfig: "./geofabrik.yml", delement: "monaco", args: args{format: formatOsmPbf}, want: false},
+		{name: "dCheck = true monaco.osm.pbf from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: formatOsmPbf}, want: true},
+		{name: "dCheck = true monaco.poly from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: formatPoly}, want: false},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		*dCheck = tt.dCheck
 		*fConfig = tt.fConfig
 		*delement = tt.delement
@@ -221,6 +246,7 @@ func Test_listCommand(t *testing.T) {
 		{name: "List Markdown", lmd: true, want: "Markdown"},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			*lmd = tt.lmd
 			fakelistAllRegions := func(configPtr *Config, format string) {
@@ -247,11 +273,11 @@ func Test_downloadCommand(t *testing.T) {
 	tests := []struct {
 		name          string
 		fConfig       string
-		dCheck        bool
 		delement      string
 		formatsFlags  fFlags
 		wantURL       string
 		wantOutput    string
+		dCheck        bool
 		checksumValid bool
 		fakefileExist bool
 	}{
@@ -321,6 +347,7 @@ func Test_downloadCommand(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		*dosmPbf = tt.formatsFlags.dosmPbf || false
 		*doshPbf = tt.formatsFlags.doshPbf || false
 		*dosmBz2 = tt.formatsFlags.dosmBz2 || false

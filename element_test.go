@@ -9,15 +9,15 @@ var sampleAfricaElementPtr = Element{
 	ID:   "africa",
 	Name: "Africa",
 	Formats: []string{
-		"osm.pbf",
+		formatOsmPbf,
 		"osm.pbf.md5",
-		"osm.bz2",
+		formatOsmBz2,
 		"osm.bz2.md5",
-		"osh.pbf",
+		formatOshPbf,
 		"osh.pbf.md5",
-		"poly",
-		"kml",
-		"state",
+		formatPoly,
+		formatKml,
+		formatState,
 	},
 }
 var sampleGeorgiaUsElementPtr = Element{
@@ -25,16 +25,16 @@ var sampleGeorgiaUsElementPtr = Element{
 	File: "georgia",
 	Name: "Georgia (US State)",
 	Formats: []string{
-		"osm.pbf",
+		formatOsmPbf,
 		"osm.pbf.md5",
-		"shp.zip",
-		"osm.bz2",
+		formatShpZip,
+		formatOsmBz2,
 		"osm.bz2.md5",
-		"osh.pbf",
+		formatOshPbf,
 		"osh.pbf.md5",
-		"poly",
-		"kml",
-		"state",
+		formatPoly,
+		formatKml,
+		formatState,
 	},
 	Parent: "us",
 }
@@ -48,15 +48,15 @@ var sampleNorthAmericaElementPtr = Element{
 	ID:   "north-america",
 	Name: "North America",
 	Formats: []string{
-		"osm.pbf",
+		formatOsmPbf,
 		"osm.pbf.md5",
-		"osm.bz2",
+		formatOsmBz2,
 		"osm.bz2.md5",
-		"osh.pbf",
+		formatOshPbf,
 		"osh.pbf.md5",
-		"poly",
-		"kml",
-		"state",
+		formatPoly,
+		formatKml,
+		formatState,
 	},
 }
 var sampleElementValidPtr = map[string]Element{
@@ -66,22 +66,22 @@ var sampleElementValidPtr = map[string]Element{
 	"north-america": sampleNorthAmericaElementPtr,
 }
 
-//Creating some fake samples
+// Creating some fake samples
 var sampleFakeGeorgiaPtr = Element{
 	ID:   "georgia-usf",
 	File: "georgia-fake",
 	Name: "Georgia (US State) - fake test",
 	Formats: []string{
-		"osm.pbf",
+		formatOsmPbf,
 		"osm.pbf.md5",
-		"shp.zip",
-		"osm.bz2",
+		formatShpZip,
+		formatOsmBz2,
 		"osm.bz2.md5",
-		"osh.pbf",
+		formatOshPbf,
 		"osh.pbf.md5",
-		"poly",
-		"kml",
-		"state",
+		formatPoly,
+		formatKml,
+		formatState,
 	},
 	Parent: "us", // keep good parent!
 }
@@ -90,16 +90,16 @@ var sampleFakeGeorgia2Ptr = Element{
 	File: "georgia",
 	Name: "Georgia (US State)",
 	Formats: []string{
-		"osm.pbf",
+		formatOsmPbf,
 		"osm.pbf.md5",
-		"shp.zip",
-		"osm.bz2",
+		formatShpZip,
+		formatOsmBz2,
 		"osm.bz2.md5",
-		"osh.pbf",
+		formatOshPbf,
 		"osh.pbf.md5",
-		"poly",
-		"kml",
-		"state",
+		formatPoly,
+		formatKml,
+		formatState,
 	},
 	Parent: "notus", // bad parent not exist!
 }
@@ -108,16 +108,16 @@ var sampleFakeGeorgia3Ptr = Element{
 	File: "georgia",
 	Name: "Georgia (US State)",
 	Formats: []string{
-		"osm.pbf",
+		formatOsmPbf,
 		"osm.pbf.md5",
-		"shp.zip",
-		"osm.bz2",
+		formatShpZip,
+		formatOsmBz2,
 		"osm.bz2.md5",
-		"osh.pbf",
+		formatOshPbf,
 		"osh.pbf.md5",
-		"poly",
-		"kml",
-		"state",
+		formatPoly,
+		formatKml,
+		formatState,
 	},
 	Parent: "notus2",
 }
@@ -130,6 +130,7 @@ var sampleNotUS2Ptr = Element{
 
 func Benchmark_hasParent_parse_geofabrik_yml(b *testing.B) {
 	c, _ := loadConfig("./geofabrik.yml")
+
 	for n := 0; n < b.N; n++ {
 		for _, v := range c.Elements {
 			v.hasParent()
@@ -138,7 +139,6 @@ func Benchmark_hasParent_parse_geofabrik_yml(b *testing.B) {
 }
 
 func TestElement_hasParent(t *testing.T) {
-
 	tests := []struct {
 		name   string
 		fields Element
@@ -156,11 +156,12 @@ func TestElement_hasParent(t *testing.T) {
 		},
 		{
 			name:   "Haven't parent 2",
-			fields: Element{ID: "", File: "", Meta: true, Name: "", Formats: *new([]string), Parent: ""},
+			fields: Element{ID: "", File: "", Meta: true, Name: "", Formats: []string(nil), Parent: ""},
 			want:   false,
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			e := &Element{
 				ID:      tt.fields.ID,
@@ -179,15 +180,19 @@ func TestElement_hasParent(t *testing.T) {
 
 func Benchmark_findElem_parse_all_geofabrik_yml(b *testing.B) {
 	c, _ := loadConfig("./geofabrik.yml")
+
 	for n := 0; n < b.N; n++ {
 		for k := range c.Elements {
-			findElem(c, k)
+			if _, err := findElem(c, k); err != nil {
+				b.Error(err.Error())
+			}
 		}
 	}
 }
 
 func Benchmark_GetElement_parse_all_geofabrik_yml(b *testing.B) {
 	c, _ := loadConfig("./geofabrik.yml")
+
 	for n := 0; n < b.N; n++ {
 		for k := range c.Elements {
 			if _, err := c.GetElement(k); err != nil {
@@ -200,7 +205,9 @@ func Benchmark_GetElement_parse_all_geofabrik_yml(b *testing.B) {
 func Benchmark_findElem_parse_France_geofabrik_yml(b *testing.B) {
 	c, _ := loadConfig("./geofabrik.yml")
 	for n := 0; n < b.N; n++ {
-		findElem(c, "france")
+		if _, err := findElem(c, "france"); err != nil {
+			b.Errorf(err.Error())
+		}
 	}
 }
 
@@ -209,6 +216,7 @@ func Test_findElem(t *testing.T) {
 		c *Config
 		e string
 	}
+
 	tests := []struct {
 		name    string
 		args    args
@@ -226,15 +234,15 @@ func Test_findElem(t *testing.T) {
 				ID:   "africa",
 				Name: "Africa",
 				Formats: []string{
-					"osm.pbf",
+					formatOsmPbf,
 					"osm.pbf.md5",
-					"osm.bz2",
+					formatOsmBz2,
 					"osm.bz2.md5",
-					"osh.pbf",
+					formatOshPbf,
 					"osh.pbf.md5",
-					"poly",
-					"kml",
-					"state",
+					formatPoly,
+					formatKml,
+					formatState,
 				},
 			},
 			wantErr: false,
@@ -258,7 +266,9 @@ func Test_findElem(t *testing.T) {
 			wantErr: true,
 		},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := findElem(tt.args.c, tt.args.e)
 			if err != nil != tt.wantErr {
@@ -275,11 +285,14 @@ func Test_findElem(t *testing.T) {
 func Benchmark_stringInSlice_parse_geofabrik_yml(b *testing.B) {
 	c, _ := loadConfig("./geofabrik.yml")
 	sliceE := elementFormats{}
+
 	for k := range c.Elements {
 		sliceE = append(sliceE, k)
 	}
+
 	for n := 0; n < b.N; n++ {
 		for k := range c.Elements {
+			k := k
 			stringInSlice(&k, &sliceE)
 		}
 	}
@@ -287,9 +300,11 @@ func Benchmark_stringInSlice_parse_geofabrik_yml(b *testing.B) {
 func Benchmark_contains_parse_geofabrik_yml(b *testing.B) {
 	c, _ := loadConfig("./geofabrik.yml")
 	sliceE := elementFormats{}
+
 	for k := range c.Elements {
 		sliceE = append(sliceE, k)
 	}
+
 	for n := 0; n < b.N; n++ {
 		for k := range c.Elements {
 			sliceE.contains(k)
@@ -299,7 +314,8 @@ func Benchmark_contains_parse_geofabrik_yml(b *testing.B) {
 func Benchmark_stringInSlice_parse_geofabrik_yml_France_formats_osm_pbf(b *testing.B) {
 	c, _ := loadConfig("./geofabrik.yml")
 	formats := c.Elements["france"].Formats
-	format := "osm.pbf"
+	format := formatOsmPbf
+
 	for n := 0; n < b.N; n++ {
 		stringInSlice(&format, &formats)
 	}
@@ -308,7 +324,8 @@ func Benchmark_stringInSlice_parse_geofabrik_yml_France_formats_osm_pbf(b *testi
 func Benchmark_contain_parse_geofabrik_yml_France_formats_osm_pbf(b *testing.B) {
 	c, _ := loadConfig("./geofabrik.yml")
 	formats := c.Elements["france"].Formats
-	format := "osm.pbf"
+	format := formatOsmPbf
+
 	for n := 0; n < b.N; n++ {
 		formats.contains(format)
 	}
@@ -319,6 +336,7 @@ func Test_contains(t *testing.T) {
 		s elementFormats
 		e string
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -332,7 +350,9 @@ func Test_contains(t *testing.T) {
 		{name: "Void e", args: args{s: elementFormats{"a", "b"}, e: ""}, want: false},
 		{name: "Void s,e", args: args{s: elementFormats{}, e: ""}, want: false},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			if got := tt.args.s.contains(tt.args.e); got != tt.want {
 				t.Errorf("contains() = %v, want %v", got, tt.want)
@@ -345,13 +365,14 @@ func Test_contains(t *testing.T) {
 }
 
 func Test_elem2URL(t *testing.T) {
-	localSampleConfigValidPtr := SampleConfigValidPtr
-	localSampleConfigValidPtr.Elements["georgia-us2"] = sampleFakeGeorgiaPtr // add it into config
 	type args struct {
 		c   *Config
 		e   *Element
 		ext string
 	}
+
+	localSampleConfigValidPtr := SampleConfigValidPtr
+	localSampleConfigValidPtr.Elements["georgia-us2"] = sampleFakeGeorgiaPtr // add it into config
 	tests := []struct {
 		name    string
 		args    args
@@ -361,22 +382,22 @@ func Test_elem2URL(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name:    "top level test config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleAfricaElementPtr, ext: "osm.pbf"},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleAfricaElementPtr, ext: formatOsmPbf},
 			want:    "https://my.base.url/africa.osm.pbf",
 			wantErr: false,
 		}, {
 			name:    "sub level test config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: "state"},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: formatState},
 			want:    "https://my.base.url/../state/north-america/us/georgia-updates/state.txt",
 			wantErr: false,
 		}, {
 			name:    "BaseUrl test config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: "poly"},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: formatPoly},
 			want:    "http://my.new.url/folder/north-america/us/georgia.poly",
 			wantErr: false,
 		}, {
 			name:    "BaseUrl + BasePath test config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: "osm.bz2"},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: formatOsmBz2},
 			want:    "http://my.new.url/folder/../osmbz2/north-america/us/georgia.osm.bz2",
 			wantErr: false,
 		},
@@ -388,18 +409,20 @@ func Test_elem2URL(t *testing.T) {
 		},
 		{
 			name:    "sub level test config not exists in config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgiaPtr, ext: "state"},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgiaPtr, ext: formatState},
 			want:    "",
 			wantErr: true,
 		},
 		{
 			name:    "sub level test config not exists parent",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgia2Ptr, ext: "state"},
+			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgia2Ptr, ext: formatState},
 			want:    "",
 			wantErr: true,
 		},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := elem2URL(tt.args.c, tt.args.e, tt.args.ext)
 			if err != nil != tt.wantErr {
@@ -414,15 +437,16 @@ func Test_elem2URL(t *testing.T) {
 }
 
 func Test_elem2preURL(t *testing.T) {
-	localSampleConfigValidPtr := SampleConfigValidPtr
-	localSampleConfigValidPtr.Elements["georgia-us2"] = sampleFakeGeorgia2Ptr // add it into config
-	localSampleConfigValidPtr.Elements["georgia-us3"] = sampleFakeGeorgia3Ptr // add it into config
-	localSampleConfigValidPtr.Elements["notus2"] = sampleNotUS2Ptr            // add it into config
 	type args struct {
 		c *Config
 		e *Element
 		b []string
 	}
+
+	localSampleConfigValidPtr := SampleConfigValidPtr
+	localSampleConfigValidPtr.Elements["georgia-us2"] = sampleFakeGeorgia2Ptr // add it into config
+	localSampleConfigValidPtr.Elements["georgia-us3"] = sampleFakeGeorgia3Ptr // add it into config
+	localSampleConfigValidPtr.Elements["notus2"] = sampleNotUS2Ptr            // add it into config
 	tests := []struct {
 		name    string
 		args    args
@@ -464,7 +488,9 @@ func Test_elem2preURL(t *testing.T) {
 			wantErr: true,
 		},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := elem2preURL(tt.args.c, tt.args.e, tt.args.b...)
 			if err != nil != tt.wantErr {
@@ -482,12 +508,17 @@ func Benchmark_elem2preURL_parse_France_geofabrik_yml(b *testing.B) {
 	if err != nil {
 		b.Errorf(err.Error())
 	}
+
 	france, err := findElem(c, "france")
 	if err != nil {
 		b.Errorf(err.Error())
 	}
+
 	for n := 0; n < b.N; n++ {
-		elem2preURL(c, france)
+		_, err = elem2preURL(c, france)
+		if err != nil {
+			b.Errorf(err.Error())
+		}
 	}
 }
 func Benchmark_elem2URL_parse_France_geofabrik_yml(b *testing.B) {
@@ -495,12 +526,17 @@ func Benchmark_elem2URL_parse_France_geofabrik_yml(b *testing.B) {
 	if err != nil {
 		b.Errorf(err.Error())
 	}
+
 	france, err := findElem(c, "france")
 	if err != nil {
 		b.Errorf(err.Error())
 	}
+
 	for n := 0; n < b.N; n++ {
-		elem2URL(c, france, "state")
+		_, err = elem2URL(c, france, formatState)
+		if err != nil {
+			b.Errorf(err.Error())
+		}
 	}
 }
 
@@ -509,12 +545,17 @@ func Benchmark_elem2URL_parse_France_openstreetmap_fr_yml(b *testing.B) {
 	if err != nil {
 		b.Errorf(err.Error())
 	}
+
 	france, err := findElem(c, "france")
 	if err != nil {
 		b.Errorf(err.Error())
 	}
+
 	for n := 0; n < b.N; n++ {
-		elem2URL(c, france, "poly")
+		_, err = elem2URL(c, france, formatPoly)
+		if err != nil {
+			b.Errorf(err.Error())
+		}
 	}
 }
 func Test_MakeParent(t *testing.T) {
@@ -522,6 +563,7 @@ func Test_MakeParent(t *testing.T) {
 		e       Element
 		gparent string
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -531,9 +573,11 @@ func Test_MakeParent(t *testing.T) {
 		{name: "Have Parent with no gparent", args: args{e: Element{ID: "a", Name: "a", Parent: "p"}, gparent: ""}, want: &Element{ID: "p", Name: "p", Meta: true}},
 		{name: "Have Parent with gparent", args: args{e: Element{ID: "a", Name: "a", Parent: "p"}, gparent: "gp"}, want: &Element{ID: "p", Name: "p", Meta: true, Parent: "gp"}},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			if got := MakeParent(tt.args.e, tt.args.gparent); !reflect.DeepEqual(got, tt.want) {
+			if got := MakeParent(&tt.args.e, tt.args.gparent); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("MakeParent() = %v, want %v", got, tt.want)
 			}
 		})

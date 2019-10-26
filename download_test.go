@@ -7,12 +7,13 @@ func Test_downloadFromURL(t *testing.T) {
 		myURL    string
 		fileName string
 	}
+
 	tests := []struct {
 		name        string
+		args        args
 		fNodownload bool
 		fQuiet      bool
 		fProgress   bool
-		args        args
 		wantErr     bool
 	}{
 		// TODO: Add test cases.
@@ -49,7 +50,9 @@ func Test_downloadFromURL(t *testing.T) {
 			wantErr: false,
 		},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		*fNodownload = tt.fNodownload
 		*fQuiet = tt.fQuiet
 		*fProgress = tt.fProgress

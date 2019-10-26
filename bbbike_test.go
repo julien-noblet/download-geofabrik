@@ -12,7 +12,6 @@ import (
 )
 
 func Test_bbbikeGetName(t *testing.T) {
-
 	tests := []struct {
 		name string
 		h3   string
@@ -22,6 +21,7 @@ func Test_bbbikeGetName(t *testing.T) {
 		{name: "Valid", h3: "OSM extracts for Test", want: "Test"},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			if got := bbbikeGetName(tt.h3); got != tt.want {
 				t.Errorf("bbbikeGetName() = %v, want %v", got, tt.want)
@@ -286,15 +286,16 @@ func TestBbbike_parseList(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(tt.html))
-			url, _ := url.Parse(tt.url)
+			u, _ := url.Parse(tt.url)
 			e := &colly.HTMLElement{
 				DOM: dom.Selection,
 				Response: &colly.Response{
-					Request: &colly.Request{URL: url},
+					Request: &colly.Request{URL: u},
 				},
-				Request: &colly.Request{URL: url},
+				Request: &colly.Request{URL: u},
 			}
 
 			b := Bbbike{
@@ -311,17 +312,17 @@ func TestBbbike_parseList(t *testing.T) {
 						regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/$`),
 					},
 					FormatDefinition: formatDefinitions{
-						"osm.pbf": {ID: "osm.pbf", Loc: ".osm.pbf"},
-						"shp.zip": {ID: "shp.zip", Loc: ".shp.zip"},
-						"osm.gz":  {ID: "osm.gz", Loc: ".osm.gz"},
+						formatOsmPbf: {ID: formatOsmPbf, Loc: ".osm.pbf"},
+						formatShpZip: {ID: formatShpZip, Loc: ".shp.zip"},
+						formatOsmGz:  {ID: formatOsmGz, Loc: ".osm.gz"},
 					},
 				},
 			}
 
 			c := b.Collector() // Need a Collector to visit
 			for _, elemem := range *tt.elements {
-				err := b.Config.mergeElement(&elemem)
-				if err != nil {
+				elemem := elemem
+				if err := b.Config.mergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}
 			}
@@ -411,22 +412,23 @@ func TestBbbike_parseSidebar(t *testing.T) {
 			url:      `https://download.bbbike.org/osm/bbbike/Toulouse/`,
 			elements: &ElementSlice{},
 			want: ElementSlice{
-				"Toulouse": Element{ID: "Toulouse", File: "Toulouse/Toulouse", Name: "Toulouse", Formats: elementFormats{"osm.pbf", "osm.gz", "shp.zip"}},
+				"Toulouse": Element{ID: "Toulouse", File: "Toulouse/Toulouse", Name: "Toulouse", Formats: elementFormats{formatOsmPbf, formatOsmGz, formatShpZip}},
 			},
 		},
 
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(tt.html))
-			url, _ := url.Parse(tt.url)
+			u, _ := url.Parse(tt.url)
 			e := &colly.HTMLElement{
 				DOM: dom.Selection,
 				Response: &colly.Response{
-					Request: &colly.Request{URL: url},
+					Request: &colly.Request{URL: u},
 				},
-				Request: &colly.Request{URL: url},
+				Request: &colly.Request{URL: u},
 			}
 
 			b := Bbbike{
@@ -443,17 +445,17 @@ func TestBbbike_parseSidebar(t *testing.T) {
 						regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/$`),
 					},
 					FormatDefinition: formatDefinitions{
-						"osm.pbf": {ID: "osm.pbf", Loc: ".osm.pbf"},
-						"shp.zip": {ID: "shp.zip", Loc: ".shp.zip"},
-						"osm.gz":  {ID: "osm.gz", Loc: ".osm.gz"},
+						formatOsmPbf: {ID: formatOsmPbf, Loc: ".osm.pbf"},
+						formatShpZip: {ID: formatShpZip, Loc: ".shp.zip"},
+						formatOsmGz:  {ID: formatOsmGz, Loc: ".osm.gz"},
 					},
 				},
 			}
 
 			c := b.Collector() // Need a Collector to visit
 			for _, elemem := range *tt.elements {
-				err := b.Config.mergeElement(&elemem)
-				if err != nil {
+				elemem := elemem
+				if err := b.Config.mergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}
 			}

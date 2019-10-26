@@ -23,7 +23,7 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 		{name: "sample",
 			html: `<a href="fiji.osm.pbf">fiji.osm.pbf</a>`,
 			url:  `https://download.openstreetmap.fr/extracts/`,
-			want: ElementSlice{"fiji": Element{ID: "fiji", Name: "fiji", Formats: elementFormats{"osm.pbf"}}},
+			want: ElementSlice{"fiji": Element{ID: "fiji", Name: "fiji", Formats: elementFormats{formatOsmPbf}}},
 		},
 		{name: "Merge",
 			html: `
@@ -47,10 +47,10 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 			url: `https://download.openstreetmap.fr/extracts/merge/`,
 			want: ElementSlice{
 				"merge":                   Element{ID: "merge", Name: "merge", Meta: true},
-				"fiji":                    Element{ID: "fiji", Name: "fiji", Formats: elementFormats{"osm.pbf", "state"}, Parent: "merge"},
-				"france_metro_dom_com_nc": Element{ID: "france_metro_dom_com_nc", Name: "france_metro_dom_com_nc", Formats: elementFormats{"osm.pbf", "state"}, Parent: "merge"},
-				"france_taaf":             Element{ID: "france_taaf", Name: "france_taaf", Formats: elementFormats{"osm.pbf", "state"}, Parent: "merge"},
-				"kiribati":                Element{ID: "kiribati", Name: "kiribati", Formats: elementFormats{"osm.pbf", "state"}, Parent: "merge"}},
+				"fiji":                    Element{ID: "fiji", Name: "fiji", Formats: elementFormats{formatOsmPbf, formatState}, Parent: "merge"},
+				"france_metro_dom_com_nc": Element{ID: "france_metro_dom_com_nc", Name: "france_metro_dom_com_nc", Formats: elementFormats{formatOsmPbf, formatState}, Parent: "merge"},
+				"france_taaf":             Element{ID: "france_taaf", Name: "france_taaf", Formats: elementFormats{formatOsmPbf, formatState}, Parent: "merge"},
+				"kiribati":                Element{ID: "kiribati", Name: "kiribati", Formats: elementFormats{formatOsmPbf, formatState}, Parent: "merge"}},
 		},
 		{name: "cgi-bin and replication",
 			html: `
@@ -67,13 +67,14 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(tt.html))
-			url, _ := url.Parse(tt.url)
+			u, _ := url.Parse(tt.url)
 			e := &colly.HTMLElement{
 				DOM: dom.Selection,
 				Response: &colly.Response{
-					Request: &colly.Request{URL: url},
+					Request: &colly.Request{URL: u},
 				},
 			}
 			o := OpenstreetmapFR{
@@ -85,11 +86,7 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 					AllowedDomains: []string{`download.openstreetmap.fr`},
 					BaseURL:        `https://download.openstreetmap.fr/extracts`,
 					StartURL:       `https://download.openstreetmap.fr/`,
-					// URLFilters: []*regexp.Regexp{
-					// regexp.MustCompile(`https://download.openstreetmap.fr/([^cgi\-bin][^replication]\w.+|)`),
-					// },
 					URLFilters: []*regexp.Regexp{
-						//regexp.MustCompile(`https://download\.openstreetmap\.fr/([extracts|polygons]\w.+|)`),
 						regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
 						regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`),
 						regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`),
@@ -97,9 +94,9 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 						regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
 					},
 					FormatDefinition: formatDefinitions{
-						"osm.pbf": {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
-						"poly":    {ID: "poly", Loc: ".poly", BasePath: "../polygons/"},
-						"state":   {ID: "state", Loc: ".state.txt"},
+						formatOsmPbf: {ID: formatOsmPbf, Loc: "-latest.osm.pbf"},
+						formatPoly:   {ID: formatPoly, Loc: ".poly", BasePath: "../polygons/"},
+						formatState:  {ID: formatState, Loc: ".state.txt"},
 					},
 				},
 			}
@@ -107,13 +104,12 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 
 			if len(tt.element) > 0 {
 				for _, el := range tt.element {
-					err := o.Config.mergeElement(&el)
-					if err != nil {
+					el := el
+					if err := o.Config.mergeElement(&el); err != nil {
 						t.Errorf("Bad tests o.Config.mergeElement() can't merge %#v - %v", el, err)
 					}
 				}
 			}
-			//fmt.Printf("%#v", e)
 			e.ForEach("a", func(_ int, elmt *colly.HTMLElement) {
 				o.parse(elmt, c)
 			})
@@ -121,7 +117,6 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 			if !reflect.DeepEqual(o.Config.Elements, tt.want) {
 				t.Errorf("parse() fail, got %#v,\n want %#v", o.Config.Elements, tt.want)
 			}
-
 		})
 	}
 }
@@ -180,7 +175,7 @@ var openstreetmapFRtests = []struct {
 			"object": Element{
 				ID:      "object",
 				Name:    "object",
-				Formats: []string{"osm.pbf"},
+				Formats: []string{formatOsmPbf},
 			},
 		},
 		c:       Config{Elements: make(map[string]Element), ElementsMutex: &sync.RWMutex{}},
@@ -193,7 +188,7 @@ var openstreetmapFRtests = []struct {
 			"object": Element{
 				ID:      "object",
 				Name:    "object",
-				Formats: []string{"osm.pbf"},
+				Formats: []string{formatOsmPbf},
 			},
 		},
 		c:       Config{Elements: make(map[string]Element), ElementsMutex: &sync.RWMutex{}},
@@ -206,7 +201,7 @@ var openstreetmapFRtests = []struct {
 			"object": Element{
 				ID:      "object",
 				Name:    "object",
-				Formats: []string{"osm.pbf"},
+				Formats: []string{formatOsmPbf},
 				Parent:  "one",
 			},
 			"one": Element{
@@ -226,7 +221,7 @@ var openstreetmapFRtests = []struct {
 				ID:      "object",
 				Name:    "object",
 				Meta:    false,
-				Formats: []string{"osm.pbf"},
+				Formats: []string{formatOsmPbf},
 				Parent:  "one",
 			},
 			"one": Element{
@@ -245,7 +240,7 @@ var openstreetmapFRtests = []struct {
 			"object": Element{
 				ID:      "object",
 				Name:    "object",
-				Formats: []string{"osm.pbf"},
+				Formats: []string{formatOsmPbf},
 				Parent:  "two",
 			},
 			"one": Element{
@@ -270,7 +265,7 @@ var openstreetmapFRtests = []struct {
 			"object": Element{
 				ID:      "object",
 				Name:    "object",
-				Formats: []string{"osm.pbf", "state"},
+				Formats: []string{formatOsmPbf, formatState},
 				Parent:  "one",
 			},
 			"one": Element{
@@ -284,7 +279,7 @@ var openstreetmapFRtests = []struct {
 				"object": Element{
 					ID:      "object",
 					Name:    "object",
-					Formats: []string{"osm.pbf"},
+					Formats: []string{formatOsmPbf},
 					Parent:  "one",
 				},
 			},
@@ -297,6 +292,7 @@ var openstreetmapFRtests = []struct {
 
 func TestOpenstreetmapFR_parseHref(t *testing.T) {
 	for tn := range openstreetmapFRtests {
+		tn := tn
 		o := OpenstreetmapFR{
 			Scrapper: &Scrapper{
 				PB:             144,
@@ -306,11 +302,7 @@ func TestOpenstreetmapFR_parseHref(t *testing.T) {
 				AllowedDomains: []string{`download.openstreetmap.fr`},
 				BaseURL:        `https://download.openstreetmap.fr/extracts`,
 				StartURL:       `https://download.openstreetmap.fr/`,
-				// URLFilters: []*regexp.Regexp{
-				// 	regexp.MustCompile(`https://download.openstreetmap.fr/([^cgi\-bin][^replication]\w.+|)`),
-				// },
 				URLFilters: []*regexp.Regexp{
-					//regexp.MustCompile(`https://download\.openstreetmap\.fr/([extracts|polygons]\w.+|)`),
 					regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
 					regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`),
 					regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`),
@@ -318,9 +310,9 @@ func TestOpenstreetmapFR_parseHref(t *testing.T) {
 					regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
 				},
 				FormatDefinition: formatDefinitions{
-					"osm.pbf": {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
-					"poly":    {ID: "poly", Loc: ".poly", BasePath: "../polygons/"},
-					"state":   {ID: "state", Loc: ".state.txt"},
+					formatOsmPbf: {ID: formatOsmPbf, Loc: "-latest.osm.pbf"},
+					formatPoly:   {ID: formatPoly, Loc: ".poly", BasePath: "../polygons/"},
+					formatState:  {ID: formatState, Loc: ".state.txt"},
 				},
 			},
 		}
@@ -336,6 +328,7 @@ func TestOpenstreetmapFR_parseHref(t *testing.T) {
 
 func Test_openstreetmapFRGetParent(t *testing.T) {
 	for tn := range openstreetmapFRtests {
+		tn := tn
 		t.Run(openstreetmapFRtests[tn].name, func(t *testing.T) {
 			p, ps := openstreetmapFRGetParent(openstreetmapFRtests[tn].href)
 			if !reflect.DeepEqual(p, openstreetmapFRtests[tn].parent) {
@@ -344,13 +337,11 @@ func Test_openstreetmapFRGetParent(t *testing.T) {
 			if !reflect.DeepEqual(ps, openstreetmapFRtests[tn].parents) {
 				t.Errorf("openstreetmapFRGetParent() = %v want %v ", ps, openstreetmapFRtests[tn].parents)
 			}
-
 		})
 	}
 }
 
 func TestOpenstreetmapFR_makeParents(t *testing.T) {
-
 	tests := []struct {
 		name     string
 		elements ElementSlice
@@ -396,6 +387,7 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			o := &OpenstreetmapFR{
 				Scrapper: &Scrapper{
@@ -406,11 +398,7 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 					AllowedDomains: []string{`download.openstreetmap.fr`},
 					BaseURL:        `https://download.openstreetmap.fr/extracts`,
 					StartURL:       `https://download.openstreetmap.fr/`,
-					// URLFilters: []*regexp.Regexp{
-					// 	regexp.MustCompile(`https://download.openstreetmap.fr/([^cgi\-bin][^replication]\w.+|)`),
-					// },
 					URLFilters: []*regexp.Regexp{
-						//regexp.MustCompile(`https://download\.openstreetmap\.fr/([extracts|polygons]\w.+|)`),
 						regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
 						regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`),
 						regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`),
@@ -418,17 +406,17 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 						regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
 					},
 					FormatDefinition: formatDefinitions{
-						"osm.pbf": {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
-						"poly":    {ID: "poly", Loc: ".poly", BasePath: "../polygons/"},
-						"state":   {ID: "state", Loc: ".state.txt"},
+						formatOsmPbf: {ID: formatOsmPbf, Loc: "-latest.osm.pbf"},
+						formatPoly:   {ID: formatPoly, Loc: ".poly", BasePath: "../polygons/"},
+						formatState:  {ID: formatState, Loc: ".state.txt"},
 					},
 				},
 			}
 			o.GetConfig()
 			if len(tt.elements) > 0 {
 				for _, e := range tt.elements {
-					err := o.Config.mergeElement(&e)
-					if err != nil {
+					e := e
+					if err := o.Config.mergeElement(&e); err != nil {
 						t.Error(err)
 					}
 				}

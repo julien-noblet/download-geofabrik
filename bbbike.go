@@ -7,7 +7,7 @@ import (
 	"github.com/gocolly/colly"
 )
 
-//Bbbike Scrapper
+// Bbbike Scrapper
 type Bbbike struct {
 	*Scrapper
 }
@@ -26,15 +26,15 @@ var bbbike = Bbbike{
 			regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/$`),
 		},
 		FormatDefinition: formatDefinitions{
-			"osm.pbf": {ID: "osm.pbf", Loc: ".osm.pbf"},
-			"shp.zip": {ID: "shp.zip", Loc: ".osm.shp.zip"},
-			"osm.gz":  {ID: "osm.gz", Loc: ".osm.gz"},
-			"poly":    {ID: "poly", Loc: ".poly"},
+			formatOsmPbf: {ID: formatOsmPbf, Loc: ".osm.pbf"},
+			formatShpZip: {ID: formatShpZip, Loc: ".osm.shp.zip"},
+			formatOsmGz:  {ID: formatOsmGz, Loc: ".osm.gz"},
+			formatPoly:   {ID: formatPoly, Loc: ".poly"},
 		},
 	},
 }
 
-//Collector represent geofabrik's scrapper
+// Collector represent geofabrik's scrapper
 func (b *Bbbike) Collector(options ...interface{}) *colly.Collector {
 	c := b.Scrapper.Collector(options)
 	c.OnHTML("div.list tbody", func(e *colly.HTMLElement) {
@@ -43,6 +43,7 @@ func (b *Bbbike) Collector(options ...interface{}) *colly.Collector {
 	c.OnHTML("#sidebar", func(e *colly.HTMLElement) {
 		b.parseSidebar(e, c)
 	})
+
 	return c
 }
 
@@ -52,8 +53,7 @@ func (b *Bbbike) parseList(e *colly.HTMLElement, c *colly.Collector) {
 		if *fVerbose && !*fQuiet && !*fProgress {
 			log.Println("Parse:", href)
 		}
-		err := c.Visit(href)
-		if err != nil && err != colly.ErrNoURLFiltersMatch { // Not matching
+		if err := c.Visit(href); err != nil && err != colly.ErrNoURLFiltersMatch { // Not matching
 			catch(err)
 		}
 	})
@@ -64,21 +64,23 @@ func bbbikeGetName(h3 string) string {
 	return ret
 }
 
-func (b *Bbbike) parseSidebar(e *colly.HTMLElement, c *colly.Collector) {
+func (b *Bbbike) parseSidebar(e *colly.HTMLElement, c *colly.Collector) { //nolint:unparam
 	name := bbbikeGetName(e.ChildText("h3"))
 	element := Element{
 		ID:   name,
 		Name: name,
 		File: name + "/" + name,
 		Formats: elementFormats{
-			"osm.pbf",
-			"osm.gz",
-			"shp.zip",
+			formatOsmPbf,
+			formatOsmGz,
+			formatShpZip,
 		},
 	}
+
 	if *fVerbose && !*fQuiet && !*fProgress {
 		log.Println("Add", name)
 	}
+
 	if err := b.Config.mergeElement(&element); err != nil {
 		panic(err)
 	}

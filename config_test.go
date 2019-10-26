@@ -16,6 +16,7 @@ func Benchmark_Exist_geofabrik_yml(b *testing.B) {
 	// run the Fib function b.N times
 	c, _ := loadConfig("./geofabrik.yml")
 	e := "france"
+
 	for n := 0; n < b.N; n++ {
 		c.Exist(e)
 	}
@@ -24,14 +25,18 @@ func Benchmark_Exist_geofabrik_yml(b *testing.B) {
 func Benchmark_loadConfig_geofabrik_yml(b *testing.B) {
 	// run the Fib function b.N times
 	for n := 0; n < b.N; n++ {
-		loadConfig("./geofabrik.yml")
+		if _, err := loadConfig("./geofabrik.yml"); err != nil {
+			b.Error(err.Error())
+		}
 	}
 }
 
 func Benchmark_loadConfig_osmfr_yml(b *testing.B) {
 	// run the Fib function b.N times
 	for n := 0; n < b.N; n++ {
-		loadConfig("./openstreetmap.fr.yml")
+		if _, err := loadConfig("./openstreetmap.fr.yml"); err != nil {
+			b.Error(err.Error())
+		}
 	}
 }
 
@@ -39,6 +44,7 @@ func Test_loadConfig(t *testing.T) {
 	type args struct {
 		configFile string
 	}
+
 	tests := []struct {
 		name    string
 		args    args
@@ -70,16 +76,15 @@ func Test_loadConfig(t *testing.T) {
 			wantErr: false,
 		},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := loadConfig(tt.args.configFile)
 			if err != nil != tt.wantErr {
 				t.Errorf("loadConfig() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			/*if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("loadConfig() = %v, want %v", got, tt.want)
-			}*/
 			if got != nil {
 				if reflect.TypeOf(got) != reflect.TypeOf(tt.want) {
 					t.Errorf("loadConfig() is a %v, want %v", reflect.TypeOf(got), reflect.TypeOf(tt.want))
@@ -106,6 +111,7 @@ func Test_AddExtension(t *testing.T) {
 		id     string
 		format string
 	}
+
 	tests := []struct {
 		name string
 		c    Config
@@ -119,7 +125,7 @@ func Test_AddExtension(t *testing.T) {
 					"a": Element{
 						ID:      "a",
 						Name:    "a",
-						Formats: []string{"osm.pbf"},
+						Formats: []string{formatOsmPbf},
 						Meta:    false,
 					},
 				},
@@ -127,13 +133,13 @@ func Test_AddExtension(t *testing.T) {
 			},
 			args: args{
 				id:     "a",
-				format: "osm.pbf",
+				format: formatOsmPbf,
 			},
 			want: ElementSlice{
 				"a": Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf"},
+					Formats: []string{formatOsmPbf},
 					Meta:    false,
 				},
 			},
@@ -153,13 +159,13 @@ func Test_AddExtension(t *testing.T) {
 			},
 			args: args{
 				id:     "a",
-				format: "osm.pbf",
+				format: formatOsmPbf,
 			},
 			want: ElementSlice{
 				"a": Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf"},
+					Formats: []string{formatOsmPbf},
 					Meta:    false,
 				},
 			},
@@ -179,19 +185,21 @@ func Test_AddExtension(t *testing.T) {
 			},
 			args: args{
 				id:     "a",
-				format: "osm.pbf",
+				format: formatOsmPbf,
 			},
 			want: ElementSlice{
 				"a": Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf"},
+					Formats: []string{formatOsmPbf},
 					Meta:    false,
 				},
 			},
 		},
 	}
+
 	for tn := range tests {
+		tn := tn
 		t.Run(tests[tn].name, func(t *testing.T) {
 			tests[tn].c.AddExtension(tests[tn].args.id, tests[tn].args.format)
 			if !reflect.DeepEqual(tests[tn].c.Elements, tests[tn].want) {
@@ -205,6 +213,7 @@ func Benchmark_GetElement_geofabrik_yml(b *testing.B) {
 	// run the Fib function b.N times
 	c, _ := loadConfig("./geofabrik.yml")
 	e := "france"
+
 	for n := 0; n < b.N; n++ {
 		if _, err := c.GetElement(e); err != nil {
 			panic(err)
@@ -213,7 +222,6 @@ func Benchmark_GetElement_geofabrik_yml(b *testing.B) {
 }
 
 func TestConfig_GetElement(t *testing.T) {
-
 	tests := []struct {
 		name    string
 		file    string
@@ -226,7 +234,7 @@ func TestConfig_GetElement(t *testing.T) {
 			name:    "France from geofabrik",
 			file:    "./geofabrik.yml",
 			id:      "france",
-			want:    &Element{ID: "france", Name: "France", Parent: "europe", Formats: elementFormats{"osm.pbf", "kml", "state", "osm.pbf.md5", "osm.bz2", "osm.bz2.md5", "poly"}},
+			want:    &Element{ID: "france", Name: "France", Parent: "europe", Formats: elementFormats{formatOsmPbf, formatKml, formatState, "osm.pbf.md5", formatOsmBz2, "osm.bz2.md5", formatPoly}},
 			wantErr: false,
 		},
 		{
@@ -238,6 +246,7 @@ func TestConfig_GetElement(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			c, _ := loadConfig(tt.file)
 			got, err := c.GetElement(tt.id)

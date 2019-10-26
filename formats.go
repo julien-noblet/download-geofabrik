@@ -13,37 +13,50 @@ type format struct {
 
 type formatDefinitions map[string]format
 
-//miniFormats get formats of an Element
-// and return a string
-// according to download-geofabrik short flags.
+const (
+	formatState  = "state"
+	formatOsmPbf = "osm.pbf"
+	formatOsmGz  = "osm.gz"
+	formatOsmBz2 = "osm.bz2"
+	formatOshPbf = "osh.pbf"
+	formatPoly   = "poly"
+	formatShpZip = "shp.zip"
+	formatKml    = "kml"
+)
+
+// miniFormats get formats of an Element
+//  and return a string
+//  according to download-geofabrik short flags.
 func miniFormats(s []string) string {
 	res := make([]string, 7)
+
 	for _, item := range s {
 		switch item {
-		case "state":
+		case formatState:
 			res[0] = "s"
-		case "osm.pbf":
+		case formatOsmPbf:
 			res[1] = "P"
-		case "osm.gz":
+		case formatOsmGz:
 			res[2] = "G"
-		case "osm.bz2":
+		case formatOsmBz2:
 			res[2] = "B"
-		case "osh.pbf":
+		case formatOshPbf:
 			res[3] = "H"
-		case "poly":
+		case formatPoly:
 			res[4] = "p"
-		case "shp.zip":
+		case formatShpZip:
 			res[5] = "S"
-		case "kml":
+		case formatKml:
 			res[6] = "k"
 		}
 	}
+
 	return strings.Join(res, "")
 }
 
-func isHashable(c *Config, format string) (bool, string, string) {
+func isHashable(c *Config, format string) (hashable bool, hash, hashType string) {
 	hashs := []string{"md5"} // had to be globalized?
-	//h := "md5"
+
 	if _, ok := c.Formats[format]; ok {
 		for _, h := range hashs {
 			hash := format + "." + h
@@ -52,6 +65,7 @@ func isHashable(c *Config, format string) (bool, string, string) {
 			}
 		}
 	}
+
 	return false, "", ""
 }
 
@@ -59,31 +73,40 @@ func isHashable(c *Config, format string) (bool, string, string) {
 func getFormats() *[]string {
 	var formatFile []string
 	if *dosmPbf {
-		formatFile = append(formatFile, "osm.pbf")
+		formatFile = append(formatFile, formatOsmPbf)
 	}
+
 	if *doshPbf {
-		formatFile = append(formatFile, "osh.pbf")
+		formatFile = append(formatFile, formatOshPbf)
 	}
+
 	if *dosmGz {
-		formatFile = append(formatFile, "osm.gz")
+		formatFile = append(formatFile, formatOsmGz)
 	}
+
 	if *dosmBz2 {
-		formatFile = append(formatFile, "osm.bz2")
+		formatFile = append(formatFile, formatOsmBz2)
 	}
+
 	if *dshpZip {
-		formatFile = append(formatFile, "shp.zip")
+		formatFile = append(formatFile, formatShpZip)
 	}
+
 	if *dstate {
-		formatFile = append(formatFile, "state")
+		formatFile = append(formatFile, formatState)
 	}
+
 	if *dpoly {
-		formatFile = append(formatFile, "poly")
+		formatFile = append(formatFile, formatPoly)
 	}
+
 	if *dkml {
-		formatFile = append(formatFile, "kml")
+		formatFile = append(formatFile, formatKml)
 	}
+
 	if len(formatFile) == 0 {
-		formatFile = append(formatFile, "osm.pbf")
+		formatFile = append(formatFile, formatOsmPbf)
 	}
+
 	return &formatFile
 }

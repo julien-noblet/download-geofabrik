@@ -1,7 +1,7 @@
 package main
 
 import (
-	"crypto/md5"
+	"crypto/md5" //nolint:gosec
 	"encoding/hex"
 	"fmt"
 	"io"
@@ -29,16 +29,16 @@ var (
 	list = app.Command("list", "Show elements available")
 	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool()
 
-	download   = app.Command("download", "Download element") //TODO : add d as command
+	download   = app.Command("download", "Download element") // TODO : add d as command
 	delement   = download.Arg("element", "OSM element").Required().String()
-	dosmBz2    = download.Flag("osm.bz2", "Download osm.bz2 if available").Short('B').Bool()
-	dosmGz     = download.Flag("osm.gz", "Download osm.gz if available").Short('G').Bool()
-	dshpZip    = download.Flag("shp.zip", "Download shp.zip if available").Short('S').Bool()
-	dosmPbf    = download.Flag("osm.pbf", "Download osm.pbf (default)").Short('P').Bool()
-	doshPbf    = download.Flag("osh.pbf", "Download osh.pbf").Short('H').Bool()
-	dstate     = download.Flag("state", "Download state.txt file").Short('s').Bool()
-	dpoly      = download.Flag("poly", "Download poly file").Short('p').Bool()
-	dkml       = download.Flag("kml", "Download kml file").Short('k').Bool()
+	dosmBz2    = download.Flag(formatOsmBz2, "Download osm.bz2 if available").Short('B').Bool()
+	dosmGz     = download.Flag(formatOsmGz, "Download osm.gz if available").Short('G').Bool()
+	dshpZip    = download.Flag(formatShpZip, "Download shp.zip if available").Short('S').Bool()
+	dosmPbf    = download.Flag(formatOsmPbf, "Download osm.pbf (default)").Short('P').Bool()
+	doshPbf    = download.Flag(formatOshPbf, "Download osh.pbf").Short('H').Bool()
+	dstate     = download.Flag(formatState, "Download state.txt file").Short('s').Bool()
+	dpoly      = download.Flag(formatPoly, "Download poly file").Short('p').Bool()
+	dkml       = download.Flag(formatKml, "Download kml file").Short('k').Bool()
 	dCheck     = download.Flag("check", "Control with checksum (default) Use --no-check to discard control").Default("true").Bool()
 	dOutputDir = download.Flag("output_directory", "Set output directory, you can use also OUTPUT_DIR env variable").Short('d').String()
 
@@ -47,22 +47,27 @@ var (
 
 func listAllRegions(c *Config, format string) {
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetAlignment(tablewriter.ALIGN_LEFT)
-	table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
-	if format == "Markdown" {
-		table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
-		table.SetCenterSeparator("|")
-	}
 	keys := make(sort.StringSlice, len(c.Elements))
 	i := 0
+
 	for k := range c.Elements {
 		keys[i] = k
 		i++
 	}
+
 	keys.Sort()
+	table.SetAlignment(tablewriter.ALIGN_LEFT)
+	table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
+
+	if format == "Markdown" {
+		table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
+		table.SetCenterSeparator("|")
+	}
+
 	for _, item := range keys {
 		table.Append([]string{item, c.Elements[c.Elements[item].Parent].Name, c.Elements[item].Name, miniFormats(c.Elements[item].Formats)})
 	}
+
 	table.Render()
 	fmt.Printf("Total elements: %#v\n", len(c.Elements))
 }
@@ -75,38 +80,43 @@ func checkService() bool {
 		if strings.EqualFold(*fConfig, "./geofabrik.yml") {
 			*fConfig = "./openstreetmap.fr.yml"
 		}
+
 		return true
 	case "bbbike":
 		if strings.EqualFold(*fConfig, "./geofabrik.yml") {
 			*fConfig = "./bbbike.yml"
 		}
+
 		return true
 	}
+
 	return false
 }
 
 func catch(err error) {
 	if err != nil {
-		log.Fatalln(err.Error()) // Fatalln is better than Panic or Println
-		// Println only log but dont do exit(1),
-		// Panic add a lot of verbose detail for debug but it's too aggressive!
+		log.Fatalln(err.Error())
 	}
 }
 
 func listCommand() {
 	var format = ""
+
+	configPtr, err := loadConfig(*fConfig)
+	catch(err)
+
 	if *lmd {
 		format = "Markdown"
 	}
-	configPtr, err := loadConfig(*fConfig)
-	catch(err)
+
 	listAllRegions(configPtr, format)
 }
 
 func downloadCommand() {
+	formatFile := getFormats()
 	configPtr, err := loadConfig(*fConfig)
 	catch(err)
-	formatFile := getFormats()
+
 	for _, format := range *formatFile {
 		if ok, _, _ := isHashable(configPtr, format); *dCheck && ok {
 			if fileExist(*dOutputDir + *delement + "." + format) {
@@ -114,18 +124,18 @@ func downloadCommand() {
 					if !*fQuiet {
 						log.Println("Checksum mismatch, re-downloading", *dOutputDir+*delement+"."+format)
 					}
+
 					myElem, err := findElem(configPtr, *delement)
 					catch(err)
+
 					myURL, err := elem2URL(configPtr, myElem, format)
 					catch(err)
+
 					err = downloadFromURL(myURL, *dOutputDir+*delement+"."+format)
 					catch(err)
 					downloadChecksum(format)
-
-				} else {
-					if !*fQuiet {
-						log.Printf("Checksum match, no download!")
-					}
+				} else if !*fQuiet {
+					log.Printf("Checksum match, no download!")
 				}
 			} else {
 				myElem, err := findElem(configPtr, *delement)
@@ -150,20 +160,24 @@ func downloadCommand() {
 }
 
 func main() {
-
 	app.Version(version) // Add version flag
 	commands := kingpin.MustParse(app.Parse(os.Args[1:]))
+
 	if *dOutputDir == "" {
 		if *dOutputDir = os.Getenv("OUTPUT_DIR"); *dOutputDir == "" {
 			var err error
-			*dOutputDir, err = os.Getwd() // TODO: use ENV var ?
+
+			*dOutputDir, err = os.Getwd()
 			if err != nil {
 				panic(err)
 			}
 		}
 	}
-	*dOutputDir = *dOutputDir + string(os.PathSeparator)
+
+	*dOutputDir += string(os.PathSeparator)
+
 	checkService()
+
 	switch commands {
 	case list.FullCommand():
 		listCommand()
@@ -172,61 +186,73 @@ func main() {
 	case generate.FullCommand():
 		Generate(*fConfig)
 	}
-
 }
 
 func fileExist(filePath string) bool {
 	if _, err := os.Stat(filePath); err == nil {
 		return true
 	}
+
 	return false
 }
 
 func hashFileMD5(filePath string) (string, error) {
 	var returnMD5String string
+
 	if fileExist(filePath) {
+		hash := md5.New() //nolint:gosec
+
 		file, err := os.Open(filePath)
 		if err != nil {
 			return returnMD5String, err
 		}
+
 		defer func() {
 			err := file.Close()
 			catch(err)
 		}()
-		hash := md5.New()
 
 		if _, err := io.Copy(hash, file); err != nil {
 			return returnMD5String, err
 		}
+
 		hashInBytes := hash.Sum(nil)[:16]
 		returnMD5String = hex.EncodeToString(hashInBytes)
+
 		return returnMD5String, nil
 	}
+
 	return returnMD5String, nil
 }
 
-func controlHash(hashfile string, hash string) (bool, error) {
+func controlHash(hashfile, hash string) (bool, error) {
 	if fileExist(hashfile) {
 		file, err := ioutil.ReadFile(hashfile)
 		if err != nil {
 			return false, err
 		}
+
 		filehash := strings.Split(string(file), " ")[0]
+
 		if *fVerbose && !*fQuiet {
 			log.Println("Hash from file :", filehash)
 		}
+
 		return strings.EqualFold(hash, filehash), nil
 	}
+
 	return false, nil
 }
 
 func downloadChecksum(format string) bool {
 	ret := false
+
 	if *dCheck {
 		hash := "md5"
 		fhash := format + "." + hash
 		configPtr, err := loadConfig(*fConfig)
 		catch(err)
+
 		if ok, _, _ := isHashable(configPtr, format); ok {
 			myElem, err := findElem(configPtr, *delement)
 			catch(err)
@@ -234,16 +260,21 @@ func downloadChecksum(format string) bool {
 			catch(err)
 			err = downloadFromURL(myURL, *dOutputDir+*delement+"."+fhash)
 			catch(err)
+
 			if *fVerbose && !*fQuiet {
 				log.Println("Hashing", *dOutputDir+*delement+"."+format)
 			}
+
 			hashed, err := hashFileMD5(*dOutputDir + *delement + "." + format)
 			catch(err)
+
 			if *fVerbose && !*fQuiet {
 				log.Println("MD5 :", hashed)
 			}
-			ret, err := controlHash(*dOutputDir+*delement+"."+fhash, hashed)
+
+			ret, err = controlHash(*dOutputDir+*delement+"."+fhash, hashed)
 			catch(err)
+
 			if !*fQuiet {
 				if ret {
 					log.Println("Checksum OK for", *dOutputDir+*delement+"."+format)
@@ -251,11 +282,14 @@ func downloadChecksum(format string) bool {
 					log.Println("Checksum MISMATCH for", *dOutputDir+*delement+"."+format)
 				}
 			}
+
 			return ret
 		}
+
 		if !*fQuiet {
 			log.Println("No checksum provided for", *dOutputDir+*delement+"."+format)
 		}
 	}
+
 	return ret
 }

@@ -6,30 +6,30 @@ import (
 )
 
 var sampleFormatValidPtr = map[string]format{
-	//Blank
+	// Blank
 	"": {
 		ID:       "",
 		Loc:      "",
 		BasePath: "",
-	}, "osm.pbf": {
-		ID:  "osm.pbf",
+	}, formatOsmPbf: {
+		ID:  formatOsmPbf,
 		Loc: ".osm.pbf",
 		//BasePath: "/",
-	}, "state": {
-		ID:       "state",
+	}, formatState: {
+		ID:       formatState,
 		Loc:      "-updates/state.txt",
 		BasePath: "../state/",
-	}, "poly": {
-		ID:      "poly",
+	}, formatPoly: {
+		ID:      formatPoly,
 		Loc:     ".poly",
 		BaseURL: "http://my.new.url/folder",
-	}, "osm.bz2": {
-		ID:       "osm.bz2",
+	}, formatOsmBz2: {
+		ID:       formatOsmBz2,
 		Loc:      ".osm.bz2",
 		BasePath: "../osmbz2/",
 		BaseURL:  "http://my.new.url/folder",
-	}, "osm.gz": {
-		ID:       "osm.gz",
+	}, formatOsmGz: {
+		ID:       formatOsmGz,
 		Loc:      ".osm.gz",
 		BasePath: "../osmgz/",
 		BaseURL:  "http://my.new.url/folder",
@@ -39,6 +39,7 @@ var sampleFormatValidPtr = map[string]format{
 func Benchmark_miniFormats_parse_geofabrik_yml(b *testing.B) {
 	// run the Fib function b.N times
 	c, _ := loadConfig("./geofabrik.yml")
+
 	for n := 0; n < b.N; n++ {
 		for _, v := range c.Elements {
 			miniFormats(v.Formats)
@@ -49,35 +50,38 @@ func Test_miniFormats(t *testing.T) {
 	type args struct {
 		s []string
 	}
+
 	tests := []struct {
 		name string
 		args args
 		want string
 	}{
 		// TODO: Add test cases.
-		{name: "No Formats", args: args{s: *new([]string)}, want: ""},
-		{name: "state only", args: args{s: []string{"state"}}, want: "s"},
-		{name: "osm.pbf only", args: args{s: []string{"osm.pbf"}}, want: "P"},
-		{name: "osm.bz2 only", args: args{s: []string{"osm.bz2"}}, want: "B"},
-		{name: "osm.gz only", args: args{s: []string{"osm.gz"}}, want: "G"},
-		{name: "osh.pbf only", args: args{s: []string{"osh.pbf"}}, want: "H"},
-		{name: "poly only", args: args{s: []string{"poly"}}, want: "p"},
-		{name: "shp.zip only", args: args{s: []string{"shp.zip"}}, want: "S"},
-		{name: "kml only", args: args{s: []string{"kml"}}, want: "k"},
-		{name: "state and osm.pbf", args: args{s: []string{"osm.pbf", "state"}}, want: "sP"},
-		{name: "state and osm.bz2", args: args{s: []string{"state", "osm.bz2"}}, want: "sB"},
-		{name: "state and osh.pbf", args: args{s: []string{"osh.pbf", "state"}}, want: "sH"},
-		{name: "state and osm.bz2", args: args{s: []string{"state", "osm.bz2"}}, want: "sB"},
-		{name: "state and osm.bz2", args: args{s: []string{"state", "osm.bz2"}}, want: "sB"},
-		{name: "state and poly", args: args{s: []string{"state", "poly"}}, want: "sp"},
-		{name: "state and shp.zip", args: args{s: []string{"state", "shp.zip"}}, want: "sS"},
-		{name: "state and kml", args: args{s: []string{"state", "kml"}}, want: "sk"},
+		{name: "No Formats", args: args{s: []string(nil)}, want: ""},
+		{name: "state only", args: args{s: []string{formatState}}, want: "s"},
+		{name: "osm.pbf only", args: args{s: []string{formatOsmPbf}}, want: "P"},
+		{name: "osm.bz2 only", args: args{s: []string{formatOsmBz2}}, want: "B"},
+		{name: "osm.gz only", args: args{s: []string{formatOsmGz}}, want: "G"},
+		{name: "osh.pbf only", args: args{s: []string{formatOshPbf}}, want: "H"},
+		{name: "poly only", args: args{s: []string{formatPoly}}, want: "p"},
+		{name: "shp.zip only", args: args{s: []string{formatShpZip}}, want: "S"},
+		{name: "kml only", args: args{s: []string{formatKml}}, want: "k"},
+		{name: "state and osm.pbf", args: args{s: []string{formatOsmPbf, formatState}}, want: "sP"},
+		{name: "state and osm.bz2", args: args{s: []string{formatState, formatOsmBz2}}, want: "sB"},
+		{name: "state and osh.pbf", args: args{s: []string{formatOshPbf, formatState}}, want: "sH"},
+		{name: "state and osm.bz2", args: args{s: []string{formatState, formatOsmBz2}}, want: "sB"},
+		{name: "state and osm.bz2", args: args{s: []string{formatState, formatOsmBz2}}, want: "sB"},
+		{name: "state and poly", args: args{s: []string{formatState, formatPoly}}, want: "sp"},
+		{name: "state and shp.zip", args: args{s: []string{formatState, formatShpZip}}, want: "sS"},
+		{name: "state and kml", args: args{s: []string{formatState, formatKml}}, want: "sk"},
 		// Not testing all combinaisons!
-		{name: "osm.pbf and shp.zip", args: args{s: []string{"osm.pbf", "shp.zip"}}, want: "PS"},
+		{name: "osm.pbf and shp.zip", args: args{s: []string{formatOsmPbf, formatShpZip}}, want: "PS"},
 		// With all
-		{name: "All formats", args: args{s: []string{"state", "osm.bz2", "osm.pbf", "osh.pbh", "poly", "kml", "shp.zip"}}, want: "sPBpSk"},
+		{name: "All formats", args: args{s: []string{formatState, formatOsmBz2, formatOsmPbf, "osh.pbh", formatPoly, formatKml, formatShpZip}}, want: "sPBpSk"},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			if got := miniFormats(tt.args.s); got != tt.want {
 				t.Errorf("miniFormats() = %v, want %v", got, tt.want)
@@ -91,6 +95,7 @@ func Test_isHashable(t *testing.T) {
 		format string
 		file   string
 	}
+
 	tests := []struct {
 		name  string
 		args  args
@@ -99,14 +104,18 @@ func Test_isHashable(t *testing.T) {
 		want2 string
 	}{
 		// TODO: Add test cases.
-		{name: "Test is osm.pbf is hashable", args: args{format: "osm.pbf", file: "./geofabrik.yml"}, want: true, want1: "osm.pbf.md5", want2: "md5"},
-		{name: "Test is kml is hashable", args: args{format: "kml", file: "./geofabrik.yml"}, want: false, want1: "", want2: ""},
+		{name: "Test is osm.pbf is hashable", args: args{format: formatOsmPbf, file: "./geofabrik.yml"}, want: true, want1: "osm.pbf.md5", want2: "md5"},
+		{name: "Test is kml is hashable", args: args{format: formatKml, file: "./geofabrik.yml"}, want: false, want1: "", want2: ""},
 	}
+
 	for _, tt := range tests {
+		tt := tt
+
 		c, err := loadConfig(tt.args.file)
 		if err != nil {
 			t.Error(err)
 		}
+
 		t.Run(tt.name, func(t *testing.T) {
 			got, got1, got2 := isHashable(c, tt.args.format)
 			if got != tt.want {
@@ -124,6 +133,7 @@ func Test_isHashable(t *testing.T) {
 func Benchmark_isHashable_geofabrik_yml(b *testing.B) {
 	// run the Fib function b.N times
 	c, _ := loadConfig("./geofabrik.yml")
+
 	for n := 0; n < b.N; n++ {
 		for f := range c.Formats {
 			isHashable(c, f)
@@ -142,6 +152,7 @@ func Test_getFormats(t *testing.T) {
 		dpoly   bool
 		dkml    bool
 	}
+
 	tests := []struct {
 		name  string
 		want  []string
@@ -160,7 +171,7 @@ func Test_getFormats(t *testing.T) {
 				dpoly:   false,
 				dkml:    false,
 			},
-			want: []string{"osm.pbf"},
+			want: []string{formatOsmPbf},
 		}, {
 			name: "dosmPbf",
 			flags: dflags{
@@ -173,7 +184,7 @@ func Test_getFormats(t *testing.T) {
 				dpoly:   false,
 				dkml:    false,
 			},
-			want: []string{"osm.pbf"},
+			want: []string{formatOsmPbf},
 		}, {
 			name: "doshPbf",
 			flags: dflags{
@@ -186,7 +197,7 @@ func Test_getFormats(t *testing.T) {
 				dpoly:   false,
 				dkml:    false,
 			},
-			want: []string{"osh.pbf"},
+			want: []string{formatOshPbf},
 		}, {
 			name: "dosmPbf doshPbf",
 			flags: dflags{
@@ -199,7 +210,7 @@ func Test_getFormats(t *testing.T) {
 				dpoly:   false,
 				dkml:    false,
 			},
-			want: []string{"osm.pbf", "osh.pbf"},
+			want: []string{formatOsmPbf, formatOshPbf},
 		}, {
 			name: "dosmBz2 dshpZip",
 			flags: dflags{
@@ -212,7 +223,7 @@ func Test_getFormats(t *testing.T) {
 				dpoly:   false,
 				dkml:    false,
 			},
-			want: []string{"osm.bz2", "shp.zip"},
+			want: []string{formatOsmBz2, formatShpZip},
 		}, {
 			name: "dstate dpoly",
 			flags: dflags{
@@ -225,7 +236,7 @@ func Test_getFormats(t *testing.T) {
 				dpoly:   true,
 				dkml:    false,
 			},
-			want: []string{"state", "poly"},
+			want: []string{formatState, formatPoly},
 		}, {
 			name: "dkml",
 			flags: dflags{
@@ -238,7 +249,7 @@ func Test_getFormats(t *testing.T) {
 				dpoly:   false,
 				dkml:    true,
 			},
-			want: []string{"kml"},
+			want: []string{formatKml},
 		},
 		{
 			name: "dosmGz",
@@ -252,10 +263,12 @@ func Test_getFormats(t *testing.T) {
 				dpoly:   false,
 				dkml:    false,
 			},
-			want: []string{"osm.gz"},
+			want: []string{formatOsmGz},
 		},
 	}
+
 	for _, tt := range tests {
+		tt := tt
 		*dosmPbf = tt.flags.dosmPbf
 		*doshPbf = tt.flags.doshPbf
 		*dosmBz2 = tt.flags.dosmBz2
