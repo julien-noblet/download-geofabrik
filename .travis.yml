@@ -64,7 +64,7 @@ jobs:
       on:
         all_branches: true
   - stage: Readme
-    if: commit_message =~ /(readme|README|Readme|yaml|YAML|\.yml|Deploy)/
+    if: commit_message =~ /(readme|README|Readme|yaml|YAML|\.yml)/
     go: stable
     script: make readme
     deploy:
