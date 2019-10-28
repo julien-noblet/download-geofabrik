@@ -1,4 +1,4 @@
-package main
+package scrapper
 
 import (
 	"math/rand"
@@ -8,6 +8,9 @@ import (
 	"time"
 
 	"github.com/gocolly/colly"
+	"github.com/julien-noblet/download-geofabrik/config"
+	"github.com/julien-noblet/download-geofabrik/element"
+	"github.com/julien-noblet/download-geofabrik/formats"
 )
 
 func TestGetParent(t *testing.T) {
@@ -68,35 +71,35 @@ func Test_ParseFormat(t *testing.T) {
 	type args struct {
 		id     string
 		format string
-		c      Config
+		c      config.Config
 	}
 
 	tests := []struct {
 		name string
 		args args
-		want ElementSlice
+		want element.Slice
 	}{
 		{name: "Add osm.pbf but already in",
 			args: args{
 				id:     "a",
-				format: formatOsmPbf,
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatOsmPbf,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf},
+							Formats: []string{formats.FormatOsmPbf},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf},
+					Formats: []string{formats.FormatOsmPbf},
 					Meta:    false,
 				},
 			},
@@ -104,10 +107,10 @@ func Test_ParseFormat(t *testing.T) {
 		{name: "Add osm.pbf",
 			args: args{
 				id:     "a",
-				format: formatOsmPbf,
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatOsmPbf,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
 							Formats: []string{},
@@ -117,11 +120,11 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf},
+					Formats: []string{formats.FormatOsmPbf},
 					Meta:    false,
 				},
 			},
@@ -131,23 +134,23 @@ func Test_ParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "osm.pbf.md5",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf, formatKml, formatState},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState, "osm.pbf.md5"},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, "osm.pbf.md5"},
 					Meta:    false,
 				},
 			},
@@ -156,24 +159,24 @@ func Test_ParseFormat(t *testing.T) {
 			name: "Add osm.bz2",
 			args: args{
 				id:     "a",
-				format: formatOsmBz2,
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatOsmBz2,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf, formatKml, formatState},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState, formatOsmBz2},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, formats.FormatOsmBz2},
 					Meta:    false,
 				},
 			},
@@ -183,23 +186,23 @@ func Test_ParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "osm.bz2.md5",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf, formatKml, formatState},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState, "osm.bz2.md5"},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, "osm.bz2.md5"},
 					Meta:    false,
 				},
 			},
@@ -208,24 +211,24 @@ func Test_ParseFormat(t *testing.T) {
 			name: "Add poly",
 			args: args{
 				id:     "a",
-				format: formatPoly,
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatPoly,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf, formatKml, formatState},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState, formatPoly},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, formats.FormatPoly},
 					Meta:    false,
 				},
 			},
@@ -233,24 +236,24 @@ func Test_ParseFormat(t *testing.T) {
 		{name: "Add shp.zip",
 			args: args{
 				id:     "a",
-				format: formatShpZip,
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatShpZip,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf, formatKml, formatState},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState, formatShpZip},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, formats.FormatShpZip},
 					Meta:    false,
 				},
 			},
@@ -259,23 +262,23 @@ func Test_ParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "unk",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf, formatKml, formatState},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 					Meta:    false,
 				},
 			},
@@ -283,10 +286,10 @@ func Test_ParseFormat(t *testing.T) {
 		{name: "Add osm.pbf on meta",
 			args: args{
 				id:     "a",
-				format: formatOsmPbf,
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatOsmPbf,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
 							Formats: []string{},
@@ -296,11 +299,11 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf},
+					Formats: []string{formats.FormatOsmPbf},
 					Meta:    false,
 				},
 			},
@@ -312,17 +315,17 @@ func Test_ParseFormat(t *testing.T) {
 			s := Scrapper{
 				Config: &tests[tn].args.c,
 			}
-			s.Config.Formats = formatDefinitions{
-				formatOshPbf:  {ID: formatOshPbf, Loc: ".osh.pbf"},
-				"osh.pbf.md5": format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
-				formatOsmBz2:  {ID: formatOsmBz2, Loc: "-latest.osm.bz2"},
-				"osm.bz2.md5": {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
-				formatOsmPbf:  {ID: formatOsmPbf, Loc: "-latest.osm.pbf"},
-				"osm.pbf.md5": {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-				formatPoly:    {ID: formatPoly, Loc: ".poly"},
-				formatKml:     {ID: formatKml, Loc: ".kml"},
-				formatState:   {ID: formatState, Loc: "-updates/state.txt"},
-				formatShpZip:  {ID: formatShpZip, Loc: "-latest-free.shp.zip"},
+			s.Config.Formats = formats.FormatDefinitions{
+				formats.FormatOshPbf: {ID: formats.FormatOshPbf, Loc: ".osh.pbf"},
+				"osh.pbf.md5":        formats.Format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
+				formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
+				"osm.bz2.md5":        {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
+				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+				"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly"},
+				formats.FormatKml:    {ID: formats.FormatKml, Loc: ".kml"},
+				formats.FormatState:  {ID: formats.FormatState, Loc: "-updates/state.txt"},
+				formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: "-latest-free.shp.zip"},
 			}
 
 			s.ParseFormat(tests[tn].args.id, tests[tn].args.format)
@@ -418,93 +421,93 @@ func TestScrapper_GetConfig(t *testing.T) {
 	tests := []struct {
 		name   string
 		fields Scrapper
-		want   *Config
+		want   *config.Config
 	}{
 		// TODO: Add test cases.
 		{name: "Void",
-			want: &Config{Elements: ElementSlice{}, ElementsMutex: &sync.RWMutex{}},
+			want: &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}},
 		},
 		{name: "Void + BaseURL",
 			fields: Scrapper{BaseURL: "http://my.url"},
-			want:   &Config{Elements: ElementSlice{}, ElementsMutex: &sync.RWMutex{}, BaseURL: "http://my.url"},
+			want:   &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}, BaseURL: "http://my.url"},
 		},
 		{name: "Void + FormatDefinition",
-			fields: Scrapper{FormatDefinition: formatDefinitions{"ext": format{ID: "ext"}}},
-			want:   &Config{Elements: ElementSlice{}, ElementsMutex: &sync.RWMutex{}, Formats: formatDefinitions{"ext": format{ID: "ext"}}},
+			fields: Scrapper{FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}}},
+			want:   &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}, Formats: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}}},
 		},
 		{name: "Void + BaseURL",
 			fields: Scrapper{
 				BaseURL:          "http://my.url",
-				FormatDefinition: formatDefinitions{"ext": format{ID: "ext"}},
+				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
-			want: &Config{
-				Elements:      ElementSlice{},
+			want: &config.Config{
+				Elements:      element.Slice{},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
-				Formats:       formatDefinitions{"ext": format{ID: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 		{name: "Config Exist",
 			fields: Scrapper{
-				Config: &Config{
-					Elements: ElementSlice{
-						"a": Element{ID: "a"},
+				Config: &config.Config{
+					Elements: element.Slice{
+						"a": element.Element{ID: "a"},
 					},
 					ElementsMutex: &sync.RWMutex{},
 					BaseURL:       "http://my.url",
-					Formats:       formatDefinitions{"ext": format{ID: "ext"}},
+					Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 				},
 			},
-			want: &Config{
-				Elements: ElementSlice{
-					"a": Element{ID: "a"},
+			want: &config.Config{
+				Elements: element.Slice{
+					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
-				Formats:       formatDefinitions{"ext": format{ID: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 		{name: "Config Exist+ Base URL",
 			fields: Scrapper{
 				BaseURL: "http://my.url",
-				Config: &Config{
-					Elements: ElementSlice{
-						"a": Element{ID: "a"},
+				Config: &config.Config{
+					Elements: element.Slice{
+						"a": element.Element{ID: "a"},
 					},
 					ElementsMutex: &sync.RWMutex{},
 					BaseURL:       "http://old.url",
-					Formats:       formatDefinitions{"ext": format{ID: "ext"}},
+					Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 				},
 			},
-			want: &Config{
-				Elements: ElementSlice{
-					"a": Element{ID: "a"},
+			want: &config.Config{
+				Elements: element.Slice{
+					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
-				Formats:       formatDefinitions{"ext": format{ID: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 		{name: "Config Exist+ Base URL + Format Definition",
 			fields: Scrapper{
 				BaseURL: "http://my.url",
-				Config: &Config{
-					Elements: ElementSlice{
-						"a": Element{ID: "a"},
+				Config: &config.Config{
+					Elements: element.Slice{
+						"a": element.Element{ID: "a"},
 					},
 					ElementsMutex: &sync.RWMutex{},
 					BaseURL:       "http://old.url",
-					Formats:       formatDefinitions{"old": format{ID: "old"}},
+					Formats:       formats.FormatDefinitions{"old": formats.Format{ID: "old"}},
 				},
-				FormatDefinition: formatDefinitions{"ext": format{ID: "ext"}},
+				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
-			want: &Config{
-				Elements: ElementSlice{
-					"a": Element{ID: "a"},
+			want: &config.Config{
+				Elements: element.Slice{
+					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
-				Formats:       formatDefinitions{"ext": format{ID: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 	}

@@ -1,51 +1,54 @@
-package main
+package geofabrik
 
 import (
 	"net/url"
 	"reflect"
-	"regexp"
 	"strings"
 	"sync"
 	"testing"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gocolly/colly"
+	"github.com/julien-noblet/download-geofabrik/config"
+	"github.com/julien-noblet/download-geofabrik/element"
+	"github.com/julien-noblet/download-geofabrik/formats"
+	"github.com/julien-noblet/download-geofabrik/scrapper"
 )
 
 func Test_geofabrikParseFormat(t *testing.T) {
 	type args struct {
 		id     string
 		format string
-		c      Config
+		c      config.Config
 	}
 
 	tests := []struct {
 		name string
 		args args
-		want ElementSlice
+		want element.Slice
 	}{
 		{
 			name: "Add osm.pbf but already in",
 			args: args{
 				id:     "a",
-				format: formatOsmPbf,
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatOsmPbf,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf},
+							Formats: []string{formats.FormatOsmPbf},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 					Meta:    false,
 				},
 			},
@@ -54,10 +57,10 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			name: "Add osm.pbf",
 			args: args{
 				id:     "a",
-				format: formatOsmPbf,
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatOsmPbf,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
 							Formats: []string{},
@@ -67,11 +70,11 @@ func Test_geofabrikParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 					Meta:    false,
 				},
 			},
@@ -81,23 +84,23 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "osm.pbf.md5",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf, formatKml, formatState},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState, "osm.pbf.md5"},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, "osm.pbf.md5"},
 					Meta:    false,
 				},
 			},
@@ -106,24 +109,24 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			name: "Add osm.bz2",
 			args: args{
 				id:     "a",
-				format: formatOsmBz2,
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatOsmBz2,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf, formatKml, formatState},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState, formatOsmBz2},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, formats.FormatOsmBz2},
 					Meta:    false,
 				},
 			},
@@ -133,23 +136,23 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "osm.bz2.md5",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf, formatKml, formatState},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState, "osm.bz2.md5"},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, "osm.bz2.md5"},
 					Meta:    false,
 				},
 			},
@@ -158,24 +161,24 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			name: "Add poly",
 			args: args{
 				id:     "a",
-				format: formatPoly,
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatPoly,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf, formatKml, formatState},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState, formatPoly},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, formats.FormatPoly},
 					Meta:    false,
 				},
 			},
@@ -184,24 +187,24 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			name: "Add shp.zip",
 			args: args{
 				id:     "a",
-				format: formatShpZip,
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatShpZip,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf, formatKml, formatState},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState, formatShpZip},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, formats.FormatShpZip},
 					Meta:    false,
 				},
 			},
@@ -211,23 +214,23 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "unk",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{formatOsmPbf, formatKml, formatState},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 					Meta:    false,
 				},
 			},
@@ -236,10 +239,10 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			name: "Add osm.pbf on meta",
 			args: args{
 				id:     "a",
-				format: formatOsmPbf,
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatOsmPbf,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
 							Formats: []string{},
@@ -249,11 +252,11 @@ func Test_geofabrikParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formatOsmPbf, formatKml, formatState},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 					Meta:    false,
 				},
 			},
@@ -263,19 +266,19 @@ func Test_geofabrikParseFormat(t *testing.T) {
 	for tn := range tests {
 		tn := tn
 		t.Run(tests[tn].name, func(t *testing.T) {
-			s := Geofabrik{Scrapper: &Scrapper{}}
+			s := Geofabrik{Scrapper: &scrapper.Scrapper{}}
 			s.Scrapper.Config = &tests[tn].args.c
-			s.Scrapper.Config.Formats = formatDefinitions{
-				formatOshPbf:  {ID: formatOshPbf, Loc: ".osh.pbf"},
-				"osh.pbf.md5": format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
-				formatOsmBz2:  {ID: formatOsmBz2, Loc: "-latest.osm.bz2"},
-				"osm.bz2.md5": {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
-				formatOsmPbf:  {ID: formatOsmPbf, Loc: "-latest.osm.pbf"},
-				"osm.pbf.md5": {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-				formatPoly:    {ID: formatPoly, Loc: ".poly"},
-				formatKml:     {ID: formatKml, Loc: ".kml"},
-				formatState:   {ID: formatState, Loc: "-updates/state.txt"},
-				formatShpZip:  {ID: formatShpZip, Loc: "-latest-free.shp.zip"},
+			s.Scrapper.Config.Formats = formats.FormatDefinitions{
+				formats.FormatOshPbf: {ID: formats.FormatOshPbf, Loc: ".osh.pbf"},
+				"osh.pbf.md5":        {ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
+				formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
+				"osm.bz2.md5":        {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
+				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+				"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly"},
+				formats.FormatKml:    {ID: formats.FormatKml, Loc: ".kml"},
+				formats.FormatState:  {ID: formats.FormatState, Loc: "-updates/state.txt"},
+				formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: "-latest-free.shp.zip"},
 			}
 
 			s.ParseFormat(tests[tn].args.id, tests[tn].args.format)
@@ -291,8 +294,8 @@ func TestGeofabrik_parseLi(t *testing.T) {
 		name    string
 		html    string
 		url     string
-		want    ElementSlice
-		element *Element
+		want    element.Slice
+		element *element.Element
 	}{
 		{name: "sample",
 			html: `
@@ -301,8 +304,8 @@ func TestGeofabrik_parseLi(t *testing.T) {
 				<a href="toto.osm.pbf">anotherText</a>
 			</li>`,
 			url:     `https://download.geofabrik.de/toto.html`,
-			element: &Element{ID: "toto"},
-			want:    ElementSlice{"toto": Element{ID: "toto", Formats: elementFormats{formatOsmPbf, formatKml, formatState}}},
+			element: &element.Element{ID: "toto"},
+			want:    element.Slice{"toto": element.Element{ID: "toto", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState}}},
 		},
 		{name: "georgia-us",
 			html: `
@@ -311,8 +314,8 @@ func TestGeofabrik_parseLi(t *testing.T) {
 				<a href="georgia.osm.pbf">anotherText</a>
 			</li>`,
 			url:     `https://download.geofabrik.de/north-america/us/georgia.html`,
-			element: &Element{ID: "georgia-us"},
-			want:    ElementSlice{"georgia-us": Element{ID: "georgia-us", Formats: elementFormats{formatOsmPbf, formatKml, formatState}}},
+			element: &element.Element{ID: "georgia-us"},
+			want:    element.Slice{"georgia-us": element.Element{ID: "georgia-us", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState}}},
 		},
 		{name: "georgia-eu",
 			html: `
@@ -321,8 +324,8 @@ func TestGeofabrik_parseLi(t *testing.T) {
 				<a href="georgia.osm.pbf">anotherText</a>
 			</li>`,
 			url:     `https://download.geofabrik.de/europe/georgia.html`,
-			element: &Element{ID: "georgia-eu"},
-			want:    ElementSlice{"georgia-eu": Element{ID: "georgia-eu", Formats: elementFormats{formatOsmPbf, formatKml, formatState}}},
+			element: &element.Element{ID: "georgia-eu"},
+			want:    element.Slice{"georgia-eu": element.Element{ID: "georgia-eu", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState}}},
 		},
 		// TODO: Add test cases.
 	}
@@ -337,33 +340,9 @@ func TestGeofabrik_parseLi(t *testing.T) {
 					Request: &colly.Request{URL: u},
 				},
 			}
-			g := Geofabrik{
-				Scrapper: &Scrapper{
-					PB:             401,
-					Async:          true,
-					Parallelism:    20,
-					MaxDepth:       0,
-					AllowedDomains: []string{`download.geofabrik.de`},
-					BaseURL:        `https://download.geofabrik.de`,
-					StartURL:       `https://download.geofabrik.de/`,
-					URLFilters: []*regexp.Regexp{
-						regexp.MustCompile(`https://download\.geofabrik\.de/.+\.html$`),
-						regexp.MustCompile(`https://download\.geofabrik\.de/$`),
-					},
-					FormatDefinition: formatDefinitions{
-						formatOsmBz2:  {ID: formatOsmBz2, Loc: "-latest.osm.bz2"},
-						"osm.bz2.md5": {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
-						formatOsmPbf:  {ID: formatOsmPbf, Loc: "-latest.osm.pbf"},
-						"osm.pbf.md5": {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-						formatPoly:    {ID: formatPoly, Loc: ".poly"},
-						formatKml:     {ID: formatKml, Loc: ".kml"},
-						formatState:   {ID: formatState, Loc: "-updates/state.txt"},
-						formatShpZip:  {ID: formatShpZip, Loc: "-latest-free.shp.zip"},
-					},
-				},
-			}
+			g := GetDefault()
 			g.GetConfig()
-			if err := g.Config.mergeElement(tt.element); err != nil {
+			if err := g.Config.MergeElement(tt.element); err != nil {
 				t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", tt.element, err)
 			}
 			g.parseLi(e, nil)
@@ -379,8 +358,8 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 		name     string
 		html     string
 		url      string
-		want     ElementSlice
-		elements *ElementSlice
+		want     element.Slice
+		elements *element.Slice
 	}{
 		{name: "sample1",
 			html: `
@@ -413,16 +392,16 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 				<td style="border-right: 0px; margin-right: 0px; padding-right: 0px;"><a href="south-america-latest.osm.pbf">[.osm.pbf]</a></td><td style="border-left: 0px; margin-left: 0px; padding-left: 0px;">(1.5&nbsp;GB)</td><td> <img alt="not available" src="/img/cross.png"></td><td> <a href="south-america-latest.osm.bz2">[.osm.bz2]</a></td></tr>
 				</tbody></table>`,
 			url:      `https://download.geofabrik.de/`,
-			elements: &ElementSlice{},
-			want: ElementSlice{
-				"africa":            Element{ID: "africa", Name: "Africa", Meta: true},
-				"antarctica":        Element{ID: "antarctica", Name: "Antarctica", Meta: true},
-				"asia":              Element{ID: "asia", Name: "Asia", Meta: true},
-				"australia-oceania": Element{ID: "australia-oceania", Name: "Australia and Oceania", Meta: true},
-				"central-america":   Element{ID: "central-america", Name: "Central America", Meta: true},
-				"europe":            Element{ID: "europe", Name: "Europe", Meta: true},
-				"north-america":     Element{ID: "north-america", Name: "North America", Meta: true},
-				"south-america":     Element{ID: "south-america", Name: "South America", Meta: true},
+			elements: &element.Slice{},
+			want: element.Slice{
+				"africa":            element.Element{ID: "africa", Name: "Africa", Meta: true},
+				"antarctica":        element.Element{ID: "antarctica", Name: "Antarctica", Meta: true},
+				"asia":              element.Element{ID: "asia", Name: "Asia", Meta: true},
+				"australia-oceania": element.Element{ID: "australia-oceania", Name: "Australia and Oceania", Meta: true},
+				"central-america":   element.Element{ID: "central-america", Name: "Central America", Meta: true},
+				"europe":            element.Element{ID: "europe", Name: "Europe", Meta: true},
+				"north-america":     element.Element{ID: "north-america", Name: "North America", Meta: true},
+				"south-america":     element.Element{ID: "south-america", Name: "South America", Meta: true},
 			},
 		},
 		{name: "sample2 - Europe extract",
@@ -450,16 +429,16 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 				<td style="border-right: 0px; margin-right: 0px; padding-right: 0px;"><a href="europe/germany-latest.osm.pbf">[.osm.pbf]</a></td><td style="border-left: 0px; margin-left: 0px; padding-left: 0px;">(2.9&nbsp;GB)</td><td> <img alt="not available" src="/img/cross.png"></td><td> <a href="europe/germany-latest.osm.bz2">[.osm.bz2]</a></td></tr>
 				</tbody></table>`,
 			url: `https://download.geofabrik.de/europe.html`,
-			elements: &ElementSlice{
-				"europe": Element{ID: "europe", Name: "Europe", Meta: true},
+			elements: &element.Slice{
+				"europe": element.Element{ID: "europe", Name: "Europe", Meta: true},
 			},
-			want: ElementSlice{
-				"europe":     Element{ID: "europe", Name: "Europe", Meta: true},
-				"albania":    Element{ID: "albania", Name: "Albania", Meta: true, Parent: "europe"},
-				"andorra":    Element{ID: "andorra", Name: "Andorra", Meta: true, Parent: "europe"},
-				"france":     Element{ID: "france", Name: "France", Meta: true, Parent: "europe"},
-				"georgia-eu": Element{ID: "georgia-eu", Name: "Georgia (Eastern Europe)", Meta: true, Parent: "europe"},
-				"germany":    Element{ID: "germany", Name: "Germany", Meta: true, Parent: "europe"},
+			want: element.Slice{
+				"europe":     element.Element{ID: "europe", Name: "Europe", Meta: true},
+				"albania":    element.Element{ID: "albania", Name: "Albania", Meta: true, Parent: "europe"},
+				"andorra":    element.Element{ID: "andorra", Name: "Andorra", Meta: true, Parent: "europe"},
+				"france":     element.Element{ID: "france", Name: "France", Meta: true, Parent: "europe"},
+				"georgia-eu": element.Element{ID: "georgia-eu", Name: "Georgia (Eastern Europe)", Meta: true, Parent: "europe"},
+				"germany":    element.Element{ID: "germany", Name: "Germany", Meta: true, Parent: "europe"},
 			},
 		},
 		{name: "sample3 - North America extract",
@@ -485,16 +464,16 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 			<td style="border-right: 0px; margin-right: 0px; padding-right: 0px;"><a href="north-america/us/hawaii-latest.osm.pbf">[.osm.pbf]</a></td><td style="border-left: 0px; margin-left: 0px; padding-left: 0px;">(11.6&nbsp;MB)</td><td> <a href="north-america/us/hawaii-latest-free.shp.zip">[.shp.zip]</a></td><td> <a href="north-america/us/hawaii-latest.osm.bz2">[.osm.bz2]</a></td></tr>
 			</tbody></table>`,
 			url: `https://download.geofabrik.de/europe.html`,
-			elements: &ElementSlice{
-				"north-america": Element{ID: "north-america", Name: "North America", Meta: true},
+			elements: &element.Slice{
+				"north-america": element.Element{ID: "north-america", Name: "North America", Meta: true},
 			},
-			want: ElementSlice{
-				"north-america": Element{ID: "north-america", Name: "North America", Meta: true},
-				"us":            Element{ID: "us", Name: "us", Meta: true, Parent: "north-america"},
-				"canada":        Element{ID: "canada", Name: "Canada", Meta: true, Parent: "north-america"},
-				"florida":       Element{ID: "florida", Name: "Florida", Meta: true, Parent: "us"},
-				"georgia-us":    Element{ID: "georgia-us", Name: "Georgia (US State)", Meta: true, Parent: "us"},
-				"hawaii":        Element{ID: "hawaii", Name: "Hawaii", Meta: true, Parent: "us"},
+			want: element.Slice{
+				"north-america": element.Element{ID: "north-america", Name: "North America", Meta: true},
+				"us":            element.Element{ID: "us", Name: "us", Meta: true, Parent: "north-america"},
+				"canada":        element.Element{ID: "canada", Name: "Canada", Meta: true, Parent: "north-america"},
+				"florida":       element.Element{ID: "florida", Name: "Florida", Meta: true, Parent: "us"},
+				"georgia-us":    element.Element{ID: "georgia-us", Name: "Georgia (US State)", Meta: true, Parent: "us"},
+				"hawaii":        element.Element{ID: "hawaii", Name: "Hawaii", Meta: true, Parent: "us"},
 			},
 		},
 
@@ -513,35 +492,12 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 				Request: &colly.Request{URL: u},
 			}
 
-			g := Geofabrik{
-				Scrapper: &Scrapper{
-					PB:             401,
-					Async:          true,
-					Parallelism:    20,
-					MaxDepth:       1, // Force a limit!
-					AllowedDomains: []string{`download.geofabrik.de`},
-					BaseURL:        `https://download.geofabrik.de`,
-					StartURL:       `https://download.geofabrik.de/`,
-					URLFilters: []*regexp.Regexp{
-						regexp.MustCompile(`https://download\.geofabrik\.de/.+\.html$`),
-						regexp.MustCompile(`https://download\.geofabrik\.de/$`),
-					},
-					FormatDefinition: formatDefinitions{
-						formatOsmBz2:  {ID: formatOsmBz2, Loc: "-latest.osm.bz2"},
-						"osm.bz2.md5": {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
-						formatOsmPbf:  {ID: formatOsmPbf, Loc: "-latest.osm.pbf"},
-						"osm.pbf.md5": {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-						formatPoly:    {ID: formatPoly, Loc: ".poly"},
-						formatKml:     {ID: formatKml, Loc: ".kml"},
-						formatState:   {ID: formatState, Loc: "-updates/state.txt"},
-						formatShpZip:  {ID: formatShpZip, Loc: "-latest-free.shp.zip"},
-					},
-				},
-			}
+			g := GetDefault()
+
 			c := g.Collector() // Need a Collector to visit
 			for _, elemem := range *tt.elements {
 				elemem := elemem
-				if err := g.Config.mergeElement(&elemem); err != nil {
+				if err := g.Config.MergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}
 			}

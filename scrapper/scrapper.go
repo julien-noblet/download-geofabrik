@@ -1,4 +1,4 @@
-package main
+package scrapper
 
 import (
 	"fmt"
@@ -11,11 +11,15 @@ import (
 	"time"
 
 	"github.com/gocolly/colly"
+	"github.com/julien-noblet/download-geofabrik/config"
+	"github.com/julien-noblet/download-geofabrik/element"
+	"github.com/julien-noblet/download-geofabrik/formats"
+	"github.com/spf13/viper"
 )
 
 // IScrapper represent a colly Scrapper
 type IScrapper interface {
-	GetConfig() *Config
+	GetConfig() *config.Config
 	Collector(options ...interface{}) *colly.Collector
 	Limit() *colly.LimitRule
 	GetPB() int
@@ -27,24 +31,24 @@ type IScrapper interface {
 type Scrapper struct {
 	BaseURL          string
 	StartURL         string
-	Config           *Config       // ptr to Config Element
-	PB               int           // For ProgressBar
-	Async            bool          // true by default
-	DomainGlob       string        // "*" by default
-	Parallelism      int           // >1
-	RandomDelay      time.Duration // 5 * time.Second by default
-	MaxDepth         int           // 0 to infinite
+	Config           *config.Config // ptr to Config Element
+	PB               int            // For ProgressBar
+	Async            bool           // true by default
+	DomainGlob       string         // "*" by default
+	Parallelism      int            // >1
+	RandomDelay      time.Duration  // 5 * time.Second by default
+	MaxDepth         int            // 0 to infinite
 	AllowedDomains   []string
 	URLFilters       []*regexp.Regexp
-	FormatDefinition formatDefinitions
+	FormatDefinition formats.FormatDefinitions
 	Timeout          *time.Duration
 }
 
-// GetConfig init a *Config from fields
-func (s *Scrapper) GetConfig() *Config {
+// GetConfig init a *config.Config from fields
+func (s *Scrapper) GetConfig() *config.Config {
 	if s.Config == nil {
-		s.Config = &Config{
-			Elements:      ElementSlice{},  // should be void
+		s.Config = &config.Config{
+			Elements:      element.Slice{}, // should be void
 			ElementsMutex: &sync.RWMutex{}, // initialize a new Mutex
 		}
 	}
@@ -108,11 +112,14 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector { //nolint
 	})
 
 	s.Config = s.GetConfig() // ensure initialisation
-	catch(c.Limit(s.Limit()))
+	if err := c.Limit(s.Limit()); err != nil {
+		log.Panicln(err)
+	}
+
 	c.OnError(func(r *colly.Response, err error) {
 		if err != colly.ErrForbiddenURL && err != colly.ErrForbiddenDomain && err.Error() != "Forbidden" {
-			catch(fmt.Errorf("request URL: %v failed with response: %v\nerror: %v", r.Request.URL, r, err.Error()))
-		} else if *fVerbose && !*fProgress && !*fQuiet {
+			log.Panicln(fmt.Errorf("request URL: %v failed with response: %v\nerror: %v", r.Request.URL, r, err.Error()))
+		} else if viper.GetBool("verbose") && !viper.GetBool("quiet") && !viper.GetBool("progress") {
 			log.Printf("URL: %v is forbidden\n", r.Request.URL)
 		}
 	})

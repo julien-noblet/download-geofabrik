@@ -1,13 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"testing"
 
 	"bou.ke/monkey"
+	"github.com/julien-noblet/download-geofabrik/config"
+	"github.com/julien-noblet/download-geofabrik/download"
+	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -59,34 +60,6 @@ func Benchmark_listAllRegions_parse_geofabrik_yml_md(b *testing.B) {
 	}
 }
 */
-
-func Test_catch(t *testing.T) {
-	type args struct {
-		err error
-	}
-
-	tests := []struct {
-		name string
-		args args
-		want string
-	}{
-		// TODO: Add test cases.
-		{name: "should display error", args: args{err: fmt.Errorf("test")}, want: "test"},
-	}
-
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			// For testing log, need to use Monkey patching
-			fakeLogFatal := func(msg ...interface{}) {
-				assert.Equal(t, tt.want, msg[0])
-			}
-			patch := monkey.Patch(log.Fatalln, fakeLogFatal)
-			defer patch.Unpatch()
-			catch(tt.args.err)
-		})
-	}
-}
 
 func Test_hashFileMD5(t *testing.T) {
 	type args struct {
@@ -196,9 +169,9 @@ func Test_downloadChecksum(t *testing.T) {
 		want     bool
 	}{
 		// TODO: Add test cases.
-		{name: "dCheck = false monaco.osm.pbf from geofabrik", dCheck: false, fConfig: "./geofabrik.yml", delement: "monaco", args: args{format: formatOsmPbf}, want: false},
-		{name: "dCheck = true monaco.osm.pbf from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: formatOsmPbf}, want: true},
-		{name: "dCheck = true monaco.poly from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: formatPoly}, want: false},
+		{name: "dCheck = false monaco.osm.pbf from geofabrik", dCheck: false, fConfig: "./geofabrik.yml", delement: "monaco", args: args{format: formats.FormatOsmPbf}, want: false},
+		{name: "dCheck = true monaco.osm.pbf from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: formats.FormatOsmPbf}, want: true},
+		{name: "dCheck = true monaco.poly from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: formats.FormatPoly}, want: false},
 	}
 
 	for _, tt := range tests {
@@ -208,19 +181,19 @@ func Test_downloadChecksum(t *testing.T) {
 		*delement = tt.delement
 		t.Run(tt.name, func(t *testing.T) {
 			if *dCheck { // If I want to compare checksum, Download file
-				configPtr, err := loadConfig(*fConfig)
+				configPtr, err := config.LoadConfig(*fConfig)
 				if err != nil {
 					t.Error(err)
 				}
-				myElem, err := findElem(configPtr, *delement)
+				myElem, err := config.FindElem(configPtr, *delement)
 				if err != nil {
 					t.Error(err)
 				}
-				myURL, err := elem2URL(configPtr, myElem, tt.args.format)
+				myURL, err := config.Elem2URL(configPtr, myElem, tt.args.format)
 				if err != nil {
 					t.Error(err)
 				}
-				err = downloadFromURL(myURL, *delement+"."+tt.args.format)
+				err = download.FromURL(myURL, *delement+"."+tt.args.format)
 				if err != nil {
 					t.Error(err)
 				}
@@ -249,7 +222,7 @@ func Test_listCommand(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			*lmd = tt.lmd
-			fakelistAllRegions := func(configPtr *Config, format string) {
+			fakelistAllRegions := func(configPtr *config.Config, format string) {
 				assert.Equal(t, tt.want, format)
 			}
 			patch := monkey.Patch(listAllRegions, fakelistAllRegions)
@@ -370,7 +343,7 @@ func Test_downloadCommand(t *testing.T) {
 			fakefileExist := func(f string) bool {
 				return tt.fakefileExist
 			}
-			patch := monkey.Patch(downloadFromURL, fakedownloadFromURL)
+			patch := monkey.Patch(download.FromURL, fakedownloadFromURL)
 			patch2 := monkey.Patch(downloadChecksum, fakedownloadChecksum)
 			patch3 := monkey.Patch(fileExist, fakefileExist)
 			defer patch.Unpatch()

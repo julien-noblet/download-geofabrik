@@ -1,4 +1,4 @@
-package main
+package openstreetmapfr
 
 import (
 	"fmt"
@@ -8,17 +8,26 @@ import (
 	"time"
 
 	"github.com/gocolly/colly"
+	"github.com/julien-noblet/download-geofabrik/element"
+	"github.com/julien-noblet/download-geofabrik/formats"
+	"github.com/julien-noblet/download-geofabrik/scrapper"
+	"github.com/spf13/viper"
 )
 
 // OpenstreetmapFR Scrapper
 type OpenstreetmapFR struct {
-	*Scrapper
+	*scrapper.Scrapper
 }
 
-var (
-	t               = time.Second * 30
-	openstreetmapFR = OpenstreetmapFR{
-		Scrapper: &Scrapper{
+const (
+	defaultTimeout = time.Second * 30
+)
+
+func GetDefault() *OpenstreetmapFR {
+	t := defaultTimeout
+
+	return &OpenstreetmapFR{
+		Scrapper: &scrapper.Scrapper{
 			PB:             149,
 			Async:          true,
 			Parallelism:    20,
@@ -33,16 +42,16 @@ var (
 				regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),
 				regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
 			},
-			FormatDefinition: formatDefinitions{
-				formatOsmPbf:  {ID: formatOsmPbf, Loc: "-latest.osm.pbf"},
-				"osm.pbf.md5": {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-				formatPoly:    {ID: formatPoly, Loc: ".poly", BasePath: "../polygons/"},
-				formatState:   {ID: formatState, Loc: ".state.txt"},
+			FormatDefinition: formats.FormatDefinitions{
+				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+				"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", BasePath: "../polygons/"},
+				formats.FormatState:  {ID: formats.FormatState, Loc: ".state.txt"},
 			},
 			Timeout: &t,
 		},
 	}
-)
+}
 
 // Collector represent geofabrik's scrapper
 func (o *OpenstreetmapFR) Collector(options ...interface{}) *colly.Collector {
@@ -86,15 +95,15 @@ func (o *OpenstreetmapFR) makeParents(parent string, gparents []string) {
 		}
 
 		if !o.Config.Exist(parent) {
-			element := Element{
+			el := element.Element{
 				Parent: gparent,
 				Name:   parent,
 				ID:     parent,
 				Meta:   true,
 			}
 
-			if err := o.Config.mergeElement(&element); err != nil {
-				catch(fmt.Errorf("can't merge element, %v", err))
+			if err := o.Config.MergeElement(&el); err != nil {
+				log.Panicln(fmt.Errorf("can't merge element, %v", err))
 			}
 
 			if gparent != "" {
@@ -105,7 +114,7 @@ func (o *OpenstreetmapFR) makeParents(parent string, gparents []string) {
 }
 
 func (o *OpenstreetmapFR) parseHref(href string) { //nolint:gocyclo // TODO: Fix cyclo complexity
-	if *fVerbose && !*fQuiet && !*fProgress {
+	if viper.GetBool("verbose") && !viper.GetBool("quiet") && !viper.GetBool("progress") {
 		log.Println("Parsing:", href)
 	}
 
@@ -117,33 +126,33 @@ func (o *OpenstreetmapFR) parseHref(href string) { //nolint:gocyclo // TODO: Fix
 
 		valsplit := strings.Split(parents[len(parents)-1], ".")
 		if valsplit[0] != "" {
-			if *fVerbose && !*fQuiet && !*fProgress {
+			if viper.GetBool("verbose") && !viper.GetBool("quiet") && !viper.GetBool("progress") {
 				log.Println("Parsing", valsplit[0])
 			}
 
 			extension := strings.Join(valsplit[1:], ".")
 			if strings.Contains(extension, "state.txt") { // I'm shure it can be refactorized
-				extension = formatState
+				extension = formats.FormatState
 			}
 
-			if *fVerbose && !*fQuiet && !*fProgress {
+			if viper.GetBool("verbose") && !viper.GetBool("quiet") && !viper.GetBool("progress") {
 				log.Println("Add", extension, "format")
 			}
 
-			element := Element{
+			el := element.Element{
 				Parent: parent,
 				Name:   valsplit[0],
 				ID:     valsplit[0],
 				Meta:   false,
 			}
 			if !o.Config.Exist(valsplit[0]) {
-				element.Formats = append(element.Formats, extension)
+				el.Formats = append(el.Formats, extension)
 
-				if err := o.Config.mergeElement(&element); err != nil {
-					catch(fmt.Errorf("can't merge element, %v", err))
+				if err := o.Config.MergeElement(&el); err != nil {
+					log.Panicln(fmt.Errorf("can't merge element, %v", err))
 				}
 			} else {
-				if *fVerbose && !*fQuiet && !*fProgress {
+				if viper.GetBool("verbose") && !viper.GetBool("quiet") && !viper.GetBool("progress") {
 					log.Println(valsplit[0], "already exist")
 					log.Println("Merging formats")
 				}
@@ -156,14 +165,14 @@ func (o *OpenstreetmapFR) parseHref(href string) { //nolint:gocyclo // TODO: Fix
 func (o *OpenstreetmapFR) parse(e *colly.HTMLElement, c *colly.Collector) {
 	href := e.Request.AbsoluteURL(e.Attr("href"))
 	if href[len(href)-1] == '/' {
-		if *fVerbose && !*fQuiet && !*fProgress {
+		if viper.GetBool("verbose") && !viper.GetBool("quiet") && !viper.GetBool("progress") {
 			log.Println("Next:", href)
 		}
 
 		if err := c.Visit(href); err != nil && err != colly.ErrAlreadyVisited {
 			if err != colly.ErrNoURLFiltersMatch {
-				catch(err)
-			} else if *fVerbose && !*fProgress && !*fQuiet {
+				log.Panicln(err)
+			} else if viper.GetBool("verbose") && !viper.GetBool("progress") && !viper.GetBool("quiet") {
 				log.Printf("URL: %v is not matching URLFilters\n", href)
 			}
 		}

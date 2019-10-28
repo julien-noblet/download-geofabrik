@@ -1,8 +1,13 @@
-package main
+package download_test
 
-import "testing"
+import (
+	"testing"
 
-func Test_downloadFromURL(t *testing.T) {
+	"github.com/julien-noblet/download-geofabrik/download"
+	"github.com/spf13/viper"
+)
+
+func Test_DownloadFromURL(t *testing.T) {
 	type args struct {
 		myURL    string
 		fileName string
@@ -53,12 +58,12 @@ func Test_downloadFromURL(t *testing.T) {
 
 	for _, tt := range tests {
 		tt := tt
-		*fNodownload = tt.fNodownload
-		*fQuiet = tt.fQuiet
-		*fProgress = tt.fProgress
+		viper.Set("noDownload", tt.fNodownload)
+		viper.Set("quiet", tt.fQuiet)
+		viper.Set("progress", tt.fProgress)
 		t.Run(tt.name, func(t *testing.T) {
-			if err := downloadFromURL(tt.args.myURL, tt.args.fileName); err != nil != tt.wantErr {
-				t.Errorf("downloadFromURL() error = %v, wantErr %v", err, tt.wantErr)
+			if err := download.FromURL(tt.args.myURL, tt.args.fileName); err != nil != tt.wantErr {
+				t.Errorf("download.FromURL() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}

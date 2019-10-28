@@ -1,4 +1,4 @@
-package main
+package download
 
 import (
 	"fmt"
@@ -10,16 +10,17 @@ import (
 	"time"
 
 	pb "github.com/cheggaaa/pb/v3"
+	"github.com/spf13/viper"
 )
 
 const progressMinimal = 512 * 1024 // Don't display progress bar if size < 512kb
 
-func downloadFromURL(myURL, fileName string) error {
-	if *fVerbose && !*fQuiet {
+func FromURL(myURL, fileName string) error {
+	if viper.GetBool("verbose") && !viper.GetBool("quiet") {
 		log.Println("Downloading", myURL, "to", fileName)
 	}
 
-	if !*fNodownload {
+	if !viper.GetBool("noDownload") {
 		client := &http.Client{Transport: &http.Transport{
 			Proxy: http.ProxyFromEnvironment,
 			DialContext: (&net.Dialer{
@@ -40,14 +41,18 @@ func downloadFromURL(myURL, fileName string) error {
 
 		if response.StatusCode != http.StatusOK {
 			if response.StatusCode == http.StatusNotFound {
-				return fmt.Errorf("error while downloading %v, server return code %d\nPlease use 'download-geofabrik generate' to re-create your yml file", myURL, response.StatusCode)
+				return fmt.Errorf("error while downloading %v, server return code %d\n"+
+					"Please use '"+os.Args[0]+" generate' to re-create your yml file",
+					myURL, response.StatusCode)
 			}
 
 			return fmt.Errorf("error while downloading %v, server return code %d", myURL, response.StatusCode)
 		}
 
 		defer func() {
-			catch(response.Body.Close())
+			if e := response.Body.Close(); e != nil {
+				log.Panicln(e)
+			}
 		}()
 
 		// If no error, create file
@@ -55,15 +60,15 @@ func downloadFromURL(myURL, fileName string) error {
 		// and use a new cmd flag (like f) to force overwrite
 		flags := os.O_CREATE | os.O_WRONLY
 
-		var f *os.File
-
-		f, err = os.OpenFile(fileName, flags, 0666)
+		f, err := os.OpenFile(fileName, flags, 0666)
 		if err != nil {
 			return fmt.Errorf("error while creating %s - %v", fileName, err)
 		}
 
 		defer func() {
-			catch(f.Close())
+			if e := f.Close(); e != nil {
+				log.Panicln(e)
+			}
 		}()
 
 		var (
@@ -72,7 +77,7 @@ func downloadFromURL(myURL, fileName string) error {
 			progressBar *pb.ProgressBar
 		)
 
-		if !*fQuiet && *fProgress && response.ContentLength > progressMinimal {
+		if !viper.GetBool("quiet") && viper.GetBool("progress") && response.ContentLength > progressMinimal {
 			progressBar = pb.Full.Start64(response.ContentLength)
 			barReader := progressBar.NewProxyReader(response.Body)
 
@@ -89,14 +94,14 @@ func downloadFromURL(myURL, fileName string) error {
 			}
 		}
 
-		if !*fQuiet {
+		if !viper.GetBool("quiet") {
 			if progressBar != nil {
 				progressBar.Finish() // Force finish
 			}
 
 			log.Println(fileName, "downloaded.")
 
-			if *fVerbose {
+			if viper.GetBool("verbose") {
 				log.Println(n, "bytes downloaded.")
 			}
 		}

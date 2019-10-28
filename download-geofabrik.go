@@ -11,15 +11,24 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/julien-noblet/download-geofabrik/config"
+	"github.com/julien-noblet/download-geofabrik/download"
+	"github.com/julien-noblet/download-geofabrik/formats"
+	"github.com/julien-noblet/download-geofabrik/generator"
 	"github.com/olekukonko/tablewriter"
+	"github.com/spf13/viper"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 var version = "devel"
 
 var (
-	app         = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
-	fService    = app.Flag("service", "Can switch to another service. You can use \"geofabrik\", \"openstreetmap.fr\" or \"bbbike\". It automatically change config file if -c is unused.").Default("geofabrik").String()
+	app      = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
+	fService = app.Flag("service",
+		"Can switch to another service. "+
+			"You can use \"geofabrik\", \"openstreetmap.fr\" or \"bbbike\". "+
+			"It automatically change config file if -c is unused.").
+		Default("geofabrik").String()
 	fConfig     = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String()
 	fNodownload = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
 	fVerbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
@@ -29,23 +38,23 @@ var (
 	list = app.Command("list", "Show elements available")
 	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool()
 
-	download   = app.Command("download", "Download element") // TODO : add d as command
-	delement   = download.Arg("element", "OSM element").Required().String()
-	dosmBz2    = download.Flag(formatOsmBz2, "Download osm.bz2 if available").Short('B').Bool()
-	dosmGz     = download.Flag(formatOsmGz, "Download osm.gz if available").Short('G').Bool()
-	dshpZip    = download.Flag(formatShpZip, "Download shp.zip if available").Short('S').Bool()
-	dosmPbf    = download.Flag(formatOsmPbf, "Download osm.pbf (default)").Short('P').Bool()
-	doshPbf    = download.Flag(formatOshPbf, "Download osh.pbf").Short('H').Bool()
-	dstate     = download.Flag(formatState, "Download state.txt file").Short('s').Bool()
-	dpoly      = download.Flag(formatPoly, "Download poly file").Short('p').Bool()
-	dkml       = download.Flag(formatKml, "Download kml file").Short('k').Bool()
-	dCheck     = download.Flag("check", "Control with checksum (default) Use --no-check to discard control").Default("true").Bool()
-	dOutputDir = download.Flag("output_directory", "Set output directory, you can use also OUTPUT_DIR env variable").Short('d').String()
+	d          = app.Command("download", "Download element") // TODO : add d as command
+	delement   = d.Arg("element", "OSM element").Required().String()
+	dosmBz2    = d.Flag(formats.FormatOsmBz2, "Download osm.bz2 if available").Short('B').Bool()
+	dosmGz     = d.Flag(formats.FormatOsmGz, "Download osm.gz if available").Short('G').Bool()
+	dshpZip    = d.Flag(formats.FormatShpZip, "Download shp.zip if available").Short('S').Bool()
+	dosmPbf    = d.Flag(formats.FormatOsmPbf, "Download osm.pbf (default)").Short('P').Bool()
+	doshPbf    = d.Flag(formats.FormatOshPbf, "Download osh.pbf").Short('H').Bool()
+	dstate     = d.Flag(formats.FormatState, "Download state.txt file").Short('s').Bool()
+	dpoly      = d.Flag(formats.FormatPoly, "Download poly file").Short('p').Bool()
+	dkml       = d.Flag(formats.FormatKml, "Download kml file").Short('k').Bool()
+	dCheck     = d.Flag("check", "Control with checksum (default) Use --no-check to discard control").Default("true").Bool()
+	dOutputDir = d.Flag("output_directory", "Set output directory, you can use also OUTPUT_DIR env variable").Short('d').String()
 
 	generate = app.Command("generate", "Generate a new config file")
 )
 
-func listAllRegions(c *Config, format string) {
+func listAllRegions(c *config.Config, format string) {
 	table := tablewriter.NewWriter(os.Stdout)
 	keys := make(sort.StringSlice, len(c.Elements))
 	i := 0
@@ -65,7 +74,10 @@ func listAllRegions(c *Config, format string) {
 	}
 
 	for _, item := range keys {
-		table.Append([]string{item, c.Elements[c.Elements[item].Parent].Name, c.Elements[item].Name, miniFormats(c.Elements[item].Formats)})
+		table.Append([]string{item,
+			c.Elements[c.Elements[item].Parent].Name,
+			c.Elements[item].Name,
+			formats.MiniFormats(c.Elements[item].Formats)})
 	}
 
 	table.Render()
@@ -93,17 +105,13 @@ func checkService() bool {
 	return false
 }
 
-func catch(err error) {
-	if err != nil {
-		log.Fatalln(err.Error())
-	}
-}
-
 func listCommand() {
 	var format = ""
 
-	configPtr, err := loadConfig(*fConfig)
-	catch(err)
+	configPtr, err := config.LoadConfig(*fConfig)
+	if err != nil {
+		log.Panicln(err)
+	}
 
 	if *lmd {
 		format = "Markdown"
@@ -113,55 +121,101 @@ func listCommand() {
 }
 
 func downloadCommand() {
-	formatFile := getFormats()
-	configPtr, err := loadConfig(*fConfig)
-	catch(err)
+	formatFile := formats.GetFormats()
+
+	configPtr, err := config.LoadConfig(*fConfig)
+	if err != nil {
+		log.Panicln(err)
+	}
 
 	for _, format := range *formatFile {
-		if ok, _, _ := isHashable(configPtr, format); *dCheck && ok {
+		if ok, _, _ := config.IsHashable(configPtr, format); *dCheck && ok {
 			if fileExist(*dOutputDir + *delement + "." + format) {
 				if !downloadChecksum(format) {
 					if !*fQuiet {
 						log.Println("Checksum mismatch, re-downloading", *dOutputDir+*delement+"."+format)
 					}
 
-					myElem, err := findElem(configPtr, *delement)
-					catch(err)
+					myElem, err := config.FindElem(configPtr, *delement)
+					if err != nil {
+						log.Panicln(err)
+					}
 
-					myURL, err := elem2URL(configPtr, myElem, format)
-					catch(err)
+					myURL, err := config.Elem2URL(configPtr, myElem, format)
+					if err != nil {
+						log.Panicln(err)
+					}
 
-					err = downloadFromURL(myURL, *dOutputDir+*delement+"."+format)
-					catch(err)
+					err = download.FromURL(myURL, *dOutputDir+*delement+"."+format)
+					if err != nil {
+						log.Panicln(err)
+					}
+
 					downloadChecksum(format)
 				} else if !*fQuiet {
 					log.Printf("Checksum match, no download!")
 				}
 			} else {
-				myElem, err := findElem(configPtr, *delement)
-				catch(err)
-				myURL, err := elem2URL(configPtr, myElem, format)
-				catch(err)
-				err = downloadFromURL(myURL, *dOutputDir+*delement+"."+format)
-				catch(err)
+				myElem, err := config.FindElem(configPtr, *delement)
+				if err != nil {
+					log.Panicln(err)
+				}
+				myURL, err := config.Elem2URL(configPtr, myElem, format)
+				if err != nil {
+					log.Panicln(err)
+				}
+				err = download.FromURL(myURL, *dOutputDir+*delement+"."+format)
+				if err != nil {
+					log.Panicln(err)
+				}
 				if !downloadChecksum(format) && !*fQuiet {
 					log.Println("Checksum mismatch, please re-download", *dOutputDir+*delement+"."+format)
 				}
 			}
 		} else {
-			myElem, err := findElem(configPtr, *delement)
-			catch(err)
-			myURL, err := elem2URL(configPtr, myElem, format)
-			catch(err)
-			err = downloadFromURL(myURL, *dOutputDir+*delement+"."+format)
-			catch(err)
+			myElem, err := config.FindElem(configPtr, *delement)
+			if err != nil {
+				log.Panicln(err)
+			}
+			myURL, err := config.Elem2URL(configPtr, myElem, format)
+			if err != nil {
+				log.Panicln(err)
+			}
+			err = download.FromURL(myURL, *dOutputDir+*delement+"."+format)
+			if err != nil {
+				log.Panicln(err)
+			}
 		}
+	}
+}
+
+func configureBool(flag *bool, name string) {
+	viper.Set(name, false)
+
+	if *flag {
+		viper.Set(name, true)
 	}
 }
 
 func main() {
 	app.Version(version) // Add version flag
 	commands := kingpin.MustParse(app.Parse(os.Args[1:]))
+
+	configureBool(fVerbose, "verbose")
+	configureBool(fNodownload, "noDownload")
+	configureBool(fQuiet, "quiet")
+	configureBool(fProgress, "progress")
+
+	configureBool(doshPbf, "doshPbf")
+	configureBool(dosmPbf, "dosmPbf")
+	configureBool(dosmGz, "dosmGz")
+	configureBool(dosmBz2, "dosmBz2")
+	configureBool(dshpZip, "dshpZip")
+	configureBool(dstate, "dstate")
+	configureBool(dpoly, "dpoly")
+	configureBool(dkml, "dkml")
+
+	viper.Set("service", fService)
 
 	if *dOutputDir == "" {
 		if *dOutputDir = os.Getenv("OUTPUT_DIR"); *dOutputDir == "" {
@@ -181,10 +235,10 @@ func main() {
 	switch commands {
 	case list.FullCommand():
 		listCommand()
-	case download.FullCommand():
+	case d.FullCommand():
 		downloadCommand()
 	case generate.FullCommand():
-		Generate(*fConfig)
+		generator.Generate(*fConfig)
 	}
 }
 
@@ -209,7 +263,9 @@ func hashFileMD5(filePath string) (string, error) {
 
 		defer func() {
 			err := file.Close()
-			catch(err)
+			if err != nil {
+				log.Panicln(err)
+			}
 		}()
 
 		if _, err := io.Copy(hash, file); err != nil {
@@ -250,30 +306,44 @@ func downloadChecksum(format string) bool {
 	if *dCheck {
 		hash := "md5"
 		fhash := format + "." + hash
-		configPtr, err := loadConfig(*fConfig)
-		catch(err)
 
-		if ok, _, _ := isHashable(configPtr, format); ok {
-			myElem, err := findElem(configPtr, *delement)
-			catch(err)
-			myURL, err := elem2URL(configPtr, myElem, fhash)
-			catch(err)
-			err = downloadFromURL(myURL, *dOutputDir+*delement+"."+fhash)
-			catch(err)
+		configPtr, err := config.LoadConfig(*fConfig)
+		if err != nil {
+			log.Panicln(err)
+		}
+
+		if ok, _, _ := config.IsHashable(configPtr, format); ok {
+			myElem, err := config.FindElem(configPtr, *delement)
+			if err != nil {
+				log.Panicln(err)
+			}
+
+			myURL, err := config.Elem2URL(configPtr, myElem, fhash)
+			if err != nil {
+				log.Panicln(err)
+			}
+
+			if e := download.FromURL(myURL, *dOutputDir+*delement+"."+fhash); e != nil {
+				log.Panicln(e)
+			}
 
 			if *fVerbose && !*fQuiet {
 				log.Println("Hashing", *dOutputDir+*delement+"."+format)
 			}
 
 			hashed, err := hashFileMD5(*dOutputDir + *delement + "." + format)
-			catch(err)
+			if err != nil {
+				log.Panicln(err)
+			}
 
 			if *fVerbose && !*fQuiet {
 				log.Println("MD5 :", hashed)
 			}
 
 			ret, err = controlHash(*dOutputDir+*delement+"."+fhash, hashed)
-			catch(err)
+			if err != nil {
+				log.Panicln(err)
+			}
 
 			if !*fQuiet {
 				if ret {

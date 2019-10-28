@@ -118,6 +118,7 @@ linters:
     - govet
     - ineffassign
     - interfacer
+    - lll
     - maligned
     - misspell
     - nakedret
@@ -135,7 +136,6 @@ linters:
     - prealloc
 
   # don't enable:
-  # - lll
   # - gochecknoglobals
   # - gocognit
   # - godox
