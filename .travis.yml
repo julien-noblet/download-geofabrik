@@ -80,7 +80,7 @@ jobs:
     go: stable
     script:
     - GO111MODULE=off go get github.com/mattn/goveralls
-    - go test -bench=. -benchmem -v ./...
+    - go test -bench=. -benchmem -v -covermode=count -coverprofile=coverage.out ./...
     - "$GOPATH/bin/goveralls -service=travis-ci"
   - stage: buildTag
     if: tag IS present AND commit_message !~ /(no-build)/
