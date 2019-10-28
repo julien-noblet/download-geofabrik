@@ -171,7 +171,7 @@ Commands:
 | derbyshire                                  | England               | Derbyshire                             | sPBpSk  |
 | detmold-regbez                              | Nordrhein-Westfalen   | Regierungsbezirk Detmold               | sPBpSk  |
 | devon                                       | England               | Devon                                  | sPBpSk  |
-| district-of-columbia                        | us                    | District of Columbia                   | sPBpSk  |
+| district-of-columbia                        | us                    | District of Columbia                   |         |
 | djibouti                                    | Africa                | Djibouti                               | sPBpSk  |
 | dolnoslaskie                                | Poland                | Województwo dolnośląskie(Lower         | sPBpSk  |
 |                                             |                       | Silesian Voivodeship)                  |         |
@@ -317,7 +317,7 @@ Commands:
 | midi-pyrenees                               | France                | Midi-Pyrenees                          | sPBpSk  |
 | minnesota                                   | us                    | Minnesota                              | sPBpSk  |
 | mississippi                                 | us                    | Mississippi                            | sPBpSk  |
-| missouri                                    | us                    | Missouri                               | sPBpSk  |
+| missouri                                    | us                    | Missouri                               |         |
 | mittelfranken                               | Bayern                | Mittelfranken                          | sPBpSk  |
 | moldova                                     | Europe                | Moldova                                | sPBpSk  |
 | monaco                                      | Europe                | Monaco                                 | sPBpSk  |
@@ -336,7 +336,7 @@ Commands:
 | new-brunswick                               | Canada                | New Brunswick                          | sPBpSk  |
 | new-caledonia                               | Australia and Oceania | New Caledonia                          | sPBpSk  |
 | new-hampshire                               | us                    | New Hampshire                          | sPBpSk  |
-| new-jersey                                  | us                    | New Jersey                             | sPBpSk  |
+| new-jersey                                  | us                    | New Jersey                             |         |
 | new-mexico                                  | us                    | New Mexico                             | sPBpSk  |
 | new-york                                    | us                    | New York                               | sPBpSk  |
 | new-zealand                                 | Australia and Oceania | New Zealand                            | sPBpSk  |

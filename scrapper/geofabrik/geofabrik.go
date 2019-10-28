@@ -1,14 +1,13 @@
 package geofabrik
 
 import (
-	"log"
 	"regexp"
 
+	"github.com/apex/log"
 	"github.com/gocolly/colly"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/julien-noblet/download-geofabrik/scrapper"
-	"github.com/spf13/viper"
 )
 
 // Geofabrik Scrapper
@@ -85,23 +84,21 @@ func (g *Geofabrik) parseSubregion(e *colly.HTMLElement, c *colly.Collector) {
 				}
 				if !g.Config.Exist(parent) && parent != "" { // Case of parent should exist not already in Slice
 					gparent, _ := scrapper.GetParent(pp)
-					if viper.GetBool("verbose") && !viper.GetBool("quiet") && !viper.GetBool("progress") {
-						log.Println("Create Meta", el.Parent, "parent:", gparent, pp)
-					}
+					log.Debugf("Create Meta %s parent: %s %v", el.Parent, gparent, pp)
+
 					if gp := element.MakeParent(&el, gparent); gp != nil {
 						if err := g.Config.MergeElement(gp); err != nil {
-							log.Panicln(err)
+							log.WithError(err).Errorf("can't merge %s", el.Name)
 						}
 					}
 				}
 				if err := g.Config.MergeElement(&el); err != nil {
-					log.Panicln(err)
+					log.WithError(err).Errorf("can't merge %s", el.Name)
 				}
-				if viper.GetBool("verbose") && !viper.GetBool("quiet") && !viper.GetBool("progress") {
-					log.Println("Add:", href)
-				}
+				log.Debugf("Add: %s", href)
+
 				if err := c.Visit(href); err != nil && err != colly.ErrAlreadyVisited {
-					log.Panicln(err)
+					log.WithError(err).Error("can't get url")
 				}
 			}
 		})

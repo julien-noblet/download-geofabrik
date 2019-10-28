@@ -9,16 +9,21 @@ package config
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"path/filepath"
 	"reflect"
 	"strings"
 	"sync"
 
+	"github.com/apex/log"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
-	"github.com/spf13/viper"
 	yaml "gopkg.in/yaml.v2"
+)
+
+const (
+	ErrElem2URL   = "can't find url"
+	ErrFindElem   = "can't find %s"
+	ErrLoadConfig = "can't load config"
 )
 
 // Config structure handle all elements.
@@ -42,7 +47,7 @@ func (c *Config) MergeElement(el *element.Element) error {
 
 	if ok {
 		if cE.Parent != el.Parent {
-			return fmt.Errorf("cant merge : Parent mismatch")
+			return fmt.Errorf("can't merge : Parent mismatch")
 		}
 
 		c.ElementsMutex.Lock()
@@ -87,16 +92,14 @@ func (c *Config) AddExtension(id, format string) {
 	c.ElementsMutex.RUnlock()
 
 	if !elem.Formats.Contains(format) {
-		if viper.GetBool("verbose") && !viper.GetBool("quiet") && !viper.GetBool("progress") {
-			log.Println("Add", format, "to", elem.ID)
-		}
+		log.Infof("Add %s to %s", format, elem.ID)
 
 		c.ElementsMutex.Lock()
 		elem.Formats = append(elem.Formats, format)
 		c.ElementsMutex.Unlock()
 
 		if err := c.MergeElement(&elem); err != nil {
-			log.Panic(err)
+			log.WithError(err).Fatalf("can't merge %s", elem.Name)
 		}
 	}
 }
@@ -117,7 +120,7 @@ func (c *Config) GetElement(id string) (*element.Element, error) {
 func FindElem(c *Config, e string) (*element.Element, error) {
 	res := c.Elements[e]
 	if res.ID == "" || res.ID != e {
-		return nil, fmt.Errorf("%s is not in config\n Please use \"list\" command", e)
+		return nil, fmt.Errorf("%s is not in config. Please use \"list\" command", e)
 	}
 
 	return &res, nil

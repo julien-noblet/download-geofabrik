@@ -3,22 +3,23 @@ package download
 import (
 	"fmt"
 	"io"
-	"log"
 	"net"
 	"net/http"
 	"os"
 	"time"
 
+	"github.com/apex/log"
 	pb "github.com/cheggaaa/pb/v3"
 	"github.com/spf13/viper"
 )
 
-const progressMinimal = 512 * 1024 // Don't display progress bar if size < 512kb
+const (
+	progressMinimal = 512 * 1024 // Don't display progress bar if size < 512kb
+	ErrFromURL      = "can't download element"
+)
 
 func FromURL(myURL, fileName string) error {
-	if viper.GetBool("verbose") && !viper.GetBool("quiet") {
-		log.Println("Downloading", myURL, "to", fileName)
-	}
+	log.Debugf("Downloading %s to %s", myURL, fileName)
 
 	if !viper.GetBool("noDownload") {
 		client := &http.Client{Transport: &http.Transport{
@@ -51,7 +52,7 @@ func FromURL(myURL, fileName string) error {
 
 		defer func() {
 			if e := response.Body.Close(); e != nil {
-				log.Panicln(e)
+				log.WithError(e).Fatal("can't close HTTP connection")
 			}
 		}()
 
@@ -67,7 +68,7 @@ func FromURL(myURL, fileName string) error {
 
 		defer func() {
 			if e := f.Close(); e != nil {
-				log.Panicln(e)
+				log.WithError(e).Fatal("can't close file")
 			}
 		}()
 
@@ -77,7 +78,7 @@ func FromURL(myURL, fileName string) error {
 			progressBar *pb.ProgressBar
 		)
 
-		if !viper.GetBool("quiet") && viper.GetBool("progress") && response.ContentLength > progressMinimal {
+		if viper.GetBool("progress") && response.ContentLength > progressMinimal {
 			progressBar = pb.Full.Start64(response.ContentLength)
 			barReader := progressBar.NewProxyReader(response.Body)
 
@@ -94,17 +95,12 @@ func FromURL(myURL, fileName string) error {
 			}
 		}
 
-		if !viper.GetBool("quiet") {
-			if progressBar != nil {
-				progressBar.Finish() // Force finish
-			}
-
-			log.Println(fileName, "downloaded.")
-
-			if viper.GetBool("verbose") {
-				log.Println(n, "bytes downloaded.")
-			}
+		if progressBar != nil {
+			progressBar.Finish() // Force finish
 		}
+
+		log.Infof("%s downloaded.", fileName)
+		log.Debugf("%v bytes downloaded.", n)
 	}
 
 	return nil // Everything is ok

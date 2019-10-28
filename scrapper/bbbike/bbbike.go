@@ -1,14 +1,13 @@
 package bbbike
 
 import (
-	"log"
 	"regexp"
 
+	"github.com/apex/log"
 	"github.com/gocolly/colly"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/julien-noblet/download-geofabrik/scrapper"
-	"github.com/spf13/viper"
 )
 
 // Bbbike Scrapper
@@ -56,11 +55,10 @@ func (b *Bbbike) Collector(options ...interface{}) *colly.Collector {
 func (b *Bbbike) parseList(e *colly.HTMLElement, c *colly.Collector) {
 	e.ForEach("a", func(_ int, el *colly.HTMLElement) {
 		href := el.Request.AbsoluteURL(el.Attr("href"))
-		if viper.GetBool("verbose") && !viper.GetBool("quiet") && !viper.GetBool("progress") {
-			log.Println("Parse:", href)
-		}
+		log.Debugf("Parse: %s", href)
+
 		if err := c.Visit(href); err != nil && err != colly.ErrNoURLFiltersMatch { // Not matching
-			log.Fatalln(err.Error())
+			log.WithError(err).Error("can't get url")
 		}
 	})
 }
@@ -83,11 +81,9 @@ func (b *Bbbike) parseSidebar(e *colly.HTMLElement, c *colly.Collector) { //noli
 		},
 	}
 
-	if viper.GetBool("verbose") && !viper.GetBool("quiet") && !viper.GetBool("progress") {
-		log.Println("Add", name)
-	}
+	log.Debugf("Add %s", name)
 
 	if err := b.Config.MergeElement(&el); err != nil {
-		log.Fatalln(err)
+		log.WithError(err).Errorf("can't merge %s", el.Name)
 	}
 }

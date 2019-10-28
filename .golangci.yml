@@ -16,7 +16,7 @@ linters-settings:
     # simplify code: gofmt with `-s` option, true by default
     simplify: true
   gocyclo:
-    min-complexity: 20
+    min-complexity: 15
   maligned:
     suggest-new: true
   dupl:

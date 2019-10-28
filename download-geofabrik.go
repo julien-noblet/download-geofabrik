@@ -6,11 +6,13 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"os"
 	"sort"
 	"strings"
 
+	"github.com/apex/log"
+	"github.com/apex/log/handlers/cli"
+	"github.com/apex/log/handlers/text"
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/download"
 	"github.com/julien-noblet/download-geofabrik/formats"
@@ -110,7 +112,7 @@ func listCommand() {
 
 	configPtr, err := config.LoadConfig(*fConfig)
 	if err != nil {
-		log.Panicln(err)
+		log.WithError(err).Fatal(config.ErrLoadConfig)
 	}
 
 	if *lmd {
@@ -120,71 +122,49 @@ func listCommand() {
 	listAllRegions(configPtr, format)
 }
 
+func downloadFile(configPtr *config.Config, element, format, output string) {
+	myElem, err := config.FindElem(configPtr, element)
+	if err != nil {
+		log.WithError(err).Fatalf(config.ErrFindElem, element)
+	}
+
+	myURL, err := config.Elem2URL(configPtr, myElem, format)
+	if err != nil {
+		log.WithError(err).Fatal(config.ErrElem2URL)
+	}
+
+	err = download.FromURL(myURL, output)
+	if err != nil {
+		log.WithError(err).Fatal(download.ErrFromURL)
+	}
+}
+
 func downloadCommand() {
 	formatFile := formats.GetFormats()
 
 	configPtr, err := config.LoadConfig(*fConfig)
 	if err != nil {
-		log.Panicln(err)
+		log.WithError(err).Fatal(config.ErrLoadConfig)
 	}
 
 	for _, format := range *formatFile {
 		if ok, _, _ := config.IsHashable(configPtr, format); *dCheck && ok {
 			if fileExist(*dOutputDir + *delement + "." + format) {
 				if !downloadChecksum(format) {
-					if !*fQuiet {
-						log.Println("Checksum mismatch, re-downloading", *dOutputDir+*delement+"."+format)
-					}
-
-					myElem, err := config.FindElem(configPtr, *delement)
-					if err != nil {
-						log.Panicln(err)
-					}
-
-					myURL, err := config.Elem2URL(configPtr, myElem, format)
-					if err != nil {
-						log.Panicln(err)
-					}
-
-					err = download.FromURL(myURL, *dOutputDir+*delement+"."+format)
-					if err != nil {
-						log.Panicln(err)
-					}
-
+					log.Infof("Checksum mismatch, re-downloading %v", *dOutputDir+*delement+"."+format)
+					downloadFile(configPtr, *delement, format, *dOutputDir+*delement+"."+format)
 					downloadChecksum(format)
-				} else if !*fQuiet {
-					log.Printf("Checksum match, no download!")
+				} else {
+					log.Info("Checksum match, no download!")
 				}
 			} else {
-				myElem, err := config.FindElem(configPtr, *delement)
-				if err != nil {
-					log.Panicln(err)
-				}
-				myURL, err := config.Elem2URL(configPtr, myElem, format)
-				if err != nil {
-					log.Panicln(err)
-				}
-				err = download.FromURL(myURL, *dOutputDir+*delement+"."+format)
-				if err != nil {
-					log.Panicln(err)
-				}
-				if !downloadChecksum(format) && !*fQuiet {
-					log.Println("Checksum mismatch, please re-download", *dOutputDir+*delement+"."+format)
+				downloadFile(configPtr, *delement, format, *dOutputDir+*delement+"."+format)
+				if !downloadChecksum(format) {
+					log.Warnf("Checksum mismatch, please re-download %s", *dOutputDir+*delement+"."+format)
 				}
 			}
 		} else {
-			myElem, err := config.FindElem(configPtr, *delement)
-			if err != nil {
-				log.Panicln(err)
-			}
-			myURL, err := config.Elem2URL(configPtr, myElem, format)
-			if err != nil {
-				log.Panicln(err)
-			}
-			err = download.FromURL(myURL, *dOutputDir+*delement+"."+format)
-			if err != nil {
-				log.Panicln(err)
-			}
+			downloadFile(configPtr, *delement, format, *dOutputDir+*delement+"."+format)
 		}
 	}
 }
@@ -201,9 +181,20 @@ func main() {
 	app.Version(version) // Add version flag
 	commands := kingpin.MustParse(app.Parse(os.Args[1:]))
 
+	log.SetLevel(log.InfoLevel)
+	log.SetHandler(cli.Default)
+
+	if *fVerbose {
+		log.SetLevel(log.DebugLevel)
+		log.SetHandler(text.Default)
+	}
+
+	if *fQuiet {
+		log.SetLevel(log.ErrorLevel)
+	}
+
 	configureBool(fVerbose, "verbose")
 	configureBool(fNodownload, "noDownload")
-	configureBool(fQuiet, "quiet")
 	configureBool(fProgress, "progress")
 
 	configureBool(doshPbf, "doshPbf")
@@ -264,7 +255,7 @@ func hashFileMD5(filePath string) (string, error) {
 		defer func() {
 			err := file.Close()
 			if err != nil {
-				log.Panicln(err)
+				log.WithError(err).Fatal("can't save file")
 			}
 		}()
 
@@ -290,9 +281,7 @@ func controlHash(hashfile, hash string) (bool, error) {
 
 		filehash := strings.Split(string(file), " ")[0]
 
-		if *fVerbose && !*fQuiet {
-			log.Println("Hash from file :", filehash)
-		}
+		log.Debugf("Hash from file :%s", filehash)
 
 		return strings.EqualFold(hash, filehash), nil
 	}
@@ -309,56 +298,48 @@ func downloadChecksum(format string) bool {
 
 		configPtr, err := config.LoadConfig(*fConfig)
 		if err != nil {
-			log.Panicln(err)
+			log.WithError(err).Fatal(config.ErrLoadConfig)
 		}
 
 		if ok, _, _ := config.IsHashable(configPtr, format); ok {
 			myElem, err := config.FindElem(configPtr, *delement)
 			if err != nil {
-				log.Panicln(err)
+				log.WithError(err).Fatalf(config.ErrFindElem, *delement)
 			}
 
 			myURL, err := config.Elem2URL(configPtr, myElem, fhash)
 			if err != nil {
-				log.Panicln(err)
+				log.WithError(err).Fatal(config.ErrElem2URL)
 			}
 
 			if e := download.FromURL(myURL, *dOutputDir+*delement+"."+fhash); e != nil {
-				log.Panicln(e)
+				log.WithError(e).Fatal(download.ErrFromURL)
 			}
 
-			if *fVerbose && !*fQuiet {
-				log.Println("Hashing", *dOutputDir+*delement+"."+format)
-			}
+			log.Infof("Hashing %s", *dOutputDir+*delement+"."+format)
 
 			hashed, err := hashFileMD5(*dOutputDir + *delement + "." + format)
 			if err != nil {
-				log.Panicln(err)
+				log.WithError(err).Fatal("can't hash file")
 			}
 
-			if *fVerbose && !*fQuiet {
-				log.Println("MD5 :", hashed)
-			}
+			log.Debugf("MD5 : %s", hashed)
 
 			ret, err = controlHash(*dOutputDir+*delement+"."+fhash, hashed)
 			if err != nil {
-				log.Panicln(err)
+				log.WithError(err).Error("checksum error")
 			}
 
-			if !*fQuiet {
-				if ret {
-					log.Println("Checksum OK for", *dOutputDir+*delement+"."+format)
-				} else {
-					log.Println("Checksum MISMATCH for", *dOutputDir+*delement+"."+format)
-				}
+			if ret {
+				log.Infof("Checksum OK for %s", *dOutputDir+*delement+"."+format)
+			} else {
+				log.Infof("Checksum MISMATCH for %s", *dOutputDir+*delement+"."+format)
 			}
 
 			return ret
 		}
 
-		if !*fQuiet {
-			log.Println("No checksum provided for", *dOutputDir+*delement+"."+format)
-		}
+		log.Warnf("No checksum provided for %s", *dOutputDir+*delement+"."+format)
 	}
 
 	return ret

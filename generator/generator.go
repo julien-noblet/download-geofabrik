@@ -1,11 +1,10 @@
 package generator
 
 import (
-	"fmt"
 	"io/ioutil"
-	"log"
 	"path/filepath"
 
+	"github.com/apex/log"
 	pb "github.com/cheggaaa/pb/v3"
 	"github.com/gocolly/colly"
 	"github.com/julien-noblet/download-geofabrik/config"
@@ -21,12 +20,10 @@ func write(c *config.Config, filename string) {
 	filename, _ = filepath.Abs(filename)
 
 	if err := ioutil.WriteFile(filename, out, 0644); err != nil {
-		log.Panicln(fmt.Errorf(" File error: %v ", err))
+		log.WithError(err).Fatal("can't write file")
 	}
 
-	if !viper.GetBool("quiet") {
-		log.Println(filename, " generated.")
-	}
+	log.Infof("%s generated.", filename)
 }
 
 // Generate main function
@@ -45,7 +42,7 @@ func Generate(configfile string) {
 		s = bbbike.GetDefault()
 
 	default:
-		log.Panicln(fmt.Errorf("service not recognized, please use one of geofabrik, openstreetmap.fr or bbbike"))
+		log.Error("service not recognized, please use one of geofabrik, openstreetmap.fr or bbbike")
 	}
 
 	if viper.GetBool("progress") {
@@ -61,7 +58,7 @@ func Generate(configfile string) {
 	})
 
 	if err := c.Visit(s.GetStartURL()); err != nil {
-		log.Panicln(err)
+		log.WithError(err).Error("can't get url")
 	}
 
 	c.Wait()

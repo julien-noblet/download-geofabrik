@@ -542,7 +542,7 @@ func Test_FindElem(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Cant find notInList",
+			name: "Can't find notInList",
 			args: args{
 				c: &SampleConfigValidPtr,
 				e: "notInList",

@@ -1,8 +1,6 @@
 package scrapper
 
 import (
-	"fmt"
-	"log"
 	"net"
 	"net/http"
 	"regexp"
@@ -10,11 +8,11 @@ import (
 	"sync"
 	"time"
 
+	"github.com/apex/log"
 	"github.com/gocolly/colly"
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
-	"github.com/spf13/viper"
 )
 
 // IScrapper represent a colly Scrapper
@@ -113,14 +111,14 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector { //nolint
 
 	s.Config = s.GetConfig() // ensure initialisation
 	if err := c.Limit(s.Limit()); err != nil {
-		log.Panicln(err)
+		log.WithError(err).Error("can't update limit")
 	}
 
 	c.OnError(func(r *colly.Response, err error) {
 		if err != colly.ErrForbiddenURL && err != colly.ErrForbiddenDomain && err.Error() != "Forbidden" {
-			log.Panicln(fmt.Errorf("request URL: %v failed with response: %v\nerror: %v", r.Request.URL, r, err.Error()))
-		} else if viper.GetBool("verbose") && !viper.GetBool("quiet") && !viper.GetBool("progress") {
-			log.Printf("URL: %v is forbidden\n", r.Request.URL)
+			log.WithError(err).Debugf("request URL: %v failed with response: %v", r.Request.URL, r)
+		} else {
+			log.Debugf("URL: %v is forbidden", r.Request.URL)
 		}
 	})
 
