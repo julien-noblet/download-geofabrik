@@ -10,8 +10,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/download"
 	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/spf13/viper"
-	"gotest.tools/assert"
-	is "gotest.tools/assert/cmp"
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_checkService(t *testing.T) {
@@ -371,8 +370,8 @@ func Test_configureBool(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			configureBool(&tt.flag, tt.config)
-			assert.Assert(t, viper.IsSet(tt.config), "Is set")
-			assert.Assert(t, is.Equal(tt.flag, viper.GetBool(tt.config)), "ok")
+			assert.Equal(t, true, viper.IsSet(tt.config), "Is set")
+			assert.Equal(t, tt.flag, viper.GetBool(tt.config), "ok")
 		})
 	}
 }
