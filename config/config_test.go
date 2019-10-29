@@ -220,7 +220,7 @@ func Test_loadConfig(t *testing.T) {
 		},
 		{
 			name:    "Check config not yaml",
-			args:    args{configFile: "./LICENSE"},
+			args:    args{configFile: "../LICENSE"},
 			want:    nil,
 			wantErr: true,
 		},
