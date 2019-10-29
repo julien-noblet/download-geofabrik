@@ -10,8 +10,8 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_61ea798ca9ef_key -iv $encrypted_61ea798ca9ef_iv
   -in snap.login.enc -out snap.login -d
 install:
-- go get -t -v ./...
-script: go test -v ./...
+- go get -t ./...
+script: go test ./...
 services:
 - docker
 stages:
@@ -80,7 +80,7 @@ jobs:
     go: stable
     script:
     - GO111MODULE=off go get github.com/mattn/goveralls
-    - go test -bench=. -benchmem -v -covermode=count -coverprofile=coverage.out ./...
+    - go test -bench=. -benchmem -covermode=count -coverprofile=coverage.out ./...
     - "$GOPATH/bin/goveralls -coverprofile=coverage.out -service=travis-ci"
   - stage: buildTag
     if: tag IS present AND commit_message !~ /(no-build)/
