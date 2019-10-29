@@ -486,6 +486,34 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 				"hawaii":        element.Element{ID: "hawaii", Name: "Hawaii", Meta: true, Parent: "us"},
 			},
 		},
+		{name: "sample4 - South America extract",
+			html: `
+			<table id="subregions">
+			<tbody><tr>
+			   <th class="subregion">Sub Region</th>
+			   <th colspan="4">Quick Links</th>
+			</tr>
+			<tr>
+			   <th>&nbsp;</th>
+			   <th colspan="2">.osm.pbf</th>
+			   <th>.shp.zip</th>
+			   <th>.osm.bz2</th>
+			</tr>
+			<tr onmouseover="loadkml('south-america/ecuador.kml')"><td class="subregion"><a href="south-america/ecuador.html">Ecuador</a></td>
+			<td style="border-right: 0px; margin-right: 0px; padding-right: 0px;"><a href="south-america/ecuador-latest.osm.pbf">[.osm.pbf]</a></td><td style="border-left: 0px; margin-left: 0px; padding-left: 0px;">(2.3&nbsp;GB)</td><td> <img alt="not available" src="/img/cross.png"></td><td> <a href="south-america/ecuador-latest.osm.bz2">[.osm.bz2]</a></td></tr>
+			<tr onmouseover="loadkml('south-america/guatemala.kml')"><td class="subregion"><a href="south-america/guatemala.html">Guatemala</a></td>
+			<td style="border-right: 0px; margin-right: 0px; padding-right: 0px;"><a href="south-america/guatemala-latest.osm.pbf">[.osm.pbf]</a></td><td style="border-left: 0px; margin-left: 0px; padding-left: 0px;">(2.3&nbsp;GB)</td><td> <img alt="not available" src="/img/cross.png"></td><td> <a href="south-america/guatemala-latest.osm.bz2">[.osm.bz2]</a></td></tr>
+			</tbody></table>`,
+			url: `https://download.geofabrik.de/europe.html`,
+			elements: &element.Slice{
+				"south-america": element.Element{ID: "south-america", Name: "North America", Meta: true},
+			},
+			want: element.Slice{
+				"south-america":           element.Element{ID: "south-america", Name: "North America", Meta: true},
+				"ecuador":                 element.Element{ID: "ecuador", Name: "Ecuador", Meta: true, Parent: "south-america"},
+				"guatemala-south-america": element.Element{ID: "guatemala-south-america", Name: "Guatemala", Meta: true, Parent: "south-america"},
+			},
+		},
 
 		// TODO: Add test cases.
 	}
