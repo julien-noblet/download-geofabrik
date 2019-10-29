@@ -849,6 +849,33 @@ func TestConfig_MergeElement(t *testing.T) {
 				ElementsMutex: &sync.RWMutex{},
 			},
 		},
+		{name: "Add same element on non void Config with wrong parent",
+			Config: &config.Config{
+				ElementsMutex: &sync.RWMutex{},
+				Elements: element.Slice{
+					"test": {ID: "test",
+						Name:    "Test",
+						Formats: element.Formats{"format1", "format2"},
+						Parent:  "parent1",
+					},
+				},
+			},
+			el: &element.Element{ID: "test",
+				Name:    "Test",
+				Formats: element.Formats{"format1", "format2"},
+				Parent:  "parent2",
+			},
+			wantErr: true,
+			wantConfig: &config.Config{
+				Elements: element.Slice{
+					"test": {ID: "test",
+						Name:    "Test",
+						Formats: element.Formats{"format1", "format2"},
+						Parent:  "parent1",
+					}},
+				ElementsMutex: &sync.RWMutex{},
+			},
+		},
 	}
 	for _, tt := range tests {
 		tt := tt
