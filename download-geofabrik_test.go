@@ -9,7 +9,9 @@ import (
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/download"
 	"github.com/julien-noblet/download-geofabrik/formats"
-	"github.com/stretchr/testify/assert"
+	"github.com/spf13/viper"
+	"gotest.tools/assert"
+	is "gotest.tools/assert/cmp"
 )
 
 func Test_checkService(t *testing.T) {
@@ -351,6 +353,26 @@ func Test_downloadCommand(t *testing.T) {
 			defer patch3.Unpatch()
 			downloadCommand()
 			//			izefnof // real error should not compile
+		})
+	}
+}
+
+func Test_configureBool(t *testing.T) {
+	tests := []struct {
+		name   string
+		flag   bool
+		config string
+	}{
+		// TODO: Add test cases.
+		{name: "true", flag: true, config: "test1"},
+		{name: "false", flag: false, config: "test2"},
+	}
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			configureBool(&tt.flag, tt.config)
+			assert.Assert(t, viper.IsSet(tt.config), "Is set")
+			assert.Assert(t, is.Equal(tt.flag, viper.GetBool(tt.config)), "ok")
 		})
 	}
 }
