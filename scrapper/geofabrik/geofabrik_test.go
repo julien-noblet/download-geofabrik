@@ -327,6 +327,16 @@ func TestGeofabrik_parseLi(t *testing.T) {
 			element: &element.Element{ID: "georgia-eu"},
 			want:    element.Slice{"georgia-eu": element.Element{ID: "georgia-eu", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState}}},
 		},
+		{name: "guatemala-south-america",
+			html: `
+			<li>
+				<p>some text</p>
+				<a href="guatemala.osm.pbf">anotherText</a>
+			</li>`,
+			url:     `https://download.geofabrik.de/south-america/guatemala.html`,
+			element: &element.Element{ID: "guatemala-south-america"},
+			want:    element.Slice{"guatemala-south-america": element.Element{ID: "guatemala-south-america", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState}}},
+		},
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {

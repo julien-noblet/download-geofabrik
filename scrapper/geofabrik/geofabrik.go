@@ -71,10 +71,8 @@ func (g *Geofabrik) parseSubregion(e *colly.HTMLElement, c *colly.Collector) {
 						id = "georgia-eu"
 					}
 				}
-				if id == "guatemala" {
-					if parent == "south-america" {
-						id = "guatemala-south-america"
-					}
+				if id == "guatemala" && parent == "south-america" {
+					id = "guatemala-south-america"
 				}
 				el := element.Element{
 					ID:     id,
@@ -127,6 +125,12 @@ func (g *Geofabrik) parseLi(e *colly.HTMLElement, c *colly.Collector) { //nolint
 				id = "georgia-us"
 			case "europe":
 				id = "georgia-eu"
+			}
+		}
+		if id == "guatemala" {
+			parent, _ := scrapper.GetParent(el.Request.AbsoluteURL(el.Attr("href")))
+			if parent == "south-america" {
+				id = "guatemala-south-america"
 			}
 		}
 		g.ParseFormat(id, format)
