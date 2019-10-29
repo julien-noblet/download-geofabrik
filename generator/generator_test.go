@@ -2,7 +2,6 @@ package generator_test
 
 import (
 	"reflect"
-	"sync"
 	"testing"
 
 	"github.com/julien-noblet/download-geofabrik/config"
@@ -108,42 +107,6 @@ var SampleConfigValidPtr = config.Config{
 	Formats:  sampleFormatValidPtr,
 	Elements: sampleElementValidPtr,
 }
-var sampleFakeGeorgiaPtr = element.Element{
-	ID:   "georgia-usf",
-	File: "georgia-fake",
-	Name: "Georgia (US State) - fake test",
-	Formats: []string{
-		formats.FormatOsmPbf,
-		"osm.pbf.md5",
-		formats.FormatShpZip,
-		formats.FormatOsmBz2,
-		"osm.bz2.md5",
-		formats.FormatOshPbf,
-		"osh.pbf.md5",
-		formats.FormatPoly,
-		formats.FormatKml,
-		formats.FormatState,
-	},
-	Parent: "us", // keep good parent!
-}
-var sampleFakeGeorgia2Ptr = element.Element{
-	ID:   "georgia-us2",
-	File: "georgia",
-	Name: "Georgia (US State)",
-	Formats: []string{
-		formats.FormatOsmPbf,
-		"osm.pbf.md5",
-		formats.FormatShpZip,
-		formats.FormatOsmBz2,
-		"osm.bz2.md5",
-		formats.FormatOshPbf,
-		"osh.pbf.md5",
-		formats.FormatPoly,
-		formats.FormatKml,
-		formats.FormatState,
-	},
-	Parent: "notus", // bad parent not exist!
-}
 
 func TestSlice_Generate(t *testing.T) {
 	tests := []struct {
@@ -195,70 +158,6 @@ func TestGenerate(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			generator.Generate(tt.args.configfile)
-		})
-	}
-}
-
-func TestConfig_mergeElement(t *testing.T) {
-	type args struct {
-		element *element.Element
-	}
-
-	myFakeGeorgia := sampleFakeGeorgia2Ptr
-	myFakeGeorgia.ID = "georgia-us"
-	tests := []struct {
-		name    string
-		args    args
-		wantErr bool
-	}{
-		// TODO: Add test cases.
-		{
-			name: "adding a new element",
-			args: args{
-				element: &sampleFakeGeorgiaPtr,
-			},
-			wantErr: false,
-		},
-		{
-			name: "adding a same element",
-			args: args{
-				element: &sampleAfricaElementPtr,
-			},
-			wantErr: false,
-		},
-		{
-			name: "adding a meta element",
-			args: args{
-				element: &sampleUsElementPtr,
-			},
-			wantErr: false,
-		},
-		{
-			name: "adding a format to a meta element",
-			args: args{
-				element: &element.Element{ID: "us", Parent: "north-america", Formats: []string{formats.FormatOsmPbf}},
-			},
-			wantErr: false,
-		},
-		{
-			name: "adding a same element parent differ",
-			args: args{
-				element: &myFakeGeorgia,
-			},
-			wantErr: true,
-		},
-	}
-
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			c := config.Config{
-				Elements:      sampleElementValidPtr,
-				ElementsMutex: &sync.RWMutex{},
-			}
-			if err := c.MergeElement(tt.args.element); err != nil != tt.wantErr {
-				t.Errorf("Ext.mergeElement() error = %v, wantErr %v", err, tt.wantErr)
-			}
 		})
 	}
 }
