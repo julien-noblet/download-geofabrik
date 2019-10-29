@@ -771,3 +771,96 @@ func Benchmark_Elem2URL_parse_France_openstreetmap_fr_yml(b *testing.B) {
 		}
 	}
 }
+
+func TestConfig_MergeElement(t *testing.T) {
+	tests := []struct {
+		name       string
+		Config     *config.Config
+		el         *element.Element
+		wantErr    bool
+		wantConfig *config.Config
+	}{
+		// TODO: Add test cases.
+		{name: "Add element on void Config",
+			Config: &config.Config{ElementsMutex: &sync.RWMutex{}, Elements: element.Slice{}},
+			el: &element.Element{ID: "test",
+				Name:    "Test",
+				Formats: element.Formats{"format1", "format2"},
+			},
+			wantErr: false,
+			wantConfig: &config.Config{
+				Elements: element.Slice{
+					"test": {ID: "test",
+						Name:    "Test",
+						Formats: element.Formats{"format1", "format2"},
+					}},
+				ElementsMutex: &sync.RWMutex{},
+			},
+		},
+		{name: "Add new element on non void Config",
+			Config: &config.Config{
+				ElementsMutex: &sync.RWMutex{},
+				Elements: element.Slice{
+					"test2": {ID: "test2",
+						Name:    "Test2",
+						Formats: element.Formats{"format1", "format2"},
+					}},
+			},
+			el: &element.Element{ID: "test",
+				Name:    "Test",
+				Formats: element.Formats{"format1", "format2"},
+			},
+			wantErr: false,
+			wantConfig: &config.Config{
+				Elements: element.Slice{
+					"test": {ID: "test",
+						Name:    "Test",
+						Formats: element.Formats{"format1", "format2"},
+					},
+					"test2": {ID: "test2",
+						Name:    "Test2",
+						Formats: element.Formats{"format1", "format2"},
+					},
+				},
+				ElementsMutex: &sync.RWMutex{},
+			},
+		},
+		{name: "Add same element on non void Config",
+			Config: &config.Config{
+				ElementsMutex: &sync.RWMutex{},
+				Elements: element.Slice{
+					"test": {ID: "test",
+						Name:    "Test",
+						Formats: element.Formats{"format1", "format2"},
+					},
+				},
+			},
+			el: &element.Element{ID: "test",
+				Name:    "Test",
+				Formats: element.Formats{"format1", "format2"},
+			},
+			wantErr: false,
+			wantConfig: &config.Config{
+				Elements: element.Slice{
+					"test": {ID: "test",
+						Name:    "Test",
+						Formats: element.Formats{"format1", "format2"},
+					}},
+				ElementsMutex: &sync.RWMutex{},
+			},
+		},
+	}
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			c := tt.Config
+			err := c.MergeElement(tt.el)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Config.MergeElement() error = %v, wantErr %v", err, tt.wantErr)
+			}
+			if !reflect.DeepEqual(c.Elements, tt.wantConfig.Elements) {
+				t.Errorf("Config.MergeElement() config.Elements = %v, wantConfig.Elements %v", c.Elements, tt.wantConfig.Elements)
+			}
+		})
+	}
+}
