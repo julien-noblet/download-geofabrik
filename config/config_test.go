@@ -1,6 +1,7 @@
 package config_test
 
 import (
+	"io/ioutil"
 	"reflect"
 	"sync"
 	"testing"
@@ -950,6 +951,32 @@ func TestConfig_MergeElement(t *testing.T) {
 			}
 			if !reflect.DeepEqual(c.Elements, tt.wantConfig.Elements) {
 				t.Errorf("Config.MergeElement() config.Elements = %v, wantConfig.Elements %v", c.Elements, tt.wantConfig.Elements)
+			}
+		})
+	}
+}
+
+func TestConfig_Generate(t *testing.T) {
+	tests := []struct {
+		name    string
+		file    string
+		wantErr bool
+	}{
+		{name: "geofabrik", file: geofabrikYml, wantErr: false},
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			c, _ := config.LoadConfig(tt.file)
+			want, _ := ioutil.ReadFile(geofabrikYml)
+			got, err := c.Generate()
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Config.Generate() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, want) {
+				t.Errorf("Config.Generate() = %v, want %v", got, want)
 			}
 		})
 	}
