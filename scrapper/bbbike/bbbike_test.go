@@ -3,7 +3,6 @@ package bbbike
 import (
 	"net/url"
 	"reflect"
-	"regexp"
 	"strings"
 	"testing"
 
@@ -11,7 +10,6 @@ import (
 	"github.com/gocolly/colly"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
-	"github.com/julien-noblet/download-geofabrik/scrapper"
 )
 
 func Test_bbbike_getName(t *testing.T) {
@@ -301,27 +299,7 @@ func Test_bbbike_parseList(t *testing.T) {
 				Request: &colly.Request{URL: u},
 			}
 
-			b := Bbbike{
-				Scrapper: &scrapper.Scrapper{
-					PB:             236,
-					Async:          true,
-					Parallelism:    20,
-					MaxDepth:       0,
-					AllowedDomains: []string{`download.bbbike.org`},
-					BaseURL:        `https://download.bbbike.org/osm/bbbike`,
-					StartURL:       `https://download.bbbike.org/osm/bbbike/`,
-					URLFilters: []*regexp.Regexp{
-						regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/[A-Z].+$`),
-						regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/$`),
-					},
-					FormatDefinition: formats.FormatDefinitions{
-						formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: ".osm.pbf"},
-						formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: ".shp.zip"},
-						formats.FormatOsmGz:  {ID: formats.FormatOsmGz, Loc: ".osm.gz"},
-					},
-				},
-			}
-
+			b := GetDefault()
 			c := b.Collector() // Need a Collector to visit
 			for _, elemem := range *tt.elements {
 				elemem := elemem
@@ -435,27 +413,7 @@ func Test_bbbike_parseSidebar(t *testing.T) {
 				Request: &colly.Request{URL: u},
 			}
 
-			b := Bbbike{
-				Scrapper: &scrapper.Scrapper{
-					PB:             236,
-					Async:          true,
-					Parallelism:    20,
-					MaxDepth:       0,
-					AllowedDomains: []string{`download.bbbike.org`},
-					BaseURL:        `https://download.bbbike.org/osm/bbbike`,
-					StartURL:       `https://download.bbbike.org/osm/bbbike/`,
-					URLFilters: []*regexp.Regexp{
-						regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/[A-Z].+$`),
-						regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/$`),
-					},
-					FormatDefinition: formats.FormatDefinitions{
-						formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: ".osm.pbf"},
-						formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: ".shp.zip"},
-						formats.FormatOsmGz:  {ID: formats.FormatOsmGz, Loc: ".osm.gz"},
-					},
-				},
-			}
-
+			b := GetDefault()
 			c := b.Collector() // Need a Collector to visit
 			for _, elemem := range *tt.elements {
 				elemem := elemem

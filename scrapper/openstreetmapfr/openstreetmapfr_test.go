@@ -3,7 +3,6 @@ package openstreetmapfr
 import (
 	"net/url"
 	"reflect"
-	"regexp"
 	"strings"
 	"sync"
 	"testing"
@@ -13,7 +12,6 @@ import (
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
-	"github.com/julien-noblet/download-geofabrik/scrapper"
 )
 
 func TestOpenstreetmapFR_parse(t *testing.T) {
@@ -81,29 +79,7 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 					Request: &colly.Request{URL: u},
 				},
 			}
-			o := OpenstreetmapFR{
-				Scrapper: &scrapper.Scrapper{
-					PB:             144,
-					Async:          true,
-					Parallelism:    20,
-					MaxDepth:       0,
-					AllowedDomains: []string{`download.openstreetmap.fr`},
-					BaseURL:        `https://download.openstreetmap.fr/extracts`,
-					StartURL:       `https://download.openstreetmap.fr/`,
-					URLFilters: []*regexp.Regexp{
-						regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
-						regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`),
-						regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`),
-						regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),
-						regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
-					},
-					FormatDefinition: formats.FormatDefinitions{
-						formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
-						formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", BasePath: "../polygons/"},
-						formats.FormatState:  {ID: formats.FormatState, Loc: ".state.txt"},
-					},
-				},
-			}
+			o := GetDefault()
 			c := o.Collector() // Need a Collector to visit
 
 			if len(tt.element) > 0 {
@@ -297,29 +273,7 @@ var openstreetmapFRtests = []struct {
 func TestOpenstreetmapFR_parseHref(t *testing.T) {
 	for tn := range openstreetmapFRtests {
 		tn := tn
-		o := OpenstreetmapFR{
-			Scrapper: &scrapper.Scrapper{
-				PB:             144,
-				Async:          true,
-				Parallelism:    20,
-				MaxDepth:       0,
-				AllowedDomains: []string{`download.openstreetmap.fr`},
-				BaseURL:        `https://download.openstreetmap.fr/extracts`,
-				StartURL:       `https://download.openstreetmap.fr/`,
-				URLFilters: []*regexp.Regexp{
-					regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
-					regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`),
-					regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`),
-					regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),
-					regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
-				},
-				FormatDefinition: formats.FormatDefinitions{
-					formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
-					formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", BasePath: "../polygons/"},
-					formats.FormatState:  {ID: formats.FormatState, Loc: ".state.txt"},
-				},
-			},
-		}
+		o := GetDefault()
 		o.Config = &openstreetmapFRtests[tn].c
 		t.Run(openstreetmapFRtests[tn].name, func(t *testing.T) {
 			o.parseHref(openstreetmapFRtests[tn].href)
@@ -393,29 +347,7 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			o := &OpenstreetmapFR{
-				Scrapper: &scrapper.Scrapper{
-					PB:             144,
-					Async:          true,
-					Parallelism:    20,
-					MaxDepth:       0,
-					AllowedDomains: []string{`download.openstreetmap.fr`},
-					BaseURL:        `https://download.openstreetmap.fr/extracts`,
-					StartURL:       `https://download.openstreetmap.fr/`,
-					URLFilters: []*regexp.Regexp{
-						regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
-						regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`),
-						regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`),
-						regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),
-						regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
-					},
-					FormatDefinition: formats.FormatDefinitions{
-						formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
-						formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", BasePath: "../polygons/"},
-						formats.FormatState:  {ID: formats.FormatState, Loc: ".state.txt"},
-					},
-				},
-			}
+			o := GetDefault()
 			o.GetConfig()
 			if len(tt.elements) > 0 {
 				for _, e := range tt.elements {

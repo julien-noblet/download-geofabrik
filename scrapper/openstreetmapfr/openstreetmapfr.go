@@ -111,7 +111,7 @@ func (o *OpenstreetmapFR) makeParents(parent string, gparents []string) {
 	}
 }
 
-func (o *OpenstreetmapFR) parseHref(href string) { //nolint:gocyclo // TODO: Fix cyclo complexity
+func (o *OpenstreetmapFR) parseHref(href string) {
 	log.Debugf("Parsing: %s", href)
 
 	if !strings.Contains(href, "?") && !strings.Contains(href, "-latest") && href[0] != '/' {
