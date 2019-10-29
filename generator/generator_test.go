@@ -1,13 +1,13 @@
-package generator_test
+package generator
 
 import (
+	"io/ioutil"
 	"reflect"
 	"testing"
 
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
-	"github.com/julien-noblet/download-geofabrik/generator"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -157,7 +157,28 @@ func TestGenerate(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			generator.Generate(tt.args.configfile)
+			Generate(tt.args.configfile)
+		})
+	}
+}
+
+func Test_write(t *testing.T) {
+	tests := []struct {
+		name   string
+		input  string
+		output string
+	}{
+		// TODO: Add test cases.
+		{name: "geofabrik", input: "../geofabrik.yml", output: "/tmp/test.yml"},
+	}
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			c, _ := config.LoadConfig(tt.input)
+			write(c, tt.output)
+			input, _ := ioutil.ReadFile(tt.input)
+			output, _ := ioutil.ReadFile(tt.output)
+			reflect.DeepEqual(input, output)
 		})
 	}
 }
