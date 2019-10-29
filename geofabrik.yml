@@ -1173,8 +1173,16 @@ elements:
     parent: england
   district-of-columbia:
     id: district-of-columbia
-    meta: true
     name: District of Columbia
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
     parent: us
   djibouti:
     id: djibouti
@@ -1730,8 +1738,16 @@ elements:
     parent: central-america
   guatemala-south-america:
     id: guatemala-south-america
-    meta: true
     name: Guatemala
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
     parent: south-america
   guinea:
     id: guinea
@@ -2900,8 +2916,16 @@ elements:
     parent: us
   missouri:
     id: missouri
-    meta: true
     name: Missouri
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
     parent: us
   mittelfranken:
     id: mittelfranken
@@ -3139,8 +3163,16 @@ elements:
     parent: us
   new-jersey:
     id: new-jersey
-    meta: true
     name: New Jersey
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
     parent: us
   new-mexico:
     id: new-mexico

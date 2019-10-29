@@ -35,7 +35,7 @@ var (
 	fNodownload = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
 	fVerbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
 	fQuiet      = app.Flag("quiet", "Be quiet").Short('q').Bool()
-	fProgress   = app.Flag("progress", "Add a progress bar").Bool()
+	fProgress   = app.Flag("progress", "Add a progress bar (implie quiet)").Bool()
 
 	list = app.Command("list", "Show elements available")
 	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool()
@@ -184,16 +184,15 @@ func main() {
 	log.SetLevel(log.InfoLevel)
 	log.SetHandler(cli.Default)
 
+	if *fQuiet || *fProgress {
+		log.SetLevel(log.ErrorLevel)
+	}
+
 	if *fVerbose {
 		log.SetLevel(log.DebugLevel)
 		log.SetHandler(text.Default)
 	}
 
-	if *fQuiet {
-		log.SetLevel(log.ErrorLevel)
-	}
-
-	configureBool(fVerbose, "verbose")
 	configureBool(fNodownload, "noDownload")
 	configureBool(fProgress, "progress")
 

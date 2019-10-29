@@ -41,7 +41,7 @@ Flags:
   -n, --nodownload           Do not download file (test only)
   -v, --verbose              Be verbose
   -q, --quiet                Be quiet
-      --progress             Add a progress bar
+      --progress             Add a progress bar (implie quiet)
       --version              Show application version.
 
 Commands:
@@ -171,7 +171,7 @@ Commands:
 | derbyshire                                  | England               | Derbyshire                             | sPBpSk  |
 | detmold-regbez                              | Nordrhein-Westfalen   | Regierungsbezirk Detmold               | sPBpSk  |
 | devon                                       | England               | Devon                                  | sPBpSk  |
-| district-of-columbia                        | us                    | District of Columbia                   |         |
+| district-of-columbia                        | us                    | District of Columbia                   | sPBpSk  |
 | djibouti                                    | Africa                | Djibouti                               | sPBpSk  |
 | dolnoslaskie                                | Poland                | Województwo dolnośląskie(Lower         | sPBpSk  |
 |                                             |                       | Silesian Voivodeship)                  |         |
@@ -216,7 +216,7 @@ Commands:
 | groningen                                   | Netherlands           | Groningen                              | sPBpSk  |
 | guadeloupe                                  | France                | Guadeloupe                             | sPBpk   |
 | guatemala                                   | Central America       | Guatemala                              | sPBpSk  |
-| guatemala-south-america                     | South America         | Guatemala                              |         |
+| guatemala-south-america                     | South America         | Guatemala                              | sPBpSk  |
 | guinea                                      | Africa                | Guinea                                 | sPBpSk  |
 | guinea-bissau                               | Africa                | Guinea-Bissau                          | sPBpSk  |
 | guyane                                      | France                | Guyane                                 | sPBpk   |
@@ -317,7 +317,7 @@ Commands:
 | midi-pyrenees                               | France                | Midi-Pyrenees                          | sPBpSk  |
 | minnesota                                   | us                    | Minnesota                              | sPBpSk  |
 | mississippi                                 | us                    | Mississippi                            | sPBpSk  |
-| missouri                                    | us                    | Missouri                               |         |
+| missouri                                    | us                    | Missouri                               | sPBpSk  |
 | mittelfranken                               | Bayern                | Mittelfranken                          | sPBpSk  |
 | moldova                                     | Europe                | Moldova                                | sPBpSk  |
 | monaco                                      | Europe                | Monaco                                 | sPBpSk  |
@@ -336,7 +336,7 @@ Commands:
 | new-brunswick                               | Canada                | New Brunswick                          | sPBpSk  |
 | new-caledonia                               | Australia and Oceania | New Caledonia                          | sPBpSk  |
 | new-hampshire                               | us                    | New Hampshire                          | sPBpSk  |
-| new-jersey                                  | us                    | New Jersey                             |         |
+| new-jersey                                  | us                    | New Jersey                             | sPBpSk  |
 | new-mexico                                  | us                    | New Mexico                             | sPBpSk  |
 | new-york                                    | us                    | New York                               | sPBpSk  |
 | new-zealand                                 | Australia and Oceania | New Zealand                            | sPBpSk  |
