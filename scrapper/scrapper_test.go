@@ -1,4 +1,4 @@
-package main
+package scrapper
 
 import (
 	"math/rand"
@@ -8,6 +8,9 @@ import (
 	"time"
 
 	"github.com/gocolly/colly"
+	"github.com/julien-noblet/download-geofabrik/config"
+	"github.com/julien-noblet/download-geofabrik/element"
+	"github.com/julien-noblet/download-geofabrik/formats"
 )
 
 func TestGetParent(t *testing.T) {
@@ -24,6 +27,7 @@ func TestGetParent(t *testing.T) {
 		{name: "grand parents", url: "https://download.geofabrik.de/parent1/parent2", want: "parent1", want2: "https://download.geofabrik.de/parent1"},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			got, got2 := GetParent(tt.url)
 			if got != tt.want {
@@ -50,6 +54,7 @@ func Test_FileExt(t *testing.T) {
 		{name: "1 Parent long ext", url: "https://download.geofabrik.de/parent/test.ext.html", want: "test", want2: "ext.html"},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			got, ext := FileExt(tt.url)
 			if got != tt.want {
@@ -66,34 +71,35 @@ func Test_ParseFormat(t *testing.T) {
 	type args struct {
 		id     string
 		format string
-		c      Config
+		c      config.Config
 	}
+
 	tests := []struct {
 		name string
 		args args
-		want ElementSlice
+		want element.Slice
 	}{
 		{name: "Add osm.pbf but already in",
 			args: args{
 				id:     "a",
-				format: "osm.pbf",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatOsmPbf,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf"},
+							Formats: []string{formats.FormatOsmPbf},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf"},
+					Formats: []string{formats.FormatOsmPbf},
 					Meta:    false,
 				},
 			},
@@ -101,10 +107,10 @@ func Test_ParseFormat(t *testing.T) {
 		{name: "Add osm.pbf",
 			args: args{
 				id:     "a",
-				format: "osm.pbf",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatOsmPbf,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
 							Formats: []string{},
@@ -114,11 +120,11 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf"},
+					Formats: []string{formats.FormatOsmPbf},
 					Meta:    false,
 				},
 			},
@@ -128,23 +134,23 @@ func Test_ParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "osm.pbf.md5",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf", "kml", "state"},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf", "kml", "state", "osm.pbf.md5"},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, "osm.pbf.md5"},
 					Meta:    false,
 				},
 			},
@@ -153,24 +159,24 @@ func Test_ParseFormat(t *testing.T) {
 			name: "Add osm.bz2",
 			args: args{
 				id:     "a",
-				format: "osm.bz2",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatOsmBz2,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf", "kml", "state"},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf", "kml", "state", "osm.bz2"},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, formats.FormatOsmBz2},
 					Meta:    false,
 				},
 			},
@@ -180,23 +186,23 @@ func Test_ParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "osm.bz2.md5",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf", "kml", "state"},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf", "kml", "state", "osm.bz2.md5"},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, "osm.bz2.md5"},
 					Meta:    false,
 				},
 			},
@@ -205,24 +211,24 @@ func Test_ParseFormat(t *testing.T) {
 			name: "Add poly",
 			args: args{
 				id:     "a",
-				format: "poly",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatPoly,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf", "kml", "state"},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf", "kml", "state", "poly"},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, formats.FormatPoly},
 					Meta:    false,
 				},
 			},
@@ -230,24 +236,24 @@ func Test_ParseFormat(t *testing.T) {
 		{name: "Add shp.zip",
 			args: args{
 				id:     "a",
-				format: "shp.zip",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatShpZip,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf", "kml", "state"},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf", "kml", "state", "shp.zip"},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, formats.FormatShpZip},
 					Meta:    false,
 				},
 			},
@@ -256,23 +262,23 @@ func Test_ParseFormat(t *testing.T) {
 			args: args{
 				id:     "a",
 				format: "unk",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
-							Formats: []string{"osm.pbf", "kml", "state"},
+							Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 							Meta:    false,
 						},
 					},
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf", "kml", "state"},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 					Meta:    false,
 				},
 			},
@@ -280,10 +286,10 @@ func Test_ParseFormat(t *testing.T) {
 		{name: "Add osm.pbf on meta",
 			args: args{
 				id:     "a",
-				format: "osm.pbf",
-				c: Config{
-					Elements: ElementSlice{
-						"a": Element{
+				format: formats.FormatOsmPbf,
+				c: config.Config{
+					Elements: element.Slice{
+						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
 							Formats: []string{},
@@ -293,32 +299,33 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: ElementSlice{
-				"a": Element{
+			want: element.Slice{
+				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{"osm.pbf"},
+					Formats: []string{formats.FormatOsmPbf},
 					Meta:    false,
 				},
 			},
 		},
 	}
 	for tn := range tests {
+		tn := tn
 		t.Run(tests[tn].name, func(t *testing.T) {
 			s := Scrapper{
 				Config: &tests[tn].args.c,
 			}
-			s.Config.Formats = formatDefinitions{
-				"osh.pbf":     {ID: "osh.pbf", Loc: ".osh.pbf"},
-				"osh.pbf.md5": format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
-				"osm.bz2":     {ID: "osm.bz2", Loc: "-latest.osm.bz2"},
-				"osm.bz2.md5": {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
-				"osm.pbf":     {ID: "osm.pbf", Loc: "-latest.osm.pbf"},
-				"osm.pbf.md5": {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-				"poly":        {ID: "poly", Loc: ".poly"},
-				"kml":         {ID: "kml", Loc: ".kml"},
-				"state":       {ID: "state", Loc: "-updates/state.txt"},
-				"shp.zip":     {ID: "shp.zip", Loc: "-latest-free.shp.zip"},
+			s.Config.Formats = formats.FormatDefinitions{
+				formats.FormatOshPbf: {ID: formats.FormatOshPbf, Loc: ".osh.pbf"},
+				"osh.pbf.md5":        formats.Format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
+				formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
+				"osm.bz2.md5":        {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
+				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+				"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly"},
+				formats.FormatKml:    {ID: formats.FormatKml, Loc: ".kml"},
+				formats.FormatState:  {ID: formats.FormatState, Loc: "-updates/state.txt"},
+				formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: "-latest-free.shp.zip"},
 			}
 
 			s.ParseFormat(tests[tn].args.id, tests[tn].args.format)
@@ -331,10 +338,11 @@ func Test_ParseFormat(t *testing.T) {
 
 func TestScrapper_PB(t *testing.T) {
 	for i := 0; i < 10; i++ {
-		want := rand.Int()
+		want := rand.Int() //nolint:gosec
 		s := Scrapper{
 			PB: want,
 		}
+
 		out := s.GetPB()
 		if out != want {
 			t.Errorf("GetPB() got %d, want %d", out, want)
@@ -352,6 +360,7 @@ func TestScrapper_GetStartURL(t *testing.T) {
 		s := Scrapper{
 			StartURL: want,
 		}
+
 		out := s.GetStartURL()
 		if out != want {
 			t.Errorf("GetStartURL() got %v, want %v", out, want)
@@ -364,11 +373,11 @@ func stringWithCharset(seededRand *rand.Rand, length int, charset string) string
 	for i := range b {
 		b[i] = charset[seededRand.Intn(len(charset))]
 	}
+
 	return string(b)
 }
 
 func TestScrapper_Limit(t *testing.T) {
-
 	tests := []struct {
 		name   string
 		fields Scrapper
@@ -385,6 +394,7 @@ func TestScrapper_Limit(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			s := &Scrapper{
 				BaseURL:          tt.fields.BaseURL,
@@ -411,97 +421,98 @@ func TestScrapper_GetConfig(t *testing.T) {
 	tests := []struct {
 		name   string
 		fields Scrapper
-		want   *Config
+		want   *config.Config
 	}{
 		// TODO: Add test cases.
 		{name: "Void",
-			want: &Config{Elements: ElementSlice{}, ElementsMutex: &sync.RWMutex{}},
+			want: &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}},
 		},
 		{name: "Void + BaseURL",
 			fields: Scrapper{BaseURL: "http://my.url"},
-			want:   &Config{Elements: ElementSlice{}, ElementsMutex: &sync.RWMutex{}, BaseURL: "http://my.url"},
+			want:   &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}, BaseURL: "http://my.url"},
 		},
 		{name: "Void + FormatDefinition",
-			fields: Scrapper{FormatDefinition: formatDefinitions{"ext": format{ID: "ext"}}},
-			want:   &Config{Elements: ElementSlice{}, ElementsMutex: &sync.RWMutex{}, Formats: formatDefinitions{"ext": format{ID: "ext"}}},
+			fields: Scrapper{FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}}},
+			want:   &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}, Formats: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}}},
 		},
 		{name: "Void + BaseURL",
 			fields: Scrapper{
 				BaseURL:          "http://my.url",
-				FormatDefinition: formatDefinitions{"ext": format{ID: "ext"}},
+				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
-			want: &Config{
-				Elements:      ElementSlice{},
+			want: &config.Config{
+				Elements:      element.Slice{},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
-				Formats:       formatDefinitions{"ext": format{ID: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 		{name: "Config Exist",
 			fields: Scrapper{
-				Config: &Config{
-					Elements: ElementSlice{
-						"a": Element{ID: "a"},
+				Config: &config.Config{
+					Elements: element.Slice{
+						"a": element.Element{ID: "a"},
 					},
 					ElementsMutex: &sync.RWMutex{},
 					BaseURL:       "http://my.url",
-					Formats:       formatDefinitions{"ext": format{ID: "ext"}},
+					Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 				},
 			},
-			want: &Config{
-				Elements: ElementSlice{
-					"a": Element{ID: "a"},
+			want: &config.Config{
+				Elements: element.Slice{
+					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
-				Formats:       formatDefinitions{"ext": format{ID: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 		{name: "Config Exist+ Base URL",
 			fields: Scrapper{
 				BaseURL: "http://my.url",
-				Config: &Config{
-					Elements: ElementSlice{
-						"a": Element{ID: "a"},
+				Config: &config.Config{
+					Elements: element.Slice{
+						"a": element.Element{ID: "a"},
 					},
 					ElementsMutex: &sync.RWMutex{},
 					BaseURL:       "http://old.url",
-					Formats:       formatDefinitions{"ext": format{ID: "ext"}},
+					Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 				},
 			},
-			want: &Config{
-				Elements: ElementSlice{
-					"a": Element{ID: "a"},
+			want: &config.Config{
+				Elements: element.Slice{
+					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
-				Formats:       formatDefinitions{"ext": format{ID: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 		{name: "Config Exist+ Base URL + Format Definition",
 			fields: Scrapper{
 				BaseURL: "http://my.url",
-				Config: &Config{
-					Elements: ElementSlice{
-						"a": Element{ID: "a"},
+				Config: &config.Config{
+					Elements: element.Slice{
+						"a": element.Element{ID: "a"},
 					},
 					ElementsMutex: &sync.RWMutex{},
 					BaseURL:       "http://old.url",
-					Formats:       formatDefinitions{"old": format{ID: "old"}},
+					Formats:       formats.FormatDefinitions{"old": formats.Format{ID: "old"}},
 				},
-				FormatDefinition: formatDefinitions{"ext": format{ID: "ext"}},
+				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
-			want: &Config{
-				Elements: ElementSlice{
-					"a": Element{ID: "a"},
+			want: &config.Config{
+				Elements: element.Slice{
+					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
-				Formats:       formatDefinitions{"ext": format{ID: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			s := &Scrapper{
 				BaseURL:          tt.fields.BaseURL,

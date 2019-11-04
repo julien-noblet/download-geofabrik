@@ -1,4 +1,4 @@
-gofiles  = download-geofabrik.go config.go download.go element.go formats.go generator.go bbbike.go geofabrik.go openstreetmap.fr.go scrapper.go
+gofiles  = download-geofabrik.go
 geofabrik:
 	echo "Generating geofabrik.yml"
 	go run $(gofiles) generate --progress
@@ -21,3 +21,4 @@ readme:
 	go run $(gofiles) --service "bbbike" list --markdown >> README.md
 	echo "" >> README.md
 
+all: geofabrik osmfr bbbike readme

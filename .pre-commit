@@ -1,6 +1,7 @@
 #!/bin/sh
 #
 gofmt -s -w *.go
+go mod tidy
 make readme
 git add geofabrik.yml
 git add openstreetmap.fr.yml
