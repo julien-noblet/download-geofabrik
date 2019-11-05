@@ -20,7 +20,7 @@ require (
 	github.com/temoto/robotstxt v1.1.1 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
-	gopkg.in/yaml.v2 v2.2.4
+	gopkg.in/yaml.v2 v2.2.5
 )
 
 go 1.13
