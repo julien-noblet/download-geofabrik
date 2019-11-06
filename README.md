@@ -1163,7 +1163,7 @@ Total elements: 403
 | santa-catarina                          | south                            | santa-catarina                          | sPp     |
 | santa_barbara                           | california                       | santa_barbara                           | sPp     |
 | santa_clara                             | california                       | santa_clara                             | sPp     |
-| santa_cruz                              | argentina                        | santa_cruz                              | sPp     |
+| santa_cruz                              | california                       | santa_cruz                              | sPp     |
 | santa_fe                                | argentina                        | santa_fe                                | sPp     |
 | santiago_del_estero                     | argentina                        | santiago_del_estero                     | sPp     |
 | sao-paulo                               | southeast                        | sao-paulo                               | sPp     |
