@@ -1,5 +1,71 @@
 # Change Log
 
+## [Unreleased](https://github.com/julien-noblet/download-geofabrik/tree/HEAD)
+
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.5.0...HEAD)
+
+**Merged pull requests:**
+
+- chore\(deps\): update module olekukonko/tablewriter to v0.0.2 [\#216](https://github.com/julien-noblet/download-geofabrik/pull/216) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [v2.5.0](https://github.com/julien-noblet/download-geofabrik/tree/v2.5.0) (2019-11-05)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.4.1...v2.5.0)
+
+**Closed issues:**
+
+- Distribute more binaries [\#38](https://github.com/julien-noblet/download-geofabrik/issues/38)
+- Docker image [\#29](https://github.com/julien-noblet/download-geofabrik/issues/29)
+
+**Merged pull requests:**
+
+- chore\(deps\): update module spf13/viper to v1.5.0 [\#215](https://github.com/julien-noblet/download-geofabrik/pull/215) ([renovate[bot]](https://github.com/apps/renovate))
+- Split in packages, Better linting... [\#213](https://github.com/julien-noblet/download-geofabrik/pull/213) ([julien-noblet](https://github.com/julien-noblet))
+- actions: Add benchmarking [\#212](https://github.com/julien-noblet/download-geofabrik/pull/212) ([julien-noblet](https://github.com/julien-noblet))
+- Docker [\#211](https://github.com/julien-noblet/download-geofabrik/pull/211) ([julien-noblet](https://github.com/julien-noblet))
+- Ldflags [\#210](https://github.com/julien-noblet/download-geofabrik/pull/210) ([julien-noblet](https://github.com/julien-noblet))
+- chore\(deps\): update module cheggaaa/pb/v3 to v3.0.2 [\#209](https://github.com/julien-noblet/download-geofabrik/pull/209) ([renovate[bot]](https://github.com/apps/renovate))
+- Gorelease [\#182](https://github.com/julien-noblet/download-geofabrik/pull/182) ([julien-noblet](https://github.com/julien-noblet))
+
+## [v2.4.1](https://github.com/julien-noblet/download-geofabrik/tree/v2.4.1) (2019-10-18)
+[Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.4.0...v2.4.1)
+
+**Closed issues:**
+
+- Action Required: Fix Renovate Configuration [\#208](https://github.com/julien-noblet/download-geofabrik/issues/208)
+
+**Merged pull requests:**
+
+- chore\(deps\): update module yaml to v2.2.4 [\#207](https://github.com/julien-noblet/download-geofabrik/pull/207) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x [\#203](https://github.com/julien-noblet/download-geofabrik/pull/203) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to aed303c [\#202](https://github.com/julien-noblet/download-geofabrik/pull/202) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update module google.golang.org/appengine to v1.6.2 [\#201](https://github.com/julien-noblet/download-geofabrik/pull/201) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x [\#200](https://github.com/julien-noblet/download-geofabrik/pull/200) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 95c3470 [\#199](https://github.com/julien-noblet/download-geofabrik/pull/199) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/sys commit hash to fb81701 [\#198](https://github.com/julien-noblet/download-geofabrik/pull/198) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to d72b05d [\#197](https://github.com/julien-noblet/download-geofabrik/pull/197) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to c4a336e [\#196](https://github.com/julien-noblet/download-geofabrik/pull/196) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to aa644d2 [\#195](https://github.com/julien-noblet/download-geofabrik/pull/195) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to b1e2c8e [\#194](https://github.com/julien-noblet/download-geofabrik/pull/194) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to fc82fb2 [\#193](https://github.com/julien-noblet/download-geofabrik/pull/193) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x [\#192](https://github.com/julien-noblet/download-geofabrik/pull/192) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 85edb9e [\#191](https://github.com/julien-noblet/download-geofabrik/pull/191) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 15fda70 [\#190](https://github.com/julien-noblet/download-geofabrik/pull/190) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 6889da9 [\#189](https://github.com/julien-noblet/download-geofabrik/pull/189) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update module stretchr/testify to v1.4.0 [\#188](https://github.com/julien-noblet/download-geofabrik/pull/188) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 9065c18 [\#187](https://github.com/julien-noblet/download-geofabrik/pull/187) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to ea41424 [\#186](https://github.com/julien-noblet/download-geofabrik/pull/186) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x/tools commit hash to 9fae7b2 [\#185](https://github.com/julien-noblet/download-geofabrik/pull/185) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x [\#184](https://github.com/julien-noblet/download-geofabrik/pull/184) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update golang.org/x [\#183](https://github.com/julien-noblet/download-geofabrik/pull/183) ([renovate[bot]](https://github.com/apps/renovate))
+- ci\(travis\): Use GO111MODULE [\#181](https://github.com/julien-noblet/download-geofabrik/pull/181) ([julien-noblet](https://github.com/julien-noblet))
+- Update module PuerkitoBio/gocrawl to v1.0.1 [\#180](https://github.com/julien-noblet/download-geofabrik/pull/180) ([renovate[bot]](https://github.com/apps/renovate))
+- Update module PuerkitoBio/gocrawl to v1.0.1 [\#179](https://github.com/julien-noblet/download-geofabrik/pull/179) ([renovate[bot]](https://github.com/apps/renovate))
+- Update github.com/alecthomas/template commit hash to fb15b89 [\#178](https://github.com/julien-noblet/download-geofabrik/pull/178) ([renovate[bot]](https://github.com/apps/renovate))
+- Update github.com/alecthomas/units commit hash to c3de453 [\#177](https://github.com/julien-noblet/download-geofabrik/pull/177) ([renovate[bot]](https://github.com/apps/renovate))
+- Goreleaser [\#176](https://github.com/julien-noblet/download-geofabrik/pull/176) ([julien-noblet](https://github.com/julien-noblet))
+- Update golang.org/x [\#175](https://github.com/julien-noblet/download-geofabrik/pull/175) ([renovate[bot]](https://github.com/apps/renovate))
+- Update module cheggaaa/pb to v3 [\#170](https://github.com/julien-noblet/download-geofabrik/pull/170) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [v2.4.0](https://github.com/julien-noblet/download-geofabrik/tree/v2.4.0) (2019-07-06)
 [Full Changelog](https://github.com/julien-noblet/download-geofabrik/compare/v2.3.1...v2.4.0)
 
