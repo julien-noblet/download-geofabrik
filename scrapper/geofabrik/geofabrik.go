@@ -18,7 +18,7 @@ type Geofabrik struct {
 func GetDefault() *Geofabrik {
 	return &Geofabrik{
 		Scrapper: &scrapper.Scrapper{
-			PB:             402,
+			PB:             412,
 			Async:          true,
 			Parallelism:    20,
 			MaxDepth:       0,
