@@ -49,6 +49,9 @@ func (g *Geofabrik) Collector(options ...interface{}) *colly.Collector {
 	c.OnHTML("#subregions", func(e *colly.HTMLElement) {
 		g.parseSubregion(e, c)
 	})
+	c.OnHTML("#specialsubregions", func(e *colly.HTMLElement) {
+		g.parseSubregion(e, c)
+	})
 	c.OnHTML("li", func(e *colly.HTMLElement) {
 		g.parseLi(e, c)
 	})

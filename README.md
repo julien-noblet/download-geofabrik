@@ -88,8 +88,9 @@ Commands:
 | albania                                     | Europe                | Albania                                | sPBpSk  |
 | alberta                                     | Canada                | Alberta                                | sPBpSk  |
 | algeria                                     | Africa                | Algeria                                | sPBpSk  |
+| alps                                        | Europe                | Alps                                   | sPBpk   |
 | alsace                                      | France                | Alsace                                 | sPBpSk  |
-| andorra                                     | Europe                | Andorra                                | sPBpSk  |
+| andorra                                     | Europe                | Andorra                                | sPpk    |
 | angola                                      | Africa                | Angola                                 | sPBpSk  |
 | antarctica                                  |                       | Antarctica                             | sPBpSk  |
 | aquitaine                                   | France                | Aquitaine                              | sPBpSk  |
@@ -127,6 +128,7 @@ Commands:
 | bremen                                      | Germany               | Bremen                                 | sPBpSk  |
 | bretagne                                    | France                | Bretagne                               | sPBpSk  |
 | bristol                                     | England               | Bristol                                | sPBpSk  |
+| britain-and-ireland                         | Europe                | Britain and Ireland                    | sPBpk   |
 | british-columbia                            | Canada                | British Columbia                       | sPBpSk  |
 | buckinghamshire                             | England               | Buckinghamshire                        | sPBpSk  |
 | bulgaria                                    | Europe                | Bulgaria                               | sPBpSk  |
@@ -166,6 +168,7 @@ Commands:
 | cumbria                                     | England               | Cumbria                                | sPBpSk  |
 | cyprus                                      | Europe                | Cyprus                                 | sPBpSk  |
 | czech-republic                              | Europe                | Czech Republic                         | sPBpSk  |
+| dach                                        | Europe                | Germany, Austria, Switzerland          | sPBpk   |
 | delaware                                    | us                    | Delaware                               | sPBpSk  |
 | denmark                                     | Europe                | Denmark                                | sPBpSk  |
 | derbyshire                                  | England               | Derbyshire                             | sPBpSk  |
@@ -250,6 +253,7 @@ Commands:
 | jamaica                                     | Central America       | Jamaica                                | sPBpSk  |
 | japan                                       | Asia                  | Japan                                  | sPBpk   |
 | jordan                                      | Asia                  | Jordan                                 | sPBpSk  |
+| kaliningrad                                 | Russian Federation    | Kaliningrad                            | sPBpSk  |
 | kansai                                      | Japan                 | Kansai region (a.k.a. Kinki            | sPBpSk  |
 |                                             |                       | region)                                |         |
 | kansas                                      | us                    | Kansas                                 | sPBpSk  |
@@ -437,6 +441,8 @@ Commands:
 | somalia                                     | Africa                | Somalia                                | sPBpSk  |
 | somerset                                    | England               | Somerset                               | sPBpSk  |
 | south-africa                                | Africa                | South Africa                           | sPBpSk  |
+| south-africa-and-lesotho                    | Africa                | South Africa (includes                 | sPBpk   |
+|                                             |                       | Lesotho)                               |         |
 | south-america                               |                       | South America                          | sPBpk   |
 | south-carolina                              | us                    | South Carolina                         | sPBpSk  |
 | south-dakota                                | us                    | South Dakota                           | sPBpSk  |
@@ -480,6 +486,11 @@ Commands:
 | ural-fed-district                           | Russian Federation    | Ural Federal District                  | sPBpSk  |
 | uruguay                                     | South America         | Uruguay                                | sPBpSk  |
 | us                                          | North America         | us                                     |         |
+| us-midwest                                  | North America         | US Midwest                             | sPBpk   |
+| us-northeast                                | North America         | US Northeast                           | sPBpk   |
+| us-pacific                                  | North America         | US Pacific                             | sPBpk   |
+| us-south                                    | North America         | US South                               | sPBpk   |
+| us-west                                     | North America         | US West                                | sPBpk   |
 | utah                                        | us                    | Utah                                   | sPBpSk  |
 | utrecht                                     | Netherlands           | Utrecht                                | sPBpSk  |
 | uzbekistan                                  | Asia                  | Uzbekistan                             | sPBpSk  |
@@ -514,7 +525,7 @@ Commands:
 | zeeland                                     | Netherlands           | Zeeland                                | sPBpSk  |
 | zimbabwe                                    | Africa                | Zimbabwe                               | sPBpSk  |
 | zuid-holland                                | Netherlands           | Zuid-Holland                           | sPBpSk  |
-Total elements: 403
+Total elements: 413
 
 ## List of elements from openstreetmap.fr
 |                SHORTNAME                |              IS IN               |                LONG NAME                | FORMATS |
