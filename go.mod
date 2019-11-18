@@ -1,4 +1,4 @@
-module github.com/julien-noblet/download-geofabrik
+module github.com/julien-noblet/download-geofabrik/v2
 
 require (
 	bou.ke/monkey v1.0.1
