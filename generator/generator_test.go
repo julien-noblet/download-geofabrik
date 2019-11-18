@@ -5,9 +5,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/config"
-	"github.com/julien-noblet/download-geofabrik/element"
-	"github.com/julien-noblet/download-geofabrik/formats"
+	"github.com/julien-noblet/download-geofabrik/v2/config"
+	"github.com/julien-noblet/download-geofabrik/v2/element"
+	"github.com/julien-noblet/download-geofabrik/v2/formats"
 	yaml "gopkg.in/yaml.v2"
 )
 
