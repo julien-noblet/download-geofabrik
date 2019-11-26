@@ -1840,10 +1840,10 @@ elements:
     id: france_taaf
     name: france_taaf
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
-    parent: merge
+    parent: oceania
   franche_comte:
     id: franche_comte
     name: franche_comte
@@ -2994,7 +2994,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: spain
+    parent: argentina
   lake:
     id: lake
     name: lake
@@ -5163,7 +5163,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: argentina
+    parent: california
   santa_fe:
     id: santa_fe
     name: santa_fe
@@ -5304,7 +5304,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: ukraine
+    parent: southern_federal_district
   seychelles:
     id: seychelles
     name: seychelles
