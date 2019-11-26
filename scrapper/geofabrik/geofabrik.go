@@ -18,7 +18,7 @@ type Geofabrik struct {
 func GetDefault() *Geofabrik {
 	return &Geofabrik{
 		Scrapper: &scrapper.Scrapper{
-			PB:             402,
+			PB:             412,
 			Async:          true,
 			Parallelism:    20,
 			MaxDepth:       0,
@@ -47,6 +47,9 @@ func GetDefault() *Geofabrik {
 func (g *Geofabrik) Collector(options ...interface{}) *colly.Collector {
 	c := g.Scrapper.Collector(options)
 	c.OnHTML("#subregions", func(e *colly.HTMLElement) {
+		g.parseSubregion(e, c)
+	})
+	c.OnHTML("#specialsubregions", func(e *colly.HTMLElement) {
 		g.parseSubregion(e, c)
 	})
 	c.OnHTML("li", func(e *colly.HTMLElement) {

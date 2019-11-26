@@ -114,6 +114,18 @@ elements:
     - osm.bz2.md5
     - poly
     parent: africa
+  alps:
+    id: alps
+    name: Alps
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    parent: europe
   alsace:
     id: alsace
     name: Alsace
@@ -135,9 +147,6 @@ elements:
     - kml
     - state
     - osm.pbf.md5
-    - shp.zip
-    - osm.bz2
-    - osm.bz2.md5
     - poly
     parent: europe
   angola:
@@ -616,6 +625,18 @@ elements:
     - osm.bz2.md5
     - poly
     parent: england
+  britain-and-ireland:
+    id: britain-and-ireland
+    name: Britain and Ireland
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    parent: europe
   british-columbia:
     id: british-columbia
     name: British Columbia
@@ -1102,6 +1123,18 @@ elements:
     - state
     - osm.pbf.md5
     - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    parent: europe
+  dach:
+    id: dach
+    name: Germany, Austria, Switzerland
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
     - osm.bz2
     - osm.bz2.md5
     - poly
@@ -2175,6 +2208,19 @@ elements:
     - osm.bz2.md5
     - poly
     parent: asia
+  kaliningrad:
+    id: kaliningrad
+    name: Kaliningrad
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    parent: russia
   kansai:
     id: kansai
     name: Kansai region (a.k.a. Kinki region)
@@ -4337,6 +4383,18 @@ elements:
     - osm.bz2.md5
     - poly
     parent: africa
+  south-africa-and-lesotho:
+    id: south-africa-and-lesotho
+    name: South Africa (includes Lesotho)
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    parent: africa
   south-america:
     id: south-america
     name: South America
@@ -4858,6 +4916,66 @@ elements:
     id: us
     meta: true
     name: us
+    parent: north-america
+  us-midwest:
+    id: us-midwest
+    name: US Midwest
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    parent: north-america
+  us-northeast:
+    id: us-northeast
+    name: US Northeast
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    parent: north-america
+  us-pacific:
+    id: us-pacific
+    name: US Pacific
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    parent: north-america
+  us-south:
+    id: us-south
+    name: US South
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
+    parent: north-america
+  us-west:
+    id: us-west
+    name: US West
+    files:
+    - osm.pbf
+    - kml
+    - state
+    - osm.pbf.md5
+    - osm.bz2
+    - osm.bz2.md5
+    - poly
     parent: north-america
   utah:
     id: utah
