@@ -90,7 +90,7 @@ Commands:
 | algeria                                     | Africa                | Algeria                                | sPBpSk  |
 | alps                                        | Europe                | Alps                                   | sPBpk   |
 | alsace                                      | France                | Alsace                                 | sPBpSk  |
-| andorra                                     | Europe                | Andorra                                | sPBpSk  |
+| andorra                                     | Europe                | Andorra                                | sPpk    |
 | angola                                      | Africa                | Angola                                 | sPBpSk  |
 | antarctica                                  |                       | Antarctica                             | sPBpSk  |
 | aquitaine                                   | France                | Aquitaine                              | sPBpSk  |
