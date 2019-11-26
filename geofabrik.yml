@@ -1572,6 +1572,7 @@ elements:
     parent: netherlands
   georgia-eu:
     id: georgia-eu
+    file: georgia
     name: Georgia (Eastern Europe)
     files:
     - osm.pbf
@@ -1585,6 +1586,7 @@ elements:
     parent: europe
   georgia-us:
     id: georgia-us
+    file: georgia
     name: Georgia (US State)
     files:
     - osm.pbf
@@ -1738,6 +1740,7 @@ elements:
     parent: central-america
   guatemala-south-america:
     id: guatemala-south-america
+    file: guatemala
     name: Guatemala
     files:
     - osm.pbf
