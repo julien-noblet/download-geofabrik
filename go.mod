@@ -30,7 +30,7 @@ require (
 	golang.org/x/sys v0.0.0-20191105142833-ac3223d80179 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
-	gopkg.in/yaml.v2 v2.2.5
+	gopkg.in/yaml.v2 v2.2.7
 )
 
 go 1.13

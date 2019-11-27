@@ -147,6 +147,9 @@ elements:
     - kml
     - state
     - osm.pbf.md5
+    - shp.zip
+    - osm.bz2
+    - osm.bz2.md5
     - poly
     parent: europe
   angola:
