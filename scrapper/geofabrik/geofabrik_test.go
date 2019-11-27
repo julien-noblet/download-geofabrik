@@ -305,7 +305,10 @@ func TestGeofabrik_parseLi(t *testing.T) {
 			</li>`,
 			url:     `https://download.geofabrik.de/toto.html`,
 			element: &element.Element{ID: "toto"},
-			want:    element.Slice{"toto": element.Element{ID: "toto", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState}}},
+			want: element.Slice{"toto": element.Element{
+				ID:      "toto",
+				Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
+			}},
 		},
 		{name: "georgia-us",
 			html: `
@@ -315,7 +318,10 @@ func TestGeofabrik_parseLi(t *testing.T) {
 			</li>`,
 			url:     `https://download.geofabrik.de/north-america/us/georgia.html`,
 			element: &element.Element{ID: "georgia-us"},
-			want:    element.Slice{"georgia-us": element.Element{ID: "georgia-us", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState}}},
+			want: element.Slice{"georgia-us": element.Element{
+				ID:      "georgia-us",
+				Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
+			}},
 		},
 		{name: "georgia-eu",
 			html: `
@@ -325,7 +331,10 @@ func TestGeofabrik_parseLi(t *testing.T) {
 			</li>`,
 			url:     `https://download.geofabrik.de/europe/georgia.html`,
 			element: &element.Element{ID: "georgia-eu"},
-			want:    element.Slice{"georgia-eu": element.Element{ID: "georgia-eu", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState}}},
+			want: element.Slice{"georgia-eu": element.Element{
+				ID:      "georgia-eu",
+				Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
+			}},
 		},
 		{name: "guatemala-south-america",
 			html: `
@@ -335,7 +344,10 @@ func TestGeofabrik_parseLi(t *testing.T) {
 			</li>`,
 			url:     `https://download.geofabrik.de/south-america/guatemala.html`,
 			element: &element.Element{ID: "guatemala-south-america"},
-			want:    element.Slice{"guatemala-south-america": element.Element{ID: "guatemala-south-america", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState}}},
+			want: element.Slice{"guatemala-south-america": element.Element{
+				ID:      "guatemala-south-america",
+				Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
+			}},
 		},
 		// TODO: Add test cases.
 	}
@@ -447,7 +459,7 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 				"albania":    element.Element{ID: "albania", Name: "Albania", Meta: true, Parent: "europe"},
 				"andorra":    element.Element{ID: "andorra", Name: "Andorra", Meta: true, Parent: "europe"},
 				"france":     element.Element{ID: "france", Name: "France", Meta: true, Parent: "europe"},
-				"georgia-eu": element.Element{ID: "georgia-eu", Name: "Georgia (Eastern Europe)", Meta: true, Parent: "europe"},
+				"georgia-eu": element.Element{ID: "georgia-eu", File: "georgia", Name: "Georgia (Eastern Europe)", Meta: true, Parent: "europe"},
 				"germany":    element.Element{ID: "germany", Name: "Germany", Meta: true, Parent: "europe"},
 			},
 		},
@@ -482,7 +494,7 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 				"us":            element.Element{ID: "us", Name: "us", Meta: true, Parent: "north-america"},
 				"canada":        element.Element{ID: "canada", Name: "Canada", Meta: true, Parent: "north-america"},
 				"florida":       element.Element{ID: "florida", Name: "Florida", Meta: true, Parent: "us"},
-				"georgia-us":    element.Element{ID: "georgia-us", Name: "Georgia (US State)", Meta: true, Parent: "us"},
+				"georgia-us":    element.Element{ID: "georgia-us", File: "georgia", Name: "Georgia (US State)", Meta: true, Parent: "us"},
 				"hawaii":        element.Element{ID: "hawaii", Name: "Hawaii", Meta: true, Parent: "us"},
 			},
 		},
@@ -511,7 +523,7 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 			want: element.Slice{
 				"south-america":           element.Element{ID: "south-america", Name: "North America", Meta: true},
 				"ecuador":                 element.Element{ID: "ecuador", Name: "Ecuador", Meta: true, Parent: "south-america"},
-				"guatemala-south-america": element.Element{ID: "guatemala-south-america", Name: "Guatemala", Meta: true, Parent: "south-america"},
+				"guatemala-south-america": element.Element{ID: "guatemala-south-america", File: "guatemala", Name: "Guatemala", Meta: true, Parent: "south-america"},
 			},
 		},
 

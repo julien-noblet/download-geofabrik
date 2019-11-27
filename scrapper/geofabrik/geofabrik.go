@@ -64,24 +64,31 @@ func (g *Geofabrik) parseSubregion(e *colly.HTMLElement, c *colly.Collector) {
 		el.ForEach("a", func(_ int, sub *colly.HTMLElement) {
 			href := sub.Request.AbsoluteURL(sub.Attr("href"))
 			id, extension := scrapper.FileExt(href)
+			var file string
 			if extension == "html" {
 				parent, pp := scrapper.GetParent(href)
 				if id == "georgia" {
 					switch parent {
 					case "us":
 						id = "georgia-us" //nolint:goconst
+						file = "georgia"
 					case "europe":
 						id = "georgia-eu"
+						file = "georgia"
 					}
 				}
 				if id == "guatemala" && parent == "south-america" {
 					id = "guatemala-south-america"
+					file = "guatemala"
 				}
 				el := element.Element{
 					ID:     id,
 					Name:   sub.Text,
 					Parent: parent,
 					Meta:   true,
+				}
+				if file != "" {
+					el.File = file
 				}
 				if !g.Config.Exist(parent) && parent != "" { // Case of parent should exist not already in Slice
 					gparent, _ := scrapper.GetParent(pp)
