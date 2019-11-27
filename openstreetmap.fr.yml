@@ -618,9 +618,9 @@ elements:
     id: bermuda
     name: bermuda
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: north-america
   bhutan:
     id: bhutan
@@ -858,9 +858,9 @@ elements:
     id: canada
     name: canada
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: north-america
   canarias:
     id: canarias
@@ -5000,9 +5000,9 @@ elements:
     id: saint_pierre_et_miquelon
     name: saint_pierre_et_miquelon
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: north-america
   saint_vincent_and_the_grenadines:
     id: saint_vincent_and_the_grenadines
@@ -5163,7 +5163,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: argentina
+    parent: california
   santa_fe:
     id: santa_fe
     name: santa_fe
@@ -5304,7 +5304,7 @@ elements:
     - poly
     - osm.pbf
     - state
-    parent: ukraine
+    parent: southern_federal_district
   seychelles:
     id: seychelles
     name: seychelles
@@ -6117,9 +6117,9 @@ elements:
     id: us-west
     name: us-west
     files:
+    - poly
     - osm.pbf
     - state
-    - poly
     parent: north-america
   usa_virgin_islands:
     id: usa_virgin_islands
