@@ -12,7 +12,7 @@ require (
 	github.com/apex/log v1.1.1
 	github.com/cheggaaa/pb/v3 v3.0.3
 	github.com/gobwas/glob v0.2.3 // indirect
-	github.com/gocolly/colly v1.2.0
+	github.com/gocolly/colly/v2/v2 v2.0.0
 	github.com/golang/protobuf v1.3.2 // indirect
 	github.com/kennygrant/sanitize v1.2.4 // indirect
 	github.com/mattn/go-colorable v0.1.4 // indirect
