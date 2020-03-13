@@ -7,9 +7,9 @@ import (
 
 	"github.com/apex/log"
 	"github.com/gocolly/colly"
-	"github.com/julien-noblet/download-geofabrik/element"
-	"github.com/julien-noblet/download-geofabrik/formats"
-	"github.com/julien-noblet/download-geofabrik/scrapper"
+	"github.com/julien-noblet/download-geofabrik/v2/element"
+	"github.com/julien-noblet/download-geofabrik/v2/formats"
+	"github.com/julien-noblet/download-geofabrik/v2/scrapper"
 )
 
 // OpenstreetmapFR Scrapper

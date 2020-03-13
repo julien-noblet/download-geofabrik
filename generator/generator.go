@@ -7,11 +7,11 @@ import (
 	"github.com/apex/log"
 	pb "github.com/cheggaaa/pb/v3"
 	"github.com/gocolly/colly"
-	"github.com/julien-noblet/download-geofabrik/config"
-	"github.com/julien-noblet/download-geofabrik/scrapper"
-	"github.com/julien-noblet/download-geofabrik/scrapper/bbbike"
-	"github.com/julien-noblet/download-geofabrik/scrapper/geofabrik"
-	"github.com/julien-noblet/download-geofabrik/scrapper/openstreetmapfr"
+	"github.com/julien-noblet/download-geofabrik/v2/config"
+	"github.com/julien-noblet/download-geofabrik/v2/scrapper"
+	"github.com/julien-noblet/download-geofabrik/v2/scrapper/bbbike"
+	"github.com/julien-noblet/download-geofabrik/v2/scrapper/geofabrik"
+	"github.com/julien-noblet/download-geofabrik/v2/scrapper/openstreetmapfr"
 	"github.com/spf13/viper"
 )
 

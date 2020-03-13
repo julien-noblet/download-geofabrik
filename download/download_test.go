@@ -3,7 +3,7 @@ package download_test
 import (
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/download"
+	"github.com/julien-noblet/download-geofabrik/v2/download"
 	"github.com/spf13/viper"
 )
 

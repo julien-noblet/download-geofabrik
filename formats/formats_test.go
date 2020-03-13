@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/config"
-	"github.com/julien-noblet/download-geofabrik/formats"
+	"github.com/julien-noblet/download-geofabrik/v2/config"
+	"github.com/julien-noblet/download-geofabrik/v2/formats"
 	"github.com/spf13/viper"
 )
 
