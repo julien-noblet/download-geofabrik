@@ -9,7 +9,7 @@ require (
 	github.com/antchfx/htmlquery v1.2.0 // indirect
 	github.com/antchfx/xmlquery v1.2.1 // indirect
 	github.com/antchfx/xpath v1.1.2 // indirect
-	github.com/apex/log v1.1.1
+	github.com/apex/log v1.1.2
 	github.com/cheggaaa/pb/v3 v3.0.3
 	github.com/gocolly/colly v1.2.1-0.20191128122054-e910bad05231
 	github.com/golang/groupcache v0.0.0-20191027212112-611e8accdfc9 // indirect
