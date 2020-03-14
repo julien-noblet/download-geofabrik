@@ -41,10 +41,10 @@ jobs:
       script: go run download-geofabrik.go generate
       deploy:
         provider: pages
-        skip-cleanup: true
-        github-token: "$GITHUB_TOKEN"
-        keep-history: true
-        target-branch: "$TRAVIS_BRANCH"
+        skip_cleanup: true
+        github_token: "$GITHUB_TOKEN"
+        keep_history: true
+        target_branch: "$TRAVIS_BRANCH"
         on:
           all_branches: true
     - stage: OSMfr
@@ -54,10 +54,10 @@ jobs:
       script: go run download-geofabrik.go --service="openstreetmap.fr" generate
       deploy:
         provider: pages
-        skip-cleanup: true
-        github-token: "$GITHUB_TOKEN"
-        keep-history: true
-        target-branch: "$TRAVIS_BRANCH"
+        skip_cleanup: true
+        github_token: "$GITHUB_TOKEN"
+        keep_history: true
+        target_branch: "$TRAVIS_BRANCH"
         on:
           all_branches: true
     - stage: bbbike
@@ -67,10 +67,10 @@ jobs:
       script: go run download-geofabrik.go --service="bbbike" generate
       deploy:
         provider: pages
-        skip-cleanup: true
-        github-token: "$GITHUB_TOKEN"
-        keep-history: true
-        target-branch: "$TRAVIS_BRANCH"
+        skip_cleanup: true
+        github_token: "$GITHUB_TOKEN"
+        keep_history: true
+        target_branch: "$TRAVIS_BRANCH"
         on:
           all_branches: true
     - stage: Readme
@@ -93,10 +93,10 @@ jobs:
         - echo "" >> README.md
       deploy:
         provider: pages
-        skip-cleanup: true
-        github-token: "$GITHUB_TOKEN"
-        keep-history: true
-        target-branch: "$TRAVIS_BRANCH"
+        skip_cleanup: true
+        github_token: "$GITHUB_TOKEN"
+        keep_history: true
+        target_branch: "$TRAVIS_BRANCH"
         on:
           all_branches: true
     - stage: buildTag
