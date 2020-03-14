@@ -426,9 +426,24 @@ func Test_config_GetElement(t *testing.T) {
 				t.Errorf("Config.GetElement() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
+			tfrance := tt.want
+			tfrance.Formats = nil
+			tgot := got
+			tgot.Formats = nil
+			if !reflect.DeepEqual(tgot, tfrance) {
 				t.Errorf("Config.GetElement() = %v, want %v", got, tt.want)
 			}
+			for _, k := range tt.want.Formats {
+				if !(got.Formats.Contains(k)) {
+					t.Errorf("%v format should exist, got=%v", k, got)
+				}
+			}
+			for _, k := range got.Formats {
+				if !(tt.want.Formats.Contains(k)) {
+					t.Errorf("%v format should not exist, got=%v", k, got)
+				}
+			}
+
 		})
 	}
 }
