@@ -8,9 +8,10 @@ import (
 	pb "github.com/cheggaaa/pb/v3"
 	"github.com/gocolly/colly"
 	"github.com/julien-noblet/download-geofabrik/config"
+	"github.com/julien-noblet/download-geofabrik/generator/importer/geofabrik"
 	"github.com/julien-noblet/download-geofabrik/scrapper"
 	"github.com/julien-noblet/download-geofabrik/scrapper/bbbike"
-	"github.com/julien-noblet/download-geofabrik/scrapper/geofabrik"
+	geofabrikScrapper "github.com/julien-noblet/download-geofabrik/scrapper/geofabrik"
 	"github.com/julien-noblet/download-geofabrik/scrapper/openstreetmapfr"
 	"github.com/spf13/viper"
 )
@@ -35,7 +36,21 @@ func Generate(configfile string) {
 
 	switch viper.GetString("service") {
 	case "geofabrik":
-		s = geofabrik.GetDefault()
+		index, err := geofabrik.GetIndex(geofabrik.GeofabrikIndexURL)
+		if err != nil {
+			log.WithError(err)
+		}
+
+		c, err := geofabrik.Convert(index)
+		if err != nil {
+			log.WithError(err)
+		}
+
+		write(c, configfile)
+
+		return // Exit function!
+	case "geofabrik-parse":
+		s = geofabrikScrapper.GetDefault()
 	case "openstreetmap.fr":
 		s = openstreetmapfr.GetDefault()
 	case "bbbike":

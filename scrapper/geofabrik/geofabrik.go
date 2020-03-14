@@ -77,7 +77,7 @@ func (g *Geofabrik) parseSubregion(e *colly.HTMLElement, c *colly.Collector) {
 						file = "georgia"
 					}
 				}
-				if id == "guatemala" && parent == "south-america" {
+				if id == "guatemala" && parent == "south-america" { //nolint:goconst // guatemala is also in central-america
 					id = "guatemala-south-america"
 					file = "guatemala"
 				}
@@ -124,7 +124,7 @@ func (g *Geofabrik) ParseFormat(id, format string) {
 	}
 }
 
-func (g *Geofabrik) parseLi(e *colly.HTMLElement, c *colly.Collector) { //nolint:unparam
+func (g *Geofabrik) parseLi(e *colly.HTMLElement, c *colly.Collector) { //nolint:unparam,lll // *colly.Collector is passed as param but unused in this case
 	e.ForEach("a", func(_ int, el *colly.HTMLElement) {
 		_, format := scrapper.FileExt(el.Attr("href"))
 		id, _ := scrapper.FileExt(el.Request.URL.String()) // id can't be extracted from href
