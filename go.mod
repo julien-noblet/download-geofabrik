@@ -2,10 +2,9 @@ module github.com/julien-noblet/download-geofabrik
 
 require (
 	bou.ke/monkey v1.0.2
-	github.com/PuerkitoBio/goquery v1.5.0
+	github.com/PuerkitoBio/goquery v1.5.1
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
-	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/antchfx/htmlquery v1.2.0 // indirect
 	github.com/antchfx/xmlquery v1.2.1 // indirect
 	github.com/antchfx/xpath v1.1.2 // indirect
@@ -22,7 +21,6 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.6.1
 	github.com/stretchr/testify v1.4.0
-	golang.org/x/net v0.0.0-20191126235420-ef20fe5d7933 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/yaml.v2 v2.2.7
