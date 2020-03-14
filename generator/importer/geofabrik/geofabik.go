@@ -121,10 +121,17 @@ func Convert(g *Index) (*config.Config, error) {
 		for k := range ge.ElementProperties.Urls {
 			switch k {
 			case "pbf":
-				e.Formats = append(e.Formats, "osm.pbf")
+				e.Formats = append(e.Formats, formats.FormatOsmPbf, "osm.pbf.md5")
+			case "bz2":
+				e.Formats = append(e.Formats, formats.FormatOsmBz2, "osm.bz2.md5")
+			case "shp":
+				e.Formats = append(e.Formats, formats.FormatShpZip)
+			case "history":
+				e.Formats = append(e.Formats, formats.FormatOshPbf)
 			}
-			//e.Formats = append(e.Formats, k)
 		}
+
+		e.Formats = append(e.Formats, formats.FormatPoly, formats.FormatKml, formats.FormatState)
 
 		err := c.MergeElement(&e)
 		if err != nil {

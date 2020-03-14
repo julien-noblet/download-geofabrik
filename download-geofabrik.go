@@ -150,12 +150,12 @@ func downloadCommand() {
 		log.WithError(err).Fatal(config.ErrLoadConfig)
 	}
 
-	r, _ := regexp.Compile("[\\/]([A-Za-z_-]*)") // Trick for handle / in name
+	r := regexp.MustCompile(`.*[\\/]?([A-Za-z_-]*)$`) // Trick for handle / in name
+	log.Errorf("%v\n%v", *dOutputDir+*delement, r.FindStringSubmatch(*dOutputDir+*delement))
 	filename := r.FindStringSubmatch(*dOutputDir + *delement)[0]
 
 	for _, format := range *formatFile {
 		if ok, _, _ := config.IsHashable(configPtr, format); *dCheck && ok {
-
 			if fileExist(*dOutputDir + *delement + "." + format) {
 				if !downloadChecksum(format) {
 					log.Infof("Checksum mismatch, re-downloading %v", *dOutputDir+filename+"."+format)
