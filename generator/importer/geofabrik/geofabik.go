@@ -117,6 +117,7 @@ func Convert(g *Index) (*config.Config, error) {
 
 		e.ID = ge.ElementProperties.ID
 		e.Parent = ge.ElementProperties.Parent
+		e.Name = ge.ElementProperties.Name
 
 		for k := range ge.ElementProperties.Urls {
 			switch k {

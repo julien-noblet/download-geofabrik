@@ -392,10 +392,21 @@ func Test_config_GetElement(t *testing.T) {
 	}{
 		// TODO: Add test cases.
 		{
-			name:    "France from geofabrik",
-			file:    geofabrikYml,
-			id:      "france",
-			want:    &element.Element{ID: "france", Name: "France", Parent: "europe", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, "osm.pbf.md5", formats.FormatOsmBz2, "osm.bz2.md5", formats.FormatPoly}},
+			name: "France from geofabrik",
+			file: geofabrikYml,
+			id:   "france",
+			want: &element.Element{ID: "france",
+				Name: "France", Parent: "europe",
+				Formats: element.Formats{
+					formats.FormatOshPbf,
+					formats.FormatOsmPbf,
+					"osm.pbf.md5",
+					formats.FormatOsmBz2,
+					"osm.bz2.md5",
+					formats.FormatPoly,
+					formats.FormatKml,
+					formats.FormatState,
+				}},
 			wantErr: false,
 		},
 		{
