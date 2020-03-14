@@ -338,7 +338,7 @@ func Test_ParseFormat(t *testing.T) {
 
 func TestScrapper_PB(t *testing.T) {
 	for i := 0; i < 10; i++ {
-		want := rand.Int() //nolint:gosec
+		want := rand.Int() //nolint:gosec // I assume rand.Int() isn't safe but it's enough for testing
 		s := Scrapper{
 			PB: want,
 		}

@@ -68,7 +68,7 @@ func bbbikeGetName(h3 string) string {
 	return ret
 }
 
-func (b *Bbbike) parseSidebar(e *colly.HTMLElement, c *colly.Collector) { //nolint:unparam
+func (b *Bbbike) parseSidebar(e *colly.HTMLElement, c *colly.Collector) { //nolint:unparam,lll // *colly.Collector is passed as param but unused in this case
 	name := bbbikeGetName(e.ChildText("h3"))
 	el := element.Element{
 		ID:   name,

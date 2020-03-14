@@ -84,7 +84,7 @@ func (s *Scrapper) Limit() *colly.LimitRule {
 }
 
 // Collector *colly.Collector Init Collector
-func (s *Scrapper) Collector(options ...interface{}) *colly.Collector { //nolint:unparam
+func (s *Scrapper) Collector(options ...interface{}) *colly.Collector { //nolint:unparam,lll // *colly.Collector is passed as param but unused in this case
 	c := colly.NewCollector(
 		colly.AllowedDomains(s.AllowedDomains...),
 		colly.URLFilters(s.URLFilters...),

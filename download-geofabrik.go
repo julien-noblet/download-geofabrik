@@ -1,12 +1,13 @@
 package main
 
 import (
-	"crypto/md5" //nolint:gosec
+	"crypto/md5" //nolint:gosec // I only can get MD5sum files
 	"encoding/hex"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
+	"regexp"
 	"sort"
 	"strings"
 
@@ -90,6 +91,8 @@ func checkService() bool {
 	switch *fService {
 	case "geofabrik":
 		return true
+	case "geofabrik-parse":
+		return true
 	case "openstreetmap.fr":
 		if strings.EqualFold(*fConfig, "./geofabrik.yml") {
 			*fConfig = "./openstreetmap.fr.yml"
@@ -147,24 +150,28 @@ func downloadCommand() {
 		log.WithError(err).Fatal(config.ErrLoadConfig)
 	}
 
+	r := regexp.MustCompile(`.*[\\/]?([A-Za-z_-]*)$`) // Trick for handle / in name
+	log.Errorf("%v\n%v", *dOutputDir+*delement, r.FindStringSubmatch(*dOutputDir+*delement))
+	filename := r.FindStringSubmatch(*dOutputDir + *delement)[0]
+
 	for _, format := range *formatFile {
 		if ok, _, _ := config.IsHashable(configPtr, format); *dCheck && ok {
 			if fileExist(*dOutputDir + *delement + "." + format) {
 				if !downloadChecksum(format) {
-					log.Infof("Checksum mismatch, re-downloading %v", *dOutputDir+*delement+"."+format)
-					downloadFile(configPtr, *delement, format, *dOutputDir+*delement+"."+format)
+					log.Infof("Checksum mismatch, re-downloading %v", *dOutputDir+filename+"."+format)
+					downloadFile(configPtr, *delement, format, *dOutputDir+filename+"."+format)
 					downloadChecksum(format)
 				} else {
 					log.Info("Checksum match, no download!")
 				}
 			} else {
-				downloadFile(configPtr, *delement, format, *dOutputDir+*delement+"."+format)
+				downloadFile(configPtr, *delement, format, *dOutputDir+filename+"."+format)
 				if !downloadChecksum(format) {
-					log.Warnf("Checksum mismatch, please re-download %s", *dOutputDir+*delement+"."+format)
+					log.Warnf("Checksum mismatch, please re-download %s", *dOutputDir+filename+"."+format)
 				}
 			}
 		} else {
-			downloadFile(configPtr, *delement, format, *dOutputDir+*delement+"."+format)
+			downloadFile(configPtr, *delement, format, *dOutputDir+filename+"."+format)
 		}
 	}
 }
@@ -244,7 +251,7 @@ func hashFileMD5(filePath string) (string, error) {
 	var returnMD5String string
 
 	if fileExist(filePath) {
-		hash := md5.New() //nolint:gosec
+		hash := md5.New() //nolint:gosec // I use md5 to control with md5sum files
 
 		file, err := os.Open(filePath)
 		if err != nil {
