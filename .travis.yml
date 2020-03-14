@@ -3,100 +3,114 @@ go:
 - '1.14'
 - '1.13'
 - '1.12'
-- '1.11'
 - stable
 before_install:
 - openssl aes-256-cbc -K $encrypted_61ea798ca9ef_key -iv $encrypted_61ea798ca9ef_iv
   -in snap.login.enc -out snap.login -d
 install:
 - go get -t ./...
-script: go test ./...
 services:
 - docker
-stages:
-- test
-- goveralls
-- Geofabrik
-- OSMfr
-- bbbike
-- Readme
-- buildTag
+script: go test -v ./...
+#stages:
+#  - test
+#  - goveralls
+#  - Geofabrik
+#  - OSMfr
+#  - bbbike
+#  - Readme
+#  - buildTag
 jobs:
   include:
-  - stage: Geofabrik
-    if: commit_message =~ /(yaml|YAML|\.yml|geofabrik|Geofabrik)/ AND NOT commit_message
-      =~ /Deploy/ AND type != pull_request
-    go: stable
-    script: make geofabrik
-    deploy:
-      provider: pages
-      skip-cleanup: true
-      github-token: "$GITHUB_TOKEN"
-      keep-history: true
-      target-branch: "$TRAVIS_BRANCH"
-      on:
-        all_branches: true
-  - stage: OSMfr
-    if: commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmapFR|openstreetmap\.fr)/
-      AND NOT commit_message =~ /Deploy/ AND type != pull_request
-    go: stable
-    script: make osmfr
-    deploy:
-      provider: pages
-      skip-cleanup: true
-      github-token: "$GITHUB_TOKEN"
-      keep-history: true
-      target-branch: "$TRAVIS_BRANCH"
-      on:
-        all_branches: true
-  - stage: bbbike
-    if: commit_message =~ /(yaml|YAML|\.yml|bbbike)/ AND NOT commit_message =~ /Deploy/
-      AND type != pull_request
-    go: stable
-    script: make bbbike
-    deploy:
-      provider: pages
-      skip-cleanup: true
-      github-token: "$GITHUB_TOKEN"
-      keep-history: true
-      target-branch: "$TRAVIS_BRANCH"
-      on:
-        all_branches: true
-  - stage: Readme
-    if: commit_message =~ /(readme|README|Readme|yaml|YAML|\.yml)/
-    go: stable
-    script: make readme
-    deploy:
-      provider: pages
-      skip-cleanup: true
-      github-token: "$GITHUB_TOKEN"
-      keep-history: true
-      target-branch: "$TRAVIS_BRANCH"
-      on:
-        all_branches: true
-  - stage: goveralls
-    if: tag IS present OR commit_message !~ /(no-coverage|no-test)/
-    go: stable
-    script:
-    - GO111MODULE=off go get github.com/mattn/goveralls
-    - go test -covermode=count -coverprofile=coverage.out ./...
-    - "$GOPATH/bin/goveralls -coverprofile=coverage.out -service=travis-ci"
-  - stage: buildTag
-    if: tag IS present AND commit_message !~ /(no-build)/
-    go: stable
-    env: DOCKER_USERNAME=juliennoblet
-    script:
-    - sudo apt-get update
-    - sudo apt-get install snapd
-    - sudo snap install snapcraft --classic
-    - curl -sL https://github.com/upx/upx/releases/download/v3.95/upx-3.95-amd64_linux.tar.xz | tar -Jx && sudo mv upx-3.95-amd64_linux/upx /usr/bin && rm -rf upx-3.95-amd64_linux/
-    - test -n "$TRAVIS_TAG" && snapcraft login --with snap.login
-    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-    - curl -sL https://git.io/goreleaser | bash
-matrix:
-  exclude:
-  - go: '1.11'
-    env: GO111MODULE=on
+    - &test
+      stage: test
+      script: go test ./...
+    - &goveralls
+      stage: test coverage statistics
+      env:
+        GO111MODULE=off
+      go: stable
+      script:
+        - GO111MODULE=off go get github.com/mattn/goveralls
+        - go test -covermode=count -coverprofile=coverage.out ./...
+        - "$GOPATH/bin/goveralls -coverprofile=coverage.out -service=travis-ci"
+    - stage: Geofabrik
+      if: commit_message =~ /(yaml|YAML|\.yml|geofabrik|Geofabrik)/ AND NOT commit_message
+        =~ /Deploy/ AND type != pull_request
+      go: stable
+      script: go run download-geofabrik.go generate
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: "$GITHUB_TOKEN"
+        keep-history: true
+        target-branch: "$TRAVIS_BRANCH"
+        on:
+          all_branches: true
+    - stage: OSMfr
+      if: commit_message =~ /(yaml|YAML|\.yml|osmfr|OSMfr|openstreetmapFR|openstreetmap\.fr)/
+        AND NOT commit_message =~ /Deploy/ AND type != pull_request
+      go: stable
+      script: go run download-geofabrik.go --service="openstreetmap.fr" generate
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: "$GITHUB_TOKEN"
+        keep-history: true
+        target-branch: "$TRAVIS_BRANCH"
+        on:
+          all_branches: true
+    - stage: bbbike
+      if: commit_message =~ /(yaml|YAML|\.yml|bbbike)/ AND NOT commit_message =~ /Deploy/
+        AND type != pull_request
+      go: stable
+      script: go run download-geofabrik.go --service="bbbike" generate
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: "$GITHUB_TOKEN"
+        keep-history: true
+        target-branch: "$TRAVIS_BRANCH"
+        on:
+          all_branches: true
+    - stage: Readme
+      if: commit_message =~ /(readme|README|Readme|yaml|YAML|\.yml)/
+      go: stable
+      script:
+#        - go run download-geofabrik.go generate
+#        - go run download-geofabrik.go --service="openstreetmap.fr" generate
+#        - go run download-geofabrik.go --service="bbbike" generate
+        - cat .README.md1 > README.md
+        - go run download-geofabrik.go --help-long >> README.md
+        - cat .README.md2 >> README.md
+        - go run download-geofabrik.go list --markdown >> README.md
+        - echo "" >> README.md
+        - echo "## List of elements from openstreetmap.fr" >> README.md
+        - go run download-geofabrik.go --service "openstreetmap.fr" list --markdown >> README.md
+        - echo "" >> README.md
+        - echo "## List of elements from bbbike.org" >> README.md
+        - go run download-geofabrik.go --service "bbbike" list --markdown >> README.md
+        - echo "" >> README.md
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: "$GITHUB_TOKEN"
+        keep-history: true
+        target-branch: "$TRAVIS_BRANCH"
+        on:
+          all_branches: true
+    - stage: buildTag
+      if: tag IS present AND commit_message !~ /(no-build)/
+      go: stable
+      env: DOCKER_USERNAME=juliennoblet
+      script:
+      - sudo apt-get update
+      - sudo apt-get install snapd
+      - sudo snap install snapcraft --classic
+      - curl -sL https://github.com/upx/upx/releases/download/v3.95/upx-3.95-amd64_linux.tar.xz | tar -Jx && sudo mv upx-3.95-amd64_linux/upx /usr/bin && rm -rf upx-3.95-amd64_linux/
+      - test -n "$TRAVIS_TAG" && snapcraft login --with snap.login
+      - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      - curl -sL https://git.io/goreleaser | bash
 env:
   matrix:
   - GO111MODULE=on
