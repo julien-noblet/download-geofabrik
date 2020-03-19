@@ -73,7 +73,7 @@ func (s *Scrapper) Limit() *colly.LimitRule {
 	}
 
 	if s.RandomDelay == 0 {
-		s.RandomDelay = 5 * time.Second
+		s.RandomDelay = 5 * time.Second //nolint:gomnd // Use 5 seconds as random delay
 	}
 
 	return &colly.LimitRule{
@@ -99,14 +99,14 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector { //nolint
 	c.WithTransport(&http.Transport{
 		Proxy: http.ProxyFromEnvironment,
 		DialContext: (&net.Dialer{
-			Timeout:   60 * time.Second,
-			KeepAlive: 30 * time.Second,
+			Timeout:   60 * time.Second, //nolint:gomnd // Use 60 seconds as default timeout
+			KeepAlive: 30 * time.Second, //nolint:gomnd // Use 30 seconds as default KeepAlive
 			DualStack: true,
 		}).DialContext,
 		MaxIdleConns:          0,
-		IdleConnTimeout:       5 * time.Second,
-		TLSHandshakeTimeout:   10 * time.Second,
-		ExpectContinueTimeout: 5 * time.Second,
+		IdleConnTimeout:       5 * time.Second,  //nolint:gomnd // 5 seconds
+		TLSHandshakeTimeout:   10 * time.Second, //nolint:gomnd // 10 seconds
+		ExpectContinueTimeout: 5 * time.Second,  //nolint:gomnd // 5 seconds
 	})
 
 	s.Config = s.GetConfig() // ensure initialisation
@@ -155,7 +155,7 @@ func FileExt(url string) (filename, extension string) {
 // GetParent return filename, path
 func GetParent(url string) (filename, path string) {
 	r := strings.Split(url, "/")
-	if len(r) < 5 { // <4 should be impossible
+	if len(r) < 5 { //nolint:gomnd // <4 should be impossible
 		return "", strings.Join(r[:len(r)-1], "/")
 	}
 

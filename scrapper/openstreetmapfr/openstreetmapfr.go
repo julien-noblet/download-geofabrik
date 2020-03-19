@@ -26,9 +26,9 @@ func GetDefault() *OpenstreetmapFR {
 
 	return &OpenstreetmapFR{
 		Scrapper: &scrapper.Scrapper{
-			PB:             149,
+			PB:             149, //nolint:gomnd // There is 149 element right now
 			Async:          true,
-			Parallelism:    20,
+			Parallelism:    20, //nolint:gomnd // 20 threads for scrapping
 			MaxDepth:       0,
 			AllowedDomains: []string{`download.openstreetmap.fr`},
 			BaseURL:        `https://download.openstreetmap.fr/extracts`,
@@ -65,7 +65,9 @@ func openstreetmapFRGetParent(href string) (parent string, parents []string) {
 	var p string
 
 	pp := strings.Split(href, "/")
-	if len(pp) > 4 {
+	if len(pp) > 4 { //nolint:gomnt // need at least 4 elments to have a parent :
+		// http://1/2/.../x
+		// 1    2 3 4 ...
 		p = pp[len(pp)-2] // Get x in this kind of url http(s)://1/2/.../x/
 	} else {
 		p = ""

@@ -25,14 +25,14 @@ func FromURL(myURL, fileName string) error {
 		client := &http.Client{Transport: &http.Transport{
 			Proxy: http.ProxyFromEnvironment,
 			DialContext: (&net.Dialer{
-				Timeout:   60 * time.Second,
-				KeepAlive: 30 * time.Second,
+				Timeout:   60 * time.Second, //nolint:gomnd // 60 seconds
+				KeepAlive: 30 * time.Second, //nolint:gomnd // 30 seconds
 				DualStack: true,
 			}).DialContext,
 			MaxIdleConns:          0,
-			IdleConnTimeout:       5 * time.Second,
-			TLSHandshakeTimeout:   10 * time.Second,
-			ExpectContinueTimeout: 5 * time.Second,
+			IdleConnTimeout:       5 * time.Second,  //nolint:gomnd //  5 seconds
+			TLSHandshakeTimeout:   10 * time.Second, //nolint:gomnd // 10 seconds
+			ExpectContinueTimeout: 5 * time.Second,  //nolint:gomnd //  5 seconds
 		}}
 
 		response, err := client.Get(myURL)

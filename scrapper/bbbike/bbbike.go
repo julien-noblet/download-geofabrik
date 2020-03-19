@@ -18,9 +18,9 @@ type Bbbike struct {
 func GetDefault() *Bbbike {
 	return &Bbbike{
 		Scrapper: &scrapper.Scrapper{
-			PB:             236,
+			PB:             236, //nolint:gomnd // there is 236 element at this time
 			Async:          true,
-			Parallelism:    20,
+			Parallelism:    20, //nolint:gomnd // Use 20 threads for scraping
 			MaxDepth:       0,
 			AllowedDomains: []string{`download.bbbike.org`},
 			BaseURL:        `https://download.bbbike.org/osm/bbbike`,

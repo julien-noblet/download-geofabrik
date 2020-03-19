@@ -21,11 +21,12 @@ func TestGetIndex(t *testing.T) {
 			wantErr: false,
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			index, err := GetIndex(tt.myURL)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("GetIndex() error = %v, wantErr %v", err, tt.wantErr)
+	for x := range tests {
+		mt := tests[x]
+		t.Run(mt.name, func(t *testing.T) {
+			index, err := GetIndex(mt.myURL)
+			if (err != nil) != mt.wantErr {
+				t.Errorf("GetIndex() error = %v, wantErr %v", err, mt.wantErr)
 			}
 			if len(index.Features) < 10 {
 				t.Errorf("GetIndex() error I should have more features!!!")

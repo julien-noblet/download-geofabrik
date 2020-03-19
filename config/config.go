@@ -154,11 +154,11 @@ func Elem2preURL(c *Config, e *element.Element, b ...string) (string, error) {
 	}
 
 	switch len(b) {
-	case 1:
+	case 1: //nolint:gomnd // return with c.BaseURL
 		return c.BaseURL + "/" + strings.Join(b, "/") + myElem.ID, nil
-	case 2:
+	case 2: //nolint:gomnd // return without c.BaseURL
 		return strings.Join(b, "/") + myElem.ID, nil
-	default:
+	default: // len(b)==0 or >2
 		return c.BaseURL + "/" + myElem.ID, nil
 	}
 }

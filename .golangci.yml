@@ -113,6 +113,8 @@ linters:
     - gofmt
     - goimports
     - golint
+    - gomnd
+    - goprintffuncname
     - gosec
     - gosimple
     - govet
@@ -122,6 +124,8 @@ linters:
     - maligned
     - misspell
     - nakedret
+    - prealloc
+    - rowserrcheck
     - scopelint
     - staticcheck
     - structcheck
@@ -134,12 +138,12 @@ linters:
     - whitespace
     - wsl
     - prealloc
+    - gomnd
 
   # don't enable:
-  # - gochecknoglobals
   # - gocognit
+  # - gochecknoglobals
   # - godox
-  # - prealloc
 
 run:
   timeout: 5m

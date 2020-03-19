@@ -18,9 +18,9 @@ type Geofabrik struct {
 func GetDefault() *Geofabrik {
 	return &Geofabrik{
 		Scrapper: &scrapper.Scrapper{
-			PB:             412,
+			PB:             412, //nolint:gomnd // there is 412 items
 			Async:          true,
-			Parallelism:    20,
+			Parallelism:    20, //nolint:gomnd // use 20 threads for scrapping
 			MaxDepth:       0,
 			AllowedDomains: []string{`download.geofabrik.de`},
 			BaseURL:        `https://download.geofabrik.de`,
@@ -67,10 +67,10 @@ func (g *Geofabrik) parseSubregion(e *colly.HTMLElement, c *colly.Collector) {
 			var file string
 			if extension == "html" {
 				parent, pp := scrapper.GetParent(href)
-				if id == "georgia" {
+				if id == "georgia" { //nolint:goconst // Georgia is in Europe & US
 					switch parent {
 					case "us":
-						id = "georgia-us" //nolint:goconst
+						id = "georgia-us"
 						file = "georgia"
 					case "europe":
 						id = "georgia-eu"
