@@ -154,6 +154,7 @@ Commands:
 | congo-brazzaville                           | Africa                | Congo (Republic/Brazzaville)   | sPBHpSk |
 | congo-democratic-republic                   | Africa                | Congo (Democratic              | sPBHpSk |
 |                                             |                       | Republic/Kinshasa)             |         |
+| cook-islands                                | Australia and Oceania | Cook Islands                   | sPBHpk  |
 | cornwall                                    | England               | Cornwall                       | sPBHpSk |
 | corse                                       | France                | Corse                          | sPBHpSk |
 | crimean-fed-district                        | Russian Federation    | Crimean Federal District       | sPBHpSk |
@@ -246,6 +247,7 @@ Commands:
 | kazakhstan                                  | Asia                  | Kazakhstan                     | sPBHpSk |
 | kent                                        | England               | Kent                           | sPBHpSk |
 | kenya                                       | Africa                | Kenya                          | sPBHpSk |
+| kiribati                                    | Australia and Oceania | Kiribati                       | sPBHpk  |
 | koeln-regbez                                | Nordrhein-Westfalen   | Regierungsbezirk Köln          | sPBHpSk |
 | kosovo                                      | Europe                | Kosovo                         | sPBHpSk |
 | kujawsko-pomorskie                          | Poland                | Województwo                    | sPBHpSk |
@@ -287,6 +289,7 @@ Commands:
 |                                             |                       | />(Lesser Poland Voivodeship)  |         |
 | malta                                       | Europe                | Malta                          | sPBHpSk |
 | manitoba                                    | Canada                | Manitoba                       | sPBHpSk |
+| marshall-islands                            | Australia and Oceania | Marshall Islands               | sPBHpk  |
 | martinique                                  | France                | Martinique                     | sPBHpk  |
 | mauritania                                  | Africa                | Mauritania                     | sPBHpSk |
 | mauritius                                   | Africa                | Mauritius                      | sPBHpSk |
@@ -296,6 +299,7 @@ Commands:
 | mecklenburg-vorpommern                      | Germany               | Mecklenburg-Vorpommern         | sPBHpSk |
 | merseyside                                  | England               | Merseyside                     | sPBHpSk |
 | mexico                                      | North America         | Mexico                         | sPBHpSk |
+| micronesia                                  | Australia and Oceania | Micronesia                     | sPBHpk  |
 | midi-pyrenees                               | France                | Midi-Pyrenees                  | sPBHpSk |
 | mittelfranken                               | Bayern                | Mittelfranken                  | sPBHpSk |
 | moldova                                     | Europe                | Moldova                        | sPBHpSk |
@@ -307,6 +311,7 @@ Commands:
 | muenster-regbez                             | Nordrhein-Westfalen   | Regierungsbezirk Münster       | sPBHpSk |
 | myanmar                                     | Asia                  | Myanmar (a.k.a. Burma)         | sPBHpSk |
 | namibia                                     | Africa                | Namibia                        | sPBHpSk |
+| nauru                                       | Australia and Oceania | Nauru                          | sPBHpk  |
 | nepal                                       | Asia                  | Nepal                          | sPBHpSk |
 | netherlands                                 | Europe                | Netherlands                    | sPBHpSk |
 | new-brunswick                               | Canada                | New Brunswick                  | sPBHpSk |
@@ -318,6 +323,7 @@ Commands:
 | niedersachsen                               | Germany               | Niedersachsen                  | sPBHpSk |
 | niger                                       | Africa                | Niger                          | sPBHpSk |
 | nigeria                                     | Africa                | Nigeria                        | sPBHpSk |
+| niue                                        | Australia and Oceania | Niue                           | sPBHpk  |
 | noord-brabant                               | Netherlands           | Noord-Brabant                  | sPBHpSk |
 | noord-holland                               | Netherlands           | Noord-Holland                  | sPBHpSk |
 | norcal                                      | us/california         | Northern California            | sPBHpSk |
@@ -350,6 +356,7 @@ Commands:
 | overijssel                                  | Netherlands           | Overijssel                     | sPBHpSk |
 | oxfordshire                                 | England               | Oxfordshire                    | sPBHpSk |
 | pakistan                                    | Asia                  | Pakistan                       | sPBHpSk |
+| palau                                       | Australia and Oceania | Palau                          | sPBHpk  |
 | papua-new-guinea                            | Australia and Oceania | Papua New Guinea               | sPBHpSk |
 | paraguay                                    | South America         | Paraguay                       | sPBHpSk |
 | pays-de-la-loire                            | France                | Pays de la Loire               | sPBHpSk |
@@ -380,6 +387,7 @@ Commands:
 | sachsen-anhalt                              | Germany               | Sachsen-Anhalt                 | sPBHpSk |
 | saint-helena-ascension-and-tristan-da-cunha | Africa                | Saint Helena, Ascension, and   | sPBHpSk |
 |                                             |                       | Tristan da Cunha               |         |
+| samoa                                       | Australia and Oceania | Samoa                          | sPBHpk  |
 | sao-tome-and-principe                       | Africa                | Sao Tome and Principe          | sPBHpSk |
 | saskatchewan                                | Canada                | Saskatchewan                   | sPBHpSk |
 | schleswig-holstein                          | Germany               | Schleswig-Holstein             | sPBHpSk |
@@ -397,6 +405,7 @@ Commands:
 | slovakia                                    | Europe                | Slovakia                       | sPBHpSk |
 | slovenia                                    | Europe                | Slovenia                       | sPBHpSk |
 | socal                                       | us/california         | Southern California            | sPBHpSk |
+| solomon-islands                             | Australia and Oceania | Solomon Islands                | sPBHpk  |
 | somalia                                     | Africa                | Somalia                        | sPBHpSk |
 | somerset                                    | England               | Somerset                       | sPBHpSk |
 | south-africa                                | Africa                | South Africa                   | sPBHpSk |
@@ -431,10 +440,12 @@ Commands:
 | thueringen                                  | Germany               | Thüringen                      | sPBHpSk |
 | togo                                        | Africa                | Togo                           | sPBHpSk |
 | tohoku                                      | Japan                 | Tōhoku region                  | sPBHpSk |
+| tonga                                       | Australia and Oceania | Tonga                          | sPBHpk  |
 | tuebingen-regbez                            | Baden-Württemberg     | Regierungsbezirk Tübingen      | sPBHpSk |
 | tunisia                                     | Africa                | Tunisia                        | sPBHpSk |
 | turkey                                      | Europe                | Turkey                         | sPBHpSk |
 | turkmenistan                                | Asia                  | Turkmenistan                   | sPBHpSk |
+| tuvalu                                      | Australia and Oceania | Tuvalu                         | sPBHpk  |
 | tyne-and-wear                               | England               | Tyne and Wear                  | sPBHpSk |
 | uganda                                      | Africa                | Uganda                         | sPBHpSk |
 | ukraine                                     | Europe                | Ukraine (with Crimea)          | sPBHpSk |
@@ -501,6 +512,7 @@ Commands:
 | us/wyoming                                  | North America         | us/wyoming                     | sPBHpSk |
 | utrecht                                     | Netherlands           | Utrecht                        | sPBHpSk |
 | uzbekistan                                  | Asia                  | Uzbekistan                     | sPBHpSk |
+| vanuatu                                     | Australia and Oceania | Vanuatu                        | sPBHpk  |
 | venezuela                                   | South America         | Venezuela                      | sPBHpSk |
 | vietnam                                     | Asia                  | Vietnam                        | sPBHpSk |
 | volga-fed-district                          | Russian Federation    | Volga Federal District         | sPBHpSk |
@@ -526,7 +538,7 @@ Commands:
 | zeeland                                     | Netherlands           | Zeeland                        | sPBHpSk |
 | zimbabwe                                    | Africa                | Zimbabwe                       | sPBHpSk |
 | zuid-holland                                | Netherlands           | Zuid-Holland                   | sPBHpSk |
-Total elements: 418
+Total elements: 430
 
 ## List of elements from openstreetmap.fr
 |                SHORTNAME                |              IS IN               |                LONG NAME                | FORMATS |
