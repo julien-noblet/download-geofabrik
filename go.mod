@@ -10,7 +10,7 @@ require (
 	github.com/antchfx/xpath v1.1.2 // indirect
 	github.com/apex/log v1.6.0
 	github.com/cheggaaa/pb/v3 v3.0.4
-	github.com/gocolly/colly v1.2.1-0.20191128122054-e910bad05231
+	github.com/gocolly/colly/v2/v2 v2.1.0
 	github.com/golang/groupcache v0.0.0-20191027212112-611e8accdfc9 // indirect
 	github.com/mattn/go-colorable v0.1.4 // indirect
 	github.com/olekukonko/tablewriter v0.0.4
