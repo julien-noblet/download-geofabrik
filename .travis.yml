@@ -1,8 +1,8 @@
 language: go
 go:
+- '1.15'
 - '1.14'
 - '1.13'
-- '1.12'
 - stable
 before_install:
 - openssl aes-256-cbc -K $encrypted_61ea798ca9ef_key -iv $encrypted_61ea798ca9ef_iv
