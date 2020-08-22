@@ -10,7 +10,7 @@ require (
 	github.com/antchfx/xmlquery v1.2.4 // indirect
 	github.com/antchfx/xpath v1.1.8 // indirect
 	github.com/apex/log v1.9.0
-	github.com/cheggaaa/pb/v3 v3.0.4
+	github.com/cheggaaa/pb/v3 v3.0.5
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/gocolly/colly v1.2.0
 	github.com/golang/protobuf v1.4.2 // indirect
