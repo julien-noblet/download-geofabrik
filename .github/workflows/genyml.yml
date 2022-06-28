@@ -1,13 +1,11 @@
 name: yml-generate
-
 on:
   pull_request:
   push:
     branches:
       - main
-
 jobs:
-  name: yml-generate
+  yml-generate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
