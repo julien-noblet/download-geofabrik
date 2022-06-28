@@ -1,23 +1,25 @@
-name: gen-changelog
-on:
-  pull_request:
+---
+name: Create changelog
+on: 
   push:
     branches:
+      - master
       - main
+  pull_request:
+    branches:
+      - master
+      - main
+
 jobs:
-  gen-changelog:
+  generate_changelog:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          ref: ${{ github.head_ref }}
-      - uses: actions/setup-go@v3
+          fetch-depth: 0
+      - name: Generate changelog
+        id: gen_changelog
+        uses: bdashrad/git-chglog-action@v2.0.3
         with:
-          go-version: '>=1.18.3' # The Go version to download (if necessary) and use.
-          check-latest: true
-          cache: true
-      - run: go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
-      - run: git-chglog --output CHANGELOG.md
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: new yml files
+          git_chglog_version: "0.15.1"
