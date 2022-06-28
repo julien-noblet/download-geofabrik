@@ -584,8 +584,8 @@ Commands:
 | zimbabwe                                    | Africa                      | Zimbabwe                       | sPBHpSk |
 | zuid-holland                                | Netherlands                 | Zuid-Holland                   | sPBHpSk |
 Total elements: 475
-"" 
-"## List of elements from openstreetmap.fr" 
+
+## List of elements from openstreetmap.fr
 |                SHORTNAME                 |              IS IN               |                LONG NAME                 | FORMATS |
 |------------------------------------------|----------------------------------|------------------------------------------|---------|
 | HEADER                                   | spain                            | HEADER                                   |         |
@@ -853,7 +853,7 @@ Total elements: 475
 | formosa                                  | argentina                        | formosa                                  | sPp     |
 | france                                   | europe                           | france                                   | sPp     |
 | france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sP      |
-| france_taaf                              | africa                           | france_taaf                              | sPp     |
+| france_taaf                              | oceania                          | france_taaf                              | sPp     |
 | franche_comte                            | france                           | franche_comte                            | sPp     |
 | fresno                                   | california                       | fresno                                   | sPp     |
 | fribourg                                 | switzerland                      | fribourg                                 | sPp     |
@@ -1024,7 +1024,7 @@ Total elements: 475
 | kyushu                                   | japan                            | kyushu                                   | sPp     |
 | la_coruna                                | galicia                          | la_coruna                                | sPp     |
 | la_pampa                                 | argentina                        | la_pampa                                 | sPp     |
-| la_rioja                                 | spain                            | la_rioja                                 | sPp     |
+| la_rioja                                 | argentina                        | la_rioja                                 | sPp     |
 | lake                                     | california                       | lake                                     | sPp     |
 | lakshadweep                              | india                            | lakshadweep                              | sPp     |
 | lampung                                  | indonesia                        | lampung                                  | sPp     |
@@ -1331,7 +1331,7 @@ Total elements: 475
 | santa-catarina                           | south                            | santa-catarina                           | sPp     |
 | santa_barbara                            | california                       | santa_barbara                            | sPp     |
 | santa_clara                              | california                       | santa_clara                              | sPp     |
-| santa_cruz                               | california                       | santa_cruz                               | sPp     |
+| santa_cruz                               | argentina                        | santa_cruz                               | sPp     |
 | santa_cruz_de_tenerife                   | canarias                         | santa_cruz_de_tenerife                   | sPp     |
 | santa_fe                                 | argentina                        | santa_fe                                 | sPp     |
 | santiago_del_estero                      | argentina                        | santiago_del_estero                      | sPp     |
@@ -1354,7 +1354,7 @@ Total elements: 475
 | seine_saint_denis                        | ile_de_france                    | seine_saint_denis                        | sPp     |
 | senegal                                  | africa                           | senegal                                  | sPp     |
 | sergipe                                  | northeast                        | sergipe                                  | sPp     |
-| sevastopol                               | southern_federal_district        | sevastopol                               | sPp     |
+| sevastopol                               | ukraine                          | sevastopol                               | sPp     |
 | sevilla                                  | andalucia                        | sevilla                                  | sPp     |
 | seychelles                               | africa                           | seychelles                               | sPp     |
 | shaanxi                                  | china                            | shaanxi                                  | sPp     |
@@ -1569,8 +1569,8 @@ Total elements: 475
 | zuid_holland                             | netherlands                      | zuid_holland                             | sPp     |
 | zurich                                   | switzerland                      | zurich                                   | sPp     |
 Total elements: 980
-"" 
-"## List of elements from bbbike.org" 
+
+## List of elements from bbbike.org
 |    SHORTNAME     | IS IN |    LONG NAME     | FORMATS |
 |------------------|-------|------------------|---------|
 | Aachen           |       | Aachen           | PGS     |
@@ -1810,4 +1810,4 @@ Total elements: 980
 | Zagreb           |       | Zagreb           | PGS     |
 | Zuerich          |       | Zuerich          | PGS     |
 Total elements: 236
-"" 
+
