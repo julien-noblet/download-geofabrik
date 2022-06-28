@@ -104,7 +104,6 @@ linters:
     - deadcode
     - depguard
     - dogsled
-    - durationcheck
     - dupl
     - errcheck
     - errname
