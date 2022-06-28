@@ -1354,7 +1354,7 @@ Total elements: 475
 | seine_saint_denis                        | ile_de_france                    | seine_saint_denis                        | sPp     |
 | senegal                                  | africa                           | senegal                                  | sPp     |
 | sergipe                                  | northeast                        | sergipe                                  | sPp     |
-| sevastopol                               | ukraine                          | sevastopol                               | sPp     |
+| sevastopol                               | southern_federal_district        | sevastopol                               | sPp     |
 | sevilla                                  | andalucia                        | sevilla                                  | sPp     |
 | seychelles                               | africa                           | seychelles                               | sPp     |
 | shaanxi                                  | china                            | shaanxi                                  | sPp     |
@@ -1404,7 +1404,7 @@ Total elements: 475
 | southern_federal_district                | russia                           | southern_federal_district                | sPp     |
 | southwest_finland                        | finland                          | southwest_finland                        | sPp     |
 | southwestern_ontario                     | ontario                          | southwestern_ontario                     | sPp     |
-| spain                                    | africa                           | spain                                    | sPp     |
+| spain                                    | europe                           | spain                                    | sPp     |
 | stanislaus                               | california                       | stanislaus                               | sPp     |
 | state_of_mexico                          | mexico                           | state_of_mexico                          | sPp     |
 | stavropol_krai                           | north_caucasian_federal_district | stavropol_krai                           | sPp     |
