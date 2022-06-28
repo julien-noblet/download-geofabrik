@@ -1,0 +1,23 @@
+name: yml-generate
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+jobs:
+  yml-generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.18.3' # The Go version to download (if necessary) and use.
+          check-latest: true
+          cache: true
+      - run: go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
+      - run: git-chglog --output CHANGELOG.md
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: new yml files
