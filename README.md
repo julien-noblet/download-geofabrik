@@ -853,7 +853,7 @@ Total elements: 475
 | formosa                                  | argentina                        | formosa                                  | sPp     |
 | france                                   | europe                           | france                                   | sPp     |
 | france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sP      |
-| france_taaf                              | oceania                          | france_taaf                              | sPp     |
+| france_taaf                              | merge                            | france_taaf                              | sPp     |
 | franche_comte                            | france                           | franche_comte                            | sPp     |
 | fresno                                   | california                       | fresno                                   | sPp     |
 | fribourg                                 | switzerland                      | fribourg                                 | sPp     |
@@ -1354,7 +1354,7 @@ Total elements: 475
 | seine_saint_denis                        | ile_de_france                    | seine_saint_denis                        | sPp     |
 | senegal                                  | africa                           | senegal                                  | sPp     |
 | sergipe                                  | northeast                        | sergipe                                  | sPp     |
-| sevastopol                               | ukraine                          | sevastopol                               | sPp     |
+| sevastopol                               | southern_federal_district        | sevastopol                               | sPp     |
 | sevilla                                  | andalucia                        | sevilla                                  | sPp     |
 | seychelles                               | africa                           | seychelles                               | sPp     |
 | shaanxi                                  | china                            | shaanxi                                  | sPp     |

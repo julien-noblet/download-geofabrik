@@ -1,4 +1,3 @@
-baseURL: https://download.bbbike.org/osm/bbbike
 formats:
   osm.gz:
     ext: osm.gz
@@ -1901,3 +1900,4 @@ elements:
     - osm.pbf
     - osm.gz
     - shp.zip
+baseURL: https://download.bbbike.org/osm/bbbike
