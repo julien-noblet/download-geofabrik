@@ -1,7 +1,7 @@
 package config_test
 
 import (
-	"io/ioutil"
+	"os"
 	"reflect"
 	"sync"
 	"testing"
@@ -207,9 +207,9 @@ func Test_loadConfig(t *testing.T) {
 	}
 
 	tests := []struct {
-		name    string
 		args    args
 		want    *config.Config
+		name    string
 		wantErr bool
 	}{
 		// TODO: Add test cases.
@@ -274,10 +274,10 @@ func Test_AddExtension(t *testing.T) {
 	}
 
 	tests := []struct {
-		name string
-		c    config.Config
 		args args
+		c    config.Config
 		want element.Slice
+		name string
 	}{
 		{
 			name: "Add osm.pbf but already in",
@@ -384,10 +384,10 @@ func Benchmark_GetElement_geofabrik_yml(b *testing.B) {
 
 func Test_config_GetElement(t *testing.T) {
 	tests := []struct {
+		want    *element.Element
 		name    string
 		file    string
 		id      string
-		want    *element.Element
 		wantErr bool
 	}{
 		// TODO: Add test cases.
@@ -467,7 +467,6 @@ func Test_config_GetElement(t *testing.T) {
 					t.Errorf("%v format should not exist, got=%v", k, got)
 				}
 			}
-
 		})
 	}
 }
@@ -479,11 +478,11 @@ func Test_IsHashable(t *testing.T) {
 	}
 
 	tests := []struct {
-		name  string
 		args  args
-		want  bool
+		name  string
 		want1 string
 		want2 string
+		want  bool
 	}{
 		// TODO: Add test cases.
 		{name: "Test is osm.pbf is hashable", args: args{format: formats.FormatOsmPbf, file: geofabrikYml}, want: true, want1: "osm.pbf.md5", want2: "md5"},
@@ -563,9 +562,9 @@ func Test_FindElem(t *testing.T) {
 	}
 
 	tests := []struct {
-		name    string
 		args    args
 		want    *element.Element
+		name    string
 		wantErr bool
 	}{
 		// TODO: Add test cases.
@@ -712,8 +711,8 @@ func Test_elem2preURL(t *testing.T) {
 	localSampleConfigValidPtr.Elements["notus2"] = sampleNotUS2Ptr            // add it into config
 	tests := []struct {
 		name    string
-		args    args
 		want    string
+		args    args
 		wantErr bool
 	}{
 		// TODO: Add test cases.
@@ -825,11 +824,11 @@ func Benchmark_Elem2URL_parse_France_openstreetmap_fr_yml(b *testing.B) {
 
 func TestConfig_MergeElement(t *testing.T) {
 	tests := []struct {
-		name       string
 		Config     *config.Config
-		el         *element.Element
-		wantErr    bool
 		wantConfig *config.Config
+		el         *element.Element
+		name       string
+		wantErr    bool
 	}{
 		// TODO: Add test cases.
 		{name: "Add element on void Config",
@@ -1019,7 +1018,7 @@ func TestConfig_Generate(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			c, _ := config.LoadConfig(tt.file)
-			want, _ := ioutil.ReadFile(geofabrikYml)
+			want, _ := os.ReadFile(geofabrikYml)
 			got, err := c.Generate()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Config.Generate() error = %v, wantErr %v", err, tt.wantErr)

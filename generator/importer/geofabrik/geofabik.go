@@ -3,7 +3,7 @@ package geofabrik
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net"
 	"net/http"
 	"os"
@@ -42,12 +42,12 @@ type IndexElement struct {
 }
 
 type IndexElementProperties struct {
+	Urls      map[string]string `json:"urls"`
 	ID        string            `json:"id"`
 	Name      string            `json:"name"`
 	Parent    string            `json:"parent,omitempty"`
 	Iso3166_1 []string          `json:"iso3166-1:alpha2,omitempty"`
 	Iso3166_2 []string          `json:"iso3166-2,omitempty"`
-	Urls      map[string]string `json:"urls"`
 }
 
 // GetIndex download Index and Unmarshall the json
@@ -67,7 +67,7 @@ func GetIndex(myURL string) (*Index, error) {
 
 	response, err := client.Get(myURL)
 	if err != nil {
-		return nil, fmt.Errorf("error while downloading %s - %v", myURL, err)
+		return nil, fmt.Errorf("error while downloading %s - %w", myURL, err)
 	}
 
 	if response.StatusCode != http.StatusOK {
@@ -86,16 +86,16 @@ func GetIndex(myURL string) (*Index, error) {
 		}
 	}()
 
-	bodyBytes, err := ioutil.ReadAll(response.Body)
+	bodyBytes, err := io.ReadAll(response.Body)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error while reading response body %w", err)
 	}
 
 	var mygeofabrikIndex Index
 
 	err = json.Unmarshal(bodyBytes, &mygeofabrikIndex)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error while unmarshalling response body %w", err)
 	}
 
 	return &mygeofabrikIndex, nil
@@ -137,7 +137,7 @@ func Convert(g *Index) (*config.Config, error) {
 
 		err := c.MergeElement(&e)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("error while merging element %v - %w", e, err)
 		}
 	}
 

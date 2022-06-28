@@ -1,7 +1,7 @@
 package generator
 
 import (
-	"io/ioutil"
+	"os"
 	"path/filepath"
 
 	"github.com/apex/log"
@@ -20,7 +20,7 @@ func write(c *config.Config, filename string) {
 	out, _ := c.Generate()
 	filename, _ = filepath.Abs(filename)
 
-	if err := ioutil.WriteFile(filename, out, 0644); err != nil {
+	if err := os.WriteFile(filename, out, 0o600); err != nil { //nolint:gomnd // 0o600 is the default mode for new files
 		log.WithError(err).Fatal("can't write file")
 	}
 

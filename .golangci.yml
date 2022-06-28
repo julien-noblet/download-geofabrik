@@ -3,6 +3,7 @@ linters-settings:
     check-shadowing: true
     enable:
       - atomicalign
+      - fieldalignment
     settings:
       printf:
         funcs:
@@ -99,12 +100,18 @@ linters:
   # inverted configuration with `enable-all` and `disable` is not scalable during updates of golangci-lint
   disable-all: true
   enable:
+    - bidichk
     - bodyclose
+    - decorder
     - deadcode
     - depguard
     - dogsled
+    - durationcheck
     - dupl
     - errcheck
+    - errname
+    - errorlint
+    - exportloopref
     - funlen
     - gochecknoinits
     - goconst
@@ -112,21 +119,17 @@ linters:
     - gocyclo
     - gofmt
     - goimports
-    - golint
     - gomnd
     - goprintffuncname
     - gosec
     - gosimple
     - govet
     - ineffassign
-    - interfacer
     - lll
-    - maligned
     - misspell
     - nakedret
     - prealloc
     - rowserrcheck
-    - scopelint
     - staticcheck
     - structcheck
     - stylecheck
@@ -134,9 +137,11 @@ linters:
     - unconvert
     - unparam
     - unused
+    - revive
     - varcheck
     - whitespace
     - wsl
+    - wrapcheck
     - prealloc
     - gomnd
 
