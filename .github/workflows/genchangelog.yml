@@ -14,12 +14,6 @@ jobs:
   generate_changelog:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Generate changelog
         id: gen_changelog
-        uses: bdashrad/git-chglog-action@v2.0.3
-        with:
-          git_chglog_version: "0.15.1"
+        uses: hojland/github-changelog-action@v1.0.1
