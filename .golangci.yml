@@ -101,7 +101,6 @@ linters:
   disable-all: true
   enable:
     - bodyclose
-    - decorder
     - deadcode
     - depguard
     - dogsled
