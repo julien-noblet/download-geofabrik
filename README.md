@@ -853,7 +853,7 @@ Total elements: 475
 | formosa                                  | argentina                        | formosa                                  | sPp     |
 | france                                   | europe                           | france                                   | sPp     |
 | france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sP      |
-| france_taaf                              | africa                           | france_taaf                              | sPp     |
+| france_taaf                              | oceania                          | france_taaf                              | sPp     |
 | franche_comte                            | france                           | franche_comte                            | sPp     |
 | fresno                                   | california                       | fresno                                   | sPp     |
 | fribourg                                 | switzerland                      | fribourg                                 | sPp     |
@@ -1024,7 +1024,7 @@ Total elements: 475
 | kyushu                                   | japan                            | kyushu                                   | sPp     |
 | la_coruna                                | galicia                          | la_coruna                                | sPp     |
 | la_pampa                                 | argentina                        | la_pampa                                 | sPp     |
-| la_rioja                                 | spain                            | la_rioja                                 | sPp     |
+| la_rioja                                 | argentina                        | la_rioja                                 | sPp     |
 | lake                                     | california                       | lake                                     | sPp     |
 | lakshadweep                              | india                            | lakshadweep                              | sPp     |
 | lampung                                  | indonesia                        | lampung                                  | sPp     |
