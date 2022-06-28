@@ -1189,6 +1189,14 @@ elements:
     - osm.pbf
     - osm.gz
     - shp.zip
+  Minsk:
+    id: Minsk
+    file: Minsk/Minsk
+    name: Minsk
+    files:
+    - osm.pbf
+    - osm.gz
+    - shp.zip
   Moenchengladbach:
     id: Moenchengladbach
     file: Moenchengladbach/Moenchengladbach
