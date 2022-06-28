@@ -1,6 +1,7 @@
 package openstreetmapfr
 
 import (
+	"errors"
 	"regexp"
 	"strings"
 	"time"
@@ -35,10 +36,10 @@ func GetDefault() *OpenstreetmapFR {
 			StartURL:       `https://download.openstreetmap.fr/`,
 			URLFilters: []*regexp.Regexp{
 				regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
-				regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`),
-				regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`),
-				regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),
-				regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
+				regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`), //nolint:gocritic,lll // I don't know why gocrtic is complaining about this
+				regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`), //nolint:gocritic,lll // I don't know why gocrtic is complaining about this
+				regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),      //nolint:gocritic // ^ is intentional
+				regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`), //nolint:gocritic // ^ is intentional
 			},
 			FormatDefinition: formats.FormatDefinitions{
 				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
@@ -65,7 +66,7 @@ func openstreetmapFRGetParent(href string) (parent string, parents []string) {
 	var p string
 
 	pp := strings.Split(href, "/")
-	if len(pp) > 4 { //nolint:gomnt // need at least 4 elments to have a parent :
+	if len(pp) > 4 { //nolint:gomnd // need at least 4 elments to have a parent :
 		// http://1/2/.../x
 		// 1    2 3 4 ...
 		p = pp[len(pp)-2] // Get x in this kind of url http(s)://1/2/.../x/
@@ -159,8 +160,8 @@ func (o *OpenstreetmapFR) parse(e *colly.HTMLElement, c *colly.Collector) {
 	if href[len(href)-1] == '/' {
 		log.Debugf("Next: %s", href)
 
-		if err := c.Visit(href); err != nil && err != colly.ErrAlreadyVisited {
-			if err != colly.ErrNoURLFiltersMatch {
+		if err := c.Visit(href); err != nil && !errors.Is(err, colly.ErrAlreadyVisited) {
+			if !errors.Is(err, colly.ErrNoURLFiltersMatch) {
 				log.WithError(err).Error("can't get url")
 			} else {
 				log.Debugf("URL: %v is not matching URLFilters\n", href)

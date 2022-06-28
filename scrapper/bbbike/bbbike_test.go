@@ -33,11 +33,11 @@ func Test_bbbike_getName(t *testing.T) {
 
 func Test_bbbike_parseList(t *testing.T) {
 	tests := []struct {
+		elements *element.Slice
+		want     element.Slice
 		name     string
 		html     string
 		url      string
-		want     element.Slice
-		elements *element.Slice
 	}{
 		{name: "sample",
 			html: `
@@ -317,11 +317,11 @@ func Test_bbbike_parseList(t *testing.T) {
 
 func Test_bbbike_parseSidebar(t *testing.T) {
 	tests := []struct {
+		elements *element.Slice
+		want     element.Slice
 		name     string
 		html     string
 		url      string
-		want     element.Slice
-		elements *element.Slice
 	}{
 		{name: "Toulouse",
 			html: `<div id="sidebar">

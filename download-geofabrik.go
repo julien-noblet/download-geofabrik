@@ -5,7 +5,6 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"regexp"
 	"sort"
@@ -255,7 +254,7 @@ func hashFileMD5(filePath string) (string, error) {
 
 		file, err := os.Open(filePath)
 		if err != nil {
-			return returnMD5String, err
+			return returnMD5String, fmt.Errorf("can't open %s : %w", filePath, err)
 		}
 
 		defer func() {
@@ -266,7 +265,7 @@ func hashFileMD5(filePath string) (string, error) {
 		}()
 
 		if _, err := io.Copy(hash, file); err != nil {
-			return returnMD5String, err
+			return returnMD5String, fmt.Errorf("can't copy %s : %w", filePath, err)
 		}
 
 		hashInBytes := hash.Sum(nil)[:16]
@@ -280,9 +279,9 @@ func hashFileMD5(filePath string) (string, error) {
 
 func controlHash(hashfile, hash string) (bool, error) {
 	if fileExist(hashfile) {
-		file, err := ioutil.ReadFile(hashfile)
+		file, err := os.ReadFile(hashfile)
 		if err != nil {
-			return false, err
+			return false, fmt.Errorf("can't read %s : %w", hashfile, err)
 		}
 
 		filehash := strings.Split(string(file), " ")[0]

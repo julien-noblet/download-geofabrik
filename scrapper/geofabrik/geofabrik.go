@@ -1,6 +1,7 @@
 package geofabrik
 
 import (
+	"errors"
 	"regexp"
 
 	"github.com/apex/log"
@@ -105,7 +106,7 @@ func (g *Geofabrik) parseSubregion(e *colly.HTMLElement, c *colly.Collector) {
 				}
 				log.Debugf("Add: %s", href)
 
-				if err := c.Visit(href); err != nil && err != colly.ErrAlreadyVisited {
+				if err := c.Visit(href); err != nil && !errors.Is(err, colly.ErrAlreadyVisited) {
 					log.WithError(err).Error("can't get url")
 				}
 			}

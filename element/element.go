@@ -4,10 +4,10 @@ package element
 type Element struct {
 	ID      string  `yaml:"id"`
 	File    string  `yaml:"file,omitempty"`
-	Meta    bool    `yaml:"meta,omitempty"`
 	Name    string  `yaml:"name,omitempty"`
-	Formats Formats `yaml:"files,omitempty"`
 	Parent  string  `yaml:"parent,omitempty"`
+	Formats Formats `yaml:"files,omitempty"`
+	Meta    bool    `yaml:"meta,omitempty"`
 }
 
 type Formats []string

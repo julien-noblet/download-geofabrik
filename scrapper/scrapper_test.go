@@ -75,9 +75,9 @@ func Test_ParseFormat(t *testing.T) {
 	}
 
 	tests := []struct {
-		name string
 		args args
 		want element.Slice
+		name string
 	}{
 		{name: "Add osm.pbf but already in",
 			args: args{
@@ -355,7 +355,7 @@ func TestScrapper_GetStartURL(t *testing.T) {
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" + "\\/?."
 
 	for i := 0; i < 1024; i++ {
-		var seededRand = rand.New(rand.NewSource(time.Now().UnixNano()))
+		var seededRand = rand.New(rand.NewSource(time.Now().UnixNano())) //nolint:gosec // I assume rand isn't safe but it's enough for testing
 		want := stringWithCharset(seededRand, i, charset)
 		s := Scrapper{
 			StartURL: want,
@@ -380,8 +380,8 @@ func stringWithCharset(seededRand *rand.Rand, length int, charset string) string
 func TestScrapper_Limit(t *testing.T) {
 	tests := []struct {
 		name   string
-		fields Scrapper
 		want   *colly.LimitRule
+		fields Scrapper
 	}{
 		// TODO: Add test cases.
 		{name: "Default",
@@ -420,8 +420,8 @@ func TestScrapper_Limit(t *testing.T) {
 func TestScrapper_GetConfig(t *testing.T) {
 	tests := []struct {
 		name   string
-		fields Scrapper
 		want   *config.Config
+		fields Scrapper
 	}{
 		// TODO: Add test cases.
 		{name: "Void",

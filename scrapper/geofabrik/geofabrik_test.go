@@ -23,9 +23,9 @@ func Test_geofabrikParseFormat(t *testing.T) {
 	}
 
 	tests := []struct {
-		name string
 		args args
 		want element.Slice
+		name string
 	}{
 		{
 			name: "Add osm.pbf but already in",
@@ -291,11 +291,11 @@ func Test_geofabrikParseFormat(t *testing.T) {
 
 func TestGeofabrik_parseLi(t *testing.T) {
 	tests := []struct {
+		want    element.Slice
+		element *element.Element
 		name    string
 		html    string
 		url     string
-		want    element.Slice
-		element *element.Element
 	}{
 		{name: "sample",
 			html: `
@@ -377,11 +377,11 @@ func TestGeofabrik_parseLi(t *testing.T) {
 
 func TestGeofabrik_parseSubregion(t *testing.T) {
 	tests := []struct {
+		want     element.Slice
+		elements *element.Slice
 		name     string
 		html     string
 		url      string
-		want     element.Slice
-		elements *element.Slice
 	}{
 		{name: "sample1",
 			html: `

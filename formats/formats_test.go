@@ -26,8 +26,8 @@ func Test_miniFormats(t *testing.T) {
 
 	tests := []struct {
 		name string
-		args args
 		want string
+		args args
 	}{
 		// TODO: Add test cases.
 		{name: "No Formats", args: args{s: []string(nil)}, want: ""},

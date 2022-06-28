@@ -30,7 +30,7 @@ const (
 //  and return a string
 //  according to download-geofabrik short flags.
 func MiniFormats(s []string) string {
-	res := make([]string, 7)
+	res := make([]string, 7) //nolint:gomnd // 7 is the number of formats
 
 	for _, item := range s {
 		switch item {
