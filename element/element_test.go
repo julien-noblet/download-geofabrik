@@ -175,8 +175,8 @@ func Benchmark_contain_parse_geofabrik_yml_France_formats_osm_pbf(b *testing.B) 
 
 func Test_contains(t *testing.T) {
 	type args struct {
-		s element.Formats
 		e string
+		s element.Formats
 	}
 
 	tests := []struct {
@@ -208,14 +208,14 @@ func Test_contains(t *testing.T) {
 
 func Test_MakeParent(t *testing.T) {
 	type args struct {
-		e       element.Element
 		gparent string
+		e       element.Element
 	}
 
 	tests := []struct {
+		want *element.Element
 		name string
 		args args
-		want *element.Element
 	}{
 		{name: "No Parents", args: args{e: element.Element{ID: "a", Name: "a"}, gparent: ""}, want: nil},
 		{name: "Have Parent with no gparent", args: args{e: element.Element{ID: "a", Name: "a", Parent: "p"}, gparent: ""}, want: &element.Element{ID: "p", Name: "p", Meta: true}},

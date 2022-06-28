@@ -3,6 +3,7 @@ linters-settings:
     check-shadowing: true
     enable:
       - atomicalign
+      - fieldalignment
     settings:
       printf:
         funcs:
@@ -105,6 +106,7 @@ linters:
     - dogsled
     - dupl
     - errcheck
+    - exportloopref
     - funlen
     - gochecknoinits
     - goconst
@@ -112,21 +114,17 @@ linters:
     - gocyclo
     - gofmt
     - goimports
-    - golint
     - gomnd
     - goprintffuncname
     - gosec
     - gosimple
     - govet
     - ineffassign
-    - interfacer
     - lll
-    - maligned
     - misspell
     - nakedret
     - prealloc
     - rowserrcheck
-    - scopelint
     - staticcheck
     - structcheck
     - stylecheck
@@ -134,9 +132,11 @@ linters:
     - unconvert
     - unparam
     - unused
+    - revive
     - varcheck
     - whitespace
     - wsl
+    - wrapcheck
     - prealloc
     - gomnd
 

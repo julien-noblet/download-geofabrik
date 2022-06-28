@@ -1,6 +1,7 @@
 package bbbike
 
 import (
+	"errors"
 	"regexp"
 
 	"github.com/apex/log"
@@ -57,7 +58,7 @@ func (b *Bbbike) parseList(e *colly.HTMLElement, c *colly.Collector) {
 		href := el.Request.AbsoluteURL(el.Attr("href"))
 		log.Debugf("Parse: %s", href)
 
-		if err := c.Visit(href); err != nil && err != colly.ErrNoURLFiltersMatch { // Not matching
+		if err := c.Visit(href); err != nil && !errors.Is(err, colly.ErrNoURLFiltersMatch) { // Not matching
 			log.WithError(err).Error("can't get url")
 		}
 	})

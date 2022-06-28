@@ -8,7 +8,7 @@ package config
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"reflect"
 	"strings"
@@ -29,15 +29,20 @@ const (
 // Config structure handle all elements.
 // It also contain the BaseURL and Formats...
 type Config struct {
-	BaseURL       string                    `yaml:"baseURL"`
 	Formats       formats.FormatDefinitions `yaml:"formats"`
 	Elements      element.Slice             `yaml:"elements"`
 	ElementsMutex *sync.RWMutex             `yaml:"-"` // unexported
+	BaseURL       string                    `yaml:"baseURL"`
 }
 
 // Generate Yaml config
 func (c *Config) Generate() ([]byte, error) {
-	return yaml.Marshal(c)
+	yml, err := yaml.Marshal(c)
+	if err != nil {
+		return nil, fmt.Errorf("failed to Marshal : %w", err)
+	}
+
+	return yml, nil
 }
 
 func (c *Config) MergeElement(el *element.Element) error {
@@ -202,15 +207,15 @@ func Elem2URL(c *Config, e *element.Element, ext string) (string, error) {
 func LoadConfig(configFile string) (*Config, error) {
 	filename, _ := filepath.Abs(configFile) // Get absolute path
 
-	fileContent, err := ioutil.ReadFile(filename) // Open file as string
+	fileContent, err := os.ReadFile(filename) // Open file as string
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("can't open %s : %w", filename, err)
 	}
 	// Create a Config ptr
 	myConfigPtr := &Config{ElementsMutex: &sync.RWMutex{}}
 	// Charging fileContent into myConfigPtr
 	if err := yaml.Unmarshal(fileContent, myConfigPtr); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("can't unmarshal %s : %w", filename, err)
 	}
 	// Everything is OK, returning myConfigPtr
 	return myConfigPtr, nil

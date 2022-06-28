@@ -1,7 +1,7 @@
 package generator
 
 import (
-	"io/ioutil"
+	"os"
 	"reflect"
 	"testing"
 
@@ -176,8 +176,14 @@ func Test_write(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			c, _ := config.LoadConfig(tt.input)
 			write(c, tt.output)
-			input, _ := ioutil.ReadFile(tt.input)
-			output, _ := ioutil.ReadFile(tt.output)
+			input, err := os.ReadFile(tt.input)
+			if err != nil {
+				t.Errorf("read() error = %v", err)
+			}
+			output, err := os.ReadFile(tt.output)
+			if err != nil {
+				t.Errorf("read() error = %v", err)
+			}
 			reflect.DeepEqual(input, output)
 		})
 	}

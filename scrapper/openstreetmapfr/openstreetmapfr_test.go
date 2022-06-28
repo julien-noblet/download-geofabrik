@@ -301,11 +301,11 @@ func Test_openstreetmapFRGetParent(t *testing.T) {
 
 func TestOpenstreetmapFR_makeParents(t *testing.T) {
 	tests := []struct {
-		name     string
 		elements element.Slice
+		want     element.Slice
+		name     string
 		parent   string
 		gparents []string
-		want     element.Slice
 	}{
 		// TODO: Add test cases.
 		{name: "1 fake", // should not append!!!

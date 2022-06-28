@@ -1,6 +1,7 @@
 package scrapper
 
 import (
+	"errors"
 	"net"
 	"net/http"
 	"regexp"
@@ -27,19 +28,19 @@ type IScrapper interface {
 
 // Scrapper define a default scrapper
 type Scrapper struct {
+	FormatDefinition formats.FormatDefinitions
+	Config           *config.Config // ptr to Config Element
+	Timeout          *time.Duration
+	URLFilters       []*regexp.Regexp
 	BaseURL          string
 	StartURL         string
-	Config           *config.Config // ptr to Config Element
-	PB               int            // For ProgressBar
-	Async            bool           // true by default
-	DomainGlob       string         // "*" by default
-	Parallelism      int            // >1
-	RandomDelay      time.Duration  // 5 * time.Second by default
-	MaxDepth         int            // 0 to infinite
+	DomainGlob       string // "*" by default
 	AllowedDomains   []string
-	URLFilters       []*regexp.Regexp
-	FormatDefinition formats.FormatDefinitions
-	Timeout          *time.Duration
+	RandomDelay      time.Duration // 5 * time.Second by default
+	MaxDepth         int           // 0 to infinite
+	Parallelism      int           // >1
+	PB               int           // For ProgressBar
+	Async            bool          // true by default
 }
 
 // GetConfig init a *config.Config from fields
@@ -115,7 +116,7 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector { //nolint
 	}
 
 	c.OnError(func(r *colly.Response, err error) {
-		if err != colly.ErrForbiddenURL && err != colly.ErrForbiddenDomain && err.Error() != "Forbidden" {
+		if !errors.Is(err, colly.ErrForbiddenURL) && !errors.Is(err, colly.ErrForbiddenDomain) && err.Error() != "Forbidden" {
 			log.WithError(err).Debugf("request URL: %v failed with response: %v", r.Request.URL, r)
 		} else {
 			log.Debugf("URL: %v is forbidden", r.Request.URL)

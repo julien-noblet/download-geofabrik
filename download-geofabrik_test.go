@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io/ioutil"
 	"os"
 	"testing"
 
@@ -18,8 +17,8 @@ func Test_checkService(t *testing.T) {
 		name       string
 		service    string
 		config     string
-		want       bool
 		wantConfig string
+		want       bool
 	}{
 		// TODO: Add test cases.
 		{name: "checkService(), fService = geofabrik", service: "geofabrik", want: true},
@@ -103,7 +102,7 @@ func Benchmark_controlHash_LICENSE(b *testing.B) {
 	hash, _ := hashFileMD5("./LICENSE")
 	hashfile := "/tmp/download-geofabrik-test.hash"
 
-	if err := ioutil.WriteFile(hashfile, []byte(hash), 0644); err != nil {
+	if err := os.WriteFile(hashfile, []byte(hash), 0o600); err != nil {
 		b.Errorf("Can't write file %s err: %v", hashfile, err)
 	}
 
@@ -121,11 +120,11 @@ func Test_controlHash(t *testing.T) {
 	}
 
 	tests := []struct {
-		name       string
 		args       args
+		name       string
+		fileToHash string
 		want       bool
 		wantErr    bool
-		fileToHash string
 	}{
 		// TODO: Add test cases.
 		{name: "Check with LICENSE file", fileToHash: "./LICENSE", args: args{hashfile: "/tmp/download-geofabrik-test.hash", hash: "65d26fcc2f35ea6a181ac777e42db1ea"}, want: true, wantErr: false},
@@ -136,7 +135,7 @@ func Test_controlHash(t *testing.T) {
 		tt := tt
 		hash, _ := hashFileMD5(tt.fileToHash)
 
-		if err := ioutil.WriteFile(tt.args.hashfile, []byte(hash), 0644); err != nil {
+		if err := os.WriteFile(tt.args.hashfile, []byte(hash), 0o600); err != nil {
 			t.Errorf("can't write file %s err: %v", tt.args.hashfile, err)
 		}
 
@@ -248,9 +247,9 @@ func Test_downloadCommand(t *testing.T) {
 		name          string
 		fConfig       string
 		delement      string
-		formatsFlags  fFlags
 		wantURL       string
 		wantOutput    string
+		formatsFlags  fFlags
 		dCheck        bool
 		checksumValid bool
 		fakefileExist bool
@@ -359,8 +358,8 @@ func Test_downloadCommand(t *testing.T) {
 func Test_configureBool(t *testing.T) {
 	tests := []struct {
 		name   string
-		flag   bool
 		config string
+		flag   bool
 	}{
 		// TODO: Add test cases.
 		{name: "true", flag: true, config: "test1"},

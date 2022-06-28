@@ -37,7 +37,7 @@ func FromURL(myURL, fileName string) error {
 
 		response, err := client.Get(myURL)
 		if err != nil {
-			return fmt.Errorf("error while downloading %s - %v", myURL, err)
+			return fmt.Errorf("error while downloading %s - %w", myURL, err)
 		}
 
 		if response.StatusCode != http.StatusOK {
@@ -61,9 +61,9 @@ func FromURL(myURL, fileName string) error {
 		// and use a new cmd flag (like f) to force overwrite
 		flags := os.O_CREATE | os.O_WRONLY
 
-		f, err := os.OpenFile(fileName, flags, 0666)
+		f, err := os.OpenFile(fileName, flags, 0o644) //nolint:gomnd // 0o644 is the default mode
 		if err != nil {
-			return fmt.Errorf("error while creating %s - %v", fileName, err)
+			return fmt.Errorf("error while creating %s - %w", fileName, err)
 		}
 
 		defer func() {
@@ -84,14 +84,14 @@ func FromURL(myURL, fileName string) error {
 
 			n, err = io.Copy(output, barReader)
 			if err != nil {
-				return fmt.Errorf("error while writing %s - %v", fileName, err)
+				return fmt.Errorf("error while writing %s - %w", fileName, err)
 			}
 
 			defer progressBar.Finish()
 		} else {
 			n, err = io.Copy(output, response.Body)
 			if err != nil {
-				return fmt.Errorf("error while writing %s - %v", fileName, err)
+				return fmt.Errorf("error while writing %s - %w", fileName, err)
 			}
 		}
 
