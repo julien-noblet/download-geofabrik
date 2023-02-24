@@ -742,7 +742,7 @@ Total elements: 475
 | catamarca                                | argentina                        | catamarca                                | sPp     |
 | cayman_islands                           | central-america                  | cayman_islands                           | sPp     |
 | ceara                                    | northeast                        | ceara                                    | sPp     |
-| central                                  | tanzania                         | central                                  | sPp     |
+| central                                  | uganda                           | central                                  | sPp     |
 | central-america                          |                                  | central-america                          | sPp     |
 | central-west                             | brazil                           | central-west                             | sPp     |
 | central_african_republic                 | africa                           | central_african_republic                 | sPp     |
@@ -804,7 +804,7 @@ Total elements: 475
 | cook_islands                             | oceania                          | cook_islands                             | sPp     |
 | coquimbo                                 | chile                            | coquimbo                                 | sPp     |
 | coral_sea_islands                        | australia                        | coral_sea_islands                        | sPp     |
-| cordoba                                  | andalucia                        | cordoba                                  | sPp     |
+| cordoba                                  | argentina                        | cordoba                                  | sPp     |
 | correze                                  | limousin                         | correze                                  | sPp     |
 | corrientes                               | argentina                        | corrientes                               | sPp     |
 | corse                                    | france                           | corse                                    | sPp     |
@@ -844,7 +844,7 @@ Total elements: 475
 | durango                                  | mexico                           | durango                                  | sPp     |
 | dusseldorf                               | nordrhein_westfalen              | dusseldorf                               | sPp     |
 | east                                     | england                          | east                                     | sPp     |
-| east_central                             | illinois                         | east_central                             | sPp     |
+| east_central                             | florida                          | east_central                             | sPp     |
 | east_flanders                            | flanders                         | east_flanders                            | sPp     |
 | east_java                                | indonesia                        | east_java                                | sPp     |
 | east_kalimantan                          | indonesia                        | east_kalimantan                          | sPp     |
@@ -888,7 +888,7 @@ Total elements: 475
 | formosa                                  | argentina                        | formosa                                  | sPp     |
 | france                                   | europe                           | france                                   | sPp     |
 | france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sP      |
-| france_taaf                              | merge                            | france_taaf                              | sPp     |
+| france_taaf                              | oceania                          | france_taaf                              | sPp     |
 | franche_comte                            | france                           | franche_comte                            | sPp     |
 | free_state                               | south_africa                     | free_state                               | sPp     |
 | fresno                                   | california                       | fresno                                   | sPp     |
@@ -1262,14 +1262,14 @@ Total elements: 475
 | north_western                            | new_south_wales                  | north_western                            | sPp     |
 | northeast                                | brazil                           | northeast                                | sPp     |
 | northeastern_ontario                     | ontario                          | northeastern_ontario                     | sPp     |
-| northern                                 | tanzania                         | northern                                 | sPp     |
+| northern                                 | uganda                           | northern                                 | sPp     |
 | northern_cape                            | south_africa                     | northern_cape                            | sPp     |
 | northern_ireland                         | united_kingdom                   | northern_ireland                         | sPp     |
 | northern_lower                           | michigan                         | northern_lower                           | sPp     |
 | northern_mariana_islands                 | oceania                          | northern_mariana_islands                 | sPp     |
 | northern_territory                       | australia                        | northern_territory                       | sPp     |
 | northweast                               | georgia                          | northweast                               | sPp     |
-| northwest                                | illinois                         | northwest                                | sPp     |
+| northwest                                | north-carolina                   | northwest                                | sPp     |
 | northwest_territories                    | canada                           | northwest_territories                    | sPp     |
 | northwestern_federal_district            | russia                           | northwestern_federal_district            | sPp     |
 | northwestern_ontario                     | ontario                          | northwestern_ontario                     | sPp     |
@@ -1443,7 +1443,7 @@ Total elements: 475
 | seine_saint_denis                        | ile_de_france                    | seine_saint_denis                        | sPp     |
 | senegal                                  | africa                           | senegal                                  | sPp     |
 | sergipe                                  | northeast                        | sergipe                                  | sPp     |
-| sevastopol                               | ukraine                          | sevastopol                               | sPp     |
+| sevastopol                               | southern_federal_district        | sevastopol                               | sPp     |
 | sevilla                                  | andalucia                        | sevilla                                  | sPp     |
 | seychelles                               | africa                           | seychelles                               | sPp     |
 | shaanxi                                  | china                            | shaanxi                                  | sPp     |
@@ -1650,7 +1650,7 @@ Total elements: 475
 | west_papua                               | indonesia                        | west_papua                               | sPp     |
 | west_sulawesi                            | indonesia                        | west_sulawesi                            | sPp     |
 | west_sumatra                             | indonesia                        | west_sumatra                             | sPp     |
-| western                                  | tanzania                         | western                                  | sPp     |
+| western                                  | uganda                           | western                                  | sPp     |
 | western_australia                        | australia                        | western_australia                        | sPp     |
 | western_cape                             | south_africa                     | western_cape                             | sPp     |
 | western_new_york                         | new-york                         | western_new_york                         | sPp     |
