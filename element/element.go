@@ -44,7 +44,7 @@ func (f *Formats) Contains(e string) bool {
 }
 
 // MakeParent make e parent(id=name=gparent)
-// Useful for meta parents/
+// Useful for meta parents.
 func MakeParent(e *Element, gparent string) *Element {
 	if e.HasParent() {
 		return &Element{

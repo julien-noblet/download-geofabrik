@@ -27,11 +27,11 @@ func write(c *config.Config, filename string) {
 	log.Infof("%s generated.", filename)
 }
 
-// Generate main function
-func Generate(configfile string) {
+// Generate main function.
+func Generate(configfile string) { //nolint:cyclop // TODO : Refactor
 	var (
-		bar *pb.ProgressBar
-		s   scrapper.IScrapper
+		bar        *pb.ProgressBar
+		myScrapper scrapper.IScrapper
 	)
 
 	switch viper.GetString("service") {
@@ -50,32 +50,32 @@ func Generate(configfile string) {
 
 		return // Exit function!
 	case "geofabrik-parse":
-		s = geofabrikScrapper.GetDefault()
+		myScrapper = geofabrikScrapper.GetDefault()
 	case "openstreetmap.fr":
-		s = openstreetmapfr.GetDefault()
+		myScrapper = openstreetmapfr.GetDefault()
 	case "bbbike":
-		s = bbbike.GetDefault()
+		myScrapper = bbbike.GetDefault()
 
 	default:
 		log.Error("service not recognized, please use one of geofabrik, openstreetmap.fr or bbbike")
 	}
 
 	if viper.GetBool("progress") {
-		bar = pb.New(s.GetPB())
+		bar = pb.New(myScrapper.GetPB())
 		bar.Start()
 	}
 
-	c := s.Collector()
-	c.OnScraped(func(*colly.Response) {
+	collector := myScrapper.Collector()
+	collector.OnScraped(func(*colly.Response) {
 		if viper.GetBool("progress") {
 			bar.Increment()
 		}
 	})
 
-	if err := c.Visit(s.GetStartURL()); err != nil {
+	if err := collector.Visit(myScrapper.GetStartURL()); err != nil {
 		log.WithError(err).Error("can't get url")
 	}
 
-	c.Wait()
-	write(s.GetConfig(), configfile)
+	collector.Wait()
+	write(myScrapper.GetConfig(), configfile)
 }

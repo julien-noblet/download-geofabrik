@@ -57,7 +57,7 @@ func MiniFormats(s []string) string {
 	return strings.Join(res, "")
 }
 
-// GetFormats return a pointer to a slice with formats
+// GetFormats return a pointer to a slice with formats.
 func GetFormats() *[]string {
 	var formatFile []string
 	if viper.GetBool("dosmPbf") {

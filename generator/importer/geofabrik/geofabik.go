@@ -22,15 +22,17 @@ const (
 	GeofabrikBaseURL  = `https://download.geofabrik.de`
 )
 
-var GeofabrikFormatDefinition = formats.FormatDefinitions{
-	formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
-	"osm.bz2.md5":        {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
-	formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
-	"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-	formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly"},
-	formats.FormatKml:    {ID: formats.FormatKml, Loc: ".kml"},
-	formats.FormatState:  {ID: formats.FormatState, Loc: "-updates/state.txt"},
-	formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: "-latest-free.shp.zip"},
+func GeofabrikFormatDefinition() formats.FormatDefinitions {
+	return formats.FormatDefinitions{
+		formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
+		"osm.bz2.md5":        {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
+		formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+		"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+		formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly"},
+		formats.FormatKml:    {ID: formats.FormatKml, Loc: ".kml"},
+		formats.FormatState:  {ID: formats.FormatState, Loc: "-updates/state.txt"},
+		formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: "-latest-free.shp.zip"},
+	}
 }
 
 type Index struct {
@@ -50,7 +52,7 @@ type IndexElementProperties struct {
 	Iso3166_2 []string          `json:"iso3166-2,omitempty"`
 }
 
-// GetIndex download Index and Unmarshall the json
+// GetIndex download Index and Unmarshall the json.
 func GetIndex(myURL string) (*Index, error) {
 	client := &http.Client{Transport: &http.Transport{
 		Proxy: http.ProxyFromEnvironment,
@@ -101,45 +103,45 @@ func GetIndex(myURL string) (*Index, error) {
 	return &mygeofabrikIndex, nil
 }
 
-func Convert(g *Index) (*config.Config, error) {
-	c := &config.Config{
-		Formats:       GeofabrikFormatDefinition,
+func Convert(index *Index) (*config.Config, error) {
+	myConfig := &config.Config{
+		Formats:       GeofabrikFormatDefinition(),
 		BaseURL:       GeofabrikBaseURL,
 		Elements:      element.Slice{},
 		ElementsMutex: &sync.RWMutex{},
 	}
 
-	for _, ge := range g.Features {
-		var e element.Element
+	for _, indexFeature := range index.Features {
+		var myElement element.Element
 
 		if viper.GetBool("log") {
-			log.Debugf("ID:%v", ge.ElementProperties.ID)
+			log.Debugf("ID:%v", indexFeature.ElementProperties.ID)
 		}
 
-		e.ID = ge.ElementProperties.ID
-		e.Parent = ge.ElementProperties.Parent
-		e.Name = ge.ElementProperties.Name
+		myElement.ID = indexFeature.ElementProperties.ID
+		myElement.Parent = indexFeature.ElementProperties.Parent
+		myElement.Name = indexFeature.ElementProperties.Name
 
-		for k := range ge.ElementProperties.Urls {
+		for k := range indexFeature.ElementProperties.Urls {
 			switch k {
 			case "pbf":
-				e.Formats = append(e.Formats, formats.FormatOsmPbf, "osm.pbf.md5")
+				myElement.Formats = append(myElement.Formats, formats.FormatOsmPbf, "osm.pbf.md5")
 			case "bz2":
-				e.Formats = append(e.Formats, formats.FormatOsmBz2, "osm.bz2.md5")
+				myElement.Formats = append(myElement.Formats, formats.FormatOsmBz2, "osm.bz2.md5")
 			case "shp":
-				e.Formats = append(e.Formats, formats.FormatShpZip)
+				myElement.Formats = append(myElement.Formats, formats.FormatShpZip)
 			case "history":
-				e.Formats = append(e.Formats, formats.FormatOshPbf)
+				myElement.Formats = append(myElement.Formats, formats.FormatOshPbf)
 			}
 		}
 
-		e.Formats = append(e.Formats, formats.FormatPoly, formats.FormatKml, formats.FormatState)
+		myElement.Formats = append(myElement.Formats, formats.FormatPoly, formats.FormatKml, formats.FormatState)
 
-		err := c.MergeElement(&e)
+		err := myConfig.MergeElement(&myElement)
 		if err != nil {
-			return nil, fmt.Errorf("error while merging element %v - %w", e, err)
+			return nil, fmt.Errorf("error while merging element %v - %w", myElement, err)
 		}
 	}
 
-	return c, nil
+	return myConfig, nil
 }
