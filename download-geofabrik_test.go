@@ -23,11 +23,35 @@ func Test_checkService(t *testing.T) {
 		want       bool
 	}{
 		// TODO: Add test cases.
-		{name: "checkService(), fService = geofabrik", service: "geofabrik", want: true},
-		{name: "checkService(), fService = openstreetmap.fr", service: "openstreetmap.fr", config: "./geofabrik.yml", want: true, wantConfig: "./openstreetmap.fr.yml"},
-		{name: "checkService(), fService = bbbike", service: "bbbike", config: "./geofabrik.yml", want: true, wantConfig: "./bbbike.yml"},
-		{name: "checkService(), fService = anothermap", service: "anothermap", want: false},
-		{name: "checkService(), fService = \"\"", service: "", want: false},
+		{
+			name:    "checkService(), fService = geofabrik",
+			service: "geofabrik",
+			want:    true,
+		},
+		{
+			name:       "checkService(), fService = openstreetmap.fr",
+			service:    "openstreetmap.fr",
+			config:     "./geofabrik.yml",
+			want:       true,
+			wantConfig: "./openstreetmap.fr.yml",
+		},
+		{
+			name:       "checkService(), fService = bbbike",
+			service:    "bbbike",
+			config:     "./geofabrik.yml",
+			want:       true,
+			wantConfig: "./bbbike.yml",
+		},
+		{
+			name:    "checkService(), fService = anothermap",
+			service: "anothermap",
+			want:    false,
+		},
+		{
+			name:    "checkService(), fService = \"\"",
+			service: "",
+			want:    false,
+		},
 	}
 	for _, thisTest := range tests {
 		thisTest := thisTest
@@ -202,9 +226,29 @@ func Test_downloadChecksum(t *testing.T) {
 		want     bool
 	}{
 		// TODO: Add test cases.
-		{name: "dCheck = false monaco.osm.pbf from geofabrik", dCheck: false, fConfig: "./geofabrik.yml", delement: "monaco", args: args{format: formats.FormatOsmPbf}, want: false},
-		{name: "dCheck = true monaco.osm.pbf from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: formats.FormatOsmPbf}, want: true},
-		{name: "dCheck = true monaco.poly from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: formats.FormatPoly}, want: false},
+		{
+			name:     "dCheck = false monaco.osm.pbf from geofabrik",
+			dCheck:   false,
+			fConfig:  "./geofabrik.yml",
+			delement: "monaco",
+			args:     args{format: formats.FormatOsmPbf},
+			want:     false,
+		},
+		{
+			name:     "dCheck = true monaco.osm.pbf from geofabrik",
+			fConfig:  "./geofabrik.yml",
+			dCheck:   true,
+			delement: "monaco",
+			args:     args{format: formats.FormatOsmPbf},
+			want:     true,
+		},
+		{
+			name:    "dCheck = true monaco.poly from geofabrik",
+			fConfig: "./geofabrik.yml",
+			dCheck:  true, delement: "monaco",
+			args: args{format: formats.FormatPoly},
+			want: false,
+		},
 	}
 
 	for _, thisTest := range tests {

@@ -22,7 +22,8 @@ const (
 	GeofabrikBaseURL  = `https://download.geofabrik.de`
 )
 
-func GeofabrikFormatDefinition() formats.FormatDefinitions {
+// FormatDefinition get a formats.FormatDefinitions.
+func FormatDefinition() formats.FormatDefinitions {
 	return formats.FormatDefinitions{
 		formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
 		"osm.bz2.md5":        {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
@@ -105,7 +106,7 @@ func GetIndex(myURL string) (*Index, error) {
 
 func Convert(index *Index) (*config.Config, error) {
 	myConfig := &config.Config{
-		Formats:       GeofabrikFormatDefinition(),
+		Formats:       FormatDefinition(),
 		BaseURL:       GeofabrikBaseURL,
 		Elements:      element.Slice{},
 		ElementsMutex: &sync.RWMutex{},

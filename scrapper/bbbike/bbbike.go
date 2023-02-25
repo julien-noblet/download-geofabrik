@@ -66,20 +66,23 @@ func (b *Bbbike) parseList(e *colly.HTMLElement, c *colly.Collector) {
 
 func bbbikeGetName(h3 string) string {
 	ret := h3[17:] // remove "OSM extracts for "
+
 	return ret
 }
 
 func (b *Bbbike) parseSidebar(e *colly.HTMLElement, c *colly.Collector) { //nolint:unparam,lll // *colly.Collector is passed as param but unused in this case
 	name := bbbikeGetName(e.ChildText("h3"))
 	el := element.Element{
-		ID:   name,
-		Name: name,
-		File: name + "/" + name,
+		ID:     name,
+		Name:   name,
+		File:   name + "/" + name,
+		Parent: "",
 		Formats: element.Formats{
 			formats.FormatOsmPbf,
 			formats.FormatOsmGz,
 			formats.FormatShpZip,
 		},
+		Meta: false,
 	}
 
 	log.Debugf("Add %s", name)

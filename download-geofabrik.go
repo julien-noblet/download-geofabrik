@@ -10,6 +10,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/alecthomas/kingpin/v2"
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/cli"
 	"github.com/apex/log/handlers/text"
@@ -19,7 +20,6 @@ import (
 	"github.com/julien-noblet/download-geofabrik/generator"
 	"github.com/olekukonko/tablewriter"
 	"github.com/spf13/viper"
-	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 var version = "devel"
@@ -39,19 +39,24 @@ var ( // TODO: move from kingpin to cobra
 
 	list = app.Command("list", "Show elements available")                   //nolint:gochecknoglobals // global
 	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool() //nolint:gochecknoglobals // global
-
-	d          = app.Command("download", "Download element")                                                                      //nolint:gochecknoglobals // global // TODO : add d as command
-	delement   = d.Arg("element", "OSM element").Required().String()                                                              //nolint:gochecknoglobals // global
-	dosmBz2    = d.Flag(formats.FormatOsmBz2, "Download osm.bz2 if available").Short('B').Bool()                                  //nolint:gochecknoglobals // global
-	dosmGz     = d.Flag(formats.FormatOsmGz, "Download osm.gz if available").Short('G').Bool()                                    //nolint:gochecknoglobals // global
-	dshpZip    = d.Flag(formats.FormatShpZip, "Download shp.zip if available").Short('S').Bool()                                  //nolint:gochecknoglobals // global
-	dosmPbf    = d.Flag(formats.FormatOsmPbf, "Download osm.pbf (default)").Short('P').Bool()                                     //nolint:gochecknoglobals // global
-	doshPbf    = d.Flag(formats.FormatOshPbf, "Download osh.pbf").Short('H').Bool()                                               //nolint:gochecknoglobals // global
-	dstate     = d.Flag(formats.FormatState, "Download state.txt file").Short('s').Bool()                                         //nolint:gochecknoglobals // global
-	dpoly      = d.Flag(formats.FormatPoly, "Download poly file").Short('p').Bool()                                               //nolint:gochecknoglobals // global
-	dkml       = d.Flag(formats.FormatKml, "Download kml file").Short('k').Bool()                                                 //nolint:gochecknoglobals // global
-	dCheck     = d.Flag("check", "Control with checksum (default) Use --no-check to discard control").Default("true").Bool()      //nolint:gochecknoglobals // global
-	dOutputDir = d.Flag("output_directory", "Set output directory, you can use also OUTPUT_DIR env variable").Short('d').String() //nolint:gochecknoglobals // global
+	// TODO : add dDownload as command.
+	dDownload = app.Command("download", "Download element")                                                   //nolint:gochecknoglobals // global
+	delement  = dDownload.Arg("element", "OSM element").Required().String()                                   //nolint:gochecknoglobals // global
+	dosmBz2   = dDownload.Flag(formats.FormatOsmBz2, "Download osm.bz2 if available").Short('B').Bool()       //nolint:gochecknoglobals // global
+	dosmGz    = dDownload.Flag(formats.FormatOsmGz, "Download osm.gz if available").Short('G').Bool()         //nolint:gochecknoglobals // global
+	dshpZip   = dDownload.Flag(formats.FormatShpZip, "Download shp.zip if available").Short('S').Bool()       //nolint:gochecknoglobals // global
+	dosmPbf   = dDownload.Flag(formats.FormatOsmPbf, "Download osm.pbf (default)").Short('P').Bool()          //nolint:gochecknoglobals // global
+	doshPbf   = dDownload.Flag(formats.FormatOshPbf, "Download osh.pbf").Short('H').Bool()                    //nolint:gochecknoglobals // global
+	dstate    = dDownload.Flag(formats.FormatState, "Download state.txt file").Short('s').Bool()              //nolint:gochecknoglobals // global
+	dpoly     = dDownload.Flag(formats.FormatPoly, "Download poly file").Short('p').Bool()                    //nolint:gochecknoglobals // global
+	dkml      = dDownload.Flag(formats.FormatKml, "Download kml file").Short('k').Bool()                      //nolint:gochecknoglobals // global
+	dCheck    = dDownload.Flag("check", "Control with checksum (default) Use --no-check to discard control"). //nolint:gochecknoglobals // global
+			Default("true").Bool()
+	dOutputDir = dDownload.Flag( //nolint:gochecknoglobals // global
+		"output_directory",
+		"Set output directory, you can use also OUTPUT_DIR env variable",
+	).
+		Short('d').String()
 
 	generate = app.Command("generate", "Generate a new config file") //nolint:gochecknoglobals // global
 )
@@ -233,7 +238,7 @@ func main() {
 	switch commands {
 	case list.FullCommand():
 		listCommand()
-	case d.FullCommand():
+	case dDownload.FullCommand():
 		downloadCommand()
 	case generate.FullCommand():
 		generator.Generate(*fConfig)

@@ -1,12 +1,14 @@
-package geofabrik
+package geofabrik_test
 
 import (
 	"testing"
 
+	"github.com/julien-noblet/download-geofabrik/generator/importer/geofabrik"
 	"github.com/spf13/viper"
 )
 
 func TestGetIndex(t *testing.T) {
+	t.Parallel()
 	viper.Set("log", true)
 
 	tests := []struct {
@@ -17,21 +19,23 @@ func TestGetIndex(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name:    "Test",
-			myURL:   GeofabrikIndexURL,
+			myURL:   geofabrik.GeofabrikIndexURL,
 			wantErr: false,
 		},
 	}
-	for x := range tests {
-		mt := tests[x]
-		t.Run(mt.name, func(t *testing.T) {
-			index, err := GetIndex(mt.myURL)
-			if (err != nil) != mt.wantErr {
-				t.Errorf("GetIndex() error = %v, wantErr %v", err, mt.wantErr)
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			index, err := geofabrik.GetIndex(thisTest.myURL)
+			if (err != nil) != thisTest.wantErr {
+				t.Errorf("GetIndex() error = %v, wantErr %v", err, thisTest.wantErr)
 			}
 			if len(index.Features) < 10 {
 				t.Errorf("GetIndex() error I should have more features!!!")
 			}
-			c, err := Convert(index)
+			c, err := geofabrik.Convert(index)
 			if c == nil || err != nil {
 				t.Errorf("GetIndex() error cant convert !!!\n%v", err)
 			}

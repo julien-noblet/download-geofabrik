@@ -21,6 +21,8 @@ func Benchmark_miniFormats_parse_geofabrik_yml(b *testing.B) {
 }
 
 func Test_miniFormats(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		s []string
 	}
@@ -51,12 +53,25 @@ func Test_miniFormats(t *testing.T) {
 		// Not testing all combinaisons!
 		{name: "osm.pbf and shp.zip", args: args{s: []string{formats.FormatOsmPbf, formats.FormatShpZip}}, want: "PS"},
 		// With all
-		{name: "All formats", args: args{s: []string{formats.FormatState, formats.FormatOsmBz2, formats.FormatOsmPbf, "osh.pbh", formats.FormatPoly, formats.FormatKml, formats.FormatShpZip}}, want: "sPBpSk"},
+		{
+			name: "All formats",
+			args: args{s: []string{
+				formats.FormatState,
+				formats.FormatOsmBz2,
+				formats.FormatOsmPbf,
+				"osh.pbh",
+				formats.FormatPoly,
+				formats.FormatKml,
+				formats.FormatShpZip,
+			}},
+			want: "sPBpSk",
+		},
 	}
 
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if got := formats.MiniFormats(tt.args.s); got != tt.want {
 				t.Errorf("formats.MiniFormats() = %v, want %v", got, tt.want)
 			}
@@ -65,6 +80,8 @@ func Test_miniFormats(t *testing.T) {
 }
 
 func Test_getFormats(t *testing.T) {
+	t.Parallel()
+
 	type dflags struct {
 		dosmPbf bool
 		doshPbf bool
@@ -196,19 +213,20 @@ func Test_getFormats(t *testing.T) {
 		},
 	}
 
-	for _, tt := range tests {
-		tt := tt
-		viper.Set("dosmPbf", tt.flags.dosmPbf)
-		viper.Set("doshPbf", tt.flags.doshPbf)
-		viper.Set("dosmBz2", tt.flags.dosmBz2)
-		viper.Set("dosmGz", tt.flags.dosmGz)
-		viper.Set("dshpZip", tt.flags.dshpZip)
-		viper.Set("dstate", tt.flags.dstate)
-		viper.Set("dpoly", tt.flags.dpoly)
-		viper.Set("dkml", tt.flags.dkml)
-		t.Run(tt.name, func(t *testing.T) {
-			if got := formats.GetFormats(); !reflect.DeepEqual(*got, tt.want) {
-				t.Errorf("formats.GetFormats() = %v, want %v", *got, tt.want)
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		viper.Set("dosmPbf", thisTest.flags.dosmPbf)
+		viper.Set("doshPbf", thisTest.flags.doshPbf)
+		viper.Set("dosmBz2", thisTest.flags.dosmBz2)
+		viper.Set("dosmGz", thisTest.flags.dosmGz)
+		viper.Set("dshpZip", thisTest.flags.dshpZip)
+		viper.Set("dstate", thisTest.flags.dstate)
+		viper.Set("dpoly", thisTest.flags.dpoly)
+		viper.Set("dkml", thisTest.flags.dkml)
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+			if got := formats.GetFormats(); !reflect.DeepEqual(*got, thisTest.want) {
+				t.Errorf("formats.GetFormats() = %v, want %v", *got, thisTest.want)
 			}
 		})
 	}

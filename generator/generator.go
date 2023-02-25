@@ -16,7 +16,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-func write(c *config.Config, filename string) {
+func Write(c *config.Config, filename string) {
 	out, _ := c.Generate()
 	filename, _ = filepath.Abs(filename)
 
@@ -46,7 +46,7 @@ func Generate(configfile string) { //nolint:cyclop // TODO : Refactor
 			log.WithError(err)
 		}
 
-		write(c, configfile)
+		Write(c, configfile)
 
 		return // Exit function!
 	case "geofabrik-parse":
@@ -77,5 +77,5 @@ func Generate(configfile string) { //nolint:cyclop // TODO : Refactor
 	}
 
 	collector.Wait()
-	write(myScrapper.GetConfig(), configfile)
+	Write(myScrapper.GetConfig(), configfile)
 }

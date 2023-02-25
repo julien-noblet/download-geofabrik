@@ -16,7 +16,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/formats"
 )
 
-// IScrapper represent a colly Scrapper
+// IScrapper represent a colly Scrapper.
 type IScrapper interface {
 	GetConfig() *config.Config
 	Collector(options ...interface{}) *colly.Collector
@@ -26,7 +26,7 @@ type IScrapper interface {
 	ParseFormat(id, format string)
 }
 
-// Scrapper define a default scrapper
+// Scrapper define a default scrapper.
 type Scrapper struct {
 	FormatDefinition formats.FormatDefinitions
 	Config           *config.Config // ptr to Config Element
@@ -43,7 +43,7 @@ type Scrapper struct {
 	Async            bool          // true by default
 }
 
-// GetConfig init a *config.Config from fields
+// GetConfig init a *config.Config from fields.
 func (s *Scrapper) GetConfig() *config.Config {
 	if s.Config == nil {
 		s.Config = &config.Config{
@@ -63,7 +63,7 @@ func (s *Scrapper) GetConfig() *config.Config {
 	return s.Config // in case of BaseURL AND/OR FormatDefinition isn't set
 }
 
-// Limit define LimitRules
+// Limit define LimitRules.
 func (s *Scrapper) Limit() *colly.LimitRule {
 	if s.DomainGlob == "" {
 		s.DomainGlob = "*"
@@ -84,9 +84,9 @@ func (s *Scrapper) Limit() *colly.LimitRule {
 	}
 }
 
-// Collector *colly.Collector Init Collector
+// Collector *colly.Collector Init Collector.
 func (s *Scrapper) Collector(options ...interface{}) *colly.Collector { //nolint:unparam,lll // *colly.Collector is passed as param but unused in this case
-	c := colly.NewCollector(
+	myCollector := colly.NewCollector(
 		colly.AllowedDomains(s.AllowedDomains...),
 		colly.URLFilters(s.URLFilters...),
 		colly.Async(s.Async),
@@ -94,10 +94,10 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector { //nolint
 	)
 
 	if s.Timeout != nil {
-		c.SetRequestTimeout(*s.Timeout)
+		myCollector.SetRequestTimeout(*s.Timeout)
 	}
 
-	c.WithTransport(&http.Transport{
+	myCollector.WithTransport(&http.Transport{
 		Proxy: http.ProxyFromEnvironment,
 		DialContext: (&net.Dialer{
 			Timeout:   60 * time.Second, //nolint:gomnd // Use 60 seconds as default timeout
@@ -111,11 +111,11 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector { //nolint
 	})
 
 	s.Config = s.GetConfig() // ensure initialisation
-	if err := c.Limit(s.Limit()); err != nil {
+	if err := myCollector.Limit(s.Limit()); err != nil {
 		log.WithError(err).Error("can't update limit")
 	}
 
-	c.OnError(func(r *colly.Response, err error) {
+	myCollector.OnError(func(r *colly.Response, err error) {
 		if !errors.Is(err, colly.ErrForbiddenURL) && !errors.Is(err, colly.ErrForbiddenDomain) && err.Error() != "Forbidden" {
 			log.WithError(err).Debugf("request URL: %v failed with response: %v", r.Request.URL, r)
 		} else {
@@ -123,20 +123,20 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector { //nolint
 		}
 	})
 
-	return c
+	return myCollector
 }
 
-// GetStartURL return StartURL
+// GetStartURL return StartURL.
 func (s *Scrapper) GetStartURL() string {
 	return s.StartURL
 }
 
-// GetPB return PB
+// GetPB return PB.
 func (s *Scrapper) GetPB() int {
 	return s.PB
 }
 
-// ParseFormat add Extensions to ID
+// ParseFormat add Extensions to ID.
 func (s *Scrapper) ParseFormat(id, format string) {
 	for i := range s.Config.Formats {
 		if format == i {
@@ -145,7 +145,7 @@ func (s *Scrapper) ParseFormat(id, format string) {
 	}
 }
 
-// FileExt return filename, ext
+// FileExt return filename, ext.
 func FileExt(url string) (filename, extension string) {
 	urls := strings.Split(url, "/") // Todo: Try with regexp?
 	f := strings.Split(urls[len(urls)-1], ".")
@@ -153,7 +153,7 @@ func FileExt(url string) (filename, extension string) {
 	return f[0], strings.Join(f[1:], ".")
 }
 
-// GetParent return filename, path
+// GetParent return filename, path.
 func GetParent(url string) (filename, path string) {
 	r := strings.Split(url, "/")
 	if len(r) < 5 { //nolint:gomnd // <4 should be impossible

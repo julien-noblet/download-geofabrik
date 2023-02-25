@@ -13,7 +13,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/scrapper"
 )
 
-// OpenstreetmapFR Scrapper
+// OpenstreetmapFR Scrapper.
 type OpenstreetmapFR struct {
 	*scrapper.Scrapper
 }
@@ -23,7 +23,7 @@ const (
 )
 
 func GetDefault() *OpenstreetmapFR {
-	t := defaultTimeout
+	timeout := defaultTimeout
 
 	return &OpenstreetmapFR{
 		Scrapper: &scrapper.Scrapper{
@@ -47,12 +47,12 @@ func GetDefault() *OpenstreetmapFR {
 				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", BasePath: "../polygons/"},
 				formats.FormatState:  {ID: formats.FormatState, Loc: ".state.txt"},
 			},
-			Timeout: &t,
+			Timeout: &timeout,
 		},
 	}
 }
 
-// Collector represent geofabrik's scrapper
+// Collector represent geofabrik's scrapper.
 func (o *OpenstreetmapFR) Collector(options ...interface{}) *colly.Collector {
 	c := o.Scrapper.Collector(options)
 	c.OnHTML("a", func(e *colly.HTMLElement) {
@@ -62,25 +62,25 @@ func (o *OpenstreetmapFR) Collector(options ...interface{}) *colly.Collector {
 	return c
 }
 
-func openstreetmapFRGetParent(href string) (parent string, parents []string) {
-	var p string
+func openstreetmapFRGetParent(href string) (string, []string) {
+	var parent string
 
-	pp := strings.Split(href, "/")
-	if len(pp) > 4 { //nolint:gomnd // need at least 4 elments to have a parent :
+	parents := strings.Split(href, "/")
+	if len(parents) > 4 { //nolint:gomnd // need at least 4 elments to have a parent :
 		// http://1/2/.../x
 		// 1    2 3 4 ...
-		p = pp[len(pp)-2] // Get x in this kind of url http(s)://1/2/.../x/
+		parent = parents[len(parents)-2] // Get x in this kind of url http(s)://1/2/.../x/
 	} else {
-		p = ""
+		parent = ""
 	}
 
-	if strings.EqualFold(p, "extracts") { // should I try == or a switch?
-		p = ""
-	} else if strings.EqualFold(p, "polygons") {
-		p = ""
+	if strings.EqualFold(parent, "extracts") { // should I try == or a switch?
+		parent = ""
+	} else if strings.EqualFold(parent, "polygons") {
+		parent = ""
 	}
 
-	return p, pp
+	return parent, parents
 }
 
 func (o *OpenstreetmapFR) makeParents(parent string, gparents []string) {
