@@ -39,7 +39,8 @@ func Test_bbbike_parseList(t *testing.T) {
 		html     string
 		url      string
 	}{
-		{name: "sample",
+		{
+			name: "sample",
 			html: `
 			<tbody>
 				<tr class="d"><td class="n"><a href="../">..</a>/</td><td class="m">&nbsp;</td><td class="s">- &nbsp;</td><td class="t">Directory</td></tr>
@@ -323,7 +324,8 @@ func Test_bbbike_parseSidebar(t *testing.T) {
 		html     string
 		url      string
 	}{
-		{name: "Toulouse",
+		{
+			name: "Toulouse",
 			html: `<div id="sidebar">
 				<div id="routes"><h3 style="text-align:center">OSM extracts for Toulouse</h3>
 				<p>

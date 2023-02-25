@@ -56,12 +56,12 @@ var (
 	generate = app.Command("generate", "Generate a new config file")
 )
 
-func listAllRegions(c *config.Config, format string) {
+func listAllRegions(configuration *config.Config, format string) {
 	table := tablewriter.NewWriter(os.Stdout)
-	keys := make(sort.StringSlice, len(c.Elements))
+	keys := make(sort.StringSlice, len(configuration.Elements))
 	i := 0
 
-	for k := range c.Elements {
+	for k := range configuration.Elements {
 		keys[i] = k
 		i++
 	}
@@ -76,14 +76,16 @@ func listAllRegions(c *config.Config, format string) {
 	}
 
 	for _, item := range keys {
-		table.Append([]string{item,
-			c.Elements[c.Elements[item].Parent].Name,
-			c.Elements[item].Name,
-			formats.MiniFormats(c.Elements[item].Formats)})
+		table.Append([]string{
+			item,
+			configuration.Elements[configuration.Elements[item].Parent].Name,
+			configuration.Elements[item].Name,
+			formats.MiniFormats(configuration.Elements[item].Formats),
+		})
 	}
 
 	table.Render()
-	fmt.Printf("Total elements: %#v\n", len(c.Elements))
+	fmt.Printf("Total elements: %#v\n", len(configuration.Elements))
 }
 
 func checkService() bool {
@@ -110,7 +112,7 @@ func checkService() bool {
 }
 
 func listCommand() {
-	var format = ""
+	format := ""
 
 	configPtr, err := config.LoadConfig(*fConfig)
 	if err != nil {

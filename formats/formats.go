@@ -27,8 +27,9 @@ const (
 )
 
 // MiniFormats get formats of an Element
-//  and return a string
-//  according to download-geofabrik short flags.
+//
+//	and return a string
+//	according to download-geofabrik short flags.
 func MiniFormats(s []string) string {
 	res := make([]string, 7) //nolint:gomnd // 7 is the number of formats
 

@@ -19,6 +19,7 @@ func Benchmark_miniFormats_parse_geofabrik_yml(b *testing.B) {
 		}
 	}
 }
+
 func Test_miniFormats(t *testing.T) {
 	type args struct {
 		s []string
@@ -94,7 +95,8 @@ func Test_getFormats(t *testing.T) {
 				dkml:    false,
 			},
 			want: []string{formats.FormatOsmPbf},
-		}, {
+		},
+		{
 			name: "dosmPbf",
 			flags: dflags{
 				dosmPbf: true,
@@ -107,7 +109,8 @@ func Test_getFormats(t *testing.T) {
 				dkml:    false,
 			},
 			want: []string{formats.FormatOsmPbf},
-		}, {
+		},
+		{
 			name: "doshPbf",
 			flags: dflags{
 				dosmPbf: false,
@@ -120,7 +123,8 @@ func Test_getFormats(t *testing.T) {
 				dkml:    false,
 			},
 			want: []string{formats.FormatOshPbf},
-		}, {
+		},
+		{
 			name: "dosmPbf doshPbf",
 			flags: dflags{
 				dosmPbf: true,
@@ -133,7 +137,8 @@ func Test_getFormats(t *testing.T) {
 				dkml:    false,
 			},
 			want: []string{formats.FormatOsmPbf, formats.FormatOshPbf},
-		}, {
+		},
+		{
 			name: "dosmBz2 dshpZip",
 			flags: dflags{
 				dosmPbf: false,
@@ -146,7 +151,8 @@ func Test_getFormats(t *testing.T) {
 				dkml:    false,
 			},
 			want: []string{formats.FormatOsmBz2, formats.FormatShpZip},
-		}, {
+		},
+		{
 			name: "dstate dpoly",
 			flags: dflags{
 				dosmPbf: false,
@@ -159,7 +165,8 @@ func Test_getFormats(t *testing.T) {
 				dkml:    false,
 			},
 			want: []string{formats.FormatState, formats.FormatPoly},
-		}, {
+		},
+		{
 			name: "dkml",
 			flags: dflags{
 				dosmPbf: false,

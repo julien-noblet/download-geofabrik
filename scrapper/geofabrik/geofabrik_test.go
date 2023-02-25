@@ -297,7 +297,8 @@ func TestGeofabrik_parseLi(t *testing.T) {
 		html    string
 		url     string
 	}{
-		{name: "sample",
+		{
+			name: "sample",
 			html: `
 			<li>
 				<p>some text</p>
@@ -310,7 +311,8 @@ func TestGeofabrik_parseLi(t *testing.T) {
 				Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 			}},
 		},
-		{name: "georgia-us",
+		{
+			name: "georgia-us",
 			html: `
 			<li>
 				<p>some text</p>
@@ -323,7 +325,8 @@ func TestGeofabrik_parseLi(t *testing.T) {
 				Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 			}},
 		},
-		{name: "georgia-eu",
+		{
+			name: "georgia-eu",
 			html: `
 			<li>
 				<p>some text</p>
@@ -336,7 +339,8 @@ func TestGeofabrik_parseLi(t *testing.T) {
 				Formats: element.Formats{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState},
 			}},
 		},
-		{name: "guatemala-south-america",
+		{
+			name: "guatemala-south-america",
 			html: `
 			<li>
 				<p>some text</p>
@@ -383,7 +387,8 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 		html     string
 		url      string
 	}{
-		{name: "sample1",
+		{
+			name: "sample1",
 			html: `
 				<table id="subregions">
 				<tbody><tr>
@@ -426,7 +431,8 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 				"south-america":     element.Element{ID: "south-america", Name: "South America", Meta: true},
 			},
 		},
-		{name: "sample2 - Europe extract",
+		{
+			name: "sample2 - Europe extract",
 			html: `
 				<table id="subregions">
 				<tbody><tr>
@@ -463,7 +469,8 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 				"germany":    element.Element{ID: "germany", Name: "Germany", Meta: true, Parent: "europe"},
 			},
 		},
-		{name: "sample3 - North America extract",
+		{
+			name: "sample3 - North America extract",
 			html: `
 			<table id="subregions">
 			<tbody><tr>
@@ -498,7 +505,8 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 				"hawaii":        element.Element{ID: "hawaii", Name: "Hawaii", Meta: true, Parent: "us"},
 			},
 		},
-		{name: "sample4 - South America extract",
+		{
+			name: "sample4 - South America extract",
 			html: `
 			<table id="subregions">
 			<tbody><tr>

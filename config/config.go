@@ -31,13 +31,13 @@ const (
 type Config struct {
 	Formats       formats.FormatDefinitions `yaml:"formats"`
 	Elements      element.Slice             `yaml:"elements"`
-	ElementsMutex *sync.RWMutex             `yaml:"-"` // unexported
-	BaseURL       string                    `yaml:"baseURL"`
+	ElementsMutex *sync.RWMutex             `yaml:"-"`       // unexported
+	BaseURL       string                    `yaml:"baseURL"` //nolint:tagliatelle // revive prefer this form
 }
 
-// Generate Yaml config
-func (c *Config) Generate() ([]byte, error) {
-	yml, err := yaml.Marshal(c)
+// Generate Yaml config.
+func (config *Config) Generate() ([]byte, error) {
+	yml, err := yaml.Marshal(config)
 	if err != nil {
 		return nil, fmt.Errorf("failed to Marshal : %w", err)
 	}
@@ -45,76 +45,83 @@ func (c *Config) Generate() ([]byte, error) {
 	return yml, nil
 }
 
-func (c *Config) MergeElement(el *element.Element) error {
-	c.ElementsMutex.RLock()
-	cE, ok := c.Elements[el.ID]
-	c.ElementsMutex.RUnlock()
+func (config *Config) MergeElement(elementPtr *element.Element) error {
+	config.ElementsMutex.RLock()
+	newElement, ok := config.Elements[elementPtr.ID]
+	config.ElementsMutex.RUnlock()
 
-	if ok {
-		if cE.Parent != el.Parent {
+	if ok { //nolint:nestif // TODO : Refactor?
+		if newElement.Parent != elementPtr.Parent {
 			return fmt.Errorf("can't merge : Parent mismatch")
 		}
 
-		c.ElementsMutex.Lock()
-		for _, f := range el.Formats {
-			if !cE.Formats.Contains(f) {
-				cE.Formats = append(cE.Formats, f)
+		config.ElementsMutex.Lock()
+		for _, f := range elementPtr.Formats {
+			if !newElement.Formats.Contains(f) {
+				newElement.Formats = append(newElement.Formats, f)
 			}
 		}
-		c.ElementsMutex.Unlock()
+		config.ElementsMutex.Unlock()
 
-		if len(cE.Formats) == 0 {
-			cE.Meta = true
+		if len(newElement.Formats) == 0 {
+			newElement.Meta = true
 		} else {
-			cE.Meta = false
+			newElement.Meta = false
 		}
 
-		c.ElementsMutex.Lock()
-		c.Elements[el.ID] = cE
-		c.ElementsMutex.Unlock()
+		config.ElementsMutex.Lock()
+		config.Elements[elementPtr.ID] = newElement
+		config.ElementsMutex.Unlock()
 	} else {
-		c.ElementsMutex.Lock()
-		c.Elements[el.ID] = *el
-		c.ElementsMutex.Unlock()
+		config.ElementsMutex.Lock()
+		config.Elements[elementPtr.ID] = *elementPtr
+		config.ElementsMutex.Unlock()
 	}
 
 	return nil
 }
 
-// Exist check if id is in e.Elements
-func (c *Config) Exist(id string) bool {
-	c.ElementsMutex.RLock()
-	r := reflect.DeepEqual(c.Elements[id], element.Element{})
-	c.ElementsMutex.RUnlock()
+// Exist check if id is in e.Elements.
+func (config *Config) Exist(id string) bool {
+	config.ElementsMutex.RLock()
+	result := reflect.DeepEqual(config.Elements[id], element.Element{
+		ID:      "",
+		File:    "",
+		Name:    "",
+		Parent:  "",
+		Formats: element.Formats{},
+		Meta:    false,
+	})
+	config.ElementsMutex.RUnlock()
 
-	return !r
+	return !result
 }
 
-// AddExtension Add an extension to an element
-func (c *Config) AddExtension(id, format string) {
-	c.ElementsMutex.RLock()
-	elem := c.Elements[id]
-	c.ElementsMutex.RUnlock()
+// AddExtension Add an extension to an element.
+func (config *Config) AddExtension(id, format string) {
+	config.ElementsMutex.RLock()
+	elem := config.Elements[id]
+	config.ElementsMutex.RUnlock()
 
 	if !elem.Formats.Contains(format) {
 		log.Infof("Add %s to %s", format, elem.ID)
 
-		c.ElementsMutex.Lock()
+		config.ElementsMutex.Lock()
 		elem.Formats = append(elem.Formats, format)
-		c.ElementsMutex.Unlock()
+		config.ElementsMutex.Unlock()
 
-		if err := c.MergeElement(&elem); err != nil {
+		if err := config.MergeElement(&elem); err != nil {
 			log.WithError(err).Fatalf("can't merge %s", elem.Name)
 		}
 	}
 }
 
-// GetElement get an element by id or error if not found
-func (c *Config) GetElement(id string) (*element.Element, error) {
-	if c.Exist(id) {
-		c.ElementsMutex.RLock()
-		r := c.Elements[id]
-		c.ElementsMutex.RUnlock()
+// GetElement get an element by id or error if not found.
+func (config *Config) GetElement(id string) (*element.Element, error) { //nolint:varnamelen // id is ok
+	if config.Exist(id) {
+		config.ElementsMutex.RLock()
+		r := config.Elements[id]
+		config.ElementsMutex.RUnlock()
 
 		return &r, nil
 	}
@@ -122,8 +129,8 @@ func (c *Config) GetElement(id string) (*element.Element, error) {
 	return nil, fmt.Errorf("element %s not found", id)
 }
 
-func FindElem(c *Config, e string) (*element.Element, error) {
-	res := c.Elements[e]
+func FindElem(config *Config, e string) (*element.Element, error) {
+	res := config.Elements[e]
 	if res.ID == "" || res.ID != e {
 		return nil, fmt.Errorf("%s is not in config. Please use \"list\" command", e)
 	}
@@ -131,65 +138,65 @@ func FindElem(c *Config, e string) (*element.Element, error) {
 	return &res, nil
 }
 
-func Elem2preURL(c *Config, e *element.Element, b ...string) (string, error) {
-	myElem, err := FindElem(c, e.ID)
+func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string) (string, error) {
+	myElement, err := FindElem(config, elementPtr.ID)
 	if err != nil {
 		return "", err
 	}
 
-	if myElem.HasParent() {
-		parent, err := FindElem(c, myElem.Parent)
+	if myElement.HasParent() {
+		parent, err := FindElem(config, myElement.Parent)
 		if err != nil {
 			return "", err
 		}
 
-		res, err := Elem2preURL(c, parent, b...)
+		res, err := Elem2preURL(config, parent, baseURL...)
 		if err != nil {
 			return "", err
 		}
 
 		res += "/"
-		if myElem.File != "" { // TODO use file in config???
-			res += myElem.File
+		if myElement.File != "" { // TODO use file in config???
+			res += myElement.File
 		} else {
-			res += myElem.ID
+			res += myElement.ID
 		}
 
 		return res, nil
 	}
 
-	switch len(b) {
-	case 1: //nolint:gomnd // return with c.BaseURL
-		return c.BaseURL + "/" + strings.Join(b, "/") + myElem.ID, nil
+	switch len(baseURL) {
+	case 1:
+		return config.BaseURL + "/" + strings.Join(baseURL, "/") + myElement.ID, nil
 	case 2: //nolint:gomnd // return without c.BaseURL
-		return strings.Join(b, "/") + myElem.ID, nil
+		return strings.Join(baseURL, "/") + myElement.ID, nil
 	default: // len(b)==0 or >2
-		return c.BaseURL + "/" + myElem.ID, nil
+		return config.BaseURL + "/" + myElement.ID, nil
 	}
 }
 
-func Elem2URL(c *Config, e *element.Element, ext string) (string, error) {
+func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, error) {
 	var (
 		res string
 		err error
 	)
 
-	if !e.Formats.Contains(ext) {
+	if !elementPtr.Formats.Contains(ext) {
 		return "", fmt.Errorf("error!!! %s format not exist", ext)
 	}
 
-	format := c.Formats[ext]
-	if format.BasePath != "" {
+	format := config.Formats[ext]
+	if format.BasePath != "" { //nolint:nestif // TODO : Refactor?
 		if format.BaseURL != "" {
-			res, err = Elem2preURL(c, e, format.BaseURL, format.BasePath)
+			res, err = Elem2preURL(config, elementPtr, format.BaseURL, format.BasePath)
 		} else {
-			res, err = Elem2preURL(c, e, format.BasePath)
+			res, err = Elem2preURL(config, elementPtr, format.BasePath)
 		}
 	} else {
 		if format.BaseURL != "" {
-			res, err = Elem2preURL(c, e, format.BaseURL, "")
+			res, err = Elem2preURL(config, elementPtr, format.BaseURL, "")
 		} else {
-			res, err = Elem2preURL(c, e)
+			res, err = Elem2preURL(config, elementPtr)
 		}
 	}
 	// TODO check if valid URL
@@ -212,7 +219,12 @@ func LoadConfig(configFile string) (*Config, error) {
 		return nil, fmt.Errorf("can't open %s : %w", filename, err)
 	}
 	// Create a Config ptr
-	myConfigPtr := &Config{ElementsMutex: &sync.RWMutex{}}
+	myConfigPtr := &Config{
+		Formats:       formats.FormatDefinitions{},
+		Elements:      element.Slice{},
+		ElementsMutex: &sync.RWMutex{},
+		BaseURL:       "",
+	}
 	// Charging fileContent into myConfigPtr
 	if err := yaml.Unmarshal(fileContent, myConfigPtr); err != nil {
 		return nil, fmt.Errorf("can't unmarshal %s : %w", filename, err)
@@ -221,13 +233,13 @@ func LoadConfig(configFile string) (*Config, error) {
 	return myConfigPtr, nil
 }
 
-func IsHashable(c *Config, format string) (hashable bool, hash, hashType string) {
+func IsHashable(config *Config, format string) (hashable bool, hashFilename, hashType string) { //nolint:nonamedreturns // better for documentation
 	hashs := []string{"md5"} // had to be globalized?
 
-	if _, ok := c.Formats[format]; ok {
+	if _, ok := config.Formats[format]; ok {
 		for _, h := range hashs {
 			hash := format + "." + h
-			if _, ok := c.Formats[hash]; ok {
+			if _, ok := config.Formats[hash]; ok {
 				return true, hash, h
 			}
 		}

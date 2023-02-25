@@ -3,7 +3,7 @@ linters-settings:
     check-shadowing: true
     enable:
       - atomicalign
-      - fieldalignment
+      - timeformat
     settings:
       printf:
         funcs:
@@ -13,11 +13,8 @@ linters-settings:
           - (github.com/golangci/golangci-lint/pkg/logutils.Log).Fatalf
   golint:
     min-confidence: 0
-  gofmt:
-    # simplify code: gofmt with `-s` option, true by default
-    simplify: true
   gocyclo:
-    min-complexity: 15
+    min-complexity: 20
   maligned:
     suggest-new: true
   dupl:
@@ -36,7 +33,7 @@ linters-settings:
   misspell:
     locale: US
   lll:
-    line-length: 140
+    line-length: 150
   goimports:
     local-prefixes: github.com/golangci/golangci-lint
   gocritic:
@@ -47,8 +44,10 @@ linters-settings:
       - performance
       - style
     disabled-checks:
+      #- commentedOutCode
+      # - hugeParam
       #- wrapperFunc
-      - dupImport # https://github.com/go-critic/go-critic/issues/845
+      #- dupImport # https://github.com/go-critic/go-critic/issues/845
         #- ifElseChain
         #- octalLiteral
   funlen:
@@ -94,56 +93,118 @@ linters-settings:
     allow-case-traling-whitespace: true
     # Allow declarations (var) to be cuddled.
     allow-cuddle-declarations: false
+  exhaustruct:
+    exclude:
+      - 'guia2\.BySelector$'
 
 linters:
   # please, do not use `enable-all`: it's deprecated and will be removed soon.
   # inverted configuration with `enable-all` and `disable` is not scalable during updates of golangci-lint
   disable-all: true
   enable:
+    - asasalint
+    - asciicheck
+    - bidichk
     - bodyclose
-    - deadcode
+    - containedctx
+    - cyclop
+    #- deadcode
+    - decorder
     - depguard
     - dogsled
     - dupl
+    - dupword
+    - durationcheck
     - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - execinquery
+    - exhaustive
+    - exhaustruct
+    #- exhaustivestruct
     - exportloopref
     - funlen
+    - forbidigo
+    - forcetypeassert
+    - ginkgolinter
+    #- gci
+    - gocheckcompilerdirectives
+    - gochecknoglobals
     - gochecknoinits
     - goconst
     - gocritic
     - gocyclo
-    - gofmt
+    - godot
+    #- godox
+    # - goerr113
+    #- gofmt
+    - gofumpt
+    - goheader
     - goimports
+    - gomoddirectives
     - gomnd
+    - gomodguard
     - goprintffuncname
     - gosec
     - gosimple
     - govet
+    - grouper
+    #- ifshort
+    - importas
     - ineffassign
+    - interfacebloat
+    - ireturn
     - lll
+    - loggercheck
+    - maintidx
+    - makezero
     - misspell
+    - musttag
     - nakedret
+    #- nilassign
+    - nestif
+    - nilerr
+    - nilnil
+    - nlreturn
+    - noctx
+    - nolintlint
+    - nonamedreturns
+    - nosprintfhostport
+    - paralleltest
     - prealloc
+    - predeclared
+    - promlinter
+    - reassign
+    - revive
     - rowserrcheck
+    - sqlclosecheck
     - staticcheck
-    - structcheck
+    #- structcheck
     - stylecheck
+    - tagliatelle
+    - tenv
+    - testableexamples
+    - testpackage
+    - thelper
+    - tparallel
     - typecheck
     - unconvert
     - unparam
-    - unused
-    - revive
-    - varcheck
+    #- unused
+    - usestdlibvars
+    #- varcheck
+    - varnamelen
+    - wastedassign
     - whitespace
-    - wsl
     - wrapcheck
-    - prealloc
-    - gomnd
-
+    - wsl
   # don't enable:
-  # - gocognit
   # - gochecknoglobals
-  # - godox
+  # - gocognit
+  # - gochecknoinits
+  # - prealloc
+  # - testpackage
 
 run:
   timeout: 5m
@@ -155,16 +216,9 @@ run:
 issues:
   exclude-rules:
     - path: _test.go
-      #internal/(cache|renameio)/
       linters:
-        - lll
         - gochecknoinits
         - gocyclo
+        - cyclop
         - funlen
-        - dupl
-# golangci.com configuration
-# https://github.com/golangci/golangci/wiki/Configuration
-service:
-  golangci-lint-version: 1.21.x # use the fixed version to not introduce new linters unexpectedly
-  prepare:
-    - echo "here I can run custom commands, but no preparation needed for this repo"
+        - exhaustruct

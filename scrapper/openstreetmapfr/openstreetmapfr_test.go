@@ -22,12 +22,14 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 		want    element.Slice
 		element []element.Element
 	}{
-		{name: "sample",
+		{
+			name: "sample",
 			html: `<a href="fiji.osm.pbf">fiji.osm.pbf</a>`,
 			url:  `https://download.openstreetmap.fr/extracts/`,
 			want: element.Slice{"fiji": element.Element{ID: "fiji", Name: "fiji", Formats: element.Formats{formats.FormatOsmPbf}}},
 		},
-		{name: "Merge",
+		{
+			name: "Merge",
 			html: `
 				<table>
 					<tbody><tr><th valign="top"><img src="/icons/blank.gif" alt="[ICO]"></th><th><a href="?C=N;O=D">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=A">Size</a></th><th><a href="?C=D;O=A">Description</a></th></tr>
@@ -52,9 +54,11 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 				"fiji":                    element.Element{ID: "fiji", Name: "fiji", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
 				"france_metro_dom_com_nc": element.Element{ID: "france_metro_dom_com_nc", Name: "france_metro_dom_com_nc", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
 				"france_taaf":             element.Element{ID: "france_taaf", Name: "france_taaf", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
-				"kiribati":                element.Element{ID: "kiribati", Name: "kiribati", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"}},
+				"kiribati":                element.Element{ID: "kiribati", Name: "kiribati", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
+			},
 		},
-		{name: "cgi-bin and replication",
+		{
+			name: "cgi-bin and replication",
 			html: `
 				<tbody>
 					<tr><th valign="top"><img src="/icons/blank.gif" alt="[ICO]"></th><th><a href="?C=N;O=D">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=A">Size</a></th><th><a href="?C=D;O=A">Description</a></th></tr>
@@ -110,14 +114,16 @@ var openstreetmapFRtests = []struct {
 	parents []string
 }{
 	// TODO: Add test cases.
-	{name: "Void ",
+	{
+		name:    "Void ",
 		href:    "http://osm.fr/",
 		want:    element.Slice{},
 		c:       config.Config{Elements: make(map[string]element.Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "",
 		parents: []string{"http:", "", "osm.fr", ""},
 	},
-	{name: "1st level subfolder",
+	{
+		name: "1st level subfolder",
 		href: "http://osm.fr/one/",
 		want: element.Slice{
 			"one": element.Element{
@@ -130,7 +136,8 @@ var openstreetmapFRtests = []struct {
 		parent:  "one",
 		parents: []string{"http:", "", "osm.fr", "one", ""},
 	},
-	{name: "2nd level subfolder",
+	{
+		name: "2nd level subfolder",
 		href: "http://osm.fr/one/two/",
 		want: element.Slice{
 			"one": element.Element{
@@ -149,7 +156,8 @@ var openstreetmapFRtests = []struct {
 		parent:  "two",
 		parents: []string{"http:", "", "osm.fr", "one", "two", ""},
 	},
-	{name: "top level extracts osm.pbf",
+	{
+		name: "top level extracts osm.pbf",
 		href: "http://osm.fr/extracts/object.osm.pbf",
 		want: element.Slice{
 			"object": element.Element{
@@ -162,7 +170,8 @@ var openstreetmapFRtests = []struct {
 		parent:  "",
 		parents: []string{"http:", "", "osm.fr", "extracts", "object.osm.pbf"},
 	},
-	{name: "top level polygons osm.pbf",
+	{
+		name: "top level polygons osm.pbf",
 		href: "http://osm.fr/polygons/object.osm.pbf",
 		want: element.Slice{
 			"object": element.Element{
@@ -175,7 +184,8 @@ var openstreetmapFRtests = []struct {
 		parent:  "",
 		parents: []string{"http:", "", "osm.fr", "polygons", "object.osm.pbf"},
 	},
-	{name: "sub level extracts osm.pbf",
+	{
+		name: "sub level extracts osm.pbf",
 		href: "http://osm.fr/extracts/one/object.osm.pbf",
 		want: element.Slice{
 			"object": element.Element{
@@ -194,7 +204,8 @@ var openstreetmapFRtests = []struct {
 		parent:  "one",
 		parents: []string{"http:", "", "osm.fr", "extracts", "one", "object.osm.pbf"},
 	},
-	{name: "sub level polygons osm.pbf",
+	{
+		name: "sub level polygons osm.pbf",
 		href: "http://osm.fr/polygons/one/object.osm.pbf",
 		want: element.Slice{
 			"object": element.Element{
@@ -214,7 +225,8 @@ var openstreetmapFRtests = []struct {
 		parent:  "one",
 		parents: []string{"http:", "", "osm.fr", "polygons", "one", "object.osm.pbf"},
 	},
-	{name: "2nd level osm.pbf",
+	{
+		name: "2nd level osm.pbf",
 		href: "http://osm.fr/polygons/one/two/object.osm.pbf",
 		want: element.Slice{
 			"object": element.Element{
@@ -239,7 +251,8 @@ var openstreetmapFRtests = []struct {
 		parent:  "two",
 		parents: []string{"http:", "", "osm.fr", "polygons", "one", "two", "object.osm.pbf"},
 	},
-	{name: "sub level extracts osm.pbf + state",
+	{
+		name: "sub level extracts osm.pbf + state",
 		href: "http://osm.fr/extracts/one/object.state.txt",
 		want: element.Slice{
 			"object": element.Element{
@@ -308,18 +321,21 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 		gparents []string
 	}{
 		// TODO: Add test cases.
-		{name: "1 fake", // should not append!!!
+		{
+			name: "1 fake", // should not append!!!
 			// TODO: Raise an error?
 			parent:   "toto",
 			gparents: []string{"toto", "some.osm.pbf"},
 			want:     element.Slice{"toto": element.Element{ID: "toto", Name: "toto", Meta: true}},
 		},
-		{name: "1 parent",
+		{
+			name:     "1 parent",
 			parent:   "toto",
 			gparents: []string{"http:", "", "osm.fr", "extracts", "toto", "some.osm.pbf"},
 			want:     element.Slice{"toto": element.Element{ID: "toto", Name: "toto", Meta: true}},
 		},
-		{name: "2 parents",
+		{
+			name:     "2 parents",
 			parent:   "toto",
 			gparents: []string{"http:", "", "osm.fr", "extracts", "tata", "toto", "some.osm.pbf"},
 			want: element.Slice{
@@ -327,7 +343,8 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 				"tata": element.Element{ID: "tata", Name: "tata", Meta: true},
 			},
 		},
-		{name: "3 parents",
+		{
+			name:     "3 parents",
 			parent:   "toto",
 			gparents: []string{"http:", "", "osm.fr", "extracts", "tata", "titi", "toto", "some.osm.pbf"},
 			want: element.Slice{
@@ -336,7 +353,8 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 				"tata": element.Element{ID: "tata", Name: "tata", Meta: true},
 			},
 		},
-		{name: "one parent",
+		{
+			name:     "one parent",
 			parent:   "one",
 			gparents: []string{"http:", "", "osm.fr", "extracts", "one", "object.osm.pbf"},
 			want: element.Slice{

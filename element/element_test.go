@@ -28,6 +28,7 @@ var sampleAfricaElementPtr = element.Element{
 		formats.FormatState,
 	},
 }
+
 var sampleGeorgiaUsElementPtr = element.Element{
 	ID:   "georgia-us",
 	File: "georgia",
@@ -46,12 +47,14 @@ var sampleGeorgiaUsElementPtr = element.Element{
 	},
 	Parent: "us",
 }
+
 var sampleUsElementPtr = element.Element{
 	ID:     "us",
 	Meta:   true,
 	Name:   "United States of America",
 	Parent: "north-america",
 }
+
 var sampleNorthAmericaElementPtr = element.Element{
 	ID:   "north-america",
 	Name: "North America",
@@ -67,6 +70,7 @@ var sampleNorthAmericaElementPtr = element.Element{
 		formats.FormatState,
 	},
 }
+
 var sampleElementValidPtr = map[string]element.Element{
 	"africa":        sampleAfricaElementPtr,
 	"georgia-us":    sampleGeorgiaUsElementPtr,
@@ -95,7 +99,8 @@ func TestElement_HasParent(t *testing.T) {
 			name:   "us Have parent",
 			fields: sampleElementValidPtr["us"],
 			want:   true,
-		}, {
+		},
+		{
 			name:   "Africa Haven't parent",
 			fields: sampleElementValidPtr["Africa"],
 			want:   false,
@@ -139,6 +144,7 @@ func Benchmark_StringInSlice_parse_geofabrik_yml(b *testing.B) {
 		}
 	}
 }
+
 func Benchmark_contains_parse_geofabrik_yml(b *testing.B) {
 	c, _ := config.LoadConfig(geofabrikYml)
 	sliceE := element.Formats{}
@@ -153,6 +159,7 @@ func Benchmark_contains_parse_geofabrik_yml(b *testing.B) {
 		}
 	}
 }
+
 func Benchmark_StringInSlice_parse_geofabrik_yml_France_formats_osm_pbf(b *testing.B) {
 	c, _ := config.LoadConfig(geofabrikYml)
 	myformats := c.Elements["france"].Formats

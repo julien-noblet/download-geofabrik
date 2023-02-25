@@ -26,6 +26,7 @@ var sampleAfricaElementPtr = element.Element{
 		formats.FormatState,
 	},
 }
+
 var sampleGeorgiaUsElementPtr = element.Element{
 	ID:   "georgia-us",
 	File: "georgia",
@@ -44,12 +45,14 @@ var sampleGeorgiaUsElementPtr = element.Element{
 	},
 	Parent: "us",
 }
+
 var sampleUsElementPtr = element.Element{
 	ID:     "us",
 	Meta:   true,
 	Name:   "United States of America",
 	Parent: "north-america",
 }
+
 var sampleNorthAmericaElementPtr = element.Element{
 	ID:   "north-america",
 	Name: "North America",
@@ -65,12 +68,14 @@ var sampleNorthAmericaElementPtr = element.Element{
 		formats.FormatState,
 	},
 }
+
 var sampleElementValidPtr = map[string]element.Element{
 	"africa":        sampleAfricaElementPtr,
 	"georgia-us":    sampleGeorgiaUsElementPtr,
 	"us":            sampleUsElementPtr,
 	"north-america": sampleNorthAmericaElementPtr,
 }
+
 var sampleFormatValidPtr = map[string]formats.Format{
 	// Blank
 	"": {
@@ -80,7 +85,7 @@ var sampleFormatValidPtr = map[string]formats.Format{
 	}, formats.FormatOsmPbf: {
 		ID:  formats.FormatOsmPbf,
 		Loc: ".osm.pbf",
-		//BasePath: "/",
+		// BasePath: "/",
 	}, formats.FormatState: {
 		ID:       formats.FormatState,
 		Loc:      "-updates/state.txt",

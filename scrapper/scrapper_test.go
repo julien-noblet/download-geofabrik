@@ -79,7 +79,8 @@ func Test_ParseFormat(t *testing.T) {
 		want element.Slice
 		name string
 	}{
-		{name: "Add osm.pbf but already in",
+		{
+			name: "Add osm.pbf but already in",
 			args: args{
 				id:     "a",
 				format: formats.FormatOsmPbf,
@@ -104,7 +105,8 @@ func Test_ParseFormat(t *testing.T) {
 				},
 			},
 		},
-		{name: "Add osm.pbf",
+		{
+			name: "Add osm.pbf",
 			args: args{
 				id:     "a",
 				format: formats.FormatOsmPbf,
@@ -233,7 +235,8 @@ func Test_ParseFormat(t *testing.T) {
 				},
 			},
 		},
-		{name: "Add shp.zip",
+		{
+			name: "Add shp.zip",
 			args: args{
 				id:     "a",
 				format: formats.FormatShpZip,
@@ -258,7 +261,8 @@ func Test_ParseFormat(t *testing.T) {
 				},
 			},
 		},
-		{name: "Add unk format",
+		{
+			name: "Add unk format",
 			args: args{
 				id:     "a",
 				format: "unk",
@@ -283,7 +287,8 @@ func Test_ParseFormat(t *testing.T) {
 				},
 			},
 		},
-		{name: "Add osm.pbf on meta",
+		{
+			name: "Add osm.pbf on meta",
 			args: args{
 				id:     "a",
 				format: formats.FormatOsmPbf,
@@ -355,7 +360,7 @@ func TestScrapper_GetStartURL(t *testing.T) {
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" + "\\/?."
 
 	for i := 0; i < 1024; i++ {
-		var seededRand = rand.New(rand.NewSource(time.Now().UnixNano())) //nolint:gosec // I assume rand isn't safe but it's enough for testing
+		seededRand := rand.New(rand.NewSource(time.Now().UnixNano())) //nolint:gosec // I assume rand isn't safe but it's enough for testing
 		want := stringWithCharset(seededRand, i, charset)
 		s := Scrapper{
 			StartURL: want,
@@ -384,11 +389,13 @@ func TestScrapper_Limit(t *testing.T) {
 		fields Scrapper
 	}{
 		// TODO: Add test cases.
-		{name: "Default",
+		{
+			name:   "Default",
 			fields: Scrapper{DomainGlob: "*", Parallelism: 1, RandomDelay: 5 * time.Second},
 			want:   &colly.LimitRule{DomainGlob: "*", Parallelism: 1, RandomDelay: 5 * time.Second},
 		},
-		{name: "Void",
+		{
+			name:   "Void",
 			fields: Scrapper{},
 			want:   &colly.LimitRule{DomainGlob: "*", Parallelism: 1, RandomDelay: 5 * time.Second},
 		},
@@ -424,18 +431,22 @@ func TestScrapper_GetConfig(t *testing.T) {
 		fields Scrapper
 	}{
 		// TODO: Add test cases.
-		{name: "Void",
+		{
+			name: "Void",
 			want: &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}},
 		},
-		{name: "Void + BaseURL",
+		{
+			name:   "Void + BaseURL",
 			fields: Scrapper{BaseURL: "http://my.url"},
 			want:   &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}, BaseURL: "http://my.url"},
 		},
-		{name: "Void + FormatDefinition",
+		{
+			name:   "Void + FormatDefinition",
 			fields: Scrapper{FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}}},
 			want:   &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}, Formats: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}}},
 		},
-		{name: "Void + BaseURL",
+		{
+			name: "Void + BaseURL",
 			fields: Scrapper{
 				BaseURL:          "http://my.url",
 				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
@@ -447,7 +458,8 @@ func TestScrapper_GetConfig(t *testing.T) {
 				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
-		{name: "Config Exist",
+		{
+			name: "Config Exist",
 			fields: Scrapper{
 				Config: &config.Config{
 					Elements: element.Slice{
@@ -467,7 +479,8 @@ func TestScrapper_GetConfig(t *testing.T) {
 				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
-		{name: "Config Exist+ Base URL",
+		{
+			name: "Config Exist+ Base URL",
 			fields: Scrapper{
 				BaseURL: "http://my.url",
 				Config: &config.Config{
@@ -488,7 +501,8 @@ func TestScrapper_GetConfig(t *testing.T) {
 				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
-		{name: "Config Exist+ Base URL + Format Definition",
+		{
+			name: "Config Exist+ Base URL + Format Definition",
 			fields: Scrapper{
 				BaseURL: "http://my.url",
 				Config: &config.Config{

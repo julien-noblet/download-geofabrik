@@ -16,161 +16,192 @@ const (
 	openstreetmapFRYml = "../openstreetmap.fr.yml"
 )
 
-var sampleAfricaElementPtr = element.Element{
-	ID:   "africa",
-	Name: "Africa",
-	Formats: []string{
-		formats.FormatOsmPbf,
-		"osm.pbf.md5",
-		formats.FormatOsmBz2,
-		"osm.bz2.md5",
-		formats.FormatOshPbf,
-		"osh.pbf.md5",
-		formats.FormatPoly,
-		formats.FormatKml,
-		formats.FormatState,
-	},
-}
-var sampleGeorgiaUsElementPtr = element.Element{
-	ID:   "georgia-us",
-	File: "georgia",
-	Name: "Georgia (US State)",
-	Formats: []string{
-		formats.FormatOsmPbf,
-		"osm.pbf.md5",
-		formats.FormatShpZip,
-		formats.FormatOsmBz2,
-		"osm.bz2.md5",
-		formats.FormatOshPbf,
-		"osh.pbf.md5",
-		formats.FormatPoly,
-		formats.FormatKml,
-		formats.FormatState,
-	},
-	Parent: "us",
-}
-var sampleUsElementPtr = element.Element{
-	ID:     "us",
-	Meta:   true,
-	Name:   "United States of America",
-	Parent: "north-america",
-}
-var sampleNorthAmericaElementPtr = element.Element{
-	ID:   "north-america",
-	Name: "North America",
-	Formats: []string{
-		formats.FormatOsmPbf,
-		"osm.pbf.md5",
-		formats.FormatOsmBz2,
-		"osm.bz2.md5",
-		formats.FormatOshPbf,
-		"osh.pbf.md5",
-		formats.FormatPoly,
-		formats.FormatKml,
-		formats.FormatState,
-	},
-}
-var sampleElementValidPtr = map[string]element.Element{
-	"africa":        sampleAfricaElementPtr,
-	"georgia-us":    sampleGeorgiaUsElementPtr,
-	"us":            sampleUsElementPtr,
-	"north-america": sampleNorthAmericaElementPtr,
-}
-var sampleFormatValidPtr = map[string]formats.Format{
-	// Blank
-	"": {
-		ID:       "",
-		Loc:      "",
-		BasePath: "",
-	}, formats.FormatOsmPbf: {
-		ID:  formats.FormatOsmPbf,
-		Loc: ".osm.pbf",
-		//BasePath: "/",
-	}, formats.FormatState: {
-		ID:       formats.FormatState,
-		Loc:      "-updates/state.txt",
-		BasePath: "../state/",
-	}, formats.FormatPoly: {
-		ID:      formats.FormatPoly,
-		Loc:     ".poly",
-		BaseURL: "http://my.new.url/folder",
-	}, formats.FormatOsmBz2: {
-		ID:       formats.FormatOsmBz2,
-		Loc:      ".osm.bz2",
-		BasePath: "../osmbz2/",
-		BaseURL:  "http://my.new.url/folder",
-	}, formats.FormatOsmGz: {
-		ID:       formats.FormatOsmGz,
-		Loc:      ".osm.gz",
-		BasePath: "../osmgz/",
-		BaseURL:  "http://my.new.url/folder",
-	},
+func sampleAfricaElementPtr() *element.Element {
+	return &element.Element{
+		ID:   "africa",
+		Name: "Africa",
+		Formats: []string{
+			formats.FormatOsmPbf,
+			"osm.pbf.md5",
+			formats.FormatOsmBz2,
+			"osm.bz2.md5",
+			formats.FormatOshPbf,
+			"osh.pbf.md5",
+			formats.FormatPoly,
+			formats.FormatKml,
+			formats.FormatState,
+		},
+	}
 }
 
-var SampleConfigValidPtr = config.Config{
-	BaseURL:  "https://my.base.url",
-	Formats:  sampleFormatValidPtr,
-	Elements: sampleElementValidPtr,
+func sampleGeorgiaUsElementPtr() *element.Element {
+	return &element.Element{
+		ID:   "georgia-us",
+		File: "georgia",
+		Name: "Georgia (US State)",
+		Formats: []string{
+			formats.FormatOsmPbf,
+			"osm.pbf.md5",
+			formats.FormatShpZip,
+			formats.FormatOsmBz2,
+			"osm.bz2.md5",
+			formats.FormatOshPbf,
+			"osh.pbf.md5",
+			formats.FormatPoly,
+			formats.FormatKml,
+			formats.FormatState,
+		},
+		Parent: "us",
+	}
 }
-var sampleFakeGeorgiaPtr = element.Element{
-	ID:   "georgia-usf",
-	File: "georgia-fake",
-	Name: "Georgia (US State) - fake test",
-	Formats: []string{
-		formats.FormatOsmPbf,
-		"osm.pbf.md5",
-		formats.FormatShpZip,
-		formats.FormatOsmBz2,
-		"osm.bz2.md5",
-		formats.FormatOshPbf,
-		"osh.pbf.md5",
-		formats.FormatPoly,
-		formats.FormatKml,
-		formats.FormatState,
-	},
-	Parent: "us", // keep good parent!
+
+func sampleUsElementPtr() *element.Element {
+	return &element.Element{
+		ID:     "us",
+		Meta:   true,
+		Name:   "United States of America",
+		Parent: "north-america",
+	}
 }
-var sampleFakeGeorgia2Ptr = element.Element{
-	ID:   "georgia-us2",
-	File: "georgia",
-	Name: "Georgia (US State)",
-	Formats: []string{
-		formats.FormatOsmPbf,
-		"osm.pbf.md5",
-		formats.FormatShpZip,
-		formats.FormatOsmBz2,
-		"osm.bz2.md5",
-		formats.FormatOshPbf,
-		"osh.pbf.md5",
-		formats.FormatPoly,
-		formats.FormatKml,
-		formats.FormatState,
-	},
-	Parent: "notus", // bad parent not exist!
+
+func sampleNorthAmericaElementPtr() *element.Element {
+	return &element.Element{
+		ID:   "north-america",
+		Name: "North America",
+		Formats: []string{
+			formats.FormatOsmPbf,
+			"osm.pbf.md5",
+			formats.FormatOsmBz2,
+			"osm.bz2.md5",
+			formats.FormatOshPbf,
+			"osh.pbf.md5",
+			formats.FormatPoly,
+			formats.FormatKml,
+			formats.FormatState,
+		},
+	}
 }
-var sampleFakeGeorgia3Ptr = element.Element{
-	ID:   "georgia-us3",
-	File: "georgia",
-	Name: "Georgia (US State)",
-	Formats: []string{
-		formats.FormatOsmPbf,
-		"osm.pbf.md5",
-		formats.FormatShpZip,
-		formats.FormatOsmBz2,
-		"osm.bz2.md5",
-		formats.FormatOshPbf,
-		"osh.pbf.md5",
-		formats.FormatPoly,
-		formats.FormatKml,
-		formats.FormatState,
-	},
-	Parent: "notus2",
+
+func sampleElementValidPtr() map[string]element.Element {
+	return map[string]element.Element{
+		"africa":        *sampleAfricaElementPtr(),
+		"georgia-us":    *sampleGeorgiaUsElementPtr(),
+		"us":            *sampleUsElementPtr(),
+		"north-america": *sampleNorthAmericaElementPtr(),
+	}
 }
-var sampleNotUS2Ptr = element.Element{
-	ID:     "notus2",
-	Name:   "notus2",
-	Meta:   true,
-	Parent: "north", // bad parent not exist!
+
+func sampleFormatValidPtr() map[string]formats.Format {
+	return map[string]formats.Format{
+		// Blank
+		"": {
+			ID:       "",
+			Loc:      "",
+			BasePath: "",
+		}, formats.FormatOsmPbf: {
+			ID:  formats.FormatOsmPbf,
+			Loc: ".osm.pbf",
+			// BasePath: "/",
+		}, formats.FormatState: {
+			ID:       formats.FormatState,
+			Loc:      "-updates/state.txt",
+			BasePath: "../state/",
+		}, formats.FormatPoly: {
+			ID:      formats.FormatPoly,
+			Loc:     ".poly",
+			BaseURL: "http://my.new.url/folder",
+		}, formats.FormatOsmBz2: {
+			ID:       formats.FormatOsmBz2,
+			Loc:      ".osm.bz2",
+			BasePath: "../osmbz2/",
+			BaseURL:  "http://my.new.url/folder",
+		}, formats.FormatOsmGz: {
+			ID:       formats.FormatOsmGz,
+			Loc:      ".osm.gz",
+			BasePath: "../osmgz/",
+			BaseURL:  "http://my.new.url/folder",
+		},
+	}
+}
+
+func SampleConfigValidPtr() *config.Config {
+	return &config.Config{
+		BaseURL:  "https://my.base.url",
+		Formats:  sampleFormatValidPtr(),
+		Elements: sampleElementValidPtr(),
+	}
+}
+
+func sampleFakeGeorgiaPtr() *element.Element {
+	return &element.Element{
+		ID:   "georgia-usf",
+		File: "georgia-fake",
+		Name: "Georgia (US State) - fake test",
+		Formats: []string{
+			formats.FormatOsmPbf,
+			"osm.pbf.md5",
+			formats.FormatShpZip,
+			formats.FormatOsmBz2,
+			"osm.bz2.md5",
+			formats.FormatOshPbf,
+			"osh.pbf.md5",
+			formats.FormatPoly,
+			formats.FormatKml,
+			formats.FormatState,
+		},
+		Parent: "us", // keep good parent!
+	}
+}
+
+func sampleFakeGeorgia2Ptr() *element.Element {
+	return &element.Element{
+		ID:   "georgia-us2",
+		File: "georgia",
+		Name: "Georgia (US State)",
+		Formats: []string{
+			formats.FormatOsmPbf,
+			"osm.pbf.md5",
+			formats.FormatShpZip,
+			formats.FormatOsmBz2,
+			"osm.bz2.md5",
+			formats.FormatOshPbf,
+			"osh.pbf.md5",
+			formats.FormatPoly,
+			formats.FormatKml,
+			formats.FormatState,
+		},
+		Parent: "notus", // bad parent not exist!
+	}
+}
+
+func sampleFakeGeorgia3Ptr() *element.Element {
+	return &element.Element{
+		ID:   "georgia-us3",
+		File: "georgia",
+		Name: "Georgia (US State)",
+		Formats: []string{
+			formats.FormatOsmPbf,
+			"osm.pbf.md5",
+			formats.FormatShpZip,
+			formats.FormatOsmBz2,
+			"osm.bz2.md5",
+			formats.FormatOshPbf,
+			"osh.pbf.md5",
+			formats.FormatPoly,
+			formats.FormatKml,
+			formats.FormatState,
+		},
+		Parent: "notus2",
+	}
+}
+
+func sampleNotUS2Ptr() *element.Element {
+	return &element.Element{
+		ID:     "notus2",
+		Name:   "notus2",
+		Meta:   true,
+		Parent: "north", // bad parent not exist!
+	}
 }
 
 func Benchmark_Exist_geofabrik_yml(b *testing.B) {
@@ -202,6 +233,8 @@ func Benchmark_loadConfig_osmfr_yml(b *testing.B) {
 }
 
 func Test_loadConfig(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		configFile string
 	}
@@ -230,8 +263,8 @@ func Test_loadConfig(t *testing.T) {
 			args: args{configFile: geofabrikYml},
 			want: &config.Config{
 				BaseURL:       "https://download.geofabrik.de",
-				Formats:       sampleFormatValidPtr,
-				Elements:      sampleElementValidPtr,
+				Formats:       sampleFormatValidPtr(),
+				Elements:      sampleElementValidPtr(),
 				ElementsMutex: &sync.RWMutex{},
 			},
 			wantErr: false,
@@ -241,6 +274,7 @@ func Test_loadConfig(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := config.LoadConfig(tt.args.configFile)
 			if err != nil != tt.wantErr {
 				t.Errorf("loadConfig() error = %v, wantErr %v", err, tt.wantErr)
@@ -268,6 +302,8 @@ func Test_loadConfig(t *testing.T) {
 }
 
 func Test_AddExtension(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		id     string
 		format string
@@ -362,6 +398,7 @@ func Test_AddExtension(t *testing.T) {
 	for tn := range tests {
 		tn := tn
 		t.Run(tests[tn].name, func(t *testing.T) {
+			t.Parallel()
 			tests[tn].c.AddExtension(tests[tn].args.id, tests[tn].args.format)
 			if !reflect.DeepEqual(tests[tn].c.Elements, tests[tn].want) {
 				t.Errorf("AddExtension() got %v, want %v", tests[tn].c.Elements, tests[tn].want)
@@ -383,6 +420,8 @@ func Benchmark_GetElement_geofabrik_yml(b *testing.B) {
 }
 
 func Test_config_GetElement(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		want    *element.Element
 		name    string
@@ -395,7 +434,8 @@ func Test_config_GetElement(t *testing.T) {
 			name: "France from geofabrik",
 			file: geofabrikYml,
 			id:   "france",
-			want: &element.Element{ID: "france",
+			want: &element.Element{
+				ID:   "france",
 				Name: "France", Parent: "europe",
 				Formats: element.Formats{
 					formats.FormatOshPbf,
@@ -406,7 +446,8 @@ func Test_config_GetElement(t *testing.T) {
 					formats.FormatPoly,
 					formats.FormatKml,
 					formats.FormatState,
-				}},
+				},
+			},
 			wantErr: false,
 		},
 		{
@@ -420,6 +461,8 @@ func Test_config_GetElement(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			c, _ := config.LoadConfig(tt.file)
 			got, err := c.GetElement(tt.id)
 			if (err != nil) != tt.wantErr {
@@ -472,6 +515,8 @@ func Test_config_GetElement(t *testing.T) {
 }
 
 func Test_IsHashable(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		format string
 		file   string
@@ -492,13 +537,15 @@ func Test_IsHashable(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 
-		c, err := config.LoadConfig(tt.args.file)
+		myConfig, err := config.LoadConfig(tt.args.file)
 		if err != nil {
 			t.Error(err)
 		}
 
 		t.Run(tt.name, func(t *testing.T) {
-			got, got1, got2 := config.IsHashable(c, tt.args.format)
+			t.Parallel()
+
+			got, got1, got2 := config.IsHashable(myConfig, tt.args.format)
 			if got != tt.want {
 				t.Errorf("config.IsHashable() got = %v, want %v", got, tt.want)
 			}
@@ -511,6 +558,7 @@ func Test_IsHashable(t *testing.T) {
 		})
 	}
 }
+
 func Benchmark_IsHashable_geofabrik_yml(b *testing.B) {
 	// run the Fib function b.N times
 	c, _ := config.LoadConfig(geofabrikYml)
@@ -521,6 +569,7 @@ func Benchmark_IsHashable_geofabrik_yml(b *testing.B) {
 		}
 	}
 }
+
 func Benchmark_findElem_parse_all_geofabrik_yml(b *testing.B) {
 	c, _ := config.LoadConfig(geofabrikYml)
 
@@ -556,6 +605,8 @@ func Benchmark_FindElem_parse_France_geofabrik_yml(b *testing.B) {
 }
 
 func Test_FindElem(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		c *config.Config
 		e string
@@ -571,7 +622,7 @@ func Test_FindElem(t *testing.T) {
 		{
 			name: "Find",
 			args: args{
-				c: &SampleConfigValidPtr,
+				c: SampleConfigValidPtr(),
 				e: "africa",
 			},
 			want: &element.Element{
@@ -594,7 +645,7 @@ func Test_FindElem(t *testing.T) {
 		{
 			name: "Can't find notInList",
 			args: args{
-				c: &SampleConfigValidPtr,
+				c: SampleConfigValidPtr(),
 				e: "notInList",
 			},
 			want:    nil,
@@ -603,7 +654,7 @@ func Test_FindElem(t *testing.T) {
 		{
 			name: "Should not find",
 			args: args{
-				c: &SampleConfigValidPtr,
+				c: SampleConfigValidPtr(),
 				e: "",
 			},
 			want:    nil,
@@ -614,6 +665,8 @@ func Test_FindElem(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			got, err := config.FindElem(tt.args.c, tt.args.e)
 			if err != nil != tt.wantErr {
 				t.Errorf("config.FindElem() error = %v, wantErr %v", err, tt.wantErr)
@@ -627,14 +680,16 @@ func Test_FindElem(t *testing.T) {
 }
 
 func Test_elem2URL(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		c   *config.Config
 		e   *element.Element
 		ext string
 	}
 
-	localSampleConfigValidPtr := SampleConfigValidPtr
-	localSampleConfigValidPtr.Elements["georgia-us2"] = sampleFakeGeorgiaPtr // add it into config
+	localSampleConfigValidPtr := SampleConfigValidPtr()
+	localSampleConfigValidPtr.Elements["georgia-us2"] = *sampleFakeGeorgiaPtr() // add it into config
 	tests := []struct {
 		name    string
 		args    args
@@ -644,40 +699,43 @@ func Test_elem2URL(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name:    "top level test config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleAfricaElementPtr, ext: formats.FormatOsmPbf},
+			args:    args{c: localSampleConfigValidPtr, e: sampleAfricaElementPtr(), ext: formats.FormatOsmPbf},
 			want:    "https://my.base.url/africa.osm.pbf",
 			wantErr: false,
-		}, {
+		},
+		{
 			name:    "sub level test config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: formats.FormatState},
+			args:    args{c: localSampleConfigValidPtr, e: sampleGeorgiaUsElementPtr(), ext: formats.FormatState},
 			want:    "https://my.base.url/../state/north-america/us/georgia-updates/state.txt",
 			wantErr: false,
-		}, {
+		},
+		{
 			name:    "BaseUrl test config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: formats.FormatPoly},
+			args:    args{c: localSampleConfigValidPtr, e: sampleGeorgiaUsElementPtr(), ext: formats.FormatPoly},
 			want:    "http://my.new.url/folder/north-america/us/georgia.poly",
 			wantErr: false,
-		}, {
+		},
+		{
 			name:    "BaseUrl + BasePath test config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: formats.FormatOsmBz2},
+			args:    args{c: localSampleConfigValidPtr, e: sampleGeorgiaUsElementPtr(), ext: formats.FormatOsmBz2},
 			want:    "http://my.new.url/folder/../osmbz2/north-america/us/georgia.osm.bz2",
 			wantErr: false,
 		},
 		{
 			name:    "sub level test config wrong format",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr, ext: "wrongFmt"},
+			args:    args{c: localSampleConfigValidPtr, e: sampleGeorgiaUsElementPtr(), ext: "wrongFmt"},
 			want:    "",
 			wantErr: true,
 		},
 		{
 			name:    "sub level test config not exists in config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgiaPtr, ext: formats.FormatState},
+			args:    args{c: localSampleConfigValidPtr, e: sampleFakeGeorgiaPtr(), ext: formats.FormatState},
 			want:    "",
 			wantErr: true,
 		},
 		{
 			name:    "sub level test config not exists parent",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgia2Ptr, ext: formats.FormatState},
+			args:    args{c: localSampleConfigValidPtr, e: sampleFakeGeorgia2Ptr(), ext: formats.FormatState},
 			want:    "",
 			wantErr: true,
 		},
@@ -686,6 +744,7 @@ func Test_elem2URL(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			got, err := config.Elem2URL(tt.args.c, tt.args.e, tt.args.ext)
 			if err != nil != tt.wantErr {
 				t.Errorf("elem2URL() error = %v, wantErr %v", err, tt.wantErr)
@@ -699,16 +758,18 @@ func Test_elem2URL(t *testing.T) {
 }
 
 func Test_elem2preURL(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		c *config.Config
 		e *element.Element
 		b []string
 	}
 
-	localSampleConfigValidPtr := SampleConfigValidPtr
-	localSampleConfigValidPtr.Elements["georgia-us2"] = sampleFakeGeorgia2Ptr // add it into config
-	localSampleConfigValidPtr.Elements["georgia-us3"] = sampleFakeGeorgia3Ptr // add it into config
-	localSampleConfigValidPtr.Elements["notus2"] = sampleNotUS2Ptr            // add it into config
+	localSampleConfigValidPtr := SampleConfigValidPtr()
+	localSampleConfigValidPtr.Elements["georgia-us2"] = *sampleFakeGeorgia2Ptr() // add it into config
+	localSampleConfigValidPtr.Elements["georgia-us3"] = *sampleFakeGeorgia3Ptr() // add it into config
+	localSampleConfigValidPtr.Elements["notus2"] = *sampleNotUS2Ptr()            // add it into config
 	tests := []struct {
 		name    string
 		want    string
@@ -718,34 +779,37 @@ func Test_elem2preURL(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name:    "top level test config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleAfricaElementPtr},
+			args:    args{c: localSampleConfigValidPtr, e: sampleAfricaElementPtr()},
 			want:    "https://my.base.url/africa",
 			wantErr: false,
-		}, {
+		},
+		{
 			name:    "top level test config with basePath base/",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleAfricaElementPtr, b: []string{"base/"}},
+			args:    args{c: localSampleConfigValidPtr, e: sampleAfricaElementPtr(), b: []string{"base/"}},
 			want:    "https://my.base.url/base/africa",
 			wantErr: false,
-		}, {
+		},
+		{
 			name:    "sub level test config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleGeorgiaUsElementPtr},
+			args:    args{c: localSampleConfigValidPtr, e: sampleGeorgiaUsElementPtr()},
 			want:    "https://my.base.url/north-america/us/georgia",
 			wantErr: false,
-		}, {
+		},
+		{
 			name:    "sub level test config not exists in config",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgiaPtr},
+			args:    args{c: localSampleConfigValidPtr, e: sampleFakeGeorgiaPtr()},
 			want:    "",
 			wantErr: true,
 		},
 		{
 			name:    "sub level test config not exists parent",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgia2Ptr},
+			args:    args{c: localSampleConfigValidPtr, e: sampleFakeGeorgia2Ptr()},
 			want:    "",
 			wantErr: true,
 		},
 		{
 			name:    "sub level test config parent exist but not grandparent",
-			args:    args{c: &localSampleConfigValidPtr, e: &sampleFakeGeorgia3Ptr},
+			args:    args{c: localSampleConfigValidPtr, e: sampleFakeGeorgia3Ptr()},
 			want:    "",
 			wantErr: true,
 		},
@@ -754,6 +818,8 @@ func Test_elem2preURL(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			got, err := config.Elem2preURL(tt.args.c, tt.args.e, tt.args.b...)
 			if err != nil != tt.wantErr {
 				t.Errorf("config.Elem2preURL() =%v error = %v, wantErr %v", got, err, tt.wantErr)
@@ -767,36 +833,37 @@ func Test_elem2preURL(t *testing.T) {
 }
 
 func Benchmark_Elem2preURL_parse_France_geofabrik_yml(b *testing.B) {
-	c, err := config.LoadConfig(geofabrikYml)
+	myConfig, err := config.LoadConfig(geofabrikYml)
 	if err != nil {
 		b.Errorf(err.Error())
 	}
 
-	france, err := config.FindElem(c, "france")
+	france, err := config.FindElem(myConfig, "france")
 	if err != nil {
 		b.Errorf(err.Error())
 	}
 
 	for n := 0; n < b.N; n++ {
-		_, err = config.Elem2preURL(c, france)
+		_, err = config.Elem2preURL(myConfig, france)
 		if err != nil {
 			b.Errorf(err.Error())
 		}
 	}
 }
+
 func Benchmark_Elem2URL_parse_France_geofabrik_yml(b *testing.B) {
-	c, err := config.LoadConfig(geofabrikYml)
+	myConfig, err := config.LoadConfig(geofabrikYml)
 	if err != nil {
 		b.Errorf(err.Error())
 	}
 
-	france, err := config.FindElem(c, "france")
+	france, err := config.FindElem(myConfig, "france")
 	if err != nil {
 		b.Errorf(err.Error())
 	}
 
 	for n := 0; n < b.N; n++ {
-		_, err = config.Elem2URL(c, france, formats.FormatState)
+		_, err = config.Elem2URL(myConfig, france, formats.FormatState)
 		if err != nil {
 			b.Errorf(err.Error())
 		}
@@ -804,18 +871,18 @@ func Benchmark_Elem2URL_parse_France_geofabrik_yml(b *testing.B) {
 }
 
 func Benchmark_Elem2URL_parse_France_openstreetmap_fr_yml(b *testing.B) {
-	c, err := config.LoadConfig(openstreetmapFRYml)
+	myConfig, err := config.LoadConfig(openstreetmapFRYml)
 	if err != nil {
 		b.Errorf(err.Error())
 	}
 
-	france, err := config.FindElem(c, "france")
+	france, err := config.FindElem(myConfig, "france")
 	if err != nil {
 		b.Errorf(err.Error())
 	}
 
 	for n := 0; n < b.N; n++ {
-		_, err = config.Elem2URL(c, france, formats.FormatPoly)
+		_, err = config.Elem2URL(myConfig, france, formats.FormatPoly)
 		if err != nil {
 			b.Errorf(err.Error())
 		}
@@ -823,6 +890,8 @@ func Benchmark_Elem2URL_parse_France_openstreetmap_fr_yml(b *testing.B) {
 }
 
 func TestConfig_MergeElement(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		Config     *config.Config
 		wantConfig *config.Config
@@ -831,149 +900,181 @@ func TestConfig_MergeElement(t *testing.T) {
 		wantErr    bool
 	}{
 		// TODO: Add test cases.
-		{name: "Add element on void Config",
+		{
+			name:   "Add element on void Config",
 			Config: &config.Config{ElementsMutex: &sync.RWMutex{}, Elements: element.Slice{}},
-			el: &element.Element{ID: "test",
+			el: &element.Element{
+				ID:      "test",
 				Name:    "Test",
 				Formats: element.Formats{"format1", "format2"},
 			},
 			wantErr: false,
 			wantConfig: &config.Config{
 				Elements: element.Slice{
-					"test": {ID: "test",
+					"test": {
+						ID:      "test",
 						Name:    "Test",
 						Formats: element.Formats{"format1", "format2"},
-					}},
+					},
+				},
 				ElementsMutex: &sync.RWMutex{},
 			},
 		},
-		{name: "Add meta element on void Config",
+		{
+			name:   "Add meta element on void Config",
 			Config: &config.Config{ElementsMutex: &sync.RWMutex{}, Elements: element.Slice{}},
-			el: &element.Element{ID: "test",
+			el: &element.Element{
+				ID:   "test",
 				Name: "Test",
 				Meta: true,
 			},
 			wantErr: false,
 			wantConfig: &config.Config{
 				Elements: element.Slice{
-					"test": {ID: "test",
+					"test": {
+						ID:   "test",
 						Name: "Test",
 						Meta: true,
-					}},
+					},
+				},
 				ElementsMutex: &sync.RWMutex{},
 			},
 		},
-		{name: "Add new element on non void Config",
+		{
+			name: "Add new element on non void Config",
 			Config: &config.Config{
 				ElementsMutex: &sync.RWMutex{},
 				Elements: element.Slice{
-					"test2": {ID: "test2",
-						Name:    "Test2",
-						Formats: element.Formats{"format1", "format2"},
-					}},
-			},
-			el: &element.Element{ID: "test",
-				Name:    "Test",
-				Formats: element.Formats{"format1", "format2"},
-			},
-			wantErr: false,
-			wantConfig: &config.Config{
-				Elements: element.Slice{
-					"test": {ID: "test",
-						Name:    "Test",
-						Formats: element.Formats{"format1", "format2"},
-					},
-					"test2": {ID: "test2",
+					"test2": {
+						ID:      "test2",
 						Name:    "Test2",
 						Formats: element.Formats{"format1", "format2"},
 					},
 				},
-				ElementsMutex: &sync.RWMutex{},
 			},
-		},
-		{name: "Add same element on non void Config",
-			Config: &config.Config{
-				ElementsMutex: &sync.RWMutex{},
-				Elements: element.Slice{
-					"test": {ID: "test",
-						Name:    "Test",
-						Formats: element.Formats{"format1", "format2"},
-					},
-				},
-			},
-			el: &element.Element{ID: "test",
+			el: &element.Element{
+				ID:      "test",
 				Name:    "Test",
 				Formats: element.Formats{"format1", "format2"},
 			},
 			wantErr: false,
 			wantConfig: &config.Config{
 				Elements: element.Slice{
-					"test": {ID: "test",
+					"test": {
+						ID:      "test",
 						Name:    "Test",
 						Formats: element.Formats{"format1", "format2"},
-					}},
+					},
+					"test2": {
+						ID:      "test2",
+						Name:    "Test2",
+						Formats: element.Formats{"format1", "format2"},
+					},
+				},
 				ElementsMutex: &sync.RWMutex{},
 			},
 		},
-		{name: "Add same element on non void Config and el was meta",
+		{
+			name: "Add same element on non void Config",
 			Config: &config.Config{
 				ElementsMutex: &sync.RWMutex{},
 				Elements: element.Slice{
-					"test": {ID: "test",
-						Name: "Test",
-						Meta: true,
+					"test": {
+						ID:      "test",
+						Name:    "Test",
+						Formats: element.Formats{"format1", "format2"},
 					},
 				},
 			},
-			el: &element.Element{ID: "test",
+			el: &element.Element{
+				ID:      "test",
 				Name:    "Test",
 				Formats: element.Formats{"format1", "format2"},
 			},
 			wantErr: false,
 			wantConfig: &config.Config{
 				Elements: element.Slice{
-					"test": {ID: "test",
+					"test": {
+						ID:      "test",
 						Name:    "Test",
 						Formats: element.Formats{"format1", "format2"},
-					}},
+					},
+				},
 				ElementsMutex: &sync.RWMutex{},
 			},
 		},
-		{name: "Add same void element on non void Config and el was meta",
+		{
+			name: "Add same element on non void Config and el was meta",
 			Config: &config.Config{
 				ElementsMutex: &sync.RWMutex{},
 				Elements: element.Slice{
-					"test": {ID: "test",
+					"test": {
+						ID:   "test",
 						Name: "Test",
 						Meta: true,
 					},
 				},
 			},
-			el: &element.Element{ID: "test",
+			el: &element.Element{
+				ID:      "test",
+				Name:    "Test",
+				Formats: element.Formats{"format1", "format2"},
+			},
+			wantErr: false,
+			wantConfig: &config.Config{
+				Elements: element.Slice{
+					"test": {
+						ID:      "test",
+						Name:    "Test",
+						Formats: element.Formats{"format1", "format2"},
+					},
+				},
+				ElementsMutex: &sync.RWMutex{},
+			},
+		},
+		{
+			name: "Add same void element on non void Config and el was meta",
+			Config: &config.Config{
+				ElementsMutex: &sync.RWMutex{},
+				Elements: element.Slice{
+					"test": {
+						ID:   "test",
+						Name: "Test",
+						Meta: true,
+					},
+				},
+			},
+			el: &element.Element{
+				ID:   "test",
 				Name: "Test",
 			},
 			wantErr: false,
 			wantConfig: &config.Config{
 				Elements: element.Slice{
-					"test": {ID: "test",
+					"test": {
+						ID:   "test",
 						Name: "Test",
 						Meta: true,
-					}},
+					},
+				},
 				ElementsMutex: &sync.RWMutex{},
 			},
 		},
-		{name: "Add same element on non void Config with wrong parent",
+		{
+			name: "Add same element on non void Config with wrong parent",
 			Config: &config.Config{
 				ElementsMutex: &sync.RWMutex{},
 				Elements: element.Slice{
-					"test": {ID: "test",
+					"test": {
+						ID:      "test",
 						Name:    "Test",
 						Formats: element.Formats{"format1", "format2"},
 						Parent:  "parent1",
 					},
 				},
 			},
-			el: &element.Element{ID: "test",
+			el: &element.Element{
+				ID:      "test",
 				Name:    "Test",
 				Formats: element.Formats{"format1", "format2"},
 				Parent:  "parent2",
@@ -981,11 +1082,13 @@ func TestConfig_MergeElement(t *testing.T) {
 			wantErr: true,
 			wantConfig: &config.Config{
 				Elements: element.Slice{
-					"test": {ID: "test",
+					"test": {
+						ID:      "test",
 						Name:    "Test",
 						Formats: element.Formats{"format1", "format2"},
 						Parent:  "parent1",
-					}},
+					},
+				},
 				ElementsMutex: &sync.RWMutex{},
 			},
 		},
@@ -993,19 +1096,23 @@ func TestConfig_MergeElement(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			c := tt.Config
-			err := c.MergeElement(tt.el)
+			t.Parallel()
+
+			myConfig := tt.Config
+			err := myConfig.MergeElement(tt.el)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Config.MergeElement() error = %v, wantErr %v", err, tt.wantErr)
 			}
-			if !reflect.DeepEqual(c.Elements, tt.wantConfig.Elements) {
-				t.Errorf("Config.MergeElement() config.Elements = %v, wantConfig.Elements %v", c.Elements, tt.wantConfig.Elements)
+			if !reflect.DeepEqual(myConfig.Elements, tt.wantConfig.Elements) {
+				t.Errorf("Config.MergeElement() config.Elements = %v, wantConfig.Elements %v", myConfig.Elements, tt.wantConfig.Elements)
 			}
 		})
 	}
 }
 
 func TestConfig_Generate(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name    string
 		file    string
@@ -1017,6 +1124,8 @@ func TestConfig_Generate(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			c, _ := config.LoadConfig(tt.file)
 			want, _ := os.ReadFile(geofabrikYml)
 			got, err := c.Generate()

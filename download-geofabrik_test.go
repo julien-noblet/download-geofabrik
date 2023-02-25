@@ -76,16 +76,16 @@ func Test_hashFileMD5(t *testing.T) {
 		{name: "Check with LICENSE file", args: args{filePath: "./LICENSE"}, want: "65d26fcc2f35ea6a181ac777e42db1ea", wantErr: false},
 	}
 
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := hashFileMD5(tt.args.filePath)
-			if err != nil != tt.wantErr {
-				t.Errorf("hashFileMD5(%v) error = %v, wantErr %v", tt.args.filePath, err, tt.wantErr)
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			got, err := hashFileMD5(thisTest.args.filePath)
+			if err != nil != thisTest.wantErr {
+				t.Errorf("hashFileMD5(%v) error = %v, wantErr %v", thisTest.args.filePath, err, thisTest.wantErr)
 				return
 			}
-			if got != tt.want {
-				t.Errorf("hashFileMD5() = %v, want %v", got, tt.want)
+			if got != thisTest.want {
+				t.Errorf("hashFileMD5() = %v, want %v", got, thisTest.want)
 			}
 		})
 	}
@@ -98,6 +98,7 @@ func Benchmark_hashFileMD5_LICENSE(b *testing.B) {
 		}
 	}
 }
+
 func Benchmark_controlHash_LICENSE(b *testing.B) {
 	hash, _ := hashFileMD5("./LICENSE")
 	hashfile := "/tmp/download-geofabrik-test.hash"
@@ -131,22 +132,22 @@ func Test_controlHash(t *testing.T) {
 		{name: "Check with LICENSE file wrong hash", fileToHash: "./LICENSE", args: args{hashfile: "/tmp/download-geofabrik-test.hash", hash: "65d26fcc2f35ea6a181ac777e42db1eb"}, want: false, wantErr: false},
 	}
 
-	for _, tt := range tests {
-		tt := tt
-		hash, _ := hashFileMD5(tt.fileToHash)
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		hash, _ := hashFileMD5(thisTest.fileToHash)
 
-		if err := os.WriteFile(tt.args.hashfile, []byte(hash), 0o600); err != nil {
-			t.Errorf("can't write file %s err: %v", tt.args.hashfile, err)
+		if err := os.WriteFile(thisTest.args.hashfile, []byte(hash), 0o600); err != nil {
+			t.Errorf("can't write file %s err: %v", thisTest.args.hashfile, err)
 		}
 
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := controlHash(tt.args.hashfile, tt.args.hash)
-			if err != nil != tt.wantErr {
-				t.Errorf("controlHash() error = %v, wantErr %v", err, tt.wantErr)
+		t.Run(thisTest.name, func(t *testing.T) {
+			got, err := controlHash(thisTest.args.hashfile, thisTest.args.hash)
+			if err != nil != thisTest.wantErr {
+				t.Errorf("controlHash() error = %v, wantErr %v", err, thisTest.wantErr)
 				return
 			}
-			if got != tt.want {
-				t.Errorf("controlHash() = %v, want %v", got, tt.want)
+			if got != thisTest.want {
+				t.Errorf("controlHash() = %v, want %v", got, thisTest.want)
 			}
 		})
 	}
@@ -319,29 +320,29 @@ func Test_downloadCommand(t *testing.T) {
 			checksumValid: false,
 		},
 	}
-	for _, tt := range tests {
-		tt := tt
-		*dosmPbf = tt.formatsFlags.dosmPbf || false
-		*doshPbf = tt.formatsFlags.doshPbf || false
-		*dosmBz2 = tt.formatsFlags.dosmBz2 || false
-		*dshpZip = tt.formatsFlags.dshpZip || false
-		*dstate = tt.formatsFlags.dstate || false
-		*dpoly = tt.formatsFlags.dpoly || false
-		*dkml = tt.formatsFlags.dkml || false
-		*fConfig = tt.fConfig
-		*dCheck = tt.dCheck || false
-		*delement = tt.delement
-		t.Run(tt.name, func(t *testing.T) {
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		*dosmPbf = thisTest.formatsFlags.dosmPbf || false
+		*doshPbf = thisTest.formatsFlags.doshPbf || false
+		*dosmBz2 = thisTest.formatsFlags.dosmBz2 || false
+		*dshpZip = thisTest.formatsFlags.dshpZip || false
+		*dstate = thisTest.formatsFlags.dstate || false
+		*dpoly = thisTest.formatsFlags.dpoly || false
+		*dkml = thisTest.formatsFlags.dkml || false
+		*fConfig = thisTest.fConfig
+		*dCheck = thisTest.dCheck || false
+		*delement = thisTest.delement
+		t.Run(thisTest.name, func(t *testing.T) {
 			fakedownloadFromURL := func(myURL string, output string) error {
-				assert.Equal(t, tt.wantURL, myURL)
-				assert.Equal(t, tt.wantOutput, output)
+				assert.Equal(t, thisTest.wantURL, myURL)
+				assert.Equal(t, thisTest.wantOutput, output)
 				return nil
 			}
 			fakedownloadChecksum := func(f string) bool {
-				return tt.checksumValid
+				return thisTest.checksumValid
 			}
 			fakefileExist := func(f string) bool {
-				return tt.fakefileExist
+				return thisTest.fakefileExist
 			}
 			patch := monkey.Patch(download.FromURL, fakedownloadFromURL)
 			patch2 := monkey.Patch(downloadChecksum, fakedownloadChecksum)
