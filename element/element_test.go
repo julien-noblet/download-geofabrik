@@ -13,20 +13,22 @@ const (
 	geofabrikYml = "../geofabrik.yml"
 )
 
-var sampleAfricaElementPtr = element.Element{
-	ID:   "africa",
-	Name: "Africa",
-	Formats: []string{
-		formats.FormatOsmPbf,
-		"osm.pbf.md5",
-		formats.FormatOsmBz2,
-		"osm.bz2.md5",
-		formats.FormatOshPbf,
-		"osh.pbf.md5",
-		formats.FormatPoly,
-		formats.FormatKml,
-		formats.FormatState,
-	},
+func sampleAfricaElementPtr() *element.Element {
+	return &element.Element{
+		ID:   "africa",
+		Name: "Africa",
+		Formats: []string{
+			formats.FormatOsmPbf,
+			"osm.pbf.md5",
+			formats.FormatOsmBz2,
+			"osm.bz2.md5",
+			formats.FormatOshPbf,
+			"osh.pbf.md5",
+			formats.FormatPoly,
+			formats.FormatKml,
+			formats.FormatState,
+		},
+	}
 }
 
 var sampleGeorgiaUsElementPtr = element.Element{
@@ -72,7 +74,7 @@ var sampleNorthAmericaElementPtr = element.Element{
 }
 
 var sampleElementValidPtr = map[string]element.Element{
-	"africa":        sampleAfricaElementPtr,
+	"africa":        *sampleAfricaElementPtr(),
 	"georgia-us":    sampleGeorgiaUsElementPtr,
 	"us":            sampleUsElementPtr,
 	"north-america": sampleNorthAmericaElementPtr,

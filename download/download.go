@@ -18,13 +18,13 @@ const (
 	ErrFromURL      = "can't download element"
 )
 
-func FromURL(myURL, fileName string) error {
+func FromURL(myURL, fileName string) error { //nolint:cyclop // TODO: Refactor!
 	log.Debugf("Downloading %s to %s", myURL, fileName)
 
-	if !viper.GetBool("noDownload") {
-		client := &http.Client{Transport: &http.Transport{
+	if !viper.GetBool("noDownload") { //nolint:nestif // TODO : Refactor?
+		client := &http.Client{Transport: &http.Transport{ //nolint:exhaustruct // I'm lazy
 			Proxy: http.ProxyFromEnvironment,
-			DialContext: (&net.Dialer{
+			DialContext: (&net.Dialer{ //nolint:exhaustruct // I'm lazy
 				Timeout:   60 * time.Second, //nolint:gomnd // 60 seconds
 				KeepAlive: 30 * time.Second, //nolint:gomnd // 30 seconds
 				DualStack: true,
@@ -61,35 +61,35 @@ func FromURL(myURL, fileName string) error {
 		// and use a new cmd flag (like f) to force overwrite
 		flags := os.O_CREATE | os.O_WRONLY
 
-		f, err := os.OpenFile(fileName, flags, 0o644) //nolint:gomnd // 0o644 is the default mode
+		file, err := os.OpenFile(fileName, flags, 0o644) //nolint:gomnd // 0o644 is the default mode
 		if err != nil {
 			return fmt.Errorf("error while creating %s - %w", fileName, err)
 		}
 
 		defer func() {
-			if e := f.Close(); e != nil {
+			if e := file.Close(); e != nil {
 				log.WithError(e).Fatal("can't close file")
 			}
 		}()
 
 		var (
-			output      io.Writer = f
-			n           int64
-			progressBar *pb.ProgressBar
+			output          io.Writer = file
+			currentProgress int64
+			progressBar     *pb.ProgressBar
 		)
 
 		if viper.GetBool("progress") && response.ContentLength > progressMinimal {
 			progressBar = pb.Full.Start64(response.ContentLength)
 			barReader := progressBar.NewProxyReader(response.Body)
 
-			n, err = io.Copy(output, barReader)
+			currentProgress, err = io.Copy(output, barReader)
 			if err != nil {
 				return fmt.Errorf("error while writing %s - %w", fileName, err)
 			}
 
 			defer progressBar.Finish()
 		} else {
-			n, err = io.Copy(output, response.Body)
+			currentProgress, err = io.Copy(output, response.Body)
 			if err != nil {
 				return fmt.Errorf("error while writing %s - %w", fileName, err)
 			}
@@ -100,7 +100,7 @@ func FromURL(myURL, fileName string) error {
 		}
 
 		log.Infof("%s downloaded.", fileName)
-		log.Debugf("%v bytes downloaded.", n)
+		log.Debugf("%v bytes downloaded.", currentProgress)
 	}
 
 	return nil // Everything is ok

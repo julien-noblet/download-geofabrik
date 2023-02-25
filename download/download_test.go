@@ -8,6 +8,8 @@ import (
 )
 
 func Test_DownloadFromURL(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		myURL    string
 		fileName string
@@ -56,14 +58,15 @@ func Test_DownloadFromURL(t *testing.T) {
 		},
 	}
 
-	for _, tt := range tests {
-		tt := tt
-		viper.Set("noDownload", tt.fNodownload)
-		viper.Set("quiet", tt.fQuiet)
-		viper.Set("progress", tt.fProgress)
-		t.Run(tt.name, func(t *testing.T) {
-			if err := download.FromURL(tt.args.myURL, tt.args.fileName); err != nil != tt.wantErr {
-				t.Errorf("download.FromURL() error = %v, wantErr %v", err, tt.wantErr)
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		viper.Set("noDownload", thisTest.fNodownload)
+		viper.Set("quiet", thisTest.fQuiet)
+		viper.Set("progress", thisTest.fProgress)
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+			if err := download.FromURL(thisTest.args.myURL, thisTest.args.fileName); err != nil != thisTest.wantErr {
+				t.Errorf("download.FromURL() error = %v, wantErr %v", err, thisTest.wantErr)
 			}
 		})
 	}

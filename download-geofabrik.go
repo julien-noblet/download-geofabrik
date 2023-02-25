@@ -24,36 +24,36 @@ import (
 
 var version = "devel"
 
-var (
-	app      = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.")
-	fService = app.Flag("service",
+var ( // TODO: move from kingpin to cobra
+	app      = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.") //nolint:gochecknoglobals // global
+	fService = app.Flag("service",                                                                 //nolint:gochecknoglobals // global
 		"Can switch to another service. "+
 			"You can use \"geofabrik\", \"openstreetmap.fr\" or \"bbbike\". "+
 			"It automatically change config file if -c is unused.").
 		Default("geofabrik").String()
-	fConfig     = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String()
-	fNodownload = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
-	fVerbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()
-	fQuiet      = app.Flag("quiet", "Be quiet").Short('q').Bool()
-	fProgress   = app.Flag("progress", "Add a progress bar (implie quiet)").Bool()
+	fConfig     = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String() //nolint:gochecknoglobals // global
+	fNodownload = app.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()          //nolint:gochecknoglobals // global
+	fVerbose    = app.Flag("verbose", "Be verbose").Short('v').Bool()                                   //nolint:gochecknoglobals // global
+	fQuiet      = app.Flag("quiet", "Be quiet").Short('q').Bool()                                       //nolint:gochecknoglobals // global
+	fProgress   = app.Flag("progress", "Add a progress bar (implie quiet)").Bool()                      //nolint:gochecknoglobals // global
 
-	list = app.Command("list", "Show elements available")
-	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool()
+	list = app.Command("list", "Show elements available")                   //nolint:gochecknoglobals // global
+	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool() //nolint:gochecknoglobals // global
 
-	d          = app.Command("download", "Download element") // TODO : add d as command
-	delement   = d.Arg("element", "OSM element").Required().String()
-	dosmBz2    = d.Flag(formats.FormatOsmBz2, "Download osm.bz2 if available").Short('B').Bool()
-	dosmGz     = d.Flag(formats.FormatOsmGz, "Download osm.gz if available").Short('G').Bool()
-	dshpZip    = d.Flag(formats.FormatShpZip, "Download shp.zip if available").Short('S').Bool()
-	dosmPbf    = d.Flag(formats.FormatOsmPbf, "Download osm.pbf (default)").Short('P').Bool()
-	doshPbf    = d.Flag(formats.FormatOshPbf, "Download osh.pbf").Short('H').Bool()
-	dstate     = d.Flag(formats.FormatState, "Download state.txt file").Short('s').Bool()
-	dpoly      = d.Flag(formats.FormatPoly, "Download poly file").Short('p').Bool()
-	dkml       = d.Flag(formats.FormatKml, "Download kml file").Short('k').Bool()
-	dCheck     = d.Flag("check", "Control with checksum (default) Use --no-check to discard control").Default("true").Bool()
-	dOutputDir = d.Flag("output_directory", "Set output directory, you can use also OUTPUT_DIR env variable").Short('d').String()
+	d          = app.Command("download", "Download element")                                                                      //nolint:gochecknoglobals // global // TODO : add d as command
+	delement   = d.Arg("element", "OSM element").Required().String()                                                              //nolint:gochecknoglobals // global
+	dosmBz2    = d.Flag(formats.FormatOsmBz2, "Download osm.bz2 if available").Short('B').Bool()                                  //nolint:gochecknoglobals // global
+	dosmGz     = d.Flag(formats.FormatOsmGz, "Download osm.gz if available").Short('G').Bool()                                    //nolint:gochecknoglobals // global
+	dshpZip    = d.Flag(formats.FormatShpZip, "Download shp.zip if available").Short('S').Bool()                                  //nolint:gochecknoglobals // global
+	dosmPbf    = d.Flag(formats.FormatOsmPbf, "Download osm.pbf (default)").Short('P').Bool()                                     //nolint:gochecknoglobals // global
+	doshPbf    = d.Flag(formats.FormatOshPbf, "Download osh.pbf").Short('H').Bool()                                               //nolint:gochecknoglobals // global
+	dstate     = d.Flag(formats.FormatState, "Download state.txt file").Short('s').Bool()                                         //nolint:gochecknoglobals // global
+	dpoly      = d.Flag(formats.FormatPoly, "Download poly file").Short('p').Bool()                                               //nolint:gochecknoglobals // global
+	dkml       = d.Flag(formats.FormatKml, "Download kml file").Short('k').Bool()                                                 //nolint:gochecknoglobals // global
+	dCheck     = d.Flag("check", "Control with checksum (default) Use --no-check to discard control").Default("true").Bool()      //nolint:gochecknoglobals // global
+	dOutputDir = d.Flag("output_directory", "Set output directory, you can use also OUTPUT_DIR env variable").Short('d').String() //nolint:gochecknoglobals // global
 
-	generate = app.Command("generate", "Generate a new config file")
+	generate = app.Command("generate", "Generate a new config file") //nolint:gochecknoglobals // global
 )
 
 func listAllRegions(configuration *config.Config, format string) {
@@ -156,7 +156,7 @@ func downloadCommand() {
 	filename := r.FindStringSubmatch(*dOutputDir + *delement)[0]
 
 	for _, format := range *formatFile {
-		if ok, _, _ := config.IsHashable(configPtr, format); *dCheck && ok {
+		if ok, _, _ := config.IsHashable(configPtr, format); *dCheck && ok { //nolint:nestif // TODO : Refactor?
 			if fileExist(*dOutputDir + *delement + "." + format) {
 				if !downloadChecksum(format) {
 					log.Infof("Checksum mismatch, re-downloading %v", *dOutputDir+filename+"."+format)
@@ -299,7 +299,7 @@ func controlHash(hashfile, hash string) (bool, error) {
 func downloadChecksum(format string) bool {
 	ret := false
 
-	if *dCheck {
+	if *dCheck { //nolint:nestif // TODO : Refactor?
 		hash := "md5"
 		fhash := format + "." + hash
 

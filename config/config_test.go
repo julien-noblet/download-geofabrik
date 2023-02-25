@@ -271,30 +271,31 @@ func Test_loadConfig(t *testing.T) {
 		},
 	}
 
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
-			got, err := config.LoadConfig(tt.args.configFile)
-			if err != nil != tt.wantErr {
-				t.Errorf("loadConfig() error = %v, wantErr %v", err, tt.wantErr)
+			got, err := config.LoadConfig(thisTest.args.configFile)
+			if err != nil != thisTest.wantErr {
+				t.Errorf("loadConfig() error = %v, wantErr %v", err, thisTest.wantErr)
+
 				return
 			}
 			if got != nil {
-				if reflect.TypeOf(got) != reflect.TypeOf(tt.want) {
-					t.Errorf("loadConfig() is a %v, want %v", reflect.TypeOf(got), reflect.TypeOf(tt.want))
+				if reflect.TypeOf(got) != reflect.TypeOf(thisTest.want) {
+					t.Errorf("loadConfig() is a %v, want %v", reflect.TypeOf(got), reflect.TypeOf(thisTest.want))
 				}
 				// Check BaseURL
-				if got.BaseURL != tt.want.BaseURL {
-					t.Errorf("loadConfig().BaseURL = %v, want %v", got.BaseURL, tt.want.BaseURL)
+				if got.BaseURL != thisTest.want.BaseURL {
+					t.Errorf("loadConfig().BaseURL = %v, want %v", got.BaseURL, thisTest.want.BaseURL)
 				}
 				// Must have formats but ne need to check if they are valids!
-				if reflect.TypeOf(got.Formats) != reflect.TypeOf(tt.want.Formats) {
-					t.Errorf("loadConfig().Formats is a %v, want %v", reflect.TypeOf(got.Formats), reflect.TypeOf(tt.want.Formats))
+				if reflect.TypeOf(got.Formats) != reflect.TypeOf(thisTest.want.Formats) {
+					t.Errorf("loadConfig().Formats is a %v, want %v", reflect.TypeOf(got.Formats), reflect.TypeOf(thisTest.want.Formats))
 				}
 				// Must have Elements but no check if they are valids
-				if reflect.TypeOf(got.Elements) != reflect.TypeOf(tt.want.Elements) {
-					t.Errorf("loadConfig().Elements is a %v, want %v", reflect.TypeOf(got.Elements), reflect.TypeOf(tt.want.Elements))
+				if reflect.TypeOf(got.Elements) != reflect.TypeOf(thisTest.want.Elements) {
+					t.Errorf("loadConfig().Elements is a %v, want %v", reflect.TypeOf(got.Elements), reflect.TypeOf(thisTest.want.Elements))
 				}
 			}
 		})
@@ -458,24 +459,25 @@ func Test_config_GetElement(t *testing.T) {
 			wantErr: true,
 		},
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
-			c, _ := config.LoadConfig(tt.file)
-			got, err := c.GetElement(tt.id)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Config.GetElement() error = %v, wantErr %v", err, tt.wantErr)
+			c, _ := config.LoadConfig(thisTest.file)
+			got, err := c.GetElement(thisTest.id)
+			if (err != nil) != thisTest.wantErr {
+				t.Errorf("Config.GetElement() error = %v, wantErr %v", err, thisTest.wantErr)
+
 				return
 			}
-			if tt.want != nil {
+			if thisTest.want != nil {
 				tfrance := &element.Element{
-					ID:     tt.want.ID,
-					Name:   tt.want.Name,
-					File:   tt.want.File,
-					Parent: tt.want.Parent,
-					Meta:   tt.want.Meta,
+					ID:     thisTest.want.ID,
+					Name:   thisTest.want.Name,
+					File:   thisTest.want.File,
+					Parent: thisTest.want.Parent,
+					Meta:   thisTest.want.Meta,
 				}
 				tgot := &element.Element{
 					ID:     got.ID,
@@ -485,28 +487,28 @@ func Test_config_GetElement(t *testing.T) {
 					Meta:   got.Meta,
 				}
 				if !reflect.DeepEqual(tgot, tfrance) {
-					t.Errorf("Config.GetElement() = %v, want %v", got, tt.want)
+					t.Errorf("Config.GetElement() = %v, want %v", got, thisTest.want)
 				}
-				for _, k := range tt.want.Formats {
+				for _, k := range thisTest.want.Formats {
 					if !(got.Formats.Contains(k)) {
 						t.Errorf("%v format should exist, got=%v", k, got)
 					}
 				}
 				for _, k := range got.Formats {
-					if !(tt.want.Formats.Contains(k)) {
+					if !(thisTest.want.Formats.Contains(k)) {
 						t.Errorf("%v format should not exist, got=%v", k, got)
 					}
 				}
-			} else if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Config.GetElement() = %v, want %v", got, tt.want)
+			} else if !reflect.DeepEqual(got, thisTest.want) {
+				t.Errorf("Config.GetElement() = %v, want %v", got, thisTest.want)
 			}
-			for _, k := range tt.want.Formats {
+			for _, k := range thisTest.want.Formats {
 				if !(got.Formats.Contains(k)) {
 					t.Errorf("%v format should exist, got=%v", k, got)
 				}
 			}
 			for _, k := range got.Formats {
-				if !(tt.want.Formats.Contains(k)) {
+				if !(thisTest.want.Formats.Contains(k)) {
 					t.Errorf("%v format should not exist, got=%v", k, got)
 				}
 			}
@@ -534,26 +536,26 @@ func Test_IsHashable(t *testing.T) {
 		{name: "Test is kml is hashable", args: args{format: formats.FormatKml, file: geofabrikYml}, want: false, want1: "", want2: ""},
 	}
 
-	for _, tt := range tests {
-		tt := tt
+	for _, thisTest := range tests {
+		thisTest := thisTest
 
-		myConfig, err := config.LoadConfig(tt.args.file)
+		myConfig, err := config.LoadConfig(thisTest.args.file)
 		if err != nil {
 			t.Error(err)
 		}
 
-		t.Run(tt.name, func(t *testing.T) {
+		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
-			got, got1, got2 := config.IsHashable(myConfig, tt.args.format)
-			if got != tt.want {
-				t.Errorf("config.IsHashable() got = %v, want %v", got, tt.want)
+			got, got1, got2 := config.IsHashable(myConfig, thisTest.args.format)
+			if got != thisTest.want {
+				t.Errorf("config.IsHashable() got = %v, want %v", got, thisTest.want)
 			}
-			if got1 != tt.want1 {
-				t.Errorf("config.IsHashable() got1 = %v, want %v", got1, tt.want1)
+			if got1 != thisTest.want1 {
+				t.Errorf("config.IsHashable() got1 = %v, want %v", got1, thisTest.want1)
 			}
-			if got2 != tt.want2 {
-				t.Errorf("config.IsHashable() got2 = %v, want %v", got2, tt.want2)
+			if got2 != thisTest.want2 {
+				t.Errorf("config.IsHashable() got2 = %v, want %v", got2, thisTest.want2)
 			}
 		})
 	}
@@ -662,18 +664,19 @@ func Test_FindElem(t *testing.T) {
 		},
 	}
 
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
-			got, err := config.FindElem(tt.args.c, tt.args.e)
-			if err != nil != tt.wantErr {
-				t.Errorf("config.FindElem() error = %v, wantErr %v", err, tt.wantErr)
+			got, err := config.FindElem(thisTest.args.c, thisTest.args.e)
+			if err != nil != thisTest.wantErr {
+				t.Errorf("config.FindElem() error = %v, wantErr %v", err, thisTest.wantErr)
+
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("config.FindElem() = %v, want %v", got, tt.want)
+			if !reflect.DeepEqual(got, thisTest.want) {
+				t.Errorf("config.FindElem() = %v, want %v", got, thisTest.want)
 			}
 		})
 	}
@@ -741,17 +744,18 @@ func Test_elem2URL(t *testing.T) {
 		},
 	}
 
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
-			got, err := config.Elem2URL(tt.args.c, tt.args.e, tt.args.ext)
-			if err != nil != tt.wantErr {
-				t.Errorf("elem2URL() error = %v, wantErr %v", err, tt.wantErr)
+			got, err := config.Elem2URL(thisTest.args.c, thisTest.args.e, thisTest.args.ext)
+			if err != nil != thisTest.wantErr {
+				t.Errorf("elem2URL() error = %v, wantErr %v", err, thisTest.wantErr)
+
 				return
 			}
-			if got != tt.want {
-				t.Errorf("elem2URL() = %v, want %v", got, tt.want)
+			if got != thisTest.want {
+				t.Errorf("elem2URL() = %v, want %v", got, thisTest.want)
 			}
 		})
 	}
@@ -815,18 +819,19 @@ func Test_elem2preURL(t *testing.T) {
 		},
 	}
 
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
-			got, err := config.Elem2preURL(tt.args.c, tt.args.e, tt.args.b...)
-			if err != nil != tt.wantErr {
-				t.Errorf("config.Elem2preURL() =%v error = %v, wantErr %v", got, err, tt.wantErr)
+			got, err := config.Elem2preURL(thisTest.args.c, thisTest.args.e, thisTest.args.b...)
+			if err != nil != thisTest.wantErr {
+				t.Errorf("config.Elem2preURL() =%v error = %v, wantErr %v", got, err, thisTest.wantErr)
+
 				return
 			}
-			if got != tt.want {
-				t.Errorf("config.Elem2preURL() = %v, want %v", got, tt.want)
+			if got != thisTest.want {
+				t.Errorf("config.Elem2preURL() = %v, want %v", got, thisTest.want)
 			}
 		})
 	}
@@ -1093,18 +1098,18 @@ func TestConfig_MergeElement(t *testing.T) {
 			},
 		},
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
-			myConfig := tt.Config
-			err := myConfig.MergeElement(tt.el)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Config.MergeElement() error = %v, wantErr %v", err, tt.wantErr)
+			myConfig := thisTest.Config
+			err := myConfig.MergeElement(thisTest.el)
+			if (err != nil) != thisTest.wantErr {
+				t.Errorf("Config.MergeElement() error = %v, wantErr %v", err, thisTest.wantErr)
 			}
-			if !reflect.DeepEqual(myConfig.Elements, tt.wantConfig.Elements) {
-				t.Errorf("Config.MergeElement() config.Elements = %v, wantConfig.Elements %v", myConfig.Elements, tt.wantConfig.Elements)
+			if !reflect.DeepEqual(myConfig.Elements, thisTest.wantConfig.Elements) {
+				t.Errorf("Config.MergeElement() config.Elements = %v, wantConfig.Elements %v", myConfig.Elements, thisTest.wantConfig.Elements)
 			}
 		})
 	}
@@ -1121,16 +1126,17 @@ func TestConfig_Generate(t *testing.T) {
 		{name: "geofabrik", file: geofabrikYml, wantErr: false},
 		// TODO: Add test cases.
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
-			c, _ := config.LoadConfig(tt.file)
+			c, _ := config.LoadConfig(thisTest.file)
 			want, _ := os.ReadFile(geofabrikYml)
 			got, err := c.Generate()
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Config.Generate() error = %v, wantErr %v", err, tt.wantErr)
+			if (err != nil) != thisTest.wantErr {
+				t.Errorf("Config.Generate() error = %v, wantErr %v", err, thisTest.wantErr)
+
 				return
 			}
 			if !reflect.DeepEqual(got, want) {

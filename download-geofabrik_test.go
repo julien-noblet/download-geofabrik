@@ -13,6 +13,8 @@ import (
 )
 
 func Test_checkService(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name       string
 		service    string
@@ -27,18 +29,19 @@ func Test_checkService(t *testing.T) {
 		{name: "checkService(), fService = anothermap", service: "anothermap", want: false},
 		{name: "checkService(), fService = \"\"", service: "", want: false},
 	}
-	for _, tt := range tests {
-		tt := tt
-		*fService = tt.service
-		t.Run(tt.name, func(t *testing.T) {
-			if tt.config != "" {
-				*fConfig = tt.config
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		*fService = thisTest.service
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+			if thisTest.config != "" {
+				*fConfig = thisTest.config
 			}
-			if got := checkService(); got != tt.want {
-				t.Errorf("checkService() = %v, want %v", got, tt.want)
+			if got := checkService(); got != thisTest.want {
+				t.Errorf("checkService() = %v, want %v", got, thisTest.want)
 			}
-			if tt.wantConfig != "" && *fConfig != tt.wantConfig {
-				t.Errorf("checkService() haven't change fConfig, want %v have %v", tt.wantConfig, *fConfig)
+			if thisTest.wantConfig != "" && *fConfig != thisTest.wantConfig {
+				t.Errorf("checkService() haven't change fConfig, want %v have %v", thisTest.wantConfig, *fConfig)
 			}
 		})
 	}
@@ -62,6 +65,8 @@ func Benchmark_listAllRegions_parse_geofabrik_yml_md(b *testing.B) {
 */
 
 func Test_hashFileMD5(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		filePath string
 	}
@@ -73,15 +78,23 @@ func Test_hashFileMD5(t *testing.T) {
 		wantErr bool
 	}{
 		// TODO: Add test cases.
-		{name: "Check with LICENSE file", args: args{filePath: "./LICENSE"}, want: "65d26fcc2f35ea6a181ac777e42db1ea", wantErr: false},
+		{
+			name:    "Check with LICENSE file",
+			args:    args{filePath: "./LICENSE"},
+			want:    "65d26fcc2f35ea6a181ac777e42db1ea",
+			wantErr: false,
+		},
 	}
 
 	for _, thisTest := range tests {
 		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
 			got, err := hashFileMD5(thisTest.args.filePath)
 			if err != nil != thisTest.wantErr {
 				t.Errorf("hashFileMD5(%v) error = %v, wantErr %v", thisTest.args.filePath, err, thisTest.wantErr)
+
 				return
 			}
 			if got != thisTest.want {
@@ -115,6 +128,8 @@ func Benchmark_controlHash_LICENSE(b *testing.B) {
 }
 
 func Test_controlHash(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		hashfile string
 		hash     string
@@ -128,8 +143,20 @@ func Test_controlHash(t *testing.T) {
 		wantErr    bool
 	}{
 		// TODO: Add test cases.
-		{name: "Check with LICENSE file", fileToHash: "./LICENSE", args: args{hashfile: "/tmp/download-geofabrik-test.hash", hash: "65d26fcc2f35ea6a181ac777e42db1ea"}, want: true, wantErr: false},
-		{name: "Check with LICENSE file wrong hash", fileToHash: "./LICENSE", args: args{hashfile: "/tmp/download-geofabrik-test.hash", hash: "65d26fcc2f35ea6a181ac777e42db1eb"}, want: false, wantErr: false},
+		{
+			name:       "Check with LICENSE file",
+			fileToHash: "./LICENSE",
+			args:       args{hashfile: "/tmp/download-geofabrik-test.hash", hash: "65d26fcc2f35ea6a181ac777e42db1ea"},
+			want:       true,
+			wantErr:    false,
+		},
+		{
+			name:       "Check with LICENSE file wrong hash",
+			fileToHash: "./LICENSE",
+			args:       args{hashfile: "/tmp/download-geofabrik-test.hash", hash: "65d26fcc2f35ea6a181ac777e42db1eb"},
+			want:       false,
+			wantErr:    false,
+		},
 	}
 
 	for _, thisTest := range tests {
@@ -141,9 +168,12 @@ func Test_controlHash(t *testing.T) {
 		}
 
 		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
 			got, err := controlHash(thisTest.args.hashfile, thisTest.args.hash)
 			if err != nil != thisTest.wantErr {
 				t.Errorf("controlHash() error = %v, wantErr %v", err, thisTest.wantErr)
+
 				return
 			}
 			if got != thisTest.want {
@@ -154,8 +184,10 @@ func Test_controlHash(t *testing.T) {
 }
 
 // Test_downloadChecksum I don't know why sometimes controlHash fail :'(
-// seems geofabrik have a limit download I reach sometimes :/
+// seems geofabrik have a limit download I reach sometimes :/.
 func Test_downloadChecksum(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		format string
 	}
@@ -175,12 +207,14 @@ func Test_downloadChecksum(t *testing.T) {
 		{name: "dCheck = true monaco.poly from geofabrik", fConfig: "./geofabrik.yml", dCheck: true, delement: "monaco", args: args{format: formats.FormatPoly}, want: false},
 	}
 
-	for _, tt := range tests {
-		tt := tt
-		*dCheck = tt.dCheck
-		*fConfig = tt.fConfig
-		*delement = tt.delement
-		t.Run(tt.name, func(t *testing.T) {
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		*dCheck = thisTest.dCheck
+		*fConfig = thisTest.fConfig
+		*delement = thisTest.delement
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
 			if *dCheck { // If I want to compare checksum, Download file
 				configPtr, err := config.LoadConfig(*fConfig)
 				if err != nil {
@@ -190,18 +224,18 @@ func Test_downloadChecksum(t *testing.T) {
 				if err != nil {
 					t.Error(err)
 				}
-				myURL, err := config.Elem2URL(configPtr, myElem, tt.args.format)
+				myURL, err := config.Elem2URL(configPtr, myElem, thisTest.args.format)
 				if err != nil {
 					t.Error(err)
 				}
-				err = download.FromURL(myURL, *delement+"."+tt.args.format)
+				err = download.FromURL(myURL, *delement+"."+thisTest.args.format)
 				if err != nil {
 					t.Error(err)
 				}
 			}
 			// now real test
-			if got := downloadChecksum(tt.args.format); got != tt.want {
-				t.Errorf("downloadChecksum() = %v, want %v", got, tt.want)
+			if got := downloadChecksum(thisTest.args.format); got != thisTest.want {
+				t.Errorf("downloadChecksum() = %v, want %v", got, thisTest.want)
 			}
 			os.Remove("monaco.osm.pbf")     // clean
 			os.Remove("monaco.osm.pbf.md5") // clean
@@ -210,6 +244,8 @@ func Test_downloadChecksum(t *testing.T) {
 }
 
 func Test_listCommand(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name string
 		want string
@@ -219,12 +255,14 @@ func Test_listCommand(t *testing.T) {
 		{name: "List normal", want: ""},
 		{name: "List Markdown", lmd: true, want: "Markdown"},
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			*lmd = tt.lmd
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			*lmd = thisTest.lmd
 			fakelistAllRegions := func(configPtr *config.Config, format string) {
-				assert.Equal(t, tt.want, format)
+				assert.Equal(t, thisTest.want, format)
 			}
 			patch := monkey.Patch(listAllRegions, fakelistAllRegions)
 			defer patch.Unpatch()
@@ -234,6 +272,8 @@ func Test_listCommand(t *testing.T) {
 }
 
 func Test_downloadCommand(t *testing.T) {
+	t.Parallel()
+
 	type fFlags struct {
 		dosmPbf bool
 		doshPbf bool
@@ -333,9 +373,12 @@ func Test_downloadCommand(t *testing.T) {
 		*dCheck = thisTest.dCheck || false
 		*delement = thisTest.delement
 		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
 			fakedownloadFromURL := func(myURL string, output string) error {
 				assert.Equal(t, thisTest.wantURL, myURL)
 				assert.Equal(t, thisTest.wantOutput, output)
+
 				return nil
 			}
 			fakedownloadChecksum := func(f string) bool {
@@ -357,6 +400,8 @@ func Test_downloadCommand(t *testing.T) {
 }
 
 func Test_configureBool(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name   string
 		config string
@@ -369,6 +414,7 @@ func Test_configureBool(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			configureBool(&tt.flag, tt.config)
 			assert.Equal(t, true, viper.IsSet(tt.config), "Is set")
 			assert.Equal(t, tt.flag, viper.GetBool(tt.config), "ok")

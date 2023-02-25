@@ -125,7 +125,7 @@ linters:
     #- exhaustivestruct
     - exportloopref
     - funlen
-    - forbidigo
+    #- forbidigo
     - forcetypeassert
     - ginkgolinter
     #- gci
