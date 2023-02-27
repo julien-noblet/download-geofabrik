@@ -742,7 +742,7 @@ Total elements: 475
 | catamarca                                | argentina                        | catamarca                                | sPp     |
 | cayman_islands                           | central-america                  | cayman_islands                           | sPp     |
 | ceara                                    | northeast                        | ceara                                    | sPp     |
-| central                                  | uganda                           | central                                  | sPp     |
+| central                                  | tanzania                         | central                                  | sPp     |
 | central-america                          |                                  | central-america                          | sPp     |
 | central-west                             | brazil                           | central-west                             | sPp     |
 | central_african_republic                 | africa                           | central_african_republic                 | sPp     |
@@ -888,7 +888,7 @@ Total elements: 475
 | formosa                                  | argentina                        | formosa                                  | sPp     |
 | france                                   | europe                           | france                                   | sPp     |
 | france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sP      |
-| france_taaf                              | oceania                          | france_taaf                              | sPp     |
+| france_taaf                              | africa                           | france_taaf                              | sPp     |
 | franche_comte                            | france                           | franche_comte                            | sPp     |
 | free_state                               | south_africa                     | free_state                               | sPp     |
 | fresno                                   | california                       | fresno                                   | sPp     |
@@ -1258,18 +1258,18 @@ Total elements: 475
 | north_sea                                | seas                             | north_sea                                | sPp     |
 | north_sulawesi                           | indonesia                        | north_sulawesi                           | sPp     |
 | north_sumatra                            | indonesia                        | north_sumatra                            | sPp     |
-| north_west                               | south_africa                     | north_west                               | sPp     |
+| north_west                               | nigeria                          | north_west                               | sPp     |
 | north_western                            | new_south_wales                  | north_western                            | sPp     |
 | northeast                                | brazil                           | northeast                                | sPp     |
 | northeastern_ontario                     | ontario                          | northeastern_ontario                     | sPp     |
-| northern                                 | uganda                           | northern                                 | sPp     |
+| northern                                 | tanzania                         | northern                                 | sPp     |
 | northern_cape                            | south_africa                     | northern_cape                            | sPp     |
 | northern_ireland                         | united_kingdom                   | northern_ireland                         | sPp     |
 | northern_lower                           | michigan                         | northern_lower                           | sPp     |
 | northern_mariana_islands                 | oceania                          | northern_mariana_islands                 | sPp     |
 | northern_territory                       | australia                        | northern_territory                       | sPp     |
 | northweast                               | georgia                          | northweast                               | sPp     |
-| northwest                                | colorado                         | northwest                                | sPp     |
+| northwest                                | texas                            | northwest                                | sPp     |
 | northwest_territories                    | canada                           | northwest_territories                    | sPp     |
 | northwestern_federal_district            | russia                           | northwestern_federal_district            | sPp     |
 | northwestern_ontario                     | ontario                          | northwestern_ontario                     | sPp     |
@@ -1499,7 +1499,7 @@ Total elements: 475
 | southern_federal_district                | russia                           | southern_federal_district                | sPp     |
 | southern_highlands                       | tanzania                         | southern_highlands                       | sPp     |
 | southern_tier                            | new-york                         | southern_tier                            | sPp     |
-| southwest                                | colorado                         | southwest                                | sPp     |
+| southwest                                | michigan                         | southwest                                | sPp     |
 | southwest_finland                        | finland                          | southwest_finland                        | sPp     |
 | southwest_papua                          | indonesia                        | southwest_papua                          | sPp     |
 | southwestern_ontario                     | ontario                          | southwestern_ontario                     | sPp     |
@@ -1640,7 +1640,7 @@ Total elements: 475
 | wallonia_french_community                | belgium                          | wallonia_french_community                | sPp     |
 | wallonia_german_community                | belgium                          | wallonia_german_community                | sPp     |
 | warminsko_mazurskie                      | poland                           | warminsko_mazurskie                      | sPp     |
-| west                                     | texas                            | west                                     | sPp     |
+| west                                     | michigan                         | west                                     | sPp     |
 | west_bengal                              | india                            | west_bengal                              | sPp     |
 | west_flanders                            | flanders                         | west_flanders                            | sPp     |
 | west_java                                | indonesia                        | west_java                                | sPp     |
@@ -1650,7 +1650,7 @@ Total elements: 475
 | west_papua                               | indonesia                        | west_papua                               | sPp     |
 | west_sulawesi                            | indonesia                        | west_sulawesi                            | sPp     |
 | west_sumatra                             | indonesia                        | west_sumatra                             | sPp     |
-| western                                  | uganda                           | western                                  | sPp     |
+| western                                  | tanzania                         | western                                  | sPp     |
 | western_australia                        | australia                        | western_australia                        | sPp     |
 | western_cape                             | south_africa                     | western_cape                             | sPp     |
 | western_new_york                         | new-york                         | western_new_york                         | sPp     |
