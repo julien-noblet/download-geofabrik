@@ -6,7 +6,7 @@ import (
 
 	"github.com/apex/log"
 	pb "github.com/cheggaaa/pb/v3"
-	"github.com/gocolly/colly"
+	"github.com/gocolly/colly/v2"
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/generator/importer/geofabrik"
 	"github.com/julien-noblet/download-geofabrik/scrapper"
