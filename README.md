@@ -31,47 +31,47 @@ usage: download-geofabrik [<flags>] <command> [<args> ...]
 A command-line tool for downloading OSM files.
 
 Flags:
-      --help                 Show context-sensitive help (also try --help-long
+      --[no-]help            Show context-sensitive help (also try --help-long
                              and --help-man).
       --service="geofabrik"  Can switch to another service. You can use
                              "geofabrik", "openstreetmap.fr" or "bbbike". It
                              automatically change config file if -c is unused.
   -c, --config="./geofabrik.yml"  
                              Set Config file.
-  -n, --nodownload           Do not download file (test only)
-  -v, --verbose              Be verbose
-  -q, --quiet                Be quiet
-      --progress             Add a progress bar (implie quiet)
-      --version              Show application version.
+  -n, --[no-]nodownload      Do not download file (test only)
+  -v, --[no-]verbose         Be verbose
+  -q, --[no-]quiet           Be quiet
+      --[no-]progress        Add a progress bar (implie quiet)
+      --[no-]version         Show application version.
 
 Commands:
-  help [<command>...]
+help [<command>...]
     Show help.
 
 
-  list [<flags>]
+list [<flags>]
     Show elements available
 
-    --markdown  generate list in Markdown format
+    --[no-]markdown  generate list in Markdown format
 
-  download [<flags>] <element>
+download [<flags>] <element>
     Download element
 
-    -B, --osm.bz2  Download osm.bz2 if available
-    -G, --osm.gz   Download osm.gz if available
-    -S, --shp.zip  Download shp.zip if available
-    -P, --osm.pbf  Download osm.pbf (default)
-    -H, --osh.pbf  Download osh.pbf
-    -s, --state    Download state.txt file
-    -p, --poly     Download poly file
-    -k, --kml      Download kml file
-        --check    Control with checksum (default) Use --no-check to discard
-                   control
+    -B, --[no-]osm.bz2  Download osm.bz2 if available
+    -G, --[no-]osm.gz   Download osm.gz if available
+    -S, --[no-]shp.zip  Download shp.zip if available
+    -P, --[no-]osm.pbf  Download osm.pbf (default)
+    -H, --[no-]osh.pbf  Download osh.pbf
+    -s, --[no-]state    Download state.txt file
+    -p, --[no-]poly     Download poly file
+    -k, --[no-]kml      Download kml file
+        --[no-]check    Control with checksum (default) Use --no-check to
+                        discard control
     -d, --output_directory=OUTPUT_DIRECTORY  
-                   Set output directory, you can use also OUTPUT_DIR env
-                   variable
+                        Set output directory, you can use also OUTPUT_DIR env
+                        variable
 
-  generate
+generate
     Generate a new config file
 
 
