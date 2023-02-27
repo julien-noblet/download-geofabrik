@@ -18,9 +18,9 @@ elements:
     files:
     - html
     - txt
+    - poly
     - osm.pbf
     - osm.pbf.md5
     - state
-    - poly
     - ""
 baseURL: https://download.openstreetmap.fr/extracts
