@@ -84,14 +84,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error {
 // Exist check if id is in e.Elements.
 func (config *Config) Exist(id string) bool {
 	config.ElementsMutex.RLock()
-	result := reflect.DeepEqual(config.Elements[id], element.Element{
-		ID:      "",
-		File:    "",
-		Name:    "",
-		Parent:  "",
-		Formats: element.Formats{},
-		Meta:    false,
-	})
+	result := reflect.DeepEqual(config.Elements[id], element.Element{}) //nolint:exhaustruct,lll // TODO : Move config.Elements map[string]Element to maps[string]*Element
 	config.ElementsMutex.RUnlock()
 
 	return !result
