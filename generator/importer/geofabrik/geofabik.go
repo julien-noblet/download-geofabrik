@@ -49,15 +49,15 @@ type IndexElementProperties struct {
 	ID        string            `json:"id"`
 	Name      string            `json:"name"`
 	Parent    string            `json:"parent,omitempty"`
-	Iso3166_1 []string          `json:"iso3166-1:alpha2,omitempty"`
-	Iso3166_2 []string          `json:"iso3166-2,omitempty"`
+	Iso3166_1 []string          `json:"iso3166-1:alpha2,omitempty"` //nolint:tagliatelle // That's geofabrik's field name
+	Iso3166_2 []string          `json:"iso3166-2,omitempty"`        //nolint:tagliatelle // That's geofabrik's field name
 }
 
 // GetIndex download Index and Unmarshall the json.
 func GetIndex(myURL string) (*Index, error) {
-	client := &http.Client{Transport: &http.Transport{
+	client := &http.Client{Transport: &http.Transport{ //nolint:exhaustruct // I'm lazy
 		Proxy: http.ProxyFromEnvironment,
-		DialContext: (&net.Dialer{
+		DialContext: (&net.Dialer{ //nolint:exhaustruct // I'm lazy
 			Timeout:   60 * time.Second, //nolint:gomnd // 60 seconds
 			KeepAlive: 30 * time.Second, //nolint:gomnd // 30 seconds
 			DualStack: true,

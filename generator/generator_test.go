@@ -9,7 +9,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/julien-noblet/download-geofabrik/generator"
-	yaml "gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v3"
 )
 
 func sampleAfricaElementPtr() *element.Element {

@@ -11,14 +11,14 @@ import (
 	"github.com/julien-noblet/download-geofabrik/scrapper"
 )
 
-// Geofabrik Scrapper
+// Geofabrik Scrapper.
 type Geofabrik struct {
 	*scrapper.Scrapper
 }
 
 func GetDefault() *Geofabrik {
 	return &Geofabrik{
-		Scrapper: &scrapper.Scrapper{
+		Scrapper: &scrapper.Scrapper{ //nolint:exhaustruct // I'm lazy
 			PB:             412, //nolint:gomnd // there is 412 items
 			Async:          true,
 			Parallelism:    20, //nolint:gomnd // use 20 threads for scrapping
@@ -44,69 +44,70 @@ func GetDefault() *Geofabrik {
 	}
 }
 
-// Collector represent geofabrik's scrapper
-func (g *Geofabrik) Collector(options ...interface{}) *colly.Collector {
-	c := g.Scrapper.Collector(options)
+// Collector represent geofabrik's scrapper.
+func (g *Geofabrik) Collector() *colly.Collector {
+	c := g.Scrapper.Collector()
 	c.OnHTML("#subregions", func(e *colly.HTMLElement) {
-		g.parseSubregion(e, c)
+		g.ParseSubregion(e, c)
 	})
 	c.OnHTML("#specialsubregions", func(e *colly.HTMLElement) {
-		g.parseSubregion(e, c)
+		g.ParseSubregion(e, c)
 	})
 	c.OnHTML("li", func(e *colly.HTMLElement) {
-		g.parseLi(e, c)
+		g.ParseLi(e, c)
 	})
 
 	return c
 }
 
-func (g *Geofabrik) parseSubregion(e *colly.HTMLElement, c *colly.Collector) {
+//nolint:cyclop // TODO : Refactoring?
+func (g *Geofabrik) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Collector) {
 	e.ForEach("td.subregion", func(_ int, el *colly.HTMLElement) {
 		el.ForEach("a", func(_ int, sub *colly.HTMLElement) {
 			href := sub.Request.AbsoluteURL(sub.Attr("href"))
-			id, extension := scrapper.FileExt(href)
+			myID, extension := scrapper.FileExt(href)
 			var file string
-			if extension == "html" {
-				parent, pp := scrapper.GetParent(href)
-				if id == "georgia" { //nolint:goconst // Georgia is in Europe & US
+			if extension == "html" { //nolint:nestif // TODO : Refactor?
+				parent, parentPath := scrapper.GetParent(href)
+				if myID == "georgia" { //nolint:goconst // Georgia is in Europe & US
 					switch parent {
 					case "us":
-						id = "georgia-us"
+						myID = "georgia-us"
 						file = "georgia"
 					case "europe":
-						id = "georgia-eu"
+						myID = "georgia-eu"
 						file = "georgia"
 					}
 				}
-				if id == "guatemala" && parent == "south-america" { //nolint:goconst // guatemala is also in central-america
-					id = "guatemala-south-america"
+				if myID == "guatemala" && parent == "south-america" { //nolint:goconst // guatemala is also in central-america
+					myID = "guatemala-south-america"
 					file = "guatemala"
 				}
-				el := element.Element{
-					ID:     id,
+				myElement := element.Element{ //nolint:exhaustruct // I'm lazy
+					ID:     myID,
 					Name:   sub.Text,
 					Parent: parent,
 					Meta:   true,
 				}
 				if file != "" {
-					el.File = file
+					myElement.File = file
 				}
 				if !g.Config.Exist(parent) && parent != "" { // Case of parent should exist not already in Slice
-					gparent, _ := scrapper.GetParent(pp)
-					log.Debugf("Create Meta %s parent: %s %v", el.Parent, gparent, pp)
+					gparent, _ := scrapper.GetParent(parentPath)
+					log.Debugf("Create Meta %s parent: %s %v", myElement.Parent, gparent, parentPath)
 
-					if gp := element.MakeParent(&el, gparent); gp != nil {
+					if gp := element.MakeParent(&myElement, gparent); gp != nil {
 						if err := g.Config.MergeElement(gp); err != nil {
-							log.WithError(err).Errorf("can't merge %s", el.Name)
+							log.WithError(err).Errorf("can't merge %s", myElement.Name)
 						}
 					}
 				}
-				if err := g.Config.MergeElement(&el); err != nil {
-					log.WithError(err).Errorf("can't merge %s", el.Name)
+				if err := g.Config.MergeElement(&myElement); err != nil {
+					log.WithError(err).Errorf("can't merge %s", myElement.Name)
 				}
 				log.Debugf("Add: %s", href)
 
-				if err := c.Visit(href); err != nil && !errors.Is(err, colly.ErrAlreadyVisited) {
+				if err := myCollector.Visit(href); err != nil && !errors.Is(err, colly.ErrAlreadyVisited) {
 					log.WithError(err).Error("can't get url")
 				}
 			}
@@ -115,7 +116,7 @@ func (g *Geofabrik) parseSubregion(e *colly.HTMLElement, c *colly.Collector) {
 }
 
 // ParseFormat Add Extension to ID
-// In this case, we add a kml and a state for all .osm.pbf
+// In this case, we add a kml and a state for all .osm.pbf .
 func (g *Geofabrik) ParseFormat(id, format string) {
 	g.Scrapper.ParseFormat(id, format)
 
@@ -125,25 +126,25 @@ func (g *Geofabrik) ParseFormat(id, format string) {
 	}
 }
 
-func (g *Geofabrik) parseLi(e *colly.HTMLElement, c *colly.Collector) { //nolint:unparam,lll // *colly.Collector is passed as param but unused in this case
-	e.ForEach("a", func(_ int, el *colly.HTMLElement) {
-		_, format := scrapper.FileExt(el.Attr("href"))
-		id, _ := scrapper.FileExt(el.Request.URL.String()) // id can't be extracted from href
-		if id == "georgia" {                               // Exception
-			parent, _ := scrapper.GetParent(el.Request.AbsoluteURL(el.Attr("href")))
+func (g *Geofabrik) ParseLi(e *colly.HTMLElement, c *colly.Collector) {
+	e.ForEach("a", func(_ int, element *colly.HTMLElement) {
+		_, format := scrapper.FileExt(element.Attr("href"))
+		myID, _ := scrapper.FileExt(element.Request.URL.String()) // id can't be extracted from href
+		if myID == "georgia" {                                    // Exception
+			parent, _ := scrapper.GetParent(element.Request.AbsoluteURL(element.Attr("href")))
 			switch parent {
 			case "us":
-				id = "georgia-us"
+				myID = "georgia-us"
 			case "europe":
-				id = "georgia-eu"
+				myID = "georgia-eu"
 			}
 		}
-		if id == "guatemala" {
-			parent, _ := scrapper.GetParent(el.Request.AbsoluteURL(el.Attr("href")))
+		if myID == "guatemala" {
+			parent, _ := scrapper.GetParent(element.Request.AbsoluteURL(element.Attr("href")))
 			if parent == "south-america" {
-				id = "guatemala-south-america"
+				myID = "guatemala-south-america"
 			}
 		}
-		g.ParseFormat(id, format)
+		g.ParseFormat(myID, format)
 	})
 }

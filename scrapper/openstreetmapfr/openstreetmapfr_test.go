@@ -1,4 +1,4 @@
-package openstreetmapfr
+package openstreetmapfr_test
 
 import (
 	"net/url"
@@ -12,9 +12,13 @@ import (
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
+	"github.com/julien-noblet/download-geofabrik/scrapper/openstreetmapfr"
 )
 
+//nolint:lll // this func contain html extracts
 func TestOpenstreetmapFR_parse(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name    string
 		html    string
@@ -72,40 +76,42 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 		},
 		// TODO: Add test cases.
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(tt.html))
-			u, _ := url.Parse(tt.url)
-			e := &colly.HTMLElement{
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(thisTest.html))
+			myURL, _ := url.Parse(thisTest.url)
+			myElement := &colly.HTMLElement{
 				DOM: dom.Selection,
 				Response: &colly.Response{
-					Request: &colly.Request{URL: u},
+					Request: &colly.Request{URL: myURL},
 				},
 			}
-			o := GetDefault()
-			c := o.Collector() // Need a Collector to visit
+			myOpenstreetmapFR := openstreetmapfr.GetDefault()
+			myCollector := myOpenstreetmapFR.Collector() // Need a Collector to visit
 
-			if len(tt.element) > 0 {
-				for _, el := range tt.element {
+			if len(thisTest.element) > 0 {
+				for _, el := range thisTest.element {
 					el := el
-					if err := o.Config.MergeElement(&el); err != nil {
+					if err := myOpenstreetmapFR.Config.MergeElement(&el); err != nil {
 						t.Errorf("Bad tests o.Config.mergeElement() can't merge %#v - %v", el, err)
 					}
 				}
 			}
-			e.ForEach("a", func(_ int, elmt *colly.HTMLElement) {
-				o.parse(elmt, c)
+			myElement.ForEach("a", func(_ int, elmt *colly.HTMLElement) {
+				myOpenstreetmapFR.Parse(elmt, myCollector)
 			})
 
-			if !reflect.DeepEqual(o.Config.Elements, tt.want) {
-				t.Errorf("parse() fail, got %#v,\n want %#v", o.Config.Elements, tt.want)
+			if !reflect.DeepEqual(myOpenstreetmapFR.Config.Elements, thisTest.want) {
+				t.Errorf("parse() fail, got %#v,\n want %#v", myOpenstreetmapFR.Config.Elements, thisTest.want)
 			}
 		})
 	}
 }
 
-var openstreetmapFRtests = []struct {
+var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 	name    string
 	href    string
 	c       config.Config
@@ -284,35 +290,51 @@ var openstreetmapFRtests = []struct {
 }
 
 func TestOpenstreetmapFR_parseHref(t *testing.T) {
-	for tn := range openstreetmapFRtests {
-		tn := tn
-		o := GetDefault()
-		o.Config = &openstreetmapFRtests[tn].c
-		t.Run(openstreetmapFRtests[tn].name, func(t *testing.T) {
-			o.parseHref(openstreetmapFRtests[tn].href)
-			if !reflect.DeepEqual(openstreetmapFRtests[tn].c.Elements, openstreetmapFRtests[tn].want) {
-				t.Errorf("parseHref() = \n%#v len:%d, want \n%#v len:%d\n", openstreetmapFRtests[tn].c.Elements, len(openstreetmapFRtests[tn].c.Elements), openstreetmapFRtests[tn].want, len(openstreetmapFRtests[tn].want))
+	t.Parallel()
+
+	for thisTest := range openstreetmapFRtests {
+		thisTest := thisTest
+		myOpenstreetmapFR := openstreetmapfr.GetDefault()
+		myOpenstreetmapFR.Config = &openstreetmapFRtests[thisTest].c
+		t.Run(openstreetmapFRtests[thisTest].name, func(t *testing.T) {
+			t.Parallel()
+
+			myOpenstreetmapFR.ParseHref(openstreetmapFRtests[thisTest].href)
+			if !reflect.DeepEqual(openstreetmapFRtests[thisTest].c.Elements, openstreetmapFRtests[thisTest].want) {
+				t.Errorf(
+					"parseHref() = \n%#v len:%d, want \n%#v len:%d\n",
+					openstreetmapFRtests[thisTest].c.Elements,
+					len(openstreetmapFRtests[thisTest].c.Elements),
+					openstreetmapFRtests[thisTest].want,
+					len(openstreetmapFRtests[thisTest].want),
+				)
 			}
 		})
 	}
 }
 
 func Test_openstreetmapFRGetParent(t *testing.T) {
-	for tn := range openstreetmapFRtests {
-		tn := tn
-		t.Run(openstreetmapFRtests[tn].name, func(t *testing.T) {
-			p, ps := openstreetmapFRGetParent(openstreetmapFRtests[tn].href)
-			if !reflect.DeepEqual(p, openstreetmapFRtests[tn].parent) {
-				t.Errorf("openstreetmapFRGetParent() = %v want %v ", p, openstreetmapFRtests[tn].parent)
+	t.Parallel()
+
+	for thisTest := range openstreetmapFRtests {
+		ThisTest := thisTest
+		t.Run(openstreetmapFRtests[ThisTest].name, func(t *testing.T) {
+			t.Parallel()
+
+			p, ps := openstreetmapfr.GetParent(openstreetmapFRtests[ThisTest].href)
+			if !reflect.DeepEqual(p, openstreetmapFRtests[ThisTest].parent) {
+				t.Errorf("openstreetmapFRGetParent() = %v want %v ", p, openstreetmapFRtests[ThisTest].parent)
 			}
-			if !reflect.DeepEqual(ps, openstreetmapFRtests[tn].parents) {
-				t.Errorf("openstreetmapFRGetParent() = %v want %v ", ps, openstreetmapFRtests[tn].parents)
+			if !reflect.DeepEqual(ps, openstreetmapFRtests[ThisTest].parents) {
+				t.Errorf("openstreetmapFRGetParent() = %v want %v ", ps, openstreetmapFRtests[ThisTest].parents)
 			}
 		})
 	}
 }
 
 func TestOpenstreetmapFR_makeParents(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		elements element.Slice
 		want     element.Slice
@@ -362,22 +384,24 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 			},
 		},
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			o := GetDefault()
-			o.GetConfig()
-			if len(tt.elements) > 0 {
-				for _, e := range tt.elements {
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			myOpenstreetmapFR := openstreetmapfr.GetDefault()
+			myOpenstreetmapFR.GetConfig()
+			if len(thisTest.elements) > 0 {
+				for _, e := range thisTest.elements {
 					e := e
-					if err := o.Config.MergeElement(&e); err != nil {
+					if err := myOpenstreetmapFR.Config.MergeElement(&e); err != nil {
 						t.Error(err)
 					}
 				}
 			}
-			o.makeParents(tt.parent, tt.gparents)
-			if !reflect.DeepEqual(o.Config.Elements, tt.want) {
-				t.Errorf("makeParent() fail: got\n %#v,\n want \n %#v.\n", o.Config.Elements, tt.want)
+			myOpenstreetmapFR.MakeParents(thisTest.parent, thisTest.gparents)
+			if !reflect.DeepEqual(myOpenstreetmapFR.Config.Elements, thisTest.want) {
+				t.Errorf("makeParent() fail: got\n %#v,\n want \n %#v.\n", myOpenstreetmapFR.Config.Elements, thisTest.want)
 			}
 		})
 	}

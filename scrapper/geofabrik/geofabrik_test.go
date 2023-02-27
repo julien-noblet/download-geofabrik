@@ -1,4 +1,4 @@
-package geofabrik
+package geofabrik_test
 
 import (
 	"net/url"
@@ -13,9 +13,12 @@ import (
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/julien-noblet/download-geofabrik/scrapper"
+	"github.com/julien-noblet/download-geofabrik/scrapper/geofabrik"
 )
 
 func Test_geofabrikParseFormat(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		id     string
 		format string
@@ -263,12 +266,14 @@ func Test_geofabrikParseFormat(t *testing.T) {
 		},
 	}
 
-	for tn := range tests {
-		tn := tn
-		t.Run(tests[tn].name, func(t *testing.T) {
-			s := Geofabrik{Scrapper: &scrapper.Scrapper{}}
-			s.Scrapper.Config = &tests[tn].args.c
-			s.Scrapper.Config.Formats = formats.FormatDefinitions{
+	for thisTest := range tests {
+		thisTest := thisTest
+		t.Run(tests[thisTest].name, func(t *testing.T) {
+			t.Parallel()
+
+			myScrapper := geofabrik.Geofabrik{Scrapper: &scrapper.Scrapper{}}
+			myScrapper.Scrapper.Config = &tests[thisTest].args.c
+			myScrapper.Scrapper.Config.Formats = formats.FormatDefinitions{
 				formats.FormatOshPbf: {ID: formats.FormatOshPbf, Loc: ".osh.pbf"},
 				"osh.pbf.md5":        {ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
 				formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
@@ -281,15 +286,17 @@ func Test_geofabrikParseFormat(t *testing.T) {
 				formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: "-latest-free.shp.zip"},
 			}
 
-			s.ParseFormat(tests[tn].args.id, tests[tn].args.format)
-			if !reflect.DeepEqual(tests[tn].args.c.Elements, tests[tn].want) {
-				t.Errorf("ParseFormat() got %v, want %v", tests[tn].args.c.Elements, tests[tn].want)
+			myScrapper.ParseFormat(tests[thisTest].args.id, tests[thisTest].args.format)
+			if !reflect.DeepEqual(tests[thisTest].args.c.Elements, tests[thisTest].want) {
+				t.Errorf("ParseFormat() got %v, want %v", tests[thisTest].args.c.Elements, tests[thisTest].want)
 			}
 		})
 	}
 }
 
 func TestGeofabrik_parseLi(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		want    element.Slice
 		element *element.Element
@@ -355,31 +362,36 @@ func TestGeofabrik_parseLi(t *testing.T) {
 		},
 		// TODO: Add test cases.
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(tt.html))
-			u, _ := url.Parse(tt.url)
-			e := &colly.HTMLElement{
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(thisTest.html))
+			myURL, _ := url.Parse(thisTest.url)
+			myElement := &colly.HTMLElement{
 				DOM: dom.Selection,
 				Response: &colly.Response{
-					Request: &colly.Request{URL: u},
+					Request: &colly.Request{URL: myURL},
 				},
 			}
-			g := GetDefault()
-			g.GetConfig()
-			if err := g.Config.MergeElement(tt.element); err != nil {
-				t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", tt.element, err)
+			defaultGeofabrik := geofabrik.GetDefault()
+			defaultGeofabrik.GetConfig()
+			if err := defaultGeofabrik.Config.MergeElement(thisTest.element); err != nil {
+				t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", thisTest.element, err)
 			}
-			g.parseLi(e, nil)
-			if !reflect.DeepEqual(g.Config.Elements, tt.want) {
-				t.Errorf("parseLi() fail, got %v, want %v", g.Config.Elements, tt.want)
+			defaultGeofabrik.ParseLi(myElement, nil)
+			if !reflect.DeepEqual(defaultGeofabrik.Config.Elements, thisTest.want) {
+				t.Errorf("parseLi() fail, got %v, want %v", defaultGeofabrik.Config.Elements, thisTest.want)
 			}
 		})
 	}
 }
 
+//nolint:lll // this func contain html extracts
 func TestGeofabrik_parseSubregion(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		want     element.Slice
 		elements *element.Slice
@@ -537,31 +549,33 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 
 		// TODO: Add test cases.
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(tt.html))
-			u, _ := url.Parse(tt.url)
-			e := &colly.HTMLElement{
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(thisTest.html))
+			myURL, _ := url.Parse(thisTest.url)
+			myElement := &colly.HTMLElement{
 				DOM: dom.Selection,
 				Response: &colly.Response{
-					Request: &colly.Request{URL: u},
+					Request: &colly.Request{URL: myURL},
 				},
-				Request: &colly.Request{URL: u},
+				Request: &colly.Request{URL: myURL},
 			}
 
-			g := GetDefault()
+			defaultGeofabrik := geofabrik.GetDefault()
 
-			c := g.Collector() // Need a Collector to visit
-			for _, elemem := range *tt.elements {
+			myCollector := defaultGeofabrik.Collector() // Need a Collector to visit
+			for _, elemem := range *thisTest.elements {
 				elemem := elemem
-				if err := g.Config.MergeElement(&elemem); err != nil {
+				if err := defaultGeofabrik.Config.MergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}
 			}
-			g.parseSubregion(e, c)
-			if !reflect.DeepEqual(g.Config.Elements, tt.want) {
-				t.Errorf("parseSubregion() fail, got \n%v, want \n%v", g.Config.Elements, tt.want)
+			defaultGeofabrik.ParseSubregion(myElement, myCollector)
+			if !reflect.DeepEqual(defaultGeofabrik.Config.Elements, thisTest.want) {
+				t.Errorf("parseSubregion() fail, got \n%v, want \n%v", defaultGeofabrik.Config.Elements, thisTest.want)
 			}
 		})
 	}

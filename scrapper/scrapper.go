@@ -19,7 +19,7 @@ import (
 // IScrapper represent a colly Scrapper.
 type IScrapper interface {
 	GetConfig() *config.Config
-	Collector(options ...interface{}) *colly.Collector
+	Collector() *colly.Collector
 	Limit() *colly.LimitRule
 	GetPB() int
 	GetStartURL() string
@@ -46,7 +46,7 @@ type Scrapper struct {
 // GetConfig init a *config.Config from fields.
 func (s *Scrapper) GetConfig() *config.Config {
 	if s.Config == nil {
-		s.Config = &config.Config{
+		s.Config = &config.Config{ //nolint:exhaustruct // I'm lazy
 			Elements:      element.Slice{}, // should be void
 			ElementsMutex: &sync.RWMutex{}, // initialize a new Mutex
 		}
@@ -77,7 +77,7 @@ func (s *Scrapper) Limit() *colly.LimitRule {
 		s.RandomDelay = 5 * time.Second //nolint:gomnd // Use 5 seconds as random delay
 	}
 
-	return &colly.LimitRule{
+	return &colly.LimitRule{ //nolint:exhaustruct // I'm lazy
 		DomainGlob:  s.DomainGlob,
 		Parallelism: s.Parallelism,
 		RandomDelay: s.RandomDelay,
@@ -85,7 +85,7 @@ func (s *Scrapper) Limit() *colly.LimitRule {
 }
 
 // Collector *colly.Collector Init Collector.
-func (s *Scrapper) Collector(options ...interface{}) *colly.Collector { //nolint:unparam,lll // *colly.Collector is passed as param but unused in this case
+func (s *Scrapper) Collector(options ...interface{}) *colly.Collector {
 	myCollector := colly.NewCollector(
 		colly.AllowedDomains(s.AllowedDomains...),
 		colly.URLFilters(s.URLFilters...),
@@ -97,9 +97,9 @@ func (s *Scrapper) Collector(options ...interface{}) *colly.Collector { //nolint
 		myCollector.SetRequestTimeout(*s.Timeout)
 	}
 
-	myCollector.WithTransport(&http.Transport{
+	myCollector.WithTransport(&http.Transport{ //nolint:exhaustruct // I'm lazy
 		Proxy: http.ProxyFromEnvironment,
-		DialContext: (&net.Dialer{
+		DialContext: (&net.Dialer{ //nolint:exhaustruct // I'm lazy
 			Timeout:   60 * time.Second, //nolint:gomnd // Use 60 seconds as default timeout
 			KeepAlive: 30 * time.Second, //nolint:gomnd // Use 30 seconds as default KeepAlive
 			DualStack: true,
@@ -146,7 +146,7 @@ func (s *Scrapper) ParseFormat(id, format string) {
 }
 
 // FileExt return filename, ext.
-func FileExt(url string) (filename, extension string) {
+func FileExt(url string) (filename, extension string) { //nolint:nonamedreturns // better for documentation
 	urls := strings.Split(url, "/") // Todo: Try with regexp?
 	f := strings.Split(urls[len(urls)-1], ".")
 
@@ -154,7 +154,7 @@ func FileExt(url string) (filename, extension string) {
 }
 
 // GetParent return filename, path.
-func GetParent(url string) (filename, path string) {
+func GetParent(url string) (filename, path string) { //nolint:nonamedreturns // better for documentation
 	r := strings.Split(url, "/")
 	if len(r) < 5 { //nolint:gomnd // <4 should be impossible
 		return "", strings.Join(r[:len(r)-1], "/")

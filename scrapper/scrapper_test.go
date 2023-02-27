@@ -1,6 +1,7 @@
-package scrapper
+package scrapper_test
 
 import (
+	"fmt"
 	"math/rand"
 	"reflect"
 	"sync"
@@ -11,9 +12,12 @@ import (
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
+	"github.com/julien-noblet/download-geofabrik/scrapper"
 )
 
 func TestGetParent(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name  string
 		url   string
@@ -21,26 +25,50 @@ func TestGetParent(t *testing.T) {
 		want2 string
 	}{
 		// TODO: Add test cases.
-		{name: "No Parent", url: "https://download.geofabrik.de/test.html", want: "", want2: "https://download.geofabrik.de"},
-		{name: "1 parent", url: "https://download.geofabrik.de/parent1/test.html", want: "parent1", want2: "https://download.geofabrik.de/parent1"},
-		{name: "2 parents", url: "https://download.geofabrik.de/parent1/parent2/test.html", want: "parent2", want2: "https://download.geofabrik.de/parent1/parent2"},
-		{name: "grand parents", url: "https://download.geofabrik.de/parent1/parent2", want: "parent1", want2: "https://download.geofabrik.de/parent1"},
+		{
+			name:  "No Parent",
+			url:   "https://download.geofabrik.de/test.html",
+			want:  "",
+			want2: "https://download.geofabrik.de",
+		},
+		{
+			name:  "1 parent",
+			url:   "https://download.geofabrik.de/parent1/test.html",
+			want:  "parent1",
+			want2: "https://download.geofabrik.de/parent1",
+		},
+		{
+			name:  "2 parents",
+			url:   "https://download.geofabrik.de/parent1/parent2/test.html",
+			want:  "parent2",
+			want2: "https://download.geofabrik.de/parent1/parent2",
+		},
+		{
+			name:  "grand parents",
+			url:   "https://download.geofabrik.de/parent1/parent2",
+			want:  "parent1",
+			want2: "https://download.geofabrik.de/parent1",
+		},
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			got, got2 := GetParent(tt.url)
-			if got != tt.want {
-				t.Errorf("GetParent() = %v, want %v", got, tt.want)
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			got, got2 := scrapper.GetParent(thisTest.url)
+			if got != thisTest.want {
+				t.Errorf("GetParent() = %v, want %v", got, thisTest.want)
 			}
-			if got2 != tt.want2 {
-				t.Errorf("GetParent() = %v, want %v", got2, tt.want2)
+			if got2 != thisTest.want2 {
+				t.Errorf("GetParent() = %v, want %v", got2, thisTest.want2)
 			}
 		})
 	}
 }
 
 func Test_FileExt(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name  string
 		url   string
@@ -53,21 +81,25 @@ func Test_FileExt(t *testing.T) {
 		{name: "1 Parent", url: "https://download.geofabrik.de/parent/test.html", want: "test", want2: "html"},
 		{name: "1 Parent long ext", url: "https://download.geofabrik.de/parent/test.ext.html", want: "test", want2: "ext.html"},
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			got, ext := FileExt(tt.url)
-			if got != tt.want {
-				t.Errorf("FileExt() = %v, want %v", got, tt.want)
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			got, ext := scrapper.FileExt(thisTest.url)
+			if got != thisTest.want {
+				t.Errorf("FileExt() = %v, want %v", got, thisTest.want)
 			}
-			if ext != tt.want2 {
-				t.Errorf("FileExt() = %v, want %v", ext, tt.want2)
+			if ext != thisTest.want2 {
+				t.Errorf("FileExt() = %v, want %v", ext, thisTest.want2)
 			}
 		})
 	}
 }
 
 func Test_ParseFormat(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		id     string
 		format string
@@ -314,13 +346,15 @@ func Test_ParseFormat(t *testing.T) {
 			},
 		},
 	}
-	for tn := range tests {
-		tn := tn
-		t.Run(tests[tn].name, func(t *testing.T) {
-			s := Scrapper{
-				Config: &tests[tn].args.c,
+	for thisTest := range tests {
+		thisTest := thisTest
+		t.Run(tests[thisTest].name, func(t *testing.T) {
+			t.Parallel()
+
+			myScrapper := scrapper.Scrapper{
+				Config: &tests[thisTest].args.c,
 			}
-			s.Config.Formats = formats.FormatDefinitions{
+			myScrapper.Config.Formats = formats.FormatDefinitions{
 				formats.FormatOshPbf: {ID: formats.FormatOshPbf, Loc: ".osh.pbf"},
 				"osh.pbf.md5":        formats.Format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
 				formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
@@ -333,43 +367,54 @@ func Test_ParseFormat(t *testing.T) {
 				formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: "-latest-free.shp.zip"},
 			}
 
-			s.ParseFormat(tests[tn].args.id, tests[tn].args.format)
-			if !reflect.DeepEqual(tests[tn].args.c.Elements, tests[tn].want) {
-				t.Errorf("ParseFormat() got %v, want %v", tests[tn].args.c.Elements, tests[tn].want)
+			myScrapper.ParseFormat(tests[thisTest].args.id, tests[thisTest].args.format)
+			if !reflect.DeepEqual(tests[thisTest].args.c.Elements, tests[thisTest].want) {
+				t.Errorf("ParseFormat() got %v, want %v", tests[thisTest].args.c.Elements, tests[thisTest].want)
 			}
 		})
 	}
 }
 
 func TestScrapper_PB(t *testing.T) {
+	t.Parallel()
+
 	for i := 0; i < 10; i++ {
 		want := rand.Int() //nolint:gosec // I assume rand.Int() isn't safe but it's enough for testing
-		s := Scrapper{
+		myScrapper := scrapper.Scrapper{
 			PB: want,
 		}
 
-		out := s.GetPB()
-		if out != want {
-			t.Errorf("GetPB() got %d, want %d", out, want)
-		}
+		t.Run(fmt.Sprintf("PB: %d", want), func(t *testing.T) {
+			t.Parallel()
+			out := myScrapper.GetPB()
+			if out != want {
+				t.Errorf("GetPB() got %d, want %d", out, want)
+			}
+		})
 	}
 }
 
 func TestScrapper_GetStartURL(t *testing.T) {
+	t.Parallel()
+
 	const charset = "abcdefghijklmnopqrstuvwxyz" +
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" + "\\/?."
 
 	for i := 0; i < 1024; i++ {
 		seededRand := rand.New(rand.NewSource(time.Now().UnixNano())) //nolint:gosec // I assume rand isn't safe but it's enough for testing
 		want := stringWithCharset(seededRand, i, charset)
-		s := Scrapper{
+		myScrapper := scrapper.Scrapper{
 			StartURL: want,
 		}
 
-		out := s.GetStartURL()
-		if out != want {
-			t.Errorf("GetStartURL() got %v, want %v", out, want)
-		}
+		t.Run(fmt.Sprintf("StartURL: %s", want), func(t *testing.T) {
+			t.Parallel()
+
+			out := myScrapper.GetStartURL()
+			if out != want {
+				t.Errorf("GetStartURL() got %v, want %v", out, want)
+			}
+		})
 	}
 }
 
@@ -383,52 +428,58 @@ func stringWithCharset(seededRand *rand.Rand, length int, charset string) string
 }
 
 func TestScrapper_Limit(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name   string
 		want   *colly.LimitRule
-		fields Scrapper
+		fields scrapper.Scrapper
 	}{
 		// TODO: Add test cases.
 		{
 			name:   "Default",
-			fields: Scrapper{DomainGlob: "*", Parallelism: 1, RandomDelay: 5 * time.Second},
+			fields: scrapper.Scrapper{DomainGlob: "*", Parallelism: 1, RandomDelay: 5 * time.Second},
 			want:   &colly.LimitRule{DomainGlob: "*", Parallelism: 1, RandomDelay: 5 * time.Second},
 		},
 		{
 			name:   "Void",
-			fields: Scrapper{},
+			fields: scrapper.Scrapper{},
 			want:   &colly.LimitRule{DomainGlob: "*", Parallelism: 1, RandomDelay: 5 * time.Second},
 		},
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			s := &Scrapper{
-				BaseURL:          tt.fields.BaseURL,
-				StartURL:         tt.fields.StartURL,
-				Config:           tt.fields.Config,
-				PB:               tt.fields.PB,
-				Async:            tt.fields.Async,
-				DomainGlob:       tt.fields.DomainGlob,
-				Parallelism:      tt.fields.Parallelism,
-				RandomDelay:      tt.fields.RandomDelay,
-				MaxDepth:         tt.fields.MaxDepth,
-				AllowedDomains:   tt.fields.AllowedDomains,
-				URLFilters:       tt.fields.URLFilters,
-				FormatDefinition: tt.fields.FormatDefinition,
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			myScrapper := &scrapper.Scrapper{
+				BaseURL:          thisTest.fields.BaseURL,
+				StartURL:         thisTest.fields.StartURL,
+				Config:           thisTest.fields.Config,
+				PB:               thisTest.fields.PB,
+				Async:            thisTest.fields.Async,
+				DomainGlob:       thisTest.fields.DomainGlob,
+				Parallelism:      thisTest.fields.Parallelism,
+				RandomDelay:      thisTest.fields.RandomDelay,
+				MaxDepth:         thisTest.fields.MaxDepth,
+				AllowedDomains:   thisTest.fields.AllowedDomains,
+				URLFilters:       thisTest.fields.URLFilters,
+				FormatDefinition: thisTest.fields.FormatDefinition,
 			}
-			if got := s.Limit(); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Scrapper.Limit() = %v, want %v", got, tt.want)
+			if got := myScrapper.Limit(); !reflect.DeepEqual(got, thisTest.want) {
+				t.Errorf("Scrapper.Limit() = %v, want %v", got, thisTest.want)
 			}
 		})
 	}
 }
 
 func TestScrapper_GetConfig(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name   string
 		want   *config.Config
-		fields Scrapper
+		fields scrapper.Scrapper
 	}{
 		// TODO: Add test cases.
 		{
@@ -437,17 +488,21 @@ func TestScrapper_GetConfig(t *testing.T) {
 		},
 		{
 			name:   "Void + BaseURL",
-			fields: Scrapper{BaseURL: "http://my.url"},
+			fields: scrapper.Scrapper{BaseURL: "http://my.url"},
 			want:   &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}, BaseURL: "http://my.url"},
 		},
 		{
 			name:   "Void + FormatDefinition",
-			fields: Scrapper{FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}}},
-			want:   &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}, Formats: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}}},
+			fields: scrapper.Scrapper{FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}}},
+			want: &config.Config{
+				Elements:      element.Slice{},
+				ElementsMutex: &sync.RWMutex{},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
+			},
 		},
 		{
 			name: "Void + BaseURL",
-			fields: Scrapper{
+			fields: scrapper.Scrapper{
 				BaseURL:          "http://my.url",
 				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
@@ -460,7 +515,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 		},
 		{
 			name: "Config Exist",
-			fields: Scrapper{
+			fields: scrapper.Scrapper{
 				Config: &config.Config{
 					Elements: element.Slice{
 						"a": element.Element{ID: "a"},
@@ -481,7 +536,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 		},
 		{
 			name: "Config Exist+ Base URL",
-			fields: Scrapper{
+			fields: scrapper.Scrapper{
 				BaseURL: "http://my.url",
 				Config: &config.Config{
 					Elements: element.Slice{
@@ -503,7 +558,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 		},
 		{
 			name: "Config Exist+ Base URL + Format Definition",
-			fields: Scrapper{
+			fields: scrapper.Scrapper{
 				BaseURL: "http://my.url",
 				Config: &config.Config{
 					Elements: element.Slice{
@@ -525,16 +580,19 @@ func TestScrapper_GetConfig(t *testing.T) {
 			},
 		},
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			s := &Scrapper{
-				BaseURL:          tt.fields.BaseURL,
-				Config:           tt.fields.Config,
-				FormatDefinition: tt.fields.FormatDefinition,
+	for _, thisTest := range tests {
+		thisTest := thisTest
+
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			s := &scrapper.Scrapper{
+				BaseURL:          thisTest.fields.BaseURL,
+				Config:           thisTest.fields.Config,
+				FormatDefinition: thisTest.fields.FormatDefinition,
 			}
-			if got := s.GetConfig(); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Scrapper.GetConfig() = %v, want %v", got, tt.want)
+			if got := s.GetConfig(); !reflect.DeepEqual(got, thisTest.want) {
+				t.Errorf("Scrapper.GetConfig() = %v, want %v", got, thisTest.want)
 			}
 		})
 	}

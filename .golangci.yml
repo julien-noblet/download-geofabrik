@@ -167,7 +167,7 @@ linters:
     - nilerr
     - nilnil
     - nlreturn
-    - noctx
+    #- noctx
     - nolintlint
     - nonamedreturns
     - nosprintfhostport
@@ -222,3 +222,5 @@ issues:
         - cyclop
         - funlen
         - exhaustruct
+        - maintidx
+        - dupl

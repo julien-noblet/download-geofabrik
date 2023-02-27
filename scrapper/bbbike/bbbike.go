@@ -11,14 +11,14 @@ import (
 	"github.com/julien-noblet/download-geofabrik/scrapper"
 )
 
-// Bbbike Scrapper
+// Bbbike Scrapper.
 type Bbbike struct {
 	*scrapper.Scrapper
 }
 
 func GetDefault() *Bbbike {
 	return &Bbbike{
-		Scrapper: &scrapper.Scrapper{
+		Scrapper: &scrapper.Scrapper{ //nolint:exhaustruct // I'm lazy
 			PB:             236, //nolint:gomnd // there is 236 element at this time
 			Async:          true,
 			Parallelism:    20, //nolint:gomnd // Use 20 threads for scraping
@@ -40,20 +40,20 @@ func GetDefault() *Bbbike {
 	}
 }
 
-// Collector represent geofabrik's scrapper
-func (b *Bbbike) Collector(options ...interface{}) *colly.Collector {
-	c := b.Scrapper.Collector(options)
+// Collector represent geofabrik's scrapper.
+func (b *Bbbike) Collector() *colly.Collector {
+	c := b.Scrapper.Collector()
 	c.OnHTML("div.list tbody", func(e *colly.HTMLElement) {
-		b.parseList(e, c)
+		b.ParseList(e, c)
 	})
 	c.OnHTML("#sidebar", func(e *colly.HTMLElement) {
-		b.parseSidebar(e, c)
+		b.ParseSidebar(e, c)
 	})
 
 	return c
 }
 
-func (b *Bbbike) parseList(e *colly.HTMLElement, c *colly.Collector) {
+func (b *Bbbike) ParseList(e *colly.HTMLElement, c *colly.Collector) {
 	e.ForEach("a", func(_ int, el *colly.HTMLElement) {
 		href := el.Request.AbsoluteURL(el.Attr("href"))
 		log.Debugf("Parse: %s", href)
@@ -64,15 +64,15 @@ func (b *Bbbike) parseList(e *colly.HTMLElement, c *colly.Collector) {
 	})
 }
 
-func bbbikeGetName(h3 string) string {
+func GetName(h3 string) string {
 	ret := h3[17:] // remove "OSM extracts for "
 
 	return ret
 }
 
-func (b *Bbbike) parseSidebar(e *colly.HTMLElement, c *colly.Collector) { //nolint:unparam,lll // *colly.Collector is passed as param but unused in this case
-	name := bbbikeGetName(e.ChildText("h3"))
-	el := element.Element{
+func (b *Bbbike) ParseSidebar(e *colly.HTMLElement, c *colly.Collector) {
+	name := GetName(e.ChildText("h3"))
+	myElement := element.Element{
 		ID:     name,
 		Name:   name,
 		File:   name + "/" + name,
@@ -87,7 +87,7 @@ func (b *Bbbike) parseSidebar(e *colly.HTMLElement, c *colly.Collector) { //noli
 
 	log.Debugf("Add %s", name)
 
-	if err := b.Config.MergeElement(&el); err != nil {
-		log.WithError(err).Errorf("can't merge %s", el.Name)
+	if err := b.Config.MergeElement(&myElement); err != nil {
+		log.WithError(err).Errorf("can't merge %s", myElement.Name)
 	}
 }

@@ -1,4 +1,4 @@
-package bbbike
+package bbbike_test
 
 import (
 	"net/url"
@@ -10,9 +10,12 @@ import (
 	"github.com/gocolly/colly"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
+	"github.com/julien-noblet/download-geofabrik/scrapper/bbbike"
 )
 
 func Test_bbbike_getName(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name string
 		h3   string
@@ -21,17 +24,22 @@ func Test_bbbike_getName(t *testing.T) {
 		// TODO: Add test cases.
 		{name: "Valid", h3: "OSM extracts for Test", want: "Test"},
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			if got := bbbikeGetName(tt.h3); got != tt.want {
-				t.Errorf("bbbikeGetName() = %v, want %v", got, tt.want)
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			if got := bbbike.GetName(thisTest.h3); got != thisTest.want {
+				t.Errorf("bbbikeGetName() = %v, want %v", got, thisTest.want)
 			}
 		})
 	}
 }
 
+//nolint:lll // this func contain html extracts
 func Test_bbbike_parseList(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		elements *element.Slice
 		want     element.Slice
@@ -287,36 +295,41 @@ func Test_bbbike_parseList(t *testing.T) {
 
 		// TODO: Add test cases.
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(tt.html))
-			u, _ := url.Parse(tt.url)
-			e := &colly.HTMLElement{
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(thisTest.html))
+			myURL, _ := url.Parse(thisTest.url)
+			myElement := &colly.HTMLElement{
 				DOM: dom.Selection,
 				Response: &colly.Response{
-					Request: &colly.Request{URL: u},
+					Request: &colly.Request{URL: myURL},
 				},
-				Request: &colly.Request{URL: u},
+				Request: &colly.Request{URL: myURL},
 			}
 
-			b := GetDefault()
-			c := b.Collector() // Need a Collector to visit
-			for _, elemem := range *tt.elements {
+			defaultbbbike := bbbike.GetDefault()
+			myCollector := defaultbbbike.Collector() // Need a Collector to visit
+			for _, elemem := range *thisTest.elements {
 				elemem := elemem
-				if err := b.Config.MergeElement(&elemem); err != nil {
+				if err := defaultbbbike.Config.MergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}
 			}
-			b.parseList(e, c)
-			if !reflect.DeepEqual(b.Config.Elements, tt.want) {
-				t.Errorf("parseSubregion() fail, got \n%v, want \n%v", b.Config.Elements, tt.want)
+			defaultbbbike.ParseList(myElement, myCollector)
+			if !reflect.DeepEqual(defaultbbbike.Config.Elements, thisTest.want) {
+				t.Errorf("parseSubregion() fail, got \n%v, want \n%v", defaultbbbike.Config.Elements, thisTest.want)
 			}
 		})
 	}
 }
 
+//nolint:lll // this func contain html extracts
 func Test_bbbike_parseSidebar(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		elements *element.Slice
 		want     element.Slice
@@ -402,30 +415,32 @@ func Test_bbbike_parseSidebar(t *testing.T) {
 
 		// TODO: Add test cases.
 	}
-	for _, tt := range tests {
-		tt := tt
-		t.Run(tt.name, func(t *testing.T) {
-			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(tt.html))
-			u, _ := url.Parse(tt.url)
-			e := &colly.HTMLElement{
+	for _, thisTest := range tests {
+		thisTest := thisTest
+		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			dom, _ := goquery.NewDocumentFromReader(strings.NewReader(thisTest.html))
+			myURL, _ := url.Parse(thisTest.url)
+			myElement := &colly.HTMLElement{
 				DOM: dom.Selection,
 				Response: &colly.Response{
-					Request: &colly.Request{URL: u},
+					Request: &colly.Request{URL: myURL},
 				},
-				Request: &colly.Request{URL: u},
+				Request: &colly.Request{URL: myURL},
 			}
 
-			b := GetDefault()
-			c := b.Collector() // Need a Collector to visit
-			for _, elemem := range *tt.elements {
+			defaultBbbike := bbbike.GetDefault()
+			myCollector := defaultBbbike.Collector() // Need a Collector to visit
+			for _, elemem := range *thisTest.elements {
 				elemem := elemem
-				if err := b.Config.MergeElement(&elemem); err != nil {
+				if err := defaultBbbike.Config.MergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}
 			}
-			b.parseSidebar(e, c)
-			if !reflect.DeepEqual(b.Config.Elements, tt.want) {
-				t.Errorf("parseSubregion() fail, got \n%v, want \n%v", b.Config.Elements, tt.want)
+			defaultBbbike.ParseSidebar(myElement, myCollector)
+			if !reflect.DeepEqual(defaultBbbike.Config.Elements, thisTest.want) {
+				t.Errorf("parseSubregion() fail, got \n%v, want \n%v", defaultBbbike.Config.Elements, thisTest.want)
 			}
 		})
 	}
