@@ -12,9 +12,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+//nolint:paralleltest // Can't be parallelized
 func Test_checkService(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name       string
 		service    string
@@ -57,7 +56,6 @@ func Test_checkService(t *testing.T) {
 		thisTest := thisTest
 		*fService = thisTest.service
 		t.Run(thisTest.name, func(t *testing.T) {
-			t.Parallel()
 			if thisTest.config != "" {
 				*fConfig = thisTest.config
 			}
@@ -209,9 +207,9 @@ func Test_controlHash(t *testing.T) {
 
 // Test_downloadChecksum I don't know why sometimes controlHash fail :'(
 // seems geofabrik have a limit download I reach sometimes :/.
+//
+//nolint:paralleltest // Can't be parallelized
 func Test_downloadChecksum(t *testing.T) {
-	t.Parallel()
-
 	type args struct {
 		format string
 	}
@@ -257,8 +255,6 @@ func Test_downloadChecksum(t *testing.T) {
 		*fConfig = thisTest.fConfig
 		*delement = thisTest.delement
 		t.Run(thisTest.name, func(t *testing.T) {
-			t.Parallel()
-
 			if *dCheck { // If I want to compare checksum, Download file
 				configPtr, err := config.LoadConfig(*fConfig)
 				if err != nil {
@@ -287,9 +283,8 @@ func Test_downloadChecksum(t *testing.T) {
 	}
 }
 
+//nolint:paralleltest // Can't be parallelized
 func Test_listCommand(t *testing.T) {
-	t.Parallel()
-
 	tests := []struct {
 		name string
 		want string
@@ -302,8 +297,6 @@ func Test_listCommand(t *testing.T) {
 	for _, thisTest := range tests {
 		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
-			t.Parallel()
-
 			*lmd = thisTest.lmd
 			fakelistAllRegions := func(configPtr *config.Config, format string) {
 				assert.Equal(t, thisTest.want, format)
@@ -315,9 +308,8 @@ func Test_listCommand(t *testing.T) {
 	}
 }
 
+//nolint:paralleltest // Can't be parallelized
 func Test_downloadCommand(t *testing.T) {
-	t.Parallel()
-
 	type fFlags struct {
 		dosmPbf bool
 		doshPbf bool
@@ -417,8 +409,6 @@ func Test_downloadCommand(t *testing.T) {
 		*dCheck = thisTest.dCheck || false
 		*delement = thisTest.delement
 		t.Run(thisTest.name, func(t *testing.T) {
-			t.Parallel()
-
 			fakedownloadFromURL := func(myURL string, output string) error {
 				assert.Equal(t, thisTest.wantURL, myURL)
 				assert.Equal(t, thisTest.wantOutput, output)

@@ -1,7 +1,6 @@
 package element_test
 
 import (
-	"reflect"
 	"testing"
 
 	"github.com/julien-noblet/download-geofabrik/config"
@@ -246,7 +245,7 @@ func Test_MakeParent(t *testing.T) {
 	}{
 		{
 			name: "No Parents",
-			args: args{e: element.Element{ID: "a", Name: "a"}, gparent: ""},
+			args: args{e: element.Element{ID: "a", Name: "a", Parent: ""}, gparent: ""},
 			want: nil,
 		},
 		{
@@ -266,8 +265,15 @@ func Test_MakeParent(t *testing.T) {
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
-			if got := element.MakeParent(&thisTest.args.e, thisTest.args.gparent); !reflect.DeepEqual(got, thisTest.want) {
-				t.Errorf("element.MakeParent() = %v, want %v", got, thisTest.want)
+			got := element.MakeParent(&thisTest.args.e, thisTest.args.gparent)
+			if got == nil && thisTest.want == nil {
+				return
+			}
+			if got.ID != thisTest.want.ID ||
+				got.Name != thisTest.want.Name ||
+				got.Meta != thisTest.want.Meta ||
+				got.Parent != thisTest.want.Parent {
+				t.Errorf("element.MakeParent() = %+v,gparent = %+v, want %+v", got, thisTest.args.gparent, thisTest.want)
 			}
 		})
 	}

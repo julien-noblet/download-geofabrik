@@ -46,18 +46,18 @@ func GetDefault() *Geofabrik {
 
 // Collector represent geofabrik's scrapper.
 func (g *Geofabrik) Collector() *colly.Collector {
-	c := g.Scrapper.Collector()
-	c.OnHTML("#subregions", func(e *colly.HTMLElement) {
-		g.ParseSubregion(e, c)
+	myCollector := g.Scrapper.Collector()
+	myCollector.OnHTML("#subregions", func(e *colly.HTMLElement) {
+		g.ParseSubregion(e, myCollector)
 	})
-	c.OnHTML("#specialsubregions", func(e *colly.HTMLElement) {
-		g.ParseSubregion(e, c)
+	myCollector.OnHTML("#specialsubregions", func(e *colly.HTMLElement) {
+		g.ParseSubregion(e, myCollector)
 	})
-	c.OnHTML("li", func(e *colly.HTMLElement) {
-		g.ParseLi(e, c)
+	myCollector.OnHTML("li", func(e *colly.HTMLElement) {
+		g.ParseLi(e, myCollector)
 	})
 
-	return c
+	return myCollector
 }
 
 //nolint:cyclop // TODO : Refactoring?

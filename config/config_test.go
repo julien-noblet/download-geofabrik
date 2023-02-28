@@ -502,14 +502,16 @@ func Test_config_GetElement(t *testing.T) {
 			} else if !reflect.DeepEqual(got, thisTest.want) {
 				t.Errorf("Config.GetElement() = %v, want %v", got, thisTest.want)
 			}
-			for _, k := range thisTest.want.Formats {
-				if !(got.Formats.Contains(k)) {
-					t.Errorf("%v format should exist, got=%v", k, got)
+			if !thisTest.wantErr && (err == nil) {
+				for _, k := range thisTest.want.Formats {
+					if !(got.Formats.Contains(k)) {
+						t.Errorf("%v format should exist, got=%v", k, got)
+					}
 				}
-			}
-			for _, k := range got.Formats {
-				if !(thisTest.want.Formats.Contains(k)) {
-					t.Errorf("%v format should not exist, got=%v", k, got)
+				for _, k := range got.Formats {
+					if !(thisTest.want.Formats.Contains(k)) {
+						t.Errorf("%v format should not exist, got=%v", k, got)
+					}
 				}
 			}
 		})
