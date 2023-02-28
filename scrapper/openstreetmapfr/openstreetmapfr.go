@@ -2,6 +2,7 @@ package openstreetmapfr
 
 import (
 	"errors"
+	"fmt"
 	"regexp"
 	"strings"
 	"time"
@@ -20,6 +21,45 @@ type OpenstreetmapFR struct {
 
 const (
 	defaultTimeout = time.Second * 30
+	exeptionList   = "central" +
+		"central-east" +
+		"central-north" +
+		"central-south" +
+		"central-west" +
+		"central_east" +
+		"central_north" +
+		"central_south" +
+		"central_west" +
+		"coastral" +
+		"east" +
+		"eastern" +
+		"lake" +
+		"north" +
+		"north-east" +
+		"north-eastern" +
+		"north-west" +
+		"north-western" +
+		"north_east" +
+		"north_eastern" +
+		"north_west" +
+		"north_western" +
+		"northeast" +
+		"northern" +
+		"northwest" +
+		"south" +
+		"south-central" +
+		"south-east" +
+		"south-south" +
+		"south-west" +
+		"south_central" +
+		"south_east" +
+		"south_south" +
+		"south_west" +
+		"southeast" +
+		"southern" +
+		"southwest" +
+		"west" +
+		"western"
 )
 
 func GetDefault() *OpenstreetmapFR {
@@ -113,6 +153,13 @@ func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) {
 	}
 }
 
+func exeptions(name, parent string) string {
+	if strings.Contains(exeptionList, name) {
+		return fmt.Sprintf("%v_%v", parent, name)
+	}
+	return name
+}
+
 func (o *OpenstreetmapFR) ParseHref(href string) {
 	log.Debugf("Parsing: %s", href)
 
@@ -124,7 +171,10 @@ func (o *OpenstreetmapFR) ParseHref(href string) {
 
 		valsplit := strings.Split(parents[len(parents)-1], ".")
 		if valsplit[0] != "" {
-			log.Debugf("Parsing %s", valsplit[0])
+			name := valsplit[0]
+			file := name
+			name = exeptions(name, parent)
+			log.Debugf("Parsing %s", name)
 
 			extension := strings.Join(valsplit[1:], ".")
 			if strings.Contains(extension, "state.txt") { // I'm shure it can be refactorized
@@ -135,20 +185,21 @@ func (o *OpenstreetmapFR) ParseHref(href string) {
 
 			myElement := element.Element{ //nolint:exhaustruct // I'm lazy
 				Parent: parent,
-				Name:   valsplit[0],
-				ID:     valsplit[0],
+				Name:   name,
+				File:   file,
+				ID:     name,
 				Meta:   false,
 			}
-			if !o.Config.Exist(valsplit[0]) {
+			if !o.Config.Exist(name) {
 				myElement.Formats = append(myElement.Formats, extension)
 
 				if err := o.Config.MergeElement(&myElement); err != nil {
 					log.WithError(err).Errorf("can't merge %s", myElement.Name)
 				}
 			} else {
-				log.Debugf("%s already exist, Merging formats", valsplit[0])
+				log.Debugf("%s already exist, Merging formats", name)
 
-				o.Config.AddExtension(valsplit[0], extension)
+				o.Config.AddExtension(name, extension)
 			}
 		}
 	}
