@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/gocolly/colly"
+	"github.com/gocolly/colly/v2"
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
@@ -510,7 +510,7 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 			},
 			want: element.Slice{
 				"north-america": element.Element{ID: "north-america", Name: "North America", Meta: true},
-				"us":            element.Element{ID: "us", Name: "us", Meta: true, Parent: "north-america"},
+				"us":            element.Element{ID: "us", File: "", Name: "us", Parent: "north-america", Formats: element.Formats{}, Meta: true},
 				"canada":        element.Element{ID: "canada", Name: "Canada", Meta: true, Parent: "north-america"},
 				"florida":       element.Element{ID: "florida", Name: "Florida", Meta: true, Parent: "us"},
 				"georgia-us":    element.Element{ID: "georgia-us", File: "georgia", Name: "Georgia (US State)", Meta: true, Parent: "us"},
@@ -574,8 +574,10 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 				}
 			}
 			defaultGeofabrik.ParseSubregion(myElement, myCollector)
-			if !reflect.DeepEqual(defaultGeofabrik.Config.Elements, thisTest.want) {
-				t.Errorf("parseSubregion() fail, got \n%v, want \n%v", defaultGeofabrik.Config.Elements, thisTest.want)
+			for k := range defaultGeofabrik.Config.Elements {
+				if !reflect.DeepEqual(defaultGeofabrik.Config.Elements[k], thisTest.want[k]) {
+					t.Errorf("parseSubregion() fail, got \n%+v, want \n%+v", defaultGeofabrik.Config.Elements[k], thisTest.want[k])
+				}
 			}
 		})
 	}

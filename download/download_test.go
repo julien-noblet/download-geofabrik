@@ -7,9 +7,8 @@ import (
 	"github.com/spf13/viper"
 )
 
+//nolint:paralleltest // Can't be parallelized
 func Test_DownloadFromURL(t *testing.T) {
-	t.Parallel()
-
 	type args struct {
 		myURL    string
 		fileName string
@@ -24,7 +23,15 @@ func Test_DownloadFromURL(t *testing.T) {
 		wantErr     bool
 	}{
 		// TODO: Add test cases.
-		{name: "try fNodownload=true", fNodownload: true, wantErr: false},
+		{
+			name: "try fNodownload=true",
+			args: args{
+				myURL:    "https://download.geofabrik.de/this_url_should_not_exist",
+				fileName: "/tmp/download-geofabrik.test",
+			},
+			fNodownload: true,
+			wantErr:     false,
+		},
 		{
 			name:        "404 error from geofabrik",
 			fNodownload: false,
@@ -51,7 +58,7 @@ func Test_DownloadFromURL(t *testing.T) {
 			fQuiet:      false,
 			fProgress:   true,
 			args: args{
-				myURL:    "http://download.openstreetmap.fr/extracts/europe/spain/canarias.osm.pbf",
+				myURL:    "http://download.openstreetmap.fr/extracts/africa/spain/ceuta.osm.pbf",
 				fileName: "/tmp/download-geofabrik.test",
 			},
 			wantErr: false,
@@ -64,7 +71,6 @@ func Test_DownloadFromURL(t *testing.T) {
 		viper.Set("quiet", thisTest.fQuiet)
 		viper.Set("progress", thisTest.fProgress)
 		t.Run(thisTest.name, func(t *testing.T) {
-			t.Parallel()
 			if err := download.FromURL(thisTest.args.myURL, thisTest.args.fileName); err != nil != thisTest.wantErr {
 				t.Errorf("download.FromURL() error = %v, wantErr %v", err, thisTest.wantErr)
 			}

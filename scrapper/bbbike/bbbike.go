@@ -5,7 +5,7 @@ import (
 	"regexp"
 
 	"github.com/apex/log"
-	"github.com/gocolly/colly"
+	"github.com/gocolly/colly/v2"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/julien-noblet/download-geofabrik/scrapper"
@@ -42,15 +42,15 @@ func GetDefault() *Bbbike {
 
 // Collector represent geofabrik's scrapper.
 func (b *Bbbike) Collector() *colly.Collector {
-	c := b.Scrapper.Collector()
-	c.OnHTML("div.list tbody", func(e *colly.HTMLElement) {
-		b.ParseList(e, c)
+	myCollector := b.Scrapper.Collector()
+	myCollector.OnHTML("div.list tbody", func(e *colly.HTMLElement) {
+		b.ParseList(e, myCollector)
 	})
-	c.OnHTML("#sidebar", func(e *colly.HTMLElement) {
-		b.ParseSidebar(e, c)
+	myCollector.OnHTML("#sidebar", func(e *colly.HTMLElement) {
+		b.ParseSidebar(e, myCollector)
 	})
 
-	return c
+	return myCollector
 }
 
 func (b *Bbbike) ParseList(e *colly.HTMLElement, c *colly.Collector) {

@@ -79,9 +79,8 @@ func Test_miniFormats(t *testing.T) {
 	}
 }
 
+//nolint:paralleltest // Can't be parallelized
 func Test_getFormats(t *testing.T) {
-	t.Parallel()
-
 	type dflags struct {
 		dosmPbf bool
 		doshPbf bool
@@ -224,7 +223,6 @@ func Test_getFormats(t *testing.T) {
 		viper.Set("dpoly", thisTest.flags.dpoly)
 		viper.Set("dkml", thisTest.flags.dkml)
 		t.Run(thisTest.name, func(t *testing.T) {
-			t.Parallel()
 			if got := formats.GetFormats(); !reflect.DeepEqual(*got, thisTest.want) {
 				t.Errorf("formats.GetFormats() = %v, want %v", *got, thisTest.want)
 			}
