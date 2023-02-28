@@ -742,7 +742,7 @@ Total elements: 475
 | catamarca                                | argentina                        | catamarca                                | sPp     |
 | cayman_islands                           | central-america                  | cayman_islands                           | sPp     |
 | ceara                                    | northeast                        | ceara                                    | sPp     |
-| central                                  | tanzania                         | central                                  | sPp     |
+| central                                  | uganda                           | central                                  | sPp     |
 | central-america                          |                                  | central-america                          | sPp     |
 | central-west                             | brazil                           | central-west                             | sPp     |
 | central_african_republic                 | africa                           | central_african_republic                 | sPp     |
@@ -844,7 +844,7 @@ Total elements: 475
 | durango                                  | mexico                           | durango                                  | sPp     |
 | dusseldorf                               | nordrhein_westfalen              | dusseldorf                               | sPp     |
 | east                                     | england                          | east                                     | sPp     |
-| east_central                             | illinois                         | east_central                             | sPp     |
+| east_central                             | florida                          | east_central                             | sPp     |
 | east_flanders                            | flanders                         | east_flanders                            | sPp     |
 | east_java                                | indonesia                        | east_java                                | sPp     |
 | east_kalimantan                          | indonesia                        | east_kalimantan                          | sPp     |
@@ -908,7 +908,7 @@ Total elements: 475
 | gaza                                     | mozambique                       | gaza                                     | sPp     |
 | gelderland                               | netherlands                      | gelderland                               | sPp     |
 | geneva                                   | switzerland                      | geneva                                   | sPp     |
-| georgia                                  | asia                             | georgia                                  | sPp     |
+| georgia                                  | us-south                         | georgia                                  | sPp     |
 | germany                                  | europe                           | germany                                  | sPp     |
 | gers                                     | midi_pyrenees                    | gers                                     | sPp     |
 | ghana                                    | africa                           | ghana                                    | sPp     |
@@ -1024,7 +1024,7 @@ Total elements: 475
 | jilin                                    | china                            | jilin                                    | sPp     |
 | jonkoping                                | sweden                           | jonkoping                                | sPp     |
 | jujuy                                    | argentina                        | jujuy                                    | sPp     |
-| jura                                     | switzerland                      | jura                                     | sPp     |
+| jura                                     | franche_comte                    | jura                                     | sPp     |
 | kabardino_balkar_republic                | north_caucasian_federal_district | kabardino_balkar_republic                | sPp     |
 | kainuu                                   | finland                          | kainuu                                   | sPp     |
 | kaliningrad_oblast                       | northwestern_federal_district    | kaliningrad_oblast                       | sPp     |
@@ -1241,7 +1241,7 @@ Total elements: 475
 | nordrhein_westfalen                      | germany                          | nordrhein_westfalen                      | sPp     |
 | norfolk_island                           | australia                        | norfolk_island                           | sPp     |
 | norrbotten                               | sweden                           | norrbotten                               | sPp     |
-| north                                    | brazil                           | north                                    | sPp     |
+| north                                    | texas                            | north                                    | sPp     |
 | north-america                            |                                  | north-america                            | sPp     |
 | north-carolina                           | us-south                         | north-carolina                           | sPp     |
 | north_caucasian_federal_district         | russia                           | north_caucasian_federal_district         | sPp     |
@@ -1258,18 +1258,18 @@ Total elements: 475
 | north_sea                                | seas                             | north_sea                                | sPp     |
 | north_sulawesi                           | indonesia                        | north_sulawesi                           | sPp     |
 | north_sumatra                            | indonesia                        | north_sumatra                            | sPp     |
-| north_west                               | south_africa                     | north_west                               | sPp     |
+| north_west                               | nigeria                          | north_west                               | sPp     |
 | north_western                            | new_south_wales                  | north_western                            | sPp     |
-| northeast                                | brazil                           | northeast                                | sPp     |
+| northeast                                | north-carolina                   | northeast                                | sPp     |
 | northeastern_ontario                     | ontario                          | northeastern_ontario                     | sPp     |
-| northern                                 | tanzania                         | northern                                 | sPp     |
+| northern                                 | uganda                           | northern                                 | sPp     |
 | northern_cape                            | south_africa                     | northern_cape                            | sPp     |
 | northern_ireland                         | united_kingdom                   | northern_ireland                         | sPp     |
 | northern_lower                           | michigan                         | northern_lower                           | sPp     |
 | northern_mariana_islands                 | oceania                          | northern_mariana_islands                 | sPp     |
 | northern_territory                       | australia                        | northern_territory                       | sPp     |
 | northweast                               | georgia                          | northweast                               | sPp     |
-| northwest                                | north-carolina                   | northwest                                | sPp     |
+| northwest                                | texas                            | northwest                                | sPp     |
 | northwest_territories                    | canada                           | northwest_territories                    | sPp     |
 | northwestern_federal_district            | russia                           | northwestern_federal_district            | sPp     |
 | northwestern_ontario                     | ontario                          | northwestern_ontario                     | sPp     |
@@ -1475,7 +1475,7 @@ Total elements: 475
 | sonoma                                   | california                       | sonoma                                   | sPp     |
 | sonora                                   | mexico                           | sonora                                   | sPp     |
 | soria                                    | castilla_y_leon                  | soria                                    | sPp     |
-| south                                    | brazil                           | south                                    | sPp     |
+| south                                    | texas                            | south                                    | sPp     |
 | south-america                            |                                  | south-america                            | sPp     |
 | south_africa                             | africa                           | south_africa                             | sPp     |
 | south_australia                          | australia                        | south_australia                          | sPp     |
@@ -1493,17 +1493,17 @@ Total elements: 475
 | south_sulawesi                           | indonesia                        | south_sulawesi                           | sPp     |
 | south_sumatra                            | indonesia                        | south_sumatra                            | sPp     |
 | south_west                               | nigeria                          | south_west                               | sPp     |
-| southeast                                | brazil                           | southeast                                | sPp     |
+| southeast                                | texas                            | southeast                                | sPp     |
 | southeast_sulawesi                       | indonesia                        | southeast_sulawesi                       | sPp     |
 | southern                                 | illinois                         | southern                                 | sPp     |
 | southern_federal_district                | russia                           | southern_federal_district                | sPp     |
 | southern_highlands                       | tanzania                         | southern_highlands                       | sPp     |
 | southern_tier                            | new-york                         | southern_tier                            | sPp     |
-| southwest                                | michigan                         | southwest                                | sPp     |
+| southwest                                | florida                          | southwest                                | sPp     |
 | southwest_finland                        | finland                          | southwest_finland                        | sPp     |
 | southwest_papua                          | indonesia                        | southwest_papua                          | sPp     |
 | southwestern_ontario                     | ontario                          | southwestern_ontario                     | sPp     |
-| spain                                    | africa                           | spain                                    | sPp     |
+| spain                                    | europe                           | spain                                    | sPp     |
 | stanislaus                               | california                       | stanislaus                               | sPp     |
 | state_of_mexico                          | mexico                           | state_of_mexico                          | sPp     |
 | stavropol_krai                           | north_caucasian_federal_district | stavropol_krai                           | sPp     |
@@ -1640,7 +1640,7 @@ Total elements: 475
 | wallonia_french_community                | belgium                          | wallonia_french_community                | sPp     |
 | wallonia_german_community                | belgium                          | wallonia_german_community                | sPp     |
 | warminsko_mazurskie                      | poland                           | warminsko_mazurskie                      | sPp     |
-| west                                     | michigan                         | west                                     | sPp     |
+| west                                     | texas                            | west                                     | sPp     |
 | west_bengal                              | india                            | west_bengal                              | sPp     |
 | west_flanders                            | flanders                         | west_flanders                            | sPp     |
 | west_java                                | indonesia                        | west_java                                | sPp     |
@@ -1650,7 +1650,7 @@ Total elements: 475
 | west_papua                               | indonesia                        | west_papua                               | sPp     |
 | west_sulawesi                            | indonesia                        | west_sulawesi                            | sPp     |
 | west_sumatra                             | indonesia                        | west_sumatra                             | sPp     |
-| western                                  | tanzania                         | western                                  | sPp     |
+| western                                  | uganda                           | western                                  | sPp     |
 | western_australia                        | australia                        | western_australia                        | sPp     |
 | western_cape                             | south_africa                     | western_cape                             | sPp     |
 | western_new_york                         | new-york                         | western_new_york                         | sPp     |
