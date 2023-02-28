@@ -157,6 +157,7 @@ func exeptions(name, parent string) string {
 	if strings.Contains(exeptionList, name) {
 		return fmt.Sprintf("%v_%v", parent, name)
 	}
+
 	return name
 }
 
