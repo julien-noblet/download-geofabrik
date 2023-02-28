@@ -844,7 +844,7 @@ Total elements: 475
 | durango                                  | mexico                           | durango                                  | sPp     |
 | dusseldorf                               | nordrhein_westfalen              | dusseldorf                               | sPp     |
 | east                                     | england                          | east                                     | sPp     |
-| east_central                             | florida                          | east_central                             | sPp     |
+| east_central                             | illinois                         | east_central                             | sPp     |
 | east_flanders                            | flanders                         | east_flanders                            | sPp     |
 | east_java                                | indonesia                        | east_java                                | sPp     |
 | east_kalimantan                          | indonesia                        | east_kalimantan                          | sPp     |
@@ -1258,7 +1258,7 @@ Total elements: 475
 | north_sea                                | seas                             | north_sea                                | sPp     |
 | north_sulawesi                           | indonesia                        | north_sulawesi                           | sPp     |
 | north_sumatra                            | indonesia                        | north_sumatra                            | sPp     |
-| north_west                               | nigeria                          | north_west                               | sPp     |
+| north_west                               | south_africa                     | north_west                               | sPp     |
 | north_western                            | new_south_wales                  | north_western                            | sPp     |
 | northeast                                | brazil                           | northeast                                | sPp     |
 | northeastern_ontario                     | ontario                          | northeastern_ontario                     | sPp     |
@@ -1269,7 +1269,7 @@ Total elements: 475
 | northern_mariana_islands                 | oceania                          | northern_mariana_islands                 | sPp     |
 | northern_territory                       | australia                        | northern_territory                       | sPp     |
 | northweast                               | georgia                          | northweast                               | sPp     |
-| northwest                                | texas                            | northwest                                | sPp     |
+| northwest                                | north-carolina                   | northwest                                | sPp     |
 | northwest_territories                    | canada                           | northwest_territories                    | sPp     |
 | northwestern_federal_district            | russia                           | northwestern_federal_district            | sPp     |
 | northwestern_ontario                     | ontario                          | northwestern_ontario                     | sPp     |
@@ -1503,7 +1503,7 @@ Total elements: 475
 | southwest_finland                        | finland                          | southwest_finland                        | sPp     |
 | southwest_papua                          | indonesia                        | southwest_papua                          | sPp     |
 | southwestern_ontario                     | ontario                          | southwestern_ontario                     | sPp     |
-| spain                                    | europe                           | spain                                    | sPp     |
+| spain                                    | africa                           | spain                                    | sPp     |
 | stanislaus                               | california                       | stanislaus                               | sPp     |
 | state_of_mexico                          | mexico                           | state_of_mexico                          | sPp     |
 | stavropol_krai                           | north_caucasian_federal_district | stavropol_krai                           | sPp     |
