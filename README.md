@@ -700,6 +700,11 @@ Total elements: 475
 | bouvet_island                            | africa                           | bouvet_island                            | sPp     |
 | bratislavsky                             | slovakia                         | bratislavsky                             | sPp     |
 | brazil                                   | south-america                    | brazil                                   | sPp     |
+| brazil_central-west                      | brazil                           | brazil_central-west                      | sPp     |
+| brazil_north                             | brazil                           | brazil_north                             | sPp     |
+| brazil_northeast                         | brazil                           | brazil_northeast                         | sPp     |
+| brazil_south                             | brazil                           | brazil_south                             | sPp     |
+| brazil_southeast                         | brazil                           | brazil_southeast                         | sPp     |
 | bretagne                                 | france                           | bretagne                                 | sPp     |
 | british_columbia                         | canada                           | british_columbia                         | sPp     |
 | british_indian_ocean_territory           | asia                             | british_indian_ocean_territory           | sPp     |
@@ -722,6 +727,7 @@ Total elements: 475
 | calabria                                 | italy                            | calabria                                 | sPp     |
 | calaveras                                | california                       | calaveras                                | sPp     |
 | california                               | us-west                          | california                               | sPp     |
+| california_lake                          | california                       | california_lake                          | sPp     |
 | calvados                                 | basse_normandie                  | calvados                                 | sPp     |
 | cambodia                                 | asia                             | cambodia                                 | sPp     |
 | cameroon                                 | africa                           | cameroon                                 | sPp     |
@@ -742,9 +748,8 @@ Total elements: 475
 | catamarca                                | argentina                        | catamarca                                | sPp     |
 | cayman_islands                           | central-america                  | cayman_islands                           | sPp     |
 | ceara                                    | northeast                        | ceara                                    | sPp     |
-| central                                  | uganda                           | central                                  | sPp     |
 | central-america                          |                                  | central-america                          | sPp     |
-| central-west                             | brazil                           | central-west                             | sPp     |
+| central-west                             | brazil                           | central-west                             |         |
 | central_african_republic                 | africa                           | central_african_republic                 | sPp     |
 | central_federal_district                 | russia                           | central_federal_district                 | sPp     |
 | central_finland                          | finland                          | central_finland                          | sPp     |
@@ -755,7 +760,6 @@ Total elements: 475
 | central_ostrobothnia                     | finland                          | central_ostrobothnia                     | sPp     |
 | central_papua                            | indonesia                        | central_papua                            | sPp     |
 | central_sulawesi                         | indonesia                        | central_sulawesi                         | sPp     |
-| central_west                             | new_south_wales                  | central_west                             | sPp     |
 | centre                                   | france                           | centre                                   | sPp     |
 | centre_du_quebec                         | quebec                           | centre_du_quebec                         | sPp     |
 | ceuta                                    | spain                            | ceuta                                    | sPp     |
@@ -792,6 +796,10 @@ Total elements: 475
 | cocos_islands                            | australia                        | cocos_islands                            | sPp     |
 | colima                                   | mexico                           | colima                                   | sPp     |
 | colorado                                 | us-west                          | colorado                                 | sPp     |
+| colorado_northeast                       | colorado                         | colorado_northeast                       | sPp     |
+| colorado_northwest                       | colorado                         | colorado_northwest                       | sPp     |
+| colorado_southeast                       | colorado                         | colorado_southeast                       | sPp     |
+| colorado_southwest                       | colorado                         | colorado_southwest                       | sPp     |
 | colusa                                   | california                       | colusa                                   | sPp     |
 | comoros                                  | africa                           | comoros                                  | sPp     |
 | comunidad_de_madrid                      | spain                            | comunidad_de_madrid                      | sPp     |
@@ -843,21 +851,24 @@ Total elements: 475
 | drome                                    | rhone_alpes                      | drome                                    | sPp     |
 | durango                                  | mexico                           | durango                                  | sPp     |
 | dusseldorf                               | nordrhein_westfalen              | dusseldorf                               | sPp     |
-| east                                     | england                          | east                                     | sPp     |
-| east_central                             | florida                          | east_central                             | sPp     |
+| east_central                             | illinois                         | east_central                             | sPp     |
 | east_flanders                            | flanders                         | east_flanders                            | sPp     |
 | east_java                                | indonesia                        | east_java                                | sPp     |
 | east_kalimantan                          | indonesia                        | east_kalimantan                          | sPp     |
 | east_midlands                            | england                          | east_midlands                            | sPp     |
 | east_nusa_tenggara                       | indonesia                        | east_nusa_tenggara                       | sPp     |
 | east_timor                               | asia                             | east_timor                               | sPp     |
-| eastern                                  | uganda                           | eastern                                  | sPp     |
 | eastern_cape                             | south_africa                     | eastern_cape                             | sPp     |
 | eastern_ontario                          | ontario                          | eastern_ontario                          | sPp     |
 | el_dorado                                | california                       | el_dorado                                | sPp     |
 | el_salvador                              | central-america                  | el_salvador                              | sPp     |
 | emilia_romagna                           | italy                            | emilia_romagna                           | sPp     |
 | england                                  | united_kingdom                   | england                                  | sPp     |
+| england_east                             | england                          | england_east                             | sPp     |
+| england_north_east                       | england                          | england_north_east                       | sPp     |
+| england_north_west                       | england                          | england_north_west                       | sPp     |
+| england_south_east                       | england                          | england_south_east                       | sPp     |
+| england_south_west                       | england                          | england_south_west                       | sPp     |
 | entre_rios                               | argentina                        | entre_rios                               | sPp     |
 | equatorial_guinea                        | africa                           | equatorial_guinea                        | sPp     |
 | eritrea                                  | africa                           | eritrea                                  | sPp     |
@@ -885,6 +896,9 @@ Total elements: 475
 | flemish_brabant                          | flanders                         | flemish_brabant                          | sPp     |
 | flevoland                                | netherlands                      | flevoland                                | sPp     |
 | florida                                  | us-south                         | florida                                  | sPp     |
+| florida_northeast                        | florida                          | florida_northeast                        | sPp     |
+| florida_northwest                        | florida                          | florida_northwest                        | sPp     |
+| florida_southwest                        | florida                          | florida_southwest                        | sPp     |
 | formosa                                  | argentina                        | formosa                                  | sPp     |
 | france                                   | europe                           | france                                   | sPp     |
 | france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sP      |
@@ -908,7 +922,10 @@ Total elements: 475
 | gaza                                     | mozambique                       | gaza                                     | sPp     |
 | gelderland                               | netherlands                      | gelderland                               | sPp     |
 | geneva                                   | switzerland                      | geneva                                   | sPp     |
-| georgia                                  | us-south                         | georgia                                  | sPp     |
+| georgia                                  | asia                             | georgia                                  | sPp     |
+| georgia_northeast                        | georgia                          | georgia_northeast                        | sPp     |
+| georgia_southeast                        | georgia                          | georgia_southeast                        | sPp     |
+| georgia_southwest                        | georgia                          | georgia_southwest                        | sPp     |
 | germany                                  | europe                           | germany                                  | sPp     |
 | gers                                     | midi_pyrenees                    | gers                                     | sPp     |
 | ghana                                    | africa                           | ghana                                    | sPp     |
@@ -985,6 +1002,12 @@ Total elements: 475
 | ille_et_vilaine                          | bretagne                         | ille_et_vilaine                          | sPp     |
 | illes_balears                            | spain                            | illes_balears                            | sPp     |
 | illinois                                 | us-midwest                       | illinois                                 | sPp     |
+| illinois_central                         | illinois                         | illinois_central                         | sPp     |
+| illinois_north                           | illinois                         | illinois_north                           | sPp     |
+| illinois_northeast                       | illinois                         | illinois_northeast                       | sPp     |
+| illinois_northwest                       | illinois                         | illinois_northwest                       | sPp     |
+| illinois_southern                        | illinois                         | illinois_southern                        | sPp     |
+| illinois_southwest                       | illinois                         | illinois_southwest                       | sPp     |
 | imperial                                 | california                       | imperial                                 | sPp     |
 | india                                    | asia                             | india                                    | sPp     |
 | indonesia                                | asia                             | indonesia                                | sPp     |
@@ -1024,7 +1047,7 @@ Total elements: 475
 | jilin                                    | china                            | jilin                                    | sPp     |
 | jonkoping                                | sweden                           | jonkoping                                | sPp     |
 | jujuy                                    | argentina                        | jujuy                                    | sPp     |
-| jura                                     | franche_comte                    | jura                                     | sPp     |
+| jura                                     | switzerland                      | jura                                     | sPp     |
 | kabardino_balkar_republic                | north_caucasian_federal_district | kabardino_balkar_republic                | sPp     |
 | kainuu                                   | finland                          | kainuu                                   | sPp     |
 | kaliningrad_oblast                       | northwestern_federal_district    | kaliningrad_oblast                       | sPp     |
@@ -1075,9 +1098,8 @@ Total elements: 475
 | kyushu                                   | japan                            | kyushu                                   | sPp     |
 | la_coruna                                | galicia                          | la_coruna                                | sPp     |
 | la_pampa                                 | argentina                        | la_pampa                                 | sPp     |
-| la_rioja                                 | argentina                        | la_rioja                                 | sPp     |
+| la_rioja                                 | spain                            | la_rioja                                 | sPp     |
 | ladakh                                   | india                            | ladakh                                   | sPp     |
-| lake                                     | tanzania                         | lake                                     | sPp     |
 | lakshadweep                              | india                            | lakshadweep                              | sPp     |
 | lampung                                  | indonesia                        | lampung                                  | sPp     |
 | lanaudiere                               | quebec                           | lanaudiere                               | sPp     |
@@ -1172,6 +1194,10 @@ Total elements: 475
 | mexico                                   | north-america                    | mexico                                   | sPp     |
 | mexico_city                              | mexico                           | mexico_city                              | sPp     |
 | michigan                                 | us-midwest                       | michigan                                 | sPp     |
+| michigan_central                         | michigan                         | michigan_central                         | sPp     |
+| michigan_southeast                       | michigan                         | michigan_southeast                       | sPp     |
+| michigan_southwest                       | michigan                         | michigan_southwest                       | sPp     |
+| michigan_west                            | michigan                         | michigan_west                            | sPp     |
 | michoacan                                | mexico                           | michoacan                                | sPp     |
 | micronesia                               | oceania                          | micronesia                               | sPp     |
 | mid_north_coast                          | new_south_wales                  | mid_north_coast                          | sPp     |
@@ -1219,6 +1245,9 @@ Total elements: 475
 | new_brunswick                            | canada                           | new_brunswick                            | sPp     |
 | new_caledonia                            | oceania                          | new_caledonia                            | sPp     |
 | new_south_wales                          | australia                        | new_south_wales                          | sPp     |
+| new_south_wales_central_west             | new_south_wales                  | new_south_wales_central_west             | sPp     |
+| new_south_wales_north_western            | new_south_wales                  | new_south_wales_north_western            | sPp     |
+| new_south_wales_northern                 | new_south_wales                  | new_south_wales_northern                 | sPp     |
 | new_york_city                            | new-york                         | new_york_city                            | sPp     |
 | newfoundland_and_labrador                | canada                           | newfoundland_and_labrador                | sPp     |
 | niassa                                   | mozambique                       | niassa                                   | sPp     |
@@ -1228,6 +1257,11 @@ Total elements: 475
 | nievre                                   | bourgogne                        | nievre                                   | sPp     |
 | niger                                    | africa                           | niger                                    | sPp     |
 | nigeria                                  | africa                           | nigeria                                  | sPp     |
+| nigeria_north_east                       | nigeria                          | nigeria_north_east                       | sPp     |
+| nigeria_north_west                       | nigeria                          | nigeria_north_west                       | sPp     |
+| nigeria_south_east                       | nigeria                          | nigeria_south_east                       | sPp     |
+| nigeria_south_south                      | nigeria                          | nigeria_south_south                      | sPp     |
+| nigeria_south_west                       | nigeria                          | nigeria_south_west                       | sPp     |
 | ningxia                                  | china                            | ningxia                                  | sPp     |
 | nitriansky                               | slovakia                         | nitriansky                               | sPp     |
 | niue                                     | oceania                          | niue                                     | sPp     |
@@ -1241,13 +1275,17 @@ Total elements: 475
 | nordrhein_westfalen                      | germany                          | nordrhein_westfalen                      | sPp     |
 | norfolk_island                           | australia                        | norfolk_island                           | sPp     |
 | norrbotten                               | sweden                           | norrbotten                               | sPp     |
-| north                                    | texas                            | north                                    | sPp     |
+| north                                    | brazil                           | north                                    |         |
 | north-america                            |                                  | north-america                            | sPp     |
 | north-carolina                           | us-south                         | north-carolina                           | sPp     |
+| north-carolina_northeast                 | north-carolina                   | north-carolina_northeast                 | sPp     |
+| north-carolina_northwest                 | north-carolina                   | north-carolina_northwest                 | sPp     |
+| north-carolina_south_central             | north-carolina                   | north-carolina_south_central             | sPp     |
+| north-carolina_southeast                 | north-carolina                   | north-carolina_southeast                 | sPp     |
+| north-carolina_western                   | north-carolina                   | north-carolina_western                   | sPp     |
 | north_caucasian_federal_district         | russia                           | north_caucasian_federal_district         | sPp     |
 | north_central                            | nigeria                          | north_central                            | sPp     |
 | north_country                            | new-york                         | north_country                            | sPp     |
-| north_east                               | nigeria                          | north_east                               | sPp     |
 | north_kalimantan                         | indonesia                        | north_kalimantan                         | sPp     |
 | north_karelia                            | finland                          | north_karelia                            | sPp     |
 | north_maluku                             | indonesia                        | north_maluku                             | sPp     |
@@ -1258,18 +1296,14 @@ Total elements: 475
 | north_sea                                | seas                             | north_sea                                | sPp     |
 | north_sulawesi                           | indonesia                        | north_sulawesi                           | sPp     |
 | north_sumatra                            | indonesia                        | north_sumatra                            | sPp     |
-| north_west                               | nigeria                          | north_west                               | sPp     |
-| north_western                            | new_south_wales                  | north_western                            | sPp     |
-| northeast                                | north-carolina                   | northeast                                | sPp     |
+| northeast                                | brazil                           | northeast                                |         |
 | northeastern_ontario                     | ontario                          | northeastern_ontario                     | sPp     |
-| northern                                 | uganda                           | northern                                 | sPp     |
 | northern_cape                            | south_africa                     | northern_cape                            | sPp     |
 | northern_ireland                         | united_kingdom                   | northern_ireland                         | sPp     |
 | northern_lower                           | michigan                         | northern_lower                           | sPp     |
 | northern_mariana_islands                 | oceania                          | northern_mariana_islands                 | sPp     |
 | northern_territory                       | australia                        | northern_territory                       | sPp     |
 | northweast                               | georgia                          | northweast                               | sPp     |
-| northwest                                | texas                            | northwest                                | sPp     |
 | northwest_territories                    | canada                           | northwest_territories                    | sPp     |
 | northwestern_federal_district            | russia                           | northwestern_federal_district            | sPp     |
 | northwestern_ontario                     | ontario                          | northwestern_ontario                     | sPp     |
@@ -1443,7 +1477,7 @@ Total elements: 475
 | seine_saint_denis                        | ile_de_france                    | seine_saint_denis                        | sPp     |
 | senegal                                  | africa                           | senegal                                  | sPp     |
 | sergipe                                  | northeast                        | sergipe                                  | sPp     |
-| sevastopol                               | southern_federal_district        | sevastopol                               | sPp     |
+| sevastopol                               | ukraine                          | sevastopol                               | sPp     |
 | sevilla                                  | andalucia                        | sevilla                                  | sPp     |
 | seychelles                               | africa                           | seychelles                               | sPp     |
 | shaanxi                                  | china                            | shaanxi                                  | sPp     |
@@ -1475,12 +1509,11 @@ Total elements: 475
 | sonoma                                   | california                       | sonoma                                   | sPp     |
 | sonora                                   | mexico                           | sonora                                   | sPp     |
 | soria                                    | castilla_y_leon                  | soria                                    | sPp     |
-| south                                    | texas                            | south                                    | sPp     |
+| south                                    | brazil                           | south                                    |         |
 | south-america                            |                                  | south-america                            | sPp     |
 | south_africa                             | africa                           | south_africa                             | sPp     |
+| south_africa_north_west                  | south_africa                     | south_africa_north_west                  | sPp     |
 | south_australia                          | australia                        | south_australia                          | sPp     |
-| south_central                            | north-carolina                   | south_central                            | sPp     |
-| south_east                               | nigeria                          | south_east                               | sPp     |
 | south_east_region                        | new_south_wales                  | south_east_region                        | sPp     |
 | south_georgia_and_south_sandwich         | south-america                    | south_georgia_and_south_sandwich         | sPp     |
 | south_kalimantan                         | indonesia                        | south_kalimantan                         | sPp     |
@@ -1488,18 +1521,14 @@ Total elements: 475
 | south_ostrobothnia                       | finland                          | south_ostrobothnia                       | sPp     |
 | south_papua                              | indonesia                        | south_papua                              | sPp     |
 | south_savo                               | finland                          | south_savo                               | sPp     |
-| south_south                              | nigeria                          | south_south                              | sPp     |
 | south_sudan                              | africa                           | south_sudan                              | sPp     |
 | south_sulawesi                           | indonesia                        | south_sulawesi                           | sPp     |
 | south_sumatra                            | indonesia                        | south_sumatra                            | sPp     |
-| south_west                               | nigeria                          | south_west                               | sPp     |
-| southeast                                | texas                            | southeast                                | sPp     |
+| southeast                                | brazil                           | southeast                                |         |
 | southeast_sulawesi                       | indonesia                        | southeast_sulawesi                       | sPp     |
-| southern                                 | illinois                         | southern                                 | sPp     |
 | southern_federal_district                | russia                           | southern_federal_district                | sPp     |
 | southern_highlands                       | tanzania                         | southern_highlands                       | sPp     |
 | southern_tier                            | new-york                         | southern_tier                            | sPp     |
-| southwest                                | florida                          | southwest                                | sPp     |
 | southwest_finland                        | finland                          | southwest_finland                        | sPp     |
 | southwest_papua                          | indonesia                        | southwest_papua                          | sPp     |
 | southwestern_ontario                     | ontario                          | southwestern_ontario                     | sPp     |
@@ -1527,6 +1556,10 @@ Total elements: 475
 | tambov_oblast                            | central_federal_district         | tambov_oblast                            | sPp     |
 | tamil_nadu                               | india                            | tamil_nadu                               | sPp     |
 | tanzania                                 | africa                           | tanzania                                 | sPp     |
+| tanzania_central                         | tanzania                         | tanzania_central                         | sPp     |
+| tanzania_lake                            | tanzania                         | tanzania_lake                            | sPp     |
+| tanzania_northern                        | tanzania                         | tanzania_northern                        | sPp     |
+| tanzania_western                         | tanzania                         | tanzania_western                         | sPp     |
 | tarapaca                                 | chile                            | tarapaca                                 | sPp     |
 | tarn                                     | midi_pyrenees                    | tarn                                     | sPp     |
 | tarn_et_garonne                          | midi_pyrenees                    | tarn_et_garonne                          | sPp     |
@@ -1541,6 +1574,12 @@ Total elements: 475
 | teruel                                   | aragon                           | teruel                                   | sPp     |
 | tete                                     | mozambique                       | tete                                     | sPp     |
 | texas                                    | us-south                         | texas                                    | sPp     |
+| texas_central                            | texas                            | texas_central                            | sPp     |
+| texas_north                              | texas                            | texas_north                              | sPp     |
+| texas_northwest                          | texas                            | texas_northwest                          | sPp     |
+| texas_south                              | texas                            | texas_south                              | sPp     |
+| texas_southeast                          | texas                            | texas_southeast                          | sPp     |
+| texas_west                               | texas                            | texas_west                               | sPp     |
 | the_riverina                             | new_south_wales                  | the_riverina                             | sPp     |
 | thurgau                                  | switzerland                      | thurgau                                  | sPp     |
 | tianjin                                  | china                            | tianjin                                  | sPp     |
@@ -1578,6 +1617,10 @@ Total elements: 475
 | tyumen_oblast                            | ural_federal_district            | tyumen_oblast                            | sPp     |
 | udmurt_republic                          | volga_federal_district           | udmurt_republic                          | sPp     |
 | uganda                                   | africa                           | uganda                                   | sPp     |
+| uganda_central                           | uganda                           | uganda_central                           | sPp     |
+| uganda_eastern                           | uganda                           | uganda_eastern                           | sPp     |
+| uganda_northern                          | uganda                           | uganda_northern                          | sPp     |
+| uganda_western                           | uganda                           | uganda_western                           | sPp     |
 | ukraine                                  | europe                           | ukraine                                  | sPp     |
 | ulyanovsk_oblast                         | volga_federal_district           | ulyanovsk_oblast                         | sPp     |
 | umbria                                   | italy                            | umbria                                   | sPp     |
@@ -1640,7 +1683,6 @@ Total elements: 475
 | wallonia_french_community                | belgium                          | wallonia_french_community                | sPp     |
 | wallonia_german_community                | belgium                          | wallonia_german_community                | sPp     |
 | warminsko_mazurskie                      | poland                           | warminsko_mazurskie                      | sPp     |
-| west                                     | texas                            | west                                     | sPp     |
 | west_bengal                              | india                            | west_bengal                              | sPp     |
 | west_flanders                            | flanders                         | west_flanders                            | sPp     |
 | west_java                                | indonesia                        | west_java                                | sPp     |
@@ -1650,7 +1692,6 @@ Total elements: 475
 | west_papua                               | indonesia                        | west_papua                               | sPp     |
 | west_sulawesi                            | indonesia                        | west_sulawesi                            | sPp     |
 | west_sumatra                             | indonesia                        | west_sumatra                             | sPp     |
-| western                                  | uganda                           | western                                  | sPp     |
 | western_australia                        | australia                        | western_australia                        | sPp     |
 | western_cape                             | south_africa                     | western_cape                             | sPp     |
 | western_new_york                         | new-york                         | western_new_york                         | sPp     |
@@ -1689,7 +1730,7 @@ Total elements: 475
 | zug                                      | switzerland                      | zug                                      | sPp     |
 | zuid_holland                             | netherlands                      | zuid_holland                             | sPp     |
 | zurich                                   | switzerland                      | zurich                                   | sPp     |
-Total elements: 1101
+Total elements: 1142
 
 ## List of elements from bbbike.org
 |    SHORTNAME     | IS IN |    LONG NAME     | FORMATS |
