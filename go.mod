@@ -9,7 +9,7 @@ require (
 	github.com/gocolly/colly/v2 v2.1.0
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/spf13/viper v1.15.0
-	github.com/stretchr/testify v1.8.2
+	github.com/stretchr/testify v1.8.4
 	gopkg.in/yaml.v3 v3.0.1
 )
 
