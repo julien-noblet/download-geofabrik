@@ -3,13 +3,13 @@ module github.com/julien-noblet/download-geofabrik
 require (
 	bou.ke/monkey v1.0.2
 	github.com/PuerkitoBio/goquery v1.8.1
-	github.com/alecthomas/kingpin/v2 v2.3.2
+	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/apex/log v1.9.0
 	github.com/cheggaaa/pb/v3 v3.1.2
 	github.com/gocolly/colly/v2 v2.1.0
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/spf13/viper v1.15.0
-	github.com/stretchr/testify v1.8.2
+	github.com/stretchr/testify v1.8.4
 	gopkg.in/yaml.v3 v3.0.1
 )
 

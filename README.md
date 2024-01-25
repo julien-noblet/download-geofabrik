@@ -871,7 +871,7 @@ Total elements: 476
 | drome                                    | rhone_alpes                      | drome                                    | sPp     |
 | durango                                  | mexico                           | durango                                  | sPp     |
 | dusseldorf                               | nordrhein_westfalen              | dusseldorf                               | sPp     |
-| east_central                             | florida                          | east_central                             | sPp     |
+| east_central                             | illinois                         | east_central                             | sPp     |
 | east_flanders                            | flanders                         | east_flanders                            | sPp     |
 | east_java                                | indonesia                        | east_java                                | sPp     |
 | east_kalimantan                          | indonesia                        | east_kalimantan                          | sPp     |
@@ -926,7 +926,7 @@ Total elements: 476
 | formosa                                  | argentina                        | formosa                                  | sPp     |
 | france                                   | europe                           | france                                   | sPp     |
 | france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sp      |
-| france_taaf                              | africa                           | france_taaf                              | sPp     |
+| france_taaf                              | oceania                          | france_taaf                              | sPp     |
 | franche_comte                            | france                           | franche_comte                            | sPp     |
 | free_state                               | south_africa                     | free_state                               | sPp     |
 | fresno                                   | california                       | fresno                                   | sPp     |
@@ -1124,7 +1124,7 @@ Total elements: 476
 | kyushu                                   | japan                            | kyushu                                   | sPp     |
 | la_coruna                                | galicia                          | la_coruna                                | sPp     |
 | la_pampa                                 | argentina                        | la_pampa                                 | sPp     |
-| la_rioja                                 | argentina                        | la_rioja                                 | sPp     |
+| la_rioja                                 | spain                            | la_rioja                                 | sPp     |
 | ladakh                                   | india                            | ladakh                                   | sPp     |
 | lakshadweep                              | india                            | lakshadweep                              | sPp     |
 | lampung                                  | indonesia                        | lampung                                  | sPp     |
@@ -1516,7 +1516,7 @@ Total elements: 476
 | senegal                                  | africa                           | senegal                                  | sPp     |
 | sergipe                                  | northeast                        | sergipe                                  | sPp     |
 | setubal                                  | portugal                         | setubal                                  | sPp     |
-| sevastopol                               | southern_federal_district        | sevastopol                               | sPp     |
+| sevastopol                               | ukraine                          | sevastopol                               | sPp     |
 | sevilla                                  | andalucia                        | sevilla                                  | sPp     |
 | seychelles                               | africa                           | seychelles                               | sPp     |
 | shaanxi                                  | china                            | shaanxi                                  | sPp     |
