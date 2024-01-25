@@ -1516,7 +1516,7 @@ Total elements: 476
 | senegal                                  | africa                           | senegal                                  | sPp     |
 | sergipe                                  | northeast                        | sergipe                                  | sPp     |
 | setubal                                  | portugal                         | setubal                                  | sPp     |
-| sevastopol                               | southern_federal_district        | sevastopol                               | sPp     |
+| sevastopol                               | ukraine                          | sevastopol                               | sPp     |
 | sevilla                                  | andalucia                        | sevilla                                  | sPp     |
 | seychelles                               | africa                           | seychelles                               | sPp     |
 | shaanxi                                  | china                            | shaanxi                                  | sPp     |
