@@ -651,7 +651,7 @@ Total elements: 476
 | aruba                                    | central-america                  | aruba                                    | sPp     |
 | arunachal_pradesh                        | india                            | arunachal_pradesh                        | sPp     |
 | ashmore_and_cartier_islands              | australia                        | ashmore_and_cartier_islands              | sPp     |
-| asia                                     |                                  | asia                                     | p       |
+| asia                                     |                                  | asia                                     | sPp     |
 | assam                                    | india                            | assam                                    | sPp     |
 | astrakhan_oblast                         | southern_federal_district        | astrakhan_oblast                         | sPp     |
 | asturias                                 | spain                            | asturias                                 | sPp     |
@@ -871,7 +871,7 @@ Total elements: 476
 | drome                                    | rhone_alpes                      | drome                                    | sPp     |
 | durango                                  | mexico                           | durango                                  | sPp     |
 | dusseldorf                               | nordrhein_westfalen              | dusseldorf                               | sPp     |
-| east_central                             | illinois                         | east_central                             | sPp     |
+| east_central                             | florida                          | east_central                             | sPp     |
 | east_flanders                            | flanders                         | east_flanders                            | sPp     |
 | east_java                                | indonesia                        | east_java                                | sPp     |
 | east_kalimantan                          | indonesia                        | east_kalimantan                          | sPp     |
@@ -900,7 +900,7 @@ Total elements: 476
 | ethiopia                                 | africa                           | ethiopia                                 | sPp     |
 | eure                                     | haute_normandie                  | eure                                     | sPp     |
 | eure_et_loir                             | centre                           | eure_et_loir                             | sPp     |
-| europe                                   |                                  | europe                                   | p       |
+| europe                                   |                                  | europe                                   | sPp     |
 | euskadi                                  | spain                            | euskadi                                  | sPp     |
 | evora                                    | portugal                         | evora                                    | sPp     |
 | extremadura                              | spain                            | extremadura                              | sPp     |
@@ -909,7 +909,7 @@ Total elements: 476
 | far_eastern_federal_district             | russia                           | far_eastern_federal_district             | sPp     |
 | far_west                                 | new_south_wales                  | far_west                                 | sPp     |
 | faro                                     | portugal                         | faro                                     | sPp     |
-| fiji                                     | merge                            | fiji                                     | sPp     |
+| fiji                                     | merge                            | fiji                                     | sp      |
 | fiji_east                                | oceania                          | fiji_east                                | sPp     |
 | fiji_west                                | oceania                          | fiji_west                                | sPp     |
 | finger_lakes                             | new-york                         | finger_lakes                             | sPp     |
@@ -925,8 +925,8 @@ Total elements: 476
 | florida_southwest                        | florida                          | florida_southwest                        | sPp     |
 | formosa                                  | argentina                        | formosa                                  | sPp     |
 | france                                   | europe                           | france                                   | sPp     |
-| france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sPp     |
-| france_taaf                              | merge                            | france_taaf                              | sPp     |
+| france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sp      |
+| france_taaf                              | africa                           | france_taaf                              | sPp     |
 | franche_comte                            | france                           | franche_comte                            | sPp     |
 | free_state                               | south_africa                     | free_state                               | sPp     |
 | fresno                                   | california                       | fresno                                   | sPp     |
@@ -946,7 +946,7 @@ Total elements: 476
 | gaza                                     | mozambique                       | gaza                                     | sPp     |
 | gelderland                               | netherlands                      | gelderland                               | sPp     |
 | geneva                                   | switzerland                      | geneva                                   | sPp     |
-| georgia                                  | us-south                         | georgia                                  | sPp     |
+| georgia                                  | asia                             | georgia                                  | sPp     |
 | georgia_northeast                        | georgia                          | georgia_northeast                        | sPp     |
 | georgia_southeast                        | georgia                          | georgia_southeast                        | sPp     |
 | georgia_southwest                        | georgia                          | georgia_southwest                        | sPp     |
@@ -1102,7 +1102,7 @@ Total elements: 476
 | kiev                                     | ukraine                          | kiev                                     | sPp     |
 | kiev_oblast                              | ukraine                          | kiev_oblast                              | sPp     |
 | kings                                    | california                       | kings                                    | sPp     |
-| kiribati                                 | merge                            | kiribati                                 | sPp     |
+| kiribati                                 | merge                            | kiribati                                 | sp      |
 | kiribati_east                            | oceania                          | kiribati_east                            | sPp     |
 | kiribati_west                            | oceania                          | kiribati_west                            | sPp     |
 | kirov_oblast                             | volga_federal_district           | kirov_oblast                             | sPp     |
@@ -1308,7 +1308,7 @@ Total elements: 476
 | norfolk_island                           | australia                        | norfolk_island                           | sPp     |
 | norrbotten                               | sweden                           | norrbotten                               | sPp     |
 | north                                    | brazil                           | north                                    |         |
-| north-america                            |                                  | north-america                            | sp      |
+| north-america                            |                                  | north-america                            | sPp     |
 | north-carolina                           | us-south                         | north-carolina                           | sPp     |
 | north-carolina_northeast                 | north-carolina                   | north-carolina_northeast                 | sPp     |
 | north-carolina_northwest                 | north-carolina                   | north-carolina_northwest                 | sPp     |
@@ -1454,7 +1454,7 @@ Total elements: 476
 | rondonia                                 | north                            | rondonia                                 | sPp     |
 | roraima                                  | north                            | roraima                                  | sPp     |
 | rostov_oblast                            | southern_federal_district        | rostov_oblast                            | sPp     |
-| russia                                   |                                  | russia                                   | p       |
+| russia                                   |                                  | russia                                   | sPp     |
 | rwanda                                   | africa                           | rwanda                                   | sPp     |
 | ryazan_oblast                            | central_federal_district         | ryazan_oblast                            | sPp     |
 | sacramento                               | california                       | sacramento                               | sPp     |
