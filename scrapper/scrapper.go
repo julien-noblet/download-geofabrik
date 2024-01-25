@@ -85,7 +85,7 @@ func (s *Scrapper) Limit() *colly.LimitRule {
 }
 
 // Collector *colly.Collector Init Collector.
-func (s *Scrapper) Collector(options ...interface{}) *colly.Collector {
+func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector {
 	myCollector := colly.NewCollector(
 		colly.AllowedDomains(s.AllowedDomains...),
 		colly.URLFilters(s.URLFilters...),

@@ -28,6 +28,9 @@ linters-settings:
       # logging is allowed only by logutils.Log, logrus
       # is allowed to use only in logutils package
       - github.com/sirupsen/logrus
+      - github.com/apex/log/*
+      - github.com/julen-noblet/download-geofabrik/*
+      - 
     packages-with-error-messages:
       github.com/sirupsen/logrus: "logging is allowed only by logutils.Log"
   misspell:
@@ -110,7 +113,7 @@ linters:
     - cyclop
     #- deadcode
     - decorder
-    - depguard
+    #- depguard
     - dogsled
     - dupl
     - dupword

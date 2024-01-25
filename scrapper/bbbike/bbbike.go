@@ -31,10 +31,10 @@ func GetDefault() *Bbbike {
 				regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/$`),
 			},
 			FormatDefinition: formats.FormatDefinitions{
-				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: ".osm.pbf"},
-				formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: ".osm.shp.zip"},
-				formats.FormatOsmGz:  {ID: formats.FormatOsmGz, Loc: ".osm.gz"},
-				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly"},
+				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: ".osm.pbf", BasePath: "", BaseURL: ""},
+				formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: ".osm.shp.zip", BasePath: "", BaseURL: ""},
+				formats.FormatOsmGz:  {ID: formats.FormatOsmGz, Loc: ".osm.gz", BasePath: "", BaseURL: ""},
+				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", BasePath: "", BaseURL: ""},
 			},
 		},
 	}
@@ -70,7 +70,7 @@ func GetName(h3 string) string {
 	return ret
 }
 
-func (b *Bbbike) ParseSidebar(e *colly.HTMLElement, c *colly.Collector) {
+func (b *Bbbike) ParseSidebar(e *colly.HTMLElement, _ *colly.Collector) {
 	name := GetName(e.ChildText("h3"))
 	myElement := element.Element{
 		ID:     name,

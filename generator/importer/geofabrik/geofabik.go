@@ -25,14 +25,14 @@ const (
 // FormatDefinition get a formats.FormatDefinitions.
 func FormatDefinition() formats.FormatDefinitions {
 	return formats.FormatDefinitions{
-		formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
-		"osm.bz2.md5":        {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
-		formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
-		"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-		formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly"},
-		formats.FormatKml:    {ID: formats.FormatKml, Loc: ".kml"},
-		formats.FormatState:  {ID: formats.FormatState, Loc: "-updates/state.txt"},
-		formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: "-latest-free.shp.zip"},
+		formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2", BasePath: "", BaseURL: ""},
+		"osm.bz2.md5":        {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5", BasePath: "", BaseURL: ""},
+		formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf", BasePath: "", BaseURL: ""},
+		"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5", BasePath: "", BaseURL: ""},
+		formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", BasePath: "", BaseURL: ""},
+		formats.FormatKml:    {ID: formats.FormatKml, Loc: ".kml", BasePath: "", BaseURL: ""},
+		formats.FormatState:  {ID: formats.FormatState, Loc: "-updates/state.txt", BasePath: "", BaseURL: ""},
+		formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: "-latest-free.shp.zip", BasePath: "", BaseURL: ""},
 	}
 }
 
