@@ -13,7 +13,7 @@ jobs:
           ref: ${{ github.head_ref }}
       - uses: actions/setup-go@v5
         with:
-          go-version: '>=1.18.3' # The Go version to download (if necessary) and use.
+          go-version: '>=1.21' # The Go version to download (if necessary) and use.
           check-latest: true
           cache: true
       - run: go run download-geofabrik.go generate
