@@ -2,7 +2,7 @@ module github.com/julien-noblet/download-geofabrik
 
 require (
 	bou.ke/monkey v1.0.2
-	github.com/PuerkitoBio/goquery v1.9.0
+	github.com/PuerkitoBio/goquery v1.9.1
 	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/apex/log v1.9.0
 	github.com/cheggaaa/pb/v3 v3.1.5
