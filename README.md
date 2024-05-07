@@ -909,7 +909,7 @@ Total elements: 476
 | far_eastern_federal_district             | russia                           | far_eastern_federal_district             | sPp     |
 | far_west                                 | new_south_wales                  | far_west                                 | sPp     |
 | faro                                     | portugal                         | faro                                     | sPp     |
-| fiji                                     | merge                            | fiji                                     | sp      |
+| fiji                                     | merge                            | fiji                                     | sPp     |
 | fiji_east                                | oceania                          | fiji_east                                | sPp     |
 | fiji_west                                | oceania                          | fiji_west                                | sPp     |
 | finger_lakes                             | new-york                         | finger_lakes                             | sPp     |
@@ -925,8 +925,8 @@ Total elements: 476
 | florida_southwest                        | florida                          | florida_southwest                        | sPp     |
 | formosa                                  | argentina                        | formosa                                  | sPp     |
 | france                                   | europe                           | france                                   | sPp     |
-| france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sp      |
-| france_taaf                              | africa                           | france_taaf                              | sPp     |
+| france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sPp     |
+| france_taaf                              | merge                            | france_taaf                              | sPp     |
 | franche_comte                            | france                           | franche_comte                            | sPp     |
 | free_state                               | south_africa                     | free_state                               | sPp     |
 | fresno                                   | california                       | fresno                                   | sPp     |
@@ -1102,7 +1102,7 @@ Total elements: 476
 | kiev                                     | ukraine                          | kiev                                     | sPp     |
 | kiev_oblast                              | ukraine                          | kiev_oblast                              | sPp     |
 | kings                                    | california                       | kings                                    | sPp     |
-| kiribati                                 | merge                            | kiribati                                 | sp      |
+| kiribati                                 | merge                            | kiribati                                 | sPp     |
 | kiribati_east                            | oceania                          | kiribati_east                            | sPp     |
 | kiribati_west                            | oceania                          | kiribati_west                            | sPp     |
 | kirov_oblast                             | volga_federal_district           | kirov_oblast                             | sPp     |
@@ -1516,7 +1516,7 @@ Total elements: 476
 | senegal                                  | africa                           | senegal                                  | sPp     |
 | sergipe                                  | northeast                        | sergipe                                  | sPp     |
 | setubal                                  | portugal                         | setubal                                  | sPp     |
-| sevastopol                               | ukraine                          | sevastopol                               | sPp     |
+| sevastopol                               | southern_federal_district        | sevastopol                               | sPp     |
 | sevilla                                  | andalucia                        | sevilla                                  | sPp     |
 | seychelles                               | africa                           | seychelles                               | sPp     |
 | shaanxi                                  | china                            | shaanxi                                  | sPp     |
@@ -1913,6 +1913,7 @@ Total elements: 1187
 | Ljubljana        |       | Ljubljana        | PGS     |
 | Lodz             |       | Lodz             | PGS     |
 | London           |       | London           | PGS     |
+| LosAngeles       |       | LosAngeles       | PGS     |
 | Luebeck          |       | Luebeck          | PGS     |
 | Luxemburg        |       | Luxemburg        | PGS     |
 | Lyon             |       | Lyon             | PGS     |
@@ -2018,5 +2019,5 @@ Total elements: 1187
 | Wuppertal        |       | Wuppertal        | PGS     |
 | Zagreb           |       | Zagreb           | PGS     |
 | Zuerich          |       | Zuerich          | PGS     |
-Total elements: 236
+Total elements: 237
 
