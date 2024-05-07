@@ -1060,6 +1060,14 @@ elements:
             - osm.pbf
             - osm.gz
             - shp.zip
+    LosAngeles:
+        id: LosAngeles
+        file: LosAngeles/LosAngeles
+        name: LosAngeles
+        files:
+            - osm.pbf
+            - osm.gz
+            - shp.zip
     Luebeck:
         id: Luebeck
         file: Luebeck/Luebeck
