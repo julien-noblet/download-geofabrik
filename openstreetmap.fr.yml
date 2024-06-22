@@ -6701,10 +6701,10 @@ elements:
             - osm.pbf
             - state
             - poly
-    northweast:
-        id: northweast
-        file: northweast
-        name: northweast
+    northwest:
+        id: northwest
+        file: northwest
+        name: northwest
         parent: georgia
         files:
             - poly
