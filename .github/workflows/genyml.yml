@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-      - 'feat/*'
-      - 'fix/*'
 jobs:
   yml-generate:
     runs-on: ubuntu-latest
