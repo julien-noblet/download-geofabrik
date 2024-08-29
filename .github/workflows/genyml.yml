@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+permissions:
+  # contents permission to update benchmark contents in 'benchmarks' branch
+  contents: write
 jobs:
   yml-generate:
     runs-on: ubuntu-latest
