@@ -1,4 +1,7 @@
 name: gobenchdata publish
+permissions:
+  # contents permission to update benchmark contents in 'benchmarks' branch
+  contents: write
 on: push
 jobs:
   publish:
