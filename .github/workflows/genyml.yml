@@ -34,3 +34,4 @@ jobs:
         with:
           message: new yml files
           branch: ${{ github.head_ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
