@@ -906,7 +906,7 @@ Total elements: 509
 | drome                                    | rhone_alpes                      | drome                                    | sPp     |
 | durango                                  | mexico                           | durango                                  | sPp     |
 | dusseldorf                               | nordrhein_westfalen              | dusseldorf                               | sPp     |
-| east_central                             | illinois                         | east_central                             | sPp     |
+| east_central                             | florida                          | east_central                             | sPp     |
 | east_flanders                            | flanders                         | east_flanders                            | sPp     |
 | east_java                                | indonesia                        | east_java                                | sPp     |
 | east_kalimantan                          | indonesia                        | east_kalimantan                          | sPp     |
@@ -961,7 +961,7 @@ Total elements: 509
 | formosa                                  | argentina                        | formosa                                  | sPp     |
 | france                                   | europe                           | france                                   | sPp     |
 | france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sPp     |
-| france_taaf                              | africa                           | france_taaf                              | sPp     |
+| france_taaf                              | oceania                          | france_taaf                              | sPp     |
 | franche_comte                            | france                           | franche_comte                            | sPp     |
 | free_state                               | south_africa                     | free_state                               | sPp     |
 | fresno                                   | california                       | fresno                                   | sPp     |
