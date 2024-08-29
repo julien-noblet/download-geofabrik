@@ -30,7 +30,12 @@ jobs:
       - run: echo "## List of elements from bbbike.org" >> README.md
       - run: go run download-geofabrik.go --service "bbbike" list --markdown >> README.md
       - run: echo "" >> README.md
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          commit_message: new yml files
-          branch: ${{ github.head_ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+      #- uses: stefanzweifel/git-auto-commit-action@v5.0.1
+      #  with:
+      #    commit_message: new yml files
+      #    branch: ${{ github.head_ref }}
