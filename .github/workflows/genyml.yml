@@ -1,12 +1,9 @@
 name: yml-generate
 on:
   pull_request:
-    branches:
-      - master
   push:
     branches:
       - master
-
 jobs:
   yml-generate:
     runs-on: ubuntu-latest
@@ -33,11 +30,7 @@ jobs:
       - run: echo "## List of elements from bbbike.org" >> README.md
       - run: go run download-geofabrik.go --service "bbbike" list --markdown >> README.md
       - run: echo "" >> README.md
-      - uses: ad-m/github-push-action@master
+      - uses: actions-js/push@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-      #- uses: stefanzweifel/git-auto-commit-action@v5.0.1
-      #  with:
-      #    commit_message: new yml files
-      #    branch: ${{ github.head_ref }}
+          message: new yml files
+          branch: ${{ github.head_ref }}
