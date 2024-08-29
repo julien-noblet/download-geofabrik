@@ -1,11 +1,12 @@
 name: yml-generate
 on:
   pull_request:
+    branches:
+      - master
   push:
     branches:
-      - main
-      - 'feat/*'
-      - 'fix/*'
+      - master
+
 jobs:
   yml-generate:
     runs-on: ubuntu-latest
