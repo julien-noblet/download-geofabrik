@@ -1,4 +1,5 @@
 [
+  {"Version":"6aed83e94d1765f327beadf093fd502504152c73","Date":1724975271,"Tags":["ref=refs/heads/feat/auto_merge_dependabot"],"Suites":[]},
   {"Version":"26e7971d05ae379bbf3f97763b620c58cb781e68","Date":1724974886,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"d14294fdbdb2e7c463cc770027d5f50ab47febf1","Date":1724974416,"Tags":["ref=refs/heads/fix/Remove_badges"],"Suites":[]},
   {"Version":"b5ab642e92ba6f00fa7f300ce050cb824f193ea8","Date":1724974228,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.34.2"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"b7a8d3d815951e857dca37894f054b45482b7764","Date":1724968453,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
   {"Version":"c6e2eda18dbe927d731f5fb64acd4b9c13b4d0a5","Date":1724966546,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"9ac3b4ab0ec350b48daed3c300c12f089d36d20a","Date":1724966424,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"1b89a35a626edc61d1e83440930debc0b2fcdf57","Date":1717332228,"Tags":["ref=refs/heads/renovate/github.com-spf13-viper-1.x"],"Suites":[]},
-  {"Version":"ccb3ba8229b005e342b87b9e1effd208ac309a61","Date":1717332223,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"1b89a35a626edc61d1e83440930debc0b2fcdf57","Date":1717332228,"Tags":["ref=refs/heads/renovate/github.com-spf13-viper-1.x"],"Suites":[]}
 ]
