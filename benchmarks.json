@@ -1,4 +1,5 @@
 [
+  {"Version":"b5ab642e92ba6f00fa7f300ce050cb824f193ea8","Date":1724974228,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.34.2"],"Suites":[]},
   {"Version":"fea6841cd6059ba504966ff6a93493d00d758104","Date":1724974216,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fatih/color-1.17.0"],"Suites":[]},
   {"Version":"00fe9795a1f3595d9f712933bb24db0c6730bccb","Date":1724974158,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.2"],"Suites":[]},
   {"Version":"67e13b75d6942d822b9f19a732341ea02e96c9b1","Date":1724974101,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.1"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"1b89a35a626edc61d1e83440930debc0b2fcdf57","Date":1717332228,"Tags":["ref=refs/heads/renovate/github.com-spf13-viper-1.x"],"Suites":[]},
   {"Version":"ccb3ba8229b005e342b87b9e1effd208ac309a61","Date":1717332223,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"60ba6b0e43d0bac6719dc0535420c5b2fe7e2b40","Date":1715045150,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-6.x"],"Suites":[]},
-  {"Version":"d61c6c5a61acc8887b17d97053e06d7cf80ded2d","Date":1714440460,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"1d7bdbb440836d463fb8d5a8295509c8e163948c","Date":1714440458,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]}
+  {"Version":"d61c6c5a61acc8887b17d97053e06d7cf80ded2d","Date":1714440460,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
