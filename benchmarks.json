@@ -1,4 +1,5 @@
 [
+  {"Version":"5a8736cc28b5233df53c3bb8ee50ff9b0c3e56e9","Date":1724972481,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"f5a518232a28a4f8536422b1893acabf035cdccb","Date":1724971868,"Tags":["ref=refs/heads/fix/push_action"],"Suites":[]},
   {"Version":"c8e39639e68d441b670984c429f1b38500d55659","Date":1724971314,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"4dcbdf0a38ea19e700744a72cf5bde6dcd43b23b","Date":1724970770,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"285c7c6d99ec709213fa1a9fd24ddef753e62853","Date":1709219165,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"76971e3b4cd6415dd755d6d4d9c58558ff3bfc65","Date":1709219163,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"d468b75020117bb14082f81d7165366f280fdef5","Date":1708651433,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"ac77895e28e2c5beb04c55ee83702eee4c5a6c0b","Date":1708651424,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
-  {"Version":"1fbef3df7061e2c6d27988f93847898821a0ffe4","Date":1707497703,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-4.x"],"Suites":[]}
+  {"Version":"ac77895e28e2c5beb04c55ee83702eee4c5a6c0b","Date":1708651424,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]}
 ]
