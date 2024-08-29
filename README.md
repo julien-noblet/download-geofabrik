@@ -905,7 +905,7 @@ Total elements: 509
 | drome                                    | rhone_alpes                      | drome                                    | sPp     |
 | durango                                  | mexico                           | durango                                  | sPp     |
 | dusseldorf                               | nordrhein_westfalen              | dusseldorf                               | sPp     |
-| east_central                             | illinois                         | east_central                             | sPp     |
+| east_central                             | florida                          | east_central                             | sPp     |
 | east_flanders                            | flanders                         | east_flanders                            | sPp     |
 | east_java                                | indonesia                        | east_java                                | sPp     |
 | east_kalimantan                          | indonesia                        | east_kalimantan                          | sPp     |
@@ -1607,7 +1607,7 @@ Total elements: 509
 | southwest_finland                        | finland                          | southwest_finland                        | sPp     |
 | southwest_papua                          | indonesia                        | southwest_papua                          | sPp     |
 | southwestern_ontario                     | ontario                          | southwestern_ontario                     | sPp     |
-| spain                                    | europe                           | spain                                    | sPp     |
+| spain                                    | africa                           | spain                                    | sPp     |
 | stanislaus                               | california                       | stanislaus                               | sPp     |
 | state_of_mexico                          | mexico                           | state_of_mexico                          | sPp     |
 | stavropol_krai                           | north_caucasian_federal_district | stavropol_krai                           | sPp     |
