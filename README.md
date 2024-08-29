@@ -1336,7 +1336,7 @@ Total elements: 476
 | northern_mariana_islands                 | oceania                          | northern_mariana_islands                 | sPp     |
 | northern_mindanao                        | philippines                      | northern_mindanao                        | sPp     |
 | northern_territory                       | australia                        | northern_territory                       | sPp     |
-| northweast                               | georgia                          | northweast                               | sPp     |
+| northwest                                | georgia                          | northwest                                | sPp     |
 | northwest_territories                    | canada                           | northwest_territories                    | sPp     |
 | northwestern_federal_district            | russia                           | northwestern_federal_district            | sPp     |
 | northwestern_ontario                     | ontario                          | northwestern_ontario                     | sPp     |
