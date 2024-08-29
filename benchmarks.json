@@ -1,4 +1,5 @@
 [
+  {"Version":"bc0731eb007ca029f9cd4f9f3ab899f78522c169","Date":1724975648,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fatih/color-1.17.0"],"Suites":[]},
   {"Version":"5373f6f8f47c2fb736ec1fab69cb1f0be9066fa6","Date":1724975395,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"cd4f3b3a82c584f0d9c2ebe04d366d6cd4f81cc1","Date":1724975368,"Tags":["ref=refs/heads/feat/auto_merge_dependabot"],"Suites":[]},
   {"Version":"6aed83e94d1765f327beadf093fd502504152c73","Date":1724975271,"Tags":["ref=refs/heads/feat/auto_merge_dependabot"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"540f3ad46989879af9bef717677a62c7941a0d3f","Date":1724968885,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
   {"Version":"467828f7e6892236b3497de8d144414dd80823e9","Date":1724968799,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
   {"Version":"bebcb68a3e55c6eb060b9dd47b679e3c523dcd89","Date":1724968679,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
-  {"Version":"b7a8d3d815951e857dca37894f054b45482b7764","Date":1724968453,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
-  {"Version":"c6e2eda18dbe927d731f5fb64acd4b9c13b4d0a5","Date":1724966546,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"b7a8d3d815951e857dca37894f054b45482b7764","Date":1724968453,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]}
 ]
