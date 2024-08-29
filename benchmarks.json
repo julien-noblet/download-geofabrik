@@ -1,4 +1,5 @@
 [
+  {"Version":"c8e39639e68d441b670984c429f1b38500d55659","Date":1724971314,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"4dcbdf0a38ea19e700744a72cf5bde6dcd43b23b","Date":1724970770,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"80bf854453092ec1734c3eec80f922517eb73584","Date":1724970414,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
   {"Version":"1c00a44c6f3f30c516263257c4838774fe61cd83","Date":1724970007,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"d468b75020117bb14082f81d7165366f280fdef5","Date":1708651433,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ac77895e28e2c5beb04c55ee83702eee4c5a6c0b","Date":1708651424,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"1fbef3df7061e2c6d27988f93847898821a0ffe4","Date":1707497703,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-4.x"],"Suites":[]},
-  {"Version":"2f2f2a245f1119b63c8b0aa06c6f9228ac16767d","Date":1706227536,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"95bc0068298e8ffb1e3fe034f2bec77a2c6f2938","Date":1706227532,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]}
+  {"Version":"2f2f2a245f1119b63c8b0aa06c6f9228ac16767d","Date":1706227536,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
