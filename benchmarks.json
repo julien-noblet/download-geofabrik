@@ -1,4 +1,5 @@
 [
+  {"Version":"67e13b75d6942d822b9f19a732341ea02e96c9b1","Date":1724974101,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.1"],"Suites":[]},
   {"Version":"1e427767f6a432d1f90d552add344a17cb81e013","Date":1724973929,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"7482f6e30d92c5e855ece200880add0324b9d370","Date":1724973637,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/temoto/robotstxt-1.1.2"],"Suites":[]},
   {"Version":"f6f956544fcc86ebcd3197a27dcb7c31a0c16bd0","Date":1724973340,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"d61c6c5a61acc8887b17d97053e06d7cf80ded2d","Date":1714440460,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"1d7bdbb440836d463fb8d5a8295509c8e163948c","Date":1714440458,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"dbfde97c9415a0a84a4e58c34a5d2cd9ddb8e990","Date":1714015746,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-5.x"],"Suites":[]},
-  {"Version":"0a041a34b80ca9115eff8d110625010cff34afbb","Date":1709988322,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"f3748fc37f84bb47c1d9bab5bb5657d7e5a807fe","Date":1709301406,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"0a041a34b80ca9115eff8d110625010cff34afbb","Date":1709988322,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
