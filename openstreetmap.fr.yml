@@ -1912,9 +1912,9 @@ elements:
         name: chubu
         parent: japan
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     chubut:
         id: chubut
         file: chubut
@@ -1930,9 +1930,9 @@ elements:
         name: chugoku
         parent: japan
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     chukotka_autonomous_okrug:
         id: chukotka_autonomous_okrug
         file: chukotka_autonomous_okrug
@@ -2799,11 +2799,8 @@ elements:
             - poly
     europe:
         id: europe
-        file: europe
         name: europe
         files:
-            - osm.pbf
-            - state
             - poly
     euskadi:
         id: euskadi
@@ -2865,9 +2862,9 @@ elements:
         name: far_west
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     faro:
         id: faro
         file: faro
@@ -3228,6 +3225,15 @@ elements:
             - osm.pbf
             - state
             - poly
+    georgia_northwest:
+        id: georgia_northwest
+        file: northwest
+        name: georgia_northwest
+        parent: georgia
+        files:
+            - osm.pbf
+            - state
+            - poly
     georgia_southeast:
         id: georgia_southeast
         file: southeast
@@ -3402,18 +3408,18 @@ elements:
         name: greater_metropolitan_newcastle
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     greater_metropolitan_sydney:
         id: greater_metropolitan_sydney
         file: greater_metropolitan_sydney
         name: greater_metropolitan_sydney
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     grenada:
         id: grenada
         file: grenada
@@ -3798,9 +3804,9 @@ elements:
         name: hokkaido
         parent: japan
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     honduras:
         id: honduras
         file: honduras
@@ -3906,9 +3912,9 @@ elements:
         name: illawarra
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     ille_et_vilaine:
         id: ille_et_vilaine
         file: ille_et_vilaine
@@ -4428,9 +4434,9 @@ elements:
         name: kansai
         parent: japan
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     kanta_hame:
         id: kanta_hame
         file: kanta_hame
@@ -4446,9 +4452,9 @@ elements:
         name: kanto
         parent: japan
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     karachay_cherkess_republic:
         id: karachay_cherkess_republic
         file: karachay_cherkess_republic
@@ -4788,9 +4794,9 @@ elements:
         name: kyushu
         parent: japan
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     la_coruna:
         id: la_coruna
         file: la_coruna
@@ -5773,9 +5779,9 @@ elements:
         name: mid_north_coast
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     midi_pyrenees:
         id: midi_pyrenees
         file: midi_pyrenees
@@ -6016,9 +6022,9 @@ elements:
         name: murray
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     myanmar:
         id: myanmar
         file: myanmar
@@ -6187,27 +6193,27 @@ elements:
         name: new_south_wales_central_west
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     new_south_wales_north_western:
         id: new_south_wales_north_western
         file: north_western
         name: new_south_wales_north_western
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     new_south_wales_northern:
         id: new_south_wales_northern
         file: northern
         name: new_south_wales_northern
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     new_york_city:
         id: new_york_city
         file: new_york_city
@@ -6295,45 +6301,45 @@ elements:
         name: nigeria_north_east
         parent: nigeria
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     nigeria_north_west:
         id: nigeria_north_west
         file: north_west
         name: nigeria_north_west
         parent: nigeria
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     nigeria_south_east:
         id: nigeria_south_east
         file: south_east
         name: nigeria_south_east
         parent: nigeria
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     nigeria_south_south:
         id: nigeria_south_south
         file: south_south
         name: nigeria_south_south
         parent: nigeria
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     nigeria_south_west:
         id: nigeria_south_west
         file: south_west
         name: nigeria_south_west
         parent: nigeria
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     ningxia:
         id: ningxia
         file: ningxia
@@ -6461,9 +6467,6 @@ elements:
         file: north-america
         name: north-america
         files:
-            - osm.pbf
-            - osm.pbf.md5
-            - state
             - poly
     north-carolina:
         id: north-carolina
@@ -6534,9 +6537,9 @@ elements:
         name: north_central
         parent: nigeria
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     north_country:
         id: north_country
         file: north_country
@@ -6700,15 +6703,6 @@ elements:
         file: northern_territory
         name: northern_territory
         parent: australia
-        files:
-            - osm.pbf
-            - state
-            - poly
-    northwest:
-        id: northwest
-        file: northwest
-        name: northwest
-        parent: georgia
         files:
             - osm.pbf
             - state
@@ -7660,9 +7654,9 @@ elements:
         name: richmond_tweed
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     rio-de-janeiro:
         id: rio-de-janeiro
         file: rio-de-janeiro
@@ -8317,7 +8311,7 @@ elements:
         id: sevastopol
         file: sevastopol
         name: sevastopol
-        parent: southern_federal_district
+        parent: ukraine
         files:
             - osm.pbf
             - state
@@ -8391,9 +8385,9 @@ elements:
         name: shikoku
         parent: japan
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     siberian_federal_district:
         id: siberian_federal_district
         file: siberian_federal_district
@@ -8657,9 +8651,9 @@ elements:
         name: south_east_region
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     south_georgia_and_south_sandwich:
         id: south_georgia_and_south_sandwich
         file: south_georgia_and_south_sandwich
@@ -8987,9 +8981,9 @@ elements:
         name: sydney_surrounds
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     tabasco:
         id: tabasco
         file: tabasco
@@ -9257,9 +9251,9 @@ elements:
         name: the_riverina
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     thurgau:
         id: thurgau
         file: thurgau
@@ -9347,9 +9341,9 @@ elements:
         name: tohoku
         parent: japan
         files:
+            - poly
             - osm.pbf
             - state
-            - poly
     tokelau:
         id: tokelau
         file: tokelau
