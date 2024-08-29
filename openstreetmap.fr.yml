@@ -341,18 +341,18 @@ elements:
         name: andaman_and_nicobar_islands
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     andhra_pradesh:
         id: andhra_pradesh
         file: andhra_pradesh
         name: andhra_pradesh
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     angola:
         id: angola
         file: angola
@@ -548,9 +548,9 @@ elements:
         name: arunachal_pradesh
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     ashmore_and_cartier_islands:
         id: ashmore_and_cartier_islands
         file: ashmore_and_cartier_islands
@@ -575,9 +575,9 @@ elements:
         name: assam
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     astrakhan_oblast:
         id: astrakhan_oblast
         file: astrakhan_oblast
@@ -989,9 +989,9 @@ elements:
         name: bihar
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     biobio:
         id: biobio
         file: biobio
@@ -1750,9 +1750,9 @@ elements:
         name: chandigarh
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     charente:
         id: charente
         file: charente
@@ -1849,9 +1849,9 @@ elements:
         name: chhattisgarh
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     chiapas:
         id: chiapas
         file: chiapas
@@ -2326,18 +2326,18 @@ elements:
         name: dadra_and_nagar_haveli
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     dadra_and_nagar_haveli_and_daman_and_diu:
         id: dadra_and_nagar_haveli_and_daman_and_diu
         file: dadra_and_nagar_haveli_and_daman_and_diu
         name: dadra_and_nagar_haveli_and_daman_and_diu
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     dagestan_republic:
         id: dagestan_republic
         file: dagestan_republic
@@ -2362,9 +2362,9 @@ elements:
         name: daman_and_diu
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     davao_region:
         id: davao_region
         file: davao_region
@@ -2540,7 +2540,7 @@ elements:
         id: east_central
         file: east_central
         name: east_central
-        parent: illinois
+        parent: florida
         files:
             - osm.pbf
             - state
@@ -2799,11 +2799,8 @@ elements:
             - poly
     europe:
         id: europe
-        file: europe
         name: europe
         files:
-            - osm.pbf
-            - state
             - poly
     euskadi:
         id: euskadi
@@ -2865,9 +2862,9 @@ elements:
         name: far_west
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     faro:
         id: faro
         file: faro
@@ -3228,6 +3225,15 @@ elements:
             - osm.pbf
             - state
             - poly
+    georgia_northwest:
+        id: georgia_northwest
+        file: northwest
+        name: georgia_northwest
+        parent: georgia
+        files:
+            - osm.pbf
+            - state
+            - poly
     georgia_southeast:
         id: georgia_southeast
         file: southeast
@@ -3324,9 +3330,9 @@ elements:
         name: goa
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     goias:
         id: goias
         file: goias
@@ -3402,18 +3408,18 @@ elements:
         name: greater_metropolitan_newcastle
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     greater_metropolitan_sydney:
         id: greater_metropolitan_sydney
         file: greater_metropolitan_sydney
         name: greater_metropolitan_sydney
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     grenada:
         id: grenada
         file: grenada
@@ -3555,9 +3561,9 @@ elements:
         name: gujarat
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     guyana:
         id: guyana
         file: guyana
@@ -3600,9 +3606,9 @@ elements:
         name: haryana
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     haut_rhin:
         id: haut_rhin
         file: haut_rhin
@@ -3789,9 +3795,9 @@ elements:
         name: himachal_pradesh
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     hokkaido:
         id: hokkaido
         file: hokkaido
@@ -3906,9 +3912,9 @@ elements:
         name: illawarra
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     ille_et_vilaine:
         id: ille_et_vilaine
         file: ille_et_vilaine
@@ -4230,9 +4236,9 @@ elements:
         name: jammu_and_kashmir
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     jamtland:
         id: jamtland
         file: jamtland
@@ -4284,9 +4290,9 @@ elements:
         name: jharkhand
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     jiangsu:
         id: jiangsu
         file: jiangsu
@@ -4482,9 +4488,9 @@ elements:
         name: karnataka
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     karnten:
         id: karnten
         file: karnten
@@ -4518,9 +4524,9 @@ elements:
         name: kerala
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     kern:
         id: kern
         file: kern
@@ -4824,18 +4830,18 @@ elements:
         name: ladakh
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     lakshadweep:
         id: lakshadweep
         file: lakshadweep
         name: lakshadweep
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     lampung:
         id: lampung
         file: lampung
@@ -5274,9 +5280,9 @@ elements:
         name: madhya_pradesh
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     magadan_oblast:
         id: magadan_oblast
         file: magadan_oblast
@@ -5301,9 +5307,9 @@ elements:
         name: maharashtra
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     maine_et_loire:
         id: maine_et_loire
         file: maine_et_loire
@@ -5400,9 +5406,9 @@ elements:
         name: manipur
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     manitoba:
         id: manitoba
         file: manitoba
@@ -5616,9 +5622,9 @@ elements:
         name: meghalaya
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     melilla:
         id: melilla
         file: melilla
@@ -5773,9 +5779,9 @@ elements:
         name: mid_north_coast
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     midi_pyrenees:
         id: midi_pyrenees
         file: midi_pyrenees
@@ -5818,9 +5824,9 @@ elements:
         name: mizoram
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     modoc:
         id: modoc
         file: modoc
@@ -6016,9 +6022,9 @@ elements:
         name: murray
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     myanmar:
         id: myanmar
         file: myanmar
@@ -6043,9 +6049,9 @@ elements:
         name: nagaland
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     namibia:
         id: namibia
         file: namibia
@@ -6079,9 +6085,9 @@ elements:
         name: national_capital_territory_of_delhi
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     nauru:
         id: nauru
         file: nauru
@@ -6187,27 +6193,27 @@ elements:
         name: new_south_wales_central_west
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     new_south_wales_north_western:
         id: new_south_wales_north_western
         file: north_western
         name: new_south_wales_north_western
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     new_south_wales_northern:
         id: new_south_wales_northern
         file: northern
         name: new_south_wales_northern
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     new_york_city:
         id: new_york_city
         file: new_york_city
@@ -6458,12 +6464,8 @@ elements:
         meta: true
     north-america:
         id: north-america
-        file: north-america
         name: north-america
         files:
-            - osm.pbf
-            - osm.pbf.md5
-            - state
             - poly
     north-carolina:
         id: north-carolina
@@ -6704,15 +6706,6 @@ elements:
             - osm.pbf
             - state
             - poly
-    northwest:
-        id: northwest
-        file: northwest
-        name: northwest
-        parent: georgia
-        files:
-            - osm.pbf
-            - state
-            - poly
     northwest_territories:
         id: northwest_territories
         file: northwest_territories
@@ -6863,9 +6856,9 @@ elements:
         name: odisha
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     oestfold:
         id: oestfold
         file: oestfold
@@ -7462,9 +7455,9 @@ elements:
         name: puducherry
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     puebla:
         id: puebla
         file: puebla
@@ -7498,9 +7491,9 @@ elements:
         name: punjab
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     puy_de_dome:
         id: puy_de_dome
         file: puy_de_dome
@@ -7588,9 +7581,9 @@ elements:
         name: rajasthan
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     region_de_murcia:
         id: region_de_murcia
         file: region_de_murcia
@@ -7660,9 +7653,9 @@ elements:
         name: richmond_tweed
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     rio-de-janeiro:
         id: rio-de-janeiro
         file: rio-de-janeiro
@@ -8436,9 +8429,9 @@ elements:
         name: sikkim
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     sinaloa:
         id: sinaloa
         file: sinaloa
@@ -8657,9 +8650,9 @@ elements:
         name: south_east_region
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     south_georgia_and_south_sandwich:
         id: south_georgia_and_south_sandwich
         file: south_georgia_and_south_sandwich
@@ -8987,9 +8980,9 @@ elements:
         name: sydney_surrounds
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     tabasco:
         id: tabasco
         file: tabasco
@@ -9023,9 +9016,9 @@ elements:
         name: tamil_nadu
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     tanzania:
         id: tanzania
         file: tanzania
@@ -9140,9 +9133,9 @@ elements:
         name: telangana
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     telemark:
         id: telemark
         file: telemark
@@ -9257,9 +9250,9 @@ elements:
         name: the_riverina
         parent: new_south_wales
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     thurgau:
         id: thurgau
         file: thurgau
@@ -9446,9 +9439,9 @@ elements:
         name: tripura
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     trnavsky:
         id: trnavsky
         file: trnavsky
@@ -9788,18 +9781,18 @@ elements:
         name: uttar_pradesh
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     uttarakhand:
         id: uttarakhand
         file: uttarakhand
         name: uttarakhand
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     uusimaa:
         id: uusimaa
         file: uusimaa
@@ -10220,9 +10213,9 @@ elements:
         name: west_bengal
         parent: india
         files:
-            - poly
             - osm.pbf
             - state
+            - poly
     west_flanders:
         id: west_flanders
         file: west_flanders

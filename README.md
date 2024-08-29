@@ -92,6 +92,7 @@ generate
 | andalucia                                   | Spain                       | Andalucía                      | sPBHpSk |
 | andorra                                     | Europe                      | Andorra                        | sPBHpSk |
 | angola                                      | Africa                      | Angola                         | sPBHpSk |
+| anhui                                       | China                       | Anhui                          | sPBHpSk |
 | antarctica                                  |                             | Antarctica                     | sPBHpSk |
 | aquitaine                                   | France                      | Aquitaine                      | sPBHpSk |
 | aragon                                      | Spain                       | Aragón                         | sPBHpSk |
@@ -112,6 +113,7 @@ generate
 | basse-normandie                             | France                      | Basse-Normandie                | sPBHpSk |
 | bayern                                      | Germany                     | Bayern                         | sPBHpk  |
 | bedfordshire                                | England                     | Bedfordshire                   | sPBHpSk |
+| beijing                                     | China                       | Beijing                        | sPBHpSk |
 | belarus                                     | Europe                      | Belarus                        | sPBHpSk |
 | belgium                                     | Europe                      | Belgium                        | sPBHpSk |
 | belize                                      | Central America             | Belize                         | sPBHpSk |
@@ -156,7 +158,8 @@ generate
 | champagne-ardenne                           | France                      | Champagne Ardenne              | sPBHpSk |
 | cheshire                                    | England                     | Cheshire                       | sPBHpSk |
 | chile                                       | South America               | Chile                          | sPBHpSk |
-| china                                       | Asia                        | China                          | sPBHpSk |
+| china                                       | Asia                        | China                          | sPBHpk  |
+| chongqing                                   | China                       | Chongqing                      | sPBHpSk |
 | chubu                                       | Japan                       | Chūbu region                   | sPBHpSk |
 | chugoku                                     | Japan                       | Chūgoku region                 | sPBHpSk |
 | colombia                                    | South America               | Colombia                       | sPBHpSk |
@@ -211,8 +214,10 @@ generate
 | franche-comte                               | France                      | Franche Comte                  | sPBHpSk |
 | freiburg-regbez                             | Baden-Württemberg           | Regierungsbezirk Freiburg      | sPBHpSk |
 | friesland                                   | Netherlands                 | Friesland                      | sPBHpSk |
+| fujian                                      | China                       | Fujian                         | sPBHpSk |
 | gabon                                       | Africa                      | Gabon                          | sPBHpSk |
 | galicia                                     | Spain                       | Galicia                        | sPBHpSk |
+| gansu                                       | China                       | Gansu                          | sPBHpSk |
 | gcc-states                                  | Asia                        | GCC States                     | sPBHpSk |
 | gelderland                                  | Netherlands                 | Gelderland                     | sPBHpSk |
 | georgia                                     | Europe                      | Georgia                        | sPBHpSk |
@@ -226,27 +231,40 @@ generate
 | greenland                                   | North America               | Greenland                      | sPBHpSk |
 | groningen                                   | Netherlands                 | Groningen                      | sPBHpSk |
 | guadeloupe                                  | France                      | Guadeloupe                     | sPBHpk  |
+| guangdong                                   | China                       | Guangdong (with Hong Kong and  | sPBHpSk |
+|                                             |                             | Macau)                         |         |
+| guangxi                                     | China                       | Guangxi                        | sPBHpSk |
 | guatemala                                   | Central America             | Guatemala                      | sPBHpSk |
 | guernsey-jersey                             | Europe                      | Guernsey and Jersey            | sPBHpSk |
 | guinea                                      | Africa                      | Guinea                         | sPBHpSk |
 | guinea-bissau                               | Africa                      | Guinea-Bissau                  | sPBHpSk |
+| guizhou                                     | China                       | Guizhou                        | sPBHpSk |
 | guyana                                      | South America               | Guyana                         | sPBHpSk |
-| guyane                                      | France                      | Guyane                         | sPBHpk  |
+| guyane                                      | France                      | Guyane                         | sPBHpSk |
+| hainan                                      | China                       | Hainan                         | sPBHpSk |
 | haiti-and-domrep                            | Central America             | Haiti and Dominican Republic   | sPBHpSk |
 | hamburg                                     | Germany                     | Hamburg                        | sPBHpSk |
 | hampshire                                   | England                     | Hampshire                      | sPBHpSk |
 | haute-normandie                             | France                      | Haute-Normandie                | sPBHpSk |
+| hebei                                       | China                       | Hebei (with Beijing and        | sPBHpSk |
+|                                             |                             | Tianjin)                       |         |
+| heilongjiang                                | China                       | Heilongjiang                   | sPBHpSk |
+| henan                                       | China                       | Henan                          | sPBHpSk |
 | herefordshire                               | England                     | Herefordshire                  | sPBHpSk |
 | hertfordshire                               | England                     | Hertfordshire                  | sPBHpSk |
 | hessen                                      | Germany                     | Hessen                         | sPBHpSk |
 | hokkaido                                    | Japan                       | Hokkaidō                       | sPBHpSk |
 | honduras                                    | Central America             | Honduras                       | sPBHpSk |
+| hong-kong                                   | China                       | Hong Kong                      | sPBHpSk |
+| hubei                                       | China                       | Hubei                          | sPBHpSk |
+| hunan                                       | China                       | Hunan                          | sPBHpSk |
 | hungary                                     | Europe                      | Hungary                        | sPBHpSk |
 | iceland                                     | Europe                      | Iceland                        | sPBHpSk |
 | ile-de-clipperton                           | Australia and Oceania       | Île de Clipperton              | sPBHpSk |
 | ile-de-france                               | France                      | Ile-de-France                  | sPBHpSk |
 | india                                       | Asia                        | India                          | sPBHpk  |
 | indonesia                                   | Asia                        | Indonesia (with East Timor)    | sPBHpk  |
+| inner-mongolia                              | China                       | Inner Mongolia                 | sPBHpSk |
 | iran                                        | Asia                        | Iran                           | sPBHpSk |
 | iraq                                        | Asia                        | Iraq                           | sPBHpSk |
 | ireland-and-northern-ireland                | Europe                      | Ireland and Northern Ireland   | sPBHpSk |
@@ -260,6 +278,9 @@ generate
 | jamaica                                     | Central America             | Jamaica                        | sPBHpSk |
 | japan                                       | Asia                        | Japan                          | sPBHpk  |
 | java                                        | Indonesia (with East Timor) | Java                           | sPBHpSk |
+| jiangsu                                     | China                       | Jiangsu                        | sPBHpSk |
+| jiangxi                                     | China                       | Jiangxi                        | sPBHpSk |
+| jilin                                       | China                       | Jilin                          | sPBHpSk |
 | jordan                                      | Asia                        | Jordan                         | sPBHpSk |
 | kalimantan                                  | Indonesia (with East Timor) | Kalimantan                     | sPBHpSk |
 | kaliningrad                                 | Russian Federation          | Kaliningrad                    | sPBHpSk |
@@ -287,6 +308,7 @@ generate
 | lebanon                                     | Asia                        | Lebanon                        | sPBHpSk |
 | leicestershire                              | England                     | Leicestershire                 | sPBHpSk |
 | lesotho                                     | Africa                      | Lesotho                        | sPBHpSk |
+| liaoning                                    | China                       | Liaoning                       | sPBHpSk |
 | liberia                                     | Africa                      | Liberia                        | sPBHpSk |
 | libya                                       | Africa                      | Libya                          | sPBHpSk |
 | liechtenstein                               | Europe                      | Liechtenstein                  | sPBHpSk |
@@ -302,6 +324,7 @@ generate
 | lubuskie                                    | Poland                      | Województwo lubuskie<br        | sPBHpSk |
 |                                             |                             | />(Lubusz Voivodeship)         |         |
 | luxembourg                                  | Europe                      | Luxembourg                     | sPBHpSk |
+| macau                                       | China                       | Macau                          | sPBHpSk |
 | macedonia                                   | Europe                      | Macedonia                      | sPBHpSk |
 | madagascar                                  | Africa                      | Madagascar                     | sPBHpSk |
 | madrid                                      | Spain                       | Madrid                         | sPBHpSk |
@@ -352,6 +375,7 @@ generate
 | niedersachsen                               | Germany                     | Niedersachsen                  | sPBHpSk |
 | niger                                       | Africa                      | Niger                          | sPBHpSk |
 | nigeria                                     | Africa                      | Nigeria                        | sPBHpSk |
+| ningxia                                     | China                       | Ningxia                        | sPBHpSk |
 | niue                                        | Australia and Oceania       | Niue                           | sPBHpSk |
 | noord-brabant                               | Netherlands                 | Noord-Brabant                  | sPBHpSk |
 | noord-holland                               | Netherlands                 | Noord-Holland                  | sPBHpSk |
@@ -412,6 +436,7 @@ generate
 | portugal                                    | Europe                      | Portugal                       | sPBHpSk |
 | prince-edward-island                        | Canada                      | Prince Edward Island           | sPBHpSk |
 | provence-alpes-cote-d-azur                  | France                      | Provence Alpes-Cote-d'Azur     | sPBHpSk |
+| qinghai                                     | China                       | Qinghai                        | sPBHpSk |
 | quebec                                      | Canada                      | Quebec                         | sPBHpSk |
 | reunion                                     | France                      | Reunion                        | sPBHpk  |
 | rheinland-pfalz                             | Germany                     | Rheinland-Pfalz                | sPBHpSk |
@@ -434,9 +459,14 @@ generate
 | senegal-and-gambia                          | Africa                      | Senegal and Gambia             | sPBHpSk |
 | serbia                                      | Europe                      | Serbia                         | sPBHpSk |
 | seychelles                                  | Africa                      | Seychelles                     | sPBHpSk |
+| shaanxi                                     | China                       | Shaanxi                        | sPBHpSk |
+| shandong                                    | China                       | Shandong                       | sPBHpSk |
+| shanghai                                    | China                       | Shanghai                       | sPBHpSk |
+| shanxi                                      | China                       | Shanxi                         | sPBHpSk |
 | shikoku                                     | Japan                       | Shikoku                        | sPBHpSk |
 | shropshire                                  | England                     | Shropshire                     | sPBHpSk |
 | siberian-fed-district                       | Russian Federation          | Siberian Federal District      | sPBHpSk |
+| sichuan                                     | China                       | Sichuan                        | sPBHpSk |
 | sierra-leone                                | Africa                      | Sierra Leone                   | sPBHpSk |
 | slaskie                                     | Poland                      | Województwo śląskie<br         | sPBHpSk |
 |                                             |                             | />(Silesian Voivodeship)       |         |
@@ -479,6 +509,8 @@ generate
 | tanzania                                    | Africa                      | Tanzania                       | sPBHpSk |
 | thailand                                    | Asia                        | Thailand                       | sPBHpSk |
 | thueringen                                  | Germany                     | Thüringen                      | sPBHpSk |
+| tianjin                                     | China                       | Tianjin                        | sPBHpSk |
+| tibet                                       | China                       | Tibet                          | sPBHpSk |
 | togo                                        | Africa                      | Togo                           | sPBHpSk |
 | tohoku                                      | Japan                       | Tōhoku region                  | sPBHpSk |
 | tokelau                                     | Australia and Oceania       | Tokelau                        | sPBHpSk |
@@ -576,16 +608,19 @@ generate
 |                                             |                             | />(Greater Poland Voivodeship) |         |
 | wiltshire                                   | England                     | Wiltshire                      | sPBHpSk |
 | worcestershire                              | England                     | Worcestershire                 | sPBHpSk |
+| xinjiang                                    | China                       | Xinjiang                       | sPBHpSk |
 | yemen                                       | Asia                        | Yemen                          | sPBHpSk |
 | yukon                                       | Canada                      | Yukon                          | sPBHpSk |
+| yunnan                                      | China                       | Yunnan                         | sPBHpSk |
 | zachodniopomorskie                          | Poland                      | Województwo                    | sPBHpSk |
 |                                             |                             | zachodniopomorskie<br />(West  |         |
 |                                             |                             | Pomeranian Voivodeship)        |         |
 | zambia                                      | Africa                      | Zambia                         | sPBHpSk |
 | zeeland                                     | Netherlands                 | Zeeland                        | sPBHpSk |
+| zhejiang                                    | China                       | Zhejiang                       | sPBHpSk |
 | zimbabwe                                    | Africa                      | Zimbabwe                       | sPBHpSk |
 | zuid-holland                                | Netherlands                 | Zuid-Holland                   | sPBHpSk |
-Total elements: 476
+Total elements: 509
 
 ## List of elements from openstreetmap.fr
 |                SHORTNAME                 |              IS IN               |                LONG NAME                 | FORMATS |
@@ -871,7 +906,7 @@ Total elements: 476
 | drome                                    | rhone_alpes                      | drome                                    | sPp     |
 | durango                                  | mexico                           | durango                                  | sPp     |
 | dusseldorf                               | nordrhein_westfalen              | dusseldorf                               | sPp     |
-| east_central                             | illinois                         | east_central                             | sPp     |
+| east_central                             | florida                          | east_central                             | sPp     |
 | east_flanders                            | flanders                         | east_flanders                            | sPp     |
 | east_java                                | indonesia                        | east_java                                | sPp     |
 | east_kalimantan                          | indonesia                        | east_kalimantan                          | sPp     |
@@ -900,7 +935,7 @@ Total elements: 476
 | ethiopia                                 | africa                           | ethiopia                                 | sPp     |
 | eure                                     | haute_normandie                  | eure                                     | sPp     |
 | eure_et_loir                             | centre                           | eure_et_loir                             | sPp     |
-| europe                                   |                                  | europe                                   | sPp     |
+| europe                                   |                                  | europe                                   | p       |
 | euskadi                                  | spain                            | euskadi                                  | sPp     |
 | evora                                    | portugal                         | evora                                    | sPp     |
 | extremadura                              | spain                            | extremadura                              | sPp     |
@@ -948,6 +983,7 @@ Total elements: 476
 | geneva                                   | switzerland                      | geneva                                   | sPp     |
 | georgia                                  | asia                             | georgia                                  | sPp     |
 | georgia_northeast                        | georgia                          | georgia_northeast                        | sPp     |
+| georgia_northwest                        | georgia                          | georgia_northwest                        | sPp     |
 | georgia_southeast                        | georgia                          | georgia_southeast                        | sPp     |
 | georgia_southwest                        | georgia                          | georgia_southwest                        | sPp     |
 | germany                                  | europe                           | germany                                  | sPp     |
@@ -1308,7 +1344,7 @@ Total elements: 476
 | norfolk_island                           | australia                        | norfolk_island                           | sPp     |
 | norrbotten                               | sweden                           | norrbotten                               | sPp     |
 | north                                    | brazil                           | north                                    |         |
-| north-america                            |                                  | north-america                            | sPp     |
+| north-america                            |                                  | north-america                            | p       |
 | north-carolina                           | us-south                         | north-carolina                           | sPp     |
 | north-carolina_northeast                 | north-carolina                   | north-carolina_northeast                 | sPp     |
 | north-carolina_northwest                 | north-carolina                   | north-carolina_northwest                 | sPp     |
@@ -1336,7 +1372,6 @@ Total elements: 476
 | northern_mariana_islands                 | oceania                          | northern_mariana_islands                 | sPp     |
 | northern_mindanao                        | philippines                      | northern_mindanao                        | sPp     |
 | northern_territory                       | australia                        | northern_territory                       | sPp     |
-| northwest                                | georgia                          | northwest                                | sPp     |
 | northwest_territories                    | canada                           | northwest_territories                    | sPp     |
 | northwestern_federal_district            | russia                           | northwestern_federal_district            | sPp     |
 | northwestern_ontario                     | ontario                          | northwestern_ontario                     | sPp     |

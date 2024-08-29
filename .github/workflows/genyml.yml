@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - main
+      - master
 jobs:
   yml-generate:
     runs-on: ubuntu-latest
@@ -30,7 +30,9 @@ jobs:
       - run: echo "## List of elements from bbbike.org" >> README.md
       - run: go run download-geofabrik.go --service "bbbike" list --markdown >> README.md
       - run: echo "" >> README.md
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: actions-js/push@master
         with:
-          commit_message: new yml files
+          message: new yml files
           branch: ${{ github.head_ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          rebase: true
