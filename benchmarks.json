@@ -1,4 +1,5 @@
 [
+  {"Version":"d443acbc2c3ea991845e485553041ca47c0938fd","Date":1724982646,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ed383c79e2470d76230604eead75b2d9569fe8d4","Date":1724982176,"Tags":["ref=refs/heads/new_yamls"],"Suites":[]},
   {"Version":"651f2b1fe5cd058b420e86efff72d019f34481dd","Date":1724982068,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"6af7729e75fefe2969a50059cfd8585d1d31f9af","Date":1724981821,"Tags":["ref=refs/heads/renovate/actions-checkout-4.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"fea6841cd6059ba504966ff6a93493d00d758104","Date":1724974216,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fatih/color-1.17.0"],"Suites":[]},
   {"Version":"00fe9795a1f3595d9f712933bb24db0c6730bccb","Date":1724974158,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.2"],"Suites":[]},
   {"Version":"67e13b75d6942d822b9f19a732341ea02e96c9b1","Date":1724974101,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.1"],"Suites":[]},
-  {"Version":"1e427767f6a432d1f90d552add344a17cb81e013","Date":1724973929,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"7482f6e30d92c5e855ece200880add0324b9d370","Date":1724973637,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/temoto/robotstxt-1.1.2"],"Suites":[]}
+  {"Version":"1e427767f6a432d1f90d552add344a17cb81e013","Date":1724973929,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
