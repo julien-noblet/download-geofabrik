@@ -1,4 +1,5 @@
 [
+  {"Version":"495002b4888bce67fbeb2ed7b01041ad65f4cad0","Date":1724977447,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"93efae08367ec76d0fdc1966735f1ba41d9b70dc","Date":1724977432,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.2"],"Suites":[]},
   {"Version":"52381114c4ef55faaf52e9857e10879407af0323","Date":1724977428,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.1"],"Suites":[]},
   {"Version":"6df5c55e53eabc4058747e156a01b056ae67c1f8","Date":1724977271,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.34.2"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"c8e39639e68d441b670984c429f1b38500d55659","Date":1724971314,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"4dcbdf0a38ea19e700744a72cf5bde6dcd43b23b","Date":1724970770,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"80bf854453092ec1734c3eec80f922517eb73584","Date":1724970414,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
-  {"Version":"1c00a44c6f3f30c516263257c4838774fe61cd83","Date":1724970007,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
-  {"Version":"d344c5e5daaee61cb22e2821d666e45a56298527","Date":1724969890,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]}
+  {"Version":"1c00a44c6f3f30c516263257c4838774fe61cd83","Date":1724970007,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]}
 ]
