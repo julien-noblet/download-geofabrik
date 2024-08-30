@@ -1,4 +1,5 @@
 [
+  {"Version":"651f2b1fe5cd058b420e86efff72d019f34481dd","Date":1724982068,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"6af7729e75fefe2969a50059cfd8585d1d31f9af","Date":1724981821,"Tags":["ref=refs/heads/renovate/actions-checkout-4.x"],"Suites":[]},
   {"Version":"4bdab03601e20d190e3e635d48454474c1642a66","Date":1724981798,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"915001e943f6787eb1f98d257d6875fe90c50e08","Date":1724980824,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"67e13b75d6942d822b9f19a732341ea02e96c9b1","Date":1724974101,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.1"],"Suites":[]},
   {"Version":"1e427767f6a432d1f90d552add344a17cb81e013","Date":1724973929,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"7482f6e30d92c5e855ece200880add0324b9d370","Date":1724973637,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/temoto/robotstxt-1.1.2"],"Suites":[]},
-  {"Version":"f6f956544fcc86ebcd3197a27dcb7c31a0c16bd0","Date":1724973340,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"b9cd3f9a33510fed0ed00c1ba5b6e1e705cd18e3","Date":1724972681,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/temoto/robotstxt-1.1.2"],"Suites":[]}
+  {"Version":"f6f956544fcc86ebcd3197a27dcb7c31a0c16bd0","Date":1724973340,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
