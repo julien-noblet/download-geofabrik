@@ -1159,7 +1159,7 @@ Total elements: 509
 | kyushu                                   | japan                            | kyushu                                   | sPp     |
 | la_coruna                                | galicia                          | la_coruna                                | sPp     |
 | la_pampa                                 | argentina                        | la_pampa                                 | sPp     |
-| la_rioja                                 | spain                            | la_rioja                                 | sPp     |
+| la_rioja                                 | argentina                        | la_rioja                                 | sPp     |
 | ladakh                                   | india                            | ladakh                                   | sPp     |
 | lakshadweep                              | india                            | lakshadweep                              | sPp     |
 | lampung                                  | indonesia                        | lampung                                  | sPp     |
@@ -1550,7 +1550,7 @@ Total elements: 509
 | senegal                                  | africa                           | senegal                                  | sPp     |
 | sergipe                                  | northeast                        | sergipe                                  | sPp     |
 | setubal                                  | portugal                         | setubal                                  | sPp     |
-| sevastopol                               | ukraine                          | sevastopol                               | sPp     |
+| sevastopol                               | southern_federal_district        | sevastopol                               | sPp     |
 | sevilla                                  | andalucia                        | sevilla                                  | sPp     |
 | seychelles                               | africa                           | seychelles                               | sPp     |
 | shaanxi                                  | china                            | shaanxi                                  | sPp     |
