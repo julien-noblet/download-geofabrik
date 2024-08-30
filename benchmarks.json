@@ -1,4 +1,5 @@
 [
+  {"Version":"fb69c79451633de05919310c4ab164ac288fb277","Date":1724977081,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"e3d8500df043d5ff9b545c7ba0e3a3d0af9a6be2","Date":1724977069,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.34.2"],"Suites":[]},
   {"Version":"139883f69e0af53788ee6ff2c6d5c24bf038521f","Date":1724976781,"Tags":["ref=refs/heads/feat/Generate_yaml"],"Suites":[]},
   {"Version":"7b126413d6816d97082c3247b65c869b02feefb7","Date":1724976433,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"bc8737bdfea04d8f9a893603116b43e554a9da0a","Date":1724969732,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
   {"Version":"3260fd8dfd8436918d064810b617e3cda6729992","Date":1724969573,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
   {"Version":"2d0b45cc0b286f6b197c0f10303b34aa12ccd776","Date":1724969490,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
-  {"Version":"6b92371687347a2c4b1baf17fd81395d8c745ad6","Date":1724969059,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]},
-  {"Version":"540f3ad46989879af9bef717677a62c7941a0d3f","Date":1724968885,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]}
+  {"Version":"6b92371687347a2c4b1baf17fd81395d8c745ad6","Date":1724969059,"Tags":["ref=refs/heads/feat/Fix_push_yaml"],"Suites":[]}
 ]
