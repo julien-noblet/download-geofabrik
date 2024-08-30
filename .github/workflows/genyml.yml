@@ -37,8 +37,8 @@ jobs:
       - run: echo "" >> README.md
       - uses: actions-js/push@master
         with:
-          message: new yml files
-          branch: ${{ github.head_ref }}
+          message: generate yaml files - $(date +%Y-%m-%d)
+          branch: new_yamls
           github_token: ${{ secrets.GITHUB_TOKEN }}
           rebase: true
           force: true
