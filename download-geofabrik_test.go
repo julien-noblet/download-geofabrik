@@ -306,7 +306,7 @@ func Test_listCommand(t *testing.T) {
 		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			*lmd = thisTest.lmd
-			fakelistAllRegions := func(configuration *config.Config, format string) { //nolint:unparam // I need to test format
+			fakelistAllRegions := func(configuration *config.Config, format string) { //nolint:revive // I need to test format
 				assert.Equal(t, thisTest.want, format)
 			}
 			patch := monkey.Patch(listAllRegions, fakelistAllRegions)
@@ -425,10 +425,10 @@ func Test_downloadCommand(t *testing.T) {
 
 				return nil
 			}
-			fakedownloadChecksum := func(format string) bool { //nolint:unparam // I need to test format
+			fakedownloadChecksum := func(format string) bool { //nolint:revive // I need to test format
 				return thisTest.checksumValid
 			}
-			fakefileExist := func(filePath string) bool { //nolint:unparam // I need to test filePath
+			fakefileExist := func(filePath string) bool { //nolint:revive // I need to test filePath
 				return thisTest.fakefileExist
 			}
 			patch := monkey.Patch(download.FromURL, fakedownloadFromURL)
