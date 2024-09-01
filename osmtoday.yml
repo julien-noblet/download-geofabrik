@@ -1753,7 +1753,6 @@ elements:
             - geojson
     cordoba-andalucia:
         id: cordoba-andalucia
-        file: cordoba
         name: Cordoba
         parent: andalucia
         files:
@@ -1762,7 +1761,6 @@ elements:
             - poly
     cordoba-argentina:
         id: cordoba-argentina
-        file: cordoba
         name: Cordoba
         parent: argentina
         files:
@@ -2544,7 +2542,6 @@ elements:
             - geojson
     georgia-asia:
         id: georgia-asia
-        file: georgia
         name: Georgia
         parent: asia
         files:
@@ -2553,7 +2550,6 @@ elements:
             - poly
     georgia-us:
         id: georgia-us
-        file: georgia
         name: Georgia
         parent: us
         files:
@@ -2859,7 +2855,6 @@ elements:
             - geojson
     guyane-france:
         id: guyane-france
-        file: guyane
         name: Guyan
         parent: france
         files:
@@ -3957,7 +3952,6 @@ elements:
             - geojson
     la_rioja-argentina:
         id: la_rioja-argentina
-        file: la_rioja
         name: Rioja
         parent: argentina
         files:
@@ -3966,7 +3960,6 @@ elements:
             - poly
     la_rioja-spain:
         id: la_rioja-spain
-        file: la_rioja
         name: Rioja
         parent: spain
         files:
@@ -4155,7 +4148,6 @@ elements:
             - geojson
     limburg-flanders:
         id: limburg-flanders
-        file: limburg
         name: Limburg
         parent: flanders
         files:
@@ -4164,7 +4156,6 @@ elements:
             - poly
     limburg-netherlands:
         id: limburg-netherlands
-        file: limburg
         name: Limburg
         parent: netherlands
         files:
@@ -6898,7 +6889,6 @@ elements:
             - geojson
     sevastopol-ukraine:
         id: sevastopol-ukraine
-        file: sevastopol
         name: Sevastopol
         parent: ukraine
         files:
