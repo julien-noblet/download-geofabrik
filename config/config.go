@@ -52,7 +52,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error {
 
 	if ok { //nolint:nestif // TODO : Refactor?
 		if newElement.Parent != elementPtr.Parent {
-			return fmt.Errorf("can't merge : Parent mismatch")
+			return fmt.Errorf("can't merge : Parent mismatch %s != %s (%s)", newElement.Parent, elementPtr.Parent, elementPtr.ID)
 		}
 
 		config.ElementsMutex.Lock()

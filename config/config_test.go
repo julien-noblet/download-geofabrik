@@ -95,28 +95,28 @@ func sampleFormatValidPtr() map[string]formats.Format {
 	return map[string]formats.Format{
 		// Blank
 		"": {
-			ID:       "",
+			Ext:      "",
 			Loc:      "",
 			BasePath: "",
 		}, formats.FormatOsmPbf: {
-			ID:  formats.FormatOsmPbf,
+			Ext: formats.FormatOsmPbf,
 			Loc: ".osm.pbf",
 			// BasePath: "/",
 		}, formats.FormatState: {
-			ID:       formats.FormatState,
+			Ext:      formats.FormatState,
 			Loc:      "-updates/state.txt",
 			BasePath: "../state/",
 		}, formats.FormatPoly: {
-			ID:      formats.FormatPoly,
+			Ext:     formats.FormatPoly,
 			Loc:     ".poly",
 			BaseURL: "http://my.new.url/folder",
 		}, formats.FormatOsmBz2: {
-			ID:       formats.FormatOsmBz2,
+			Ext:      formats.FormatOsmBz2,
 			Loc:      ".osm.bz2",
 			BasePath: "../osmbz2/",
 			BaseURL:  "http://my.new.url/folder",
 		}, formats.FormatOsmGz: {
-			ID:       formats.FormatOsmGz,
+			Ext:      formats.FormatOsmGz,
 			Loc:      ".osm.gz",
 			BasePath: "../osmgz/",
 			BaseURL:  "http://my.new.url/folder",

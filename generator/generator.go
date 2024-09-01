@@ -13,6 +13,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/scrapper/bbbike"
 	geofabrikScrapper "github.com/julien-noblet/download-geofabrik/scrapper/geofabrik"
 	"github.com/julien-noblet/download-geofabrik/scrapper/openstreetmapfr"
+	"github.com/julien-noblet/download-geofabrik/scrapper/osmtoday"
 	"github.com/spf13/viper"
 )
 
@@ -53,11 +54,13 @@ func Generate(configfile string) { //nolint:cyclop // TODO : Refactor
 		myScrapper = geofabrikScrapper.GetDefault()
 	case "openstreetmap.fr":
 		myScrapper = openstreetmapfr.GetDefault()
+	case "osmtoday":
+		myScrapper = osmtoday.GetDefault()
 	case "bbbike":
 		myScrapper = bbbike.GetDefault()
 
 	default:
-		log.Error("service not recognized, please use one of geofabrik, openstreetmap.fr or bbbike")
+		log.Error("service not recognized, please use one of geofabrik, openstreetmap.fr, osmtoday or bbbike")
 	}
 
 	if viper.GetBool("progress") {

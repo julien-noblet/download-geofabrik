@@ -43,6 +43,9 @@ _testmain.go
 *.poly
 *.osm.*
 *.zip
+*.md5
+*.pbf
+
 snap.login
 
 # Test binary, built with `go test -c`

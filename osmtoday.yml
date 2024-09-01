@@ -1,0 +1,9031 @@
+formats:
+    geojson:
+        ext: kml
+        loc: .geojson
+    md5:
+        ext: md5
+        loc: .md5
+    osm.pbf:
+        ext: osm.pbf
+        loc: .pbf
+    poly:
+        ext: poly
+        loc: .poly
+elements:
+    "":
+        id: ""
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    aargau:
+        id: aargau
+        name: Aargau
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    abitibi_temiscamingue:
+        id: abitibi_temiscamingue
+        name: Abitibi - Temiskaming
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    abruzzo:
+        id: abruzzo
+        name: Abruzzo
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    aceh:
+        id: aceh
+        name: Aceh
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    acre:
+        id: acre
+        name: Acre
+        parent: north
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    adygea_republic:
+        id: adygea_republic
+        name: Republic of Adygea
+        parent: southern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    afghanistan:
+        id: afghanistan
+        name: Afghanistan
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    africa:
+        id: africa
+        name: Africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    aguascalientes:
+        id: aguascalientes
+        name: Aguascalientes
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    akershus:
+        id: akershus
+        name: Akershus
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    alabama:
+        id: alabama
+        name: Alabama
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    alagoas:
+        id: alagoas
+        name: Alagoas
+        parent: northeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    aland:
+        id: aland
+        name: Åland Islands
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    alaska:
+        id: alaska
+        name: Alaska
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    alava:
+        id: alava
+        name: Alava
+        parent: euskadi
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    albacete:
+        id: albacete
+        name: Albacete
+        parent: castilla_la_mancha
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    alberta:
+        id: alberta
+        name: Alberta
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    algeria:
+        id: algeria
+        name: Algeria
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    alicante:
+        id: alicante
+        name: Alicante
+        parent: comunitat_valenciana
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    almeria:
+        id: almeria
+        name: Almeria
+        parent: andalucia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    alsace:
+        id: alsace
+        name: Alsace
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    altai_krai:
+        id: altai_krai
+        name: Altai region
+        parent: siberian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    altai_republic:
+        id: altai_republic
+        name: Altai Republic
+        parent: siberian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    amapa:
+        id: amapa
+        name: Amapa
+        parent: north
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    amazonas:
+        id: amazonas
+        name: Amazons
+        parent: north
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    american-oceania:
+        id: american-oceania
+        name: America-Oceania
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    amur_oblast:
+        id: amur_oblast
+        name: Amur region
+        parent: far_eastern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    andalucia:
+        id: andalucia
+        name: Andalusia
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    andaman_and_nicobar_islands:
+        id: andaman_and_nicobar_islands
+        name: Andaman and Nicobar Islands
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    andhra_pradesh:
+        id: andhra_pradesh
+        name: Andhra Pradesh
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    angola:
+        id: angola
+        name: Angola
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    anguilla:
+        id: anguilla
+        name: Anguilla
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    anhui:
+        id: anhui
+        name: anhui
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    antarctica:
+        id: antarctica
+        name: Antarctica
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    antigua_and_barbuda:
+        id: antigua_and_barbuda
+        name: Antigua and Barbuda
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    antwerp:
+        id: antwerp
+        name: Antwerp
+        parent: flanders
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    appenzell_ausserrhoden:
+        id: appenzell_ausserrhoden
+        name: Appenzell Ausserrhoden
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    appenzell_innerrhoden:
+        id: appenzell_innerrhoden
+        name: Appenzell-Innerrhoden
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    aquitaine:
+        id: aquitaine
+        name: Aquitaine
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    aragon:
+        id: aragon
+        name: Aragon
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    argentina:
+        id: argentina
+        name: Argentina
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    arizona:
+        id: arizona
+        name: Arizona
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    arkansas:
+        id: arkansas
+        name: Arkansas
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    arkhangelsk_oblast:
+        id: arkhangelsk_oblast
+        name: Arkhangelsk region
+        parent: northwestern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    armenia:
+        id: armenia
+        name: Armenia
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    arnsberg:
+        id: arnsberg
+        name: Arnsberg
+        parent: nordrhein_westfalen
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    aruba:
+        id: aruba
+        name: Aruba
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    arunachal_pradesh:
+        id: arunachal_pradesh
+        name: Arunachal Pradesh
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    asia:
+        id: asia
+        name: Asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    assam:
+        id: assam
+        name: Assam
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    astrakhan_oblast:
+        id: astrakhan_oblast
+        name: Astrakhan Region
+        parent: southern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    asturias:
+        id: asturias
+        name: Asturias
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    aust-agder:
+        id: aust-agder
+        name: Aust-Agder
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    australia:
+        id: australia
+        name: Australia
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    australia_oceania:
+        id: australia_oceania
+        name: Australia Oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    austria:
+        id: austria
+        name: Austria
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    auvergne:
+        id: auvergne
+        name: Auvergne
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    avila:
+        id: avila
+        name: Avila
+        parent: castilla_y_leon
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    azerbaijan:
+        id: azerbaijan
+        name: Azerbaijan
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    azores:
+        id: azores
+        name: Azores
+        parent: portugal
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    badajoz:
+        id: badajoz
+        name: Badajoz
+        parent: extremadura
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    baden_wuerttemberg:
+        id: baden_wuerttemberg
+        name: Baden Württemberg
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bahamas:
+        id: bahamas
+        name: Bahamas
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bahia:
+        id: bahia
+        name: Bahia
+        parent: northeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bahrain:
+        id: bahrain
+        name: Bahrain
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    baja_california:
+        id: baja_california
+        name: Baja California
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    baja_california_sur:
+        id: baja_california_sur
+        name: Baja California Sur
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bali:
+        id: bali
+        name: Bali
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bangka_belitung_islands:
+        id: bangka_belitung_islands
+        name: Bangka Belitung Islands
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bangladesh:
+        id: bangladesh
+        name: Bangladesh
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    banskobystricky:
+        id: banskobystricky
+        name: Banskofast
+        parent: slovakia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    banten:
+        id: banten
+        name: banten
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    barbados:
+        id: barbados
+        name: Barbados
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    barcelona:
+        id: barcelona
+        name: Barcelona
+        parent: catalunya
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bas_saint_laurent:
+        id: bas_saint_laurent
+        name: Lower Saint Lawrence
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    basel_landschaft:
+        id: basel_landschaft
+        name: Basel Land
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    basel_stadt:
+        id: basel_stadt
+        name: Basel-Stadt
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bashkortostan_republic:
+        id: bashkortostan_republic
+        name: Republic of Bashkortostan
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    basilicata:
+        id: basilicata
+        name: Basilicata
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    basse_normandie:
+        id: basse_normandie
+        name: Lower Normandy
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bayern:
+        id: bayern
+        name: Bavaria
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bedfordshire:
+        id: bedfordshire
+        name: Bedfordshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    beijing:
+        id: beijing
+        name: Beijing
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    belarus:
+        id: belarus
+        name: Belarus
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    belgium:
+        id: belgium
+        name: Belgium
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    belgorod_oblast:
+        id: belgorod_oblast
+        name: Belgorod region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    belize:
+        id: belize
+        name: Belize
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bengkulu:
+        id: bengkulu
+        name: Bengkulu
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    benin:
+        id: benin
+        name: Benin
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    berkshire:
+        id: berkshire
+        name: Berkshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    berlin:
+        id: berlin
+        name: Berlin
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bermuda:
+        id: bermuda
+        name: Bermuda
+        parent: north_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bern:
+        id: bern
+        name: Berne
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bhutan:
+        id: bhutan
+        name: Butane
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bihar:
+        id: bihar
+        name: Bihar
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    blekinge:
+        id: blekinge
+        name: Blekinge
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bolivia:
+        id: bolivia
+        name: Bolivia
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    botswana:
+        id: botswana
+        name: Botswana
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bourgogne:
+        id: bourgogne
+        name: Burgundian
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bouvet_island:
+        id: bouvet_island
+        name: Bouvet Island
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    brandenburg:
+        id: brandenburg
+        name: Brandenburg
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bratislavsky:
+        id: bratislavsky
+        name: Bratislava
+        parent: slovakia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    brazil:
+        id: brazil
+        name: Brazil
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bremen:
+        id: bremen
+        name: Bremen
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    brestakaya:
+        id: brestakaya
+        name: Brest region
+        parent: belarus
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bretagne:
+        id: bretagne
+        name: Brittany
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bristol:
+        id: bristol
+        name: Bristol
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    british_columbia:
+        id: british_columbia
+        name: British Columbia
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    british_indian_ocean_territory:
+        id: british_indian_ocean_territory
+        name: British Indian Ocean Territory
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    british_virgin_islands:
+        id: british_virgin_islands
+        name: British Virgin Islands
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    brunei:
+        id: brunei
+        name: Brunei
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    brussels_capital_region:
+        id: brussels_capital_region
+        name: Brussels Capital Region
+        parent: belgium
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    bryansk_oblast:
+        id: bryansk_oblast
+        name: Bryansk Region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    buckinghamshire:
+        id: buckinghamshire
+        name: Buckinghamshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    buenos_aires:
+        id: buenos_aires
+        name: Buenos Aires
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    buenos_aires_city:
+        id: buenos_aires_city
+        name: city of Buenos Aires
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    burgenland:
+        id: burgenland
+        name: Burgenland
+        parent: austria
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    burgos:
+        id: burgos
+        name: Burgos
+        parent: castilla_y_leon
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    burkina_faso:
+        id: burkina_faso
+        name: Burkina Faso
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    burundi:
+        id: burundi
+        name: Burundi
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    buryatia_republic:
+        id: buryatia_republic
+        name: The Republic of Buryatia
+        parent: siberian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    buskerud:
+        id: buskerud
+        name: Buskerud
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    caceres:
+        id: caceres
+        name: Caceres
+        parent: extremadura
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cadiz:
+        id: cadiz
+        name: Cadiz
+        parent: andalucia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    calabria:
+        id: calabria
+        name: Calabria
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    california:
+        id: california
+        name: California
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cambodia:
+        id: cambodia
+        name: Cambodia
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cambridgeshire:
+        id: cambridgeshire
+        name: Cambridgeshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cameroon:
+        id: cameroon
+        name: Cameroon
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    campania:
+        id: campania
+        name: Campaign
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    campeche:
+        id: campeche
+        name: campeche
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    canada:
+        id: canada
+        name: Canada
+        parent: north_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    canary-islands:
+        id: canary-islands
+        name: Canary Islands
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cantabria:
+        id: cantabria
+        name: Cantabria
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cape_verde:
+        id: cape_verde
+        name: Cape Verde
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    capitale_nationale:
+        id: capitale_nationale
+        name: Capital Nacional
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    caribbean:
+        id: caribbean
+        name: caribbean
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    castellon:
+        id: castellon
+        name: Castellón
+        parent: comunitat_valenciana
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    castilla_la_mancha:
+        id: castilla_la_mancha
+        name: Castile-La Mancha
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    castilla_y_leon:
+        id: castilla_y_leon
+        name: Castile and Leon
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    catalunya:
+        id: catalunya
+        name: Catalonia
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    catamarca:
+        id: catamarca
+        name: Catamarca
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cayman_islands:
+        id: cayman_islands
+        name: Cayman islands
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ceara:
+        id: ceara
+        name: Ceara
+        parent: northeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    central-west:
+        id: central-west
+        name: Central Western
+        parent: brazil
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    central-zone:
+        id: central-zone
+        name: Central Zone
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    central_african_republic:
+        id: central_african_republic
+        name: Central African Republic
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    central_america:
+        id: central_america
+        name: Central America
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    central_federal_district:
+        id: central_federal_district
+        name: Central Federal District
+        parent: russia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    central_finland:
+        id: central_finland
+        name: Central Finland
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    central_java:
+        id: central_java
+        name: Central Java
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    central_kalimantan:
+        id: central_kalimantan
+        name: Central Kalimantan
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    central_ontario:
+        id: central_ontario
+        name: Central Ontario
+        parent: ontario
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    central_ostrobothnia:
+        id: central_ostrobothnia
+        name: Central Ostrobothnia
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    central_sulawesi:
+        id: central_sulawesi
+        name: Central Sulawesi
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    centre:
+        id: centre
+        name: Center
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    centre_du_quebec:
+        id: centre_du_quebec
+        name: Central Quebec
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chaco:
+        id: chaco
+        name: Chaco
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chad:
+        id: chad
+        name: Chad
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    champagne_ardenne:
+        id: champagne_ardenne
+        name: Champagne - Ardennes
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chandigarh:
+        id: chandigarh
+        name: Chandigarh
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chaudiere_appalaches:
+        id: chaudiere_appalaches
+        name: Chaudieres - Appalachians
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chechen_republic:
+        id: chechen_republic
+        name: Chechen Republic
+        parent: north_caucasian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chelyabinsk_oblast:
+        id: chelyabinsk_oblast
+        name: Chelyabinsk region
+        parent: ural_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cherkasy_oblast:
+        id: cherkasy_oblast
+        name: Cherkasy region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chernihiv_oblast:
+        id: chernihiv_oblast
+        name: Chernihiv region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chernivtsi_oblast:
+        id: chernivtsi_oblast
+        name: Chernivtsi Region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cheshire:
+        id: cheshire
+        name: Cheshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chhattisgarh:
+        id: chhattisgarh
+        name: Chhattisgarh
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chiapas:
+        id: chiapas
+        name: Chiapas
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chihuahua:
+        id: chihuahua
+        name: Chihuahua
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chile:
+        id: chile
+        name: Chile
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    china:
+        id: china
+        name: China
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chongqing:
+        id: chongqing
+        name: chongqing
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chubu:
+        id: chubu
+        name: Chubu
+        parent: japan
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chubut:
+        id: chubut
+        name: Chubut
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chugoku:
+        id: chugoku
+        name: Chugoku
+        parent: japan
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chukotka_autonomous_okrug:
+        id: chukotka_autonomous_okrug
+        name: Chukotka Autonomous Okrug
+        parent: far_eastern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    chuvash_republic:
+        id: chuvash_republic
+        name: Chuvash Republic
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ciudad_real:
+        id: ciudad_real
+        name: Ciudad Real
+        parent: castilla_la_mancha
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    coahuila:
+        id: coahuila
+        name: Coahuila
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    colima:
+        id: colima
+        name: Colima
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    colombia:
+        id: colombia
+        name: Colombia
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    colorado:
+        id: colorado
+        name: Colorado
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    comoros:
+        id: comoros
+        name: Comoros
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    comunidad_de_madrid:
+        id: comunidad_de_madrid
+        name: Madrid
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    comunidad_foral_de_navarra:
+        id: comunidad_foral_de_navarra
+        name: Navarre
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    comunitat_valenciana:
+        id: comunitat_valenciana
+        name: Valencia
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    congo-democratic-republic:
+        id: congo-democratic-republic
+        name: Democratic Republic of the Congo
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    congo_brazzaville:
+        id: congo_brazzaville
+        name: Brazzaville
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    congo_kinshasa:
+        id: congo_kinshasa
+        name: Kinshasa
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    connecticut:
+        id: connecticut
+        name: Connecticut
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cook-islands:
+        id: cook-islands
+        name: Cook Islands
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cordoba-andalucia:
+        id: cordoba-andalucia
+        file: cordoba
+        name: Cordoba
+        parent: andalucia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+    cordoba-argentina:
+        id: cordoba-argentina
+        file: cordoba
+        name: Cordoba
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+    cornwall:
+        id: cornwall
+        name: Cornwall
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    corrientes:
+        id: corrientes
+        name: Corrientes
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    corse:
+        id: corse
+        name: Kors
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    costa_rica:
+        id: costa_rica
+        name: Costa Rica
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cote_nord:
+        id: cote_nord
+        name: Côte Nor
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    crimea:
+        id: crimea
+        name: Crimea
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    crimea_republic:
+        id: crimea_republic
+        name: Republic of Crimea
+        parent: southern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cuba:
+        id: cuba
+        name: Cuba
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cuenca:
+        id: cuenca
+        name: Cuenca
+        parent: castilla_la_mancha
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    cumbria:
+        id: cumbria
+        name: Cumbria
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    curacao:
+        id: curacao
+        name: Curacao
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    czech_republic:
+        id: czech_republic
+        name: Czech Republic
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    dadra_and_nagar_haveli:
+        id: dadra_and_nagar_haveli
+        name: Dadra and Nagar Haveli
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    dadra_and_nagar_haveli_and_daman_and_diu:
+        id: dadra_and_nagar_haveli_and_daman_and_diu
+        name: Dadra and Nagar Haveli and Daman and Diu
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    dagestan_republic:
+        id: dagestan_republic
+        name: The Republic of Dagestan
+        parent: north_caucasian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    dalarna:
+        id: dalarna
+        name: Dalarna
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    daman_and_diu:
+        id: daman_and_diu
+        name: Daman and Diu
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    delaware:
+        id: delaware
+        name: Delaware
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    derbyshire:
+        id: derbyshire
+        name: Derbyshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    detmold:
+        id: detmold
+        name: Detmold
+        parent: nordrhein_westfalen
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    devon:
+        id: devon
+        name: Devonian
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    district-of-columbia:
+        id: district-of-columbia
+        name: District of Colombia
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    distrito-federal:
+        id: distrito-federal
+        name: Distrito Federal
+        parent: central-west
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    djibouti:
+        id: djibouti
+        name: Djibouti
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    dnipropetrovsk_oblast:
+        id: dnipropetrovsk_oblast
+        name: Dnipropetrovsk Region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    dolnoslaskie:
+        id: dolnoslaskie
+        name: Dolnoslaskie
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    dominica:
+        id: dominica
+        name: Dominica
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    dominican_republic:
+        id: dominican_republic
+        name: Dominican Republic
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    donetsk_oblast:
+        id: donetsk_oblast
+        name: Donetsk Oblast
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    dorset:
+        id: dorset
+        name: Dorset
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    drenthe:
+        id: drenthe
+        name: Drenthe
+        parent: netherlands
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    durango:
+        id: durango
+        name: Durango
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    durham:
+        id: durham
+        name: Durham
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    dusseldorf:
+        id: dusseldorf
+        name: Dusseldorf
+        parent: nordrhein_westfalen
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    east:
+        id: east
+        name: East
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    east_flanders:
+        id: east_flanders
+        name: East Flemish
+        parent: flanders
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    east_java:
+        id: east_java
+        name: East Java
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    east_kalimantan:
+        id: east_kalimantan
+        name: East Kalimantan
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    east_midlands:
+        id: east_midlands
+        name: East Midlands
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    east_nusa_tenggara:
+        id: east_nusa_tenggara
+        name: East Nusa Tenggara
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    east_sussex:
+        id: east_sussex
+        name: East Sussex
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    east_timor:
+        id: east_timor
+        name: East Timor
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    east_yorkshire_with_hull:
+        id: east_yorkshire_with_hull
+        name: East Riding of Yorkshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    eastern-zone:
+        id: eastern-zone
+        name: Eastern Zone
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    eastern_ontario:
+        id: eastern_ontario
+        name: Eastern Ontario
+        parent: ontario
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ecuador:
+        id: ecuador
+        name: Ecuador
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    egypt:
+        id: egypt
+        name: Egypt
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    el_salvador:
+        id: el_salvador
+        name: Salvador
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    emilia_romagna:
+        id: emilia_romagna
+        name: Emilia-Romagna
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    england:
+        id: england
+        name: England
+        parent: united_kingdom
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    entre_rios:
+        id: entre_rios
+        name: Entre Rios
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    equatorial_guinea:
+        id: equatorial_guinea
+        name: Equatorial Guinea
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    eritrea:
+        id: eritrea
+        name: Eritrea
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    espirito-santo:
+        id: espirito-santo
+        name: Duhito Santo
+        parent: southeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    essex:
+        id: essex
+        name: Essex
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    estrie:
+        id: estrie
+        name: Estri
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ethiopia:
+        id: ethiopia
+        name: Ethiopia
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    europe:
+        id: europe
+        name: Europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    euskadi:
+        id: euskadi
+        name: Euskadi
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    extremadura:
+        id: extremadura
+        name: Extremadura
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    falkland:
+        id: falkland
+        name: Falkland
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    far_eastern_federal_district:
+        id: far_eastern_federal_district
+        name: Far Eastern Federal District
+        parent: russia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    fiji:
+        id: fiji
+        name: Fiji
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    finland:
+        id: finland
+        name: Finland
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    finnmark:
+        id: finnmark
+        name: Finnmark
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    flanders:
+        id: flanders
+        name: Flanders
+        parent: belgium
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    flemish_brabant:
+        id: flemish_brabant
+        name: Flemish Brabant
+        parent: flanders
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    flevoland:
+        id: flevoland
+        name: Flevoland
+        parent: netherlands
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    florida:
+        id: florida
+        name: Florida
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    formosa:
+        id: formosa
+        name: Formosa
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    france:
+        id: france
+        name: France
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    france_taaf:
+        id: france_taaf
+        name: French Southern and Antarctic Territories
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    franche_comte:
+        id: franche_comte
+        name: franche-comté
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    fribourg:
+        id: fribourg
+        name: Friborg
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    friesland:
+        id: friesland
+        name: friesland
+        parent: netherlands
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    friuli_venezia_giulia:
+        id: friuli_venezia_giulia
+        name: Friuli Venezia Giulia
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    fujian:
+        id: fujian
+        name: Fujian
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    gabon:
+        id: gabon
+        name: Gabon
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    galicia:
+        id: galicia
+        name: Galicia
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    gambia:
+        id: gambia
+        name: Gambia
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    gansu:
+        id: gansu
+        name: Gansu
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    gaspesie_iles_de_la_madeleine:
+        id: gaspesie_iles_de_la_madeleine
+        name: Gaspesie - Madeleine Islands
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    gavleborg:
+        id: gavleborg
+        name: Gävleborg
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    gcc_states:
+        id: gcc_states
+        name: Cooperation Council for the Arab States of the Gulf
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    gelderland:
+        id: gelderland
+        name: Gelderland
+        parent: netherlands
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    geneva:
+        id: geneva
+        name: Geneva
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    georgia-asia:
+        id: georgia-asia
+        file: georgia
+        name: Georgia
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+    georgia-us:
+        id: georgia-us
+        file: georgia
+        name: Georgia
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+    germany:
+        id: germany
+        name: Germany
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ghana:
+        id: ghana
+        name: Ghana
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    gibraltar:
+        id: gibraltar
+        name: Gibraltar
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    girona:
+        id: girona
+        name: Girona
+        parent: catalunya
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    glarus:
+        id: glarus
+        name: Glarus
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    gloucestershire:
+        id: gloucestershire
+        name: Gloucestershire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    goa:
+        id: goa
+        name: Goa
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    goias:
+        id: goias
+        name: Goiás
+        parent: central-west
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    golden_horseshoe:
+        id: golden_horseshoe
+        name: Golden Horseshoe
+        parent: ontario
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    gorontalo:
+        id: gorontalo
+        name: Gorontalo
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    gotland:
+        id: gotland
+        name: Gotland
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    granada:
+        id: granada
+        name: Granada
+        parent: andalucia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    greater_london:
+        id: greater_london
+        name: Greater London
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    greater_manchester:
+        id: greater_manchester
+        name: Greater Manchester
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    greenland:
+        id: greenland
+        name: Greenland
+        parent: north_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    grenada:
+        id: grenada
+        name: Grenada
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    grisons:
+        id: grisons
+        name: Grisons
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    grodnenskaya:
+        id: grodnenskaya
+        name: The Grodno region
+        parent: belarus
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    groningen:
+        id: groningen
+        name: Groningen
+        parent: netherlands
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guadalajara:
+        id: guadalajara
+        name: Guadalajara
+        parent: castilla_la_mancha
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guadeloupe:
+        id: guadeloupe
+        name: Guadeloupe
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guanajuato:
+        id: guanajuato
+        name: Guanajuato
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guangdong:
+        id: guangdong
+        name: Guangdong
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guangxi:
+        id: guangxi
+        name: Guangxi
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guatemala:
+        id: guatemala
+        name: Guatemala
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guernesey:
+        id: guernesey
+        name: guernsey
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guerrero:
+        id: guerrero
+        name: Guerrero
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guinea:
+        id: guinea
+        name: Guinea
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guipuzcoa:
+        id: guipuzcoa
+        name: Gipuzkoa
+        parent: euskadi
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guizhou:
+        id: guizhou
+        name: Guizhou
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    gujarat:
+        id: gujarat
+        name: Gujarat
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guyana:
+        id: guyana
+        name: Guyana
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guyane:
+        id: guyane
+        name: Guyan
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    guyane-france:
+        id: guyane-france
+        file: guyane
+        name: Guyan
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+    hainan:
+        id: hainan
+        name: Hainan
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    haiti_and_domrep:
+        id: haiti_and_domrep
+        name: Republic of Haiti and Domenican Republic
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    halland:
+        id: halland
+        name: Halland
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hamburg:
+        id: hamburg
+        name: Hamburg
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hampshire:
+        id: hampshire
+        name: Hampshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    haryana:
+        id: haryana
+        name: Haryana
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    haute_normandie:
+        id: haute_normandie
+        name: Upper Normandy
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hawaii:
+        id: hawaii
+        name: Hawaii
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hebei:
+        id: hebei
+        name: Hebei
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hedmark:
+        id: hedmark
+        name: headmark
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    heilongjiang:
+        id: heilongjiang
+        name: heilongjiang
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    henan:
+        id: henan
+        name: Henan
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    herefordshire:
+        id: herefordshire
+        name: Herefordshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hertfordshire:
+        id: hertfordshire
+        name: Hertfordshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hessen:
+        id: hessen
+        name: Hesse
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hidalgo:
+        id: hidalgo
+        name: Hidalgo
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    himachal_pradesh:
+        id: himachal_pradesh
+        name: Himachal Pradesh
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hokkaido:
+        id: hokkaido
+        name: Hokkaido
+        parent: japan
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    homelskay:
+        id: homelskay
+        name: Gomel region
+        parent: belarus
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    honduras:
+        id: honduras
+        name: Honduras
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hong_kong:
+        id: hong_kong
+        name: Hong Kong
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hordaland:
+        id: hordaland
+        name: Hordaland
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hubei:
+        id: hubei
+        name: Hubei
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    huelva:
+        id: huelva
+        name: Huelva
+        parent: andalucia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    huesca:
+        id: huesca
+        name: Huesca
+        parent: aragon
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    hunan:
+        id: hunan
+        name: Hunan
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    idaho:
+        id: idaho
+        name: Idaho
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ile-de-clipperton:
+        id: ile-de-clipperton
+        name: Ile De Clipperton
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ile_de_france:
+        id: ile_de_france
+        name: Île de France
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    illes_balears:
+        id: illes_balears
+        name: Balearic Islands
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    illinois:
+        id: illinois
+        name: Illinois
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    india:
+        id: india
+        name: India
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    indiana:
+        id: indiana
+        name: Indiana
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    indonesia:
+        id: indonesia
+        name: Indonesia
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ingushetia_republic:
+        id: ingushetia_republic
+        name: Republic of Ingushetia
+        parent: north_caucasian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    inner_mongolia:
+        id: inner_mongolia
+        name: Inner Mongolia
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    iowa:
+        id: iowa
+        name: Iowa
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    iran:
+        id: iran
+        name: Iran
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    iraq:
+        id: iraq
+        name: Iraq
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ireland:
+        id: ireland
+        name: Ireland
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    irkutsk_oblast:
+        id: irkutsk_oblast
+        name: Irkutsk region
+        parent: siberian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    isle_of_wight:
+        id: isle_of_wight
+        name: Isle of Wight
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    israel:
+        id: israel
+        name: Israel
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    israel_and_palestine:
+        id: israel_and_palestine
+        name: Israel and Palestine
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    italy:
+        id: italy
+        name: Italy
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ivano-frankivsk_oblast:
+        id: ivano-frankivsk_oblast
+        name: Ivano-Frankivsk region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ivanovo_oblast:
+        id: ivanovo_oblast
+        name: Ivanovo Region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ivory_coast:
+        id: ivory_coast
+        name: Ivory Coast
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jaen:
+        id: jaen
+        name: Haen
+        parent: andalucia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jakarta:
+        id: jakarta
+        name: Jakarta
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jalisco:
+        id: jalisco
+        name: Jalisco
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jamaica:
+        id: jamaica
+        name: Jamaica
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jambi:
+        id: jambi
+        name: Jambi
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jammu_and_kashmir:
+        id: jammu_and_kashmir
+        name: Jammu and Kashmir
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jamtland:
+        id: jamtland
+        name: gemtland
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jan_mayen:
+        id: jan_mayen
+        name: Jan Mayen
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    japan:
+        id: japan
+        name: Japan
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    java:
+        id: java
+        name: Java
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jersey:
+        id: jersey
+        name: channel islands
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jewish_autonomous_oblast:
+        id: jewish_autonomous_oblast
+        name: Jewish Autonomous Region
+        parent: far_eastern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jharkhand:
+        id: jharkhand
+        name: Jharkhand
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jiangsu:
+        id: jiangsu
+        name: Jiangsu
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jiangxi:
+        id: jiangxi
+        name: Jiangxi
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jihocesky:
+        id: jihocesky
+        name: Jigocheski
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jihomoravsky:
+        id: jihomoravsky
+        name: Jichomoravian
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jilin:
+        id: jilin
+        name: Jilin
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jonkoping:
+        id: jonkoping
+        name: Yonkoping
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jordan:
+        id: jordan
+        name: Jordan
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jujuy:
+        id: jujuy
+        name: Jujuy
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    jura:
+        id: jura
+        name: Yura
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kabardino_balkar_republic:
+        id: kabardino_balkar_republic
+        name: Kabardino Balkar Republic
+        parent: north_caucasian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kainuu:
+        id: kainuu
+        name: Kainuu
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kalimantan:
+        id: kalimantan
+        name: kalimantan
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kaliningrad_oblast:
+        id: kaliningrad_oblast
+        name: Kaliningrad region
+        parent: northwestern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kalmar:
+        id: kalmar
+        name: Squid
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kalmykia_republic:
+        id: kalmykia_republic
+        name: Republic of Kalmykia
+        parent: southern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kaluga_oblast:
+        id: kaluga_oblast
+        name: Kaluga region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kamchatka_krai:
+        id: kamchatka_krai
+        name: Kamchatka
+        parent: far_eastern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kansai:
+        id: kansai
+        name: Kansai
+        parent: japan
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kansas:
+        id: kansas
+        name: Kansas
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kanta_hame:
+        id: kanta_hame
+        name: Kanta-Hame
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kanto:
+        id: kanto
+        name: Kanto
+        parent: japan
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    karachay_cherkess_republic:
+        id: karachay_cherkess_republic
+        name: Karachaev Circassian Republic
+        parent: north_caucasian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    karelia_republic:
+        id: karelia_republic
+        name: Republic of Karelia
+        parent: northwestern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    karlovarsky:
+        id: karlovarsky
+        name: Karlovy Vary
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    karnataka:
+        id: karnataka
+        name: Karnataka
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    karnten:
+        id: karnten
+        name: Carnten
+        parent: austria
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kazakhstan:
+        id: kazakhstan
+        name: Kazakhstan
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kemerovo_oblast:
+        id: kemerovo_oblast
+        name: Kemerovo Region
+        parent: siberian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kent:
+        id: kent
+        name: Kent
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kentucky:
+        id: kentucky
+        name: Kentucky
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kenya:
+        id: kenya
+        name: Kenya
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kerala:
+        id: kerala
+        name: Kerala
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    khabarovsk_krai:
+        id: khabarovsk_krai
+        name: Khabarovsk region
+        parent: far_eastern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    khakassia_republic:
+        id: khakassia_republic
+        name: The Republic of Khakassia
+        parent: siberian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    khanty_mansi_autonomous_okrug:
+        id: khanty_mansi_autonomous_okrug
+        name: Khanty-Mansi Autonomous Okrug
+        parent: ural_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kharkiv_oblast:
+        id: kharkiv_oblast
+        name: Kharkov region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kherson_oblast:
+        id: kherson_oblast
+        name: Kherson region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    khmelnytskyi_oblast:
+        id: khmelnytskyi_oblast
+        name: Khmelnitsky region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kiev:
+        id: kiev
+        name: Kyiv
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kiev_oblast:
+        id: kiev_oblast
+        name: Kyiv region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kiribati:
+        id: kiribati
+        name: Kiribati
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kirov_oblast:
+        id: kirov_oblast
+        name: Kirov region
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kirovohrad_oblast:
+        id: kirovohrad_oblast
+        name: Kirovograd Region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    koln:
+        id: koln
+        name: Column
+        parent: nordrhein_westfalen
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    komi_republic:
+        id: komi_republic
+        name: Komi Republic
+        parent: northwestern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kosicky:
+        id: kosicky
+        name: Kositsky
+        parent: slovakia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kostroma_oblast:
+        id: kostroma_oblast
+        name: Kostroma region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kralovehradecky:
+        id: kralovehradecky
+        name: Kralovogradetsky
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    krasnodar_krai:
+        id: krasnodar_krai
+        name: Krasnodar region
+        parent: southern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    krasnoyarsk_krai:
+        id: krasnoyarsk_krai
+        name: Krasnoyarsk Region
+        parent: siberian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kronoberg:
+        id: kronoberg
+        name: Kronoberg
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kujawsko_pomorskie:
+        id: kujawsko_pomorskie
+        name: Kuyavia-Pomeranian
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kurgan_oblast:
+        id: kurgan_oblast
+        name: Kurgan region
+        parent: ural_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kursk_oblast:
+        id: kursk_oblast
+        name: Kursk Region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kuwait:
+        id: kuwait
+        name: Kuwait
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kymenlaakso:
+        id: kymenlaakso
+        name: Kymenlaakso
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kyrgyzstan:
+        id: kyrgyzstan
+        name: Kyrgyzstan
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    kyushu:
+        id: kyushu
+        name: Kyushu
+        parent: japan
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    la_coruna:
+        id: la_coruna
+        name: La Coruna
+        parent: galicia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    la_pampa:
+        id: la_pampa
+        name: La Pampa
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    la_rioja-argentina:
+        id: la_rioja-argentina
+        file: la_rioja
+        name: Rioja
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+    la_rioja-spain:
+        id: la_rioja-spain
+        file: la_rioja
+        name: Rioja
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+    lakshadweep:
+        id: lakshadweep
+        name: Lakshadweep
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lampung:
+        id: lampung
+        name: Lampung
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lanaudiere:
+        id: lanaudiere
+        name: Lanaudière
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lancashire:
+        id: lancashire
+        name: Lancashire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    languedoc_roussillon:
+        id: languedoc_roussillon
+        name: Languedoc Roussillon
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    laos:
+        id: laos
+        name: Laos
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lapland:
+        id: lapland
+        name: Lapland
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    laurentides:
+        id: laurentides
+        name: Laurentides
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    laval:
+        id: laval
+        name: Laval
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lazio:
+        id: lazio
+        name: Lazio
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lebanon:
+        id: lebanon
+        name: Lebanon
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    leicestershire:
+        id: leicestershire
+        name: Leicestershire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    leningrad_oblast:
+        id: leningrad_oblast
+        name: Leningrad region
+        parent: northwestern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    leon:
+        id: leon
+        name: Leon
+        parent: castilla_y_leon
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lesotho:
+        id: lesotho
+        name: Lesotho
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    liaoning:
+        id: liaoning
+        name: Liaoning
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    liberecky:
+        id: liberecky
+        name: Liberec
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    liberia:
+        id: liberia
+        name: Liberia
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    libya:
+        id: libya
+        name: Libya
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    liguria:
+        id: liguria
+        name: Liguria
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    limburg-flanders:
+        id: limburg-flanders
+        file: limburg
+        name: Limburg
+        parent: flanders
+        files:
+            - osm.pbf
+            - md5
+            - poly
+    limburg-netherlands:
+        id: limburg-netherlands
+        file: limburg
+        name: Limburg
+        parent: netherlands
+        files:
+            - osm.pbf
+            - md5
+            - poly
+    limousin:
+        id: limousin
+        name: Limousine
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lincolnshire:
+        id: lincolnshire
+        name: Lincolnshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lipetsk_oblast:
+        id: lipetsk_oblast
+        name: Lipetsk Region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lleida:
+        id: lleida
+        name: Lleida
+        parent: catalunya
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lodzkie:
+        id: lodzkie
+        name: Lodz
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lombardia:
+        id: lombardia
+        name: Lombardy
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lorraine:
+        id: lorraine
+        name: Lorraine
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    louisiana:
+        id: louisiana
+        name: Louisiana
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lubelskie:
+        id: lubelskie
+        name: Lubelskie
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lubuskie:
+        id: lubuskie
+        name: Lubuski
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lucerne:
+        id: lucerne
+        name: Alfalfa
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lugo:
+        id: lugo
+        name: Lugo
+        parent: galicia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    luhansk_oblast:
+        id: luhansk_oblast
+        name: Lugansk region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    luxembourg:
+        id: luxembourg
+        name: Luxembourg
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    lviv_oblast:
+        id: lviv_oblast
+        name: Lviv region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    macau:
+        id: macau
+        name: Macau
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    madagascar:
+        id: madagascar
+        name: Madagascar
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    madeira:
+        id: madeira
+        name: Madeira
+        parent: portugal
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    madhya_pradesh:
+        id: madhya_pradesh
+        name: Madhya Pradesh
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    magadan_oblast:
+        id: magadan_oblast
+        name: Magadan Region
+        parent: far_eastern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    maharashtra:
+        id: maharashtra
+        name: Maharashtra
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    maine:
+        id: maine
+        name: Maine
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    malaga:
+        id: malaga
+        name: Malaga
+        parent: andalucia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    malawi:
+        id: malawi
+        name: Malawi
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    malaysia:
+        id: malaysia
+        name: Malaysia
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    maldives:
+        id: maldives
+        name: Maldives
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mali:
+        id: mali
+        name: Mali
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    malopolskie:
+        id: malopolskie
+        name: Lesser Poland
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    maluku:
+        id: maluku
+        name: Maluku
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    manipur:
+        id: manipur
+        name: Manipur
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    manitoba:
+        id: manitoba
+        name: Manitoba
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    maranhao:
+        id: maranhao
+        name: Maranhao
+        parent: northeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    marche:
+        id: marche
+        name: Marche
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mari_el_republic:
+        id: mari_el_republic
+        name: Mari El Republic
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    marshall-islands:
+        id: marshall-islands
+        name: Marshall Islands
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    martinique:
+        id: martinique
+        name: Martinique
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    maryland:
+        id: maryland
+        name: Maryland
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    massachusetts:
+        id: massachusetts
+        name: Massachusetts
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mato-grosso:
+        id: mato-grosso
+        name: Mata Grosso
+        parent: central-west
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mato-grosso-do-sul:
+        id: mato-grosso-do-sul
+        name: Mato Grosso Do Sul
+        parent: central-west
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mauricie:
+        id: mauricie
+        name: Morisi
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mauritania:
+        id: mauritania
+        name: Mauritania
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mauritius:
+        id: mauritius
+        name: Mauritius
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mayotte:
+        id: mayotte
+        name: Mayotte
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mazowieckie:
+        id: mazowieckie
+        name: Masovian
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mecklenburg_vorpommern:
+        id: mecklenburg_vorpommern
+        name: Mecklenburg Western Pomerania
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    meghalaya:
+        id: meghalaya
+        name: Megalaya
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mendoza:
+        id: mendoza
+        name: Mendoza
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    merseyside:
+        id: merseyside
+        name: Merseyside
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mexico:
+        id: mexico
+        name: Mexico
+        parent: north_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mexico_city:
+        id: mexico_city
+        name: mexico city
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    michigan:
+        id: michigan
+        name: Michigan
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    michoacan:
+        id: michoacan
+        name: Michoacán
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    micronesia:
+        id: micronesia
+        name: micronesia
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    midi_pyrenees:
+        id: midi_pyrenees
+        name: Midi Pyrenees
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    minas-gerais:
+        id: minas-gerais
+        name: Minas Gerais
+        parent: southeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    minnesota:
+        id: minnesota
+        name: Minnesota
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    minskaya:
+        id: minskaya
+        name: Minsk Region
+        parent: belarus
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    misiones:
+        id: misiones
+        name: missiones
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mississippi:
+        id: mississippi
+        name: Mississippi
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    missouri:
+        id: missouri
+        name: Missouri
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mittelfranken:
+        id: mittelfranken
+        name: Mittelfranken
+        parent: bayern
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mizoram:
+        id: mizoram
+        name: Mizoram
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    moere_og_romsdal:
+        id: moere_og_romsdal
+        name: Møre og Romsdal
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mogilevskaya:
+        id: mogilevskaya
+        name: Mogilev region
+        parent: belarus
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    molise:
+        id: molise
+        name: plea
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    monaco:
+        id: monaco
+        name: Monaco
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mongolia:
+        id: mongolia
+        name: Mongolia
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    montana:
+        id: montana
+        name: Montana
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    monteregie:
+        id: monteregie
+        name: Monteregi
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    montreal:
+        id: montreal
+        name: Montreal
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    montserrat:
+        id: montserrat
+        name: Montserrat
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    moravskoslezsky:
+        id: moravskoslezsky
+        name: Moravian-Slase
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mordovia_republic:
+        id: mordovia_republic
+        name: The Republic of Mordovia
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    morelos:
+        id: morelos
+        name: Morelos
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    morocco:
+        id: morocco
+        name: Morocco
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    moscow:
+        id: moscow
+        name: Moscow
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    moscow_oblast:
+        id: moscow_oblast
+        name: Moscow region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mozambique:
+        id: mozambique
+        name: Mozambique
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    munster:
+        id: munster
+        name: Munster
+        parent: nordrhein_westfalen
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    murmansk_oblast:
+        id: murmansk_oblast
+        name: Murmansk region
+        parent: northwestern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    myanmar:
+        id: myanmar
+        name: Myanmar
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    mykolaiv_oblast:
+        id: mykolaiv_oblast
+        name: Mykolaiv Region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nagaland:
+        id: nagaland
+        name: Nagaland
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    namibia:
+        id: namibia
+        name: Namibia
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    national_capital_territory_of_delhi:
+        id: national_capital_territory_of_delhi
+        name: National Capital Territory Delhi
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nauru:
+        id: nauru
+        name: Nauru
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nayarit:
+        id: nayarit
+        name: Nayarite
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nebraska:
+        id: nebraska
+        name: Nebraska
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nenets_autonomous_okrug:
+        id: nenets_autonomous_okrug
+        name: Nenets Autonomous Okrug
+        parent: northwestern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nepal:
+        id: nepal
+        name: Nepal
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    netherlands:
+        id: netherlands
+        name: Netherlands
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    neuchatel:
+        id: neuchatel
+        name: Neuchâtel
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    neuquen:
+        id: neuquen
+        name: Neuquen
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nevada:
+        id: nevada
+        name: Nevada
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    new-caledonia:
+        id: new-caledonia
+        name: New Caledonia
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    new-hampshire:
+        id: new-hampshire
+        name: New Hampshire
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    new-jersey:
+        id: new-jersey
+        name: New Jersey
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    new-mexico:
+        id: new-mexico
+        name: New Mexico
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    new-york:
+        id: new-york
+        name: New York
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    new-zealand:
+        id: new-zealand
+        name: New Zealand
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    new_brunswick:
+        id: new_brunswick
+        name: New Brunswick
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    newfoundland_and_labrador:
+        id: newfoundland_and_labrador
+        name: Newfoundland and Labrador
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nicaragua:
+        id: nicaragua
+        name: Nicaragua
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nidwalden:
+        id: nidwalden
+        name: Nidwalden
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    niederbayern:
+        id: niederbayern
+        name: Niederbayern
+        parent: bayern
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    niederosterreich:
+        id: niederosterreich
+        name: Niederosterreich
+        parent: austria
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    niedersachsen:
+        id: niedersachsen
+        name: Lower Saxony
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    niger:
+        id: niger
+        name: Niger
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nigeria:
+        id: nigeria
+        name: Nigeria
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ningxia:
+        id: ningxia
+        name: Ningxia
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nitriansky:
+        id: nitriansky
+        name: Nitryansky
+        parent: slovakia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    niue:
+        id: niue
+        name: Niue
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nizhny_novgorod_oblast:
+        id: nizhny_novgorod_oblast
+        name: Nizhny Novgorod Region
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    noord_brabant:
+        id: noord_brabant
+        name: North Brabant
+        parent: netherlands
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    noord_holland:
+        id: noord_holland
+        name: North Holland
+        parent: netherlands
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    norcal:
+        id: norcal
+        name: California North
+        parent: california
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nord_du_quebec:
+        id: nord_du_quebec
+        name: North of Quebec
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nord_pas_de_calais:
+        id: nord_pas_de_calais
+        name: Nord - Pas de Calais
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nordland:
+        id: nordland
+        name: Nordland
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nordrhein_westfalen:
+        id: nordrhein_westfalen
+        name: North Rhine Westphalia
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    norfolk:
+        id: norfolk
+        name: Norfolk
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    norrbotten:
+        id: norrbotten
+        name: Norrbotten
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north:
+        id: north
+        name: North
+        parent: brazil
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north-carolina:
+        id: north-carolina
+        name: North Carolina
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north-dakota:
+        id: north-dakota
+        name: North Dakota
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north-eastern-zone:
+        id: north-eastern-zone
+        name: North East Zone
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_america:
+        id: north_america
+        name: North America
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_caucasian_federal_district:
+        id: north_caucasian_federal_district
+        name: North Caucasian Federal District
+        parent: russia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_east:
+        id: north_east
+        name: Northeast
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_kalimantan:
+        id: north_kalimantan
+        name: North Kalimantan
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_karelia:
+        id: north_karelia
+        name: North Karelia
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_korea:
+        id: north_korea
+        name: North Korea
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_maluku:
+        id: north_maluku
+        name: North Maluku
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_ossetia_alania_republic:
+        id: north_ossetia_alania_republic
+        name: Republic of North Ossetia Alania
+        parent: north_caucasian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_ostrobothnia:
+        id: north_ostrobothnia
+        name: North Ostrobothnia
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_savo:
+        id: north_savo
+        name: North Savo
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_sulawesi:
+        id: north_sulawesi
+        name: North Sulawesi
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_sumatra:
+        id: north_sumatra
+        name: North Sumatra
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_west:
+        id: north_west
+        name: Northwest
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    north_yorkshire:
+        id: north_yorkshire
+        name: North Yorkshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    northamptonshire:
+        id: northamptonshire
+        name: Northamptonshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    northeast:
+        id: northeast
+        name: Northeast
+        parent: brazil
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    northeastern_ontario:
+        id: northeastern_ontario
+        name: Northeastern Ontario
+        parent: ontario
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    northern-zone:
+        id: northern-zone
+        name: North Zone
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    northern_ireland:
+        id: northern_ireland
+        name: Northern Ireland
+        parent: united_kingdom
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    northumberland:
+        id: northumberland
+        name: Northumberland
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    northwest_territories:
+        id: northwest_territories
+        name: Northwest Territories
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    northwestern_federal_district:
+        id: northwestern_federal_district
+        name: Northwestern Federal District
+        parent: russia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    northwestern_ontario:
+        id: northwestern_ontario
+        name: Northwestern Ontario
+        parent: ontario
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    norway:
+        id: norway
+        name: Norway
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nottinghamshire:
+        id: nottinghamshire
+        name: Nottinghamshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nova_scotia:
+        id: nova_scotia
+        name: Nova Scotia
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    novgorod_oblast:
+        id: novgorod_oblast
+        name: Novgorod region
+        parent: northwestern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    novosibirsk_oblast:
+        id: novosibirsk_oblast
+        name: Novosibirsk region
+        parent: siberian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nuevo_leon:
+        id: nuevo_leon
+        name: Nuevo Leon
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nunavut:
+        id: nunavut
+        name: Nunavut
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    nusa_tenggara:
+        id: nusa_tenggara
+        name: West Nusa Tenggara
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oaxaca:
+        id: oaxaca
+        name: Oaxaca
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oberbayern:
+        id: oberbayern
+        name: Oberbayern
+        parent: bayern
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oberfranken:
+        id: oberfranken
+        name: Oberfranken
+        parent: bayern
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oberosterreich:
+        id: oberosterreich
+        name: Oberosterreich
+        parent: austria
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oberpfalz:
+        id: oberpfalz
+        name: Oberpfalz
+        parent: bayern
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    obwalden:
+        id: obwalden
+        name: obwalden
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    odessa_oblast:
+        id: odessa_oblast
+        name: Odessa region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    odisha:
+        id: odisha
+        name: Odisha
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oestfold:
+        id: oestfold
+        name: estfold
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ohio:
+        id: ohio
+        name: Ohio
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oklahoma:
+        id: oklahoma
+        name: Oklahoma
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    olomoucky:
+        id: olomoucky
+        name: Olomouc
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oman:
+        id: oman
+        name: Oman
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    omsk_oblast:
+        id: omsk_oblast
+        name: Omsk Region
+        parent: siberian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ontario:
+        id: ontario
+        name: Ontario
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    opolskie:
+        id: opolskie
+        name: Opole
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oppland:
+        id: oppland
+        name: Oppland
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    orebro:
+        id: orebro
+        name: Orebro
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oregon:
+        id: oregon
+        name: Oregon
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    orenburg_oblast:
+        id: orenburg_oblast
+        name: Orenburg region
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oryol_oblast:
+        id: oryol_oblast
+        name: Oryol Region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oslo:
+        id: oslo
+        name: Oslo
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ostergotland:
+        id: ostergotland
+        name: Ostergotland
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ostrobothnia:
+        id: ostrobothnia
+        name: Ostrobothnia
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ourense:
+        id: ourense
+        name: Ourense
+        parent: galicia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    outaouais:
+        id: outaouais
+        name: Outaouais
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    overijssel:
+        id: overijssel
+        name: Overijssel
+        parent: netherlands
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    oxfordshire:
+        id: oxfordshire
+        name: Oxfordshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    paijat_hame:
+        id: paijat_hame
+        name: Payat-Hame
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    pakistan:
+        id: pakistan
+        name: Pakistan
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    palau:
+        id: palau
+        name: Palau
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    palencia:
+        id: palencia
+        name: Palencia
+        parent: castilla_y_leon
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    palestine:
+        id: palestine
+        name: Palestine
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    panama:
+        id: panama
+        name: Panama
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    papua:
+        id: papua
+        name: Papua
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    papua-new-guinea:
+        id: papua-new-guinea
+        name: Papua New Guinea
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    para:
+        id: para
+        name: Paragraph
+        parent: north
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    paraguay:
+        id: paraguay
+        name: Paraguay
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    paraiba:
+        id: paraiba
+        name: Paraiba
+        parent: northeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    parana:
+        id: parana
+        name: Paraná
+        parent: south
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    pardubicky:
+        id: pardubicky
+        name: Pardubice
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    pays_de_la_loire:
+        id: pays_de_la_loire
+        name: Pays de la Loire
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    pennsylvania:
+        id: pennsylvania
+        name: Pennsylvania
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    penza_oblast:
+        id: penza_oblast
+        name: Penza region
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    perm_krai:
+        id: perm_krai
+        name: Perm region
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    pernambuco:
+        id: pernambuco
+        name: Pernambuco
+        parent: northeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    peru:
+        id: peru
+        name: Peru
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    philippines:
+        id: philippines
+        name: Philippines
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    piaui:
+        id: piaui
+        name: Piaui
+        parent: northeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    picardie:
+        id: picardie
+        name: Picardy
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    piemonte:
+        id: piemonte
+        name: Piedmont
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    pirkanmaa:
+        id: pirkanmaa
+        name: Pirkanmaa
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    pitcairn-islands:
+        id: pitcairn-islands
+        name: Pitcairn Islands
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    plzensky:
+        id: plzensky
+        name: Pilsensky
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    podkarpackie:
+        id: podkarpackie
+        name: Subcarpathia
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    podlaskie:
+        id: podlaskie
+        name: Podlaskie Voivodeship
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    poitou_charentes:
+        id: poitou_charentes
+        name: Poitou Charente
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    poland:
+        id: poland
+        name: Poland
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    poltava_oblast:
+        id: poltava_oblast
+        name: Poltava region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    polynesie-francaise:
+        id: polynesie-francaise
+        name: Polynesia-France
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    pomorskie:
+        id: pomorskie
+        name: Pomeranian
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    pontevedra:
+        id: pontevedra
+        name: Pontevedra
+        parent: galicia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    portugal:
+        id: portugal
+        name: Portugal
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    praha:
+        id: praha
+        name: Prague
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    presovsky:
+        id: presovsky
+        name: Presovsky
+        parent: slovakia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    primorsky_krai:
+        id: primorsky_krai
+        name: Primorsky Krai
+        parent: far_eastern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    prince_edward_island:
+        id: prince_edward_island
+        name: Prince Edward Island
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    provence_alpes_cote_d_azur:
+        id: provence_alpes_cote_d_azur
+        name: Provence - Alpes - Cote d'Azur
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    pskov_oblast:
+        id: pskov_oblast
+        name: Pskov region
+        parent: northwestern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    puducherry:
+        id: puducherry
+        name: Puducherry
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    puebla:
+        id: puebla
+        name: puebla
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    puerto-rico:
+        id: puerto-rico
+        name: Puerto Rico
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    puerto_rico:
+        id: puerto_rico
+        name: Puerto Rico
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    puglia:
+        id: puglia
+        name: Apulia
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    punjab:
+        id: punjab
+        name: Punjab
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    qatar:
+        id: qatar
+        name: Qatar
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    qinghai:
+        id: qinghai
+        name: Qinghai
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    quebec:
+        id: quebec
+        name: Quebec
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    queretaro:
+        id: queretaro
+        name: Querétaro
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    quintana_roo:
+        id: quintana_roo
+        name: Quintana Roo
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rajasthan:
+        id: rajasthan
+        name: Rajasthan
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    region_de_murcia:
+        id: region_de_murcia
+        name: Murcia
+        parent: spain
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    reunion:
+        id: reunion
+        name: reunion
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rheinland_pfalz:
+        id: rheinland_pfalz
+        name: Rhineland Palatinate
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rhode-island:
+        id: rhode-island
+        name: Rhode Island
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rhone_alpes:
+        id: rhone_alpes
+        name: Rhone Alps
+        parent: france
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    riau:
+        id: riau
+        name: Riau
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    riau_islands:
+        id: riau_islands
+        name: Kepulauan Riau
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rio-de-janeiro:
+        id: rio-de-janeiro
+        name: Rio de Janeiro
+        parent: southeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rio-grande-do-norte:
+        id: rio-grande-do-norte
+        name: Rio Grande do Norte
+        parent: northeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rio-grande-do-sul:
+        id: rio-grande-do-sul
+        name: Rio Grande do Sul
+        parent: south
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rio_negro:
+        id: rio_negro
+        name: Rio Negro
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rivne_oblast:
+        id: rivne_oblast
+        name: Rivne Region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rogaland:
+        id: rogaland
+        name: Rogaland
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rondonia:
+        id: rondonia
+        name: Rondonia
+        parent: north
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    roraima:
+        id: roraima
+        name: Roraima
+        parent: north
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rostov_oblast:
+        id: rostov_oblast
+        name: Rostov region
+        parent: southern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    russia:
+        id: russia
+        name: Russia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rutland:
+        id: rutland
+        name: rutland
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    rwanda:
+        id: rwanda
+        name: Rwanda
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ryazan_oblast:
+        id: ryazan_oblast
+        name: Ryazan Oblast
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saarland:
+        id: saarland
+        name: Saar
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sachsen:
+        id: sachsen
+        name: Sachsen
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sachsen_anhalt:
+        id: sachsen_anhalt
+        name: Saxony-Anhalt
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saguenay_lac_saint_jean:
+        id: saguenay_lac_saint_jean
+        name: Saguenay - Lake Saint-Jean
+        parent: quebec
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saint_barthelemy:
+        id: saint_barthelemy
+        name: Saint Barthélemy
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saint_gallen:
+        id: saint_gallen
+        name: St. Gallen
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saint_helena_ascension_tristan_da_cunha:
+        id: saint_helena_ascension_tristan_da_cunha
+        name: Saint Helena
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saint_kitts_and_nevis:
+        id: saint_kitts_and_nevis
+        name: Saint Kitts and Nevis
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saint_lucia:
+        id: saint_lucia
+        name: Saint Lucia
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saint_martin:
+        id: saint_martin
+        name: Saint Martin
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saint_petersburg:
+        id: saint_petersburg
+        name: St. Petersburg
+        parent: northwestern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saint_pierre_et_miquelon:
+        id: saint_pierre_et_miquelon
+        name: Saint Pierre and Miquelon
+        parent: north_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saint_vincent_and_the_grenadines:
+        id: saint_vincent_and_the_grenadines
+        name: Saint Vincent and the Grenadines
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sakha_republic:
+        id: sakha_republic
+        name: Republic of Yakutia
+        parent: far_eastern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sakhalin_oblast:
+        id: sakhalin_oblast
+        name: Sakhalin Region
+        parent: far_eastern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    salamanca:
+        id: salamanca
+        name: Salamanca
+        parent: castilla_y_leon
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    salta:
+        id: salta
+        name: Salta
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    salzburg:
+        id: salzburg
+        name: Salzburg
+        parent: austria
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    samara_oblast:
+        id: samara_oblast
+        name: Samara Region
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    samoa:
+        id: samoa
+        name: Samoa
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    san_juan:
+        id: san_juan
+        name: San Juan
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    san_luis:
+        id: san_luis
+        name: San Luis
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    san_luis_potosi:
+        id: san_luis_potosi
+        name: San Luis Potosi
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    san_marino:
+        id: san_marino
+        name: San Marino
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    santa-catarina:
+        id: santa-catarina
+        name: Santa Catarina
+        parent: south
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    santa_cruz:
+        id: santa_cruz
+        name: Santa Cruz
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    santa_fe:
+        id: santa_fe
+        name: Santa Fe
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    santiago_del_estero:
+        id: santiago_del_estero
+        name: Santiago Del Estero
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sao-paulo:
+        id: sao-paulo
+        name: Sao Paulo
+        parent: southeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sao_tome_and_principe:
+        id: sao_tome_and_principe
+        name: Sao Tome and Principe
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saratov_oblast:
+        id: saratov_oblast
+        name: Saratov region
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sardegna:
+        id: sardegna
+        name: Sardinia
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saskatchewan:
+        id: saskatchewan
+        name: Saskatchewan
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    satakunta:
+        id: satakunta
+        name: Satakunta
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    saudi_arabia:
+        id: saudi_arabia
+        name: Saudi Arabia
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    schaffhausen:
+        id: schaffhausen
+        name: Schaffhausen
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    schleswig_holstein:
+        id: schleswig_holstein
+        name: Schleswig Holstein
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    schwaben:
+        id: schwaben
+        name: Schwaben
+        parent: bayern
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    schwyz:
+        id: schwyz
+        name: Schwyz
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    scotland:
+        id: scotland
+        name: Scotland
+        parent: united_kingdom
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    segovia:
+        id: segovia
+        name: Segovia
+        parent: castilla_y_leon
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    senegal:
+        id: senegal
+        name: Senegal
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sergipe:
+        id: sergipe
+        name: Sergeep
+        parent: northeast
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sevastopol:
+        id: sevastopol
+        name: Sevastopol
+        parent: southern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sevastopol-ukraine:
+        id: sevastopol-ukraine
+        file: sevastopol
+        name: Sevastopol
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+    sevilla:
+        id: sevilla
+        name: Seville
+        parent: andalucia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    seychelles:
+        id: seychelles
+        name: Seychelles
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    shaanxi:
+        id: shaanxi
+        name: Shaanxi
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    shandong:
+        id: shandong
+        name: Shandong
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    shanghai:
+        id: shanghai
+        name: Shanghai
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    shanxi:
+        id: shanxi
+        name: Shanxi
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    shikoku:
+        id: shikoku
+        name: Shikoku
+        parent: japan
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    shropshire:
+        id: shropshire
+        name: Shropshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    siberian_federal_district:
+        id: siberian_federal_district
+        name: Siberian Federal District
+        parent: russia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sichuan:
+        id: sichuan
+        name: Sichuan
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sicilia:
+        id: sicilia
+        name: Sicily
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sierra-leone:
+        id: sierra-leone
+        name: Sierra Leone
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sikkim:
+        id: sikkim
+        name: Sikkim
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sinaloa:
+        id: sinaloa
+        name: Sinaloa
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    singapore:
+        id: singapore
+        name: Singapore
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sint_maarten:
+        id: sint_maarten
+        name: Sint Maarten
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    skane:
+        id: skane
+        name: Skane
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    slaskie:
+        id: slaskie
+        name: Sweet
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    slovakia:
+        id: slovakia
+        name: Slovakia
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    smolensk_oblast:
+        id: smolensk_oblast
+        name: Smolensk region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    socal:
+        id: socal
+        name: California South
+        parent: california
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sodermanland:
+        id: sodermanland
+        name: Södermanland
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sogn_og_fjordane:
+        id: sogn_og_fjordane
+        name: Sogn-og-Fyurane
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    solomon-islands:
+        id: solomon-islands
+        name: Solomon islands
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    solothurn:
+        id: solothurn
+        name: Solothurn
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    somalia:
+        id: somalia
+        name: Somalia
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    somerset:
+        id: somerset
+        name: Somerset
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sonora:
+        id: sonora
+        name: Sonora
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    soria:
+        id: soria
+        name: Soria
+        parent: castilla_y_leon
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south:
+        id: south
+        name: South
+        parent: brazil
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south-africa-and-lesotho:
+        id: south-africa-and-lesotho
+        name: South Africa and Lesotho
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south-carolina:
+        id: south-carolina
+        name: South Carolina
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south-dakota:
+        id: south-dakota
+        name: North Dakota
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_africa:
+        id: south_africa
+        name: South Africa
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_america:
+        id: south_america
+        name: South America
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_east:
+        id: south_east
+        name: South East
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_georgia_and_south_sandwich:
+        id: south_georgia_and_south_sandwich
+        name: South Georgia And South Sandwich
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_kalimantan:
+        id: south_kalimantan
+        name: South Kalimantan
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_karelia:
+        id: south_karelia
+        name: South Karelia
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_korea:
+        id: south_korea
+        name: South Korea
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_ostrobothnia:
+        id: south_ostrobothnia
+        name: Southern Ostrobothnia
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_savo:
+        id: south_savo
+        name: South Savo
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_sudan:
+        id: south_sudan
+        name: South Sudan
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_sulawesi:
+        id: south_sulawesi
+        name: South Sulawesi
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_sumatra:
+        id: south_sumatra
+        name: South Sumatra
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_west:
+        id: south_west
+        name: South West
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    south_yorkshire:
+        id: south_yorkshire
+        name: South Yorkshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    southeast:
+        id: southeast
+        name: Southeast
+        parent: brazil
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    southeast_sulawesi:
+        id: southeast_sulawesi
+        name: Southeast Sulawesi
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    southern-zone:
+        id: southern-zone
+        name: South Zone
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    southern_federal_district:
+        id: southern_federal_district
+        name: Southern Federal District
+        parent: russia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    southwest_finland:
+        id: southwest_finland
+        name: Southwest Finland
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    southwestern_ontario:
+        id: southwestern_ontario
+        name: Southwestern Ontario
+        parent: ontario
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    spain:
+        id: spain
+        name: Spain
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sri_lanka:
+        id: sri_lanka
+        name: Sri Lanka
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    staffordshire:
+        id: staffordshire
+        name: Staffordshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    state_of_mexico:
+        id: state_of_mexico
+        name: mexico city
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    stavropol_krai:
+        id: stavropol_krai
+        name: Stavropol region
+        parent: north_caucasian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    steiermark:
+        id: steiermark
+        name: Stirmarka
+        parent: austria
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    stockholm:
+        id: stockholm
+        name: Stockholm
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    stredocesky:
+        id: stredocesky
+        name: Stredochsky
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sudan:
+        id: sudan
+        name: Sudan
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    suffolk:
+        id: suffolk
+        name: Suffolk
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sulawesi:
+        id: sulawesi
+        name: Sulawesi
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sumatra:
+        id: sumatra
+        name: Sumatra
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sumy_oblast:
+        id: sumy_oblast
+        name: Sumy region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    suriname:
+        id: suriname
+        name: Suriname
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    surrey:
+        id: surrey
+        name: Surrey
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    svalbard:
+        id: svalbard
+        name: Svalbard
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sverdlovsk_oblast:
+        id: sverdlovsk_oblast
+        name: Sverdlovsk region
+        parent: ural_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    swaziland:
+        id: swaziland
+        name: Swaziland
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    sweden:
+        id: sweden
+        name: Sweden
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    swietokrzyskie:
+        id: swietokrzyskie
+        name: Świętokrzyskie
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    switzerland:
+        id: switzerland
+        name: Switzerland
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    syria:
+        id: syria
+        name: Syria
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tabasco:
+        id: tabasco
+        name: Tabasco
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    taiwan:
+        id: taiwan
+        name: Taiwan
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tajikistan:
+        id: tajikistan
+        name: Tajikistan
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tamaulipas:
+        id: tamaulipas
+        name: Tamaulipas
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tambov_oblast:
+        id: tambov_oblast
+        name: Tambov Region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tamil_nadu:
+        id: tamil_nadu
+        name: Tamilnadu
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tanzania:
+        id: tanzania
+        name: Tanzania
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tarragona:
+        id: tarragona
+        name: Tarragona
+        parent: catalunya
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tatarstan_republic:
+        id: tatarstan_republic
+        name: Republic of Tatarstan
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    telangana:
+        id: telangana
+        name: Telengana
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    telemark:
+        id: telemark
+        name: Telemark
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tennessee:
+        id: tennessee
+        name: Tennessee
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ternopil_oblast:
+        id: ternopil_oblast
+        name: Ternopil Region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    teruel:
+        id: teruel
+        name: Teruel
+        parent: aragon
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    texas:
+        id: texas
+        name: Texas
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    thailand:
+        id: thailand
+        name: Thailand
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    thueringen:
+        id: thueringen
+        name: Thuringian
+        parent: germany
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    thurgau:
+        id: thurgau
+        name: Thurgau
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tianjin:
+        id: tianjin
+        name: Tianjin
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tibet:
+        id: tibet
+        name: Tibet
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ticino:
+        id: ticino
+        name: Ticino
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tierra_del_fuego:
+        id: tierra_del_fuego
+        name: Tierra del Fuego
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tirol:
+        id: tirol
+        name: Tyrol
+        parent: austria
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tlaxcala:
+        id: tlaxcala
+        name: Tlaxcala
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tocantins:
+        id: tocantins
+        name: Tocantines
+        parent: north
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    togo:
+        id: togo
+        name: Togo
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tohoku:
+        id: tohoku
+        name: Tohoku
+        parent: japan
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tokelau:
+        id: tokelau
+        name: Tokelau
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    toledo:
+        id: toledo
+        name: Toledo
+        parent: castilla_la_mancha
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tomsk_oblast:
+        id: tomsk_oblast
+        name: Tomsk Region
+        parent: siberian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tonga:
+        id: tonga
+        name: Tonga
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    toscana:
+        id: toscana
+        name: Tuscany
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    trenciansky:
+        id: trenciansky
+        name: Trenchansky
+        parent: slovakia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    trentino_alto_adige:
+        id: trentino_alto_adige
+        name: Trentino Alto Adige
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    trinidad_and_tobago:
+        id: trinidad_and_tobago
+        name: Trinidad and Tobago
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tripura:
+        id: tripura
+        name: Tripura
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    trnavsky:
+        id: trnavsky
+        name: Trnavsky
+        parent: slovakia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    troendelag:
+        id: troendelag
+        name: Trendelag
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    troms:
+        id: troms
+        name: Troms
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tucuman:
+        id: tucuman
+        name: Tucuman
+        parent: argentina
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tula_oblast:
+        id: tula_oblast
+        name: Tula region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tunisia:
+        id: tunisia
+        name: Tunisia
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    turkmenistan:
+        id: turkmenistan
+        name: Turkmenistan
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    turks_and_caicos_islands:
+        id: turks_and_caicos_islands
+        name: Turks and Caicos Islands
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tuva_republic:
+        id: tuva_republic
+        name: Tyva Republic
+        parent: siberian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tuvalu:
+        id: tuvalu
+        name: Tuvalu
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tver_oblast:
+        id: tver_oblast
+        name: Tver region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tyne_and_wear:
+        id: tyne_and_wear
+        name: Tyne And Wear
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    tyumen_oblast:
+        id: tyumen_oblast
+        name: Tyumen region
+        parent: ural_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    udmurt_republic:
+        id: udmurt_republic
+        name: Republic of Udmurtia
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    uganda:
+        id: uganda
+        name: Uganda
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ukraine:
+        id: ukraine
+        name: Ukraine
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ulyanovsk_oblast:
+        id: ulyanovsk_oblast
+        name: Ulyanovsk region
+        parent: volga_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    umbria:
+        id: umbria
+        name: Umbria
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    united_arab_emirates:
+        id: united_arab_emirates
+        name: United Arab Emirates
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    united_kingdom:
+        id: united_kingdom
+        name: United Kingdom
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    united_states_virgin_islands:
+        id: united_states_virgin_islands
+        name: Virgin Islands
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    unterfranken:
+        id: unterfranken
+        name: uncontracted
+        parent: bayern
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    uppsala:
+        id: uppsala
+        name: Uppsala
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ural_federal_district:
+        id: ural_federal_district
+        name: Ural federal district
+        parent: russia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    uri:
+        id: uri
+        name: Uri
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    uruguay:
+        id: uruguay
+        name: Uruguay
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    us:
+        id: us
+        name: United States of America
+        parent: north_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    us-midwest:
+        id: us-midwest
+        name: US-Midwest
+        parent: north_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    us-northeast:
+        id: us-northeast
+        name: USA-Northeast
+        parent: north_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    us-pacific:
+        id: us-pacific
+        name: USA-Pacific
+        parent: north_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    us-south:
+        id: us-south
+        name: US South
+        parent: north_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    us-virgin-islands:
+        id: us-virgin-islands
+        name: US Virgin Islands
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    us-west:
+        id: us-west
+        name: USA-West
+        parent: north_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    usa_virgin_islands:
+        id: usa_virgin_islands
+        name: Virgin Islands
+        parent: central_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    ustecky:
+        id: ustecky
+        name: Ustetsky
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    utah:
+        id: utah
+        name: Utah
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    utrecht:
+        id: utrecht
+        name: Utrecht
+        parent: netherlands
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    uttar_pradesh:
+        id: uttar_pradesh
+        name: Uttar Pradesh
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    uttarakhand:
+        id: uttarakhand
+        name: Uttarakhand
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    uusimaa:
+        id: uusimaa
+        name: Uusimaa
+        parent: finland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    uzbekistan:
+        id: uzbekistan
+        name: Uzbekistan
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    valais:
+        id: valais
+        name: Valais
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    valencia:
+        id: valencia
+        name: Valencia
+        parent: comunitat_valenciana
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    valladolid:
+        id: valladolid
+        name: Valladolid
+        parent: castilla_y_leon
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    valle_aosta:
+        id: valle_aosta
+        name: Valle Aosta
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vanuatu:
+        id: vanuatu
+        name: Vanuatu
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    varmland:
+        id: varmland
+        name: Värmland
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vasterbotten:
+        id: vasterbotten
+        name: Vasterbotten
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vasternorrland:
+        id: vasternorrland
+        name: Vast Severnaya Zemlya
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vastmanland:
+        id: vastmanland
+        name: Vast Earth
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vastra_gotaland:
+        id: vastra_gotaland
+        name: Västra Götaland
+        parent: sweden
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vatican_city:
+        id: vatican_city
+        name: Vatican
+        parent: europe
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vaud:
+        id: vaud
+        name: In
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    veneto:
+        id: veneto
+        name: Veneto
+        parent: italy
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    venezuela:
+        id: venezuela
+        name: Venezuela
+        parent: south_america
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    veracruz:
+        id: veracruz
+        name: Veracruz
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vermont:
+        id: vermont
+        name: Vermont
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vest-agder:
+        id: vest-agder
+        name: Vest-Agder
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vestfold:
+        id: vestfold
+        name: Vest
+        parent: norway
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vietnam:
+        id: vietnam
+        name: Vietnam
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vinnytsia_oblast:
+        id: vinnytsia_oblast
+        name: Vinnytsia region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    virginia:
+        id: virginia
+        name: Virginia
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vitebskaya:
+        id: vitebskaya
+        name: Vitebsk region
+        parent: belarus
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vizcaya:
+        id: vizcaya
+        name: Biscay
+        parent: euskadi
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vladimir_oblast:
+        id: vladimir_oblast
+        name: Vladimir region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    volga_federal_district:
+        id: volga_federal_district
+        name: Volga Federal District
+        parent: russia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    volgograd_oblast:
+        id: volgograd_oblast
+        name: Volgograd region
+        parent: southern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vologda_oblast:
+        id: vologda_oblast
+        name: Vologda Region
+        parent: northwestern_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    volyn_oblast:
+        id: volyn_oblast
+        name: Volyn Region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vorarlberg:
+        id: vorarlberg
+        name: Vorarlberg
+        parent: austria
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    voronezh_oblast:
+        id: voronezh_oblast
+        name: Voronezh region
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    vysocina:
+        id: vysocina
+        name: Vysochina
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    wales:
+        id: wales
+        name: Wales
+        parent: united_kingdom
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    wallis-et-futuna:
+        id: wallis-et-futuna
+        name: Wallis and Futuna
+        parent: australia_oceania
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    wallonia_french_community:
+        id: wallonia_french_community
+        name: French Community of Belgium
+        parent: belgium
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    wallonia_german_community:
+        id: wallonia_german_community
+        name: wallonia
+        parent: belgium
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    warminsko_mazurskie:
+        id: warminsko_mazurskie
+        name: Warmian-Masurian
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    warwickshire:
+        id: warwickshire
+        name: Warwickshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    washington:
+        id: washington
+        name: Washington
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    west-virginia:
+        id: west-virginia
+        name: West Virginia
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    west_bengal:
+        id: west_bengal
+        name: West Bengal
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    west_flanders:
+        id: west_flanders
+        name: West Flanders
+        parent: flanders
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    west_java:
+        id: west_java
+        name: West Java
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    west_kalimantan:
+        id: west_kalimantan
+        name: West Kalimantan
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    west_midlands:
+        id: west_midlands
+        name: Western Middle-earth
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    west_nusa_tenggara:
+        id: west_nusa_tenggara
+        name: West Nusa Tenggara
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    west_papua:
+        id: west_papua
+        name: West Papua
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    west_sulawesi:
+        id: west_sulawesi
+        name: West Sulawesi
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    west_sumatra:
+        id: west_sumatra
+        name: West Sumatra
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    west_sussex:
+        id: west_sussex
+        name: West Sussex
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    west_yorkshire:
+        id: west_yorkshire
+        name: West Yorkshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    western-zone:
+        id: western-zone
+        name: West Zone
+        parent: india
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    western_sahara:
+        id: western_sahara
+        name: West Sahara
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    wielkopolskie:
+        id: wielkopolskie
+        name: Greater Poland
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    wien:
+        id: wien
+        name: Vein
+        parent: austria
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    wiltshire:
+        id: wiltshire
+        name: Wiltshire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    wisconsin:
+        id: wisconsin
+        name: Wisconsin
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    worcestershire:
+        id: worcestershire
+        name: Worcestershire
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    wyoming:
+        id: wyoming
+        name: Wyoming
+        parent: us
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    xinjiang:
+        id: xinjiang
+        name: xinjiang
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    yamalo_nenets_autonomous_okrug:
+        id: yamalo_nenets_autonomous_okrug
+        name: Yamalo Nenets Autonomous Okrug
+        parent: ural_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    yaroslavl_oblast:
+        id: yaroslavl_oblast
+        name: Yaroslavskaya oblast
+        parent: central_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    yemen:
+        id: yemen
+        name: Yemen
+        parent: asia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    yogyakarta:
+        id: yogyakarta
+        name: Yogyakarta
+        parent: indonesia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    yorkshire_and_the_humber:
+        id: yorkshire_and_the_humber
+        name: Yorkshire and the Humber
+        parent: england
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    yucatan:
+        id: yucatan
+        name: Yucatan
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    yukon:
+        id: yukon
+        name: Yukon
+        parent: canada
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    yunnan:
+        id: yunnan
+        name: Yunnan
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zabaykalsky_krai:
+        id: zabaykalsky_krai
+        name: Transbaikal region
+        parent: siberian_federal_district
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zacatecas:
+        id: zacatecas
+        name: Zacatecas
+        parent: mexico
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zachodniopomorskie:
+        id: zachodniopomorskie
+        name: West Pomeranian
+        parent: poland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zakarpattia_oblast:
+        id: zakarpattia_oblast
+        name: Zakarpattia Oblast
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zambia:
+        id: zambia
+        name: Zambia
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zamora:
+        id: zamora
+        name: Zamora
+        parent: castilla_y_leon
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zaporizhia_oblast:
+        id: zaporizhia_oblast
+        name: Zaporozhye region
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zaragoza:
+        id: zaragoza
+        name: Zaragoza
+        parent: aragon
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zeeland:
+        id: zeeland
+        name: Zealand
+        parent: netherlands
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zhejiang:
+        id: zhejiang
+        name: Zhejiang
+        parent: china
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zhytomyr_oblast:
+        id: zhytomyr_oblast
+        name: Zhytomyr Oblast
+        parent: ukraine
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zilinsky:
+        id: zilinsky
+        name: Zhilinsky
+        parent: slovakia
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zimbabwe:
+        id: zimbabwe
+        name: Zimbabwe
+        parent: africa
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zlinsky:
+        id: zlinsky
+        name: Zlinsky
+        parent: czech_republic
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zug:
+        id: zug
+        name: Zug
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zuid_holland:
+        id: zuid_holland
+        name: South Holland
+        parent: netherlands
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+    zurich:
+        id: zurich
+        name: Zurich
+        parent: switzerland
+        files:
+            - osm.pbf
+            - md5
+            - poly
+            - geojson
+baseURL: https://osmtoday.com

@@ -7,7 +7,7 @@ import (
 )
 
 type Format struct {
-	ID       string `yaml:"ext"`
+	Ext      string `yaml:"ext"`
 	Loc      string `yaml:"loc"`
 	BasePath string `yaml:"basepath,omitempty"`
 	BaseURL  string `yaml:"baseurl,omitempty"`
@@ -16,14 +16,15 @@ type Format struct {
 type FormatDefinitions map[string]Format
 
 const (
-	FormatState  = "state"
-	FormatOsmPbf = "osm.pbf"
-	FormatOsmGz  = "osm.gz"
-	FormatOsmBz2 = "osm.bz2"
-	FormatOshPbf = "osh.pbf"
-	FormatPoly   = "poly"
-	FormatShpZip = "shp.zip"
-	FormatKml    = "kml"
+	FormatState   = "state"
+	FormatOsmPbf  = "osm.pbf"
+	FormatOsmGz   = "osm.gz"
+	FormatOsmBz2  = "osm.bz2"
+	FormatOshPbf  = "osh.pbf"
+	FormatPoly    = "poly"
+	FormatShpZip  = "shp.zip"
+	FormatKml     = "kml"
+	FormatGeoJson = "geojson"
 )
 
 // MiniFormats get formats of an Element
@@ -51,6 +52,8 @@ func MiniFormats(s []string) string {
 			res[5] = "S"
 		case FormatKml:
 			res[6] = "k"
+		case FormatGeoJson:
+			res[7] = "g"
 		}
 	}
 
@@ -91,7 +94,9 @@ func GetFormats() *[]string {
 	if viper.GetBool("dkml") {
 		formatFile = append(formatFile, FormatKml)
 	}
-
+	if viper.GetBool("dgeojson") {
+		formatFile = append(formatFile, FormatGeoJson)
+	}
 	if len(formatFile) == 0 {
 		formatFile = append(formatFile, FormatOsmPbf)
 	}

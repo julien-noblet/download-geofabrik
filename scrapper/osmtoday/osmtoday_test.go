@@ -1,4 +1,4 @@
-package geofabrik_test
+package osmtoday_test
 
 import (
 	"net/url"
@@ -83,10 +83,10 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			},
 		},
 		{
-			name: "Add osm.pbf.md5",
+			name: "Add md5",
 			args: args{
 				id:     "a",
-				format: "osm.pbf.md5",
+				format: "md5",
 				c: config.Config{
 					Elements: element.Slice{
 						"a": element.Element{
@@ -103,7 +103,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
-					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, "osm.pbf.md5"},
+					Formats: []string{formats.FormatOsmPbf, formats.FormatKml, formats.FormatState, "md5"},
 					Meta:    false,
 				},
 			},
