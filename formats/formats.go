@@ -14,6 +14,10 @@ type Format struct {
 }
 
 type FormatDefinitions map[string]Format
+type MiniFormat struct {
+	ShortName string
+	FullName  string
+}
 
 const (
 	FormatState   = "state"
@@ -24,36 +28,33 @@ const (
 	FormatPoly    = "poly"
 	FormatShpZip  = "shp.zip"
 	FormatKml     = "kml"
-	FormatGeoJson = "geojson"
+	FormatGeoJSON = "geojson"
 )
 
 // MiniFormats get formats of an Element
 //
 //	and return a string
 //	according to download-geofabrik short flags.
-func MiniFormats(s []string) string {
-	res := make([]string, 7) //nolint:gomnd // 7 is the number of formats
+func MiniFormats(miniFormat []string) string {
+	miniFormatList := []MiniFormat{
+		{ShortName: "s", FullName: FormatState},
+		{ShortName: "P", FullName: FormatOsmPbf},
+		{ShortName: "G", FullName: FormatOsmGz},
+		{ShortName: "B", FullName: FormatOsmBz2},
+		{ShortName: "H", FullName: FormatOshPbf},
+		{ShortName: "p", FullName: FormatPoly},
+		{ShortName: "S", FullName: FormatShpZip},
+		{ShortName: "k", FullName: FormatKml},
+		{ShortName: "g", FullName: FormatGeoJSON},
+	}
 
-	for _, item := range s {
-		switch item {
-		case FormatState:
-			res[0] = "s"
-		case FormatOsmPbf:
-			res[1] = "P"
-		case FormatOsmGz:
-			res[2] = "G"
-		case FormatOsmBz2:
-			res[2] = "B"
-		case FormatOshPbf:
-			res[3] = "H"
-		case FormatPoly:
-			res[4] = "p"
-		case FormatShpZip:
-			res[5] = "S"
-		case FormatKml:
-			res[6] = "k"
-		case FormatGeoJson:
-			res[7] = "g"
+	res := make([]string, len(miniFormatList))
+
+	for _, item := range miniFormat {
+		for i, format := range miniFormatList {
+			if item == format.FullName {
+				res[i] = format.ShortName
+			}
 		}
 	}
 
@@ -95,7 +96,7 @@ func GetFormats() *[]string {
 		formatFile = append(formatFile, FormatKml)
 	}
 	if viper.GetBool("dgeojson") {
-		formatFile = append(formatFile, FormatGeoJson)
+		formatFile = append(formatFile, FormatGeoJSON)
 	}
 	if len(formatFile) == 0 {
 		formatFile = append(formatFile, FormatOsmPbf)
