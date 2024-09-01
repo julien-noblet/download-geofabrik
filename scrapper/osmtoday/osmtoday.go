@@ -54,75 +54,33 @@ func (g *Osmtoday) Collector() *colly.Collector {
 	return myCollector
 }
 
-func (g *Osmtoday) Exceptions(e element.Element) element.Element {
-	// Exception
-	// la_rioja is in argentina and spain
-	if e.ID == "la_rioja" {
-		switch e.Parent {
-		case "argentina":
-			e.ID = "la_rioja-argentina"
-			e.File = "la_rioja"
-		case "spain":
-			e.ID = "la_rioja-spain"
-			e.File = "la_rioja"
+func (g *Osmtoday) Exceptions(myElement *element.Element) *element.Element {
+	// Exceptions
+	exceptions := []struct {
+		ID     string
+		Parent string
+	}{
+		{"la_rioja", "argentina"},
+		{"la_rioja", "spain"},
+		{"guyane", "france"},
+		{"guyane", "south-america"},
+		{"sevastopol", "ukraine"},
+		{"sevastopol", "russia"},
+		{"limburg", "netherlands"},
+		{"limburg", "flanders"},
+		{"cordoba", "argentina"},
+		{"cordoba", "andalucia"},
+		{"georgia", "asia"},
+		{"georgia", "us"},
+	}
+
+	for _, exception := range exceptions {
+		if myElement.ID == exception.ID && myElement.Parent == exception.Parent {
+			myElement.ID = fmt.Sprintf("%s-%s", myElement.ID, myElement.Parent)
 		}
 	}
-	// Guyan is in france
-	if e.ID == "guyane" {
-		switch e.Parent {
-		case "france":
-			e.ID = "guyane-france"
-			e.File = "guyane"
-		case "south-america":
-			e.ID = "guyane-south-america"
-			e.File = "guyane"
-		}
-	}
-	//    ⨯ can't merge Sevastopol    error=can't merge : Parent mismatch southern_federal_district != ukraine (sevastopol)
-	if e.ID == "sevastopol" {
-		switch e.Parent {
-		case "ukraine":
-			e.ID = "sevastopol-ukraine"
-			e.File = "sevastopol"
-		case "russia":
-			e.ID = "sevastopol-russia"
-			e.File = "sevastopol"
-		}
-	}
-	//    ⨯ can't merge Limburg       error=can't merge : Parent mismatch netherlands != flanders (limburg)
-	if e.ID == "limburg" {
-		switch e.Parent {
-		case "netherlands":
-			e.ID = "limburg-netherlands"
-			e.File = "limburg"
-		case "flanders":
-			e.ID = "limburg-flanders"
-			e.File = "limburg"
-		}
-	}
-	//    ⨯ can't merge Cordoba       error=can't merge : Parent mismatch argentina != andalucia (cordoba)
-	if e.ID == "cordoba" {
-		switch e.Parent {
-		case "argentina":
-			e.ID = "cordoba-argentina"
-			e.File = "cordoba"
-		case "andalucia":
-			e.ID = "cordoba-andalucia"
-			e.File = "cordoba"
-		}
-	}
-	//    ⨯ can't merge Georgia       error=can't merge : Parent mismatch asia != us (georgia)
-	if e.ID == "georgia" {
-		switch e.Parent {
-		case "asia":
-			e.ID = "georgia-asia"
-			e.File = "georgia"
-		case "us":
-			e.ID = "georgia-us"
-			e.File = "georgia"
-		}
-	}
-	return e
+
+	return myElement
 }
 
 //nolint:cyclop // TODO : Refactoring?
@@ -149,7 +107,7 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
 					Parent: parent,
 					Meta:   true,
 				}
-				myElement = g.Exceptions(myElement)
+				myElement = *g.Exceptions(&myElement)
 				if file != "" {
 					myElement.File = file
 				}
@@ -180,18 +138,17 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
 					Parent: parent,
 					Meta:   true,
 				}
-				myElement = g.Exceptions(myElement)
+				myElement = *g.Exceptions(&myElement)
 				if file != "" {
 					myElement.File = file
 				}
 				g.ParseFormat(myElement.ID, extension)
 			}
-
 		})
 	})
 }
 
-// ParseFormat Add Extension to ID
+// ParseFormat Add Extension to ID.
 func (g *Osmtoday) ParseFormat(id, format string) {
 	g.Scrapper.ParseFormatService(id, format, &g.Scrapper.FormatDefinition)
 

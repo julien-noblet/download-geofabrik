@@ -253,7 +253,7 @@ func TestOsmtoday_Exceptions(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			g := osmtoday.GetDefault()
-			if got := g.Exceptions(tt.args.e); !reflect.DeepEqual(got, tt.want) {
+			if got := g.Exceptions(&tt.args.e); !reflect.DeepEqual(got, &tt.want) {
 				t.Errorf("Osmtoday.Exceptions() = %v, want %v", got, tt.want)
 			}
 		})

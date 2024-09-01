@@ -66,7 +66,9 @@ func (g *Geofabrik) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Coll
 		el.ForEach("a", func(_ int, sub *colly.HTMLElement) {
 			href := sub.Request.AbsoluteURL(sub.Attr("href"))
 			myID, extension := scrapper.FileExt(href)
+
 			var file string
+
 			if extension == "html" { //nolint:nestif // TODO : Refactor?
 				parent, parentPath := scrapper.GetParent(href)
 				if myID == "georgia" { //nolint:goconst // Georgia is in Europe & US
