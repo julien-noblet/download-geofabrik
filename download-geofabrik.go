@@ -171,22 +171,22 @@ func downloadCommand() {
 	for _, format := range *formatFile {
 		myFormat := configPtr.Formats[format]
 		if ok, _, _ := config.IsHashable(configPtr, myFormat.Ext); *dCheck && ok { //nolint:nestif // TODO : Refactor?
-			if fileExist(*dOutputDir + *delement + "." + myFormat.Loc) {
+			if fileExist(*dOutputDir + *delement + "." + myFormat.Ext) {
 				if !downloadChecksum(myFormat.Ext) {
 					log.Infof("Checksum mismatch, re-downloading %v", *dOutputDir+filename+"."+myFormat.Ext)
-					downloadFile(configPtr, *delement, myFormat.Ext, *dOutputDir+filename+myFormat.Loc)
+					downloadFile(configPtr, *delement, myFormat.Ext, *dOutputDir+filename+"."+myFormat.Ext)
 					downloadChecksum(myFormat.Ext)
 				} else {
 					log.Info("Checksum match, no download!")
 				}
 			} else {
-				downloadFile(configPtr, *delement, myFormat.Ext, *dOutputDir+filename+"."+myFormat.Loc)
+				downloadFile(configPtr, *delement, myFormat.Ext, *dOutputDir+filename+"."+myFormat.Ext)
 				if !downloadChecksum(myFormat.Ext) {
-					log.Warnf("Checksum mismatch, please re-download %s", *dOutputDir+filename+myFormat.Loc)
+					log.Warnf("Checksum mismatch, please re-download %s", *dOutputDir+filename+"."+myFormat.Ext)
 				}
 			}
 		} else {
-			downloadFile(configPtr, *delement, myFormat.Ext, *dOutputDir+filename+myFormat.Loc)
+			downloadFile(configPtr, *delement, myFormat.Ext, *dOutputDir+filename+"."+myFormat.Ext)
 		}
 	}
 }
