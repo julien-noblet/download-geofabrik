@@ -50,7 +50,7 @@ var ( // TODO: move from kingpin to cobra
 	dstate    = dDownload.Flag(formats.FormatState, "Download state.txt file").Short('s').Bool()              //nolint:gochecknoglobals // global
 	dpoly     = dDownload.Flag(formats.FormatPoly, "Download poly file").Short('p').Bool()                    //nolint:gochecknoglobals // global
 	dkml      = dDownload.Flag(formats.FormatKml, "Download kml file").Short('k').Bool()                      //nolint:gochecknoglobals // global
-	dgeojson  = dDownload.Flag(formats.FormatGeoJson, "Download geojson file").Short('g').Bool()              //nolint:gochecknoglobals // global
+	dgeojson  = dDownload.Flag(formats.FormatGeoJSON, "Download geojson file").Short('g').Bool()              //nolint:gochecknoglobals // global
 	dCheck    = dDownload.Flag("check", "Control with checksum (default) Use --no-check to discard control"). //nolint:gochecknoglobals // global
 			Default("true").Bool()
 	dOutputDir = dDownload.Flag( //nolint:gochecknoglobals // global
@@ -165,7 +165,6 @@ func downloadCommand() {
 	}
 
 	r := regexp.MustCompile(`.*[\\/]?([A-Za-z_-]*)$`) // Trick for handle / in name
-	//log.Errorf("%v\n%v", *dOutputDir+*delement, r.FindStringSubmatch(*dOutputDir+*delement))
 	filename := r.FindStringSubmatch(*dOutputDir + *delement)[0]
 
 	for _, format := range *formatFile {

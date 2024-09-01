@@ -260,14 +260,17 @@ func Test_downloadChecksum(t *testing.T) {
 				if err != nil {
 					t.Error(err)
 				}
+
 				myElem, err := config.FindElem(configPtr, *delement)
 				if err != nil {
 					t.Error(err)
 				}
+
 				myURL, err := config.Elem2URL(configPtr, myElem, thisTest.args.format)
 				if err != nil {
 					t.Error(err)
 				}
+
 				err = download.FromURL(myURL, *delement+"."+thisTest.args.format)
 				if err != nil {
 					t.Error(err)
@@ -277,6 +280,7 @@ func Test_downloadChecksum(t *testing.T) {
 			if got := downloadChecksum(thisTest.args.format); got != thisTest.want {
 				t.Errorf("downloadChecksum() = %v, want %v", got, thisTest.want)
 			}
+
 			os.Remove("monaco.osm.pbf")     // clean
 			os.Remove("monaco.osm.pbf.md5") // clean
 		})

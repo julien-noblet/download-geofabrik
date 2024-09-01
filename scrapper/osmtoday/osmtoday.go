@@ -35,7 +35,7 @@ func GetDefault() *Osmtoday {
 				formats.FormatOsmPbf:  {Ext: formats.FormatOsmPbf, Loc: ".pbf", BasePath: "", BaseURL: ""},
 				"md5":                 {Ext: "md5", Loc: ".md5", BasePath: "", BaseURL: ""},
 				formats.FormatPoly:    {Ext: formats.FormatPoly, Loc: ".poly", BasePath: "", BaseURL: ""},
-				formats.FormatGeoJson: {Ext: formats.FormatKml, Loc: ".geojson", BasePath: "", BaseURL: ""},
+				formats.FormatGeoJSON: {Ext: formats.FormatKml, Loc: ".geojson", BasePath: "", BaseURL: ""},
 			},
 		},
 	}

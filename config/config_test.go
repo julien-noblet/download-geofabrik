@@ -275,6 +275,7 @@ func Test_loadConfig(t *testing.T) {
 		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
+
 			got, err := config.LoadConfig(thisTest.args.configFile)
 			if err != nil != thisTest.wantErr {
 				t.Errorf("loadConfig() error = %v, wantErr %v", err, thisTest.wantErr)
@@ -489,11 +490,13 @@ func Test_config_GetElement(t *testing.T) {
 				if !reflect.DeepEqual(tgot, tfrance) {
 					t.Errorf("Config.GetElement() = %v, want %v", got, thisTest.want)
 				}
+
 				for _, k := range thisTest.want.Formats {
 					if !(got.Formats.Contains(k)) {
 						t.Errorf("%v format should exist, got=%v", k, got)
 					}
 				}
+
 				for _, k := range got.Formats {
 					if !(thisTest.want.Formats.Contains(k)) {
 						t.Errorf("%v format should not exist, got=%v", k, got)
@@ -508,6 +511,7 @@ func Test_config_GetElement(t *testing.T) {
 						t.Errorf("%v format should exist, got=%v", k, got)
 					}
 				}
+
 				for _, k := range got.Formats {
 					if !(thisTest.want.Formats.Contains(k)) {
 						t.Errorf("%v format should not exist, got=%v", k, got)
@@ -603,7 +607,7 @@ func Benchmark_FindElem_parse_France_geofabrik_yml(b *testing.B) {
 
 	for n := 0; n < b.N; n++ {
 		if _, err := config.FindElem(c, "france"); err != nil {
-			b.Errorf(err.Error())
+			b.Errorf("%v", err.Error())
 		}
 	}
 }
@@ -750,6 +754,7 @@ func Test_elem2URL(t *testing.T) {
 		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
+
 			got, err := config.Elem2URL(thisTest.args.c, thisTest.args.e, thisTest.args.ext)
 			if err != nil != thisTest.wantErr {
 				t.Errorf("elem2URL() error = %v, wantErr %v", err, thisTest.wantErr)
@@ -842,18 +847,18 @@ func Test_elem2preURL(t *testing.T) {
 func Benchmark_Elem2preURL_parse_France_geofabrik_yml(b *testing.B) {
 	myConfig, err := config.LoadConfig(geofabrikYml)
 	if err != nil {
-		b.Errorf(err.Error())
+		b.Error(err)
 	}
 
 	france, err := config.FindElem(myConfig, "france")
 	if err != nil {
-		b.Errorf(err.Error())
+		b.Error(err)
 	}
 
 	for n := 0; n < b.N; n++ {
 		_, err = config.Elem2preURL(myConfig, france)
 		if err != nil {
-			b.Errorf(err.Error())
+			b.Error(err)
 		}
 	}
 }
@@ -861,18 +866,18 @@ func Benchmark_Elem2preURL_parse_France_geofabrik_yml(b *testing.B) {
 func Benchmark_Elem2URL_parse_France_geofabrik_yml(b *testing.B) {
 	myConfig, err := config.LoadConfig(geofabrikYml)
 	if err != nil {
-		b.Errorf(err.Error())
+		b.Error(err)
 	}
 
 	france, err := config.FindElem(myConfig, "france")
 	if err != nil {
-		b.Errorf(err.Error())
+		b.Error(err)
 	}
 
 	for n := 0; n < b.N; n++ {
 		_, err = config.Elem2URL(myConfig, france, formats.FormatState)
 		if err != nil {
-			b.Errorf(err.Error())
+			b.Error(err)
 		}
 	}
 }
@@ -880,18 +885,18 @@ func Benchmark_Elem2URL_parse_France_geofabrik_yml(b *testing.B) {
 func Benchmark_Elem2URL_parse_France_openstreetmap_fr_yml(b *testing.B) {
 	myConfig, err := config.LoadConfig(openstreetmapFRYml)
 	if err != nil {
-		b.Errorf(err.Error())
+		b.Error(err)
 	}
 
 	france, err := config.FindElem(myConfig, "france")
 	if err != nil {
-		b.Errorf(err.Error())
+		b.Error(err)
 	}
 
 	for n := 0; n < b.N; n++ {
 		_, err = config.Elem2URL(myConfig, france, formats.FormatPoly)
 		if err != nil {
-			b.Errorf(err.Error())
+			b.Error(err)
 		}
 	}
 }
