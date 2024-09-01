@@ -1,4 +1,5 @@
 [
+  {"Version":"1127f6a836a95c8cf6a53e07e11351c1113a1a1b","Date":1725230195,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
   {"Version":"7a1aceb8e1576b01b39dc8a5f974765cfd370798","Date":1725229956,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
   {"Version":"b244f32059e0cc2c9364c0cd3d842424cfa8435f","Date":1725228275,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
   {"Version":"841e2d01b64e3ae7fdbb8b447832685df8b50b8e","Date":1725227689,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"e3d8500df043d5ff9b545c7ba0e3a3d0af9a6be2","Date":1724977069,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.34.2"],"Suites":[]},
   {"Version":"139883f69e0af53788ee6ff2c6d5c24bf038521f","Date":1724976781,"Tags":["ref=refs/heads/feat/Generate_yaml"],"Suites":[]},
   {"Version":"7b126413d6816d97082c3247b65c869b02feefb7","Date":1724976433,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"bc0731eb007ca029f9cd4f9f3ab899f78522c169","Date":1724975648,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fatih/color-1.17.0"],"Suites":[]},
-  {"Version":"5373f6f8f47c2fb736ec1fab69cb1f0be9066fa6","Date":1724975395,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"bc0731eb007ca029f9cd4f9f3ab899f78522c169","Date":1724975648,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fatih/color-1.17.0"],"Suites":[]}
 ]
