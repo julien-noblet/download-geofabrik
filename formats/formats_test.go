@@ -74,6 +74,7 @@ func Test_miniFormats(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
+
 			if got := formats.MiniFormats(tt.args.s); got != tt.want {
 				t.Errorf("formats.MiniFormats() = %v, want %v", got, tt.want)
 			}

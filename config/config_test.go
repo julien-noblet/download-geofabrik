@@ -282,6 +282,7 @@ func Test_loadConfig(t *testing.T) {
 
 				return
 			}
+
 			if got != nil {
 				if reflect.TypeOf(got) != reflect.TypeOf(thisTest.want) {
 					t.Errorf("loadConfig() is a %v, want %v", reflect.TypeOf(got), reflect.TypeOf(thisTest.want))
@@ -398,12 +399,13 @@ func Test_AddExtension(t *testing.T) {
 	}
 
 	for tn := range tests {
-		tn := tn
-		t.Run(tests[tn].name, func(t *testing.T) {
+		test := tn
+		t.Run(tests[test].name, func(t *testing.T) {
 			t.Parallel()
-			tests[tn].c.AddExtension(tests[tn].args.id, tests[tn].args.format)
-			if !reflect.DeepEqual(tests[tn].c.Elements, tests[tn].want) {
-				t.Errorf("AddExtension() got %v, want %v", tests[tn].c.Elements, tests[tn].want)
+			tests[test].c.AddExtension(tests[test].args.id, tests[test].args.format)
+
+			if !reflect.DeepEqual(tests[test].c.Elements, tests[test].want) {
+				t.Errorf("AddExtension() got %v, want %v", tests[test].c.Elements, tests[test].want)
 			}
 		})
 	}
@@ -466,12 +468,14 @@ func Test_config_GetElement(t *testing.T) {
 			t.Parallel()
 
 			c, _ := config.LoadConfig(thisTest.file)
+
 			got, err := c.GetElement(thisTest.id)
 			if (err != nil) != thisTest.wantErr {
 				t.Errorf("Config.GetElement() error = %v, wantErr %v", err, thisTest.wantErr)
 
 				return
 			}
+
 			if thisTest.want != nil {
 				tfrance := &element.Element{
 					ID:     thisTest.want.ID,
@@ -487,6 +491,7 @@ func Test_config_GetElement(t *testing.T) {
 					Parent: got.Parent,
 					Meta:   got.Meta,
 				}
+
 				if !reflect.DeepEqual(tgot, tfrance) {
 					t.Errorf("Config.GetElement() = %v, want %v", got, thisTest.want)
 				}
@@ -505,6 +510,7 @@ func Test_config_GetElement(t *testing.T) {
 			} else if !reflect.DeepEqual(got, thisTest.want) {
 				t.Errorf("Config.GetElement() = %v, want %v", got, thisTest.want)
 			}
+
 			if !thisTest.wantErr && (err == nil) {
 				for _, k := range thisTest.want.Formats {
 					if !(got.Formats.Contains(k)) {
@@ -557,9 +563,11 @@ func Test_IsHashable(t *testing.T) {
 			if got != thisTest.want {
 				t.Errorf("config.IsHashable() got = %v, want %v", got, thisTest.want)
 			}
+
 			if got1 != thisTest.want1 {
 				t.Errorf("config.IsHashable() got1 = %v, want %v", got1, thisTest.want1)
 			}
+
 			if got2 != thisTest.want2 {
 				t.Errorf("config.IsHashable() got2 = %v, want %v", got2, thisTest.want2)
 			}
@@ -681,6 +689,7 @@ func Test_FindElem(t *testing.T) {
 
 				return
 			}
+
 			if !reflect.DeepEqual(got, thisTest.want) {
 				t.Errorf("config.FindElem() = %v, want %v", got, thisTest.want)
 			}
@@ -761,6 +770,7 @@ func Test_elem2URL(t *testing.T) {
 
 				return
 			}
+
 			if got != thisTest.want {
 				t.Errorf("elem2URL() = %v, want %v", got, thisTest.want)
 			}
@@ -837,6 +847,7 @@ func Test_elem2preURL(t *testing.T) {
 
 				return
 			}
+
 			if got != thisTest.want {
 				t.Errorf("config.Elem2preURL() = %v, want %v", got, thisTest.want)
 			}
@@ -1111,10 +1122,12 @@ func TestConfig_MergeElement(t *testing.T) {
 			t.Parallel()
 
 			myConfig := thisTest.Config
+
 			err := myConfig.MergeElement(thisTest.el)
 			if (err != nil) != thisTest.wantErr {
 				t.Errorf("Config.MergeElement() error = %v, wantErr %v", err, thisTest.wantErr)
 			}
+
 			if !reflect.DeepEqual(myConfig.Elements, thisTest.wantConfig.Elements) {
 				t.Errorf("Config.MergeElement() config.Elements = %v, wantConfig.Elements %v", myConfig.Elements, thisTest.wantConfig.Elements)
 			}
@@ -1140,12 +1153,14 @@ func TestConfig_Generate(t *testing.T) {
 
 			c, _ := config.LoadConfig(thisTest.file)
 			want, _ := os.ReadFile(geofabrikYml)
+
 			got, err := c.Generate()
 			if (err != nil) != thisTest.wantErr {
 				t.Errorf("Config.Generate() error = %v, wantErr %v", err, thisTest.wantErr)
 
 				return
 			}
+
 			if !reflect.DeepEqual(got, want) {
 				t.Errorf("Config.Generate() = %v, want %v", got, want)
 			}

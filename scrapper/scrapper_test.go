@@ -59,6 +59,7 @@ func TestGetParent(t *testing.T) {
 			if got != thisTest.want {
 				t.Errorf("GetParent() = %v, want %v", got, thisTest.want)
 			}
+
 			if got2 != thisTest.want2 {
 				t.Errorf("GetParent() = %v, want %v", got2, thisTest.want2)
 			}
@@ -90,6 +91,7 @@ func Test_FileExt(t *testing.T) {
 			if got != thisTest.want {
 				t.Errorf("FileExt() = %v, want %v", got, thisTest.want)
 			}
+
 			if ext != thisTest.want2 {
 				t.Errorf("FileExt() = %v, want %v", ext, thisTest.want2)
 			}
@@ -368,6 +370,7 @@ func Test_ParseFormat(t *testing.T) {
 			}
 
 			myScrapper.ParseFormat(tests[thisTest].args.id, tests[thisTest].args.format)
+
 			if !reflect.DeepEqual(tests[thisTest].args.c.Elements, tests[thisTest].want) {
 				t.Errorf("ParseFormat() got %v, want %v", tests[thisTest].args.c.Elements, tests[thisTest].want)
 			}
@@ -386,6 +389,7 @@ func TestScrapper_PB(t *testing.T) {
 
 		t.Run(fmt.Sprintf("PB: %d", want), func(t *testing.T) {
 			t.Parallel()
+
 			out := myScrapper.GetPB()
 			if out != want {
 				t.Errorf("GetPB() got %d, want %d", out, want)

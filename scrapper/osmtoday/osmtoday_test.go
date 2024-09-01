@@ -14,6 +14,7 @@ import (
 
 func TestGetDefault(t *testing.T) {
 	t.Parallel()
+
 	tests := []struct {
 		name string
 		want *osmtoday.Osmtoday
@@ -44,10 +45,12 @@ func TestGetDefault(t *testing.T) {
 			},
 		},
 	}
+
 	for _, tt := range tests {
 		test := tt // Reinitialize tt inside the range statement
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
+
 			if got := osmtoday.GetDefault(); !reflect.DeepEqual(got, test.want) {
 				t.Errorf("GetDefault() = %v, want %v", got, test.want)
 			}
@@ -61,6 +64,7 @@ func TestOsmtoday_Exceptions(t *testing.T) {
 	type args struct {
 		e element.Element
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -268,6 +272,7 @@ func TestOsmtoday_Exceptions(t *testing.T) {
 		test := tt // Reinitialize tt inside the range statement
 		t.Run(test.name, func(t *testing.T) {
 			t.Parallel()
+
 			g := osmtoday.GetDefault()
 
 			if got := g.Exceptions(&test.args.e); !reflect.DeepEqual(got, &test.want) {

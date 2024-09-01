@@ -59,9 +59,11 @@ func Test_checkService(t *testing.T) {
 			if thisTest.config != "" {
 				*fConfig = thisTest.config
 			}
+
 			if got := checkService(); got != thisTest.want {
 				t.Errorf("checkService() = %v, want %v", got, thisTest.want)
 			}
+
 			if thisTest.wantConfig != "" && *fConfig != thisTest.wantConfig {
 				t.Errorf("checkService() haven't change fConfig, want %v have %v", thisTest.wantConfig, *fConfig)
 			}
@@ -119,6 +121,7 @@ func Test_hashFileMD5(t *testing.T) {
 
 				return
 			}
+
 			if got != thisTest.want {
 				t.Errorf("hashFileMD5() = %v, want %v", got, thisTest.want)
 			}
@@ -198,6 +201,7 @@ func Test_controlHash(t *testing.T) {
 
 				return
 			}
+
 			if got != thisTest.want {
 				t.Errorf("controlHash() = %v, want %v", got, thisTest.want)
 			}
@@ -302,11 +306,13 @@ func Test_listCommand(t *testing.T) {
 		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			*lmd = thisTest.lmd
-			fakelistAllRegions := func(configPtr *config.Config, format string) {
+			fakelistAllRegions := func(_, format string) {
 				assert.Equal(t, thisTest.want, format)
 			}
 			patch := monkey.Patch(listAllRegions, fakelistAllRegions)
+
 			defer patch.Unpatch()
+
 			listCommand()
 		})
 	}
@@ -419,20 +425,24 @@ func Test_downloadCommand(t *testing.T) {
 
 				return nil
 			}
-			fakedownloadChecksum := func(f string) bool {
+			fakedownloadChecksum := func() bool {
 				return thisTest.checksumValid
 			}
-			fakefileExist := func(f string) bool {
+			fakefileExist := func() bool {
 				return thisTest.fakefileExist
 			}
 			patch := monkey.Patch(download.FromURL, fakedownloadFromURL)
-			patch2 := monkey.Patch(downloadChecksum, fakedownloadChecksum)
-			patch3 := monkey.Patch(fileExist, fakefileExist)
+
 			defer patch.Unpatch()
+
+			patch2 := monkey.Patch(downloadChecksum, fakedownloadChecksum)
+
 			defer patch2.Unpatch()
+
+			patch3 := monkey.Patch(fileExist, fakefileExist)
+
 			defer patch3.Unpatch()
 			downloadCommand()
-			//			izefnof // real error should not compile
 		})
 	}
 }

@@ -88,6 +88,7 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
 	e.ForEach("td", func(_ int, el *colly.HTMLElement) {
 		el.ForEach("a", func(_ int, sub *colly.HTMLElement) {
 			href := sub.Request.AbsoluteURL(sub.Attr("href"))
+
 			myID, extension := scrapper.FileExt(href)
 			if myID == "" {
 				// TODO : Move to Debug
@@ -107,10 +108,13 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
 					Parent: parent,
 					Meta:   true,
 				}
+
 				myElement = *g.Exceptions(&myElement)
+
 				if file != "" {
 					myElement.File = file
 				}
+
 				if !g.Config.Exist(parent) && parent != "" { // Case of parent should exist not already in Slice
 					gparent, _ := scrapper.GetParent(parentPath)
 					log.Debugf("Create Meta %s parent: %s %v", myElement.Parent, gparent, parentPath)
@@ -121,9 +125,11 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
 						}
 					}
 				}
+
 				if err := g.Config.MergeElement(&myElement); err != nil {
 					log.WithError(err).Errorf("can't merge %s", myElement.Name)
 				}
+
 				log.Debugf("Add: %s", href)
 
 				if err := myCollector.Visit(href); err != nil && !errors.Is(err, colly.ErrAlreadyVisited) {
@@ -139,9 +145,11 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
 					Meta:   true,
 				}
 				myElement = *g.Exceptions(&myElement)
+
 				if file != "" {
 					myElement.File = file
 				}
+
 				g.ParseFormat(myElement.ID, extension)
 			}
 		})

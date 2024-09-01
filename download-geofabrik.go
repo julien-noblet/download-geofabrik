@@ -140,6 +140,7 @@ func listCommand() {
 
 func downloadFile(configPtr *config.Config, element, format, output string) {
 	format = configPtr.Formats[format].ID
+
 	myElem, err := config.FindElem(configPtr, element)
 	if err != nil {
 		log.WithError(err).Fatalf(config.ErrFindElem, element)
@@ -180,6 +181,7 @@ func downloadCommand() {
 				}
 			} else {
 				downloadFile(configPtr, *delement, myFormat.ID, *dOutputDir+filename+"."+myFormat.ID)
+
 				if !downloadChecksum(myFormat.ID) {
 					log.Warnf("Checksum mismatch, please re-download %s", *dOutputDir+filename+"."+myFormat.ID)
 				}

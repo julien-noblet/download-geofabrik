@@ -100,6 +100,7 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 					}
 				}
 			}
+
 			myElement.ForEach("a", func(_ int, elmt *colly.HTMLElement) {
 				myOpenstreetmapFR.Parse(elmt, myCollector)
 			})
@@ -307,6 +308,7 @@ func TestOpenstreetmapFR_parseHref(t *testing.T) {
 			t.Parallel()
 
 			myOpenstreetmapFR.ParseHref(openstreetmapFRtests[thisTest].href)
+
 			if !reflect.DeepEqual(openstreetmapFRtests[thisTest].c.Elements, openstreetmapFRtests[thisTest].want) {
 				t.Errorf(
 					"parseHref() = \n%#v len:%d, want \n%#v len:%d\n",
@@ -328,12 +330,13 @@ func Test_openstreetmapFRGetParent(t *testing.T) {
 		t.Run(openstreetmapFRtests[ThisTest].name, func(t *testing.T) {
 			t.Parallel()
 
-			p, ps := openstreetmapfr.GetParent(openstreetmapFRtests[ThisTest].href)
+			p, grandParent := openstreetmapfr.GetParent(openstreetmapFRtests[ThisTest].href)
 			if !reflect.DeepEqual(p, openstreetmapFRtests[ThisTest].parent) {
 				t.Errorf("openstreetmapFRGetParent() = %v want %v ", p, openstreetmapFRtests[ThisTest].parent)
 			}
-			if !reflect.DeepEqual(ps, openstreetmapFRtests[ThisTest].parents) {
-				t.Errorf("openstreetmapFRGetParent() = %v want %v ", ps, openstreetmapFRtests[ThisTest].parents)
+
+			if !reflect.DeepEqual(grandParent, openstreetmapFRtests[ThisTest].parents) {
+				t.Errorf("openstreetmapFRGetParent() = %v want %v ", grandParent, openstreetmapFRtests[ThisTest].parents)
 			}
 		})
 	}
@@ -398,6 +401,7 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 
 			myOpenstreetmapFR := openstreetmapfr.GetDefault()
 			myOpenstreetmapFR.GetConfig()
+
 			if len(thisTest.elements) > 0 {
 				for _, e := range thisTest.elements {
 					e := e
@@ -406,7 +410,9 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 					}
 				}
 			}
+
 			myOpenstreetmapFR.MakeParents(thisTest.parent, thisTest.gparents)
+
 			if !reflect.DeepEqual(myOpenstreetmapFR.Config.Elements, thisTest.want) {
 				t.Errorf("makeParent() fail: got\n %#v,\n want \n %#v.\n", myOpenstreetmapFR.Config.Elements, thisTest.want)
 			}
