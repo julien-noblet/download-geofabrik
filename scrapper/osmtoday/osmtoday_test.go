@@ -23,9 +23,9 @@ func TestGetDefault(t *testing.T) {
 			name: "TestGetDefault",
 			want: &osmtoday.Osmtoday{
 				Scrapper: &scrapper.Scrapper{
-					PB:             412, //nolint:gomnd // there is 412 items
+					PB:             412,
 					Async:          true,
-					Parallelism:    20, //nolint:gomnd // use 20 threads for scrapping
+					Parallelism:    20,
 					MaxDepth:       0,
 					AllowedDomains: []string{"osmtoday.com"},
 					BaseURL:        "https://osmtoday.com",
@@ -246,6 +246,21 @@ func TestOsmtoday_Exceptions(t *testing.T) {
 				File:   "georgia",
 			},
 		},
+		{
+			name: "france is not in the list",
+			args: args{
+				e: element.Element{
+					ID:     "france",
+					Parent: "europe",
+					File:   "france",
+				},
+			},
+			want: element.Element{
+				ID:     "france",
+				Parent: "europe",
+				File:   "france",
+			},
+		},
 	}
 
 	for _, tt := range tests {
@@ -253,6 +268,7 @@ func TestOsmtoday_Exceptions(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			g := osmtoday.GetDefault()
+
 			if got := g.Exceptions(&tt.args.e); !reflect.DeepEqual(got, &tt.want) {
 				t.Errorf("Osmtoday.Exceptions() = %v, want %v", got, tt.want)
 			}
@@ -281,6 +297,7 @@ func TestOsmtoday_ParseFormat(t *testing.T) {
 		id     string
 		format string
 	}
+
 	tests := []struct {
 		name string
 		args args
