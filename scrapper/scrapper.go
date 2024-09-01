@@ -145,6 +145,15 @@ func (s *Scrapper) ParseFormat(id, format string) {
 	}
 }
 
+// ParseFormatService add Extensions to ID.
+func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefinitions) {
+	for f, i := range *def {
+		if "."+format == i.Loc {
+			s.Config.AddExtension(id, f)
+		}
+	}
+}
+
 // FileExt return filename, ext.
 func FileExt(url string) (filename, extension string) { //nolint:nonamedreturns // better for documentation
 	urls := strings.Split(url, "/") // Todo: Try with regexp?

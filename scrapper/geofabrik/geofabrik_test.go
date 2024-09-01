@@ -287,6 +287,7 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			}
 
 			myScrapper.ParseFormat(tests[thisTest].args.id, tests[thisTest].args.format)
+
 			if !reflect.DeepEqual(tests[thisTest].args.c.Elements, tests[thisTest].want) {
 				t.Errorf("ParseFormat() got %v, want %v", tests[thisTest].args.c.Elements, tests[thisTest].want)
 			}
@@ -376,11 +377,15 @@ func TestGeofabrik_parseLi(t *testing.T) {
 				},
 			}
 			defaultGeofabrik := geofabrik.GetDefault()
+
 			defaultGeofabrik.GetConfig()
+
 			if err := defaultGeofabrik.Config.MergeElement(thisTest.element); err != nil {
 				t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", thisTest.element, err)
 			}
+
 			defaultGeofabrik.ParseLi(myElement, nil)
+
 			if !reflect.DeepEqual(defaultGeofabrik.Config.Elements, thisTest.want) {
 				t.Errorf("parseLi() fail, got %v, want %v", defaultGeofabrik.Config.Elements, thisTest.want)
 			}
@@ -567,13 +572,16 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 			defaultGeofabrik := geofabrik.GetDefault()
 
 			myCollector := defaultGeofabrik.Collector() // Need a Collector to visit
+
 			for _, elemem := range *thisTest.elements {
 				elemem := elemem
 				if err := defaultGeofabrik.Config.MergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}
 			}
+
 			defaultGeofabrik.ParseSubregion(myElement, myCollector)
+
 			for k := range defaultGeofabrik.Config.Elements {
 				if !reflect.DeepEqual(defaultGeofabrik.Config.Elements[k], thisTest.want[k]) {
 					t.Errorf("parseSubregion() fail, got \n%+v, want \n%+v", defaultGeofabrik.Config.Elements[k], thisTest.want[k])

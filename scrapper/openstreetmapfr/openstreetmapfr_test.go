@@ -30,7 +30,7 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 			name: "sample",
 			html: `<a href="fiji.osm.pbf">fiji.osm.pbf</a>`,
 			url:  `https://download.openstreetmap.fr/extracts/`,
-			want: element.Slice{"fiji": element.Element{ID: "fiji", Name: "fiji", Formats: element.Formats{formats.FormatOsmPbf}}},
+			want: element.Slice{"fiji": element.Element{ID: "fiji", File: "fiji", Name: "fiji", Formats: element.Formats{formats.FormatOsmPbf}}},
 		},
 		{
 			name: "Merge",
@@ -55,10 +55,10 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 			url: `https://download.openstreetmap.fr/extracts/merge/`,
 			want: element.Slice{
 				"merge":                   element.Element{ID: "merge", Name: "merge", Meta: true},
-				"fiji":                    element.Element{ID: "fiji", Name: "fiji", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
-				"france_metro_dom_com_nc": element.Element{ID: "france_metro_dom_com_nc", Name: "france_metro_dom_com_nc", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
-				"france_taaf":             element.Element{ID: "france_taaf", Name: "france_taaf", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
-				"kiribati":                element.Element{ID: "kiribati", Name: "kiribati", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
+				"fiji":                    element.Element{ID: "fiji", File: "fiji", Name: "fiji", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
+				"france_metro_dom_com_nc": element.Element{ID: "france_metro_dom_com_nc", File: "france_metro_dom_com_nc", Name: "france_metro_dom_com_nc", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
+				"france_taaf":             element.Element{ID: "france_taaf", File: "france_taaf", Name: "france_taaf", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
+				"kiribati":                element.Element{ID: "kiribati", File: "kiribati", Name: "kiribati", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
 			},
 		},
 		{
@@ -100,6 +100,7 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 					}
 				}
 			}
+
 			myElement.ForEach("a", func(_ int, elmt *colly.HTMLElement) {
 				myOpenstreetmapFR.Parse(elmt, myCollector)
 			})
@@ -168,6 +169,7 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 		want: element.Slice{
 			"object": element.Element{
 				ID:      "object",
+				File:    "object",
 				Name:    "object",
 				Formats: []string{formats.FormatOsmPbf},
 			},
@@ -182,6 +184,7 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 		want: element.Slice{
 			"object": element.Element{
 				ID:      "object",
+				File:    "object",
 				Name:    "object",
 				Formats: []string{formats.FormatOsmPbf},
 			},
@@ -196,6 +199,7 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 		want: element.Slice{
 			"object": element.Element{
 				ID:      "object",
+				File:    "object",
 				Name:    "object",
 				Formats: []string{formats.FormatOsmPbf},
 				Parent:  "one",
@@ -216,6 +220,7 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 		want: element.Slice{
 			"object": element.Element{
 				ID:      "object",
+				File:    "object",
 				Name:    "object",
 				Meta:    false,
 				Formats: []string{formats.FormatOsmPbf},
@@ -237,6 +242,7 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 		want: element.Slice{
 			"object": element.Element{
 				ID:      "object",
+				File:    "object",
 				Name:    "object",
 				Formats: []string{formats.FormatOsmPbf},
 				Parent:  "two",
@@ -263,6 +269,7 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 		want: element.Slice{
 			"object": element.Element{
 				ID:      "object",
+				File:    "object",
 				Name:    "object",
 				Formats: []string{formats.FormatOsmPbf, formats.FormatState},
 				Parent:  "one",
@@ -277,6 +284,7 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 			Elements: element.Slice{
 				"object": element.Element{
 					ID:      "object",
+					File:    "object",
 					Name:    "object",
 					Formats: []string{formats.FormatOsmPbf},
 					Parent:  "one",
@@ -300,6 +308,7 @@ func TestOpenstreetmapFR_parseHref(t *testing.T) {
 			t.Parallel()
 
 			myOpenstreetmapFR.ParseHref(openstreetmapFRtests[thisTest].href)
+
 			if !reflect.DeepEqual(openstreetmapFRtests[thisTest].c.Elements, openstreetmapFRtests[thisTest].want) {
 				t.Errorf(
 					"parseHref() = \n%#v len:%d, want \n%#v len:%d\n",
@@ -321,12 +330,13 @@ func Test_openstreetmapFRGetParent(t *testing.T) {
 		t.Run(openstreetmapFRtests[ThisTest].name, func(t *testing.T) {
 			t.Parallel()
 
-			p, ps := openstreetmapfr.GetParent(openstreetmapFRtests[ThisTest].href)
+			p, grandParent := openstreetmapfr.GetParent(openstreetmapFRtests[ThisTest].href)
 			if !reflect.DeepEqual(p, openstreetmapFRtests[ThisTest].parent) {
 				t.Errorf("openstreetmapFRGetParent() = %v want %v ", p, openstreetmapFRtests[ThisTest].parent)
 			}
-			if !reflect.DeepEqual(ps, openstreetmapFRtests[ThisTest].parents) {
-				t.Errorf("openstreetmapFRGetParent() = %v want %v ", ps, openstreetmapFRtests[ThisTest].parents)
+
+			if !reflect.DeepEqual(grandParent, openstreetmapFRtests[ThisTest].parents) {
+				t.Errorf("openstreetmapFRGetParent() = %v want %v ", grandParent, openstreetmapFRtests[ThisTest].parents)
 			}
 		})
 	}
@@ -391,6 +401,7 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 
 			myOpenstreetmapFR := openstreetmapfr.GetDefault()
 			myOpenstreetmapFR.GetConfig()
+
 			if len(thisTest.elements) > 0 {
 				for _, e := range thisTest.elements {
 					e := e
@@ -399,7 +410,9 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 					}
 				}
 			}
+
 			myOpenstreetmapFR.MakeParents(thisTest.parent, thisTest.gparents)
+
 			if !reflect.DeepEqual(myOpenstreetmapFR.Config.Elements, thisTest.want) {
 				t.Errorf("makeParent() fail: got\n %#v,\n want \n %#v.\n", myOpenstreetmapFR.Config.Elements, thisTest.want)
 			}

@@ -66,7 +66,9 @@ func (g *Geofabrik) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Coll
 		el.ForEach("a", func(_ int, sub *colly.HTMLElement) {
 			href := sub.Request.AbsoluteURL(sub.Attr("href"))
 			myID, extension := scrapper.FileExt(href)
+
 			var file string
+
 			if extension == "html" { //nolint:nestif // TODO : Refactor?
 				parent, parentPath := scrapper.GetParent(href)
 				if myID == "georgia" { //nolint:goconst // Georgia is in Europe & US
@@ -79,19 +81,23 @@ func (g *Geofabrik) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Coll
 						file = "georgia"
 					}
 				}
+
 				if myID == "guatemala" && parent == "south-america" { //nolint:goconst // guatemala is also in central-america
 					myID = "guatemala-south-america"
 					file = "guatemala"
 				}
+
 				myElement := element.Element{ //nolint:exhaustruct // I'm lazy
 					ID:     myID,
 					Name:   sub.Text,
 					Parent: parent,
 					Meta:   true,
 				}
+
 				if file != "" {
 					myElement.File = file
 				}
+
 				if !g.Config.Exist(parent) && parent != "" { // Case of parent should exist not already in Slice
 					gparent, _ := scrapper.GetParent(parentPath)
 					log.Debugf("Create Meta %s parent: %s %v", myElement.Parent, gparent, parentPath)
@@ -102,9 +108,11 @@ func (g *Geofabrik) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Coll
 						}
 					}
 				}
+
 				if err := g.Config.MergeElement(&myElement); err != nil {
 					log.WithError(err).Errorf("can't merge %s", myElement.Name)
 				}
+
 				log.Debugf("Add: %s", href)
 
 				if err := myCollector.Visit(href); err != nil && !errors.Is(err, colly.ErrAlreadyVisited) {
@@ -129,6 +137,7 @@ func (g *Geofabrik) ParseFormat(id, format string) {
 func (g *Geofabrik) ParseLi(e *colly.HTMLElement, _ *colly.Collector) {
 	e.ForEach("a", func(_ int, element *colly.HTMLElement) {
 		_, format := scrapper.FileExt(element.Attr("href"))
+
 		myID, _ := scrapper.FileExt(element.Request.URL.String()) // id can't be extracted from href
 		if myID == "georgia" {                                    // Exception
 			parent, _ := scrapper.GetParent(element.Request.AbsoluteURL(element.Attr("href")))
@@ -139,12 +148,14 @@ func (g *Geofabrik) ParseLi(e *colly.HTMLElement, _ *colly.Collector) {
 				myID = "georgia-eu"
 			}
 		}
+
 		if myID == "guatemala" {
 			parent, _ := scrapper.GetParent(element.Request.AbsoluteURL(element.Attr("href")))
 			if parent == "south-america" {
 				myID = "guatemala-south-america"
 			}
 		}
+
 		g.ParseFormat(myID, format)
 	})
 }

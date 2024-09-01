@@ -32,15 +32,18 @@ func TestGetIndex(t *testing.T) {
 			if (err != nil) != thisTest.wantErr {
 				t.Errorf("GetIndex() error = %v, wantErr %v", err, thisTest.wantErr)
 			}
+
 			if len(index.Features) < 10 {
 				t.Errorf("GetIndex() error I should have more features!!!")
 			}
-			c, err := geofabrik.Convert(index)
-			if c == nil || err != nil {
+
+			converted, err := geofabrik.Convert(index)
+			if converted == nil || err != nil {
 				t.Errorf("GetIndex() error cant convert !!!\n%v", err)
 			}
-			if e, err := c.GetElement("france"); err != nil || e == nil {
-				t.Errorf("GetIndex() error cant find element !!!\nconfig=%v\nerr=%v", c, err)
+
+			if e, err := converted.GetElement("france"); err != nil || e == nil {
+				t.Errorf("GetIndex() error cant find element !!!\nconfig=%v\nerr=%v", converted, err)
 			}
 		})
 	}

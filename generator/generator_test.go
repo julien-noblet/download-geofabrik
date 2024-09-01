@@ -160,6 +160,7 @@ func TestSlice_Generate(t *testing.T) {
 
 				return
 			}
+
 			if !reflect.DeepEqual(got, thisTest.want) {
 				t.Errorf("Slice.Generate() = %v, want %v", got, thisTest.want)
 			}
@@ -208,14 +209,17 @@ func Test_write(t *testing.T) {
 
 			c, _ := config.LoadConfig(thisTest.input)
 			generator.Write(c, thisTest.output)
+
 			input, err := os.ReadFile(thisTest.input)
 			if err != nil {
 				t.Errorf("read() error = %v", err)
 			}
+
 			output, err := os.ReadFile(thisTest.output)
 			if err != nil {
 				t.Errorf("read() error = %v", err)
 			}
+
 			reflect.DeepEqual(input, output)
 		})
 	}

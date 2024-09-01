@@ -223,6 +223,7 @@ func Test_contains(t *testing.T) {
 			if got := thisTest.args.s.Contains(thisTest.args.e); got != thisTest.want {
 				t.Errorf("Contains() = %v, want %v", got, thisTest.want)
 			}
+
 			if got := element.StringInSlice(&thisTest.args.e, &thisTest.args.s); got != thisTest.want {
 				t.Errorf("StringInSlice() = %v, want %v", got, thisTest.want)
 			}
@@ -269,6 +270,7 @@ func Test_MakeParent(t *testing.T) {
 			if got == nil && thisTest.want == nil {
 				return
 			}
+
 			if got.ID != thisTest.want.ID ||
 				got.Name != thisTest.want.Name ||
 				got.Meta != thisTest.want.Meta ||

@@ -1,6 +1,7 @@
 package formats
 
 import (
+	"slices"
 	"strings"
 
 	"github.com/spf13/viper"
@@ -13,44 +14,50 @@ type Format struct {
 	BaseURL  string `yaml:"baseurl,omitempty"`
 }
 
-type FormatDefinitions map[string]Format
+type (
+	FormatDefinitions map[string]Format
+	MiniFormat        struct {
+		ShortName string
+		FullName  string
+	}
+)
 
 const (
-	FormatState  = "state"
-	FormatOsmPbf = "osm.pbf"
-	FormatOsmGz  = "osm.gz"
-	FormatOsmBz2 = "osm.bz2"
-	FormatOshPbf = "osh.pbf"
-	FormatPoly   = "poly"
-	FormatShpZip = "shp.zip"
-	FormatKml    = "kml"
+	FormatState   = "state"
+	FormatOsmPbf  = "osm.pbf"
+	FormatOsmGz   = "osm.gz"
+	FormatOsmBz2  = "osm.bz2"
+	FormatOshPbf  = "osh.pbf"
+	FormatPoly    = "poly"
+	FormatShpZip  = "shp.zip"
+	FormatKml     = "kml"
+	FormatGeoJSON = "geojson"
 )
 
 // MiniFormats get formats of an Element
 //
 //	and return a string
 //	according to download-geofabrik short flags.
-func MiniFormats(s []string) string {
-	res := make([]string, 7) //nolint:gomnd // 7 is the number of formats
+func MiniFormats(miniFormat []string) string {
+	miniFormatList := []MiniFormat{
+		{ShortName: "s", FullName: FormatState},
+		{ShortName: "P", FullName: FormatOsmPbf},
+		{ShortName: "G", FullName: FormatOsmGz},
+		{ShortName: "B", FullName: FormatOsmBz2},
+		{ShortName: "H", FullName: FormatOshPbf},
+		{ShortName: "p", FullName: FormatPoly},
+		{ShortName: "S", FullName: FormatShpZip},
+		{ShortName: "k", FullName: FormatKml},
+		{ShortName: "g", FullName: FormatGeoJSON},
+	}
 
-	for _, item := range s {
-		switch item {
-		case FormatState:
-			res[0] = "s"
-		case FormatOsmPbf:
-			res[1] = "P"
-		case FormatOsmGz:
-			res[2] = "G"
-		case FormatOsmBz2:
-			res[2] = "B"
-		case FormatOshPbf:
-			res[3] = "H"
-		case FormatPoly:
-			res[4] = "p"
-		case FormatShpZip:
-			res[5] = "S"
-		case FormatKml:
-			res[6] = "k"
+	res := make([]string, len(miniFormatList))
+
+	for _, item := range miniFormat {
+		for i, format := range miniFormatList {
+			if item == format.FullName {
+				res[i] = format.ShortName
+			}
 		}
 	}
 
@@ -60,41 +67,30 @@ func MiniFormats(s []string) string {
 // GetFormats return a pointer to a slice with formats.
 func GetFormats() *[]string {
 	var formatFile []string
-	if viper.GetBool("dosmPbf") {
-		formatFile = append(formatFile, FormatOsmPbf)
+
+	options := map[string]string{
+		"dosmPbf":  FormatOsmPbf,
+		"doshPbf":  FormatOshPbf,
+		"dosmGz":   FormatOsmGz,
+		"dosmBz2":  FormatOsmBz2,
+		"dshpZip":  FormatShpZip,
+		"dstate":   FormatState,
+		"dpoly":    FormatPoly,
+		"dkml":     FormatKml,
+		"dgeojson": FormatGeoJSON,
 	}
 
-	if viper.GetBool("doshPbf") {
-		formatFile = append(formatFile, FormatOshPbf)
-	}
-
-	if viper.GetBool("dosmGz") {
-		formatFile = append(formatFile, FormatOsmGz)
-	}
-
-	if viper.GetBool("dosmBz2") {
-		formatFile = append(formatFile, FormatOsmBz2)
-	}
-
-	if viper.GetBool("dshpZip") {
-		formatFile = append(formatFile, FormatShpZip)
-	}
-
-	if viper.GetBool("dstate") {
-		formatFile = append(formatFile, FormatState)
-	}
-
-	if viper.GetBool("dpoly") {
-		formatFile = append(formatFile, FormatPoly)
-	}
-
-	if viper.GetBool("dkml") {
-		formatFile = append(formatFile, FormatKml)
+	for k, v := range options {
+		if viper.GetBool(k) {
+			formatFile = append(formatFile, v)
+		}
 	}
 
 	if len(formatFile) == 0 {
 		formatFile = append(formatFile, FormatOsmPbf)
 	}
+
+	slices.Sort(formatFile)
 
 	return &formatFile
 }

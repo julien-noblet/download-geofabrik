@@ -50,6 +50,8 @@ func Test_miniFormats(t *testing.T) {
 		{name: "state and poly", args: args{s: []string{formats.FormatState, formats.FormatPoly}}, want: "sp"},
 		{name: "state and shp.zip", args: args{s: []string{formats.FormatState, formats.FormatShpZip}}, want: "sS"},
 		{name: "state and kml", args: args{s: []string{formats.FormatState, formats.FormatKml}}, want: "sk"},
+		{name: "state and geojson", args: args{s: []string{formats.FormatState, formats.FormatGeoJSON}}, want: "sg"},
+		{name: "osm.pbf and geojson", args: args{s: []string{formats.FormatOsmPbf, formats.FormatGeoJSON}}, want: "Pg"},
 		// Not testing all combinaisons!
 		{name: "osm.pbf and shp.zip", args: args{s: []string{formats.FormatOsmPbf, formats.FormatShpZip}}, want: "PS"},
 		// With all
@@ -72,6 +74,7 @@ func Test_miniFormats(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
+
 			if got := formats.MiniFormats(tt.args.s); got != tt.want {
 				t.Errorf("formats.MiniFormats() = %v, want %v", got, tt.want)
 			}
@@ -82,14 +85,15 @@ func Test_miniFormats(t *testing.T) {
 //nolint:paralleltest // Can't be parallelized
 func Test_getFormats(t *testing.T) {
 	type dflags struct {
-		dosmPbf bool
-		doshPbf bool
-		dosmBz2 bool
-		dosmGz  bool
-		dshpZip bool
-		dstate  bool
-		dpoly   bool
-		dkml    bool
+		dosmPbf  bool
+		doshPbf  bool
+		dosmBz2  bool
+		dosmGz   bool
+		dshpZip  bool
+		dstate   bool
+		dpoly    bool
+		dkml     bool
+		dgeojson bool
 	}
 
 	tests := []struct {
@@ -101,14 +105,15 @@ func Test_getFormats(t *testing.T) {
 		{
 			name: "none",
 			flags: dflags{
-				dosmPbf: false,
-				doshPbf: false,
-				dosmBz2: false,
-				dosmGz:  false,
-				dshpZip: false,
-				dstate:  false,
-				dpoly:   false,
-				dkml:    false,
+				dosmPbf:  false,
+				doshPbf:  false,
+				dosmBz2:  false,
+				dosmGz:   false,
+				dshpZip:  false,
+				dstate:   false,
+				dpoly:    false,
+				dkml:     false,
+				dgeojson: false,
 			},
 			want: []string{formats.FormatOsmPbf},
 		},
@@ -152,7 +157,7 @@ func Test_getFormats(t *testing.T) {
 				dpoly:   false,
 				dkml:    false,
 			},
-			want: []string{formats.FormatOsmPbf, formats.FormatOshPbf},
+			want: []string{formats.FormatOshPbf, formats.FormatOsmPbf},
 		},
 		{
 			name: "dosmBz2 dshpZip",
@@ -180,7 +185,7 @@ func Test_getFormats(t *testing.T) {
 				dpoly:   true,
 				dkml:    false,
 			},
-			want: []string{formats.FormatState, formats.FormatPoly},
+			want: []string{formats.FormatPoly, formats.FormatState},
 		},
 		{
 			name: "dkml",
@@ -210,6 +215,21 @@ func Test_getFormats(t *testing.T) {
 			},
 			want: []string{formats.FormatOsmGz},
 		},
+		{
+			name: "dgeojson",
+			flags: dflags{
+				dosmPbf:  false,
+				doshPbf:  false,
+				dosmBz2:  false,
+				dosmGz:   false,
+				dshpZip:  false,
+				dstate:   false,
+				dpoly:    false,
+				dkml:     false,
+				dgeojson: true,
+			},
+			want: []string{formats.FormatGeoJSON},
+		},
 	}
 
 	for _, thisTest := range tests {
@@ -222,6 +242,7 @@ func Test_getFormats(t *testing.T) {
 		viper.Set("dstate", thisTest.flags.dstate)
 		viper.Set("dpoly", thisTest.flags.dpoly)
 		viper.Set("dkml", thisTest.flags.dkml)
+		viper.Set("dgeojson", thisTest.flags.dgeojson)
 		t.Run(thisTest.name, func(t *testing.T) {
 			if got := formats.GetFormats(); !reflect.DeepEqual(*got, thisTest.want) {
 				t.Errorf("formats.GetFormats() = %v, want %v", *got, thisTest.want)

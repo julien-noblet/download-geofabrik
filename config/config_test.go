@@ -275,12 +275,14 @@ func Test_loadConfig(t *testing.T) {
 		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
+
 			got, err := config.LoadConfig(thisTest.args.configFile)
 			if err != nil != thisTest.wantErr {
 				t.Errorf("loadConfig() error = %v, wantErr %v", err, thisTest.wantErr)
 
 				return
 			}
+
 			if got != nil {
 				if reflect.TypeOf(got) != reflect.TypeOf(thisTest.want) {
 					t.Errorf("loadConfig() is a %v, want %v", reflect.TypeOf(got), reflect.TypeOf(thisTest.want))
@@ -397,12 +399,13 @@ func Test_AddExtension(t *testing.T) {
 	}
 
 	for tn := range tests {
-		tn := tn
-		t.Run(tests[tn].name, func(t *testing.T) {
+		test := tn
+		t.Run(tests[test].name, func(t *testing.T) {
 			t.Parallel()
-			tests[tn].c.AddExtension(tests[tn].args.id, tests[tn].args.format)
-			if !reflect.DeepEqual(tests[tn].c.Elements, tests[tn].want) {
-				t.Errorf("AddExtension() got %v, want %v", tests[tn].c.Elements, tests[tn].want)
+			tests[test].c.AddExtension(tests[test].args.id, tests[test].args.format)
+
+			if !reflect.DeepEqual(tests[test].c.Elements, tests[test].want) {
+				t.Errorf("AddExtension() got %v, want %v", tests[test].c.Elements, tests[test].want)
 			}
 		})
 	}
@@ -465,12 +468,14 @@ func Test_config_GetElement(t *testing.T) {
 			t.Parallel()
 
 			c, _ := config.LoadConfig(thisTest.file)
+
 			got, err := c.GetElement(thisTest.id)
 			if (err != nil) != thisTest.wantErr {
 				t.Errorf("Config.GetElement() error = %v, wantErr %v", err, thisTest.wantErr)
 
 				return
 			}
+
 			if thisTest.want != nil {
 				tfrance := &element.Element{
 					ID:     thisTest.want.ID,
@@ -486,14 +491,17 @@ func Test_config_GetElement(t *testing.T) {
 					Parent: got.Parent,
 					Meta:   got.Meta,
 				}
+
 				if !reflect.DeepEqual(tgot, tfrance) {
 					t.Errorf("Config.GetElement() = %v, want %v", got, thisTest.want)
 				}
+
 				for _, k := range thisTest.want.Formats {
 					if !(got.Formats.Contains(k)) {
 						t.Errorf("%v format should exist, got=%v", k, got)
 					}
 				}
+
 				for _, k := range got.Formats {
 					if !(thisTest.want.Formats.Contains(k)) {
 						t.Errorf("%v format should not exist, got=%v", k, got)
@@ -502,12 +510,14 @@ func Test_config_GetElement(t *testing.T) {
 			} else if !reflect.DeepEqual(got, thisTest.want) {
 				t.Errorf("Config.GetElement() = %v, want %v", got, thisTest.want)
 			}
+
 			if !thisTest.wantErr && (err == nil) {
 				for _, k := range thisTest.want.Formats {
 					if !(got.Formats.Contains(k)) {
 						t.Errorf("%v format should exist, got=%v", k, got)
 					}
 				}
+
 				for _, k := range got.Formats {
 					if !(thisTest.want.Formats.Contains(k)) {
 						t.Errorf("%v format should not exist, got=%v", k, got)
@@ -553,9 +563,11 @@ func Test_IsHashable(t *testing.T) {
 			if got != thisTest.want {
 				t.Errorf("config.IsHashable() got = %v, want %v", got, thisTest.want)
 			}
+
 			if got1 != thisTest.want1 {
 				t.Errorf("config.IsHashable() got1 = %v, want %v", got1, thisTest.want1)
 			}
+
 			if got2 != thisTest.want2 {
 				t.Errorf("config.IsHashable() got2 = %v, want %v", got2, thisTest.want2)
 			}
@@ -603,7 +615,7 @@ func Benchmark_FindElem_parse_France_geofabrik_yml(b *testing.B) {
 
 	for n := 0; n < b.N; n++ {
 		if _, err := config.FindElem(c, "france"); err != nil {
-			b.Errorf(err.Error())
+			b.Errorf("%v", err.Error())
 		}
 	}
 }
@@ -677,6 +689,7 @@ func Test_FindElem(t *testing.T) {
 
 				return
 			}
+
 			if !reflect.DeepEqual(got, thisTest.want) {
 				t.Errorf("config.FindElem() = %v, want %v", got, thisTest.want)
 			}
@@ -750,12 +763,14 @@ func Test_elem2URL(t *testing.T) {
 		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
+
 			got, err := config.Elem2URL(thisTest.args.c, thisTest.args.e, thisTest.args.ext)
 			if err != nil != thisTest.wantErr {
 				t.Errorf("elem2URL() error = %v, wantErr %v", err, thisTest.wantErr)
 
 				return
 			}
+
 			if got != thisTest.want {
 				t.Errorf("elem2URL() = %v, want %v", got, thisTest.want)
 			}
@@ -832,6 +847,7 @@ func Test_elem2preURL(t *testing.T) {
 
 				return
 			}
+
 			if got != thisTest.want {
 				t.Errorf("config.Elem2preURL() = %v, want %v", got, thisTest.want)
 			}
@@ -842,18 +858,18 @@ func Test_elem2preURL(t *testing.T) {
 func Benchmark_Elem2preURL_parse_France_geofabrik_yml(b *testing.B) {
 	myConfig, err := config.LoadConfig(geofabrikYml)
 	if err != nil {
-		b.Errorf(err.Error())
+		b.Error(err)
 	}
 
 	france, err := config.FindElem(myConfig, "france")
 	if err != nil {
-		b.Errorf(err.Error())
+		b.Error(err)
 	}
 
 	for n := 0; n < b.N; n++ {
 		_, err = config.Elem2preURL(myConfig, france)
 		if err != nil {
-			b.Errorf(err.Error())
+			b.Error(err)
 		}
 	}
 }
@@ -861,18 +877,18 @@ func Benchmark_Elem2preURL_parse_France_geofabrik_yml(b *testing.B) {
 func Benchmark_Elem2URL_parse_France_geofabrik_yml(b *testing.B) {
 	myConfig, err := config.LoadConfig(geofabrikYml)
 	if err != nil {
-		b.Errorf(err.Error())
+		b.Error(err)
 	}
 
 	france, err := config.FindElem(myConfig, "france")
 	if err != nil {
-		b.Errorf(err.Error())
+		b.Error(err)
 	}
 
 	for n := 0; n < b.N; n++ {
 		_, err = config.Elem2URL(myConfig, france, formats.FormatState)
 		if err != nil {
-			b.Errorf(err.Error())
+			b.Error(err)
 		}
 	}
 }
@@ -880,18 +896,18 @@ func Benchmark_Elem2URL_parse_France_geofabrik_yml(b *testing.B) {
 func Benchmark_Elem2URL_parse_France_openstreetmap_fr_yml(b *testing.B) {
 	myConfig, err := config.LoadConfig(openstreetmapFRYml)
 	if err != nil {
-		b.Errorf(err.Error())
+		b.Error(err)
 	}
 
 	france, err := config.FindElem(myConfig, "france")
 	if err != nil {
-		b.Errorf(err.Error())
+		b.Error(err)
 	}
 
 	for n := 0; n < b.N; n++ {
 		_, err = config.Elem2URL(myConfig, france, formats.FormatPoly)
 		if err != nil {
-			b.Errorf(err.Error())
+			b.Error(err)
 		}
 	}
 }
@@ -1106,10 +1122,12 @@ func TestConfig_MergeElement(t *testing.T) {
 			t.Parallel()
 
 			myConfig := thisTest.Config
+
 			err := myConfig.MergeElement(thisTest.el)
 			if (err != nil) != thisTest.wantErr {
 				t.Errorf("Config.MergeElement() error = %v, wantErr %v", err, thisTest.wantErr)
 			}
+
 			if !reflect.DeepEqual(myConfig.Elements, thisTest.wantConfig.Elements) {
 				t.Errorf("Config.MergeElement() config.Elements = %v, wantConfig.Elements %v", myConfig.Elements, thisTest.wantConfig.Elements)
 			}
@@ -1135,12 +1153,14 @@ func TestConfig_Generate(t *testing.T) {
 
 			c, _ := config.LoadConfig(thisTest.file)
 			want, _ := os.ReadFile(geofabrikYml)
+
 			got, err := c.Generate()
 			if (err != nil) != thisTest.wantErr {
 				t.Errorf("Config.Generate() error = %v, wantErr %v", err, thisTest.wantErr)
 
 				return
 			}
+
 			if !reflect.DeepEqual(got, want) {
 				t.Errorf("Config.Generate() = %v, want %v", got, want)
 			}

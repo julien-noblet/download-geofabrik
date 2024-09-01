@@ -28,7 +28,7 @@ var ( // TODO: move from kingpin to cobra
 	app      = kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files.") //nolint:gochecknoglobals // global
 	fService = app.Flag("service",                                                                 //nolint:gochecknoglobals // global
 		"Can switch to another service. "+
-			"You can use \"geofabrik\", \"openstreetmap.fr\" or \"bbbike\". "+
+			"You can use \"geofabrik\", \"openstreetmap.fr\" \"osmtoday\" or \"bbbike\". "+
 			"It automatically change config file if -c is unused.").
 		Default("geofabrik").String()
 	fConfig     = app.Flag("config", "Set Config file.").Default("./geofabrik.yml").Short('c').String() //nolint:gochecknoglobals // global
@@ -50,6 +50,7 @@ var ( // TODO: move from kingpin to cobra
 	dstate    = dDownload.Flag(formats.FormatState, "Download state.txt file").Short('s').Bool()              //nolint:gochecknoglobals // global
 	dpoly     = dDownload.Flag(formats.FormatPoly, "Download poly file").Short('p').Bool()                    //nolint:gochecknoglobals // global
 	dkml      = dDownload.Flag(formats.FormatKml, "Download kml file").Short('k').Bool()                      //nolint:gochecknoglobals // global
+	dgeojson  = dDownload.Flag(formats.FormatGeoJSON, "Download geojson file").Short('g').Bool()              //nolint:gochecknoglobals // global
 	dCheck    = dDownload.Flag("check", "Control with checksum (default) Use --no-check to discard control"). //nolint:gochecknoglobals // global
 			Default("true").Bool()
 	dOutputDir = dDownload.Flag( //nolint:gochecknoglobals // global
@@ -105,6 +106,12 @@ func checkService() bool {
 		}
 
 		return true
+	case "osmtoday":
+		if strings.EqualFold(*fConfig, "./geofabrik.yml") {
+			*fConfig = "./osmtoday.yml"
+		}
+
+		return true
 	case "bbbike":
 		if strings.EqualFold(*fConfig, "./geofabrik.yml") {
 			*fConfig = "./bbbike.yml"
@@ -132,6 +139,8 @@ func listCommand() {
 }
 
 func downloadFile(configPtr *config.Config, element, format, output string) {
+	format = configPtr.Formats[format].ID
+
 	myElem, err := config.FindElem(configPtr, element)
 	if err != nil {
 		log.WithError(err).Fatalf(config.ErrFindElem, element)
@@ -157,27 +166,28 @@ func downloadCommand() {
 	}
 
 	r := regexp.MustCompile(`.*[\\/]?([A-Za-z_-]*)$`) // Trick for handle / in name
-	log.Errorf("%v\n%v", *dOutputDir+*delement, r.FindStringSubmatch(*dOutputDir+*delement))
 	filename := r.FindStringSubmatch(*dOutputDir + *delement)[0]
 
 	for _, format := range *formatFile {
-		if ok, _, _ := config.IsHashable(configPtr, format); *dCheck && ok { //nolint:nestif // TODO : Refactor?
-			if fileExist(*dOutputDir + *delement + "." + format) {
-				if !downloadChecksum(format) {
-					log.Infof("Checksum mismatch, re-downloading %v", *dOutputDir+filename+"."+format)
-					downloadFile(configPtr, *delement, format, *dOutputDir+filename+"."+format)
-					downloadChecksum(format)
+		myFormat := configPtr.Formats[format]
+		if ok, _, _ := config.IsHashable(configPtr, myFormat.ID); *dCheck && ok { //nolint:nestif // TODO : Refactor?
+			if fileExist(*dOutputDir + *delement + "." + myFormat.ID) {
+				if !downloadChecksum(myFormat.ID) {
+					log.Infof("Checksum mismatch, re-downloading %v", *dOutputDir+filename+"."+myFormat.ID)
+					downloadFile(configPtr, *delement, myFormat.ID, *dOutputDir+filename+"."+myFormat.ID)
+					downloadChecksum(myFormat.ID)
 				} else {
 					log.Info("Checksum match, no download!")
 				}
 			} else {
-				downloadFile(configPtr, *delement, format, *dOutputDir+filename+"."+format)
-				if !downloadChecksum(format) {
-					log.Warnf("Checksum mismatch, please re-download %s", *dOutputDir+filename+"."+format)
+				downloadFile(configPtr, *delement, myFormat.ID, *dOutputDir+filename+"."+myFormat.ID)
+
+				if !downloadChecksum(myFormat.ID) {
+					log.Warnf("Checksum mismatch, please re-download %s", *dOutputDir+filename+"."+myFormat.ID)
 				}
 			}
 		} else {
-			downloadFile(configPtr, *delement, format, *dOutputDir+filename+"."+format)
+			downloadFile(configPtr, *delement, myFormat.ID, *dOutputDir+filename+"."+myFormat.ID)
 		}
 	}
 }

@@ -312,13 +312,16 @@ func Test_bbbike_parseList(t *testing.T) {
 
 			defaultbbbike := bbbike.GetDefault()
 			myCollector := defaultbbbike.Collector() // Need a Collector to visit
+
 			for _, elemem := range *thisTest.elements {
 				elemem := elemem
 				if err := defaultbbbike.Config.MergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}
 			}
+
 			defaultbbbike.ParseList(myElement, myCollector)
+
 			if !reflect.DeepEqual(defaultbbbike.Config.Elements, thisTest.want) {
 				t.Errorf("parseSubregion() fail, got \n%v, want \n%v", defaultbbbike.Config.Elements, thisTest.want)
 			}
@@ -432,13 +435,16 @@ func Test_bbbike_parseSidebar(t *testing.T) {
 
 			defaultBbbike := bbbike.GetDefault()
 			myCollector := defaultBbbike.Collector() // Need a Collector to visit
+
 			for _, elemem := range *thisTest.elements {
 				elemem := elemem
 				if err := defaultBbbike.Config.MergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}
 			}
+
 			defaultBbbike.ParseSidebar(myElement, myCollector)
+
 			if !reflect.DeepEqual(defaultBbbike.Config.Elements, thisTest.want) {
 				t.Errorf("parseSubregion() fail, got \n%v, want \n%v", defaultBbbike.Config.Elements, thisTest.want)
 			}
