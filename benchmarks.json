@@ -1,4 +1,5 @@
 [
+  {"Version":"d332a682388936edd53d58e982d735a40b33c43a","Date":1725231296,"Tags":["ref=refs/heads/fix/openstreetmapfr"],"Suites":[]},
   {"Version":"5d09a21c703b9749842b2d5ba7c6a9dda0a08180","Date":1725230805,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"263c1f5d54dd912cff1bddf4696fa4dc01cd64b3","Date":1725230343,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
   {"Version":"1127f6a836a95c8cf6a53e07e11351c1113a1a1b","Date":1725230195,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"6df5c55e53eabc4058747e156a01b056ae67c1f8","Date":1724977271,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.34.2"],"Suites":[]},
   {"Version":"0ac9ec697d8c7e6fb63e5c574524c91e947f6274","Date":1724977112,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.34.2"],"Suites":[]},
   {"Version":"fb69c79451633de05919310c4ab164ac288fb277","Date":1724977081,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"e3d8500df043d5ff9b545c7ba0e3a3d0af9a6be2","Date":1724977069,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.34.2"],"Suites":[]},
-  {"Version":"139883f69e0af53788ee6ff2c6d5c24bf038521f","Date":1724976781,"Tags":["ref=refs/heads/feat/Generate_yaml"],"Suites":[]}
+  {"Version":"e3d8500df043d5ff9b545c7ba0e3a3d0af9a6be2","Date":1724977069,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.34.2"],"Suites":[]}
 ]
