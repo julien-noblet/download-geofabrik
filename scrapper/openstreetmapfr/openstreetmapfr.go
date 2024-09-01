@@ -32,6 +32,7 @@ const (
 		"central_west" +
 		"coastral" +
 		"east" +
+		"east-central" +
 		"eastern" +
 		"lake" +
 		"north" +
@@ -59,7 +60,10 @@ const (
 		"southern" +
 		"southwest" +
 		"west" +
-		"western"
+		"west-central" +
+		"western" +
+		"france_taaf"
+	pass_list = "HEADER"
 )
 
 func GetDefault() *OpenstreetmapFR {
@@ -172,6 +176,10 @@ func (o *OpenstreetmapFR) ParseHref(href string) {
 
 		valsplit := strings.Split(parents[len(parents)-1], ".")
 		if valsplit[0] != "" {
+			if strings.Contains(pass_list, valsplit[0]) { // There is a list of element that should be passed
+				return
+			}
+
 			name := valsplit[0]
 			file := name
 			name = exeptions(name, parent)
