@@ -63,7 +63,7 @@ const (
 		"west-central" +
 		"western" +
 		"france_taaf"
-	pass_list = "HEADER"
+	passList = "HEADER"
 )
 
 func GetDefault() *OpenstreetmapFR {
@@ -176,7 +176,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) {
 
 		valsplit := strings.Split(parents[len(parents)-1], ".")
 		if valsplit[0] != "" {
-			if strings.Contains(pass_list, valsplit[0]) { // There is a list of element that should be passed
+			if strings.Contains(passList, valsplit[0]) { // There is a list of element that should be passed
 				return
 			}
 
