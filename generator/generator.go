@@ -3,6 +3,7 @@ package generator
 import (
 	"os"
 	"path/filepath"
+	"slices"
 
 	"github.com/apex/log"
 	pb "github.com/cheggaaa/pb/v3"
@@ -81,4 +82,11 @@ func Generate(configfile string) { //nolint:cyclop // TODO : Refactor
 
 	collector.Wait()
 	Write(myScrapper.GetConfig(), configfile)
+}
+
+// Cleanup configuration before writing it.
+func Cleanup(c *config.Config) {
+	for _, elem := range c.Elements {
+		slices.Sort(elem.Formats)
+	}
 }
