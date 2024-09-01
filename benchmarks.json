@@ -1,4 +1,5 @@
 [
+  {"Version":"492a38589fca9725ab2e0d3852dcb1eac9d169ca","Date":1725226035,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
   {"Version":"c7c55521ff17b4041be7c8d4129cbd49241e0017","Date":1725224202,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
   {"Version":"4e2dc2a4ce97a32955f3380bd3ef277ae0fda66f","Date":1725221321,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
   {"Version":"2b75c08ed4d204123a8870352b9a823d24889238","Date":1725221095,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"6aed83e94d1765f327beadf093fd502504152c73","Date":1724975271,"Tags":["ref=refs/heads/feat/auto_merge_dependabot"],"Suites":[]},
   {"Version":"26e7971d05ae379bbf3f97763b620c58cb781e68","Date":1724974886,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"d14294fdbdb2e7c463cc770027d5f50ab47febf1","Date":1724974416,"Tags":["ref=refs/heads/fix/Remove_badges"],"Suites":[]},
-  {"Version":"b5ab642e92ba6f00fa7f300ce050cb824f193ea8","Date":1724974228,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.34.2"],"Suites":[]},
-  {"Version":"fea6841cd6059ba504966ff6a93493d00d758104","Date":1724974216,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fatih/color-1.17.0"],"Suites":[]}
+  {"Version":"b5ab642e92ba6f00fa7f300ce050cb824f193ea8","Date":1724974228,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.34.2"],"Suites":[]}
 ]
