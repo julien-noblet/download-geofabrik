@@ -139,7 +139,7 @@ func listCommand() {
 }
 
 func downloadFile(configPtr *config.Config, element, format, output string) {
-	format = configPtr.Formats[format].Ext
+	format = configPtr.Formats[format].ID
 	myElem, err := config.FindElem(configPtr, element)
 	if err != nil {
 		log.WithError(err).Fatalf(config.ErrFindElem, element)
@@ -169,23 +169,23 @@ func downloadCommand() {
 
 	for _, format := range *formatFile {
 		myFormat := configPtr.Formats[format]
-		if ok, _, _ := config.IsHashable(configPtr, myFormat.Ext); *dCheck && ok { //nolint:nestif // TODO : Refactor?
-			if fileExist(*dOutputDir + *delement + "." + myFormat.Ext) {
-				if !downloadChecksum(myFormat.Ext) {
-					log.Infof("Checksum mismatch, re-downloading %v", *dOutputDir+filename+"."+myFormat.Ext)
-					downloadFile(configPtr, *delement, myFormat.Ext, *dOutputDir+filename+"."+myFormat.Ext)
-					downloadChecksum(myFormat.Ext)
+		if ok, _, _ := config.IsHashable(configPtr, myFormat.ID); *dCheck && ok { //nolint:nestif // TODO : Refactor?
+			if fileExist(*dOutputDir + *delement + "." + myFormat.ID) {
+				if !downloadChecksum(myFormat.ID) {
+					log.Infof("Checksum mismatch, re-downloading %v", *dOutputDir+filename+"."+myFormat.ID)
+					downloadFile(configPtr, *delement, myFormat.ID, *dOutputDir+filename+"."+myFormat.ID)
+					downloadChecksum(myFormat.ID)
 				} else {
 					log.Info("Checksum match, no download!")
 				}
 			} else {
-				downloadFile(configPtr, *delement, myFormat.Ext, *dOutputDir+filename+"."+myFormat.Ext)
-				if !downloadChecksum(myFormat.Ext) {
-					log.Warnf("Checksum mismatch, please re-download %s", *dOutputDir+filename+"."+myFormat.Ext)
+				downloadFile(configPtr, *delement, myFormat.ID, *dOutputDir+filename+"."+myFormat.ID)
+				if !downloadChecksum(myFormat.ID) {
+					log.Warnf("Checksum mismatch, please re-download %s", *dOutputDir+filename+"."+myFormat.ID)
 				}
 			}
 		} else {
-			downloadFile(configPtr, *delement, myFormat.Ext, *dOutputDir+filename+"."+myFormat.Ext)
+			downloadFile(configPtr, *delement, myFormat.ID, *dOutputDir+filename+"."+myFormat.ID)
 		}
 	}
 }

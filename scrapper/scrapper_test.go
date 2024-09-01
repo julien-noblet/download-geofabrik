@@ -355,16 +355,16 @@ func Test_ParseFormat(t *testing.T) {
 				Config: &tests[thisTest].args.c,
 			}
 			myScrapper.Config.Formats = formats.FormatDefinitions{
-				formats.FormatOshPbf: {Ext: formats.FormatOshPbf, Loc: ".osh.pbf"},
-				"osh.pbf.md5":        formats.Format{Ext: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
-				formats.FormatOsmBz2: {Ext: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
-				"osm.bz2.md5":        {Ext: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
-				formats.FormatOsmPbf: {Ext: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
-				"osm.pbf.md5":        {Ext: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-				formats.FormatPoly:   {Ext: formats.FormatPoly, Loc: ".poly"},
-				formats.FormatKml:    {Ext: formats.FormatKml, Loc: ".kml"},
-				formats.FormatState:  {Ext: formats.FormatState, Loc: "-updates/state.txt"},
-				formats.FormatShpZip: {Ext: formats.FormatShpZip, Loc: "-latest-free.shp.zip"},
+				formats.FormatOshPbf: {ID: formats.FormatOshPbf, Loc: ".osh.pbf"},
+				"osh.pbf.md5":        formats.Format{ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
+				formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
+				"osm.bz2.md5":        {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
+				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+				"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly"},
+				formats.FormatKml:    {ID: formats.FormatKml, Loc: ".kml"},
+				formats.FormatState:  {ID: formats.FormatState, Loc: "-updates/state.txt"},
+				formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: "-latest-free.shp.zip"},
 			}
 
 			myScrapper.ParseFormat(tests[thisTest].args.id, tests[thisTest].args.format)
@@ -493,24 +493,24 @@ func TestScrapper_GetConfig(t *testing.T) {
 		},
 		{
 			name:   "Void + FormatDefinition",
-			fields: scrapper.Scrapper{FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{Ext: "ext"}}},
+			fields: scrapper.Scrapper{FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}}},
 			want: &config.Config{
 				Elements:      element.Slice{},
 				ElementsMutex: &sync.RWMutex{},
-				Formats:       formats.FormatDefinitions{"ext": formats.Format{Ext: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 		{
 			name: "Void + BaseURL",
 			fields: scrapper.Scrapper{
 				BaseURL:          "http://my.url",
-				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{Ext: "ext"}},
+				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 			want: &config.Config{
 				Elements:      element.Slice{},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
-				Formats:       formats.FormatDefinitions{"ext": formats.Format{Ext: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 		{
@@ -522,7 +522,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 					},
 					ElementsMutex: &sync.RWMutex{},
 					BaseURL:       "http://my.url",
-					Formats:       formats.FormatDefinitions{"ext": formats.Format{Ext: "ext"}},
+					Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 				},
 			},
 			want: &config.Config{
@@ -531,7 +531,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 				},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
-				Formats:       formats.FormatDefinitions{"ext": formats.Format{Ext: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 		{
@@ -544,7 +544,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 					},
 					ElementsMutex: &sync.RWMutex{},
 					BaseURL:       "http://old.url",
-					Formats:       formats.FormatDefinitions{"ext": formats.Format{Ext: "ext"}},
+					Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 				},
 			},
 			want: &config.Config{
@@ -553,7 +553,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 				},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
-				Formats:       formats.FormatDefinitions{"ext": formats.Format{Ext: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 		{
@@ -566,9 +566,9 @@ func TestScrapper_GetConfig(t *testing.T) {
 					},
 					ElementsMutex: &sync.RWMutex{},
 					BaseURL:       "http://old.url",
-					Formats:       formats.FormatDefinitions{"old": formats.Format{Ext: "old"}},
+					Formats:       formats.FormatDefinitions{"old": formats.Format{ID: "old"}},
 				},
-				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{Ext: "ext"}},
+				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 			want: &config.Config{
 				Elements: element.Slice{
@@ -576,7 +576,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 				},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
-				Formats:       formats.FormatDefinitions{"ext": formats.Format{Ext: "ext"}},
+				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
 	}

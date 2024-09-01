@@ -274,16 +274,16 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			myScrapper := geofabrik.Geofabrik{Scrapper: &scrapper.Scrapper{}}
 			myScrapper.Scrapper.Config = &tests[thisTest].args.c
 			myScrapper.Scrapper.Config.Formats = formats.FormatDefinitions{
-				formats.FormatOshPbf: {Ext: formats.FormatOshPbf, Loc: ".osh.pbf"},
-				"osh.pbf.md5":        {Ext: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
-				formats.FormatOsmBz2: {Ext: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
-				"osm.bz2.md5":        {Ext: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
-				formats.FormatOsmPbf: {Ext: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
-				"osm.pbf.md5":        {Ext: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-				formats.FormatPoly:   {Ext: formats.FormatPoly, Loc: ".poly"},
-				formats.FormatKml:    {Ext: formats.FormatKml, Loc: ".kml"},
-				formats.FormatState:  {Ext: formats.FormatState, Loc: "-updates/state.txt"},
-				formats.FormatShpZip: {Ext: formats.FormatShpZip, Loc: "-latest-free.shp.zip"},
+				formats.FormatOshPbf: {ID: formats.FormatOshPbf, Loc: ".osh.pbf"},
+				"osh.pbf.md5":        {ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
+				formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
+				"osm.bz2.md5":        {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
+				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+				"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly"},
+				formats.FormatKml:    {ID: formats.FormatKml, Loc: ".kml"},
+				formats.FormatState:  {ID: formats.FormatState, Loc: "-updates/state.txt"},
+				formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: "-latest-free.shp.zip"},
 			}
 
 			myScrapper.ParseFormat(tests[thisTest].args.id, tests[thisTest].args.format)

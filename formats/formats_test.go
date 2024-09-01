@@ -156,7 +156,7 @@ func Test_getFormats(t *testing.T) {
 				dpoly:   false,
 				dkml:    false,
 			},
-			want: []string{formats.FormatOsmPbf, formats.FormatOshPbf},
+			want: []string{formats.FormatOshPbf, formats.FormatOsmPbf},
 		},
 		{
 			name: "dosmBz2 dshpZip",
@@ -184,7 +184,7 @@ func Test_getFormats(t *testing.T) {
 				dpoly:   true,
 				dkml:    false,
 			},
-			want: []string{formats.FormatState, formats.FormatPoly},
+			want: []string{formats.FormatPoly, formats.FormatState},
 		},
 		{
 			name: "dkml",

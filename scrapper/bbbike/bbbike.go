@@ -31,10 +31,10 @@ func GetDefault() *Bbbike {
 				regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/$`),
 			},
 			FormatDefinition: formats.FormatDefinitions{
-				formats.FormatOsmPbf: {Ext: formats.FormatOsmPbf, Loc: ".osm.pbf", BasePath: "", BaseURL: ""},
-				formats.FormatShpZip: {Ext: formats.FormatShpZip, Loc: ".osm.shp.zip", BasePath: "", BaseURL: ""},
-				formats.FormatOsmGz:  {Ext: formats.FormatOsmGz, Loc: ".osm.gz", BasePath: "", BaseURL: ""},
-				formats.FormatPoly:   {Ext: formats.FormatPoly, Loc: ".poly", BasePath: "", BaseURL: ""},
+				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: ".osm.pbf", BasePath: "", BaseURL: ""},
+				formats.FormatShpZip: {ID: formats.FormatShpZip, Loc: ".osm.shp.zip", BasePath: "", BaseURL: ""},
+				formats.FormatOsmGz:  {ID: formats.FormatOsmGz, Loc: ".osm.gz", BasePath: "", BaseURL: ""},
+				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", BasePath: "", BaseURL: ""},
 			},
 		},
 	}
