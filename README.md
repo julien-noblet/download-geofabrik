@@ -907,7 +907,6 @@ Total elements: 509
 | drome                                    | rhone_alpes                      | drome                                    | sPp     |
 | durango                                  | mexico                           | durango                                  | sPp     |
 | dusseldorf                               | nordrhein_westfalen              | dusseldorf                               | sPp     |
-| east_central                             | florida                          | east_central                             | sPp     |
 | east_flanders                            | flanders                         | east_flanders                            | sPp     |
 | east_java                                | indonesia                        | east_java                                | sPp     |
 | east_kalimantan                          | indonesia                        | east_kalimantan                          | sPp     |
@@ -957,6 +956,7 @@ Total elements: 509
 | flemish_brabant                          | flanders                         | flemish_brabant                          | sPp     |
 | flevoland                                | netherlands                      | flevoland                                | sPp     |
 | florida                                  | us-south                         | florida                                  | sPp     |
+| florida_east_central                     | florida                          | florida_east_central                     | sPp     |
 | florida_northeast                        | florida                          | florida_northeast                        | sPp     |
 | florida_northwest                        | florida                          | florida_northwest                        | sPp     |
 | florida_southwest                        | florida                          | florida_southwest                        | sPp     |
@@ -1065,6 +1065,7 @@ Total elements: 509
 | illes_balears                            | spain                            | illes_balears                            | sPp     |
 | illinois                                 | us-midwest                       | illinois                                 | sPp     |
 | illinois_central                         | illinois                         | illinois_central                         | sPp     |
+| illinois_east_central                    | illinois                         | illinois_east_central                    | sPp     |
 | illinois_north                           | illinois                         | illinois_north                           | sPp     |
 | illinois_northeast                       | illinois                         | illinois_northeast                       | sPp     |
 | illinois_northwest                       | illinois                         | illinois_northwest                       | sPp     |
@@ -1327,6 +1328,7 @@ Total elements: 509
 | nievre                                   | bourgogne                        | nievre                                   | sPp     |
 | niger                                    | africa                           | niger                                    | sPp     |
 | nigeria                                  | africa                           | nigeria                                  | sPp     |
+| nigeria_north_central                    | nigeria                          | nigeria_north_central                    | sPp     |
 | nigeria_north_east                       | nigeria                          | nigeria_north_east                       | sPp     |
 | nigeria_north_west                       | nigeria                          | nigeria_north_west                       | sPp     |
 | nigeria_south_east                       | nigeria                          | nigeria_south_east                       | sPp     |
@@ -1348,13 +1350,13 @@ Total elements: 509
 | north                                    | brazil                           | north                                    |         |
 | north-america                            |                                  | north-america                            | p       |
 | north-carolina                           | us-south                         | north-carolina                           | sPp     |
+| north-carolina_north_central             | north-carolina                   | north-carolina_north_central             | sPp     |
 | north-carolina_northeast                 | north-carolina                   | north-carolina_northeast                 | sPp     |
 | north-carolina_northwest                 | north-carolina                   | north-carolina_northwest                 | sPp     |
 | north-carolina_south_central             | north-carolina                   | north-carolina_south_central             | sPp     |
 | north-carolina_southeast                 | north-carolina                   | north-carolina_southeast                 | sPp     |
 | north-carolina_western                   | north-carolina                   | north-carolina_western                   | sPp     |
 | north_caucasian_federal_district         | russia                           | north_caucasian_federal_district         | sPp     |
-| north_central                            | nigeria                          | north_central                            | sPp     |
 | north_country                            | new-york                         | north_country                            | sPp     |
 | north_kalimantan                         | indonesia                        | north_kalimantan                         | sPp     |
 | north_karelia                            | finland                          | north_karelia                            | sPp     |
@@ -1555,7 +1557,7 @@ Total elements: 509
 | senegal                                  | africa                           | senegal                                  | sPp     |
 | sergipe                                  | northeast                        | sergipe                                  | sPp     |
 | setubal                                  | portugal                         | setubal                                  | sPp     |
-| sevastopol                               | southern_federal_district        | sevastopol                               | sPp     |
+| sevastopol                               | ukraine                          | sevastopol                               | sPp     |
 | sevilla                                  | andalucia                        | sevilla                                  | sPp     |
 | seychelles                               | africa                           | seychelles                               | sPp     |
 | shaanxi                                  | china                            | shaanxi                                  | sPp     |
@@ -1816,7 +1818,7 @@ Total elements: 509
 | zug                                      | switzerland                      | zug                                      | sPp     |
 | zuid_holland                             | netherlands                      | zuid_holland                             | sPp     |
 | zurich                                   | switzerland                      | zurich                                   | sPp     |
-Total elements: 1190
+Total elements: 1192
 
 ## List of elements from bbbike.org
 |    SHORTNAME     | IS IN |    LONG NAME     | FORMATS |
