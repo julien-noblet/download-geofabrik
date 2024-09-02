@@ -1,4 +1,5 @@
 [
+  {"Version":"2068bc747025a3714aa9458342864444c32bae9e","Date":1725306310,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"b67fb6440d3239142bb376bc569fb081ffbf0df8","Date":1725295440,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
   {"Version":"b67fb6440d3239142bb376bc569fb081ffbf0df8","Date":1725295401,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"03b6cf3b48fd74e12c14a1eab51070d3eb36ff54","Date":1725293405,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"7db9bac973495d637a9793c766bcbb3bd39694de","Date":1725237370,"Tags":["ref=refs/heads/feat/goreleaser"],"Suites":[]},
   {"Version":"77438f44452ef42955b307892553195e7ed64a00","Date":1725237353,"Tags":["ref=refs/heads/feat/goreleaser"],"Suites":[]},
   {"Version":"7a9ab163682e4052547f5156528982e8ea2db19f","Date":1725237080,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"83f4c07706b6480aa1b671338909f600dfd3844f","Date":1725236886,"Tags":["ref=refs/heads/fix/genYaml"],"Suites":[]},
-  {"Version":"1f1c0966271435dbc244a5256d9a6e2e53bc922f","Date":1725236797,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"83f4c07706b6480aa1b671338909f600dfd3844f","Date":1725236886,"Tags":["ref=refs/heads/fix/genYaml"],"Suites":[]}
 ]
