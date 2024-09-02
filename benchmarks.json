@@ -1,4 +1,5 @@
 [
+  {"Version":"7a9ab163682e4052547f5156528982e8ea2db19f","Date":1725237080,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"83f4c07706b6480aa1b671338909f600dfd3844f","Date":1725236886,"Tags":["ref=refs/heads/fix/genYaml"],"Suites":[]},
   {"Version":"1f1c0966271435dbc244a5256d9a6e2e53bc922f","Date":1725236797,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"f5432a26b69f5837d855b5285db2c0fecaabff45","Date":1725236428,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"2b75c08ed4d204123a8870352b9a823d24889238","Date":1725221095,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
   {"Version":"d443acbc2c3ea991845e485553041ca47c0938fd","Date":1724982646,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ed383c79e2470d76230604eead75b2d9569fe8d4","Date":1724982176,"Tags":["ref=refs/heads/new_yamls"],"Suites":[]},
-  {"Version":"651f2b1fe5cd058b420e86efff72d019f34481dd","Date":1724982068,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"6af7729e75fefe2969a50059cfd8585d1d31f9af","Date":1724981821,"Tags":["ref=refs/heads/renovate/actions-checkout-4.x"],"Suites":[]}
+  {"Version":"651f2b1fe5cd058b420e86efff72d019f34481dd","Date":1724982068,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
