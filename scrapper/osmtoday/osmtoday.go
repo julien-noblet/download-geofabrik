@@ -20,7 +20,7 @@ type Osmtoday struct {
 func GetDefault() *Osmtoday {
 	return &Osmtoday{
 		Scrapper: &scrapper.Scrapper{ //nolint:exhaustruct // I'm lazy
-			PB:             412, //nolint:gomnd // there is 412 items
+			PB:             1003, //nolint:gomnd // there is 412 items
 			Async:          true,
 			Parallelism:    20, //nolint:gomnd // use 20 threads for scrapping
 			MaxDepth:       0,

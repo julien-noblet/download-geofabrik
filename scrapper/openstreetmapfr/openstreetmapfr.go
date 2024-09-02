@@ -76,7 +76,7 @@ func GetDefault() *OpenstreetmapFR {
 
 	return &OpenstreetmapFR{
 		Scrapper: &scrapper.Scrapper{ //nolint:exhaustruct // I'm lazy
-			PB:             149, //nolint:gomnd // There is 149 element right now
+			PB:             1192, //nolint:gomnd // There is 1192 element right now
 			Async:          true,
 			Parallelism:    20, //nolint:gomnd // 20 threads for scrapping
 			MaxDepth:       0,

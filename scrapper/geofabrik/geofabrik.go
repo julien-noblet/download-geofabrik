@@ -19,7 +19,7 @@ type Geofabrik struct {
 func GetDefault() *Geofabrik {
 	return &Geofabrik{
 		Scrapper: &scrapper.Scrapper{ //nolint:exhaustruct // I'm lazy
-			PB:             412, //nolint:gomnd // there is 412 items
+			PB:             509, //nolint:gomnd // there is 509 items
 			Async:          true,
 			Parallelism:    20, //nolint:gomnd // use 20 threads for scrapping
 			MaxDepth:       0,
