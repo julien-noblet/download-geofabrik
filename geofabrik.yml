@@ -42,11 +42,11 @@ elements:
         id: africa
         name: Africa
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - osh.pbf
             - poly
             - kml
             - state
@@ -69,12 +69,12 @@ elements:
         name: Alberta
         parent: canada
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -166,12 +166,12 @@ elements:
         name: Angola
         parent: africa
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -180,12 +180,12 @@ elements:
         name: Anhui
         parent: china
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -221,12 +221,12 @@ elements:
         name: Aragón
         parent: spain
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -249,12 +249,12 @@ elements:
         name: Armenia
         parent: asia
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -303,12 +303,12 @@ elements:
         name: Australia
         parent: australia-oceania
         files:
-            - osm.bz2
-            - osm.bz2.md5
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -371,12 +371,12 @@ elements:
         name: Azores
         parent: europe
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -412,12 +412,12 @@ elements:
         name: Bangladesh
         parent: asia
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -495,12 +495,12 @@ elements:
         name: Belgium
         parent: europe
         files:
+            - osm.bz2
+            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
-            - osm.bz2
-            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -523,12 +523,12 @@ elements:
         name: Benin
         parent: africa
         files:
+            - osm.bz2
+            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
-            - osm.bz2
-            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -537,12 +537,12 @@ elements:
         name: Berkshire
         parent: england
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -551,12 +551,12 @@ elements:
         name: Berlin
         parent: germany
         files:
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -607,12 +607,12 @@ elements:
         name: Botswana
         parent: africa
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -649,11 +649,11 @@ elements:
         name: Brazil
         parent: south-america
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -662,12 +662,12 @@ elements:
         name: Bremen
         parent: germany
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -759,12 +759,12 @@ elements:
         name: Burkina Faso
         parent: africa
         files:
-            - shp.zip
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -773,12 +773,12 @@ elements:
         name: Burundi
         parent: africa
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -842,12 +842,12 @@ elements:
         name: Canary Islands
         parent: africa
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -870,12 +870,12 @@ elements:
         name: Cape Verde
         parent: africa
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -898,12 +898,12 @@ elements:
         name: Castilla y León
         parent: spain
         files:
+            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
             - poly
             - kml
             - state
@@ -912,12 +912,12 @@ elements:
         name: Cataluña
         parent: spain
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -939,11 +939,11 @@ elements:
         id: central-america
         name: Central America
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - osh.pbf
             - poly
             - kml
             - state
@@ -952,12 +952,12 @@ elements:
         name: Central Federal District
         parent: russia
         files:
-            - shp.zip
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -966,12 +966,12 @@ elements:
         name: Central Zone
         parent: india
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -980,12 +980,12 @@ elements:
         name: Centre
         parent: france
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -1022,12 +1022,12 @@ elements:
         name: Ceuta
         parent: spain
         files:
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -1036,12 +1036,12 @@ elements:
         name: Chad
         parent: africa
         files:
+            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
             - poly
             - kml
             - state
@@ -1092,11 +1092,11 @@ elements:
         name: China
         parent: asia
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - osh.pbf
             - poly
             - kml
             - state
@@ -1105,12 +1105,12 @@ elements:
         name: Chongqing
         parent: china
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -1119,12 +1119,12 @@ elements:
         name: Chūbu region
         parent: japan
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -1133,12 +1133,12 @@ elements:
         name: Chūgoku region
         parent: japan
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -1147,12 +1147,12 @@ elements:
         name: Colombia
         parent: south-america
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -1161,12 +1161,12 @@ elements:
         name: Comores
         parent: africa
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -1217,12 +1217,12 @@ elements:
         name: Cornwall
         parent: england
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -1231,12 +1231,12 @@ elements:
         name: Corse
         parent: france
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -1273,12 +1273,12 @@ elements:
         name: Croatia
         parent: europe
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -1287,12 +1287,12 @@ elements:
         name: Cuba
         parent: central-america
         files:
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -1301,12 +1301,12 @@ elements:
         name: Cumbria
         parent: england
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -1315,12 +1315,12 @@ elements:
         name: Cyprus
         parent: europe
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -1329,12 +1329,12 @@ elements:
         name: Czech Republic
         parent: europe
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -1370,12 +1370,12 @@ elements:
         name: Derbyshire
         parent: england
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -1398,12 +1398,12 @@ elements:
         name: Devon
         parent: england
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -1412,12 +1412,12 @@ elements:
         name: Djibouti
         parent: africa
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -1454,12 +1454,12 @@ elements:
         name: Drenthe
         parent: netherlands
         files:
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -1468,12 +1468,12 @@ elements:
         name: Regierungsbezirk Düsseldorf
         parent: nordrhein-westfalen
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -1538,12 +1538,12 @@ elements:
         name: Eastern Zone
         parent: india
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -1579,12 +1579,12 @@ elements:
         name: El Salvador
         parent: central-america
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -1649,12 +1649,12 @@ elements:
         name: Essex
         parent: england
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -1677,12 +1677,12 @@ elements:
         name: Ethiopia
         parent: africa
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -1745,12 +1745,12 @@ elements:
         name: Fiji
         parent: australia-oceania
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -1773,12 +1773,12 @@ elements:
         name: Flevoland
         parent: netherlands
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -1800,12 +1800,12 @@ elements:
         name: Franche Comte
         parent: france
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -1898,12 +1898,12 @@ elements:
         name: GCC States
         parent: asia
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -1953,12 +1953,12 @@ elements:
         name: Ghana
         parent: africa
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -1994,12 +1994,12 @@ elements:
         name: Greater London
         parent: england
         files:
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -2022,12 +2022,12 @@ elements:
         name: Greece
         parent: europe
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -2050,12 +2050,12 @@ elements:
         name: Groningen
         parent: netherlands
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -2064,11 +2064,11 @@ elements:
         name: Guadeloupe
         parent: france
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - osh.pbf
             - poly
             - kml
             - state
@@ -2077,12 +2077,12 @@ elements:
         name: Guangdong (with Hong Kong and Macau)
         parent: china
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -2091,12 +2091,12 @@ elements:
         name: Guangxi
         parent: china
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -2105,12 +2105,12 @@ elements:
         name: Guatemala
         parent: central-america
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -2119,12 +2119,12 @@ elements:
         name: Guernsey and Jersey
         parent: europe
         files:
-            - shp.zip
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -2133,12 +2133,12 @@ elements:
         name: Guinea
         parent: africa
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -2259,12 +2259,12 @@ elements:
         name: Haute-Normandie
         parent: france
         files:
-            - osm.bz2
-            - osm.bz2.md5
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -2315,12 +2315,12 @@ elements:
         name: Herefordshire
         parent: england
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -2343,12 +2343,12 @@ elements:
         name: Hessen
         parent: germany
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -2371,12 +2371,12 @@ elements:
         name: Honduras
         parent: central-america
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -2399,12 +2399,12 @@ elements:
         name: Hubei
         parent: china
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -2441,12 +2441,12 @@ elements:
         name: Iceland
         parent: europe
         files:
-            - osm.bz2
-            - osm.bz2.md5
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -2469,12 +2469,12 @@ elements:
         name: Ile-de-France
         parent: france
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -2496,11 +2496,11 @@ elements:
         name: Indonesia (with East Timor)
         parent: asia
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -2537,12 +2537,12 @@ elements:
         name: Iraq
         parent: asia
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -2551,12 +2551,12 @@ elements:
         name: Ireland and Northern Ireland
         parent: europe
         files:
+            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
             - poly
             - kml
             - state
@@ -2593,12 +2593,12 @@ elements:
         name: Isle of Wight
         parent: england
         files:
-            - osm.bz2
-            - osm.bz2.md5
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -2689,12 +2689,12 @@ elements:
         name: Java
         parent: indonesia
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -2703,12 +2703,12 @@ elements:
         name: Jiangsu
         parent: china
         files:
-            - shp.zip
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -2731,12 +2731,12 @@ elements:
         name: Jilin
         parent: china
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -2843,12 +2843,12 @@ elements:
         name: Kent
         parent: england
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -2857,12 +2857,12 @@ elements:
         name: Kenya
         parent: africa
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -2885,12 +2885,12 @@ elements:
         name: Regierungsbezirk Köln
         parent: nordrhein-westfalen
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -2899,12 +2899,12 @@ elements:
         name: Kosovo
         parent: europe
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -2913,12 +2913,12 @@ elements:
         name: Województwo kujawsko-pomorskie<br />(Kuyavian-Pomeranian Voivodeship)
         parent: poland
         files:
+            - osm.bz2
+            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
-            - osm.bz2
-            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -2941,12 +2941,12 @@ elements:
         name: Kyūshū
         parent: japan
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -2969,12 +2969,12 @@ elements:
         name: Lancashire
         parent: england
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -3011,12 +3011,12 @@ elements:
         name: Latvia
         parent: europe
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -3053,12 +3053,12 @@ elements:
         name: Lesotho
         parent: africa
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -3081,12 +3081,12 @@ elements:
         name: Liberia
         parent: africa
         files:
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -3123,12 +3123,12 @@ elements:
         name: Limburg
         parent: netherlands
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -3151,12 +3151,12 @@ elements:
         name: Lincolnshire
         parent: england
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -3179,12 +3179,12 @@ elements:
         name: Województwo łódzkie<br />(Łódź Voivodeship)
         parent: poland
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -3193,12 +3193,12 @@ elements:
         name: Lorraine
         parent: france
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -3249,12 +3249,12 @@ elements:
         name: Macau
         parent: china
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -3277,12 +3277,12 @@ elements:
         name: Madagascar
         parent: africa
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -3291,12 +3291,12 @@ elements:
         name: Madrid
         parent: spain
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -3417,12 +3417,12 @@ elements:
         name: Marshall Islands
         parent: australia-oceania
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -3513,12 +3513,12 @@ elements:
         name: Melilla
         parent: spain
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -3527,12 +3527,12 @@ elements:
         name: Merseyside
         parent: england
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -3625,12 +3625,12 @@ elements:
         name: Mongolia
         parent: asia
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -3639,12 +3639,12 @@ elements:
         name: Montenegro
         parent: europe
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -3667,12 +3667,12 @@ elements:
         name: Mozambique
         parent: africa
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -3681,12 +3681,12 @@ elements:
         name: Regierungsbezirk Münster
         parent: nordrhein-westfalen
         files:
-            - osm.bz2
-            - osm.bz2.md5
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -3695,12 +3695,12 @@ elements:
         name: Murcia
         parent: spain
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -3709,12 +3709,12 @@ elements:
         name: Myanmar (a.k.a. Burma)
         parent: asia
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -3751,12 +3751,12 @@ elements:
         name: Navarra
         parent: spain
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -3765,12 +3765,12 @@ elements:
         name: Nepal
         parent: asia
         files:
+            - osm.bz2
+            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
-            - osm.bz2
-            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -3834,12 +3834,12 @@ elements:
         name: Newfoundland and Labrador
         parent: canada
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -3861,12 +3861,12 @@ elements:
         name: Niederbayern
         parent: bayern
         files:
+            - osm.bz2
+            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
-            - osm.bz2
-            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -3945,12 +3945,12 @@ elements:
         name: Noord-Brabant
         parent: netherlands
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -4001,12 +4001,12 @@ elements:
         name: Nord-Ovest
         parent: italy
         files:
+            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
             - poly
             - kml
             - state
@@ -4015,12 +4015,12 @@ elements:
         name: Nord-Pas-de-Calais
         parent: france
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -4029,12 +4029,12 @@ elements:
         name: Nordeste
         parent: brazil
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -4043,11 +4043,11 @@ elements:
         name: Nordrhein-Westfalen
         parent: germany
         files:
+            - osm.bz2
+            - osm.bz2.md5
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
-            - osm.bz2
-            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -4056,12 +4056,12 @@ elements:
         name: Norfolk
         parent: england
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -4070,12 +4070,12 @@ elements:
         name: Norte
         parent: brazil
         files:
-            - osm.bz2
-            - osm.bz2.md5
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -4083,11 +4083,11 @@ elements:
         id: north-america
         name: North America
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - osh.pbf
             - poly
             - kml
             - state
@@ -4096,12 +4096,12 @@ elements:
         name: North Caucasus Federal District
         parent: russia
         files:
-            - osm.bz2
-            - osm.bz2.md5
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -4180,12 +4180,12 @@ elements:
         name: Northumberland
         parent: england
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -4194,12 +4194,12 @@ elements:
         name: Northwest Territories
         parent: canada
         files:
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -4208,12 +4208,12 @@ elements:
         name: Northwestern Federal District
         parent: russia
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -4236,12 +4236,12 @@ elements:
         name: Nottinghamshire
         parent: england
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -4264,12 +4264,12 @@ elements:
         name: Nunavut
         parent: canada
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -4292,12 +4292,12 @@ elements:
         name: Oberbayern
         parent: bayern
         files:
-            - osm.bz2
-            - osm.bz2.md5
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -4320,12 +4320,12 @@ elements:
         name: Oberpfalz
         parent: bayern
         files:
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -4362,12 +4362,12 @@ elements:
         name: Overijssel
         parent: netherlands
         files:
-            - shp.zip
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -4376,12 +4376,12 @@ elements:
         name: Oxfordshire
         parent: england
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -4446,12 +4446,12 @@ elements:
         name: Papua
         parent: indonesia
         files:
-            - shp.zip
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -4460,12 +4460,12 @@ elements:
         name: Papua New Guinea
         parent: australia-oceania
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -4502,12 +4502,12 @@ elements:
         name: Peru
         parent: south-america
         files:
-            - shp.zip
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -4544,12 +4544,12 @@ elements:
         name: Pitcairn Islands
         parent: australia-oceania
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -4558,12 +4558,12 @@ elements:
         name: Województwo podkarpackie<br />(Subcarpathian Voivodeship)
         parent: poland
         files:
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -4600,11 +4600,11 @@ elements:
         name: Poland
         parent: europe
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - osh.pbf
             - poly
             - kml
             - state
@@ -4641,12 +4641,12 @@ elements:
         name: Portugal
         parent: europe
         files:
+            - osm.bz2
+            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
-            - osm.bz2
-            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -4655,12 +4655,12 @@ elements:
         name: Prince Edward Island
         parent: canada
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -4669,12 +4669,12 @@ elements:
         name: Provence Alpes-Cote-d'Azur
         parent: france
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -4683,12 +4683,12 @@ elements:
         name: Qinghai
         parent: china
         files:
-            - shp.zip
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -4697,12 +4697,12 @@ elements:
         name: Quebec
         parent: canada
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -4711,11 +4711,11 @@ elements:
         name: Reunion
         parent: france
         files:
-            - osm.bz2
-            - osm.bz2.md5
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -4724,12 +4724,12 @@ elements:
         name: Rheinland-Pfalz
         parent: germany
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -4834,12 +4834,12 @@ elements:
         name: Sachsen-Anhalt
         parent: germany
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -4848,12 +4848,12 @@ elements:
         name: Saint Helena, Ascension, and Tristan da Cunha
         parent: africa
         files:
-            - osm.bz2
-            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -4876,12 +4876,12 @@ elements:
         name: Sao Tome and Principe
         parent: africa
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -4904,12 +4904,12 @@ elements:
         name: Schleswig-Holstein
         parent: germany
         files:
-            - shp.zip
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -4946,12 +4946,12 @@ elements:
         name: Senegal and Gambia
         parent: africa
         files:
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -4960,12 +4960,12 @@ elements:
         name: Serbia
         parent: europe
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -4974,12 +4974,12 @@ elements:
         name: Seychelles
         parent: africa
         files:
+            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
             - poly
             - kml
             - state
@@ -5072,12 +5072,12 @@ elements:
         name: Siberian Federal District
         parent: russia
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5100,12 +5100,12 @@ elements:
         name: Sierra Leone
         parent: africa
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5114,12 +5114,12 @@ elements:
         name: Województwo śląskie<br />(Silesian Voivodeship)
         parent: poland
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -5128,12 +5128,12 @@ elements:
         name: Slovakia
         parent: europe
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5142,12 +5142,12 @@ elements:
         name: Slovenia
         parent: europe
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5156,12 +5156,12 @@ elements:
         name: Southern California
         parent: us/california
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5251,12 +5251,12 @@ elements:
         name: South Federal District
         parent: russia
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -5265,12 +5265,12 @@ elements:
         name: South Korea
         parent: asia
         files:
-            - osm.bz2
-            - osm.bz2.md5
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -5293,12 +5293,12 @@ elements:
         name: South Yorkshire
         parent: england
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5334,12 +5334,12 @@ elements:
         name: Sri Lanka
         parent: asia
         files:
+            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
             - poly
             - kml
             - state
@@ -5348,12 +5348,12 @@ elements:
         name: Staffordshire
         parent: england
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5362,12 +5362,12 @@ elements:
         name: Regierungsbezirk Stuttgart
         parent: baden-wuerttemberg
         files:
+            - osm.bz2
+            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
-            - osm.bz2
-            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -5432,12 +5432,12 @@ elements:
         name: Sul
         parent: brazil
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5446,12 +5446,12 @@ elements:
         name: Sulawesi
         parent: indonesia
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5474,12 +5474,12 @@ elements:
         name: Suriname
         parent: south-america
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5488,12 +5488,12 @@ elements:
         name: Surrey
         parent: england
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5516,12 +5516,12 @@ elements:
         name: Sweden
         parent: europe
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -5544,12 +5544,12 @@ elements:
         name: Switzerland
         parent: europe
         files:
+            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
             - poly
             - kml
             - state
@@ -5558,12 +5558,12 @@ elements:
         name: Syria
         parent: asia
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -5572,12 +5572,12 @@ elements:
         name: Taiwan
         parent: asia
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -5600,12 +5600,12 @@ elements:
         name: Tanzania
         parent: africa
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5614,12 +5614,12 @@ elements:
         name: Thailand
         parent: asia
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5642,12 +5642,12 @@ elements:
         name: Tianjin
         parent: china
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -5684,12 +5684,12 @@ elements:
         name: Tōhoku region
         parent: japan
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5712,12 +5712,12 @@ elements:
         name: Tonga
         parent: australia-oceania
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5768,12 +5768,12 @@ elements:
         name: Turkmenistan
         parent: asia
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -5838,11 +5838,11 @@ elements:
         name: United Kingdom
         parent: europe
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -5865,12 +5865,12 @@ elements:
         name: Ural Federal District
         parent: russia
         files:
-            - osm.bz2
-            - osm.bz2.md5
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -5879,12 +5879,12 @@ elements:
         name: Uruguay
         parent: south-america
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -5893,11 +5893,11 @@ elements:
         name: United States of America
         parent: north-america
         files:
-            - osm.bz2
-            - osm.bz2.md5
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -5932,11 +5932,11 @@ elements:
         name: US Pacific
         parent: north-america
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -5999,12 +5999,12 @@ elements:
         name: us/arizona
         parent: north-america
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -6096,12 +6096,12 @@ elements:
         name: us/florida
         parent: north-america
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6138,12 +6138,12 @@ elements:
         name: us/idaho
         parent: north-america
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6166,12 +6166,12 @@ elements:
         name: us/indiana
         parent: north-america
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6180,12 +6180,12 @@ elements:
         name: us/iowa
         parent: north-america
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -6208,12 +6208,12 @@ elements:
         name: us/kentucky
         parent: north-america
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6250,12 +6250,12 @@ elements:
         name: us/maryland
         parent: north-america
         files:
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -6264,12 +6264,12 @@ elements:
         name: us/massachusetts
         parent: north-america
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -6278,12 +6278,12 @@ elements:
         name: us/michigan
         parent: north-america
         files:
-            - osm.bz2
-            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -6320,12 +6320,12 @@ elements:
         name: us/missouri
         parent: north-america
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6334,12 +6334,12 @@ elements:
         name: us/montana
         parent: north-america
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -6348,12 +6348,12 @@ elements:
         name: us/nebraska
         parent: north-america
         files:
+            - osm.bz2
+            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
-            - osm.bz2
-            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -6362,12 +6362,12 @@ elements:
         name: us/nevada
         parent: north-america
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6404,12 +6404,12 @@ elements:
         name: us/new-mexico
         parent: north-america
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6432,12 +6432,12 @@ elements:
         name: us/north-carolina
         parent: north-america
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6446,12 +6446,12 @@ elements:
         name: us/north-dakota
         parent: north-america
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -6460,12 +6460,12 @@ elements:
         name: us/ohio
         parent: north-america
         files:
-            - osm.bz2
-            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -6502,12 +6502,12 @@ elements:
         name: us/pennsylvania
         parent: north-america
         files:
+            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
             - poly
             - kml
             - state
@@ -6530,12 +6530,12 @@ elements:
         name: us/rhode-island
         parent: north-america
         files:
+            - osm.bz2
+            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
-            - osm.bz2
-            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -6544,12 +6544,12 @@ elements:
         name: us/south-carolina
         parent: north-america
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6586,12 +6586,12 @@ elements:
         name: us/texas
         parent: north-america
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6684,12 +6684,12 @@ elements:
         name: us/wisconsin
         parent: north-america
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -6698,12 +6698,12 @@ elements:
         name: us/wyoming
         parent: north-america
         files:
-            - osm.bz2
-            - osm.bz2.md5
-            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
+            - shp.zip
             - poly
             - kml
             - state
@@ -6712,12 +6712,12 @@ elements:
         name: Utrecht
         parent: netherlands
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -6740,12 +6740,12 @@ elements:
         name: Valencia
         parent: spain
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -6754,12 +6754,12 @@ elements:
         name: Vanuatu
         parent: australia-oceania
         files:
-            - osm.bz2
-            - osm.bz2.md5
             - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
+            - osm.bz2
+            - osm.bz2.md5
             - poly
             - kml
             - state
@@ -6796,12 +6796,12 @@ elements:
         name: Volga Federal District
         parent: russia
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -6810,12 +6810,12 @@ elements:
         name: Wales
         parent: united-kingdom
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6866,12 +6866,12 @@ elements:
         name: West Midlands
         parent: england
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6880,12 +6880,12 @@ elements:
         name: West Sussex
         parent: england
         files:
+            - shp.zip
             - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
             - poly
             - kml
             - state
@@ -6936,12 +6936,12 @@ elements:
         name: Wiltshire
         parent: england
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -6950,12 +6950,12 @@ elements:
         name: Worcestershire
         parent: england
         files:
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -6978,12 +6978,12 @@ elements:
         name: Yemen
         parent: asia
         files:
-            - osm.pbf
-            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
+            - osm.pbf
+            - osm.pbf.md5
             - poly
             - kml
             - state
@@ -7034,12 +7034,12 @@ elements:
         name: Zambia
         parent: africa
         files:
-            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
+            - osh.pbf
             - poly
             - kml
             - state
@@ -7048,12 +7048,12 @@ elements:
         name: Zeeland
         parent: netherlands
         files:
+            - shp.zip
+            - osh.pbf
             - osm.pbf
             - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
-            - shp.zip
-            - osh.pbf
             - poly
             - kml
             - state
@@ -7090,12 +7090,12 @@ elements:
         name: Zuid-Holland
         parent: netherlands
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - osm.bz2
             - osm.bz2.md5
             - shp.zip
             - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
             - poly
             - kml
             - state
