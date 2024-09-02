@@ -62,7 +62,9 @@ const (
 		"west" +
 		"west-central" +
 		"western" +
-		"france_taaf"
+		"france_taaf" +
+		"la_rioja" +
+		"sevastopol"
 	passList = "HEADER"
 )
 
