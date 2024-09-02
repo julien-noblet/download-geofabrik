@@ -67,7 +67,10 @@ const (
 		"west_central" +
 		"west-central" +
 		"western" +
-		"france_taaf"
+		"france_taaf" +
+		"sevastopol" +
+		"la_rioja" +
+		"jura"
 	passList = "HEADER"
 )
 
@@ -76,7 +79,7 @@ func GetDefault() *OpenstreetmapFR {
 
 	return &OpenstreetmapFR{
 		Scrapper: &scrapper.Scrapper{ //nolint:exhaustruct // I'm lazy
-			PB:             1192, //nolint:gomnd // There is 1192 element right now
+			PB:             1195, //nolint:gomnd // There is 1195 element right now
 			Async:          true,
 			Parallelism:    20, //nolint:gomnd // 20 threads for scrapping
 			MaxDepth:       0,
