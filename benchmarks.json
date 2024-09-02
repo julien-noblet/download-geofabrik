@@ -1,4 +1,5 @@
 [
+  {"Version":"80a6da040ed4cb9bf43540d26bbccd7d5277ee9c","Date":1725280232,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
   {"Version":"80a6da040ed4cb9bf43540d26bbccd7d5277ee9c","Date":1725280181,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"488c24d98fdb491f4ad43d6d43865cb57188d5a2","Date":1725278774,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
   {"Version":"488c24d98fdb491f4ad43d6d43865cb57188d5a2","Date":1725278609,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"12deb8746d392793874b64fef9bc7c333306166d","Date":1725235726,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"8f42e47d7ca90444fc15e015ca309c7ce356dd70","Date":1725235546,"Tags":["ref=refs/heads/fix/openstreetmapfr"],"Suites":[]},
   {"Version":"001d747e4254925a72ceb3e539d8169991c46927","Date":1725232477,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"696b0864e2062e9c7d9b1742ba279c5ba281db8a","Date":1725232405,"Tags":["ref=refs/heads/feat/goreleaser"],"Suites":[]},
-  {"Version":"7d1af727f4ca4622087ad0a24225c870ba538b67","Date":1725231570,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"696b0864e2062e9c7d9b1742ba279c5ba281db8a","Date":1725232405,"Tags":["ref=refs/heads/feat/goreleaser"],"Suites":[]}
 ]
