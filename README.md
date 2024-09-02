@@ -867,7 +867,7 @@ Total elements: 509
 | coquimbo                                 | chile                            | coquimbo                                 | sPp     |
 | coral_sea_islands                        | australia                        | coral_sea_islands                        | sPp     |
 | cordillera_administrative_region         | philippines                      | cordillera_administrative_region         | sPp     |
-| cordoba                                  | argentina                        | cordoba                                  | sPp     |
+| cordoba                                  | andalucia                        | cordoba                                  | sPp     |
 | correze                                  | limousin                         | correze                                  | sPp     |
 | corrientes                               | argentina                        | corrientes                               | sPp     |
 | corse                                    | france                           | corse                                    | sPp     |

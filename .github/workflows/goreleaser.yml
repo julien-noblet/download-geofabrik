@@ -34,7 +34,7 @@ jobs:
           distribution: goreleaser
           # 'latest', 'nightly', or a semver
           version: "latest"
-          args: release --clean
+          args: release --clean --timeout 120m
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Your GoReleaser Pro key, if you are using the 'goreleaser-pro' distribution

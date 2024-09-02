@@ -60,11 +60,11 @@ builds:
       - ppc64le
       - s390x
 
-    goamd64:
-      - v1
-      - v2
-      - v3
-      - v4
+    #goamd64:
+    #  - v1
+    #  - v2
+    #  - v3
+    #  - v4
 
     goarm:
       - 5
@@ -74,12 +74,6 @@ builds:
     ignore:
       - goos: darwin
         goarch: 386
-      - goos: linux
-        goarch: 386
-      - goos: linux
-        goarch: amd64
-      - goos: linux
-        goarch: arm64
 
     ldflags: >-
       -s -w
@@ -92,7 +86,7 @@ upx:
   - # Whether to enable it or not.
     #
     # Templates: allowed.
-    enabled: true
+    enabled: false # remove upx since I've issues with it
 
     goos:
       - linux
@@ -125,7 +119,6 @@ archives:
     files:
       - license*
       - LICENSE*
-      - readme.md
       - README.md
       - changelog*
       - CHANGELOG*
