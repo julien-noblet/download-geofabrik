@@ -1,4 +1,5 @@
 [
+  {"Version":"29967ec0fa7572751d00da4b828cf29eec0971aa","Date":1725237546,"Tags":["ref=refs/heads/feat/goreleaser"],"Suites":[]},
   {"Version":"7db9bac973495d637a9793c766bcbb3bd39694de","Date":1725237370,"Tags":["ref=refs/heads/feat/goreleaser"],"Suites":[]},
   {"Version":"77438f44452ef42955b307892553195e7ed64a00","Date":1725237353,"Tags":["ref=refs/heads/feat/goreleaser"],"Suites":[]},
   {"Version":"7a9ab163682e4052547f5156528982e8ea2db19f","Date":1725237080,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"492a38589fca9725ab2e0d3852dcb1eac9d169ca","Date":1725226035,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
   {"Version":"c7c55521ff17b4041be7c8d4129cbd49241e0017","Date":1725224202,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
   {"Version":"4e2dc2a4ce97a32955f3380bd3ef277ae0fda66f","Date":1725221321,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
-  {"Version":"2b75c08ed4d204123a8870352b9a823d24889238","Date":1725221095,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
-  {"Version":"d443acbc2c3ea991845e485553041ca47c0938fd","Date":1724982646,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"2b75c08ed4d204123a8870352b9a823d24889238","Date":1725221095,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]}
 ]
