@@ -1,4 +1,5 @@
 [
+  {"Version":"e2cedc5cbfbdfc45fe3bdcbe0ccec70465c53370","Date":1725258589,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"25a2e026ca3d93e48eb97c9215900efff3e13682","Date":1725256631,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
   {"Version":"25a2e026ca3d93e48eb97c9215900efff3e13682","Date":1725256552,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"7090e1794732308bd0a579f6022674f1b4fd4bcc","Date":1725256034,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"7a1aceb8e1576b01b39dc8a5f974765cfd370798","Date":1725229956,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
   {"Version":"b244f32059e0cc2c9364c0cd3d842424cfa8435f","Date":1725228275,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
   {"Version":"841e2d01b64e3ae7fdbb8b447832685df8b50b8e","Date":1725227689,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
-  {"Version":"e64842b10274f05e2df5bbc28c30124a1991817d","Date":1725227611,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
-  {"Version":"984c17bad3348717e77edfddf59686516a8087e1","Date":1725227290,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]}
+  {"Version":"e64842b10274f05e2df5bbc28c30124a1991817d","Date":1725227611,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]}
 ]
