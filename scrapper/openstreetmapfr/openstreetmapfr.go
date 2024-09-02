@@ -94,10 +94,10 @@ func GetDefault() *OpenstreetmapFR {
 				regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`), //nolint:gocritic // ^ is intentional
 			},
 			FormatDefinition: formats.FormatDefinitions{
-				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf", BasePath: "", BaseURL: ""},
-				"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5", BasePath: "", BaseURL: ""},
-				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", BasePath: "../polygons/", BaseURL: ""},
-				formats.FormatState:  {ID: formats.FormatState, Loc: ".state.txt", BasePath: "", BaseURL: ""},
+				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf", ToLoc: "", BasePath: "", BaseURL: ""},
+				"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5", ToLoc: "", BasePath: "", BaseURL: ""},
+				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "../polygons/", BaseURL: ""},
+				formats.FormatState:  {ID: formats.FormatState, Loc: ".state.txt", ToLoc: "", BasePath: "", BaseURL: ""},
 			},
 			Timeout: &timeout,
 		},
