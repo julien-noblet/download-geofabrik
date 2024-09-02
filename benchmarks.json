@@ -1,4 +1,5 @@
 [
+  {"Version":"12deb8746d392793874b64fef9bc7c333306166d","Date":1725235726,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"8f42e47d7ca90444fc15e015ca309c7ce356dd70","Date":1725235546,"Tags":["ref=refs/heads/fix/openstreetmapfr"],"Suites":[]},
   {"Version":"001d747e4254925a72ceb3e539d8169991c46927","Date":1725232477,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"696b0864e2062e9c7d9b1742ba279c5ba281db8a","Date":1725232405,"Tags":["ref=refs/heads/feat/goreleaser"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"6748f3275f43ae8f68af018871a010c902cf8fc3","Date":1724977778,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"8deaf5767ea3aa4fd92d51c253575c4037c546e0","Date":1724977753,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"7feaee71a92237c34135355f8f98dcf774c4bc2f","Date":1724977566,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.2"],"Suites":[]},
-  {"Version":"62e88dafc60b69d27e46d8031e1aeccd1ab33221","Date":1724977503,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.1"],"Suites":[]},
-  {"Version":"495002b4888bce67fbeb2ed7b01041ad65f4cad0","Date":1724977447,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"62e88dafc60b69d27e46d8031e1aeccd1ab33221","Date":1724977503,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.1"],"Suites":[]}
 ]
