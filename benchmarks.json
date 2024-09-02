@@ -1,4 +1,5 @@
 [
+  {"Version":"061e5717dfbca2bb50e72c4dc40f8805997c699e","Date":1725276902,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
   {"Version":"061e5717dfbca2bb50e72c4dc40f8805997c699e","Date":1725276885,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"e4ad1d1379b4aec707efe2c9234bb6e3ba4f5e63","Date":1725276748,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
   {"Version":"e4ad1d1379b4aec707efe2c9234bb6e3ba4f5e63","Date":1725276697,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"6aac20f6d73ecf0f1612d5d4b3776d05e173cd62","Date":1725231418,"Tags":["ref=refs/heads/new_yamls"],"Suites":[]},
   {"Version":"d332a682388936edd53d58e982d735a40b33c43a","Date":1725231296,"Tags":["ref=refs/heads/fix/openstreetmapfr"],"Suites":[]},
   {"Version":"5d09a21c703b9749842b2d5ba7c6a9dda0a08180","Date":1725230805,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"263c1f5d54dd912cff1bddf4696fa4dc01cd64b3","Date":1725230343,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]},
-  {"Version":"1127f6a836a95c8cf6a53e07e11351c1113a1a1b","Date":1725230195,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]}
+  {"Version":"263c1f5d54dd912cff1bddf4696fa4dc01cd64b3","Date":1725230343,"Tags":["ref=refs/heads/feat/osmtoday"],"Suites":[]}
 ]
