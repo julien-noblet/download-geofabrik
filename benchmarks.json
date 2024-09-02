@@ -1,4 +1,5 @@
 [
+  {"Version":"488c24d98fdb491f4ad43d6d43865cb57188d5a2","Date":1725278609,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"18ada1257b3f1f4c3e524efee593ace377910f34","Date":1725277008,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
   {"Version":"18ada1257b3f1f4c3e524efee593ace377910f34","Date":1725276968,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"061e5717dfbca2bb50e72c4dc40f8805997c699e","Date":1725276902,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"696b0864e2062e9c7d9b1742ba279c5ba281db8a","Date":1725232405,"Tags":["ref=refs/heads/feat/goreleaser"],"Suites":[]},
   {"Version":"7d1af727f4ca4622087ad0a24225c870ba538b67","Date":1725231570,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"5c99f7c894b28cec32adce13feaecb87c42840ec","Date":1725231471,"Tags":["ref=refs/heads/fix/openstreetmapfr"],"Suites":[]},
-  {"Version":"6aac20f6d73ecf0f1612d5d4b3776d05e173cd62","Date":1725231418,"Tags":["ref=refs/heads/new_yamls"],"Suites":[]},
-  {"Version":"d332a682388936edd53d58e982d735a40b33c43a","Date":1725231296,"Tags":["ref=refs/heads/fix/openstreetmapfr"],"Suites":[]}
+  {"Version":"6aac20f6d73ecf0f1612d5d4b3776d05e173cd62","Date":1725231418,"Tags":["ref=refs/heads/new_yamls"],"Suites":[]}
 ]
