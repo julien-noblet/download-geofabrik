@@ -2,7 +2,7 @@
 name: goreleaser
 
 on:
-  pull_request:
+  #pull_request: # do not run on PRs
   push:
     # run only against tags
     tags:
