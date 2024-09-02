@@ -224,3 +224,123 @@ func Test_write(t *testing.T) {
 		})
 	}
 }
+
+func TestCleanup(t *testing.T) {
+	t.Parallel()
+
+	type args struct {
+		c *config.Config
+	}
+
+	tests := []struct {
+		name string
+		args args
+		want element.Formats
+	}{
+		// TODO: Add test cases.
+		{
+			name: "example 1",
+			args: args{
+				c: &config.Config{
+					BaseURL: "https://my.base.url",
+					Formats: formats.FormatDefinitions{
+						formats.FormatOsmPbf: {
+							ID:  formats.FormatOsmPbf,
+							Loc: ".osm.pbf",
+							// BasePath: "/",
+						}, formats.FormatState: {
+							ID:       formats.FormatState,
+							Loc:      "-updates/state.txt",
+							BasePath: "../state/",
+						}, formats.FormatPoly: {
+							ID: formats.FormatPoly,
+
+							Loc:     ".poly",
+							BaseURL: "http://my.new.url/folder",
+						}, formats.FormatOsmBz2: {
+							ID:       formats.FormatOsmBz2,
+							Loc:      ".osm.bz2",
+							BasePath: "../osmbz2/",
+							BaseURL:  "http://my.new.url/folder",
+						}, formats.FormatOsmGz: {
+							ID:       formats.FormatOsmGz,
+							Loc:      ".osm.gz",
+							BasePath: "../osmgz/",
+							BaseURL:  "http://my.new.url/folder",
+						},
+					},
+					Elements: element.Slice{
+						"africa": {
+							ID:   "africa",
+							Name: "Africa",
+							Formats: []string{
+								formats.FormatOsmPbf,
+								"osm.pbf.md5",
+								formats.FormatOsmBz2,
+								"osm.bz2.md5",
+								formats.FormatOshPbf,
+								"osh.pbf.md5",
+								formats.FormatPoly,
+								formats.FormatKml,
+								formats.FormatState,
+							},
+						},
+					},
+				},
+			},
+			want: element.Formats{
+				formats.FormatKml,
+				formats.FormatOshPbf,
+				"osh.pbf.md5",
+				formats.FormatOsmBz2,
+				"osm.bz2.md5",
+				formats.FormatOsmPbf,
+				"osm.pbf.md5",
+				formats.FormatPoly,
+				formats.FormatState,
+			},
+		},
+		{
+			name: "example 2",
+			args: args{
+				c: &config.Config{
+					BaseURL: "https://my.base.url",
+					Formats: formats.FormatDefinitions{},
+					Elements: element.Slice{
+						"africa": {
+							ID:   "africa",
+							Name: "Africa",
+							Formats: []string{
+								formats.FormatOsmPbf,
+								formats.FormatGeoJSON,
+								formats.FormatPoly,
+								formats.FormatState,
+							},
+						},
+					},
+				},
+			},
+			want: element.Formats{
+				formats.FormatGeoJSON,
+				formats.FormatOsmPbf,
+				formats.FormatPoly,
+				formats.FormatState,
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		myTest := tt
+
+		t.Run(myTest.name, func(t *testing.T) {
+			t.Parallel()
+
+			af := myTest.args.c.Elements["africa"]
+			generator.Cleanup(myTest.args.c)
+			// compare af.Formats != tt.want
+			if !reflect.DeepEqual(af.Formats, myTest.want) {
+				t.Errorf("Cleanup() = %v, want %v", af.Formats, myTest.want)
+			}
+		})
+	}
+}

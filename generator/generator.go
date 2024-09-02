@@ -43,12 +43,13 @@ func Generate(configfile string) { //nolint:cyclop // TODO : Refactor
 			log.WithError(err)
 		}
 
-		c, err := geofabrik.Convert(index)
+		myConfig, err := geofabrik.Convert(index)
 		if err != nil {
 			log.WithError(err)
 		}
 
-		Write(c, configfile)
+		Cleanup(myConfig)
+		Write(myConfig, configfile)
 
 		return // Exit function!
 	case "geofabrik-parse":
@@ -81,7 +82,11 @@ func Generate(configfile string) { //nolint:cyclop // TODO : Refactor
 	}
 
 	collector.Wait()
-	Write(myScrapper.GetConfig(), configfile)
+
+	myconfig := myScrapper.GetConfig()
+
+	Cleanup(myconfig)
+	Write(myconfig, configfile)
 }
 
 // Cleanup configuration before writing it.

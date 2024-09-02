@@ -679,6 +679,7 @@ Total elements: 509
 | ardeche                                  | rhone_alpes                      | ardeche                                  | sPp     |
 | ardennes                                 | champagne_ardenne                | ardennes                                 | sPp     |
 | argentina                                | south-america                    | argentina                                | sPp     |
+| argentina_la_rioja                       | argentina                        | argentina_la_rioja                       | sPp     |
 | arica_y_parinacota                       | chile                            | arica_y_parinacota                       | sPp     |
 | ariege                                   | midi_pyrenees                    | ariege                                   | sPp     |
 | arkhangelsk_oblast                       | northwestern_federal_district    | arkhangelsk_oblast                       | sPp     |
@@ -867,7 +868,7 @@ Total elements: 509
 | coquimbo                                 | chile                            | coquimbo                                 | sPp     |
 | coral_sea_islands                        | australia                        | coral_sea_islands                        | sPp     |
 | cordillera_administrative_region         | philippines                      | cordillera_administrative_region         | sPp     |
-| cordoba                                  | andalucia                        | cordoba                                  | sPp     |
+| cordoba                                  | argentina                        | cordoba                                  | sPp     |
 | correze                                  | limousin                         | correze                                  | sPp     |
 | corrientes                               | argentina                        | corrientes                               | sPp     |
 | corse                                    | france                           | corse                                    | sPp     |
@@ -964,6 +965,7 @@ Total elements: 509
 | france                                   | europe                           | france                                   |         |
 | france_metro_dom_com_nc                  | merge                            | france_metro_dom_com_nc                  | sPp     |
 | franche_comte                            | france                           | franche_comte                            | sPp     |
+| franche_comte_jura                       | franche_comte                    | franche_comte_jura                       | sPp     |
 | free_state                               | south_africa                     | free_state                               | sPp     |
 | fresno                                   | california                       | fresno                                   | sPp     |
 | fribourg                                 | switzerland                      | fribourg                                 | sPp     |
@@ -1111,7 +1113,6 @@ Total elements: 509
 | jilin                                    | china                            | jilin                                    | sPp     |
 | jonkoping                                | sweden                           | jonkoping                                | sPp     |
 | jujuy                                    | argentina                        | jujuy                                    | sPp     |
-| jura                                     | switzerland                      | jura                                     | sPp     |
 | kabardino_balkar_republic                | north_caucasian_federal_district | kabardino_balkar_republic                | sPp     |
 | kainuu                                   | finland                          | kainuu                                   | sPp     |
 | kaliningrad_oblast                       | northwestern_federal_district    | kaliningrad_oblast                       | sPp     |
@@ -1162,7 +1163,6 @@ Total elements: 509
 | kyushu                                   | japan                            | kyushu                                   | sPp     |
 | la_coruna                                | galicia                          | la_coruna                                | sPp     |
 | la_pampa                                 | argentina                        | la_pampa                                 | sPp     |
-| la_rioja                                 | spain                            | la_rioja                                 | sPp     |
 | ladakh                                   | india                            | ladakh                                   | sPp     |
 | lakshadweep                              | india                            | lakshadweep                              | sPp     |
 | lampung                                  | indonesia                        | lampung                                  | sPp     |
@@ -1557,7 +1557,6 @@ Total elements: 509
 | senegal                                  | africa                           | senegal                                  | sPp     |
 | sergipe                                  | northeast                        | sergipe                                  | sPp     |
 | setubal                                  | portugal                         | setubal                                  | sPp     |
-| sevastopol                               | ukraine                          | sevastopol                               | sPp     |
 | sevilla                                  | andalucia                        | sevilla                                  | sPp     |
 | seychelles                               | africa                           | seychelles                               | sPp     |
 | shaanxi                                  | china                            | shaanxi                                  | sPp     |
@@ -1609,12 +1608,14 @@ Total elements: 509
 | southeast_sulawesi                       | indonesia                        | southeast_sulawesi                       | sPp     |
 | southeastern_anatolia                    | turkey                           | southeastern_anatolia                    | sPp     |
 | southern_federal_district                | russia                           | southern_federal_district                | sPp     |
+| southern_federal_district_sevastopol     | southern_federal_district        | southern_federal_district_sevastopol     | sPp     |
 | southern_highlands                       | tanzania                         | southern_highlands                       | sPp     |
 | southern_tier                            | new-york                         | southern_tier                            | sPp     |
 | southwest_finland                        | finland                          | southwest_finland                        | sPp     |
 | southwest_papua                          | indonesia                        | southwest_papua                          | sPp     |
 | southwestern_ontario                     | ontario                          | southwestern_ontario                     | sPp     |
 | spain                                    | europe                           | spain                                    | sPp     |
+| spain_la_rioja                           | spain                            | spain_la_rioja                           | sPp     |
 | stanislaus                               | california                       | stanislaus                               | sPp     |
 | state_of_mexico                          | mexico                           | state_of_mexico                          | sPp     |
 | stavropol_krai                           | north_caucasian_federal_district | stavropol_krai                           | sPp     |
@@ -1632,6 +1633,7 @@ Total elements: 509
 | sweden                                   | europe                           | sweden                                   | sPp     |
 | swietokrzyskie                           | poland                           | swietokrzyskie                           | sPp     |
 | switzerland                              | europe                           | switzerland                              | sPp     |
+| switzerland_jura                         | switzerland                      | switzerland_jura                         | sPp     |
 | sydney_surrounds                         | new_south_wales                  | sydney_surrounds                         | sPp     |
 | tabasco                                  | mexico                           | tabasco                                  | sPp     |
 | tamaulipas                               | mexico                           | tamaulipas                               | sPp     |
@@ -1705,6 +1707,7 @@ Total elements: 509
 | uganda_northern                          | uganda                           | uganda_northern                          | sPp     |
 | uganda_western                           | uganda                           | uganda_western                           | sPp     |
 | ukraine                                  | europe                           | ukraine                                  | sPp     |
+| ukraine_sevastopol                       | ukraine                          | ukraine_sevastopol                       | sPp     |
 | ulyanovsk_oblast                         | volga_federal_district           | ulyanovsk_oblast                         | sPp     |
 | umbria                                   | italy                            | umbria                                   | sPp     |
 | united_arab_emirates                     | asia                             | united_arab_emirates                     | sPp     |
@@ -1818,7 +1821,7 @@ Total elements: 509
 | zug                                      | switzerland                      | zug                                      | sPp     |
 | zuid_holland                             | netherlands                      | zuid_holland                             | sPp     |
 | zurich                                   | switzerland                      | zurich                                   | sPp     |
-Total elements: 1192
+Total elements: 1195
 
 ## List of elements from bbbike.org
 |    SHORTNAME     | IS IN |    LONG NAME     | FORMATS |
