@@ -37,7 +37,7 @@ func GetDefault() *Bbbike {
 				formats.FormatGarminOntrail:  {ID: formats.FormatGarminOntrail, Loc: ".osm.garmin-ontrail-latin1.zip", ToLoc: "", BasePath: "", BaseURL: ""},
 				formats.FormatGarminOpenTopo: {ID: formats.FormatGarminOpenTopo, Loc: ".osm.garmin-opentopo-latin1.zip", ToLoc: "", BasePath: "", BaseURL: ""},
 				formats.FormatGeoJSON:        {ID: formats.FormatGeoJSON, Loc: ".osm.geojson.xz", ToLoc: ".geojson.xz", BasePath: "", BaseURL: ""},
-				formats.FormatMBTiles:        {ID: formats.FormatMBTiles, Loc: ".osm.mbtiles-openmaptiles.zip", ToLoc: "", BasePath: "", BaseURL: ""},
+				formats.FormatMBTiles:        {ID: formats.FormatMBTiles, Loc: ".osm.mbtiles-openmaptiles.zip", ToLoc: "osm.mbtiles-openmaptiles.zip", BasePath: "", BaseURL: ""}, //nolint:lll // I don't want to split this line
 				formats.FormatMapsforge:      {ID: formats.FormatMapsforge, Loc: ".osm.mapsforge-osm.zip", ToLoc: "", BasePath: "", BaseURL: ""},
 				formats.FormatOsmGz:          {ID: formats.FormatOsmGz, Loc: ".osm.gz", ToLoc: "", BasePath: "", BaseURL: ""},
 				formats.FormatOsmPbf:         {ID: formats.FormatOsmPbf, Loc: ".osm.pbf", ToLoc: "", BasePath: "", BaseURL: ""},

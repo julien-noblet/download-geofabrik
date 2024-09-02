@@ -38,8 +38,8 @@ const (
 	FormatGarminOpenTopo = "osm.garmin-opentopo-latin1.zip" // BBBike only
 	FormatGarminOSM      = "osm.garmin-osm.zip"             // BBBike only
 	FormatMapsforge      = "osm.mapsforge-osm.zip"          // BBBike only
-	FormatMBTiles        = "osm.mbtiles-openmaptiles.zip"   // BBBike only
-	FormatCSV            = "csv"                            // BBBike only
+	FormatMBTiles        = "mbtiles"
+	FormatCSV            = "csv" // BBBike only
 )
 
 // MiniFormats get formats of an Element
