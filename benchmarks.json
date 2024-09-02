@@ -1,4 +1,5 @@
 [
+  {"Version":"f5432a26b69f5837d855b5285db2c0fecaabff45","Date":1725236428,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"9a7b196b95c0ed7a535eaacc0e3bfab8c8aeb368","Date":1725236312,"Tags":["ref=refs/heads/fix/openstreetmapfr"],"Suites":[]},
   {"Version":"a9370814a06b761783823b006c8e36411c7b3c19","Date":1725236194,"Tags":["ref=refs/heads/fix/openstreetmapfr"],"Suites":[]},
   {"Version":"ae2ec1bd32a4c02f3af1f51282581d55d4d234c3","Date":1725236154,"Tags":["ref=refs/heads/feat/goreleaser"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"651f2b1fe5cd058b420e86efff72d019f34481dd","Date":1724982068,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"6af7729e75fefe2969a50059cfd8585d1d31f9af","Date":1724981821,"Tags":["ref=refs/heads/renovate/actions-checkout-4.x"],"Suites":[]},
   {"Version":"4bdab03601e20d190e3e635d48454474c1642a66","Date":1724981798,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"915001e943f6787eb1f98d257d6875fe90c50e08","Date":1724980824,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"6748f3275f43ae8f68af018871a010c902cf8fc3","Date":1724977778,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"915001e943f6787eb1f98d257d6875fe90c50e08","Date":1724980824,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
