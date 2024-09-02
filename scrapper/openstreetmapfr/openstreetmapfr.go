@@ -32,10 +32,13 @@ const (
 		"central_west" +
 		"coastral" +
 		"east" +
+		"east_central" +
 		"east-central" +
 		"eastern" +
 		"lake" +
 		"north" +
+		"north_central" +
+		"north-central" +
 		"north-east" +
 		"north-eastern" +
 		"north-west" +
@@ -48,6 +51,7 @@ const (
 		"northern" +
 		"northwest" +
 		"south" +
+		"south_central" +
 		"south-central" +
 		"south-east" +
 		"south-south" +
@@ -60,11 +64,10 @@ const (
 		"southern" +
 		"southwest" +
 		"west" +
+		"west_central" +
 		"west-central" +
 		"western" +
-		"france_taaf" +
-		"la_rioja" +
-		"sevastopol"
+		"france_taaf"
 	passList = "HEADER"
 )
 
