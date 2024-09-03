@@ -12,6 +12,7 @@ type Format struct {
 	Loc      string `yaml:"loc"`
 	BasePath string `yaml:"basepath,omitempty"`
 	BaseURL  string `yaml:"baseurl,omitempty"`
+	ToLoc    string `yaml:"toloc,omitempty"`
 }
 
 type (
@@ -23,15 +24,22 @@ type (
 )
 
 const (
-	FormatState   = "state"
-	FormatOsmPbf  = "osm.pbf"
-	FormatOsmGz   = "osm.gz"
-	FormatOsmBz2  = "osm.bz2"
-	FormatOshPbf  = "osh.pbf"
-	FormatPoly    = "poly"
-	FormatShpZip  = "shp.zip"
-	FormatKml     = "kml"
-	FormatGeoJSON = "geojson"
+	FormatState          = "state"
+	FormatOsmPbf         = "osm.pbf"
+	FormatOsmGz          = "osm.gz"
+	FormatOsmBz2         = "osm.bz2"
+	FormatOshPbf         = "osh.pbf"
+	FormatPoly           = "poly"
+	FormatShpZip         = "shp.zip"
+	FormatKml            = "kml"
+	FormatGeoJSON        = "geojson"                        // BBBike & OSM Today only
+	FormatGarminOntrail  = "osm.garmin-ontrail-latin1.zip"  // BBBike only
+	FormatGarminOnroad   = "osm.garmin-onroad-latin1.zip"   // BBBike only
+	FormatGarminOpenTopo = "osm.garmin-opentopo-latin1.zip" // BBBike only
+	FormatGarminOSM      = "osm.garmin-osm.zip"             // BBBike only
+	FormatMapsforge      = "osm.mapsforge-osm.zip"          // BBBike only
+	FormatMBTiles        = "mbtiles"
+	FormatCSV            = "csv" // BBBike only
 )
 
 // MiniFormats get formats of an Element
@@ -49,6 +57,13 @@ func MiniFormats(miniFormat []string) string {
 		{ShortName: "S", FullName: FormatShpZip},
 		{ShortName: "k", FullName: FormatKml},
 		{ShortName: "g", FullName: FormatGeoJSON},
+		{ShortName: "t", FullName: FormatGarminOntrail},
+		{ShortName: "r", FullName: FormatGarminOnroad},
+		{ShortName: "o", FullName: FormatGarminOpenTopo},
+		{ShortName: "O", FullName: FormatGarminOSM},
+		{ShortName: "m", FullName: FormatMapsforge},
+		{ShortName: "M", FullName: FormatMBTiles},
+		{ShortName: "C", FullName: FormatCSV},
 	}
 
 	res := make([]string, len(miniFormatList))
@@ -69,15 +84,22 @@ func GetFormats() *[]string {
 	var formatFile []string
 
 	options := map[string]string{
-		"dosmPbf":  FormatOsmPbf,
-		"doshPbf":  FormatOshPbf,
-		"dosmGz":   FormatOsmGz,
-		"dosmBz2":  FormatOsmBz2,
-		"dshpZip":  FormatShpZip,
-		"dstate":   FormatState,
-		"dpoly":    FormatPoly,
-		"dkml":     FormatKml,
-		"dgeojson": FormatGeoJSON,
+		"dosmPbf":         FormatOsmPbf,
+		"doshPbf":         FormatOshPbf,
+		"dosmGz":          FormatOsmGz,
+		"dosmBz2":         FormatOsmBz2,
+		"dshpZip":         FormatShpZip,
+		"dstate":          FormatState,
+		"dpoly":           FormatPoly,
+		"dkml":            FormatKml,
+		"dgeojson":        FormatGeoJSON,
+		"dgarmin":         FormatGarminOSM,
+		"dmaps":           FormatMapsforge,
+		"dmbtiles":        FormatMBTiles,
+		"dcsv":            FormatCSV,
+		"dgarminonroad":   FormatGarminOnroad,
+		"dgarminontrail":  FormatGarminOntrail,
+		"dgarminopentopo": FormatGarminOpenTopo,
 	}
 
 	for k, v := range options {

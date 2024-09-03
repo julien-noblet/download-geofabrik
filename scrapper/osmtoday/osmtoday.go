@@ -32,10 +32,10 @@ func GetDefault() *Osmtoday {
 				regexp.MustCompile(`https://osmtoday\.com/$`),
 			},
 			FormatDefinition: formats.FormatDefinitions{
-				formats.FormatOsmPbf:  {ID: formats.FormatOsmPbf, Loc: ".pbf", BasePath: "", BaseURL: ""},
-				"md5":                 {ID: "md5", Loc: ".md5", BasePath: "", BaseURL: ""},
-				formats.FormatPoly:    {ID: formats.FormatPoly, Loc: ".poly", BasePath: "", BaseURL: ""},
-				formats.FormatGeoJSON: {ID: formats.FormatKml, Loc: ".geojson", BasePath: "", BaseURL: ""},
+				"osm.pbf.md5":         {ID: "osm.pbf.md5", Loc: ".md5", ToLoc: "", BasePath: "", BaseURL: ""},
+				formats.FormatGeoJSON: {ID: formats.FormatGeoJSON, Loc: ".geojson", ToLoc: "", BasePath: "", BaseURL: ""},
+				formats.FormatOsmPbf:  {ID: formats.FormatOsmPbf, Loc: ".pbf", ToLoc: "", BasePath: "", BaseURL: ""},
+				formats.FormatPoly:    {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "", BaseURL: ""},
 			},
 		},
 	}

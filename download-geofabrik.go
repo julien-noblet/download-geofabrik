@@ -40,18 +40,25 @@ var ( // TODO: move from kingpin to cobra
 	list = app.Command("list", "Show elements available")                   //nolint:gochecknoglobals // global
 	lmd  = list.Flag("markdown", "generate list in Markdown format").Bool() //nolint:gochecknoglobals // global
 	// TODO : add dDownload as command.
-	dDownload = app.Command("download", "Download element")                                                   //nolint:gochecknoglobals // global
-	delement  = dDownload.Arg("element", "OSM element").Required().String()                                   //nolint:gochecknoglobals // global
-	dosmBz2   = dDownload.Flag(formats.FormatOsmBz2, "Download osm.bz2 if available").Short('B').Bool()       //nolint:gochecknoglobals // global
-	dosmGz    = dDownload.Flag(formats.FormatOsmGz, "Download osm.gz if available").Short('G').Bool()         //nolint:gochecknoglobals // global
-	dshpZip   = dDownload.Flag(formats.FormatShpZip, "Download shp.zip if available").Short('S').Bool()       //nolint:gochecknoglobals // global
-	dosmPbf   = dDownload.Flag(formats.FormatOsmPbf, "Download osm.pbf (default)").Short('P').Bool()          //nolint:gochecknoglobals // global
-	doshPbf   = dDownload.Flag(formats.FormatOshPbf, "Download osh.pbf").Short('H').Bool()                    //nolint:gochecknoglobals // global
-	dstate    = dDownload.Flag(formats.FormatState, "Download state.txt file").Short('s').Bool()              //nolint:gochecknoglobals // global
-	dpoly     = dDownload.Flag(formats.FormatPoly, "Download poly file").Short('p').Bool()                    //nolint:gochecknoglobals // global
-	dkml      = dDownload.Flag(formats.FormatKml, "Download kml file").Short('k').Bool()                      //nolint:gochecknoglobals // global
-	dgeojson  = dDownload.Flag(formats.FormatGeoJSON, "Download geojson file").Short('g').Bool()              //nolint:gochecknoglobals // global
-	dCheck    = dDownload.Flag("check", "Control with checksum (default) Use --no-check to discard control"). //nolint:gochecknoglobals // global
+	dDownload       = app.Command("download", "Download element")                                                   //nolint:gochecknoglobals // global
+	delement        = dDownload.Arg("element", "OSM element").Required().String()                                   //nolint:gochecknoglobals // global
+	dosmBz2         = dDownload.Flag(formats.FormatOsmBz2, "Download osm.bz2 if available").Short('B').Bool()       //nolint:gochecknoglobals // global
+	dosmGz          = dDownload.Flag(formats.FormatOsmGz, "Download osm.gz if available").Short('G').Bool()         //nolint:gochecknoglobals // global
+	dshpZip         = dDownload.Flag(formats.FormatShpZip, "Download shp.zip if available").Short('S').Bool()       //nolint:gochecknoglobals // global
+	dosmPbf         = dDownload.Flag(formats.FormatOsmPbf, "Download osm.pbf (default)").Short('P').Bool()          //nolint:gochecknoglobals // global
+	doshPbf         = dDownload.Flag(formats.FormatOshPbf, "Download osh.pbf").Short('H').Bool()                    //nolint:gochecknoglobals // global
+	dstate          = dDownload.Flag(formats.FormatState, "Download state.txt file").Short('s').Bool()              //nolint:gochecknoglobals // global
+	dpoly           = dDownload.Flag(formats.FormatPoly, "Download poly file").Short('p').Bool()                    //nolint:gochecknoglobals // global
+	dkml            = dDownload.Flag(formats.FormatKml, "Download kml file").Short('k').Bool()                      //nolint:gochecknoglobals // global
+	dgeojson        = dDownload.Flag(formats.FormatGeoJSON, "Download GeoJSON file").Short('g').Bool()              //nolint:gochecknoglobals // global
+	dgarmin         = dDownload.Flag("garmin-osm", "Download Garmin OSM file").Short('O').Bool()                    //nolint:gochecknoglobals // global
+	dmaps           = dDownload.Flag("mapsforge", "Download Mapsforge file").Short('m').Bool()                      //nolint:gochecknoglobals // global
+	dmbtiles        = dDownload.Flag("mbtiles", "Download MBTiles file").Short('M').Bool()                          //nolint:gochecknoglobals // global
+	dcsv            = dDownload.Flag("csv", "Download CSV file").Short('C').Bool()                                  //nolint:gochecknoglobals // global
+	dgarminonroad   = dDownload.Flag("garminonroad", "Download Garmin Onroad file").Short('r').Bool()               //nolint:gochecknoglobals // global
+	dgarminontrail  = dDownload.Flag("garminontrail", "Download Garmin Ontrail file").Short('t').Bool()             //nolint:gochecknoglobals // global
+	dgarminopentopo = dDownload.Flag("garminopenTopo", "Download Garmin OpenTopo file").Short('o').Bool()           //nolint:gochecknoglobals // global
+	dCheck          = dDownload.Flag("check", "Control with checksum (default) Use --no-check to discard control"). //nolint:gochecknoglobals // global
 			Default("true").Bool()
 	dOutputDir = dDownload.Flag( //nolint:gochecknoglobals // global
 		"output_directory",
@@ -180,16 +187,33 @@ func downloadCommand() {
 					log.Info("Checksum match, no download!")
 				}
 			} else {
-				downloadFile(configPtr, *delement, myFormat.ID, *dOutputDir+filename+"."+myFormat.ID)
+				downloadFile(configPtr, *delement, myFormat.ID, *dOutputDir+getOutputFileName(configPtr, *delement, &myFormat))
 
 				if !downloadChecksum(myFormat.ID) {
-					log.Warnf("Checksum mismatch, please re-download %s", *dOutputDir+filename+"."+myFormat.ID)
+					log.Warnf("Checksum mismatch, please re-download %s", *dOutputDir+getOutputFileName(configPtr, *delement, &myFormat))
 				}
 			}
 		} else {
-			downloadFile(configPtr, *delement, myFormat.ID, *dOutputDir+filename+"."+myFormat.ID)
+			downloadFile(configPtr, *delement, myFormat.ID, *dOutputDir+getOutputFileName(configPtr, *delement, &myFormat))
 		}
 	}
+}
+
+func getOutputFileName(configPtr *config.Config, element string, myFormat *formats.Format) string {
+	myElem, err := config.FindElem(configPtr, element)
+	if err != nil {
+		log.WithError(err).Fatalf(config.ErrFindElem, element)
+	}
+
+	var extension string
+
+	if myFormat.ToLoc != "" {
+		extension = myFormat.ToLoc
+	} else {
+		extension = "." + myFormat.ID
+	}
+
+	return myElem.ID + extension
 }
 
 func configureBool(flag *bool, name string) {
@@ -227,6 +251,14 @@ func main() {
 	configureBool(dstate, "dstate")
 	configureBool(dpoly, "dpoly")
 	configureBool(dkml, "dkml")
+	configureBool(dgeojson, "dgeojson")
+	configureBool(dgarmin, "dgarmin")
+	configureBool(dmaps, "dmaps")
+	configureBool(dmbtiles, "dmbtiles")
+	configureBool(dcsv, "dcsv")
+	configureBool(dgarminonroad, "dgarminonroad")
+	configureBool(dgarminontrail, "dgarminontrail")
+	configureBool(dgarminopentopo, "dgarminopentopo")
 
 	viper.Set("service", fService)
 

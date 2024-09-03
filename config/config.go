@@ -131,6 +131,14 @@ func FindElem(config *Config, e string) (*element.Element, error) {
 	return &res, nil
 }
 
+func GetFile(myElement *element.Element) string {
+	if myElement.File != "" {
+		return myElement.File
+	}
+
+	return myElement.ID
+}
+
 func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string) (string, error) {
 	myElement, err := FindElem(config, elementPtr.ID)
 	if err != nil {
@@ -149,22 +157,18 @@ func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string)
 		}
 
 		res += "/"
-		if myElement.File != "" { // TODO use file in config???
-			res += myElement.File
-		} else {
-			res += myElement.ID
-		}
+		res += GetFile(myElement)
 
 		return res, nil
 	}
 
 	switch len(baseURL) {
 	case 1:
-		return config.BaseURL + "/" + strings.Join(baseURL, "/") + myElement.ID, nil
+		return config.BaseURL + "/" + strings.Join(baseURL, "/") + GetFile(myElement), nil
 	case 2: //nolint:gomnd // return without c.BaseURL
-		return strings.Join(baseURL, "/") + myElement.ID, nil
+		return strings.Join(baseURL, "/") + GetFile(myElement), nil
 	default: // len(b)==0 or >2
-		return config.BaseURL + "/" + myElement.ID, nil
+		return config.BaseURL + "/" + GetFile(myElement), nil
 	}
 }
 

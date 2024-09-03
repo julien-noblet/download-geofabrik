@@ -57,20 +57,27 @@ list [<flags>]
 download [<flags>] <element>
     Download element
 
-    -B, --[no-]osm.bz2  Download osm.bz2 if available
-    -G, --[no-]osm.gz   Download osm.gz if available
-    -S, --[no-]shp.zip  Download shp.zip if available
-    -P, --[no-]osm.pbf  Download osm.pbf (default)
-    -H, --[no-]osh.pbf  Download osh.pbf
-    -s, --[no-]state    Download state.txt file
-    -p, --[no-]poly     Download poly file
-    -k, --[no-]kml      Download kml file
-    -g, --[no-]geojson  Download geojson file
-        --[no-]check    Control with checksum (default) Use --no-check to
-                        discard control
+    -B, --[no-]osm.bz2         Download osm.bz2 if available
+    -G, --[no-]osm.gz          Download osm.gz if available
+    -S, --[no-]shp.zip         Download shp.zip if available
+    -P, --[no-]osm.pbf         Download osm.pbf (default)
+    -H, --[no-]osh.pbf         Download osh.pbf
+    -s, --[no-]state           Download state.txt file
+    -p, --[no-]poly            Download poly file
+    -k, --[no-]kml             Download kml file
+    -g, --[no-]geojson         Download GeoJSON file
+    -O, --[no-]garmin-osm      Download Garmin OSM file
+    -m, --[no-]mapsforge       Download Mapsforge file
+    -M, --[no-]mbtiles         Download MBTiles file
+    -C, --[no-]csv             Download CSV file
+    -r, --[no-]garminonroad    Download Garmin Onroad file
+    -t, --[no-]garminontrail   Download Garmin Ontrail file
+    -o, --[no-]garminopenTopo  Download Garmin OpenTopo file
+        --[no-]check           Control with checksum (default) Use --no-check to
+                               discard control
     -d, --output_directory=OUTPUT_DIRECTORY  
-                        Set output directory, you can use also OUTPUT_DIR env
-                        variable
+                               Set output directory, you can use also OUTPUT_DIR
+                               env variable
 
 generate
     Generate a new config file

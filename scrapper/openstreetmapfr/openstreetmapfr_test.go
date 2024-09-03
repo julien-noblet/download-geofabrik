@@ -57,7 +57,7 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 				"merge":                   element.Element{ID: "merge", Name: "merge", Meta: true},
 				"fiji":                    element.Element{ID: "fiji", File: "fiji", Name: "fiji", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
 				"france_metro_dom_com_nc": element.Element{ID: "france_metro_dom_com_nc", File: "france_metro_dom_com_nc", Name: "france_metro_dom_com_nc", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
-				"france_taaf":             element.Element{ID: "france_taaf", File: "france_taaf", Name: "france_taaf", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
+				"merge_france_taaf":       element.Element{ID: "merge_france_taaf", File: "france_taaf", Name: "merge_france_taaf", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
 				"kiribati":                element.Element{ID: "kiribati", File: "kiribati", Name: "kiribati", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
 			},
 		},
