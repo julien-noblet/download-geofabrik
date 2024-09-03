@@ -499,6 +499,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    argentina_santa_cruz:
+        id: argentina_santa_cruz
+        file: santa_cruz
+        name: argentina_santa_cruz
+        parent: argentina
+        files:
+            - osm.pbf
+            - poly
+            - state
     arica_y_parinacota:
         id: arica_y_parinacota
         file: arica_y_parinacota
@@ -1367,6 +1376,15 @@ elements:
         id: california_lake
         file: lake
         name: california_lake
+        parent: california
+        files:
+            - osm.pbf
+            - poly
+            - state
+    california_santa_cruz:
+        id: california_santa_cruz
+        file: santa_cruz
+        name: california_santa_cruz
         parent: california
         files:
             - osm.pbf
@@ -8115,15 +8133,6 @@ elements:
         file: santa_clara
         name: santa_clara
         parent: california
-        files:
-            - osm.pbf
-            - poly
-            - state
-    santa_cruz:
-        id: santa_cruz
-        file: santa_cruz
-        name: santa_cruz
-        parent: argentina
         files:
             - osm.pbf
             - poly

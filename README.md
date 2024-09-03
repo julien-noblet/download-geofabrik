@@ -687,6 +687,7 @@ Total elements: 509
 | ardennes                                 | champagne_ardenne                | ardennes                                 | sPp     |
 | argentina                                | south-america                    | argentina                                | sPp     |
 | argentina_la_rioja                       | argentina                        | argentina_la_rioja                       | sPp     |
+| argentina_santa_cruz                     | argentina                        | argentina_santa_cruz                     | sPp     |
 | arica_y_parinacota                       | chile                            | arica_y_parinacota                       | sPp     |
 | ariege                                   | midi_pyrenees                    | ariege                                   | sPp     |
 | arkhangelsk_oblast                       | northwestern_federal_district    | arkhangelsk_oblast                       | sPp     |
@@ -784,6 +785,7 @@ Total elements: 509
 | calaveras                                | california                       | calaveras                                | sPp     |
 | california                               | us-west                          | california                               | sPp     |
 | california_lake                          | california                       | california_lake                          | sPp     |
+| california_santa_cruz                    | california                       | california_santa_cruz                    | sPp     |
 | calvados                                 | basse_normandie                  | calvados                                 | sPp     |
 | cambodia                                 | asia                             | cambodia                                 | sPp     |
 | cameroon                                 | africa                           | cameroon                                 | sPp     |
@@ -1538,7 +1540,6 @@ Total elements: 509
 | santa-catarina                           | south                            | santa-catarina                           | sPp     |
 | santa_barbara                            | california                       | santa_barbara                            | sPp     |
 | santa_clara                              | california                       | santa_clara                              | sPp     |
-| santa_cruz                               | argentina                        | santa_cruz                               | sPp     |
 | santa_cruz_de_tenerife                   | canarias                         | santa_cruz_de_tenerife                   | sPp     |
 | santa_fe                                 | argentina                        | santa_fe                                 | sPp     |
 | santarem                                 | portugal                         | santarem                                 | sPp     |
@@ -1828,7 +1829,7 @@ Total elements: 509
 | zug                                      | switzerland                      | zug                                      | sPp     |
 | zuid_holland                             | netherlands                      | zuid_holland                             | sPp     |
 | zurich                                   | switzerland                      | zurich                                   | sPp     |
-Total elements: 1195
+Total elements: 1196
 
 ## List of elements from bbbike.org
 |    SHORTNAME     | IS IN |    LONG NAME     |   FORMATS    |
