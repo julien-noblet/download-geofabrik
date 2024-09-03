@@ -70,7 +70,8 @@ const (
 		"france_taaf" +
 		"sevastopol" +
 		"la_rioja" +
-		"jura"
+		"jura" +
+		"santa_cruz"
 	passList = "HEADER"
 )
 
