@@ -210,7 +210,7 @@ func getOutputFileName(configPtr *config.Config, element string, myFormat *forma
 	if myFormat.ToLoc != "" {
 		extension = myFormat.ToLoc
 	} else {
-		extension = myFormat.ID
+		extension = "." + myFormat.ID
 	}
 
 	return myElem.ID + extension
