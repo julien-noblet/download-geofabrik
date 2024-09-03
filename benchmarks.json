@@ -1,4 +1,5 @@
 [
+  {"Version":"c6a90eae8d4f1e1d00a44c70a36ae7e3851d895a","Date":1725393541,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"b6646e7fcd2b6833f58d196b746eda247f9b4220","Date":1725393266,"Tags":["ref=refs/heads/feat/setup-go"],"Suites":[]},
   {"Version":"ed5d2a457183cfa337300a3a05872c37ef1a58c4","Date":1725366277,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"0339f8367bb9be3866df756c929666e68ec569d5","Date":1725364923,"Tags":["ref=refs/heads/fix/bbbike"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"061e5717dfbca2bb50e72c4dc40f8805997c699e","Date":1725276902,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
   {"Version":"061e5717dfbca2bb50e72c4dc40f8805997c699e","Date":1725276885,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"e4ad1d1379b4aec707efe2c9234bb6e3ba4f5e63","Date":1725276748,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
-  {"Version":"e4ad1d1379b4aec707efe2c9234bb6e3ba4f5e63","Date":1725276697,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"e2cedc5cbfbdfc45fe3bdcbe0ccec70465c53370","Date":1725258624,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]}
+  {"Version":"e4ad1d1379b4aec707efe2c9234bb6e3ba4f5e63","Date":1725276697,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
