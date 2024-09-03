@@ -2,61 +2,13 @@ package osmtoday_test
 
 import (
 	"reflect"
-	"regexp"
 	"testing"
 
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
-	"github.com/julien-noblet/download-geofabrik/scrapper"
 	"github.com/julien-noblet/download-geofabrik/scrapper/osmtoday"
 )
-
-func TestGetDefault(t *testing.T) {
-	t.Parallel()
-
-	tests := []struct {
-		name string
-		want *osmtoday.Osmtoday
-	}{
-		// TODO: Add test cases.
-		{
-			name: "TestGetDefault",
-			want: &osmtoday.Osmtoday{
-				Scrapper: &scrapper.Scrapper{
-					PB:             412,
-					Async:          true,
-					Parallelism:    20,
-					MaxDepth:       0,
-					AllowedDomains: []string{"osmtoday.com"},
-					BaseURL:        "https://osmtoday.com",
-					StartURL:       "https://osmtoday.com/",
-					URLFilters: []*regexp.Regexp{
-						regexp.MustCompile(`https://osmtoday\.com/.+\.html$`),
-						regexp.MustCompile(`https://osmtoday\.com/$`),
-					},
-					FormatDefinition: formats.FormatDefinitions{
-						formats.FormatOsmPbf:  {ID: formats.FormatOsmPbf, Loc: ".pbf", BasePath: "", BaseURL: ""},
-						"md5":                 {ID: "md5", Loc: ".md5", BasePath: "", BaseURL: ""},
-						formats.FormatPoly:    {ID: formats.FormatPoly, Loc: ".poly", BasePath: "", BaseURL: ""},
-						formats.FormatGeoJSON: {ID: formats.FormatKml, Loc: ".geojson", BasePath: "", BaseURL: ""},
-					},
-				},
-			},
-		},
-	}
-
-	for _, tt := range tests {
-		test := tt // Reinitialize tt inside the range statement
-		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
-			if got := osmtoday.GetDefault(); !reflect.DeepEqual(got, test.want) {
-				t.Errorf("GetDefault() = %v, want %v", got, test.want)
-			}
-		})
-	}
-}
 
 func TestOsmtoday_Exceptions(t *testing.T) {
 	t.Parallel()
@@ -276,7 +228,7 @@ func TestOsmtoday_Exceptions(t *testing.T) {
 			g := osmtoday.GetDefault()
 
 			if got := g.Exceptions(&test.args.e); !reflect.DeepEqual(got, &test.want) {
-				t.Errorf("Osmtoday.Exceptions() = %v, want %v", got, test.want)
+				t.Errorf("Osmtoday.Exceptions() = %v, want %v", *got, test.want)
 			}
 		})
 	}

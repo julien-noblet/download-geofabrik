@@ -412,7 +412,26 @@ func Test_bbbike_parseSidebar(t *testing.T) {
 			url:      `https://download.bbbike.org/osm/bbbike/Toulouse/`,
 			elements: &element.Slice{},
 			want: element.Slice{
-				"Toulouse": element.Element{ID: "Toulouse", File: "Toulouse/Toulouse", Name: "Toulouse", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatOsmGz, formats.FormatShpZip}},
+				"Toulouse": element.Element{
+					ID:     "Toulouse",
+					File:   "Toulouse/Toulouse",
+					Name:   "Toulouse",
+					Parent: "",
+					Formats: element.Formats{
+						formats.FormatCSV,
+						formats.FormatGarminOSM,
+						formats.FormatGarminOnroad,
+						formats.FormatGarminOntrail,
+						formats.FormatGarminOpenTopo,
+						formats.FormatGeoJSON,
+						formats.FormatMBTiles,
+						formats.FormatMapsforge,
+						formats.FormatOsmGz,
+						formats.FormatOsmPbf,
+						formats.FormatPoly,
+						formats.FormatShpZip,
+					},
+				},
 			},
 		},
 
