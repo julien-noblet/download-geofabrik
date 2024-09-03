@@ -1,7 +1,34 @@
 formats:
+    csv:
+        ext: csv
+        loc: .osm.csv.xz
+        toloc: .osm.csv.xz
+    geojson:
+        ext: geojson
+        loc: .osm.geojson.xz
+        toloc: .geojson.xz
+    mbtiles:
+        ext: mbtiles
+        loc: .osm.mbtiles-openmaptiles.zip
+        toloc: osm.mbtiles-openmaptiles.zip
+    osm.garmin-onroad-latin1.zip:
+        ext: osm.garmin-onroad-latin1.zip
+        loc: .osm.garmin-onroad-latin1.zip
+    osm.garmin-ontrail-latin1.zip:
+        ext: osm.garmin-ontrail-latin1.zip
+        loc: .osm.garmin-ontrail-latin1.zip
+    osm.garmin-opentopo-latin1.zip:
+        ext: osm.garmin-opentopo-latin1.zip
+        loc: .osm.garmin-opentopo-latin1.zip
+    osm.garmin-osm.zip:
+        ext: osm.garmin-osm.zip
+        loc: .osm.garmin-osm.zip
     osm.gz:
         ext: osm.gz
         loc: .osm.gz
+    osm.mapsforge-osm.zip:
+        ext: osm.mapsforge-osm.zip
+        loc: .osm.mapsforge-osm.zip
     osm.pbf:
         ext: osm.pbf
         loc: .osm.pbf
@@ -17,1895 +44,4028 @@ elements:
         file: Aachen/Aachen
         name: Aachen
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Aarhus:
         id: Aarhus
         file: Aarhus/Aarhus
         name: Aarhus
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Adelaide:
         id: Adelaide
         file: Adelaide/Adelaide
         name: Adelaide
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Albuquerque:
         id: Albuquerque
         file: Albuquerque/Albuquerque
         name: Albuquerque
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Alexandria:
         id: Alexandria
         file: Alexandria/Alexandria
         name: Alexandria
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Amsterdam:
         id: Amsterdam
         file: Amsterdam/Amsterdam
         name: Amsterdam
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Antwerpen:
         id: Antwerpen
         file: Antwerpen/Antwerpen
         name: Antwerpen
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Arnhem:
         id: Arnhem
         file: Arnhem/Arnhem
         name: Arnhem
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Auckland:
         id: Auckland
         file: Auckland/Auckland
         name: Auckland
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Augsburg:
         id: Augsburg
         file: Augsburg/Augsburg
         name: Augsburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Austin:
         id: Austin
         file: Austin/Austin
         name: Austin
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Baghdad:
         id: Baghdad
         file: Baghdad/Baghdad
         name: Baghdad
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Baku:
         id: Baku
         file: Baku/Baku
         name: Baku
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Balaton:
         id: Balaton
         file: Balaton/Balaton
         name: Balaton
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bamberg:
         id: Bamberg
         file: Bamberg/Bamberg
         name: Bamberg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bangkok:
         id: Bangkok
         file: Bangkok/Bangkok
         name: Bangkok
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Barcelona:
         id: Barcelona
         file: Barcelona/Barcelona
         name: Barcelona
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Basel:
         id: Basel
         file: Basel/Basel
         name: Basel
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Beijing:
         id: Beijing
         file: Beijing/Beijing
         name: Beijing
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Beirut:
         id: Beirut
         file: Beirut/Beirut
         name: Beirut
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Berkeley:
         id: Berkeley
         file: Berkeley/Berkeley
         name: Berkeley
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Berlin:
         id: Berlin
         file: Berlin/Berlin
         name: Berlin
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bern:
         id: Bern
         file: Bern/Bern
         name: Bern
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bielefeld:
         id: Bielefeld
         file: Bielefeld/Bielefeld
         name: Bielefeld
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Birmingham:
         id: Birmingham
         file: Birmingham/Birmingham
         name: Birmingham
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bochum:
         id: Bochum
         file: Bochum/Bochum
         name: Bochum
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bogota:
         id: Bogota
         file: Bogota/Bogota
         name: Bogota
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bombay:
         id: Bombay
         file: Bombay/Bombay
         name: Bombay
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bonn:
         id: Bonn
         file: Bonn/Bonn
         name: Bonn
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bordeaux:
         id: Bordeaux
         file: Bordeaux/Bordeaux
         name: Bordeaux
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Boulder:
         id: Boulder
         file: Boulder/Boulder
         name: Boulder
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     BrandenburgHavel:
         id: BrandenburgHavel
         file: BrandenburgHavel/BrandenburgHavel
         name: BrandenburgHavel
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Braunschweig:
         id: Braunschweig
         file: Braunschweig/Braunschweig
         name: Braunschweig
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bremen:
         id: Bremen
         file: Bremen/Bremen
         name: Bremen
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bremerhaven:
         id: Bremerhaven
         file: Bremerhaven/Bremerhaven
         name: Bremerhaven
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Brisbane:
         id: Brisbane
         file: Brisbane/Brisbane
         name: Brisbane
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bristol:
         id: Bristol
         file: Bristol/Bristol
         name: Bristol
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Brno:
         id: Brno
         file: Brno/Brno
         name: Brno
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bruegge:
         id: Bruegge
         file: Bruegge/Bruegge
         name: Bruegge
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Bruessel:
         id: Bruessel
         file: Bruessel/Bruessel
         name: Bruessel
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Budapest:
         id: Budapest
         file: Budapest/Budapest
         name: Budapest
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     BuenosAires:
         id: BuenosAires
         file: BuenosAires/BuenosAires
         name: BuenosAires
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Cairo:
         id: Cairo
         file: Cairo/Cairo
         name: Cairo
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Calgary:
         id: Calgary
         file: Calgary/Calgary
         name: Calgary
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Cambridge:
         id: Cambridge
         file: Cambridge/Cambridge
         name: Cambridge
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     CambridgeMa:
         id: CambridgeMa
         file: CambridgeMa/CambridgeMa
         name: CambridgeMa
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Canberra:
         id: Canberra
         file: Canberra/Canberra
         name: Canberra
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     CapeTown:
         id: CapeTown
         file: CapeTown/CapeTown
         name: CapeTown
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Chemnitz:
         id: Chemnitz
         file: Chemnitz/Chemnitz
         name: Chemnitz
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Chicago:
         id: Chicago
         file: Chicago/Chicago
         name: Chicago
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     ClermontFerrand:
         id: ClermontFerrand
         file: ClermontFerrand/ClermontFerrand
         name: ClermontFerrand
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Colmar:
         id: Colmar
         file: Colmar/Colmar
         name: Colmar
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Copenhagen:
         id: Copenhagen
         file: Copenhagen/Copenhagen
         name: Copenhagen
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Cork:
         id: Cork
         file: Cork/Cork
         name: Cork
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Corsica:
         id: Corsica
         file: Corsica/Corsica
         name: Corsica
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Corvallis:
         id: Corvallis
         file: Corvallis/Corvallis
         name: Corvallis
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Cottbus:
         id: Cottbus
         file: Cottbus/Cottbus
         name: Cottbus
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Cracow:
         id: Cracow
         file: Cracow/Cracow
         name: Cracow
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     CraterLake:
         id: CraterLake
         file: CraterLake/CraterLake
         name: CraterLake
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Curitiba:
         id: Curitiba
         file: Curitiba/Curitiba
         name: Curitiba
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Cusco:
         id: Cusco
         file: Cusco/Cusco
         name: Cusco
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Dallas:
         id: Dallas
         file: Dallas/Dallas
         name: Dallas
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Darmstadt:
         id: Darmstadt
         file: Darmstadt/Darmstadt
         name: Darmstadt
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Davis:
         id: Davis
         file: Davis/Davis
         name: Davis
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     DenHaag:
         id: DenHaag
         file: DenHaag/DenHaag
         name: DenHaag
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Denver:
         id: Denver
         file: Denver/Denver
         name: Denver
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Dessau:
         id: Dessau
         file: Dessau/Dessau
         name: Dessau
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Dortmund:
         id: Dortmund
         file: Dortmund/Dortmund
         name: Dortmund
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Dresden:
         id: Dresden
         file: Dresden/Dresden
         name: Dresden
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Dublin:
         id: Dublin
         file: Dublin/Dublin
         name: Dublin
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Duesseldorf:
         id: Duesseldorf
         file: Duesseldorf/Duesseldorf
         name: Duesseldorf
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Duisburg:
         id: Duisburg
         file: Duisburg/Duisburg
         name: Duisburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Edinburgh:
         id: Edinburgh
         file: Edinburgh/Edinburgh
         name: Edinburgh
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Eindhoven:
         id: Eindhoven
         file: Eindhoven/Eindhoven
         name: Eindhoven
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Emden:
         id: Emden
         file: Emden/Emden
         name: Emden
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Erfurt:
         id: Erfurt
         file: Erfurt/Erfurt
         name: Erfurt
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Erlangen:
         id: Erlangen
         file: Erlangen/Erlangen
         name: Erlangen
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Eugene:
         id: Eugene
         file: Eugene/Eugene
         name: Eugene
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Flensburg:
         id: Flensburg
         file: Flensburg/Flensburg
         name: Flensburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     FortCollins:
         id: FortCollins
         file: FortCollins/FortCollins
         name: FortCollins
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Frankfurt:
         id: Frankfurt
         file: Frankfurt/Frankfurt
         name: Frankfurt
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     FrankfurtOder:
         id: FrankfurtOder
         file: FrankfurtOder/FrankfurtOder
         name: FrankfurtOder
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Freiburg:
         id: Freiburg
         file: Freiburg/Freiburg
         name: Freiburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Gdansk:
         id: Gdansk
         file: Gdansk/Gdansk
         name: Gdansk
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Genf:
         id: Genf
         file: Genf/Genf
         name: Genf
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Gent:
         id: Gent
         file: Gent/Gent
         name: Gent
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Gera:
         id: Gera
         file: Gera/Gera
         name: Gera
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Glasgow:
         id: Glasgow
         file: Glasgow/Glasgow
         name: Glasgow
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Gliwice:
         id: Gliwice
         file: Gliwice/Gliwice
         name: Gliwice
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Goerlitz:
         id: Goerlitz
         file: Goerlitz/Goerlitz
         name: Goerlitz
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Goeteborg:
         id: Goeteborg
         file: Goeteborg/Goeteborg
         name: Goeteborg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Goettingen:
         id: Goettingen
         file: Goettingen/Goettingen
         name: Goettingen
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Graz:
         id: Graz
         file: Graz/Graz
         name: Graz
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Groningen:
         id: Groningen
         file: Groningen/Groningen
         name: Groningen
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Halifax:
         id: Halifax
         file: Halifax/Halifax
         name: Halifax
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Halle:
         id: Halle
         file: Halle/Halle
         name: Halle
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Hamburg:
         id: Hamburg
         file: Hamburg/Hamburg
         name: Hamburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Hamm:
         id: Hamm
         file: Hamm/Hamm
         name: Hamm
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Hannover:
         id: Hannover
         file: Hannover/Hannover
         name: Hannover
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Heilbronn:
         id: Heilbronn
         file: Heilbronn/Heilbronn
         name: Heilbronn
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Helsinki:
         id: Helsinki
         file: Helsinki/Helsinki
         name: Helsinki
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Hertogenbosch:
         id: Hertogenbosch
         file: Hertogenbosch/Hertogenbosch
         name: Hertogenbosch
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Huntsville:
         id: Huntsville
         file: Huntsville/Huntsville
         name: Huntsville
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Innsbruck:
         id: Innsbruck
         file: Innsbruck/Innsbruck
         name: Innsbruck
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Istanbul:
         id: Istanbul
         file: Istanbul/Istanbul
         name: Istanbul
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Jena:
         id: Jena
         file: Jena/Jena
         name: Jena
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Jerusalem:
         id: Jerusalem
         file: Jerusalem/Jerusalem
         name: Jerusalem
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Johannesburg:
         id: Johannesburg
         file: Johannesburg/Johannesburg
         name: Johannesburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Kaiserslautern:
         id: Kaiserslautern
         file: Kaiserslautern/Kaiserslautern
         name: Kaiserslautern
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Karlsruhe:
         id: Karlsruhe
         file: Karlsruhe/Karlsruhe
         name: Karlsruhe
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Kassel:
         id: Kassel
         file: Kassel/Kassel
         name: Kassel
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Katowice:
         id: Katowice
         file: Katowice/Katowice
         name: Katowice
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Kaunas:
         id: Kaunas
         file: Kaunas/Kaunas
         name: Kaunas
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Kiel:
         id: Kiel
         file: Kiel/Kiel
         name: Kiel
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Kiew:
         id: Kiew
         file: Kiew/Kiew
         name: Kiew
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Koblenz:
         id: Koblenz
         file: Koblenz/Koblenz
         name: Koblenz
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Koeln:
         id: Koeln
         file: Koeln/Koeln
         name: Koeln
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Konstanz:
         id: Konstanz
         file: Konstanz/Konstanz
         name: Konstanz
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     LaPaz:
         id: LaPaz
         file: LaPaz/LaPaz
         name: LaPaz
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     LaPlata:
         id: LaPlata
         file: LaPlata/LaPlata
         name: LaPlata
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     LakeGarda:
         id: LakeGarda
         file: LakeGarda/LakeGarda
         name: LakeGarda
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Lausanne:
         id: Lausanne
         file: Lausanne/Lausanne
         name: Lausanne
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Leeds:
         id: Leeds
         file: Leeds/Leeds
         name: Leeds
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Leipzig:
         id: Leipzig
         file: Leipzig/Leipzig
         name: Leipzig
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Lima:
         id: Lima
         file: Lima/Lima
         name: Lima
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Linz:
         id: Linz
         file: Linz/Linz
         name: Linz
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Lisbon:
         id: Lisbon
         file: Lisbon/Lisbon
         name: Lisbon
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Liverpool:
         id: Liverpool
         file: Liverpool/Liverpool
         name: Liverpool
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Ljubljana:
         id: Ljubljana
         file: Ljubljana/Ljubljana
         name: Ljubljana
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Lodz:
         id: Lodz
         file: Lodz/Lodz
         name: Lodz
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     London:
         id: London
         file: London/London
         name: London
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     LosAngeles:
         id: LosAngeles
         file: LosAngeles/LosAngeles
         name: LosAngeles
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Luebeck:
         id: Luebeck
         file: Luebeck/Luebeck
         name: Luebeck
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Luxemburg:
         id: Luxemburg
         file: Luxemburg/Luxemburg
         name: Luxemburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Lyon:
         id: Lyon
         file: Lyon/Lyon
         name: Lyon
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Maastricht:
         id: Maastricht
         file: Maastricht/Maastricht
         name: Maastricht
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Madison:
         id: Madison
         file: Madison/Madison
         name: Madison
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Madrid:
         id: Madrid
         file: Madrid/Madrid
         name: Madrid
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Magdeburg:
         id: Magdeburg
         file: Magdeburg/Magdeburg
         name: Magdeburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Mainz:
         id: Mainz
         file: Mainz/Mainz
         name: Mainz
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Malmoe:
         id: Malmoe
         file: Malmoe/Malmoe
         name: Malmoe
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Manchester:
         id: Manchester
         file: Manchester/Manchester
         name: Manchester
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Mannheim:
         id: Mannheim
         file: Mannheim/Mannheim
         name: Mannheim
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Marseille:
         id: Marseille
         file: Marseille/Marseille
         name: Marseille
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Melbourne:
         id: Melbourne
         file: Melbourne/Melbourne
         name: Melbourne
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Memphis:
         id: Memphis
         file: Memphis/Memphis
         name: Memphis
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     MexicoCity:
         id: MexicoCity
         file: MexicoCity/MexicoCity
         name: MexicoCity
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Miami:
         id: Miami
         file: Miami/Miami
         name: Miami
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Minsk:
         id: Minsk
         file: Minsk/Minsk
         name: Minsk
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Moenchengladbach:
         id: Moenchengladbach
         file: Moenchengladbach/Moenchengladbach
         name: Moenchengladbach
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Montevideo:
         id: Montevideo
         file: Montevideo/Montevideo
         name: Montevideo
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Montpellier:
         id: Montpellier
         file: Montpellier/Montpellier
         name: Montpellier
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Montreal:
         id: Montreal
         file: Montreal/Montreal
         name: Montreal
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Moscow:
         id: Moscow
         file: Moscow/Moscow
         name: Moscow
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Muenchen:
         id: Muenchen
         file: Muenchen/Muenchen
         name: Muenchen
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Muenster:
         id: Muenster
         file: Muenster/Muenster
         name: Muenster
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     NewDelhi:
         id: NewDelhi
         file: NewDelhi/NewDelhi
         name: NewDelhi
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     NewOrleans:
         id: NewOrleans
         file: NewOrleans/NewOrleans
         name: NewOrleans
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     NewYork:
         id: NewYork
         file: NewYork/NewYork
         name: NewYork
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Nuernberg:
         id: Nuernberg
         file: Nuernberg/Nuernberg
         name: Nuernberg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Oldenburg:
         id: Oldenburg
         file: Oldenburg/Oldenburg
         name: Oldenburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Oranienburg:
         id: Oranienburg
         file: Oranienburg/Oranienburg
         name: Oranienburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Orlando:
         id: Orlando
         file: Orlando/Orlando
         name: Orlando
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Oslo:
         id: Oslo
         file: Oslo/Oslo
         name: Oslo
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Osnabrueck:
         id: Osnabrueck
         file: Osnabrueck/Osnabrueck
         name: Osnabrueck
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Ostrava:
         id: Ostrava
         file: Ostrava/Ostrava
         name: Ostrava
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Ottawa:
         id: Ottawa
         file: Ottawa/Ottawa
         name: Ottawa
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Paderborn:
         id: Paderborn
         file: Paderborn/Paderborn
         name: Paderborn
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Palma:
         id: Palma
         file: Palma/Palma
         name: Palma
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     PaloAlto:
         id: PaloAlto
         file: PaloAlto/PaloAlto
         name: PaloAlto
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Paris:
         id: Paris
         file: Paris/Paris
         name: Paris
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Perth:
         id: Perth
         file: Perth/Perth
         name: Perth
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Philadelphia:
         id: Philadelphia
         file: Philadelphia/Philadelphia
         name: Philadelphia
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     PhnomPenh:
         id: PhnomPenh
         file: PhnomPenh/PhnomPenh
         name: PhnomPenh
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Portland:
         id: Portland
         file: Portland/Portland
         name: Portland
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     PortlandME:
         id: PortlandME
         file: PortlandME/PortlandME
         name: PortlandME
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Porto:
         id: Porto
         file: Porto/Porto
         name: Porto
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     PortoAlegre:
         id: PortoAlegre
         file: PortoAlegre/PortoAlegre
         name: PortoAlegre
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Potsdam:
         id: Potsdam
         file: Potsdam/Potsdam
         name: Potsdam
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Poznan:
         id: Poznan
         file: Poznan/Poznan
         name: Poznan
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Prag:
         id: Prag
         file: Prag/Prag
         name: Prag
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Providence:
         id: Providence
         file: Providence/Providence
         name: Providence
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Regensburg:
         id: Regensburg
         file: Regensburg/Regensburg
         name: Regensburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Riga:
         id: Riga
         file: Riga/Riga
         name: Riga
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     RiodeJaneiro:
         id: RiodeJaneiro
         file: RiodeJaneiro/RiodeJaneiro
         name: RiodeJaneiro
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Rostock:
         id: Rostock
         file: Rostock/Rostock
         name: Rostock
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Rotterdam:
         id: Rotterdam
         file: Rotterdam/Rotterdam
         name: Rotterdam
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Ruegen:
         id: Ruegen
         file: Ruegen/Ruegen
         name: Ruegen
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Saarbruecken:
         id: Saarbruecken
         file: Saarbruecken/Saarbruecken
         name: Saarbruecken
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Sacramento:
         id: Sacramento
         file: Sacramento/Sacramento
         name: Sacramento
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Saigon:
         id: Saigon
         file: Saigon/Saigon
         name: Saigon
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Salzburg:
         id: Salzburg
         file: Salzburg/Salzburg
         name: Salzburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     SanFrancisco:
         id: SanFrancisco
         file: SanFrancisco/SanFrancisco
         name: SanFrancisco
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     SanJose:
         id: SanJose
         file: SanJose/SanJose
         name: SanJose
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     SanktPetersburg:
         id: SanktPetersburg
         file: SanktPetersburg/SanktPetersburg
         name: SanktPetersburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     SantaBarbara:
         id: SantaBarbara
         file: SantaBarbara/SantaBarbara
         name: SantaBarbara
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     SantaCruz:
         id: SantaCruz
         file: SantaCruz/SantaCruz
         name: SantaCruz
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Santiago:
         id: Santiago
         file: Santiago/Santiago
         name: Santiago
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Sarajewo:
         id: Sarajewo
         file: Sarajewo/Sarajewo
         name: Sarajewo
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Schwerin:
         id: Schwerin
         file: Schwerin/Schwerin
         name: Schwerin
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Seattle:
         id: Seattle
         file: Seattle/Seattle
         name: Seattle
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Seoul:
         id: Seoul
         file: Seoul/Seoul
         name: Seoul
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Sheffield:
         id: Sheffield
         file: Sheffield/Sheffield
         name: Sheffield
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Singapore:
         id: Singapore
         file: Singapore/Singapore
         name: Singapore
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Sofia:
         id: Sofia
         file: Sofia/Sofia
         name: Sofia
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Stockholm:
         id: Stockholm
         file: Stockholm/Stockholm
         name: Stockholm
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Stockton:
         id: Stockton
         file: Stockton/Stockton
         name: Stockton
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Strassburg:
         id: Strassburg
         file: Strassburg/Strassburg
         name: Strassburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Stuttgart:
         id: Stuttgart
         file: Stuttgart/Stuttgart
         name: Stuttgart
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Sucre:
         id: Sucre
         file: Sucre/Sucre
         name: Sucre
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Sydney:
         id: Sydney
         file: Sydney/Sydney
         name: Sydney
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Szczecin:
         id: Szczecin
         file: Szczecin/Szczecin
         name: Szczecin
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Tallinn:
         id: Tallinn
         file: Tallinn/Tallinn
         name: Tallinn
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Tehran:
         id: Tehran
         file: Tehran/Tehran
         name: Tehran
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Tilburg:
         id: Tilburg
         file: Tilburg/Tilburg
         name: Tilburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Tokyo:
         id: Tokyo
         file: Tokyo/Tokyo
         name: Tokyo
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Toronto:
         id: Toronto
         file: Toronto/Toronto
         name: Toronto
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Toulouse:
         id: Toulouse
         file: Toulouse/Toulouse
         name: Toulouse
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Trondheim:
         id: Trondheim
         file: Trondheim/Trondheim
         name: Trondheim
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Tucson:
         id: Tucson
         file: Tucson/Tucson
         name: Tucson
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Turin:
         id: Turin
         file: Turin/Turin
         name: Turin
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     UlanBator:
         id: UlanBator
         file: UlanBator/UlanBator
         name: UlanBator
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Ulm:
         id: Ulm
         file: Ulm/Ulm
         name: Ulm
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Usedom:
         id: Usedom
         file: Usedom/Usedom
         name: Usedom
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Utrecht:
         id: Utrecht
         file: Utrecht/Utrecht
         name: Utrecht
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Vancouver:
         id: Vancouver
         file: Vancouver/Vancouver
         name: Vancouver
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Victoria:
         id: Victoria
         file: Victoria/Victoria
         name: Victoria
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     WarenMueritz:
         id: WarenMueritz
         file: WarenMueritz/WarenMueritz
         name: WarenMueritz
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Warsaw:
         id: Warsaw
         file: Warsaw/Warsaw
         name: Warsaw
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     WashingtonDC:
         id: WashingtonDC
         file: WashingtonDC/WashingtonDC
         name: WashingtonDC
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Waterloo:
         id: Waterloo
         file: Waterloo/Waterloo
         name: Waterloo
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Wien:
         id: Wien
         file: Wien/Wien
         name: Wien
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Wroclaw:
         id: Wroclaw
         file: Wroclaw/Wroclaw
         name: Wroclaw
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Wuerzburg:
         id: Wuerzburg
         file: Wuerzburg/Wuerzburg
         name: Wuerzburg
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Wuppertal:
         id: Wuppertal
         file: Wuppertal/Wuppertal
         name: Wuppertal
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Zagreb:
         id: Zagreb
         file: Zagreb/Zagreb
         name: Zagreb
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
     Zuerich:
         id: Zuerich
         file: Zuerich/Zuerich
         name: Zuerich
         files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
             - osm.gz
+            - osm.mapsforge-osm.zip
             - osm.pbf
+            - poly
             - shp.zip
 baseURL: https://download.bbbike.org/osm/bbbike

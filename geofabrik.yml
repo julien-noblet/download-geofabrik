@@ -2,6 +2,10 @@ formats:
     kml:
         ext: kml
         loc: .kml
+    mbtiles:
+        ext: mbtiles
+        loc: -latest-free.mbtiles.zip
+        toloc: latest-free.mbtiles.zip
     osm.bz2:
         ext: osm.bz2
         loc: -latest.osm.bz2
@@ -19,7 +23,7 @@ formats:
         loc: .poly
     shp.zip:
         ext: shp.zip
-        loc: -latest-free.shp.zip
+        loc: -shortbread-1.0.mbtiles
     state:
         ext: state
         loc: -updates/state.txt

@@ -1,13 +1,13 @@
 formats:
     geojson:
-        ext: kml
+        ext: geojson
         loc: .geojson
-    md5:
-        ext: md5
-        loc: .md5
     osm.pbf:
         ext: osm.pbf
         loc: .pbf
+    osm.pbf.md5:
+        ext: osm.pbf.md5
+        loc: .md5
     poly:
         ext: poly
         loc: .poly
@@ -18,6 +18,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     aargau:
         id: aargau
@@ -27,6 +28,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     abitibi_temiscamingue:
         id: abitibi_temiscamingue
@@ -36,6 +38,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     abruzzo:
         id: abruzzo
@@ -45,6 +48,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     aceh:
         id: aceh
@@ -54,6 +58,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     acre:
         id: acre
@@ -63,6 +68,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     adygea_republic:
         id: adygea_republic
@@ -72,6 +78,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     afghanistan:
         id: afghanistan
@@ -81,6 +88,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     africa:
         id: africa
@@ -89,6 +97,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     aguascalientes:
         id: aguascalientes
@@ -98,6 +107,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     akershus:
         id: akershus
@@ -107,6 +117,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     alabama:
         id: alabama
@@ -116,6 +127,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     alagoas:
         id: alagoas
@@ -125,6 +137,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     aland:
         id: aland
@@ -134,6 +147,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     alaska:
         id: alaska
@@ -143,6 +157,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     alava:
         id: alava
@@ -152,6 +167,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     albacete:
         id: albacete
@@ -161,6 +177,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     alberta:
         id: alberta
@@ -170,6 +187,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     algeria:
         id: algeria
@@ -179,6 +197,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     alicante:
         id: alicante
@@ -188,6 +207,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     almeria:
         id: almeria
@@ -197,6 +217,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     alsace:
         id: alsace
@@ -206,6 +227,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     altai_krai:
         id: altai_krai
@@ -215,6 +237,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     altai_republic:
         id: altai_republic
@@ -224,6 +247,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     amapa:
         id: amapa
@@ -233,6 +257,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     amazonas:
         id: amazonas
@@ -242,6 +267,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     american-oceania:
         id: american-oceania
@@ -251,6 +277,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     amur_oblast:
         id: amur_oblast
@@ -260,6 +287,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     andalucia:
         id: andalucia
@@ -269,6 +297,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     andaman_and_nicobar_islands:
         id: andaman_and_nicobar_islands
@@ -278,6 +307,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     andhra_pradesh:
         id: andhra_pradesh
@@ -287,6 +317,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     angola:
         id: angola
@@ -296,6 +327,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     anguilla:
         id: anguilla
@@ -305,6 +337,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     anhui:
         id: anhui
@@ -314,6 +347,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     antarctica:
         id: antarctica
@@ -322,6 +356,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     antigua_and_barbuda:
         id: antigua_and_barbuda
@@ -331,6 +366,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     antwerp:
         id: antwerp
@@ -340,6 +376,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     appenzell_ausserrhoden:
         id: appenzell_ausserrhoden
@@ -349,6 +386,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     appenzell_innerrhoden:
         id: appenzell_innerrhoden
@@ -358,6 +396,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     aquitaine:
         id: aquitaine
@@ -367,6 +406,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     aragon:
         id: aragon
@@ -376,6 +416,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     argentina:
         id: argentina
@@ -385,6 +426,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     arizona:
         id: arizona
@@ -394,6 +436,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     arkansas:
         id: arkansas
@@ -403,6 +446,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     arkhangelsk_oblast:
         id: arkhangelsk_oblast
@@ -412,6 +456,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     armenia:
         id: armenia
@@ -421,6 +466,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     arnsberg:
         id: arnsberg
@@ -430,6 +476,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     aruba:
         id: aruba
@@ -439,6 +486,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     arunachal_pradesh:
         id: arunachal_pradesh
@@ -448,6 +496,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     asia:
         id: asia
@@ -456,6 +505,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     assam:
         id: assam
@@ -465,6 +515,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     astrakhan_oblast:
         id: astrakhan_oblast
@@ -474,6 +525,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     asturias:
         id: asturias
@@ -483,6 +535,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     aust-agder:
         id: aust-agder
@@ -492,6 +545,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     australia:
         id: australia
@@ -501,6 +555,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     australia_oceania:
         id: australia_oceania
@@ -509,6 +564,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     austria:
         id: austria
@@ -518,6 +574,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     auvergne:
         id: auvergne
@@ -527,6 +584,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     avila:
         id: avila
@@ -536,6 +594,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     azerbaijan:
         id: azerbaijan
@@ -545,6 +604,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     azores:
         id: azores
@@ -554,6 +614,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     badajoz:
         id: badajoz
@@ -563,6 +624,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     baden_wuerttemberg:
         id: baden_wuerttemberg
@@ -572,6 +634,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bahamas:
         id: bahamas
@@ -581,6 +644,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bahia:
         id: bahia
@@ -590,6 +654,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bahrain:
         id: bahrain
@@ -599,6 +664,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     baja_california:
         id: baja_california
@@ -608,6 +674,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     baja_california_sur:
         id: baja_california_sur
@@ -617,6 +684,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bali:
         id: bali
@@ -626,6 +694,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bangka_belitung_islands:
         id: bangka_belitung_islands
@@ -635,6 +704,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bangladesh:
         id: bangladesh
@@ -644,6 +714,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     banskobystricky:
         id: banskobystricky
@@ -653,6 +724,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     banten:
         id: banten
@@ -662,6 +734,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     barbados:
         id: barbados
@@ -671,6 +744,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     barcelona:
         id: barcelona
@@ -680,6 +754,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bas_saint_laurent:
         id: bas_saint_laurent
@@ -689,6 +764,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     basel_landschaft:
         id: basel_landschaft
@@ -698,6 +774,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     basel_stadt:
         id: basel_stadt
@@ -707,6 +784,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bashkortostan_republic:
         id: bashkortostan_republic
@@ -716,6 +794,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     basilicata:
         id: basilicata
@@ -725,6 +804,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     basse_normandie:
         id: basse_normandie
@@ -734,6 +814,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bayern:
         id: bayern
@@ -743,6 +824,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bedfordshire:
         id: bedfordshire
@@ -752,6 +834,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     beijing:
         id: beijing
@@ -761,6 +844,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     belarus:
         id: belarus
@@ -770,6 +854,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     belgium:
         id: belgium
@@ -779,6 +864,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     belgorod_oblast:
         id: belgorod_oblast
@@ -788,6 +874,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     belize:
         id: belize
@@ -797,6 +884,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bengkulu:
         id: bengkulu
@@ -806,6 +894,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     benin:
         id: benin
@@ -815,6 +904,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     berkshire:
         id: berkshire
@@ -824,6 +914,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     berlin:
         id: berlin
@@ -833,6 +924,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bermuda:
         id: bermuda
@@ -842,6 +934,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bern:
         id: bern
@@ -851,6 +944,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bhutan:
         id: bhutan
@@ -860,6 +954,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bihar:
         id: bihar
@@ -869,6 +964,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     blekinge:
         id: blekinge
@@ -878,6 +974,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bolivia:
         id: bolivia
@@ -887,6 +984,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     botswana:
         id: botswana
@@ -896,6 +994,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bourgogne:
         id: bourgogne
@@ -905,6 +1004,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bouvet_island:
         id: bouvet_island
@@ -914,6 +1014,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     brandenburg:
         id: brandenburg
@@ -923,6 +1024,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bratislavsky:
         id: bratislavsky
@@ -932,6 +1034,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     brazil:
         id: brazil
@@ -941,6 +1044,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bremen:
         id: bremen
@@ -950,6 +1054,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     brestakaya:
         id: brestakaya
@@ -959,6 +1064,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bretagne:
         id: bretagne
@@ -968,6 +1074,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bristol:
         id: bristol
@@ -977,6 +1084,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     british_columbia:
         id: british_columbia
@@ -986,6 +1094,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     british_indian_ocean_territory:
         id: british_indian_ocean_territory
@@ -995,6 +1104,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     british_virgin_islands:
         id: british_virgin_islands
@@ -1004,6 +1114,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     brunei:
         id: brunei
@@ -1013,6 +1124,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     brussels_capital_region:
         id: brussels_capital_region
@@ -1022,6 +1134,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     bryansk_oblast:
         id: bryansk_oblast
@@ -1031,6 +1144,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     buckinghamshire:
         id: buckinghamshire
@@ -1040,6 +1154,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     buenos_aires:
         id: buenos_aires
@@ -1049,6 +1164,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     buenos_aires_city:
         id: buenos_aires_city
@@ -1058,6 +1174,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     burgenland:
         id: burgenland
@@ -1067,6 +1184,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     burgos:
         id: burgos
@@ -1076,6 +1194,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     burkina_faso:
         id: burkina_faso
@@ -1085,6 +1204,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     burundi:
         id: burundi
@@ -1094,6 +1214,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     buryatia_republic:
         id: buryatia_republic
@@ -1103,6 +1224,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     buskerud:
         id: buskerud
@@ -1112,6 +1234,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     caceres:
         id: caceres
@@ -1121,6 +1244,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cadiz:
         id: cadiz
@@ -1130,6 +1254,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     calabria:
         id: calabria
@@ -1139,6 +1264,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     california:
         id: california
@@ -1148,6 +1274,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cambodia:
         id: cambodia
@@ -1157,6 +1284,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cambridgeshire:
         id: cambridgeshire
@@ -1166,6 +1294,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cameroon:
         id: cameroon
@@ -1175,6 +1304,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     campania:
         id: campania
@@ -1184,6 +1314,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     campeche:
         id: campeche
@@ -1193,6 +1324,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     canada:
         id: canada
@@ -1202,6 +1334,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     canary-islands:
         id: canary-islands
@@ -1211,6 +1344,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cantabria:
         id: cantabria
@@ -1220,6 +1354,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cape_verde:
         id: cape_verde
@@ -1229,6 +1364,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     capitale_nationale:
         id: capitale_nationale
@@ -1238,6 +1374,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     caribbean:
         id: caribbean
@@ -1247,6 +1384,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     castellon:
         id: castellon
@@ -1256,6 +1394,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     castilla_la_mancha:
         id: castilla_la_mancha
@@ -1265,6 +1404,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     castilla_y_leon:
         id: castilla_y_leon
@@ -1274,6 +1414,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     catalunya:
         id: catalunya
@@ -1283,6 +1424,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     catamarca:
         id: catamarca
@@ -1292,6 +1434,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cayman_islands:
         id: cayman_islands
@@ -1301,6 +1444,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ceara:
         id: ceara
@@ -1310,6 +1454,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     central-west:
         id: central-west
@@ -1319,6 +1464,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     central-zone:
         id: central-zone
@@ -1328,6 +1474,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     central_african_republic:
         id: central_african_republic
@@ -1337,6 +1484,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     central_america:
         id: central_america
@@ -1345,6 +1493,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     central_federal_district:
         id: central_federal_district
@@ -1354,6 +1503,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     central_finland:
         id: central_finland
@@ -1363,6 +1513,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     central_java:
         id: central_java
@@ -1372,6 +1523,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     central_kalimantan:
         id: central_kalimantan
@@ -1381,6 +1533,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     central_ontario:
         id: central_ontario
@@ -1390,6 +1543,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     central_ostrobothnia:
         id: central_ostrobothnia
@@ -1399,6 +1553,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     central_sulawesi:
         id: central_sulawesi
@@ -1408,6 +1563,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     centre:
         id: centre
@@ -1417,6 +1573,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     centre_du_quebec:
         id: centre_du_quebec
@@ -1426,6 +1583,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chaco:
         id: chaco
@@ -1435,6 +1593,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chad:
         id: chad
@@ -1444,6 +1603,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     champagne_ardenne:
         id: champagne_ardenne
@@ -1453,6 +1613,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chandigarh:
         id: chandigarh
@@ -1462,6 +1623,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chaudiere_appalaches:
         id: chaudiere_appalaches
@@ -1471,6 +1633,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chechen_republic:
         id: chechen_republic
@@ -1480,6 +1643,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chelyabinsk_oblast:
         id: chelyabinsk_oblast
@@ -1489,6 +1653,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cherkasy_oblast:
         id: cherkasy_oblast
@@ -1498,6 +1663,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chernihiv_oblast:
         id: chernihiv_oblast
@@ -1507,6 +1673,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chernivtsi_oblast:
         id: chernivtsi_oblast
@@ -1516,6 +1683,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cheshire:
         id: cheshire
@@ -1525,6 +1693,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chhattisgarh:
         id: chhattisgarh
@@ -1534,6 +1703,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chiapas:
         id: chiapas
@@ -1543,6 +1713,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chihuahua:
         id: chihuahua
@@ -1552,6 +1723,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chile:
         id: chile
@@ -1561,6 +1733,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     china:
         id: china
@@ -1570,6 +1743,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chongqing:
         id: chongqing
@@ -1579,6 +1753,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chubu:
         id: chubu
@@ -1588,6 +1763,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chubut:
         id: chubut
@@ -1597,6 +1773,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chugoku:
         id: chugoku
@@ -1606,6 +1783,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chukotka_autonomous_okrug:
         id: chukotka_autonomous_okrug
@@ -1615,6 +1793,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     chuvash_republic:
         id: chuvash_republic
@@ -1624,6 +1803,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ciudad_real:
         id: ciudad_real
@@ -1633,6 +1813,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     coahuila:
         id: coahuila
@@ -1642,6 +1823,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     colima:
         id: colima
@@ -1651,6 +1833,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     colombia:
         id: colombia
@@ -1660,6 +1843,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     colorado:
         id: colorado
@@ -1669,6 +1853,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     comoros:
         id: comoros
@@ -1678,6 +1863,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     comunidad_de_madrid:
         id: comunidad_de_madrid
@@ -1687,6 +1873,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     comunidad_foral_de_navarra:
         id: comunidad_foral_de_navarra
@@ -1696,6 +1883,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     comunitat_valenciana:
         id: comunitat_valenciana
@@ -1705,6 +1893,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     congo-democratic-republic:
         id: congo-democratic-republic
@@ -1714,6 +1903,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     congo_brazzaville:
         id: congo_brazzaville
@@ -1723,6 +1913,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     congo_kinshasa:
         id: congo_kinshasa
@@ -1732,6 +1923,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     connecticut:
         id: connecticut
@@ -1741,6 +1933,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cook-islands:
         id: cook-islands
@@ -1750,6 +1943,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cordoba-andalucia:
         id: cordoba-andalucia
@@ -1775,6 +1969,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     corrientes:
         id: corrientes
@@ -1784,6 +1979,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     corse:
         id: corse
@@ -1793,6 +1989,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     costa_rica:
         id: costa_rica
@@ -1802,6 +1999,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cote_nord:
         id: cote_nord
@@ -1811,6 +2009,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     crimea:
         id: crimea
@@ -1820,6 +2019,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     crimea_republic:
         id: crimea_republic
@@ -1829,6 +2029,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cuba:
         id: cuba
@@ -1838,6 +2039,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cuenca:
         id: cuenca
@@ -1847,6 +2049,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     cumbria:
         id: cumbria
@@ -1856,6 +2059,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     curacao:
         id: curacao
@@ -1865,6 +2069,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     czech_republic:
         id: czech_republic
@@ -1874,6 +2079,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     dadra_and_nagar_haveli:
         id: dadra_and_nagar_haveli
@@ -1883,6 +2089,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     dadra_and_nagar_haveli_and_daman_and_diu:
         id: dadra_and_nagar_haveli_and_daman_and_diu
@@ -1892,6 +2099,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     dagestan_republic:
         id: dagestan_republic
@@ -1901,6 +2109,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     dalarna:
         id: dalarna
@@ -1910,6 +2119,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     daman_and_diu:
         id: daman_and_diu
@@ -1919,6 +2129,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     delaware:
         id: delaware
@@ -1928,6 +2139,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     derbyshire:
         id: derbyshire
@@ -1937,6 +2149,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     detmold:
         id: detmold
@@ -1946,6 +2159,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     devon:
         id: devon
@@ -1955,6 +2169,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     district-of-columbia:
         id: district-of-columbia
@@ -1964,6 +2179,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     distrito-federal:
         id: distrito-federal
@@ -1973,6 +2189,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     djibouti:
         id: djibouti
@@ -1982,6 +2199,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     dnipropetrovsk_oblast:
         id: dnipropetrovsk_oblast
@@ -1991,6 +2209,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     dolnoslaskie:
         id: dolnoslaskie
@@ -2000,6 +2219,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     dominica:
         id: dominica
@@ -2009,6 +2229,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     dominican_republic:
         id: dominican_republic
@@ -2018,6 +2239,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     donetsk_oblast:
         id: donetsk_oblast
@@ -2027,6 +2249,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     dorset:
         id: dorset
@@ -2036,6 +2259,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     drenthe:
         id: drenthe
@@ -2045,6 +2269,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     durango:
         id: durango
@@ -2054,6 +2279,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     durham:
         id: durham
@@ -2063,6 +2289,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     dusseldorf:
         id: dusseldorf
@@ -2072,6 +2299,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     east:
         id: east
@@ -2081,6 +2309,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     east_flanders:
         id: east_flanders
@@ -2090,6 +2319,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     east_java:
         id: east_java
@@ -2099,6 +2329,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     east_kalimantan:
         id: east_kalimantan
@@ -2108,6 +2339,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     east_midlands:
         id: east_midlands
@@ -2117,6 +2349,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     east_nusa_tenggara:
         id: east_nusa_tenggara
@@ -2126,6 +2359,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     east_sussex:
         id: east_sussex
@@ -2135,6 +2369,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     east_timor:
         id: east_timor
@@ -2144,6 +2379,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     east_yorkshire_with_hull:
         id: east_yorkshire_with_hull
@@ -2153,6 +2389,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     eastern-zone:
         id: eastern-zone
@@ -2162,6 +2399,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     eastern_ontario:
         id: eastern_ontario
@@ -2171,6 +2409,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ecuador:
         id: ecuador
@@ -2180,6 +2419,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     egypt:
         id: egypt
@@ -2189,6 +2429,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     el_salvador:
         id: el_salvador
@@ -2198,6 +2439,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     emilia_romagna:
         id: emilia_romagna
@@ -2207,6 +2449,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     england:
         id: england
@@ -2216,6 +2459,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     entre_rios:
         id: entre_rios
@@ -2225,6 +2469,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     equatorial_guinea:
         id: equatorial_guinea
@@ -2234,6 +2479,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     eritrea:
         id: eritrea
@@ -2243,6 +2489,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     espirito-santo:
         id: espirito-santo
@@ -2252,6 +2499,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     essex:
         id: essex
@@ -2261,6 +2509,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     estrie:
         id: estrie
@@ -2270,6 +2519,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ethiopia:
         id: ethiopia
@@ -2279,6 +2529,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     europe:
         id: europe
@@ -2287,6 +2538,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     euskadi:
         id: euskadi
@@ -2296,6 +2548,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     extremadura:
         id: extremadura
@@ -2305,6 +2558,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     falkland:
         id: falkland
@@ -2314,6 +2568,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     far_eastern_federal_district:
         id: far_eastern_federal_district
@@ -2323,6 +2578,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     fiji:
         id: fiji
@@ -2332,6 +2588,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     finland:
         id: finland
@@ -2341,6 +2598,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     finnmark:
         id: finnmark
@@ -2350,6 +2608,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     flanders:
         id: flanders
@@ -2359,6 +2618,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     flemish_brabant:
         id: flemish_brabant
@@ -2368,6 +2628,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     flevoland:
         id: flevoland
@@ -2377,6 +2638,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     florida:
         id: florida
@@ -2386,6 +2648,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     formosa:
         id: formosa
@@ -2395,6 +2658,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     france:
         id: france
@@ -2404,6 +2668,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     france_taaf:
         id: france_taaf
@@ -2413,6 +2678,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     franche_comte:
         id: franche_comte
@@ -2422,6 +2688,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     fribourg:
         id: fribourg
@@ -2431,6 +2698,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     friesland:
         id: friesland
@@ -2440,6 +2708,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     friuli_venezia_giulia:
         id: friuli_venezia_giulia
@@ -2449,6 +2718,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     fujian:
         id: fujian
@@ -2458,6 +2728,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     gabon:
         id: gabon
@@ -2467,6 +2738,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     galicia:
         id: galicia
@@ -2476,6 +2748,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     gambia:
         id: gambia
@@ -2485,6 +2758,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     gansu:
         id: gansu
@@ -2494,6 +2768,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     gaspesie_iles_de_la_madeleine:
         id: gaspesie_iles_de_la_madeleine
@@ -2503,6 +2778,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     gavleborg:
         id: gavleborg
@@ -2512,6 +2788,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     gcc_states:
         id: gcc_states
@@ -2521,6 +2798,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     gelderland:
         id: gelderland
@@ -2530,6 +2808,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     geneva:
         id: geneva
@@ -2539,6 +2818,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     georgia-asia:
         id: georgia-asia
@@ -2564,6 +2844,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ghana:
         id: ghana
@@ -2573,6 +2854,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     gibraltar:
         id: gibraltar
@@ -2582,6 +2864,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     girona:
         id: girona
@@ -2591,6 +2874,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     glarus:
         id: glarus
@@ -2600,6 +2884,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     gloucestershire:
         id: gloucestershire
@@ -2609,6 +2894,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     goa:
         id: goa
@@ -2618,6 +2904,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     goias:
         id: goias
@@ -2627,6 +2914,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     golden_horseshoe:
         id: golden_horseshoe
@@ -2636,6 +2924,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     gorontalo:
         id: gorontalo
@@ -2645,6 +2934,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     gotland:
         id: gotland
@@ -2654,6 +2944,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     granada:
         id: granada
@@ -2663,6 +2954,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     greater_london:
         id: greater_london
@@ -2672,6 +2964,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     greater_manchester:
         id: greater_manchester
@@ -2681,6 +2974,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     greenland:
         id: greenland
@@ -2690,6 +2984,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     grenada:
         id: grenada
@@ -2699,6 +2994,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     grisons:
         id: grisons
@@ -2708,6 +3004,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     grodnenskaya:
         id: grodnenskaya
@@ -2717,6 +3014,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     groningen:
         id: groningen
@@ -2726,6 +3024,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guadalajara:
         id: guadalajara
@@ -2735,6 +3034,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guadeloupe:
         id: guadeloupe
@@ -2744,6 +3044,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guanajuato:
         id: guanajuato
@@ -2753,6 +3054,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guangdong:
         id: guangdong
@@ -2762,6 +3064,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guangxi:
         id: guangxi
@@ -2771,6 +3074,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guatemala:
         id: guatemala
@@ -2780,6 +3084,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guernesey:
         id: guernesey
@@ -2789,6 +3094,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guerrero:
         id: guerrero
@@ -2798,6 +3104,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guinea:
         id: guinea
@@ -2807,6 +3114,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guipuzcoa:
         id: guipuzcoa
@@ -2816,6 +3124,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guizhou:
         id: guizhou
@@ -2825,6 +3134,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     gujarat:
         id: gujarat
@@ -2834,6 +3144,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guyana:
         id: guyana
@@ -2843,6 +3154,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guyane:
         id: guyane
@@ -2852,6 +3164,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     guyane-france:
         id: guyane-france
@@ -2869,6 +3182,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     haiti_and_domrep:
         id: haiti_and_domrep
@@ -2878,6 +3192,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     halland:
         id: halland
@@ -2887,6 +3202,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hamburg:
         id: hamburg
@@ -2896,6 +3212,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hampshire:
         id: hampshire
@@ -2905,6 +3222,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     haryana:
         id: haryana
@@ -2914,6 +3232,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     haute_normandie:
         id: haute_normandie
@@ -2923,6 +3242,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hawaii:
         id: hawaii
@@ -2932,6 +3252,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hebei:
         id: hebei
@@ -2941,6 +3262,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hedmark:
         id: hedmark
@@ -2950,6 +3272,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     heilongjiang:
         id: heilongjiang
@@ -2959,6 +3282,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     henan:
         id: henan
@@ -2968,6 +3292,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     herefordshire:
         id: herefordshire
@@ -2977,6 +3302,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hertfordshire:
         id: hertfordshire
@@ -2986,6 +3312,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hessen:
         id: hessen
@@ -2995,6 +3322,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hidalgo:
         id: hidalgo
@@ -3004,6 +3332,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     himachal_pradesh:
         id: himachal_pradesh
@@ -3013,6 +3342,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hokkaido:
         id: hokkaido
@@ -3022,6 +3352,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     homelskay:
         id: homelskay
@@ -3031,6 +3362,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     honduras:
         id: honduras
@@ -3040,6 +3372,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hong_kong:
         id: hong_kong
@@ -3049,6 +3382,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hordaland:
         id: hordaland
@@ -3058,6 +3392,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hubei:
         id: hubei
@@ -3067,6 +3402,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     huelva:
         id: huelva
@@ -3076,6 +3412,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     huesca:
         id: huesca
@@ -3085,6 +3422,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     hunan:
         id: hunan
@@ -3094,6 +3432,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     idaho:
         id: idaho
@@ -3103,6 +3442,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ile-de-clipperton:
         id: ile-de-clipperton
@@ -3112,6 +3452,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ile_de_france:
         id: ile_de_france
@@ -3121,6 +3462,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     illes_balears:
         id: illes_balears
@@ -3130,6 +3472,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     illinois:
         id: illinois
@@ -3139,6 +3482,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     india:
         id: india
@@ -3148,6 +3492,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     indiana:
         id: indiana
@@ -3157,6 +3502,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     indonesia:
         id: indonesia
@@ -3166,6 +3512,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ingushetia_republic:
         id: ingushetia_republic
@@ -3175,6 +3522,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     inner_mongolia:
         id: inner_mongolia
@@ -3184,6 +3532,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     iowa:
         id: iowa
@@ -3193,6 +3542,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     iran:
         id: iran
@@ -3202,6 +3552,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     iraq:
         id: iraq
@@ -3211,6 +3562,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ireland:
         id: ireland
@@ -3220,6 +3572,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     irkutsk_oblast:
         id: irkutsk_oblast
@@ -3229,6 +3582,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     isle_of_wight:
         id: isle_of_wight
@@ -3238,6 +3592,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     israel:
         id: israel
@@ -3247,6 +3602,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     israel_and_palestine:
         id: israel_and_palestine
@@ -3256,6 +3612,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     italy:
         id: italy
@@ -3265,6 +3622,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ivano-frankivsk_oblast:
         id: ivano-frankivsk_oblast
@@ -3274,6 +3632,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ivanovo_oblast:
         id: ivanovo_oblast
@@ -3283,6 +3642,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ivory_coast:
         id: ivory_coast
@@ -3292,6 +3652,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jaen:
         id: jaen
@@ -3301,6 +3662,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jakarta:
         id: jakarta
@@ -3310,6 +3672,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jalisco:
         id: jalisco
@@ -3319,6 +3682,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jamaica:
         id: jamaica
@@ -3328,6 +3692,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jambi:
         id: jambi
@@ -3337,6 +3702,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jammu_and_kashmir:
         id: jammu_and_kashmir
@@ -3346,6 +3712,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jamtland:
         id: jamtland
@@ -3355,6 +3722,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jan_mayen:
         id: jan_mayen
@@ -3364,6 +3732,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     japan:
         id: japan
@@ -3373,6 +3742,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     java:
         id: java
@@ -3382,6 +3752,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jersey:
         id: jersey
@@ -3391,6 +3762,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jewish_autonomous_oblast:
         id: jewish_autonomous_oblast
@@ -3400,6 +3772,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jharkhand:
         id: jharkhand
@@ -3409,6 +3782,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jiangsu:
         id: jiangsu
@@ -3418,6 +3792,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jiangxi:
         id: jiangxi
@@ -3427,6 +3802,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jihocesky:
         id: jihocesky
@@ -3436,6 +3812,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jihomoravsky:
         id: jihomoravsky
@@ -3445,6 +3822,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jilin:
         id: jilin
@@ -3454,6 +3832,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jonkoping:
         id: jonkoping
@@ -3463,6 +3842,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jordan:
         id: jordan
@@ -3472,6 +3852,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jujuy:
         id: jujuy
@@ -3481,6 +3862,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     jura:
         id: jura
@@ -3490,6 +3872,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kabardino_balkar_republic:
         id: kabardino_balkar_republic
@@ -3499,6 +3882,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kainuu:
         id: kainuu
@@ -3508,6 +3892,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kalimantan:
         id: kalimantan
@@ -3517,6 +3902,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kaliningrad_oblast:
         id: kaliningrad_oblast
@@ -3526,6 +3912,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kalmar:
         id: kalmar
@@ -3535,6 +3922,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kalmykia_republic:
         id: kalmykia_republic
@@ -3544,6 +3932,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kaluga_oblast:
         id: kaluga_oblast
@@ -3553,6 +3942,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kamchatka_krai:
         id: kamchatka_krai
@@ -3562,6 +3952,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kansai:
         id: kansai
@@ -3571,6 +3962,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kansas:
         id: kansas
@@ -3580,6 +3972,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kanta_hame:
         id: kanta_hame
@@ -3589,6 +3982,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kanto:
         id: kanto
@@ -3598,6 +3992,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     karachay_cherkess_republic:
         id: karachay_cherkess_republic
@@ -3607,6 +4002,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     karelia_republic:
         id: karelia_republic
@@ -3616,6 +4012,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     karlovarsky:
         id: karlovarsky
@@ -3625,6 +4022,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     karnataka:
         id: karnataka
@@ -3634,6 +4032,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     karnten:
         id: karnten
@@ -3643,6 +4042,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kazakhstan:
         id: kazakhstan
@@ -3652,6 +4052,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kemerovo_oblast:
         id: kemerovo_oblast
@@ -3661,6 +4062,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kent:
         id: kent
@@ -3670,6 +4072,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kentucky:
         id: kentucky
@@ -3679,6 +4082,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kenya:
         id: kenya
@@ -3688,6 +4092,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kerala:
         id: kerala
@@ -3697,6 +4102,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     khabarovsk_krai:
         id: khabarovsk_krai
@@ -3706,6 +4112,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     khakassia_republic:
         id: khakassia_republic
@@ -3715,6 +4122,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     khanty_mansi_autonomous_okrug:
         id: khanty_mansi_autonomous_okrug
@@ -3724,6 +4132,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kharkiv_oblast:
         id: kharkiv_oblast
@@ -3733,6 +4142,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kherson_oblast:
         id: kherson_oblast
@@ -3742,6 +4152,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     khmelnytskyi_oblast:
         id: khmelnytskyi_oblast
@@ -3751,6 +4162,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kiev:
         id: kiev
@@ -3760,6 +4172,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kiev_oblast:
         id: kiev_oblast
@@ -3769,6 +4182,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kiribati:
         id: kiribati
@@ -3778,6 +4192,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kirov_oblast:
         id: kirov_oblast
@@ -3787,6 +4202,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kirovohrad_oblast:
         id: kirovohrad_oblast
@@ -3796,6 +4212,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     koln:
         id: koln
@@ -3805,6 +4222,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     komi_republic:
         id: komi_republic
@@ -3814,6 +4232,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kosicky:
         id: kosicky
@@ -3823,6 +4242,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kostroma_oblast:
         id: kostroma_oblast
@@ -3832,6 +4252,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kralovehradecky:
         id: kralovehradecky
@@ -3841,6 +4262,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     krasnodar_krai:
         id: krasnodar_krai
@@ -3850,6 +4272,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     krasnoyarsk_krai:
         id: krasnoyarsk_krai
@@ -3859,6 +4282,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kronoberg:
         id: kronoberg
@@ -3868,6 +4292,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kujawsko_pomorskie:
         id: kujawsko_pomorskie
@@ -3877,6 +4302,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kurgan_oblast:
         id: kurgan_oblast
@@ -3886,6 +4312,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kursk_oblast:
         id: kursk_oblast
@@ -3895,6 +4322,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kuwait:
         id: kuwait
@@ -3904,6 +4332,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kymenlaakso:
         id: kymenlaakso
@@ -3913,6 +4342,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kyrgyzstan:
         id: kyrgyzstan
@@ -3922,6 +4352,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     kyushu:
         id: kyushu
@@ -3931,6 +4362,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     la_coruna:
         id: la_coruna
@@ -3940,6 +4372,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     la_pampa:
         id: la_pampa
@@ -3949,6 +4382,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     la_rioja-argentina:
         id: la_rioja-argentina
@@ -3974,6 +4408,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lampung:
         id: lampung
@@ -3983,6 +4418,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lanaudiere:
         id: lanaudiere
@@ -3992,6 +4428,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lancashire:
         id: lancashire
@@ -4001,6 +4438,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     languedoc_roussillon:
         id: languedoc_roussillon
@@ -4010,6 +4448,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     laos:
         id: laos
@@ -4019,6 +4458,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lapland:
         id: lapland
@@ -4028,6 +4468,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     laurentides:
         id: laurentides
@@ -4037,6 +4478,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     laval:
         id: laval
@@ -4046,6 +4488,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lazio:
         id: lazio
@@ -4055,6 +4498,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lebanon:
         id: lebanon
@@ -4064,6 +4508,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     leicestershire:
         id: leicestershire
@@ -4073,6 +4518,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     leningrad_oblast:
         id: leningrad_oblast
@@ -4082,6 +4528,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     leon:
         id: leon
@@ -4091,6 +4538,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lesotho:
         id: lesotho
@@ -4100,6 +4548,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     liaoning:
         id: liaoning
@@ -4109,6 +4558,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     liberecky:
         id: liberecky
@@ -4118,6 +4568,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     liberia:
         id: liberia
@@ -4127,6 +4578,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     libya:
         id: libya
@@ -4136,6 +4588,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     liguria:
         id: liguria
@@ -4145,6 +4598,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     limburg-flanders:
         id: limburg-flanders
@@ -4170,6 +4624,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lincolnshire:
         id: lincolnshire
@@ -4179,6 +4634,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lipetsk_oblast:
         id: lipetsk_oblast
@@ -4188,6 +4644,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lleida:
         id: lleida
@@ -4197,6 +4654,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lodzkie:
         id: lodzkie
@@ -4206,6 +4664,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lombardia:
         id: lombardia
@@ -4215,6 +4674,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lorraine:
         id: lorraine
@@ -4224,6 +4684,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     louisiana:
         id: louisiana
@@ -4233,6 +4694,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lubelskie:
         id: lubelskie
@@ -4242,6 +4704,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lubuskie:
         id: lubuskie
@@ -4251,6 +4714,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lucerne:
         id: lucerne
@@ -4260,6 +4724,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lugo:
         id: lugo
@@ -4269,6 +4734,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     luhansk_oblast:
         id: luhansk_oblast
@@ -4278,6 +4744,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     luxembourg:
         id: luxembourg
@@ -4287,6 +4754,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     lviv_oblast:
         id: lviv_oblast
@@ -4296,6 +4764,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     macau:
         id: macau
@@ -4305,6 +4774,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     madagascar:
         id: madagascar
@@ -4314,6 +4784,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     madeira:
         id: madeira
@@ -4323,6 +4794,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     madhya_pradesh:
         id: madhya_pradesh
@@ -4332,6 +4804,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     magadan_oblast:
         id: magadan_oblast
@@ -4341,6 +4814,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     maharashtra:
         id: maharashtra
@@ -4350,6 +4824,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     maine:
         id: maine
@@ -4359,6 +4834,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     malaga:
         id: malaga
@@ -4368,6 +4844,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     malawi:
         id: malawi
@@ -4377,6 +4854,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     malaysia:
         id: malaysia
@@ -4386,6 +4864,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     maldives:
         id: maldives
@@ -4395,6 +4874,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mali:
         id: mali
@@ -4404,6 +4884,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     malopolskie:
         id: malopolskie
@@ -4413,6 +4894,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     maluku:
         id: maluku
@@ -4422,6 +4904,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     manipur:
         id: manipur
@@ -4431,6 +4914,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     manitoba:
         id: manitoba
@@ -4440,6 +4924,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     maranhao:
         id: maranhao
@@ -4449,6 +4934,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     marche:
         id: marche
@@ -4458,6 +4944,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mari_el_republic:
         id: mari_el_republic
@@ -4467,6 +4954,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     marshall-islands:
         id: marshall-islands
@@ -4476,6 +4964,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     martinique:
         id: martinique
@@ -4485,6 +4974,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     maryland:
         id: maryland
@@ -4494,6 +4984,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     massachusetts:
         id: massachusetts
@@ -4503,6 +4994,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mato-grosso:
         id: mato-grosso
@@ -4512,6 +5004,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mato-grosso-do-sul:
         id: mato-grosso-do-sul
@@ -4521,6 +5014,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mauricie:
         id: mauricie
@@ -4530,6 +5024,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mauritania:
         id: mauritania
@@ -4539,6 +5034,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mauritius:
         id: mauritius
@@ -4548,6 +5044,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mayotte:
         id: mayotte
@@ -4557,6 +5054,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mazowieckie:
         id: mazowieckie
@@ -4566,6 +5064,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mecklenburg_vorpommern:
         id: mecklenburg_vorpommern
@@ -4575,6 +5074,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     meghalaya:
         id: meghalaya
@@ -4584,6 +5084,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mendoza:
         id: mendoza
@@ -4593,6 +5094,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     merseyside:
         id: merseyside
@@ -4602,6 +5104,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mexico:
         id: mexico
@@ -4611,6 +5114,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mexico_city:
         id: mexico_city
@@ -4620,6 +5124,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     michigan:
         id: michigan
@@ -4629,6 +5134,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     michoacan:
         id: michoacan
@@ -4638,6 +5144,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     micronesia:
         id: micronesia
@@ -4647,6 +5154,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     midi_pyrenees:
         id: midi_pyrenees
@@ -4656,6 +5164,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     minas-gerais:
         id: minas-gerais
@@ -4665,6 +5174,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     minnesota:
         id: minnesota
@@ -4674,6 +5184,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     minskaya:
         id: minskaya
@@ -4683,6 +5194,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     misiones:
         id: misiones
@@ -4692,6 +5204,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mississippi:
         id: mississippi
@@ -4701,6 +5214,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     missouri:
         id: missouri
@@ -4710,6 +5224,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mittelfranken:
         id: mittelfranken
@@ -4719,6 +5234,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mizoram:
         id: mizoram
@@ -4728,6 +5244,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     moere_og_romsdal:
         id: moere_og_romsdal
@@ -4737,6 +5254,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mogilevskaya:
         id: mogilevskaya
@@ -4746,6 +5264,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     molise:
         id: molise
@@ -4755,6 +5274,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     monaco:
         id: monaco
@@ -4764,6 +5284,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mongolia:
         id: mongolia
@@ -4773,6 +5294,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     montana:
         id: montana
@@ -4782,6 +5304,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     monteregie:
         id: monteregie
@@ -4791,6 +5314,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     montreal:
         id: montreal
@@ -4800,6 +5324,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     montserrat:
         id: montserrat
@@ -4809,6 +5334,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     moravskoslezsky:
         id: moravskoslezsky
@@ -4818,6 +5344,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mordovia_republic:
         id: mordovia_republic
@@ -4827,6 +5354,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     morelos:
         id: morelos
@@ -4836,6 +5364,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     morocco:
         id: morocco
@@ -4845,6 +5374,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     moscow:
         id: moscow
@@ -4854,6 +5384,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     moscow_oblast:
         id: moscow_oblast
@@ -4863,6 +5394,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mozambique:
         id: mozambique
@@ -4872,6 +5404,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     munster:
         id: munster
@@ -4881,6 +5414,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     murmansk_oblast:
         id: murmansk_oblast
@@ -4890,6 +5424,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     myanmar:
         id: myanmar
@@ -4899,6 +5434,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     mykolaiv_oblast:
         id: mykolaiv_oblast
@@ -4908,6 +5444,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nagaland:
         id: nagaland
@@ -4917,6 +5454,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     namibia:
         id: namibia
@@ -4926,6 +5464,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     national_capital_territory_of_delhi:
         id: national_capital_territory_of_delhi
@@ -4935,6 +5474,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nauru:
         id: nauru
@@ -4944,6 +5484,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nayarit:
         id: nayarit
@@ -4953,6 +5494,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nebraska:
         id: nebraska
@@ -4962,6 +5504,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nenets_autonomous_okrug:
         id: nenets_autonomous_okrug
@@ -4971,6 +5514,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nepal:
         id: nepal
@@ -4980,6 +5524,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     netherlands:
         id: netherlands
@@ -4989,6 +5534,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     neuchatel:
         id: neuchatel
@@ -4998,6 +5544,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     neuquen:
         id: neuquen
@@ -5007,6 +5554,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nevada:
         id: nevada
@@ -5016,6 +5564,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     new-caledonia:
         id: new-caledonia
@@ -5025,6 +5574,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     new-hampshire:
         id: new-hampshire
@@ -5034,6 +5584,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     new-jersey:
         id: new-jersey
@@ -5043,6 +5594,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     new-mexico:
         id: new-mexico
@@ -5052,6 +5604,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     new-york:
         id: new-york
@@ -5061,6 +5614,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     new-zealand:
         id: new-zealand
@@ -5070,6 +5624,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     new_brunswick:
         id: new_brunswick
@@ -5079,6 +5634,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     newfoundland_and_labrador:
         id: newfoundland_and_labrador
@@ -5088,6 +5644,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nicaragua:
         id: nicaragua
@@ -5097,6 +5654,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nidwalden:
         id: nidwalden
@@ -5106,6 +5664,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     niederbayern:
         id: niederbayern
@@ -5115,6 +5674,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     niederosterreich:
         id: niederosterreich
@@ -5124,6 +5684,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     niedersachsen:
         id: niedersachsen
@@ -5133,6 +5694,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     niger:
         id: niger
@@ -5142,6 +5704,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nigeria:
         id: nigeria
@@ -5151,6 +5714,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ningxia:
         id: ningxia
@@ -5160,6 +5724,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nitriansky:
         id: nitriansky
@@ -5169,6 +5734,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     niue:
         id: niue
@@ -5178,6 +5744,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nizhny_novgorod_oblast:
         id: nizhny_novgorod_oblast
@@ -5187,6 +5754,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     noord_brabant:
         id: noord_brabant
@@ -5196,6 +5764,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     noord_holland:
         id: noord_holland
@@ -5205,6 +5774,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     norcal:
         id: norcal
@@ -5214,6 +5784,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nord_du_quebec:
         id: nord_du_quebec
@@ -5223,6 +5794,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nord_pas_de_calais:
         id: nord_pas_de_calais
@@ -5232,6 +5804,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nordland:
         id: nordland
@@ -5241,6 +5814,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nordrhein_westfalen:
         id: nordrhein_westfalen
@@ -5250,6 +5824,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     norfolk:
         id: norfolk
@@ -5259,6 +5834,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     norrbotten:
         id: norrbotten
@@ -5268,6 +5844,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north:
         id: north
@@ -5277,6 +5854,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north-carolina:
         id: north-carolina
@@ -5286,6 +5864,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north-dakota:
         id: north-dakota
@@ -5295,6 +5874,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north-eastern-zone:
         id: north-eastern-zone
@@ -5304,6 +5884,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_america:
         id: north_america
@@ -5312,6 +5893,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_caucasian_federal_district:
         id: north_caucasian_federal_district
@@ -5321,6 +5903,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_east:
         id: north_east
@@ -5330,6 +5913,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_kalimantan:
         id: north_kalimantan
@@ -5339,6 +5923,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_karelia:
         id: north_karelia
@@ -5348,6 +5933,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_korea:
         id: north_korea
@@ -5357,6 +5943,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_maluku:
         id: north_maluku
@@ -5366,6 +5953,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_ossetia_alania_republic:
         id: north_ossetia_alania_republic
@@ -5375,6 +5963,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_ostrobothnia:
         id: north_ostrobothnia
@@ -5384,6 +5973,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_savo:
         id: north_savo
@@ -5393,6 +5983,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_sulawesi:
         id: north_sulawesi
@@ -5402,6 +5993,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_sumatra:
         id: north_sumatra
@@ -5411,6 +6003,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_west:
         id: north_west
@@ -5420,6 +6013,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     north_yorkshire:
         id: north_yorkshire
@@ -5429,6 +6023,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     northamptonshire:
         id: northamptonshire
@@ -5438,6 +6033,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     northeast:
         id: northeast
@@ -5447,6 +6043,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     northeastern_ontario:
         id: northeastern_ontario
@@ -5456,6 +6053,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     northern-zone:
         id: northern-zone
@@ -5465,6 +6063,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     northern_ireland:
         id: northern_ireland
@@ -5474,6 +6073,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     northumberland:
         id: northumberland
@@ -5483,6 +6083,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     northwest_territories:
         id: northwest_territories
@@ -5492,6 +6093,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     northwestern_federal_district:
         id: northwestern_federal_district
@@ -5501,6 +6103,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     northwestern_ontario:
         id: northwestern_ontario
@@ -5510,6 +6113,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     norway:
         id: norway
@@ -5519,6 +6123,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nottinghamshire:
         id: nottinghamshire
@@ -5528,6 +6133,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nova_scotia:
         id: nova_scotia
@@ -5537,6 +6143,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     novgorod_oblast:
         id: novgorod_oblast
@@ -5546,6 +6153,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     novosibirsk_oblast:
         id: novosibirsk_oblast
@@ -5555,6 +6163,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nuevo_leon:
         id: nuevo_leon
@@ -5564,6 +6173,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nunavut:
         id: nunavut
@@ -5573,6 +6183,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     nusa_tenggara:
         id: nusa_tenggara
@@ -5582,6 +6193,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oaxaca:
         id: oaxaca
@@ -5591,6 +6203,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oberbayern:
         id: oberbayern
@@ -5600,6 +6213,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oberfranken:
         id: oberfranken
@@ -5609,6 +6223,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oberosterreich:
         id: oberosterreich
@@ -5618,6 +6233,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oberpfalz:
         id: oberpfalz
@@ -5627,6 +6243,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     obwalden:
         id: obwalden
@@ -5636,6 +6253,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     odessa_oblast:
         id: odessa_oblast
@@ -5645,6 +6263,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     odisha:
         id: odisha
@@ -5654,6 +6273,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oestfold:
         id: oestfold
@@ -5663,6 +6283,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ohio:
         id: ohio
@@ -5672,6 +6293,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oklahoma:
         id: oklahoma
@@ -5681,6 +6303,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     olomoucky:
         id: olomoucky
@@ -5690,6 +6313,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oman:
         id: oman
@@ -5699,6 +6323,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     omsk_oblast:
         id: omsk_oblast
@@ -5708,6 +6333,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ontario:
         id: ontario
@@ -5717,6 +6343,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     opolskie:
         id: opolskie
@@ -5726,6 +6353,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oppland:
         id: oppland
@@ -5735,6 +6363,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     orebro:
         id: orebro
@@ -5744,6 +6373,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oregon:
         id: oregon
@@ -5753,6 +6383,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     orenburg_oblast:
         id: orenburg_oblast
@@ -5762,6 +6393,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oryol_oblast:
         id: oryol_oblast
@@ -5771,6 +6403,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oslo:
         id: oslo
@@ -5780,6 +6413,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ostergotland:
         id: ostergotland
@@ -5789,6 +6423,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ostrobothnia:
         id: ostrobothnia
@@ -5798,6 +6433,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ourense:
         id: ourense
@@ -5807,6 +6443,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     outaouais:
         id: outaouais
@@ -5816,6 +6453,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     overijssel:
         id: overijssel
@@ -5825,6 +6463,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     oxfordshire:
         id: oxfordshire
@@ -5834,6 +6473,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     paijat_hame:
         id: paijat_hame
@@ -5843,6 +6483,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     pakistan:
         id: pakistan
@@ -5852,6 +6493,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     palau:
         id: palau
@@ -5861,6 +6503,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     palencia:
         id: palencia
@@ -5870,6 +6513,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     palestine:
         id: palestine
@@ -5879,6 +6523,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     panama:
         id: panama
@@ -5888,6 +6533,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     papua:
         id: papua
@@ -5897,6 +6543,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     papua-new-guinea:
         id: papua-new-guinea
@@ -5906,6 +6553,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     para:
         id: para
@@ -5915,6 +6563,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     paraguay:
         id: paraguay
@@ -5924,6 +6573,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     paraiba:
         id: paraiba
@@ -5933,6 +6583,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     parana:
         id: parana
@@ -5942,6 +6593,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     pardubicky:
         id: pardubicky
@@ -5951,6 +6603,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     pays_de_la_loire:
         id: pays_de_la_loire
@@ -5960,6 +6613,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     pennsylvania:
         id: pennsylvania
@@ -5969,6 +6623,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     penza_oblast:
         id: penza_oblast
@@ -5978,6 +6633,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     perm_krai:
         id: perm_krai
@@ -5987,6 +6643,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     pernambuco:
         id: pernambuco
@@ -5996,6 +6653,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     peru:
         id: peru
@@ -6005,6 +6663,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     philippines:
         id: philippines
@@ -6014,6 +6673,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     piaui:
         id: piaui
@@ -6023,6 +6683,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     picardie:
         id: picardie
@@ -6032,6 +6693,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     piemonte:
         id: piemonte
@@ -6041,6 +6703,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     pirkanmaa:
         id: pirkanmaa
@@ -6050,6 +6713,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     pitcairn-islands:
         id: pitcairn-islands
@@ -6059,6 +6723,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     plzensky:
         id: plzensky
@@ -6068,6 +6733,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     podkarpackie:
         id: podkarpackie
@@ -6077,6 +6743,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     podlaskie:
         id: podlaskie
@@ -6086,6 +6753,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     poitou_charentes:
         id: poitou_charentes
@@ -6095,6 +6763,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     poland:
         id: poland
@@ -6104,6 +6773,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     poltava_oblast:
         id: poltava_oblast
@@ -6113,6 +6783,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     polynesie-francaise:
         id: polynesie-francaise
@@ -6122,6 +6793,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     pomorskie:
         id: pomorskie
@@ -6131,6 +6803,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     pontevedra:
         id: pontevedra
@@ -6140,6 +6813,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     portugal:
         id: portugal
@@ -6149,6 +6823,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     praha:
         id: praha
@@ -6158,6 +6833,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     presovsky:
         id: presovsky
@@ -6167,6 +6843,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     primorsky_krai:
         id: primorsky_krai
@@ -6176,6 +6853,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     prince_edward_island:
         id: prince_edward_island
@@ -6185,6 +6863,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     provence_alpes_cote_d_azur:
         id: provence_alpes_cote_d_azur
@@ -6194,6 +6873,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     pskov_oblast:
         id: pskov_oblast
@@ -6203,6 +6883,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     puducherry:
         id: puducherry
@@ -6212,6 +6893,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     puebla:
         id: puebla
@@ -6221,6 +6903,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     puerto-rico:
         id: puerto-rico
@@ -6230,6 +6913,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     puerto_rico:
         id: puerto_rico
@@ -6239,6 +6923,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     puglia:
         id: puglia
@@ -6248,6 +6933,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     punjab:
         id: punjab
@@ -6257,6 +6943,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     qatar:
         id: qatar
@@ -6266,6 +6953,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     qinghai:
         id: qinghai
@@ -6275,6 +6963,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     quebec:
         id: quebec
@@ -6284,6 +6973,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     queretaro:
         id: queretaro
@@ -6293,6 +6983,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     quintana_roo:
         id: quintana_roo
@@ -6302,6 +6993,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rajasthan:
         id: rajasthan
@@ -6311,6 +7003,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     region_de_murcia:
         id: region_de_murcia
@@ -6320,6 +7013,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     reunion:
         id: reunion
@@ -6329,6 +7023,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rheinland_pfalz:
         id: rheinland_pfalz
@@ -6338,6 +7033,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rhode-island:
         id: rhode-island
@@ -6347,6 +7043,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rhone_alpes:
         id: rhone_alpes
@@ -6356,6 +7053,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     riau:
         id: riau
@@ -6365,6 +7063,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     riau_islands:
         id: riau_islands
@@ -6374,6 +7073,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rio-de-janeiro:
         id: rio-de-janeiro
@@ -6383,6 +7083,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rio-grande-do-norte:
         id: rio-grande-do-norte
@@ -6392,6 +7093,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rio-grande-do-sul:
         id: rio-grande-do-sul
@@ -6401,6 +7103,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rio_negro:
         id: rio_negro
@@ -6410,6 +7113,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rivne_oblast:
         id: rivne_oblast
@@ -6419,6 +7123,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rogaland:
         id: rogaland
@@ -6428,6 +7133,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rondonia:
         id: rondonia
@@ -6437,6 +7143,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     roraima:
         id: roraima
@@ -6446,6 +7153,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rostov_oblast:
         id: rostov_oblast
@@ -6455,6 +7163,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     russia:
         id: russia
@@ -6463,6 +7172,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rutland:
         id: rutland
@@ -6472,6 +7182,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     rwanda:
         id: rwanda
@@ -6481,6 +7192,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ryazan_oblast:
         id: ryazan_oblast
@@ -6490,6 +7202,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saarland:
         id: saarland
@@ -6499,6 +7212,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sachsen:
         id: sachsen
@@ -6508,6 +7222,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sachsen_anhalt:
         id: sachsen_anhalt
@@ -6517,6 +7232,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saguenay_lac_saint_jean:
         id: saguenay_lac_saint_jean
@@ -6526,6 +7242,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saint_barthelemy:
         id: saint_barthelemy
@@ -6535,6 +7252,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saint_gallen:
         id: saint_gallen
@@ -6544,6 +7262,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saint_helena_ascension_tristan_da_cunha:
         id: saint_helena_ascension_tristan_da_cunha
@@ -6553,6 +7272,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saint_kitts_and_nevis:
         id: saint_kitts_and_nevis
@@ -6562,6 +7282,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saint_lucia:
         id: saint_lucia
@@ -6571,6 +7292,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saint_martin:
         id: saint_martin
@@ -6580,6 +7302,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saint_petersburg:
         id: saint_petersburg
@@ -6589,6 +7312,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saint_pierre_et_miquelon:
         id: saint_pierre_et_miquelon
@@ -6598,6 +7322,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saint_vincent_and_the_grenadines:
         id: saint_vincent_and_the_grenadines
@@ -6607,6 +7332,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sakha_republic:
         id: sakha_republic
@@ -6616,6 +7342,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sakhalin_oblast:
         id: sakhalin_oblast
@@ -6625,6 +7352,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     salamanca:
         id: salamanca
@@ -6634,6 +7362,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     salta:
         id: salta
@@ -6643,6 +7372,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     salzburg:
         id: salzburg
@@ -6652,6 +7382,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     samara_oblast:
         id: samara_oblast
@@ -6661,6 +7392,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     samoa:
         id: samoa
@@ -6670,6 +7402,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     san_juan:
         id: san_juan
@@ -6679,6 +7412,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     san_luis:
         id: san_luis
@@ -6688,6 +7422,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     san_luis_potosi:
         id: san_luis_potosi
@@ -6697,6 +7432,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     san_marino:
         id: san_marino
@@ -6706,6 +7442,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     santa-catarina:
         id: santa-catarina
@@ -6715,6 +7452,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     santa_cruz:
         id: santa_cruz
@@ -6724,6 +7462,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     santa_fe:
         id: santa_fe
@@ -6733,6 +7472,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     santiago_del_estero:
         id: santiago_del_estero
@@ -6742,6 +7482,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sao-paulo:
         id: sao-paulo
@@ -6751,6 +7492,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sao_tome_and_principe:
         id: sao_tome_and_principe
@@ -6760,6 +7502,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saratov_oblast:
         id: saratov_oblast
@@ -6769,6 +7512,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sardegna:
         id: sardegna
@@ -6778,6 +7522,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saskatchewan:
         id: saskatchewan
@@ -6787,6 +7532,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     satakunta:
         id: satakunta
@@ -6796,6 +7542,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     saudi_arabia:
         id: saudi_arabia
@@ -6805,6 +7552,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     schaffhausen:
         id: schaffhausen
@@ -6814,6 +7562,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     schleswig_holstein:
         id: schleswig_holstein
@@ -6823,6 +7572,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     schwaben:
         id: schwaben
@@ -6832,6 +7582,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     schwyz:
         id: schwyz
@@ -6841,6 +7592,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     scotland:
         id: scotland
@@ -6850,6 +7602,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     segovia:
         id: segovia
@@ -6859,6 +7612,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     senegal:
         id: senegal
@@ -6868,6 +7622,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sergipe:
         id: sergipe
@@ -6877,6 +7632,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sevastopol:
         id: sevastopol
@@ -6886,6 +7642,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sevastopol-ukraine:
         id: sevastopol-ukraine
@@ -6903,6 +7660,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     seychelles:
         id: seychelles
@@ -6912,6 +7670,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     shaanxi:
         id: shaanxi
@@ -6921,6 +7680,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     shandong:
         id: shandong
@@ -6930,6 +7690,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     shanghai:
         id: shanghai
@@ -6939,6 +7700,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     shanxi:
         id: shanxi
@@ -6948,6 +7710,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     shikoku:
         id: shikoku
@@ -6957,6 +7720,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     shropshire:
         id: shropshire
@@ -6966,6 +7730,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     siberian_federal_district:
         id: siberian_federal_district
@@ -6975,6 +7740,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sichuan:
         id: sichuan
@@ -6984,6 +7750,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sicilia:
         id: sicilia
@@ -6993,6 +7760,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sierra-leone:
         id: sierra-leone
@@ -7002,6 +7770,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sikkim:
         id: sikkim
@@ -7011,6 +7780,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sinaloa:
         id: sinaloa
@@ -7020,6 +7790,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     singapore:
         id: singapore
@@ -7029,6 +7800,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sint_maarten:
         id: sint_maarten
@@ -7038,6 +7810,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     skane:
         id: skane
@@ -7047,6 +7820,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     slaskie:
         id: slaskie
@@ -7056,6 +7830,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     slovakia:
         id: slovakia
@@ -7065,6 +7840,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     smolensk_oblast:
         id: smolensk_oblast
@@ -7074,6 +7850,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     socal:
         id: socal
@@ -7083,6 +7860,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sodermanland:
         id: sodermanland
@@ -7092,6 +7870,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sogn_og_fjordane:
         id: sogn_og_fjordane
@@ -7101,6 +7880,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     solomon-islands:
         id: solomon-islands
@@ -7110,6 +7890,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     solothurn:
         id: solothurn
@@ -7119,6 +7900,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     somalia:
         id: somalia
@@ -7128,6 +7910,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     somerset:
         id: somerset
@@ -7137,6 +7920,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sonora:
         id: sonora
@@ -7146,6 +7930,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     soria:
         id: soria
@@ -7155,6 +7940,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south:
         id: south
@@ -7164,6 +7950,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south-africa-and-lesotho:
         id: south-africa-and-lesotho
@@ -7173,6 +7960,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south-carolina:
         id: south-carolina
@@ -7182,6 +7970,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south-dakota:
         id: south-dakota
@@ -7191,6 +7980,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_africa:
         id: south_africa
@@ -7200,6 +7990,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_america:
         id: south_america
@@ -7208,6 +7999,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_east:
         id: south_east
@@ -7217,6 +8009,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_georgia_and_south_sandwich:
         id: south_georgia_and_south_sandwich
@@ -7226,6 +8019,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_kalimantan:
         id: south_kalimantan
@@ -7235,6 +8029,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_karelia:
         id: south_karelia
@@ -7244,6 +8039,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_korea:
         id: south_korea
@@ -7253,6 +8049,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_ostrobothnia:
         id: south_ostrobothnia
@@ -7262,6 +8059,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_savo:
         id: south_savo
@@ -7271,6 +8069,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_sudan:
         id: south_sudan
@@ -7280,6 +8079,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_sulawesi:
         id: south_sulawesi
@@ -7289,6 +8089,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_sumatra:
         id: south_sumatra
@@ -7298,6 +8099,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_west:
         id: south_west
@@ -7307,6 +8109,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     south_yorkshire:
         id: south_yorkshire
@@ -7316,6 +8119,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     southeast:
         id: southeast
@@ -7325,6 +8129,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     southeast_sulawesi:
         id: southeast_sulawesi
@@ -7334,6 +8139,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     southern-zone:
         id: southern-zone
@@ -7343,6 +8149,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     southern_federal_district:
         id: southern_federal_district
@@ -7352,6 +8159,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     southwest_finland:
         id: southwest_finland
@@ -7361,6 +8169,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     southwestern_ontario:
         id: southwestern_ontario
@@ -7370,6 +8179,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     spain:
         id: spain
@@ -7379,6 +8189,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sri_lanka:
         id: sri_lanka
@@ -7388,6 +8199,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     staffordshire:
         id: staffordshire
@@ -7397,6 +8209,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     state_of_mexico:
         id: state_of_mexico
@@ -7406,6 +8219,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     stavropol_krai:
         id: stavropol_krai
@@ -7415,6 +8229,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     steiermark:
         id: steiermark
@@ -7424,6 +8239,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     stockholm:
         id: stockholm
@@ -7433,6 +8249,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     stredocesky:
         id: stredocesky
@@ -7442,6 +8259,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sudan:
         id: sudan
@@ -7451,6 +8269,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     suffolk:
         id: suffolk
@@ -7460,6 +8279,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sulawesi:
         id: sulawesi
@@ -7469,6 +8289,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sumatra:
         id: sumatra
@@ -7478,6 +8299,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sumy_oblast:
         id: sumy_oblast
@@ -7487,6 +8309,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     suriname:
         id: suriname
@@ -7496,6 +8319,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     surrey:
         id: surrey
@@ -7505,6 +8329,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     svalbard:
         id: svalbard
@@ -7514,6 +8339,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sverdlovsk_oblast:
         id: sverdlovsk_oblast
@@ -7523,6 +8349,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     swaziland:
         id: swaziland
@@ -7532,6 +8359,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     sweden:
         id: sweden
@@ -7541,6 +8369,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     swietokrzyskie:
         id: swietokrzyskie
@@ -7550,6 +8379,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     switzerland:
         id: switzerland
@@ -7559,6 +8389,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     syria:
         id: syria
@@ -7568,6 +8399,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tabasco:
         id: tabasco
@@ -7577,6 +8409,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     taiwan:
         id: taiwan
@@ -7586,6 +8419,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tajikistan:
         id: tajikistan
@@ -7595,6 +8429,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tamaulipas:
         id: tamaulipas
@@ -7604,6 +8439,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tambov_oblast:
         id: tambov_oblast
@@ -7613,6 +8449,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tamil_nadu:
         id: tamil_nadu
@@ -7622,6 +8459,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tanzania:
         id: tanzania
@@ -7631,6 +8469,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tarragona:
         id: tarragona
@@ -7640,6 +8479,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tatarstan_republic:
         id: tatarstan_republic
@@ -7649,6 +8489,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     telangana:
         id: telangana
@@ -7658,6 +8499,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     telemark:
         id: telemark
@@ -7667,6 +8509,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tennessee:
         id: tennessee
@@ -7676,6 +8519,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ternopil_oblast:
         id: ternopil_oblast
@@ -7685,6 +8529,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     teruel:
         id: teruel
@@ -7694,6 +8539,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     texas:
         id: texas
@@ -7703,6 +8549,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     thailand:
         id: thailand
@@ -7712,6 +8559,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     thueringen:
         id: thueringen
@@ -7721,6 +8569,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     thurgau:
         id: thurgau
@@ -7730,6 +8579,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tianjin:
         id: tianjin
@@ -7739,6 +8589,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tibet:
         id: tibet
@@ -7748,6 +8599,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ticino:
         id: ticino
@@ -7757,6 +8609,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tierra_del_fuego:
         id: tierra_del_fuego
@@ -7766,6 +8619,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tirol:
         id: tirol
@@ -7775,6 +8629,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tlaxcala:
         id: tlaxcala
@@ -7784,6 +8639,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tocantins:
         id: tocantins
@@ -7793,6 +8649,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     togo:
         id: togo
@@ -7802,6 +8659,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tohoku:
         id: tohoku
@@ -7811,6 +8669,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tokelau:
         id: tokelau
@@ -7820,6 +8679,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     toledo:
         id: toledo
@@ -7829,6 +8689,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tomsk_oblast:
         id: tomsk_oblast
@@ -7838,6 +8699,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tonga:
         id: tonga
@@ -7847,6 +8709,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     toscana:
         id: toscana
@@ -7856,6 +8719,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     trenciansky:
         id: trenciansky
@@ -7865,6 +8729,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     trentino_alto_adige:
         id: trentino_alto_adige
@@ -7874,6 +8739,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     trinidad_and_tobago:
         id: trinidad_and_tobago
@@ -7883,6 +8749,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tripura:
         id: tripura
@@ -7892,6 +8759,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     trnavsky:
         id: trnavsky
@@ -7901,6 +8769,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     troendelag:
         id: troendelag
@@ -7910,6 +8779,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     troms:
         id: troms
@@ -7919,6 +8789,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tucuman:
         id: tucuman
@@ -7928,6 +8799,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tula_oblast:
         id: tula_oblast
@@ -7937,6 +8809,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tunisia:
         id: tunisia
@@ -7946,6 +8819,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     turkmenistan:
         id: turkmenistan
@@ -7955,6 +8829,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     turks_and_caicos_islands:
         id: turks_and_caicos_islands
@@ -7964,6 +8839,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tuva_republic:
         id: tuva_republic
@@ -7973,6 +8849,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tuvalu:
         id: tuvalu
@@ -7982,6 +8859,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tver_oblast:
         id: tver_oblast
@@ -7991,6 +8869,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tyne_and_wear:
         id: tyne_and_wear
@@ -8000,6 +8879,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     tyumen_oblast:
         id: tyumen_oblast
@@ -8009,6 +8889,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     udmurt_republic:
         id: udmurt_republic
@@ -8018,6 +8899,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     uganda:
         id: uganda
@@ -8027,6 +8909,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ukraine:
         id: ukraine
@@ -8036,6 +8919,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ulyanovsk_oblast:
         id: ulyanovsk_oblast
@@ -8045,6 +8929,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     umbria:
         id: umbria
@@ -8054,6 +8939,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     united_arab_emirates:
         id: united_arab_emirates
@@ -8063,6 +8949,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     united_kingdom:
         id: united_kingdom
@@ -8072,6 +8959,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     united_states_virgin_islands:
         id: united_states_virgin_islands
@@ -8081,6 +8969,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     unterfranken:
         id: unterfranken
@@ -8090,6 +8979,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     uppsala:
         id: uppsala
@@ -8099,6 +8989,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ural_federal_district:
         id: ural_federal_district
@@ -8108,6 +8999,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     uri:
         id: uri
@@ -8117,6 +9009,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     uruguay:
         id: uruguay
@@ -8126,6 +9019,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     us:
         id: us
@@ -8135,6 +9029,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     us-midwest:
         id: us-midwest
@@ -8144,6 +9039,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     us-northeast:
         id: us-northeast
@@ -8153,6 +9049,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     us-pacific:
         id: us-pacific
@@ -8162,6 +9059,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     us-south:
         id: us-south
@@ -8171,6 +9069,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     us-virgin-islands:
         id: us-virgin-islands
@@ -8180,6 +9079,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     us-west:
         id: us-west
@@ -8189,6 +9089,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     usa_virgin_islands:
         id: usa_virgin_islands
@@ -8198,6 +9099,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     ustecky:
         id: ustecky
@@ -8207,6 +9109,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     utah:
         id: utah
@@ -8216,6 +9119,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     utrecht:
         id: utrecht
@@ -8225,6 +9129,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     uttar_pradesh:
         id: uttar_pradesh
@@ -8234,6 +9139,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     uttarakhand:
         id: uttarakhand
@@ -8243,6 +9149,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     uusimaa:
         id: uusimaa
@@ -8252,6 +9159,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     uzbekistan:
         id: uzbekistan
@@ -8261,6 +9169,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     valais:
         id: valais
@@ -8270,6 +9179,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     valencia:
         id: valencia
@@ -8279,6 +9189,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     valladolid:
         id: valladolid
@@ -8288,6 +9199,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     valle_aosta:
         id: valle_aosta
@@ -8297,6 +9209,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vanuatu:
         id: vanuatu
@@ -8306,6 +9219,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     varmland:
         id: varmland
@@ -8315,6 +9229,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vasterbotten:
         id: vasterbotten
@@ -8324,6 +9239,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vasternorrland:
         id: vasternorrland
@@ -8333,6 +9249,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vastmanland:
         id: vastmanland
@@ -8342,6 +9259,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vastra_gotaland:
         id: vastra_gotaland
@@ -8351,6 +9269,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vatican_city:
         id: vatican_city
@@ -8360,6 +9279,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vaud:
         id: vaud
@@ -8369,6 +9289,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     veneto:
         id: veneto
@@ -8378,6 +9299,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     venezuela:
         id: venezuela
@@ -8387,6 +9309,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     veracruz:
         id: veracruz
@@ -8396,6 +9319,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vermont:
         id: vermont
@@ -8405,6 +9329,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vest-agder:
         id: vest-agder
@@ -8414,6 +9339,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vestfold:
         id: vestfold
@@ -8423,6 +9349,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vietnam:
         id: vietnam
@@ -8432,6 +9359,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vinnytsia_oblast:
         id: vinnytsia_oblast
@@ -8441,6 +9369,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     virginia:
         id: virginia
@@ -8450,6 +9379,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vitebskaya:
         id: vitebskaya
@@ -8459,6 +9389,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vizcaya:
         id: vizcaya
@@ -8468,6 +9399,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vladimir_oblast:
         id: vladimir_oblast
@@ -8477,6 +9409,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     volga_federal_district:
         id: volga_federal_district
@@ -8486,6 +9419,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     volgograd_oblast:
         id: volgograd_oblast
@@ -8495,6 +9429,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vologda_oblast:
         id: vologda_oblast
@@ -8504,6 +9439,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     volyn_oblast:
         id: volyn_oblast
@@ -8513,6 +9449,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vorarlberg:
         id: vorarlberg
@@ -8522,6 +9459,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     voronezh_oblast:
         id: voronezh_oblast
@@ -8531,6 +9469,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     vysocina:
         id: vysocina
@@ -8540,6 +9479,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     wales:
         id: wales
@@ -8549,6 +9489,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     wallis-et-futuna:
         id: wallis-et-futuna
@@ -8558,6 +9499,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     wallonia_french_community:
         id: wallonia_french_community
@@ -8567,6 +9509,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     wallonia_german_community:
         id: wallonia_german_community
@@ -8576,6 +9519,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     warminsko_mazurskie:
         id: warminsko_mazurskie
@@ -8585,6 +9529,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     warwickshire:
         id: warwickshire
@@ -8594,6 +9539,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     washington:
         id: washington
@@ -8603,6 +9549,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     west-virginia:
         id: west-virginia
@@ -8612,6 +9559,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     west_bengal:
         id: west_bengal
@@ -8621,6 +9569,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     west_flanders:
         id: west_flanders
@@ -8630,6 +9579,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     west_java:
         id: west_java
@@ -8639,6 +9589,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     west_kalimantan:
         id: west_kalimantan
@@ -8648,6 +9599,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     west_midlands:
         id: west_midlands
@@ -8657,6 +9609,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     west_nusa_tenggara:
         id: west_nusa_tenggara
@@ -8666,6 +9619,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     west_papua:
         id: west_papua
@@ -8675,6 +9629,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     west_sulawesi:
         id: west_sulawesi
@@ -8684,6 +9639,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     west_sumatra:
         id: west_sumatra
@@ -8693,6 +9649,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     west_sussex:
         id: west_sussex
@@ -8702,6 +9659,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     west_yorkshire:
         id: west_yorkshire
@@ -8711,6 +9669,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     western-zone:
         id: western-zone
@@ -8720,6 +9679,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     western_sahara:
         id: western_sahara
@@ -8729,6 +9689,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     wielkopolskie:
         id: wielkopolskie
@@ -8738,6 +9699,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     wien:
         id: wien
@@ -8747,6 +9709,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     wiltshire:
         id: wiltshire
@@ -8756,6 +9719,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     wisconsin:
         id: wisconsin
@@ -8765,6 +9729,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     worcestershire:
         id: worcestershire
@@ -8774,6 +9739,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     wyoming:
         id: wyoming
@@ -8783,6 +9749,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     xinjiang:
         id: xinjiang
@@ -8792,6 +9759,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     yamalo_nenets_autonomous_okrug:
         id: yamalo_nenets_autonomous_okrug
@@ -8801,6 +9769,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     yaroslavl_oblast:
         id: yaroslavl_oblast
@@ -8810,6 +9779,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     yemen:
         id: yemen
@@ -8819,6 +9789,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     yogyakarta:
         id: yogyakarta
@@ -8828,6 +9799,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     yorkshire_and_the_humber:
         id: yorkshire_and_the_humber
@@ -8837,6 +9809,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     yucatan:
         id: yucatan
@@ -8846,6 +9819,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     yukon:
         id: yukon
@@ -8855,6 +9829,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     yunnan:
         id: yunnan
@@ -8864,6 +9839,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zabaykalsky_krai:
         id: zabaykalsky_krai
@@ -8873,6 +9849,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zacatecas:
         id: zacatecas
@@ -8882,6 +9859,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zachodniopomorskie:
         id: zachodniopomorskie
@@ -8891,6 +9869,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zakarpattia_oblast:
         id: zakarpattia_oblast
@@ -8900,6 +9879,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zambia:
         id: zambia
@@ -8909,6 +9889,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zamora:
         id: zamora
@@ -8918,6 +9899,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zaporizhia_oblast:
         id: zaporizhia_oblast
@@ -8927,6 +9909,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zaragoza:
         id: zaragoza
@@ -8936,6 +9919,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zeeland:
         id: zeeland
@@ -8945,6 +9929,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zhejiang:
         id: zhejiang
@@ -8954,6 +9939,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zhytomyr_oblast:
         id: zhytomyr_oblast
@@ -8963,6 +9949,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zilinsky:
         id: zilinsky
@@ -8972,6 +9959,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zimbabwe:
         id: zimbabwe
@@ -8981,6 +9969,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zlinsky:
         id: zlinsky
@@ -8990,6 +9979,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zug:
         id: zug
@@ -8999,6 +9989,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zuid_holland:
         id: zuid_holland
@@ -9008,6 +9999,7 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
     zurich:
         id: zurich
@@ -9017,5 +10009,6 @@ elements:
             - geojson
             - md5
             - osm.pbf
+            - osm.pbf.md5
             - poly
 baseURL: https://osmtoday.com
