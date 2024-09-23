@@ -1,4 +1,5 @@
 [
+  {"Version":"17508bcb57ffa27a8e5c5e5126de986e55f486c9","Date":1727075633,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/rivo/uniseg-0.4.7"],"Suites":[]},
   {"Version":"24616393c7ef6d7a857417a25b8aab0012dd26ea","Date":1726513797,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"5b98dca0afb3477a1d2ccdf16c3f71a42b5e119a","Date":1726004366,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"b5102593014aab885f56902639239b364d525370","Date":1725637126,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"0f87b5953a203d380da0f84b3e6a16a5dc913177","Date":1725292149,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"58f7e89e9cea0b64e3a4b0fc547e7f0c0cc08b08","Date":1725286865,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
   {"Version":"58f7e89e9cea0b64e3a4b0fc547e7f0c0cc08b08","Date":1725286827,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"80a6da040ed4cb9bf43540d26bbccd7d5277ee9c","Date":1725280232,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
-  {"Version":"80a6da040ed4cb9bf43540d26bbccd7d5277ee9c","Date":1725280181,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"80a6da040ed4cb9bf43540d26bbccd7d5277ee9c","Date":1725280232,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]}
 ]
