@@ -1,4 +1,5 @@
 [
+  {"Version":"671688524e55d38459b30250ee5cdcdecc50480a","Date":1727075650,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/golang/protobuf-1.5.4"],"Suites":[]},
   {"Version":"de18dd2cd641b7124342d12fdd081e05b133e42c","Date":1727075644,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.16"],"Suites":[]},
   {"Version":"099e2ce23243920fdb329e7c728e35e29de138a9","Date":1727075638,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.7.0"],"Suites":[]},
   {"Version":"17508bcb57ffa27a8e5c5e5126de986e55f486c9","Date":1727075633,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/rivo/uniseg-0.4.7"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"03b6cf3b48fd74e12c14a1eab51070d3eb36ff54","Date":1725293405,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
   {"Version":"03b6cf3b48fd74e12c14a1eab51070d3eb36ff54","Date":1725293371,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"0f87b5953a203d380da0f84b3e6a16a5dc913177","Date":1725292164,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
-  {"Version":"0f87b5953a203d380da0f84b3e6a16a5dc913177","Date":1725292149,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"58f7e89e9cea0b64e3a4b0fc547e7f0c0cc08b08","Date":1725286865,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]}
+  {"Version":"0f87b5953a203d380da0f84b3e6a16a5dc913177","Date":1725292149,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
