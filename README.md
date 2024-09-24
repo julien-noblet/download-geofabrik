@@ -32,27 +32,22 @@ A command-line tool for downloading OSM files.
 Flags:
       --[no-]help            Show context-sensitive help (also try --help-long
                              and --help-man).
-      --service="geofabrik"  Can switch to another service. You can use
-                             "geofabrik", "openstreetmap.fr" "osmtoday" or
-                             "bbbike". It automatically change config file if -c
-                             is unused.
   -c, --config="./geofabrik.yml"  
                              Set Config file.
   -n, --[no-]nodownload      Do not download file (test only)
   -v, --[no-]verbose         Be verbose
   -q, --[no-]quiet           Be quiet
-      --[no-]progress        Add a progress bar (implie quiet)
+      --[no-]progress        Add a progress bar (implies quiet)
+      --service="geofabrik"  Can switch to another service. You can use
+                             "geofabrik", "openstreetmap.fr" "osmtoday" or
+                             "bbbike". It automatically change config file if -c
+                             is unused.
       --[no-]version         Show application version.
 
 Commands:
 help [<command>...]
     Show help.
 
-
-list [<flags>]
-    Show elements available
-
-    --[no-]markdown  generate list in Markdown format
 
 download [<flags>] <element>
     Download element
@@ -82,6 +77,11 @@ download [<flags>] <element>
 generate
     Generate a new config file
 
+
+list [<flags>]
+    Show elements available
+
+    --[no-]markdown  generate list in Markdown format
 
 
 ```

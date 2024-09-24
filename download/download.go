@@ -10,6 +10,8 @@ import (
 
 	"github.com/apex/log"
 	pb "github.com/cheggaaa/pb/v3"
+	"github.com/julien-noblet/download-geofabrik/config"
+	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/spf13/viper"
 )
 
@@ -104,4 +106,104 @@ func FromURL(myURL, fileName string) error { //nolint:cyclop // TODO: Refactor!
 	}
 
 	return nil // Everything is ok
+}
+
+func FileExist(filePath string) bool {
+	if _, err := os.Stat(filePath); err == nil {
+		return true
+	}
+
+	return false
+}
+
+func DownloadFile(configPtr *config.Config, element, format, output string) {
+	format = configPtr.Formats[format].ID
+
+	myElem, err := config.FindElem(configPtr, element)
+	if err != nil {
+		log.WithError(err).Fatalf(config.ErrFindElem.Error(), element)
+	}
+
+	myURL, err := config.Elem2URL(configPtr, myElem, format)
+	if err != nil {
+		log.WithError(err).Fatal(config.ErrElem2URL)
+	}
+
+	err = FromURL(myURL, output)
+	if err != nil {
+		log.WithError(err).Fatal(ErrFromURL)
+	}
+}
+
+func GetOutputFileName(configPtr *config.Config, element string, myFormat *formats.Format) string {
+	myElem, err := config.FindElem(configPtr, element)
+	if err != nil {
+		log.WithError(err).Fatalf(config.ErrFindElem.Error(), element)
+	}
+
+	var extension string
+
+	if myFormat.ToLoc != "" {
+		extension = myFormat.ToLoc
+	} else {
+		extension = "." + myFormat.ID
+	}
+
+	return myElem.ID + extension
+}
+
+func DownloadChecksum(format string) bool {
+	ret := false
+
+	if viper.GetBool(config.ViperCheck) {
+		hash := "md5"
+		fhash := format + "." + hash
+
+		configPtr, err := config.LoadConfig(viper.GetString(config.ViperConfig))
+		if err != nil {
+			log.WithError(err).Fatal(config.ErrLoadConfig)
+		}
+
+		if ok, _, _ := config.IsHashable(configPtr, format); ok {
+			myElem, err := config.FindElem(configPtr, viper.GetString(config.ViperElement))
+			if err != nil {
+				log.WithError(err).Fatalf(config.ErrFindElem.Error(), viper.GetString(config.ViperElement))
+			}
+
+			myURL, err := config.Elem2URL(configPtr, myElem, fhash)
+			if err != nil {
+				log.WithError(err).Fatal(config.ErrElem2URL)
+			}
+
+			if e := FromURL(myURL, viper.GetString("output_directory")+viper.GetString(config.ViperElement)+"."+fhash); e != nil {
+				log.WithError(e).Fatal(ErrFromURL)
+			}
+
+			log.Infof("Hashing %s", viper.GetString(config.ViperOutputDirectory)+viper.GetString(config.ViperElement)+"."+format)
+
+			hashed, err := HashFileMD5(viper.GetString(config.ViperOutputDirectory) + viper.GetString(config.ViperElement) + "." + format)
+			if err != nil {
+				log.WithError(err).Fatal("can't hash file")
+			}
+
+			log.Debugf("MD5 : %s", hashed)
+
+			ret, err = ControlHash(viper.GetString(config.ViperOutputDirectory)+viper.GetString(config.ViperElement)+"."+fhash, hashed)
+			if err != nil {
+				log.WithError(err).Error("checksum error")
+			}
+
+			if ret {
+				log.Infof("Checksum OK for %s", viper.GetString(config.ViperOutputDirectory)+viper.GetString(config.ViperElement)+"."+format)
+			} else {
+				log.Infof("Checksum MISMATCH for %s", viper.GetString(config.ViperOutputDirectory)+viper.GetString(config.ViperElement)+"."+format)
+			}
+
+			return ret
+		}
+
+		log.Warnf("No checksum provided for %s", viper.GetString(config.ViperOutputDirectory)+viper.GetString(config.ViperElement)+"."+format)
+	}
+
+	return ret
 }
