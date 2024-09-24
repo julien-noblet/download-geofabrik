@@ -1,4 +1,5 @@
 [
+  {"Version":"f9ca78336ee03c3256298b5ff960ba27763dac44","Date":1727156784,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/golang/protobuf-1.5.4"],"Suites":[]},
   {"Version":"b8ad254414f65909bc1c1ee54198524e1f8aff95","Date":1727156770,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.16"],"Suites":[]},
   {"Version":"e829fd7dc1ac30dbf0908eebb9384add166c2d99","Date":1727156736,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"bcb13d85c7537d43bf5e73097d4b7fddd677e60a","Date":1727156648,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/golang/protobuf-1.5.4"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"ca6dda568918ad15efc62b278797b223b852e173","Date":1725319452,"Tags":["ref=refs/heads/fix/bbbike"],"Suites":[]},
   {"Version":"9949c05d40f0b6e2a882ff808281e1d5ec68be72","Date":1725314847,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"6b5bfa3d5e2da24c5a20fc59e9c0756b2a2793e8","Date":1725313824,"Tags":["ref=refs/heads/fix/generator"],"Suites":[]},
-  {"Version":"4e9985728adf0506093908e4f9aeeae6fe9e3bfb","Date":1725313536,"Tags":["ref=refs/heads/fix/generator"],"Suites":[]},
-  {"Version":"2068bc747025a3714aa9458342864444c32bae9e","Date":1725306332,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]}
+  {"Version":"4e9985728adf0506093908e4f9aeeae6fe9e3bfb","Date":1725313536,"Tags":["ref=refs/heads/fix/generator"],"Suites":[]}
 ]
