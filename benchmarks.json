@@ -1,4 +1,5 @@
 [
+  {"Version":"cfa9a59f66ec41d546e8dfa2ec0bb37fd650a903","Date":1727158860,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"8414c8b6dd562e9612b894b6cd1b7697cedd31a0","Date":1727157967,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.2.3"],"Suites":[]},
   {"Version":"dc6e431b0756d3e7f07e1ce748759e91190c0695","Date":1727157936,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"f9ca78336ee03c3256298b5ff960ba27763dac44","Date":1727156784,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/golang/protobuf-1.5.4"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"0339f8367bb9be3866df756c929666e68ec569d5","Date":1725364923,"Tags":["ref=refs/heads/fix/bbbike"],"Suites":[]},
   {"Version":"e76a831eccabc412b683918d56a2679875c88deb","Date":1725320975,"Tags":["ref=refs/heads/feat/setup-go"],"Suites":[]},
   {"Version":"d09997ffaf6ece2b0724f35907dbbefcbd6c3c82","Date":1725320656,"Tags":["ref=refs/heads/fix/bbbike"],"Suites":[]},
-  {"Version":"ca6dda568918ad15efc62b278797b223b852e173","Date":1725319452,"Tags":["ref=refs/heads/fix/bbbike"],"Suites":[]},
-  {"Version":"9949c05d40f0b6e2a882ff808281e1d5ec68be72","Date":1725314847,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"ca6dda568918ad15efc62b278797b223b852e173","Date":1725319452,"Tags":["ref=refs/heads/fix/bbbike"],"Suites":[]}
 ]
