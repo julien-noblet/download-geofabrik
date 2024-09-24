@@ -1,4 +1,5 @@
 [
+  {"Version":"600b422c645e6b703d01a7a0ce699fbf2d0f72ef","Date":1727156630,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.7.0"],"Suites":[]},
   {"Version":"006d6151a8fc3f6efe8ff1b2f9a925b139cefed4","Date":1727156585,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ae8e68093cea498feb71b2db4c9ef7588ba1064c","Date":1727075662,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.2.3"],"Suites":[]},
   {"Version":"671688524e55d38459b30250ee5cdcdecc50480a","Date":1727075650,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/golang/protobuf-1.5.4"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"2068bc747025a3714aa9458342864444c32bae9e","Date":1725306310,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"b67fb6440d3239142bb376bc569fb081ffbf0df8","Date":1725295440,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
   {"Version":"b67fb6440d3239142bb376bc569fb081ffbf0df8","Date":1725295401,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"03b6cf3b48fd74e12c14a1eab51070d3eb36ff54","Date":1725293405,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]},
-  {"Version":"03b6cf3b48fd74e12c14a1eab51070d3eb36ff54","Date":1725293371,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"03b6cf3b48fd74e12c14a1eab51070d3eb36ff54","Date":1725293405,"Tags":["ref=refs/tags/v2.7.0-rc1"],"Suites":[]}
 ]
