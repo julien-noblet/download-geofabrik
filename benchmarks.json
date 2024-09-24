@@ -1,4 +1,5 @@
 [
+  {"Version":"cfa96e4cf301c7545c25db468f48917bbd112cb7","Date":1727158916,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.16"],"Suites":[]},
   {"Version":"cfa9a59f66ec41d546e8dfa2ec0bb37fd650a903","Date":1727158860,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"8414c8b6dd562e9612b894b6cd1b7697cedd31a0","Date":1727157967,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.2.3"],"Suites":[]},
   {"Version":"dc6e431b0756d3e7f07e1ce748759e91190c0695","Date":1727157936,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"ed5d2a457183cfa337300a3a05872c37ef1a58c4","Date":1725366277,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"0339f8367bb9be3866df756c929666e68ec569d5","Date":1725364923,"Tags":["ref=refs/heads/fix/bbbike"],"Suites":[]},
   {"Version":"e76a831eccabc412b683918d56a2679875c88deb","Date":1725320975,"Tags":["ref=refs/heads/feat/setup-go"],"Suites":[]},
-  {"Version":"d09997ffaf6ece2b0724f35907dbbefcbd6c3c82","Date":1725320656,"Tags":["ref=refs/heads/fix/bbbike"],"Suites":[]},
-  {"Version":"ca6dda568918ad15efc62b278797b223b852e173","Date":1725319452,"Tags":["ref=refs/heads/fix/bbbike"],"Suites":[]}
+  {"Version":"d09997ffaf6ece2b0724f35907dbbefcbd6c3c82","Date":1725320656,"Tags":["ref=refs/heads/fix/bbbike"],"Suites":[]}
 ]
