@@ -124,7 +124,7 @@ linters:
     - errorlint
     - execinquery
     - exhaustive
-    - exhaustruct
+    #- exhaustruct
     #- exhaustivestruct
     - exportloopref
     - funlen
@@ -172,7 +172,7 @@ linters:
     - nlreturn
     #- noctx
     - nolintlint
-    - nonamedreturns
+    #- nonamedreturns
     - nosprintfhostport
     - paralleltest
     - prealloc
