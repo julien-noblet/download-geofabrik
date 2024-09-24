@@ -1,9 +1,9 @@
 linters-settings:
   govet:
-    check-shadowing: true
     enable:
       - atomicalign
       - timeformat
+      - shadow
     settings:
       printf:
         funcs:
@@ -23,16 +23,12 @@ linters-settings:
     min-len: 2
     min-occurrences: 3
   depguard:
-    list-type: blacklist
-    packages:
-      # logging is allowed only by logutils.Log, logrus
-      # is allowed to use only in logutils package
-      - github.com/sirupsen/logrus
-      - github.com/apex/log/*
-      - github.com/julen-noblet/download-geofabrik/*
-      - 
-    packages-with-error-messages:
-      github.com/sirupsen/logrus: "logging is allowed only by logutils.Log"
+    rules:
+      main:
+        list-mode: lax
+        allow:
+          - github.com/apex/log
+          - github.com/julen-noblet/download-geofabrik/*
   misspell:
     locale: US
   lll:
@@ -96,125 +92,31 @@ linters-settings:
     allow-case-traling-whitespace: true
     # Allow declarations (var) to be cuddled.
     allow-cuddle-declarations: false
-  exhaustruct:
-    exclude:
-      - 'guia2\.BySelector$'
+
 
 linters:
   # please, do not use `enable-all`: it's deprecated and will be removed soon.
   # inverted configuration with `enable-all` and `disable` is not scalable during updates of golangci-lint
-  disable-all: true
-  enable:
-    - asasalint
-    - asciicheck
-    - bidichk
-    - bodyclose
-    - containedctx
-    - cyclop
-    #- deadcode
-    - decorder
-    #- depguard
-    - dogsled
-    - dupl
-    - dupword
-    - durationcheck
-    - errcheck
-    - errchkjson
-    - errname
-    - errorlint
-    - execinquery
-    - exhaustive
-    #- exhaustruct
-    #- exhaustivestruct
-    - exportloopref
-    - funlen
-    #- forbidigo
-    - forcetypeassert
-    - ginkgolinter
-    #- gci
-    - gocheckcompilerdirectives
+  #disable-all: true
+  #enable-all: true
+  disable:
     - gochecknoglobals
-    - gochecknoinits
-    - goconst
-    - gocritic
-    - gocyclo
-    - godot
-    #- godox
-    # - goerr113
-    #- gofmt
-    - gofumpt
-    - goheader
-    - goimports
-    - gomoddirectives
-    - gomnd
-    - gomodguard
-    - goprintffuncname
-    - gosec
-    - gosimple
-    - govet
-    - grouper
-    #- ifshort
-    - importas
-    - ineffassign
-    - interfacebloat
-    - ireturn
-    - lll
-    - loggercheck
-    - maintidx
-    - makezero
-    - misspell
-    - musttag
-    - nakedret
-    #- nilassign
-    - nestif
-    - nilerr
-    - nilnil
-    - nlreturn
-    #- noctx
-    - nolintlint
-    #- nonamedreturns
-    - nosprintfhostport
-    - paralleltest
-    - prealloc
-    - predeclared
-    - promlinter
-    - reassign
-    - revive
-    - rowserrcheck
-    - sqlclosecheck
-    - staticcheck
-    #- structcheck
-    - stylecheck
-    - tagliatelle
-    - tenv
-    - testableexamples
-    - testpackage
-    - thelper
-    - tparallel
-    - typecheck
-    - unconvert
-    - unparam
-    #- unused
-    - usestdlibvars
-    #- varcheck
-    - varnamelen
-    - wastedassign
-    - whitespace
-    - wrapcheck
-    - wsl
-  # don't enable:
-  # - gochecknoglobals
-  # - gocognit
-  # - gochecknoinits
-  # - prealloc
-  # - testpackage
-
-run:
-  timeout: 5m
-  skip-dirs:
-    - test/testdata_etc
-  skip-files:
-    - internal/cache/.*_test.go
+    - exhaustruct
+    - nonamedreturns
+  presets:
+    - bugs
+    - comment
+    - complexity
+    - error
+    - format
+    - import
+    - metalinter
+    - module
+    - performance
+    - sql
+    - style
+    - test
+    - unused
 
 issues:
   exclude-rules:
@@ -227,3 +129,6 @@ issues:
         - exhaustruct
         - maintidx
         - dupl
+        - godox
+        - gocognit
+    

@@ -150,7 +150,7 @@ func downloadFile(configPtr *config.Config, element, format, output string) {
 
 	myElem, err := config.FindElem(configPtr, element)
 	if err != nil {
-		log.WithError(err).Fatalf(config.ErrFindElem, element)
+		log.WithError(err).Fatalf(config.ErrFindElem.Error(), element)
 	}
 
 	myURL, err := config.Elem2URL(configPtr, myElem, format)
@@ -202,7 +202,7 @@ func downloadCommand() {
 func getOutputFileName(configPtr *config.Config, element string, myFormat *formats.Format) string {
 	myElem, err := config.FindElem(configPtr, element)
 	if err != nil {
-		log.WithError(err).Fatalf(config.ErrFindElem, element)
+		log.WithError(err).Fatalf(config.ErrFindElem.Error(), element)
 	}
 
 	var extension string
@@ -358,7 +358,7 @@ func downloadChecksum(format string) bool {
 		if ok, _, _ := config.IsHashable(configPtr, format); ok {
 			myElem, err := config.FindElem(configPtr, *delement)
 			if err != nil {
-				log.WithError(err).Fatalf(config.ErrFindElem, *delement)
+				log.WithError(err).Fatalf(config.ErrFindElem.Error(), *delement)
 			}
 
 			myURL, err := config.Elem2URL(configPtr, myElem, fhash)
