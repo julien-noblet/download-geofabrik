@@ -52,6 +52,11 @@ help [<command>...]
 download [<flags>] <element>
     Download element
 
+        --[no-]check           Control with checksum (default) Use --no-check to
+                               discard control
+    -d, --output_directory=OUTPUT_DIRECTORY  
+                               Set output directory, you can use also OUTPUT_DIR
+                               env variable
     -B, --[no-]osm.bz2         Download osm.bz2 if available
     -G, --[no-]osm.gz          Download osm.gz if available
     -S, --[no-]shp.zip         Download shp.zip if available
@@ -68,11 +73,6 @@ download [<flags>] <element>
     -r, --[no-]garminonroad    Download Garmin Onroad file
     -t, --[no-]garminontrail   Download Garmin Ontrail file
     -o, --[no-]garminopenTopo  Download Garmin OpenTopo file
-        --[no-]check           Control with checksum (default) Use --no-check to
-                               discard control
-    -d, --output_directory=OUTPUT_DIRECTORY  
-                               Set output directory, you can use also OUTPUT_DIR
-                               env variable
 
 generate
     Generate a new config file
