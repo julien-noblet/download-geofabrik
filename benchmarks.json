@@ -1,4 +1,5 @@
 [
+  {"Version":"6daa71ba9be8e04dfc33a5e9640ab8c52468a233","Date":1727296400,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"ed7b8ac575f34c7e461d6e6b9dd8293da0310746","Date":1727295165,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"53cabf0ade907135a89c2b6b6b7006b7f996afa0","Date":1727295131,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"2ac26566cfe15d6f8627b39433d1020bb2293e6c","Date":1727294665,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"dc6e431b0756d3e7f07e1ce748759e91190c0695","Date":1727157936,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"f9ca78336ee03c3256298b5ff960ba27763dac44","Date":1727156784,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/golang/protobuf-1.5.4"],"Suites":[]},
   {"Version":"b8ad254414f65909bc1c1ee54198524e1f8aff95","Date":1727156770,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.16"],"Suites":[]},
-  {"Version":"e829fd7dc1ac30dbf0908eebb9384add166c2d99","Date":1727156736,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"bcb13d85c7537d43bf5e73097d4b7fddd677e60a","Date":1727156648,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/golang/protobuf-1.5.4"],"Suites":[]}
+  {"Version":"e829fd7dc1ac30dbf0908eebb9384add166c2d99","Date":1727156736,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
