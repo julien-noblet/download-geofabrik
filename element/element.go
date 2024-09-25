@@ -12,25 +12,11 @@ type Element struct {
 
 type Formats []string
 
-// Slice contain all Elements
-// TODO: It's not a slice but a MAP!!!!
-type Slice map[string]Element
+// MapElement contain all Elements
+type MapElement map[string]Element
 
 func (e *Element) HasParent() bool {
 	return e.Parent != ""
-}
-
-// StringInSlice : Check if a sting is present in a slice
-// should be more easy to access to a map!
-// TODO: remove it!
-func StringInSlice(a *string, list *Formats) bool {
-	for _, b := range *list {
-		if b == *a {
-			return true
-		}
-	}
-
-	return false
 }
 
 func (f *Formats) Contains(e string) bool {

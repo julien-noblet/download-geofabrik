@@ -109,7 +109,7 @@ func Convert(index *Index) (*config.Config, error) {
 	myConfig := &config.Config{
 		Formats:       FormatDefinition(),
 		BaseURL:       GeofabrikBaseURL,
-		Elements:      element.Slice{},
+		Elements:      element.MapElement{},
 		ElementsMutex: &sync.RWMutex{},
 	}
 

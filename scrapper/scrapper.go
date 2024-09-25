@@ -78,7 +78,7 @@ func (s *Scrapper) GetConfig() *config.Config {
 // initializeConfig initializes the configuration with default values.
 func (s *Scrapper) initializeConfig() *config.Config {
 	return &config.Config{
-		Elements:      element.Slice{},
+		Elements:      element.MapElement{},
 		ElementsMutex: &sync.RWMutex{},
 		Formats:       s.FormatDefinition,
 		BaseURL:       s.BaseURL,

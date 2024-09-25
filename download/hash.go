@@ -60,7 +60,7 @@ func ComputeMD5Hash(filePath string) (string, error) {
 
 	defer func() {
 		if err := file.Close(); err != nil {
-			log.WithError(err).Errorf(fmt.Errorf(closeErrorMsg, err).Error())
+			log.WithError(err).Error(fmt.Errorf(closeErrorMsg, err).Error())
 		}
 	}()
 

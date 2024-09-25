@@ -133,7 +133,7 @@ func TestSlice_Generate(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		e       element.Slice
+		e       element.MapElement
 		want    []byte
 		wantErr bool
 	}{
@@ -269,7 +269,7 @@ func TestCleanup(t *testing.T) {
 							BaseURL:  "http://my.new.url/folder",
 						},
 					},
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"africa": {
 							ID:   "africa",
 							Name: "Africa",
@@ -306,7 +306,7 @@ func TestCleanup(t *testing.T) {
 				c: &config.Config{
 					BaseURL: "https://my.base.url",
 					Formats: formats.FormatDefinitions{},
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"africa": {
 							ID:   "africa",
 							Name: "Africa",

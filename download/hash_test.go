@@ -135,6 +135,7 @@ func Test_VerifyFileChecksum(t *testing.T) {
 		outputPath string
 		hashfile   string
 	}
+
 	tests := []struct {
 		name string
 		args args

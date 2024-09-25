@@ -32,7 +32,7 @@ var (
 // It also contain the BaseURL and Formats...
 type Config struct {
 	Formats       formats.FormatDefinitions `yaml:"formats"`
-	Elements      element.Slice             `yaml:"elements"`
+	Elements      element.MapElement        `yaml:"elements"`
 	ElementsMutex *sync.RWMutex             `yaml:"-"`       // unexported
 	BaseURL       string                    `yaml:"baseURL"` //nolint:tagliatelle // revive prefer this form
 }
@@ -204,7 +204,7 @@ func LoadConfig(configFile string) (*Config, error) {
 
 	myConfigPtr := &Config{
 		Formats:       formats.FormatDefinitions{},
-		Elements:      element.Slice{},
+		Elements:      element.MapElement{},
 		ElementsMutex: &sync.RWMutex{},
 		BaseURL:       "",
 	}

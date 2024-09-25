@@ -110,7 +110,7 @@ func Test_ParseFormat(t *testing.T) {
 
 	tests := []struct {
 		args args
-		want element.Slice
+		want element.MapElement
 		name string
 	}{
 		{
@@ -119,7 +119,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: formats.FormatOsmPbf,
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -130,7 +130,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -145,7 +145,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: formats.FormatOsmPbf,
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -156,7 +156,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -171,7 +171,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: "osm.pbf.md5",
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -182,7 +182,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -197,7 +197,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: formats.FormatOsmBz2,
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -208,7 +208,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -223,7 +223,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: "osm.bz2.md5",
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -234,7 +234,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -249,7 +249,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: formats.FormatPoly,
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -260,7 +260,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -275,7 +275,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: formats.FormatShpZip,
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -286,7 +286,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -301,7 +301,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: "unk",
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -312,7 +312,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -327,7 +327,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: formats.FormatOsmPbf,
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -338,7 +338,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -488,18 +488,18 @@ func TestScrapper_GetConfig(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name: "Void",
-			want: &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}},
+			want: &config.Config{Elements: element.MapElement{}, ElementsMutex: &sync.RWMutex{}},
 		},
 		{
 			name:   "Void + BaseURL",
 			fields: scrapper.Scrapper{BaseURL: "http://my.url"},
-			want:   &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}, BaseURL: "http://my.url"},
+			want:   &config.Config{Elements: element.MapElement{}, ElementsMutex: &sync.RWMutex{}, BaseURL: "http://my.url"},
 		},
 		{
 			name:   "Void + FormatDefinition",
 			fields: scrapper.Scrapper{FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}}},
 			want: &config.Config{
-				Elements:      element.Slice{},
+				Elements:      element.MapElement{},
 				ElementsMutex: &sync.RWMutex{},
 				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
@@ -511,7 +511,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 			want: &config.Config{
-				Elements:      element.Slice{},
+				Elements:      element.MapElement{},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
 				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
@@ -521,7 +521,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 			name: "Config Exist",
 			fields: scrapper.Scrapper{
 				Config: &config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{ID: "a"},
 					},
 					ElementsMutex: &sync.RWMutex{},
@@ -530,7 +530,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 				},
 			},
 			want: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
@@ -543,7 +543,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 			fields: scrapper.Scrapper{
 				BaseURL: "http://my.url",
 				Config: &config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{ID: "a"},
 					},
 					ElementsMutex: &sync.RWMutex{},
@@ -552,7 +552,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 				},
 			},
 			want: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
@@ -565,7 +565,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 			fields: scrapper.Scrapper{
 				BaseURL: "http://my.url",
 				Config: &config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{ID: "a"},
 					},
 					ElementsMutex: &sync.RWMutex{},
@@ -575,7 +575,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 			want: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},

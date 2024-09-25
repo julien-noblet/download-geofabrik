@@ -102,7 +102,7 @@ func TestFile(t *testing.T) {
 					Formats: formats.FormatDefinitions{
 						formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "polygons/", BaseURL: ""},
 					},
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"africa": element.Element{ID: "africa", Name: "Africa", Formats: []string{formats.FormatPoly}},
 					},
 					ElementsMutex: &sync.RWMutex{},
@@ -122,7 +122,7 @@ func TestFile(t *testing.T) {
 					Formats: formats.FormatDefinitions{
 						formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "polygons/", BaseURL: ""},
 					},
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"africa": element.Element{ID: "africa", Name: "Africa", Formats: []string{formats.FormatPoly}},
 					},
 					ElementsMutex: &sync.RWMutex{},
@@ -141,7 +141,7 @@ func TestFile(t *testing.T) {
 					Formats: formats.FormatDefinitions{
 						formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "polygons/", BaseURL: ""},
 					},
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"africa": element.Element{ID: "africa", Name: "Africa", Formats: []string{formats.FormatPoly}},
 					},
 					ElementsMutex: &sync.RWMutex{},
@@ -160,7 +160,7 @@ func TestFile(t *testing.T) {
 					Formats: formats.FormatDefinitions{
 						formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "polygons/", BaseURL: ""},
 					},
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"africa": element.Element{ID: "africa", Name: "Africa", Formats: []string{formats.FormatPoly}},
 					},
 					ElementsMutex: &sync.RWMutex{},

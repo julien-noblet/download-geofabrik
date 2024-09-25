@@ -112,7 +112,7 @@ func GetDefault() *OpenstreetmapFR {
 			Timeout: timeout,
 			Config: &config.Config{
 				Formats:       formats.FormatDefinitions{},
-				Elements:      element.Slice{},
+				Elements:      element.MapElement{},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       `https://download.openstreetmap.fr/`,
 			},
