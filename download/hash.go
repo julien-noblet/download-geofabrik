@@ -47,7 +47,8 @@ func HashFileMD5(filePath string) (string, error) {
 	}
 	defer func() {
 		if err := file.Close(); err != nil {
-			log.WithError(err).Errorf(closeErrorMsg, err)
+			e := fmt.Errorf(closeErrorMsg, err)
+			log.WithError(err).Errorf(e.Error())
 		}
 	}()
 
