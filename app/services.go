@@ -1,33 +1,26 @@
 package app
 
 import (
-	"strings"
-
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/spf13/viper"
 )
 
 const (
-	geofabrikService = "geofabrik"
-	geofabrikParse   = "geofabrik-parse"
-	openstreetmapFr  = "openstreetmap.fr"
-	osmtodayService  = "osmtoday"
-	bbbikeService    = "bbbike"
+	geofabrikParse = "geofabrik-parse"
 )
 
 // serviceConfigMap maps services to their respective configuration files.
 var serviceConfigMap = map[string]string{
-	openstreetmapFr: "./openstreetmap.fr.yml",
-	osmtodayService: "./osmtoday.yml",
-	bbbikeService:   "./bbbike.yml",
+	serviceGeofabrik: "./geofabrik.yml",
+	geofabrikParse:   "./geofabrik.yml",
+	serviceOSMFr:     "./openstreetmap.fr.yml",
+	serviceOSMToday:  "./osmtoday.yml",
+	serviceBBBike:    "./bbbike.yml",
 }
 
 // CheckService checks the service and sets the appropriate configuration file.
 func CheckService() bool {
 	service := viper.GetString(config.ViperService)
-	if service == geofabrikService || service == geofabrikParse {
-		return true
-	}
 
 	if configFile, exists := serviceConfigMap[service]; exists {
 		SetConfigFile(configFile)
@@ -40,7 +33,9 @@ func CheckService() bool {
 
 // SetConfigFile sets the configuration file if the current config file is the default.
 func SetConfigFile(configFile string) {
-	if strings.EqualFold(viper.GetString(config.ViperConfig), defaultConfigFile) {
+	if viper.GetString(config.ViperConfig) == "" {
+		viper.Set(config.ViperConfig, defaultConfigFile)
+	} else {
 		viper.Set(config.ViperConfig, configFile)
 	}
 }

@@ -16,40 +16,40 @@ const (
 
 // ConfigureViper sets up the Viper configuration based on the application flags.
 func (a *App) ConfigureViper() {
-	viper.Set(config.ViperConfig, *a.fConfig)
-	viper.Set(config.ViperService, *a.fService)
-	setViperBool(config.ViperNoDL, a.fNodownload)
-	setViperBool(config.ViperProgress, a.fProgress)
-	setViperBool(config.ViperVerbose, a.fVerbose)
-	setViperBool(config.ViperQuiet, a.fQuiet)
-	viper.Set(config.ViperElement, *a.delement)
+	viper.Set(config.ViperConfig, *a.FConfig)
+	viper.Set(config.ViperService, *a.FService)
+	SetViperBool(config.ViperNoDL, a.FNodownload)
+	SetViperBool(config.ViperProgress, a.FProgress)
+	SetViperBool(config.ViperVerbose, a.FVerbose)
+	SetViperBool(config.ViperQuiet, a.FQuiet)
+	viper.Set(config.ViperElement, *a.Delement)
 
 	// Add other configurations here
-	viper.Set(config.ViperOutputDirectory, *a.dOutputDir)
-	setViperBool(config.ViperCheck, a.dCheck)
-	setViperBool(config.ViperListFormatMarkdown, a.lmd)
+	viper.Set(config.ViperOutputDirectory, *a.DOutputDir)
+	SetViperBool(config.ViperCheck, a.DCheck)
+	SetViperBool(config.ViperListFormatMarkdown, a.Lmd)
 
 	// Formats:
-	setViperBool(formats.FormatOsmBz2, a.dosmBz2)
-	setViperBool(formats.FormatOsmGz, a.dosmGz)
-	setViperBool(formats.FormatShpZip, a.dshpZip)
-	setViperBool(formats.FormatOsmPbf, a.dosmPbf)
-	setViperBool(formats.FormatOshPbf, a.doshPbf)
-	setViperBool(formats.FormatState, a.dstate)
-	setViperBool(formats.FormatPoly, a.dpoly)
-	setViperBool(formats.FormatKml, a.dkml)
-	setViperBool(formats.FormatGeoJSON, a.dgeojson)
-	setViperBool(formats.FormatGarminOSM, a.dgarmin)
-	setViperBool(formats.FormatMapsforge, a.dmaps)
-	setViperBool(formats.FormatMBTiles, a.dmbtiles)
-	setViperBool(formats.FormatCSV, a.dcsv)
-	setViperBool(formats.FormatGarminOnroad, a.dgarminonroad)
-	setViperBool(formats.FormatGarminOntrail, a.dgarminontrail)
-	setViperBool(formats.FormatGarminOpenTopo, a.dgarminopentopo)
+	SetViperBool(formats.FormatOsmBz2, a.DosmBz2)
+	SetViperBool(formats.FormatOsmGz, a.DosmGz)
+	SetViperBool(formats.FormatShpZip, a.DshpZip)
+	SetViperBool(formats.FormatOsmPbf, a.DosmPbf)
+	SetViperBool(formats.FormatOshPbf, a.DoshPbf)
+	SetViperBool(formats.FormatState, a.Dstate)
+	SetViperBool(formats.FormatPoly, a.Dpoly)
+	SetViperBool(formats.FormatKml, a.Dkml)
+	SetViperBool(formats.FormatGeoJSON, a.Dgeojson)
+	SetViperBool(formats.FormatGarminOSM, a.Dgarmin)
+	SetViperBool(formats.FormatMapsforge, a.Dmaps)
+	SetViperBool(formats.FormatMBTiles, a.Dmbtiles)
+	SetViperBool(formats.FormatCSV, a.Dcsv)
+	SetViperBool(formats.FormatGarminOnroad, a.Dgarminonroad)
+	SetViperBool(formats.FormatGarminOntrail, a.Dgarminontrail)
+	SetViperBool(formats.FormatGarminOpenTopo, a.Dgarminopentopo)
 }
 
-// setViperBool sets a boolean flag in Viper configuration.
-func setViperBool(name string, flag *bool) {
+// SetViperBool sets a boolean flag in Viper configuration.
+func SetViperBool(name string, flag *bool) {
 	viper.Set(name, false)
 
 	if *flag {
