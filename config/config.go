@@ -124,7 +124,7 @@ func (config *Config) GetElement(id string) (*element.Element, error) { //nolint
 func FindElem(config *Config, e string) (*element.Element, error) {
 	res := config.Elements[e]
 	if res.ID == "" || res.ID != e {
-		return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, e)
+		return nil, fmt.Errorf("%w: %s is not in config.\n Please use \"list\" command", ErrFindElem, e)
 	}
 
 	return &res, nil

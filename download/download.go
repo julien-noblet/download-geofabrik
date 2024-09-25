@@ -11,7 +11,6 @@ import (
 	"github.com/apex/log"
 	pb "github.com/cheggaaa/pb/v3"
 	"github.com/julien-noblet/download-geofabrik/config"
-	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/spf13/viper"
 )
 
@@ -56,7 +55,13 @@ func FromURL(myURL, fileName string) error {
 	defer response.Body.Close()
 
 	if response.StatusCode != http.StatusOK {
-		return fmt.Errorf("error while downloading %v, server return code %d\n Please use '%s generate' to re-create your yml file", myURL, response.StatusCode, os.Args[0])
+		return fmt.Errorf(
+			"error while downloading %v, server return code %d\n Please use '%s generate' to re-create your yml file.\n %w",
+			myURL,
+			response.StatusCode,
+			os.Args[0],
+			http.ErrNotSupported,
+		)
 	}
 
 	file, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY, fileMode)
@@ -102,38 +107,31 @@ func FileExist(filePath string) bool {
 }
 
 // File downloads a file based on the configuration and element.
-func File(configPtr *config.Config, element, format, output string) {
+func File(configPtr *config.Config, element, format, output string) error {
 	format = configPtr.Formats[format].ID
 
 	myElem, err := config.FindElem(configPtr, element)
 	if err != nil {
-		log.WithError(err).Fatalf(config.ErrFindElem.Error(), element)
+		log.WithError(err).Errorf(config.ErrFindElem.Error(), element)
+
+		return fmt.Errorf("%w", fmt.Errorf(config.ErrFindElem.Error(), element))
 	}
 
 	myURL, err := config.Elem2URL(configPtr, myElem, format)
 	if err != nil {
-		log.WithError(err).Fatal(config.ErrElem2URL)
+		log.WithError(err).Error(config.ErrElem2URL)
+
+		return fmt.Errorf("%s %w", config.ErrElem2URL, err)
 	}
 
 	err = FromURL(myURL, output)
 	if err != nil {
-		log.WithError(err).Fatal(ErrFromURL)
-	}
-}
+		log.WithError(err).Error(ErrFromURL)
 
-// GetOutputFileName generates the output file name based on the element and format.
-func GetOutputFileName(configPtr *config.Config, element string, myFormat *formats.Format) string {
-	myElem, err := config.FindElem(configPtr, element)
-	if err != nil {
-		log.WithError(err).Fatalf(config.ErrFindElem.Error(), element)
+		return fmt.Errorf("%s %w", ErrFromURL, err)
 	}
 
-	extension := myFormat.ToLoc
-	if extension == "" {
-		extension = "." + myFormat.ID
-	}
-
-	return myElem.ID + extension
+	return nil
 }
 
 // Checksum downloads and verifies the checksum of a file.

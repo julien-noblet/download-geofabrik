@@ -1,9 +1,13 @@
 package download_test
 
 import (
+	"sync"
 	"testing"
 
+	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/download"
+	"github.com/julien-noblet/download-geofabrik/element"
+	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/spf13/viper"
 )
 
@@ -73,6 +77,113 @@ func Test_DownloadFromURL(t *testing.T) {
 		t.Run(thisTest.name, func(t *testing.T) {
 			if err := download.FromURL(thisTest.args.myURL, thisTest.args.fileName); err != nil != thisTest.wantErr {
 				t.Errorf("download.FromURL() error = %v, wantErr %v", err, thisTest.wantErr)
+			}
+		})
+	}
+}
+
+func TestFile(t *testing.T) {
+	t.Parallel()
+
+	type args struct {
+		configPtr *config.Config
+		element   string
+		format    string
+		output    string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "TestFile",
+			args: args{
+				configPtr: &config.Config{
+					Formats: formats.FormatDefinitions{
+						formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "polygons/", BaseURL: ""},
+					},
+					Elements: element.Slice{
+						"africa": element.Element{ID: "africa", Name: "Africa", Formats: []string{formats.FormatPoly}},
+					},
+					ElementsMutex: &sync.RWMutex{},
+					BaseURL:       `https://download.openstreetmap.fr/`,
+				},
+
+				element: "africa",
+				format:  formats.FormatPoly,
+				output:  "/tmp/download-geofabrik.test",
+			},
+			wantErr: false,
+		},
+		{
+			name: "TestFile not found",
+			args: args{
+				configPtr: &config.Config{
+					Formats: formats.FormatDefinitions{
+						formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "polygons/", BaseURL: ""},
+					},
+					Elements: element.Slice{
+						"africa": element.Element{ID: "africa", Name: "Africa", Formats: []string{formats.FormatPoly}},
+					},
+					ElementsMutex: &sync.RWMutex{},
+					BaseURL:       `https://download.openstreetmap.fr/`,
+				},
+				element: "europe",
+				format:  formats.FormatPoly,
+				output:  "/tmp/download-geofabrik.test",
+			},
+			wantErr: true,
+		},
+		{
+			name: "TestFile url error",
+			args: args{
+				configPtr: &config.Config{
+					Formats: formats.FormatDefinitions{
+						formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "polygons/", BaseURL: ""},
+					},
+					Elements: element.Slice{
+						"africa": element.Element{ID: "africa", Name: "Africa", Formats: []string{formats.FormatPoly}},
+					},
+					ElementsMutex: &sync.RWMutex{},
+					BaseURL:       `https://xx.fr/`,
+				},
+				element: "africa",
+				format:  formats.FormatPoly,
+				output:  "/tmp/download-geofabrik.test",
+			},
+			wantErr: true,
+		},
+		{
+			name: "TestFile format error",
+			args: args{
+				configPtr: &config.Config{
+					Formats: formats.FormatDefinitions{
+						formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "polygons/", BaseURL: ""},
+					},
+					Elements: element.Slice{
+						"africa": element.Element{ID: "africa", Name: "Africa", Formats: []string{formats.FormatPoly}},
+					},
+					ElementsMutex: &sync.RWMutex{},
+					BaseURL:       `https://download.openstreetmap.fr/`,
+				},
+				element: "africa",
+				format:  "unknown",
+				output:  "/tmp/download-geofabrik.test",
+			},
+			wantErr: true,
+		},
+	}
+
+	viper.Set(config.ViperVerbose, true)
+
+	for _, tt := range tests {
+		t.Parallel()
+
+		t.Run(tt.name, func(t *testing.T) {
+			got := download.File(tt.args.configPtr, tt.args.element, tt.args.format, tt.args.output)
+			if (got != nil) != tt.wantErr {
+				t.Errorf("File() error = %v, wantErr %v", got, tt.wantErr)
 			}
 		})
 	}
