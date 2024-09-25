@@ -53,7 +53,6 @@ func TestSetConfigFile(t *testing.T) {
 }
 
 func TestCheckService(t *testing.T) {
-
 	mutex := sync.RWMutex{}
 
 	tests := []struct {
@@ -103,6 +102,7 @@ func TestCheckService(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			mutex.Lock()
 			defer mutex.Unlock()
+
 			viper.Set(config.ViperService, tt.serviceName)
 			defer viper.Set(config.ViperService, "")
 
@@ -113,7 +113,6 @@ func TestCheckService(t *testing.T) {
 			if tt.wantbool && (viper.GetString(config.ViperConfig) != tt.want) {
 				t.Errorf("CheckService() = %v, want %v", viper.GetString(config.ViperConfig), tt.want)
 			}
-
 		})
 	}
 }

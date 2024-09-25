@@ -82,7 +82,7 @@ func TestConfigureLogging(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+		t.Run(tt.name, func(_ *testing.T) {
 			viper.Set(config.ViperQuiet, tt.args.quiet)
 			viper.Set(config.ViperVerbose, tt.args.verbose)
 			viper.Set(config.ViperProgress, tt.args.progress)
