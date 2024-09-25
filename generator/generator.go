@@ -22,7 +22,7 @@ func Write(c *config.Config, filename string) {
 	out, _ := c.Generate()
 	filename, _ = filepath.Abs(filename)
 
-	if err := os.WriteFile(filename, out, 0o600); err != nil { //nolint:gomnd // 0o600 is the default mode for new files
+	if err := os.WriteFile(filename, out, 0o600); err != nil {
 		log.WithError(err).Fatal("can't write file")
 	}
 
@@ -30,7 +30,7 @@ func Write(c *config.Config, filename string) {
 }
 
 // Generate main function.
-func Generate(configfile string) { //nolint:cyclop // TODO : Refactor
+func Generate(configfile string) {
 	var (
 		bar        *pb.ProgressBar
 		myScrapper scrapper.IScrapper
