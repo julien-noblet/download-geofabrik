@@ -71,7 +71,6 @@ func Test_DownloadFromURL(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		viper.Set("noDownload", thisTest.fNodownload)
 		viper.Set("quiet", thisTest.fQuiet)
 		viper.Set("progress", thisTest.fProgress)
@@ -223,6 +222,15 @@ func TestChecksum(t *testing.T) {
 			want:   true,
 		},
 	}
+
+	// preparation: download monaco.osm.pbf
+	configPtr, err := config.LoadConfig("../geofabrik.yml")
+	if err != nil {
+		t.Error(err)
+	}
+
+	download.File(configPtr, "monaco", formats.FormatOsmPbf, "monaco.osm.pbf")
+
 	for _, tt := range tests {
 		viper.Set(config.ViperCheck, tt.check)
 
@@ -232,6 +240,10 @@ func TestChecksum(t *testing.T) {
 			}
 		})
 	}
+
+	os.Remove("monaco.osm.pbf")     // clean
+	os.Remove("monaco.osm.pbf.md5") // clean
+	os.Remove("monaco.poly")        // clean just in case
 }
 
 // Test_downloadChecksum I don't know why sometimes controlHash fail :'(
@@ -239,10 +251,6 @@ func TestChecksum(t *testing.T) {
 //
 //nolint:paralleltest // Can't be parallelized
 func Test_downloadChecksum(t *testing.T) {
-	type args struct {
-		format string
-	}
-
 	viper.Set(config.ViperVerbose, true)
 
 	mutex := sync.RWMutex{}
@@ -283,20 +291,23 @@ func Test_downloadChecksum(t *testing.T) {
 
 	for _, thisTest := range tests {
 		mutex.Lock()
-		real_Test_downloadChecksum(t, thisTest, &mutex)
+		realTestDownloadChecksum(t, thisTest)
 		mutex.Unlock()
 	}
 }
 
-func real_Test_downloadChecksum(t *testing.T, thisTest struct {
-	name     string
-	fConfig  string
-	delement string
-	format   string
-	dCheck   bool
-	want     bool
-}, mutex *sync.RWMutex,
+func realTestDownloadChecksum( //nolint:thelper // prevent mutex lock
+	t *testing.T,
+	thisTest struct {
+		name     string
+		fConfig  string
+		delement string
+		format   string
+		dCheck   bool
+		want     bool
+	},
 ) {
+	// load geofabrik.yml config
 	viper.Set(config.ViperConfig, thisTest.fConfig)
 	viper.Set(config.ViperService, "geofabrik")
 	viper.Set(config.ViperElement, thisTest.delement)

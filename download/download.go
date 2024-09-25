@@ -1,6 +1,7 @@
 package download
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"net"
@@ -48,7 +49,15 @@ func FromURL(myURL, fileName string) error {
 		},
 	}
 
-	response, err := client.Get(myURL)
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	defer cancel()
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, myURL, http.NoBody)
+	if err != nil {
+		return fmt.Errorf("error creating request for %s - %w", myURL, err)
+	}
+
+	response, err := client.Do(req)
 	if err != nil {
 		return fmt.Errorf("error while downloading %s - %w", myURL, err)
 	}
@@ -114,7 +123,7 @@ func File(configPtr *config.Config, element, format, output string) error {
 	if err != nil {
 		log.WithError(err).Errorf(config.ErrFindElem.Error(), element)
 
-		return fmt.Errorf("%w", fmt.Errorf(config.ErrFindElem.Error(), element))
+		return fmt.Errorf("%w: %s", config.ErrFindElem, element)
 	}
 
 	myURL, err := config.Elem2URL(configPtr, myElem, format)
