@@ -30,12 +30,14 @@ const (
 func CheckFileHash(hashfile, expectedHash string) (bool, error) {
 	if !FileExist(hashfile) {
 		log.Infof(hashFileNotFoundMsg, hashfile)
+
 		return false, nil
 	}
 
 	fileContent, err := os.ReadFile(hashfile)
 	if err != nil {
 		log.Infof(hashFileReadErrorMsg, hashfile)
+
 		return false, fmt.Errorf(readErrorMsg, hashfile, err)
 	}
 

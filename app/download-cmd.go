@@ -75,10 +75,13 @@ func HandleHashableFormat(configPtr *config.Config, formatID, outputFilePath str
 
 // DownloadFile handles the file download logic.
 func DownloadFile(configPtr *config.Config, formatID, outputFilePath string) {
-	download.File(
+	err := download.File(
 		configPtr,
 		viper.GetString(viperElementKey),
 		formatID,
 		outputFilePath,
 	)
+	if err != nil {
+		log.WithError(err).Fatal("Download error")
+	}
 }

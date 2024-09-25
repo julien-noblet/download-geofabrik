@@ -1,6 +1,7 @@
 package download_test
 
 import (
+	"os"
 	"sync"
 	"testing"
 
@@ -83,13 +84,13 @@ func Test_DownloadFromURL(t *testing.T) {
 }
 
 func TestFile(t *testing.T) {
-
 	type args struct {
 		configPtr *config.Config
 		element   string
 		format    string
 		output    string
 	}
+
 	tests := []struct {
 		name    string
 		args    args
@@ -187,19 +188,46 @@ func TestFile(t *testing.T) {
 }
 
 func TestChecksum(t *testing.T) {
-	type args struct {
-		format string
-	}
+	// load geofabrik.yml config
+	viper.Set(config.ViperConfig, "../geofabrik.yml")
+	viper.Set(config.ViperElement, "monaco")
+
 	tests := []struct {
-		name string
-		args args
-		want bool
+		name   string
+		format string
+		check  bool
+		want   bool
 	}{
-		// TODO: Add test cases.
+		{
+			name:   "TestChecksum " + formats.FormatPoly + " no check",
+			format: formats.FormatPoly,
+			check:  false,
+			want:   false,
+		},
+		{
+			name:   "TestChecksum " + formats.FormatOsmPbf + " no check",
+			format: formats.FormatOsmPbf,
+			check:  false,
+			want:   false,
+		},
+		{
+			name:   "TestChecksum " + formats.FormatPoly + " check",
+			format: formats.FormatPoly,
+			check:  true,
+			want:   false,
+		},
+		{
+			name:   "TestChecksum " + formats.FormatOsmPbf + " check",
+			format: formats.FormatOsmPbf,
+			check:  true,
+			want:   true,
+		},
 	}
 	for _, tt := range tests {
+		viper.Set(config.ViperCheck, tt.check)
+
 		t.Run(tt.name, func(t *testing.T) {
-			if got := download.Checksum(tt.args.format); got != tt.want {
+			if got := download.Checksum(tt.format); got != tt.want {
 				t.Errorf("Checksum() = %v, want %v", got, tt.want)
 			}
 		})
@@ -267,7 +295,8 @@ func real_Test_downloadChecksum(t *testing.T, thisTest struct {
 	format   string
 	dCheck   bool
 	want     bool
-}, mutex *sync.RWMutex) {
+}, mutex *sync.RWMutex,
+) {
 	viper.Set(config.ViperConfig, thisTest.fConfig)
 	viper.Set(config.ViperService, "geofabrik")
 	viper.Set(config.ViperElement, thisTest.delement)
@@ -300,7 +329,8 @@ func real_Test_downloadChecksum(t *testing.T, thisTest struct {
 			t.Errorf("download.Checksum() = %v, want %v", got, thisTest.want)
 		}
 
-		//os.Remove("monaco.osm.pbf")     // clean
-		//os.Remove("monaco.osm.pbf.md5") // clean
+		os.Remove("monaco.osm.pbf")     // clean
+		os.Remove("monaco.osm.pbf.md5") // clean
+		os.Remove("monaco.poly")        // clean
 	})
 }
