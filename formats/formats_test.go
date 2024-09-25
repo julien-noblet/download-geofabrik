@@ -15,12 +15,12 @@ func Benchmark_miniFormats_parse_geofabrik_yml(b *testing.B) {
 
 	for n := 0; n < b.N; n++ {
 		for _, v := range c.Elements {
-			formats.MiniFormats(v.Formats)
+			formats.GetMiniFormats(v.Formats)
 		}
 	}
 }
 
-func Test_miniFormats(t *testing.T) {
+func Test_GetMiniFormats(t *testing.T) {
 	t.Parallel()
 
 	type args struct {
@@ -42,9 +42,9 @@ func Test_miniFormats(t *testing.T) {
 		{name: "poly only", args: args{s: []string{formats.FormatPoly}}, want: "p"},
 		{name: "shp.zip only", args: args{s: []string{formats.FormatShpZip}}, want: "S"},
 		{name: "kml only", args: args{s: []string{formats.FormatKml}}, want: "k"},
-		{name: "state and osm.pbf", args: args{s: []string{formats.FormatOsmPbf, formats.FormatState}}, want: "sP"},
+		{name: "state and osm.pbf", args: args{s: []string{formats.FormatOsmPbf, formats.FormatState}}, want: "Ps"},
 		{name: "state and osm.bz2", args: args{s: []string{formats.FormatState, formats.FormatOsmBz2}}, want: "sB"},
-		{name: "state and osh.pbf", args: args{s: []string{formats.FormatOshPbf, formats.FormatState}}, want: "sH"},
+		{name: "state and osh.pbf", args: args{s: []string{formats.FormatOshPbf, formats.FormatState}}, want: "Hs"},
 		{name: "state and osm.bz2", args: args{s: []string{formats.FormatState, formats.FormatOsmBz2}}, want: "sB"},
 		{name: "state and osm.bz2", args: args{s: []string{formats.FormatState, formats.FormatOsmBz2}}, want: "sB"},
 		{name: "state and poly", args: args{s: []string{formats.FormatState, formats.FormatPoly}}, want: "sp"},
@@ -66,7 +66,7 @@ func Test_miniFormats(t *testing.T) {
 				formats.FormatKml,
 				formats.FormatShpZip,
 			}},
-			want: "sPBpSk",
+			want: "sBPpkS",
 		},
 	}
 
@@ -74,7 +74,7 @@ func Test_miniFormats(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			if got := formats.MiniFormats(tt.args.s); got != tt.want {
+			if got := formats.GetMiniFormats(tt.args.s); got != tt.want {
 				t.Errorf("formats.MiniFormats() = %v, want %v", got, tt.want)
 			}
 		})
@@ -241,8 +241,8 @@ func Test_getFormats(t *testing.T) {
 		viper.Set("dkml", thisTest.flags.dkml)
 		viper.Set("dgeojson", thisTest.flags.dgeojson)
 		t.Run(thisTest.name, func(t *testing.T) {
-			if got := formats.GetFormats(); !reflect.DeepEqual(*got, thisTest.want) {
-				t.Errorf("formats.GetFormats() = %v, want %v", *got, thisTest.want)
+			if got := formats.GetFormats(); !reflect.DeepEqual(got, thisTest.want) {
+				t.Errorf("formats.GetFormats() = %v, want %v", got, thisTest.want)
 			}
 		})
 	}

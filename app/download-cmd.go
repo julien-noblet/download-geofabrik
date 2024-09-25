@@ -28,7 +28,7 @@ func DownloadCommand() {
 
 	filename := GetFilename(viper.GetString(viperOutputDirectoryKey), viper.GetString(viperElementKey))
 
-	for _, format := range *formatFile {
+	for _, format := range formatFile {
 		myFormat := configPtr.Formats[format]
 		outputFilePath := viper.GetString(viperOutputDirectoryKey) + filename + "." + myFormat.ID
 

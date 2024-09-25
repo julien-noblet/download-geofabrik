@@ -25,7 +25,7 @@ func ListAllRegions(configuration *config.Config, format string) {
 			item,
 			configuration.Elements[configuration.Elements[item].Parent].Name,
 			configuration.Elements[item].Name,
-			formats.MiniFormats(configuration.Elements[item].Formats),
+			formats.GetMiniFormats(configuration.Elements[item].Formats),
 		})
 	}
 

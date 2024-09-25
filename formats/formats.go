@@ -1,12 +1,13 @@
 package formats
 
 import (
-	"slices"
+	"sort"
 	"strings"
 
 	"github.com/spf13/viper"
 )
 
+// Format represents a file format with various attributes.
 type Format struct {
 	ID       string `yaml:"ext"`
 	Loc      string `yaml:"loc"`
@@ -15,13 +16,14 @@ type Format struct {
 	ToLoc    string `yaml:"toloc,omitempty"`
 }
 
-type (
-	FormatDefinitions map[string]Format
-	MiniFormat        struct {
-		ShortName string
-		FullName  string
-	}
-)
+// FormatDefinitions is a map of format definitions.
+type FormatDefinitions map[string]Format
+
+// MiniFormat represents a short and full name pair for a format.
+type MiniFormat struct {
+	ShortName string
+	FullName  string
+}
 
 const (
 	FormatState          = "state"
@@ -42,12 +44,29 @@ const (
 	FormatCSV            = "csv" // BBBike only
 )
 
-// MiniFormats get formats of an Element
-//
-//	and return a string
-//	according to download-geofabrik short flags.
-func MiniFormats(miniFormat []string) string {
-	miniFormatList := []MiniFormat{
+// Configuration keys
+const (
+	KeyOsmPbf         = "dosmPbf"
+	KeyOshPbf         = "doshPbf"
+	KeyOsmGz          = "dosmGz"
+	KeyOsmBz2         = "dosmBz2"
+	KeyShpZip         = "dshpZip"
+	KeyState          = "dstate"
+	KeyPoly           = "dpoly"
+	KeyKml            = "dkml"
+	KeyGeoJSON        = "dgeojson"
+	KeyGarminOSM      = "dgarmin"
+	KeyMapsforge      = "dmaps"
+	KeyMBTiles        = "dmbtiles"
+	KeyCSV            = "dcsv"
+	KeyGarminOnroad   = "dgarminonroad"
+	KeyGarminOntrail  = "dgarminontrail"
+	KeyGarminOpenTopo = "dgarminopentopo"
+)
+
+// GetMiniFormats returns a string of short format names based on the provided full format names.
+func GetMiniFormats(fullFormatNames []string) string {
+	miniFormats := []MiniFormat{
 		{ShortName: "s", FullName: FormatState},
 		{ShortName: "P", FullName: FormatOsmPbf},
 		{ShortName: "G", FullName: FormatOsmGz},
@@ -66,53 +85,54 @@ func MiniFormats(miniFormat []string) string {
 		{ShortName: "C", FullName: FormatCSV},
 	}
 
-	res := make([]string, len(miniFormatList))
+	shortNames := make([]string, 0, len(fullFormatNames))
 
-	for _, item := range miniFormat {
-		for i, format := range miniFormatList {
-			if item == format.FullName {
-				res[i] = format.ShortName
+	for _, fullName := range fullFormatNames {
+		for _, format := range miniFormats {
+			if fullName == format.FullName {
+				shortNames = append(shortNames, format.ShortName)
+				break
 			}
 		}
 	}
 
-	return strings.Join(res, "")
+	return strings.Join(shortNames, "")
 }
 
-// GetFormats return a pointer to a slice with formats.
-func GetFormats() *[]string {
-	var formatFile []string
-
+// GetFormats returns a slice of format strings based on the configuration.
+func GetFormats() []string {
 	options := map[string]string{
-		"dosmPbf":         FormatOsmPbf,
-		"doshPbf":         FormatOshPbf,
-		"dosmGz":          FormatOsmGz,
-		"dosmBz2":         FormatOsmBz2,
-		"dshpZip":         FormatShpZip,
-		"dstate":          FormatState,
-		"dpoly":           FormatPoly,
-		"dkml":            FormatKml,
-		"dgeojson":        FormatGeoJSON,
-		"dgarmin":         FormatGarminOSM,
-		"dmaps":           FormatMapsforge,
-		"dmbtiles":        FormatMBTiles,
-		"dcsv":            FormatCSV,
-		"dgarminonroad":   FormatGarminOnroad,
-		"dgarminontrail":  FormatGarminOntrail,
-		"dgarminopentopo": FormatGarminOpenTopo,
+		KeyOsmPbf:         FormatOsmPbf,
+		KeyOshPbf:         FormatOshPbf,
+		KeyOsmGz:          FormatOsmGz,
+		KeyOsmBz2:         FormatOsmBz2,
+		KeyShpZip:         FormatShpZip,
+		KeyState:          FormatState,
+		KeyPoly:           FormatPoly,
+		KeyKml:            FormatKml,
+		KeyGeoJSON:        FormatGeoJSON,
+		KeyGarminOSM:      FormatGarminOSM,
+		KeyMapsforge:      FormatMapsforge,
+		KeyMBTiles:        FormatMBTiles,
+		KeyCSV:            FormatCSV,
+		KeyGarminOnroad:   FormatGarminOnroad,
+		KeyGarminOntrail:  FormatGarminOntrail,
+		KeyGarminOpenTopo: FormatGarminOpenTopo,
 	}
 
-	for k, v := range options {
-		if viper.GetBool(k) {
-			formatFile = append(formatFile, v)
+	var formatList []string
+
+	for key, format := range options {
+		if viper.GetBool(key) {
+			formatList = append(formatList, format)
 		}
 	}
 
-	if len(formatFile) == 0 {
-		formatFile = append(formatFile, FormatOsmPbf)
+	if len(formatList) == 0 {
+		formatList = append(formatList, FormatOsmPbf)
 	}
 
-	slices.Sort(formatFile)
+	sort.Strings(formatList)
 
-	return &formatFile
+	return formatList
 }
