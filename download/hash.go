@@ -60,3 +60,28 @@ func HashFileMD5(filePath string) (string, error) {
 
 	return hex.EncodeToString(hash.Sum(nil)), nil
 }
+
+// VerifyChecksum verifies the checksum of a file.
+func VerifyChecksum(outputPath, format string) bool {
+	log.Infof("Hashing %s", outputPath)
+
+	hashed, err := HashFileMD5(outputPath)
+	if err != nil {
+		log.WithError(err).Fatal("can't hash file")
+	}
+
+	log.Debugf("MD5 : %s", hashed)
+
+	ret, err := ControlHash(outputPath+".md5", hashed)
+	if err != nil {
+		log.WithError(err).Error("checksum error")
+	}
+
+	if ret {
+		log.Infof("Checksum OK for %s", outputPath)
+	} else {
+		log.Infof("Checksum MISMATCH for %s", outputPath)
+	}
+
+	return ret
+}

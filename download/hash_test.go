@@ -23,7 +23,7 @@ func Test_hashFileMD5(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name:    "Check with LICENSE file",
-			args:    args{filePath: "./LICENSE"},
+			args:    args{filePath: "../LICENSE"},
 			want:    "65d26fcc2f35ea6a181ac777e42db1ea",
 			wantErr: false,
 		},
@@ -123,6 +123,31 @@ func Test_controlHash(t *testing.T) {
 
 			if got != thisTest.want {
 				t.Errorf("controlHash() = %v, want %v", got, thisTest.want)
+			}
+		})
+	}
+}
+
+func TestVerifyChecksum(t *testing.T) {
+	type args struct {
+		outputPath string
+		format     string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "Check with LICENSE file",
+			args: args{outputPath: "../LICENSE", format: "md5"},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := download.VerifyChecksum(tt.args.outputPath, tt.args.format); got != tt.want {
+				t.Errorf("VerifyChecksum() = %v, want %v", got, tt.want)
 			}
 		})
 	}

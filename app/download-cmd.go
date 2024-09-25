@@ -57,17 +57,17 @@ func IsHashable(configPtr *config.Config, formatID string) bool {
 // HandleHashableFormat handles the download logic for hashable formats.
 func HandleHashableFormat(configPtr *config.Config, formatID, outputFilePath string) {
 	if download.FileExist(outputFilePath) {
-		if !download.DownloadChecksum(formatID) {
+		if !download.Checksum(formatID) {
 			log.Infof("Checksum mismatch, re-downloading %v", outputFilePath)
 			DownloadFile(configPtr, formatID, outputFilePath)
-			download.DownloadChecksum(formatID)
+			download.Checksum(formatID)
 		} else {
 			log.Info("Checksum match, no download!")
 		}
 	} else {
 		DownloadFile(configPtr, formatID, outputFilePath)
 
-		if !download.DownloadChecksum(formatID) {
+		if !download.Checksum(formatID) {
 			log.Warnf("Checksum mismatch, please re-download %s", outputFilePath)
 		}
 	}
@@ -75,7 +75,7 @@ func HandleHashableFormat(configPtr *config.Config, formatID, outputFilePath str
 
 // DownloadFile handles the file download logic.
 func DownloadFile(configPtr *config.Config, formatID, outputFilePath string) {
-	download.DownloadFile(
+	download.File(
 		configPtr,
 		viper.GetString(viperElementKey),
 		formatID,
