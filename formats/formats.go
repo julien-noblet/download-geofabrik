@@ -44,7 +44,7 @@ const (
 	FormatCSV            = "csv" // BBBike only
 )
 
-// Configuration keys
+// Configuration keys.
 const (
 	KeyOsmPbf         = "dosmPbf"
 	KeyOshPbf         = "doshPbf"
@@ -91,6 +91,7 @@ func GetMiniFormats(fullFormatNames []string) string {
 		for _, format := range miniFormats {
 			if fullName == format.FullName {
 				shortNames = append(shortNames, format.ShortName)
+
 				break
 			}
 		}
