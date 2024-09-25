@@ -77,7 +77,6 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -300,7 +299,6 @@ func TestOpenstreetmapFR_parseHref(t *testing.T) {
 	t.Parallel()
 
 	for thisTest := range openstreetmapFRtests {
-		thisTest := thisTest
 		myOpenstreetmapFR := openstreetmapfr.GetDefault()
 		myOpenstreetmapFR.Config = &openstreetmapFRtests[thisTest].c
 		t.Run(openstreetmapFRtests[thisTest].name, func(t *testing.T) {
@@ -394,7 +392,6 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 		},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
