@@ -159,12 +159,12 @@ func Checksum(format string) bool {
 			log.WithError(err).Fatal(config.ErrElem2URL)
 		}
 
-		outputPath := viper.GetString("output_directory") + viper.GetString(config.ViperElement) + "." + fhash
-		if e := FromURL(myURL, outputPath); e != nil {
+		outputPath := viper.GetString(config.ViperOutputDirectory) + viper.GetString(config.ViperElement)
+		if e := FromURL(myURL, outputPath+"."+fhash); e != nil {
 			log.WithError(e).Fatal(ErrFromURL)
 		}
 
-		return VerifyChecksum(outputPath, format)
+		return VerifyChecksum(outputPath+"."+format, outputPath+"."+fhash)
 	}
 
 	log.Warnf("No checksum provided for %s", viper.GetString(config.ViperOutputDirectory)+viper.GetString(config.ViperElement)+"."+format)

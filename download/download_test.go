@@ -83,7 +83,6 @@ func Test_DownloadFromURL(t *testing.T) {
 }
 
 func TestFile(t *testing.T) {
-	t.Parallel()
 
 	type args struct {
 		configPtr *config.Config
@@ -178,8 +177,6 @@ func TestFile(t *testing.T) {
 	viper.Set(config.ViperVerbose, true)
 
 	for _, tt := range tests {
-		t.Parallel()
-
 		t.Run(tt.name, func(t *testing.T) {
 			got := download.File(tt.args.configPtr, tt.args.element, tt.args.format, tt.args.output)
 			if (got != nil) != tt.wantErr {
@@ -187,4 +184,123 @@ func TestFile(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestChecksum(t *testing.T) {
+	type args struct {
+		format string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := download.Checksum(tt.args.format); got != tt.want {
+				t.Errorf("Checksum() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// Test_downloadChecksum I don't know why sometimes controlHash fail :'(
+// seems geofabrik have a limit download I reach sometimes :/.
+//
+//nolint:paralleltest // Can't be parallelized
+func Test_downloadChecksum(t *testing.T) {
+	type args struct {
+		format string
+	}
+
+	viper.Set(config.ViperVerbose, true)
+
+	mutex := sync.RWMutex{}
+
+	tests := []struct {
+		name     string
+		fConfig  string
+		delement string
+		format   string
+		dCheck   bool
+		want     bool
+	}{
+		// TODO: Add test cases.
+		{
+			name:     "dCheck = false monaco.osm.pbf from geofabrik",
+			dCheck:   false,
+			fConfig:  "../geofabrik.yml",
+			delement: "monaco",
+			format:   formats.FormatOsmPbf,
+			want:     false,
+		},
+		{
+			name:     "dCheck = true monaco.osm.pbf from geofabrik",
+			fConfig:  "../geofabrik.yml",
+			dCheck:   true,
+			delement: "monaco",
+			format:   formats.FormatOsmPbf,
+			want:     true,
+		},
+		{
+			name:    "dCheck = true monaco.poly from geofabrik",
+			fConfig: "../geofabrik.yml",
+			dCheck:  true, delement: "monaco",
+			format: formats.FormatPoly,
+			want:   false,
+		},
+	}
+
+	for _, thisTest := range tests {
+		mutex.Lock()
+		real_Test_downloadChecksum(t, thisTest, &mutex)
+		mutex.Unlock()
+	}
+}
+
+func real_Test_downloadChecksum(t *testing.T, thisTest struct {
+	name     string
+	fConfig  string
+	delement string
+	format   string
+	dCheck   bool
+	want     bool
+}, mutex *sync.RWMutex) {
+	viper.Set(config.ViperConfig, thisTest.fConfig)
+	viper.Set(config.ViperService, "geofabrik")
+	viper.Set(config.ViperElement, thisTest.delement)
+	viper.Set(config.ViperCheck, thisTest.dCheck)
+
+	t.Run(thisTest.name, func(t *testing.T) {
+		if viper.GetBool(config.ViperCheck) { // If I want to compare checksum, Download file
+			configPtr, err := config.LoadConfig(thisTest.fConfig)
+			if err != nil {
+				t.Error(err)
+			}
+
+			myElem, err := config.FindElem(configPtr, thisTest.delement)
+			if err != nil {
+				t.Error(err)
+			}
+
+			myURL, err := config.Elem2URL(configPtr, myElem, thisTest.format)
+			if err != nil {
+				t.Error(err)
+			}
+
+			err = download.FromURL(myURL, thisTest.delement+"."+thisTest.format)
+			if err != nil {
+				t.Error(err)
+			}
+		}
+		// now real test
+		if got := download.Checksum(thisTest.format); got != thisTest.want {
+			t.Errorf("download.Checksum() = %v, want %v", got, thisTest.want)
+		}
+
+		//os.Remove("monaco.osm.pbf")     // clean
+		//os.Remove("monaco.osm.pbf.md5") // clean
+	})
 }

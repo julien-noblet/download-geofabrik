@@ -90,14 +90,14 @@ func Test_controlHash(t *testing.T) {
 		{
 			name:       "Check with LICENSE file",
 			fileToHash: "../LICENSE",
-			args:       args{hashfile: "/tmp/download-geofabrik-test.hash", hash: "65d26fcc2f35ea6a181ac777e42db1ea"},
+			args:       args{hashfile: "../LICENCE.md5", hash: "65d26fcc2f35ea6a181ac777e42db1ea"},
 			want:       true,
 			wantErr:    false,
 		},
 		{
 			name:       "Check with LICENSE file wrong hash",
 			fileToHash: "../LICENSE",
-			args:       args{hashfile: "/tmp/download-geofabrik-test.hash", hash: "65d26fcc2f35ea6a181ac777e42db1eb"},
+			args:       args{hashfile: "../LICENCE.md5", hash: "65d26fcc2f35ea6a181ac777e42db1eb"},
 			want:       false,
 			wantErr:    false,
 		},
@@ -107,7 +107,9 @@ func Test_controlHash(t *testing.T) {
 		thisTest := thisTest
 		hash, _ := download.HashFileMD5(thisTest.fileToHash)
 
-		if err := os.WriteFile(thisTest.args.hashfile, []byte(hash), 0o600); err != nil {
+		hashfull := hash + " " + thisTest.fileToHash
+
+		if err := os.WriteFile(thisTest.args.hashfile, []byte(hashfull), 0o600); err != nil {
 			t.Errorf("can't write file %s err: %v", thisTest.args.hashfile, err)
 		}
 
@@ -131,7 +133,7 @@ func Test_controlHash(t *testing.T) {
 func TestVerifyChecksum(t *testing.T) {
 	type args struct {
 		outputPath string
-		format     string
+		hashfile   string
 	}
 	tests := []struct {
 		name string
@@ -140,13 +142,13 @@ func TestVerifyChecksum(t *testing.T) {
 	}{
 		{
 			name: "Check with LICENSE file",
-			args: args{outputPath: "../LICENSE", format: "md5"},
+			args: args{outputPath: "../LICENSE", hashfile: "../LICENCE.md5"},
 			want: true,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := download.VerifyChecksum(tt.args.outputPath, tt.args.format); got != tt.want {
+			if got := download.VerifyChecksum(tt.args.outputPath, tt.args.hashfile); got != tt.want {
 				t.Errorf("VerifyChecksum() = %v, want %v", got, tt.want)
 			}
 		})

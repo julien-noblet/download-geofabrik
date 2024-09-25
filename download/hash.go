@@ -21,16 +21,20 @@ const (
 // ControlHash checks if the hash of a file matches the provided hash.
 func ControlHash(hashfile, expectedHash string) (bool, error) {
 	if !FileExist(hashfile) {
+		log.Infof("Hash file %s not found", hashfile)
+
 		return false, nil
 	}
 
 	fileContent, err := os.ReadFile(hashfile)
 	if err != nil {
+		log.Infof("Can't read hash file %s", hashfile)
+
 		return false, fmt.Errorf(readErrorMsg, hashfile, err)
 	}
 
 	fileHash := strings.Split(string(fileContent), " ")[0]
-	log.Debugf("Hash from file: %s", fileHash)
+	log.Infof("Hash from file: %s", fileHash)
 
 	return strings.EqualFold(expectedHash, fileHash), nil
 }
@@ -62,25 +66,25 @@ func HashFileMD5(filePath string) (string, error) {
 }
 
 // VerifyChecksum verifies the checksum of a file.
-func VerifyChecksum(outputPath, format string) bool {
-	log.Infof("Hashing %s", outputPath)
+func VerifyChecksum(file, hashfile string) bool {
+	log.Infof("Hashing %s", file)
 
-	hashed, err := HashFileMD5(outputPath)
+	hashed, err := HashFileMD5(file)
 	if err != nil {
 		log.WithError(err).Fatal("can't hash file")
 	}
 
 	log.Debugf("MD5 : %s", hashed)
 
-	ret, err := ControlHash(outputPath+".md5", hashed)
+	ret, err := ControlHash(hashfile, hashed)
 	if err != nil {
 		log.WithError(err).Error("checksum error")
 	}
 
 	if ret {
-		log.Infof("Checksum OK for %s", outputPath)
+		log.Infof("Checksum OK for %s", file)
 	} else {
-		log.Infof("Checksum MISMATCH for %s", outputPath)
+		log.Infof("Checksum MISMATCH for %s", file)
 	}
 
 	return ret
