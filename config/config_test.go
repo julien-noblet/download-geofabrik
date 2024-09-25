@@ -547,8 +547,6 @@ func Test_IsHashable(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
-
 		myConfig, err := config.LoadConfig(thisTest.args.file)
 		if err != nil {
 			t.Error(err)
@@ -677,7 +675,6 @@ func Test_FindElem(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -758,7 +755,6 @@ func Test_elem2URL(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -835,7 +831,6 @@ func Test_elem2preURL(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -1115,7 +1110,6 @@ func TestConfig_MergeElement(t *testing.T) {
 		},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 

@@ -158,6 +158,7 @@ func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string)
 		}
 
 		res += "/" + GetFile(myElement)
+
 		return res, nil
 	}
 
@@ -180,7 +181,7 @@ func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, 
 	format := config.Formats[ext]
 
 	baseURL, basePath := format.BaseURL, format.BasePath
-	if baseURL == "" && basePath == "" {
+	if baseURL == "" {
 		baseURL = config.BaseURL
 	}
 
