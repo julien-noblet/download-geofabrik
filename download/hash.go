@@ -12,24 +12,30 @@ import (
 )
 
 const (
-	readErrorMsg  = "can't read %s: %w"
-	openErrorMsg  = "can't open %s: %w"
-	copyErrorMsg  = "can't copy %s: %w"
-	closeErrorMsg = "can't close file: %w"
+	readErrorMsg         = "can't read %s: %w"
+	openErrorMsg         = "can't open %s: %w"
+	copyErrorMsg         = "can't copy %s: %w"
+	closeErrorMsg        = "can't close file: %w"
+	hashFileNotFoundMsg  = "Hash file %s not found"
+	hashFileReadErrorMsg = "Can't read hash file %s"
+	hashMismatchMsg      = "Checksum MISMATCH for %s"
+	hashMatchMsg         = "Checksum OK for %s"
+	hashingFileMsg       = "Hashing %s"
+	md5HashMsg           = "MD5 : %s"
+	checksumErrorMsg     = "checksum error"
+	hashFileErrorMsg     = "can't hash file"
 )
 
-// ControlHash checks if the hash of a file matches the provided hash.
-func ControlHash(hashfile, expectedHash string) (bool, error) {
+// CheckFileHash checks if the hash of a file matches the provided hash.
+func CheckFileHash(hashfile, expectedHash string) (bool, error) {
 	if !FileExist(hashfile) {
-		log.Infof("Hash file %s not found", hashfile)
-
+		log.Infof(hashFileNotFoundMsg, hashfile)
 		return false, nil
 	}
 
 	fileContent, err := os.ReadFile(hashfile)
 	if err != nil {
-		log.Infof("Can't read hash file %s", hashfile)
-
+		log.Infof(hashFileReadErrorMsg, hashfile)
 		return false, fmt.Errorf(readErrorMsg, hashfile, err)
 	}
 
@@ -39,8 +45,8 @@ func ControlHash(hashfile, expectedHash string) (bool, error) {
 	return strings.EqualFold(expectedHash, fileHash), nil
 }
 
-// HashFileMD5 computes the MD5 hash of a file.
-func HashFileMD5(filePath string) (string, error) {
+// ComputeMD5Hash computes the MD5 hash of a file.
+func ComputeMD5Hash(filePath string) (string, error) {
 	if !FileExist(filePath) {
 		return "", nil
 	}
@@ -52,8 +58,7 @@ func HashFileMD5(filePath string) (string, error) {
 
 	defer func() {
 		if err := file.Close(); err != nil {
-			e := fmt.Errorf(closeErrorMsg, err)
-			log.WithError(err).Errorf(e.Error()) //nolint:govet // Need to use different log library to avoid this
+			log.WithError(err).Errorf(fmt.Errorf(closeErrorMsg, err).Error())
 		}
 	}()
 
@@ -65,26 +70,26 @@ func HashFileMD5(filePath string) (string, error) {
 	return hex.EncodeToString(hash.Sum(nil)), nil
 }
 
-// VerifyChecksum verifies the checksum of a file.
-func VerifyChecksum(file, hashfile string) bool {
-	log.Infof("Hashing %s", file)
+// VerifyFileChecksum verifies the checksum of a file.
+func VerifyFileChecksum(file, hashfile string) bool {
+	log.Infof(hashingFileMsg, file)
 
-	hashed, err := HashFileMD5(file)
+	hashed, err := ComputeMD5Hash(file)
 	if err != nil {
-		log.WithError(err).Fatal("can't hash file")
+		log.WithError(err).Fatal(hashFileErrorMsg)
 	}
 
-	log.Debugf("MD5 : %s", hashed)
+	log.Debugf(md5HashMsg, hashed)
 
-	ret, err := ControlHash(hashfile, hashed)
+	ret, err := CheckFileHash(hashfile, hashed)
 	if err != nil {
-		log.WithError(err).Error("checksum error")
+		log.WithError(err).Error(checksumErrorMsg)
 	}
 
 	if ret {
-		log.Infof("Checksum OK for %s", file)
+		log.Infof(hashMatchMsg, file)
 	} else {
-		log.Infof("Checksum MISMATCH for %s", file)
+		log.Infof(hashMismatchMsg, file)
 	}
 
 	return ret

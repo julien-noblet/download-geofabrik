@@ -164,9 +164,10 @@ func Checksum(format string) bool {
 			log.WithError(e).Fatal(ErrFromURL)
 		}
 
-		return VerifyChecksum(outputPath+"."+format, outputPath+"."+fhash)
+		return VerifyFileChecksum(outputPath+"."+format, outputPath+"."+fhash)
 	}
 
 	log.Warnf("No checksum provided for %s", viper.GetString(config.ViperOutputDirectory)+viper.GetString(config.ViperElement)+"."+format)
+
 	return false
 }

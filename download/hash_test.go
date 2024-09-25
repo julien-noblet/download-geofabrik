@@ -34,7 +34,7 @@ func Test_hashFileMD5(t *testing.T) {
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
-			got, err := download.HashFileMD5(thisTest.args.filePath)
+			got, err := download.ComputeMD5Hash(thisTest.args.filePath)
 			if err != nil != thisTest.wantErr {
 				t.Errorf("hashFileMD5(%v) error = %v, wantErr %v", thisTest.args.filePath, err, thisTest.wantErr)
 
@@ -50,14 +50,14 @@ func Test_hashFileMD5(t *testing.T) {
 
 func Benchmark_hashFileMD5_LICENSE(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		if _, err := download.HashFileMD5("./LICENSE"); err != nil {
+		if _, err := download.ComputeMD5Hash("./LICENSE"); err != nil {
 			b.Error(err.Error())
 		}
 	}
 }
 
 func Benchmark_controlHash_LICENSE(b *testing.B) {
-	hash, _ := download.HashFileMD5("./LICENSE")
+	hash, _ := download.ComputeMD5Hash("./LICENSE")
 	hashfile := "/tmp/download-geofabrik-test.hash"
 
 	if err := os.WriteFile(hashfile, []byte(hash), 0o600); err != nil {
@@ -65,7 +65,7 @@ func Benchmark_controlHash_LICENSE(b *testing.B) {
 	}
 
 	for n := 0; n < b.N; n++ {
-		if _, err := download.ControlHash(hashfile, hash); err != nil {
+		if _, err := download.CheckFileHash(hashfile, hash); err != nil {
 			b.Error(err.Error())
 		}
 	}
@@ -105,7 +105,7 @@ func Test_controlHash(t *testing.T) {
 
 	for _, thisTest := range tests {
 		thisTest := thisTest
-		hash, _ := download.HashFileMD5(thisTest.fileToHash)
+		hash, _ := download.ComputeMD5Hash(thisTest.fileToHash)
 
 		hashfull := hash + " " + thisTest.fileToHash
 
@@ -116,7 +116,7 @@ func Test_controlHash(t *testing.T) {
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
-			got, err := download.ControlHash(thisTest.args.hashfile, thisTest.args.hash)
+			got, err := download.CheckFileHash(thisTest.args.hashfile, thisTest.args.hash)
 			if err != nil != thisTest.wantErr {
 				t.Errorf("controlHash() error = %v, wantErr %v", err, thisTest.wantErr)
 
@@ -130,7 +130,7 @@ func Test_controlHash(t *testing.T) {
 	}
 }
 
-func TestVerifyChecksum(t *testing.T) {
+func Test_VerifyFileChecksum(t *testing.T) {
 	type args struct {
 		outputPath string
 		hashfile   string
@@ -148,7 +148,7 @@ func TestVerifyChecksum(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := download.VerifyChecksum(tt.args.outputPath, tt.args.hashfile); got != tt.want {
+			if got := download.VerifyFileChecksum(tt.args.outputPath, tt.args.hashfile); got != tt.want {
 				t.Errorf("VerifyChecksum() = %v, want %v", got, tt.want)
 			}
 		})
