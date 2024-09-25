@@ -10,50 +10,75 @@ import (
 	"github.com/spf13/viper"
 )
 
+const (
+	viperConfigKey          = config.ViperConfig
+	viperOutputDirectoryKey = config.ViperOutputDirectory
+	viperElementKey         = config.ViperElement
+	viperCheckKey           = config.ViperCheck
+)
+
+// DownloadCommand handles the download command logic.
 func DownloadCommand() {
 	formatFile := formats.GetFormats()
 
-	configPtr, err := config.LoadConfig(viper.GetString(config.ViperConfig))
+	configPtr, err := config.LoadConfig(viper.GetString(viperConfigKey))
 	if err != nil {
 		log.WithError(err).Fatal(config.ErrLoadConfig)
 	}
 
-	r := regexp.MustCompile(`.*[\\/]?([A-Za-z_-]*)$`) // Trick for handle / in name
-	filename := r.FindStringSubmatch(viper.GetString(config.ViperOutputDirectory) + viper.GetString(config.ViperElement))[0]
+	filename := GetFilename(viper.GetString(viperOutputDirectoryKey), viper.GetString(viperElementKey))
 
 	for _, format := range *formatFile {
 		myFormat := configPtr.Formats[format]
-		if ok, _, _ := config.IsHashable(configPtr, myFormat.ID); viper.GetBool(config.ViperCheck) && ok { //nolint:nestif // TODO : Refactor?
-			if download.FileExist(viper.GetString(config.ViperOutputDirectory) + viper.GetString(config.ViperElement) + "." + myFormat.ID) {
-				if !download.DownloadChecksum(myFormat.ID) {
-					log.Infof("Checksum mismatch, re-downloading %v", viper.GetString(config.ViperOutputDirectory)+filename+"."+myFormat.ID)
-					download.DownloadFile(configPtr, viper.GetString(config.ViperElement), myFormat.ID, viper.GetString(config.ViperOutputDirectory)+filename+"."+myFormat.ID)
-					download.DownloadChecksum(myFormat.ID)
-				} else {
-					log.Info("Checksum match, no download!")
-				}
-			} else {
-				download.DownloadFile(
-					configPtr,
-					viper.GetString(config.ViperElement),
-					myFormat.ID,
-					viper.GetString(config.ViperOutputDirectory)+download.GetOutputFileName(configPtr, viper.GetString(config.ViperElement), &myFormat),
-				)
+		outputFilePath := viper.GetString(viperOutputDirectoryKey) + filename + "." + myFormat.ID
 
-				if !download.DownloadChecksum(myFormat.ID) {
-					log.Warnf(
-						"Checksum mismatch, please re-download %s",
-						viper.GetString(config.ViperOutputDirectory)+download.GetOutputFileName(configPtr, viper.GetString(config.ViperElement), &myFormat),
-					)
-				}
-			}
+		if viper.GetBool(viperCheckKey) && IsHashable(configPtr, myFormat.ID) {
+			HandleHashableFormat(configPtr, myFormat.ID, outputFilePath)
 		} else {
-			download.DownloadFile(
-				configPtr,
-				viper.GetString(config.ViperElement),
-				myFormat.ID,
-				viper.GetString(config.ViperOutputDirectory)+download.GetOutputFileName(configPtr, viper.GetString(config.ViperElement), &myFormat),
-			)
+			DownloadFile(configPtr, myFormat.ID, outputFilePath)
 		}
 	}
+}
+
+// GetFilename extracts the filename from the given directory and element.
+func GetFilename(outputDir, element string) string {
+	r := regexp.MustCompile(`.*[\\/]?([A-Za-z_-]*)$`)
+
+	return r.FindStringSubmatch(outputDir + element)[0]
+}
+
+// IsHashable checks if the format is hashable.
+func IsHashable(configPtr *config.Config, formatID string) bool {
+	ok, _, _ := config.IsHashable(configPtr, formatID)
+
+	return ok
+}
+
+// HandleHashableFormat handles the download logic for hashable formats.
+func HandleHashableFormat(configPtr *config.Config, formatID, outputFilePath string) {
+	if download.FileExist(outputFilePath) {
+		if !download.DownloadChecksum(formatID) {
+			log.Infof("Checksum mismatch, re-downloading %v", outputFilePath)
+			DownloadFile(configPtr, formatID, outputFilePath)
+			download.DownloadChecksum(formatID)
+		} else {
+			log.Info("Checksum match, no download!")
+		}
+	} else {
+		DownloadFile(configPtr, formatID, outputFilePath)
+
+		if !download.DownloadChecksum(formatID) {
+			log.Warnf("Checksum mismatch, please re-download %s", outputFilePath)
+		}
+	}
+}
+
+// DownloadFile handles the file download logic.
+func DownloadFile(configPtr *config.Config, formatID, outputFilePath string) {
+	download.DownloadFile(
+		configPtr,
+		viper.GetString(viperElementKey),
+		formatID,
+		outputFilePath,
+	)
 }
