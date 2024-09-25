@@ -229,7 +229,10 @@ func TestChecksum(t *testing.T) {
 		t.Error(err)
 	}
 
-	download.File(configPtr, "monaco", formats.FormatOsmPbf, "monaco.osm.pbf")
+	err = download.File(configPtr, "monaco", formats.FormatOsmPbf, "monaco.osm.pbf")
+	if err != nil {
+		t.Error(err)
+	}
 
 	for _, tt := range tests {
 		viper.Set(config.ViperCheck, tt.check)
