@@ -142,7 +142,7 @@ func Test_VerifyFileChecksum(t *testing.T) {
 	}{
 		{
 			name: "Check with LICENSE file",
-			args: args{outputPath: "../LICENSE", hashfile: "../LICENCE.md5"},
+			args: args{outputPath: "../LICENSE", hashfile: "../LICENSE.md5"},
 			want: true,
 		},
 	}
