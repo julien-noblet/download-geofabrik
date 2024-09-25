@@ -11,50 +11,50 @@ import (
 	"github.com/apex/log"
 )
 
-func ControlHash(hashfile, hash string) (bool, error) {
-	if FileExist(hashfile) {
-		file, err := os.ReadFile(hashfile)
-		if err != nil {
-			return false, fmt.Errorf("can't read %s : %w", hashfile, err)
-		}
+const (
+	readErrorMsg  = "can't read %s: %w"
+	openErrorMsg  = "can't open %s: %w"
+	copyErrorMsg  = "can't copy %s: %w"
+	closeErrorMsg = "can't close file: %w"
+)
 
-		filehash := strings.Split(string(file), " ")[0]
-
-		log.Debugf("Hash from file :%s", filehash)
-
-		return strings.EqualFold(hash, filehash), nil
+// ControlHash checks if the hash of a file matches the provided hash.
+func ControlHash(hashfile, expectedHash string) (bool, error) {
+	if !FileExist(hashfile) {
+		return false, nil
 	}
 
-	return false, nil
+	fileContent, err := os.ReadFile(hashfile)
+	if err != nil {
+		return false, fmt.Errorf(readErrorMsg, hashfile, err)
+	}
+
+	fileHash := strings.Split(string(fileContent), " ")[0]
+	log.Debugf("Hash from file: %s", fileHash)
+
+	return strings.EqualFold(expectedHash, fileHash), nil
 }
 
+// HashFileMD5 computes the MD5 hash of a file.
 func HashFileMD5(filePath string) (string, error) {
-	var returnMD5String string
-
-	if FileExist(filePath) {
-		hash := md5.New() //nolint:gosec // I use md5 to control with md5sum files
-
-		file, err := os.Open(filePath)
-		if err != nil {
-			return returnMD5String, fmt.Errorf("can't open %s : %w", filePath, err)
-		}
-
-		defer func() {
-			err := file.Close()
-			if err != nil {
-				log.WithError(err).Fatal("can't save file")
-			}
-		}()
-
-		if _, err := io.Copy(hash, file); err != nil {
-			return returnMD5String, fmt.Errorf("can't copy %s : %w", filePath, err)
-		}
-
-		hashInBytes := hash.Sum(nil)[:16]
-		returnMD5String = hex.EncodeToString(hashInBytes)
-
-		return returnMD5String, nil
+	if !FileExist(filePath) {
+		return "", nil
 	}
 
-	return returnMD5String, nil
+	file, err := os.Open(filePath)
+	if err != nil {
+		return "", fmt.Errorf(openErrorMsg, filePath, err)
+	}
+	defer func() {
+		if err := file.Close(); err != nil {
+			log.WithError(err).Errorf(closeErrorMsg, err)
+		}
+	}()
+
+	hash := md5.New() //nolint:gosec // MD5 is used to control with md5sum files
+	if _, err := io.Copy(hash, file); err != nil {
+		return "", fmt.Errorf(copyErrorMsg, filePath, err)
+	}
+
+	return hex.EncodeToString(hash.Sum(nil)), nil
 }
