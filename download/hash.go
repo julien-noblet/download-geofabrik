@@ -1,7 +1,7 @@
 package download
 
 import (
-	"crypto/md5"
+	"crypto/md5" //nolint:gosec // MD5 is used to control with md5sum files
 	"encoding/hex"
 	"fmt"
 	"io"
@@ -45,10 +45,11 @@ func HashFileMD5(filePath string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf(openErrorMsg, filePath, err)
 	}
+
 	defer func() {
 		if err := file.Close(); err != nil {
 			e := fmt.Errorf(closeErrorMsg, err)
-			log.WithError(err).Errorf(e.Error())
+			log.WithError(err).Errorf(e.Error()) //nolint:govet // Need to use different log library to avoid this
 		}
 	}()
 
