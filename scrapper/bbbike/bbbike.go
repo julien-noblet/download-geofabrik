@@ -11,10 +11,13 @@ import (
 	"github.com/julien-noblet/download-geofabrik/scrapper"
 )
 
-// Constants for magic numbers.
+// Constants for magic numbers and URLs.
 const (
-	progressBarCount = 237
-	parallelism      = 20
+	progressBarCount = 237 // number of elements
+	parallelism      = 20  // number of parallel downloads
+	prefixLength     = 17  // length of "OSM extracts for "
+	baseURL          = "https://download.bbbike.org/osm/bbbike"
+	startURL         = baseURL + "/"
 )
 
 // Bbbike Scrapper.
@@ -24,33 +27,37 @@ type Bbbike struct {
 
 // GetDefault returns the default configuration for Bbbike scrapper.
 func GetDefault() *Bbbike {
+	urlFilters := []*regexp.Regexp{
+		regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/[A-Z].+$`),
+		regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/$`),
+	}
+
+	formatDefinition := formats.FormatDefinitions{
+		formats.FormatCSV:            {ID: formats.FormatCSV, Loc: ".osm.csv.xz", ToLoc: ".osm.csv.xz"},
+		formats.FormatGarminOSM:      {ID: formats.FormatGarminOSM, Loc: ".osm.garmin-osm.zip"},
+		formats.FormatGarminOnroad:   {ID: formats.FormatGarminOnroad, Loc: ".osm.garmin-onroad-latin1.zip"},
+		formats.FormatGarminOntrail:  {ID: formats.FormatGarminOntrail, Loc: ".osm.garmin-ontrail-latin1.zip"},
+		formats.FormatGarminOpenTopo: {ID: formats.FormatGarminOpenTopo, Loc: ".osm.garmin-opentopo-latin1.zip"},
+		formats.FormatGeoJSON:        {ID: formats.FormatGeoJSON, Loc: ".osm.geojson.xz", ToLoc: ".geojson.xz"},
+		formats.FormatMBTiles:        {ID: formats.FormatMBTiles, Loc: ".osm.mbtiles-openmaptiles.zip", ToLoc: "osm.mbtiles-openmaptiles.zip"},
+		formats.FormatMapsforge:      {ID: formats.FormatMapsforge, Loc: ".osm.mapsforge-osm.zip"},
+		formats.FormatOsmGz:          {ID: formats.FormatOsmGz, Loc: ".osm.gz"},
+		formats.FormatOsmPbf:         {ID: formats.FormatOsmPbf, Loc: ".osm.pbf"},
+		formats.FormatPoly:           {ID: formats.FormatPoly, Loc: ".poly"},
+		formats.FormatShpZip:         {ID: formats.FormatShpZip, Loc: ".osm.shp.zip"},
+	}
+
 	return &Bbbike{
 		Scrapper: &scrapper.Scrapper{
-			PB:             progressBarCount,
-			Async:          true,
-			Parallelism:    parallelism,
-			MaxDepth:       0,
-			AllowedDomains: []string{`download.bbbike.org`},
-			BaseURL:        `https://download.bbbike.org/osm/bbbike`,
-			StartURL:       `https://download.bbbike.org/osm/bbbike/`,
-			URLFilters: []*regexp.Regexp{
-				regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/[A-Z].+$`),
-				regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/$`),
-			},
-			FormatDefinition: formats.FormatDefinitions{
-				formats.FormatCSV:            {ID: formats.FormatCSV, Loc: ".osm.csv.xz", ToLoc: ".osm.csv.xz"},
-				formats.FormatGarminOSM:      {ID: formats.FormatGarminOSM, Loc: ".osm.garmin-osm.zip"},
-				formats.FormatGarminOnroad:   {ID: formats.FormatGarminOnroad, Loc: ".osm.garmin-onroad-latin1.zip"},
-				formats.FormatGarminOntrail:  {ID: formats.FormatGarminOntrail, Loc: ".osm.garmin-ontrail-latin1.zip"},
-				formats.FormatGarminOpenTopo: {ID: formats.FormatGarminOpenTopo, Loc: ".osm.garmin-opentopo-latin1.zip"},
-				formats.FormatGeoJSON:        {ID: formats.FormatGeoJSON, Loc: ".osm.geojson.xz", ToLoc: ".geojson.xz"},
-				formats.FormatMBTiles:        {ID: formats.FormatMBTiles, Loc: ".osm.mbtiles-openmaptiles.zip", ToLoc: "osm.mbtiles-openmaptiles.zip"},
-				formats.FormatMapsforge:      {ID: formats.FormatMapsforge, Loc: ".osm.mapsforge-osm.zip"},
-				formats.FormatOsmGz:          {ID: formats.FormatOsmGz, Loc: ".osm.gz"},
-				formats.FormatOsmPbf:         {ID: formats.FormatOsmPbf, Loc: ".osm.pbf"},
-				formats.FormatPoly:           {ID: formats.FormatPoly, Loc: ".poly"},
-				formats.FormatShpZip:         {ID: formats.FormatShpZip, Loc: ".osm.shp.zip"},
-			},
+			PB:               progressBarCount,
+			Async:            true,
+			Parallelism:      parallelism,
+			MaxDepth:         0,
+			AllowedDomains:   []string{`download.bbbike.org`},
+			BaseURL:          baseURL,
+			StartURL:         startURL,
+			URLFilters:       urlFilters,
+			FormatDefinition: formatDefinition,
 		},
 	}
 }
@@ -82,8 +89,6 @@ func (b *Bbbike) ParseList(e *colly.HTMLElement, c *colly.Collector) {
 
 // GetName extracts the name from the given string.
 func GetName(h3 string) string {
-	const prefixLength = 17
-
 	return h3[prefixLength:] // remove "OSM extracts for "
 }
 
