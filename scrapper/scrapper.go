@@ -157,7 +157,7 @@ func (s *Scrapper) ParseFormat(id, format string) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	s.addExtension(id, format, &s.Config.Formats)
+	s.AddExtension(id, format, &s.Config.Formats)
 }
 
 // ParseFormatService adds Extensions to ID.
@@ -165,13 +165,13 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	s.addExtension(id, format, def)
+	s.AddExtension(id, format, def)
 }
 
-// addExtension adds an extension to the configuration.
-func (s *Scrapper) addExtension(id, format string, def *formats.FormatDefinitions) {
+// AddExtension adds an extension to the configuration.
+func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) {
 	for f, i := range *def {
-		if "."+format == i.Loc {
+		if format == i.ID {
 			s.Config.AddExtension(id, f)
 		}
 	}
