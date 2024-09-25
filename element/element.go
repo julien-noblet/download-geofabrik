@@ -1,6 +1,6 @@
 package element
 
-// Element represent a part to download with formats, name, parent...
+// Element represents a part to download with formats, name, parent, etc.
 type Element struct {
 	ID      string  `yaml:"id"`
 	File    string  `yaml:"file,omitempty"`
@@ -12,36 +12,36 @@ type Element struct {
 
 type Formats []string
 
-// MapElement contain all Elements.
+// MapElement contains all Elements.
 type MapElement map[string]Element
 
+// HasParent checks if the element has a parent.
 func (e *Element) HasParent() bool {
 	return e.Parent != ""
 }
 
-func (f *Formats) Contains(e string) bool {
-	for _, a := range *f {
-		if e == a {
+// Contains checks if the format list contains a specific format.
+func (f *Formats) Contains(format string) bool {
+	for _, existingFormat := range *f {
+		if format == existingFormat {
 			return true
 		}
 	}
-
 	return false
 }
 
-// MakeParent make e parent(id=name=gparent)
+// CreateParentElement creates a parent element for the given element.
 // Useful for meta parents.
-func MakeParent(e *Element, gparent string) *Element {
+func CreateParentElement(e *Element, grandparentID string) *Element {
 	if e.HasParent() {
 		return &Element{
 			ID:      e.Parent,
 			File:    "",
 			Name:    e.Parent,
-			Parent:  gparent,
+			Parent:  grandparentID,
 			Formats: Formats{},
 			Meta:    true,
 		}
 	}
-
 	return nil
 }
