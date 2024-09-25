@@ -27,6 +27,7 @@ func (f *Formats) Contains(format string) bool {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -43,5 +44,6 @@ func CreateParentElement(e *Element, grandparentID string) *Element {
 			Meta:    true,
 		}
 	}
+
 	return nil
 }

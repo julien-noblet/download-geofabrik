@@ -200,7 +200,7 @@ func Test_MakeParent(t *testing.T) {
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
-			got := element.MakeParent(&thisTest.args.e, thisTest.args.gparent)
+			got := element.CreateParentElement(&thisTest.args.e, thisTest.args.gparent)
 			if got == nil && thisTest.want == nil {
 				return
 			}

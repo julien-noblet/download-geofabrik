@@ -119,7 +119,7 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
 					gparent, _ := scrapper.GetParent(parentPath)
 					log.Debugf("Create Meta %s parent: %s %v", myElement.Parent, gparent, parentPath)
 
-					if gp := element.MakeParent(&myElement, gparent); gp != nil {
+					if gp := element.CreateParentElement(&myElement, gparent); gp != nil {
 						if err := g.Config.MergeElement(gp); err != nil {
 							log.WithError(err).Errorf("can't merge %s", myElement.Name)
 						}
