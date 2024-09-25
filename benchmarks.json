@@ -1,4 +1,5 @@
 [
+  {"Version":"115898b280c209048a9871917e609a20a6111c4c","Date":1727243942,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"fcbf7b9bcdae0df668221bf9d3568be2a901cdaf","Date":1727227365,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"574393922e302e2a16f3f607053a7c1130d63301","Date":1727223098,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"e1da86219fc5db34346162d7401e7deb242b960f","Date":1727222176,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"b5102593014aab885f56902639239b364d525370","Date":1725637126,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"f49047da4ed15756fe12570d5df86a33c6f94f16","Date":1725429916,"Tags":["ref=refs/tags/v2.7.0-rc2"],"Suites":[]},
   {"Version":"f49047da4ed15756fe12570d5df86a33c6f94f16","Date":1725428759,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"1623ff0ce8048c12a15e42884b26c711ee9be55d","Date":1725394641,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"f67b1a32cd53f8c9c4638e99d4e08fa1516e290c","Date":1725394448,"Tags":["ref=refs/heads/fix/openstreetmapfr"],"Suites":[]}
+  {"Version":"1623ff0ce8048c12a15e42884b26c711ee9be55d","Date":1725394641,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
