@@ -310,7 +310,6 @@ func TestOsmtoday_ParseFormat(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		tt := tt // Reinitialize tt inside the range statement
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 

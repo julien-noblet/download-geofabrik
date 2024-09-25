@@ -349,7 +349,6 @@ func Test_ParseFormat(t *testing.T) {
 		},
 	}
 	for thisTest := range tests {
-		thisTest := thisTest
 		t.Run(tests[thisTest].name, func(t *testing.T) {
 			t.Parallel()
 

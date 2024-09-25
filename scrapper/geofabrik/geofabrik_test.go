@@ -267,7 +267,6 @@ func Test_geofabrikParseFormat(t *testing.T) {
 	}
 
 	for thisTest := range tests {
-		thisTest := thisTest
 		t.Run(tests[thisTest].name, func(t *testing.T) {
 			t.Parallel()
 
@@ -364,7 +363,6 @@ func TestGeofabrik_parseLi(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
