@@ -1,6 +1,7 @@
 package generator
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"slices"
@@ -18,78 +19,139 @@ import (
 	"github.com/spf13/viper"
 )
 
-func Write(c *config.Config, filename string) {
-	out, _ := c.Generate()
-	filename, _ = filepath.Abs(filename)
+const (
+	filePermission         = 0o600
+	serviceGeofabrik       = "geofabrik"
+	serviceGeofabrikParse  = "geofabrik-parse"
+	serviceOpenStreetMapFR = "openstreetmap.fr"
+	serviceOSMToday        = "osmtoday"
+	serviceBBBike          = "bbbike"
+)
 
-	if err := os.WriteFile(filename, out, 0o600); err != nil {
-		log.WithError(err).Fatal("can't write file")
+// Write writes the generated configuration to a file.
+func Write(c *config.Config, filename string) error {
+	out, err := c.Generate()
+	if err != nil {
+		return fmt.Errorf("failed to generate config: %w", err)
+	}
+
+	filename, err = filepath.Abs(filename)
+	if err != nil {
+		return fmt.Errorf("failed to get absolute path for filename: %w", err)
+	}
+
+	if err := os.WriteFile(filename, out, filePermission); err != nil {
+		return fmt.Errorf("failed to write file: %w", err)
 	}
 
 	log.Infof("%s generated.", filename)
+
+	return nil
 }
 
-// Generate main function.
+// Generate generates the configuration based on the specified service.
 func Generate(configfile string) {
-	var (
-		bar        *pb.ProgressBar
-		myScrapper scrapper.IScrapper
-	)
-
-	switch viper.GetString("service") {
-	case "geofabrik":
-		index, err := geofabrik.GetIndex(geofabrik.GeofabrikIndexURL)
-		if err != nil {
-			log.WithError(err)
-		}
-
-		myConfig, err := geofabrik.Convert(index)
-		if err != nil {
-			log.WithError(err)
-		}
-
-		Cleanup(myConfig)
-		Write(myConfig, configfile)
-
-		return // Exit function!
-	case "geofabrik-parse":
-		myScrapper = geofabrikScrapper.GetDefault()
-	case "openstreetmap.fr":
-		myScrapper = openstreetmapfr.GetDefault()
-	case "osmtoday":
-		myScrapper = osmtoday.GetDefault()
-	case "bbbike":
-		myScrapper = bbbike.GetDefault()
-
-	default:
-		log.Error("service not recognized, please use one of geofabrik, openstreetmap.fr, osmtoday or bbbike")
+	service := viper.GetString("service")
+	serviceHandlers := map[string]func(string){
+		serviceGeofabrik:       handleGeofabrik,
+		serviceGeofabrikParse:  handleScrapperService,
+		serviceOpenStreetMapFR: handleScrapperService,
+		serviceOSMToday:        handleScrapperService,
+		serviceBBBike:          handleScrapperService,
 	}
+
+	if handler, exists := serviceHandlers[service]; exists {
+		handler(configfile)
+	} else {
+		log.Errorf("service not recognized: %s, please use one of geofabrik, openstreetmap.fr, osmtoday or bbbike", service)
+	}
+}
+
+// handleScrapperService handles the scrapper service based on the specified service.
+func handleScrapperService(configfile string) {
+	myScrapper := getScrapper(viper.GetString("service"))
 
 	if viper.GetBool("progress") {
-		bar = pb.New(myScrapper.GetPB())
-		bar.Start()
+		handleProgress(myScrapper)
+	} else {
+		collector := myScrapper.Collector()
+		visitAndWait(collector, myScrapper.GetStartURL())
 	}
+
+	myconfig := myScrapper.GetConfig()
+	Cleanup(myconfig)
+
+	if err := Write(myconfig, configfile); err != nil {
+		log.WithError(err).Error("failed to write config")
+	}
+}
+
+// getScrapper returns the appropriate scrapper based on the service.
+func getScrapper(service string) scrapper.IScrapper { //nolint:ireturn // have to return the interface
+	switch service {
+	case serviceGeofabrikParse:
+		return geofabrikScrapper.GetDefault()
+	case serviceOpenStreetMapFR:
+		return openstreetmapfr.GetDefault()
+	case serviceOSMToday:
+		return osmtoday.GetDefault()
+	case serviceBBBike:
+		return bbbike.GetDefault()
+	default:
+		log.Fatalf("unknown service: %s", service)
+
+		return nil
+	}
+}
+
+// handleProgress handles the progress bar for the scrapper.
+func handleProgress(myScrapper scrapper.IScrapper) {
+	bar := pb.New(myScrapper.GetPB())
+	bar.Start()
+	defer bar.Finish()
 
 	collector := myScrapper.Collector()
 	collector.OnScraped(func(*colly.Response) {
-		if viper.GetBool("progress") {
-			bar.Increment()
-		}
+		bar.Increment()
 	})
+	visitAndWait(collector, myScrapper.GetStartURL())
+}
 
-	if err := collector.Visit(myScrapper.GetStartURL()); err != nil {
+// visitAndWait visits the URL and waits for the collector to finish.
+func visitAndWait(collector *colly.Collector, url string) {
+	if err := collector.Visit(url); err != nil {
 		log.WithError(err).Error("can't get url")
+
+		return
 	}
 
 	collector.Wait()
-
-	myconfig := myScrapper.GetConfig()
-
-	Cleanup(myconfig)
-	Write(myconfig, configfile)
 }
 
-// Cleanup configuration before writing it.
+// handleGeofabrik handles the Geofabrik service.
+func handleGeofabrik(configfile string) {
+	index, err := geofabrik.GetIndex(geofabrik.GeofabrikIndexURL)
+	if err != nil {
+		log.WithError(err).Error("failed to get geofabrik index")
+
+		return
+	}
+
+	myConfig, err := geofabrik.Convert(index)
+	if err != nil {
+		log.WithError(err).Error("failed to convert geofabrik index")
+
+		return
+	}
+
+	Cleanup(myConfig)
+
+	if err := Write(myConfig, configfile); err != nil {
+		log.WithError(err).Error("failed to write config")
+	}
+}
+
+// Cleanup sorts the formats in the configuration elements.
 func Cleanup(c *config.Config) {
 	for _, elem := range c.Elements {
 		slices.Sort(elem.Formats)

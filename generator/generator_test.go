@@ -205,7 +205,11 @@ func Test_write(t *testing.T) {
 			t.Parallel()
 
 			c, _ := config.LoadConfig(thisTest.input)
-			generator.Write(c, thisTest.output)
+
+			err := generator.Write(c, thisTest.output)
+			if err != nil {
+				t.Errorf("write() error = %v", err)
+			}
 
 			input, err := os.ReadFile(thisTest.input)
 			if err != nil {
