@@ -90,14 +90,14 @@ func Test_controlHash(t *testing.T) {
 		{
 			name:       "Check with LICENSE file",
 			fileToHash: "../LICENSE",
-			args:       args{hashfile: "../LICENCE.md5", hash: "65d26fcc2f35ea6a181ac777e42db1ea"},
+			args:       args{hashfile: "../LICENSE.md5", hash: "65d26fcc2f35ea6a181ac777e42db1ea"},
 			want:       true,
 			wantErr:    false,
 		},
 		{
 			name:       "Check with LICENSE file wrong hash",
 			fileToHash: "../LICENSE",
-			args:       args{hashfile: "../LICENCE.md5", hash: "65d26fcc2f35ea6a181ac777e42db1eb"},
+			args:       args{hashfile: "../LICENSE.md5", hash: "65d26fcc2f35ea6a181ac777e42db1eb"},
 			want:       false,
 			wantErr:    false,
 		},
