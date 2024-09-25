@@ -47,6 +47,7 @@ func (config *Config) Generate() ([]byte, error) {
 	return yml, nil
 }
 
+// MergeElement merges a new element into the config.
 func (config *Config) MergeElement(elementPtr *element.Element) error {
 	config.ElementsMutex.RLock()
 	newElement, ok := config.Elements[elementPtr.ID]
@@ -78,7 +79,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error {
 	return nil
 }
 
-// Exist check if id is in e.Elements.
+// Exist checks if an element with the given ID exists in the config.
 func (config *Config) Exist(id string) bool {
 	config.ElementsMutex.RLock()
 	defer config.ElementsMutex.RUnlock()
@@ -87,7 +88,7 @@ func (config *Config) Exist(id string) bool {
 	return !result
 }
 
-// AddExtension Add an extension to an element.
+// AddExtension adds an extension to an element.
 func (config *Config) AddExtension(id, format string) {
 	config.ElementsMutex.RLock()
 	elem := config.Elements[id]
@@ -106,7 +107,7 @@ func (config *Config) AddExtension(id, format string) {
 	}
 }
 
-// GetElement get an element by id or error if not found.
+// GetElement gets an element by ID or returns an error if not found.
 func (config *Config) GetElement(id string) (*element.Element, error) { //nolint:varnamelen // id is ok
 	if config.Exist(id) {
 		config.ElementsMutex.RLock()
@@ -119,6 +120,7 @@ func (config *Config) GetElement(id string) (*element.Element, error) { //nolint
 	return nil, fmt.Errorf("%w: %s", ErrFindElem, id)
 }
 
+// FindElem finds an element in the config by ID.
 func FindElem(config *Config, e string) (*element.Element, error) {
 	res := config.Elements[e]
 	if res.ID == "" || res.ID != e {
@@ -128,6 +130,7 @@ func FindElem(config *Config, e string) (*element.Element, error) {
 	return &res, nil
 }
 
+// GetFile gets the file name of an element.
 func GetFile(myElement *element.Element) string {
 	if myElement.File != "" {
 		return myElement.File
@@ -136,6 +139,7 @@ func GetFile(myElement *element.Element) string {
 	return myElement.ID
 }
 
+// Elem2preURL generates a pre-URL for an element.
 func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string) (string, error) {
 	myElement, err := FindElem(config, elementPtr.ID)
 	if err != nil {
@@ -153,9 +157,7 @@ func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string)
 			return "", err
 		}
 
-		res += "/"
-		res += GetFile(myElement)
-
+		res += "/" + GetFile(myElement)
 		return res, nil
 	}
 
@@ -169,6 +171,7 @@ func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string)
 	}
 }
 
+// Elem2URL generates a URL for an element with the given extension.
 func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, error) {
 	if !elementPtr.Formats.Contains(ext) {
 		return "", fmt.Errorf("%w: %s", ErrFormatNotExist, ext)
@@ -212,8 +215,8 @@ func LoadConfig(configFile string) (*Config, error) {
 	return myConfigPtr, nil
 }
 
-// IsHashable check if format is hashable.
-func IsHashable(config *Config, format string) (isHashble bool, hash, extension string) {
+// IsHashable checks if a format is hashable.
+func IsHashable(config *Config, format string) (isHashable bool, hash, extension string) {
 	if _, ok := config.Formats[format]; ok {
 		for _, h := range hashes {
 			hash := format + "." + h
