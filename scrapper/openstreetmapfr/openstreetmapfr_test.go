@@ -94,7 +94,6 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 
 			if len(thisTest.element) > 0 {
 				for _, el := range thisTest.element {
-					el := el
 					if err := myOpenstreetmapFR.Config.MergeElement(&el); err != nil {
 						t.Errorf("Bad tests o.Config.mergeElement() can't merge %#v - %v", el, err)
 					}
@@ -404,7 +403,6 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 
 			if len(thisTest.elements) > 0 {
 				for _, e := range thisTest.elements {
-					e := e
 					if err := myOpenstreetmapFR.Config.MergeElement(&e); err != nil {
 						t.Error(err)
 					}

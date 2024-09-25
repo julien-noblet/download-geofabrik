@@ -1139,7 +1139,6 @@ func TestConfig_Generate(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 

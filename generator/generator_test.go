@@ -146,7 +146,6 @@ func TestSlice_Generate(t *testing.T) {
 		},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		myConfig := SampleConfigValidPtr()
 		myConfig.Elements = map[string]element.Element{} // void Elements
 		myConfig.Elements = thisTest.e
@@ -183,7 +182,6 @@ func TestGenerate(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			generator.Generate(tt.args.configfile)
@@ -203,7 +201,6 @@ func Test_write(t *testing.T) {
 		{name: "geofabrik", input: "../geofabrik.yml", output: "/tmp/test.yml"},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 

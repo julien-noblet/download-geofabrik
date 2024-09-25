@@ -12,7 +12,7 @@ type Element struct {
 
 type Formats []string
 
-// MapElement contain all Elements
+// MapElement contain all Elements.
 type MapElement map[string]Element
 
 func (e *Element) HasParent() bool {

@@ -132,4 +132,5 @@ issues:
         - godox
         - gocognit
         - varnamelen
+        - paralleltest
     

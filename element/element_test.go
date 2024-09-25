@@ -123,7 +123,6 @@ func TestElement_HasParent(t *testing.T) {
 		},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -198,7 +197,6 @@ func Test_MakeParent(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 

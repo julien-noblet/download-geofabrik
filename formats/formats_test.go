@@ -71,7 +71,6 @@ func Test_miniFormats(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -82,7 +81,6 @@ func Test_miniFormats(t *testing.T) {
 	}
 }
 
-//nolint:paralleltest // Can't be parallelized
 func Test_getFormats(t *testing.T) {
 	type dflags struct {
 		dosmPbf  bool
@@ -233,7 +231,6 @@ func Test_getFormats(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		viper.Set("dosmPbf", thisTest.flags.dosmPbf)
 		viper.Set("doshPbf", thisTest.flags.doshPbf)
 		viper.Set("dosmBz2", thisTest.flags.dosmBz2)

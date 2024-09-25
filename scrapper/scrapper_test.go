@@ -1,8 +1,10 @@
 package scrapper_test
 
 import (
+	"crypto/rand"
 	"fmt"
-	"math/rand"
+	"math"
+	"math/big"
 	"reflect"
 	"sync"
 	"testing"
@@ -51,7 +53,6 @@ func TestGetParent(t *testing.T) {
 		},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -83,7 +84,6 @@ func Test_FileExt(t *testing.T) {
 		{name: "1 Parent long ext", url: "https://download.geofabrik.de/parent/test.ext.html", want: "test", want2: "ext.html"},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -381,21 +381,41 @@ func Test_ParseFormat(t *testing.T) {
 func TestScrapper_PB(t *testing.T) {
 	t.Parallel()
 
-	for i := 0; i < 10; i++ {
-		want := rand.Int() //nolint:gosec // I assume rand.Int() isn't safe but it's enough for testing
+	for _ = range [10]int{} {
+		want, err := rand.Int(rand.Reader, big.NewInt(math.MaxInt64))
+		if err != nil {
+			t.Fatalf("Failed to generate random number: %v", err)
+		}
+
+		wantInt := int(want.Int64())
 		myScrapper := scrapper.Scrapper{
-			PB: want,
+			PB: wantInt,
 		}
 
 		t.Run(fmt.Sprintf("PB: %d", want), func(t *testing.T) {
 			t.Parallel()
 
 			out := myScrapper.GetPB()
-			if out != want {
+			if out != wantInt {
 				t.Errorf("GetPB() got %d, want %d", out, want)
 			}
 		})
 	}
+}
+
+func generateRandomString(n int, charset string) (string, error) {
+	b := make([]byte, n)
+
+	_, err := rand.Read(b)
+	if err != nil {
+		return "", err
+	}
+
+	for i := range b {
+		b[i] = charset[int(b[i])%len(charset)]
+	}
+
+	return string(b), nil
 }
 
 func TestScrapper_GetStartURL(t *testing.T) {
@@ -404,9 +424,11 @@ func TestScrapper_GetStartURL(t *testing.T) {
 	const charset = "abcdefghijklmnopqrstuvwxyz" +
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" + "\\/?."
 
-	for i := 0; i < 1024; i++ {
-		seededRand := rand.New(rand.NewSource(time.Now().UnixNano())) //nolint:gosec // I assume rand isn't safe but it's enough for testing
-		want := stringWithCharset(seededRand, i, charset)
+	for i := range [1024]int{} {
+		want, err := generateRandomString(i, charset)
+		if err != nil {
+			t.Fatalf("Failed to generate random string: %v", err)
+		}
 		myScrapper := scrapper.Scrapper{
 			StartURL: want,
 		}
@@ -420,15 +442,6 @@ func TestScrapper_GetStartURL(t *testing.T) {
 			}
 		})
 	}
-}
-
-func stringWithCharset(seededRand *rand.Rand, length int, charset string) string {
-	b := make([]byte, length)
-	for i := range b {
-		b[i] = charset[seededRand.Intn(len(charset))]
-	}
-
-	return string(b)
 }
 
 func TestScrapper_Limit(t *testing.T) {

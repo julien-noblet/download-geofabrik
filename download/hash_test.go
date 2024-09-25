@@ -30,7 +30,6 @@ func Test_hashFileMD5(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -104,7 +103,6 @@ func Test_controlHash(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		hash, _ := download.ComputeMD5Hash(thisTest.fileToHash)
 
 		hashfull := hash + " " + thisTest.fileToHash

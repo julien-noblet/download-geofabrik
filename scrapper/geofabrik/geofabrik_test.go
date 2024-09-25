@@ -574,7 +574,6 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 			myCollector := defaultGeofabrik.Collector() // Need a Collector to visit
 
 			for _, elemem := range *thisTest.elements {
-				elemem := elemem
 				if err := defaultGeofabrik.Config.MergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}

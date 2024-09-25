@@ -25,7 +25,6 @@ func Test_bbbike_getName(t *testing.T) {
 		{name: "Valid", h3: "OSM extracts for Test", want: "Test"},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -296,7 +295,6 @@ func Test_bbbike_parseList(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -314,7 +312,6 @@ func Test_bbbike_parseList(t *testing.T) {
 			myCollector := defaultbbbike.Collector() // Need a Collector to visit
 
 			for _, elemem := range *thisTest.elements {
-				elemem := elemem
 				if err := defaultbbbike.Config.MergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}
@@ -438,7 +435,6 @@ func Test_bbbike_parseSidebar(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -456,7 +452,6 @@ func Test_bbbike_parseSidebar(t *testing.T) {
 			myCollector := defaultBbbike.Collector() // Need a Collector to visit
 
 			for _, elemem := range *thisTest.elements {
-				elemem := elemem
 				if err := defaultBbbike.Config.MergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}

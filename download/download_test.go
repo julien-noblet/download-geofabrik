@@ -12,7 +12,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-//nolint:paralleltest // Can't be parallelized
 func Test_DownloadFromURL(t *testing.T) {
 	type args struct {
 		myURL    string
@@ -251,8 +250,6 @@ func TestChecksum(t *testing.T) {
 
 // Test_downloadChecksum I don't know why sometimes controlHash fail :'(
 // seems geofabrik have a limit download I reach sometimes :/.
-//
-//nolint:paralleltest // Can't be parallelized
 func Test_downloadChecksum(t *testing.T) {
 	viper.Set(config.ViperVerbose, true)
 
