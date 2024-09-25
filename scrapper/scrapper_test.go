@@ -380,7 +380,7 @@ func Test_ParseFormat(t *testing.T) {
 func TestScrapper_PB(t *testing.T) {
 	t.Parallel()
 
-	for _ = range [10]int{} {
+	for range [10]int{} {
 		want, err := rand.Int(rand.Reader, big.NewInt(math.MaxInt64))
 		if err != nil {
 			t.Fatalf("Failed to generate random number: %v", err)
