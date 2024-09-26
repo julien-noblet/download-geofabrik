@@ -46,12 +46,19 @@ func TestSetConfigFile(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			mutex.Lock()
-			defer mutex.Unlock()
-			app.SetConfigFile(tt.configFile)
+			viper.Set(config.ViperConfig, "")
+			mutex.Unlock()
 
+			mutex.Lock()
+			app.SetConfigFile(tt.configFile)
+			mutex.Unlock()
+
+			mutex.RLock()
 			if viper.GetString(config.ViperConfig) != tt.want {
 				t.Errorf("SetConfigFile() = %v, want %v", viper.GetString(config.ViperConfig), tt.want)
 			}
+			mutex.RUnlock()
+
 		})
 	}
 }
