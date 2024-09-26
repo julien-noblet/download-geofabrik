@@ -35,12 +35,15 @@ jobs:
         # workflow uploads it.  Used in the pull request comment.
         report-url: https://julien-noblet.github.io/download-geofabrik/${{ github.ref_name}}.html
 
-    - uses: peaceiris/actions-gh-pages@v3
-      if: always() && steps.coverage.outputs.report-pathname != ''
+    - name: Commit files
+      run: |
+        git checkout github-pages
+        cp -r ${{ steps.coverage.outputs.report-pathname }} .${{ github.ref_name}}.html
+        git add .${{ github.ref_name}}.html
+        git commit -m "Upload coverage report"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ${{ steps.coverage.outputs.report-pathname }}
-        publish_branch: gh-pages
-        cname: julien-noblet.github.io
-        keep_files: true
-        commit_message: "Upload coverage report"
+        branch: github-pages
+        
