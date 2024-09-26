@@ -98,10 +98,10 @@ func GetDefault() *OpenstreetmapFR {
 			StartURL:       `https://download.openstreetmap.fr/`,
 			URLFilters: []*regexp.Regexp{
 				regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
-				regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`),
-				regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`),
-				regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),
-				regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`),
+				regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`), //nolint:gocritic // This is a valid regexp
+				regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`), //nolint:gocritic // This is a valid regexp
+				regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),      //nolint:gocritic // This is a valid regexp
+				regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`), //nolint:gocritic // This is a valid regexp
 			},
 			FormatDefinition: formats.FormatDefinitions{
 				"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5", ToLoc: "", BasePath: "", BaseURL: ""},
@@ -211,36 +211,40 @@ func Exceptions(name, parent string) string {
 func (o *OpenstreetmapFR) ParseHref(href string) {
 	log.Debugf("Parsing: %s", href)
 
-	if !strings.Contains(href, "?") && !strings.Contains(href, "-latest") && href[0] != '/' {
-		parent, parents := GetParent(href)
-		if !o.Config.Exist(parent) {
-			o.MakeParents(parent, parents)
-		}
-
-		valsplit := strings.Split(parents[len(parents)-1], ".")
-		if valsplit[0] != "" && len(strings.Split(href, "/")) > minParentListLength {
-			if strings.Contains(passList, valsplit[0]) {
-				return
-			}
-
-			name := valsplit[0]
-			file := ""
-			name = Exceptions(name, parent)
-			log.Debugf("Parsing %s", name)
-
-			extension := strings.Join(valsplit[1:], ".")
-			if strings.Contains(extension, "state.txt") {
-				extension = formats.FormatState
-			}
-
-			log.Debugf("Add %s format", extension)
-			if extension != "" {
-				file = name
-			}
-
-			o.addOrUpdateElement(parent, name, file, extension)
-		}
+	if strings.Contains(href, "?") || strings.Contains(href, "-latest") || href[0] == '/' {
+		return
 	}
+
+	parent, parents := GetParent(href)
+	if !o.Config.Exist(parent) {
+		o.MakeParents(parent, parents)
+	}
+
+	valsplit := strings.Split(parents[len(parents)-1], ".")
+	if valsplit[0] == "" || len(strings.Split(href, "/")) <= minParentListLength {
+		return
+	}
+
+	if strings.Contains(passList, valsplit[0]) {
+		return
+	}
+
+	name := Exceptions(valsplit[0], parent)
+	log.Debugf("Parsing %s", name)
+
+	extension := strings.Join(valsplit[1:], ".")
+	if strings.Contains(extension, "state.txt") {
+		extension = formats.FormatState
+	}
+
+	log.Debugf("Add %s format", extension)
+
+	file := ""
+	if extension != "" {
+		file = name
+	}
+
+	o.addOrUpdateElement(parent, name, file, extension)
 }
 
 // addOrUpdateElement adds or updates an element in the configuration.
@@ -274,23 +278,31 @@ func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension strin
 			o.Config.AddExtension(name, extension)
 		}
 	}
-
 }
 
 // Parse parses the HTML element and visits the URL if it's a directory.
 func (o *OpenstreetmapFR) Parse(e *colly.HTMLElement, c *colly.Collector) {
 	href := e.Request.AbsoluteURL(e.Attr("href"))
-	if href[len(href)-1] == '/' {
+	if isDirectory(href) {
 		log.Debugf("Next: %s", href)
-
-		if err := c.Visit(href); err != nil && !errors.Is(err, colly.ErrAlreadyVisited) {
-			if !errors.Is(err, colly.ErrNoURLFiltersMatch) {
-				log.WithError(err).Error("can't get url")
-			} else {
-				log.Debugf("URL: %v is not matching URLFilters\n", href)
-			}
-		}
+		visitURL(c, href)
 	} else {
 		o.ParseHref(href)
+	}
+}
+
+// isDirectory checks if the URL is a directory.
+func isDirectory(href string) bool {
+	return href[len(href)-1] == '/'
+}
+
+// visitURL visits the URL and handles errors.
+func visitURL(c *colly.Collector, href string) {
+	if err := c.Visit(href); err != nil && !errors.Is(err, colly.ErrAlreadyVisited) {
+		if !errors.Is(err, colly.ErrNoURLFiltersMatch) {
+			log.WithError(err).Error("can't get url")
+		} else {
+			log.Debugf("URL: %v is not matching URLFilters\n", href)
+		}
 	}
 }

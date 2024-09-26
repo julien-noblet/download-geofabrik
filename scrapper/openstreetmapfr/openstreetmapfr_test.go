@@ -112,11 +112,11 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 				if _, ok := thisTest.want[id]; !ok {
 					t.Errorf("parse() fail, got %#v,\n want %#v", myOpenstreetmapFR.Config.Elements, thisTest.want)
 				}
+
 				if !reflect.DeepEqual(elem, thisTest.want[id]) {
 					t.Errorf("parse() fail, got %#v,\n want %#v", elem, thisTest.want[id])
 				}
 			}
-
 		})
 	}
 }
