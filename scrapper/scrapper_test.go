@@ -407,7 +407,7 @@ func generateRandomString(n int, charset string) (string, error) {
 
 	_, err := rand.Read(b)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("failed to read random bytes: %w", err)
 	}
 
 	for i := range b {
@@ -428,11 +428,12 @@ func TestScrapper_GetStartURL(t *testing.T) {
 		if err != nil {
 			t.Fatalf("Failed to generate random string: %v", err)
 		}
+
 		myScrapper := scrapper.Scrapper{
 			StartURL: want,
 		}
 
-		t.Run(fmt.Sprintf("StartURL: %s", want), func(t *testing.T) {
+		t.Run("StartURL: "+want, func(t *testing.T) {
 			t.Parallel()
 
 			out := myScrapper.GetStartURL()
@@ -468,8 +469,8 @@ func TestScrapper_Limit(t *testing.T) {
 			want:   &colly.LimitRule{DomainGlob: "my.url", Parallelism: 10, RandomDelay: 10 * time.Second},
 		},
 	}
-	for _, thisTest := range tests {
-		thisTest := thisTest
+	for this := range tests {
+		thisTest := &tests[this]
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -615,8 +616,8 @@ func TestScrapper_GetConfig(t *testing.T) {
 			},
 		},
 	}
-	for _, thisTest := range tests {
-		thisTest := thisTest
+	for tt := range tests {
+		thisTest := &tests[tt]
 
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
@@ -639,7 +640,6 @@ func TestScrapper_GetConfig(t *testing.T) {
 			if !reflect.DeepEqual(got.Formats, thisTest.want.Formats) {
 				t.Errorf("Scrapper.GetConfig() = %v, want %v", got.Formats, thisTest.want.Formats)
 			}
-
 		})
 	}
 }

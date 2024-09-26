@@ -154,17 +154,11 @@ func (s *Scrapper) GetPB() int {
 
 // ParseFormat adds Extensions to ID.
 func (s *Scrapper) ParseFormat(id, format string) {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-
 	s.AddExtension(id, format, &s.Config.Formats)
 }
 
 // ParseFormatService adds Extensions to ID.
 func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefinitions) {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-
 	s.AddExtension(id, format, def)
 }
 

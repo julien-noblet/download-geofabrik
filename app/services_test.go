@@ -10,6 +10,8 @@ import (
 )
 
 func TestSetConfigFile(t *testing.T) {
+	mutex := sync.RWMutex{}
+
 	tests := []struct {
 		name       string
 		configFile string
@@ -43,6 +45,8 @@ func TestSetConfigFile(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			mutex.Lock()
+			defer mutex.Unlock()
 			app.SetConfigFile(tt.configFile)
 
 			if viper.GetString(config.ViperConfig) != tt.want {

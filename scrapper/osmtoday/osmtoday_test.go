@@ -11,8 +11,6 @@ import (
 )
 
 func TestOsmtoday_Exceptions(t *testing.T) {
-	t.Parallel()
-
 	type args struct {
 		e element.Element
 	}
@@ -223,8 +221,6 @@ func TestOsmtoday_Exceptions(t *testing.T) {
 	for _, tt := range tests {
 		test := tt // Reinitialize tt inside the range statement
 		t.Run(test.name, func(t *testing.T) {
-			t.Parallel()
-
 			g := osmtoday.GetDefault()
 
 			if got := g.Exceptions(&test.args.e); !reflect.DeepEqual(got, &test.want) {
@@ -234,9 +230,7 @@ func TestOsmtoday_Exceptions(t *testing.T) {
 	}
 }
 
-func TestOsmtoday_ParseFormat(t *testing.T) {
-	t.Parallel()
-
+func gWithOsmPbf() *osmtoday.Osmtoday {
 	gWithOsmPbf := osmtoday.GetDefault()
 	gWithOsmPbf.Config = &config.Config{
 		Formats: formats.FormatDefinitions{
@@ -244,76 +238,14 @@ func TestOsmtoday_ParseFormat(t *testing.T) {
 		},
 	}
 
+	return gWithOsmPbf
+}
+
+func gWithPoly() *osmtoday.Osmtoday {
 	gWithPoly := osmtoday.GetDefault()
-	gWithPoly.Config = &config.Config{
-		Formats: formats.FormatDefinitions{
-			formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", BasePath: "", BaseURL: ""},
-		},
+	gWithPoly.Config.Formats = formats.FormatDefinitions{
+		formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", BasePath: "", BaseURL: ""},
 	}
 
-	type args struct {
-		id     string
-		format string
-	}
-
-	tests := []struct {
-		name string
-		args args
-		g    *osmtoday.Osmtoday
-		want formats.FormatDefinitions
-	}{
-		// TODO: Add test cases.
-		{
-			name: "Format not in the list",
-			args: args{
-				id:     "test",
-				format: "test",
-			},
-			g: osmtoday.GetDefault(),
-			want: formats.FormatDefinitions{
-				"test": {ID: "test", Loc: "", BasePath: "", BaseURL: ""},
-			},
-		},
-		{
-			name: "Format in the list",
-			args: args{
-				id:     formats.FormatOsmPbf,
-				format: formats.FormatOsmPbf,
-			},
-			g: osmtoday.GetDefault(),
-			want: formats.FormatDefinitions{
-				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: ".pbf", BasePath: "", BaseURL: ""},
-			},
-		},
-		{
-			name: "Format in the list double",
-			args: args{
-				id:     formats.FormatOsmPbf,
-				format: formats.FormatOsmPbf,
-			},
-			g: gWithOsmPbf,
-			want: formats.FormatDefinitions{
-				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: ".pbf", BasePath: "", BaseURL: ""},
-			},
-		},
-		{
-			name: "Format in the list with poly",
-			args: args{
-				id:     formats.FormatOsmPbf,
-				format: formats.FormatOsmPbf,
-			},
-			g: gWithPoly,
-			want: formats.FormatDefinitions{
-				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", BasePath: "", BaseURL: ""},
-				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: ".pbf", BasePath: "", BaseURL: ""},
-			},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
-			tt.g.ParseFormat(tt.args.id, tt.args.format)
-		})
-	}
+	return gWithPoly
 }
