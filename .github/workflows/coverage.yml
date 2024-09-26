@@ -38,7 +38,7 @@ jobs:
 
     - name: Commit files
       run: |
-        git checkout github-pages
+        git checkout -b github-pages
         cp -r ${{ steps.coverage.outputs.report-pathname }} .${{ github.ref_name}}.html
         git add .${{ github.ref_name}}.html
         git commit -m "Upload coverage report"
