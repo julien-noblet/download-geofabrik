@@ -36,6 +36,11 @@ jobs:
         # workflow uploads it.  Used in the pull request comment.
         report-url: https://julien-noblet.github.io/download-geofabrik/${{ github.ref_name}}.html
 
+    - name: Generate coverage tree map
+      run: |
+        mkdir -p ${{ github.ref_name}}
+        go run github.com/nikolaydubina/go-cover-treemap@latest -coverprofile ${{ steps.coverage.outputs.gocov-agg-pathname }} -only-folders=true >/tmp/treemap.svg
+        mv /tmp/treemap.svg ${{ steps.coverage.outputs.report-pathname }}.svg
     - name: Commit files
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -44,7 +49,7 @@ jobs:
         git checkout gh-pages
         mkdir -p ${{ github.ref_name}}
         cp -r ${{ steps.coverage.outputs.report-pathname }} ${{ github.ref_name}}.html
-        git add ${{ github.ref_name}}.html
+        git add ${{ github.ref_name}}.html ${{ steps.coverage.outputs.report-pathname }}.svg
         git commit -m "Upload coverage report"
     - name: Push changes
       uses: ad-m/github-push-action@master
