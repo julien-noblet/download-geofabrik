@@ -33,4 +33,15 @@ jobs:
         
         # A url that the html report will be accessible at, once your
         # workflow uploads it.  Used in the pull request comment.
-        # report-url: https://artifacts.example.com/go-coverage/${{ github.ref_name}}.html
+        report-url: https://julien-noblet.github.io/download-geofabrik/${{ github.ref_name}}.html
+
+    - uses: peaceiris/actions-gh-pages@v3
+      if: always() && steps.coverage.outputs.report-pathname != ''
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ${{ steps.coverage.outputs.report-pathname }}
+        publish_branch: gh-pages
+        cname: julien-noblet.github.io
+        keep_files: true
+        commit_message: "Upload coverage report"
+        
