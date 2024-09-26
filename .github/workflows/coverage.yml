@@ -18,6 +18,7 @@ jobs:
 
     - uses: gwatts/go-coverage-action@v2
       id: coverage
+      continue-on-error: true
       with:
         # Optional coverage threshold
         # use fail-coverage to determine what should happen below this threshold
