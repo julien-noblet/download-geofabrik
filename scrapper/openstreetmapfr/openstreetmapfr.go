@@ -134,6 +134,9 @@ func (o *OpenstreetmapFR) Collector() *colly.Collector {
 
 // GetParent returns the parent and the list of parents from a given href.
 func GetParent(href string) (parent string, parentList []string) {
+	// Remove the last / from the href to avoid empty string in the parent list
+	href = strings.TrimSuffix(href, "/")
+
 	parentList = strings.Split(href, "/")
 	if len(parentList) > minParentListLength {
 		parent = parentList[len(parentList)-2]
@@ -167,7 +170,7 @@ func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) {
 
 // getGparent returns the grandparent from a list of parents.
 func getGparent(gparents []string) string {
-	if gparents == nil || len(gparents) < 3 {
+	if gparents == nil || len(gparents) < minParentListLength {
 		return ""
 	}
 
@@ -215,13 +218,13 @@ func (o *OpenstreetmapFR) ParseHref(href string) {
 		}
 
 		valsplit := strings.Split(parents[len(parents)-1], ".")
-		if valsplit[0] != "" {
+		if valsplit[0] != "" && len(strings.Split(href, "/")) > minParentListLength {
 			if strings.Contains(passList, valsplit[0]) {
 				return
 			}
 
 			name := valsplit[0]
-			file := name
+			file := ""
 			name = Exceptions(name, parent)
 			log.Debugf("Parsing %s", name)
 
@@ -231,6 +234,9 @@ func (o *OpenstreetmapFR) ParseHref(href string) {
 			}
 
 			log.Debugf("Add %s format", extension)
+			if extension != "" {
+				file = name
+			}
 
 			o.addOrUpdateElement(parent, name, file, extension)
 		}
@@ -247,8 +253,16 @@ func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension strin
 		Formats: []string{},
 		Meta:    false,
 	}
+
+	if extension == "" {
+		myElement.File = ""
+		myElement.Meta = true
+	}
+
 	if !o.Config.Exist(name) {
-		myElement.Formats = append(myElement.Formats, extension)
+		if extension != "" {
+			myElement.Formats = append(myElement.Formats, extension)
+		}
 
 		if err := o.Config.MergeElement(&myElement); err != nil {
 			log.WithError(err).Errorf("can't merge %s", myElement.Name)
@@ -256,8 +270,11 @@ func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension strin
 	} else {
 		log.Debugf("%s already exist, Merging formats", name)
 
-		o.Config.AddExtension(name, extension)
+		if extension != "" {
+			o.Config.AddExtension(name, extension)
+		}
 	}
+
 }
 
 // Parse parses the HTML element and visits the URL if it's a directory.

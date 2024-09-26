@@ -54,10 +54,10 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 				</tbody></table>`,
 			url: `https://download.openstreetmap.fr/extracts/merge/`,
 			want: element.MapElement{
-				"merge":                   element.Element{ID: "merge", Name: "merge", Meta: true},
+				"merge":                   element.Element{ID: "merge", Name: "merge", Formats: element.Formats{}, Meta: true},
 				"fiji":                    element.Element{ID: "fiji", File: "fiji", Name: "fiji", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
 				"france_metro_dom_com_nc": element.Element{ID: "france_metro_dom_com_nc", File: "france_metro_dom_com_nc", Name: "france_metro_dom_com_nc", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
-				"merge_france_taaf":       element.Element{ID: "merge_france_taaf", File: "france_taaf", Name: "merge_france_taaf", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
+				"merge_france_taaf":       element.Element{ID: "merge_france_taaf", File: "merge_france_taaf", Name: "merge_france_taaf", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
 				"kiribati":                element.Element{ID: "kiribati", File: "kiribati", Name: "kiribati", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
 			},
 		},
@@ -94,7 +94,7 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 			if len(thisTest.element) > 0 {
 				for _, el := range thisTest.element {
 					if err := myOpenstreetmapFR.Config.MergeElement(&el); err != nil {
-						t.Errorf("Bad tests o.Config.mergeElement() can't merge %#v - %v", el, err)
+						t.Errorf("Failed to merge element: %v", err)
 					}
 				}
 			}
@@ -103,9 +103,20 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 				myOpenstreetmapFR.Parse(elmt, myCollector)
 			})
 
-			if !reflect.DeepEqual(myOpenstreetmapFR.Config.Elements, thisTest.want) {
+			if len(myOpenstreetmapFR.Config.Elements) != len(thisTest.want) {
 				t.Errorf("parse() fail, got %#v,\n want %#v", myOpenstreetmapFR.Config.Elements, thisTest.want)
 			}
+
+			for id, elem := range myOpenstreetmapFR.Config.Elements {
+				// id is not in the want map, fail
+				if _, ok := thisTest.want[id]; !ok {
+					t.Errorf("parse() fail, got %#v,\n want %#v", myOpenstreetmapFR.Config.Elements, thisTest.want)
+				}
+				if !reflect.DeepEqual(elem, thisTest.want[id]) {
+					t.Errorf("parse() fail, got %#v,\n want %#v", elem, thisTest.want[id])
+				}
+			}
+
 		})
 	}
 }
@@ -121,49 +132,52 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 	// TODO: Add test cases.
 	{
 		name:    "Void ",
-		href:    "http://osm.fr/",
+		href:    "http://openstreetmap.fr/",
 		want:    element.MapElement{},
 		c:       config.Config{Elements: make(map[string]element.Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "",
-		parents: []string{"http:", "", "osm.fr", ""},
+		parents: []string{"http:", "", "openstreetmap.fr"},
 	},
 	{
 		name: "1st level subfolder",
-		href: "http://osm.fr/one/",
+		href: "http://openstreetmap.fr/one/",
 		want: element.MapElement{
 			"one": element.Element{
-				ID:   "one",
-				Meta: true,
-				Name: "one",
+				ID:      "one",
+				Formats: element.Formats{},
+				Meta:    true,
+				Name:    "one",
+			},
+		},
+		c:       config.Config{Elements: make(map[string]element.Element), ElementsMutex: &sync.RWMutex{}},
+		parent:  "",
+		parents: []string{"http:", "", "openstreetmap.fr", "one"},
+	},
+	{
+		name: "2nd level subfolder",
+		href: "http://openstreetmap.fr/one/two/",
+		want: element.MapElement{
+			"one": element.Element{
+				ID:      "one",
+				Formats: element.Formats{},
+				Meta:    true,
+				Name:    "one",
+			},
+			"two": element.Element{
+				ID:      "two",
+				Formats: element.Formats{},
+				Meta:    true,
+				Name:    "two",
+				Parent:  "one",
 			},
 		},
 		c:       config.Config{Elements: make(map[string]element.Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "one",
-		parents: []string{"http:", "", "osm.fr", "one", ""},
-	},
-	{
-		name: "2nd level subfolder",
-		href: "http://osm.fr/one/two/",
-		want: element.MapElement{
-			"one": element.Element{
-				ID:   "one",
-				Meta: true,
-				Name: "one",
-			},
-			"two": element.Element{
-				ID:     "two",
-				Meta:   true,
-				Name:   "two",
-				Parent: "one",
-			},
-		},
-		c:       config.Config{Elements: make(map[string]element.Element), ElementsMutex: &sync.RWMutex{}},
-		parent:  "two",
-		parents: []string{"http:", "", "osm.fr", "one", "two", ""},
+		parents: []string{"http:", "", "openstreetmap.fr", "one", "two"},
 	},
 	{
 		name: "top level extracts osm.pbf",
-		href: "http://osm.fr/extracts/object.osm.pbf",
+		href: "http://openstreetmap.fr/extracts/object.osm.pbf",
 		want: element.MapElement{
 			"object": element.Element{
 				ID:      "object",
@@ -174,11 +188,11 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 		},
 		c:       config.Config{Elements: make(map[string]element.Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "",
-		parents: []string{"http:", "", "osm.fr", "extracts", "object.osm.pbf"},
+		parents: []string{"http:", "", "openstreetmap.fr", "extracts", "object.osm.pbf"},
 	},
 	{
 		name: "top level polygons osm.pbf",
-		href: "http://osm.fr/polygons/object.osm.pbf",
+		href: "http://openstreetmap.fr/polygons/object.osm.pbf",
 		want: element.MapElement{
 			"object": element.Element{
 				ID:      "object",
@@ -189,11 +203,11 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 		},
 		c:       config.Config{Elements: make(map[string]element.Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "",
-		parents: []string{"http:", "", "osm.fr", "polygons", "object.osm.pbf"},
+		parents: []string{"http:", "", "openstreetmap.fr", "polygons", "object.osm.pbf"},
 	},
 	{
 		name: "sub level extracts osm.pbf",
-		href: "http://osm.fr/extracts/one/object.osm.pbf",
+		href: "http://openstreetmap.fr/extracts/one/object.osm.pbf",
 		want: element.MapElement{
 			"object": element.Element{
 				ID:      "object",
@@ -203,18 +217,19 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 				Parent:  "one",
 			},
 			"one": element.Element{
-				ID:   "one",
-				Meta: true,
-				Name: "one",
+				ID:      "one",
+				Formats: element.Formats{},
+				Meta:    true,
+				Name:    "one",
 			},
 		},
 		c:       config.Config{Elements: make(map[string]element.Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "one",
-		parents: []string{"http:", "", "osm.fr", "extracts", "one", "object.osm.pbf"},
+		parents: []string{"http:", "", "openstreetmap.fr", "extracts", "one", "object.osm.pbf"},
 	},
 	{
 		name: "sub level polygons osm.pbf",
-		href: "http://osm.fr/polygons/one/object.osm.pbf",
+		href: "http://openstreetmap.fr/polygons/one/object.osm.pbf",
 		want: element.MapElement{
 			"object": element.Element{
 				ID:      "object",
@@ -225,18 +240,19 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 				Parent:  "one",
 			},
 			"one": element.Element{
-				ID:   "one",
-				Meta: true,
-				Name: "one",
+				ID:      "one",
+				Formats: element.Formats{},
+				Meta:    true,
+				Name:    "one",
 			},
 		},
 		c:       config.Config{Elements: make(map[string]element.Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "one",
-		parents: []string{"http:", "", "osm.fr", "polygons", "one", "object.osm.pbf"},
+		parents: []string{"http:", "", "openstreetmap.fr", "polygons", "one", "object.osm.pbf"},
 	},
 	{
 		name: "2nd level osm.pbf",
-		href: "http://osm.fr/polygons/one/two/object.osm.pbf",
+		href: "http://openstreetmap.fr/polygons/one/two/object.osm.pbf",
 		want: element.MapElement{
 			"object": element.Element{
 				ID:      "object",
@@ -246,24 +262,26 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 				Parent:  "two",
 			},
 			"one": element.Element{
-				ID:   "one",
-				Meta: true,
-				Name: "one",
+				ID:      "one",
+				Formats: element.Formats{},
+				Meta:    true,
+				Name:    "one",
 			},
 			"two": element.Element{
-				ID:     "two",
-				Meta:   true,
-				Name:   "two",
-				Parent: "one",
+				ID:      "two",
+				Formats: element.Formats{},
+				Meta:    true,
+				Name:    "two",
+				Parent:  "one",
 			},
 		},
 		c:       config.Config{Elements: make(map[string]element.Element), ElementsMutex: &sync.RWMutex{}},
 		parent:  "two",
-		parents: []string{"http:", "", "osm.fr", "polygons", "one", "two", "object.osm.pbf"},
+		parents: []string{"http:", "", "openstreetmap.fr", "polygons", "one", "two", "object.osm.pbf"},
 	},
 	{
 		name: "sub level extracts osm.pbf + state",
-		href: "http://osm.fr/extracts/one/object.state.txt",
+		href: "http://openstreetmap.fr/extracts/one/object.state.txt",
 		want: element.MapElement{
 			"object": element.Element{
 				ID:      "object",
@@ -273,9 +291,10 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 				Parent:  "one",
 			},
 			"one": element.Element{
-				ID:   "one",
-				Meta: true,
-				Name: "one",
+				ID:      "one",
+				Formats: element.Formats{},
+				Meta:    true,
+				Name:    "one",
 			},
 		},
 		c: config.Config{
@@ -291,7 +310,7 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 			ElementsMutex: &sync.RWMutex{},
 		},
 		parent:  "one",
-		parents: []string{"http:", "", "osm.fr", "extracts", "one", "object.state.txt"},
+		parents: []string{"http:", "", "openstreetmap.fr", "extracts", "one", "object.state.txt"},
 	},
 }
 
@@ -323,17 +342,16 @@ func Test_openstreetmapFRGetParent(t *testing.T) {
 	t.Parallel()
 
 	for thisTest := range openstreetmapFRtests {
-		ThisTest := thisTest
-		t.Run(openstreetmapFRtests[ThisTest].name, func(t *testing.T) {
+		t.Run(openstreetmapFRtests[thisTest].name, func(t *testing.T) {
 			t.Parallel()
 
-			p, grandParent := openstreetmapfr.GetParent(openstreetmapFRtests[ThisTest].href)
-			if !reflect.DeepEqual(p, openstreetmapFRtests[ThisTest].parent) {
-				t.Errorf("openstreetmapFRGetParent() = %v want %v ", p, openstreetmapFRtests[ThisTest].parent)
+			p, grandParent := openstreetmapfr.GetParent(openstreetmapFRtests[thisTest].href)
+			if !reflect.DeepEqual(p, openstreetmapFRtests[thisTest].parent) {
+				t.Errorf("openstreetmapFRGetParent() = %v want %v ", p, openstreetmapFRtests[thisTest].parent)
 			}
 
-			if !reflect.DeepEqual(grandParent, openstreetmapFRtests[ThisTest].parents) {
-				t.Errorf("openstreetmapFRGetParent() = %v want %v ", grandParent, openstreetmapFRtests[ThisTest].parents)
+			if !reflect.DeepEqual(grandParent, openstreetmapFRtests[thisTest].parents) {
+				t.Errorf("openstreetmapFRGetParent() = %v want %v ", grandParent, openstreetmapFRtests[thisTest].parents)
 			}
 		})
 	}
@@ -355,39 +373,39 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 			// TODO: Raise an error?
 			parent:   "toto",
 			gparents: []string{"toto", "some.osm.pbf"},
-			want:     element.MapElement{"toto": element.Element{ID: "toto", Name: "toto", Meta: true}},
+			want:     element.MapElement{"toto": element.Element{ID: "toto", Name: "toto", Formats: element.Formats{}, Meta: true}},
 		},
 		{
 			name:     "1 parent",
 			parent:   "toto",
-			gparents: []string{"http:", "", "osm.fr", "extracts", "toto", "some.osm.pbf"},
-			want:     element.MapElement{"toto": element.Element{ID: "toto", Name: "toto", Meta: true}},
+			gparents: []string{"http:", "", "openstreetmap.fr", "extracts", "toto", "some.osm.pbf"},
+			want:     element.MapElement{"toto": element.Element{ID: "toto", Name: "toto", Formats: element.Formats{}, Meta: true}},
 		},
 		{
 			name:     "2 parents",
 			parent:   "toto",
-			gparents: []string{"http:", "", "osm.fr", "extracts", "tata", "toto", "some.osm.pbf"},
+			gparents: []string{"http:", "", "openstreetmap.fr", "extracts", "tata", "toto", "some.osm.pbf"},
 			want: element.MapElement{
-				"toto": element.Element{ID: "toto", Name: "toto", Meta: true, Parent: "tata"},
-				"tata": element.Element{ID: "tata", Name: "tata", Meta: true},
+				"toto": element.Element{ID: "toto", Name: "toto", Formats: element.Formats{}, Meta: true, Parent: "tata"},
+				"tata": element.Element{ID: "tata", Name: "tata", Formats: element.Formats{}, Meta: true},
 			},
 		},
 		{
 			name:     "3 parents",
 			parent:   "toto",
-			gparents: []string{"http:", "", "osm.fr", "extracts", "tata", "titi", "toto", "some.osm.pbf"},
+			gparents: []string{"http:", "", "openstreetmap.fr", "extracts", "tata", "titi", "toto", "some.osm.pbf"},
 			want: element.MapElement{
-				"toto": element.Element{ID: "toto", Name: "toto", Meta: true, Parent: "titi"},
-				"titi": element.Element{ID: "titi", Name: "titi", Meta: true, Parent: "tata"},
-				"tata": element.Element{ID: "tata", Name: "tata", Meta: true},
+				"toto": element.Element{ID: "toto", Name: "toto", Formats: element.Formats{}, Meta: true, Parent: "titi"},
+				"titi": element.Element{ID: "titi", Name: "titi", Formats: element.Formats{}, Meta: true, Parent: "tata"},
+				"tata": element.Element{ID: "tata", Name: "tata", Formats: element.Formats{}, Meta: true},
 			},
 		},
 		{
 			name:     "one parent",
 			parent:   "one",
-			gparents: []string{"http:", "", "osm.fr", "extracts", "one", "object.osm.pbf"},
+			gparents: []string{"http:", "", "openstreetmap.fr", "extracts", "one", "object.osm.pbf"},
 			want: element.MapElement{
-				"one": element.Element{ID: "one", Name: "one", Meta: true},
+				"one": element.Element{ID: "one", Name: "one", Formats: element.Formats{}, Meta: true},
 			},
 		},
 	}
