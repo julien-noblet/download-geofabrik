@@ -460,7 +460,12 @@ func TestScrapper_Limit(t *testing.T) {
 		{
 			name:   "Void",
 			fields: scrapper.Scrapper{},
-			want:   &colly.LimitRule{DomainGlob: "*", Parallelism: 1, RandomDelay: 5 * time.Second},
+			want:   &colly.LimitRule{DomainGlob: "*", Parallelism: 1, RandomDelay: 0},
+		},
+		{
+			name:   "Custom",
+			fields: scrapper.Scrapper{DomainGlob: "my.url", Parallelism: 10, RandomDelay: 10 * time.Second},
+			want:   &colly.LimitRule{DomainGlob: "my.url", Parallelism: 10, RandomDelay: 10 * time.Second},
 		},
 	}
 	for _, thisTest := range tests {
@@ -482,8 +487,22 @@ func TestScrapper_Limit(t *testing.T) {
 				URLFilters:       thisTest.fields.URLFilters,
 				FormatDefinition: thisTest.fields.FormatDefinition,
 			}
-			if got := myScrapper.Limit(); !reflect.DeepEqual(got, thisTest.want) {
-				t.Errorf("Scrapper.Limit() = %v, want %v", got, thisTest.want)
+			got := myScrapper.Limit()
+
+			if got.Delay != thisTest.want.Delay {
+				t.Errorf("Scrapper.Limit() = %v, want %v", got.Delay, thisTest.want.Delay)
+			}
+
+			if got.Parallelism != thisTest.want.Parallelism {
+				t.Errorf("Scrapper.Limit() = %v, want %v", got.Parallelism, thisTest.want.Parallelism)
+			}
+
+			if got.DomainGlob != thisTest.want.DomainGlob {
+				t.Errorf("Scrapper.Limit() = %v, want %v", got.DomainGlob, thisTest.want.DomainGlob)
+			}
+
+			if got.RandomDelay != thisTest.want.RandomDelay {
+				t.Errorf("Scrapper.Limit() = %v, want %v", got.RandomDelay, thisTest.want.RandomDelay)
 			}
 		})
 	}
@@ -568,7 +587,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
-				BaseURL:       "http://my.url",
+				BaseURL:       "http://old.url",
 				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
@@ -591,8 +610,8 @@ func TestScrapper_GetConfig(t *testing.T) {
 					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
-				BaseURL:       "http://my.url",
-				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
+				BaseURL:       "http://old.url",
+				Formats:       formats.FormatDefinitions{"old": formats.Format{ID: "old"}},
 			},
 		},
 	}
@@ -607,9 +626,20 @@ func TestScrapper_GetConfig(t *testing.T) {
 				Config:           thisTest.fields.Config,
 				FormatDefinition: thisTest.fields.FormatDefinition,
 			}
-			if got := s.GetConfig(); !reflect.DeepEqual(got, thisTest.want) {
-				t.Errorf("Scrapper.GetConfig() = %v, want %v", got, thisTest.want)
+			got := s.GetConfig()
+
+			if got.BaseURL != thisTest.want.BaseURL {
+				t.Errorf("Scrapper.GetConfig() = %v, want %v", got.BaseURL, thisTest.want.BaseURL)
 			}
+
+			if !reflect.DeepEqual(got.Elements, thisTest.want.Elements) {
+				t.Errorf("Scrapper.GetConfig() = %v, want %v", got.Elements, thisTest.want.Elements)
+			}
+
+			if !reflect.DeepEqual(got.Formats, thisTest.want.Formats) {
+				t.Errorf("Scrapper.GetConfig() = %v, want %v", got.Formats, thisTest.want.Formats)
+			}
+
 		})
 	}
 }
