@@ -40,7 +40,8 @@ jobs:
       run: |
         git fetch --all
         git checkout gh-pages
-        cp -r ${{ steps.coverage.outputs.report-pathname }} .${{ github.ref_name}}.html
+        mkdir -p merge
+        cp -r ${{ steps.coverage.outputs.report-pathname }} ${{ github.ref_name}}.html
         git add .${{ github.ref_name}}.html
         git commit -m "Upload coverage report"
     - name: Push changes
