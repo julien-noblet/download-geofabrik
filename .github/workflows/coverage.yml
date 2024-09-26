@@ -38,8 +38,8 @@ jobs:
 
     - name: Commit files
       run: |
-        git pull
-        git checkout github-pages
+        git pull origin gh-pages
+        git checkout gh-pages
         cp -r ${{ steps.coverage.outputs.report-pathname }} .${{ github.ref_name}}.html
         git add .${{ github.ref_name}}.html
         git commit -m "Upload coverage report"
@@ -47,5 +47,5 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: github-pages
+        branch: gh-pages
         
