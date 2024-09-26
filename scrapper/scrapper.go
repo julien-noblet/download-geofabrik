@@ -55,22 +55,30 @@ const (
 )
 
 // NewScrapper creates a new Scrapper instance with default values.
-func NewScrapper() *Scrapper {
+func NewScrapper(baseURL, startURL string, allowedDomains []string) *Scrapper {
 	return &Scrapper{
-		RandomDelay: defaultRandomDelay,
-		Timeout:     defaultTimeout,
-		Parallelism: 1,
+		RandomDelay:    defaultRandomDelay,
+		Timeout:        defaultTimeout,
+		Parallelism:    1,
+		BaseURL:        baseURL,
+		StartURL:       startURL,
+		AllowedDomains: allowedDomains,
 	}
 }
 
 // GetConfig initializes a *config.Config from fields.
 func (s *Scrapper) GetConfig() *config.Config {
+	s.mu.RLock()
+	if s.Config != nil {
+		defer s.mu.RUnlock()
+
+		return s.Config
+	}
+	s.mu.RUnlock()
+
 	s.mu.Lock()
 	defer s.mu.Unlock()
-
-	if s.Config == nil {
-		s.Config = s.initializeConfig()
-	}
+	s.Config = s.initializeConfig()
 
 	return s.Config
 }

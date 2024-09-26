@@ -4,9 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/element"
-	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/julien-noblet/download-geofabrik/scrapper/osmtoday"
 )
 
@@ -230,6 +228,7 @@ func TestOsmtoday_Exceptions(t *testing.T) {
 	}
 }
 
+/*
 func gWithOsmPbf() *osmtoday.Osmtoday {
 	gWithOsmPbf := osmtoday.GetDefault()
 	gWithOsmPbf.Config = &config.Config{
@@ -249,3 +248,4 @@ func gWithPoly() *osmtoday.Osmtoday {
 
 	return gWithPoly
 }
+*/
