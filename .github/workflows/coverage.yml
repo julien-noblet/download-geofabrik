@@ -38,7 +38,7 @@ jobs:
 
     - name: Commit files
       run: |
-        git pull origin gh-pages
+        git fetch --all
         git checkout gh-pages
         cp -r ${{ steps.coverage.outputs.report-pathname }} .${{ github.ref_name}}.html
         git add .${{ github.ref_name}}.html
