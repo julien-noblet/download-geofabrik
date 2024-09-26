@@ -44,4 +44,3 @@ jobs:
         cname: julien-noblet.github.io
         keep_files: true
         commit_message: "Upload coverage report"
-        
