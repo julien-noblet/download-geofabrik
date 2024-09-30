@@ -1,4 +1,5 @@
 [
+  {"Version":"e6fb26788ceb05d852dfb14164b4b50ad200f096","Date":1727681927,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.1"],"Suites":[]},
   {"Version":"e01d30dcb8b81a742c6936de3a16682200551619","Date":1727681925,"Tags":["ref=refs/heads/dependabot/go_modules/go.uber.org/multierr-1.11.0"],"Suites":[]},
   {"Version":"306aafc6d6545c3b1444c5433a82486e23563b5d","Date":1727391028,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"093802d0f48854116f49c3929f5e8782649d5a9c","Date":1727390914,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"52caa1aa6abd602b2e505d0161c0a0ce69efe541","Date":1727296831,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"6daa71ba9be8e04dfc33a5e9640ab8c52468a233","Date":1727296400,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"ed7b8ac575f34c7e461d6e6b9dd8293da0310746","Date":1727295165,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
-  {"Version":"53cabf0ade907135a89c2b6b6b7006b7f996afa0","Date":1727295131,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
-  {"Version":"2ac26566cfe15d6f8627b39433d1020bb2293e6c","Date":1727294665,"Tags":["ref=refs/heads/full-review"],"Suites":[]}
+  {"Version":"53cabf0ade907135a89c2b6b6b7006b7f996afa0","Date":1727295131,"Tags":["ref=refs/heads/full-review"],"Suites":[]}
 ]
