@@ -47,7 +47,7 @@ require (
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/temoto/robotstxt v1.1.2 // indirect
 	github.com/xhit/go-str2duration/v2 v2.1.0 // indirect
-	go.uber.org/atomic v1.9.0 // indirect
+	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	golang.org/x/exp v0.0.0-20230905200255-921286631fa9 // indirect
 	golang.org/x/net v0.29.0 // indirect
