@@ -1,4 +1,5 @@
 [
+  {"Version":"3e1cbce13010a09de17d9322b13c445dfd47dd2e","Date":1727746370,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"1037f3b77958ddd170b5d794edc7524656d2ac4e","Date":1727738329,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"2114b8193d4e7087b36c6197973729e139de930d","Date":1727738214,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.6.0"],"Suites":[]},
   {"Version":"835ba9cde425cb4308e9e5f636a8567098fa671f","Date":1727738179,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"10dd22b1c36e53df5694a89cda97c08b9449a749","Date":1727380400,"Tags":["ref=refs/heads/feat/coverage"],"Suites":[]},
   {"Version":"b256ca5c557e0457a8630e41e0511561fda77221","Date":1727380292,"Tags":["ref=refs/heads/feat/coverage"],"Suites":[]},
   {"Version":"9d6b973472bec4991570ec9d71fdf1da0c9b2f18","Date":1727379955,"Tags":["ref=refs/heads/feat/coverage"],"Suites":[]},
-  {"Version":"c3bf95f89cb108d59333c9bbd319cfbf4ab91e16","Date":1727379814,"Tags":["ref=refs/heads/feat/coverage"],"Suites":[]},
-  {"Version":"304cb0f3171d9e3f3424fda74b9a5786a0ff3bf0","Date":1727379169,"Tags":["ref=refs/heads/full-review"],"Suites":[]}
+  {"Version":"c3bf95f89cb108d59333c9bbd319cfbf4ab91e16","Date":1727379814,"Tags":["ref=refs/heads/feat/coverage"],"Suites":[]}
 ]
