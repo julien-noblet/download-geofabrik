@@ -1,4 +1,5 @@
 [
+  {"Version":"4a9f9784f74f55089a12e66489086978918f0275","Date":1727852161,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"6fa4e9f73d220fcfbaab811d86656f52b1b82092","Date":1727844103,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.1"],"Suites":[]},
   {"Version":"dc7a1a75197816545e9380fc88eb6509239225db","Date":1727844020,"Tags":["ref=refs/heads/dependabot/go_modules/go.uber.org/multierr-1.11.0"],"Suites":[]},
   {"Version":"c2d11fa4f67a8c04484e420b43a524f30ce8567d","Date":1727844011,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"a6c455e3aebdb033bdeaeb8d270862b349d647be","Date":1727382895,"Tags":["ref=refs/heads/feat/coverage"],"Suites":[]},
   {"Version":"3960d63cf4b834458c1b3477f60e711a21ccd89c","Date":1727382618,"Tags":["ref=refs/heads/feat/coverage"],"Suites":[]},
   {"Version":"2f91b10fa5c3997c2246c671918de850a04587ef","Date":1727382469,"Tags":["ref=refs/heads/feat/coverage"],"Suites":[]},
-  {"Version":"87178ae50b3bdfdb1be13f7ad2fa62f07782fc29","Date":1727382355,"Tags":["ref=refs/heads/feat/coverage"],"Suites":[]},
-  {"Version":"a8d2c962feb81eca45dfe97afee95f5f328456ae","Date":1727382165,"Tags":["ref=refs/heads/feat/coverage"],"Suites":[]}
+  {"Version":"87178ae50b3bdfdb1be13f7ad2fa62f07782fc29","Date":1727382355,"Tags":["ref=refs/heads/feat/coverage"],"Suites":[]}
 ]
