@@ -52,6 +52,7 @@ jobs:
     - name: Generate coverage tree map
       run: |
         mkdir -p ${{ github.ref_name}}
+        mkdir -p /tmp/${{ github.ref_name}}
         go run github.com/nikolaydubina/go-cover-treemap@latest -coverprofile ${{ steps.coverage.outputs.gocov-agg-pathname }} -only-folders=true > /tmp/${{ github.ref_name}}.svg
     - name: Commit files
       run: |
