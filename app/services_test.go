@@ -58,7 +58,6 @@ func TestSetConfigFile(t *testing.T) {
 				t.Errorf("SetConfigFile() = %v, want %v", viper.GetString(config.ViperConfig), tt.want)
 			}
 			mutex.RUnlock()
-
 		})
 	}
 }
