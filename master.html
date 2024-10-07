@@ -552,7 +552,7 @@ func (config *Config) Generate() ([]byte, error) <span class="cov2" title="3">{
 }
 
 // MergeElement merges a new element into the config.
-func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="609">{
+func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="610">{
         config.ElementsMutex.RLock()
         newElement, ok := config.Elements[elementPtr.ID]
         config.ElementsMutex.RUnlock()
@@ -574,13 +574,13 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 <span class="cov6" title="42">newElement.Meta = len(newElement.Formats) == 0
 
                 config.Elements[elementPtr.ID] = newElement</span>
-        } else<span class="cov9" title="566"> {
+        } else<span class="cov9" title="567"> {
                 config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov10" title="609">return nil</span>
+        <span class="cov9" title="609">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
@@ -2646,7 +2646,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
         return s.StartURL
 }</span>
 
