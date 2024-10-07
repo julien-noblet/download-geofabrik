@@ -1,4 +1,5 @@
 [
+  {"Version":"09f7c0a0fcdef787bf3f8db884a6b9e844fdeb96","Date":1728337905,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"edfe32a8060c35fde396b397b12f3b91cfd08e40","Date":1728337255,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"a21e4002b73ac9203385c942d1b87096a7db9712","Date":1728337110,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"eac43278173cdd7ee6fe4eb2f9473387430fb779","Date":1728336636,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"1037f3b77958ddd170b5d794edc7524656d2ac4e","Date":1727738329,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"2114b8193d4e7087b36c6197973729e139de930d","Date":1727738214,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.6.0"],"Suites":[]},
   {"Version":"835ba9cde425cb4308e9e5f636a8567098fa671f","Date":1727738179,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"e44850c648b505e5beb07db33bf6ea5624be00b9","Date":1727738055,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.6.0"],"Suites":[]},
-  {"Version":"935603ce980b224697f30111a2be20669bde0228","Date":1727738050,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.1"],"Suites":[]}
+  {"Version":"e44850c648b505e5beb07db33bf6ea5624be00b9","Date":1727738055,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.6.0"],"Suites":[]}
 ]
