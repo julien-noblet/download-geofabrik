@@ -1,4 +1,7 @@
 name: "Go Coverage"
+permissions:
+  # contents permission to update benchmark contents in 'benchmarks' branch
+  contents: write
 on:
   pull_request:
   push:
