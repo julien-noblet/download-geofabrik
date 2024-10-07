@@ -44,10 +44,10 @@ jobs:
       with:
         auth: ${{ secrets.GIST_SECRET }}
         gistID: a509e15ea4734ca3e8e98f32ab5369c0
-        filename: download-geofabrik-coverage.svg # Use test.svg if you want to use the SVG mode.
-        label: Download Geofabrik
-        message: coverage
-        color: orange
+        filename: coverage.json
+        label: Go Coverage
+        message: ${{ steps.coverage.outputs.coverage-pct-1dp }}%
+        color: ${{ steps.coverage.outputs.meets-threshold == 'true' && 'green' || 'red' }}
         
     - name: Generate coverage tree map
       run: |
