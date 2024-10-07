@@ -33,9 +33,13 @@ func CheckService() bool {
 
 // SetConfigFile sets the configuration file if the current config file is the default.
 func SetConfigFile(configFile string) {
-	if viper.GetString(config.ViperConfig) == "" {
+	if viper.GetString(config.ViperConfig) == "" && configFile == "" {
 		viper.Set(config.ViperConfig, defaultConfigFile)
-	} else {
+
+		return
+	}
+
+	if configFile != "" {
 		viper.Set(config.ViperConfig, configFile)
 	}
 }

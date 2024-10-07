@@ -47,17 +47,13 @@ func TestSetConfigFile(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			mutex.Lock()
 			viper.Set(config.ViperConfig, "")
-			mutex.Unlock()
 
-			mutex.Lock()
 			app.SetConfigFile(tt.configFile)
-			mutex.Unlock()
 
-			mutex.RLock()
 			if viper.GetString(config.ViperConfig) != tt.want {
 				t.Errorf("SetConfigFile() = %v, want %v", viper.GetString(config.ViperConfig), tt.want)
 			}
-			mutex.RUnlock()
+			mutex.Unlock()
 		})
 	}
 }
