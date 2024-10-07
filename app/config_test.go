@@ -2,6 +2,7 @@ package app_test
 
 import (
 	"os"
+	"sync"
 	"testing"
 
 	"github.com/julien-noblet/download-geofabrik/app"
@@ -11,7 +12,7 @@ import (
 )
 
 func Test_setViperBool(t *testing.T) {
-	t.Parallel()
+	mutex := sync.RWMutex{}
 
 	type args struct {
 		name string
@@ -43,12 +44,14 @@ func Test_setViperBool(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
+			mutex.Lock()
 			app.SetViperBool(tt.args.name, &tt.args.flag)
 
 			if got := viper.Get(tt.args.name); got != tt.want {
 				t.Errorf("setViperBool() = %v, want %v", got, tt.want)
 			}
+
+			mutex.Unlock()
 		})
 	}
 }
