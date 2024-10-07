@@ -16,7 +16,8 @@ const (
 	markdownFormat = "Markdown"
 )
 
-func ListAllRegions(configuration *config.Config, format string) {
+// ListAllRegions lists all regions in the specified format.
+func ListAllRegions(configuration *config.Config, format string) error {
 	table := CreateTable(format)
 	keys := GetSortedKeys(configuration)
 
@@ -31,8 +32,11 @@ func ListAllRegions(configuration *config.Config, format string) {
 
 	table.Render()
 	fmt.Printf("Total elements: %#v\n", len(configuration.Elements)) //nolint:forbidigo // I want to print the number of elements
+
+	return nil
 }
 
+// CreateTable creates a table with the specified format.
 func CreateTable(format string) *tablewriter.Table {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetAlignment(tablewriter.ALIGN_LEFT)
@@ -46,6 +50,7 @@ func CreateTable(format string) *tablewriter.Table {
 	return table
 }
 
+// GetSortedKeys returns the sorted keys of the configuration elements.
 func GetSortedKeys(configuration *config.Config) []string {
 	keys := make(sort.StringSlice, len(configuration.Elements))
 	i := 0
@@ -60,6 +65,7 @@ func GetSortedKeys(configuration *config.Config) []string {
 	return keys
 }
 
+// ListCommand executes the list command.
 func ListCommand() {
 	format := ""
 
@@ -72,5 +78,7 @@ func ListCommand() {
 		format = markdownFormat
 	}
 
-	ListAllRegions(configPtr, format)
+	if err := ListAllRegions(configPtr, format); err != nil {
+		log.WithError(err).Fatal("Failed to list all regions")
+	}
 }
