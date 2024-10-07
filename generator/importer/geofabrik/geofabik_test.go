@@ -5,10 +5,11 @@ import (
 
 	"github.com/julien-noblet/download-geofabrik/generator/importer/geofabrik"
 	"github.com/spf13/viper"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestGetIndex(t *testing.T) {
-	t.Parallel()
 	viper.Set("log", true)
 
 	tests := []struct {
@@ -22,27 +23,32 @@ func TestGetIndex(t *testing.T) {
 			myURL:   geofabrik.GeofabrikIndexURL,
 			wantErr: false,
 		},
+		{
+			name:    "Test 404",
+			myURL:   "https://google.com/404",
+			wantErr: true,
+		},
 	}
 	for _, thisTest := range tests {
 		t.Run(thisTest.name, func(t *testing.T) {
-			t.Parallel()
-
 			index, err := geofabrik.GetIndex(thisTest.myURL)
-			if (err != nil) != thisTest.wantErr {
-				t.Errorf("GetIndex() error = %v, wantErr %v", err, thisTest.wantErr)
-			}
+			if thisTest.wantErr {
+				require.Error(t, err)
+			} else {
+				assert.NotNil(t, index)
 
-			if len(index.Features) < 10 {
-				t.Errorf("GetIndex() error I should have more features!!!")
-			}
+				if len(index.Features) < 10 {
+					t.Errorf("GetIndex() error I should have more features!!!")
+				}
 
-			converted, err := geofabrik.Convert(index)
-			if converted == nil || err != nil {
-				t.Errorf("GetIndex() error cant convert !!!\n%v", err)
-			}
+				converted, err := geofabrik.Convert(index)
+				if converted == nil || err != nil {
+					t.Errorf("GetIndex() error cant convert !!!\n%v", err)
+				}
 
-			if e, err := converted.GetElement("france"); err != nil || e == nil {
-				t.Errorf("GetIndex() error cant find element !!!\nconfig=%v\nerr=%v", converted, err)
+				if e, err := converted.GetElement("france"); err != nil || e == nil {
+					t.Errorf("GetIndex() error cant find element !!!\nconfig=%v\nerr=%v", converted, err)
+				}
 			}
 		})
 	}
