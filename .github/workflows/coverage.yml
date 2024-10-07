@@ -38,16 +38,6 @@ jobs:
         # A url that the html report will be accessible at, once your
         # workflow uploads it.  Used in the pull request comment.
         report-url: https://julien-noblet.github.io/download-geofabrik/${{ github.ref_name}}.html
-
-    - name: Create Awesome Badge
-      uses: schneegans/dynamic-badges-action@v1.7.0
-      with:
-        auth: ${{ secrets.GIST_SECRET }}
-        gistID: a509e15ea4734ca3e8e98f32ab5369c0
-        filename: coverage.json
-        label: Go Coverage
-        message: ${{ steps.coverage.outputs.coverage-pct-1dp }}%
-        color: ${{ steps.coverage.outputs.meets-threshold == 'true' && 'green' || 'red' }}
         
     - name: Generate coverage tree map
       run: |
@@ -70,4 +60,17 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: gh-pages
-        
+  badge-generation:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+    - name: Create Awesome Badge
+      uses: schneegans/dynamic-badges-action@v1.7.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: a509e15ea4734ca3e8e98f32ab5369c0
+        filename: coverage.json
+        label: Go Coverage
+        message: ${{ steps.coverage.outputs.coverage-pct-1dp }}%
+        color: ${{ steps.coverage.outputs.meets-threshold == 'true' && 'green' || 'red' }}
+       
