@@ -1,4 +1,5 @@
 [
+  {"Version":"aa0335296a1b3f0aa011c4988289fb90d61af2e9","Date":1728328135,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"a96243b086f20f388eabdc5d371277f17dccd615","Date":1728328105,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"173878c5c5fd55bde027a723d8f6664beb19d3c3","Date":1728284580,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.19.0"],"Suites":[]},
   {"Version":"0c24a6b6c1e036e9636751c4b1d0740773a29631","Date":1728284577,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.2"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"306aafc6d6545c3b1444c5433a82486e23563b5d","Date":1727391028,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"093802d0f48854116f49c3929f5e8782649d5a9c","Date":1727390914,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"4058f6d9189e2ebf26970ee73a12f1f0f635256a","Date":1727390045,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
-  {"Version":"a435e206e920e5ef8178c0363f8426f608c7055d","Date":1727387956,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"e78f5aaff12e5c21211a1114dc5d67b0ea27322a","Date":1727383219,"Tags":["ref=refs/heads/feat/coverage"],"Suites":[]}
+  {"Version":"a435e206e920e5ef8178c0363f8426f608c7055d","Date":1727387956,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
