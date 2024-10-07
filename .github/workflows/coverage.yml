@@ -64,6 +64,31 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
+    - uses: actions/checkout@v4
+      with:
+        # default fetch-depth is insufficent to find previous coverage notes
+        fetch-depth: 10
+
+    - uses: gwatts/go-coverage-action@v2
+      id: coverage
+      continue-on-error: true
+      with:
+        # Optional coverage threshold
+        # use fail-coverage to determine what should happen below this threshold
+        coverage-threshold: 70
+
+        # collect coverage for all packages beyond the one under test
+        cover-pkg: ./...
+
+        # Ignore code-generated files when calculating coverage totals
+        ignore-pattern: |
+          \.pb\.go$
+          \_string\.go$
+        
+        # A url that the html report will be accessible at, once your
+        # workflow uploads it.  Used in the pull request comment.
+        report-url: https://julien-noblet.github.io/download-geofabrik/${{ github.ref_name}}.html
+       
     - name: Create Awesome Badge
       uses: schneegans/dynamic-badges-action@v1.7.0
       with:
