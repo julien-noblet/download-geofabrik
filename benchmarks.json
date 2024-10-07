@@ -1,4 +1,5 @@
 [
+  {"Version":"f10a2ed2fa5a0830b969f8f762b2b8fc7ce28670","Date":1728338288,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.3"],"Suites":[]},
   {"Version":"9325adcfaf3f7b96b5411c3461edee2ef4121fa3","Date":1728338262,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.1"],"Suites":[]},
   {"Version":"50df8792ae2fc25b5764f8172bf169b8daa0ac51","Date":1728338241,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"a1754334cc362e641cf0e348da76b49af0fb4161","Date":1728338046,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"a83d75fb4aa4eb66c120173026dd1ab86b4f38ee","Date":1727811129,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"ce6cf6aaccee86290a7b039b97aac2dc5484b2e1","Date":1727746417,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.1"],"Suites":[]},
   {"Version":"6b5653f5e2e46eedef628671fc1c19ba942fd26b","Date":1727746414,"Tags":["ref=refs/heads/dependabot/go_modules/go.uber.org/multierr-1.11.0"],"Suites":[]},
-  {"Version":"3e1cbce13010a09de17d9322b13c445dfd47dd2e","Date":1727746370,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"1037f3b77958ddd170b5d794edc7524656d2ac4e","Date":1727738329,"Tags":["ref=refs/heads/full-review"],"Suites":[]}
+  {"Version":"3e1cbce13010a09de17d9322b13c445dfd47dd2e","Date":1727746370,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
