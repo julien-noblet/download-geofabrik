@@ -39,6 +39,16 @@ jobs:
         # workflow uploads it.  Used in the pull request comment.
         report-url: https://julien-noblet.github.io/download-geofabrik/${{ github.ref_name}}.html
 
+    - name: Create Awesome Badge
+      uses: schneegans/dynamic-badges-action@v1.7.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: a509e15ea4734ca3e8e98f32ab5369c0
+        filename: download-geofabrik-coverage.svg # Use test.svg if you want to use the SVG mode.
+        label: Download Geofabrik
+        message: coverage
+        color: orange
+        
     - name: Generate coverage tree map
       run: |
         mkdir -p ${{ github.ref_name}}
