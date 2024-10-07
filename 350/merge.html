@@ -79,9 +79,9 @@
 				
 				<option value="file11">github.com/julien-noblet/download-geofabrik/generator/generator.go (16.4%)</option>
 				
-				<option value="file12">github.com/julien-noblet/download-geofabrik/generator/importer/geofabrik/geofabik.go (78.3%)</option>
+				<option value="file12">github.com/julien-noblet/download-geofabrik/generator/importer/geofabrik/geofabik.go (84.8%)</option>
 				
-				<option value="file13">github.com/julien-noblet/download-geofabrik/lists/lists.go (0.0%)</option>
+				<option value="file13">github.com/julien-noblet/download-geofabrik/lists/lists.go (93.1%)</option>
 				
 				<option value="file14">github.com/julien-noblet/download-geofabrik/scrapper/bbbike/bbbike.go (80.0%)</option>
 				
@@ -580,7 +580,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov9" title="609">return nil</span>
+        <span class="cov9" title="608">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
@@ -698,7 +698,7 @@ func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, 
 }
 
 // LoadConfig loads the configuration from the specified file.
-func LoadConfig(configFile string) (*Config, error) <span class="cov4" title="16">{
+func LoadConfig(configFile string) (*Config, error) <span class="cov4" title="17">{
         filename, _ := filepath.Abs(configFile)
 
         fileContent, err := os.ReadFile(filename)
@@ -706,7 +706,7 @@ func LoadConfig(configFile string) (*Config, error) <span class="cov4" title="16
                 return nil, fmt.Errorf("can't open %s: %w", filename, err)
         }</span>
 
-        <span class="cov4" title="15">myConfigPtr := &amp;Config{
+        <span class="cov4" title="16">myConfigPtr := &amp;Config{
                 Formats:       formats.FormatDefinitions{},
                 Elements:      element.MapElement{},
                 ElementsMutex: &amp;sync.RWMutex{},
@@ -717,7 +717,7 @@ func LoadConfig(configFile string) (*Config, error) <span class="cov4" title="16
                 return nil, fmt.Errorf("can't unmarshal %s: %w", filename, err)
         }</span>
 
-        <span class="cov4" title="14">return myConfigPtr, nil</span>
+        <span class="cov4" title="15">return myConfigPtr, nil</span>
 }
 
 // IsHashable checks if a format is hashable.
@@ -1174,7 +1174,7 @@ const (
 )
 
 // GetMiniFormats returns a string of short format names based on the provided full format names.
-func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="21">{
+func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="534">{
         miniFormats := []MiniFormat{
                 {ShortName: "s", FullName: FormatState},
                 {ShortName: "P", FullName: FormatOsmPbf},
@@ -1196,9 +1196,9 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="2
 
         shortNames := make([]string, 0, len(fullFormatNames))
 
-        for _, fullName := range fullFormatNames </span><span class="cov7" title="37">{
-                for _, format := range miniFormats </span><span class="cov10" title="158">{
-                        if fullName == format.FullName </span><span class="cov7" title="36">{
+        for _, fullName := range fullFormatNames </span><span class="cov8" title="4580">{
+                for _, format := range miniFormats </span><span class="cov10" title="33013">{
+                        if fullName == format.FullName </span><span class="cov8" title="3557">{
                                 shortNames = append(shortNames, format.ShortName)
 
                                 break</span>
@@ -1206,11 +1206,11 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="2
                 }
         }
 
-        <span class="cov6" title="21">return strings.Join(shortNames, "")</span>
+        <span class="cov6" title="534">return strings.Join(shortNames, "")</span>
 }
 
 // GetFormats returns a slice of format strings based on the configuration.
-func GetFormats() []string <span class="cov4" title="9">{
+func GetFormats() []string <span class="cov2" title="9">{
         options := map[string]string{
                 KeyOsmPbf:         FormatOsmPbf,
                 KeyOshPbf:         FormatOshPbf,
@@ -1232,17 +1232,17 @@ func GetFormats() []string <span class="cov4" title="9">{
 
         var formatList []string
 
-        for key, format := range options </span><span class="cov9" title="144">{
-                if viper.GetBool(key) </span><span class="cov5" title="11">{
+        for key, format := range options </span><span class="cov5" title="144">{
+                if viper.GetBool(key) </span><span class="cov3" title="11">{
                         formatList = append(formatList, format)
                 }</span>
         }
 
-        <span class="cov4" title="9">if len(formatList) == 0 </span><span class="cov1" title="1">{
+        <span class="cov2" title="9">if len(formatList) == 0 </span><span class="cov1" title="1">{
                 formatList = append(formatList, FormatOsmPbf)
         }</span>
 
-        <span class="cov4" title="9">sort.Strings(formatList)
+        <span class="cov2" title="9">sort.Strings(formatList)
 
         return formatList</span>
 }
@@ -1500,7 +1500,7 @@ type IndexElementProperties struct {
 }
 
 // GetIndex downloads the Geofabrik index and unmarshals the JSON response.
-func GetIndex(url string) (*Index, error) <span class="cov1" title="1">{
+func GetIndex(url string) (*Index, error) <span class="cov1" title="2">{
         ctx, cancel := context.WithTimeout(context.Background(), TimeoutDuration)
         defer cancel()
 
@@ -1509,13 +1509,13 @@ func GetIndex(url string) (*Index, error) <span class="cov1" title="1">{
                 return nil, errors.Wrapf(err, ErrCreatingRequest, url)
         }</span>
 
-        <span class="cov1" title="1">response, err := HTTPClient.Do(req)
+        <span class="cov1" title="2">response, err := HTTPClient.Do(req)
         if err != nil </span><span class="cov0" title="0">{
                 return nil, errors.Wrapf(err, ErrDownloading, url)
         }</span>
-        <span class="cov1" title="1">defer response.Body.Close()
+        <span class="cov1" title="2">defer response.Body.Close()
 
-        if response.StatusCode != http.StatusOK </span><span class="cov0" title="0">{
+        if response.StatusCode != http.StatusOK </span><span class="cov1" title="1">{
                 return nil, handleHTTPError(response, url)
         }</span>
 
@@ -1533,9 +1533,9 @@ func GetIndex(url string) (*Index, error) <span class="cov1" title="1">{
 }
 
 // handleHTTPError handles HTTP errors based on the status code.
-func handleHTTPError(response *http.Response, url string) error <span class="cov0" title="0">{
+func handleHTTPError(response *http.Response, url string) error <span class="cov1" title="1">{
         switch response.StatusCode </span>{
-        case http.StatusNotFound:<span class="cov0" title="0">
+        case http.StatusNotFound:<span class="cov1" title="1">
                 return fmt.Errorf(ErrDownload, url, response.StatusCode, os.Args[0], http.ErrNoLocation)</span>
         default:<span class="cov0" title="0">
                 return fmt.Errorf(ErrDownload, url, response.StatusCode, os.Args[0], http.ErrNotSupported)</span>
@@ -1622,11 +1622,12 @@ const (
         markdownFormat = "Markdown"
 )
 
-func ListAllRegions(configuration *config.Config, format string) <span class="cov0" title="0">{
+// ListAllRegions lists all regions in the specified format.
+func ListAllRegions(configuration *config.Config, format string) error <span class="cov2" title="3">{
         table := CreateTable(format)
         keys := GetSortedKeys(configuration)
 
-        for _, item := range keys </span><span class="cov0" title="0">{
+        for _, item := range keys </span><span class="cov9" title="513">{
                 table.Append([]string{
                         item,
                         configuration.Elements[configuration.Elements[item].Parent].Name,
@@ -1635,38 +1636,43 @@ func ListAllRegions(configuration *config.Config, format string) <span class="co
                 })
         }</span>
 
-        <span class="cov0" title="0">table.Render()
-        fmt.Printf("Total elements: %#v\n", len(configuration.Elements))</span> //nolint:forbidigo // I want to print the number of elements
+        <span class="cov2" title="3">table.Render()
+        fmt.Printf("Total elements: %#v\n", len(configuration.Elements)) //nolint:forbidigo // I want to print the number of elements
+
+        return nil</span>
 }
 
-func CreateTable(format string) *tablewriter.Table <span class="cov0" title="0">{
+// CreateTable creates a table with the specified format.
+func CreateTable(format string) *tablewriter.Table <span class="cov2" title="3">{
         table := tablewriter.NewWriter(os.Stdout)
         table.SetAlignment(tablewriter.ALIGN_LEFT)
         table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
 
-        if format == markdownFormat </span><span class="cov0" title="0">{
+        if format == markdownFormat </span><span class="cov1" title="2">{
                 table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
                 table.SetCenterSeparator("|")
         }</span>
 
-        <span class="cov0" title="0">return table</span>
+        <span class="cov2" title="3">return table</span>
 }
 
-func GetSortedKeys(configuration *config.Config) []string <span class="cov0" title="0">{
+// GetSortedKeys returns the sorted keys of the configuration elements.
+func GetSortedKeys(configuration *config.Config) []string <span class="cov2" title="4">{
         keys := make(sort.StringSlice, len(configuration.Elements))
         i := 0
 
-        for k := range configuration.Elements </span><span class="cov0" title="0">{
+        for k := range configuration.Elements </span><span class="cov10" title="515">{
                 keys[i] = k
                 i++
         }</span>
 
-        <span class="cov0" title="0">keys.Sort()
+        <span class="cov2" title="4">keys.Sort()
 
         return keys</span>
 }
 
-func ListCommand() <span class="cov0" title="0">{
+// ListCommand executes the list command.
+func ListCommand() <span class="cov1" title="1">{
         format := ""
 
         configPtr, err := config.LoadConfig(viper.GetString(config.ViperConfig))
@@ -1674,11 +1680,13 @@ func ListCommand() <span class="cov0" title="0">{
                 log.WithError(err).Fatal(config.ErrLoadConfig)
         }</span>
 
-        <span class="cov0" title="0">if viper.GetBool(config.ViperListFormatMarkdown) </span><span class="cov0" title="0">{
+        <span class="cov1" title="1">if viper.GetBool(config.ViperListFormatMarkdown) </span><span class="cov1" title="1">{
                 format = markdownFormat
         }</span>
 
-        <span class="cov0" title="0">ListAllRegions(configPtr, format)</span>
+        <span class="cov1" title="1">if err := ListAllRegions(configPtr, format); err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Fatal("Failed to list all regions")
+        }</span>
 }
 </pre>
 		
