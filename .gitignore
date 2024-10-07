@@ -1,3 +1,5 @@
+
+
 # Compiled Object files, Static and Dynamic libs (Shared Objects)
 *.o
 *.a
@@ -46,6 +48,9 @@ _testmain.go
 *.md5
 *.pbf
 
+# need for tests
+!LICENSE.md5
+
 snap.login
 
 # Test binary, built with `go test -c`
@@ -56,3 +61,5 @@ snap.login
 
 
 dist/
+
+

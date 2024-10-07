@@ -16,7 +16,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/formats"
 )
 
-// IScrapper represent a colly Scrapper.
+// IScrapper represents a colly Scrapper.
 type IScrapper interface {
 	GetConfig() *config.Config
 	Collector() *colly.Collector
@@ -26,65 +26,91 @@ type IScrapper interface {
 	ParseFormat(id, format string)
 }
 
-// Scrapper define a default scrapper.
+// Scrapper defines a default scrapper.
 type Scrapper struct {
 	FormatDefinition formats.FormatDefinitions
-	Config           *config.Config // ptr to Config Element
-	Timeout          *time.Duration
+	Config           *config.Config
+	Timeout          time.Duration
 	URLFilters       []*regexp.Regexp
 	BaseURL          string
 	StartURL         string
-	DomainGlob       string // "*" by default
+	DomainGlob       string
 	AllowedDomains   []string
-	RandomDelay      time.Duration // 5 * time.Second by default
-	MaxDepth         int           // 0 to infinite
-	Parallelism      int           // >1
-	PB               int           // For ProgressBar
-	Async            bool          // true by default
+	RandomDelay      time.Duration
+	MaxDepth         int
+	Parallelism      int
+	PB               int
+	Async            bool
+	mu               sync.RWMutex
 }
 
-// GetConfig init a *config.Config from fields.
+const (
+	defaultRandomDelay           = 5 * time.Second
+	defaultTimeout               = 60 * time.Second
+	defaultKeepAlive             = 30 * time.Second
+	defaultIdleConnTimeout       = 5 * time.Second
+	defaultTLSHandshakeTimeout   = 10 * time.Second
+	defaultExpectContinueTimeout = 5 * time.Second
+	minParentListLength          = 5
+)
+
+// NewScrapper creates a new Scrapper instance with default values.
+func NewScrapper(baseURL, startURL string, allowedDomains []string) *Scrapper {
+	return &Scrapper{
+		RandomDelay:    defaultRandomDelay,
+		Timeout:        defaultTimeout,
+		Parallelism:    1,
+		BaseURL:        baseURL,
+		StartURL:       startURL,
+		AllowedDomains: allowedDomains,
+	}
+}
+
+// GetConfig initializes a *config.Config from fields.
 func (s *Scrapper) GetConfig() *config.Config {
-	if s.Config == nil {
-		s.Config = &config.Config{ //nolint:exhaustruct // I'm lazy
-			Elements:      element.Slice{}, // should be void
-			ElementsMutex: &sync.RWMutex{}, // initialize a new Mutex
-		}
-	}
+	s.mu.RLock()
+	if s.Config != nil {
+		defer s.mu.RUnlock()
 
-	if s.BaseURL != "" {
-		s.Config.BaseURL = s.BaseURL
+		return s.Config
 	}
+	s.mu.RUnlock()
 
-	if s.FormatDefinition != nil {
-		s.Config.Formats = s.FormatDefinition
-	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.Config = s.initializeConfig()
 
-	return s.Config // in case of BaseURL AND/OR FormatDefinition isn't set
+	return s.Config
 }
 
-// Limit define LimitRules.
+// initializeConfig initializes the configuration with default values.
+func (s *Scrapper) initializeConfig() *config.Config {
+	return &config.Config{
+		Elements:      element.MapElement{},
+		ElementsMutex: &sync.RWMutex{},
+		Formats:       s.FormatDefinition,
+		BaseURL:       s.BaseURL,
+	}
+}
+
+// Limit defines LimitRules.
 func (s *Scrapper) Limit() *colly.LimitRule {
 	if s.DomainGlob == "" {
 		s.DomainGlob = "*"
 	}
 
-	if s.Parallelism <= 1 { // not //
+	if s.Parallelism <= 1 {
 		s.Parallelism = 1
 	}
 
-	if s.RandomDelay == 0 {
-		s.RandomDelay = 5 * time.Second //nolint:gomnd // Use 5 seconds as random delay
-	}
-
-	return &colly.LimitRule{ //nolint:exhaustruct // I'm lazy
+	return &colly.LimitRule{
 		DomainGlob:  s.DomainGlob,
 		Parallelism: s.Parallelism,
 		RandomDelay: s.RandomDelay,
 	}
 }
 
-// Collector *colly.Collector Init Collector.
+// Collector initializes a *colly.Collector.
 func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector {
 	myCollector := colly.NewCollector(
 		colly.AllowedDomains(s.AllowedDomains...),
@@ -93,24 +119,22 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector {
 		colly.MaxDepth(s.MaxDepth),
 	)
 
-	if s.Timeout != nil {
-		myCollector.SetRequestTimeout(*s.Timeout)
+	if s.Timeout != 0 {
+		myCollector.SetRequestTimeout(s.Timeout)
 	}
 
-	myCollector.WithTransport(&http.Transport{ //nolint:exhaustruct // I'm lazy
+	myCollector.WithTransport(&http.Transport{
 		Proxy: http.ProxyFromEnvironment,
-		DialContext: (&net.Dialer{ //nolint:exhaustruct // I'm lazy
-			Timeout:   60 * time.Second, //nolint:gomnd // Use 60 seconds as default timeout
-			KeepAlive: 30 * time.Second, //nolint:gomnd // Use 30 seconds as default KeepAlive
-			DualStack: true,
+		DialContext: (&net.Dialer{
+			Timeout:   defaultTimeout,
+			KeepAlive: defaultKeepAlive,
 		}).DialContext,
-		MaxIdleConns:          0,
-		IdleConnTimeout:       5 * time.Second,  //nolint:gomnd // 5 seconds
-		TLSHandshakeTimeout:   10 * time.Second, //nolint:gomnd // 10 seconds
-		ExpectContinueTimeout: 5 * time.Second,  //nolint:gomnd // 5 seconds
+		IdleConnTimeout:       defaultIdleConnTimeout,
+		TLSHandshakeTimeout:   defaultTLSHandshakeTimeout,
+		ExpectContinueTimeout: defaultExpectContinueTimeout,
 	})
 
-	s.Config = s.GetConfig() // ensure initialisation
+	s.Config = s.GetConfig()
 	if err := myCollector.Limit(s.Limit()); err != nil {
 		log.WithError(err).Error("can't update limit")
 	}
@@ -126,46 +150,47 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector {
 	return myCollector
 }
 
-// GetStartURL return StartURL.
+// GetStartURL returns StartURL.
 func (s *Scrapper) GetStartURL() string {
 	return s.StartURL
 }
 
-// GetPB return PB.
+// GetPB returns PB.
 func (s *Scrapper) GetPB() int {
 	return s.PB
 }
 
-// ParseFormat add Extensions to ID.
+// ParseFormat adds Extensions to ID.
 func (s *Scrapper) ParseFormat(id, format string) {
-	for i := range s.Config.Formats {
-		if format == i {
-			s.Config.AddExtension(id, format)
-		}
-	}
+	s.AddExtension(id, format, &s.Config.Formats)
 }
 
-// ParseFormatService add Extensions to ID.
+// ParseFormatService adds Extensions to ID.
 func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefinitions) {
+	s.AddExtension(id, format, def)
+}
+
+// AddExtension adds an extension to the configuration.
+func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) {
 	for f, i := range *def {
-		if "."+format == i.Loc {
+		if format == i.ID {
 			s.Config.AddExtension(id, f)
 		}
 	}
 }
 
-// FileExt return filename, ext.
-func FileExt(url string) (filename, extension string) { //nolint:nonamedreturns // better for documentation
-	urls := strings.Split(url, "/") // Todo: Try with regexp?
+// FileExt returns filename and extension.
+func FileExt(url string) (filename, extension string) {
+	urls := strings.Split(url, "/")
 	f := strings.Split(urls[len(urls)-1], ".")
 
 	return f[0], strings.Join(f[1:], ".")
 }
 
-// GetParent return filename, path.
-func GetParent(url string) (filename, path string) { //nolint:nonamedreturns // better for documentation
+// GetParent returns filename and path.
+func GetParent(url string) (filename, path string) {
 	r := strings.Split(url, "/")
-	if len(r) < 5 { //nolint:gomnd // <4 should be impossible
+	if len(r) < minParentListLength {
 		return "", strings.Join(r[:len(r)-1], "/")
 	}
 

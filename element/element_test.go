@@ -123,7 +123,6 @@ func TestElement_HasParent(t *testing.T) {
 		},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -142,22 +141,6 @@ func TestElement_HasParent(t *testing.T) {
 	}
 }
 
-func Benchmark_StringInSlice_parse_geofabrik_yml(b *testing.B) {
-	myConfig, _ := config.LoadConfig(geofabrikYml)
-	sliceE := element.Formats{}
-
-	for k := range myConfig.Elements {
-		sliceE = append(sliceE, k)
-	}
-
-	for n := 0; n < b.N; n++ {
-		for k := range myConfig.Elements {
-			k := k
-			element.StringInSlice(&k, &sliceE)
-		}
-	}
-}
-
 func Benchmark_contains_parse_geofabrik_yml(b *testing.B) {
 	myConfig, _ := config.LoadConfig(geofabrikYml)
 	sliceE := element.Formats{}
@@ -173,16 +156,6 @@ func Benchmark_contains_parse_geofabrik_yml(b *testing.B) {
 	}
 }
 
-func Benchmark_StringInSlice_parse_geofabrik_yml_France_formats_osm_pbf(b *testing.B) {
-	c, _ := config.LoadConfig(geofabrikYml)
-	myformats := c.Elements["france"].Formats
-	format := formats.FormatOsmPbf
-
-	for n := 0; n < b.N; n++ {
-		element.StringInSlice(&format, &myformats)
-	}
-}
-
 func Benchmark_contain_parse_geofabrik_yml_France_formats_osm_pbf(b *testing.B) {
 	c, _ := config.LoadConfig(geofabrikYml)
 	myformats := c.Elements["france"].Formats
@@ -190,44 +163,6 @@ func Benchmark_contain_parse_geofabrik_yml_France_formats_osm_pbf(b *testing.B) 
 
 	for n := 0; n < b.N; n++ {
 		myformats.Contains(format)
-	}
-}
-
-func Test_contains(t *testing.T) {
-	t.Parallel()
-
-	type args struct {
-		e string
-		s element.Formats
-	}
-
-	tests := []struct {
-		name string
-		args args
-		want bool
-	}{
-		// TODO: Add test cases.
-		{name: "Contain", args: args{s: element.Formats{"a"}, e: "a"}, want: true},
-		{name: "Contain", args: args{s: element.Formats{"a", "b"}, e: "a"}, want: true},
-		{name: "Not Contain", args: args{s: element.Formats{"a", "b"}, e: "c"}, want: false},
-		{name: "Void s", args: args{s: element.Formats{}, e: "c"}, want: false},
-		{name: "Void e", args: args{s: element.Formats{"a", "b"}, e: ""}, want: false},
-		{name: "Void s,e", args: args{s: element.Formats{}, e: ""}, want: false},
-	}
-
-	for _, thisTest := range tests {
-		thisTest := thisTest
-		t.Run(thisTest.name, func(t *testing.T) {
-			t.Parallel()
-
-			if got := thisTest.args.s.Contains(thisTest.args.e); got != thisTest.want {
-				t.Errorf("Contains() = %v, want %v", got, thisTest.want)
-			}
-
-			if got := element.StringInSlice(&thisTest.args.e, &thisTest.args.s); got != thisTest.want {
-				t.Errorf("StringInSlice() = %v, want %v", got, thisTest.want)
-			}
-		})
 	}
 }
 
@@ -262,11 +197,10 @@ func Test_MakeParent(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
-			got := element.MakeParent(&thisTest.args.e, thisTest.args.gparent)
+			got := element.CreateParentElement(&thisTest.args.e, thisTest.args.gparent)
 			if got == nil && thisTest.want == nil {
 				return
 			}

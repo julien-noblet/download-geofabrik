@@ -4,12 +4,22 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
+	"sync"
 
 	"github.com/apex/log"
 	"github.com/gocolly/colly/v2"
+	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/element"
 	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/julien-noblet/download-geofabrik/scrapper"
+)
+
+// Constants for magic numbers and URLs.
+const (
+	progressBarCount = 1003 // number of elements
+	parallelism      = 20   // number of parallel downloads
+	baseURL          = "https://osmtoday.com"
+	startURL         = baseURL + "/"
 )
 
 // Osmtoday Scrapper.
@@ -17,31 +27,42 @@ type Osmtoday struct {
 	*scrapper.Scrapper
 }
 
+// GetDefault returns the default configuration for Osmtoday scrapper.
 func GetDefault() *Osmtoday {
+	urlFilters := []*regexp.Regexp{
+		regexp.MustCompile(`https://osmtoday\.com/.+\.html$`),
+		regexp.MustCompile(`https://osmtoday\.com/$`),
+	}
+
+	formatDefinition := formats.FormatDefinitions{
+		"osm.pbf.md5":         {ID: "osm.pbf.md5", Loc: ".md5"},
+		formats.FormatGeoJSON: {ID: formats.FormatGeoJSON, Loc: ".geojson"},
+		formats.FormatOsmPbf:  {ID: formats.FormatOsmPbf, Loc: ".pbf"},
+		formats.FormatPoly:    {ID: formats.FormatPoly, Loc: ".poly"},
+	}
+
 	return &Osmtoday{
-		Scrapper: &scrapper.Scrapper{ //nolint:exhaustruct // I'm lazy
-			PB:             1003, //nolint:gomnd // there is 1003 items
-			Async:          true,
-			Parallelism:    20, //nolint:gomnd // use 20 threads for scrapping
-			MaxDepth:       0,
-			AllowedDomains: []string{`osmtoday.com`},
-			BaseURL:        `https://osmtoday.com`,
-			StartURL:       `https://osmtoday.com/`,
-			URLFilters: []*regexp.Regexp{
-				regexp.MustCompile(`https://osmtoday\.com/.+\.html$`),
-				regexp.MustCompile(`https://osmtoday\.com/$`),
-			},
-			FormatDefinition: formats.FormatDefinitions{
-				"osm.pbf.md5":         {ID: "osm.pbf.md5", Loc: ".md5", ToLoc: "", BasePath: "", BaseURL: ""},
-				formats.FormatGeoJSON: {ID: formats.FormatGeoJSON, Loc: ".geojson", ToLoc: "", BasePath: "", BaseURL: ""},
-				formats.FormatOsmPbf:  {ID: formats.FormatOsmPbf, Loc: ".pbf", ToLoc: "", BasePath: "", BaseURL: ""},
-				formats.FormatPoly:    {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "", BaseURL: ""},
+		Scrapper: &scrapper.Scrapper{
+			PB:               progressBarCount,
+			Async:            true,
+			Parallelism:      parallelism,
+			MaxDepth:         0,
+			AllowedDomains:   []string{`osmtoday.com`},
+			BaseURL:          baseURL,
+			StartURL:         startURL,
+			URLFilters:       urlFilters,
+			FormatDefinition: formatDefinition,
+			Config: &config.Config{
+				Formats:       formats.FormatDefinitions{},
+				Elements:      element.MapElement{},
+				ElementsMutex: &sync.RWMutex{},
+				BaseURL:       "",
 			},
 		},
 	}
 }
 
-// Collector represent osmtoday's scrapper.
+// Collector represents Osmtoday's scrapper.
 func (g *Osmtoday) Collector() *colly.Collector {
 	myCollector := g.Scrapper.Collector()
 	myCollector.OnHTML(".row", func(e *colly.HTMLElement) {
@@ -54,8 +75,8 @@ func (g *Osmtoday) Collector() *colly.Collector {
 	return myCollector
 }
 
+// Exceptions handles special cases for certain IDs.
 func (g *Osmtoday) Exceptions(myElement *element.Element) *element.Element {
-	// Exceptions
 	exceptions := []struct {
 		ID     string
 		Parent string
@@ -83,7 +104,7 @@ func (g *Osmtoday) Exceptions(myElement *element.Element) *element.Element {
 	return myElement
 }
 
-//nolint:cyclop // TODO : Refactoring?
+// ParseSubregion parses the subregion information from the HTML.
 func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Collector) {
 	e.ForEach("td", func(_ int, el *colly.HTMLElement) {
 		el.ForEach("a", func(_ int, sub *colly.HTMLElement) {
@@ -91,64 +112,23 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
 
 			myID, extension := scrapper.FileExt(href)
 			if myID == "" {
-				// TODO : Move to Debug
-				fmt.Println("myID is empty, href:", href)
+				log.Debugf("myID is empty, href: %s", href)
 
 				return
 			}
 
-			var file string
-
-			if extension == "html" { //nolint:nestif // TODO : Refactor?
-				parent, parentPath := scrapper.GetParent(href)
-
-				myElement := element.Element{ //nolint:exhaustruct // I'm lazy
-					ID:     myID,
-					Name:   sub.Text,
-					Parent: parent,
-					Meta:   true,
-				}
-
-				myElement = *g.Exceptions(&myElement)
-
-				if file != "" {
-					myElement.File = file
-				}
-
-				if !g.Config.Exist(parent) && parent != "" { // Case of parent should exist not already in Slice
-					gparent, _ := scrapper.GetParent(parentPath)
-					log.Debugf("Create Meta %s parent: %s %v", myElement.Parent, gparent, parentPath)
-
-					if gp := element.MakeParent(&myElement, gparent); gp != nil {
-						if err := g.Config.MergeElement(gp); err != nil {
-							log.WithError(err).Errorf("can't merge %s", myElement.Name)
-						}
-					}
-				}
-
-				if err := g.Config.MergeElement(&myElement); err != nil {
-					log.WithError(err).Errorf("can't merge %s", myElement.Name)
-				}
-
-				log.Debugf("Add: %s", href)
-
-				if err := myCollector.Visit(href); err != nil && !errors.Is(err, colly.ErrAlreadyVisited) {
-					log.WithError(err).Error("can't get url")
-				}
+			if extension == "html" {
+				g.handleHTMLExtension(sub, href, myID, myCollector)
 			} else {
 				parent, _ := scrapper.GetParent(href)
 
-				myElement := element.Element{ //nolint:exhaustruct // I'm lazy
+				myElement := element.Element{
 					ID:     myID,
 					Name:   sub.Text,
 					Parent: parent,
 					Meta:   true,
 				}
 				myElement = *g.Exceptions(&myElement)
-
-				if file != "" {
-					myElement.File = file
-				}
 
 				g.ParseFormat(myElement.ID, extension)
 			}
@@ -156,19 +136,55 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
 	})
 }
 
-// ParseFormat Add Extension to ID.
-func (g *Osmtoday) ParseFormat(id, format string) {
-	g.Scrapper.ParseFormatService(id, format, &g.Scrapper.FormatDefinition)
+// handleHTMLExtension handles the HTML extension case.
+func (g *Osmtoday) handleHTMLExtension(sub *colly.HTMLElement, href, myID string, myCollector *colly.Collector) {
+	parent, parentPath := scrapper.GetParent(href)
 
-	if format == "pbf" {
-		g.Config.AddExtension(id, "md5") // not checked!
+	myElement := element.Element{
+		ID:     myID,
+		Name:   sub.Text,
+		Parent: parent,
+		Meta:   true,
+	}
+
+	myElement = *g.Exceptions(&myElement)
+
+	if !g.Config.Exist(parent) && parent != "" {
+		gparent, _ := scrapper.GetParent(parentPath)
+		log.Debugf("Create Meta %s parent: %s %v", myElement.Parent, gparent, parentPath)
+
+		if gp := element.CreateParentElement(&myElement, gparent); gp != nil {
+			if err := g.Config.MergeElement(gp); err != nil {
+				log.WithError(err).Errorf("can't merge %s", myElement.Name)
+			}
+		}
+	}
+
+	if err := g.Config.MergeElement(&myElement); err != nil {
+		log.WithError(err).Errorf("can't merge %s", myElement.Name)
+	}
+
+	log.Debugf("Add: %s", href)
+
+	if err := myCollector.Visit(href); err != nil && !errors.Is(err, colly.ErrAlreadyVisited) {
+		log.WithError(err).Error("can't get url")
 	}
 }
 
+// ParseFormat adds extensions to the ID.
+func (g *Osmtoday) ParseFormat(id, format string) {
+	g.Scrapper.ParseFormatService(id, format, &g.Scrapper.FormatDefinition)
+
+	if format == formats.FormatOsmPbf {
+		g.Config.AddExtension(id, "osm.pbf.md5")
+	}
+}
+
+// ParseLi parses the list items from the HTML.
 func (g *Osmtoday) ParseLi(e *colly.HTMLElement, _ *colly.Collector) {
 	e.ForEach("a", func(_ int, element *colly.HTMLElement) {
 		_, format := scrapper.FileExt(element.Attr("href"))
-		myID, _ := scrapper.FileExt(element.Request.URL.String()) // id can't be extracted from href
+		myID, _ := scrapper.FileExt(element.Request.URL.String())
 
 		g.ParseFormat(myID, format)
 	})

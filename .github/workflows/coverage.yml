@@ -39,10 +39,21 @@ jobs:
         # workflow uploads it.  Used in the pull request comment.
         report-url: https://julien-noblet.github.io/download-geofabrik/${{ github.ref_name}}.html
 
+    - name: Create Awesome Badge
+      uses: schneegans/dynamic-badges-action@v1.7.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: a509e15ea4734ca3e8e98f32ab5369c0
+        filename: coverage.json
+        label: Go Coverage
+        message: ${{ steps.coverage.outputs.coverage-pct-1dp }}%
+        color: ${{ steps.coverage.outputs.meets-threshold == 'true' && 'green' || 'red' }}
+        
     - name: Generate coverage tree map
       run: |
         mkdir -p ${{ github.ref_name}}
-        go run github.com/nikolaydubina/go-cover-treemap@latest -coverprofile ${{ steps.coverage.outputs.gocov-agg-pathname }} -only-folders=true > ${{ github.ref_name}}.svg
+        mkdir -p /tmp/${{ github.ref_name}}
+        go run github.com/nikolaydubina/go-cover-treemap@latest -coverprofile ${{ steps.coverage.outputs.gocov-agg-pathname }} -only-folders=true > /tmp/${{ github.ref_name}}.svg
     - name: Commit files
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -51,6 +62,7 @@ jobs:
         git checkout gh-pages
         mkdir -p ${{ github.ref_name}}
         cp -r ${{ steps.coverage.outputs.report-pathname }} ${{ github.ref_name}}.html
+        cp /tmp/${{ github.ref_name}}.svg ${{ github.ref_name}}.svg
         git add ${{ github.ref_name}}.html ${{ github.ref_name}}.svg
         git commit -m "Upload coverage report"
     - name: Push changes

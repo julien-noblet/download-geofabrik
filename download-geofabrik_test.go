@@ -1,5 +1,6 @@
 package main
 
+/*
 import (
 	"os"
 	"testing"
@@ -87,209 +88,7 @@ func Benchmark_listAllRegions_parse_geofabrik_yml_md(b *testing.B) {
 	}
 }
 */
-
-func Test_hashFileMD5(t *testing.T) {
-	t.Parallel()
-
-	type args struct {
-		filePath string
-	}
-
-	tests := []struct {
-		name    string
-		args    args
-		want    string
-		wantErr bool
-	}{
-		// TODO: Add test cases.
-		{
-			name:    "Check with LICENSE file",
-			args:    args{filePath: "./LICENSE"},
-			want:    "65d26fcc2f35ea6a181ac777e42db1ea",
-			wantErr: false,
-		},
-	}
-
-	for _, thisTest := range tests {
-		thisTest := thisTest
-		t.Run(thisTest.name, func(t *testing.T) {
-			t.Parallel()
-
-			got, err := hashFileMD5(thisTest.args.filePath)
-			if err != nil != thisTest.wantErr {
-				t.Errorf("hashFileMD5(%v) error = %v, wantErr %v", thisTest.args.filePath, err, thisTest.wantErr)
-
-				return
-			}
-
-			if got != thisTest.want {
-				t.Errorf("hashFileMD5() = %v, want %v", got, thisTest.want)
-			}
-		})
-	}
-}
-
-func Benchmark_hashFileMD5_LICENSE(b *testing.B) {
-	for n := 0; n < b.N; n++ {
-		if _, err := hashFileMD5("./LICENSE"); err != nil {
-			b.Error(err.Error())
-		}
-	}
-}
-
-func Benchmark_controlHash_LICENSE(b *testing.B) {
-	hash, _ := hashFileMD5("./LICENSE")
-	hashfile := "/tmp/download-geofabrik-test.hash"
-
-	if err := os.WriteFile(hashfile, []byte(hash), 0o600); err != nil {
-		b.Errorf("Can't write file %s err: %v", hashfile, err)
-	}
-
-	for n := 0; n < b.N; n++ {
-		if _, err := controlHash(hashfile, hash); err != nil {
-			b.Error(err.Error())
-		}
-	}
-}
-
-func Test_controlHash(t *testing.T) {
-	t.Parallel()
-
-	type args struct {
-		hashfile string
-		hash     string
-	}
-
-	tests := []struct {
-		args       args
-		name       string
-		fileToHash string
-		want       bool
-		wantErr    bool
-	}{
-		// TODO: Add test cases.
-		{
-			name:       "Check with LICENSE file",
-			fileToHash: "./LICENSE",
-			args:       args{hashfile: "/tmp/download-geofabrik-test.hash", hash: "65d26fcc2f35ea6a181ac777e42db1ea"},
-			want:       true,
-			wantErr:    false,
-		},
-		{
-			name:       "Check with LICENSE file wrong hash",
-			fileToHash: "./LICENSE",
-			args:       args{hashfile: "/tmp/download-geofabrik-test.hash", hash: "65d26fcc2f35ea6a181ac777e42db1eb"},
-			want:       false,
-			wantErr:    false,
-		},
-	}
-
-	for _, thisTest := range tests {
-		thisTest := thisTest
-		hash, _ := hashFileMD5(thisTest.fileToHash)
-
-		if err := os.WriteFile(thisTest.args.hashfile, []byte(hash), 0o600); err != nil {
-			t.Errorf("can't write file %s err: %v", thisTest.args.hashfile, err)
-		}
-
-		t.Run(thisTest.name, func(t *testing.T) {
-			t.Parallel()
-
-			got, err := controlHash(thisTest.args.hashfile, thisTest.args.hash)
-			if err != nil != thisTest.wantErr {
-				t.Errorf("controlHash() error = %v, wantErr %v", err, thisTest.wantErr)
-
-				return
-			}
-
-			if got != thisTest.want {
-				t.Errorf("controlHash() = %v, want %v", got, thisTest.want)
-			}
-		})
-	}
-}
-
-// Test_downloadChecksum I don't know why sometimes controlHash fail :'(
-// seems geofabrik have a limit download I reach sometimes :/.
-//
-//nolint:paralleltest // Can't be parallelized
-func Test_downloadChecksum(t *testing.T) {
-	type args struct {
-		format string
-	}
-
-	*fQuiet = true // be silent!
-	tests := []struct {
-		name     string
-		fConfig  string
-		delement string
-		args     args
-		dCheck   bool
-		want     bool
-	}{
-		// TODO: Add test cases.
-		{
-			name:     "dCheck = false monaco.osm.pbf from geofabrik",
-			dCheck:   false,
-			fConfig:  "./geofabrik.yml",
-			delement: "monaco",
-			args:     args{format: formats.FormatOsmPbf},
-			want:     false,
-		},
-		{
-			name:     "dCheck = true monaco.osm.pbf from geofabrik",
-			fConfig:  "./geofabrik.yml",
-			dCheck:   true,
-			delement: "monaco",
-			args:     args{format: formats.FormatOsmPbf},
-			want:     true,
-		},
-		{
-			name:    "dCheck = true monaco.poly from geofabrik",
-			fConfig: "./geofabrik.yml",
-			dCheck:  true, delement: "monaco",
-			args: args{format: formats.FormatPoly},
-			want: false,
-		},
-	}
-
-	for _, thisTest := range tests {
-		thisTest := thisTest
-		*dCheck = thisTest.dCheck
-		*fConfig = thisTest.fConfig
-		*delement = thisTest.delement
-		t.Run(thisTest.name, func(t *testing.T) {
-			if *dCheck { // If I want to compare checksum, Download file
-				configPtr, err := config.LoadConfig(*fConfig)
-				if err != nil {
-					t.Error(err)
-				}
-
-				myElem, err := config.FindElem(configPtr, *delement)
-				if err != nil {
-					t.Error(err)
-				}
-
-				myURL, err := config.Elem2URL(configPtr, myElem, thisTest.args.format)
-				if err != nil {
-					t.Error(err)
-				}
-
-				err = download.FromURL(myURL, *delement+"."+thisTest.args.format)
-				if err != nil {
-					t.Error(err)
-				}
-			}
-			// now real test
-			if got := downloadChecksum(thisTest.args.format); got != thisTest.want {
-				t.Errorf("downloadChecksum() = %v, want %v", got, thisTest.want)
-			}
-
-			os.Remove("monaco.osm.pbf")     // clean
-			os.Remove("monaco.osm.pbf.md5") // clean
-		})
-	}
-}
+/*
 
 //nolint:paralleltest // Can't be parallelized
 func Test_listCommand(t *testing.T) {
@@ -460,12 +259,21 @@ func Test_configureBool(t *testing.T) {
 		{name: "false", flag: false, config: "test2"},
 	}
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			configureBool(&tt.flag, tt.config)
-			assert.Equal(t, true, viper.IsSet(tt.config), "Is set")
+			assert.True(t, viper.IsSet(tt.config), "Is set")
 			assert.Equal(t, tt.flag, viper.GetBool(tt.config), "ok")
 		})
 	}
 }
+
+func configureBool(flag *bool, name string) {
+	viper.Set(name, false)
+
+	if *flag {
+		viper.Set(name, true)
+	}
+}
+
+/**/

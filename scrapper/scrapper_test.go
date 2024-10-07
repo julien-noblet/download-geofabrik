@@ -1,8 +1,10 @@
 package scrapper_test
 
 import (
+	"crypto/rand"
 	"fmt"
-	"math/rand"
+	"math"
+	"math/big"
 	"reflect"
 	"sync"
 	"testing"
@@ -51,7 +53,6 @@ func TestGetParent(t *testing.T) {
 		},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -83,7 +84,6 @@ func Test_FileExt(t *testing.T) {
 		{name: "1 Parent long ext", url: "https://download.geofabrik.de/parent/test.ext.html", want: "test", want2: "ext.html"},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -110,7 +110,7 @@ func Test_ParseFormat(t *testing.T) {
 
 	tests := []struct {
 		args args
-		want element.Slice
+		want element.MapElement
 		name string
 	}{
 		{
@@ -119,7 +119,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: formats.FormatOsmPbf,
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -130,7 +130,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -145,7 +145,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: formats.FormatOsmPbf,
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -156,7 +156,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -171,7 +171,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: "osm.pbf.md5",
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -182,7 +182,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -197,7 +197,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: formats.FormatOsmBz2,
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -208,7 +208,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -223,7 +223,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: "osm.bz2.md5",
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -234,7 +234,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -249,7 +249,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: formats.FormatPoly,
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -260,7 +260,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -275,7 +275,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: formats.FormatShpZip,
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -286,7 +286,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -301,7 +301,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: "unk",
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -312,7 +312,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -327,7 +327,7 @@ func Test_ParseFormat(t *testing.T) {
 				id:     "a",
 				format: formats.FormatOsmPbf,
 				c: config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{
 							ID:      "a",
 							Name:    "a",
@@ -338,7 +338,7 @@ func Test_ParseFormat(t *testing.T) {
 					ElementsMutex: &sync.RWMutex{},
 				},
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -349,7 +349,6 @@ func Test_ParseFormat(t *testing.T) {
 		},
 	}
 	for thisTest := range tests {
-		thisTest := thisTest
 		t.Run(tests[thisTest].name, func(t *testing.T) {
 			t.Parallel()
 
@@ -381,21 +380,41 @@ func Test_ParseFormat(t *testing.T) {
 func TestScrapper_PB(t *testing.T) {
 	t.Parallel()
 
-	for i := 0; i < 10; i++ {
-		want := rand.Int() //nolint:gosec // I assume rand.Int() isn't safe but it's enough for testing
+	for range [10]int{} {
+		want, err := rand.Int(rand.Reader, big.NewInt(math.MaxInt64))
+		if err != nil {
+			t.Fatalf("Failed to generate random number: %v", err)
+		}
+
+		wantInt := int(want.Int64())
 		myScrapper := scrapper.Scrapper{
-			PB: want,
+			PB: wantInt,
 		}
 
 		t.Run(fmt.Sprintf("PB: %d", want), func(t *testing.T) {
 			t.Parallel()
 
 			out := myScrapper.GetPB()
-			if out != want {
+			if out != wantInt {
 				t.Errorf("GetPB() got %d, want %d", out, want)
 			}
 		})
 	}
+}
+
+func generateRandomString(n int, charset string) (string, error) {
+	b := make([]byte, n)
+
+	_, err := rand.Read(b)
+	if err != nil {
+		return "", fmt.Errorf("failed to read random bytes: %w", err)
+	}
+
+	for i := range b {
+		b[i] = charset[int(b[i])%len(charset)]
+	}
+
+	return string(b), nil
 }
 
 func TestScrapper_GetStartURL(t *testing.T) {
@@ -404,14 +423,17 @@ func TestScrapper_GetStartURL(t *testing.T) {
 	const charset = "abcdefghijklmnopqrstuvwxyz" +
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" + "\\/?."
 
-	for i := 0; i < 1024; i++ {
-		seededRand := rand.New(rand.NewSource(time.Now().UnixNano())) //nolint:gosec // I assume rand isn't safe but it's enough for testing
-		want := stringWithCharset(seededRand, i, charset)
+	for i := range [1024]int{} {
+		want, err := generateRandomString(i, charset)
+		if err != nil {
+			t.Fatalf("Failed to generate random string: %v", err)
+		}
+
 		myScrapper := scrapper.Scrapper{
 			StartURL: want,
 		}
 
-		t.Run(fmt.Sprintf("StartURL: %s", want), func(t *testing.T) {
+		t.Run("StartURL: "+want, func(t *testing.T) {
 			t.Parallel()
 
 			out := myScrapper.GetStartURL()
@@ -420,15 +442,6 @@ func TestScrapper_GetStartURL(t *testing.T) {
 			}
 		})
 	}
-}
-
-func stringWithCharset(seededRand *rand.Rand, length int, charset string) string {
-	b := make([]byte, length)
-	for i := range b {
-		b[i] = charset[seededRand.Intn(len(charset))]
-	}
-
-	return string(b)
 }
 
 func TestScrapper_Limit(t *testing.T) {
@@ -448,11 +461,16 @@ func TestScrapper_Limit(t *testing.T) {
 		{
 			name:   "Void",
 			fields: scrapper.Scrapper{},
-			want:   &colly.LimitRule{DomainGlob: "*", Parallelism: 1, RandomDelay: 5 * time.Second},
+			want:   &colly.LimitRule{DomainGlob: "*", Parallelism: 1, RandomDelay: 0},
+		},
+		{
+			name:   "Custom",
+			fields: scrapper.Scrapper{DomainGlob: "my.url", Parallelism: 10, RandomDelay: 10 * time.Second},
+			want:   &colly.LimitRule{DomainGlob: "my.url", Parallelism: 10, RandomDelay: 10 * time.Second},
 		},
 	}
-	for _, thisTest := range tests {
-		thisTest := thisTest
+	for this := range tests {
+		thisTest := &tests[this]
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -470,8 +488,22 @@ func TestScrapper_Limit(t *testing.T) {
 				URLFilters:       thisTest.fields.URLFilters,
 				FormatDefinition: thisTest.fields.FormatDefinition,
 			}
-			if got := myScrapper.Limit(); !reflect.DeepEqual(got, thisTest.want) {
-				t.Errorf("Scrapper.Limit() = %v, want %v", got, thisTest.want)
+			got := myScrapper.Limit()
+
+			if got.Delay != thisTest.want.Delay {
+				t.Errorf("Scrapper.Limit() = %v, want %v", got.Delay, thisTest.want.Delay)
+			}
+
+			if got.Parallelism != thisTest.want.Parallelism {
+				t.Errorf("Scrapper.Limit() = %v, want %v", got.Parallelism, thisTest.want.Parallelism)
+			}
+
+			if got.DomainGlob != thisTest.want.DomainGlob {
+				t.Errorf("Scrapper.Limit() = %v, want %v", got.DomainGlob, thisTest.want.DomainGlob)
+			}
+
+			if got.RandomDelay != thisTest.want.RandomDelay {
+				t.Errorf("Scrapper.Limit() = %v, want %v", got.RandomDelay, thisTest.want.RandomDelay)
 			}
 		})
 	}
@@ -488,18 +520,18 @@ func TestScrapper_GetConfig(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name: "Void",
-			want: &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}},
+			want: &config.Config{Elements: element.MapElement{}, ElementsMutex: &sync.RWMutex{}},
 		},
 		{
 			name:   "Void + BaseURL",
 			fields: scrapper.Scrapper{BaseURL: "http://my.url"},
-			want:   &config.Config{Elements: element.Slice{}, ElementsMutex: &sync.RWMutex{}, BaseURL: "http://my.url"},
+			want:   &config.Config{Elements: element.MapElement{}, ElementsMutex: &sync.RWMutex{}, BaseURL: "http://my.url"},
 		},
 		{
 			name:   "Void + FormatDefinition",
 			fields: scrapper.Scrapper{FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}}},
 			want: &config.Config{
-				Elements:      element.Slice{},
+				Elements:      element.MapElement{},
 				ElementsMutex: &sync.RWMutex{},
 				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
@@ -511,7 +543,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 			want: &config.Config{
-				Elements:      element.Slice{},
+				Elements:      element.MapElement{},
 				ElementsMutex: &sync.RWMutex{},
 				BaseURL:       "http://my.url",
 				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
@@ -521,7 +553,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 			name: "Config Exist",
 			fields: scrapper.Scrapper{
 				Config: &config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{ID: "a"},
 					},
 					ElementsMutex: &sync.RWMutex{},
@@ -530,7 +562,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 				},
 			},
 			want: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
@@ -543,7 +575,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 			fields: scrapper.Scrapper{
 				BaseURL: "http://my.url",
 				Config: &config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{ID: "a"},
 					},
 					ElementsMutex: &sync.RWMutex{},
@@ -552,11 +584,11 @@ func TestScrapper_GetConfig(t *testing.T) {
 				},
 			},
 			want: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
-				BaseURL:       "http://my.url",
+				BaseURL:       "http://old.url",
 				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 		},
@@ -565,7 +597,7 @@ func TestScrapper_GetConfig(t *testing.T) {
 			fields: scrapper.Scrapper{
 				BaseURL: "http://my.url",
 				Config: &config.Config{
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"a": element.Element{ID: "a"},
 					},
 					ElementsMutex: &sync.RWMutex{},
@@ -575,17 +607,17 @@ func TestScrapper_GetConfig(t *testing.T) {
 				FormatDefinition: formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
 			},
 			want: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"a": element.Element{ID: "a"},
 				},
 				ElementsMutex: &sync.RWMutex{},
-				BaseURL:       "http://my.url",
-				Formats:       formats.FormatDefinitions{"ext": formats.Format{ID: "ext"}},
+				BaseURL:       "http://old.url",
+				Formats:       formats.FormatDefinitions{"old": formats.Format{ID: "old"}},
 			},
 		},
 	}
-	for _, thisTest := range tests {
-		thisTest := thisTest
+	for tt := range tests {
+		thisTest := &tests[tt]
 
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
@@ -595,8 +627,18 @@ func TestScrapper_GetConfig(t *testing.T) {
 				Config:           thisTest.fields.Config,
 				FormatDefinition: thisTest.fields.FormatDefinition,
 			}
-			if got := s.GetConfig(); !reflect.DeepEqual(got, thisTest.want) {
-				t.Errorf("Scrapper.GetConfig() = %v, want %v", got, thisTest.want)
+			got := s.GetConfig()
+
+			if got.BaseURL != thisTest.want.BaseURL {
+				t.Errorf("Scrapper.GetConfig() = %v, want %v", got.BaseURL, thisTest.want.BaseURL)
+			}
+
+			if !reflect.DeepEqual(got.Elements, thisTest.want.Elements) {
+				t.Errorf("Scrapper.GetConfig() = %v, want %v", got.Elements, thisTest.want.Elements)
+			}
+
+			if !reflect.DeepEqual(got.Formats, thisTest.want.Formats) {
+				t.Errorf("Scrapper.GetConfig() = %v, want %v", got.Formats, thisTest.want.Formats)
 			}
 		})
 	}

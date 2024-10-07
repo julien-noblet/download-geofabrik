@@ -25,7 +25,6 @@ func Test_bbbike_getName(t *testing.T) {
 		{name: "Valid", h3: "OSM extracts for Test", want: "Test"},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -41,8 +40,8 @@ func Test_bbbike_parseList(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
-		elements *element.Slice
-		want     element.Slice
+		elements *element.MapElement
+		want     element.MapElement
 		name     string
 		html     string
 		url      string
@@ -289,14 +288,13 @@ func Test_bbbike_parseList(t *testing.T) {
 				<tr class="d"><td class="n"><a href="Zuerich/">Zuerich</a>/</td><td class="m">2019-May-03 05:14:26</td><td class="s">- &nbsp;</td><td class="t">Directory</td></tr>
 			</tbody>`,
 			url:      `https://download.bbbike.org/osm/bbbike/`,
-			elements: &element.Slice{},
-			want:     element.Slice{},
+			elements: &element.MapElement{},
+			want:     element.MapElement{},
 		},
 
 		// TODO: Add test cases.
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -314,7 +312,6 @@ func Test_bbbike_parseList(t *testing.T) {
 			myCollector := defaultbbbike.Collector() // Need a Collector to visit
 
 			for _, elemem := range *thisTest.elements {
-				elemem := elemem
 				if err := defaultbbbike.Config.MergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}
@@ -334,8 +331,8 @@ func Test_bbbike_parseSidebar(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
-		elements *element.Slice
-		want     element.Slice
+		elements *element.MapElement
+		want     element.MapElement
 		name     string
 		html     string
 		url      string
@@ -410,8 +407,8 @@ func Test_bbbike_parseSidebar(t *testing.T) {
 				</div>
 				</div>`,
 			url:      `https://download.bbbike.org/osm/bbbike/Toulouse/`,
-			elements: &element.Slice{},
-			want: element.Slice{
+			elements: &element.MapElement{},
+			want: element.MapElement{
 				"Toulouse": element.Element{
 					ID:     "Toulouse",
 					File:   "Toulouse/Toulouse",
@@ -438,7 +435,6 @@ func Test_bbbike_parseSidebar(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -456,7 +452,6 @@ func Test_bbbike_parseSidebar(t *testing.T) {
 			myCollector := defaultBbbike.Collector() // Need a Collector to visit
 
 			for _, elemem := range *thisTest.elements {
-				elemem := elemem
 				if err := defaultBbbike.Config.MergeElement(&elemem); err != nil {
 					t.Errorf("Bad tests g.Config.mergeElement() can't merge %v - %v", elemem, err)
 				}

@@ -272,7 +272,6 @@ func Test_loadConfig(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -315,13 +314,13 @@ func Test_AddExtension(t *testing.T) {
 	tests := []struct {
 		args args
 		c    config.Config
-		want element.Slice
+		want element.MapElement
 		name string
 	}{
 		{
 			name: "Add osm.pbf but already in",
 			c: config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"a": element.Element{
 						ID:      "a",
 						Name:    "a",
@@ -335,7 +334,7 @@ func Test_AddExtension(t *testing.T) {
 				id:     "a",
 				format: formats.FormatOsmPbf,
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -347,7 +346,7 @@ func Test_AddExtension(t *testing.T) {
 		{
 			name: "Add osm.pbf",
 			c: config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"a": element.Element{
 						ID:      "a",
 						Name:    "a",
@@ -361,7 +360,7 @@ func Test_AddExtension(t *testing.T) {
 				id:     "a",
 				format: formats.FormatOsmPbf,
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -373,7 +372,7 @@ func Test_AddExtension(t *testing.T) {
 		{
 			name: "Add osm.pbf on meta",
 			c: config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"a": element.Element{
 						ID:      "a",
 						Name:    "a",
@@ -387,7 +386,7 @@ func Test_AddExtension(t *testing.T) {
 				id:     "a",
 				format: formats.FormatOsmPbf,
 			},
-			want: element.Slice{
+			want: element.MapElement{
 				"a": element.Element{
 					ID:      "a",
 					Name:    "a",
@@ -463,7 +462,6 @@ func Test_config_GetElement(t *testing.T) {
 		},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -549,8 +547,6 @@ func Test_IsHashable(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
-
 		myConfig, err := config.LoadConfig(thisTest.args.file)
 		if err != nil {
 			t.Error(err)
@@ -679,7 +675,6 @@ func Test_FindElem(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -760,7 +755,6 @@ func Test_elem2URL(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -837,7 +831,6 @@ func Test_elem2preURL(t *testing.T) {
 	}
 
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -925,7 +918,7 @@ func TestConfig_MergeElement(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name:   "Add element on void Config",
-			Config: &config.Config{ElementsMutex: &sync.RWMutex{}, Elements: element.Slice{}},
+			Config: &config.Config{ElementsMutex: &sync.RWMutex{}, Elements: element.MapElement{}},
 			el: &element.Element{
 				ID:      "test",
 				Name:    "Test",
@@ -933,7 +926,7 @@ func TestConfig_MergeElement(t *testing.T) {
 			},
 			wantErr: false,
 			wantConfig: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"test": {
 						ID:      "test",
 						Name:    "Test",
@@ -945,7 +938,7 @@ func TestConfig_MergeElement(t *testing.T) {
 		},
 		{
 			name:   "Add meta element on void Config",
-			Config: &config.Config{ElementsMutex: &sync.RWMutex{}, Elements: element.Slice{}},
+			Config: &config.Config{ElementsMutex: &sync.RWMutex{}, Elements: element.MapElement{}},
 			el: &element.Element{
 				ID:   "test",
 				Name: "Test",
@@ -953,7 +946,7 @@ func TestConfig_MergeElement(t *testing.T) {
 			},
 			wantErr: false,
 			wantConfig: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"test": {
 						ID:   "test",
 						Name: "Test",
@@ -967,7 +960,7 @@ func TestConfig_MergeElement(t *testing.T) {
 			name: "Add new element on non void Config",
 			Config: &config.Config{
 				ElementsMutex: &sync.RWMutex{},
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"test2": {
 						ID:      "test2",
 						Name:    "Test2",
@@ -982,7 +975,7 @@ func TestConfig_MergeElement(t *testing.T) {
 			},
 			wantErr: false,
 			wantConfig: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"test": {
 						ID:      "test",
 						Name:    "Test",
@@ -1001,7 +994,7 @@ func TestConfig_MergeElement(t *testing.T) {
 			name: "Add same element on non void Config",
 			Config: &config.Config{
 				ElementsMutex: &sync.RWMutex{},
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"test": {
 						ID:      "test",
 						Name:    "Test",
@@ -1016,7 +1009,7 @@ func TestConfig_MergeElement(t *testing.T) {
 			},
 			wantErr: false,
 			wantConfig: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"test": {
 						ID:      "test",
 						Name:    "Test",
@@ -1030,7 +1023,7 @@ func TestConfig_MergeElement(t *testing.T) {
 			name: "Add same element on non void Config and el was meta",
 			Config: &config.Config{
 				ElementsMutex: &sync.RWMutex{},
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"test": {
 						ID:   "test",
 						Name: "Test",
@@ -1045,7 +1038,7 @@ func TestConfig_MergeElement(t *testing.T) {
 			},
 			wantErr: false,
 			wantConfig: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"test": {
 						ID:      "test",
 						Name:    "Test",
@@ -1059,7 +1052,7 @@ func TestConfig_MergeElement(t *testing.T) {
 			name: "Add same void element on non void Config and el was meta",
 			Config: &config.Config{
 				ElementsMutex: &sync.RWMutex{},
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"test": {
 						ID:   "test",
 						Name: "Test",
@@ -1073,7 +1066,7 @@ func TestConfig_MergeElement(t *testing.T) {
 			},
 			wantErr: false,
 			wantConfig: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"test": {
 						ID:   "test",
 						Name: "Test",
@@ -1087,7 +1080,7 @@ func TestConfig_MergeElement(t *testing.T) {
 			name: "Add same element on non void Config with wrong parent",
 			Config: &config.Config{
 				ElementsMutex: &sync.RWMutex{},
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"test": {
 						ID:      "test",
 						Name:    "Test",
@@ -1104,7 +1097,7 @@ func TestConfig_MergeElement(t *testing.T) {
 			},
 			wantErr: true,
 			wantConfig: &config.Config{
-				Elements: element.Slice{
+				Elements: element.MapElement{
 					"test": {
 						ID:      "test",
 						Name:    "Test",
@@ -1117,7 +1110,6 @@ func TestConfig_MergeElement(t *testing.T) {
 		},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
@@ -1147,7 +1139,6 @@ func TestConfig_Generate(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
