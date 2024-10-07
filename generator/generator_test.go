@@ -133,7 +133,7 @@ func TestSlice_Generate(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		e       element.Slice
+		e       element.MapElement
 		want    []byte
 		wantErr bool
 	}{
@@ -146,7 +146,6 @@ func TestSlice_Generate(t *testing.T) {
 		},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		myConfig := SampleConfigValidPtr()
 		myConfig.Elements = map[string]element.Element{} // void Elements
 		myConfig.Elements = thisTest.e
@@ -183,7 +182,6 @@ func TestGenerate(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			generator.Generate(tt.args.configfile)
@@ -203,12 +201,15 @@ func Test_write(t *testing.T) {
 		{name: "geofabrik", input: "../geofabrik.yml", output: "/tmp/test.yml"},
 	}
 	for _, thisTest := range tests {
-		thisTest := thisTest
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
 			c, _ := config.LoadConfig(thisTest.input)
-			generator.Write(c, thisTest.output)
+
+			err := generator.Write(c, thisTest.output)
+			if err != nil {
+				t.Errorf("write() error = %v", err)
+			}
 
 			input, err := os.ReadFile(thisTest.input)
 			if err != nil {
@@ -269,7 +270,7 @@ func TestCleanup(t *testing.T) {
 							BaseURL:  "http://my.new.url/folder",
 						},
 					},
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"africa": {
 							ID:   "africa",
 							Name: "Africa",
@@ -306,7 +307,7 @@ func TestCleanup(t *testing.T) {
 				c: &config.Config{
 					BaseURL: "https://my.base.url",
 					Formats: formats.FormatDefinitions{},
-					Elements: element.Slice{
+					Elements: element.MapElement{
 						"africa": {
 							ID:   "africa",
 							Name: "Africa",

@@ -1,6 +1,6 @@
 package element
 
-// Element represent a part to download with formats, name, parent...
+// Element represents a part to download with formats, name, parent, etc.
 type Element struct {
 	ID      string  `yaml:"id"`
 	File    string  `yaml:"file,omitempty"`
@@ -12,20 +12,18 @@ type Element struct {
 
 type Formats []string
 
-// Slice contain all Elements
-// TODO: It's not a slice but a MAP!!!!
-type Slice map[string]Element
+// MapElement contains all Elements.
+type MapElement map[string]Element
 
+// HasParent checks if the element has a parent.
 func (e *Element) HasParent() bool {
 	return e.Parent != ""
 }
 
-// StringInSlice : Check if a sting is present in a slice
-// should be more easy to access to a map!
-// TODO: remove it!
-func StringInSlice(a *string, list *Formats) bool {
-	for _, b := range *list {
-		if b == *a {
+// Contains checks if the format list contains a specific format.
+func (f *Formats) Contains(format string) bool {
+	for _, existingFormat := range *f {
+		if format == existingFormat {
 			return true
 		}
 	}
@@ -33,25 +31,15 @@ func StringInSlice(a *string, list *Formats) bool {
 	return false
 }
 
-func (f *Formats) Contains(e string) bool {
-	for _, a := range *f {
-		if e == a {
-			return true
-		}
-	}
-
-	return false
-}
-
-// MakeParent make e parent(id=name=gparent)
+// CreateParentElement creates a parent element for the given element.
 // Useful for meta parents.
-func MakeParent(e *Element, gparent string) *Element {
+func CreateParentElement(e *Element, grandparentID string) *Element {
 	if e.HasParent() {
 		return &Element{
 			ID:      e.Parent,
 			File:    "",
 			Name:    e.Parent,
-			Parent:  gparent,
+			Parent:  grandparentID,
 			Formats: Formats{},
 			Meta:    true,
 		}
