@@ -1,4 +1,5 @@
 [
+  {"Version":"1338ad82e8b1d12b4dde86ae5f6a24c78367fb1f","Date":1728339658,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.3"],"Suites":[]},
   {"Version":"f7bd81b370169b3f7aec79bf084b68c511e2083b","Date":1728339609,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ad7c0a34eb775650912cf4431ac59c598aa20533","Date":1728339545,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.3"],"Suites":[]},
   {"Version":"4b00755afd009ffdbb9044404aaf247be7287d36","Date":1728339499,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.2"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"65edf7e0159f1c2203281b6b6d874f21c8b20c06","Date":1728333558,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"d5b29978f3f468daaf221b104d3491eb4142fdcb","Date":1728333372,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"38d3e982b19184fdefe89758e776ee68da017fa7","Date":1728329659,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
-  {"Version":"2beccc2c6a2d4aabfb9083e73c8b2c559b60fe0e","Date":1728329527,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
-  {"Version":"7707d8aebc4882bac613cd940a0ee49b01df3a15","Date":1728329375,"Tags":["ref=refs/heads/full-review"],"Suites":[]}
+  {"Version":"2beccc2c6a2d4aabfb9083e73c8b2c559b60fe0e","Date":1728329527,"Tags":["ref=refs/heads/full-review"],"Suites":[]}
 ]
