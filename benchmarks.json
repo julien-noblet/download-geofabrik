@@ -1,4 +1,5 @@
 [
+  {"Version":"7707d8aebc4882bac613cd940a0ee49b01df3a15","Date":1728329375,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"b674ccdb4e8660897bfe6cac6c82f25970ddb300","Date":1728329102,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"2adb157e02164f1e6967ad7d4547c0728f962862","Date":1728328521,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
   {"Version":"aa0335296a1b3f0aa011c4988289fb90d61af2e9","Date":1728328135,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"9778987438afb836b447a91ec087faaddc14c43f","Date":1727681935,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.6.0"],"Suites":[]},
   {"Version":"e6fb26788ceb05d852dfb14164b4b50ad200f096","Date":1727681927,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.1"],"Suites":[]},
   {"Version":"e01d30dcb8b81a742c6936de3a16682200551619","Date":1727681925,"Tags":["ref=refs/heads/dependabot/go_modules/go.uber.org/multierr-1.11.0"],"Suites":[]},
-  {"Version":"306aafc6d6545c3b1444c5433a82486e23563b5d","Date":1727391028,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
-  {"Version":"093802d0f48854116f49c3929f5e8782649d5a9c","Date":1727390914,"Tags":["ref=refs/heads/full-review"],"Suites":[]}
+  {"Version":"306aafc6d6545c3b1444c5433a82486e23563b5d","Date":1727391028,"Tags":["ref=refs/heads/full-review"],"Suites":[]}
 ]
