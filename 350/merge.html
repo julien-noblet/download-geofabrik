@@ -584,7 +584,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(id string) bool <span class="cov7" title="72">{
+func (config *Config) Exist(id string) bool <span class="cov6" title="70">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
         result := reflect.DeepEqual(config.Elements[id], element.Element{})
@@ -2130,7 +2130,7 @@ func GetParent(href string) (parent string, parentList []string) <span class="co
         href = strings.TrimSuffix(href, "/")
 
         parentList = strings.Split(href, "/")
-        if len(parentList) &gt; minParentListLength </span><span class="cov9" title="23">{
+        if len(parentList) &gt; minParentListLength </span><span class="cov9" title="22">{
                 parent = parentList[len(parentList)-2]
         }</span> else<span class="cov4" title="4"> {
                 parent = ""
@@ -2140,7 +2140,7 @@ func GetParent(href string) (parent string, parentList []string) <span class="co
                 parent = ""
         }</span>
 
-        <span class="cov9" title="27">return parent, parentList</span>
+        <span class="cov9" title="26">return parent, parentList</span>
 }
 
 // MakeParents creates parent elements recursively.
@@ -2196,7 +2196,7 @@ func Exceptions(name, parent string) string <span class="cov8" title="17">{
                 return fmt.Sprintf("%v_%v", parent, name)
         }</span>
 
-        <span class="cov8" title="15">return name</span>
+        <span class="cov7" title="14">return name</span>
 }
 
 // ParseHref parses the href and updates the configuration.
@@ -2217,7 +2217,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
                 return
         }</span>
 
-        <span class="cov8" title="17">if strings.Contains(passList, valsplit[0]) </span><span class="cov0" title="0">{
+        <span class="cov8" title="16">if strings.Contains(passList, valsplit[0]) </span><span class="cov0" title="0">{
                 return
         }</span>
 
@@ -2260,7 +2260,7 @@ func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension strin
                         myElement.Formats = append(myElement.Formats, extension)
                 }</span>
 
-                <span class="cov7" title="12">if err := o.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+                <span class="cov7" title="11">if err := o.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
                         log.WithError(err).Errorf("can't merge %s", myElement.Name)
                 }</span>
         } else<span class="cov5" title="5"> {
