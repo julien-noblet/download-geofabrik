@@ -1,4 +1,5 @@
 [
+  {"Version":"5ca382490be6a9cf53234586d65e9261328eaae7","Date":1729144385,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.35.1"],"Suites":[]},
   {"Version":"7e1b675cb55c8a2d8142ec93326193bc8cf434eb","Date":1729144333,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ba7c728e90093e0e90c75872e6acc8f0f938deea","Date":1729144092,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.35.1"],"Suites":[]},
   {"Version":"2d0355a4e5ce62fadd77e38bebdea6c90bc21ac6","Date":1729144086,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.30.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"f10a2ed2fa5a0830b969f8f762b2b8fc7ce28670","Date":1728338288,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.3"],"Suites":[]},
   {"Version":"9325adcfaf3f7b96b5411c3461edee2ef4121fa3","Date":1728338262,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.1"],"Suites":[]},
   {"Version":"50df8792ae2fc25b5764f8172bf169b8daa0ac51","Date":1728338241,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"a1754334cc362e641cf0e348da76b49af0fb4161","Date":1728338046,"Tags":["ref=refs/heads/full-review"],"Suites":[]},
-  {"Version":"09f7c0a0fcdef787bf3f8db884a6b9e844fdeb96","Date":1728337905,"Tags":["ref=refs/heads/full-review"],"Suites":[]}
+  {"Version":"a1754334cc362e641cf0e348da76b49af0fb4161","Date":1728338046,"Tags":["ref=refs/heads/full-review"],"Suites":[]}
 ]
