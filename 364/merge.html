@@ -584,7 +584,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(id string) bool <span class="cov6" title="71">{
+func (config *Config) Exist(id string) bool <span class="cov7" title="72">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
         result := reflect.DeepEqual(config.Elements[id], element.Element{})
@@ -2149,7 +2149,7 @@ func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span cl
                 return
         }</span>
 
-        <span class="cov7" title="14">gparent := getGparent(gparents)
+        <span class="cov8" title="15">gparent := getGparent(gparents)
 
         if !o.Config.Exist(parent) </span><span class="cov8" title="15">{
                 o.createAndMergeElement(parent, gparent)
@@ -2161,12 +2161,12 @@ func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span cl
 }
 
 // getGparent returns the grandparent from a list of parents.
-func getGparent(gparents []string) string <span class="cov7" title="14">{
+func getGparent(gparents []string) string <span class="cov8" title="15">{
         if gparents == nil || len(gparents) &lt; minParentListLength </span><span class="cov1" title="1">{
                 return ""
         }</span>
 
-        <span class="cov7" title="13">gparent := gparents[len(gparents)-3]
+        <span class="cov7" title="14">gparent := gparents[len(gparents)-3]
         if gparent == "http:" || gparent == "openstreetmap.fr" || gparent == "extracts" || gparent == "polygons" </span><span class="cov7" title="10">{
                 return ""
         }</span>
@@ -2208,7 +2208,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
         }</span>
 
         <span class="cov8" title="18">parent, parents := GetParent(href)
-        if !o.Config.Exist(parent) </span><span class="cov7" title="10">{
+        if !o.Config.Exist(parent) </span><span class="cov7" title="11">{
                 o.MakeParents(parent, parents)
         }</span>
 
