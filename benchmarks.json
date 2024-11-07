@@ -1,4 +1,5 @@
 [
+  {"Version":"0289d11b60931a31934fba3bb5f44c5da1dd8ea6","Date":1730944123,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fatih/color-1.18.0"],"Suites":[]},
   {"Version":"ebe749c3bb06e4a424650063ab49c4e23d2c7565","Date":1730944121,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.8.0"],"Suites":[]},
   {"Version":"e8ef223ea7e0c4d9c860ded118a0a7318543a887","Date":1730944119,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.35.1"],"Suites":[]},
   {"Version":"8282ccdb2e597b98dcde6947f8fd04c9bdc7f2d7","Date":1730944077,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"7612a4c2b279ab649b171e5614c95f91e28f9431","Date":1728338918,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"570da4f2a96edf8f0ff21463e17b0da2f92b38b1","Date":1728338432,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.2"],"Suites":[]},
   {"Version":"63ef291dd9b908754a6f972b70e1dedbfbe6f0dc","Date":1728338415,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.19.0"],"Suites":[]},
-  {"Version":"b9d78fa9218423ecfa4fe45e4fb1e078eeaa4918","Date":1728338412,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.3"],"Suites":[]},
-  {"Version":"3f9d7de6a5665e37f98d406a5ff11ec4ccbcaaa2","Date":1728338366,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"b9d78fa9218423ecfa4fe45e4fb1e078eeaa4918","Date":1728338412,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.3"],"Suites":[]}
 ]
