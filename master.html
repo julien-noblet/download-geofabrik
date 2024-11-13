@@ -1197,7 +1197,7 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="5
         shortNames := make([]string, 0, len(fullFormatNames))
 
         for _, fullName := range fullFormatNames </span><span class="cov8" title="4580">{
-                for _, format := range miniFormats </span><span class="cov10" title="33013">{
+                for _, format := range miniFormats </span><span class="cov10" title="33010">{
                         if fullName == format.FullName </span><span class="cov8" title="3557">{
                                 shortNames = append(shortNames, format.ShortName)
 
