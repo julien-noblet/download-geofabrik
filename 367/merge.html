@@ -574,7 +574,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 <span class="cov6" title="42">newElement.Meta = len(newElement.Formats) == 0
 
                 config.Elements[elementPtr.ID] = newElement</span>
-        } else<span class="cov9" title="566"> {
+        } else<span class="cov9" title="567"> {
                 config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
                 config.Elements[elementPtr.ID] = *elementPtr
@@ -1016,13 +1016,13 @@ func ComputeMD5Hash(filePath string) (string, error) <span class="cov10" title="
                 return "", fmt.Errorf(openErrorMsg, filePath, err)
         }</span>
 
-        <span class="cov9" title="5">defer func() </span><span class="cov10" title="6">{
+        <span class="cov10" title="6">defer func() </span><span class="cov10" title="6">{
                 if err := file.Close(); err != nil </span><span class="cov0" title="0">{
                         log.WithError(err).Error(fmt.Errorf(closeErrorMsg, err).Error())
                 }</span>
         }()
 
-        <span class="cov9" title="5">hash := md5.New() //nolint:gosec // MD5 is used to control with md5sum files
+        <span class="cov10" title="6">hash := md5.New() //nolint:gosec // MD5 is used to control with md5sum files
         if _, err := io.Copy(hash, file); err != nil </span><span class="cov0" title="0">{
                 return "", fmt.Errorf(copyErrorMsg, filePath, err)
         }</span>
@@ -1963,7 +1963,7 @@ func (g *Geofabrik) handleSpecialCases(myID, parent string) (newID, file string)
                 }</span>
         }
 
-        <span class="cov9" title="22">return myID, file</span>
+        <span class="cov10" title="23">return myID, file</span>
 }
 
 // ParseFormat adds extensions to the ID.
@@ -2196,7 +2196,7 @@ func Exceptions(name, parent string) string <span class="cov8" title="17">{
                 return fmt.Sprintf("%v_%v", parent, name)
         }</span>
 
-        <span class="cov7" title="14">return name</span>
+        <span class="cov8" title="15">return name</span>
 }
 
 // ParseHref parses the href and updates the configuration.
@@ -2207,7 +2207,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
                 return
         }</span>
 
-        <span class="cov8" title="17">parent, parents := GetParent(href)
+        <span class="cov8" title="18">parent, parents := GetParent(href)
         if !o.Config.Exist(parent) </span><span class="cov7" title="11">{
                 o.MakeParents(parent, parents)
         }</span>
@@ -2256,7 +2256,7 @@ func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension strin
         }</span>
 
         <span class="cov8" title="17">if !o.Config.Exist(name) </span><span class="cov7" title="12">{
-                if extension != "" </span><span class="cov6" title="9">{
+                if extension != "" </span><span class="cov7" title="10">{
                         myElement.Formats = append(myElement.Formats, extension)
                 }</span>
 
