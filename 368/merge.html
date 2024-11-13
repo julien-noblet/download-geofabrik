@@ -999,7 +999,7 @@ func CheckFileHash(hashfile, expectedHash string) (bool, error) <span class="cov
                 return false, fmt.Errorf(readErrorMsg, hashfile, err)
         }</span>
 
-        <span class="cov9" title="5">fileHash := strings.Split(string(fileContent), " ")[0]
+        <span class="cov7" title="4">fileHash := strings.Split(string(fileContent), " ")[0]
         log.Infof("Hash from file: %s", fileHash)
 
         return strings.EqualFold(expectedHash, fileHash), nil</span>
@@ -2255,7 +2255,7 @@ func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension strin
                 myElement.Meta = true
         }</span>
 
-        <span class="cov8" title="17">if !o.Config.Exist(name) </span><span class="cov7" title="11">{
+        <span class="cov8" title="17">if !o.Config.Exist(name) </span><span class="cov7" title="12">{
                 if extension != "" </span><span class="cov7" title="10">{
                         myElement.Formats = append(myElement.Formats, extension)
                 }</span>
