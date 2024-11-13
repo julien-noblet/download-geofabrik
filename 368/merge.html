@@ -999,7 +999,7 @@ func CheckFileHash(hashfile, expectedHash string) (bool, error) <span class="cov
                 return false, fmt.Errorf(readErrorMsg, hashfile, err)
         }</span>
 
-        <span class="cov7" title="4">fileHash := strings.Split(string(fileContent), " ")[0]
+        <span class="cov9" title="5">fileHash := strings.Split(string(fileContent), " ")[0]
         log.Infof("Hash from file: %s", fileHash)
 
         return strings.EqualFold(expectedHash, fileHash), nil</span>
