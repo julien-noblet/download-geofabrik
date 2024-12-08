@@ -1,17 +1,4 @@
-formats:
-    osm.pbf:
-        ext: osm.pbf
-        loc: -latest.osm.pbf
-    osm.pbf.md5:
-        ext: osm.pbf.md5
-        loc: -latest.osm.pbf.md5
-    poly:
-        ext: poly
-        loc: .poly
-        basepath: ../polygons/
-    state:
-        ext: state
-        loc: .state.txt
+formats: {}
 elements:
     aargau:
         id: aargau
@@ -96,7 +83,7 @@ elements:
             - state
     africa_france_taaf:
         id: africa_france_taaf
-        file: france_taaf
+        file: africa_france_taaf
         name: africa_france_taaf
         parent: africa
         files:
@@ -492,7 +479,7 @@ elements:
             - state
     argentina_la_rioja:
         id: argentina_la_rioja
-        file: la_rioja
+        file: argentina_la_rioja
         name: argentina_la_rioja
         parent: argentina
         files:
@@ -501,7 +488,7 @@ elements:
             - state
     argentina_santa_cruz:
         id: argentina_santa_cruz
-        file: santa_cruz
+        file: argentina_santa_cruz
         name: argentina_santa_cruz
         parent: argentina
         files:
@@ -1113,7 +1100,7 @@ elements:
             - state
     brazil_central-west:
         id: brazil_central-west
-        file: central-west
+        file: brazil_central-west
         name: brazil_central-west
         parent: brazil
         files:
@@ -1122,7 +1109,7 @@ elements:
             - state
     brazil_north:
         id: brazil_north
-        file: north
+        file: brazil_north
         name: brazil_north
         parent: brazil
         files:
@@ -1131,7 +1118,7 @@ elements:
             - state
     brazil_northeast:
         id: brazil_northeast
-        file: northeast
+        file: brazil_northeast
         name: brazil_northeast
         parent: brazil
         files:
@@ -1140,7 +1127,7 @@ elements:
             - state
     brazil_south:
         id: brazil_south
-        file: south
+        file: brazil_south
         name: brazil_south
         parent: brazil
         files:
@@ -1149,7 +1136,7 @@ elements:
             - state
     brazil_southeast:
         id: brazil_southeast
-        file: southeast
+        file: brazil_southeast
         name: brazil_southeast
         parent: brazil
         files:
@@ -1374,7 +1361,7 @@ elements:
             - state
     california_lake:
         id: california_lake
-        file: lake
+        file: california_lake
         name: california_lake
         parent: california
         files:
@@ -1383,7 +1370,7 @@ elements:
             - state
     california_santa_cruz:
         id: california_santa_cruz
-        file: santa_cruz
+        file: california_santa_cruz
         name: california_santa_cruz
         parent: california
         files:
@@ -2054,7 +2041,7 @@ elements:
             - state
     colorado_northeast:
         id: colorado_northeast
-        file: northeast
+        file: colorado_northeast
         name: colorado_northeast
         parent: colorado
         files:
@@ -2063,7 +2050,7 @@ elements:
             - state
     colorado_northwest:
         id: colorado_northwest
-        file: northwest
+        file: colorado_northwest
         name: colorado_northwest
         parent: colorado
         files:
@@ -2072,7 +2059,7 @@ elements:
             - state
     colorado_southeast:
         id: colorado_southeast
-        file: southeast
+        file: colorado_southeast
         name: colorado_southeast
         parent: colorado
         files:
@@ -2081,7 +2068,7 @@ elements:
             - state
     colorado_southwest:
         id: colorado_southwest
-        file: southwest
+        file: colorado_southwest
         name: colorado_southwest
         parent: colorado
         files:
@@ -2655,6 +2642,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    egypt:
+        id: egypt
+        file: egypt
+        name: egypt
+        parent: africa
+        files:
+            - osm.pbf
+            - poly
+            - state
     el_dorado:
         id: el_dorado
         file: el_dorado
@@ -2693,7 +2689,7 @@ elements:
             - state
     england_east:
         id: england_east
-        file: east
+        file: england_east
         name: england_east
         parent: england
         files:
@@ -2702,7 +2698,7 @@ elements:
             - state
     england_north_east:
         id: england_north_east
-        file: north_east
+        file: england_north_east
         name: england_north_east
         parent: england
         files:
@@ -2711,7 +2707,7 @@ elements:
             - state
     england_north_west:
         id: england_north_west
-        file: north_west
+        file: england_north_west
         name: england_north_west
         parent: england
         files:
@@ -2720,7 +2716,7 @@ elements:
             - state
     england_south_east:
         id: england_south_east
-        file: south_east
+        file: england_south_east
         name: england_south_east
         parent: england
         files:
@@ -2729,7 +2725,7 @@ elements:
             - state
     england_south_west:
         id: england_south_west
-        file: south_west
+        file: england_south_west
         name: england_south_west
         parent: england
         files:
@@ -2823,15 +2819,6 @@ elements:
         name: europe
         files:
             - poly
-    europe_france:
-        id: europe_france
-        file: france
-        name: europe_france
-        parent: europe
-        files:
-            - osm.pbf
-            - poly
-            - state
     euskadi:
         id: euskadi
         file: euskadi
@@ -3005,7 +2992,7 @@ elements:
             - state
     florida_east_central:
         id: florida_east_central
-        file: east_central
+        file: florida_east_central
         name: florida_east_central
         parent: florida
         files:
@@ -3014,7 +3001,7 @@ elements:
             - state
     florida_northeast:
         id: florida_northeast
-        file: northeast
+        file: florida_northeast
         name: florida_northeast
         parent: florida
         files:
@@ -3023,7 +3010,7 @@ elements:
             - state
     florida_northwest:
         id: florida_northwest
-        file: northwest
+        file: florida_northwest
         name: florida_northwest
         parent: florida
         files:
@@ -3032,7 +3019,7 @@ elements:
             - state
     florida_southwest:
         id: florida_southwest
-        file: southwest
+        file: florida_southwest
         name: florida_southwest
         parent: florida
         files:
@@ -3050,9 +3037,13 @@ elements:
             - state
     france:
         id: france
+        file: france
         name: france
         parent: europe
-        meta: true
+        files:
+            - osm.pbf
+            - poly
+            - state
     france_metro_dom_com_nc:
         id: france_metro_dom_com_nc
         file: france_metro_dom_com_nc
@@ -3073,7 +3064,7 @@ elements:
             - state
     franche_comte_jura:
         id: franche_comte_jura
-        file: jura
+        file: franche_comte_jura
         name: franche_comte_jura
         parent: franche_comte
         files:
@@ -3253,7 +3244,7 @@ elements:
             - state
     georgia_northeast:
         id: georgia_northeast
-        file: northeast
+        file: georgia_northeast
         name: georgia_northeast
         parent: georgia
         files:
@@ -3262,7 +3253,7 @@ elements:
             - state
     georgia_northwest:
         id: georgia_northwest
-        file: northwest
+        file: georgia_northwest
         name: georgia_northwest
         parent: georgia
         files:
@@ -3271,7 +3262,7 @@ elements:
             - state
     georgia_southeast:
         id: georgia_southeast
-        file: southeast
+        file: georgia_southeast
         name: georgia_southeast
         parent: georgia
         files:
@@ -3280,7 +3271,7 @@ elements:
             - state
     georgia_southwest:
         id: georgia_southwest
-        file: southwest
+        file: georgia_southwest
         name: georgia_southwest
         parent: georgia
         files:
@@ -3395,12 +3386,6 @@ elements:
             - osm.pbf
             - poly
             - state
-    google40770f7a526b2e5f:
-        id: google40770f7a526b2e5f
-        file: google40770f7a526b2e5f
-        name: google40770f7a526b2e5f
-        files:
-            - html
     gorontalo:
         id: gorontalo
         file: gorontalo
@@ -3622,6 +3607,15 @@ elements:
         file: hainan
         name: hainan
         parent: china
+        files:
+            - osm.pbf
+            - poly
+            - state
+    haiti:
+        id: haiti
+        file: haiti
+        name: haiti
+        parent: central-america
         files:
             - osm.pbf
             - poly
@@ -3979,7 +3973,7 @@ elements:
             - state
     illinois_central:
         id: illinois_central
-        file: central
+        file: illinois_central
         name: illinois_central
         parent: illinois
         files:
@@ -3988,7 +3982,7 @@ elements:
             - state
     illinois_east_central:
         id: illinois_east_central
-        file: east_central
+        file: illinois_east_central
         name: illinois_east_central
         parent: illinois
         files:
@@ -3997,7 +3991,7 @@ elements:
             - state
     illinois_north:
         id: illinois_north
-        file: north
+        file: illinois_north
         name: illinois_north
         parent: illinois
         files:
@@ -4006,7 +4000,7 @@ elements:
             - state
     illinois_northeast:
         id: illinois_northeast
-        file: northeast
+        file: illinois_northeast
         name: illinois_northeast
         parent: illinois
         files:
@@ -4015,7 +4009,7 @@ elements:
             - state
     illinois_northwest:
         id: illinois_northwest
-        file: northwest
+        file: illinois_northwest
         name: illinois_northwest
         parent: illinois
         files:
@@ -4024,7 +4018,7 @@ elements:
             - state
     illinois_southern:
         id: illinois_southern
-        file: southern
+        file: illinois_southern
         name: illinois_southern
         parent: illinois
         files:
@@ -4033,7 +4027,7 @@ elements:
             - state
     illinois_southwest:
         id: illinois_southwest
-        file: southwest
+        file: illinois_southwest
         name: illinois_southwest
         parent: illinois
         files:
@@ -4967,6 +4961,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    lebanon:
+        id: lebanon
+        file: lebanon
+        name: lebanon
+        parent: asia
+        files:
+            - osm.pbf
+            - poly
+            - state
     leiria:
         id: leiria
         file: leiria
@@ -5278,6 +5281,15 @@ elements:
         file: macau
         name: macau
         parent: china
+        files:
+            - osm.pbf
+            - poly
+            - state
+    madagascar:
+        id: madagascar
+        file: madagascar
+        name: madagascar
+        parent: africa
         files:
             - osm.pbf
             - poly
@@ -5693,7 +5705,7 @@ elements:
         meta: true
     merge_france_taaf:
         id: merge_france_taaf
-        file: france_taaf
+        file: merge_france_taaf
         name: merge_france_taaf
         parent: merge
         files:
@@ -5756,7 +5768,7 @@ elements:
             - state
     michigan_central:
         id: michigan_central
-        file: central
+        file: michigan_central
         name: michigan_central
         parent: michigan
         files:
@@ -5765,7 +5777,7 @@ elements:
             - state
     michigan_southeast:
         id: michigan_southeast
-        file: southeast
+        file: michigan_southeast
         name: michigan_southeast
         parent: michigan
         files:
@@ -5774,7 +5786,7 @@ elements:
             - state
     michigan_southwest:
         id: michigan_southwest
-        file: southwest
+        file: michigan_southwest
         name: michigan_southwest
         parent: michigan
         files:
@@ -5783,7 +5795,7 @@ elements:
             - state
     michigan_west:
         id: michigan_west
-        file: west
+        file: michigan_west
         name: michigan_west
         parent: michigan
         files:
@@ -5984,6 +5996,15 @@ elements:
         file: morelos
         name: morelos
         parent: mexico
+        files:
+            - osm.pbf
+            - poly
+            - state
+    morocco:
+        id: morocco
+        file: morocco
+        name: morocco
+        parent: africa
         files:
             - osm.pbf
             - poly
@@ -6224,7 +6245,7 @@ elements:
             - state
     new_south_wales_central_west:
         id: new_south_wales_central_west
-        file: central_west
+        file: new_south_wales_central_west
         name: new_south_wales_central_west
         parent: new_south_wales
         files:
@@ -6233,7 +6254,7 @@ elements:
             - state
     new_south_wales_north_western:
         id: new_south_wales_north_western
-        file: north_western
+        file: new_south_wales_north_western
         name: new_south_wales_north_western
         parent: new_south_wales
         files:
@@ -6242,7 +6263,7 @@ elements:
             - state
     new_south_wales_northern:
         id: new_south_wales_northern
-        file: northern
+        file: new_south_wales_northern
         name: new_south_wales_northern
         parent: new_south_wales
         files:
@@ -6332,7 +6353,7 @@ elements:
             - state
     nigeria_north_central:
         id: nigeria_north_central
-        file: north_central
+        file: nigeria_north_central
         name: nigeria_north_central
         parent: nigeria
         files:
@@ -6341,7 +6362,7 @@ elements:
             - state
     nigeria_north_east:
         id: nigeria_north_east
-        file: north_east
+        file: nigeria_north_east
         name: nigeria_north_east
         parent: nigeria
         files:
@@ -6350,7 +6371,7 @@ elements:
             - state
     nigeria_north_west:
         id: nigeria_north_west
-        file: north_west
+        file: nigeria_north_west
         name: nigeria_north_west
         parent: nigeria
         files:
@@ -6359,7 +6380,7 @@ elements:
             - state
     nigeria_south_east:
         id: nigeria_south_east
-        file: south_east
+        file: nigeria_south_east
         name: nigeria_south_east
         parent: nigeria
         files:
@@ -6368,7 +6389,7 @@ elements:
             - state
     nigeria_south_south:
         id: nigeria_south_south
-        file: south_south
+        file: nigeria_south_south
         name: nigeria_south_south
         parent: nigeria
         files:
@@ -6377,7 +6398,7 @@ elements:
             - state
     nigeria_south_west:
         id: nigeria_south_west
-        file: south_west
+        file: nigeria_south_west
         name: nigeria_south_west
         parent: nigeria
         files:
@@ -6523,7 +6544,7 @@ elements:
             - state
     north-carolina_north_central:
         id: north-carolina_north_central
-        file: north_central
+        file: north-carolina_north_central
         name: north-carolina_north_central
         parent: north-carolina
         files:
@@ -6532,7 +6553,7 @@ elements:
             - state
     north-carolina_northeast:
         id: north-carolina_northeast
-        file: northeast
+        file: north-carolina_northeast
         name: north-carolina_northeast
         parent: north-carolina
         files:
@@ -6541,7 +6562,7 @@ elements:
             - state
     north-carolina_northwest:
         id: north-carolina_northwest
-        file: northwest
+        file: north-carolina_northwest
         name: north-carolina_northwest
         parent: north-carolina
         files:
@@ -6550,7 +6571,7 @@ elements:
             - state
     north-carolina_south_central:
         id: north-carolina_south_central
-        file: south_central
+        file: north-carolina_south_central
         name: north-carolina_south_central
         parent: north-carolina
         files:
@@ -6559,7 +6580,7 @@ elements:
             - state
     north-carolina_southeast:
         id: north-carolina_southeast
-        file: southeast
+        file: north-carolina_southeast
         name: north-carolina_southeast
         parent: north-carolina
         files:
@@ -6568,7 +6589,7 @@ elements:
             - state
     north-carolina_western:
         id: north-carolina_western
-        file: western
+        file: north-carolina_western
         name: north-carolina_western
         parent: north-carolina
         files:
@@ -6888,7 +6909,7 @@ elements:
             - state
     oceania_france_taaf:
         id: oceania_france_taaf
-        file: france_taaf
+        file: oceania_france_taaf
         name: oceania_france_taaf
         parent: oceania
         files:
@@ -7397,7 +7418,7 @@ elements:
         meta: true
     polygons-merge_france_taaf:
         id: polygons-merge_france_taaf
-        file: france_taaf
+        file: polygons-merge_france_taaf
         name: polygons-merge_france_taaf
         parent: polygons-merge
         files:
@@ -7771,12 +7792,6 @@ elements:
             - osm.pbf
             - poly
             - state
-    robots:
-        id: robots
-        file: robots
-        name: robots
-        files:
-            - txt
     rogaland:
         id: rogaland
         file: rogaland
@@ -8671,7 +8686,7 @@ elements:
             - state
     south_africa_north_west:
         id: south_africa_north_west
-        file: north_west
+        file: south_africa_north_west
         name: south_africa_north_west
         parent: south_africa
         files:
@@ -8811,7 +8826,7 @@ elements:
             - state
     southern_federal_district_sevastopol:
         id: southern_federal_district_sevastopol
-        file: sevastopol
+        file: southern_federal_district_sevastopol
         name: southern_federal_district_sevastopol
         parent: southern_federal_district
         files:
@@ -8869,13 +8884,12 @@ elements:
         name: spain
         parent: europe
         files:
-            - ""
             - osm.pbf
             - poly
             - state
     spain_la_rioja:
         id: spain_la_rioja
-        file: la_rioja
+        file: spain_la_rioja
         name: spain_la_rioja
         parent: spain
         files:
@@ -9037,7 +9051,7 @@ elements:
             - state
     switzerland_jura:
         id: switzerland_jura
-        file: jura
+        file: switzerland_jura
         name: switzerland_jura
         parent: switzerland
         files:
@@ -9100,7 +9114,7 @@ elements:
             - state
     tanzania_central:
         id: tanzania_central
-        file: central
+        file: tanzania_central
         name: tanzania_central
         parent: tanzania
         files:
@@ -9109,7 +9123,7 @@ elements:
             - state
     tanzania_lake:
         id: tanzania_lake
-        file: lake
+        file: tanzania_lake
         name: tanzania_lake
         parent: tanzania
         files:
@@ -9118,7 +9132,7 @@ elements:
             - state
     tanzania_northern:
         id: tanzania_northern
-        file: northern
+        file: tanzania_northern
         name: tanzania_northern
         parent: tanzania
         files:
@@ -9127,7 +9141,7 @@ elements:
             - state
     tanzania_western:
         id: tanzania_western
-        file: western
+        file: tanzania_western
         name: tanzania_western
         parent: tanzania
         files:
@@ -9262,7 +9276,7 @@ elements:
             - state
     texas_central:
         id: texas_central
-        file: central
+        file: texas_central
         name: texas_central
         parent: texas
         files:
@@ -9271,7 +9285,7 @@ elements:
             - state
     texas_north:
         id: texas_north
-        file: north
+        file: texas_north
         name: texas_north
         parent: texas
         files:
@@ -9280,7 +9294,7 @@ elements:
             - state
     texas_northwest:
         id: texas_northwest
-        file: northwest
+        file: texas_northwest
         name: texas_northwest
         parent: texas
         files:
@@ -9289,7 +9303,7 @@ elements:
             - state
     texas_south:
         id: texas_south
-        file: south
+        file: texas_south
         name: texas_south
         parent: texas
         files:
@@ -9298,7 +9312,7 @@ elements:
             - state
     texas_southeast:
         id: texas_southeast
-        file: southeast
+        file: texas_southeast
         name: texas_southeast
         parent: texas
         files:
@@ -9307,7 +9321,7 @@ elements:
             - state
     texas_west:
         id: texas_west
-        file: west
+        file: texas_west
         name: texas_west
         parent: texas
         files:
@@ -9658,7 +9672,7 @@ elements:
             - state
     uganda_central:
         id: uganda_central
-        file: central
+        file: uganda_central
         name: uganda_central
         parent: uganda
         files:
@@ -9667,7 +9681,7 @@ elements:
             - state
     uganda_eastern:
         id: uganda_eastern
-        file: eastern
+        file: uganda_eastern
         name: uganda_eastern
         parent: uganda
         files:
@@ -9676,7 +9690,7 @@ elements:
             - state
     uganda_northern:
         id: uganda_northern
-        file: northern
+        file: uganda_northern
         name: uganda_northern
         parent: uganda
         files:
@@ -9685,7 +9699,7 @@ elements:
             - state
     uganda_western:
         id: uganda_western
-        file: western
+        file: uganda_western
         name: uganda_western
         parent: uganda
         files:
@@ -9703,7 +9717,7 @@ elements:
             - state
     ukraine_sevastopol:
         id: ukraine_sevastopol
-        file: sevastopol
+        file: ukraine_sevastopol
         name: ukraine_sevastopol
         parent: ukraine
         files:
@@ -10727,4 +10741,4 @@ elements:
             - osm.pbf
             - poly
             - state
-baseURL: https://download.openstreetmap.fr/extracts
+baseURL: https://download.openstreetmap.fr/
