@@ -1,4 +1,5 @@
 [
+  {"Version":"7d7160f73161804d5a938b8c3593541a14270729","Date":1734937635,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.7.1"],"Suites":[]},
   {"Version":"0372c6fce4e89ccf6d780dad634f5c05e4fa49c0","Date":1734937630,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.33.0"],"Suites":[]},
   {"Version":"2ce9497af84897c2ff3118eb841c7526ee5a43d6","Date":1733728882,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/magiconair/properties-1.8.9"],"Suites":[]},
   {"Version":"651e210439acf8ca069368207761c1f61ec300bf","Date":1733728873,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.21.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"f3af353c201ffc8d61f06d11f6abf0a51fd74c57","Date":1730705245,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.8.0"],"Suites":[]},
   {"Version":"db0f7fdca015dd4ef677d291880bb6b9d3d1eac8","Date":1730099436,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fatih/color-1.18.0"],"Suites":[]},
   {"Version":"5ca382490be6a9cf53234586d65e9261328eaae7","Date":1729144385,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.35.1"],"Suites":[]},
-  {"Version":"7e1b675cb55c8a2d8142ec93326193bc8cf434eb","Date":1729144333,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"ba7c728e90093e0e90c75872e6acc8f0f938deea","Date":1729144092,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.35.1"],"Suites":[]}
+  {"Version":"7e1b675cb55c8a2d8142ec93326193bc8cf434eb","Date":1729144333,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
