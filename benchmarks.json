@@ -1,4 +1,5 @@
 [
+  {"Version":"eb9aee12139c3845862b45aa9516cb5f1efe475a","Date":1735259137,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.7.1"],"Suites":[]},
   {"Version":"3d21f3775a62f8ab7eeb506a87efbf2e5261b7ff","Date":1735259128,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/magiconair/properties-1.8.9"],"Suites":[]},
   {"Version":"e083751f8a9ec22b29f47ea123eca1f31e770f86","Date":1735259059,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"07d75fce1b102649bf70540d2d84841b2e0ccad0","Date":1735258986,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"ebe749c3bb06e4a424650063ab49c4e23d2c7565","Date":1730944121,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.8.0"],"Suites":[]},
   {"Version":"e8ef223ea7e0c4d9c860ded118a0a7318543a887","Date":1730944119,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.35.1"],"Suites":[]},
   {"Version":"8282ccdb2e597b98dcde6947f8fd04c9bdc7f2d7","Date":1730944077,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"d056199b26a8587d9a996cf89a0483b041f6f6e6","Date":1730944005,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"f3af353c201ffc8d61f06d11f6abf0a51fd74c57","Date":1730705245,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.8.0"],"Suites":[]}
+  {"Version":"d056199b26a8587d9a996cf89a0483b041f6f6e6","Date":1730944005,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
 ]
