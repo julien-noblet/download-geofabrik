@@ -1896,11 +1896,11 @@ func (g *Geofabrik) Collector() *colly.Collector <span class="cov4" title="4">{
 // ParseSubregion parses the subregion information from the HTML.
 func (g *Geofabrik) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Collector) <span class="cov4" title="4">{
         e.ForEach("td.subregion", func(_ int, el *colly.HTMLElement) </span><span class="cov9" title="19">{
-                el.ForEach("a", func(_ int, sub *colly.HTMLElement) </span><span class="cov9" title="18">{
+                el.ForEach("a", func(_ int, sub *colly.HTMLElement) </span><span class="cov9" title="19">{
                         href := sub.Request.AbsoluteURL(sub.Attr("href"))
                         myID, extension := scrapper.FileExt(href)
 
-                        if extension == "html" </span><span class="cov9" title="18">{
+                        if extension == "html" </span><span class="cov9" title="19">{
                                 g.handleHTMLExtension(sub, href, myID, myCollector)
                         }</span>
                 })
@@ -1963,7 +1963,7 @@ func (g *Geofabrik) handleSpecialCases(myID, parent string) (newID, file string)
                 }</span>
         }
 
-        <span class="cov9" title="22">return myID, file</span>
+        <span class="cov10" title="23">return myID, file</span>
 }
 
 // ParseFormat adds extensions to the ID.
