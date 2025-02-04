@@ -1,4 +1,5 @@
 [
+  {"Version":"9b9cf1f2baafc1337106ed33c41c240428bc7731","Date":1738703515,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"22667af7a26c678c64f3031ea176038104afa182","Date":1738703423,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"4fb4711aef2f724c57dfda9537be86bb0b411f6c","Date":1737962961,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.4"],"Suites":[]},
   {"Version":"eb5c7ca8413a9381877ea8e81c598bc8d00ece46","Date":1737455871,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.3"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"0445b267c20f20c699916b0f022394ada3e3cb41","Date":1732368266,"Tags":["ref=refs/heads/renovate/github.com-stretchr-testify-1.x"],"Suites":[]},
   {"Version":"a59dff3845e4f80686912ddf7d67fd6daeb1b029","Date":1731969425,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"8d3e885c58ba24464cde1b34010d72b0f0dadc51","Date":1731916547,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.35.2"],"Suites":[]},
-  {"Version":"23dc3d6a6b12ca9f29cd21e456729b5f492051d6","Date":1731539503,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"b53ac719e0a93779d53678010598575793273b81","Date":1731539313,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.31.0"],"Suites":[]}
+  {"Version":"23dc3d6a6b12ca9f29cd21e456729b5f492051d6","Date":1731539503,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
