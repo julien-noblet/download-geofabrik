@@ -552,7 +552,7 @@ func (config *Config) Generate() ([]byte, error) <span class="cov2" title="3">{
 }
 
 // MergeElement merges a new element into the config.
-func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="610">{
+func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="609">{
         config.ElementsMutex.RLock()
         newElement, ok := config.Elements[elementPtr.ID]
         config.ElementsMutex.RUnlock()
@@ -580,7 +580,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov9" title="609">return nil</span>
+        <span class="cov10" title="609">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
@@ -1197,7 +1197,7 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="5
         shortNames := make([]string, 0, len(fullFormatNames))
 
         for _, fullName := range fullFormatNames </span><span class="cov8" title="4580">{
-                for _, format := range miniFormats </span><span class="cov10" title="33013">{
+                for _, format := range miniFormats </span><span class="cov10" title="33010">{
                         if fullName == format.FullName </span><span class="cov8" title="3557">{
                                 shortNames = append(shortNames, format.ShortName)
 
