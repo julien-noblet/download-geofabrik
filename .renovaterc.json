@@ -1,18 +1,24 @@
 {
-  "extends": ["config:base"],
+  "extends": [
+    "config:recommended"
+  ],
   "automerge": true,
   "major": {
     "automerge": false
   },
-  "devDependencies": {
-    "automerge": true
-  },
-  "rebaseStalePrs": true,
   "packageRules": [
     {
-      "packagePatterns": [ "golang.org/x" ],
-      "groupName": "golang.org/x"
+      "groupName": "golang.org/x",
+      "matchPackageNames": [
+        "/golang.org/x/"
+      ]
+    },
+    {
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "automerge": true
     }
-  ]
-
+  ],
+  "rebaseWhen": "behind-base-branch"
 }
