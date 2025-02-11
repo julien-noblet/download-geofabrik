@@ -1,4 +1,5 @@
 [
+  {"Version":"eb7547a7762cb880b96f9bdd856bed6199c051dd","Date":1739308915,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/magiconair/properties-1.8.9"],"Suites":[]},
   {"Version":"a81997eb534161f461ac102d1a18771cd4206b66","Date":1739308841,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"14f908501aedc0c030677d7895d8c9e1592ea99a","Date":1739308837,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.5"],"Suites":[]},
   {"Version":"3ef304fc3e0a2b37de3a5748d4834e8e3ddd7f01","Date":1739308766,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"e083751f8a9ec22b29f47ea123eca1f31e770f86","Date":1735259059,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"07d75fce1b102649bf70540d2d84841b2e0ccad0","Date":1735258986,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"7d7160f73161804d5a938b8c3593541a14270729","Date":1734937635,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.7.1"],"Suites":[]},
-  {"Version":"0372c6fce4e89ccf6d780dad634f5c05e4fa49c0","Date":1734937630,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.33.0"],"Suites":[]},
-  {"Version":"2ce9497af84897c2ff3118eb841c7526ee5a43d6","Date":1733728882,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/magiconair/properties-1.8.9"],"Suites":[]}
+  {"Version":"0372c6fce4e89ccf6d780dad634f5c05e4fa49c0","Date":1734937630,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.33.0"],"Suites":[]}
 ]
