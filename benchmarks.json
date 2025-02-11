@@ -1,4 +1,5 @@
 [
+  {"Version":"14f6d5e9850860a543ed6b70573d1342a852835a","Date":1739309963,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"0fad2e1b2b30321741cae27bd553d9e018cbf10f","Date":1739309924,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"e61824c8d2668f2d70321ccb970558c0c49efbf6","Date":1739309748,"Tags":["ref=refs/heads/renovate/migrate-config"],"Suites":[]},
   {"Version":"398af0828a57305a2de545662b77f298add284fd","Date":1739309737,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"eebe34492e6c8c975dc4d7e9707ebcacbf177278","Date":1737455777,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"037a36d1f3d32bf92775db386204ffa8c73e445a","Date":1737455147,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]},
   {"Version":"99eb93b59d978f638ce835522da90a30cdb10c96","Date":1737063204,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.3"],"Suites":[]},
-  {"Version":"82da1b8b1989110e33b4b68b1b01239f0d9cb562","Date":1737063196,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.3"],"Suites":[]},
-  {"Version":"fa82e0b15099bb25f59720c6f789ef759a62f361","Date":1737063191,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.3"],"Suites":[]}
+  {"Version":"82da1b8b1989110e33b4b68b1b01239f0d9cb562","Date":1737063196,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.3"],"Suites":[]}
 ]
