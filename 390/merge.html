@@ -2232,7 +2232,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
         <span class="cov8" title="17">log.Debugf("Add %s format", extension)
 
         file := ""
-        if extension != "" </span><span class="cov8" title="15">{
+        if extension != "" </span><span class="cov7" title="14">{
                 file = name
         }</span>
 
@@ -2240,7 +2240,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
 }
 
 // addOrUpdateElement adds or updates an element in the configuration.
-func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension string) <span class="cov8" title="17">{
+func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension string) <span class="cov8" title="16">{
         myElement := element.Element{
                 ID:      name,
                 File:    file,
