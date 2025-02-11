@@ -1,4 +1,5 @@
 [
+  {"Version":"14f908501aedc0c030677d7895d8c9e1592ea99a","Date":1739308837,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.5"],"Suites":[]},
   {"Version":"3ef304fc3e0a2b37de3a5748d4834e8e3ddd7f01","Date":1739308766,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"2a4c126212681676ea5620e46c5585693d223619","Date":1739302758,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"401ec4bd343a9eb5ade6d53f1acbdc6c1065ded4","Date":1739173622,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.4"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"7d7160f73161804d5a938b8c3593541a14270729","Date":1734937635,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.7.1"],"Suites":[]},
   {"Version":"0372c6fce4e89ccf6d780dad634f5c05e4fa49c0","Date":1734937630,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.33.0"],"Suites":[]},
   {"Version":"2ce9497af84897c2ff3118eb841c7526ee5a43d6","Date":1733728882,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/magiconair/properties-1.8.9"],"Suites":[]},
-  {"Version":"651e210439acf8ca069368207761c1f61ec300bf","Date":1733728873,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.21.0"],"Suites":[]},
-  {"Version":"123c402aa4475ff6a3757984f2d2bcbcbc5f8aca","Date":1733254519,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
+  {"Version":"651e210439acf8ca069368207761c1f61ec300bf","Date":1733728873,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.21.0"],"Suites":[]}
 ]
