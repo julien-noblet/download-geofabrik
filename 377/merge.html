@@ -1086,7 +1086,7 @@ func (f *Formats) Contains(format string) bool <span class="cov8" title="188">{
                 }</span>
         }
 
-        <span class="cov7" title="81">return false</span>
+        <span class="cov7" title="82">return false</span>
 }
 
 // CreateParentElement creates a parent element for the given element.
@@ -2196,7 +2196,7 @@ func Exceptions(name, parent string) string <span class="cov8" title="17">{
                 return fmt.Sprintf("%v_%v", parent, name)
         }</span>
 
-        <span class="cov7" title="14">return name</span>
+        <span class="cov8" title="15">return name</span>
 }
 
 // ParseHref parses the href and updates the configuration.
@@ -2229,7 +2229,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
                 extension = formats.FormatState
         }</span>
 
-        <span class="cov8" title="16">log.Debugf("Add %s format", extension)
+        <span class="cov8" title="17">log.Debugf("Add %s format", extension)
 
         file := ""
         if extension != "" </span><span class="cov8" title="15">{
