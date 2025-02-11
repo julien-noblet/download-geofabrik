@@ -2667,7 +2667,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="22">{
-        for f, i := range *def </span><span class="cov7" title="213">{
+        for f, i := range *def </span><span class="cov7" title="216">{
                 if format == i.ID </span><span class="cov4" title="20">{
                         s.Config.AddExtension(id, f)
                 }</span>
