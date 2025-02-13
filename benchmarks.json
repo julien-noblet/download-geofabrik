@@ -1,4 +1,5 @@
 [
+  {"Version":"cc12e30b61550e4beaadac949dc21cb8ba63f868","Date":1739461348,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"2aad92cec2d75bc13b2d195a052f2b0cc6205c6a","Date":1739427844,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"2a76441697534f35c7bd8b6d982f49819c85d18a","Date":1739427744,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"14f6d5e9850860a543ed6b70573d1342a852835a","Date":1739309963,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"eb5c7ca8413a9381877ea8e81c598bc8d00ece46","Date":1737455871,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.3"],"Suites":[]},
   {"Version":"3a3459601ddf92bec253c73c9a34406d771acf70","Date":1737455851,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.3"],"Suites":[]},
   {"Version":"87108fb69ddf4516baee2d41c8c96d09c704fffe","Date":1737455848,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.7.1"],"Suites":[]},
-  {"Version":"eebe34492e6c8c975dc4d7e9707ebcacbf177278","Date":1737455777,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"037a36d1f3d32bf92775db386204ffa8c73e445a","Date":1737455147,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]}
+  {"Version":"eebe34492e6c8c975dc4d7e9707ebcacbf177278","Date":1737455777,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
