@@ -1,4 +1,5 @@
 [
+  {"Version":"337364e81ba0c97dbc3d92401dc12389cfb33aa5","Date":1739778102,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.7.0"],"Suites":[]},
   {"Version":"41227cc8e07cfe87ebe392f24744bf4067d083f8","Date":1739461494,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"cc12e30b61550e4beaadac949dc21cb8ba63f868","Date":1739461348,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"2aad92cec2d75bc13b2d195a052f2b0cc6205c6a","Date":1739427844,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"22667af7a26c678c64f3031ea176038104afa182","Date":1738703423,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"4fb4711aef2f724c57dfda9537be86bb0b411f6c","Date":1737962961,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.4"],"Suites":[]},
   {"Version":"eb5c7ca8413a9381877ea8e81c598bc8d00ece46","Date":1737455871,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.3"],"Suites":[]},
-  {"Version":"3a3459601ddf92bec253c73c9a34406d771acf70","Date":1737455851,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.3"],"Suites":[]},
-  {"Version":"87108fb69ddf4516baee2d41c8c96d09c704fffe","Date":1737455848,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.7.1"],"Suites":[]}
+  {"Version":"3a3459601ddf92bec253c73c9a34406d771acf70","Date":1737455851,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.3"],"Suites":[]}
 ]
