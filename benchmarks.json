@@ -1,4 +1,5 @@
 [
+  {"Version":"d1a3dac53a80344869829bbb4e4d761efdbdd390","Date":1740986311,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/cheggaaa/pb/v3-3.1.7"],"Suites":[]},
   {"Version":"bf7cc75ec029bec520fb11ea3dd83c28a5e068c8","Date":1740751958,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]},
   {"Version":"7414a3c352cf57ce70b480e514956a8218740c80","Date":1739778108,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/afero-1.12.0"],"Suites":[]},
   {"Version":"337364e81ba0c97dbc3d92401dc12389cfb33aa5","Date":1739778102,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.7.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"0f88924f7fe8eb0166d7ad9ec9a1b7d665efa9ad","Date":1739173610,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.5"],"Suites":[]},
   {"Version":"fbaa4e013c696953445758be89bf0da11d5470b8","Date":1738703584,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.4"],"Suites":[]},
   {"Version":"9b9cf1f2baafc1337106ed33c41c240428bc7731","Date":1738703515,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"22667af7a26c678c64f3031ea176038104afa182","Date":1738703423,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"4fb4711aef2f724c57dfda9537be86bb0b411f6c","Date":1737962961,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.4"],"Suites":[]}
+  {"Version":"22667af7a26c678c64f3031ea176038104afa182","Date":1738703423,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
 ]
