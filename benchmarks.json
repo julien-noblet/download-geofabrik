@@ -1,4 +1,5 @@
 [
+  {"Version":"fb70d6b68f661e6a9a7dfde7ef9a3e2f09ae4a55","Date":1741038768,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.6"],"Suites":[]},
   {"Version":"d05362101bc237b2d1922ae49b39a53ac7eeb6b2","Date":1741038765,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.4"],"Suites":[]},
   {"Version":"73647a998e73e3aff7a3402253452a7fd09ed992","Date":1741038709,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/cheggaaa/pb/v3-3.1.7"],"Suites":[]},
   {"Version":"1af7d0110e5b3a300bd5505f395fd314049e00e2","Date":1741038693,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"14f908501aedc0c030677d7895d8c9e1592ea99a","Date":1739308837,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.5"],"Suites":[]},
   {"Version":"3ef304fc3e0a2b37de3a5748d4834e8e3ddd7f01","Date":1739308766,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"2a4c126212681676ea5620e46c5585693d223619","Date":1739302758,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"401ec4bd343a9eb5ade6d53f1acbdc6c1065ded4","Date":1739173622,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.4"],"Suites":[]},
-  {"Version":"0f88924f7fe8eb0166d7ad9ec9a1b7d665efa9ad","Date":1739173610,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.5"],"Suites":[]}
+  {"Version":"401ec4bd343a9eb5ade6d53f1acbdc6c1065ded4","Date":1739173622,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.4.4"],"Suites":[]}
 ]
