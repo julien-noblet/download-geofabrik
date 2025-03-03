@@ -2191,12 +2191,12 @@ func (o *OpenstreetmapFR) createAndMergeElement(parent, gparent string) <span cl
 }
 
 // Exceptions returns the exception name if it exists in the exception list.
-func Exceptions(name, parent string) string <span class="cov8" title="17">{
+func Exceptions(name, parent string) string <span class="cov8" title="16">{
         if _, exists := exceptionList[name]; exists </span><span class="cov2" title="2">{
                 return fmt.Sprintf("%v_%v", parent, name)
         }</span>
 
-        <span class="cov8" title="15">return name</span>
+        <span class="cov7" title="14">return name</span>
 }
 
 // ParseHref parses the href and updates the configuration.
