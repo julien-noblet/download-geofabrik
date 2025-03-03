@@ -2196,7 +2196,7 @@ func Exceptions(name, parent string) string <span class="cov8" title="17">{
                 return fmt.Sprintf("%v_%v", parent, name)
         }</span>
 
-        <span class="cov8" title="15">return name</span>
+        <span class="cov7" title="14">return name</span>
 }
 
 // ParseHref parses the href and updates the configuration.
@@ -2236,11 +2236,11 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
                 file = name
         }</span>
 
-        <span class="cov8" title="17">o.addOrUpdateElement(parent, name, file, extension)</span>
+        <span class="cov8" title="16">o.addOrUpdateElement(parent, name, file, extension)</span>
 }
 
 // addOrUpdateElement adds or updates an element in the configuration.
-func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension string) <span class="cov8" title="17">{
+func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension string) <span class="cov8" title="16">{
         myElement := element.Element{
                 ID:      name,
                 File:    file,
@@ -2255,7 +2255,7 @@ func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension strin
                 myElement.Meta = true
         }</span>
 
-        <span class="cov8" title="17">if !o.Config.Exist(name) </span><span class="cov7" title="12">{
+        <span class="cov8" title="16">if !o.Config.Exist(name) </span><span class="cov7" title="12">{
                 if extension != "" </span><span class="cov7" title="10">{
                         myElement.Formats = append(myElement.Formats, extension)
                 }</span>
@@ -2646,7 +2646,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1022">{
         return s.StartURL
 }</span>
 
