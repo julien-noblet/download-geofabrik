@@ -2130,13 +2130,13 @@ func GetParent(href string) (parent string, parentList []string) <span class="co
         href = strings.TrimSuffix(href, "/")
 
         parentList = strings.Split(href, "/")
-        if len(parentList) &gt; minParentListLength </span><span class="cov9" title="22">{
+        if len(parentList) &gt; minParentListLength </span><span class="cov9" title="23">{
                 parent = parentList[len(parentList)-2]
         }</span> else<span class="cov4" title="4"> {
                 parent = ""
         }</span>
 
-        <span class="cov9" title="26">if strings.EqualFold(parent, "extracts") || strings.EqualFold(parent, "polygons") </span><span class="cov5" title="5">{
+        <span class="cov9" title="27">if strings.EqualFold(parent, "extracts") || strings.EqualFold(parent, "polygons") </span><span class="cov5" title="5">{
                 parent = ""
         }</span>
 
@@ -2646,7 +2646,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
         return s.StartURL
 }</span>
 
