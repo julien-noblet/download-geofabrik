@@ -48,7 +48,7 @@ func Test_hashFileMD5(t *testing.T) {
 }
 
 func Benchmark_hashFileMD5_LICENSE(b *testing.B) {
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		if _, err := download.ComputeMD5Hash("./LICENSE"); err != nil {
 			b.Error(err.Error())
 		}
@@ -63,7 +63,7 @@ func Benchmark_controlHash_LICENSE(b *testing.B) {
 		b.Errorf("Can't write file %s err: %v", hashfile, err)
 	}
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		if _, err := download.CheckFileHash(hashfile, hash); err != nil {
 			b.Error(err.Error())
 		}

@@ -170,7 +170,7 @@ func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) {
 
 // getGparent returns the grandparent from a list of parents.
 func getGparent(gparents []string) string {
-	if gparents == nil || len(gparents) < minParentListLength {
+	if len(gparents) < minParentListLength {
 		return ""
 	}
 

@@ -434,7 +434,7 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 }
 
 func BenchmarkExeptions(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for range make([]struct{}, b.N) {
 		openstreetmapfr.Exceptions("north-east", "parent")
 		openstreetmapfr.Exceptions("central", "parent")
 		openstreetmapfr.Exceptions("unknown", "parent")

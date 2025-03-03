@@ -13,7 +13,7 @@ func Benchmark_miniFormats_parse_geofabrik_yml(b *testing.B) {
 	// run the Fib function b.N times
 	c, _ := config.LoadConfig("../geofabrik.yml")
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		for _, v := range c.Elements {
 			formats.GetMiniFormats(v.Formats)
 		}

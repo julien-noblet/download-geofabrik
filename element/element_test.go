@@ -90,7 +90,7 @@ func sampleElementValidPtr() map[string]element.Element {
 func Benchmark_HasParent_parse_geofabrik_yml(b *testing.B) {
 	c, _ := config.LoadConfig(geofabrikYml)
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		for _, v := range c.Elements {
 			v.HasParent()
 		}
@@ -149,7 +149,7 @@ func Benchmark_contains_parse_geofabrik_yml(b *testing.B) {
 		sliceE = append(sliceE, key)
 	}
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		for k := range myConfig.Elements {
 			sliceE.Contains(k)
 		}
@@ -161,7 +161,7 @@ func Benchmark_contain_parse_geofabrik_yml_France_formats_osm_pbf(b *testing.B) 
 	myformats := c.Elements["france"].Formats
 	format := formats.FormatOsmPbf
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		myformats.Contains(format)
 	}
 }
