@@ -91,7 +91,7 @@ func TestSetOutputDir(t *testing.T) {
 			t.Parallel()
 
 			if tt.env != "" {
-				os.Setenv("OUTPUT_DIR", tt.env)
+				t.Setenv("OUTPUT_DIR", tt.env)
 			}
 
 			viper.Set("output_directory", tt.outputDirectory)

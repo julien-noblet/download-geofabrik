@@ -52,13 +52,11 @@ func TestGetSortedKeys(t *testing.T) {
 	assert.Equal(t, []string{"region1", "region2"}, keys)
 }
 
-func TestListCommand(t *testing.T) { // it just works
+func TestListCommand(_ *testing.T) { // it just works
 	viper.Set(config.ViperConfig, "../geofabrik.yml")
 	viper.Set(config.ViperListFormatMarkdown, true)
 
-	lists.ListCommand()
 	// Output: | ShortName | Is in | Long Name | formats |
 	// |-----------|-------|----------|--------|
-
-	assert.NoError(t, nil)
+	lists.ListCommand()
 }

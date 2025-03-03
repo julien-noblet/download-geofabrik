@@ -209,14 +209,14 @@ func Benchmark_Exist_geofabrik_yml(b *testing.B) {
 	c, _ := config.LoadConfig(geofabrikYml)
 	e := "france"
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		c.Exist(e)
 	}
 }
 
 func Benchmark_loadConfig_geofabrik_yml(b *testing.B) {
 	// run the Fib function b.N times
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		if _, err := config.LoadConfig(geofabrikYml); err != nil {
 			b.Error(err.Error())
 		}
@@ -225,7 +225,7 @@ func Benchmark_loadConfig_geofabrik_yml(b *testing.B) {
 
 func Benchmark_loadConfig_osmfr_yml(b *testing.B) {
 	// run the Fib function b.N times
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		if _, err := config.LoadConfig(openstreetmapFRYml); err != nil {
 			b.Error(err.Error())
 		}
@@ -415,7 +415,7 @@ func Benchmark_GetElement_geofabrik_yml(b *testing.B) {
 	c, _ := config.LoadConfig(geofabrikYml)
 	e := "france"
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		if _, err := c.GetElement(e); err != nil {
 			panic(err)
 		}
@@ -575,7 +575,7 @@ func Benchmark_IsHashable_geofabrik_yml(b *testing.B) {
 	// run the Fib function b.N times
 	c, _ := config.LoadConfig(geofabrikYml)
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		for f := range c.Formats {
 			config.IsHashable(c, f)
 		}
@@ -585,7 +585,7 @@ func Benchmark_IsHashable_geofabrik_yml(b *testing.B) {
 func Benchmark_findElem_parse_all_geofabrik_yml(b *testing.B) {
 	c, _ := config.LoadConfig(geofabrikYml)
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		for k := range c.Elements {
 			if _, err := config.FindElem(c, k); err != nil {
 				b.Error(err.Error())
@@ -597,7 +597,7 @@ func Benchmark_findElem_parse_all_geofabrik_yml(b *testing.B) {
 func Benchmark_GetElement_parse_all_geofabrik_yml(b *testing.B) {
 	c, _ := config.LoadConfig(geofabrikYml)
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		for k := range c.Elements {
 			if _, err := c.GetElement(k); err != nil {
 				panic(err)
@@ -609,7 +609,7 @@ func Benchmark_GetElement_parse_all_geofabrik_yml(b *testing.B) {
 func Benchmark_FindElem_parse_France_geofabrik_yml(b *testing.B) {
 	c, _ := config.LoadConfig(geofabrikYml)
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		if _, err := config.FindElem(c, "france"); err != nil {
 			b.Errorf("%v", err.Error())
 		}
@@ -859,7 +859,7 @@ func Benchmark_Elem2preURL_parse_France_geofabrik_yml(b *testing.B) {
 		b.Error(err)
 	}
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		_, err = config.Elem2preURL(myConfig, france)
 		if err != nil {
 			b.Error(err)
@@ -878,7 +878,7 @@ func Benchmark_Elem2URL_parse_France_geofabrik_yml(b *testing.B) {
 		b.Error(err)
 	}
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		_, err = config.Elem2URL(myConfig, france, formats.FormatState)
 		if err != nil {
 			b.Error(err)
@@ -897,7 +897,7 @@ func Benchmark_Elem2URL_parse_France_openstreetmap_fr_yml(b *testing.B) {
 		b.Error(err)
 	}
 
-	for n := 0; n < b.N; n++ {
+	for range make([]struct{}, b.N) {
 		_, err = config.Elem2URL(myConfig, france, formats.FormatPoly)
 		if err != nil {
 			b.Error(err)
