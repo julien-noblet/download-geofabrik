@@ -28,20 +28,20 @@ type IScrapper interface {
 
 // Scrapper defines a default scrapper.
 type Scrapper struct {
-	FormatDefinition formats.FormatDefinitions
 	Config           *config.Config
-	Timeout          time.Duration
-	URLFilters       []*regexp.Regexp
+	FormatDefinition formats.FormatDefinitions
 	BaseURL          string
-	StartURL         string
 	DomainGlob       string
+	StartURL         string
+	URLFilters       []*regexp.Regexp
 	AllowedDomains   []string
+	Timeout          time.Duration
 	RandomDelay      time.Duration
 	MaxDepth         int
 	Parallelism      int
 	PB               int
-	Async            bool
 	mu               sync.RWMutex
+	Async            bool
 }
 
 const (
