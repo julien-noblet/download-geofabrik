@@ -1,4 +1,5 @@
 [
+  {"Version":"1f6074f866c26683ae83f83efc8bce1e94a0c62b","Date":1741047955,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"dc3a87a9d6919737f77bc200a645bd3c022fb8a9","Date":1741045667,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/cheggaaa/pb/v3-3.1.7"],"Suites":[]},
   {"Version":"254bcbab31aa19143b224fc156ca3527fa7787fe","Date":1741045629,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"90c76d394f090f17cb65eb6f38364209d2d7cc07","Date":1741038796,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"87830811a8d5b45ec6c690c72376f42b5a6f799e","Date":1739309055,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"ff0574683296d028560ea6b00b12314966eceaa8","Date":1739309017,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"eb7547a7762cb880b96f9bdd856bed6199c051dd","Date":1739308915,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/magiconair/properties-1.8.9"],"Suites":[]},
-  {"Version":"a81997eb534161f461ac102d1a18771cd4206b66","Date":1739308841,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"14f908501aedc0c030677d7895d8c9e1592ea99a","Date":1739308837,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.5"],"Suites":[]}
+  {"Version":"a81997eb534161f461ac102d1a18771cd4206b66","Date":1739308841,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
 ]
