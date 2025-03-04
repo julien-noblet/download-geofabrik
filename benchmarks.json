@@ -1,4 +1,5 @@
 [
+  {"Version":"ee441b60d4b21beabb18b0aef9aec5480599b4ad","Date":1741048456,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/afero-1.12.0"],"Suites":[]},
   {"Version":"f443582edc38549c9481a007618c423c7e4d686b","Date":1741048453,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.6"],"Suites":[]},
   {"Version":"c2d035523cb20111ea3832a1d3679efe8ba5ecbc","Date":1741048450,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.7.0"],"Suites":[]},
   {"Version":"4f73bf28c162fea29ba18be6f9b5725f751e0064","Date":1741048382,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"e61824c8d2668f2d70321ccb970558c0c49efbf6","Date":1739309748,"Tags":["ref=refs/heads/renovate/migrate-config"],"Suites":[]},
   {"Version":"398af0828a57305a2de545662b77f298add284fd","Date":1739309737,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"e24594e3b4e0060bfc0bc67220033710dc2dfb5e","Date":1739309701,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"6a086dc8e4027dc00e572f74f8d57e30b95d362b","Date":1739309556,"Tags":["ref=refs/heads/renovate/migrate-config"],"Suites":[]},
-  {"Version":"42cc8890e27ffe6454e7d3a1fb3011fb30a139ec","Date":1739309489,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.7.1"],"Suites":[]}
+  {"Version":"6a086dc8e4027dc00e572f74f8d57e30b95d362b","Date":1739309556,"Tags":["ref=refs/heads/renovate/migrate-config"],"Suites":[]}
 ]
