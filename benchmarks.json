@@ -1,4 +1,5 @@
 [
+  {"Version":"d675b2c36a0bb3561736725d3cfc129ac04ad81b","Date":1741131017,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"80623d822d211a8a22b03ac8cf5e8aa4bc6e1940","Date":1741130903,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"b3e2ee8c163ab486927aa2b7370389cd32f055be","Date":1741049098,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"3daa1ddeb05a9bf2eaab79ffa8694df07b6d5d1a","Date":1741049091,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"d1a3dac53a80344869829bbb4e4d761efdbdd390","Date":1740986311,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/cheggaaa/pb/v3-3.1.7"],"Suites":[]},
   {"Version":"bf7cc75ec029bec520fb11ea3dd83c28a5e068c8","Date":1740751958,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]},
   {"Version":"7414a3c352cf57ce70b480e514956a8218740c80","Date":1739778108,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/afero-1.12.0"],"Suites":[]},
-  {"Version":"337364e81ba0c97dbc3d92401dc12389cfb33aa5","Date":1739778102,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.7.0"],"Suites":[]},
-  {"Version":"41227cc8e07cfe87ebe392f24744bf4067d083f8","Date":1739461494,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"337364e81ba0c97dbc3d92401dc12389cfb33aa5","Date":1739778102,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.7.0"],"Suites":[]}
 ]
