@@ -1,4 +1,5 @@
 [
+  {"Version":"4f73bf28c162fea29ba18be6f9b5725f751e0064","Date":1741048382,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"dba0be7dafe8336acdbe9aff21573198712d1f6a","Date":1741048368,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]},
   {"Version":"d65f5eacf5e301fa74fd8f8e7e5844db639a6745","Date":1741048282,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/cheggaaa/pb/v3-3.1.7"],"Suites":[]},
   {"Version":"6a0feb638f0c5fada1fa00e0afb71763786300e8","Date":1741048276,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"6a086dc8e4027dc00e572f74f8d57e30b95d362b","Date":1739309556,"Tags":["ref=refs/heads/renovate/migrate-config"],"Suites":[]},
   {"Version":"42cc8890e27ffe6454e7d3a1fb3011fb30a139ec","Date":1739309489,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.7.1"],"Suites":[]},
   {"Version":"26c7a51ca15f831cd70fb54fd7f8d6dc2fd2e403","Date":1739309226,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"1408a5fa7a57769f98dad0ebb4050e1098cc1255","Date":1739309192,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"7f6bb186ba86254bd104fe5db7badf7034993580","Date":1739309091,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.5"],"Suites":[]}
+  {"Version":"1408a5fa7a57769f98dad0ebb4050e1098cc1255","Date":1739309192,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
