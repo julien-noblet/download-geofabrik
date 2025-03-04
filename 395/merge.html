@@ -584,7 +584,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(id string) bool <span class="cov7" title="72">{
+func (config *Config) Exist(id string) bool <span class="cov6" title="71">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
         result := reflect.DeepEqual(config.Elements[id], element.Element{})
@@ -598,7 +598,7 @@ func (config *Config) AddExtension(id, format string) <span class="cov6" title="
         elem := config.Elements[id]
         config.ElementsMutex.RUnlock()
 
-        if !elem.Formats.Contains(format) </span><span class="cov6" title="39">{
+        if !elem.Formats.Contains(format) </span><span class="cov6" title="38">{
                 log.Infof("Add %s to %s", format, elem.ID)
 
                 config.ElementsMutex.Lock()
@@ -1080,7 +1080,7 @@ func (e *Element) HasParent() bool <span class="cov6" title="37">{
 
 // Contains checks if the format list contains a specific format.
 func (f *Formats) Contains(format string) bool <span class="cov8" title="188">{
-        for _, existingFormat := range *f </span><span class="cov10" title="441">{
+        for _, existingFormat := range *f </span><span class="cov10" title="440">{
                 if format == existingFormat </span><span class="cov7" title="106">{
                         return true
                 }</span>
