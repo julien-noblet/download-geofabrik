@@ -1952,10 +1952,12 @@ func (g *Geofabrik) handleSpecialCases(myID, parent string) (newID, file string)
                 case "us":<span class="cov2" title="2">
                         myID = georgia + "-us"
                         file = georgia</span>
+
                 case "europe":<span class="cov2" title="2">
                         myID = georgia + "-eu"
                         file = georgia</span>
                 }
+
         case "guatemala":<span class="cov2" title="2">
                 if parent == "south-america" </span><span class="cov2" title="2">{
                         myID = "guatemala-south-america"
@@ -2162,7 +2164,7 @@ func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span cl
 
 // getGparent returns the grandparent from a list of parents.
 func getGparent(gparents []string) string <span class="cov8" title="15">{
-        if gparents == nil || len(gparents) &lt; minParentListLength </span><span class="cov1" title="1">{
+        if len(gparents) &lt; minParentListLength </span><span class="cov1" title="1">{
                 return ""
         }</span>
 
@@ -2207,7 +2209,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
                 return
         }</span>
 
-        <span class="cov8" title="18">parent, parents := GetParent(href)
+        <span class="cov8" title="17">parent, parents := GetParent(href)
         if !o.Config.Exist(parent) </span><span class="cov7" title="11">{
                 o.MakeParents(parent, parents)
         }</span>
@@ -2523,20 +2525,20 @@ type IScrapper interface {
 
 // Scrapper defines a default scrapper.
 type Scrapper struct {
-        FormatDefinition formats.FormatDefinitions
         Config           *config.Config
-        Timeout          time.Duration
-        URLFilters       []*regexp.Regexp
+        FormatDefinition formats.FormatDefinitions
         BaseURL          string
-        StartURL         string
         DomainGlob       string
+        StartURL         string
+        URLFilters       []*regexp.Regexp
         AllowedDomains   []string
+        Timeout          time.Duration
         RandomDelay      time.Duration
         MaxDepth         int
         Parallelism      int
         PB               int
-        Async            bool
         mu               sync.RWMutex
+        Async            bool
 }
 
 const (
@@ -2646,12 +2648,12 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
         return s.StartURL
 }</span>
 
 // GetPB returns PB.
-func (s *Scrapper) GetPB() int <span class="cov3" title="9">{
+func (s *Scrapper) GetPB() int <span class="cov3" title="10">{
         return s.PB
 }</span>
 
