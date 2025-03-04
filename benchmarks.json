@@ -1,4 +1,5 @@
 [
+  {"Version":"36f225e8fd4b1c432cc673e3d5b55beaec9e73cb","Date":1741048928,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"8724f24238998d135822faf89397ae1d40dedd83","Date":1741048683,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/afero-1.12.0"],"Suites":[]},
   {"Version":"56920f26b1a7da98373d079d8c5e2eae41b66fc7","Date":1741048679,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.4"],"Suites":[]},
   {"Version":"501b42b576fb079ca56b370498f25cab026cc0da","Date":1741048611,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"2aad92cec2d75bc13b2d195a052f2b0cc6205c6a","Date":1739427844,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"2a76441697534f35c7bd8b6d982f49819c85d18a","Date":1739427744,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"14f6d5e9850860a543ed6b70573d1342a852835a","Date":1739309963,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"0fad2e1b2b30321741cae27bd553d9e018cbf10f","Date":1739309924,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"e61824c8d2668f2d70321ccb970558c0c49efbf6","Date":1739309748,"Tags":["ref=refs/heads/renovate/migrate-config"],"Suites":[]}
+  {"Version":"0fad2e1b2b30321741cae27bd553d9e018cbf10f","Date":1739309924,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
