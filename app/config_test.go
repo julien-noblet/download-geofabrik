@@ -57,8 +57,6 @@ func Test_setViperBool(t *testing.T) {
 }
 
 func TestSetOutputDir(t *testing.T) {
-	t.Parallel()
-
 	currdir, _ := os.Getwd()
 
 	tests := []struct {
@@ -88,8 +86,6 @@ func TestSetOutputDir(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			if tt.env != "" {
 				t.Setenv("OUTPUT_DIR", tt.env)
 			}
