@@ -1,4 +1,5 @@
 [
+  {"Version":"b3e2ee8c163ab486927aa2b7370389cd32f055be","Date":1741049098,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"3daa1ddeb05a9bf2eaab79ffa8694df07b6d5d1a","Date":1741049091,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"83bf54128f35cf68f23c3bb082eb987429637d00","Date":1741049002,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.7.0"],"Suites":[]},
   {"Version":"076845350fbf1fc29f7ae0fd1fed095ab12ad00b","Date":1741048983,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/afero-1.12.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"7414a3c352cf57ce70b480e514956a8218740c80","Date":1739778108,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/afero-1.12.0"],"Suites":[]},
   {"Version":"337364e81ba0c97dbc3d92401dc12389cfb33aa5","Date":1739778102,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.7.0"],"Suites":[]},
   {"Version":"41227cc8e07cfe87ebe392f24744bf4067d083f8","Date":1739461494,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"cc12e30b61550e4beaadac949dc21cb8ba63f868","Date":1739461348,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
-  {"Version":"2aad92cec2d75bc13b2d195a052f2b0cc6205c6a","Date":1739427844,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"cc12e30b61550e4beaadac949dc21cb8ba63f868","Date":1739461348,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]}
 ]
