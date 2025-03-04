@@ -1,9 +1,92 @@
 linters-settings:
   govet:
     enable:
+      # Check for missing values after append.
+      - appends
+      # Report mismatches between assembly files and Go declarations.
+      - asmdecl
+      # Check for useless assignments.
+      - assign
+      # Check for common mistakes using the sync/atomic package.
+      - atomic
+      # Check for non-64-bits-aligned arguments to sync/atomic functions.
       - atomicalign
-      - timeformat
+      # Check for common mistakes involving boolean operators.
+      - bools
+      # Check //go:build and // +build directives.
+      - buildtag
+      # Detect some violations of the cgo pointer passing rules.
+      - cgocall
+      # Check for unkeyed composite literals.
+      - composites
+      # Check for locks erroneously passed by value.
+      - copylocks
+      # Check for calls of reflect.DeepEqual on error values.
+      - deepequalerrors
+      # Report common mistakes in defer statements.
+      - defers
+      # Check Go toolchain directives such as //go:debug.
+      - directive
+      # Report passing non-pointer or non-error values to errors.As.
+      - errorsas
+      # Find structs that would use less memory if their fields were sorted.
+      - fieldalignment
+      # Find calls to a particular function.
+      - findcall
+      # Report assembly that clobbers the frame pointer before saving it.
+      - framepointer
+      # Check for mistakes using HTTP responses.
+      - httpresponse
+      # Detect impossible interface-to-interface type assertions.
+      - ifaceassert
+      # Check references to loop variables from within nested functions.
+      - loopclosure
+      # Check cancel func returned by context.WithCancel is called.
+      - lostcancel
+      # Check for useless comparisons between functions and nil.
+      - nilfunc
+      # Check for redundant or impossible nil comparisons.
+      - nilness
+      # Check consistency of Printf format strings and arguments.
+      - printf
+      # Check for comparing reflect.Value values with == or reflect.DeepEqual.
+      - reflectvaluecompare
+      # Check for possible unintended shadowing of variables.
       - shadow
+      # Check for shifts that equal or exceed the width of the integer.
+      - shift
+      # Check for unbuffered channel of os.Signal.
+      - sigchanyzer
+      # Check for invalid structured logging calls.
+      - slog
+      # Check the argument type of sort.Slice.
+      - sortslice
+      # Check signature of methods of well-known interfaces.
+      - stdmethods
+      # Report uses of too-new standard library symbols.
+      - stdversion
+      # Check for string(int) conversions.
+      - stringintconv
+      # Check that struct field tags conform to reflect.StructTag.Get.
+      - structtag
+      # Report calls to (*testing.T).Fatal from goroutines started by a test.
+      - testinggoroutine
+      # Check for common mistaken usages of tests and examples.
+      - tests
+      # Check for calls of (time.Time).Format or time.Parse with 2006-02-01.
+      - timeformat
+      # Report passing non-pointer or non-interface values to unmarshal.
+      - unmarshal
+      # Check for unreachable code.
+      - unreachable
+      # Check for invalid conversions of uintptr to unsafe.Pointer.
+      - unsafeptr
+      # Check for unused results of calls to some functions.
+      - unusedresult
+      # Checks for unused writes.
+      - unusedwrite
+      # Check for misuses of sync.WaitGroup.
+      - waitgroup
     settings:
       printf:
         funcs:
@@ -11,12 +94,8 @@ linters-settings:
           - (github.com/golangci/golangci-lint/pkg/logutils.Log).Warnf
           - (github.com/golangci/golangci-lint/pkg/logutils.Log).Errorf
           - (github.com/golangci/golangci-lint/pkg/logutils.Log).Fatalf
-  golint:
-    min-confidence: 0
   gocyclo:
     min-complexity: 20
-  maligned:
-    suggest-new: true
   dupl:
    threshold: 150
   goconst:
@@ -36,13 +115,14 @@ linters-settings:
   goimports:
     local-prefixes: github.com/golangci/golangci-lint
   gocritic:
-    enabled-tags:
-      - diagnostic
-      - experimental
-      - opinionated
-      - performance
-      - style
-    disabled-checks:
+    #enabled-tags:
+    #  - diagnostic
+    #  - experimental
+    #  - opinionated
+    #  - performance
+    #  - style
+    enable-all: true
+    #disabled-checks:
       #- commentedOutCode
       # - hugeParam
       #- wrapperFunc
@@ -57,7 +137,7 @@ linters-settings:
     # XXX: if you enable this setting, unused will report a lot of false-positives in text editors:
     # if it's called for subdir of a project it can't find funcs usages. All text editor integrations
     # with golangci-lint call it on a directory with the changed file.
-    check-exported: false
+    exported-fields-are-used: false
   unparam:
     # Inspect exported functions, default is false. Set to true if no external program/library imports your code.
     # XXX: if you enable this setting, unparam will report a lot of false-positives in text editors:
@@ -80,16 +160,17 @@ linters-settings:
     multi-if: false   # Enforces newlines (or comments) after every multi-line if statement
     multi-func: true # Enforces newlines (or comments) after every multi-line function signature
   wsl:
-    # If true append is only allowed to be cuddled if appending value is
-    # matching variables, fields or types on line above. Default is true.
-    strict-append: true
     # Allow calls and assignments to be cuddled as long as the lines have any
     # matching variables, fields or types. Default is true.
     allow-assign-and-call: true
     # Allow multiline assignments to be cuddled. Default is true.
     allow-multiline-assign: true
-    # Allow case blocks to end with a whitespace.
-    allow-case-traling-whitespace: true
+    #  If the number of lines in a case block is equal to or lager than this number,
+    # the case *must* end white a newline.
+    # https://github.com/bombsimon/wsl/blob/HEAD/doc/configuration.md#force-case-trailing-whitespace
+    # Default: 0
+    force-case-trailing-whitespace: 2
+    allow-trailing-comment: true
     # Allow declarations (var) to be cuddled.
     allow-cuddle-declarations: false
 

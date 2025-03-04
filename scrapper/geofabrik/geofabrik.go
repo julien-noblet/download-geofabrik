@@ -133,10 +133,12 @@ func (g *Geofabrik) handleSpecialCases(myID, parent string) (newID, file string)
 		case "us":
 			myID = georgia + "-us"
 			file = georgia
+
 		case "europe":
 			myID = georgia + "-eu"
 			file = georgia
 		}
+
 	case "guatemala":
 		if parent == "south-america" {
 			myID = "guatemala-south-america"

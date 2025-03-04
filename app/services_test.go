@@ -64,44 +64,44 @@ func TestCheckService(t *testing.T) {
 	tests := []struct {
 		name        string
 		serviceName string
-		wantbool    bool
 		want        string
+		wantbool    bool
 	}{
 		{
 			name:        "Test CheckService with geofabrik",
 			serviceName: "geofabrik",
-			wantbool:    true,
 			want:        "./geofabrik.yml",
+			wantbool:    true,
 		},
 		{
 			name:        "Test CheckService with geofabrik-parse",
 			serviceName: "geofabrik-parse",
-			wantbool:    true,
 			want:        "./geofabrik.yml",
+			wantbool:    true,
 		},
 		{
 			name:        "Test CheckService with openstreetmap.fr",
 			serviceName: "openstreetmap.fr",
-			wantbool:    true,
 			want:        "./openstreetmap.fr.yml",
+			wantbool:    true,
 		},
 		{
 			name:        "Test CheckService with osmtoday",
 			serviceName: "osmtoday",
-			wantbool:    true,
 			want:        "./osmtoday.yml",
+			wantbool:    true,
 		},
 		{
 			name:        "Test CheckService with bbbike",
 			serviceName: "bbbike",
-			wantbool:    true,
 			want:        "./bbbike.yml",
+			wantbool:    true,
 		},
 		{
 			name:        "Test CheckService with unknown service",
 			serviceName: "unknown",
-			wantbool:    false,
 			want:        "",
+			wantbool:    false,
 		},
 	}
 	for _, tt := range tests {

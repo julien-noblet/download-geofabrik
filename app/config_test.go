@@ -108,13 +108,14 @@ func TestSetOutputDir(t *testing.T) {
 func TestApp_ConfigureViper(t *testing.T) {
 	type fields struct {
 		fConfig         string
+		delement        string
+		dOutputDir      string
+		fService        string
 		fNodownload     bool
 		fVerbose        bool
 		fQuiet          bool
 		fProgress       bool
-		delement        string
 		dCheck          bool
-		dOutputDir      string
 		dosmBz2         bool
 		dosmGz          bool
 		dshpZip         bool
@@ -132,7 +133,6 @@ func TestApp_ConfigureViper(t *testing.T) {
 		dgarminontrail  bool
 		dgarminopentopo bool
 		lmd             bool
-		fService        string
 	}
 
 	tests := []struct {
@@ -299,36 +299,36 @@ func TestApp_ConfigureViper(t *testing.T) {
 			a.ConfigureViper()
 
 			checks := []struct {
-				key      string
 				expected interface{}
 				actual   interface{}
+				key      string
 			}{
-				{config.ViperConfig, tt.fields.fConfig, viper.GetString(config.ViperConfig)},
-				{config.ViperNoDL, tt.fields.fNodownload, viper.GetBool(config.ViperNoDL)},
-				{config.ViperVerbose, tt.fields.fVerbose, viper.GetBool(config.ViperVerbose)},
-				{config.ViperQuiet, tt.fields.fQuiet, viper.GetBool(config.ViperQuiet)},
-				{config.ViperProgress, tt.fields.fProgress, viper.GetBool(config.ViperProgress)},
-				{config.ViperElement, tt.fields.delement, viper.GetString(config.ViperElement)},
-				{config.ViperCheck, tt.fields.dCheck, viper.GetBool(config.ViperCheck)},
-				{config.ViperOutputDirectory, tt.fields.dOutputDir, viper.GetString(config.ViperOutputDirectory)},
-				{config.ViperListFormatMarkdown, tt.fields.lmd, viper.GetBool(config.ViperListFormatMarkdown)},
-				{formats.FormatOsmBz2, tt.fields.dosmBz2, viper.GetBool(formats.FormatOsmBz2)},
-				{formats.FormatOsmGz, tt.fields.dosmGz, viper.GetBool(formats.FormatOsmGz)},
-				{formats.FormatShpZip, tt.fields.dshpZip, viper.GetBool(formats.FormatShpZip)},
-				{formats.FormatOsmPbf, tt.fields.dosmPbf, viper.GetBool(formats.FormatOsmPbf)},
-				{formats.FormatOshPbf, tt.fields.doshPbf, viper.GetBool(formats.FormatOshPbf)},
-				{formats.FormatState, tt.fields.dstate, viper.GetBool(formats.FormatState)},
-				{formats.FormatPoly, tt.fields.dpoly, viper.GetBool(formats.FormatPoly)},
-				{formats.FormatKml, tt.fields.dkml, viper.GetBool(formats.FormatKml)},
-				{formats.FormatGeoJSON, tt.fields.dgeojson, viper.GetBool(formats.FormatGeoJSON)},
-				{formats.FormatGarminOSM, tt.fields.dgarmin, viper.GetBool(formats.FormatGarminOSM)},
-				{formats.FormatMapsforge, tt.fields.dmaps, viper.GetBool(formats.FormatMapsforge)},
-				{formats.FormatMBTiles, tt.fields.dmbtiles, viper.GetBool(formats.FormatMBTiles)},
-				{formats.FormatCSV, tt.fields.dcsv, viper.GetBool(formats.FormatCSV)},
-				{formats.FormatGarminOnroad, tt.fields.dgarminonroad, viper.GetBool(formats.FormatGarminOnroad)},
-				{formats.FormatGarminOntrail, tt.fields.dgarminontrail, viper.GetBool(formats.FormatGarminOntrail)},
-				{formats.FormatGarminOpenTopo, tt.fields.dgarminopentopo, viper.GetBool(formats.FormatGarminOpenTopo)},
-				{config.ViperService, tt.fields.fService, viper.GetString(config.ViperService)},
+				{tt.fields.fConfig, viper.GetString(config.ViperConfig), config.ViperConfig},
+				{tt.fields.fNodownload, viper.GetBool(config.ViperNoDL), config.ViperNoDL},
+				{tt.fields.fVerbose, viper.GetBool(config.ViperVerbose), config.ViperVerbose},
+				{tt.fields.fQuiet, viper.GetBool(config.ViperQuiet), config.ViperQuiet},
+				{tt.fields.fProgress, viper.GetBool(config.ViperProgress), config.ViperProgress},
+				{tt.fields.delement, viper.GetString(config.ViperElement), config.ViperElement},
+				{tt.fields.dCheck, viper.GetBool(config.ViperCheck), config.ViperCheck},
+				{tt.fields.dOutputDir, viper.GetString(config.ViperOutputDirectory), config.ViperOutputDirectory},
+				{tt.fields.lmd, viper.GetBool(config.ViperListFormatMarkdown), config.ViperListFormatMarkdown},
+				{tt.fields.dosmBz2, viper.GetBool(formats.FormatOsmBz2), formats.FormatOsmBz2},
+				{tt.fields.dosmGz, viper.GetBool(formats.FormatOsmGz), formats.FormatOsmGz},
+				{tt.fields.dshpZip, viper.GetBool(formats.FormatShpZip), formats.FormatShpZip},
+				{tt.fields.dosmPbf, viper.GetBool(formats.FormatOsmPbf), formats.FormatOsmPbf},
+				{tt.fields.doshPbf, viper.GetBool(formats.FormatOshPbf), formats.FormatOshPbf},
+				{tt.fields.dstate, viper.GetBool(formats.FormatState), formats.FormatState},
+				{tt.fields.dpoly, viper.GetBool(formats.FormatPoly), formats.FormatPoly},
+				{tt.fields.dkml, viper.GetBool(formats.FormatKml), formats.FormatKml},
+				{tt.fields.dgeojson, viper.GetBool(formats.FormatGeoJSON), formats.FormatGeoJSON},
+				{tt.fields.dgarmin, viper.GetBool(formats.FormatGarminOSM), formats.FormatGarminOSM},
+				{tt.fields.dmaps, viper.GetBool(formats.FormatMapsforge), formats.FormatMapsforge},
+				{tt.fields.dmbtiles, viper.GetBool(formats.FormatMBTiles), formats.FormatMBTiles},
+				{tt.fields.dcsv, viper.GetBool(formats.FormatCSV), formats.FormatCSV},
+				{tt.fields.dgarminonroad, viper.GetBool(formats.FormatGarminOnroad), formats.FormatGarminOnroad},
+				{tt.fields.dgarminontrail, viper.GetBool(formats.FormatGarminOntrail), formats.FormatGarminOntrail},
+				{tt.fields.dgarminopentopo, viper.GetBool(formats.FormatGarminOpenTopo), formats.FormatGarminOpenTopo},
+				{tt.fields.fService, viper.GetString(config.ViperService), config.ViperService},
 			}
 
 			for _, check := range checks {
