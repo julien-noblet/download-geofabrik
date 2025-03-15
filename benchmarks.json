@@ -1,4 +1,5 @@
 [
+  {"Version":"46b01dc6a59230bf47b4886376b0277f8eec944a","Date":1742064221,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.23.0"],"Suites":[]},
   {"Version":"70fbf4bf739cdc0478eaffe4f0839ac9d75aac59","Date":1742064220,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.37.0"],"Suites":[]},
   {"Version":"429bf336a4514c55b2788d34adf9324ea6eba8d0","Date":1742064218,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.31.0"],"Suites":[]},
   {"Version":"c631ad0cb2401fae5e55de1e7b9a2dfedd5fadb4","Date":1742064158,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"1f6074f866c26683ae83f83efc8bce1e94a0c62b","Date":1741047955,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"dc3a87a9d6919737f77bc200a645bd3c022fb8a9","Date":1741045667,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/cheggaaa/pb/v3-3.1.7"],"Suites":[]},
   {"Version":"254bcbab31aa19143b224fc156ca3527fa7787fe","Date":1741045629,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"90c76d394f090f17cb65eb6f38364209d2d7cc07","Date":1741038796,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]},
-  {"Version":"fb70d6b68f661e6a9a7dfde7ef9a3e2f09ae4a55","Date":1741038768,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.6"],"Suites":[]}
+  {"Version":"90c76d394f090f17cb65eb6f38364209d2d7cc07","Date":1741038796,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]}
 ]
