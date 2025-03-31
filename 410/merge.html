@@ -1,0 +1,2727 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>app: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">github.com/julien-noblet/download-geofabrik/app/app.go (0.0%)</option>
+				
+				<option value="file1">github.com/julien-noblet/download-geofabrik/app/config.go (97.4%)</option>
+				
+				<option value="file2">github.com/julien-noblet/download-geofabrik/app/download-cmd.go (0.0%)</option>
+				
+				<option value="file3">github.com/julien-noblet/download-geofabrik/app/log.go (100.0%)</option>
+				
+				<option value="file4">github.com/julien-noblet/download-geofabrik/app/services.go (100.0%)</option>
+				
+				<option value="file5">github.com/julien-noblet/download-geofabrik/config/config.go (97.7%)</option>
+				
+				<option value="file6">github.com/julien-noblet/download-geofabrik/download-geofabrik.go (0.0%)</option>
+				
+				<option value="file7">github.com/julien-noblet/download-geofabrik/download/download.go (88.4%)</option>
+				
+				<option value="file8">github.com/julien-noblet/download-geofabrik/download/hash.go (67.6%)</option>
+				
+				<option value="file9">github.com/julien-noblet/download-geofabrik/element/element.go (100.0%)</option>
+				
+				<option value="file10">github.com/julien-noblet/download-geofabrik/formats/formats.go (100.0%)</option>
+				
+				<option value="file11">github.com/julien-noblet/download-geofabrik/generator/generator.go (16.4%)</option>
+				
+				<option value="file12">github.com/julien-noblet/download-geofabrik/generator/importer/geofabrik/geofabik.go (84.8%)</option>
+				
+				<option value="file13">github.com/julien-noblet/download-geofabrik/lists/lists.go (93.1%)</option>
+				
+				<option value="file14">github.com/julien-noblet/download-geofabrik/scrapper/bbbike/bbbike.go (80.0%)</option>
+				
+				<option value="file15">github.com/julien-noblet/download-geofabrik/scrapper/geofabrik/geofabrik.go (88.5%)</option>
+				
+				<option value="file16">github.com/julien-noblet/download-geofabrik/scrapper/openstreetmapfr/openstreetmapfr.go (93.4%)</option>
+				
+				<option value="file17">github.com/julien-noblet/download-geofabrik/scrapper/osmtoday/osmtoday.go (16.7%)</option>
+				
+				<option value="file18">github.com/julien-noblet/download-geofabrik/scrapper/scrapper.go (85.7%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">no coverage</span>
+				<span class="cov1">low coverage</span>
+				<span class="cov2">*</span>
+				<span class="cov3">*</span>
+				<span class="cov4">*</span>
+				<span class="cov5">*</span>
+				<span class="cov6">*</span>
+				<span class="cov7">*</span>
+				<span class="cov8">*</span>
+				<span class="cov9">*</span>
+				<span class="cov10">high coverage</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package app
+
+import (
+        "github.com/alecthomas/kingpin/v2"
+        "github.com/julien-noblet/download-geofabrik/formats"
+)
+
+const (
+        defaultConfigFile = "./geofabrik.yml"
+        serviceGeofabrik  = "geofabrik"
+        serviceOSMFr      = "openstreetmap.fr"
+        serviceOSMToday   = "osmtoday"
+        serviceBBBike     = "bbbike"
+)
+
+// App encapsulates the application state and configuration.
+type App struct {
+        App         *kingpin.Application
+        FConfig     *string
+        FNodownload *bool
+        FVerbose    *bool
+        FQuiet      *bool
+        FProgress   *bool
+        Cdownload   *kingpin.CmdClause
+        Delement    *string
+        DCheck      *bool
+        DOutputDir  *string
+
+        // Formats
+        DosmBz2         *bool
+        DosmGz          *bool
+        DshpZip         *bool
+        DosmPbf         *bool
+        DoshPbf         *bool
+        Dstate          *bool
+        Dpoly           *bool
+        Dkml            *bool
+        Dgeojson        *bool
+        Dgarmin         *bool
+        Dmaps           *bool
+        Dmbtiles        *bool
+        Dcsv            *bool
+        Dgarminonroad   *bool
+        Dgarminontrail  *bool
+        Dgarminopentopo *bool
+
+        Cgenerate *kingpin.CmdClause
+        Clist     *kingpin.CmdClause
+        Lmd       *bool
+        FService  *string
+}
+
+// NewApp initializes a new App instance with default settings.
+func NewApp() *App <span class="cov0" title="0">{
+        myApp := &amp;App{
+                App: kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files."),
+        }
+
+        myApp.initFlags()
+        myApp.initCommands()
+
+        return myApp
+}</span>
+
+// initFlags initializes the flags for the application.
+func (a *App) initFlags() <span class="cov0" title="0">{
+        a.FConfig = a.App.Flag("config", "Set Config file.").Default(defaultConfigFile).Short('c').String()
+        a.FNodownload = a.App.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
+        a.FVerbose = a.App.Flag("verbose", "Be verbose").Short('v').Bool()
+        a.FQuiet = a.App.Flag("quiet", "Be quiet").Short('q').Bool()
+        a.FProgress = a.App.Flag("progress", "Add a progress bar (implies quiet)").Bool()
+        a.FService = a.App.Flag("service",
+                "Can switch to another service. "+
+                        "You can use \"geofabrik\", \"openstreetmap.fr\" \"osmtoday\" or \"bbbike\". "+
+                        "It automatically change config file if -c is unused.").
+                Default(serviceGeofabrik).String()
+}</span>
+
+// initCommands initializes the commands for the application.
+func (a *App) initCommands() <span class="cov0" title="0">{
+        a.Cdownload = a.App.Command("download", "Download element")
+        a.Delement = a.Cdownload.Arg("element", "OSM element").Required().String()
+        a.DCheck = a.Cdownload.Flag("check", "Control with checksum (default) Use --no-check to discard control").
+                Default("true").Bool()
+        a.DOutputDir = a.Cdownload.Flag(
+                "output_directory",
+                "Set output directory, you can use also OUTPUT_DIR env variable",
+        ).Short('d').String()
+
+        a.initFormatFlags()
+
+        a.Cgenerate = a.App.Command("generate", "Generate a new config file")
+        a.Clist = a.App.Command("list", "Show elements available")
+        a.Lmd = a.Clist.Flag("markdown", "generate list in Markdown format").Bool()
+}</span>
+
+// initFormatFlags initializes the format flags for the download command.
+func (a *App) initFormatFlags() <span class="cov0" title="0">{
+        a.DosmBz2 = a.Cdownload.Flag(formats.FormatOsmBz2, "Download osm.bz2 if available").Short('B').Bool()
+        a.DosmGz = a.Cdownload.Flag(formats.FormatOsmGz, "Download osm.gz if available").Short('G').Bool()
+        a.DshpZip = a.Cdownload.Flag(formats.FormatShpZip, "Download shp.zip if available").Short('S').Bool()
+        a.DosmPbf = a.Cdownload.Flag(formats.FormatOsmPbf, "Download osm.pbf (default)").Short('P').Bool()
+        a.DoshPbf = a.Cdownload.Flag(formats.FormatOshPbf, "Download osh.pbf").Short('H').Bool()
+        a.Dstate = a.Cdownload.Flag(formats.FormatState, "Download state.txt file").Short('s').Bool()
+        a.Dpoly = a.Cdownload.Flag(formats.FormatPoly, "Download poly file").Short('p').Bool()
+        a.Dkml = a.Cdownload.Flag(formats.FormatKml, "Download kml file").Short('k').Bool()
+        a.Dgeojson = a.Cdownload.Flag(formats.FormatGeoJSON, "Download GeoJSON file").Short('g').Bool()
+        a.Dgarmin = a.Cdownload.Flag("garmin-osm", "Download Garmin OSM file").Short('O').Bool()
+        a.Dmaps = a.Cdownload.Flag("mapsforge", "Download Mapsforge file").Short('m').Bool()
+        a.Dmbtiles = a.Cdownload.Flag("mbtiles", "Download MBTiles file").Short('M').Bool()
+        a.Dcsv = a.Cdownload.Flag("csv", "Download CSV file").Short('C').Bool()
+        a.Dgarminonroad = a.Cdownload.Flag("garminonroad", "Download Garmin Onroad file").Short('r').Bool()
+        a.Dgarminontrail = a.Cdownload.Flag("garminontrail", "Download Garmin Ontrail file").Short('t').Bool()
+        a.Dgarminopentopo = a.Cdownload.Flag("garminopenTopo", "Download Garmin OpenTopo file").Short('o').Bool()
+}</span>
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package app
+
+import (
+        "os"
+
+        "github.com/apex/log"
+        "github.com/julien-noblet/download-geofabrik/config"
+        "github.com/julien-noblet/download-geofabrik/formats"
+        "github.com/spf13/viper"
+)
+
+const (
+        defaultOutputDirEnv  = "OUTPUT_DIR"
+        defaultPathSeparator = string(os.PathSeparator)
+)
+
+// ConfigureViper sets up the Viper configuration based on the application flags.
+func (a *App) ConfigureViper() <span class="cov3" title="4">{
+        viper.Set(config.ViperConfig, *a.FConfig)
+        viper.Set(config.ViperService, *a.FService)
+        SetViperBool(config.ViperNoDL, a.FNodownload)
+        SetViperBool(config.ViperProgress, a.FProgress)
+        SetViperBool(config.ViperVerbose, a.FVerbose)
+        SetViperBool(config.ViperQuiet, a.FQuiet)
+        viper.Set(config.ViperElement, *a.Delement)
+
+        // Add other configurations here
+        viper.Set(config.ViperOutputDirectory, *a.DOutputDir)
+        SetViperBool(config.ViperCheck, a.DCheck)
+        SetViperBool(config.ViperListFormatMarkdown, a.Lmd)
+
+        // Formats:
+        SetViperBool(formats.FormatOsmBz2, a.DosmBz2)
+        SetViperBool(formats.FormatOsmGz, a.DosmGz)
+        SetViperBool(formats.FormatShpZip, a.DshpZip)
+        SetViperBool(formats.FormatOsmPbf, a.DosmPbf)
+        SetViperBool(formats.FormatOshPbf, a.DoshPbf)
+        SetViperBool(formats.FormatState, a.Dstate)
+        SetViperBool(formats.FormatPoly, a.Dpoly)
+        SetViperBool(formats.FormatKml, a.Dkml)
+        SetViperBool(formats.FormatGeoJSON, a.Dgeojson)
+        SetViperBool(formats.FormatGarminOSM, a.Dgarmin)
+        SetViperBool(formats.FormatMapsforge, a.Dmaps)
+        SetViperBool(formats.FormatMBTiles, a.Dmbtiles)
+        SetViperBool(formats.FormatCSV, a.Dcsv)
+        SetViperBool(formats.FormatGarminOnroad, a.Dgarminonroad)
+        SetViperBool(formats.FormatGarminOntrail, a.Dgarminontrail)
+        SetViperBool(formats.FormatGarminOpenTopo, a.Dgarminopentopo)
+}</span>
+
+// SetViperBool sets a boolean flag in Viper configuration.
+func SetViperBool(name string, flag *bool) <span class="cov10" title="90">{
+        viper.Set(name, false)
+
+        if *flag </span><span class="cov7" title="25">{
+                viper.Set(name, true)
+        }</span>
+}
+
+// SetOutputDir sets the output directory in Viper configuration.
+func SetOutputDir() <span class="cov3" title="3">{
+        outputDir := viper.GetString(config.ViperOutputDirectory)
+        if outputDir == "" </span><span class="cov2" title="2">{
+                if outputDir = os.Getenv(defaultOutputDirEnv); outputDir == "" </span><span class="cov1" title="1">{
+                        var err error
+
+                        outputDir, err = os.Getwd()
+                        if err != nil </span><span class="cov0" title="0">{
+                                log.WithError(err).Fatal("Failed to get current working directory")
+                        }</span>
+                }
+        }
+
+        <span class="cov3" title="3">outputDir += defaultPathSeparator
+        viper.Set(config.ViperOutputDirectory, outputDir)</span>
+}
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package app
+
+import (
+        "regexp"
+
+        "github.com/apex/log"
+        "github.com/julien-noblet/download-geofabrik/config"
+        "github.com/julien-noblet/download-geofabrik/download"
+        "github.com/julien-noblet/download-geofabrik/formats"
+        "github.com/spf13/viper"
+)
+
+const (
+        viperConfigKey          = config.ViperConfig
+        viperOutputDirectoryKey = config.ViperOutputDirectory
+        viperElementKey         = config.ViperElement
+        viperCheckKey           = config.ViperCheck
+)
+
+// DownloadCommand handles the download command logic.
+func DownloadCommand() <span class="cov0" title="0">{
+        formatFile := formats.GetFormats()
+
+        configPtr, err := config.LoadConfig(viper.GetString(viperConfigKey))
+        if err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Fatal(config.ErrLoadConfig)
+        }</span>
+
+        <span class="cov0" title="0">filename := GetFilename(viper.GetString(viperOutputDirectoryKey), viper.GetString(viperElementKey))
+
+        for _, format := range formatFile </span><span class="cov0" title="0">{
+                myFormat := configPtr.Formats[format]
+                outputFilePath := viper.GetString(viperOutputDirectoryKey) + filename + "." + myFormat.ID
+
+                if viper.GetBool(viperCheckKey) &amp;&amp; IsHashable(configPtr, myFormat.ID) </span><span class="cov0" title="0">{
+                        HandleHashableFormat(configPtr, myFormat.ID, outputFilePath)
+                }</span> else<span class="cov0" title="0"> {
+                        DownloadFile(configPtr, myFormat.ID, outputFilePath)
+                }</span>
+        }
+}
+
+// GetFilename extracts the filename from the given directory and element.
+func GetFilename(outputDir, element string) string <span class="cov0" title="0">{
+        r := regexp.MustCompile(`.*[\\/]?([A-Za-z_-]*)$`)
+
+        return r.FindStringSubmatch(outputDir + element)[0]
+}</span>
+
+// IsHashable checks if the format is hashable.
+func IsHashable(configPtr *config.Config, formatID string) bool <span class="cov0" title="0">{
+        ok, _, _ := config.IsHashable(configPtr, formatID)
+
+        return ok
+}</span>
+
+// HandleHashableFormat handles the download logic for hashable formats.
+func HandleHashableFormat(configPtr *config.Config, formatID, outputFilePath string) <span class="cov0" title="0">{
+        if download.FileExist(outputFilePath) </span><span class="cov0" title="0">{
+                if !download.Checksum(formatID) </span><span class="cov0" title="0">{
+                        log.Infof("Checksum mismatch, re-downloading %v", outputFilePath)
+                        DownloadFile(configPtr, formatID, outputFilePath)
+                        download.Checksum(formatID)
+                }</span> else<span class="cov0" title="0"> {
+                        log.Info("Checksum match, no download!")
+                }</span>
+        } else<span class="cov0" title="0"> {
+                DownloadFile(configPtr, formatID, outputFilePath)
+
+                if !download.Checksum(formatID) </span><span class="cov0" title="0">{
+                        log.Warnf("Checksum mismatch, please re-download %s", outputFilePath)
+                }</span>
+        }
+}
+
+// DownloadFile handles the file download logic.
+func DownloadFile(configPtr *config.Config, formatID, outputFilePath string) <span class="cov0" title="0">{
+        err := download.File(
+                configPtr,
+                viper.GetString(viperElementKey),
+                formatID,
+                outputFilePath,
+        )
+        if err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Fatal("Download error")
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package app
+
+import (
+        "github.com/apex/log"
+        "github.com/apex/log/handlers/cli"
+        "github.com/apex/log/handlers/text"
+        "github.com/julien-noblet/download-geofabrik/config"
+        "github.com/spf13/viper"
+)
+
+const (
+        defaultLogLevel = log.InfoLevel
+        quietLogLevel   = log.ErrorLevel
+        verboseLogLevel = log.DebugLevel
+)
+
+// ConfigureLogging sets up the logging configuration based on the application flags.
+func ConfigureLogging() <span class="cov10" title="8">{
+        SetDefaultLogging()
+
+        if IsQuietMode() </span><span class="cov8" title="6">{
+                SetQuietLogging()
+        }</span>
+
+        <span class="cov10" title="8">if IsVerboseMode() </span><span class="cov7" title="4">{
+                SetVerboseLogging()
+        }</span>
+}
+
+// SetDefaultLogging sets the default logging configuration.
+func SetDefaultLogging() <span class="cov10" title="8">{
+        log.SetLevel(defaultLogLevel)
+        log.SetHandler(cli.Default)
+}</span>
+
+// SetQuietLogging sets the logging configuration for quiet mode.
+func SetQuietLogging() <span class="cov8" title="6">{
+        log.SetLevel(quietLogLevel)
+}</span>
+
+// SetVerboseLogging sets the logging configuration for verbose mode.
+func SetVerboseLogging() <span class="cov7" title="4">{
+        log.SetLevel(verboseLogLevel)
+        log.SetHandler(text.Default)
+}</span>
+
+// IsQuietMode checks if the application is in quiet mode.
+func IsQuietMode() bool <span class="cov10" title="8">{
+        return viper.GetBool(config.ViperQuiet) || viper.GetBool(config.ViperProgress)
+}</span>
+
+// IsVerboseMode checks if the application is in verbose mode.
+func IsVerboseMode() bool <span class="cov10" title="8">{
+        return viper.GetBool(config.ViperVerbose)
+}</span>
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package app
+
+import (
+        "github.com/julien-noblet/download-geofabrik/config"
+        "github.com/spf13/viper"
+)
+
+const (
+        geofabrikParse = "geofabrik-parse"
+)
+
+// serviceConfigMap maps services to their respective configuration files.
+var serviceConfigMap = map[string]string{
+        serviceGeofabrik: "./geofabrik.yml",
+        geofabrikParse:   "./geofabrik.yml",
+        serviceOSMFr:     "./openstreetmap.fr.yml",
+        serviceOSMToday:  "./osmtoday.yml",
+        serviceBBBike:    "./bbbike.yml",
+}
+
+// CheckService checks the service and sets the appropriate configuration file.
+func CheckService() bool <span class="cov8" title="6">{
+        service := viper.GetString(config.ViperService)
+
+        if configFile, exists := serviceConfigMap[service]; exists </span><span class="cov7" title="5">{
+                SetConfigFile(configFile)
+
+                return true
+        }</span>
+
+        <span class="cov1" title="1">return false</span>
+}
+
+// SetConfigFile sets the configuration file if the current config file is the default.
+func SetConfigFile(configFile string) <span class="cov10" title="10">{
+        if viper.GetString(config.ViperConfig) == "" &amp;&amp; configFile == "" </span><span class="cov1" title="1">{
+                viper.Set(config.ViperConfig, defaultConfigFile)
+
+                return
+        }</span>
+
+        <span class="cov9" title="9">if configFile != "" </span><span class="cov9" title="9">{
+                viper.Set(config.ViperConfig, configFile)
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file5" style="display: none">package config
+
+import (
+        "errors"
+        "fmt"
+        "os"
+        "path/filepath"
+        "reflect"
+        "strings"
+        "sync"
+
+        "github.com/apex/log"
+        "github.com/julien-noblet/download-geofabrik/element"
+        "github.com/julien-noblet/download-geofabrik/formats"
+        yaml "gopkg.in/yaml.v3"
+)
+
+const (
+        ErrElem2URL   = "can't find url"
+        ErrLoadConfig = "can't load config"
+)
+
+var (
+        ErrFindElem       = errors.New("element not found")
+        ErrParentMismatch = errors.New("can't merge")
+        ErrFormatNotExist = errors.New("format not exist")
+
+        hashes = []string{"md5"}
+)
+
+// Config structure handle all elements.
+// It also contain the BaseURL and Formats...
+type Config struct {
+        Formats       formats.FormatDefinitions `yaml:"formats"`
+        Elements      element.MapElement        `yaml:"elements"`
+        ElementsMutex *sync.RWMutex             `yaml:"-"`       // unexported
+        BaseURL       string                    `yaml:"baseURL"` //nolint:tagliatelle // revive prefer this form
+}
+
+// Generate Yaml config.
+func (config *Config) Generate() ([]byte, error) <span class="cov2" title="3">{
+        yml, err := yaml.Marshal(config)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("failed to Marshal: %w", err)
+        }</span>
+
+        <span class="cov2" title="3">return yml, nil</span>
+}
+
+// MergeElement merges a new element into the config.
+func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="610">{
+        config.ElementsMutex.RLock()
+        newElement, ok := config.Elements[elementPtr.ID]
+        config.ElementsMutex.RUnlock()
+
+        if ok </span><span class="cov6" title="43">{
+                if newElement.Parent != elementPtr.Parent </span><span class="cov1" title="1">{
+                        return fmt.Errorf("%w: Parent mismatch %s != %s (%s)", ErrParentMismatch, newElement.Parent, elementPtr.Parent, elementPtr.ID)
+                }</span>
+
+                <span class="cov6" title="42">config.ElementsMutex.Lock()
+                defer config.ElementsMutex.Unlock()
+
+                for _, f := range elementPtr.Formats </span><span class="cov7" title="99">{
+                        if !newElement.Formats.Contains(f) </span><span class="cov6" title="41">{
+                                newElement.Formats = append(newElement.Formats, f)
+                        }</span>
+                }
+
+                <span class="cov6" title="42">newElement.Meta = len(newElement.Formats) == 0
+
+                config.Elements[elementPtr.ID] = newElement</span>
+        } else<span class="cov9" title="567"> {
+                config.ElementsMutex.Lock()
+                defer config.ElementsMutex.Unlock()
+                config.Elements[elementPtr.ID] = *elementPtr
+        }</span>
+
+        <span class="cov9" title="609">return nil</span>
+}
+
+// Exist checks if an element with the given ID exists in the config.
+func (config *Config) Exist(id string) bool <span class="cov7" title="72">{
+        config.ElementsMutex.RLock()
+        defer config.ElementsMutex.RUnlock()
+        result := reflect.DeepEqual(config.Elements[id], element.Element{})
+
+        return !result
+}</span>
+
+// AddExtension adds an extension to an element.
+func (config *Config) AddExtension(id, format string) <span class="cov6" title="42">{
+        config.ElementsMutex.RLock()
+        elem := config.Elements[id]
+        config.ElementsMutex.RUnlock()
+
+        if !elem.Formats.Contains(format) </span><span class="cov6" title="39">{
+                log.Infof("Add %s to %s", format, elem.ID)
+
+                config.ElementsMutex.Lock()
+                elem.Formats = append(elem.Formats, format)
+                config.ElementsMutex.Unlock()
+
+                if err := config.MergeElement(&amp;elem); err != nil </span><span class="cov0" title="0">{
+                        log.WithError(err).Fatalf("can't merge %s", elem.Name)
+                }</span>
+        }
+}
+
+// GetElement gets an element by ID or returns an error if not found.
+func (config *Config) GetElement(id string) (*element.Element, error) <span class="cov2" title="3">{ //nolint:varnamelen // id is ok
+        if config.Exist(id) </span><span class="cov1" title="2">{
+                config.ElementsMutex.RLock()
+                r := config.Elements[id]
+                config.ElementsMutex.RUnlock()
+
+                return &amp;r, nil
+        }</span>
+
+        <span class="cov1" title="1">return nil, fmt.Errorf("%w: %s", ErrFindElem, id)</span>
+}
+
+// FindElem finds an element in the config by ID.
+func FindElem(config *Config, e string) (*element.Element, error) <span class="cov6" title="61">{
+        res := config.Elements[e]
+        if res.ID == "" || res.ID != e </span><span class="cov3" title="8">{
+                return nil, fmt.Errorf("%w: %s is not in config.\n Please use \"list\" command", ErrFindElem, e)
+        }</span>
+
+        <span class="cov6" title="53">return &amp;res, nil</span>
+}
+
+// GetFile gets the file name of an element.
+func GetFile(myElement *element.Element) string <span class="cov5" title="27">{
+        if myElement.File != "" </span><span class="cov2" title="4">{
+                return myElement.File
+        }</span>
+
+        <span class="cov5" title="23">return myElement.ID</span>
+}
+
+// Elem2preURL generates a pre-URL for an element.
+func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string) (string, error) <span class="cov5" title="33">{
+        myElement, err := FindElem(config, elementPtr.ID)
+        if err != nil </span><span class="cov2" title="3">{
+                return "", err
+        }</span>
+
+        <span class="cov5" title="30">if myElement.HasParent() </span><span class="cov4" title="16">{
+                parent, err := FindElem(config, myElement.Parent)
+                if err != nil </span><span class="cov1" title="2">{
+                        return "", err
+                }</span>
+
+                <span class="cov4" title="14">res, err := Elem2preURL(config, parent, baseURL...)
+                if err != nil </span><span class="cov1" title="1">{
+                        return "", err
+                }</span>
+
+                <span class="cov4" title="13">res += "/" + GetFile(myElement)
+
+                return res, nil</span>
+        }
+
+        <span class="cov4" title="14">switch len(baseURL) </span>{
+        case 1:<span class="cov1" title="1">
+                return config.BaseURL + "/" + strings.Join(baseURL, "/") + GetFile(myElement), nil</span>
+        case 2:<span class="cov4" title="11"> //nolint:mnd // return without c.BaseURL
+                return strings.Join(baseURL, "/") + GetFile(myElement), nil</span>
+        default:<span class="cov1" title="2"> // len(b)==0 or &gt;2
+                return config.BaseURL + "/" + GetFile(myElement), nil</span>
+        }
+}
+
+// Elem2URL generates a URL for an element with the given extension.
+func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, error) <span class="cov4" title="15">{
+        if !elementPtr.Formats.Contains(ext) </span><span class="cov1" title="2">{
+                return "", fmt.Errorf("%w: %s", ErrFormatNotExist, ext)
+        }</span>
+
+        <span class="cov4" title="13">format := config.Formats[ext]
+
+        baseURL, basePath := format.BaseURL, format.BasePath
+        if baseURL == "" </span><span class="cov4" title="11">{
+                baseURL = config.BaseURL
+        }</span>
+
+        <span class="cov4" title="13">res, err := Elem2preURL(config, elementPtr, baseURL, basePath)
+        if err != nil </span><span class="cov1" title="2">{
+                return "", err
+        }</span>
+
+        <span class="cov4" title="11">return res + format.Loc, nil</span>
+}
+
+// LoadConfig loads the configuration from the specified file.
+func LoadConfig(configFile string) (*Config, error) <span class="cov4" title="17">{
+        filename, _ := filepath.Abs(configFile)
+
+        fileContent, err := os.ReadFile(filename)
+        if err != nil </span><span class="cov1" title="1">{
+                return nil, fmt.Errorf("can't open %s: %w", filename, err)
+        }</span>
+
+        <span class="cov4" title="16">myConfigPtr := &amp;Config{
+                Formats:       formats.FormatDefinitions{},
+                Elements:      element.MapElement{},
+                ElementsMutex: &amp;sync.RWMutex{},
+                BaseURL:       "",
+        }
+
+        if err := yaml.Unmarshal(fileContent, myConfigPtr); err != nil </span><span class="cov1" title="1">{
+                return nil, fmt.Errorf("can't unmarshal %s: %w", filename, err)
+        }</span>
+
+        <span class="cov4" title="15">return myConfigPtr, nil</span>
+}
+
+// IsHashable checks if a format is hashable.
+func IsHashable(config *Config, format string) (isHashable bool, hash, extension string) <span class="cov3" title="6">{
+        if _, ok := config.Formats[format]; ok </span><span class="cov3" title="6">{
+                for _, h := range hashes </span><span class="cov3" title="6">{
+                        hash := format + "." + h
+                        if _, ok := config.Formats[hash]; ok </span><span class="cov2" title="3">{
+                                return true, hash, h
+                        }</span>
+                }
+        }
+
+        <span class="cov2" title="3">return false, "", ""</span>
+}
+</pre>
+		
+		<pre class="file" id="file6" style="display: none">package main
+
+import (
+        "os"
+
+        "github.com/alecthomas/kingpin/v2"
+        "github.com/julien-noblet/download-geofabrik/app"
+        "github.com/julien-noblet/download-geofabrik/config"
+        "github.com/julien-noblet/download-geofabrik/generator"
+        "github.com/julien-noblet/download-geofabrik/lists"
+        "github.com/spf13/viper"
+)
+
+var version = "devel"
+
+func main() <span class="cov0" title="0">{
+        myApp := app.NewApp()
+        myApp.App.Version(version) // Add version flag
+        commands := kingpin.MustParse(myApp.App.Parse(os.Args[1:]))
+
+        myApp.ConfigureViper()
+        app.ConfigureLogging()
+        app.SetOutputDir()
+
+        app.CheckService()
+
+        switch commands </span>{
+        case myApp.Clist.FullCommand():<span class="cov0" title="0">
+                lists.ListCommand()</span>
+        case myApp.Cdownload.FullCommand():<span class="cov0" title="0">
+                app.DownloadCommand()</span>
+        case myApp.Cgenerate.FullCommand():<span class="cov0" title="0">
+                generator.Generate(viper.GetString(config.ViperConfig))</span>
+        }
+}
+</pre>
+		
+		<pre class="file" id="file7" style="display: none">package download
+
+import (
+        "context"
+        "fmt"
+        "io"
+        "net"
+        "net/http"
+        "os"
+        "time"
+
+        "github.com/apex/log"
+        pb "github.com/cheggaaa/pb/v3"
+        "github.com/julien-noblet/download-geofabrik/config"
+        "github.com/spf13/viper"
+)
+
+const (
+        progressMinimal = 512 * 1024 // Don't display progress bar if size &lt; 512kb
+        ErrFromURL      = "can't download element"
+        timeout         = 60 * time.Second
+        keepAlive       = 30 * time.Second
+        idleTimeout     = 5 * time.Second
+        tlsTimeout      = 10 * time.Second
+        continueTimeout = 5 * time.Second
+        fileMode        = 0o644
+)
+
+// FromURL downloads a file from a URL to a specified file path.
+func FromURL(myURL, fileName string) error <span class="cov10" title="11">{
+        log.Debugf("Downloading %s to %s", myURL, fileName)
+
+        if viper.GetBool("noDownload") </span><span class="cov1" title="1">{
+                return nil
+        }</span>
+
+        <span class="cov9" title="10">client := &amp;http.Client{
+                Transport: &amp;http.Transport{
+                        Proxy: http.ProxyFromEnvironment,
+                        DialContext: (&amp;net.Dialer{
+                                Timeout:   timeout,
+                                KeepAlive: keepAlive,
+                                DualStack: true,
+                        }).DialContext,
+                        MaxIdleConns:          0,
+                        IdleConnTimeout:       idleTimeout,
+                        TLSHandshakeTimeout:   tlsTimeout,
+                        ExpectContinueTimeout: continueTimeout,
+                },
+        }
+
+        ctx, cancel := context.WithTimeout(context.Background(), timeout)
+        defer cancel()
+
+        req, err := http.NewRequestWithContext(ctx, http.MethodGet, myURL, http.NoBody)
+        if err != nil </span><span class="cov0" title="0">{
+                return fmt.Errorf("error creating request for %s - %w", myURL, err)
+        }</span>
+
+        <span class="cov9" title="10">response, err := client.Do(req)
+        if err != nil </span><span class="cov1" title="1">{
+                return fmt.Errorf("error while downloading %s - %w", myURL, err)
+        }</span>
+        <span class="cov9" title="9">defer response.Body.Close()
+
+        if response.StatusCode != http.StatusOK </span><span class="cov1" title="1">{
+                return fmt.Errorf(
+                        "error while downloading %v, server return code %d\n Please use '%s generate' to re-create your yml file.\n %w",
+                        myURL,
+                        response.StatusCode,
+                        os.Args[0],
+                        http.ErrNotSupported,
+                )
+        }</span>
+
+        <span class="cov8" title="8">file, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY, fileMode)
+        if err != nil </span><span class="cov0" title="0">{
+                return fmt.Errorf("error while creating %s - %w", fileName, err)
+        }</span>
+        <span class="cov8" title="8">defer file.Close()
+
+        var (
+                output          io.Writer = file
+                currentProgress int64
+                progressBar     *pb.ProgressBar
+        )
+
+        if viper.GetBool("progress") &amp;&amp; response.ContentLength &gt; progressMinimal </span><span class="cov5" title="3">{
+                progressBar = pb.Full.Start64(response.ContentLength)
+                barReader := progressBar.NewProxyReader(response.Body)
+
+                currentProgress, err = io.Copy(output, barReader)
+                if err != nil </span><span class="cov0" title="0">{
+                        return fmt.Errorf("error while writing %s - %w", fileName, err)
+                }</span>
+
+                <span class="cov5" title="3">defer progressBar.Finish()</span>
+        } else<span class="cov7" title="5"> {
+                currentProgress, err = io.Copy(output, response.Body)
+                if err != nil </span><span class="cov0" title="0">{
+                        return fmt.Errorf("error while writing %s - %w", fileName, err)
+                }</span>
+        }
+
+        <span class="cov8" title="8">log.Infof("%s downloaded.", fileName)
+        log.Debugf("%v bytes downloaded.", currentProgress)
+
+        return nil</span>
+}
+
+// FileExist checks if a file exists at the given path.
+func FileExist(filePath string) bool <span class="cov10" title="11">{
+        _, err := os.Stat(filePath)
+
+        return err == nil
+}</span>
+
+// File downloads a file based on the configuration and element.
+func File(configPtr *config.Config, element, format, output string) error <span class="cov7" title="5">{
+        format = configPtr.Formats[format].ID
+
+        myElem, err := config.FindElem(configPtr, element)
+        if err != nil </span><span class="cov1" title="1">{
+                log.WithError(err).Errorf(config.ErrFindElem.Error(), element)
+
+                return fmt.Errorf("%w: %s", config.ErrFindElem, element)
+        }</span>
+
+        <span class="cov6" title="4">myURL, err := config.Elem2URL(configPtr, myElem, format)
+        if err != nil </span><span class="cov1" title="1">{
+                log.WithError(err).Error(config.ErrElem2URL)
+
+                return fmt.Errorf("%s %w", config.ErrElem2URL, err)
+        }</span>
+
+        <span class="cov5" title="3">err = FromURL(myURL, output)
+        if err != nil </span><span class="cov1" title="1">{
+                log.WithError(err).Error(ErrFromURL)
+
+                return fmt.Errorf("%s %w", ErrFromURL, err)
+        }</span>
+
+        <span class="cov3" title="2">return nil</span>
+}
+
+// Checksum downloads and verifies the checksum of a file.
+func Checksum(format string) bool <span class="cov8" title="7">{
+        if !viper.GetBool(config.ViperCheck) </span><span class="cov5" title="3">{
+                return false
+        }</span>
+
+        <span class="cov6" title="4">hash := "md5"
+        fhash := format + "." + hash
+
+        configPtr, err := config.LoadConfig(viper.GetString(config.ViperConfig))
+        if err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Fatal(config.ErrLoadConfig)
+        }</span>
+
+        <span class="cov6" title="4">if ok, _, _ := config.IsHashable(configPtr, format); ok </span><span class="cov3" title="2">{
+                myElem, err := config.FindElem(configPtr, viper.GetString(config.ViperElement))
+                if err != nil </span><span class="cov0" title="0">{
+                        log.WithError(err).Fatalf(config.ErrFindElem.Error(), viper.GetString(config.ViperElement))
+                }</span>
+
+                <span class="cov3" title="2">myURL, err := config.Elem2URL(configPtr, myElem, fhash)
+                if err != nil </span><span class="cov0" title="0">{
+                        log.WithError(err).Fatal(config.ErrElem2URL)
+                }</span>
+
+                <span class="cov3" title="2">outputPath := viper.GetString(config.ViperOutputDirectory) + viper.GetString(config.ViperElement)
+                if e := FromURL(myURL, outputPath+"."+fhash); e != nil </span><span class="cov0" title="0">{
+                        log.WithError(e).Fatal(ErrFromURL)
+                }</span>
+
+                <span class="cov3" title="2">return VerifyFileChecksum(outputPath+"."+format, outputPath+"."+fhash)</span>
+        }
+
+        <span class="cov3" title="2">log.Warnf("No checksum provided for %s", viper.GetString(config.ViperOutputDirectory)+viper.GetString(config.ViperElement)+"."+format)
+
+        return false</span>
+}
+</pre>
+		
+		<pre class="file" id="file8" style="display: none">package download
+
+import (
+        "crypto/md5" //nolint:gosec // MD5 is used to control with md5sum files
+        "encoding/hex"
+        "fmt"
+        "io"
+        "os"
+        "strings"
+
+        "github.com/apex/log"
+)
+
+const (
+        readErrorMsg         = "can't read %s: %w"
+        openErrorMsg         = "can't open %s: %w"
+        copyErrorMsg         = "can't copy %s: %w"
+        closeErrorMsg        = "can't close file: %w"
+        hashFileNotFoundMsg  = "Hash file %s not found"
+        hashFileReadErrorMsg = "Can't read hash file %s"
+        hashMismatchMsg      = "Checksum MISMATCH for %s"
+        hashMatchMsg         = "Checksum OK for %s"
+        hashingFileMsg       = "Hashing %s"
+        md5HashMsg           = "MD5 : %s"
+        checksumErrorMsg     = "checksum error"
+        hashFileErrorMsg     = "can't hash file"
+)
+
+// CheckFileHash checks if the hash of a file matches the provided hash.
+func CheckFileHash(hashfile, expectedHash string) (bool, error) <span class="cov9" title="5">{
+        if !FileExist(hashfile) </span><span class="cov0" title="0">{
+                log.Infof(hashFileNotFoundMsg, hashfile)
+
+                return false, nil
+        }</span>
+
+        <span class="cov9" title="5">fileContent, err := os.ReadFile(hashfile)
+        if err != nil </span><span class="cov0" title="0">{
+                log.Infof(hashFileReadErrorMsg, hashfile)
+
+                return false, fmt.Errorf(readErrorMsg, hashfile, err)
+        }</span>
+
+        <span class="cov9" title="5">fileHash := strings.Split(string(fileContent), " ")[0]
+        log.Infof("Hash from file: %s", fileHash)
+
+        return strings.EqualFold(expectedHash, fileHash), nil</span>
+}
+
+// ComputeMD5Hash computes the MD5 hash of a file.
+func ComputeMD5Hash(filePath string) (string, error) <span class="cov10" title="6">{
+        if !FileExist(filePath) </span><span class="cov0" title="0">{
+                return "", nil
+        }</span>
+
+        <span class="cov10" title="6">file, err := os.Open(filePath)
+        if err != nil </span><span class="cov0" title="0">{
+                return "", fmt.Errorf(openErrorMsg, filePath, err)
+        }</span>
+
+        <span class="cov10" title="6">defer func() </span><span class="cov10" title="6">{
+                if err := file.Close(); err != nil </span><span class="cov0" title="0">{
+                        log.WithError(err).Error(fmt.Errorf(closeErrorMsg, err).Error())
+                }</span>
+        }()
+
+        <span class="cov10" title="6">hash := md5.New() //nolint:gosec // MD5 is used to control with md5sum files
+        if _, err := io.Copy(hash, file); err != nil </span><span class="cov0" title="0">{
+                return "", fmt.Errorf(copyErrorMsg, filePath, err)
+        }</span>
+
+        <span class="cov10" title="6">return hex.EncodeToString(hash.Sum(nil)), nil</span>
+}
+
+// VerifyFileChecksum verifies the checksum of a file.
+func VerifyFileChecksum(file, hashfile string) bool <span class="cov6" title="3">{
+        log.Infof(hashingFileMsg, file)
+
+        hashed, err := ComputeMD5Hash(file)
+        if err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Fatal(hashFileErrorMsg)
+        }</span>
+
+        <span class="cov6" title="3">log.Debugf(md5HashMsg, hashed)
+
+        ret, err := CheckFileHash(hashfile, hashed)
+        if err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Error(checksumErrorMsg)
+        }</span>
+
+        <span class="cov6" title="3">if ret </span><span class="cov6" title="3">{
+                log.Infof(hashMatchMsg, file)
+        }</span> else<span class="cov0" title="0"> {
+                log.Infof(hashMismatchMsg, file)
+        }</span>
+
+        <span class="cov6" title="3">return ret</span>
+}
+</pre>
+		
+		<pre class="file" id="file9" style="display: none">package element
+
+// Element represents a part to download with formats, name, parent, etc.
+type Element struct {
+        ID      string  `yaml:"id"`
+        File    string  `yaml:"file,omitempty"`
+        Name    string  `yaml:"name,omitempty"`
+        Parent  string  `yaml:"parent,omitempty"`
+        Formats Formats `yaml:"files,omitempty"`
+        Meta    bool    `yaml:"meta,omitempty"`
+}
+
+type Formats []string
+
+// MapElement contains all Elements.
+type MapElement map[string]Element
+
+// HasParent checks if the element has a parent.
+func (e *Element) HasParent() bool <span class="cov6" title="37">{
+        return e.Parent != ""
+}</span>
+
+// Contains checks if the format list contains a specific format.
+func (f *Formats) Contains(format string) bool <span class="cov8" title="188">{
+        for _, existingFormat := range *f </span><span class="cov10" title="441">{
+                if format == existingFormat </span><span class="cov7" title="106">{
+                        return true
+                }</span>
+        }
+
+        <span class="cov7" title="82">return false</span>
+}
+
+// CreateParentElement creates a parent element for the given element.
+// Useful for meta parents.
+func CreateParentElement(e *Element, grandparentID string) *Element <span class="cov3" title="4">{
+        if e.HasParent() </span><span class="cov2" title="3">{
+                return &amp;Element{
+                        ID:      e.Parent,
+                        File:    "",
+                        Name:    e.Parent,
+                        Parent:  grandparentID,
+                        Formats: Formats{},
+                        Meta:    true,
+                }
+        }</span>
+
+        <span class="cov1" title="1">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file10" style="display: none">package formats
+
+import (
+        "sort"
+        "strings"
+
+        "github.com/spf13/viper"
+)
+
+// Format represents a file format with various attributes.
+type Format struct {
+        ID       string `yaml:"ext"`
+        Loc      string `yaml:"loc"`
+        BasePath string `yaml:"basepath,omitempty"`
+        BaseURL  string `yaml:"baseurl,omitempty"`
+        ToLoc    string `yaml:"toloc,omitempty"`
+}
+
+// FormatDefinitions is a map of format definitions.
+type FormatDefinitions map[string]Format
+
+// MiniFormat represents a short and full name pair for a format.
+type MiniFormat struct {
+        ShortName string
+        FullName  string
+}
+
+const (
+        FormatState          = "state"
+        FormatOsmPbf         = "osm.pbf"
+        FormatOsmGz          = "osm.gz"
+        FormatOsmBz2         = "osm.bz2"
+        FormatOshPbf         = "osh.pbf"
+        FormatPoly           = "poly"
+        FormatShpZip         = "shp.zip"
+        FormatKml            = "kml"
+        FormatGeoJSON        = "geojson"                        // BBBike &amp; OSM Today only
+        FormatGarminOntrail  = "osm.garmin-ontrail-latin1.zip"  // BBBike only
+        FormatGarminOnroad   = "osm.garmin-onroad-latin1.zip"   // BBBike only
+        FormatGarminOpenTopo = "osm.garmin-opentopo-latin1.zip" // BBBike only
+        FormatGarminOSM      = "osm.garmin-osm.zip"             // BBBike only
+        FormatMapsforge      = "osm.mapsforge-osm.zip"          // BBBike only
+        FormatMBTiles        = "mbtiles"
+        FormatCSV            = "csv" // BBBike only
+)
+
+// Configuration keys.
+const (
+        KeyOsmPbf         = "dosmPbf"
+        KeyOshPbf         = "doshPbf"
+        KeyOsmGz          = "dosmGz"
+        KeyOsmBz2         = "dosmBz2"
+        KeyShpZip         = "dshpZip"
+        KeyState          = "dstate"
+        KeyPoly           = "dpoly"
+        KeyKml            = "dkml"
+        KeyGeoJSON        = "dgeojson"
+        KeyGarminOSM      = "dgarmin"
+        KeyMapsforge      = "dmaps"
+        KeyMBTiles        = "dmbtiles"
+        KeyCSV            = "dcsv"
+        KeyGarminOnroad   = "dgarminonroad"
+        KeyGarminOntrail  = "dgarminontrail"
+        KeyGarminOpenTopo = "dgarminopentopo"
+)
+
+// GetMiniFormats returns a string of short format names based on the provided full format names.
+func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="534">{
+        miniFormats := []MiniFormat{
+                {ShortName: "s", FullName: FormatState},
+                {ShortName: "P", FullName: FormatOsmPbf},
+                {ShortName: "G", FullName: FormatOsmGz},
+                {ShortName: "B", FullName: FormatOsmBz2},
+                {ShortName: "H", FullName: FormatOshPbf},
+                {ShortName: "p", FullName: FormatPoly},
+                {ShortName: "S", FullName: FormatShpZip},
+                {ShortName: "k", FullName: FormatKml},
+                {ShortName: "g", FullName: FormatGeoJSON},
+                {ShortName: "t", FullName: FormatGarminOntrail},
+                {ShortName: "r", FullName: FormatGarminOnroad},
+                {ShortName: "o", FullName: FormatGarminOpenTopo},
+                {ShortName: "O", FullName: FormatGarminOSM},
+                {ShortName: "m", FullName: FormatMapsforge},
+                {ShortName: "M", FullName: FormatMBTiles},
+                {ShortName: "C", FullName: FormatCSV},
+        }
+
+        shortNames := make([]string, 0, len(fullFormatNames))
+
+        for _, fullName := range fullFormatNames </span><span class="cov8" title="4580">{
+                for _, format := range miniFormats </span><span class="cov10" title="33013">{
+                        if fullName == format.FullName </span><span class="cov8" title="3557">{
+                                shortNames = append(shortNames, format.ShortName)
+
+                                break</span>
+                        }
+                }
+        }
+
+        <span class="cov6" title="534">return strings.Join(shortNames, "")</span>
+}
+
+// GetFormats returns a slice of format strings based on the configuration.
+func GetFormats() []string <span class="cov2" title="9">{
+        options := map[string]string{
+                KeyOsmPbf:         FormatOsmPbf,
+                KeyOshPbf:         FormatOshPbf,
+                KeyOsmGz:          FormatOsmGz,
+                KeyOsmBz2:         FormatOsmBz2,
+                KeyShpZip:         FormatShpZip,
+                KeyState:          FormatState,
+                KeyPoly:           FormatPoly,
+                KeyKml:            FormatKml,
+                KeyGeoJSON:        FormatGeoJSON,
+                KeyGarminOSM:      FormatGarminOSM,
+                KeyMapsforge:      FormatMapsforge,
+                KeyMBTiles:        FormatMBTiles,
+                KeyCSV:            FormatCSV,
+                KeyGarminOnroad:   FormatGarminOnroad,
+                KeyGarminOntrail:  FormatGarminOntrail,
+                KeyGarminOpenTopo: FormatGarminOpenTopo,
+        }
+
+        var formatList []string
+
+        for key, format := range options </span><span class="cov5" title="144">{
+                if viper.GetBool(key) </span><span class="cov3" title="11">{
+                        formatList = append(formatList, format)
+                }</span>
+        }
+
+        <span class="cov2" title="9">if len(formatList) == 0 </span><span class="cov1" title="1">{
+                formatList = append(formatList, FormatOsmPbf)
+        }</span>
+
+        <span class="cov2" title="9">sort.Strings(formatList)
+
+        return formatList</span>
+}
+</pre>
+		
+		<pre class="file" id="file11" style="display: none">package generator
+
+import (
+        "fmt"
+        "os"
+        "path/filepath"
+        "slices"
+
+        "github.com/apex/log"
+        pb "github.com/cheggaaa/pb/v3"
+        "github.com/gocolly/colly/v2"
+        "github.com/julien-noblet/download-geofabrik/config"
+        "github.com/julien-noblet/download-geofabrik/generator/importer/geofabrik"
+        "github.com/julien-noblet/download-geofabrik/scrapper"
+        "github.com/julien-noblet/download-geofabrik/scrapper/bbbike"
+        geofabrikScrapper "github.com/julien-noblet/download-geofabrik/scrapper/geofabrik"
+        "github.com/julien-noblet/download-geofabrik/scrapper/openstreetmapfr"
+        "github.com/julien-noblet/download-geofabrik/scrapper/osmtoday"
+        "github.com/spf13/viper"
+)
+
+const (
+        filePermission         = 0o600
+        serviceGeofabrik       = "geofabrik"
+        serviceGeofabrikParse  = "geofabrik-parse"
+        serviceOpenStreetMapFR = "openstreetmap.fr"
+        serviceOSMToday        = "osmtoday"
+        serviceBBBike          = "bbbike"
+)
+
+// Write writes the generated configuration to a file.
+func Write(c *config.Config, filename string) error <span class="cov1" title="1">{
+        out, err := c.Generate()
+        if err != nil </span><span class="cov0" title="0">{
+                return fmt.Errorf("failed to generate config: %w", err)
+        }</span>
+
+        <span class="cov1" title="1">filename, err = filepath.Abs(filename)
+        if err != nil </span><span class="cov0" title="0">{
+                return fmt.Errorf("failed to get absolute path for filename: %w", err)
+        }</span>
+
+        <span class="cov1" title="1">if err := os.WriteFile(filename, out, filePermission); err != nil </span><span class="cov0" title="0">{
+                return fmt.Errorf("failed to write file: %w", err)
+        }</span>
+
+        <span class="cov1" title="1">log.Infof("%s generated.", filename)
+
+        return nil</span>
+}
+
+// Generate generates the configuration based on the specified service.
+func Generate(configfile string) <span class="cov0" title="0">{
+        service := viper.GetString("service")
+        serviceHandlers := map[string]func(string){
+                serviceGeofabrik:       handleGeofabrik,
+                serviceGeofabrikParse:  handleScrapperService,
+                serviceOpenStreetMapFR: handleScrapperService,
+                serviceOSMToday:        handleScrapperService,
+                serviceBBBike:          handleScrapperService,
+        }
+
+        if handler, exists := serviceHandlers[service]; exists </span><span class="cov0" title="0">{
+                handler(configfile)
+        }</span> else<span class="cov0" title="0"> {
+                log.Errorf("service not recognized: %s, please use one of geofabrik, openstreetmap.fr, osmtoday or bbbike", service)
+        }</span>
+}
+
+// handleScrapperService handles the scrapper service based on the specified service.
+func handleScrapperService(configfile string) <span class="cov0" title="0">{
+        myScrapper := getScrapper(viper.GetString("service"))
+
+        if viper.GetBool("progress") </span><span class="cov0" title="0">{
+                handleProgress(myScrapper)
+        }</span> else<span class="cov0" title="0"> {
+                collector := myScrapper.Collector()
+                visitAndWait(collector, myScrapper.GetStartURL())
+        }</span>
+
+        <span class="cov0" title="0">myconfig := myScrapper.GetConfig()
+        Cleanup(myconfig)
+
+        if err := Write(myconfig, configfile); err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Error("failed to write config")
+        }</span>
+}
+
+// getScrapper returns the appropriate scrapper based on the service.
+func getScrapper(service string) scrapper.IScrapper <span class="cov0" title="0">{ //nolint:ireturn // have to return the interface
+        switch service </span>{
+        case serviceGeofabrikParse:<span class="cov0" title="0">
+                return geofabrikScrapper.GetDefault()</span>
+        case serviceOpenStreetMapFR:<span class="cov0" title="0">
+                return openstreetmapfr.GetDefault()</span>
+        case serviceOSMToday:<span class="cov0" title="0">
+                return osmtoday.GetDefault()</span>
+        case serviceBBBike:<span class="cov0" title="0">
+                return bbbike.GetDefault()</span>
+        default:<span class="cov0" title="0">
+                log.Fatalf("unknown service: %s", service)
+
+                return nil</span>
+        }
+}
+
+// handleProgress handles the progress bar for the scrapper.
+func handleProgress(myScrapper scrapper.IScrapper) <span class="cov0" title="0">{
+        bar := pb.New(myScrapper.GetPB())
+        bar.Start()
+        defer bar.Finish()
+
+        collector := myScrapper.Collector()
+        collector.OnScraped(func(*colly.Response) </span><span class="cov0" title="0">{
+                bar.Increment()
+        }</span>)
+        <span class="cov0" title="0">visitAndWait(collector, myScrapper.GetStartURL())</span>
+}
+
+// visitAndWait visits the URL and waits for the collector to finish.
+func visitAndWait(collector *colly.Collector, url string) <span class="cov0" title="0">{
+        if err := collector.Visit(url); err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Error("can't get url")
+
+                return
+        }</span>
+
+        <span class="cov0" title="0">collector.Wait()</span>
+}
+
+// handleGeofabrik handles the Geofabrik service.
+func handleGeofabrik(configfile string) <span class="cov0" title="0">{
+        index, err := geofabrik.GetIndex(geofabrik.GeofabrikIndexURL)
+        if err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Error("failed to get geofabrik index")
+
+                return
+        }</span>
+
+        <span class="cov0" title="0">myConfig, err := geofabrik.Convert(index)
+        if err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Error("failed to convert geofabrik index")
+
+                return
+        }</span>
+
+        <span class="cov0" title="0">Cleanup(myConfig)
+
+        if err := Write(myConfig, configfile); err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Error("failed to write config")
+        }</span>
+}
+
+// Cleanup sorts the formats in the configuration elements.
+func Cleanup(c *config.Config) <span class="cov10" title="2">{
+        for _, elem := range c.Elements </span><span class="cov10" title="2">{
+                slices.Sort(elem.Formats)
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file12" style="display: none">package geofabrik
+
+import (
+        "context"
+        "encoding/json"
+        "fmt"
+        "io"
+        "net"
+        "net/http"
+        "os"
+        "sync"
+        "time"
+
+        "github.com/apex/log"
+        "github.com/julien-noblet/download-geofabrik/config"
+        "github.com/julien-noblet/download-geofabrik/element"
+        "github.com/julien-noblet/download-geofabrik/formats"
+        "github.com/pkg/errors"
+        "github.com/spf13/viper"
+)
+
+const (
+        GeofabrikIndexURL = `https://download.geofabrik.de/index-v1-nogeom.json`
+        GeofabrikBaseURL  = `https://download.geofabrik.de`
+
+        ErrDownload          = "error while downloading %v, server returned code %d\nPlease use '%s generate' to re-create your yml file %w"
+        ErrCreatingRequest   = "error while creating request for %s"
+        ErrDownloading       = "error while downloading %s"
+        ErrReadingResponse   = "error while reading response body"
+        ErrUnmarshallingBody = "error while unmarshalling response body"
+        ErrMergingElement    = "error while merging element %v"
+
+        TimeoutDuration       = 60 * time.Second
+        KeepAliveDuration     = 30 * time.Second
+        IdleConnTimeout       = 5 * time.Second
+        TLSHandshakeTimeout   = 10 * time.Second
+        ExpectContinueTimeout = 5 * time.Second
+)
+
+// HTTPClient is a reusable HTTP client.
+var HTTPClient = &amp;http.Client{
+        Transport: &amp;http.Transport{
+                Proxy: http.ProxyFromEnvironment,
+                DialContext: (&amp;net.Dialer{
+                        Timeout:   TimeoutDuration,
+                        KeepAlive: KeepAliveDuration,
+                        DualStack: true,
+                }).DialContext,
+                MaxIdleConns:          0,
+                IdleConnTimeout:       IdleConnTimeout,
+                TLSHandshakeTimeout:   TLSHandshakeTimeout,
+                ExpectContinueTimeout: ExpectContinueTimeout,
+        },
+}
+
+// FormatDefinition returns a map of format definitions.
+func FormatDefinition() formats.FormatDefinitions <span class="cov1" title="1">{
+        return formats.FormatDefinitions{
+                "osm.bz2.md5":         {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
+                "osm.pbf.md5":         {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+                formats.FormatKml:     {ID: formats.FormatKml, Loc: ".kml"},
+                formats.FormatMBTiles: {ID: formats.FormatMBTiles, Loc: "-latest-free.mbtiles.zip", ToLoc: "latest-free.mbtiles.zip"},
+                formats.FormatOsmBz2:  {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
+                formats.FormatOsmPbf:  {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+                formats.FormatPoly:    {ID: formats.FormatPoly, Loc: ".poly"},
+                formats.FormatShpZip:  {ID: formats.FormatShpZip, Loc: "-shortbread-1.0.mbtiles"},
+                formats.FormatState:   {ID: formats.FormatState, Loc: "-updates/state.txt"},
+        }
+}</span>
+
+// Index represents the structure of the Geofabrik index.
+type Index struct {
+        Features []IndexElement `json:"features"`
+}
+
+// IndexElement represents an element in the Geofabrik index.
+type IndexElement struct {
+        ElementProperties IndexElementProperties `json:"properties"`
+}
+
+// IndexElementProperties represents the properties of an index element.
+type IndexElementProperties struct {
+        Urls      map[string]string `json:"urls"`
+        ID        string            `json:"id"`
+        Name      string            `json:"name"`
+        Parent    string            `json:"parent,omitempty"`
+        Iso3166_1 []string          `json:"iso3166-1:alpha2,omitempty"` //nolint:tagliatelle // That's geofabrik's field name
+        Iso3166_2 []string          `json:"iso3166-2,omitempty"`        //nolint:tagliatelle // That's geofabrik's field name
+}
+
+// GetIndex downloads the Geofabrik index and unmarshals the JSON response.
+func GetIndex(url string) (*Index, error) <span class="cov1" title="2">{
+        ctx, cancel := context.WithTimeout(context.Background(), TimeoutDuration)
+        defer cancel()
+
+        req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, http.NoBody)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, errors.Wrapf(err, ErrCreatingRequest, url)
+        }</span>
+
+        <span class="cov1" title="2">response, err := HTTPClient.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, errors.Wrapf(err, ErrDownloading, url)
+        }</span>
+        <span class="cov1" title="2">defer response.Body.Close()
+
+        if response.StatusCode != http.StatusOK </span><span class="cov1" title="1">{
+                return nil, handleHTTPError(response, url)
+        }</span>
+
+        <span class="cov1" title="1">bodyBytes, err := io.ReadAll(response.Body)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, errors.Wrap(err, ErrReadingResponse)
+        }</span>
+
+        <span class="cov1" title="1">var geofabrikIndex Index
+        if err := json.Unmarshal(bodyBytes, &amp;geofabrikIndex); err != nil </span><span class="cov0" title="0">{
+                return nil, errors.Wrap(err, ErrUnmarshallingBody)
+        }</span>
+
+        <span class="cov1" title="1">return &amp;geofabrikIndex, nil</span>
+}
+
+// handleHTTPError handles HTTP errors based on the status code.
+func handleHTTPError(response *http.Response, url string) error <span class="cov1" title="1">{
+        switch response.StatusCode </span>{
+        case http.StatusNotFound:<span class="cov1" title="1">
+                return fmt.Errorf(ErrDownload, url, response.StatusCode, os.Args[0], http.ErrNoLocation)</span>
+        default:<span class="cov0" title="0">
+                return fmt.Errorf(ErrDownload, url, response.StatusCode, os.Args[0], http.ErrNotSupported)</span>
+        }
+}
+
+// Convert converts the Geofabrik index to a config.Config object.
+func Convert(index *Index) (*config.Config, error) <span class="cov1" title="1">{
+        cfg := &amp;config.Config{
+                Formats:       FormatDefinition(),
+                BaseURL:       GeofabrikBaseURL,
+                Elements:      element.MapElement{},
+                ElementsMutex: &amp;sync.RWMutex{},
+        }
+
+        for _, feature := range index.Features </span><span class="cov7" title="509">{
+                if err := processFeature(cfg, &amp;feature); err != nil </span><span class="cov0" title="0">{
+                        return nil, err
+                }</span>
+        }
+
+        <span class="cov1" title="1">return cfg, nil</span>
+}
+
+// processFeature processes a single feature from the Geofabrik index.
+func processFeature(cfg *config.Config, feature *IndexElement) error <span class="cov7" title="509">{
+        var elem element.Element
+
+        if viper.GetBool("log") </span><span class="cov7" title="509">{
+                log.WithField("ID", feature.ElementProperties.ID).Debug("Processing feature")
+        }</span>
+
+        <span class="cov7" title="509">elem.ID = feature.ElementProperties.ID
+        elem.Parent = feature.ElementProperties.Parent
+        elem.Name = feature.ElementProperties.Name
+
+        elem.Formats = append(elem.Formats, getFormats(feature.ElementProperties.Urls)...)
+
+        if err := cfg.MergeElement(&amp;elem); err != nil </span><span class="cov0" title="0">{
+                return errors.Wrapf(err, ErrMergingElement, elem)
+        }</span>
+
+        <span class="cov7" title="509">return nil</span>
+}
+
+// getFormats returns the formats based on the URLs.
+func getFormats(urls map[string]string) []string <span class="cov7" title="509">{
+        myFormats := []string{}
+
+        for k := range urls </span><span class="cov10" title="3521">{
+                switch k </span>{
+                case "pbf":<span class="cov7" title="509">
+                        myFormats = append(myFormats, formats.FormatOsmPbf, "osm.pbf.md5")</span>
+                case "bz2":<span class="cov7" title="509">
+                        myFormats = append(myFormats, formats.FormatOsmBz2, "osm.bz2.md5")</span>
+                case "shp":<span class="cov7" title="467">
+                        myFormats = append(myFormats, formats.FormatShpZip)</span>
+                case "history":<span class="cov7" title="509">
+                        myFormats = append(myFormats, formats.FormatOshPbf)</span>
+                }
+        }
+
+        <span class="cov7" title="509">myFormats = append(myFormats, formats.FormatPoly, formats.FormatKml, formats.FormatState)
+
+        return myFormats</span>
+}
+</pre>
+		
+		<pre class="file" id="file13" style="display: none">package lists
+
+import (
+        "fmt"
+        "os"
+        "sort"
+
+        "github.com/apex/log"
+        "github.com/julien-noblet/download-geofabrik/config"
+        "github.com/julien-noblet/download-geofabrik/formats"
+        "github.com/olekukonko/tablewriter"
+        "github.com/spf13/viper"
+)
+
+const (
+        markdownFormat = "Markdown"
+)
+
+// ListAllRegions lists all regions in the specified format.
+func ListAllRegions(configuration *config.Config, format string) error <span class="cov2" title="3">{
+        table := CreateTable(format)
+        keys := GetSortedKeys(configuration)
+
+        for _, item := range keys </span><span class="cov9" title="513">{
+                table.Append([]string{
+                        item,
+                        configuration.Elements[configuration.Elements[item].Parent].Name,
+                        configuration.Elements[item].Name,
+                        formats.GetMiniFormats(configuration.Elements[item].Formats),
+                })
+        }</span>
+
+        <span class="cov2" title="3">table.Render()
+        fmt.Printf("Total elements: %#v\n", len(configuration.Elements)) //nolint:forbidigo // I want to print the number of elements
+
+        return nil</span>
+}
+
+// CreateTable creates a table with the specified format.
+func CreateTable(format string) *tablewriter.Table <span class="cov2" title="3">{
+        table := tablewriter.NewWriter(os.Stdout)
+        table.SetAlignment(tablewriter.ALIGN_LEFT)
+        table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
+
+        if format == markdownFormat </span><span class="cov1" title="2">{
+                table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
+                table.SetCenterSeparator("|")
+        }</span>
+
+        <span class="cov2" title="3">return table</span>
+}
+
+// GetSortedKeys returns the sorted keys of the configuration elements.
+func GetSortedKeys(configuration *config.Config) []string <span class="cov2" title="4">{
+        keys := make(sort.StringSlice, len(configuration.Elements))
+        i := 0
+
+        for k := range configuration.Elements </span><span class="cov10" title="515">{
+                keys[i] = k
+                i++
+        }</span>
+
+        <span class="cov2" title="4">keys.Sort()
+
+        return keys</span>
+}
+
+// ListCommand executes the list command.
+func ListCommand() <span class="cov1" title="1">{
+        format := ""
+
+        configPtr, err := config.LoadConfig(viper.GetString(config.ViperConfig))
+        if err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Fatal(config.ErrLoadConfig)
+        }</span>
+
+        <span class="cov1" title="1">if viper.GetBool(config.ViperListFormatMarkdown) </span><span class="cov1" title="1">{
+                format = markdownFormat
+        }</span>
+
+        <span class="cov1" title="1">if err := ListAllRegions(configPtr, format); err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Fatal("Failed to list all regions")
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file14" style="display: none">package bbbike
+
+import (
+        "errors"
+        "regexp"
+
+        "github.com/apex/log"
+        "github.com/gocolly/colly/v2"
+        "github.com/julien-noblet/download-geofabrik/element"
+        "github.com/julien-noblet/download-geofabrik/formats"
+        "github.com/julien-noblet/download-geofabrik/scrapper"
+)
+
+// Constants for magic numbers and URLs.
+const (
+        progressBarCount = 237 // number of elements
+        parallelism      = 20  // number of parallel downloads
+        prefixLength     = 17  // length of "OSM extracts for "
+        baseURL          = "https://download.bbbike.org/osm/bbbike"
+        startURL         = baseURL + "/"
+)
+
+// Bbbike Scrapper.
+type Bbbike struct {
+        *scrapper.Scrapper
+}
+
+// GetDefault returns the default configuration for Bbbike scrapper.
+func GetDefault() *Bbbike <span class="cov2" title="2">{
+        urlFilters := []*regexp.Regexp{
+                regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/[A-Z].+$`),
+                regexp.MustCompile(`https://download\.bbbike\.org/osm/bbbike/$`),
+        }
+
+        formatDefinition := formats.FormatDefinitions{
+                formats.FormatCSV:            {ID: formats.FormatCSV, Loc: ".osm.csv.xz", ToLoc: ".osm.csv.xz"},
+                formats.FormatGarminOSM:      {ID: formats.FormatGarminOSM, Loc: ".osm.garmin-osm.zip"},
+                formats.FormatGarminOnroad:   {ID: formats.FormatGarminOnroad, Loc: ".osm.garmin-onroad-latin1.zip"},
+                formats.FormatGarminOntrail:  {ID: formats.FormatGarminOntrail, Loc: ".osm.garmin-ontrail-latin1.zip"},
+                formats.FormatGarminOpenTopo: {ID: formats.FormatGarminOpenTopo, Loc: ".osm.garmin-opentopo-latin1.zip"},
+                formats.FormatGeoJSON:        {ID: formats.FormatGeoJSON, Loc: ".osm.geojson.xz", ToLoc: ".geojson.xz"},
+                formats.FormatMBTiles:        {ID: formats.FormatMBTiles, Loc: ".osm.mbtiles-openmaptiles.zip", ToLoc: "osm.mbtiles-openmaptiles.zip"},
+                formats.FormatMapsforge:      {ID: formats.FormatMapsforge, Loc: ".osm.mapsforge-osm.zip"},
+                formats.FormatOsmGz:          {ID: formats.FormatOsmGz, Loc: ".osm.gz"},
+                formats.FormatOsmPbf:         {ID: formats.FormatOsmPbf, Loc: ".osm.pbf"},
+                formats.FormatPoly:           {ID: formats.FormatPoly, Loc: ".poly"},
+                formats.FormatShpZip:         {ID: formats.FormatShpZip, Loc: ".osm.shp.zip"},
+        }
+
+        return &amp;Bbbike{
+                Scrapper: &amp;scrapper.Scrapper{
+                        PB:               progressBarCount,
+                        Async:            true,
+                        Parallelism:      parallelism,
+                        MaxDepth:         0,
+                        AllowedDomains:   []string{`download.bbbike.org`},
+                        BaseURL:          baseURL,
+                        StartURL:         startURL,
+                        URLFilters:       urlFilters,
+                        FormatDefinition: formatDefinition,
+                },
+        }
+}</span>
+
+// Collector represents Bbbike's scrapper.
+func (b *Bbbike) Collector() *colly.Collector <span class="cov2" title="2">{
+        myCollector := b.Scrapper.Collector()
+        myCollector.OnHTML("div.list tbody", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+                b.ParseList(e, myCollector)
+        }</span>)
+        <span class="cov2" title="2">myCollector.OnHTML("#sidebar", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+                b.ParseSidebar(e, myCollector)
+        }</span>)
+
+        <span class="cov2" title="2">return myCollector</span>
+}
+
+// ParseList parses the list of elements from the HTML.
+func (b *Bbbike) ParseList(e *colly.HTMLElement, c *colly.Collector) <span class="cov1" title="1">{
+        e.ForEach("a", func(_ int, el *colly.HTMLElement) </span><span class="cov10" title="236">{
+                href := el.Request.AbsoluteURL(el.Attr("href"))
+                log.Debugf("Parse: %s", href)
+
+                if err := c.Visit(href); err != nil &amp;&amp; !errors.Is(err, colly.ErrNoURLFiltersMatch) </span><span class="cov0" title="0">{
+                        log.WithError(err).Error("can't get url")
+                }</span>
+        })
+}
+
+// GetName extracts the name from the given string.
+func GetName(h3 string) string <span class="cov2" title="2">{
+        return h3[prefixLength:] // remove "OSM extracts for "
+}</span>
+
+// ParseSidebar parses the sidebar information from the HTML.
+func (b *Bbbike) ParseSidebar(e *colly.HTMLElement, _ *colly.Collector) <span class="cov1" title="1">{
+        name := GetName(e.ChildText("h3"))
+        myElement := element.Element{
+                ID:     name,
+                Name:   name,
+                File:   name + "/" + name,
+                Parent: "",
+                Formats: element.Formats{
+                        formats.FormatCSV,
+                        formats.FormatGarminOSM,
+                        formats.FormatGarminOnroad,
+                        formats.FormatGarminOntrail,
+                        formats.FormatGarminOpenTopo,
+                        formats.FormatGeoJSON,
+                        formats.FormatMBTiles,
+                        formats.FormatMapsforge,
+                        formats.FormatOsmGz,
+                        formats.FormatOsmPbf,
+                        formats.FormatPoly,
+                        formats.FormatShpZip,
+                },
+                Meta: false,
+        }
+
+        log.Debugf("Add %s", name)
+
+        if err := b.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Errorf("can't merge %s", myElement.Name)
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file15" style="display: none">package geofabrik
+
+import (
+        "errors"
+        "regexp"
+
+        "github.com/apex/log"
+        "github.com/gocolly/colly/v2"
+        "github.com/julien-noblet/download-geofabrik/element"
+        "github.com/julien-noblet/download-geofabrik/formats"
+        "github.com/julien-noblet/download-geofabrik/scrapper"
+)
+
+// Constants for magic numbers and URLs.
+const (
+        progressBarCount = 509 // number of elements
+        parallelism      = 20  // number of parallel downloads
+        baseURL          = "https://download.geofabrik.de"
+        startURL         = baseURL + "/"
+)
+
+// Geofabrik Scrapper.
+type Geofabrik struct {
+        *scrapper.Scrapper
+}
+
+// GetDefault returns the default configuration for Geofabrik scrapper.
+func GetDefault() *Geofabrik <span class="cov6" title="8">{
+        urlFilters := []*regexp.Regexp{
+                regexp.MustCompile(`https://download\.geofabrik\.de/.+\.html$`),
+                regexp.MustCompile(`https://download\.geofabrik\.de/$`),
+        }
+
+        formatDefinition := formats.FormatDefinitions{
+                "osm.bz2.md5":         {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
+                "osm.pbf.md5":         {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+                formats.FormatKml:     {ID: formats.FormatKml, Loc: ".kml"},
+                formats.FormatMBTiles: {ID: formats.FormatMBTiles, Loc: "-latest-free.mbtiles.zip", ToLoc: "latest-free.mbtiles.zip"},
+                formats.FormatOsmBz2:  {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},
+                formats.FormatOsmPbf:  {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+                formats.FormatPoly:    {ID: formats.FormatPoly, Loc: ".poly"},
+                formats.FormatShpZip:  {ID: formats.FormatShpZip, Loc: "-shortbread-1.0.mbtiles"},
+                formats.FormatState:   {ID: formats.FormatState, Loc: "-updates/state.txt"},
+        }
+
+        return &amp;Geofabrik{
+                Scrapper: &amp;scrapper.Scrapper{
+                        PB:               progressBarCount,
+                        Async:            true,
+                        Parallelism:      parallelism,
+                        MaxDepth:         0,
+                        AllowedDomains:   []string{`download.geofabrik.de`},
+                        BaseURL:          baseURL,
+                        StartURL:         startURL,
+                        URLFilters:       urlFilters,
+                        FormatDefinition: formatDefinition,
+                },
+        }
+}</span>
+
+// Collector represents Geofabrik's scrapper.
+func (g *Geofabrik) Collector() *colly.Collector <span class="cov4" title="4">{
+        myCollector := g.Scrapper.Collector()
+        myCollector.OnHTML("#subregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+                g.ParseSubregion(e, myCollector)
+        }</span>)
+        <span class="cov4" title="4">myCollector.OnHTML("#specialsubregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+                g.ParseSubregion(e, myCollector)
+        }</span>)
+        <span class="cov4" title="4">myCollector.OnHTML("li", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+                g.ParseLi(e, myCollector)
+        }</span>)
+
+        <span class="cov4" title="4">return myCollector</span>
+}
+
+// ParseSubregion parses the subregion information from the HTML.
+func (g *Geofabrik) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Collector) <span class="cov4" title="4">{
+        e.ForEach("td.subregion", func(_ int, el *colly.HTMLElement) </span><span class="cov9" title="19">{
+                el.ForEach("a", func(_ int, sub *colly.HTMLElement) </span><span class="cov9" title="19">{
+                        href := sub.Request.AbsoluteURL(sub.Attr("href"))
+                        myID, extension := scrapper.FileExt(href)
+
+                        if extension == "html" </span><span class="cov9" title="19">{
+                                g.handleHTMLExtension(sub, href, myID, myCollector)
+                        }</span>
+                })
+        })
+}
+
+// handleHTMLExtension handles the HTML extension case.
+func (g *Geofabrik) handleHTMLExtension(sub *colly.HTMLElement, href, myID string, myCollector *colly.Collector) <span class="cov9" title="19">{
+        parent, parentPath := scrapper.GetParent(href)
+        myID, file := g.handleSpecialCases(myID, parent)
+
+        myElement := element.Element{
+                ID:     myID,
+                Name:   sub.Text,
+                Parent: parent,
+                Meta:   true,
+                File:   file,
+        }
+
+        if !g.Config.Exist(parent) &amp;&amp; parent != "" </span><span class="cov1" title="1">{
+                gparent, _ := scrapper.GetParent(parentPath)
+                log.Debugf("Create Meta %s parent: %s %v", myElement.Parent, gparent, parentPath)
+
+                if gp := element.CreateParentElement(&amp;myElement, gparent); gp != nil </span><span class="cov1" title="1">{
+                        if err := g.Config.MergeElement(gp); err != nil </span><span class="cov0" title="0">{
+                                log.WithError(err).Errorf("can't merge %s", myElement.Name)
+                        }</span>
+                }
+        }
+
+        <span class="cov9" title="19">if err := g.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Errorf("can't merge %s", myElement.Name)
+        }</span>
+
+        <span class="cov9" title="19">log.Debugf("Add: %s", href)
+
+        if err := myCollector.Visit(href); err != nil &amp;&amp; !errors.Is(err, colly.ErrAlreadyVisited) </span><span class="cov0" title="0">{
+                log.WithError(err).Error("can't get url")
+        }</span>
+}
+
+// handleSpecialCases handles special cases for certain IDs.
+func (g *Geofabrik) handleSpecialCases(myID, parent string) (newID, file string) <span class="cov10" title="23">{
+        const georgia = "georgia"
+
+        switch myID </span>{
+        case georgia:<span class="cov4" title="4">
+                switch parent </span>{
+                case "us":<span class="cov2" title="2">
+                        myID = georgia + "-us"
+                        file = georgia</span>
+
+                case "europe":<span class="cov2" title="2">
+                        myID = georgia + "-eu"
+                        file = georgia</span>
+                }
+
+        case "guatemala":<span class="cov2" title="2">
+                if parent == "south-america" </span><span class="cov2" title="2">{
+                        myID = "guatemala-south-america"
+                        file = "guatemala"
+                }</span>
+        }
+
+        <span class="cov10" title="23">return myID, file</span>
+}
+
+// ParseFormat adds extensions to the ID.
+func (g *Geofabrik) ParseFormat(id, format string) <span class="cov8" title="13">{
+        g.Scrapper.ParseFormat(id, format)
+
+        if format == formats.FormatOsmPbf </span><span class="cov6" title="7">{
+                g.Config.AddExtension(id, formats.FormatKml)
+                g.Config.AddExtension(id, formats.FormatState)
+        }</span>
+}
+
+// ParseLi parses the list items from the HTML.
+func (g *Geofabrik) ParseLi(e *colly.HTMLElement, _ *colly.Collector) <span class="cov4" title="4">{
+        e.ForEach("a", func(_ int, element *colly.HTMLElement) </span><span class="cov4" title="4">{
+                _, format := scrapper.FileExt(element.Attr("href"))
+
+                myID, _ := scrapper.FileExt(element.Request.URL.String())
+                grandParent, _ := scrapper.GetParent(element.Request.AbsoluteURL(element.Attr("href")))
+                myID, _ = g.handleSpecialCases(myID, grandParent)
+
+                g.ParseFormat(myID, format)
+        }</span>)
+}
+</pre>
+		
+		<pre class="file" id="file16" style="display: none">package openstreetmapfr
+
+import (
+        "errors"
+        "fmt"
+        "regexp"
+        "strings"
+        "sync"
+        "time"
+
+        "github.com/apex/log"
+        "github.com/gocolly/colly/v2"
+        "github.com/julien-noblet/download-geofabrik/config"
+        "github.com/julien-noblet/download-geofabrik/element"
+        "github.com/julien-noblet/download-geofabrik/formats"
+        "github.com/julien-noblet/download-geofabrik/scrapper"
+)
+
+// OpenstreetmapFR Scrapper.
+type OpenstreetmapFR struct {
+        *scrapper.Scrapper
+}
+
+const (
+        defaultTimeout      = time.Second * 30
+        passList            = "HEADER"
+        nbElmt              = 1196            // Number of elements in openstreetmap.fr
+        parallelism         = 20              // use 20 routines to scrape openstreetmap.fr
+        randomDelay         = time.Second * 5 // Random delay between 0 and 5 seconds
+        minParentListLength = 4
+)
+
+var exceptionList = map[string]struct{}{
+        "central":       {},
+        "central-east":  {},
+        "central-north": {},
+        "central-south": {},
+        "central-west":  {},
+        "central_east":  {},
+        "central_north": {},
+        "central_south": {},
+        "central_west":  {},
+        "coastral":      {},
+        "east":          {},
+        "east_central":  {},
+        "east-central":  {},
+        "eastern":       {},
+        "lake":          {},
+        "north":         {},
+        "north_central": {},
+        "north-central": {},
+        "north-east":    {},
+        "north-eastern": {},
+        "north-west":    {},
+        "north-western": {},
+        "north_east":    {},
+        "north_eastern": {},
+        "north_west":    {},
+        "north_western": {},
+        "northeast":     {},
+        "northern":      {},
+        "northwest":     {},
+        "south":         {},
+        "south_central": {},
+        "south-central": {},
+        "south-east":    {},
+        "south-south":   {},
+        "south-west":    {},
+        "south_east":    {},
+        "south_south":   {},
+        "south_west":    {},
+        "southeast":     {},
+        "southern":      {},
+        "southwest":     {},
+        "west":          {},
+        "west_central":  {},
+        "west-central":  {},
+        "western":       {},
+        "france_taaf":   {},
+        "sevastopol":    {},
+        "la_rioja":      {},
+        "jura":          {},
+        "santa_cruz":    {},
+}
+
+// GetDefault returns a default instance of OpenstreetmapFR.
+func GetDefault() *OpenstreetmapFR <span class="cov8" title="17">{
+        timeout := defaultTimeout
+
+        return &amp;OpenstreetmapFR{
+                Scrapper: &amp;scrapper.Scrapper{
+                        PB:             nbElmt,
+                        Async:          true,
+                        Parallelism:    parallelism,
+                        MaxDepth:       0,
+                        AllowedDomains: []string{`download.openstreetmap.fr`},
+                        BaseURL:        `https://download.openstreetmap.fr/extracts`,
+                        StartURL:       `https://download.openstreetmap.fr/`,
+                        URLFilters: []*regexp.Regexp{
+                                regexp.MustCompile(`https://download\.openstreetmap\.fr/$`),
+                                regexp.MustCompile(`https://download\.openstreetmap\.fr/extracts/(\w.+|)$`), //nolint:gocritic // This is a valid regexp
+                                regexp.MustCompile(`https://download\.openstreetmap\.fr/polygons/(\w.+|)$`), //nolint:gocritic // This is a valid regexp
+                                regexp.MustCompile(`https://download.openstreetmap.fr/cgi-bin/^(.*)$`),      //nolint:gocritic // This is a valid regexp
+                                regexp.MustCompile(`https://download.openstreetmap.fr/replication/^(.*|)$`), //nolint:gocritic // This is a valid regexp
+                        },
+                        FormatDefinition: formats.FormatDefinitions{
+                                "osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5", ToLoc: "", BasePath: "", BaseURL: ""},
+                                formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf", ToLoc: "", BasePath: "", BaseURL: ""},
+                                formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "../polygons/", BaseURL: ""},
+                                formats.FormatState:  {ID: formats.FormatState, Loc: ".state.txt", ToLoc: "", BasePath: "", BaseURL: ""},
+                        },
+                        Timeout: timeout,
+                        Config: &amp;config.Config{
+                                Formats:       formats.FormatDefinitions{},
+                                Elements:      element.MapElement{},
+                                ElementsMutex: &amp;sync.RWMutex{},
+                                BaseURL:       `https://download.openstreetmap.fr/`,
+                        },
+                        DomainGlob:  "*",
+                        RandomDelay: randomDelay,
+                },
+        }
+}</span>
+
+// Collector returns a Colly collector for OpenstreetmapFR.
+func (o *OpenstreetmapFR) Collector() *colly.Collector <span class="cov3" title="3">{
+        c := o.Scrapper.Collector()
+        c.OnHTML("a", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+                o.Parse(e, c)
+        }</span>)
+
+        <span class="cov3" title="3">return c</span>
+}
+
+// GetParent returns the parent and the list of parents from a given href.
+func GetParent(href string) (parent string, parentList []string) <span class="cov9" title="27">{
+        // Remove the last / from the href to avoid empty string in the parent list
+        href = strings.TrimSuffix(href, "/")
+
+        parentList = strings.Split(href, "/")
+        if len(parentList) &gt; minParentListLength </span><span class="cov9" title="23">{
+                parent = parentList[len(parentList)-2]
+        }</span> else<span class="cov4" title="4"> {
+                parent = ""
+        }</span>
+
+        <span class="cov9" title="27">if strings.EqualFold(parent, "extracts") || strings.EqualFold(parent, "polygons") </span><span class="cov5" title="5">{
+                parent = ""
+        }</span>
+
+        <span class="cov9" title="27">return parent, parentList</span>
+}
+
+// MakeParents creates parent elements recursively.
+func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span class="cov8" title="20">{
+        if parent == "" </span><span class="cov5" title="5">{
+                return
+        }</span>
+
+        <span class="cov8" title="15">gparent := getGparent(gparents)
+
+        if !o.Config.Exist(parent) </span><span class="cov8" title="15">{
+                o.createAndMergeElement(parent, gparent)
+
+                if gparent != "" </span><span class="cov4" title="4">{
+                        o.MakeParents(gparent, gparents[:len(gparents)-1])
+                }</span>
+        }
+}
+
+// getGparent returns the grandparent from a list of parents.
+func getGparent(gparents []string) string <span class="cov8" title="15">{
+        if len(gparents) &lt; minParentListLength </span><span class="cov1" title="1">{
+                return ""
+        }</span>
+
+        <span class="cov7" title="14">gparent := gparents[len(gparents)-3]
+        if gparent == "http:" || gparent == "openstreetmap.fr" || gparent == "extracts" || gparent == "polygons" </span><span class="cov7" title="10">{
+                return ""
+        }</span>
+
+        <span class="cov4" title="4">return gparent</span>
+}
+
+// createAndMergeElement creates and merges an element into the configuration.
+func (o *OpenstreetmapFR) createAndMergeElement(parent, gparent string) <span class="cov8" title="15">{
+        myElement := element.Element{
+                Parent:  gparent,
+                Name:    parent,
+                ID:      parent,
+                Formats: []string{},
+                File:    "",
+                Meta:    true,
+        }
+
+        if err := o.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Errorf("can't merge %s", myElement.Name)
+        }</span>
+}
+
+// Exceptions returns the exception name if it exists in the exception list.
+func Exceptions(name, parent string) string <span class="cov8" title="17">{
+        if _, exists := exceptionList[name]; exists </span><span class="cov2" title="2">{
+                return fmt.Sprintf("%v_%v", parent, name)
+        }</span>
+
+        <span class="cov8" title="15">return name</span>
+}
+
+// ParseHref parses the href and updates the configuration.
+func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">{
+        log.Debugf("Parsing: %s", href)
+
+        if strings.Contains(href, "?") || strings.Contains(href, "-latest") || href[0] == '/' </span><span class="cov7" title="12">{
+                return
+        }</span>
+
+        <span class="cov8" title="18">parent, parents := GetParent(href)
+        if !o.Config.Exist(parent) </span><span class="cov7" title="11">{
+                o.MakeParents(parent, parents)
+        }</span>
+
+        <span class="cov8" title="18">valsplit := strings.Split(parents[len(parents)-1], ".")
+        if valsplit[0] == "" || len(strings.Split(href, "/")) &lt;= minParentListLength </span><span class="cov1" title="1">{
+                return
+        }</span>
+
+        <span class="cov8" title="17">if strings.Contains(passList, valsplit[0]) </span><span class="cov0" title="0">{
+                return
+        }</span>
+
+        <span class="cov8" title="17">name := Exceptions(valsplit[0], parent)
+        log.Debugf("Parsing %s", name)
+
+        extension := strings.Join(valsplit[1:], ".")
+        if strings.Contains(extension, "state.txt") </span><span class="cov5" title="5">{
+                extension = formats.FormatState
+        }</span>
+
+        <span class="cov8" title="17">log.Debugf("Add %s format", extension)
+
+        file := ""
+        if extension != "" </span><span class="cov8" title="15">{
+                file = name
+        }</span>
+
+        <span class="cov8" title="17">o.addOrUpdateElement(parent, name, file, extension)</span>
+}
+
+// addOrUpdateElement adds or updates an element in the configuration.
+func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension string) <span class="cov8" title="17">{
+        myElement := element.Element{
+                ID:      name,
+                File:    file,
+                Name:    name,
+                Parent:  parent,
+                Formats: []string{},
+                Meta:    false,
+        }
+
+        if extension == "" </span><span class="cov2" title="2">{
+                myElement.File = ""
+                myElement.Meta = true
+        }</span>
+
+        <span class="cov8" title="17">if !o.Config.Exist(name) </span><span class="cov7" title="12">{
+                if extension != "" </span><span class="cov7" title="10">{
+                        myElement.Formats = append(myElement.Formats, extension)
+                }</span>
+
+                <span class="cov7" title="12">if err := o.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+                        log.WithError(err).Errorf("can't merge %s", myElement.Name)
+                }</span>
+        } else<span class="cov5" title="5"> {
+                log.Debugf("%s already exist, Merging formats", name)
+
+                if extension != "" </span><span class="cov5" title="5">{
+                        o.Config.AddExtension(name, extension)
+                }</span>
+        }
+}
+
+// Parse parses the HTML element and visits the URL if it's a directory.
+func (o *OpenstreetmapFR) Parse(e *colly.HTMLElement, c *colly.Collector) <span class="cov9" title="23">{
+        href := e.Request.AbsoluteURL(e.Attr("href"))
+        if isDirectory(href) </span><span class="cov2" title="2">{
+                log.Debugf("Next: %s", href)
+                visitURL(c, href)
+        }</span> else<span class="cov9" title="21"> {
+                o.ParseHref(href)
+        }</span>
+}
+
+// isDirectory checks if the URL is a directory.
+func isDirectory(href string) bool <span class="cov9" title="23">{
+        return href[len(href)-1] == '/'
+}</span>
+
+// visitURL visits the URL and handles errors.
+func visitURL(c *colly.Collector, href string) <span class="cov2" title="2">{
+        if err := c.Visit(href); err != nil &amp;&amp; !errors.Is(err, colly.ErrAlreadyVisited) </span><span class="cov2" title="2">{
+                if !errors.Is(err, colly.ErrNoURLFiltersMatch) </span><span class="cov0" title="0">{
+                        log.WithError(err).Error("can't get url")
+                }</span> else<span class="cov2" title="2"> {
+                        log.Debugf("URL: %v is not matching URLFilters\n", href)
+                }</span>
+        }
+}
+</pre>
+		
+		<pre class="file" id="file17" style="display: none">package osmtoday
+
+import (
+        "errors"
+        "fmt"
+        "regexp"
+        "sync"
+
+        "github.com/apex/log"
+        "github.com/gocolly/colly/v2"
+        "github.com/julien-noblet/download-geofabrik/config"
+        "github.com/julien-noblet/download-geofabrik/element"
+        "github.com/julien-noblet/download-geofabrik/formats"
+        "github.com/julien-noblet/download-geofabrik/scrapper"
+)
+
+// Constants for magic numbers and URLs.
+const (
+        progressBarCount = 1003 // number of elements
+        parallelism      = 20   // number of parallel downloads
+        baseURL          = "https://osmtoday.com"
+        startURL         = baseURL + "/"
+)
+
+// Osmtoday Scrapper.
+type Osmtoday struct {
+        *scrapper.Scrapper
+}
+
+// GetDefault returns the default configuration for Osmtoday scrapper.
+func GetDefault() *Osmtoday <span class="cov5" title="13">{
+        urlFilters := []*regexp.Regexp{
+                regexp.MustCompile(`https://osmtoday\.com/.+\.html$`),
+                regexp.MustCompile(`https://osmtoday\.com/$`),
+        }
+
+        formatDefinition := formats.FormatDefinitions{
+                "osm.pbf.md5":         {ID: "osm.pbf.md5", Loc: ".md5"},
+                formats.FormatGeoJSON: {ID: formats.FormatGeoJSON, Loc: ".geojson"},
+                formats.FormatOsmPbf:  {ID: formats.FormatOsmPbf, Loc: ".pbf"},
+                formats.FormatPoly:    {ID: formats.FormatPoly, Loc: ".poly"},
+        }
+
+        return &amp;Osmtoday{
+                Scrapper: &amp;scrapper.Scrapper{
+                        PB:               progressBarCount,
+                        Async:            true,
+                        Parallelism:      parallelism,
+                        MaxDepth:         0,
+                        AllowedDomains:   []string{`osmtoday.com`},
+                        BaseURL:          baseURL,
+                        StartURL:         startURL,
+                        URLFilters:       urlFilters,
+                        FormatDefinition: formatDefinition,
+                        Config: &amp;config.Config{
+                                Formats:       formats.FormatDefinitions{},
+                                Elements:      element.MapElement{},
+                                ElementsMutex: &amp;sync.RWMutex{},
+                                BaseURL:       "",
+                        },
+                },
+        }
+}</span>
+
+// Collector represents Osmtoday's scrapper.
+func (g *Osmtoday) Collector() *colly.Collector <span class="cov0" title="0">{
+        myCollector := g.Scrapper.Collector()
+        myCollector.OnHTML(".row", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+                g.ParseLi(e, myCollector)
+        }</span>)
+        <span class="cov0" title="0">myCollector.OnHTML("table", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+                g.ParseSubregion(e, myCollector)
+        }</span>)
+
+        <span class="cov0" title="0">return myCollector</span>
+}
+
+// Exceptions handles special cases for certain IDs.
+func (g *Osmtoday) Exceptions(myElement *element.Element) *element.Element <span class="cov5" title="13">{
+        exceptions := []struct {
+                ID     string
+                Parent string
+        }{
+                {"la_rioja", "argentina"},
+                {"la_rioja", "spain"},
+                {"guyane", "france"},
+                {"guyane", "south-america"},
+                {"sevastopol", "ukraine"},
+                {"sevastopol", "russia"},
+                {"limburg", "netherlands"},
+                {"limburg", "flanders"},
+                {"cordoba", "argentina"},
+                {"cordoba", "andalucia"},
+                {"georgia", "asia"},
+                {"georgia", "us"},
+        }
+
+        for _, exception := range exceptions </span><span class="cov10" title="156">{
+                if myElement.ID == exception.ID &amp;&amp; myElement.Parent == exception.Parent </span><span class="cov5" title="12">{
+                        myElement.ID = fmt.Sprintf("%s-%s", myElement.ID, myElement.Parent)
+                }</span>
+        }
+
+        <span class="cov5" title="13">return myElement</span>
+}
+
+// ParseSubregion parses the subregion information from the HTML.
+func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Collector) <span class="cov0" title="0">{
+        e.ForEach("td", func(_ int, el *colly.HTMLElement) </span><span class="cov0" title="0">{
+                el.ForEach("a", func(_ int, sub *colly.HTMLElement) </span><span class="cov0" title="0">{
+                        href := sub.Request.AbsoluteURL(sub.Attr("href"))
+
+                        myID, extension := scrapper.FileExt(href)
+                        if myID == "" </span><span class="cov0" title="0">{
+                                log.Debugf("myID is empty, href: %s", href)
+
+                                return
+                        }</span>
+
+                        <span class="cov0" title="0">if extension == "html" </span><span class="cov0" title="0">{
+                                g.handleHTMLExtension(sub, href, myID, myCollector)
+                        }</span> else<span class="cov0" title="0"> {
+                                parent, _ := scrapper.GetParent(href)
+
+                                myElement := element.Element{
+                                        ID:     myID,
+                                        Name:   sub.Text,
+                                        Parent: parent,
+                                        Meta:   true,
+                                }
+                                myElement = *g.Exceptions(&amp;myElement)
+
+                                g.ParseFormat(myElement.ID, extension)
+                        }</span>
+                })
+        })
+}
+
+// handleHTMLExtension handles the HTML extension case.
+func (g *Osmtoday) handleHTMLExtension(sub *colly.HTMLElement, href, myID string, myCollector *colly.Collector) <span class="cov0" title="0">{
+        parent, parentPath := scrapper.GetParent(href)
+
+        myElement := element.Element{
+                ID:     myID,
+                Name:   sub.Text,
+                Parent: parent,
+                Meta:   true,
+        }
+
+        myElement = *g.Exceptions(&amp;myElement)
+
+        if !g.Config.Exist(parent) &amp;&amp; parent != "" </span><span class="cov0" title="0">{
+                gparent, _ := scrapper.GetParent(parentPath)
+                log.Debugf("Create Meta %s parent: %s %v", myElement.Parent, gparent, parentPath)
+
+                if gp := element.CreateParentElement(&amp;myElement, gparent); gp != nil </span><span class="cov0" title="0">{
+                        if err := g.Config.MergeElement(gp); err != nil </span><span class="cov0" title="0">{
+                                log.WithError(err).Errorf("can't merge %s", myElement.Name)
+                        }</span>
+                }
+        }
+
+        <span class="cov0" title="0">if err := g.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Errorf("can't merge %s", myElement.Name)
+        }</span>
+
+        <span class="cov0" title="0">log.Debugf("Add: %s", href)
+
+        if err := myCollector.Visit(href); err != nil &amp;&amp; !errors.Is(err, colly.ErrAlreadyVisited) </span><span class="cov0" title="0">{
+                log.WithError(err).Error("can't get url")
+        }</span>
+}
+
+// ParseFormat adds extensions to the ID.
+func (g *Osmtoday) ParseFormat(id, format string) <span class="cov0" title="0">{
+        g.Scrapper.ParseFormatService(id, format, &amp;g.Scrapper.FormatDefinition)
+
+        if format == formats.FormatOsmPbf </span><span class="cov0" title="0">{
+                g.Config.AddExtension(id, "osm.pbf.md5")
+        }</span>
+}
+
+// ParseLi parses the list items from the HTML.
+func (g *Osmtoday) ParseLi(e *colly.HTMLElement, _ *colly.Collector) <span class="cov0" title="0">{
+        e.ForEach("a", func(_ int, element *colly.HTMLElement) </span><span class="cov0" title="0">{
+                _, format := scrapper.FileExt(element.Attr("href"))
+                myID, _ := scrapper.FileExt(element.Request.URL.String())
+
+                g.ParseFormat(myID, format)
+        }</span>)
+}
+</pre>
+		
+		<pre class="file" id="file18" style="display: none">package scrapper
+
+import (
+        "errors"
+        "net"
+        "net/http"
+        "regexp"
+        "strings"
+        "sync"
+        "time"
+
+        "github.com/apex/log"
+        "github.com/gocolly/colly/v2"
+        "github.com/julien-noblet/download-geofabrik/config"
+        "github.com/julien-noblet/download-geofabrik/element"
+        "github.com/julien-noblet/download-geofabrik/formats"
+)
+
+// IScrapper represents a colly Scrapper.
+type IScrapper interface {
+        GetConfig() *config.Config
+        Collector() *colly.Collector
+        Limit() *colly.LimitRule
+        GetPB() int
+        GetStartURL() string
+        ParseFormat(id, format string)
+}
+
+// Scrapper defines a default scrapper.
+type Scrapper struct {
+        Config           *config.Config
+        FormatDefinition formats.FormatDefinitions
+        BaseURL          string
+        DomainGlob       string
+        StartURL         string
+        URLFilters       []*regexp.Regexp
+        AllowedDomains   []string
+        Timeout          time.Duration
+        RandomDelay      time.Duration
+        MaxDepth         int
+        Parallelism      int
+        PB               int
+        mu               sync.RWMutex
+        Async            bool
+}
+
+const (
+        defaultRandomDelay           = 5 * time.Second
+        defaultTimeout               = 60 * time.Second
+        defaultKeepAlive             = 30 * time.Second
+        defaultIdleConnTimeout       = 5 * time.Second
+        defaultTLSHandshakeTimeout   = 10 * time.Second
+        defaultExpectContinueTimeout = 5 * time.Second
+        minParentListLength          = 5
+)
+
+// NewScrapper creates a new Scrapper instance with default values.
+func NewScrapper(baseURL, startURL string, allowedDomains []string) *Scrapper <span class="cov0" title="0">{
+        return &amp;Scrapper{
+                RandomDelay:    defaultRandomDelay,
+                Timeout:        defaultTimeout,
+                Parallelism:    1,
+                BaseURL:        baseURL,
+                StartURL:       startURL,
+                AllowedDomains: allowedDomains,
+        }
+}</span>
+
+// GetConfig initializes a *config.Config from fields.
+func (s *Scrapper) GetConfig() *config.Config <span class="cov5" title="25">{
+        s.mu.RLock()
+        if s.Config != nil </span><span class="cov4" title="11">{
+                defer s.mu.RUnlock()
+
+                return s.Config
+        }</span>
+        <span class="cov4" title="14">s.mu.RUnlock()
+
+        s.mu.Lock()
+        defer s.mu.Unlock()
+        s.Config = s.initializeConfig()
+
+        return s.Config</span>
+}
+
+// initializeConfig initializes the configuration with default values.
+func (s *Scrapper) initializeConfig() *config.Config <span class="cov4" title="14">{
+        return &amp;config.Config{
+                Elements:      element.MapElement{},
+                ElementsMutex: &amp;sync.RWMutex{},
+                Formats:       s.FormatDefinition,
+                BaseURL:       s.BaseURL,
+        }
+}</span>
+
+// Limit defines LimitRules.
+func (s *Scrapper) Limit() *colly.LimitRule <span class="cov4" title="12">{
+        if s.DomainGlob == "" </span><span class="cov3" title="7">{
+                s.DomainGlob = "*"
+        }</span>
+
+        <span class="cov4" title="12">if s.Parallelism &lt;= 1 </span><span class="cov1" title="2">{
+                s.Parallelism = 1
+        }</span>
+
+        <span class="cov4" title="12">return &amp;colly.LimitRule{
+                DomainGlob:  s.DomainGlob,
+                Parallelism: s.Parallelism,
+                RandomDelay: s.RandomDelay,
+        }</span>
+}
+
+// Collector initializes a *colly.Collector.
+func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov3" title="9">{
+        myCollector := colly.NewCollector(
+                colly.AllowedDomains(s.AllowedDomains...),
+                colly.URLFilters(s.URLFilters...),
+                colly.Async(s.Async),
+                colly.MaxDepth(s.MaxDepth),
+        )
+
+        if s.Timeout != 0 </span><span class="cov2" title="3">{
+                myCollector.SetRequestTimeout(s.Timeout)
+        }</span>
+
+        <span class="cov3" title="9">myCollector.WithTransport(&amp;http.Transport{
+                Proxy: http.ProxyFromEnvironment,
+                DialContext: (&amp;net.Dialer{
+                        Timeout:   defaultTimeout,
+                        KeepAlive: defaultKeepAlive,
+                }).DialContext,
+                IdleConnTimeout:       defaultIdleConnTimeout,
+                TLSHandshakeTimeout:   defaultTLSHandshakeTimeout,
+                ExpectContinueTimeout: defaultExpectContinueTimeout,
+        })
+
+        s.Config = s.GetConfig()
+        if err := myCollector.Limit(s.Limit()); err != nil </span><span class="cov0" title="0">{
+                log.WithError(err).Error("can't update limit")
+        }</span>
+
+        <span class="cov3" title="9">myCollector.OnError(func(r *colly.Response, err error) </span><span class="cov0" title="0">{
+                if !errors.Is(err, colly.ErrForbiddenURL) &amp;&amp; !errors.Is(err, colly.ErrForbiddenDomain) &amp;&amp; err.Error() != "Forbidden" </span><span class="cov0" title="0">{
+                        log.WithError(err).Debugf("request URL: %v failed with response: %v", r.Request.URL, r)
+                }</span> else<span class="cov0" title="0"> {
+                        log.Debugf("URL: %v is forbidden", r.Request.URL)
+                }</span>
+        })
+
+        <span class="cov3" title="9">return myCollector</span>
+}
+
+// GetStartURL returns StartURL.
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
+        return s.StartURL
+}</span>
+
+// GetPB returns PB.
+func (s *Scrapper) GetPB() int <span class="cov3" title="10">{
+        return s.PB
+}</span>
+
+// ParseFormat adds Extensions to ID.
+func (s *Scrapper) ParseFormat(id, format string) <span class="cov5" title="22">{
+        s.AddExtension(id, format, &amp;s.Config.Formats)
+}</span>
+
+// ParseFormatService adds Extensions to ID.
+func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefinitions) <span class="cov0" title="0">{
+        s.AddExtension(id, format, def)
+}</span>
+
+// AddExtension adds an extension to the configuration.
+func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="22">{
+        for f, i := range *def </span><span class="cov7" title="216">{
+                if format == i.ID </span><span class="cov4" title="20">{
+                        s.Config.AddExtension(id, f)
+                }</span>
+        }
+}
+
+// FileExt returns filename and extension.
+func FileExt(url string) (filename, extension string) <span class="cov5" title="31">{
+        urls := strings.Split(url, "/")
+        f := strings.Split(urls[len(urls)-1], ".")
+
+        return f[0], strings.Join(f[1:], ".")
+}</span>
+
+// GetParent returns filename and path.
+func GetParent(url string) (filename, path string) <span class="cov5" title="28">{
+        r := strings.Split(url, "/")
+        if len(r) &lt; minParentListLength </span><span class="cov3" title="10">{
+                return "", strings.Join(r[:len(r)-1], "/")
+        }</span>
+
+        <span class="cov4" title="18">return r[len(r)-2], strings.Join(r[:len(r)-1], "/")</span>
+}
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
