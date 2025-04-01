@@ -1,4 +1,5 @@
 [
+  {"Version":"90ac87d102b57c2c33c136650cbb449f3dac981d","Date":1743490808,"Tags":["ref=refs/heads/renovate/github.com-gocolly-colly-v2-2.x"],"Suites":[]},
   {"Version":"2c3185c313fe798e53f2f66973017b8bd96d4772","Date":1743490275,"Tags":["ref=refs/heads/renovate/github.com-gocolly-colly-v2-2.x"],"Suites":[]},
   {"Version":"3f6637cb893da38faacf627a0e440fd808199fe6","Date":1743490240,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ed759e6197e4b8d60b2021d7d5e13bf5d7230a0b","Date":1743490142,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"4cb3dd986d342169eb7d2c5982d60550be8cf793","Date":1743028487,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/afero-1.14.0"],"Suites":[]},
   {"Version":"3a8d46db1057669e9e7327915e5ebc8a63dc23a7","Date":1743028484,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.23.0"],"Suites":[]},
   {"Version":"061d8da1aa27b23953198f7569484b74da57a96f","Date":1743028477,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.37.0"],"Suites":[]},
-  {"Version":"51f04ecc781a2dea80e4cb2de8822b84d79c7697","Date":1743028420,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"c07efd44fb751b1055f343a5baa43679e6da1dee","Date":1743028133,"Tags":["ref=refs/heads/renovate/github.com-spf13-viper-1.x"],"Suites":[]}
+  {"Version":"51f04ecc781a2dea80e4cb2de8822b84d79c7697","Date":1743028420,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
