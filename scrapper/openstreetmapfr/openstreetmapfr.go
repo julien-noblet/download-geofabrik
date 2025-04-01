@@ -298,7 +298,7 @@ func isDirectory(href string) bool {
 
 // visitURL visits the URL and handles errors.
 func visitURL(c *colly.Collector, href string) {
-	if err := c.Visit(href); err != nil && !errors.Is(err, colly.ErrAlreadyVisited) {
+	if err := c.Visit(href); err != nil && !errors.Is(err, &colly.AlreadyVisitedError{}) {
 		if !errors.Is(err, colly.ErrNoURLFiltersMatch) {
 			log.WithError(err).Error("can't get url")
 		} else {
