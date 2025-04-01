@@ -1,4 +1,5 @@
 [
+  {"Version":"cfcd1aac827d39cdba31e8dfc02abd6b47280b82","Date":1743488623,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"240da7128fc8c2f166a0e0e4baf610a9725d974a","Date":1743488526,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"7a2ccd6ecfd35c32e964b39ad5e775971288733b","Date":1743487748,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"343b564aef660996099519901a5b339b0173ce22","Date":1743487702,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"c631ad0cb2401fae5e55de1e7b9a2dfedd5fadb4","Date":1742064158,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"6021c826ad57cecc82e334620fe4914917df02ad","Date":1742064067,"Tags":["ref=refs/heads/renovate/github.com-spf13-viper-1.x"],"Suites":[]},
   {"Version":"f53abcc6de48d59416d1db55fc1702114e9b23e1","Date":1741591378,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.23.0"],"Suites":[]},
-  {"Version":"89a938ae42f5268e30f99fdb3318ae73faf43a82","Date":1741591367,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.31.0"],"Suites":[]},
-  {"Version":"3230a71b4bf087380bca3cd6a025087583d1ad07","Date":1741591365,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.37.0"],"Suites":[]}
+  {"Version":"89a938ae42f5268e30f99fdb3318ae73faf43a82","Date":1741591367,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.31.0"],"Suites":[]}
 ]
