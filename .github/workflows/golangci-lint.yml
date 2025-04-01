@@ -10,22 +10,21 @@ on:
 permissions:
   contents: read
   # Optional: allow read access to pull request. Use with `only-new-issues` option.
-  # pull-requests: read
+  pull-requests: read
 jobs:
   golangci:
     name: lint
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
           go-version: stable
           check-latest: true
           cache: true
-      - name: Run go mod tidy
-        run: go mod tidy
-      - uses: actions/checkout@v4
+          go-version-file: "go.mod"
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v7
         with:
           # Optional: version of golangci-lint to use in form of v1.2 or v1.2.3 or `latest` to use the latest version
           version: latest
@@ -41,7 +40,7 @@ jobs:
 
           # Optional: if set to true then the all caching functionality will be complete disabled,
           #           takes precedence over all other caching options.
-          # skip-cache: true
+          skip-cache: true
 
           # Optional: if set to true then the action don't cache or restore ~/go/pkg.
           # skip-pkg-cache: true
