@@ -21,6 +21,8 @@ jobs:
           go-version: stable
           check-latest: true
           cache: true
+      - name: Run go mod tidy
+        run: go mod tidy
       - uses: actions/checkout@v4
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v6
