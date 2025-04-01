@@ -1,4 +1,5 @@
 [
+  {"Version":"69136fe88c32f63e05d3ea64fd597cadbab54cb4","Date":1743490962,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"90ac87d102b57c2c33c136650cbb449f3dac981d","Date":1743490808,"Tags":["ref=refs/heads/renovate/github.com-gocolly-colly-v2-2.x"],"Suites":[]},
   {"Version":"2c3185c313fe798e53f2f66973017b8bd96d4772","Date":1743490275,"Tags":["ref=refs/heads/renovate/github.com-gocolly-colly-v2-2.x"],"Suites":[]},
   {"Version":"3f6637cb893da38faacf627a0e440fd808199fe6","Date":1743490240,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"cfd9108831041fc3ecf15e1c2797c4179a7fd6eb","Date":1743028488,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.31.0"],"Suites":[]},
   {"Version":"4cb3dd986d342169eb7d2c5982d60550be8cf793","Date":1743028487,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/afero-1.14.0"],"Suites":[]},
   {"Version":"3a8d46db1057669e9e7327915e5ebc8a63dc23a7","Date":1743028484,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.23.0"],"Suites":[]},
-  {"Version":"061d8da1aa27b23953198f7569484b74da57a96f","Date":1743028477,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.37.0"],"Suites":[]},
-  {"Version":"51f04ecc781a2dea80e4cb2de8822b84d79c7697","Date":1743028420,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"061d8da1aa27b23953198f7569484b74da57a96f","Date":1743028477,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.37.0"],"Suites":[]}
 ]
