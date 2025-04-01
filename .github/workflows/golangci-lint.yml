@@ -20,8 +20,8 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
-          # check-latest: true
-          cache: false
+          check-latest: true
+          cache: true
           go-version-file: "go.mod"
       - name: Run go mod tidy
         run: go mod tidy
