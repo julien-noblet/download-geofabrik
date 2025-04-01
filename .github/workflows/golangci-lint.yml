@@ -20,7 +20,7 @@ jobs:
         with:
           go-version: stable
           check-latest: true
-          cache: true
+          # cache: true
       - name: Run go mod tidy
         run: go mod tidy
       - uses: actions/checkout@v4
