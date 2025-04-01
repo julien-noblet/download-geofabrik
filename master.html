@@ -1935,9 +1935,9 @@ func (g *Geofabrik) handleHTMLExtension(sub *colly.HTMLElement, href, myID strin
                 log.WithError(err).Errorf("can't merge %s", myElement.Name)
         }</span>
 
-        <span class="cov9" title="19">log.Debugf("Add: %s", href)
+        <span class="cov9" title="18">log.Debugf("Add: %s", href)
 
-        if err := myCollector.Visit(href); err != nil &amp;&amp; !errors.Is(err, colly.ErrAlreadyVisited) </span><span class="cov0" title="0">{
+        if err := myCollector.Visit(href); err != nil &amp;&amp; !errors.Is(err, &amp;colly.AlreadyVisitedError{}) </span><span class="cov0" title="0">{
                 log.WithError(err).Error("can't get url")
         }</span>
 }
@@ -2292,7 +2292,7 @@ func isDirectory(href string) bool <span class="cov9" title="23">{
 
 // visitURL visits the URL and handles errors.
 func visitURL(c *colly.Collector, href string) <span class="cov2" title="2">{
-        if err := c.Visit(href); err != nil &amp;&amp; !errors.Is(err, colly.ErrAlreadyVisited) </span><span class="cov2" title="2">{
+        if err := c.Visit(href); err != nil &amp;&amp; !errors.Is(err, &amp;colly.AlreadyVisitedError{}) </span><span class="cov2" title="2">{
                 if !errors.Is(err, colly.ErrNoURLFiltersMatch) </span><span class="cov0" title="0">{
                         log.WithError(err).Error("can't get url")
                 }</span> else<span class="cov2" title="2"> {
@@ -2470,7 +2470,7 @@ func (g *Osmtoday) handleHTMLExtension(sub *colly.HTMLElement, href, myID string
 
         <span class="cov0" title="0">log.Debugf("Add: %s", href)
 
-        if err := myCollector.Visit(href); err != nil &amp;&amp; !errors.Is(err, colly.ErrAlreadyVisited) </span><span class="cov0" title="0">{
+        if err := myCollector.Visit(href); err != nil &amp;&amp; !errors.Is(err, &amp;colly.AlreadyVisitedError{}) </span><span class="cov0" title="0">{
                 log.WithError(err).Error("can't get url")
         }</span>
 }
