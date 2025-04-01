@@ -1,217 +1,239 @@
-linters-settings:
-  govet:
-    enable:
-      # Check for missing values after append.
-      - appends
-      # Report mismatches between assembly files and Go declarations.
-      - asmdecl
-      # Check for useless assignments.
-      - assign
-      # Check for common mistakes using the sync/atomic package.
-      - atomic
-      # Check for non-64-bits-aligned arguments to sync/atomic functions.
-      - atomicalign
-      # Check for common mistakes involving boolean operators.
-      - bools
-      # Check //go:build and // +build directives.
-      - buildtag
-      # Detect some violations of the cgo pointer passing rules.
-      - cgocall
-      # Check for unkeyed composite literals.
-      - composites
-      # Check for locks erroneously passed by value.
-      - copylocks
-      # Check for calls of reflect.DeepEqual on error values.
-      - deepequalerrors
-      # Report common mistakes in defer statements.
-      - defers
-      # Check Go toolchain directives such as //go:debug.
-      - directive
-      # Report passing non-pointer or non-error values to errors.As.
-      - errorsas
-      # Find structs that would use less memory if their fields were sorted.
-      - fieldalignment
-      # Find calls to a particular function.
-      - findcall
-      # Report assembly that clobbers the frame pointer before saving it.
-      - framepointer
-      # Check for mistakes using HTTP responses.
-      - httpresponse
-      # Detect impossible interface-to-interface type assertions.
-      - ifaceassert
-      # Check references to loop variables from within nested functions.
-      - loopclosure
-      # Check cancel func returned by context.WithCancel is called.
-      - lostcancel
-      # Check for useless comparisons between functions and nil.
-      - nilfunc
-      # Check for redundant or impossible nil comparisons.
-      - nilness
-      # Check consistency of Printf format strings and arguments.
-      - printf
-      # Check for comparing reflect.Value values with == or reflect.DeepEqual.
-      - reflectvaluecompare
-      # Check for possible unintended shadowing of variables.
-      - shadow
-      # Check for shifts that equal or exceed the width of the integer.
-      - shift
-      # Check for unbuffered channel of os.Signal.
-      - sigchanyzer
-      # Check for invalid structured logging calls.
-      - slog
-      # Check the argument type of sort.Slice.
-      - sortslice
-      # Check signature of methods of well-known interfaces.
-      - stdmethods
-      # Report uses of too-new standard library symbols.
-      - stdversion
-      # Check for string(int) conversions.
-      - stringintconv
-      # Check that struct field tags conform to reflect.StructTag.Get.
-      - structtag
-      # Report calls to (*testing.T).Fatal from goroutines started by a test.
-      - testinggoroutine
-      # Check for common mistaken usages of tests and examples.
-      - tests
-      # Check for calls of (time.Time).Format or time.Parse with 2006-02-01.
-      - timeformat
-      # Report passing non-pointer or non-interface values to unmarshal.
-      - unmarshal
-      # Check for unreachable code.
-      - unreachable
-      # Check for invalid conversions of uintptr to unsafe.Pointer.
-      - unsafeptr
-      # Check for unused results of calls to some functions.
-      - unusedresult
-      # Checks for unused writes.
-      - unusedwrite
-      # Check for misuses of sync.WaitGroup.
-      - waitgroup
-    settings:
-      printf:
-        funcs:
-          - (github.com/golangci/golangci-lint/pkg/logutils.Log).Infof
-          - (github.com/golangci/golangci-lint/pkg/logutils.Log).Warnf
-          - (github.com/golangci/golangci-lint/pkg/logutils.Log).Errorf
-          - (github.com/golangci/golangci-lint/pkg/logutils.Log).Fatalf
-  gocyclo:
-    min-complexity: 20
-  dupl:
-   threshold: 150
-  goconst:
-    min-len: 2
-    min-occurrences: 3
-  depguard:
-    rules:
-      main:
-        list-mode: lax
-        allow:
-          - github.com/apex/log
-          - github.com/julen-noblet/download-geofabrik/*
-  misspell:
-    locale: US
-  lll:
-    line-length: 150
-  goimports:
-    local-prefixes: github.com/golangci/golangci-lint
-  gocritic:
-    #enabled-tags:
-    #  - diagnostic
-    #  - experimental
-    #  - opinionated
-    #  - performance
-    #  - style
-    enable-all: true
-    #disabled-checks:
-      #- commentedOutCode
-      # - hugeParam
-      #- wrapperFunc
-      #- dupImport # https://github.com/go-critic/go-critic/issues/845
-        #- ifElseChain
-        #- octalLiteral
-  funlen:
-    lines: 100
-    statements: 50
-  unused:
-    # treat code as a program (not a library) and report unused exported identifiers; default is false.
-    # XXX: if you enable this setting, unused will report a lot of false-positives in text editors:
-    # if it's called for subdir of a project it can't find funcs usages. All text editor integrations
-    # with golangci-lint call it on a directory with the changed file.
-    exported-fields-are-used: false
-  unparam:
-    # Inspect exported functions, default is false. Set to true if no external program/library imports your code.
-    # XXX: if you enable this setting, unparam will report a lot of false-positives in text editors:
-    # if it's called for subdir of a project it can't find external interfaces. All text editor integrations
-    # with golangci-lint call it on a directory with the changed file.
-    check-exported: false
-  nakedret:
-    # make an issue if func has more lines of code than this setting and it has naked returns; default is 30
-    max-func-lines: 30
-  prealloc:
-    # XXX: we don't recommend using this linter before doing performance profiling.
-    # For most programs usage of prealloc will be a premature optimization.
-
-    # Report preallocation suggestions only on simple loops that have no returns/breaks/continues/gotos in them.
-    # True by default.
-    simple: true
-    range-loops: true # Report preallocation suggestions on range loops, true by default
-    for-loops: true # Report preallocation suggestions on for loops, false by default
-  whitespace:
-    multi-if: false   # Enforces newlines (or comments) after every multi-line if statement
-    multi-func: true # Enforces newlines (or comments) after every multi-line function signature
-  wsl:
-    # Allow calls and assignments to be cuddled as long as the lines have any
-    # matching variables, fields or types. Default is true.
-    allow-assign-and-call: true
-    # Allow multiline assignments to be cuddled. Default is true.
-    allow-multiline-assign: true
-    #  If the number of lines in a case block is equal to or lager than this number,
-    # the case *must* end white a newline.
-    # https://github.com/bombsimon/wsl/blob/HEAD/doc/configuration.md#force-case-trailing-whitespace
-    # Default: 0
-    force-case-trailing-whitespace: 2
-    allow-trailing-comment: true
-    # Allow declarations (var) to be cuddled.
-    allow-cuddle-declarations: false
-
-
+version: "2"
 linters:
-  # please, do not use `enable-all`: it's deprecated and will be removed soon.
-  # inverted configuration with `enable-all` and `disable` is not scalable during updates of golangci-lint
-  #disable-all: true
-  #enable-all: true
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - canonicalheader
+    - containedctx
+    - contextcheck
+    - copyloopvar
+    - cyclop
+    - decorder
+    - depguard
+    - dogsled
+    - dupl
+    - dupword
+    - durationcheck
+    - err113
+    - errchkjson
+    - errname
+    - errorlint
+    - exhaustive
+    - exptostd
+    - fatcontext
+    - forbidigo
+    - forcetypeassert
+    - funlen
+    - ginkgolinter
+    - gocheckcompilerdirectives
+    - gochecknoinits
+    - gochecksumtype
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - godox
+    - goheader
+    - gomoddirectives
+    - gomodguard
+    - goprintffuncname
+    - gosec
+    - gosmopolitan
+    - grouper
+    - iface
+    - importas
+    - inamedparam
+    - interfacebloat
+    - intrange
+    - ireturn
+    - lll
+    - loggercheck
+    - maintidx
+    - makezero
+    - mirror
+    - misspell
+    - mnd
+    - musttag
+    - nakedret
+    - nestif
+    - nilerr
+    - nilnesserr
+    - nilnil
+    - nlreturn
+    - noctx
+    - nolintlint
+    - nosprintfhostport
+    - paralleltest
+    - perfsprint
+    - prealloc
+    - predeclared
+    - promlinter
+    - protogetter
+    - reassign
+    - recvcheck
+    - revive
+    - rowserrcheck
+    - sloglint
+    - spancheck
+    - sqlclosecheck
+    - staticcheck
+    - tagalign
+    - tagliatelle
+    - testableexamples
+    - testifylint
+    - testpackage
+    - thelper
+    - tparallel
+    - unconvert
+    - unparam
+    - usestdlibvars
+    - usetesting
+    - varnamelen
+    - wastedassign
+    - whitespace
+    - wrapcheck
+    - wsl
+    - zerologlint
   disable:
-    - gochecknoglobals
     - exhaustruct
+    - gochecknoglobals
     - nonamedreturns
-  presets:
-    - bugs
-    - comment
-    - complexity
-    - error
-    - format
-    - import
-    - metalinter
-    - module
-    - performance
-    - sql
-    - style
-    - test
-    - unused
-
-issues:
-  exclude-rules:
-    - path: _test.go
-      linters:
-        - gochecknoinits
-        - gocyclo
-        - cyclop
-        - funlen
-        - exhaustruct
-        - maintidx
-        - dupl
-        - godox
-        - gocognit
-        - varnamelen
-        - paralleltest
-    
+  settings:
+    depguard:
+      rules:
+        main:
+          list-mode: lax
+          allow:
+            - github.com/apex/log
+            - github.com/julen-noblet/download-geofabrik/*
+    dupl:
+      threshold: 150
+    funlen:
+      lines: 100
+      statements: 50
+    goconst:
+      min-len: 2
+      min-occurrences: 3
+    gocritic:
+      enable-all: true
+    gocyclo:
+      min-complexity: 20
+    govet:
+      enable:
+        - appends
+        - asmdecl
+        - assign
+        - atomic
+        - atomicalign
+        - bools
+        - buildtag
+        - cgocall
+        - composites
+        - copylocks
+        - deepequalerrors
+        - defers
+        - directive
+        - errorsas
+        - fieldalignment
+        - findcall
+        - framepointer
+        - httpresponse
+        - ifaceassert
+        - loopclosure
+        - lostcancel
+        - nilfunc
+        - nilness
+        - printf
+        - reflectvaluecompare
+        - shadow
+        - shift
+        - sigchanyzer
+        - slog
+        - sortslice
+        - stdmethods
+        - stdversion
+        - stringintconv
+        - structtag
+        - testinggoroutine
+        - tests
+        - timeformat
+        - unmarshal
+        - unreachable
+        - unsafeptr
+        - unusedresult
+        - unusedwrite
+        - waitgroup
+      settings:
+        printf:
+          funcs:
+            - (github.com/golangci/golangci-lint/pkg/logutils.Log).Infof
+            - (github.com/golangci/golangci-lint/pkg/logutils.Log).Warnf
+            - (github.com/golangci/golangci-lint/pkg/logutils.Log).Errorf
+            - (github.com/golangci/golangci-lint/pkg/logutils.Log).Fatalf
+    lll:
+      line-length: 150
+    misspell:
+      locale: US
+    nakedret:
+      max-func-lines: 30
+    prealloc:
+      simple: true
+      range-loops: true
+      for-loops: true
+    unparam:
+      check-exported: false
+    unused:
+      exported-fields-are-used: false
+    whitespace:
+      multi-if: false
+      multi-func: true
+    wsl:
+      allow-assign-and-call: true
+      allow-multiline-assign: true
+      force-case-trailing-whitespace: 2
+      allow-trailing-comment: true
+      allow-cuddle-declarations: false
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - cyclop
+          - dupl
+          - exhaustruct
+          - funlen
+          - gochecknoinits
+          - gocognit
+          - gocyclo
+          - godox
+          - maintidx
+          - paralleltest
+          - varnamelen
+        path: _test.go
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/golangci/golangci-lint
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
