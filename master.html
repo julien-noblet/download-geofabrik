@@ -580,11 +580,11 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov9" title="608">return nil</span>
+        <span class="cov9" title="609">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(id string) bool <span class="cov6" title="71">{
+func (config *Config) Exist(id string) bool <span class="cov7" title="72">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
         result := reflect.DeepEqual(config.Elements[id], element.Element{})
@@ -1883,14 +1883,14 @@ func (g *Geofabrik) Collector() *colly.Collector <span class="cov4" title="4">{
         myCollector.OnHTML("#subregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseSubregion(e, myCollector)
         }</span>)
-        <span class="cov4" title="3">myCollector.OnHTML("#specialsubregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+        <span class="cov4" title="4">myCollector.OnHTML("#specialsubregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseSubregion(e, myCollector)
         }</span>)
         <span class="cov4" title="4">myCollector.OnHTML("li", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseLi(e, myCollector)
         }</span>)
 
-        <span class="cov4" title="3">return myCollector</span>
+        <span class="cov4" title="4">return myCollector</span>
 }
 
 // ParseSubregion parses the subregion information from the HTML.
@@ -1900,7 +1900,7 @@ func (g *Geofabrik) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Coll
                         href := sub.Request.AbsoluteURL(sub.Attr("href"))
                         myID, extension := scrapper.FileExt(href)
 
-                        if extension == "html" </span><span class="cov9" title="18">{
+                        if extension == "html" </span><span class="cov9" title="19">{
                                 g.handleHTMLExtension(sub, href, myID, myCollector)
                         }</span>
                 })
@@ -1965,7 +1965,7 @@ func (g *Geofabrik) handleSpecialCases(myID, parent string) (newID, file string)
                 }</span>
         }
 
-        <span class="cov9" title="22">return myID, file</span>
+        <span class="cov10" title="23">return myID, file</span>
 }
 
 // ParseFormat adds extensions to the ID.
@@ -2669,7 +2669,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="22">{
-        for f, i := range *def </span><span class="cov7" title="215">{
+        for f, i := range *def </span><span class="cov7" title="216">{
                 if format == i.ID </span><span class="cov4" title="20">{
                         s.Config.AddExtension(id, f)
                 }</span>
@@ -2677,7 +2677,7 @@ func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinition
 }
 
 // FileExt returns filename and extension.
-func FileExt(url string) (filename, extension string) <span class="cov5" title="30">{
+func FileExt(url string) (filename, extension string) <span class="cov5" title="31">{
         urls := strings.Split(url, "/")
         f := strings.Split(urls[len(urls)-1], ".")
 
