@@ -598,7 +598,7 @@ func (config *Config) AddExtension(id, format string) <span class="cov6" title="
         elem := config.Elements[id]
         config.ElementsMutex.RUnlock()
 
-        if !elem.Formats.Contains(format) </span><span class="cov6" title="38">{
+        if !elem.Formats.Contains(format) </span><span class="cov6" title="39">{
                 log.Infof("Add %s to %s", format, elem.ID)
 
                 config.ElementsMutex.Lock()
@@ -1080,13 +1080,13 @@ func (e *Element) HasParent() bool <span class="cov6" title="37">{
 
 // Contains checks if the format list contains a specific format.
 func (f *Formats) Contains(format string) bool <span class="cov8" title="188">{
-        for _, existingFormat := range *f </span><span class="cov10" title="440">{
+        for _, existingFormat := range *f </span><span class="cov10" title="441">{
                 if format == existingFormat </span><span class="cov7" title="106">{
                         return true
                 }</span>
         }
 
-        <span class="cov7" title="81">return false</span>
+        <span class="cov7" title="82">return false</span>
 }
 
 // CreateParentElement creates a parent element for the given element.
@@ -2669,7 +2669,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="22">{
-        for f, i := range *def </span><span class="cov7" title="215">{
+        for f, i := range *def </span><span class="cov7" title="216">{
                 if format == i.ID </span><span class="cov4" title="20">{
                         s.Config.AddExtension(id, f)
                 }</span>
