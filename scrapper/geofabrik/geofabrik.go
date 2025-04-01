@@ -118,7 +118,7 @@ func (g *Geofabrik) handleHTMLExtension(sub *colly.HTMLElement, href, myID strin
 
 	log.Debugf("Add: %s", href)
 
-	if err := myCollector.Visit(href); err != nil && !errors.Is(err, colly.ErrAlreadyVisited) {
+	if err := myCollector.Visit(href); err != nil && !errors.Is(err, &colly.AlreadyVisitedError{}) {
 		log.WithError(err).Error("can't get url")
 	}
 }

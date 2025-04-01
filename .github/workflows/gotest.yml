@@ -16,4 +16,4 @@ jobs:
           go-version: stable
           check-latest: true
           cache: true
-      - run: go test -v ./
+      - run: go test -v ./...
