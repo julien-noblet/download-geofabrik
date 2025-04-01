@@ -1,4 +1,5 @@
 [
+  {"Version":"cca923955f67f0b27bf6e2c00bf4659fc87f120c","Date":1743489833,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"df78727bd52a6dd4b9db882bf5677bd6e72c37e9","Date":1743488906,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"93b9fb192a8985a0025b9efb22790dcd87803a35","Date":1743488743,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"b1738b4559119a3c70af7b5e11ea173808e8d71d","Date":1743488719,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"8e41783c687b4516159ac797137d64866ae3e53b","Date":1742195104,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.8.0"],"Suites":[]},
   {"Version":"46b01dc6a59230bf47b4886376b0277f8eec944a","Date":1742064221,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.23.0"],"Suites":[]},
   {"Version":"70fbf4bf739cdc0478eaffe4f0839ac9d75aac59","Date":1742064220,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.37.0"],"Suites":[]},
-  {"Version":"429bf336a4514c55b2788d34adf9324ea6eba8d0","Date":1742064218,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.31.0"],"Suites":[]},
-  {"Version":"c631ad0cb2401fae5e55de1e7b9a2dfedd5fadb4","Date":1742064158,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"429bf336a4514c55b2788d34adf9324ea6eba8d0","Date":1742064218,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.31.0"],"Suites":[]}
 ]
