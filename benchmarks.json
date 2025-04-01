@@ -1,4 +1,5 @@
 [
+  {"Version":"ed759e6197e4b8d60b2021d7d5e13bf5d7230a0b","Date":1743490142,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"b35a0fae103d9cfb241ae34ac046ca7039abf70c","Date":1743490073,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"0c81b4727bdff42107994886205f542ec7d14c29","Date":1743489891,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"cca923955f67f0b27bf6e2c00bf4659fc87f120c","Date":1743489833,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"51f04ecc781a2dea80e4cb2de8822b84d79c7697","Date":1743028420,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"c07efd44fb751b1055f343a5baa43679e6da1dee","Date":1743028133,"Tags":["ref=refs/heads/renovate/github.com-spf13-viper-1.x"],"Suites":[]},
   {"Version":"c2625ee541a1bf8fde5da177f886e9c70e664857","Date":1742195111,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/afero-1.14.0"],"Suites":[]},
-  {"Version":"8e41783c687b4516159ac797137d64866ae3e53b","Date":1742195104,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.8.0"],"Suites":[]},
-  {"Version":"46b01dc6a59230bf47b4886376b0277f8eec944a","Date":1742064221,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.23.0"],"Suites":[]}
+  {"Version":"8e41783c687b4516159ac797137d64866ae3e53b","Date":1742195104,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.8.0"],"Suites":[]}
 ]
