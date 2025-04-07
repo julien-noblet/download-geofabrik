@@ -1,4 +1,5 @@
 [
+  {"Version":"57fff2d1599cd0d6d5b5e6f9a3a86d550480c228","Date":1744062572,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"b3020b564f062417aae040035f4b717e9b0dc9de","Date":1744062291,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/nlnwa/whatwg-url-0.6.2"],"Suites":[]},
   {"Version":"13e1744f0454beb31866ebf5edce82762532cce7","Date":1744062288,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.32.0"],"Suites":[]},
   {"Version":"17add3e8b9cdd72a00262ccccfbd9a7b32585bfb","Date":1744062224,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"90ac87d102b57c2c33c136650cbb449f3dac981d","Date":1743490808,"Tags":["ref=refs/heads/renovate/github.com-gocolly-colly-v2-2.x"],"Suites":[]},
   {"Version":"2c3185c313fe798e53f2f66973017b8bd96d4772","Date":1743490275,"Tags":["ref=refs/heads/renovate/github.com-gocolly-colly-v2-2.x"],"Suites":[]},
   {"Version":"3f6637cb893da38faacf627a0e440fd808199fe6","Date":1743490240,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"ed759e6197e4b8d60b2021d7d5e13bf5d7230a0b","Date":1743490142,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
-  {"Version":"b35a0fae103d9cfb241ae34ac046ca7039abf70c","Date":1743490073,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]}
+  {"Version":"ed759e6197e4b8d60b2021d7d5e13bf5d7230a0b","Date":1743490142,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]}
 ]
