@@ -1,4 +1,5 @@
 [
+  {"Version":"c6818b3e53d833b88e5ce2fdb166747649346e1b","Date":1744062728,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"b26e0e0e30589b6284e95b6b052f2b3f6dc54236","Date":1744062637,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/nlnwa/whatwg-url-0.6.2"],"Suites":[]},
   {"Version":"57fff2d1599cd0d6d5b5e6f9a3a86d550480c228","Date":1744062572,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"b3020b564f062417aae040035f4b717e9b0dc9de","Date":1744062291,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/nlnwa/whatwg-url-0.6.2"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"7df387c38fd76a1aaff4ce8ff1c2dee42d8a7a70","Date":1743491025,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.9.0"],"Suites":[]},
   {"Version":"69136fe88c32f63e05d3ea64fd597cadbab54cb4","Date":1743490962,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"90ac87d102b57c2c33c136650cbb449f3dac981d","Date":1743490808,"Tags":["ref=refs/heads/renovate/github.com-gocolly-colly-v2-2.x"],"Suites":[]},
-  {"Version":"2c3185c313fe798e53f2f66973017b8bd96d4772","Date":1743490275,"Tags":["ref=refs/heads/renovate/github.com-gocolly-colly-v2-2.x"],"Suites":[]},
-  {"Version":"3f6637cb893da38faacf627a0e440fd808199fe6","Date":1743490240,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"2c3185c313fe798e53f2f66973017b8bd96d4772","Date":1743490275,"Tags":["ref=refs/heads/renovate/github.com-gocolly-colly-v2-2.x"],"Suites":[]}
 ]
