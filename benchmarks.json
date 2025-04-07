@@ -1,4 +1,5 @@
 [
+  {"Version":"17add3e8b9cdd72a00262ccccfbd9a7b32585bfb","Date":1744062224,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"f97380c9ffa6a76574e01a981d4d84f439ce16e3","Date":1744061850,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.24.0"],"Suites":[]},
   {"Version":"a47f806b9640ff40560e56ec4cca6999ae21e24d","Date":1744061779,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"0e43d53e93713a115c47ba7919ea232559a8ca7d","Date":1744061673,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.32.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"ed759e6197e4b8d60b2021d7d5e13bf5d7230a0b","Date":1743490142,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"b35a0fae103d9cfb241ae34ac046ca7039abf70c","Date":1743490073,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"0c81b4727bdff42107994886205f542ec7d14c29","Date":1743489891,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
-  {"Version":"cca923955f67f0b27bf6e2c00bf4659fc87f120c","Date":1743489833,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
-  {"Version":"df78727bd52a6dd4b9db882bf5677bd6e72c37e9","Date":1743488906,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]}
+  {"Version":"cca923955f67f0b27bf6e2c00bf4659fc87f120c","Date":1743489833,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]}
 ]
