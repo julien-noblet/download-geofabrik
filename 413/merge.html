@@ -2177,7 +2177,7 @@ func getGparent(gparents []string) string <span class="cov8" title="15">{
 }
 
 // createAndMergeElement creates and merges an element into the configuration.
-func (o *OpenstreetmapFR) createAndMergeElement(parent, gparent string) <span class="cov7" title="14">{
+func (o *OpenstreetmapFR) createAndMergeElement(parent, gparent string) <span class="cov8" title="15">{
         myElement := element.Element{
                 Parent:  gparent,
                 Name:    parent,
@@ -2648,7 +2648,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
         return s.StartURL
 }</span>
 
@@ -2670,7 +2670,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="22">{
         for f, i := range *def </span><span class="cov7" title="216">{
-                if format == i.ID </span><span class="cov4" title="19">{
+                if format == i.ID </span><span class="cov4" title="20">{
                         s.Config.AddExtension(id, f)
                 }</span>
         }
