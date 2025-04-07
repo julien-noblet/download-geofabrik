@@ -2147,7 +2147,7 @@ func GetParent(href string) (parent string, parentList []string) <span class="co
 
 // MakeParents creates parent elements recursively.
 func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span class="cov8" title="20">{
-        if parent == "" </span><span class="cov5" title="5">{
+        if parent == "" </span><span class="cov4" title="4">{
                 return
         }</span>
 
@@ -2219,7 +2219,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
                 return
         }</span>
 
-        <span class="cov8" title="17">if strings.Contains(passList, valsplit[0]) </span><span class="cov0" title="0">{
+        <span class="cov8" title="16">if strings.Contains(passList, valsplit[0]) </span><span class="cov0" title="0">{
                 return
         }</span>
 
@@ -2648,7 +2648,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
         return s.StartURL
 }</span>
 
@@ -2669,7 +2669,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="22">{
-        for f, i := range *def </span><span class="cov7" title="216">{
+        for f, i := range *def </span><span class="cov7" title="214">{
                 if format == i.ID </span><span class="cov4" title="20">{
                         s.Config.AddExtension(id, f)
                 }</span>
