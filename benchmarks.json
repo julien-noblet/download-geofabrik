@@ -1,4 +1,5 @@
 [
+  {"Version":"a47f806b9640ff40560e56ec4cca6999ae21e24d","Date":1744061779,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"0e43d53e93713a115c47ba7919ea232559a8ca7d","Date":1744061673,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.32.0"],"Suites":[]},
   {"Version":"cd204f35d55e73b1dd194310956d8eb8aed6a01b","Date":1744061672,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.24.0"],"Suites":[]},
   {"Version":"9850f0da7f052b2675996f143bc224a0e3478f55","Date":1744061667,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.9.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"0c81b4727bdff42107994886205f542ec7d14c29","Date":1743489891,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"cca923955f67f0b27bf6e2c00bf4659fc87f120c","Date":1743489833,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
   {"Version":"df78727bd52a6dd4b9db882bf5677bd6e72c37e9","Date":1743488906,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
-  {"Version":"93b9fb192a8985a0025b9efb22790dcd87803a35","Date":1743488743,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]},
-  {"Version":"b1738b4559119a3c70af7b5e11ea173808e8d71d","Date":1743488719,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]}
+  {"Version":"93b9fb192a8985a0025b9efb22790dcd87803a35","Date":1743488743,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-7.x"],"Suites":[]}
 ]
