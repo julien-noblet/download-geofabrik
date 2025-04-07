@@ -3876,7 +3876,7 @@ elements:
             - state
     niedersachsen:
         id: niedersachsen
-        name: Niedersachsen
+        name: Niedersachsen (mit Bremen)
         parent: germany
         files:
             - kml
