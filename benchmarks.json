@@ -1,4 +1,5 @@
 [
+  {"Version":"06b5632828bf76676e438d4af8362fa2a3711647","Date":1744412623,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"43f20419a10d90c2fcdf4c8cd997698b68764bb7","Date":1744412496,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"c6818b3e53d833b88e5ce2fdb166747649346e1b","Date":1744062728,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"b26e0e0e30589b6284e95b6b052f2b3f6dc54236","Date":1744062637,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/nlnwa/whatwg-url-0.6.2"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"788d8eb4e458afd6834602a094e0efa8ae7e6941","Date":1743491033,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.38.0"],"Suites":[]},
   {"Version":"d434e8b4ccfa31ddb858c4305f6d82f97fe75195","Date":1743491030,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/afero-1.14.0"],"Suites":[]},
   {"Version":"7df387c38fd76a1aaff4ce8ff1c2dee42d8a7a70","Date":1743491025,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.9.0"],"Suites":[]},
-  {"Version":"69136fe88c32f63e05d3ea64fd597cadbab54cb4","Date":1743490962,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"90ac87d102b57c2c33c136650cbb449f3dac981d","Date":1743490808,"Tags":["ref=refs/heads/renovate/github.com-gocolly-colly-v2-2.x"],"Suites":[]}
+  {"Version":"69136fe88c32f63e05d3ea64fd597cadbab54cb4","Date":1743490962,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
