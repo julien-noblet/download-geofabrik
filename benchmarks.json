@@ -1,4 +1,5 @@
 [
+  {"Version":"f1ffefd8b20e664418e319b5e516c2463e7d60a9","Date":1746432093,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.8.0"],"Suites":[]},
   {"Version":"e94b8d4b548bbe53a0f3a1b9afb6fabb0f2f7603","Date":1746398988,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-8.x"],"Suites":[]},
   {"Version":"f71a8c589bab10f1862b9c5d9ddc6b1186d951a6","Date":1744615965,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.2.4"],"Suites":[]},
   {"Version":"06b5632828bf76676e438d4af8362fa2a3711647","Date":1744412623,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"3a9f4b0045643339bea8e474cc20bcd86b650493","Date":1743497043,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.9.0"],"Suites":[]},
   {"Version":"d46ff086de321ed51c286266a441a1d6471d1cda","Date":1743497033,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/afero-1.14.0"],"Suites":[]},
   {"Version":"e2fdb3d6189bdbb65f753123f4a9558b19712b44","Date":1743496965,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"788d8eb4e458afd6834602a094e0efa8ae7e6941","Date":1743491033,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.38.0"],"Suites":[]},
-  {"Version":"d434e8b4ccfa31ddb858c4305f6d82f97fe75195","Date":1743491030,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/afero-1.14.0"],"Suites":[]}
+  {"Version":"788d8eb4e458afd6834602a094e0efa8ae7e6941","Date":1743491033,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.38.0"],"Suites":[]}
 ]
