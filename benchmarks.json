@@ -1,4 +1,5 @@
 [
+  {"Version":"78d117fa1ffc60f9fd47244fbe66713dbd0cb028","Date":1746988556,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"dbce66cab63057dd22bfbdc96d7a2d0c10073faf","Date":1746899654,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"b15a83e64ba38a91f05ea43e6bd7417c502fb343","Date":1746576320,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-8.x"],"Suites":[]},
   {"Version":"cf0c11f766359032a9ea5de12b962fac9d423ef0","Date":1746576318,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.2.4"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"4cbec055ecc138a6098ac903293d327ab2cd8cac","Date":1744011927,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.32.0"],"Suites":[]},
   {"Version":"fd1e4bb7b27490f012180425b6276295b46a9894","Date":1744011792,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.9.0"],"Suites":[]},
   {"Version":"d7666a0b5f8ad7575067a0abfc44f9177c4d6da0","Date":1743537447,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"11b1e427ac26ed7ad6d413dac60f4ebdbc3ec381","Date":1743537338,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"b47fe5a9876e3f02a88b1295f62cfe57d038f696","Date":1743497147,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"11b1e427ac26ed7ad6d413dac60f4ebdbc3ec381","Date":1743537338,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
 ]
