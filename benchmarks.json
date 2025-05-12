@@ -1,4 +1,5 @@
 [
+  {"Version":"edee61a7eca59f33cf50c3b6337df1c6a0f4aa9f","Date":1747064334,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.2.4"],"Suites":[]},
   {"Version":"1bec1f6ebde74be55468d323620dcc8349fb1bd7","Date":1747064291,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"ff06850b3654db4e922297eff86e0e676f13f51b","Date":1747064282,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-8.x"],"Suites":[]},
   {"Version":"9bf9735e16df5a7279a11eb4736d63aeb88eafee","Date":1747064248,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"a47f806b9640ff40560e56ec4cca6999ae21e24d","Date":1744061779,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"0e43d53e93713a115c47ba7919ea232559a8ca7d","Date":1744061673,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.32.0"],"Suites":[]},
   {"Version":"cd204f35d55e73b1dd194310956d8eb8aed6a01b","Date":1744061672,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.24.0"],"Suites":[]},
-  {"Version":"9850f0da7f052b2675996f143bc224a0e3478f55","Date":1744061667,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.9.0"],"Suites":[]},
-  {"Version":"19222e65ed2eb1f51b894e01440552dd7159c92f","Date":1744061602,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"9850f0da7f052b2675996f143bc224a0e3478f55","Date":1744061667,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.9.0"],"Suites":[]}
 ]
