@@ -1,4 +1,5 @@
 [
+  {"Version":"dc003c7b974c5617c6bf15122450525305555804","Date":1747035564,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.40.0"],"Suites":[]},
   {"Version":"8e227a674e23847bb9ed5f121c5de02d2dc99d96","Date":1747000185,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"78d117fa1ffc60f9fd47244fbe66713dbd0cb028","Date":1746988556,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"dbce66cab63057dd22bfbdc96d7a2d0c10073faf","Date":1746899654,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"2645a5257972f075a7631bf009617fdca569ff68","Date":1744012112,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.24.0"],"Suites":[]},
   {"Version":"3b5eed21eb7ceb1c59c17c1d1d34048dad3e4fd1","Date":1744012102,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/nlnwa/whatwg-url-0.6.2"],"Suites":[]},
   {"Version":"4cbec055ecc138a6098ac903293d327ab2cd8cac","Date":1744011927,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.32.0"],"Suites":[]},
-  {"Version":"fd1e4bb7b27490f012180425b6276295b46a9894","Date":1744011792,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.9.0"],"Suites":[]},
-  {"Version":"d7666a0b5f8ad7575067a0abfc44f9177c4d6da0","Date":1743537447,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"fd1e4bb7b27490f012180425b6276295b46a9894","Date":1744011792,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.9.0"],"Suites":[]}
 ]
