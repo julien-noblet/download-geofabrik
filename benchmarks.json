@@ -1,4 +1,5 @@
 [
+  {"Version":"2729f75a98bf714b7e3b7518526b96ecf2658efa","Date":1747117666,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"53917cd043308e438a5793c08f93b252a4539745","Date":1747117563,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/tablewriter-1.0.2"],"Suites":[]},
   {"Version":"a9ca4aa77de7e02ada9254454495713b4df7d3e0","Date":1747117553,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.8.0"],"Suites":[]},
   {"Version":"86d23ca4070dcc9e6639181956f1a30c61c57724","Date":1747117526,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"f71a8c589bab10f1862b9c5d9ddc6b1186d951a6","Date":1744615965,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.2.4"],"Suites":[]},
   {"Version":"06b5632828bf76676e438d4af8362fa2a3711647","Date":1744412623,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"43f20419a10d90c2fcdf4c8cd997698b68764bb7","Date":1744412496,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
-  {"Version":"c6818b3e53d833b88e5ce2fdb166747649346e1b","Date":1744062728,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"b26e0e0e30589b6284e95b6b052f2b3f6dc54236","Date":1744062637,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/nlnwa/whatwg-url-0.6.2"],"Suites":[]}
+  {"Version":"c6818b3e53d833b88e5ce2fdb166747649346e1b","Date":1744062728,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
