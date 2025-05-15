@@ -1,4 +1,5 @@
 [
+  {"Version":"2156c126a5851b7115f040f9b5cf345cb49a62ad","Date":1747289164,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"7b6411dad42f4d01b9e7d1dbd4fe7e6219a02cd2","Date":1747289122,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"3723478e3c9dc717e082485e4a653926c084bb81","Date":1747288840,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/tablewriter-1.0.2"],"Suites":[]},
   {"Version":"15ce7dc0724c4e3f39d9565cd1bc0315249456c3","Date":1747288805,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"8e227a674e23847bb9ed5f121c5de02d2dc99d96","Date":1747000185,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"78d117fa1ffc60f9fd47244fbe66713dbd0cb028","Date":1746988556,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"dbce66cab63057dd22bfbdc96d7a2d0c10073faf","Date":1746899654,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
-  {"Version":"b15a83e64ba38a91f05ea43e6bd7417c502fb343","Date":1746576320,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-8.x"],"Suites":[]},
-  {"Version":"cf0c11f766359032a9ea5de12b962fac9d423ef0","Date":1746576318,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.2.4"],"Suites":[]}
+  {"Version":"b15a83e64ba38a91f05ea43e6bd7417c502fb343","Date":1746576320,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-8.x"],"Suites":[]}
 ]
