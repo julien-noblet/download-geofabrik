@@ -552,7 +552,7 @@ func (config *Config) Generate() ([]byte, error) <span class="cov2" title="3">{
 }
 
 // MergeElement merges a new element into the config.
-func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="610">{
+func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="609">{
         config.ElementsMutex.RLock()
         newElement, ok := config.Elements[elementPtr.ID]
         config.ElementsMutex.RUnlock()
@@ -580,7 +580,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov9" title="609">return nil</span>
+        <span class="cov10" title="609">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
@@ -1080,7 +1080,7 @@ func (e *Element) HasParent() bool <span class="cov6" title="37">{
 
 // Contains checks if the format list contains a specific format.
 func (f *Formats) Contains(format string) bool <span class="cov8" title="188">{
-        for _, existingFormat := range *f </span><span class="cov10" title="438">{
+        for _, existingFormat := range *f </span><span class="cov10" title="441">{
                 if format == existingFormat </span><span class="cov7" title="106">{
                         return true
                 }</span>
@@ -2648,7 +2648,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1021">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
         return s.StartURL
 }</span>
 
