@@ -1,4 +1,5 @@
 [
+  {"Version":"f44afc73ff32f0c2f5ff4b6e4fa21595ba10d144","Date":1752645368,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.42.0"],"Suites":[]},
   {"Version":"cdaa677b1defba0e888fd7afdee23d167ab94db6","Date":1752645337,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"6aec6beb1f131b11ea368090bd4d24cdcb7f30fc","Date":1752645297,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"953c43b59e6114485c75cf71624315f7b4279e08","Date":1752485872,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.27.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"90929eba9b35cdb124b917f281311e9244683e64","Date":1749239900,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/tablewriter-1.0.7"],"Suites":[]},
   {"Version":"50b40f09cb0ce9e1ea5d9464b3948885b74a0d3b","Date":1749239896,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.9.1"],"Suites":[]},
   {"Version":"d40b3e3bdac55c6c760ad5e1a474d13980cb9cb0","Date":1749239821,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"4e7a83ada32df46cba9d777253ad5683d0694ed7","Date":1749239666,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"d3e0992f3ea300c54bda0b3ba816c6ea307979d7","Date":1748850214,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.9.1"],"Suites":[]}
+  {"Version":"4e7a83ada32df46cba9d777253ad5683d0694ed7","Date":1749239666,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
 ]
