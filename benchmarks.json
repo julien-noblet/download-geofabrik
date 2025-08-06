@@ -1,4 +1,5 @@
 [
+  {"Version":"84ebf4324a7385e35518dee9797c182c308c7610","Date":1754512593,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/tablewriter-1.0.9"],"Suites":[]},
   {"Version":"e608cc5b92c7aafad29a36a0c0dc7299f56b8f19","Date":1754512588,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.7"],"Suites":[]},
   {"Version":"92de9586313297106cd4c4eddbd42a41ce571bee","Date":1754512510,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"c6daf4b326d319547b9fdb3077eb863eeabf30e7","Date":1754512319,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"e3dd36be409a5e9788aee3df87204719ed03696f","Date":1751611001,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"41ee1381412621d48c3e1fe6a43fd5511067d2ba","Date":1751610961,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ebe1d36e9ac5a0002c3bd92d4d22324b05597dba","Date":1751610847,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/cast-1.9.2"],"Suites":[]},
-  {"Version":"07f3739b6404bb9159f04c91851aadb9d9ba4705","Date":1751610810,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
-  {"Version":"e9e9f1746cc39efb2899eecbc119a2853b79208f","Date":1751610769,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"07f3739b6404bb9159f04c91851aadb9d9ba4705","Date":1751610810,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]}
 ]
