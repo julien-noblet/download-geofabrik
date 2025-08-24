@@ -580,7 +580,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov9" title="609">return nil</span>
+        <span class="cov9" title="608">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
@@ -2648,7 +2648,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1022">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1019">{
         return s.StartURL
 }</span>
 
@@ -2658,7 +2658,7 @@ func (s *Scrapper) GetPB() int <span class="cov3" title="10">{
 }</span>
 
 // ParseFormat adds Extensions to ID.
-func (s *Scrapper) ParseFormat(id, format string) <span class="cov4" title="21">{
+func (s *Scrapper) ParseFormat(id, format string) <span class="cov5" title="22">{
         s.AddExtension(id, format, &amp;s.Config.Formats)
 }</span>
 
@@ -2669,7 +2669,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="22">{
-        for f, i := range *def </span><span class="cov7" title="212">{
+        for f, i := range *def </span><span class="cov7" title="216">{
                 if format == i.ID </span><span class="cov4" title="20">{
                         s.Config.AddExtension(id, f)
                 }</span>
