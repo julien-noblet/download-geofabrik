@@ -1,4 +1,5 @@
 [
+  {"Version":"e12458cb4931d5ce964d8d60272065036df7ce0c","Date":1756058567,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"51baa622260d61c8d42d09f87da0aeb728a2882f","Date":1756058542,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.10.0"],"Suites":[]},
   {"Version":"8c0f9d657950f8723269de5ddf8d6ff4e05c0e8b","Date":1756058512,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/tablewriter-1.0.9"],"Suites":[]},
   {"Version":"d69b3ff97f30e2ffd3ce00117e91e25164d80a16","Date":1756058508,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.7"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"f44afc73ff32f0c2f5ff4b6e4fa21595ba10d144","Date":1752645368,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.42.0"],"Suites":[]},
   {"Version":"cdaa677b1defba0e888fd7afdee23d167ab94db6","Date":1752645337,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"6aec6beb1f131b11ea368090bd4d24cdcb7f30fc","Date":1752645297,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"953c43b59e6114485c75cf71624315f7b4279e08","Date":1752485872,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.27.0"],"Suites":[]},
-  {"Version":"ac5bcd4cbf6fe843d39e8387e686dd24842b88fb","Date":1752485869,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.42.0"],"Suites":[]}
+  {"Version":"953c43b59e6114485c75cf71624315f7b4279e08","Date":1752485872,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.27.0"],"Suites":[]}
 ]
