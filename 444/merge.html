@@ -584,7 +584,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(id string) bool <span class="cov6" title="71">{
+func (config *Config) Exist(id string) bool <span class="cov7" title="72">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
         result := reflect.DeepEqual(config.Elements[id], element.Element{})
@@ -1965,7 +1965,7 @@ func (g *Geofabrik) handleSpecialCases(myID, parent string) (newID, file string)
                 }</span>
         }
 
-        <span class="cov9" title="22">return myID, file</span>
+        <span class="cov10" title="23">return myID, file</span>
 }
 
 // ParseFormat adds extensions to the ID.
@@ -2648,7 +2648,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
         return s.StartURL
 }</span>
 
