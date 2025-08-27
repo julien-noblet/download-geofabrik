@@ -14,7 +14,7 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
         # default fetch-depth is insufficent to find previous coverage notes
         fetch-depth: 10
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
         # default fetch-depth is insufficent to find previous coverage notes
         fetch-depth: 10
