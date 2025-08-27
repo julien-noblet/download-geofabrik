@@ -2146,7 +2146,7 @@ func GetParent(href string) (parent string, parentList []string) <span class="co
 }
 
 // MakeParents creates parent elements recursively.
-func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span class="cov8" title="20">{
+func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span class="cov9" title="20">{
         if parent == "" </span><span class="cov5" title="5">{
                 return
         }</span>
@@ -2168,7 +2168,7 @@ func getGparent(gparents []string) string <span class="cov8" title="15">{
                 return ""
         }</span>
 
-        <span class="cov7" title="14">gparent := gparents[len(gparents)-3]
+        <span class="cov8" title="14">gparent := gparents[len(gparents)-3]
         if gparent == "http:" || gparent == "openstreetmap.fr" || gparent == "extracts" || gparent == "polygons" </span><span class="cov7" title="10">{
                 return ""
         }</span>
@@ -2202,7 +2202,7 @@ func Exceptions(name, parent string) string <span class="cov8" title="17">{
 }
 
 // ParseHref parses the href and updates the configuration.
-func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">{
+func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="29">{
         log.Debugf("Parsing: %s", href)
 
         if strings.Contains(href, "?") || strings.Contains(href, "-latest") || href[0] == '/' </span><span class="cov7" title="12">{
