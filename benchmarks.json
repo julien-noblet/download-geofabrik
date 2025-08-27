@@ -1,4 +1,5 @@
 [
+  {"Version":"9f7c94a1e9749d4a8bed5d7631fca1d5a119f13a","Date":1756309412,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/tablewriter-1.0.9"],"Suites":[]},
   {"Version":"7be806147647ac6f2473fc2d025139f91e263888","Date":1756309406,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/go-viper/mapstructure/v2-2.4.0"],"Suites":[]},
   {"Version":"66e561219f5e64039dac6ec3344c7b5f9dd7e60a","Date":1756309353,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"96410eb2180a3d05ff684999e4a047035d2d29d0","Date":1756306428,"Tags":["ref=refs/heads/renovate/github.com-stretchr-testify-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"158258f140cf7f952455774f734106ef1e29bc1d","Date":1754512622,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/go-viper/mapstructure/v2-2.4.0"],"Suites":[]},
   {"Version":"52de79ba5bb73fe9abb04710eb9c17661fa5270f","Date":1754512595,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.10.0"],"Suites":[]},
   {"Version":"84ebf4324a7385e35518dee9797c182c308c7610","Date":1754512593,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/tablewriter-1.0.9"],"Suites":[]},
-  {"Version":"e608cc5b92c7aafad29a36a0c0dc7299f56b8f19","Date":1754512588,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.7"],"Suites":[]},
-  {"Version":"92de9586313297106cd4c4eddbd42a41ce571bee","Date":1754512510,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"e608cc5b92c7aafad29a36a0c0dc7299f56b8f19","Date":1754512588,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.7"],"Suites":[]}
 ]
