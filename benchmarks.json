@@ -1,4 +1,5 @@
 [
+  {"Version":"66e561219f5e64039dac6ec3344c7b5f9dd7e60a","Date":1756309353,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"96410eb2180a3d05ff684999e4a047035d2d29d0","Date":1756306428,"Tags":["ref=refs/heads/renovate/github.com-stretchr-testify-1.x"],"Suites":[]},
   {"Version":"358e7b8dd28a31cdadbe0e88282e34f5a36edb5b","Date":1756130607,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.8"],"Suites":[]},
   {"Version":"3e720d2fde66b0e721a5af8d13c4656a539c9189","Date":1756059047,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.10.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"84ebf4324a7385e35518dee9797c182c308c7610","Date":1754512593,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/tablewriter-1.0.9"],"Suites":[]},
   {"Version":"e608cc5b92c7aafad29a36a0c0dc7299f56b8f19","Date":1754512588,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.7"],"Suites":[]},
   {"Version":"92de9586313297106cd4c4eddbd42a41ce571bee","Date":1754512510,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"c6daf4b326d319547b9fdb3077eb863eeabf30e7","Date":1754512319,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"72c6c69b817e6312ef353633ea6846b667656eaa","Date":1754301157,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.10.0"],"Suites":[]}
+  {"Version":"c6daf4b326d319547b9fdb3077eb863eeabf30e7","Date":1754512319,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
 ]
