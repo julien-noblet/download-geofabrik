@@ -1,4 +1,5 @@
 [
+  {"Version":"fe662d49af6a6db4c76ddd5539b677df1a695c4c","Date":1756444982,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.10.0"],"Suites":[]},
   {"Version":"d395663b11402cd307b993883041f4accf0175e9","Date":1756444959,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"338dcb2d9b77770ba19744c786d442b19ccf310e","Date":1756444922,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"f210cedcac4f037cba8c98bfa944e5e602fa8b8a","Date":1756444643,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.10.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"c86e5f88d7ff89c9d53bd67b82b36f9938de933b","Date":1756058962,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.7"],"Suites":[]},
   {"Version":"b1ab50cb9b4762aeb3095defbd45a26a638ae288","Date":1756058904,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"dd31702f431f154568f200b3073c8f0c1b8853f0","Date":1756058631,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
-  {"Version":"8f91c2961173a765d2e15131f2e2dbc2195c41b6","Date":1756058611,"Tags":["ref=refs/heads/renovate/actions-checkout-5.x"],"Suites":[]},
-  {"Version":"9a4d09cffb6e1f2d16e8c1a0188943cb73f9e947","Date":1756058594,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.7"],"Suites":[]}
+  {"Version":"8f91c2961173a765d2e15131f2e2dbc2195c41b6","Date":1756058611,"Tags":["ref=refs/heads/renovate/actions-checkout-5.x"],"Suites":[]}
 ]
