@@ -9,7 +9,7 @@ jobs:
     name: release_pull_request
     steps:
     - name: checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
     - name: Create PR to branch
       uses: gorillio/github-action-cherry-pick@master
       with:
