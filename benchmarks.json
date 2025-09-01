@@ -1,4 +1,5 @@
 [
+  {"Version":"d47fb1740772bb594762f33e51b4e44b85236845","Date":1756736138,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/bits-and-blooms/bitset-1.24.0"],"Suites":[]},
   {"Version":"6876fac5b774f0d1de06c42bb47f3690351b646f","Date":1756735219,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.35.0"],"Suites":[]},
   {"Version":"2590f956928f28e64b9a9018738ce02690e1caea","Date":1756734860,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.5"],"Suites":[]},
   {"Version":"1f74a5fe2e9fc6d8c999901a45fd5a65f7feede6","Date":1756445663,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"66e561219f5e64039dac6ec3344c7b5f9dd7e60a","Date":1756309353,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"96410eb2180a3d05ff684999e4a047035d2d29d0","Date":1756306428,"Tags":["ref=refs/heads/renovate/github.com-stretchr-testify-1.x"],"Suites":[]},
   {"Version":"358e7b8dd28a31cdadbe0e88282e34f5a36edb5b","Date":1756130607,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.8"],"Suites":[]},
-  {"Version":"3e720d2fde66b0e721a5af8d13c4656a539c9189","Date":1756059047,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.10.0"],"Suites":[]},
-  {"Version":"3c7ff3a5039732ddca5c7ab8b6e409f53dbf6eee","Date":1756059019,"Tags":["ref=refs/heads/renovate/actions-checkout-5.x"],"Suites":[]}
+  {"Version":"3e720d2fde66b0e721a5af8d13c4656a539c9189","Date":1756059047,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.10.0"],"Suites":[]}
 ]
