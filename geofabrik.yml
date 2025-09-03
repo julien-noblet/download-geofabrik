@@ -35,8 +35,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -48,11 +46,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     albania:
         id: albania
@@ -61,8 +58,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -75,8 +70,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -89,8 +82,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -103,11 +94,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     alsace:
         id: alsace
@@ -116,8 +106,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -130,8 +118,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -144,8 +130,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -158,8 +142,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -172,8 +154,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -186,8 +166,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -199,8 +177,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -213,8 +189,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -227,8 +201,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -241,8 +213,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -255,8 +225,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -269,8 +237,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -282,11 +248,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     asturias:
         id: asturias
@@ -295,8 +260,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -309,8 +272,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -322,11 +283,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     austria:
         id: austria
@@ -335,8 +295,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -349,8 +307,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -363,8 +319,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -377,8 +331,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -391,11 +343,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     bahamas:
         id: bahamas
@@ -404,8 +355,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -418,8 +367,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -432,8 +379,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -446,11 +391,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     bedfordshire:
         id: bedfordshire
@@ -459,8 +403,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -473,8 +415,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -487,8 +427,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -501,8 +439,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -515,8 +451,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -529,8 +463,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -543,8 +475,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -557,8 +487,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -571,8 +499,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -585,8 +511,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -599,8 +523,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -613,8 +535,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -627,8 +547,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -641,8 +559,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -655,11 +571,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     bremen:
         id: bremen
@@ -668,8 +583,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -682,8 +595,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -696,8 +607,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -710,11 +619,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     british-columbia:
         id: british-columbia
@@ -723,8 +631,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -737,8 +643,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -751,8 +655,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -765,8 +667,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -779,8 +679,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -793,8 +691,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -807,8 +703,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -821,8 +715,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -835,11 +727,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     canary-islands:
         id: canary-islands
@@ -848,8 +739,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -862,8 +751,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -876,8 +763,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -890,8 +775,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -904,8 +787,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -918,8 +799,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -932,8 +811,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -945,11 +822,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     central-fed-district:
         id: central-fed-district
@@ -958,8 +834,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -972,8 +846,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -986,8 +858,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1000,8 +870,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1014,8 +882,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1028,8 +894,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1042,8 +906,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1056,8 +918,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1070,8 +930,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1084,8 +942,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1098,11 +954,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     chongqing:
         id: chongqing
@@ -1111,8 +966,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1125,8 +978,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1139,8 +990,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1153,8 +1002,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1167,8 +1014,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1181,8 +1026,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1195,8 +1038,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1209,8 +1050,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1223,8 +1062,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1237,8 +1074,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1251,8 +1086,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1265,8 +1098,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1279,8 +1110,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1293,8 +1122,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1307,8 +1134,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1321,8 +1146,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1335,8 +1158,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1349,11 +1170,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     denmark:
         id: denmark
@@ -1362,8 +1182,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1376,8 +1194,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1390,8 +1206,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1404,8 +1218,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1418,8 +1230,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1432,8 +1242,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1446,8 +1254,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1460,8 +1266,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1474,8 +1278,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1488,8 +1290,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1502,8 +1302,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1516,8 +1314,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1530,8 +1326,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1544,8 +1338,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1558,11 +1350,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     egypt:
         id: egypt
@@ -1571,8 +1362,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1585,8 +1374,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1599,8 +1386,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1613,8 +1398,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1627,8 +1410,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1641,8 +1422,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1655,8 +1434,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1669,8 +1446,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1683,8 +1458,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1696,11 +1469,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     extremadura:
         id: extremadura
@@ -1709,8 +1481,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1723,8 +1493,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1737,8 +1505,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1751,8 +1517,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1765,8 +1529,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1779,8 +1541,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1793,11 +1553,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     franche-comte:
         id: franche-comte
@@ -1806,8 +1565,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1820,8 +1577,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1834,8 +1589,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1848,8 +1601,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1862,8 +1613,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1876,8 +1625,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1890,8 +1637,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1904,8 +1649,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1918,8 +1661,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1932,8 +1673,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1946,11 +1685,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     ghana:
         id: ghana
@@ -1959,8 +1697,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1973,8 +1709,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -1987,11 +1721,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     greater-london:
         id: greater-london
@@ -2000,8 +1733,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2014,8 +1745,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2028,8 +1757,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2042,8 +1769,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2056,8 +1781,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2070,11 +1793,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     guangdong:
         id: guangdong
@@ -2083,8 +1805,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2097,8 +1817,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2111,8 +1829,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2125,8 +1841,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2139,8 +1853,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2153,8 +1865,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2167,8 +1877,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2181,8 +1889,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2195,8 +1901,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2209,8 +1913,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2223,8 +1925,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2237,8 +1937,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2251,8 +1949,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2265,8 +1961,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2279,8 +1973,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2293,8 +1985,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2307,8 +1997,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2321,8 +2009,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2335,8 +2021,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2349,8 +2033,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2363,8 +2045,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2377,8 +2057,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2391,8 +2069,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2405,8 +2081,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2419,8 +2093,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2433,8 +2105,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2447,8 +2117,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2461,8 +2129,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2475,8 +2141,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2489,11 +2153,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     indonesia:
         id: indonesia
@@ -2502,11 +2165,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     inner-mongolia:
         id: inner-mongolia
@@ -2515,8 +2177,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2529,8 +2189,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2543,8 +2201,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2557,8 +2213,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2571,8 +2225,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2585,8 +2237,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2599,8 +2249,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2613,8 +2261,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2627,8 +2273,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2641,11 +2285,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     ivory-coast:
         id: ivory-coast
@@ -2654,8 +2297,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2668,8 +2309,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2682,11 +2321,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     java:
         id: java
@@ -2695,8 +2333,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2709,8 +2345,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2723,8 +2357,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2737,8 +2369,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2751,8 +2381,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2765,8 +2393,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2779,8 +2405,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2793,8 +2417,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2807,8 +2429,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2821,8 +2441,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2835,8 +2453,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2849,8 +2465,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2863,8 +2477,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2877,8 +2489,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2891,8 +2501,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2905,8 +2513,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2919,8 +2525,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2933,8 +2537,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2947,8 +2549,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2961,8 +2561,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2975,8 +2573,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -2989,8 +2585,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3003,8 +2597,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3017,8 +2609,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3031,8 +2621,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3045,8 +2633,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3059,8 +2645,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3073,8 +2657,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3087,8 +2669,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3101,8 +2681,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3115,8 +2693,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3129,8 +2705,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3143,8 +2717,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3157,8 +2729,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3171,8 +2741,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3185,8 +2753,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3199,8 +2765,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3213,8 +2777,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3227,8 +2789,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3241,8 +2801,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3255,8 +2813,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3269,8 +2825,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3283,8 +2837,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3297,8 +2849,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3311,8 +2861,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3325,8 +2873,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3339,8 +2885,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3353,8 +2897,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3367,8 +2909,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3381,8 +2921,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3395,8 +2933,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3409,8 +2945,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3423,8 +2957,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3437,11 +2969,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     mauritania:
         id: mauritania
@@ -3450,8 +2981,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3464,8 +2993,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3478,11 +3005,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     mazowieckie:
         id: mazowieckie
@@ -3491,8 +3017,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3505,8 +3029,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3519,8 +3041,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3533,8 +3053,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3547,8 +3065,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3561,8 +3077,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3575,8 +3089,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3589,8 +3101,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3603,8 +3113,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3617,8 +3125,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3631,8 +3137,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3645,8 +3149,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3659,8 +3161,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3673,8 +3173,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3687,8 +3185,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3701,8 +3197,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3715,8 +3209,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3729,8 +3221,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3743,8 +3233,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3757,8 +3245,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3771,8 +3257,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3785,11 +3269,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     new-brunswick:
         id: new-brunswick
@@ -3798,8 +3281,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3812,8 +3293,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3826,8 +3305,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3840,8 +3317,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3854,11 +3329,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     niederbayern:
         id: niederbayern
@@ -3867,8 +3341,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3876,13 +3348,11 @@ elements:
             - state
     niedersachsen:
         id: niedersachsen
-        name: Niedersachsen
+        name: Niedersachsen (mit Bremen)
         parent: germany
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3895,8 +3365,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3909,8 +3377,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3923,8 +3389,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3937,8 +3401,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3951,8 +3413,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3965,8 +3425,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3979,8 +3437,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -3993,8 +3449,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4007,8 +3461,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4021,8 +3473,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4035,8 +3485,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4049,11 +3497,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     norfolk:
         id: norfolk
@@ -4062,8 +3509,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4076,8 +3521,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4089,11 +3532,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     north-caucasus-fed-district:
         id: north-caucasus-fed-district
@@ -4102,8 +3544,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4116,8 +3556,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4130,8 +3568,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4144,8 +3580,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4158,8 +3592,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4172,8 +3604,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4186,8 +3616,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4200,8 +3628,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4214,8 +3640,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4228,8 +3652,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4242,8 +3664,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4256,8 +3676,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4270,8 +3688,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4284,8 +3700,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4298,8 +3712,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4312,8 +3724,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4326,8 +3736,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4340,8 +3748,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4354,8 +3760,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4368,8 +3772,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4382,8 +3784,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4396,8 +3796,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4410,8 +3808,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4424,8 +3820,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4438,8 +3832,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4452,8 +3844,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4466,8 +3856,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4480,8 +3868,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4494,8 +3880,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4508,8 +3892,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4522,8 +3904,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4536,8 +3916,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4550,8 +3928,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4564,8 +3940,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4578,8 +3952,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4592,8 +3964,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4606,11 +3976,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     polynesie-francaise:
         id: polynesie-francaise
@@ -4619,8 +3988,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4633,8 +4000,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4647,8 +4012,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4661,8 +4024,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4675,8 +4036,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4689,8 +4048,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4703,8 +4060,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4717,11 +4072,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     rheinland-pfalz:
         id: rheinland-pfalz
@@ -4730,8 +4084,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4744,8 +4096,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4758,8 +4108,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4771,11 +4119,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     rutland:
         id: rutland
@@ -4784,8 +4131,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4798,8 +4143,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4812,8 +4155,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4826,8 +4167,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4840,8 +4179,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4854,8 +4191,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4868,8 +4203,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4882,8 +4215,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4896,8 +4227,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4910,8 +4239,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4924,8 +4251,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4938,8 +4263,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4952,8 +4275,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4966,8 +4287,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4980,8 +4299,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -4994,8 +4311,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5008,8 +4323,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5022,8 +4335,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5036,8 +4347,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5050,8 +4359,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5064,8 +4371,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5078,8 +4383,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5092,8 +4395,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5106,8 +4407,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5120,8 +4419,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5134,8 +4431,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5148,8 +4443,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5162,8 +4455,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5176,8 +4467,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5190,8 +4479,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5204,8 +4491,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5218,8 +4503,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5232,11 +4515,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     south-america:
         id: south-america
@@ -5244,11 +4526,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     south-fed-district:
         id: south-fed-district
@@ -5257,8 +4538,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5271,8 +4550,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5285,8 +4562,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5299,8 +4574,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5313,8 +4586,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5327,11 +4598,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     sri-lanka:
         id: sri-lanka
@@ -5340,8 +4610,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5354,8 +4622,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5368,8 +4634,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5382,8 +4646,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5396,8 +4658,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5410,8 +4670,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5424,8 +4682,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5438,8 +4694,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5452,8 +4706,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5466,8 +4718,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5480,8 +4730,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5494,8 +4742,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5508,8 +4754,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5522,8 +4766,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5536,8 +4778,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5550,8 +4790,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5564,8 +4802,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5578,8 +4814,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5592,8 +4826,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5606,8 +4838,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5620,8 +4850,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5634,8 +4862,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5648,8 +4874,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5662,8 +4886,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5676,8 +4898,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5690,8 +4910,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5704,8 +4922,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5718,8 +4934,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5732,8 +4946,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5746,8 +4958,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5760,8 +4970,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5774,8 +4982,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5788,8 +4994,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5802,8 +5006,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5816,8 +5018,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5830,8 +5030,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5844,11 +5042,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     unterfranken:
         id: unterfranken
@@ -5857,8 +5054,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5871,8 +5066,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5885,8 +5078,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5899,11 +5090,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     us-midwest:
         id: us-midwest
@@ -5912,11 +5102,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     us-northeast:
         id: us-northeast
@@ -5925,11 +5114,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     us-pacific:
         id: us-pacific
@@ -5938,11 +5126,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     us-south:
         id: us-south
@@ -5951,11 +5138,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     us-west:
         id: us-west
@@ -5964,11 +5150,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     us/alabama:
         id: us/alabama
@@ -5977,8 +5162,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -5991,8 +5174,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6005,8 +5186,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6019,8 +5198,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6033,11 +5210,10 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
+            - shp.zip
             - state
     us/colorado:
         id: us/colorado
@@ -6046,8 +5222,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6060,8 +5234,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6074,8 +5246,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6088,8 +5258,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6102,8 +5270,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6116,8 +5282,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6130,8 +5294,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6144,8 +5306,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6158,8 +5318,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6172,8 +5330,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6186,8 +5342,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6200,8 +5354,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6214,8 +5366,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6228,8 +5378,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6242,8 +5390,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6256,8 +5402,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6270,8 +5414,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6284,8 +5426,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6298,8 +5438,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6312,8 +5450,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6326,8 +5462,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6340,8 +5474,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6354,8 +5486,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6368,8 +5498,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6382,8 +5510,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6396,8 +5522,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6410,8 +5534,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6424,8 +5546,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6438,8 +5558,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6452,8 +5570,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6466,8 +5582,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6480,8 +5594,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6494,8 +5606,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6508,8 +5618,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6522,8 +5630,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6536,8 +5642,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6550,8 +5654,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6564,8 +5666,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6578,8 +5678,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6592,8 +5690,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6606,8 +5702,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6620,8 +5714,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6634,8 +5726,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6648,8 +5738,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6662,8 +5750,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6676,8 +5762,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6690,8 +5774,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6704,8 +5786,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6718,8 +5798,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6732,8 +5810,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6746,8 +5822,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6760,8 +5834,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6774,8 +5846,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6788,8 +5858,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6802,8 +5870,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6816,8 +5882,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6830,8 +5894,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6844,8 +5906,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6858,8 +5918,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6872,8 +5930,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6886,8 +5942,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6900,8 +5954,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6914,8 +5966,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6928,8 +5978,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6942,8 +5990,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6956,8 +6002,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6970,8 +6014,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6984,8 +6026,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -6998,8 +6038,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -7012,8 +6050,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -7026,8 +6062,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -7040,8 +6074,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -7054,8 +6086,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -7068,8 +6098,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -7082,8 +6110,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
@@ -7096,8 +6122,6 @@ elements:
         files:
             - kml
             - osh.pbf
-            - osm.bz2
-            - osm.bz2.md5
             - osm.pbf
             - osm.pbf.md5
             - poly
