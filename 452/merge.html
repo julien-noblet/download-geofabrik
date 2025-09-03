@@ -79,7 +79,7 @@
 				
 				<option value="file11">github.com/julien-noblet/download-geofabrik/generator/generator.go (16.4%)</option>
 				
-				<option value="file12">github.com/julien-noblet/download-geofabrik/generator/importer/geofabrik/geofabik.go (84.8%)</option>
+				<option value="file12">github.com/julien-noblet/download-geofabrik/generator/importer/geofabrik/geofabik.go (82.6%)</option>
 				
 				<option value="file13">github.com/julien-noblet/download-geofabrik/lists/lists.go (93.1%)</option>
 				
@@ -1080,7 +1080,7 @@ func (e *Element) HasParent() bool <span class="cov6" title="37">{
 
 // Contains checks if the format list contains a specific format.
 func (f *Formats) Contains(format string) bool <span class="cov8" title="188">{
-        for _, existingFormat := range *f </span><span class="cov10" title="440">{
+        for _, existingFormat := range *f </span><span class="cov10" title="441">{
                 if format == existingFormat </span><span class="cov7" title="106">{
                         return true
                 }</span>
@@ -1585,13 +1585,13 @@ func processFeature(cfg *config.Config, feature *IndexElement) error <span class
 func getFormats(urls map[string]string) []string <span class="cov7" title="509">{
         myFormats := []string{}
 
-        for k := range urls </span><span class="cov10" title="3521">{
+        for k := range urls </span><span class="cov10" title="3054">{
                 switch k </span>{
                 case "pbf":<span class="cov7" title="509">
                         myFormats = append(myFormats, formats.FormatOsmPbf, "osm.pbf.md5")</span>
-                case "bz2":<span class="cov7" title="509">
+                case "bz2":<span class="cov0" title="0">
                         myFormats = append(myFormats, formats.FormatOsmBz2, "osm.bz2.md5")</span>
-                case "shp":<span class="cov7" title="467">
+                case "shp":<span class="cov7" title="509">
                         myFormats = append(myFormats, formats.FormatShpZip)</span>
                 case "history":<span class="cov7" title="509">
                         myFormats = append(myFormats, formats.FormatOshPbf)</span>
