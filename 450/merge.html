@@ -1585,13 +1585,13 @@ func processFeature(cfg *config.Config, feature *IndexElement) error <span class
 func getFormats(urls map[string]string) []string <span class="cov7" title="509">{
         myFormats := []string{}
 
-        for k := range urls </span><span class="cov10" title="3054">{
+        for k := range urls </span><span class="cov10" title="3026">{
                 switch k </span>{
                 case "pbf":<span class="cov7" title="509">
                         myFormats = append(myFormats, formats.FormatOsmPbf, "osm.pbf.md5")</span>
                 case "bz2":<span class="cov0" title="0">
                         myFormats = append(myFormats, formats.FormatOsmBz2, "osm.bz2.md5")</span>
-                case "shp":<span class="cov7" title="509">
+                case "shp":<span class="cov7" title="481">
                         myFormats = append(myFormats, formats.FormatShpZip)</span>
                 case "history":<span class="cov7" title="509">
                         myFormats = append(myFormats, formats.FormatOshPbf)</span>
@@ -2648,7 +2648,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1022">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1021">{
         return s.StartURL
 }</span>
 
