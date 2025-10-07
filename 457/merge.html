@@ -1016,7 +1016,7 @@ func ComputeMD5Hash(filePath string) (string, error) <span class="cov10" title="
                 return "", fmt.Errorf(openErrorMsg, filePath, err)
         }</span>
 
-        <span class="cov10" title="6">defer func() </span><span class="cov10" title="6">{
+        <span class="cov10" title="6">defer func() </span><span class="cov9" title="5">{
                 if err := file.Close(); err != nil </span><span class="cov0" title="0">{
                         log.WithError(err).Error(fmt.Errorf(closeErrorMsg, err).Error())
                 }</span>
@@ -2648,7 +2648,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1022">{
         return s.StartURL
 }</span>
 
@@ -2669,7 +2669,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="22">{
-        for f, i := range *def </span><span class="cov7" title="214">{
+        for f, i := range *def </span><span class="cov7" title="216">{
                 if format == i.ID </span><span class="cov4" title="20">{
                         s.Config.AddExtension(id, f)
                 }</span>
