@@ -552,7 +552,7 @@ func (config *Config) Generate() ([]byte, error) <span class="cov2" title="3">{
 }
 
 // MergeElement merges a new element into the config.
-func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="610">{
+func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="612">{
         config.ElementsMutex.RLock()
         newElement, ok := config.Elements[elementPtr.ID]
         config.ElementsMutex.RUnlock()
@@ -574,17 +574,17 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 <span class="cov6" title="42">newElement.Meta = len(newElement.Formats) == 0
 
                 config.Elements[elementPtr.ID] = newElement</span>
-        } else<span class="cov9" title="567"> {
+        } else<span class="cov9" title="569"> {
                 config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov9" title="609">return nil</span>
+        <span class="cov9" title="611">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(id string) bool <span class="cov7" title="72">{
+func (config *Config) Exist(id string) bool <span class="cov6" title="72">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
         result := reflect.DeepEqual(config.Elements[id], element.Element{})
@@ -1551,7 +1551,7 @@ func Convert(index *Index) (*config.Config, error) <span class="cov1" title="1">
                 ElementsMutex: &amp;sync.RWMutex{},
         }
 
-        for _, feature := range index.Features </span><span class="cov7" title="509">{
+        for _, feature := range index.Features </span><span class="cov7" title="511">{
                 if err := processFeature(cfg, &amp;feature); err != nil </span><span class="cov0" title="0">{
                         return nil, err
                 }</span>
@@ -1561,14 +1561,14 @@ func Convert(index *Index) (*config.Config, error) <span class="cov1" title="1">
 }
 
 // processFeature processes a single feature from the Geofabrik index.
-func processFeature(cfg *config.Config, feature *IndexElement) error <span class="cov7" title="509">{
+func processFeature(cfg *config.Config, feature *IndexElement) error <span class="cov7" title="511">{
         var elem element.Element
 
-        if viper.GetBool("log") </span><span class="cov7" title="509">{
+        if viper.GetBool("log") </span><span class="cov7" title="511">{
                 log.WithField("ID", feature.ElementProperties.ID).Debug("Processing feature")
         }</span>
 
-        <span class="cov7" title="509">elem.ID = feature.ElementProperties.ID
+        <span class="cov7" title="511">elem.ID = feature.ElementProperties.ID
         elem.Parent = feature.ElementProperties.Parent
         elem.Name = feature.ElementProperties.Name
 
@@ -1578,27 +1578,27 @@ func processFeature(cfg *config.Config, feature *IndexElement) error <span class
                 return errors.Wrapf(err, ErrMergingElement, elem)
         }</span>
 
-        <span class="cov7" title="509">return nil</span>
+        <span class="cov7" title="511">return nil</span>
 }
 
 // getFormats returns the formats based on the URLs.
-func getFormats(urls map[string]string) []string <span class="cov7" title="509">{
+func getFormats(urls map[string]string) []string <span class="cov7" title="511">{
         myFormats := []string{}
 
-        for k := range urls </span><span class="cov10" title="3026">{
+        for k := range urls </span><span class="cov10" title="3038">{
                 switch k </span>{
-                case "pbf":<span class="cov7" title="509">
+                case "pbf":<span class="cov7" title="511">
                         myFormats = append(myFormats, formats.FormatOsmPbf, "osm.pbf.md5")</span>
                 case "bz2":<span class="cov0" title="0">
                         myFormats = append(myFormats, formats.FormatOsmBz2, "osm.bz2.md5")</span>
-                case "shp":<span class="cov7" title="481">
+                case "shp":<span class="cov7" title="483">
                         myFormats = append(myFormats, formats.FormatShpZip)</span>
-                case "history":<span class="cov7" title="509">
+                case "history":<span class="cov7" title="511">
                         myFormats = append(myFormats, formats.FormatOshPbf)</span>
                 }
         }
 
-        <span class="cov7" title="509">myFormats = append(myFormats, formats.FormatPoly, formats.FormatKml, formats.FormatState)
+        <span class="cov7" title="511">myFormats = append(myFormats, formats.FormatPoly, formats.FormatKml, formats.FormatState)
 
         return myFormats</span>
 }
@@ -2677,7 +2677,7 @@ func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinition
 }
 
 // FileExt returns filename and extension.
-func FileExt(url string) (filename, extension string) <span class="cov5" title="31">{
+func FileExt(url string) (filename, extension string) <span class="cov5" title="30">{
         urls := strings.Split(url, "/")
         f := strings.Split(urls[len(urls)-1], ".")
 
