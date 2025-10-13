@@ -1,4 +1,5 @@
 [
+  {"Version":"d4183b6f1ec8ebc78986c88c4e4ce830fc873c3e","Date":1760394026,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/bits-and-blooms/bitset-1.24.1"],"Suites":[]},
   {"Version":"69eecee0b9fd9a9cce019fc6e841926877af286e","Date":1760393948,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/tablewriter-1.1.0"],"Suites":[]},
   {"Version":"a8b4260f88bf3a15c128e710938e9b0c56911aef","Date":1760393931,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"f4f471292cd7325bafda30511c944498d0bef766","Date":1760393919,"Tags":["ref=refs/heads/renovate/github-codeql-action-4.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"f08d23f703f618999c00174693a6e3067f13d225","Date":1757355578,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.5"],"Suites":[]},
   {"Version":"62935e9bdb17eb6699f11f5ce55fe1e361e97669","Date":1757353420,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"0cdf5e2ba60648ed6d6052e92635f4143954d349","Date":1757353096,"Tags":["ref=refs/heads/renovate/github.com-spf13-viper-1.x"],"Suites":[]},
-  {"Version":"e4e0b7e32111b8e724bbc0073b69d56bda272e8d","Date":1757315605,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.36.0"],"Suites":[]},
-  {"Version":"92d01771b09f0b9f25576420fcac80e66a4666df","Date":1757315578,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.10"],"Suites":[]}
+  {"Version":"e4e0b7e32111b8e724bbc0073b69d56bda272e8d","Date":1757315605,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.36.0"],"Suites":[]}
 ]
