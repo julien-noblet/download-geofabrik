@@ -1,4 +1,5 @@
 [
+  {"Version":"043affa5948320fe54a96ccec6b8e42922d543e2","Date":1760393796,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"828c99018f3dec81b8d07ee117527be9801d9d32","Date":1760393527,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"1ebb0513459fa7083d9fc410b6f78c8a8af17ec2","Date":1760339318,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/bits-and-blooms/bitset-1.24.1"],"Suites":[]},
   {"Version":"bc52914b5c258a1ac19288d31d4912c31e2c4618","Date":1760339190,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.37.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"8a5b9f470353d9f03040f91a47c91967c8c03270","Date":1756962311,"Tags":["ref=refs/heads/renovate/actions-setup-go-6.x"],"Suites":[]},
   {"Version":"e7697bb2c0c93c53a1b4c146f010e43ad532f045","Date":1756933314,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.35.0"],"Suites":[]},
   {"Version":"79ecf496699510579a81ccf5c3ec0db4f2dfb3ae","Date":1756933260,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
-  {"Version":"94a24592bdfddbf8ab48f4611b9b6d9cc411fd21","Date":1756933232,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"549220ca5579024bf075883b13aecfa814be1ce6","Date":1756933114,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
+  {"Version":"94a24592bdfddbf8ab48f4611b9b6d9cc411fd21","Date":1756933232,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
