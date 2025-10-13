@@ -1,4 +1,5 @@
 [
+  {"Version":"f4f471292cd7325bafda30511c944498d0bef766","Date":1760393919,"Tags":["ref=refs/heads/renovate/github-codeql-action-4.x"],"Suites":[]},
   {"Version":"87cde0b557ea1a39d2483909c73c7d00d5759e03","Date":1760393915,"Tags":["ref=refs/heads/renovate/actions-setup-go-6.x"],"Suites":[]},
   {"Version":"c94c87759f206c3741634f0bff7f8ae28dbef1a2","Date":1760393877,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.37.0"],"Suites":[]},
   {"Version":"043affa5948320fe54a96ccec6b8e42922d543e2","Date":1760393796,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"e4e0b7e32111b8e724bbc0073b69d56bda272e8d","Date":1757315605,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.36.0"],"Suites":[]},
   {"Version":"92d01771b09f0b9f25576420fcac80e66a4666df","Date":1757315578,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.10"],"Suites":[]},
   {"Version":"eca3da87575d0808dd4440aaa3ce730199971a1b","Date":1756970827,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.9"],"Suites":[]},
-  {"Version":"8a5b9f470353d9f03040f91a47c91967c8c03270","Date":1756962311,"Tags":["ref=refs/heads/renovate/actions-setup-go-6.x"],"Suites":[]},
-  {"Version":"e7697bb2c0c93c53a1b4c146f010e43ad532f045","Date":1756933314,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.35.0"],"Suites":[]}
+  {"Version":"8a5b9f470353d9f03040f91a47c91967c8c03270","Date":1756962311,"Tags":["ref=refs/heads/renovate/actions-setup-go-6.x"],"Suites":[]}
 ]
