@@ -1,4 +1,5 @@
 [
+  {"Version":"1ebb0513459fa7083d9fc410b6f78c8a8af17ec2","Date":1760339318,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/bits-and-blooms/bitset-1.24.1"],"Suites":[]},
   {"Version":"bc52914b5c258a1ac19288d31d4912c31e2c4618","Date":1760339190,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.37.0"],"Suites":[]},
   {"Version":"7e5503f51deb8e47436ecaef1e199fcf768c1b60","Date":1759869571,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"4423b8e557290d216332ed4bd6c82f9f36d09343","Date":1759869536,"Tags":["ref=refs/heads/renovate/github-codeql-action-4.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"79ecf496699510579a81ccf5c3ec0db4f2dfb3ae","Date":1756933260,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"94a24592bdfddbf8ab48f4611b9b6d9cc411fd21","Date":1756933232,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"549220ca5579024bf075883b13aecfa814be1ce6","Date":1756933114,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"2ae6c5b8fa4717812e4e3d203a69506c666e6f56","Date":1756740634,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.9"],"Suites":[]},
-  {"Version":"d47fb1740772bb594762f33e51b4e44b85236845","Date":1756736138,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/bits-and-blooms/bitset-1.24.0"],"Suites":[]}
+  {"Version":"2ae6c5b8fa4717812e4e3d203a69506c666e6f56","Date":1756740634,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/spf13/pflag-1.0.9"],"Suites":[]}
 ]
