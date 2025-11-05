@@ -1,4 +1,5 @@
 [
+  {"Version":"d77409c01f24a68602cd86ab3d9ac3a93da94187","Date":1762378797,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"04a1c1bf9f14724a77c4d60f2893d70c7c55068d","Date":1761549711,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/bits-and-blooms/bitset-1.24.2"],"Suites":[]},
   {"Version":"225f3f6a9ba50d0ad0b126699a2e580423a5558d","Date":1760394036,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.10"],"Suites":[]},
   {"Version":"d4183b6f1ec8ebc78986c88c4e4ce830fc873c3e","Date":1760394026,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/bits-and-blooms/bitset-1.24.1"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"d9f4f2b9b4580b38715094bc27c9188f165fdf2a","Date":1757366122,"Tags":["ref=refs/heads/renovate/actions-setup-go-6.x"],"Suites":[]},
   {"Version":"05e24ead7fa4c5cf6e9c0870eb6bc9de9bca897b","Date":1757357728,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.36.0"],"Suites":[]},
   {"Version":"45267bab2a6576eed12db5ff0c7acf745267a957","Date":1757355969,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/bits-and-blooms/bitset-1.24.0"],"Suites":[]},
-  {"Version":"f08d23f703f618999c00174693a6e3067f13d225","Date":1757355578,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.5"],"Suites":[]},
-  {"Version":"62935e9bdb17eb6699f11f5ce55fe1e361e97669","Date":1757353420,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"f08d23f703f618999c00174693a6e3067f13d225","Date":1757355578,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.5"],"Suites":[]}
 ]
