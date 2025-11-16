@@ -1,4 +1,5 @@
 [
+  {"Version":"1d2fddeb44f5ba7b540afd75db2a1c9acdac9068","Date":1763312554,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"4f6ab624905e15b891fa506462fd98850ffa9ae0","Date":1763312436,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"ca788a0fdb912cecb5ebbc170a17644b9f9be7e6","Date":1762684960,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"9fc5b12c8615f92c27b38e646d78a9765ee37257","Date":1762563280,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-9.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"68f2fda760dd2cfc5da4864b0bf3ea6b0d3ccb1a","Date":1759869492,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.10"],"Suites":[]},
   {"Version":"67c7013fe045c7d0142d248ff6925049ad4d430d","Date":1759869433,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"a3579a3be042116efc89d320317933b9ff05b0cc","Date":1759866739,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"ca8ee55e115a94e18d20c2e40c9a590801c41bf0","Date":1759734191,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.10"],"Suites":[]},
-  {"Version":"e1ad92a804549861344cee943508edc47cd4e8ba","Date":1758703004,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]}
+  {"Version":"ca8ee55e115a94e18d20c2e40c9a590801c41bf0","Date":1759734191,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.10"],"Suites":[]}
 ]
