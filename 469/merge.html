@@ -2238,7 +2238,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
                 file = name
         }</span>
 
-        <span class="cov8" title="16">o.addOrUpdateElement(parent, name, file, extension)</span>
+        <span class="cov8" title="17">o.addOrUpdateElement(parent, name, file, extension)</span>
 }
 
 // addOrUpdateElement adds or updates an element in the configuration.
@@ -2648,7 +2648,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1021">{
         return s.StartURL
 }</span>
 
