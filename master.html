@@ -55,7 +55,7 @@
 			<div id="nav">
 				<select id="files">
 				
-				<option value="file0">github.com/julien-noblet/download-geofabrik/app/app.go (0.0%)</option>
+				<option value="file0">github.com/julien-noblet/download-geofabrik/app/app.go (100.0%)</option>
 				
 				<option value="file1">github.com/julien-noblet/download-geofabrik/app/config.go (97.4%)</option>
 				
@@ -67,7 +67,7 @@
 				
 				<option value="file5">github.com/julien-noblet/download-geofabrik/config/config.go (97.7%)</option>
 				
-				<option value="file6">github.com/julien-noblet/download-geofabrik/download-geofabrik.go (0.0%)</option>
+				<option value="file6">github.com/julien-noblet/download-geofabrik/download-geofabrik.go (75.0%)</option>
 				
 				<option value="file7">github.com/julien-noblet/download-geofabrik/download/download.go (88.4%)</option>
 				
@@ -167,7 +167,7 @@ type App struct {
 }
 
 // NewApp initializes a new App instance with default settings.
-func NewApp() *App <span class="cov0" title="0">{
+func NewApp() *App <span class="cov10" title="2">{
         myApp := &amp;App{
                 App: kingpin.New("download-geofabrik", "A command-line tool for downloading OSM files."),
         }
@@ -179,7 +179,7 @@ func NewApp() *App <span class="cov0" title="0">{
 }</span>
 
 // initFlags initializes the flags for the application.
-func (a *App) initFlags() <span class="cov0" title="0">{
+func (a *App) initFlags() <span class="cov10" title="2">{
         a.FConfig = a.App.Flag("config", "Set Config file.").Default(defaultConfigFile).Short('c').String()
         a.FNodownload = a.App.Flag("nodownload", "Do not download file (test only)").Short('n').Bool()
         a.FVerbose = a.App.Flag("verbose", "Be verbose").Short('v').Bool()
@@ -193,7 +193,7 @@ func (a *App) initFlags() <span class="cov0" title="0">{
 }</span>
 
 // initCommands initializes the commands for the application.
-func (a *App) initCommands() <span class="cov0" title="0">{
+func (a *App) initCommands() <span class="cov10" title="2">{
         a.Cdownload = a.App.Command("download", "Download element")
         a.Delement = a.Cdownload.Arg("element", "OSM element").Required().String()
         a.DCheck = a.Cdownload.Flag("check", "Control with checksum (default) Use --no-check to discard control").
@@ -211,7 +211,7 @@ func (a *App) initCommands() <span class="cov0" title="0">{
 }</span>
 
 // initFormatFlags initializes the format flags for the download command.
-func (a *App) initFormatFlags() <span class="cov0" title="0">{
+func (a *App) initFormatFlags() <span class="cov10" title="2">{
         a.DosmBz2 = a.Cdownload.Flag(formats.FormatOsmBz2, "Download osm.bz2 if available").Short('B').Bool()
         a.DosmGz = a.Cdownload.Flag(formats.FormatOsmGz, "Download osm.gz if available").Short('G').Bool()
         a.DshpZip = a.Cdownload.Flag(formats.FormatShpZip, "Download shp.zip if available").Short('S').Bool()
@@ -248,7 +248,7 @@ const (
 )
 
 // ConfigureViper sets up the Viper configuration based on the application flags.
-func (a *App) ConfigureViper() <span class="cov3" title="4">{
+func (a *App) ConfigureViper() <span class="cov4" title="5">{
         viper.Set(config.ViperConfig, *a.FConfig)
         viper.Set(config.ViperService, *a.FService)
         SetViperBool(config.ViperNoDL, a.FNodownload)
@@ -282,7 +282,7 @@ func (a *App) ConfigureViper() <span class="cov3" title="4">{
 }</span>
 
 // SetViperBool sets a boolean flag in Viper configuration.
-func SetViperBool(name string, flag *bool) <span class="cov10" title="90">{
+func SetViperBool(name string, flag *bool) <span class="cov10" title="112">{
         viper.Set(name, false)
 
         if *flag </span><span class="cov7" title="25">{
@@ -291,10 +291,10 @@ func SetViperBool(name string, flag *bool) <span class="cov10" title="90">{
 }
 
 // SetOutputDir sets the output directory in Viper configuration.
-func SetOutputDir() <span class="cov3" title="3">{
+func SetOutputDir() <span class="cov3" title="4">{
         outputDir := viper.GetString(config.ViperOutputDirectory)
-        if outputDir == "" </span><span class="cov2" title="2">{
-                if outputDir = os.Getenv(defaultOutputDirEnv); outputDir == "" </span><span class="cov1" title="1">{
+        if outputDir == "" </span><span class="cov3" title="3">{
+                if outputDir = os.Getenv(defaultOutputDirEnv); outputDir == "" </span><span class="cov2" title="2">{
                         var err error
 
                         outputDir, err = os.Getwd()
@@ -304,7 +304,7 @@ func SetOutputDir() <span class="cov3" title="3">{
                 }
         }
 
-        <span class="cov3" title="3">outputDir += defaultPathSeparator
+        <span class="cov3" title="4">outputDir += defaultPathSeparator
         viper.Set(config.ViperOutputDirectory, outputDir)</span>
 }
 </pre>
@@ -415,20 +415,20 @@ const (
 )
 
 // ConfigureLogging sets up the logging configuration based on the application flags.
-func ConfigureLogging() <span class="cov10" title="8">{
+func ConfigureLogging() <span class="cov10" title="9">{
         SetDefaultLogging()
 
         if IsQuietMode() </span><span class="cov8" title="6">{
                 SetQuietLogging()
         }</span>
 
-        <span class="cov10" title="8">if IsVerboseMode() </span><span class="cov7" title="4">{
+        <span class="cov10" title="9">if IsVerboseMode() </span><span class="cov6" title="4">{
                 SetVerboseLogging()
         }</span>
 }
 
 // SetDefaultLogging sets the default logging configuration.
-func SetDefaultLogging() <span class="cov10" title="8">{
+func SetDefaultLogging() <span class="cov10" title="9">{
         log.SetLevel(defaultLogLevel)
         log.SetHandler(cli.Default)
 }</span>
@@ -439,18 +439,18 @@ func SetQuietLogging() <span class="cov8" title="6">{
 }</span>
 
 // SetVerboseLogging sets the logging configuration for verbose mode.
-func SetVerboseLogging() <span class="cov7" title="4">{
+func SetVerboseLogging() <span class="cov6" title="4">{
         log.SetLevel(verboseLogLevel)
         log.SetHandler(text.Default)
 }</span>
 
 // IsQuietMode checks if the application is in quiet mode.
-func IsQuietMode() bool <span class="cov10" title="8">{
+func IsQuietMode() bool <span class="cov10" title="9">{
         return viper.GetBool(config.ViperQuiet) || viper.GetBool(config.ViperProgress)
 }</span>
 
 // IsVerboseMode checks if the application is in verbose mode.
-func IsVerboseMode() bool <span class="cov10" title="8">{
+func IsVerboseMode() bool <span class="cov10" title="9">{
         return viper.GetBool(config.ViperVerbose)
 }</span>
 </pre>
@@ -476,10 +476,10 @@ var serviceConfigMap = map[string]string{
 }
 
 // CheckService checks the service and sets the appropriate configuration file.
-func CheckService() bool <span class="cov8" title="6">{
+func CheckService() bool <span class="cov8" title="7">{
         service := viper.GetString(config.ViperService)
 
-        if configFile, exists := serviceConfigMap[service]; exists </span><span class="cov7" title="5">{
+        if configFile, exists := serviceConfigMap[service]; exists </span><span class="cov7" title="6">{
                 SetConfigFile(configFile)
 
                 return true
@@ -489,14 +489,14 @@ func CheckService() bool <span class="cov8" title="6">{
 }
 
 // SetConfigFile sets the configuration file if the current config file is the default.
-func SetConfigFile(configFile string) <span class="cov10" title="10">{
+func SetConfigFile(configFile string) <span class="cov10" title="11">{
         if viper.GetString(config.ViperConfig) == "" &amp;&amp; configFile == "" </span><span class="cov1" title="1">{
                 viper.Set(config.ViperConfig, defaultConfigFile)
 
                 return
         }</span>
 
-        <span class="cov9" title="9">if configFile != "" </span><span class="cov9" title="9">{
+        <span class="cov9" title="10">if configFile != "" </span><span class="cov9" title="10">{
                 viper.Set(config.ViperConfig, configFile)
         }</span>
 }
@@ -698,7 +698,7 @@ func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, 
 }
 
 // LoadConfig loads the configuration from the specified file.
-func LoadConfig(configFile string) (*Config, error) <span class="cov4" title="17">{
+func LoadConfig(configFile string) (*Config, error) <span class="cov5" title="18">{
         filename, _ := filepath.Abs(configFile)
 
         fileContent, err := os.ReadFile(filename)
@@ -706,7 +706,7 @@ func LoadConfig(configFile string) (*Config, error) <span class="cov4" title="17
                 return nil, fmt.Errorf("can't open %s: %w", filename, err)
         }</span>
 
-        <span class="cov4" title="16">myConfigPtr := &amp;Config{
+        <span class="cov4" title="17">myConfigPtr := &amp;Config{
                 Formats:       formats.FormatDefinitions{},
                 Elements:      element.MapElement{},
                 ElementsMutex: &amp;sync.RWMutex{},
@@ -717,7 +717,7 @@ func LoadConfig(configFile string) (*Config, error) <span class="cov4" title="17
                 return nil, fmt.Errorf("can't unmarshal %s: %w", filename, err)
         }</span>
 
-        <span class="cov4" title="15">return myConfigPtr, nil</span>
+        <span class="cov4" title="16">return myConfigPtr, nil</span>
 }
 
 // IsHashable checks if a format is hashable.
@@ -740,7 +740,6 @@ func IsHashable(config *Config, format string) (isHashable bool, hash, extension
 import (
         "os"
 
-        "github.com/alecthomas/kingpin/v2"
         "github.com/julien-noblet/download-geofabrik/app"
         "github.com/julien-noblet/download-geofabrik/config"
         "github.com/julien-noblet/download-geofabrik/generator"
@@ -751,24 +750,36 @@ import (
 var version = "devel"
 
 func main() <span class="cov0" title="0">{
+        if err := Run(os.Args[1:]); err != nil </span><span class="cov0" title="0">{
+                os.Exit(1)
+        }</span>
+}
+
+// Run executes the application logic with the provided arguments.
+func Run(args []string) error <span class="cov10" title="2">{
         myApp := app.NewApp()
         myApp.App.Version(version) // Add version flag
-        commands := kingpin.MustParse(myApp.App.Parse(os.Args[1:]))
+        commands, err := myApp.App.Parse(args)
+        if err != nil </span><span class="cov1" title="1">{
+                return err
+        }</span>
 
-        myApp.ConfigureViper()
+        <span class="cov1" title="1">myApp.ConfigureViper()
         app.ConfigureLogging()
         app.SetOutputDir()
 
         app.CheckService()
 
         switch commands </span>{
-        case myApp.Clist.FullCommand():<span class="cov0" title="0">
+        case myApp.Clist.FullCommand():<span class="cov1" title="1">
                 lists.ListCommand()</span>
         case myApp.Cdownload.FullCommand():<span class="cov0" title="0">
                 app.DownloadCommand()</span>
         case myApp.Cgenerate.FullCommand():<span class="cov0" title="0">
                 generator.Generate(viper.GetString(config.ViperConfig))</span>
         }
+
+        <span class="cov1" title="1">return nil</span>
 }
 </pre>
 		
@@ -1174,7 +1185,7 @@ const (
 )
 
 // GetMiniFormats returns a string of short format names based on the provided full format names.
-func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="534">{
+func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="1043">{
         miniFormats := []MiniFormat{
                 {ShortName: "s", FullName: FormatState},
                 {ShortName: "P", FullName: FormatOsmPbf},
@@ -1196,9 +1207,9 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="5
 
         shortNames := make([]string, 0, len(fullFormatNames))
 
-        for _, fullName := range fullFormatNames </span><span class="cov8" title="4580">{
-                for _, format := range miniFormats </span><span class="cov10" title="33013">{
-                        if fullName == format.FullName </span><span class="cov8" title="3557">{
+        for _, fullName := range fullFormatNames </span><span class="cov8" title="9119">{
+                for _, format := range miniFormats </span><span class="cov10" title="65804">{
+                        if fullName == format.FullName </span><span class="cov8" title="7078">{
                                 shortNames = append(shortNames, format.ShortName)
 
                                 break</span>
@@ -1206,7 +1217,7 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="5
                 }
         }
 
-        <span class="cov6" title="534">return strings.Join(shortNames, "")</span>
+        <span class="cov6" title="1043">return strings.Join(shortNames, "")</span>
 }
 
 // GetFormats returns a slice of format strings based on the configuration.
@@ -1233,7 +1244,7 @@ func GetFormats() []string <span class="cov2" title="9">{
         var formatList []string
 
         for key, format := range options </span><span class="cov5" title="144">{
-                if viper.GetBool(key) </span><span class="cov3" title="11">{
+                if viper.GetBool(key) </span><span class="cov2" title="11">{
                         formatList = append(formatList, format)
                 }</span>
         }
@@ -1623,11 +1634,11 @@ const (
 )
 
 // ListAllRegions lists all regions in the specified format.
-func ListAllRegions(configuration *config.Config, format string) error <span class="cov2" title="3">{
+func ListAllRegions(configuration *config.Config, format string) error <span class="cov2" title="4">{
         table := CreateTable(format)
         keys := GetSortedKeys(configuration)
 
-        for _, item := range keys </span><span class="cov9" title="513">{
+        for _, item := range keys </span><span class="cov9" title="1022">{
                 table.Append([]string{
                         item,
                         configuration.Elements[configuration.Elements[item].Parent].Name,
@@ -1636,14 +1647,14 @@ func ListAllRegions(configuration *config.Config, format string) error <span cla
                 })
         }</span>
 
-        <span class="cov2" title="3">table.Render()
+        <span class="cov2" title="4">table.Render()
         fmt.Printf("Total elements: %#v\n", len(configuration.Elements)) //nolint:forbidigo // I want to print the number of elements
 
         return nil</span>
 }
 
 // CreateTable creates a table with the specified format.
-func CreateTable(format string) *tablewriter.Table <span class="cov2" title="3">{
+func CreateTable(format string) *tablewriter.Table <span class="cov2" title="4">{
         table := tablewriter.NewWriter(os.Stdout)
         table.SetAlignment(tablewriter.ALIGN_LEFT)
         table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
@@ -1653,26 +1664,26 @@ func CreateTable(format string) *tablewriter.Table <span class="cov2" title="3">
                 table.SetCenterSeparator("|")
         }</span>
 
-        <span class="cov2" title="3">return table</span>
+        <span class="cov2" title="4">return table</span>
 }
 
 // GetSortedKeys returns the sorted keys of the configuration elements.
-func GetSortedKeys(configuration *config.Config) []string <span class="cov2" title="4">{
+func GetSortedKeys(configuration *config.Config) []string <span class="cov3" title="5">{
         keys := make(sort.StringSlice, len(configuration.Elements))
         i := 0
 
-        for k := range configuration.Elements </span><span class="cov10" title="515">{
+        for k := range configuration.Elements </span><span class="cov10" title="1024">{
                 keys[i] = k
                 i++
         }</span>
 
-        <span class="cov2" title="4">keys.Sort()
+        <span class="cov3" title="5">keys.Sort()
 
         return keys</span>
 }
 
 // ListCommand executes the list command.
-func ListCommand() <span class="cov1" title="1">{
+func ListCommand() <span class="cov1" title="2">{
         format := ""
 
         configPtr, err := config.LoadConfig(viper.GetString(config.ViperConfig))
@@ -1680,11 +1691,11 @@ func ListCommand() <span class="cov1" title="1">{
                 log.WithError(err).Fatal(config.ErrLoadConfig)
         }</span>
 
-        <span class="cov1" title="1">if viper.GetBool(config.ViperListFormatMarkdown) </span><span class="cov1" title="1">{
+        <span class="cov1" title="2">if viper.GetBool(config.ViperListFormatMarkdown) </span><span class="cov1" title="1">{
                 format = markdownFormat
         }</span>
 
-        <span class="cov1" title="1">if err := ListAllRegions(configPtr, format); err != nil </span><span class="cov0" title="0">{
+        <span class="cov1" title="2">if err := ListAllRegions(configPtr, format); err != nil </span><span class="cov0" title="0">{
                 log.WithError(err).Fatal("Failed to list all regions")
         }</span>
 }
@@ -2648,7 +2659,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
         return s.StartURL
 }</span>
 
