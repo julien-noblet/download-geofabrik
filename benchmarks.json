@@ -1,4 +1,5 @@
 [
+  {"Version":"9b558c89bb5c126b63ebf61549b193c1cb183522","Date":1764565141,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"03cb8f072b9a7266c724a128d31efb6ce73b446d","Date":1764565123,"Tags":["ref=refs/heads/renovate/actions-setup-go-6.x"],"Suites":[]},
   {"Version":"5d7b4ba996030149f685ef2024a2165892a33b66","Date":1764565090,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ef0785c4d463f696dc3c2151ba56df0029de40da","Date":1764565005,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"989e3727d1a742a6ca2e9d233a5a57ff5f2a3d09","Date":1762378974,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"d77409c01f24a68602cd86ab3d9ac3a93da94187","Date":1762378797,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"04a1c1bf9f14724a77c4d60f2893d70c7c55068d","Date":1761549711,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/bits-and-blooms/bitset-1.24.2"],"Suites":[]},
-  {"Version":"225f3f6a9ba50d0ad0b126699a2e580423a5558d","Date":1760394036,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.10"],"Suites":[]},
-  {"Version":"d4183b6f1ec8ebc78986c88c4e4ce830fc873c3e","Date":1760394026,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/bits-and-blooms/bitset-1.24.1"],"Suites":[]}
+  {"Version":"225f3f6a9ba50d0ad0b126699a2e580423a5558d","Date":1760394036,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.10"],"Suites":[]}
 ]
