@@ -3,7 +3,6 @@ package main
 import (
 	"os"
 
-	"github.com/alecthomas/kingpin/v2"
 	"github.com/julien-noblet/download-geofabrik/app"
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/generator"
@@ -14,9 +13,19 @@ import (
 var version = "devel"
 
 func main() {
+	if err := Run(os.Args[1:]); err != nil {
+		os.Exit(1)
+	}
+}
+
+// Run executes the application logic with the provided arguments.
+func Run(args []string) error {
 	myApp := app.NewApp()
 	myApp.App.Version(version) // Add version flag
-	commands := kingpin.MustParse(myApp.App.Parse(os.Args[1:]))
+	commands, err := myApp.App.Parse(args)
+	if err != nil {
+		return err
+	}
 
 	myApp.ConfigureViper()
 	app.ConfigureLogging()
@@ -32,4 +41,6 @@ func main() {
 	case myApp.Cgenerate.FullCommand():
 		generator.Generate(viper.GetString(config.ViperConfig))
 	}
+
+	return nil
 }
