@@ -1,4 +1,5 @@
 [
+  {"Version":"17e88b97f601ec90cec648b276037ba80856f7f4","Date":1764568298,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"db7a15cfd7966553116c0aa2d4d5e71ef582ef34","Date":1764568150,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"3bfffafbd4a64b01e2df300ba7a5357ce5fab19f","Date":1764567645,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"4a55fcf66d49ccaa0d2e9b09da066610949595ff","Date":1764567626,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"4f6ab624905e15b891fa506462fd98850ffa9ae0","Date":1763312436,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"ca788a0fdb912cecb5ebbc170a17644b9f9be7e6","Date":1762684960,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"9fc5b12c8615f92c27b38e646d78a9765ee37257","Date":1762563280,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-9.x"],"Suites":[]},
-  {"Version":"2330f10f295fe33241a278bd27f89950d79fb74a","Date":1762379105,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
-  {"Version":"67fcd5364823477bd79240b1edacbee68a75cd93","Date":1762379074,"Tags":["ref=refs/heads/renovate/github-codeql-action-4.x"],"Suites":[]}
+  {"Version":"2330f10f295fe33241a278bd27f89950d79fb74a","Date":1762379105,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]}
 ]
