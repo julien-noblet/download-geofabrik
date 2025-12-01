@@ -2210,7 +2210,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
         }</span>
 
         <span class="cov8" title="18">parent, parents := GetParent(href)
-        if !o.Config.Exist(parent) </span><span class="cov7" title="11">{
+        if !o.Config.Exist(parent) </span><span class="cov7" title="10">{
                 o.MakeParents(parent, parents)
         }</span>
 
