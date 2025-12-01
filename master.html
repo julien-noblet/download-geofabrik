@@ -598,7 +598,7 @@ func (config *Config) AddExtension(id, format string) <span class="cov6" title="
         elem := config.Elements[id]
         config.ElementsMutex.RUnlock()
 
-        if !elem.Formats.Contains(format) </span><span class="cov6" title="38">{
+        if !elem.Formats.Contains(format) </span><span class="cov6" title="39">{
                 log.Infof("Add %s to %s", format, elem.ID)
 
                 config.ElementsMutex.Lock()
@@ -1086,7 +1086,7 @@ func (f *Formats) Contains(format string) bool <span class="cov8" title="188">{
                 }</span>
         }
 
-        <span class="cov7" title="81">return false</span>
+        <span class="cov7" title="82">return false</span>
 }
 
 // CreateParentElement creates a parent element for the given element.
