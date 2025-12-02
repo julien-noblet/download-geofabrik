@@ -1,4 +1,5 @@
 [
+  {"Version":"883234cb186e3a05e8f6b3ed9b879c97b6ffd0e7","Date":1764701782,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"2f2a6ea50771110970b099a8b2f3bd21b7841d9f","Date":1764701755,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"4f6ff8691d2443a7a65f169b3748f2e7b3ff268d","Date":1764701609,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"3207a55763bb34804c59def9b32d0fcba9627c4c","Date":1764582744,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/tablewriter-1.1.2"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"0957715dcfef2117d83cbf83c5bbb70e32ce1ce9","Date":1764564860,"Tags":["ref=refs/heads/renovate/golangci-golangci-lint-action-9.x"],"Suites":[]},
   {"Version":"c5521e364a028ffeff716c392f3375d3f99682a4","Date":1764564859,"Tags":["ref=refs/heads/renovate/github-codeql-action-4.x"],"Suites":[]},
   {"Version":"994deaa3093699917c135cccfe816f25e01d150d","Date":1764564857,"Tags":["ref=refs/heads/renovate/actions-setup-go-6.x"],"Suites":[]},
-  {"Version":"b02a9fc6bb7d7cbe2d9f2e995b850851aa5c41db","Date":1764564829,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"aae881e5caa5dee6d560c616f470b0b9ce690c08","Date":1764511465,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]}
+  {"Version":"b02a9fc6bb7d7cbe2d9f2e995b850851aa5c41db","Date":1764564829,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
