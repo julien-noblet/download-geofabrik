@@ -584,7 +584,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(id string) bool <span class="cov6" title="71">{
+func (config *Config) Exist(id string) bool <span class="cov6" title="72">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
         result := reflect.DeepEqual(config.Elements[id], element.Element{})
@@ -2164,7 +2164,7 @@ func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span cl
 
         <span class="cov8" title="15">gparent := getGparent(gparents)
 
-        if !o.Config.Exist(parent) </span><span class="cov7" title="14">{
+        if !o.Config.Exist(parent) </span><span class="cov8" title="15">{
                 o.createAndMergeElement(parent, gparent)
 
                 if gparent != "" </span><span class="cov4" title="4">{
@@ -2209,7 +2209,7 @@ func Exceptions(name, parent string) string <span class="cov8" title="17">{
                 return fmt.Sprintf("%v_%v", parent, name)
         }</span>
 
-        <span class="cov7" title="14">return name</span>
+        <span class="cov8" title="15">return name</span>
 }
 
 // ParseHref parses the href and updates the configuration.
@@ -2245,11 +2245,11 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
         <span class="cov8" title="17">log.Debugf("Add %s format", extension)
 
         file := ""
-        if extension != "" </span><span class="cov7" title="14">{
+        if extension != "" </span><span class="cov8" title="15">{
                 file = name
         }</span>
 
-        <span class="cov8" title="16">o.addOrUpdateElement(parent, name, file, extension)</span>
+        <span class="cov8" title="17">o.addOrUpdateElement(parent, name, file, extension)</span>
 }
 
 // addOrUpdateElement adds or updates an element in the configuration.
