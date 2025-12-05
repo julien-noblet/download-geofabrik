@@ -1654,7 +1654,7 @@ func ListAllRegions(configuration *config.Config, format string) error <span cla
         }
 
         <span class="cov2" title="4">if err := table.Render(); err != nil </span><span class="cov0" title="0">{
-                return fmt.Errorf("unable to render table : %w", err)
+                return fmt.Errorf("unable to render table: %w", err)
         }</span>
         <span class="cov2" title="4">fmt.Printf("Total elements: %#v\n", len(configuration.Elements)) //nolint:forbidigo // I want to print the number of elements
 
@@ -2676,7 +2676,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1022">{
         return s.StartURL
 }</span>
 
@@ -2697,7 +2697,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="22">{
-        for f, i := range *def </span><span class="cov7" title="216">{
+        for f, i := range *def </span><span class="cov7" title="212">{
                 if format == i.ID </span><span class="cov4" title="20">{
                         s.Config.AddExtension(id, f)
                 }</span>
