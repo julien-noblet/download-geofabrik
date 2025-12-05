@@ -30,12 +30,12 @@ func ListAllRegions(configuration *config.Config, format string) error {
 			formats.GetMiniFormats(configuration.Elements[item].Formats),
 		)
 		if err != nil {
-			return err
+			return fmt.Errorf("unable to append : %w", err)
 		}
 	}
 
 	if err := table.Render(); err != nil {
-		return err
+		return fmt.Errorf("unable to render table : %w", err)
 	}
 	fmt.Printf("Total elements: %#v\n", len(configuration.Elements)) //nolint:forbidigo // I want to print the number of elements
 
@@ -47,7 +47,7 @@ func CreateTable(format string) *tablewriter.Table {
 	// Options
 	opts := []tablewriter.Option{
 		tablewriter.WithHeader([]string{"ShortName", "Is in", "Long Name", "formats"}),
-		tablewriter.WithAlignment(tw.MakeAlign(4, tw.AlignLeft)),
+		tablewriter.WithAlignment(tw.MakeAlign(4, tw.AlignLeft)), //nolint:gomnd // 4 spaces for formats
 	}
 
 	if format == markdownFormat {
