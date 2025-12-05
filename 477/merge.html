@@ -760,6 +760,7 @@ func main() <span class="cov0" title="0">{
 func Run(args []string) error <span class="cov10" title="2">{
         myApp := app.NewApp()
         myApp.App.Version(version) // Add version flag
+
         commands, err := myApp.App.Parse(args)
         if err != nil </span><span class="cov1" title="1">{
                 return fmt.Errorf("unable to parse arguments: %w", err)
@@ -1210,7 +1211,7 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="1
 
         for _, fullName := range fullFormatNames </span><span class="cov8" title="9119">{
                 for _, format := range miniFormats </span><span class="cov10" title="65804">{
-                        if fullName == format.FullName </span><span class="cov8" title="7078">{
+                        if fullName == format.FullName </span><span class="cov8" title="7077">{
                                 shortNames = append(shortNames, format.ShortName)
 
                                 break</span>
@@ -1665,7 +1666,7 @@ func CreateTable(format string) *tablewriter.Table <span class="cov2" title="4">
         // Options
         opts := []tablewriter.Option{
                 tablewriter.WithHeader([]string{"ShortName", "Is in", "Long Name", "formats"}),
-                tablewriter.WithAlignment(tw.MakeAlign(4, tw.AlignLeft)), //nolint:gomnd // 4 spaces for formats
+                tablewriter.WithAlignment(tw.MakeAlign(4, tw.AlignLeft)), //nolint:mnd // 4 spaces for formats
         }
 
         if format == markdownFormat </span><span class="cov1" title="2">{
@@ -1923,7 +1924,7 @@ func (g *Geofabrik) Collector() *colly.Collector <span class="cov4" title="4">{
 // ParseSubregion parses the subregion information from the HTML.
 func (g *Geofabrik) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Collector) <span class="cov4" title="4">{
         e.ForEach("td.subregion", func(_ int, el *colly.HTMLElement) </span><span class="cov9" title="19">{
-                el.ForEach("a", func(_ int, sub *colly.HTMLElement) </span><span class="cov9" title="19">{
+                el.ForEach("a", func(_ int, sub *colly.HTMLElement) </span><span class="cov9" title="18">{
                         href := sub.Request.AbsoluteURL(sub.Attr("href"))
                         myID, extension := scrapper.FileExt(href)
 
