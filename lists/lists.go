@@ -30,7 +30,7 @@ func ListAllRegions(configuration *config.Config, format string) error {
 			formats.GetMiniFormats(configuration.Elements[item].Formats),
 		)
 		if err != nil {
-			return fmt.Errorf("unable to append : %w", err)
+			return fmt.Errorf("unable to append: %w", err)
 		}
 	}
 
