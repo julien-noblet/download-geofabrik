@@ -1647,12 +1647,12 @@ func ListAllRegions(configuration *config.Config, format string) error <span cla
                         formats.GetMiniFormats(configuration.Elements[item].Formats),
                 )
                 if err != nil </span><span class="cov0" title="0">{
-                        return err
+                        return fmt.Errorf("unable to append : %w", err)
                 }</span>
         }
 
         <span class="cov2" title="4">if err := table.Render(); err != nil </span><span class="cov0" title="0">{
-                return err
+                return fmt.Errorf("unable to render table : %w", err)
         }</span>
         <span class="cov2" title="4">fmt.Printf("Total elements: %#v\n", len(configuration.Elements)) //nolint:forbidigo // I want to print the number of elements
 
@@ -1664,7 +1664,7 @@ func CreateTable(format string) *tablewriter.Table <span class="cov2" title="4">
         // Options
         opts := []tablewriter.Option{
                 tablewriter.WithHeader([]string{"ShortName", "Is in", "Long Name", "formats"}),
-                tablewriter.WithAlignment(tw.MakeAlign(4, tw.AlignLeft)),
+                tablewriter.WithAlignment(tw.MakeAlign(4, tw.AlignLeft)), //nolint:gomnd // 4 spaces for formats
         }
 
         if format == markdownFormat </span><span class="cov1" title="2">{
@@ -1957,7 +1957,7 @@ func (g *Geofabrik) handleHTMLExtension(sub *colly.HTMLElement, href, myID strin
                 }
         }
 
-        <span class="cov9" title="19">if err := g.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+        <span class="cov9" title="18">if err := g.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
                 log.WithError(err).Errorf("can't merge %s", myElement.Name)
         }</span>
 
@@ -1973,7 +1973,7 @@ func (g *Geofabrik) handleSpecialCases(myID, parent string) (newID, file string)
         const georgia = "georgia"
 
         switch myID </span>{
-        case georgia:<span class="cov4" title="4">
+        case georgia:<span class="cov4" title="3">
                 switch parent </span>{
                 case "us":<span class="cov2" title="2">
                         myID = georgia + "-us"
@@ -2674,7 +2674,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
         return s.StartURL
 }</span>
 
