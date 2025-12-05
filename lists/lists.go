@@ -47,7 +47,7 @@ func CreateTable(format string) *tablewriter.Table {
 	// Options
 	opts := []tablewriter.Option{
 		tablewriter.WithHeader([]string{"ShortName", "Is in", "Long Name", "formats"}),
-		tablewriter.WithAlignment(tw.MakeAlign(4, tw.AlignLeft)), //nolint:mnd // 4 spaces for formats
+		tablewriter.WithAlignment(tw.MakeAlign(4, tw.AlignLeft)), //nolint:mnd // 4 columns to align left
 	}
 
 	if format == markdownFormat {
