@@ -1040,7 +1040,7 @@ func ComputeMD5Hash(filePath string) (string, error) <span class="cov10" title="
                 return "", fmt.Errorf(copyErrorMsg, filePath, err)
         }</span>
 
-        <span class="cov9" title="5">return hex.EncodeToString(hash.Sum(nil)), nil</span>
+        <span class="cov10" title="6">return hex.EncodeToString(hash.Sum(nil)), nil</span>
 }
 
 // VerifyFileChecksum verifies the checksum of a file.
@@ -1666,7 +1666,7 @@ func CreateTable(format string) *tablewriter.Table <span class="cov2" title="4">
         // Options
         opts := []tablewriter.Option{
                 tablewriter.WithHeader([]string{"ShortName", "Is in", "Long Name", "formats"}),
-                tablewriter.WithAlignment(tw.MakeAlign(4, tw.AlignLeft)), //nolint:mnd // 4 spaces for formats
+                tablewriter.WithAlignment(tw.MakeAlign(4, tw.AlignLeft)), //nolint:mnd // 4 columns to align left
         }
 
         if format == markdownFormat </span><span class="cov1" title="2">{
