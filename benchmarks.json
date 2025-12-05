@@ -1,4 +1,5 @@
 [
+  {"Version":"4e2b80164f3782a1e983b800526948f471e5b350","Date":1764918789,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"b2f842802a18212e6159534cde0f45c07eb12c11","Date":1764918772,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"1e185a3ba7147e8d7e53a5c2c96eda8179c8a966","Date":1764918380,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"eb882045dda82fa066e68912b1c01d32857f1bcb","Date":1764918238,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x-fix"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"3bfffafbd4a64b01e2df300ba7a5357ce5fab19f","Date":1764567645,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"4a55fcf66d49ccaa0d2e9b09da066610949595ff","Date":1764567626,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ae9b72cd66314fd9d9d39292138a1c18090ade20","Date":1764566052,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/bits-and-blooms/bitset-1.24.2"],"Suites":[]},
-  {"Version":"a1767f06154f15e78eeeffcff01640af02d05a41","Date":1764566009,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
-  {"Version":"93e449aa2ce6b2080493430b2d90a71524d5d67b","Date":1764565981,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"a1767f06154f15e78eeeffcff01640af02d05a41","Date":1764566009,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]}
 ]
