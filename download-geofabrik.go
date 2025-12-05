@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/julien-noblet/download-geofabrik/app"
@@ -22,9 +23,10 @@ func main() {
 func Run(args []string) error {
 	myApp := app.NewApp()
 	myApp.App.Version(version) // Add version flag
+
 	commands, err := myApp.App.Parse(args)
 	if err != nil {
-		return err
+		return fmt.Errorf("unable to parse arguments: %w", err)
 	}
 
 	myApp.ConfigureViper()

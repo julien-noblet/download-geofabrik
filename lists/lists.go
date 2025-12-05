@@ -9,6 +9,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/config"
 	"github.com/julien-noblet/download-geofabrik/formats"
 	"github.com/olekukonko/tablewriter"
+	"github.com/olekukonko/tablewriter/tw"
 	"github.com/spf13/viper"
 )
 
@@ -22,15 +23,20 @@ func ListAllRegions(configuration *config.Config, format string) error {
 	keys := GetSortedKeys(configuration)
 
 	for _, item := range keys {
-		table.Append([]string{
+		err := table.Append(
 			item,
 			configuration.Elements[configuration.Elements[item].Parent].Name,
 			configuration.Elements[item].Name,
 			formats.GetMiniFormats(configuration.Elements[item].Formats),
-		})
+		)
+		if err != nil {
+			return fmt.Errorf("unable to append : %w", err)
+		}
 	}
 
-	table.Render()
+	if err := table.Render(); err != nil {
+		return fmt.Errorf("unable to render table : %w", err)
+	}
 	fmt.Printf("Total elements: %#v\n", len(configuration.Elements)) //nolint:forbidigo // I want to print the number of elements
 
 	return nil
@@ -38,16 +44,25 @@ func ListAllRegions(configuration *config.Config, format string) error {
 
 // CreateTable creates a table with the specified format.
 func CreateTable(format string) *tablewriter.Table {
-	table := tablewriter.NewWriter(os.Stdout)
-	table.SetAlignment(tablewriter.ALIGN_LEFT)
-	table.SetHeader([]string{"ShortName", "Is in", "Long Name", "formats"})
-
-	if format == markdownFormat {
-		table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
-		table.SetCenterSeparator("|")
+	// Options
+	opts := []tablewriter.Option{
+		tablewriter.WithHeader([]string{"ShortName", "Is in", "Long Name", "formats"}),
+		tablewriter.WithAlignment(tw.MakeAlign(4, tw.AlignLeft)), //nolint:mnd // 4 spaces for formats
 	}
 
-	return table
+	if format == markdownFormat {
+		opts = append(opts, tablewriter.WithRendition(tw.Rendition{
+			Symbols: tw.NewSymbols(tw.StyleMarkdown),
+			Borders: tw.Border{
+				Left:   tw.On,
+				Top:    tw.Off,
+				Right:  tw.On,
+				Bottom: tw.Off,
+			},
+		}))
+	}
+
+	return tablewriter.NewTable(os.Stdout, opts...)
 }
 
 // GetSortedKeys returns the sorted keys of the configuration elements.
