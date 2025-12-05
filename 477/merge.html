@@ -738,6 +738,7 @@ func IsHashable(config *Config, format string) (isHashable bool, hash, extension
 		<pre class="file" id="file6" style="display: none">package main
 
 import (
+        "fmt"
         "os"
 
         "github.com/julien-noblet/download-geofabrik/app"
@@ -761,7 +762,7 @@ func Run(args []string) error <span class="cov10" title="2">{
         myApp.App.Version(version) // Add version flag
         commands, err := myApp.App.Parse(args)
         if err != nil </span><span class="cov1" title="1">{
-                return err
+                return fmt.Errorf("unable to parse arguments: %w", err)
         }</span>
 
         <span class="cov1" title="1">myApp.ConfigureViper()
@@ -1957,7 +1958,7 @@ func (g *Geofabrik) handleHTMLExtension(sub *colly.HTMLElement, href, myID strin
                 }
         }
 
-        <span class="cov9" title="18">if err := g.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+        <span class="cov9" title="19">if err := g.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
                 log.WithError(err).Errorf("can't merge %s", myElement.Name)
         }</span>
 
@@ -1973,7 +1974,7 @@ func (g *Geofabrik) handleSpecialCases(myID, parent string) (newID, file string)
         const georgia = "georgia"
 
         switch myID </span>{
-        case georgia:<span class="cov4" title="3">
+        case georgia:<span class="cov4" title="4">
                 switch parent </span>{
                 case "us":<span class="cov2" title="2">
                         myID = georgia + "-us"
@@ -2674,7 +2675,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
         return s.StartURL
 }</span>
 
