@@ -4,4 +4,4 @@ COPY download-geofabrik /
 COPY geofabrik.yml /
 COPY bbbike.yml /
 COPY openstreetmap.fr.yml /
-COPY osmtoday.yml /
+COPY geo2day.yml /

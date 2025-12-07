@@ -1,4 +1,4 @@
-package osmtoday
+package geo2day
 
 import (
 	"errors"
@@ -18,20 +18,20 @@ import (
 const (
 	progressBarCount = 1003 // number of elements
 	parallelism      = 20   // number of parallel downloads
-	baseURL          = "https://osmtoday.com"
+	baseURL          = "https://geo2day.com"
 	startURL         = baseURL + "/"
 )
 
-// Osmtoday Scrapper.
-type Osmtoday struct {
+// Geo2day Scrapper.
+type Geo2day struct {
 	*scrapper.Scrapper
 }
 
 // GetDefault returns the default configuration for Osmtoday scrapper.
-func GetDefault() *Osmtoday {
+func GetDefault() *Geo2day {
 	urlFilters := []*regexp.Regexp{
-		regexp.MustCompile(`https://osmtoday\.com/.+\.html$`),
-		regexp.MustCompile(`https://osmtoday\.com/$`),
+		regexp.MustCompile(`https://geo2day\.com/.+\.html$`),
+		regexp.MustCompile(`https://geo2day\.com/$`),
 	}
 
 	formatDefinition := formats.FormatDefinitions{
@@ -41,13 +41,13 @@ func GetDefault() *Osmtoday {
 		formats.FormatPoly:    {ID: formats.FormatPoly, Loc: ".poly"},
 	}
 
-	return &Osmtoday{
+	return &Geo2day{
 		Scrapper: &scrapper.Scrapper{
 			PB:               progressBarCount,
 			Async:            true,
 			Parallelism:      parallelism,
 			MaxDepth:         0,
-			AllowedDomains:   []string{`osmtoday.com`},
+			AllowedDomains:   []string{`geo2day.com`},
 			BaseURL:          baseURL,
 			StartURL:         startURL,
 			URLFilters:       urlFilters,
@@ -63,7 +63,7 @@ func GetDefault() *Osmtoday {
 }
 
 // Collector represents Osmtoday's scrapper.
-func (g *Osmtoday) Collector() *colly.Collector {
+func (g *Geo2day) Collector() *colly.Collector {
 	myCollector := g.Scrapper.Collector()
 	myCollector.OnHTML(".row", func(e *colly.HTMLElement) {
 		g.ParseLi(e, myCollector)
@@ -76,7 +76,7 @@ func (g *Osmtoday) Collector() *colly.Collector {
 }
 
 // Exceptions handles special cases for certain IDs.
-func (g *Osmtoday) Exceptions(myElement *element.Element) *element.Element {
+func (g *Geo2day) Exceptions(myElement *element.Element) *element.Element {
 	exceptions := []struct {
 		ID     string
 		Parent string
@@ -105,7 +105,7 @@ func (g *Osmtoday) Exceptions(myElement *element.Element) *element.Element {
 }
 
 // ParseSubregion parses the subregion information from the HTML.
-func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Collector) {
+func (g *Geo2day) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Collector) {
 	e.ForEach("td", func(_ int, el *colly.HTMLElement) {
 		el.ForEach("a", func(_ int, sub *colly.HTMLElement) {
 			href := sub.Request.AbsoluteURL(sub.Attr("href"))
@@ -141,7 +141,7 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
 }
 
 // handleHTMLExtension handles the HTML extension case.
-func (g *Osmtoday) handleHTMLExtension(sub *colly.HTMLElement, href, myID string, myCollector *colly.Collector) {
+func (g *Geo2day) handleHTMLExtension(sub *colly.HTMLElement, href, myID string, myCollector *colly.Collector) {
 	parent, parentPath := scrapper.GetParent(href)
 
 	myElement := element.Element{
@@ -176,7 +176,7 @@ func (g *Osmtoday) handleHTMLExtension(sub *colly.HTMLElement, href, myID string
 }
 
 // ParseFormat adds extensions to the ID.
-func (g *Osmtoday) ParseFormat(id, format string) {
+func (g *Geo2day) ParseFormat(id, format string) {
 	g.ParseFormatService(id, format, &g.FormatDefinition)
 
 	if format == formats.FormatOsmPbf {
@@ -185,7 +185,7 @@ func (g *Osmtoday) ParseFormat(id, format string) {
 }
 
 // ParseLi parses the list items from the HTML.
-func (g *Osmtoday) ParseLi(e *colly.HTMLElement, _ *colly.Collector) {
+func (g *Geo2day) ParseLi(e *colly.HTMLElement, _ *colly.Collector) {
 	e.ForEach("a", func(_ int, element *colly.HTMLElement) {
 		_, format := scrapper.FileExt(element.Attr("href"))
 		myID, _ := scrapper.FileExt(element.Request.URL.String())

@@ -14,9 +14,9 @@ import (
 	"github.com/julien-noblet/download-geofabrik/internal/generator/importer/geofabrik"
 	"github.com/julien-noblet/download-geofabrik/internal/scrapper"
 	"github.com/julien-noblet/download-geofabrik/internal/scrapper/bbbike"
+	"github.com/julien-noblet/download-geofabrik/internal/scrapper/geo2day"
 	geofabrikScrapper "github.com/julien-noblet/download-geofabrik/internal/scrapper/geofabrik"
 	"github.com/julien-noblet/download-geofabrik/internal/scrapper/openstreetmapfr"
-	"github.com/julien-noblet/download-geofabrik/internal/scrapper/osmtoday"
 )
 
 const (
@@ -24,7 +24,7 @@ const (
 	ServiceGeofabrik       = "geofabrik"
 	ServiceGeofabrikParse  = "geofabrik-parse"
 	ServiceOpenStreetMapFR = "openstreetmap.fr"
-	ServiceOSMToday        = "osmtoday"
+	ServiceGeo2Day         = "geo2day"
 	ServiceBBBike          = "bbbike"
 )
 
@@ -72,8 +72,8 @@ func PerformGenerate(service string, progress bool, configfile string) error {
 		myScrapper = geofabrikScrapper.GetDefault()
 	case ServiceOpenStreetMapFR:
 		myScrapper = openstreetmapfr.GetDefault()
-	case ServiceOSMToday:
-		myScrapper = osmtoday.GetDefault()
+	case ServiceGeo2Day:
+		myScrapper = geo2day.GetDefault()
 	case ServiceBBBike:
 		myScrapper = bbbike.GetDefault()
 	default:
