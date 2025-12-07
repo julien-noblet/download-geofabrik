@@ -9,9 +9,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var (
-	markdown bool
-)
+var markdown bool
 
 var listCmd = &cobra.Command{
 	Use:   "list",
@@ -24,7 +22,7 @@ func init() {
 	listCmd.Flags().BoolVar(&markdown, "markdown", false, "Generate list in Markdown format")
 }
 
-func runList(cmd *cobra.Command, args []string) error {
+func runList(_ *cobra.Command, _ []string) error {
 	cfgFile := viper.GetString("config")
 	if cfgFile == "" {
 		cfgFile = config.DefaultConfigFile

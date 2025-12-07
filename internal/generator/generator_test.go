@@ -194,7 +194,10 @@ func TestGenerate(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
-			generator.Generate(tt.args.service, tt.args.progress, tt.args.configfile)
+
+			if err := generator.Generate(tt.args.service, tt.args.progress, tt.args.configfile); err != nil {
+				t.Errorf("Generate() error = %v", err)
+			}
 		})
 	}
 }

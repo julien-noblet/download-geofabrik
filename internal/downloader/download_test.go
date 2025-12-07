@@ -5,13 +5,13 @@ import (
 	"os"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/config"
 	// Lint usually complains if package name mismatch directory.
 	// I might have missed changing package name in `download.go`.
 	// I should check `download.go` first line.
 
 	// If it is `package download`, then import is `.../internal/downloader`.
 	// And alias `download "github.com/..."`?
+	"github.com/julien-noblet/download-geofabrik/internal/config"
 
 	// I'll assume package name is `downloader` in my rewrite if I changed it.
 	// In step 276 view output: "package download".
@@ -193,6 +193,7 @@ func TestChecksum(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed setup download: %v", err)
 	}
+
 	defer os.Remove("/tmp/monaco.osm.pbf")
 	defer os.Remove("/tmp/monaco.osm.pbf.md5")
 

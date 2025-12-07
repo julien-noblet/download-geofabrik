@@ -11,9 +11,9 @@ import (
 	"github.com/gocolly/colly/v2"
 	"github.com/julien-noblet/download-geofabrik/internal/config"
 	"github.com/julien-noblet/download-geofabrik/internal/element"
-	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 	"github.com/julien-noblet/download-geofabrik/internal/scrapper"
 	"github.com/julien-noblet/download-geofabrik/internal/scrapper/geofabrik"
+	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 )
 
 func Test_geofabrikParseFormat(t *testing.T) {

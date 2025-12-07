@@ -212,7 +212,7 @@ func Test_getFormats(t *testing.T) {
 	}
 }
 
-func Test_getFormats_Rewritten(t *testing.T) {
+func Test_getFormats_Rewritten(_ *testing.T) {
 	// I'll replace the whole function content with logic that builds map
 	// Actually I can keep the struct and just chang the loop.
 }

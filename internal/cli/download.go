@@ -2,6 +2,7 @@ package cli
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 	"os"
 
@@ -13,13 +14,12 @@ import (
 )
 
 var (
-	// Flags for download command
+	// Flags for download command.
 	outputDir        string
 	check            bool
-	allFormats       bool
 	noDownload       bool
 	downloadProgress bool
-	// Format flags
+	// Format flags.
 	formatFlags = make(map[string]*bool)
 )
 
@@ -66,7 +66,7 @@ func addFormatFlag(key, shorthand, usage string) {
 	downloadCmd.Flags().BoolVarP(&val, key, shorthand, false, usage)
 }
 
-func runDownload(cmd *cobra.Command, args []string) error {
+func runDownload(_ *cobra.Command, args []string) error {
 	elementID := args[0]
 
 	// Prepare Options
@@ -98,13 +98,12 @@ func runDownload(cmd *cobra.Command, args []string) error {
 	if opts.OutputDirectory == "" {
 		wd, err := os.Getwd()
 		if err != nil {
-			return err
+			return fmt.Errorf("get working directory: %w", err)
 		}
+
 		opts.OutputDirectory = wd + string(os.PathSeparator)
-	} else {
-		if opts.OutputDirectory[len(opts.OutputDirectory)-1] != os.PathSeparator {
-			opts.OutputDirectory += string(os.PathSeparator)
-		}
+	} else if opts.OutputDirectory[len(opts.OutputDirectory)-1] != os.PathSeparator {
+		opts.OutputDirectory += string(os.PathSeparator)
 	}
 
 	// Load Config
@@ -117,7 +116,7 @@ func runDownload(cmd *cobra.Command, args []string) error {
 	// Determine active formats
 	activeFormats := formats.GetFormats(opts.FormatFlags)
 
-	dl := downloader.NewDownloader(cfg, opts)
+	downloaderClient := downloader.NewDownloader(cfg, opts)
 
 	ctx := context.Background()
 
@@ -141,69 +140,41 @@ func runDownload(cmd *cobra.Command, args []string) error {
 		slog.Info("Processing", "element", elementID, "format", format)
 
 		if opts.Check {
-			// Checksum calculates filenames itself?
-			// My default Checksum implementation recalculated paths.
-			// I should verify consistency.
-			if !dl.Checksum(ctx, elementID, format) {
-				// If checksum failed or mismatched, or file not exist.
-				// Checksum returns TRUE if match. FALSE if download needed or mismatch.
-				// Actually original `HandleHashableFormat` logic:
-				// If file exist: check checksum. If match, skip. If mismatch, redownload.
-				// If file not exist: download. Verify.
-
-				// My new `Checksum` logic just returns bool.
-				// It does NOT download the file itself?
-				// Wait, my `Checksum` implementation calls `FromURL` to download the md5 file.
-				// But does it download the MAIN file?
-
-				// Looking at my new `Checksum`:
-				// It downloads .md5
-				// Calls `VerifyFileChecksum`.
-
-				// It does NOT download the target file if missing.
-				// The original code `HandleHashableFormat` did:
-				// if exist -> check. if mismatch -> download.
-				// else -> download. check.
-
-				// So I need to orchestrate this here or in `downloader`.
-				// `downloader.Checksum` currently verifies.
-
-				// I should improve `Downloader` to have `DownloadWithChecksum` logic?
-				// Or handle it here.
-
-				// Let's implement logic here:
-				targetFile := outFile + "." + cfg.Formats[format].ID
-
-				shouldDownload := true
-				if downloader.FileExist(targetFile) {
-					if dl.Checksum(ctx, elementID, format) {
-						slog.Info("File already exists and checksum matches", "file", targetFile)
-						shouldDownload = false
-					} else {
-						slog.Warn("Checksum mismatch or verification failed, re-downloading", "file", targetFile)
-					}
-				}
-
-				if shouldDownload {
-					if err := dl.DownloadFile(ctx, elementID, format, targetFile); err != nil {
-						return err
-					}
-					// Verify again
-					dl.Checksum(ctx, elementID, format)
-				}
-			} else {
-				// Check disabled
-				targetFile := outFile + "." + cfg.Formats[format].ID
-				if err := dl.DownloadFile(ctx, elementID, format, targetFile); err != nil {
-					return err
-				}
+			if err := downloadWithChecksum(ctx, downloaderClient, cfg, elementID, format, outFile); err != nil {
+				return fmt.Errorf("download with checksum failed: %w", err)
 			}
 		} else {
 			targetFile := outFile + "." + cfg.Formats[format].ID
-			if err := dl.DownloadFile(ctx, elementID, format, targetFile); err != nil {
-				return err
+			if err := downloaderClient.DownloadFile(ctx, elementID, format, targetFile); err != nil {
+				return fmt.Errorf("download file failed: %w", err)
 			}
 		}
+	}
+
+	return nil
+}
+
+// downloadWithChecksum handles downloading a file with checksum verification.
+func downloadWithChecksum(ctx context.Context, downloaderClient *downloader.Downloader, cfg *config.Config, elementID, format, outFile string) error {
+	targetFile := outFile + "." + cfg.Formats[format].ID
+	shouldDownload := true
+
+	if downloader.FileExist(targetFile) {
+		if downloaderClient.Checksum(ctx, elementID, format) {
+			slog.Info("File already exists and checksum matches", "file", targetFile)
+
+			shouldDownload = false
+		} else {
+			slog.Warn("Checksum mismatch or verification failed, re-downloading", "file", targetFile)
+		}
+	}
+
+	if shouldDownload {
+		if err := downloaderClient.DownloadFile(ctx, elementID, format, targetFile); err != nil {
+			return fmt.Errorf("download file failed: %w", err)
+		}
+		// Verify again
+		downloaderClient.Checksum(ctx, elementID, format)
 	}
 
 	return nil

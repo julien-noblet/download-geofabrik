@@ -22,7 +22,14 @@ var generateCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(generateCmd)
-	generateCmd.Flags().StringVarP(&service, "service", "s", "geofabrik", "Service to use (geofabrik, geofabrik-parse, openstreetmap.fr, osmtoday, bbbike)")
+
+	generateCmd.Flags().StringVarP(
+		&service,
+		"service",
+		"s",
+		"geofabrik",
+		"Service to use (geofabrik, geofabrik-parse, openstreetmap.fr, osmtoday, bbbike)",
+	)
 	generateCmd.Flags().BoolVarP(&generateProgress, "progress", "p", true, "Show progress bar")
 
 	// Bind to viper if needed, or just pass flags manually.
@@ -30,7 +37,7 @@ func init() {
 	// I refactored generator.go to use args.
 }
 
-func runGenerate(cmd *cobra.Command, args []string) error {
+func runGenerate(_ *cobra.Command, _ []string) error {
 	cfgFile := viper.GetString("config")
 	if cfgFile == "" {
 		cfgFile = config.DefaultConfigFile

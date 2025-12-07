@@ -85,6 +85,7 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) error 
 	if err != nil {
 		return fmt.Errorf("error while creating %s - %w", fileName, err)
 	}
+
 	defer file.Close()
 
 	var (
@@ -119,12 +120,12 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) error 
 // FileExist checks if a file exists at the given path.
 func FileExist(filePath string) bool {
 	_, err := os.Stat(filePath)
+
 	return err == nil
 }
 
 // DownloadFile downloads a file based on the configuration and element.
-func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, outputPath string) error {
-	// elementID and formatName are strings.
+func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, outputPath string) error { // elementID and formatName are strings.
 	// config.FindElem uses d.Config.
 
 	format := d.Config.Formats[formatName].ID
@@ -132,18 +133,21 @@ func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, ou
 	myElem, err := config.FindElem(d.Config, elementID)
 	if err != nil {
 		slog.Error("Element not found", "element", elementID, "error", err)
+
 		return fmt.Errorf("%w: %s", config.ErrFindElem, elementID)
 	}
 
 	myURL, err := config.Elem2URL(d.Config, myElem, format)
 	if err != nil {
 		slog.Error("URL generation failed", "error", err)
+
 		return fmt.Errorf("%s %w", config.ErrElem2URL, err)
 	}
 
 	err = d.FromURL(ctx, myURL, outputPath)
 	if err != nil {
 		slog.Error("Download failed", "error", err)
+
 		return fmt.Errorf("%s %w", ErrFromURL, err)
 	}
 
@@ -163,6 +167,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 		myElem, err := config.FindElem(d.Config, elementID)
 		if err != nil {
 			slog.Error("Element not found", "element", elementID, "error", err)
+
 			return false
 		}
 
@@ -203,5 +208,6 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 	}
 
 	slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+formatName)
+
 	return false
 }
