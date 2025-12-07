@@ -49,7 +49,8 @@ func TestElem2preURL_NoParent_WithBaseURLArgs(t *testing.T) {
 		},
 		ElementsMutex: &sync.RWMutex{},
 	}
-	elem, _ := cfg.GetElement("item")
+	elem, err := cfg.GetElement("item")
+	require.NoError(t, err)
 
 	// Case 1: 1 arg
 	url, err := config.Elem2preURL(cfg, elem, "custom")
