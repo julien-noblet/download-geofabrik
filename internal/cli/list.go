@@ -24,9 +24,13 @@ func RegisterListCmd() {
 }
 
 func runList(_ *cobra.Command, _ []string) error {
-	cfgFile := viper.GetString("config")
+	cfgFile := viper.ConfigFileUsed()
 	if cfgFile == "" {
-		cfgFile = config.DefaultConfigFile
+		if service != "" {
+			cfgFile = service + ".yml"
+		} else {
+			cfgFile = config.DefaultConfigFile
+		}
 	}
 
 	opts := &config.Options{

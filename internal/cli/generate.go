@@ -10,10 +10,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var (
-	service          string
-	generateProgress bool
-)
+var generateProgress bool
 
 var generateCmd = &cobra.Command{
 	Use:   "generate",
@@ -23,15 +20,17 @@ var generateCmd = &cobra.Command{
 
 func RegisterGenerateCmd() {
 	rootCmd.AddCommand(generateCmd)
-	generateCmd.Flags().StringVarP(&service, "service", "s", "geofabrik",
-		"Service to use (geofabrik, geofabrik-parse, openstreetmap.fr, osmtoday, bbbike)")
 	generateCmd.Flags().BoolVarP(&generateProgress, "progress", "p", true, "Show progress bar")
 }
 
 func runGenerate(_ *cobra.Command, _ []string) error {
-	cfgFile := viper.GetString("config")
+	cfgFile := viper.ConfigFileUsed()
 	if cfgFile == "" {
-		cfgFile = config.DefaultConfigFile
+		if service != "" {
+			cfgFile = service + ".yml"
+		} else {
+			cfgFile = config.DefaultConfigFile
+		}
 	}
 
 	slog.Info("Generating config", "service", service, "file", cfgFile)

@@ -73,9 +73,13 @@ func runDownload(_ *cobra.Command, args []string) error {
 	// Note: rootCmd flags (config file, verbose) should be parsed already.
 	// I need to access them. They are bound to Viper in root.go (I need to ensure that).
 
-	cfgFile := viper.GetString("config")
+	cfgFile := viper.ConfigFileUsed()
 	if cfgFile == "" {
-		cfgFile = config.DefaultConfigFile
+		if service != "" {
+			cfgFile = service + ".yml"
+		} else {
+			cfgFile = config.DefaultConfigFile
+		}
 	}
 
 	opts := &config.Options{

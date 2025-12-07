@@ -57,7 +57,7 @@ func TestOpenstreetmapFR_parse(t *testing.T) {
 				"merge":                   element.Element{ID: "merge", Name: "merge", Formats: element.Formats{}, Meta: true},
 				"fiji":                    element.Element{ID: "fiji", File: "fiji", Name: "fiji", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
 				"france_metro_dom_com_nc": element.Element{ID: "france_metro_dom_com_nc", File: "france_metro_dom_com_nc", Name: "france_metro_dom_com_nc", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
-				"merge_france_taaf":       element.Element{ID: "merge_france_taaf", File: "merge_france_taaf", Name: "merge_france_taaf", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
+				"merge_france_taaf":       element.Element{ID: "merge_france_taaf", File: "france_taaf", Name: "merge_france_taaf", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
 				"kiribati":                element.Element{ID: "kiribati", File: "kiribati", Name: "kiribati", Formats: element.Formats{formats.FormatOsmPbf, formats.FormatState}, Parent: "merge"},
 			},
 		},
@@ -297,6 +297,7 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 				Name:    "one",
 			},
 		},
+
 		c: config.Config{
 			Elements: element.MapElement{
 				"object": element.Element{
@@ -311,6 +312,28 @@ var openstreetmapFRtests = []struct { //nolint:gochecknoglobals // global
 		},
 		parent:  "one",
 		parents: []string{"http:", "", "openstreetmap.fr", "extracts", "one", "object.state.txt"},
+	},
+	{
+		name: "exception file name",
+		href: "http://openstreetmap.fr/extracts/brazil/southeast.osm.pbf",
+		want: element.MapElement{
+			"brazil_southeast": element.Element{
+				ID:      "brazil_southeast",
+				File:    "southeast",
+				Name:    "brazil_southeast",
+				Formats: []string{formats.FormatOsmPbf},
+				Parent:  "brazil",
+			},
+			"brazil": element.Element{
+				ID:      "brazil",
+				Formats: element.Formats{},
+				Meta:    true,
+				Name:    "brazil",
+			},
+		},
+		c:       config.Config{Elements: make(map[string]element.Element), ElementsMutex: &sync.RWMutex{}},
+		parent:  "brazil",
+		parents: []string{"http:", "", "openstreetmap.fr", "extracts", "brazil", "southeast.osm.pbf"},
 	},
 }
 

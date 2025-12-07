@@ -6,11 +6,9 @@ import (
 	"log/slog"
 	"regexp"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/gocolly/colly/v2"
-	"github.com/julien-noblet/download-geofabrik/internal/config"
 	"github.com/julien-noblet/download-geofabrik/internal/element"
 	"github.com/julien-noblet/download-geofabrik/internal/scrapper"
 	"github.com/julien-noblet/download-geofabrik/pkg/formats"
@@ -109,13 +107,7 @@ func GetDefault() *OpenstreetmapFR {
 				formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "../polygons/", BaseURL: ""},
 				formats.FormatState:  {ID: formats.FormatState, Loc: ".state.txt", ToLoc: "", BasePath: "", BaseURL: ""},
 			},
-			Timeout: timeout,
-			Config: &config.Config{
-				Formats:       formats.FormatDefinitions{},
-				Elements:      element.MapElement{},
-				ElementsMutex: &sync.RWMutex{},
-				BaseURL:       `https://download.openstreetmap.fr/`,
-			},
+			Timeout:     timeout,
 			DomainGlob:  "*",
 			RandomDelay: randomDelay,
 		},
@@ -241,7 +233,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) {
 
 	file := ""
 	if extension != "" {
-		file = name
+		file = valsplit[0]
 	}
 
 	o.addOrUpdateElement(parent, name, file, extension)
