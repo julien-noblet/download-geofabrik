@@ -14,27 +14,28 @@ before:
     - go mod tidy
     # you may remove this if you don't need go generate
     - go generate ./...
-    - go run download-geofabrik.go generate
-    - go run download-geofabrik.go --service="openstreetmap.fr" generate
-    - go run download-geofabrik.go --service="bbbike" generate
-    - go run download-geofabrik.go --service="osmtoday" generate
+    - go run cmd/download-geofabrik/main.go generate
+    - go run cmd/download-geofabrik/main.go --service="openstreetmap.fr" generate
+    - go run cmd/download-geofabrik/main.go --service="bbbike" generate
+    - go run cmd/download-geofabrik/main.go --service="osmtoday" generate
     - cat .README.md1 > README.md
-    - go run download-geofabrik.go --help-long >> README.md
+    - go run cmd/download-geofabrik/main.go --help >> README.md
     - cat .README.md2 >> README.md
-    - go run download-geofabrik.go list --markdown >> README.md
+    - go run cmd/download-geofabrik/main.go list --markdown >> README.md
     - echo "" >> README.md
     - echo "## List of elements from openstreetmap.fr" >> README.md
-    - go run download-geofabrik.go --service "openstreetmap.fr" list --markdown >> README.md
+    - go run cmd/download-geofabrik/main.go --service "openstreetmap.fr" list --markdown >> README.md
     - echo "" >> README.md
     - echo "## List of elements from bbbike.org" >> README.md
-    - go run download-geofabrik.go --service "bbbike" list --markdown >> README.md
+    - go run cmd/download-geofabrik/main.go --service "bbbike" list --markdown >> README.md
     - echo "" >> README.md
     - echo "## List of elements from osmtoday" >> README.md
-    - go run download-geofabrik.go --service "osmtoday" list --markdown >> README.md
+    - go run cmd/download-geofabrik/main.go --service "osmtoday" list --markdown >> README.md
 
 
 builds:
-  - env:
+  - main: ./cmd/download-geofabrik/main.go
+    env:
       - CGO_ENABLED=0
     goos:
       - linux
