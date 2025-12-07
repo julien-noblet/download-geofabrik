@@ -1,4 +1,5 @@
 [
+  {"Version":"bf07f53e4648a519ef7b99fb081749dce69627c6","Date":1765103927,"Tags":["ref=refs/heads/copilot/fix-lint-issues-golangci-lint"],"Suites":[]},
   {"Version":"303c2793127af8ff5935c2ec10bb33be2d616e16","Date":1765101937,"Tags":["ref=refs/heads/rework"],"Suites":[]},
   {"Version":"9e9109079b3902476789d82dc54f6ba8e5851b9f","Date":1765101843,"Tags":["ref=refs/heads/copilot/sub-pr-478"],"Suites":[]},
   {"Version":"88f5ab2a93fd8588d297d77e0d174ea06dd03716","Date":1765101020,"Tags":["ref=refs/heads/rework"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"0caffbe44c9855afdc2ed136b4debf587c540d24","Date":1764578020,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"c1bbb8496323c73fc1c858dd6a8300be379399a9","Date":1764577972,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"728d0f445f880beaef1c81363613bab9318f748e","Date":1764574538,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/sagikazarmark/locafero-0.12.0"],"Suites":[]},
-  {"Version":"051f3061915c134c9a1136bba73db0ce73a3d1c8","Date":1764574528,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.5"],"Suites":[]},
-  {"Version":"17e88b97f601ec90cec648b276037ba80856f7f4","Date":1764568298,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]}
+  {"Version":"051f3061915c134c9a1136bba73db0ce73a3d1c8","Date":1764574528,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.5"],"Suites":[]}
 ]
