@@ -1,4 +1,5 @@
 [
+  {"Version":"285ffa21df7fcb77550722a3fb9528e59d7fe9c2","Date":1765124001,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"5acf5f29896b138863cd3cbb2df6ca979e18a8c1","Date":1765123817,"Tags":["ref=refs/heads/coverage"],"Suites":[]},
   {"Version":"53ef0f6513463e96f44a2b042725d5471baa3580","Date":1765122075,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"a8049cbfed843f5bc5b15d1d8e13788393db0bb9","Date":1765121937,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"90c76ee37a589baa5117b9aaaac26b774105745e","Date":1764843034,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"8c8651ccad5c25d582b28f323cb5b9a69fe673c0","Date":1764842989,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/tablewriter-1.1.2"],"Suites":[]},
   {"Version":"b1bc37dc09cc0039bd08486a1cc4dd502df50148","Date":1764842924,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"c9309f0237114d865d25569cb2f4ca9662f4070e","Date":1764838326,"Tags":["ref=refs/heads/renovate/github.com-gocolly-colly-v2-2.x"],"Suites":[]},
-  {"Version":"a758eae17e561fb63a50349d2186d44c8f34f353","Date":1764701822,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/tablewriter-1.1.2"],"Suites":[]}
+  {"Version":"c9309f0237114d865d25569cb2f4ca9662f4070e","Date":1764838326,"Tags":["ref=refs/heads/renovate/github.com-gocolly-colly-v2-2.x"],"Suites":[]}
 ]
