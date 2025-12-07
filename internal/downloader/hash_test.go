@@ -129,6 +129,8 @@ func Test_controlHash(t *testing.T) {
 }
 
 func Test_VerifyFileChecksum(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		outputPath string
 		hashfile   string
@@ -147,6 +149,8 @@ func Test_VerifyFileChecksum(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			if got := download.VerifyFileChecksum(tt.args.outputPath, tt.args.hashfile); got != tt.want {
 				t.Errorf("VerifyChecksum() = %v, want %v", got, tt.want)
 			}

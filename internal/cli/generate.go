@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"fmt"
 	"log/slog"
 
 	"github.com/julien-noblet/download-geofabrik/internal/config"
@@ -20,17 +21,14 @@ var generateCmd = &cobra.Command{
 	RunE:  runGenerate,
 }
 
-func init() {
+func RegisterGenerateCmd() {
 	rootCmd.AddCommand(generateCmd)
-	generateCmd.Flags().StringVarP(&service, "service", "s", "geofabrik", "Service to use (geofabrik, geofabrik-parse, openstreetmap.fr, osmtoday, bbbike)")
+	generateCmd.Flags().StringVarP(&service, "service", "s", "geofabrik",
+		"Service to use (geofabrik, geofabrik-parse, openstreetmap.fr, osmtoday, bbbike)")
 	generateCmd.Flags().BoolVarP(&generateProgress, "progress", "p", true, "Show progress bar")
-
-	// Bind to viper if needed, or just pass flags manually.
-	// Logic in generator.go was using Viper.
-	// I refactored generator.go to use args.
 }
 
-func runGenerate(cmd *cobra.Command, args []string) error {
+func runGenerate(_ *cobra.Command, _ []string) error {
 	cfgFile := viper.GetString("config")
 	if cfgFile == "" {
 		cfgFile = config.DefaultConfigFile
@@ -40,7 +38,8 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 
 	if err := generator.Generate(service, generateProgress, cfgFile); err != nil {
 		slog.Error("Generation failed", "error", err)
-		return err
+
+		return fmt.Errorf("generation failed: %w", err)
 	}
 
 	return nil

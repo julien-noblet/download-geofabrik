@@ -13,8 +13,8 @@ import (
 	"github.com/gocolly/colly/v2"
 	"github.com/julien-noblet/download-geofabrik/internal/config"
 	"github.com/julien-noblet/download-geofabrik/internal/element"
-	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 	"github.com/julien-noblet/download-geofabrik/internal/scrapper"
+	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 )
 
 func TestGetParent(t *testing.T) {
@@ -52,20 +52,8 @@ func TestGetParent(t *testing.T) {
 			want2: "https://download.geofabrik.de/parent1",
 		},
 	}
-	for _, thisTest := range tests {
-		t.Run(thisTest.name, func(t *testing.T) {
-			t.Parallel()
 
-			got, got2 := scrapper.GetParent(thisTest.url)
-			if got != thisTest.want {
-				t.Errorf("GetParent() = %v, want %v", got, thisTest.want)
-			}
-
-			if got2 != thisTest.want2 {
-				t.Errorf("GetParent() = %v, want %v", got2, thisTest.want2)
-			}
-		})
-	}
+	testScrapperCommon(t, tests, scrapper.GetParent)
 }
 
 func Test_FileExt(t *testing.T) {
@@ -83,17 +71,24 @@ func Test_FileExt(t *testing.T) {
 		{name: "1 Parent", url: "https://download.geofabrik.de/parent/test.html", want: "test", want2: "html"},
 		{name: "1 Parent long ext", url: "https://download.geofabrik.de/parent/test.ext.html", want: "test", want2: "ext.html"},
 	}
+
+	testScrapperCommon(t, tests, scrapper.FileExt)
+}
+
+func testScrapperCommon(t *testing.T, tests []struct{ name, url, want, want2 string }, fn func(string) (string, string)) {
+	t.Helper()
+
 	for _, thisTest := range tests {
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
-			got, ext := scrapper.FileExt(thisTest.url)
+			got, got2 := fn(thisTest.url)
 			if got != thisTest.want {
-				t.Errorf("FileExt() = %v, want %v", got, thisTest.want)
+				t.Errorf("got %v, want %v", got, thisTest.want)
 			}
 
-			if ext != thisTest.want2 {
-				t.Errorf("FileExt() = %v, want %v", ext, thisTest.want2)
+			if got2 != thisTest.want2 {
+				t.Errorf("got %v, want %v", got2, thisTest.want2)
 			}
 		})
 	}

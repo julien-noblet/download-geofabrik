@@ -29,12 +29,14 @@ const (
 func CheckFileHash(hashfile, expectedHash string) (bool, error) {
 	if !FileExist(hashfile) {
 		slog.Warn("Hash file not found", "file", hashfile)
+
 		return false, nil
 	}
 
 	fileContent, err := os.ReadFile(hashfile)
 	if err != nil {
 		slog.Warn("Can't read hash file", "file", hashfile, "error", err)
+
 		return false, fmt.Errorf(readErrorMsg, hashfile, err)
 	}
 
@@ -76,6 +78,7 @@ func VerifyFileChecksum(file, hashfile string) bool {
 	hashed, err := ComputeMD5Hash(file)
 	if err != nil {
 		slog.Error("Can't hash file", "error", err)
+
 		return false // Was Fatal before
 	}
 

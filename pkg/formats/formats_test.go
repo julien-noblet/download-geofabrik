@@ -81,138 +81,76 @@ func Test_GetMiniFormats(t *testing.T) {
 }
 
 func Test_getFormats(t *testing.T) {
-	type dflags struct {
-		dosmPbf  bool
-		doshPbf  bool
-		dosmBz2  bool
-		dosmGz   bool
-		dshpZip  bool
-		dstate   bool
-		dpoly    bool
-		dkml     bool
-		dgeojson bool
-	}
+	t.Parallel()
 
 	tests := []struct {
+		flags map[string]bool
 		name  string
 		want  []string
-		flags dflags
 	}{
 		{
-			name: "none",
-			flags: dflags{
-				dosmPbf:  false,
-				doshPbf:  false,
-				dosmBz2:  false,
-				dosmGz:   false,
-				dshpZip:  false,
-				dstate:   false,
-				dpoly:    false,
-				dkml:     false,
-				dgeojson: false,
-			},
-			want: []string{formats.FormatOsmPbf},
+			name:  "none",
+			flags: map[string]bool{},
+			want:  []string{formats.FormatOsmPbf},
 		},
 		{
-			name: "dosmPbf",
-			flags: dflags{
-				dosmPbf: true,
-			},
-			want: []string{formats.FormatOsmPbf},
+			name:  "dosmPbf",
+			flags: map[string]bool{formats.KeyOsmPbf: true},
+			want:  []string{formats.FormatOsmPbf},
 		},
 		{
-			name: "doshPbf",
-			flags: dflags{
-				doshPbf: true,
-			},
-			want: []string{formats.FormatOshPbf},
+			name:  "doshPbf",
+			flags: map[string]bool{formats.KeyOshPbf: true},
+			want:  []string{formats.FormatOshPbf},
 		},
 		{
 			name: "dosmPbf doshPbf",
-			flags: dflags{
-				dosmPbf: true,
-				doshPbf: true,
+			flags: map[string]bool{
+				formats.KeyOsmPbf: true,
+				formats.KeyOshPbf: true,
 			},
 			want: []string{formats.FormatOshPbf, formats.FormatOsmPbf},
 		},
 		{
 			name: "dosmBz2 dshpZip",
-			flags: dflags{
-				dosmBz2: true,
-				dshpZip: true,
+			flags: map[string]bool{
+				formats.KeyOsmBz2: true,
+				formats.KeyShpZip: true,
 			},
 			want: []string{formats.FormatOsmBz2, formats.FormatShpZip},
 		},
 		{
 			name: "dstate dpoly",
-			flags: dflags{
-				dstate: true,
-				dpoly:  true,
+			flags: map[string]bool{
+				formats.KeyState: true,
+				formats.KeyPoly:  true,
 			},
 			want: []string{formats.FormatPoly, formats.FormatState},
 		},
 		{
-			name: "dkml",
-			flags: dflags{
-				dkml: true,
-			},
-			want: []string{formats.FormatKml},
+			name:  "dkml",
+			flags: map[string]bool{formats.KeyKml: true},
+			want:  []string{formats.FormatKml},
 		},
 		{
-			name: "dosmGz",
-			flags: dflags{
-				dosmGz: true,
-			},
-			want: []string{formats.FormatOsmGz},
+			name:  "dosmGz",
+			flags: map[string]bool{formats.KeyOsmGz: true},
+			want:  []string{formats.FormatOsmGz},
 		},
 		{
-			name: "dgeojson",
-			flags: dflags{
-				dgeojson: true,
-			},
-			want: []string{formats.FormatGeoJSON},
+			name:  "dgeojson",
+			flags: map[string]bool{formats.KeyGeoJSON: true},
+			want:  []string{formats.FormatGeoJSON},
 		},
 	}
 
 	for _, thisTest := range tests {
 		t.Run(thisTest.name, func(t *testing.T) {
-			fakeViperMap := make(map[string]bool)
-			if thisTest.flags.dosmPbf {
-				fakeViperMap["dosmPbf"] = true
-			}
-			if thisTest.flags.doshPbf {
-				fakeViperMap["doshPbf"] = true
-			}
-			if thisTest.flags.dosmBz2 {
-				fakeViperMap["dosmBz2"] = true
-			}
-			if thisTest.flags.dosmGz {
-				fakeViperMap["dosmGz"] = true
-			}
-			if thisTest.flags.dshpZip {
-				fakeViperMap["dshpZip"] = true
-			}
-			if thisTest.flags.dstate {
-				fakeViperMap["dstate"] = true
-			}
-			if thisTest.flags.dpoly {
-				fakeViperMap["dpoly"] = true
-			}
-			if thisTest.flags.dkml {
-				fakeViperMap["dkml"] = true
-			}
-			if thisTest.flags.dgeojson {
-				fakeViperMap["dgeojson"] = true
-			}
+			t.Parallel()
 
-			if got := formats.GetFormats(fakeViperMap); !reflect.DeepEqual(got, thisTest.want) {
+			if got := formats.GetFormats(thisTest.flags); !reflect.DeepEqual(got, thisTest.want) {
 				t.Errorf("formats.GetFormats() = %v, want %v", got, thisTest.want)
 			}
 		})
 	}
-}
-
-func Test_getFormats_Rewritten(t *testing.T) {
-	// I'll replace the whole function content with logic that builds map
-	// Actually I can keep the struct and just chang the loop.
 }
