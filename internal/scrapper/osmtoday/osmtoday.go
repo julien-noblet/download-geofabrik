@@ -130,6 +130,10 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
 				}
 				myElement = *g.Exceptions(&myElement)
 
+				if err := g.Config.MergeElement(&myElement); err != nil {
+					slog.Error("Can't merge", "name", myElement.Name, "error", err)
+				}
+
 				g.ParseFormat(myElement.ID, extension)
 			}
 		})

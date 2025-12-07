@@ -1,11 +1,16 @@
 package osmtoday_test
 
 import (
+	"fmt"
+	"net/http"
+	"net/http/httptest"
 	"reflect"
 	"testing"
 
 	"github.com/julien-noblet/download-geofabrik/internal/element"
 	"github.com/julien-noblet/download-geofabrik/internal/scrapper/osmtoday"
+	"github.com/julien-noblet/download-geofabrik/pkg/formats"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestOsmtoday_Exceptions(t *testing.T) {
@@ -228,5 +233,107 @@ func TestOsmtoday_Exceptions(t *testing.T) {
 				t.Errorf("Osmtoday.Exceptions() = %v, want %v", *got, tt.want)
 			}
 		})
+	}
+}
+
+func TestOsmtoday_Collector(t *testing.T) {
+	// Mock server
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case "/":
+			fmt.Fprintln(w, `
+				<html>
+				<body>
+					<table>
+						<td>
+							<a href="/europe.html">Europe</a>
+							<a href="/planet.osm.pbf">Planet PBF</a>
+						</td>
+					</table>
+					<div class="row">
+						<a href="/planet.osm.pbf">Planet PBF</a>
+					</div>
+				</body>
+				</html>
+			`)
+		case "/europe.html":
+			fmt.Fprintln(w, `
+				<html>
+				<body>
+					<table>
+						<td>
+                            <a href="/europe/france.html">France</a>
+                            <a href="/europe/germany.osm.pbf">Germany</a>
+						</td>
+					</table>
+				</body>
+				</html>
+			`)
+		case "/europe/france.html":
+			fmt.Fprintln(w, `
+				<html>
+				<body>
+					<table>
+						<td>
+                            <a href="/europe/france/ile-de-france.osm.pbf">Ile-de-France</a>
+						</td>
+					</table>
+				</body>
+				</html>
+			`)
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	defer ts.Close()
+
+	g := osmtoday.GetDefault()
+	g.BaseURL = ts.URL
+	g.StartURL = ts.URL + "/"
+	g.AllowedDomains = nil // Allow all domains (specifically the test server)
+	g.URLFilters = nil     // Disable URL filters to allow test server URLs
+	g.Parallelism = 1      // Process sequentially to avoid race in test logic if any (though map access needs sync)
+
+	c := g.Collector()
+
+	// Visit the start URL
+	err := c.Visit(g.StartURL)
+	assert.NoError(t, err)
+	c.Wait()
+
+	// Helper to get element by key safely
+	getElement := func(key string) (element.Element, bool) {
+		g.Config.ElementsMutex.RLock()
+		defer g.Config.ElementsMutex.RUnlock() // Defer unlock
+		el, ok := g.Config.Elements[key]
+		return el, ok
+	}
+
+	// 1. Check Planet PBF (Attached to root element "")
+	rootEl, found := getElement("")
+	assert.True(t, found, "root element should exist")
+	if found {
+		assert.Contains(t, rootEl.Formats, formats.FormatOsmPbf)
+	}
+
+	// 2. Check Europe (HTML)
+	europe, found := getElement("europe")
+	assert.True(t, found, "europe element should exist")
+	assert.Equal(t, "europe", europe.ID)
+	// 3. Check traversal to France
+	france, found := getElement("france")
+	assert.True(t, found, "france element should exist")
+	if found {
+		assert.Equal(t, "france", france.ID)
+		assert.Equal(t, "europe", france.Parent)
+	}
+
+	// 4. Check contents within France (Ile-de-france)
+	// ID "ile-de-france"
+	idf, found := getElement("ile-de-france")
+	assert.True(t, found, "ile-de-france element should exist")
+	if found {
+		// Parent should be "france"
+		assert.Equal(t, "france", idf.Parent)
 	}
 }
