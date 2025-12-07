@@ -40,7 +40,7 @@ func NewDownloader(cfg *config.Config, opts *config.Options) *Downloader {
 }
 
 // FromURL downloads a file from a URL to a specified file path.
-func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) error {
+func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err error) {
 	slog.Debug("Downloading", "url", myURL, "file", fileName)
 
 	if d.Options.NoDownload {
