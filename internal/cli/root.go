@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
+	"sync"
 
 	"github.com/julien-noblet/download-geofabrik/internal/config"
 	"github.com/spf13/cobra"
@@ -24,18 +25,23 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
-func Execute() {
-	initCLI()
+var once sync.Once
 
-	RegisterDownloadCmd()
-	RegisterGenerateCmd()
-	RegisterListCmd()
+// Execute adds all child commands to the root command and sets flags appropriately.
+func Execute() error {
+	once.Do(func() {
+		initCLI()
+
+		RegisterDownloadCmd()
+		RegisterGenerateCmd()
+		RegisterListCmd()
+	})
 
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
-		os.Exit(1)
+		return fmt.Errorf("root cmd execution failed: %w", err)
 	}
+
+	return nil
 }
 
 func initCLI() {

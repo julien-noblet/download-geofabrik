@@ -45,7 +45,7 @@ func RegisterDownloadCmd() {
 	addFormatFlag(formats.KeyOsmGz, "G", "Download osm.gz")
 	addFormatFlag(formats.KeyOsmBz2, "B", "Download osm.bz2")
 	addFormatFlag(formats.KeyShpZip, "S", "Download shp.zip")
-	addFormatFlag(formats.KeyState, "s", "Download state.txt")
+	addFormatFlag(formats.KeyState, "", "Download state.txt")
 	addFormatFlag(formats.KeyPoly, "p", "Download poly")
 	addFormatFlag(formats.KeyKml, "k", "Download kml")
 	addFormatFlag(formats.KeyGeoJSON, "g", "Download GeoJSON")
