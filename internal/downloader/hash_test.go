@@ -71,8 +71,6 @@ func Benchmark_controlHash_LICENSE(b *testing.B) {
 }
 
 func Test_controlHash(t *testing.T) {
-	t.Parallel()
-
 	type args struct {
 		hashfile string
 		hash     string
@@ -112,8 +110,6 @@ func Test_controlHash(t *testing.T) {
 		}
 
 		t.Run(thisTest.name, func(t *testing.T) {
-			t.Parallel()
-
 			got, err := download.CheckFileHash(thisTest.args.hashfile, thisTest.args.hash)
 			if err != nil != thisTest.wantErr {
 				t.Errorf("controlHash() error = %v, wantErr %v", err, thisTest.wantErr)

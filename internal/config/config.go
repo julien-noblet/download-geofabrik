@@ -183,9 +183,21 @@ func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string)
 
 	switch len(baseURL) {
 	case 1:
-		return config.BaseURL + "/" + strings.Join(baseURL, "/") + GetFile(myElement), nil
+		prefix := config.BaseURL + "/" + strings.Join(baseURL, "/")
+		if !strings.HasSuffix(prefix, "/") {
+			prefix += "/"
+		}
+
+		return prefix + GetFile(myElement), nil
+
 	case 2: //nolint:mnd // This case handles exactly 2 base URL components
-		return strings.Join(baseURL, "/") + GetFile(myElement), nil
+		prefix := strings.Join(baseURL, "/")
+		if !strings.HasSuffix(prefix, "/") {
+			prefix += "/"
+		}
+
+		return prefix + GetFile(myElement), nil
+
 	default:
 		return config.BaseURL + "/" + GetFile(myElement), nil
 	}
