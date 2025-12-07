@@ -17,7 +17,7 @@ before:
     - go run cmd/download-geofabrik/main.go generate
     - go run cmd/download-geofabrik/main.go --service="openstreetmap.fr" generate
     - go run cmd/download-geofabrik/main.go --service="bbbike" generate
-    - go run cmd/download-geofabrik/main.go --service="osmtoday" generate
+    - go run cmd/download-geofabrik/main.go --service="geo2day" generate
     - cat .README.md1 > README.md
     - go run cmd/download-geofabrik/main.go --help >> README.md
     - cat .README.md2 >> README.md
@@ -29,8 +29,8 @@ before:
     - echo "## List of elements from bbbike.org" >> README.md
     - go run cmd/download-geofabrik/main.go --service "bbbike" list --markdown >> README.md
     - echo "" >> README.md
-    - echo "## List of elements from osmtoday" >> README.md
-    - go run cmd/download-geofabrik/main.go --service "osmtoday" list --markdown >> README.md
+    - echo "## List of elements from geo2day" >> README.md
+    - go run cmd/download-geofabrik/main.go --service "geo2day" list --markdown >> README.md
 
 
 builds:
@@ -126,7 +126,7 @@ archives:
       - bbbike.yml
       - geofabrik.yml
       - openstreetmap.fr.yml
-      - osmtoday.yml
+      - geo2day.yml
 checksum:
   name_template: 'checksums.txt'
 snapshot:
@@ -155,4 +155,4 @@ dockers:
       - geofabrik.yml
       - openstreetmap.fr.yml
       - bbbike.yml
-      - osmtoday.yml
+      - geo2day.yml

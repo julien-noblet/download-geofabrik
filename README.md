@@ -38,7 +38,7 @@ Flags:
   -q, --[no-]quiet           Be quiet
       --[no-]progress        Add a progress bar (implies quiet)
       --service="geofabrik"  Can switch to another service. You can use
-                             "geofabrik", "openstreetmap.fr" "osmtoday" or
+                             "geofabrik", "openstreetmap.fr" "geo2day" or
                              "bbbike". It automatically change config file if -c
                              is unused.
       --[no-]version         Show application version.
@@ -2072,7 +2072,7 @@ Total elements: 1196
 | Zuerich          |       | Zuerich          | CgMrtoOGmPpS |
 Total elements: 237
 
-## List of elements from osmtoday
+## List of elements from geo2day
 |                SHORTNAME                 |             IS IN              |           LONG NAME            | FORMATS |
 |------------------------------------------|--------------------------------|--------------------------------|---------|
 |                                          |                                |                                | gPp     |

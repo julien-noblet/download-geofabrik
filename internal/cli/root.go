@@ -43,7 +43,7 @@ func initCLI() {
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is geofabrik.yml)")
 	rootCmd.PersistentFlags().StringVarP(&service, "service", "s", config.DefaultService,
-		"Service to use (geofabrik, geofabrik-parse, openstreetmap.fr, osmtoday, bbbike)")
+		"Service to use (geofabrik, geofabrik-parse, openstreetmap.fr, geo2day, bbbike)")
 	rootCmd.PersistentFlags().Bool("verbose", false, "Verbose mode")
 	rootCmd.PersistentFlags().Bool("quiet", false, "Quiet mode")
 

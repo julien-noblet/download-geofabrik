@@ -1,4 +1,4 @@
-package osmtoday_test
+package geo2day_test
 
 import (
 	"fmt"
@@ -8,13 +8,13 @@ import (
 	"testing"
 
 	"github.com/julien-noblet/download-geofabrik/internal/element"
-	"github.com/julien-noblet/download-geofabrik/internal/scrapper/osmtoday"
+	"github.com/julien-noblet/download-geofabrik/internal/scrapper/geo2day"
 	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
-func TestOsmtoday_Exceptions(t *testing.T) {
+func TestGeo2day_Exceptions(t *testing.T) {
 	t.Parallel()
 
 	type args struct {
@@ -228,16 +228,16 @@ func TestOsmtoday_Exceptions(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			g := osmtoday.GetDefault()
+			g := geo2day.GetDefault()
 
 			if got := g.Exceptions(&tt.args.e); !reflect.DeepEqual(got, &tt.want) {
-				t.Errorf("Osmtoday.Exceptions() = %v, want %v", *got, tt.want)
+				t.Errorf("Geo2day.Exceptions() = %v, want %v", *got, tt.want)
 			}
 		})
 	}
 }
 
-func TestOsmtoday_Collector(t *testing.T) {
+func TestGeo2day_Collector(t *testing.T) {
 	// Mock server
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
@@ -291,7 +291,7 @@ func TestOsmtoday_Collector(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	g := osmtoday.GetDefault()
+	g := geo2day.GetDefault()
 	g.BaseURL = ts.URL
 	g.StartURL = ts.URL + "/"
 	g.AllowedDomains = nil // Allow all domains (specifically the test server)

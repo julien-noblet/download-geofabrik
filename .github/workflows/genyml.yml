@@ -24,7 +24,7 @@ jobs:
       - run: go run cmd/download-geofabrik/main.go generate
       - run: go run cmd/download-geofabrik/main.go --service="openstreetmap.fr" generate
       - run: go run cmd/download-geofabrik/main.go --service="bbbike" generate
-      - run: go run cmd/download-geofabrik/main.go --service="osmtoday" generate
+      - run: go run cmd/download-geofabrik/main.go --service="geo2day" generate
       - run: cat .README.md1 > README.md
       - run: go run cmd/download-geofabrik/main.go --help >> README.md
       - run: cat .README.md2 >> README.md
@@ -36,8 +36,8 @@ jobs:
       - run: echo "## List of elements from bbbike.org" >> README.md
       - run: go run cmd/download-geofabrik/main.go --service "bbbike" list --markdown >> README.md
       - run: echo "" >> README.md
-      - run: echo "## List of elements from osmtoday" >> README.md
-      - run: go run cmd/download-geofabrik/main.go --service "osmtoday" list --markdown >> README.md
+      - run: echo "## List of elements from geo2day" >> README.md
+      - run: go run cmd/download-geofabrik/main.go --service "geo2day" list --markdown >> README.md
       - run: echo "" >> README.md
       - uses: actions-js/push@master
         with:

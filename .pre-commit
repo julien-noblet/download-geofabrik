@@ -13,8 +13,8 @@ echo "" >> README.md
 echo "## List of elements from bbbike.org" >> README.md
 go run download-geofabrik.go --service "bbbike" list --markdown >> README.md
 echo "" >> README.md
-echo "## List of elements from osmtoday" >> README.md
-go run download-geofabrik.go --service "osmtoday" list --markdown >> README.md
+echo "## List of elements from geo2day" >> README.md
+go run download-geofabrik.go --service "geo2day" list --markdown >> README.md
 echo "" >> README.md
 git add geofabrik.yml
 git add openstreetmap.fr.yml
