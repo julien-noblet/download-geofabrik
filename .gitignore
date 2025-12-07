@@ -6,10 +6,10 @@
 *.so
 
 # Makefile build folder
-download-geofabrik*/
+# download-geofabrik*/
 
 # Linux binary
-download-geofabrik
+//download-geofabrik
 
 # Folders
 dist
@@ -63,3 +63,4 @@ snap.login
 dist/
 
 
+download-geofabrik
