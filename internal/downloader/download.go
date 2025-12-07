@@ -40,7 +40,7 @@ func NewDownloader(cfg *config.Config, opts *config.Options) *Downloader {
 }
 
 // FromURL downloads a file from a URL to a specified file path.
-func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) error {
+func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err error) {
 	slog.Debug("Downloading", "url", myURL, "file", fileName)
 
 	if d.Options.NoDownload {
@@ -85,7 +85,11 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) error 
 	if err != nil {
 		return fmt.Errorf("error while creating %s - %w", fileName, err)
 	}
-	defer file.Close()
+	defer func() {
+		if cerr := file.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("error while closing %s - %w", fileName, cerr)
+		}
+	}()
 
 	var (
 		output          io.Writer = file
