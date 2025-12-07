@@ -73,9 +73,9 @@
 				
 				<option value="file8">github.com/julien-noblet/download-geofabrik/internal/element/element.go (100.0%)</option>
 				
-				<option value="file9">github.com/julien-noblet/download-geofabrik/internal/generator/generator.go (36.4%)</option>
+				<option value="file9">github.com/julien-noblet/download-geofabrik/internal/generator/generator.go (67.3%)</option>
 				
-				<option value="file10">github.com/julien-noblet/download-geofabrik/internal/generator/importer/geofabrik/geofabrik.go (80.9%)</option>
+				<option value="file10">github.com/julien-noblet/download-geofabrik/internal/generator/importer/geofabrik/geofabrik.go (85.1%)</option>
 				
 				<option value="file11">github.com/julien-noblet/download-geofabrik/internal/lists/lists.go (90.5%)</option>
 				
@@ -87,7 +87,7 @@
 				
 				<option value="file15">github.com/julien-noblet/download-geofabrik/internal/scrapper/osmtoday/osmtoday.go (80.0%)</option>
 				
-				<option value="file16">github.com/julien-noblet/download-geofabrik/internal/scrapper/scrapper.go (88.1%)</option>
+				<option value="file16">github.com/julien-noblet/download-geofabrik/internal/scrapper/scrapper.go (90.5%)</option>
 				
 				<option value="file17">github.com/julien-noblet/download-geofabrik/pkg/formats/formats.go (100.0%)</option>
 				
@@ -500,49 +500,49 @@ type Options struct {
 }
 
 // Generate Yaml config.
-func (config *Config) Generate() ([]byte, error) <span class="cov2" title="3">{
+func (config *Config) Generate() ([]byte, error) <span class="cov3" title="5">{
         yml, err := yaml.Marshal(config)
         if err != nil </span><span class="cov0" title="0">{
                 return nil, fmt.Errorf("failed to Marshal: %w", err)
         }</span>
 
-        <span class="cov2" title="3">return yml, nil</span>
+        <span class="cov3" title="5">return yml, nil</span>
 }
 
 // MergeElement merges a new element into the config.
-func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="1129">{
+func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="1131">{
         config.ElementsMutex.RLock()
         newElement, ok := config.Elements[elementPtr.ID]
         config.ElementsMutex.RUnlock()
 
-        if ok </span><span class="cov5" title="44">{
+        if ok </span><span class="cov5" title="45">{
                 if newElement.Parent != elementPtr.Parent </span><span class="cov0" title="0">{
                         return fmt.Errorf("%w: Parent mismatch %s != %s (%s)", ErrParentMismatch, newElement.Parent, elementPtr.Parent, elementPtr.ID)
                 }</span>
 
-                <span class="cov5" title="44">config.ElementsMutex.Lock()
+                <span class="cov5" title="45">config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
 
-                for _, f := range elementPtr.Formats </span><span class="cov6" title="104">{
-                        if !newElement.Formats.Contains(f) </span><span class="cov5" title="44">{
+                for _, f := range elementPtr.Formats </span><span class="cov6" title="105">{
+                        if !newElement.Formats.Contains(f) </span><span class="cov5" title="45">{
                                 newElement.Formats = append(newElement.Formats, f)
                         }</span>
                 }
 
-                <span class="cov5" title="44">newElement.Meta = len(newElement.Formats) == 0
+                <span class="cov5" title="45">newElement.Meta = len(newElement.Formats) == 0
                 config.Elements[elementPtr.ID] = newElement</span>
-        } else<span class="cov9" title="1085"> {
+        } else<span class="cov9" title="1086"> {
                 config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
 
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov10" title="1129">return nil</span>
+        <span class="cov9" title="1130">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(elementID string) bool <span class="cov6" title="72">{
+func (config *Config) Exist(elementID string) bool <span class="cov6" title="73">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
 
@@ -552,12 +552,12 @@ func (config *Config) Exist(elementID string) bool <span class="cov6" title="72"
 }</span>
 
 // AddExtension adds an extension to an element.
-func (config *Config) AddExtension(elementID, format string) <span class="cov5" title="47">{
+func (config *Config) AddExtension(elementID, format string) <span class="cov5" title="48">{
         config.ElementsMutex.RLock()
         elem := config.Elements[elementID]
         config.ElementsMutex.RUnlock()
 
-        if !elem.Formats.Contains(format) </span><span class="cov5" title="45">{
+        if !elem.Formats.Contains(format) </span><span class="cov5" title="46">{
                 slog.Info("Add extension to element", "format", format, "id", elem.ID)
 
                 config.ElementsMutex.Lock()
@@ -574,8 +574,8 @@ func (config *Config) AddExtension(elementID, format string) <span class="cov5" 
 }
 
 // GetElement gets an element by ID or returns an error if not found.
-func (config *Config) GetElement(elementID string) (*element.Element, error) <span class="cov1" title="1">{
-        if config.Exist(elementID) </span><span class="cov1" title="1">{
+func (config *Config) GetElement(elementID string) (*element.Element, error) <span class="cov1" title="2">{
+        if config.Exist(elementID) </span><span class="cov1" title="2">{
                 config.ElementsMutex.RLock()
                 r := config.Elements[elementID]
                 config.ElementsMutex.RUnlock()
@@ -1039,14 +1039,14 @@ func (e *Element) HasParent() bool <span class="cov4" title="10">{
 }</span>
 
 // Contains checks if the format list contains a specific format.
-func (f *Formats) Contains(format string) bool <span class="cov9" title="154">{
-        for _, existingFormat := range *f </span><span class="cov10" title="223">{
-                if format == existingFormat </span><span class="cov7" title="65">{
+func (f *Formats) Contains(format string) bool <span class="cov9" title="157">{
+        for _, existingFormat := range *f </span><span class="cov10" title="224">{
+                if format == existingFormat </span><span class="cov7" title="66">{
                         return true
                 }</span>
         }
 
-        <span class="cov8" title="89">return false</span>
+        <span class="cov8" title="91">return false</span>
 }
 
 // CreateParentElement creates a parent element for the given element.
@@ -1100,22 +1100,22 @@ const (
 var ErrUnknownService = errors.New("unknown service")
 
 // Write writes the generated configuration to a file.
-func Write(c *config.Config, filename string) error <span class="cov1" title="2">{
+func Write(c *config.Config, filename string) error <span class="cov2" title="4">{
         out, err := c.Generate()
         if err != nil </span><span class="cov0" title="0">{
                 return fmt.Errorf("failed to generate config: %w", err)
         }</span>
 
-        <span class="cov1" title="2">filename, err = filepath.Abs(filename)
+        <span class="cov2" title="4">filename, err = filepath.Abs(filename)
         if err != nil </span><span class="cov0" title="0">{
                 return fmt.Errorf("failed to get absolute path for filename: %w", err)
         }</span>
 
-        <span class="cov1" title="2">if err := os.WriteFile(filename, out, filePermission); err != nil </span><span class="cov0" title="0">{
+        <span class="cov2" title="4">if err := os.WriteFile(filename, out, filePermission); err != nil </span><span class="cov1" title="1">{
                 return fmt.Errorf("failed to write file: %w", err)
         }</span>
 
-        <span class="cov1" title="2">slog.Info("Generated config file", "file", filename)
+        <span class="cov2" title="3">slog.Info("Generated config file", "file", filename)
 
         return nil</span>
 }
@@ -1131,11 +1131,11 @@ func Generate(service string, progress bool, configfile string) error <span clas
 }</span>
 
 // PerformGenerate handles the generation logic for all services.
-func PerformGenerate(service string, progress bool, configfile string) error <span class="cov1" title="1">{
+func PerformGenerate(service string, progress bool, configfile string) error <span class="cov3" title="6">{
         var myScrapper scrapper.IScrapper
 
         switch service </span>{
-        case ServiceGeofabrik:<span class="cov1" title="1">
+        case ServiceGeofabrik:<span class="cov3" title="5">
                 return handleGeofabrik(configfile, progress)</span>
         case ServiceGeofabrikParse:<span class="cov0" title="0">
                 myScrapper = geofabrikScrapper.GetDefault()</span>
@@ -1145,7 +1145,7 @@ func PerformGenerate(service string, progress bool, configfile string) error <sp
                 myScrapper = osmtoday.GetDefault()</span>
         case ServiceBBBike:<span class="cov0" title="0">
                 myScrapper = bbbike.GetDefault()</span>
-        default:<span class="cov0" title="0">
+        default:<span class="cov1" title="1">
                 return fmt.Errorf("%w: %s", ErrUnknownService, service)</span>
         }
 
@@ -1169,60 +1169,60 @@ func PerformGenerate(service string, progress bool, configfile string) error <sp
 }
 
 // handleGeofabrik handles the Geofabrik service.
-func handleGeofabrik(configfile string, _ bool) error <span class="cov1" title="1">{
+func handleGeofabrik(configfile string, _ bool) error <span class="cov3" title="5">{
         index, err := geofabrik.GetIndex(geofabrik.GeofabrikIndexURL)
-        if err != nil </span><span class="cov0" title="0">{
+        if err != nil </span><span class="cov1" title="2">{
                 slog.Error("Failed to get geofabrik index", "error", err)
 
                 return fmt.Errorf("failed to get index: %w", err)
         }</span>
 
-        <span class="cov1" title="1">myConfig, err := geofabrik.Convert(index)
+        <span class="cov2" title="3">myConfig, err := geofabrik.Convert(index)
         if err != nil </span><span class="cov0" title="0">{
                 slog.Error("Failed to convert geofabrik index", "error", err)
 
                 return fmt.Errorf("failed to convert index: %w", err)
         }</span>
 
-        <span class="cov1" title="1">Cleanup(myConfig)
+        <span class="cov2" title="3">Cleanup(myConfig)
 
-        if err := Write(myConfig, configfile); err != nil </span><span class="cov0" title="0">{
+        if err := Write(myConfig, configfile); err != nil </span><span class="cov1" title="1">{
                 slog.Error("Failed to write config", "error", err)
 
                 return err
         }</span>
 
-        <span class="cov1" title="1">return nil</span>
+        <span class="cov1" title="2">return nil</span>
 }
 
 // handleProgress handles the progress bar for the scrapper.
-func handleProgress(myScrapper scrapper.IScrapper) <span class="cov0" title="0">{
+func handleProgress(myScrapper scrapper.IScrapper) <span class="cov1" title="1">{
         bar := pb.New(myScrapper.GetPB())
         bar.Start()
 
         defer bar.Finish()
 
         collector := myScrapper.Collector()
-        collector.OnScraped(func(*colly.Response) </span><span class="cov0" title="0">{
+        collector.OnScraped(func(*colly.Response) </span><span class="cov1" title="1">{
                 bar.Increment()
         }</span>)
-        <span class="cov0" title="0">visitAndWait(collector, myScrapper.GetStartURL())</span>
+        <span class="cov1" title="1">visitAndWait(collector, myScrapper.GetStartURL())</span>
 }
 
 // visitAndWait visits the URL and waits for the collector to finish.
-func visitAndWait(collector *colly.Collector, url string) <span class="cov0" title="0">{
-        if err := collector.Visit(url); err != nil </span><span class="cov0" title="0">{
+func visitAndWait(collector *colly.Collector, url string) <span class="cov2" title="3">{
+        if err := collector.Visit(url); err != nil </span><span class="cov1" title="1">{
                 slog.Error("Can't get url", "error", err)
 
                 return
         }</span>
 
-        <span class="cov0" title="0">collector.Wait()</span>
+        <span class="cov1" title="2">collector.Wait()</span>
 }
 
 // Cleanup sorts the formats in the configuration elements.
-func Cleanup(c *config.Config) <span class="cov2" title="3">{
-        for _, elem := range c.Elements </span><span class="cov10" title="514">{
+func Cleanup(c *config.Config) <span class="cov3" title="5">{
+        for _, elem := range c.Elements </span><span class="cov10" title="515">{
                 slices.Sort(elem.Formats)
         }</span>
 }
@@ -1247,16 +1247,16 @@ import (
         "github.com/julien-noblet/download-geofabrik/pkg/formats"
 )
 
-const (
+var (
         GeofabrikIndexURL = `https://download.geofabrik.de/index-v1-nogeom.json`
         GeofabrikBaseURL  = `https://download.geofabrik.de`
 
-        ErrDownload          = "error while downloading %v, server returned code %d\nPlease use '%s generate' to re-create your yml file %w"
-        ErrCreatingRequest   = "error while creating request for %s: %w"
-        ErrDownloading       = "error while downloading %s: %w"
-        ErrReadingResponse   = "error while reading response body: %w"
-        ErrUnmarshallingBody = "error while unmarshalling response body: %w"
-        ErrMergingElement    = "error while merging element %v: %w"
+        // ErrDownload          = "error while downloading %v, server returned code %d\nPlease use '%s generate' to re-create your yml file %w"
+        // ErrCreatingRequest   = "error while creating request for %s: %w"
+        // ErrDownloading       = "error while downloading %s: %w"
+        // ErrReadingResponse   = "error while reading response body: %w"
+        // ErrUnmarshallingBody = "error while unmarshalling response body: %w"
+        // ErrMergingElement    = "error while merging element %v: %w".
 
         TimeoutDuration       = 60 * time.Second
         KeepAliveDuration     = 30 * time.Second
@@ -1282,7 +1282,7 @@ var HTTPClient = &amp;http.Client{
 }
 
 // FormatDefinition returns a map of format definitions.
-func FormatDefinition() formats.FormatDefinitions <span class="cov1" title="2">{
+func FormatDefinition() formats.FormatDefinitions <span class="cov2" title="4">{
         return formats.FormatDefinitions{
                 "osm.bz2.md5":         {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
                 "osm.pbf.md5":         {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
@@ -1317,55 +1317,58 @@ type IndexElementProperties struct {
 }
 
 // GetIndex downloads the Geofabrik index and unmarshals the JSON response.
-func GetIndex(url string) (*Index, error) <span class="cov2" title="3">{
+func GetIndex(url string) (*Index, error) <span class="cov3" title="7">{
         ctx, cancel := context.WithTimeout(context.Background(), TimeoutDuration)
         defer cancel()
 
         req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, http.NoBody)
         if err != nil </span><span class="cov0" title="0">{
-                return nil, fmt.Errorf(ErrCreatingRequest, url, err)
+                return nil, fmt.Errorf("error while creating request for %s: %w", url, err)
         }</span>
 
-        <span class="cov2" title="3">response, err := HTTPClient.Do(req)
+        <span class="cov3" title="7">response, err := HTTPClient.Do(req)
         if err != nil </span><span class="cov0" title="0">{
-                return nil, fmt.Errorf(ErrDownloading, url, err)
+                return nil, fmt.Errorf("error while downloading %s: %w", url, err)
         }</span>
 
-        <span class="cov2" title="3">defer func() </span><span class="cov2" title="3">{
+        <span class="cov3" title="7">defer func() </span><span class="cov3" title="7">{
                 if cerr := response.Body.Close(); cerr != nil &amp;&amp; err == nil </span><span class="cov0" title="0">{
                         err = fmt.Errorf("close response: %w", cerr)
                 }</span>
         }()
 
-        <span class="cov2" title="3">if response.StatusCode != http.StatusOK </span><span class="cov1" title="1">{
+        <span class="cov3" title="7">if response.StatusCode != http.StatusOK </span><span class="cov1" title="2">{
                 return nil, handleHTTPError(response, url)
         }</span>
 
-        <span class="cov1" title="2">bodyBytes, err := io.ReadAll(response.Body)
+        <span class="cov2" title="5">bodyBytes, err := io.ReadAll(response.Body)
         if err != nil </span><span class="cov0" title="0">{
-                return nil, fmt.Errorf(ErrReadingResponse, err)
+                return nil, fmt.Errorf("error while reading response body: %w", err)
         }</span>
 
-        <span class="cov1" title="2">var geofabrikIndex Index
-        if err := json.Unmarshal(bodyBytes, &amp;geofabrikIndex); err != nil </span><span class="cov0" title="0">{
-                return nil, fmt.Errorf(ErrUnmarshallingBody, err)
+        <span class="cov2" title="5">var geofabrikIndex Index
+        if err := json.Unmarshal(bodyBytes, &amp;geofabrikIndex); err != nil </span><span class="cov1" title="1">{
+                return nil, fmt.Errorf("error while unmarshalling response body: %w", err)
         }</span>
 
-        <span class="cov1" title="2">return &amp;geofabrikIndex, nil</span>
+        <span class="cov2" title="4">return &amp;geofabrikIndex, nil</span>
 }
 
 // handleHTTPError handles HTTP errors based on the status code.
-func handleHTTPError(response *http.Response, url string) error <span class="cov1" title="1">{
+func handleHTTPError(response *http.Response, url string) error <span class="cov1" title="2">{
         switch response.StatusCode </span>{
         case http.StatusNotFound:<span class="cov1" title="1">
-                return fmt.Errorf(ErrDownload, url, response.StatusCode, os.Args[0], http.ErrNoLocation)</span>
-        default:<span class="cov0" title="0">
-                return fmt.Errorf(ErrDownload, url, response.StatusCode, os.Args[0], http.ErrNotSupported)</span>
+                return fmt.Errorf("error while downloading %s, server returned code %d\n"+
+                        "Please use '%s generate' to re-create your yml file %w", url, response.StatusCode, os.Args[0], http.ErrNoLocation)</span>
+
+        default:<span class="cov1" title="1">
+                return fmt.Errorf("error while downloading %s, server returned code %d\n"+
+                        "Please use '%s generate' to re-create your yml file %w", url, response.StatusCode, os.Args[0], http.ErrNotSupported)</span>
         }
 }
 
 // Convert converts the Geofabrik index to a config.Config object.
-func Convert(index *Index) (*config.Config, error) <span class="cov1" title="2">{
+func Convert(index *Index) (*config.Config, error) <span class="cov2" title="4">{
         cfg := &amp;config.Config{
                 Formats:       FormatDefinition(),
                 BaseURL:       GeofabrikBaseURL,
@@ -1373,17 +1376,17 @@ func Convert(index *Index) (*config.Config, error) <span class="cov1" title="2">
                 ElementsMutex: &amp;sync.RWMutex{},
         }
 
-        for _, feature := range index.Features </span><span class="cov8" title="1024">{
+        for _, feature := range index.Features </span><span class="cov8" title="1025">{
                 if err := processFeature(cfg, &amp;feature); err != nil </span><span class="cov0" title="0">{
                         return nil, err
                 }</span>
         }
 
-        <span class="cov1" title="2">return cfg, nil</span>
+        <span class="cov2" title="4">return cfg, nil</span>
 }
 
 // processFeature processes a single feature from the Geofabrik index.
-func processFeature(cfg *config.Config, feature *IndexElement) error <span class="cov8" title="1024">{
+func processFeature(cfg *config.Config, feature *IndexElement) error <span class="cov8" title="1025">{
         var elem element.Element
 
         slog.Debug("Processing feature", "ID", feature.ElementProperties.ID)
@@ -1395,19 +1398,19 @@ func processFeature(cfg *config.Config, feature *IndexElement) error <span class
         elem.Formats = append(elem.Formats, getFormats(feature.ElementProperties.Urls)...)
 
         if err := cfg.MergeElement(&amp;elem); err != nil </span><span class="cov0" title="0">{
-                return fmt.Errorf(ErrMergingElement, elem, err)
+                return fmt.Errorf("error while merging element %v: %w", elem, err)
         }</span>
 
-        <span class="cov8" title="1024">return nil</span>
+        <span class="cov8" title="1025">return nil</span>
 }
 
 // getFormats returns the formats based on the URLs.
-func getFormats(urls map[string]string) []string <span class="cov8" title="1024">{
+func getFormats(urls map[string]string) []string <span class="cov8" title="1025">{
         myFormats := []string{}
 
-        for k := range urls </span><span class="cov10" title="6086">{
+        for k := range urls </span><span class="cov10" title="6087">{
                 switch k </span>{
-                case "pbf":<span class="cov8" title="1024">
+                case "pbf":<span class="cov8" title="1025">
                         myFormats = append(myFormats, formats.FormatOsmPbf, "osm.pbf.md5")</span>
                 case "bz2":<span class="cov0" title="0">
                         myFormats = append(myFormats, formats.FormatOsmBz2, "osm.bz2.md5")</span>
@@ -1418,7 +1421,7 @@ func getFormats(urls map[string]string) []string <span class="cov8" title="1024"
                 }
         }
 
-        <span class="cov8" title="1024">myFormats = append(myFormats, formats.FormatPoly, formats.FormatKml, formats.FormatState)
+        <span class="cov8" title="1025">myFormats = append(myFormats, formats.FormatPoly, formats.FormatKml, formats.FormatState)
 
         return myFormats</span>
 }
@@ -1699,14 +1702,14 @@ func (g *Geofabrik) Collector() *colly.Collector <span class="cov4" title="4">{
         myCollector.OnHTML("#subregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseSubregion(e, myCollector)
         }</span>)
-        <span class="cov4" title="3">myCollector.OnHTML("#specialsubregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+        <span class="cov4" title="4">myCollector.OnHTML("#specialsubregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseSubregion(e, myCollector)
         }</span>)
         <span class="cov4" title="4">myCollector.OnHTML("li", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseLi(e, myCollector)
         }</span>)
 
-        <span class="cov4" title="3">return myCollector</span>
+        <span class="cov4" title="4">return myCollector</span>
 }
 
 // ParseSubregion parses the subregion information from the HTML.
@@ -2035,7 +2038,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="30">
                 return
         }</span>
 
-        <span class="cov8" title="17">if strings.Contains(passList, valsplit[0]) </span><span class="cov0" title="0">{
+        <span class="cov8" title="16">if strings.Contains(passList, valsplit[0]) </span><span class="cov0" title="0">{
                 return
         }</span>
 
@@ -2215,7 +2218,7 @@ func (g *Osmtoday) Exceptions(myElement *element.Element) *element.Element <span
                 {"georgia", "us"},
         }
 
-        for _, exception := range exceptions </span><span class="cov10" title="216">{
+        for _, exception := range exceptions </span><span class="cov10" title="203">{
                 if myElement.ID == exception.ID &amp;&amp; myElement.Parent == exception.Parent </span><span class="cov5" title="12">{
                         myElement.ID = fmt.Sprintf("%s-%s", myElement.ID, myElement.Parent)
                 }</span>
@@ -2372,7 +2375,7 @@ const (
 )
 
 // NewScrapper creates a new Scrapper instance with default values.
-func NewScrapper(baseURL, startURL string, allowedDomains []string) *Scrapper <span class="cov0" title="0">{
+func NewScrapper(baseURL, startURL string, allowedDomains []string) *Scrapper <span class="cov1" title="2">{
         return &amp;Scrapper{
                 RandomDelay:    defaultRandomDelay,
                 Timeout:        defaultTimeout,
@@ -2384,7 +2387,7 @@ func NewScrapper(baseURL, startURL string, allowedDomains []string) *Scrapper <s
 }</span>
 
 // GetConfig initializes a *config.Config from fields.
-func (s *Scrapper) GetConfig() *config.Config <span class="cov5" title="25">{
+func (s *Scrapper) GetConfig() *config.Config <span class="cov5" title="27">{
         s.mu.RLock()
 
         if s.Config != nil </span><span class="cov4" title="12">{
@@ -2393,7 +2396,7 @@ func (s *Scrapper) GetConfig() *config.Config <span class="cov5" title="25">{
                 return s.Config
         }</span>
 
-        <span class="cov4" title="14">s.mu.RUnlock()
+        <span class="cov4" title="15">s.mu.RUnlock()
 
         s.mu.Lock()
         defer s.mu.Unlock()
@@ -2404,7 +2407,7 @@ func (s *Scrapper) GetConfig() *config.Config <span class="cov5" title="25">{
 }
 
 // initializeConfig initializes the configuration with default values.
-func (s *Scrapper) initializeConfig() *config.Config <span class="cov4" title="14">{
+func (s *Scrapper) initializeConfig() *config.Config <span class="cov4" title="15">{
         return &amp;config.Config{
                 Elements:      element.MapElement{},
                 ElementsMutex: &amp;sync.RWMutex{},
@@ -2414,16 +2417,16 @@ func (s *Scrapper) initializeConfig() *config.Config <span class="cov4" title="1
 }</span>
 
 // Limit defines LimitRules.
-func (s *Scrapper) Limit() *colly.LimitRule <span class="cov4" title="13">{
-        if s.DomainGlob == "" </span><span class="cov3" title="8">{
+func (s *Scrapper) Limit() *colly.LimitRule <span class="cov4" title="14">{
+        if s.DomainGlob == "" </span><span class="cov3" title="9">{
                 s.DomainGlob = "*"
         }</span>
 
-        <span class="cov4" title="13">if s.Parallelism &lt;= 1 </span><span class="cov2" title="3">{
+        <span class="cov4" title="14">if s.Parallelism &lt;= 1 </span><span class="cov2" title="4">{
                 s.Parallelism = 1
         }</span>
 
-        <span class="cov4" title="13">return &amp;colly.LimitRule{
+        <span class="cov4" title="14">return &amp;colly.LimitRule{
                 DomainGlob:  s.DomainGlob,
                 Parallelism: s.Parallelism,
                 RandomDelay: s.RandomDelay,
@@ -2431,7 +2434,7 @@ func (s *Scrapper) Limit() *colly.LimitRule <span class="cov4" title="13">{
 }
 
 // Collector initializes a *colly.Collector.
-func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov3" title="10">{
+func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov4" title="11">{
         myCollector := colly.NewCollector(
                 colly.AllowedDomains(s.AllowedDomains...),
                 colly.URLFilters(s.URLFilters...),
@@ -2439,11 +2442,11 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
                 colly.MaxDepth(s.MaxDepth),
         )
 
-        if s.Timeout != 0 </span><span class="cov2" title="3">{
+        if s.Timeout != 0 </span><span class="cov2" title="4">{
                 myCollector.SetRequestTimeout(s.Timeout)
         }</span>
 
-        <span class="cov3" title="9">myCollector.WithTransport(&amp;http.Transport{
+        <span class="cov4" title="11">myCollector.WithTransport(&amp;http.Transport{
                 Proxy: http.ProxyFromEnvironment,
                 DialContext: (&amp;net.Dialer{
                         Timeout:   defaultTimeout,
@@ -2459,7 +2462,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
                 slog.Error("Can't update limit", "error", err)
         }</span>
 
-        <span class="cov3" title="10">myCollector.OnError(func(r *colly.Response, err error) </span><span class="cov0" title="0">{
+        <span class="cov4" title="11">myCollector.OnError(func(r *colly.Response, err error) </span><span class="cov0" title="0">{
                 if !errors.Is(err, colly.ErrForbiddenURL) &amp;&amp; !errors.Is(err, colly.ErrForbiddenDomain) &amp;&amp; err.Error() != "Forbidden" </span><span class="cov0" title="0">{
                         slog.Debug("Request failed", "url", r.Request.URL, "error", err)
                 }</span> else<span class="cov0" title="0"> {
@@ -2467,7 +2470,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
                 }</span>
         })
 
-        <span class="cov3" title="10">return myCollector</span>
+        <span class="cov4" title="11">return myCollector</span>
 }
 
 // GetStartURL returns StartURL.
@@ -2486,14 +2489,14 @@ func (s *Scrapper) ParseFormat(id, format string) <span class="cov5" title="22">
 }</span>
 
 // ParseFormatService adds Extensions to ID.
-func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefinitions) <span class="cov2" title="4">{
+func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefinitions) <span class="cov3" title="5">{
         s.AddExtension(id, format, def)
 }</span>
 
 // AddExtension adds an extension to the configuration.
-func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="26">{
-        for f, i := range *def </span><span class="cov8" title="232">{
-                if format == i.ID </span><span class="cov5" title="24">{
+func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="27">{
+        for f, i := range *def </span><span class="cov8" title="233">{
+                if format == i.ID </span><span class="cov5" title="25">{
                         s.Config.AddExtension(id, f)
                 }</span>
         }
