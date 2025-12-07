@@ -173,7 +173,7 @@ func (g *Osmtoday) handleHTMLExtension(sub *colly.HTMLElement, href, myID string
 
 // ParseFormat adds extensions to the ID.
 func (g *Osmtoday) ParseFormat(id, format string) {
-	g.Scrapper.ParseFormatService(id, format, &g.Scrapper.FormatDefinition)
+	g.ParseFormatService(id, format, &g.FormatDefinition)
 
 	if format == formats.FormatOsmPbf {
 		g.Config.AddExtension(id, "osm.pbf.md5")

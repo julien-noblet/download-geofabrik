@@ -172,8 +172,8 @@ func TestGenerate(t *testing.T) {
 
 	type args struct {
 		service    string
-		progress   bool
 		configfile string
+		progress   bool
 	}
 
 	tests := []struct {
@@ -194,7 +194,10 @@ func TestGenerate(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
-			generator.Generate(tt.args.service, tt.args.progress, tt.args.configfile)
+
+			if err := generator.Generate(tt.args.service, tt.args.progress, tt.args.configfile); err != nil {
+				t.Errorf("Generate() error = %v", err)
+			}
 		})
 	}
 }
@@ -264,8 +267,7 @@ func TestCleanup(t *testing.T) {
 							Loc:      "-updates/state.txt",
 							BasePath: "../state/",
 						}, formats.FormatPoly: {
-							ID: formats.FormatPoly,
-
+							ID:      formats.FormatPoly,
 							Loc:     ".poly",
 							BaseURL: "http://my.new.url/folder",
 						}, formats.FormatOsmBz2: {

@@ -100,7 +100,12 @@ func GetIndex(url string) (*Index, error) {
 	if err != nil {
 		return nil, fmt.Errorf(ErrDownloading, url, err)
 	}
-	defer response.Body.Close()
+
+	defer func() {
+		if cerr := response.Body.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("close response: %w", cerr)
+		}
+	}()
 
 	if response.StatusCode != http.StatusOK {
 		return nil, handleHTTPError(response, url)

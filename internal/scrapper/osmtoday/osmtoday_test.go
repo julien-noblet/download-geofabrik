@@ -9,6 +9,8 @@ import (
 )
 
 func TestOsmtoday_Exceptions(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		e element.Element
 	}
@@ -217,35 +219,14 @@ func TestOsmtoday_Exceptions(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		test := tt // Reinitialize tt inside the range statement
-		t.Run(test.name, func(t *testing.T) {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			g := osmtoday.GetDefault()
 
-			if got := g.Exceptions(&test.args.e); !reflect.DeepEqual(got, &test.want) {
-				t.Errorf("Osmtoday.Exceptions() = %v, want %v", *got, test.want)
+			if got := g.Exceptions(&tt.args.e); !reflect.DeepEqual(got, &tt.want) {
+				t.Errorf("Osmtoday.Exceptions() = %v, want %v", *got, tt.want)
 			}
 		})
 	}
 }
-
-/*
-func gWithOsmPbf() *osmtoday.Osmtoday {
-	gWithOsmPbf := osmtoday.GetDefault()
-	gWithOsmPbf.Config = &config.Config{
-		Formats: formats.FormatDefinitions{
-			formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: ".pbf", BasePath: "", BaseURL: ""},
-		},
-	}
-
-	return gWithOsmPbf
-}
-
-func gWithPoly() *osmtoday.Osmtoday {
-	gWithPoly := osmtoday.GetDefault()
-	gWithPoly.Config.Formats = formats.FormatDefinitions{
-		formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", BasePath: "", BaseURL: ""},
-	}
-
-	return gWithPoly
-}
-*/

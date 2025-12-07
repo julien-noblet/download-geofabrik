@@ -10,6 +10,7 @@ import (
 )
 
 func TestGetIndex(t *testing.T) {
+	t.Parallel()
 	viper.Set("log", true)
 
 	tests := []struct {
@@ -31,6 +32,8 @@ func TestGetIndex(t *testing.T) {
 	}
 	for _, thisTest := range tests {
 		t.Run(thisTest.name, func(t *testing.T) {
+			t.Parallel()
+
 			index, err := geofabrik.GetIndex(thisTest.myURL)
 			if thisTest.wantErr {
 				require.Error(t, err)

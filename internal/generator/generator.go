@@ -1,6 +1,7 @@
 package generator
 
 import (
+	"errors"
 	"fmt"
 	"log/slog"
 	"os"
@@ -26,6 +27,8 @@ const (
 	ServiceOSMToday        = "osmtoday"
 	ServiceBBBike          = "bbbike"
 )
+
+var ErrUnknownService = errors.New("unknown service")
 
 // Write writes the generated configuration to a file.
 func Write(c *config.Config, filename string) error {
@@ -74,7 +77,7 @@ func PerformGenerate(service string, progress bool, configfile string) error {
 	case ServiceBBBike:
 		myScrapper = bbbike.GetDefault()
 	default:
-		return fmt.Errorf("unknown service: %s", service)
+		return fmt.Errorf("%w: %s", ErrUnknownService, service)
 	}
 
 	if progress {
@@ -89,8 +92,10 @@ func PerformGenerate(service string, progress bool, configfile string) error {
 
 	if err := Write(myconfig, configfile); err != nil {
 		slog.Error("Failed to write config", "error", err)
+
 		return err
 	}
+
 	return nil
 }
 
@@ -99,21 +104,25 @@ func handleGeofabrik(configfile string, _ bool) error {
 	index, err := geofabrik.GetIndex(geofabrik.GeofabrikIndexURL)
 	if err != nil {
 		slog.Error("Failed to get geofabrik index", "error", err)
-		return err
+
+		return fmt.Errorf("failed to get index: %w", err)
 	}
 
 	myConfig, err := geofabrik.Convert(index)
 	if err != nil {
 		slog.Error("Failed to convert geofabrik index", "error", err)
-		return err
+
+		return fmt.Errorf("failed to convert index: %w", err)
 	}
 
 	Cleanup(myConfig)
 
 	if err := Write(myConfig, configfile); err != nil {
 		slog.Error("Failed to write config", "error", err)
+
 		return err
 	}
+
 	return nil
 }
 
@@ -121,6 +130,7 @@ func handleGeofabrik(configfile string, _ bool) error {
 func handleProgress(myScrapper scrapper.IScrapper) {
 	bar := pb.New(myScrapper.GetPB())
 	bar.Start()
+
 	defer bar.Finish()
 
 	collector := myScrapper.Collector()
@@ -134,6 +144,7 @@ func handleProgress(myScrapper scrapper.IScrapper) {
 func visitAndWait(collector *colly.Collector, url string) {
 	if err := collector.Visit(url); err != nil {
 		slog.Error("Can't get url", "error", err)
+
 		return
 	}
 

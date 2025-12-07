@@ -35,6 +35,7 @@ func ListAllRegions(configuration *config.Config, format string) error {
 	if err := table.Render(); err != nil {
 		return fmt.Errorf("unable to render table: %w", err)
 	}
+
 	fmt.Printf("Total elements: %#v\n", len(configuration.Elements)) //nolint:forbidigo // I want to print the number of elements
 
 	return nil

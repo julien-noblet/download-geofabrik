@@ -11,9 +11,9 @@ import (
 	"github.com/gocolly/colly/v2"
 	"github.com/julien-noblet/download-geofabrik/internal/config"
 	"github.com/julien-noblet/download-geofabrik/internal/element"
-	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 	"github.com/julien-noblet/download-geofabrik/internal/scrapper"
 	"github.com/julien-noblet/download-geofabrik/internal/scrapper/geofabrik"
+	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 )
 
 func Test_geofabrikParseFormat(t *testing.T) {
@@ -271,8 +271,8 @@ func Test_geofabrikParseFormat(t *testing.T) {
 			t.Parallel()
 
 			myScrapper := geofabrik.Geofabrik{Scrapper: &scrapper.Scrapper{}}
-			myScrapper.Scrapper.Config = &tests[thisTest].args.c
-			myScrapper.Scrapper.Config.Formats = formats.FormatDefinitions{
+			myScrapper.Config = &tests[thisTest].args.c
+			myScrapper.Config.Formats = formats.FormatDefinitions{
 				formats.FormatOshPbf: {ID: formats.FormatOshPbf, Loc: ".osh.pbf"},
 				"osh.pbf.md5":        {ID: "osh.pbf.md5", Loc: ".osh.pbf.md5"},
 				formats.FormatOsmBz2: {ID: formats.FormatOsmBz2, Loc: "-latest.osm.bz2"},

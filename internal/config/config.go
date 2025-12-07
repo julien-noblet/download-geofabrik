@@ -16,14 +16,13 @@ import (
 )
 
 const (
-	ErrElem2URL   = "can't find url"
-	ErrLoadConfig = "can't load config"
-
 	DefaultConfigFile = "geofabrik.yml"
 	DefaultService    = "geofabrik"
 )
 
 var (
+	ErrElem2URL       = errors.New("can't find url")
+	ErrLoadConfig     = errors.New("can't load config")
 	ErrFindElem       = errors.New("element not found")
 	ErrParentMismatch = errors.New("can't merge")
 	ErrFormatNotExist = errors.New("format not exist")
@@ -36,11 +35,13 @@ type Config struct {
 	Formats       formats.FormatDefinitions `yaml:"formats"`
 	Elements      element.MapElement        `yaml:"elements"`
 	ElementsMutex *sync.RWMutex             `yaml:"-"`       // unexported
-	BaseURL       string                    `yaml:"baseURL"` //nolint:tagliatelle
+	BaseURL       string                    `yaml:"baseURL"` //nolint:tagliatelle // external yaml requirement
 }
 
-// Options holds runtime configuration (flags)
+// Options holds runtime configuration (flags).
+// Field alignment optimized.
 type Options struct {
+	FormatFlags     map[string]bool
 	ConfigFile      string
 	Service         string
 	OutputDirectory string
@@ -49,7 +50,6 @@ type Options struct {
 	Quiet           bool
 	NoDownload      bool
 	Progress        bool
-	FormatFlags     map[string]bool
 }
 
 // Generate Yaml config.
@@ -58,6 +58,7 @@ func (config *Config) Generate() ([]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to Marshal: %w", err)
 	}
+
 	return yml, nil
 }
 
@@ -86,6 +87,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error {
 	} else {
 		config.ElementsMutex.Lock()
 		defer config.ElementsMutex.Unlock()
+
 		config.Elements[elementPtr.ID] = *elementPtr
 	}
 
@@ -93,24 +95,28 @@ func (config *Config) MergeElement(elementPtr *element.Element) error {
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(id string) bool {
+func (config *Config) Exist(elementID string) bool {
 	config.ElementsMutex.RLock()
 	defer config.ElementsMutex.RUnlock()
-	result := reflect.DeepEqual(config.Elements[id], element.Element{})
+
+	result := reflect.DeepEqual(config.Elements[elementID], element.Element{})
+
 	return !result
 }
 
 // AddExtension adds an extension to an element.
-func (config *Config) AddExtension(id, format string) {
+func (config *Config) AddExtension(elementID, format string) {
 	config.ElementsMutex.RLock()
-	elem := config.Elements[id]
+	elem := config.Elements[elementID]
 	config.ElementsMutex.RUnlock()
 
 	if !elem.Formats.Contains(format) {
 		slog.Info("Add extension to element", "format", format, "id", elem.ID)
 
 		config.ElementsMutex.Lock()
+
 		elem.Formats = append(elem.Formats, format)
+
 		config.ElementsMutex.Unlock()
 
 		if err := config.MergeElement(&elem); err != nil {
@@ -121,14 +127,16 @@ func (config *Config) AddExtension(id, format string) {
 }
 
 // GetElement gets an element by ID or returns an error if not found.
-func (config *Config) GetElement(id string) (*element.Element, error) {
-	if config.Exist(id) {
+func (config *Config) GetElement(elementID string) (*element.Element, error) {
+	if config.Exist(elementID) {
 		config.ElementsMutex.RLock()
-		r := config.Elements[id]
+		r := config.Elements[elementID]
 		config.ElementsMutex.RUnlock()
+
 		return &r, nil
 	}
-	return nil, fmt.Errorf("%w: %s", ErrFindElem, id)
+
+	return nil, fmt.Errorf("%w: %s", ErrFindElem, elementID)
 }
 
 // FindElem finds an element in the config by ID.
@@ -137,6 +145,7 @@ func FindElem(config *Config, e string) (*element.Element, error) {
 	if res.ID == "" || res.ID != e {
 		return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, e)
 	}
+
 	return &res, nil
 }
 
@@ -145,6 +154,7 @@ func GetFile(myElement *element.Element) string {
 	if myElement.File != "" {
 		return myElement.File
 	}
+
 	return myElement.ID
 }
 
@@ -167,13 +177,14 @@ func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string)
 		}
 
 		res += "/" + GetFile(myElement)
+
 		return res, nil
 	}
 
 	switch len(baseURL) {
 	case 1:
 		return config.BaseURL + "/" + strings.Join(baseURL, "/") + GetFile(myElement), nil
-	case 2:
+	case 2: //nolint:mnd // This case handles exactly 2 base URL components
 		return strings.Join(baseURL, "/") + GetFile(myElement), nil
 	default:
 		return config.BaseURL + "/" + GetFile(myElement), nil
@@ -188,6 +199,7 @@ func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, 
 
 	format := config.Formats[ext]
 	baseURL, basePath := format.BaseURL, format.BasePath
+
 	if baseURL == "" {
 		baseURL = config.BaseURL
 	}
@@ -203,6 +215,7 @@ func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, 
 // LoadConfig loads the configuration from the specified file.
 func LoadConfig(configFile string) (*Config, error) {
 	filename, _ := filepath.Abs(configFile)
+
 	fileContent, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, fmt.Errorf("can't open %s: %w", filename, err)
@@ -232,5 +245,6 @@ func IsHashable(config *Config, format string) (isHashable bool, hash, extension
 			}
 		}
 	}
+
 	return false, "", ""
 }

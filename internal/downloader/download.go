@@ -2,6 +2,7 @@ package download
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"log/slog"
@@ -16,13 +17,17 @@ import (
 
 const (
 	progressMinimal = 512 * 1024 // Don't display progress bar if size < 512kb
-	ErrFromURL      = "can't download element"
 	defaultTimeout  = 60 * time.Second
 	keepAlive       = 30 * time.Second
 	idleTimeout     = 5 * time.Second
 	tlsTimeout      = 10 * time.Second
 	continueTimeout = 5 * time.Second
 	fileMode        = 0o644
+)
+
+var (
+	ErrFromURL          = errors.New("can't download element")
+	ErrServerStatusCode = errors.New("server return code error")
 )
 
 // Downloader handles downloading files.
@@ -39,15 +44,9 @@ func NewDownloader(cfg *config.Config, opts *config.Options) *Downloader {
 	}
 }
 
-// FromURL downloads a file from a URL to a specified file path.
-func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err error) {
-	slog.Debug("Downloading", "url", myURL, "file", fileName)
-
-	if d.Options.NoDownload {
-		return nil
-	}
-
-	client := &http.Client{
+// createClient creates a configured HTTP client.
+func createClient() *http.Client {
+	return &http.Client{
 		Transport: &http.Transport{
 			Proxy: http.ProxyFromEnvironment,
 			DialContext: (&net.Dialer{
@@ -61,6 +60,17 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 			ExpectContinueTimeout: continueTimeout,
 		},
 	}
+}
+
+// FromURL downloads a file from a URL to a specified file path.
+func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err error) {
+	slog.Debug("Downloading", "url", myURL, "file", fileName)
+
+	if d.Options.NoDownload {
+		return nil
+	}
+
+	client := createClient()
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, myURL, http.NoBody)
 	if err != nil {
@@ -71,20 +81,28 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 	if err != nil {
 		return fmt.Errorf("error while downloading %s - %w", myURL, err)
 	}
-	defer response.Body.Close()
+
+	defer func() {
+		if cerr := response.Body.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("error while closing response body for %s - %w", myURL, cerr)
+		}
+	}()
 
 	if response.StatusCode != http.StatusOK {
-		return fmt.Errorf(
-			"error while downloading %v, server return code %d",
-			myURL,
-			response.StatusCode,
-		)
+		return fmt.Errorf("%w: error while downloading %v, server return code %d",
+			ErrServerStatusCode, myURL, response.StatusCode)
 	}
 
+	return d.saveToFile(fileName, response)
+}
+
+// saveToFile saves the response body to a file with progress bar support.
+func (d *Downloader) saveToFile(fileName string, response *http.Response) (err error) {
 	file, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY, fileMode)
 	if err != nil {
 		return fmt.Errorf("error while creating %s - %w", fileName, err)
 	}
+
 	defer func() {
 		if cerr := file.Close(); cerr != nil && err == nil {
 			err = fmt.Errorf("error while closing %s - %w", fileName, cerr)
@@ -123,6 +141,7 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 // FileExist checks if a file exists at the given path.
 func FileExist(filePath string) bool {
 	_, err := os.Stat(filePath)
+
 	return err == nil
 }
 
@@ -130,25 +149,27 @@ func FileExist(filePath string) bool {
 func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, outputPath string) error {
 	// elementID and formatName are strings.
 	// config.FindElem uses d.Config.
-
 	format := d.Config.Formats[formatName].ID
 
 	myElem, err := config.FindElem(d.Config, elementID)
 	if err != nil {
 		slog.Error("Element not found", "element", elementID, "error", err)
+
 		return fmt.Errorf("%w: %s", config.ErrFindElem, elementID)
 	}
 
 	myURL, err := config.Elem2URL(d.Config, myElem, format)
 	if err != nil {
 		slog.Error("URL generation failed", "error", err)
-		return fmt.Errorf("%s %w", config.ErrElem2URL, err)
+
+		return fmt.Errorf("%w: %w", config.ErrElem2URL, err)
 	}
 
 	err = d.FromURL(ctx, myURL, outputPath)
 	if err != nil {
 		slog.Error("Download failed", "error", err)
-		return fmt.Errorf("%s %w", ErrFromURL, err)
+
+		return fmt.Errorf("%w: %w", ErrFromURL, err)
 	}
 
 	return nil
@@ -167,45 +188,29 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 		myElem, err := config.FindElem(d.Config, elementID)
 		if err != nil {
 			slog.Error("Element not found", "element", elementID, "error", err)
+
 			return false
 		}
 
 		myURL, err := config.Elem2URL(d.Config, myElem, fhash)
 		if err != nil {
 			slog.Error("URL generation failed", "error", err)
+
 			return false
 		}
 
 		outputPath := d.Options.OutputDirectory + elementID
-		// Ensure path separator?
-		// Actually d.Options.OutputDirectory should have separator?
-		// Original code: viper.GetString(config.ViperOutputDirectory) + viper.GetString(config.ViperElement)
-		// I'll assume OutputDirectory ends with separator if needed, or join properly.
-		// It's safer to use filepath.Join? But Element might be a filename?
-		// Original code: outputPath + "." + fhash
-
-		// I will use `outputPath` argument passed in? No, Checksum calculates it?
-		// `Checksum` in original code calculated output path from global config!
-		// `outputPath := viper.GetString(config.ViperOutputDirectory) + viper.GetString(config.ViperElement)`
-		// `VerifyFileChecksum(outputPath+"."+format, outputPath+"."+fhash)`
-
-		// So Checksum needs to know the layout on disk.
-		// I'll reconstruct it.
 
 		if e := d.FromURL(ctx, myURL, outputPath+"."+fhash); e != nil {
 			slog.Error("Checksum download failed", "error", e)
+
 			return false
 		}
 
 		return VerifyFileChecksum(outputPath+"."+d.Config.Formats[formatName].ID, outputPath+"."+fhash)
-		// Wait, d.Config.Formats[formatName].ID might not be the extension on disk?
-		// Original code: `outputPath+"."+format`
-		// format arg is likely the key (e.g. "osm.pbf"), not the extension on disk?
-		// Original `formats` map mapped key to `Format` struct with `ID` (ext).
-		// Let's assume `formatName` is the key.
-
 	}
 
 	slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+formatName)
+
 	return false
 }

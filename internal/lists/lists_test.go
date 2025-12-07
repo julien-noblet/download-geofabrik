@@ -10,6 +10,8 @@ import (
 )
 
 func TestListAllRegions(t *testing.T) { // it just works
+	t.Parallel()
+
 	mockConfig := &config.Config{
 		Elements: map[string]element.Element{
 			"region1": {Parent: "parent1", Name: "Region 1", Formats: []string{"format1"}},
@@ -27,6 +29,8 @@ func TestListAllRegions(t *testing.T) { // it just works
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			err := lists.ListAllRegions(mockConfig, tt.format)
 			// Output: | ShortName | Is in | Long Name | formats |
 			// |-----------|-------|----------|--------|
@@ -40,6 +44,8 @@ func TestListAllRegions(t *testing.T) { // it just works
 }
 
 func TestGetSortedKeys(t *testing.T) {
+	t.Parallel()
+
 	mockConfig := &config.Config{
 		Elements: map[string]element.Element{
 			"region2": {Parent: "parent2", Name: "Region 2", Formats: []string{"format2"}},

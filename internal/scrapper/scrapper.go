@@ -69,15 +69,18 @@ func NewScrapper(baseURL, startURL string, allowedDomains []string) *Scrapper {
 // GetConfig initializes a *config.Config from fields.
 func (s *Scrapper) GetConfig() *config.Config {
 	s.mu.RLock()
+
 	if s.Config != nil {
 		defer s.mu.RUnlock()
 
 		return s.Config
 	}
+
 	s.mu.RUnlock()
 
 	s.mu.Lock()
 	defer s.mu.Unlock()
+
 	s.Config = s.initializeConfig()
 
 	return s.Config
