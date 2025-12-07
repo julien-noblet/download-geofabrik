@@ -85,7 +85,11 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) error 
 	if err != nil {
 		return fmt.Errorf("error while creating %s - %w", fileName, err)
 	}
-	defer file.Close()
+	defer func() {
+		if cerr := file.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("error while closing %s - %w", fileName, cerr)
+		}
+	}()
 
 	var (
 		output          io.Writer = file
