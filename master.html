@@ -65,7 +65,7 @@
 				
 				<option value="file4">github.com/julien-noblet/download-geofabrik/internal/cli/root.go (84.4%)</option>
 				
-				<option value="file5">github.com/julien-noblet/download-geofabrik/internal/config/config.go (76.4%)</option>
+				<option value="file5">github.com/julien-noblet/download-geofabrik/internal/config/config.go (88.4%)</option>
 				
 				<option value="file6">github.com/julien-noblet/download-geofabrik/internal/downloader/download.go (67.6%)</option>
 				
@@ -577,49 +577,49 @@ type Options struct {
 }
 
 // Generate Yaml config.
-func (config *Config) Generate() ([]byte, error) <span class="cov3" title="5">{
+func (config *Config) Generate() ([]byte, error) <span class="cov3" title="6">{
         yml, err := yaml.Marshal(config)
         if err != nil </span><span class="cov0" title="0">{
                 return nil, fmt.Errorf("failed to Marshal: %w", err)
         }</span>
 
-        <span class="cov3" title="5">return yml, nil</span>
+        <span class="cov3" title="6">return yml, nil</span>
 }
 
 // MergeElement merges a new element into the config.
-func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="1133">{
+func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="1137">{
         config.ElementsMutex.RLock()
         newElement, ok := config.Elements[elementPtr.ID]
         config.ElementsMutex.RUnlock()
 
-        if ok </span><span class="cov5" title="45">{
-                if newElement.Parent != elementPtr.Parent </span><span class="cov0" title="0">{
+        if ok </span><span class="cov5" title="48">{
+                if newElement.Parent != elementPtr.Parent </span><span class="cov1" title="1">{
                         return fmt.Errorf("%w: Parent mismatch %s != %s (%s)", ErrParentMismatch, newElement.Parent, elementPtr.Parent, elementPtr.ID)
                 }</span>
 
-                <span class="cov5" title="45">config.ElementsMutex.Lock()
+                <span class="cov5" title="47">config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
 
-                for _, f := range elementPtr.Formats </span><span class="cov6" title="105">{
-                        if !newElement.Formats.Contains(f) </span><span class="cov5" title="45">{
+                for _, f := range elementPtr.Formats </span><span class="cov6" title="108">{
+                        if !newElement.Formats.Contains(f) </span><span class="cov5" title="47">{
                                 newElement.Formats = append(newElement.Formats, f)
                         }</span>
                 }
 
-                <span class="cov5" title="45">newElement.Meta = len(newElement.Formats) == 0
+                <span class="cov5" title="47">newElement.Meta = len(newElement.Formats) == 0
                 config.Elements[elementPtr.ID] = newElement</span>
-        } else<span class="cov9" title="1088"> {
+        } else<span class="cov9" title="1089"> {
                 config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
 
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov10" title="1133">return nil</span>
+        <span class="cov9" title="1136">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(elementID string) bool <span class="cov6" title="76">{
+func (config *Config) Exist(elementID string) bool <span class="cov6" title="83">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
 
@@ -629,12 +629,12 @@ func (config *Config) Exist(elementID string) bool <span class="cov6" title="76"
 }</span>
 
 // AddExtension adds an extension to an element.
-func (config *Config) AddExtension(elementID, format string) <span class="cov5" title="48">{
+func (config *Config) AddExtension(elementID, format string) <span class="cov5" title="49">{
         config.ElementsMutex.RLock()
         elem := config.Elements[elementID]
         config.ElementsMutex.RUnlock()
 
-        if !elem.Formats.Contains(format) </span><span class="cov5" title="46">{
+        if !elem.Formats.Contains(format) </span><span class="cov5" title="47">{
                 slog.Info("Add extension to element", "format", format, "id", elem.ID)
 
                 config.ElementsMutex.Lock()
@@ -651,8 +651,8 @@ func (config *Config) AddExtension(elementID, format string) <span class="cov5" 
 }
 
 // GetElement gets an element by ID or returns an error if not found.
-func (config *Config) GetElement(elementID string) (*element.Element, error) <span class="cov1" title="2">{
-        if config.Exist(elementID) </span><span class="cov1" title="2">{
+func (config *Config) GetElement(elementID string) (*element.Element, error) <span class="cov3" title="7">{
+        if config.Exist(elementID) </span><span class="cov3" title="7">{
                 config.ElementsMutex.RLock()
                 r := config.Elements[elementID]
                 config.ElementsMutex.RUnlock()
@@ -664,80 +664,92 @@ func (config *Config) GetElement(elementID string) (*element.Element, error) <sp
 }
 
 // FindElem finds an element in the config by ID.
-func FindElem(config *Config, e string) (*element.Element, error) <span class="cov4" title="14">{
+func FindElem(config *Config, e string) (*element.Element, error) <span class="cov4" title="21">{
         res := config.Elements[e]
         if res.ID == "" || res.ID != e </span><span class="cov0" title="0">{
                 return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, e)
         }</span>
 
-        <span class="cov4" title="14">return &amp;res, nil</span>
+        <span class="cov4" title="21">return &amp;res, nil</span>
 }
 
 // GetFile gets the file name of an element.
-func GetFile(myElement *element.Element) string <span class="cov3" title="7">{
+func GetFile(myElement *element.Element) string <span class="cov4" title="13">{
         if myElement.File != "" </span><span class="cov0" title="0">{
                 return myElement.File
         }</span>
 
-        <span class="cov3" title="7">return myElement.ID</span>
+        <span class="cov4" title="13">return myElement.ID</span>
 }
 
 // Elem2preURL generates a pre-URL for an element.
-func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string) (string, error) <span class="cov3" title="7">{
+func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string) (string, error) <span class="cov4" title="13">{
         myElement, err := FindElem(config, elementPtr.ID)
         if err != nil </span><span class="cov0" title="0">{
                 return "", err
         }</span>
 
-        <span class="cov3" title="7">if myElement.HasParent() </span><span class="cov0" title="0">{
+        <span class="cov4" title="13">if myElement.HasParent() </span><span class="cov1" title="1">{
                 parent, err := FindElem(config, myElement.Parent)
                 if err != nil </span><span class="cov0" title="0">{
                         return "", err
                 }</span>
 
-                <span class="cov0" title="0">res, err := Elem2preURL(config, parent, baseURL...)
+                <span class="cov1" title="1">res, err := Elem2preURL(config, parent, baseURL...)
                 if err != nil </span><span class="cov0" title="0">{
                         return "", err
                 }</span>
 
-                <span class="cov0" title="0">res += "/" + GetFile(myElement)
+                <span class="cov1" title="1">res += "/" + GetFile(myElement)
 
                 return res, nil</span>
         }
 
-        <span class="cov3" title="7">switch len(baseURL) </span>{
-        case 1:<span class="cov0" title="0">
-                return config.BaseURL + "/" + strings.Join(baseURL, "/") + GetFile(myElement), nil</span>
-        case 2:<span class="cov3" title="7"> //nolint:mnd // This case handles exactly 2 base URL components
-                return strings.Join(baseURL, "/") + GetFile(myElement), nil</span>
-        default:<span class="cov0" title="0">
+        <span class="cov4" title="12">switch len(baseURL) </span>{
+        case 1:<span class="cov1" title="1">
+                prefix := config.BaseURL + "/" + strings.Join(baseURL, "/")
+                if !strings.HasSuffix(prefix, "/") </span><span class="cov1" title="1">{
+                        prefix += "/"
+                }</span>
+
+                <span class="cov1" title="1">return prefix + GetFile(myElement), nil</span>
+
+        case 2:<span class="cov3" title="9"> //nolint:mnd // This case handles exactly 2 base URL components
+                prefix := strings.Join(baseURL, "/")
+                if !strings.HasSuffix(prefix, "/") </span><span class="cov1" title="1">{
+                        prefix += "/"
+                }</span>
+
+                <span class="cov3" title="9">return prefix + GetFile(myElement), nil</span>
+
+        default:<span class="cov1" title="2">
                 return config.BaseURL + "/" + GetFile(myElement), nil</span>
         }
 }
 
 // Elem2URL generates a URL for an element with the given extension.
-func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, error) <span class="cov3" title="7">{
-        if !elementPtr.Formats.Contains(ext) </span><span class="cov0" title="0">{
+func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, error) <span class="cov3" title="9">{
+        if !elementPtr.Formats.Contains(ext) </span><span class="cov1" title="1">{
                 return "", fmt.Errorf("%w: %s", ErrFormatNotExist, ext)
         }</span>
 
-        <span class="cov3" title="7">format := config.Formats[ext]
+        <span class="cov3" title="8">format := config.Formats[ext]
         baseURL, basePath := format.BaseURL, format.BasePath
 
-        if baseURL == "" </span><span class="cov3" title="7">{
+        if baseURL == "" </span><span class="cov3" title="8">{
                 baseURL = config.BaseURL
         }</span>
 
-        <span class="cov3" title="7">res, err := Elem2preURL(config, elementPtr, baseURL, basePath)
+        <span class="cov3" title="8">res, err := Elem2preURL(config, elementPtr, baseURL, basePath)
         if err != nil </span><span class="cov0" title="0">{
                 return "", err
         }</span>
 
-        <span class="cov3" title="7">return res + format.Loc, nil</span>
+        <span class="cov3" title="8">return res + format.Loc, nil</span>
 }
 
 // LoadConfig loads the configuration from the specified file.
-func LoadConfig(configFile string) (*Config, error) <span class="cov3" title="9">{
+func LoadConfig(configFile string) (*Config, error) <span class="cov3" title="10">{
         filename, _ := filepath.Abs(configFile)
 
         fileContent, err := os.ReadFile(filename)
@@ -745,7 +757,7 @@ func LoadConfig(configFile string) (*Config, error) <span class="cov3" title="9"
                 return nil, fmt.Errorf("can't open %s: %w", filename, err)
         }</span>
 
-        <span class="cov3" title="8">myConfigPtr := &amp;Config{
+        <span class="cov3" title="9">myConfigPtr := &amp;Config{
                 Formats:       formats.FormatDefinitions{},
                 Elements:      element.MapElement{},
                 ElementsMutex: &amp;sync.RWMutex{},
@@ -756,21 +768,21 @@ func LoadConfig(configFile string) (*Config, error) <span class="cov3" title="9"
                 return nil, fmt.Errorf("can't unmarshal %s: %w", filename, err)
         }</span>
 
-        <span class="cov3" title="8">return myConfigPtr, nil</span>
+        <span class="cov3" title="9">return myConfigPtr, nil</span>
 }
 
 // IsHashable checks if a format is hashable.
-func IsHashable(config *Config, format string) (isHashable bool, hash, extension string) <span class="cov2" title="3">{
-        if _, ok := config.Formats[format]; ok </span><span class="cov2" title="3">{
-                for _, h := range hashes </span><span class="cov2" title="3">{
+func IsHashable(config *Config, format string) (isHashable bool, hash, extension string) <span class="cov3" title="5">{
+        if _, ok := config.Formats[format]; ok </span><span class="cov2" title="4">{
+                for _, h := range hashes </span><span class="cov2" title="4">{
                         hash := format + "." + h
-                        if _, ok := config.Formats[hash]; ok </span><span class="cov1" title="1">{
+                        if _, ok := config.Formats[hash]; ok </span><span class="cov1" title="2">{
                                 return true, hash, h
                         }</span>
                 }
         }
 
-        <span class="cov1" title="2">return false, "", ""</span>
+        <span class="cov2" title="3">return false, "", ""</span>
 }
 </pre>
 		
@@ -1111,19 +1123,19 @@ type Formats []string
 type MapElement map[string]Element
 
 // HasParent checks if the element has a parent.
-func (e *Element) HasParent() bool <span class="cov5" title="14">{
+func (e *Element) HasParent() bool <span class="cov5" title="20">{
         return e.Parent != ""
 }</span>
 
 // Contains checks if the format list contains a specific format.
-func (f *Formats) Contains(format string) bool <span class="cov9" title="161">{
-        for _, existingFormat := range *f </span><span class="cov10" title="228">{
-                if format == existingFormat </span><span class="cov8" title="70">{
+func (f *Formats) Contains(format string) bool <span class="cov9" title="167">{
+        for _, existingFormat := range *f </span><span class="cov10" title="234">{
+                if format == existingFormat </span><span class="cov8" title="72">{
                         return true
                 }</span>
         }
 
-        <span class="cov8" title="91">return false</span>
+        <span class="cov8" title="95">return false</span>
 }
 
 // CreateParentElement creates a parent element for the given element.
@@ -1526,7 +1538,7 @@ func ListAllRegions(configuration *config.Config, format string) error <span cla
         table := CreateTable(format)
         keys := GetSortedKeys(configuration)
 
-        for _, item := range keys </span><span class="cov8" title="6">{
+        for _, item := range keys </span><span class="cov8" title="7">{
                 err := table.Append(
                         item,
                         configuration.Elements[configuration.Elements[item].Parent].Name,
@@ -1538,7 +1550,7 @@ func ListAllRegions(configuration *config.Config, format string) error <span cla
                 }</span>
         }
 
-        <span class="cov6" title="4">if err := table.Render(); err != nil </span><span class="cov0" title="0">{
+        <span class="cov7" title="5">if err := table.Render(); err != nil </span><span class="cov0" title="0">{
                 return fmt.Errorf("unable to render table: %w", err)
         }</span>
 
@@ -2212,7 +2224,7 @@ func (o *OpenstreetmapFR) Collector() *colly.Collector <span class="cov3" title=
 }
 
 // GetParent returns the parent and the list of parents from a given href.
-func GetParent(href string) (parent string, parentList []string) <span class="cov9" title="29">{
+func GetParent(href string) (parent string, parentList []string) <span class="cov9" title="28">{
         // Remove the last / from the href to avoid empty string in the parent list
         href = strings.TrimSuffix(href, "/")
 
@@ -2543,7 +2555,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1022">{
         return s.StartURL
 }</span>
 
@@ -2564,7 +2576,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="27">{
-        for f, i := range *def </span><span class="cov8" title="231">{
+        for f, i := range *def </span><span class="cov8" title="233">{
                 if format == i.ID </span><span class="cov5" title="25">{
                         s.Config.AddExtension(id, f)
                 }</span>
@@ -2679,7 +2691,7 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="2
         shortNames := make([]string, 0, len(fullFormatNames))
 
         for _, fullName := range fullFormatNames </span><span class="cov7" title="44">{
-                for _, format := range miniFormats </span><span class="cov9" title="207">{
+                for _, format := range miniFormats </span><span class="cov10" title="228">{
                         if fullName == format.FullName </span><span class="cov7" title="39">{
                                 shortNames = append(shortNames, format.ShortName)
 
@@ -2688,7 +2700,7 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="2
                 }
         }
 
-        <span class="cov6" title="27">return strings.Join(shortNames, "")</span>
+        <span class="cov6" title="28">return strings.Join(shortNames, "")</span>
 }
 
 // GetFormats returns a slice of format strings based on the configuration map.
@@ -2715,8 +2727,8 @@ func GetFormats(config map[string]bool) []string <span class="cov5" title="13">{
 
         var formatList []string
 
-        for key, format := range options </span><span class="cov10" title="208">{
-                if enabled, ok := config[key]; ok &amp;&amp; enabled </span><span class="cov5" title="11">{
+        for key, format := range options </span><span class="cov9" title="208">{
+                if enabled, ok := config[key]; ok &amp;&amp; enabled </span><span class="cov4" title="11">{
                         formatList = append(formatList, format)
                 }</span>
         }
