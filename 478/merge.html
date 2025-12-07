@@ -85,9 +85,9 @@
 				
 				<option value="file14">github.com/julien-noblet/download-geofabrik/internal/scrapper/openstreetmapfr/openstreetmapfr.go (93.4%)</option>
 				
-				<option value="file15">github.com/julien-noblet/download-geofabrik/internal/scrapper/osmtoday/osmtoday.go (16.7%)</option>
+				<option value="file15">github.com/julien-noblet/download-geofabrik/internal/scrapper/osmtoday/osmtoday.go (80.0%)</option>
 				
-				<option value="file16">github.com/julien-noblet/download-geofabrik/internal/scrapper/scrapper.go (85.7%)</option>
+				<option value="file16">github.com/julien-noblet/download-geofabrik/internal/scrapper/scrapper.go (88.1%)</option>
 				
 				<option value="file17">github.com/julien-noblet/download-geofabrik/pkg/formats/formats.go (100.0%)</option>
 				
@@ -510,39 +510,39 @@ func (config *Config) Generate() ([]byte, error) <span class="cov2" title="3">{
 }
 
 // MergeElement merges a new element into the config.
-func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="1116">{
+func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="1129">{
         config.ElementsMutex.RLock()
         newElement, ok := config.Elements[elementPtr.ID]
         config.ElementsMutex.RUnlock()
 
-        if ok </span><span class="cov5" title="37">{
+        if ok </span><span class="cov5" title="44">{
                 if newElement.Parent != elementPtr.Parent </span><span class="cov0" title="0">{
                         return fmt.Errorf("%w: Parent mismatch %s != %s (%s)", ErrParentMismatch, newElement.Parent, elementPtr.Parent, elementPtr.ID)
                 }</span>
 
-                <span class="cov5" title="37">config.ElementsMutex.Lock()
+                <span class="cov5" title="44">config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
 
-                for _, f := range elementPtr.Formats </span><span class="cov6" title="93">{
-                        if !newElement.Formats.Contains(f) </span><span class="cov5" title="37">{
+                for _, f := range elementPtr.Formats </span><span class="cov6" title="104">{
+                        if !newElement.Formats.Contains(f) </span><span class="cov5" title="44">{
                                 newElement.Formats = append(newElement.Formats, f)
                         }</span>
                 }
 
-                <span class="cov5" title="37">newElement.Meta = len(newElement.Formats) == 0
+                <span class="cov5" title="44">newElement.Meta = len(newElement.Formats) == 0
                 config.Elements[elementPtr.ID] = newElement</span>
-        } else<span class="cov9" title="1079"> {
+        } else<span class="cov9" title="1085"> {
                 config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
 
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov10" title="1116">return nil</span>
+        <span class="cov10" title="1129">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(elementID string) bool <span class="cov6" title="70">{
+func (config *Config) Exist(elementID string) bool <span class="cov6" title="72">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
 
@@ -552,12 +552,12 @@ func (config *Config) Exist(elementID string) bool <span class="cov6" title="70"
 }</span>
 
 // AddExtension adds an extension to an element.
-func (config *Config) AddExtension(elementID, format string) <span class="cov5" title="39">{
+func (config *Config) AddExtension(elementID, format string) <span class="cov5" title="47">{
         config.ElementsMutex.RLock()
         elem := config.Elements[elementID]
         config.ElementsMutex.RUnlock()
 
-        if !elem.Formats.Contains(format) </span><span class="cov5" title="37">{
+        if !elem.Formats.Contains(format) </span><span class="cov5" title="45">{
                 slog.Info("Add extension to element", "format", format, "id", elem.ID)
 
                 config.ElementsMutex.Lock()
@@ -1039,14 +1039,14 @@ func (e *Element) HasParent() bool <span class="cov4" title="10">{
 }</span>
 
 // Contains checks if the format list contains a specific format.
-func (f *Formats) Contains(format string) bool <span class="cov9" title="135">{
-        for _, existingFormat := range *f </span><span class="cov10" title="211">{
-                if format == existingFormat </span><span class="cov7" title="61">{
+func (f *Formats) Contains(format string) bool <span class="cov9" title="154">{
+        for _, existingFormat := range *f </span><span class="cov10" title="223">{
+                if format == existingFormat </span><span class="cov7" title="65">{
                         return true
                 }</span>
         }
 
-        <span class="cov8" title="74">return false</span>
+        <span class="cov8" title="89">return false</span>
 }
 
 // CreateParentElement creates a parent element for the given element.
@@ -1699,14 +1699,14 @@ func (g *Geofabrik) Collector() *colly.Collector <span class="cov4" title="4">{
         myCollector.OnHTML("#subregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseSubregion(e, myCollector)
         }</span>)
-        <span class="cov4" title="4">myCollector.OnHTML("#specialsubregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+        <span class="cov4" title="3">myCollector.OnHTML("#specialsubregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseSubregion(e, myCollector)
         }</span>)
         <span class="cov4" title="4">myCollector.OnHTML("li", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseLi(e, myCollector)
         }</span>)
 
-        <span class="cov4" title="4">return myCollector</span>
+        <span class="cov4" title="3">return myCollector</span>
 }
 
 // ParseSubregion parses the subregion information from the HTML.
@@ -2148,7 +2148,7 @@ type Osmtoday struct {
 }
 
 // GetDefault returns the default configuration for Osmtoday scrapper.
-func GetDefault() *Osmtoday <span class="cov5" title="13">{
+func GetDefault() *Osmtoday <span class="cov5" title="14">{
         urlFilters := []*regexp.Regexp{
                 regexp.MustCompile(`https://osmtoday\.com/.+\.html$`),
                 regexp.MustCompile(`https://osmtoday\.com/$`),
@@ -2183,20 +2183,20 @@ func GetDefault() *Osmtoday <span class="cov5" title="13">{
 }</span>
 
 // Collector represents Osmtoday's scrapper.
-func (g *Osmtoday) Collector() *colly.Collector <span class="cov0" title="0">{
+func (g *Osmtoday) Collector() *colly.Collector <span class="cov1" title="1">{
         myCollector := g.Scrapper.Collector()
-        myCollector.OnHTML(".row", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+        myCollector.OnHTML(".row", func(e *colly.HTMLElement) </span><span class="cov1" title="1">{
                 g.ParseLi(e, myCollector)
         }</span>)
-        <span class="cov0" title="0">myCollector.OnHTML("table", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+        <span class="cov1" title="1">myCollector.OnHTML("table", func(e *colly.HTMLElement) </span><span class="cov2" title="3">{
                 g.ParseSubregion(e, myCollector)
         }</span>)
 
-        <span class="cov0" title="0">return myCollector</span>
+        <span class="cov1" title="1">return myCollector</span>
 }
 
 // Exceptions handles special cases for certain IDs.
-func (g *Osmtoday) Exceptions(myElement *element.Element) *element.Element <span class="cov5" title="13">{
+func (g *Osmtoday) Exceptions(myElement *element.Element) *element.Element <span class="cov5" title="18">{
         exceptions := []struct {
                 ID     string
                 Parent string
@@ -2215,19 +2215,19 @@ func (g *Osmtoday) Exceptions(myElement *element.Element) *element.Element <span
                 {"georgia", "us"},
         }
 
-        for _, exception := range exceptions </span><span class="cov10" title="152">{
+        for _, exception := range exceptions </span><span class="cov10" title="216">{
                 if myElement.ID == exception.ID &amp;&amp; myElement.Parent == exception.Parent </span><span class="cov5" title="12">{
                         myElement.ID = fmt.Sprintf("%s-%s", myElement.ID, myElement.Parent)
                 }</span>
         }
 
-        <span class="cov5" title="13">return myElement</span>
+        <span class="cov5" title="18">return myElement</span>
 }
 
 // ParseSubregion parses the subregion information from the HTML.
-func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Collector) <span class="cov0" title="0">{
-        e.ForEach("td", func(_ int, el *colly.HTMLElement) </span><span class="cov0" title="0">{
-                el.ForEach("a", func(_ int, sub *colly.HTMLElement) </span><span class="cov0" title="0">{
+func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Collector) <span class="cov2" title="3">{
+        e.ForEach("td", func(_ int, el *colly.HTMLElement) </span><span class="cov2" title="3">{
+                el.ForEach("a", func(_ int, sub *colly.HTMLElement) </span><span class="cov3" title="5">{
                         href := sub.Request.AbsoluteURL(sub.Attr("href"))
 
                         myID, extension := scrapper.FileExt(href)
@@ -2237,9 +2237,9 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
                                 return
                         }</span>
 
-                        <span class="cov0" title="0">if extension == "html" </span><span class="cov0" title="0">{
+                        <span class="cov3" title="5">if extension == "html" </span><span class="cov2" title="2">{
                                 g.handleHTMLExtension(sub, href, myID, myCollector)
-                        }</span> else<span class="cov0" title="0"> {
+                        }</span> else<span class="cov2" title="3"> {
                                 parent, _ := scrapper.GetParent(href)
 
                                 myElement := element.Element{
@@ -2250,14 +2250,18 @@ func (g *Osmtoday) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Colle
                                 }
                                 myElement = *g.Exceptions(&amp;myElement)
 
-                                g.ParseFormat(myElement.ID, extension)
-                        }</span>
+                                if err := g.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+                                        slog.Error("Can't merge", "name", myElement.Name, "error", err)
+                                }</span>
+
+                                <span class="cov2" title="3">g.ParseFormat(myElement.ID, extension)</span>
+                        }
                 })
         })
 }
 
 // handleHTMLExtension handles the HTML extension case.
-func (g *Osmtoday) handleHTMLExtension(sub *colly.HTMLElement, href, myID string, myCollector *colly.Collector) <span class="cov0" title="0">{
+func (g *Osmtoday) handleHTMLExtension(sub *colly.HTMLElement, href, myID string, myCollector *colly.Collector) <span class="cov2" title="2">{
         parent, parentPath := scrapper.GetParent(href)
 
         myElement := element.Element{
@@ -2280,11 +2284,11 @@ func (g *Osmtoday) handleHTMLExtension(sub *colly.HTMLElement, href, myID string
                 }
         }
 
-        <span class="cov0" title="0">if err := g.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+        <span class="cov2" title="2">if err := g.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
                 slog.Error("Can't merge", "name", myElement.Name, "error", err)
         }</span>
 
-        <span class="cov0" title="0">slog.Debug("Add", "href", href)
+        <span class="cov2" title="2">slog.Debug("Add", "href", href)
 
         if err := myCollector.Visit(href); err != nil &amp;&amp; !errors.Is(err, &amp;colly.AlreadyVisitedError{}) </span><span class="cov0" title="0">{
                 slog.Error("Can't get url", "error", err)
@@ -2292,17 +2296,17 @@ func (g *Osmtoday) handleHTMLExtension(sub *colly.HTMLElement, href, myID string
 }
 
 // ParseFormat adds extensions to the ID.
-func (g *Osmtoday) ParseFormat(id, format string) <span class="cov0" title="0">{
+func (g *Osmtoday) ParseFormat(id, format string) <span class="cov3" title="4">{
         g.ParseFormatService(id, format, &amp;g.FormatDefinition)
 
-        if format == formats.FormatOsmPbf </span><span class="cov0" title="0">{
+        if format == formats.FormatOsmPbf </span><span class="cov3" title="4">{
                 g.Config.AddExtension(id, "osm.pbf.md5")
         }</span>
 }
 
 // ParseLi parses the list items from the HTML.
-func (g *Osmtoday) ParseLi(e *colly.HTMLElement, _ *colly.Collector) <span class="cov0" title="0">{
-        e.ForEach("a", func(_ int, element *colly.HTMLElement) </span><span class="cov0" title="0">{
+func (g *Osmtoday) ParseLi(e *colly.HTMLElement, _ *colly.Collector) <span class="cov1" title="1">{
+        e.ForEach("a", func(_ int, element *colly.HTMLElement) </span><span class="cov1" title="1">{
                 _, format := scrapper.FileExt(element.Attr("href"))
                 myID, _ := scrapper.FileExt(element.Request.URL.String())
 
@@ -2383,7 +2387,7 @@ func NewScrapper(baseURL, startURL string, allowedDomains []string) *Scrapper <s
 func (s *Scrapper) GetConfig() *config.Config <span class="cov5" title="25">{
         s.mu.RLock()
 
-        if s.Config != nil </span><span class="cov4" title="11">{
+        if s.Config != nil </span><span class="cov4" title="12">{
                 defer s.mu.RUnlock()
 
                 return s.Config
@@ -2410,16 +2414,16 @@ func (s *Scrapper) initializeConfig() *config.Config <span class="cov4" title="1
 }</span>
 
 // Limit defines LimitRules.
-func (s *Scrapper) Limit() *colly.LimitRule <span class="cov4" title="12">{
-        if s.DomainGlob == "" </span><span class="cov3" title="7">{
+func (s *Scrapper) Limit() *colly.LimitRule <span class="cov4" title="13">{
+        if s.DomainGlob == "" </span><span class="cov3" title="8">{
                 s.DomainGlob = "*"
         }</span>
 
-        <span class="cov4" title="12">if s.Parallelism &lt;= 1 </span><span class="cov1" title="2">{
+        <span class="cov4" title="13">if s.Parallelism &lt;= 1 </span><span class="cov2" title="3">{
                 s.Parallelism = 1
         }</span>
 
-        <span class="cov4" title="12">return &amp;colly.LimitRule{
+        <span class="cov4" title="13">return &amp;colly.LimitRule{
                 DomainGlob:  s.DomainGlob,
                 Parallelism: s.Parallelism,
                 RandomDelay: s.RandomDelay,
@@ -2427,7 +2431,7 @@ func (s *Scrapper) Limit() *colly.LimitRule <span class="cov4" title="12">{
 }
 
 // Collector initializes a *colly.Collector.
-func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov3" title="9">{
+func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov3" title="10">{
         myCollector := colly.NewCollector(
                 colly.AllowedDomains(s.AllowedDomains...),
                 colly.URLFilters(s.URLFilters...),
@@ -2455,7 +2459,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
                 slog.Error("Can't update limit", "error", err)
         }</span>
 
-        <span class="cov3" title="9">myCollector.OnError(func(r *colly.Response, err error) </span><span class="cov0" title="0">{
+        <span class="cov3" title="10">myCollector.OnError(func(r *colly.Response, err error) </span><span class="cov0" title="0">{
                 if !errors.Is(err, colly.ErrForbiddenURL) &amp;&amp; !errors.Is(err, colly.ErrForbiddenDomain) &amp;&amp; err.Error() != "Forbidden" </span><span class="cov0" title="0">{
                         slog.Debug("Request failed", "url", r.Request.URL, "error", err)
                 }</span> else<span class="cov0" title="0"> {
@@ -2463,7 +2467,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
                 }</span>
         })
 
-        <span class="cov3" title="9">return myCollector</span>
+        <span class="cov3" title="10">return myCollector</span>
 }
 
 // GetStartURL returns StartURL.
@@ -2482,21 +2486,21 @@ func (s *Scrapper) ParseFormat(id, format string) <span class="cov5" title="22">
 }</span>
 
 // ParseFormatService adds Extensions to ID.
-func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefinitions) <span class="cov0" title="0">{
+func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefinitions) <span class="cov2" title="4">{
         s.AddExtension(id, format, def)
 }</span>
 
 // AddExtension adds an extension to the configuration.
-func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="22">{
-        for f, i := range *def </span><span class="cov7" title="216">{
-                if format == i.ID </span><span class="cov4" title="20">{
+func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="26">{
+        for f, i := range *def </span><span class="cov8" title="232">{
+                if format == i.ID </span><span class="cov5" title="24">{
                         s.Config.AddExtension(id, f)
                 }</span>
         }
 }
 
 // FileExt returns filename and extension.
-func FileExt(url string) (filename, extension string) <span class="cov5" title="31">{
+func FileExt(url string) (filename, extension string) <span class="cov5" title="38">{
         urls := strings.Split(url, "/")
         f := strings.Split(urls[len(urls)-1], ".")
 
@@ -2504,13 +2508,13 @@ func FileExt(url string) (filename, extension string) <span class="cov5" title="
 }</span>
 
 // GetParent returns filename and path.
-func GetParent(url string) (filename, path string) <span class="cov5" title="28">{
+func GetParent(url string) (filename, path string) <span class="cov5" title="33">{
         r := strings.Split(url, "/")
-        if len(r) &lt; minParentListLength </span><span class="cov3" title="10">{
+        if len(r) &lt; minParentListLength </span><span class="cov4" title="12">{
                 return "", strings.Join(r[:len(r)-1], "/")
         }</span>
 
-        <span class="cov4" title="18">return r[len(r)-2], strings.Join(r[:len(r)-1], "/")</span>
+        <span class="cov4" title="21">return r[len(r)-2], strings.Join(r[:len(r)-1], "/")</span>
 }
 </pre>
 		
