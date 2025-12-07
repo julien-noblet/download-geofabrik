@@ -1,16 +1,57 @@
-package generator_test
+package generator //nolint:testpackage // testing internal functions
 
 import (
+	"fmt"
+	"net/http"
+	"net/http/httptest"
 	"os"
+	"path/filepath"
 	"reflect"
+	"sync"
 	"testing"
 
+	"github.com/gocolly/colly/v2"
 	"github.com/julien-noblet/download-geofabrik/internal/config"
 	"github.com/julien-noblet/download-geofabrik/internal/element"
-	"github.com/julien-noblet/download-geofabrik/internal/generator"
+	"github.com/julien-noblet/download-geofabrik/internal/generator/importer/geofabrik"
 	"github.com/julien-noblet/download-geofabrik/pkg/formats"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	yaml "gopkg.in/yaml.v3"
 )
+
+// MockScrapper implements scrapper.IScrapper.
+type MockScrapper struct {
+	BaseURL  string
+	StartURL string
+	PB       int
+}
+
+func (m *MockScrapper) GetConfig() *config.Config {
+	return &config.Config{
+		Elements:      element.MapElement{},
+		ElementsMutex: &sync.RWMutex{},
+	}
+}
+
+func (m *MockScrapper) Collector() *colly.Collector {
+	// Return a collector that visits mock URL?
+	// We need it to NOT hit internet.
+	return colly.NewCollector()
+}
+
+func (m *MockScrapper) Limit() *colly.LimitRule {
+	return &colly.LimitRule{}
+}
+
+func (m *MockScrapper) GetPB() int {
+	return m.PB
+}
+
+func (m *MockScrapper) GetStartURL() string {
+	return m.StartURL
+}
+func (m *MockScrapper) ParseFormat(_, _ string) {}
 
 func sampleAfricaElementPtr() *element.Element {
 	return &element.Element{
@@ -184,7 +225,7 @@ func TestGenerate(t *testing.T) {
 		{
 			name: "run",
 			args: args{
-				service:    generator.ServiceGeofabrik,
+				service:    ServiceGeofabrik,
 				progress:   false,
 				configfile: "/tmp/gen_test.yml",
 			},
@@ -195,7 +236,7 @@ func TestGenerate(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			if err := generator.Generate(tt.args.service, tt.args.progress, tt.args.configfile); err != nil {
+			if err := Generate(tt.args.service, tt.args.progress, tt.args.configfile); err != nil {
 				t.Errorf("Generate() error = %v", err)
 			}
 		})
@@ -219,7 +260,7 @@ func Test_write(t *testing.T) {
 
 			c, _ := config.LoadConfig(thisTest.input)
 
-			err := generator.Write(c, thisTest.output)
+			err := Write(c, thisTest.output)
 			if err != nil {
 				t.Errorf("write() error = %v", err)
 			}
@@ -349,11 +390,156 @@ func TestCleanup(t *testing.T) {
 			t.Parallel()
 
 			af := myTest.args.c.Elements["africa"]
-			generator.Cleanup(myTest.args.c)
+			Cleanup(myTest.args.c)
 			// compare af.Formats != tt.want
 			if !reflect.DeepEqual(af.Formats, myTest.want) {
 				t.Errorf("Cleanup() = %v, want %v", af.Formats, myTest.want)
 			}
 		})
 	}
+}
+
+func TestPerformGenerate_WithMock(t *testing.T) {
+	// Mock server
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		fmt.Fprintln(w, `{
+    "features": [
+        {
+            "properties": {
+                "id": "test-region",
+                "name": "Test Region",
+                "urls": {
+                    "pbf": "https://example.com/test-region.osm.pbf"
+                }
+            }
+        }
+    ]
+}`)
+	}))
+	defer ts.Close()
+
+	// Override URL
+	oldURL := geofabrik.GeofabrikIndexURL
+	geofabrik.GeofabrikIndexURL = ts.URL
+
+	defer func() { geofabrik.GeofabrikIndexURL = oldURL }()
+
+	// Temp config file
+	tmpDir := t.TempDir()
+	configFile := filepath.Join(tmpDir, "test_config.yml")
+
+	// Run Generate
+	err := PerformGenerate(ServiceGeofabrik, false, configFile)
+	require.NoError(t, err)
+
+	// Verify file exists
+	_, err = os.Stat(configFile)
+	require.NoError(t, err)
+
+	// Verify content (basic check)
+	content, err := os.ReadFile(configFile)
+	require.NoError(t, err)
+	assert.Contains(t, string(content), "test-region")
+	assert.Contains(t, string(content), "osm.pbf")
+}
+
+func TestHandleProgress(_ *testing.T) {
+	// Mock scrapper with mock server
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		fmt.Fprintln(w, "OK")
+	}))
+	defer ts.Close()
+
+	ms := &MockScrapper{
+		StartURL: ts.URL,
+		PB:       10,
+	}
+
+	// Capture stdout? No need, just ensure no panic and coverage.
+	handleProgress(ms)
+}
+
+func TestVisitAndWait(_ *testing.T) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		fmt.Fprintln(w, "OK")
+	}))
+	defer ts.Close()
+
+	c := colly.NewCollector()
+	visitAndWait(c, ts.URL)
+}
+
+func TestPerformGenerate_Unknown(t *testing.T) {
+	err := PerformGenerate("unknown", false, "")
+	require.Error(t, err)
+	assert.ErrorIs(t, err, ErrUnknownService)
+}
+
+func TestPerformGenerate_Geofabrik_Error(t *testing.T) {
+	// Mock server returns 500
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.WriteHeader(http.StatusInternalServerError)
+	}))
+	defer ts.Close()
+
+	oldURL := geofabrik.GeofabrikIndexURL
+	geofabrik.GeofabrikIndexURL = ts.URL
+
+	defer func() { geofabrik.GeofabrikIndexURL = oldURL }()
+
+	err := PerformGenerate(ServiceGeofabrik, false, "dummy")
+	require.Error(t, err)
+	// Check error message contains "failed to get index"
+	assert.Contains(t, err.Error(), "failed to get index")
+}
+
+func TestPerformGenerate_Geofabrik_InvalidJSON(t *testing.T) {
+	// Mock server returns invalid JSON
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		fmt.Fprintln(w, `invalid json`)
+	}))
+	defer ts.Close()
+
+	oldURL := geofabrik.GeofabrikIndexURL
+	geofabrik.GeofabrikIndexURL = ts.URL
+
+	defer func() { geofabrik.GeofabrikIndexURL = oldURL }()
+
+	err := PerformGenerate(ServiceGeofabrik, false, "dummy")
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "failed to get index") // GetIndex fails at unmarshal -> "error while unmarshalling" -> wrapped?
+	// In geofabrik.go: return nil, fmt.Errorf(ErrUnmarshallingBody, err)
+	// In generator.go: return fmt.Errorf("failed to get index: %w", err) (wait, GetIndex returns error)
+	// generator.go: err := geofabrik.GetIndex... if err != nil ...
+}
+
+func TestPerformGenerate_Geofabrik_WriteError(t *testing.T) {
+	// Mock server
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		fmt.Fprintln(w, `{
+    "features": []
+}`)
+	}))
+	defer ts.Close()
+
+	oldURL := geofabrik.GeofabrikIndexURL
+	geofabrik.GeofabrikIndexURL = ts.URL
+
+	defer func() { geofabrik.GeofabrikIndexURL = oldURL }()
+
+	// Invalid config file path (directory)
+	tmpDir := t.TempDir()
+
+	err := PerformGenerate(ServiceGeofabrik, false, tmpDir)
+	require.Error(t, err)
+	// Write fails because tmpDir is a directory or use /dev/null/fail?
+	// os.WriteFile on directory fails with "is a directory" on Linux.
+	// Or use a non-existent directory structure /non/existent/path.
+}
+
+func TestVisitAndWait_Error(_ *testing.T) {
+	c := colly.NewCollector()
+	// Invalid URL causes Visit to return error immediately
+	// e.g. schemes must be present
+	visitAndWait(c, ":/invalid-url")
 }

@@ -11,6 +11,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/internal/scrapper/osmtoday"
 	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestOsmtoday_Exceptions(t *testing.T) {
@@ -256,6 +257,7 @@ func TestOsmtoday_Collector(t *testing.T) {
 				</body>
 				</html>
 			`)
+
 		case "/europe.html":
 			fmt.Fprintln(w, `
 				<html>
@@ -269,6 +271,7 @@ func TestOsmtoday_Collector(t *testing.T) {
 				</body>
 				</html>
 			`)
+
 		case "/europe/france.html":
 			fmt.Fprintln(w, `
 				<html>
@@ -281,6 +284,7 @@ func TestOsmtoday_Collector(t *testing.T) {
 				</body>
 				</html>
 			`)
+
 		default:
 			http.NotFound(w, r)
 		}
@@ -298,20 +302,23 @@ func TestOsmtoday_Collector(t *testing.T) {
 
 	// Visit the start URL
 	err := c.Visit(g.StartURL)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	c.Wait()
 
 	// Helper to get element by key safely
 	getElement := func(key string) (element.Element, bool) {
 		g.Config.ElementsMutex.RLock()
 		defer g.Config.ElementsMutex.RUnlock() // Defer unlock
+
 		el, ok := g.Config.Elements[key]
+
 		return el, ok
 	}
 
 	// 1. Check Planet PBF (Attached to root element "")
 	rootEl, found := getElement("")
 	assert.True(t, found, "root element should exist")
+
 	if found {
 		assert.Contains(t, rootEl.Formats, formats.FormatOsmPbf)
 	}
@@ -323,6 +330,7 @@ func TestOsmtoday_Collector(t *testing.T) {
 	// 3. Check traversal to France
 	france, found := getElement("france")
 	assert.True(t, found, "france element should exist")
+
 	if found {
 		assert.Equal(t, "france", france.ID)
 		assert.Equal(t, "europe", france.Parent)
@@ -332,6 +340,7 @@ func TestOsmtoday_Collector(t *testing.T) {
 	// ID "ile-de-france"
 	idf, found := getElement("ile-de-france")
 	assert.True(t, found, "ile-de-france element should exist")
+
 	if found {
 		// Parent should be "france"
 		assert.Equal(t, "france", idf.Parent)

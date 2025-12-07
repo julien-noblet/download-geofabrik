@@ -17,16 +17,16 @@ import (
 	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 )
 
-const (
+var (
 	GeofabrikIndexURL = `https://download.geofabrik.de/index-v1-nogeom.json`
 	GeofabrikBaseURL  = `https://download.geofabrik.de`
 
-	ErrDownload          = "error while downloading %v, server returned code %d\nPlease use '%s generate' to re-create your yml file %w"
-	ErrCreatingRequest   = "error while creating request for %s: %w"
-	ErrDownloading       = "error while downloading %s: %w"
-	ErrReadingResponse   = "error while reading response body: %w"
-	ErrUnmarshallingBody = "error while unmarshalling response body: %w"
-	ErrMergingElement    = "error while merging element %v: %w"
+	// ErrDownload          = "error while downloading %v, server returned code %d\nPlease use '%s generate' to re-create your yml file %w"
+	// ErrCreatingRequest   = "error while creating request for %s: %w"
+	// ErrDownloading       = "error while downloading %s: %w"
+	// ErrReadingResponse   = "error while reading response body: %w"
+	// ErrUnmarshallingBody = "error while unmarshalling response body: %w"
+	// ErrMergingElement    = "error while merging element %v: %w".
 
 	TimeoutDuration       = 60 * time.Second
 	KeepAliveDuration     = 30 * time.Second
@@ -93,12 +93,12 @@ func GetIndex(url string) (*Index, error) {
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, http.NoBody)
 	if err != nil {
-		return nil, fmt.Errorf(ErrCreatingRequest, url, err)
+		return nil, fmt.Errorf("error while creating request for %s: %w", url, err)
 	}
 
 	response, err := HTTPClient.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf(ErrDownloading, url, err)
+		return nil, fmt.Errorf("error while downloading %s: %w", url, err)
 	}
 
 	defer func() {
@@ -113,12 +113,12 @@ func GetIndex(url string) (*Index, error) {
 
 	bodyBytes, err := io.ReadAll(response.Body)
 	if err != nil {
-		return nil, fmt.Errorf(ErrReadingResponse, err)
+		return nil, fmt.Errorf("error while reading response body: %w", err)
 	}
 
 	var geofabrikIndex Index
 	if err := json.Unmarshal(bodyBytes, &geofabrikIndex); err != nil {
-		return nil, fmt.Errorf(ErrUnmarshallingBody, err)
+		return nil, fmt.Errorf("error while unmarshalling response body: %w", err)
 	}
 
 	return &geofabrikIndex, nil
@@ -128,9 +128,12 @@ func GetIndex(url string) (*Index, error) {
 func handleHTTPError(response *http.Response, url string) error {
 	switch response.StatusCode {
 	case http.StatusNotFound:
-		return fmt.Errorf(ErrDownload, url, response.StatusCode, os.Args[0], http.ErrNoLocation)
+		return fmt.Errorf("error while downloading %s, server returned code %d\n"+
+			"Please use '%s generate' to re-create your yml file %w", url, response.StatusCode, os.Args[0], http.ErrNoLocation)
+
 	default:
-		return fmt.Errorf(ErrDownload, url, response.StatusCode, os.Args[0], http.ErrNotSupported)
+		return fmt.Errorf("error while downloading %s, server returned code %d\n"+
+			"Please use '%s generate' to re-create your yml file %w", url, response.StatusCode, os.Args[0], http.ErrNotSupported)
 	}
 }
 
@@ -165,7 +168,7 @@ func processFeature(cfg *config.Config, feature *IndexElement) error {
 	elem.Formats = append(elem.Formats, getFormats(feature.ElementProperties.Urls)...)
 
 	if err := cfg.MergeElement(&elem); err != nil {
-		return fmt.Errorf(ErrMergingElement, elem, err)
+		return fmt.Errorf("error while merging element %v: %w", elem, err)
 	}
 
 	return nil

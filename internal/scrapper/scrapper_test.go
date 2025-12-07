@@ -638,3 +638,69 @@ func TestScrapper_GetConfig(t *testing.T) {
 		})
 	}
 }
+
+func TestNewScrapper(t *testing.T) {
+	t.Parallel()
+
+	baseURL := "http://example.com"
+	startURL := "http://example.com/start"
+	allowedDomains := []string{"example.com"}
+
+	s := scrapper.NewScrapper(baseURL, startURL, allowedDomains)
+
+	if s.BaseURL != baseURL {
+		t.Errorf("NewScrapper().BaseURL = %v, want %v", s.BaseURL, baseURL)
+	}
+
+	if s.StartURL != startURL {
+		t.Errorf("NewScrapper().StartURL = %v, want %v", s.StartURL, startURL)
+	}
+
+	if !reflect.DeepEqual(s.AllowedDomains, allowedDomains) {
+		t.Errorf("NewScrapper().AllowedDomains = %v, want %v", s.AllowedDomains, allowedDomains)
+	}
+	// Check default values
+	if s.RandomDelay == 0 {
+		t.Error("NewScrapper().RandomDelay should not be 0")
+	}
+
+	if s.Timeout == 0 {
+		t.Error("NewScrapper().Timeout should not be 0")
+	}
+}
+
+func TestScrapper_Collector(t *testing.T) {
+	t.Parallel()
+
+	s := scrapper.NewScrapper("http://example.com", "http://example.com", []string{"example.com"})
+	c := s.Collector()
+
+	if c == nil {
+		t.Error("Collector() returned nil")
+	}
+	// Verify that Config is initialized
+	if s.Config == nil {
+		t.Error("Collector() did not initialize Config")
+	}
+}
+
+func TestScrapper_ParseFormatService(t *testing.T) {
+	t.Parallel()
+
+	c := &config.Config{
+		Elements:      element.MapElement{"test": element.Element{ID: "test"}},
+		ElementsMutex: &sync.RWMutex{},
+	}
+	s := &scrapper.Scrapper{Config: c}
+
+	defs := formats.FormatDefinitions{
+		"pbf": formats.Format{ID: "pbf", Loc: ".pbf"},
+	}
+
+	s.ParseFormatService("test", "pbf", &defs)
+
+	el, _ := c.GetElement("test")
+	if !el.Formats.Contains("pbf") {
+		t.Errorf("ParseFormatService did not add format")
+	}
+}
