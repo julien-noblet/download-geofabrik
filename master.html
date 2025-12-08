@@ -2224,7 +2224,7 @@ func (o *OpenstreetmapFR) Collector() *colly.Collector <span class="cov3" title=
 }
 
 // GetParent returns the parent and the list of parents from a given href.
-func GetParent(href string) (parent string, parentList []string) <span class="cov9" title="28">{
+func GetParent(href string) (parent string, parentList []string) <span class="cov9" title="29">{
         // Remove the last / from the href to avoid empty string in the parent list
         href = strings.TrimSuffix(href, "/")
 
@@ -2555,7 +2555,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1022">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
         return s.StartURL
 }</span>
 
