@@ -2555,7 +2555,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1022">{
         return s.StartURL
 }</span>
 
@@ -2576,7 +2576,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="27">{
-        for f, i := range *def </span><span class="cov8" title="233">{
+        for f, i := range *def </span><span class="cov8" title="232">{
                 if format == i.ID </span><span class="cov5" title="25">{
                         s.Config.AddExtension(id, f)
                 }</span>
@@ -2691,7 +2691,7 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="2
         shortNames := make([]string, 0, len(fullFormatNames))
 
         for _, fullName := range fullFormatNames </span><span class="cov7" title="44">{
-                for _, format := range miniFormats </span><span class="cov10" title="228">{
+                for _, format := range miniFormats </span><span class="cov10" title="226">{
                         if fullName == format.FullName </span><span class="cov7" title="39">{
                                 shortNames = append(shortNames, format.ShortName)
 
