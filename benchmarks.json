@@ -1,4 +1,5 @@
 [
+  {"Version":"7affed4acb4ef031ac7578fe7e587a41f530c9a2","Date":1768540110,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"048b3d631e43c02bc278e47606193ee7fcb9edb7","Date":1768514090,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"36a8d8a73e14167dbd57344537728bdde1a507e6","Date":1768513963,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"c49b85840b515c79c5d842e346123bfe11c4221f","Date":1765782193,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/clipperhouse/displaywidth-0.6.2"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"ba2147221056b760587735d60b8938e2e7156b07","Date":1765106695,"Tags":["ref=refs/heads/rework"],"Suites":[]},
   {"Version":"bf07f53e4648a519ef7b99fb081749dce69627c6","Date":1765103927,"Tags":["ref=refs/heads/copilot/fix-lint-issues-golangci-lint"],"Suites":[]},
   {"Version":"303c2793127af8ff5935c2ec10bb33be2d616e16","Date":1765101937,"Tags":["ref=refs/heads/rework"],"Suites":[]},
-  {"Version":"9e9109079b3902476789d82dc54f6ba8e5851b9f","Date":1765101843,"Tags":["ref=refs/heads/copilot/sub-pr-478"],"Suites":[]},
-  {"Version":"88f5ab2a93fd8588d297d77e0d174ea06dd03716","Date":1765101020,"Tags":["ref=refs/heads/rework"],"Suites":[]}
+  {"Version":"9e9109079b3902476789d82dc54f6ba8e5851b9f","Date":1765101843,"Tags":["ref=refs/heads/copilot/sub-pr-478"],"Suites":[]}
 ]
