@@ -1,4 +1,5 @@
 [
+  {"Version":"cb4206a99d18f9a77267d29ac04dd39dba7a9fa7","Date":1768597630,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"bc7b1226029434dff8df7c354d1765115274a21b","Date":1768597549,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"bb8983297cbb5692d3a3f4f8bffeb928f450e7a8","Date":1768597467,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"7affed4acb4ef031ac7578fe7e587a41f530c9a2","Date":1768540110,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"10d312c7333fc94cdff994803397e7fe4471ee8a","Date":1765116617,"Tags":["ref=refs/heads/rework"],"Suites":[]},
   {"Version":"f6e9d0851721fc3be3173a5590bcee601d8eded6","Date":1765108451,"Tags":["ref=refs/heads/rework"],"Suites":[]},
   {"Version":"10a07c23bd746fb251bfc1bf9fc94b44c06c85c4","Date":1765107401,"Tags":["ref=refs/heads/rework"],"Suites":[]},
-  {"Version":"ba2147221056b760587735d60b8938e2e7156b07","Date":1765106695,"Tags":["ref=refs/heads/rework"],"Suites":[]},
-  {"Version":"bf07f53e4648a519ef7b99fb081749dce69627c6","Date":1765103927,"Tags":["ref=refs/heads/copilot/fix-lint-issues-golangci-lint"],"Suites":[]}
+  {"Version":"ba2147221056b760587735d60b8938e2e7156b07","Date":1765106695,"Tags":["ref=refs/heads/rework"],"Suites":[]}
 ]
