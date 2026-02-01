@@ -2965,7 +2965,7 @@ elements:
     kharkiv_oblast:
         id: kharkiv_oblast
         name: Kharkov region
-        parent: southern_federal_district
+        parent: ukraine
         files:
             - geojson
             - poly
@@ -7067,7 +7067,7 @@ elements:
     zaporizhia_oblast:
         id: zaporizhia_oblast
         name: Zaporozhye region
-        parent: southern_federal_district
+        parent: ukraine
         files:
             - geojson
             - poly
