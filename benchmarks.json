@@ -1,4 +1,5 @@
 [
+  {"Version":"11cf8f506d6387173f65fb0700d3f5e9dd16ca62","Date":1770787045,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"4c7eca078dec34a8383f2e5c5ae25e8816f9fef0","Date":1770786961,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"6381e0d5f2b8c96460ea0e1352fd105378ef48cd","Date":1770756275,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"c812403642bb08c20cab72176d0bce434c455d97","Date":1770269272,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"b1bc37dc09cc0039bd08486a1cc4dd502df50148","Date":1765121824,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"9b5069eea684a80531a7c001854c7288e4514bd5","Date":1765121634,"Tags":["ref=refs/heads/rework"],"Suites":[]},
   {"Version":"aea5fd444e4e85a19d12e376c06e90b04c031919","Date":1765121130,"Tags":["ref=refs/heads/rework"],"Suites":[]},
-  {"Version":"b73073abcc5213b33c640cccaabd6043a602d141","Date":1765117004,"Tags":["ref=refs/tags/v2.7.0-rc3"],"Suites":[]},
-  {"Version":"b73073abcc5213b33c640cccaabd6043a602d141","Date":1765116728,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"b73073abcc5213b33c640cccaabd6043a602d141","Date":1765117004,"Tags":["ref=refs/tags/v2.7.0-rc3"],"Suites":[]}
 ]
