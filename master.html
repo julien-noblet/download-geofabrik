@@ -1822,7 +1822,7 @@ func (g *Geo2day) Exceptions(myElement *element.Element) *element.Element <span 
                 {"georgia", "us"},
         }
 
-        for _, exception := range exceptions </span><span class="cov10" title="216">{
+        for _, exception := range exceptions </span><span class="cov10" title="213">{
                 if myElement.ID == exception.ID &amp;&amp; myElement.Parent == exception.Parent </span><span class="cov5" title="12">{
                         myElement.ID = fmt.Sprintf("%s-%s", myElement.ID, myElement.Parent)
                 }</span>
@@ -2691,8 +2691,8 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="2
         shortNames := make([]string, 0, len(fullFormatNames))
 
         for _, fullName := range fullFormatNames </span><span class="cov7" title="44">{
-                for _, format := range miniFormats </span><span class="cov10" title="224">{
-                        if fullName == format.FullName </span><span class="cov7" title="37">{
+                for _, format := range miniFormats </span><span class="cov10" title="228">{
+                        if fullName == format.FullName </span><span class="cov7" title="39">{
                                 shortNames = append(shortNames, format.ShortName)
 
                                 break</span>
@@ -2700,7 +2700,7 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="2
                 }
         }
 
-        <span class="cov6" title="27">return strings.Join(shortNames, "")</span>
+        <span class="cov6" title="28">return strings.Join(shortNames, "")</span>
 }
 
 // GetFormats returns a slice of format strings based on the configuration map.
