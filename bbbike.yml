@@ -1093,6 +1093,23 @@ elements:
             - osm.pbf
             - poly
             - shp.zip
+    Damaskus:
+        id: Damaskus
+        file: Damaskus/Damaskus
+        name: Damaskus
+        files:
+            - csv
+            - geojson
+            - mbtiles
+            - osm.garmin-onroad-latin1.zip
+            - osm.garmin-ontrail-latin1.zip
+            - osm.garmin-opentopo-latin1.zip
+            - osm.garmin-osm.zip
+            - osm.gz
+            - osm.mapsforge-osm.zip
+            - osm.pbf
+            - poly
+            - shp.zip
     Darmstadt:
         id: Darmstadt
         file: Darmstadt/Darmstadt
