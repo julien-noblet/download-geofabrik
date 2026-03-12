@@ -1,4 +1,5 @@
 [
+  {"Version":"f8b7fab43a6913be334dfeb5ec5bf2ed2ab19485","Date":1773325642,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"6722faa0038ff698a29e0ecbbd698f48998dffd5","Date":1773324905,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"1b7387b206e20562a4bdcf3f72dbd1f5131c5969","Date":1773033889,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"7d219634bf89b6a56ca0e5e1b5d71961c448d9ac","Date":1772968112,"Tags":["ref=refs/heads/renovate/goreleaser-goreleaser-action-7.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"81ffd0d19fc478d1bce9ecff66d58617808e0c3e","Date":1765125880,"Tags":["ref=refs/heads/coverage"],"Suites":[]},
   {"Version":"6aa372dab1e2f35880441b8a11a2e8eb678be965","Date":1765125383,"Tags":["ref=refs/heads/coverage"],"Suites":[]},
   {"Version":"2c1138c75835557bf393d4ff9960eb27e7295e4a","Date":1765124973,"Tags":["ref=refs/heads/coverage"],"Suites":[]},
-  {"Version":"285ffa21df7fcb77550722a3fb9528e59d7fe9c2","Date":1765124001,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"5acf5f29896b138863cd3cbb2df6ca979e18a8c1","Date":1765123817,"Tags":["ref=refs/heads/coverage"],"Suites":[]}
+  {"Version":"285ffa21df7fcb77550722a3fb9528e59d7fe9c2","Date":1765124001,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
