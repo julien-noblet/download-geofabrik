@@ -587,7 +587,7 @@ func (config *Config) Generate() ([]byte, error) <span class="cov3" title="6">{
 }
 
 // MergeElement merges a new element into the config.
-func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="1136">{
+func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="1137">{
         config.ElementsMutex.RLock()
         newElement, ok := config.Elements[elementPtr.ID]
         config.ElementsMutex.RUnlock()
@@ -615,7 +615,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov10" title="1136">return nil</span>
+        <span class="cov9" title="1136">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
@@ -2243,7 +2243,7 @@ func GetParent(href string) (parent string, parentList []string) <span class="co
 }
 
 // MakeParents creates parent elements recursively.
-func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span class="cov8" title="20">{
+func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span class="cov8" title="21">{
         if parent == "" </span><span class="cov5" title="5">{
                 return
         }</span>
@@ -2331,11 +2331,11 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="31">
         <span class="cov8" title="18">slog.Debug("Add format", "extension", extension)
 
         file := ""
-        if extension != "" </span><span class="cov8" title="15">{
+        if extension != "" </span><span class="cov8" title="16">{
                 file = valsplit[0]
         }</span>
 
-        <span class="cov8" title="17">o.addOrUpdateElement(parent, name, file, extension)</span>
+        <span class="cov8" title="18">o.addOrUpdateElement(parent, name, file, extension)</span>
 }
 
 // addOrUpdateElement adds or updates an element in the configuration.
@@ -2359,7 +2359,7 @@ func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension strin
                         myElement.Formats = append(myElement.Formats, extension)
                 }</span>
 
-                <span class="cov7" title="12">if err := o.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+                <span class="cov7" title="13">if err := o.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
                         slog.Error("Can't merge", "name", myElement.Name, "error", err)
                 }</span>
         } else<span class="cov5" title="5"> {
@@ -2555,7 +2555,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
         return s.StartURL
 }</span>
 
@@ -2727,7 +2727,7 @@ func GetFormats(config map[string]bool) []string <span class="cov5" title="13">{
 
         var formatList []string
 
-        for key, format := range options </span><span class="cov9" title="207">{
+        for key, format := range options </span><span class="cov9" title="208">{
                 if enabled, ok := config[key]; ok &amp;&amp; enabled </span><span class="cov4" title="11">{
                         formatList = append(formatList, format)
                 }</span>
