@@ -1,4 +1,5 @@
 [
+  {"Version":"0702e022e0d963de30338e5f3b755e7cb0d70983","Date":1773596723,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"84ca902de122d2f524eec1d8c3af5135726ef3a9","Date":1773596607,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"f8b7fab43a6913be334dfeb5ec5bf2ed2ab19485","Date":1773325642,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"6722faa0038ff698a29e0ecbbd698f48998dffd5","Date":1773324905,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"4de790032b109efd152273b4080e96bdc0ea1385","Date":1765177383,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/clipperhouse/displaywidth-0.6.1"],"Suites":[]},
   {"Version":"bdac7dd239add50e73dd7e47f38fe383cc4d1eec","Date":1765126290,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"81ffd0d19fc478d1bce9ecff66d58617808e0c3e","Date":1765125880,"Tags":["ref=refs/heads/coverage"],"Suites":[]},
-  {"Version":"6aa372dab1e2f35880441b8a11a2e8eb678be965","Date":1765125383,"Tags":["ref=refs/heads/coverage"],"Suites":[]},
-  {"Version":"2c1138c75835557bf393d4ff9960eb27e7295e4a","Date":1765124973,"Tags":["ref=refs/heads/coverage"],"Suites":[]}
+  {"Version":"6aa372dab1e2f35880441b8a11a2e8eb678be965","Date":1765125383,"Tags":["ref=refs/heads/coverage"],"Suites":[]}
 ]
