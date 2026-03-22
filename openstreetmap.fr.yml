@@ -355,6 +355,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    andorra:
+        id: andorra
+        file: andorra
+        name: andorra
+        parent: europe
+        files:
+            - osm.pbf
+            - poly
+            - state
     angola:
         id: angola
         file: angola
@@ -2655,6 +2664,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    egypt:
+        id: egypt
+        file: egypt
+        name: egypt
+        parent: africa
+        files:
+            - osm.pbf
+            - poly
+            - state
     el_dorado:
         id: el_dorado
         file: el_dorado
@@ -2822,14 +2840,8 @@ elements:
         file: europe
         name: europe
         files:
-            - poly
-    europe_france:
-        id: europe_france
-        file: france
-        name: europe_france
-        parent: europe
-        files:
             - osm.pbf
+            - osm.pbf.md5
             - poly
             - state
     euskadi:
@@ -3050,9 +3062,13 @@ elements:
             - state
     france:
         id: france
+        file: france
         name: france
         parent: europe
-        meta: true
+        files:
+            - osm.pbf
+            - poly
+            - state
     france_metro_dom_com_nc:
         id: france_metro_dom_com_nc
         file: france_metro_dom_com_nc
@@ -3395,12 +3411,6 @@ elements:
             - osm.pbf
             - poly
             - state
-    google40770f7a526b2e5f:
-        id: google40770f7a526b2e5f
-        file: google40770f7a526b2e5f
-        name: google40770f7a526b2e5f
-        files:
-            - html
     gorontalo:
         id: gorontalo
         file: gorontalo
@@ -3622,6 +3632,15 @@ elements:
         file: hainan
         name: hainan
         parent: china
+        files:
+            - osm.pbf
+            - poly
+            - state
+    haiti:
+        id: haiti
+        file: haiti
+        name: haiti
+        parent: central-america
         files:
             - osm.pbf
             - poly
@@ -4967,6 +4986,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    lebanon:
+        id: lebanon
+        file: lebanon
+        name: lebanon
+        parent: asia
+        files:
+            - osm.pbf
+            - poly
+            - state
     leiria:
         id: leiria
         file: leiria
@@ -5278,6 +5306,15 @@ elements:
         file: macau
         name: macau
         parent: china
+        files:
+            - osm.pbf
+            - poly
+            - state
+    madagascar:
+        id: madagascar
+        file: madagascar
+        name: madagascar
+        parent: africa
         files:
             - osm.pbf
             - poly
@@ -5988,6 +6025,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    morocco:
+        id: morocco
+        file: morocco
+        name: morocco
+        parent: africa
+        files:
+            - osm.pbf
+            - poly
+            - state
     moscow:
         id: moscow
         file: moscow
@@ -6137,6 +6183,15 @@ elements:
         file: nayarit
         name: nayarit
         parent: mexico
+        files:
+            - osm.pbf
+            - poly
+            - state
+    negros_island_region:
+        id: negros_island_region
+        file: negros_island_region
+        name: negros_island_region
+        parent: philippines
         files:
             - osm.pbf
             - poly
@@ -6511,7 +6566,10 @@ elements:
         file: north-america
         name: north-america
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - poly
+            - state
     north-carolina:
         id: north-carolina
         file: north-carolina
@@ -7771,12 +7829,6 @@ elements:
             - osm.pbf
             - poly
             - state
-    robots:
-        id: robots
-        file: robots
-        name: robots
-        files:
-            - txt
     rogaland:
         id: rogaland
         file: rogaland
@@ -8869,7 +8921,6 @@ elements:
         name: spain
         parent: europe
         files:
-            - ""
             - osm.pbf
             - poly
             - state
