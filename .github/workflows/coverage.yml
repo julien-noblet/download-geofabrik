@@ -98,7 +98,7 @@ jobs:
         report-url: https://julien-noblet.github.io/download-geofabrik/${{ github.ref_name}}.html
        
     - name: Create Awesome Badge
-      uses: schneegans/dynamic-badges-action@v1.7.0
+      uses: schneegans/dynamic-badges-action@v1.8.0
       with:
         auth: ${{ secrets.GIST_SECRET }}
         gistID: a509e15ea4734ca3e8e98f32ab5369c0
