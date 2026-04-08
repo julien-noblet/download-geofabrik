@@ -1,4 +1,5 @@
 [
+  {"Version":"c2c2a6f6b68041822405d65c1fe62e5eb220778b","Date":1775608204,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"c24b5e385e95b270cc8a9912c3a70201c7100d72","Date":1774676743,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"39d0231cabb13e8406e6069d0aa4ea89dde0495a","Date":1774676488,"Tags":["ref=refs/heads/renovate/schneegans-dynamic-badges-action-1.x"],"Suites":[]},
   {"Version":"0702e022e0d963de30338e5f3b755e7cb0d70983","Date":1773596723,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"85997a1d69d079d2db50dc24aa998224aeb1f1c8","Date":1765782171,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.48.0"],"Suites":[]},
   {"Version":"1fc3b1f5e8e947e98f760c96348b8cbec2186164","Date":1765782161,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.11"],"Suites":[]},
   {"Version":"278663d6c9134267f8bdaf9ed23b97bd42f6e56b","Date":1765216238,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"4de790032b109efd152273b4080e96bdc0ea1385","Date":1765177383,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/clipperhouse/displaywidth-0.6.1"],"Suites":[]},
-  {"Version":"bdac7dd239add50e73dd7e47f38fe383cc4d1eec","Date":1765126290,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"4de790032b109efd152273b4080e96bdc0ea1385","Date":1765177383,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/clipperhouse/displaywidth-0.6.1"],"Suites":[]}
 ]
