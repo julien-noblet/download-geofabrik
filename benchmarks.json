@@ -1,4 +1,5 @@
 [
+  {"Version":"caa116db793b7e84f62e5c4cdfe41576297c823d","Date":1775862722,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"19863f0a628620998f305c32fc5d99912fd82d12","Date":1775862703,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"932e6f4bd62bd03a4ed5aa833def90f02688422b","Date":1775695620,"Tags":["ref=refs/heads/renovate/dependabot-fetch-metadata-3.x"],"Suites":[]},
   {"Version":"f7192b1720a1f866fc6af74b8a0e2653bcf16d05","Date":1775624378,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"048b3d631e43c02bc278e47606193ee7fcb9edb7","Date":1768514090,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"36a8d8a73e14167dbd57344537728bdde1a507e6","Date":1768513963,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"c49b85840b515c79c5d842e346123bfe11c4221f","Date":1765782193,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/clipperhouse/displaywidth-0.6.2"],"Suites":[]},
-  {"Version":"32376b3ce7f1df091d089c217818290fd34a2a29","Date":1765782181,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.32.0"],"Suites":[]},
-  {"Version":"d8175ad8cf6974b78f3e38246678b6f4d9819095","Date":1765782177,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.39.0"],"Suites":[]}
+  {"Version":"32376b3ce7f1df091d089c217818290fd34a2a29","Date":1765782181,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.32.0"],"Suites":[]}
 ]
