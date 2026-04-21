@@ -1,4 +1,5 @@
 [
+  {"Version":"1e9b7a9983ddab2587d7d4423ba2cd97735d599a","Date":1776747054,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.6"],"Suites":[]},
   {"Version":"8e99b08fff3e3266c379a90156e69ee2d6998528","Date":1776747000,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"35c20f98d4689944f3cf5dbb221226e40f1637ad","Date":1776746883,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.32.0"],"Suites":[]},
   {"Version":"1df043de1ece247571a85244c60e04c7625c6e47","Date":1776746847,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.48.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"11cf8f506d6387173f65fb0700d3f5e9dd16ca62","Date":1770787045,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"4c7eca078dec34a8383f2e5c5ae25e8816f9fef0","Date":1770786961,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"6381e0d5f2b8c96460ea0e1352fd105378ef48cd","Date":1770756275,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"c812403642bb08c20cab72176d0bce434c455d97","Date":1770269272,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"fca6624d409bb295d7ec6a0d3e5aef4429ba1a68","Date":1770226270,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
+  {"Version":"c812403642bb08c20cab72176d0bce434c455d97","Date":1770269272,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
 ]
