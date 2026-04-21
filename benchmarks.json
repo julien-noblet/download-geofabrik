@@ -1,4 +1,5 @@
 [
+  {"Version":"e11be80c723acc94e1cf9438a3529d1294b492ce","Date":1776800676,"Tags":["ref=refs/heads/renovate/oleksiyrudenko-gha-git-credentials-2.x"],"Suites":[]},
   {"Version":"618184dfafb50da026e63024dcece59c359a5abb","Date":1776747136,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"1e9b7a9983ddab2587d7d4423ba2cd97735d599a","Date":1776747054,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.6"],"Suites":[]},
   {"Version":"8e99b08fff3e3266c379a90156e69ee2d6998528","Date":1776747000,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"ecd4779251222f2abcce6d32d625d1682938a9be","Date":1772968027,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"accbc09e58c10311c9b81b01d252268c58f0d775","Date":1771695760,"Tags":["ref=refs/heads/renovate/goreleaser-goreleaser-action-7.x"],"Suites":[]},
   {"Version":"11cf8f506d6387173f65fb0700d3f5e9dd16ca62","Date":1770787045,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"4c7eca078dec34a8383f2e5c5ae25e8816f9fef0","Date":1770786961,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"6381e0d5f2b8c96460ea0e1352fd105378ef48cd","Date":1770756275,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
+  {"Version":"4c7eca078dec34a8383f2e5c5ae25e8816f9fef0","Date":1770786961,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
 ]
