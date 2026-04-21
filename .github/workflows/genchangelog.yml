@@ -23,7 +23,7 @@ jobs:
             -   uses: maicol07/github-changelog-action@patch-1
                 with:
                     next_version: ${{ github.event.inputs.next_version }}
-            -   uses: oleksiyrudenko/gha-git-credentials@v2-latest
+            -   uses: oleksiyrudenko/gha-git-credentials@v2.1
                 with:
                     token: '${{ secrets.GITHUB_TOKEN }}'
             -   run: "git commit -m \"changelog: 🔖 Updated changelog for commit ${{ github.sha }}\" -a"
