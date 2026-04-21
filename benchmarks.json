@@ -1,4 +1,5 @@
 [
+  {"Version":"20fe8f1aee5b79a62f7b101267c3f8ba180c78d4","Date":1776746619,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"c1f2f2c7b40ebf944afedf2e49b14bec358a85d4","Date":1776746521,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/clipperhouse/displaywidth-0.6.2"],"Suites":[]},
   {"Version":"535e42854c9d0c726a592ca9b4d84e192c3a9393","Date":1776746423,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"caa116db793b7e84f62e5c4cdfe41576297c823d","Date":1775862722,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"bc7b1226029434dff8df7c354d1765115274a21b","Date":1768597549,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"bb8983297cbb5692d3a3f4f8bffeb928f450e7a8","Date":1768597467,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"7affed4acb4ef031ac7578fe7e587a41f530c9a2","Date":1768540110,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"048b3d631e43c02bc278e47606193ee7fcb9edb7","Date":1768514090,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"36a8d8a73e14167dbd57344537728bdde1a507e6","Date":1768513963,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
+  {"Version":"048b3d631e43c02bc278e47606193ee7fcb9edb7","Date":1768514090,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
