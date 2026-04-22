@@ -1,4 +1,5 @@
 [
+  {"Version":"6ca09fe58eae86c07d61f9813ca2fbcad7bb8220","Date":1776830716,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.11"],"Suites":[]},
   {"Version":"9e39ab42199dc5d1970151f9823fddea781ce13d","Date":1776800881,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"e11be80c723acc94e1cf9438a3529d1294b492ce","Date":1776800676,"Tags":["ref=refs/heads/renovate/oleksiyrudenko-gha-git-credentials-2.x"],"Suites":[]},
   {"Version":"618184dfafb50da026e63024dcece59c359a5abb","Date":1776747136,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"7d219634bf89b6a56ca0e5e1b5d71961c448d9ac","Date":1772968112,"Tags":["ref=refs/heads/renovate/goreleaser-goreleaser-action-7.x"],"Suites":[]},
   {"Version":"9682cfe8d6a525784cc99fb023dd358f0b512672","Date":1772968107,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ecd4779251222f2abcce6d32d625d1682938a9be","Date":1772968027,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"accbc09e58c10311c9b81b01d252268c58f0d775","Date":1771695760,"Tags":["ref=refs/heads/renovate/goreleaser-goreleaser-action-7.x"],"Suites":[]},
-  {"Version":"11cf8f506d6387173f65fb0700d3f5e9dd16ca62","Date":1770787045,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"accbc09e58c10311c9b81b01d252268c58f0d775","Date":1771695760,"Tags":["ref=refs/heads/renovate/goreleaser-goreleaser-action-7.x"],"Suites":[]}
 ]
