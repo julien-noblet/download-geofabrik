@@ -1,4 +1,5 @@
 [
+  {"Version":"c178a3a806b66db6450d5a8eebee0610e96f170b","Date":1777274884,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/ll-0.1.8"],"Suites":[]},
   {"Version":"a8d1c699fb71edca953ffc50382e3b2a5cf28291","Date":1777274850,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.3.0"],"Suites":[]},
   {"Version":"f5c7ce665fb0e628eb978c90db42c04fdde99ef8","Date":1777274841,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-isatty-0.0.22"],"Suites":[]},
   {"Version":"b517e678be173c8b58ad76681d5c22e456fc585a","Date":1776830793,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"84ca902de122d2f524eec1d8c3af5135726ef3a9","Date":1773596607,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"f8b7fab43a6913be334dfeb5ec5bf2ed2ab19485","Date":1773325642,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"6722faa0038ff698a29e0ecbbd698f48998dffd5","Date":1773324905,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
-  {"Version":"1b7387b206e20562a4bdcf3f72dbd1f5131c5969","Date":1773033889,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"7d219634bf89b6a56ca0e5e1b5d71961c448d9ac","Date":1772968112,"Tags":["ref=refs/heads/renovate/goreleaser-goreleaser-action-7.x"],"Suites":[]}
+  {"Version":"1b7387b206e20562a4bdcf3f72dbd1f5131c5969","Date":1773033889,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
