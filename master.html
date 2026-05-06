@@ -608,14 +608,14 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
 
                 <span class="cov5" title="47">newElement.Meta = len(newElement.Formats) == 0
                 config.Elements[elementPtr.ID] = newElement</span>
-        } else<span class="cov9" title="1173"> {
+        } else<span class="cov9" title="1172"> {
                 config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
 
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov9" title="1220">return nil</span>
+        <span class="cov9" title="1219">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
@@ -2000,7 +2000,7 @@ func (g *Geofabrik) Collector() *colly.Collector <span class="cov4" title="4">{
 
 // ParseSubregion parses the subregion information from the HTML.
 func (g *Geofabrik) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Collector) <span class="cov4" title="4">{
-        e.ForEach("td.subregion", func(_ int, el *colly.HTMLElement) </span><span class="cov9" title="19">{
+        e.ForEach("td.subregion", func(_ int, el *colly.HTMLElement) </span><span class="cov9" title="18">{
                 el.ForEach("a", func(_ int, sub *colly.HTMLElement) </span><span class="cov9" title="19">{
                         href := sub.Request.AbsoluteURL(sub.Attr("href"))
                         myID, extension := scrapper.FileExt(href)
@@ -2543,7 +2543,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
                 slog.Error("Can't update limit", "error", err)
         }</span>
 
-        <span class="cov4" title="11">myCollector.OnError(func(r *colly.Response, err error) </span><span class="cov0" title="0">{
+        <span class="cov3" title="10">myCollector.OnError(func(r *colly.Response, err error) </span><span class="cov0" title="0">{
                 if !errors.Is(err, colly.ErrForbiddenURL) &amp;&amp; !errors.Is(err, colly.ErrForbiddenDomain) &amp;&amp; err.Error() != "Forbidden" </span><span class="cov0" title="0">{
                         slog.Debug("Request failed", "url", r.Request.URL, "error", err)
                 }</span> else<span class="cov0" title="0"> {
