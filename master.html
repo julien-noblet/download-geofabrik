@@ -608,7 +608,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
 
                 <span class="cov5" title="47">newElement.Meta = len(newElement.Formats) == 0
                 config.Elements[elementPtr.ID] = newElement</span>
-        } else<span class="cov9" title="1173"> {
+        } else<span class="cov9" title="1172"> {
                 config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
 
@@ -1822,7 +1822,7 @@ func (g *Geo2day) Exceptions(myElement *element.Element) *element.Element <span 
                 {"georgia", "us"},
         }
 
-        for _, exception := range exceptions </span><span class="cov10" title="205">{
+        for _, exception := range exceptions </span><span class="cov10" title="216">{
                 if myElement.ID == exception.ID &amp;&amp; myElement.Parent == exception.Parent </span><span class="cov5" title="12">{
                         myElement.ID = fmt.Sprintf("%s-%s", myElement.ID, myElement.Parent)
                 }</span>
@@ -2235,7 +2235,7 @@ func GetParent(href string) (parent string, parentList []string) <span class="co
                 parent = ""
         }</span>
 
-        <span class="cov9" title="29">if strings.EqualFold(parent, "extracts") || strings.EqualFold(parent, "polygons") </span><span class="cov5" title="5">{
+        <span class="cov9" title="28">if strings.EqualFold(parent, "extracts") || strings.EqualFold(parent, "polygons") </span><span class="cov5" title="5">{
                 parent = ""
         }</span>
 
@@ -2274,7 +2274,7 @@ func getGparent(gparents []string) string <span class="cov8" title="16">{
 }
 
 // createAndMergeElement creates and merges an element into the configuration.
-func (o *OpenstreetmapFR) createAndMergeElement(parent, gparent string) <span class="cov8" title="16">{
+func (o *OpenstreetmapFR) createAndMergeElement(parent, gparent string) <span class="cov8" title="15">{
         myElement := element.Element{
                 Parent:  gparent,
                 Name:    parent,
@@ -2306,7 +2306,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="31">
                 return
         }</span>
 
-        <span class="cov8" title="19">parent, parents := GetParent(href)
+        <span class="cov8" title="18">parent, parents := GetParent(href)
         if !o.Config.Exist(parent) </span><span class="cov7" title="12">{
                 o.MakeParents(parent, parents)
         }</span>
