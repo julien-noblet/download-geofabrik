@@ -1,4 +1,5 @@
 [
+  {"Version":"9de2191e3c30d0002188a94f3c2a46465b765246","Date":1778048215,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"fca63d87d0e458a9ba1ed7983eb93621a1a91eff","Date":1778048039,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.3.0"],"Suites":[]},
   {"Version":"8fe03df9cb09fcb11a4269a2a68414cf3a549bb1","Date":1778048036,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.5.1"],"Suites":[]},
   {"Version":"4b8688c1c11daeb2696e5716669a6ff6a01bf01c","Date":1778047958,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"20fe8f1aee5b79a62f7b101267c3f8ba180c78d4","Date":1776746619,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"c1f2f2c7b40ebf944afedf2e49b14bec358a85d4","Date":1776746521,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/clipperhouse/displaywidth-0.6.2"],"Suites":[]},
   {"Version":"535e42854c9d0c726a592ca9b4d84e192c3a9393","Date":1776746423,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"caa116db793b7e84f62e5c4cdfe41576297c823d","Date":1775862722,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"19863f0a628620998f305c32fc5d99912fd82d12","Date":1775862703,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"caa116db793b7e84f62e5c4cdfe41576297c823d","Date":1775862722,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]}
 ]
