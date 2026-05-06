@@ -1,4 +1,5 @@
 [
+  {"Version":"6ae3a4786f85db7966a024b02c6c690318caae7a","Date":1778047618,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.5.1"],"Suites":[]},
   {"Version":"853ee2416a5efb61b4678c9716c08869589e7c67","Date":1778047613,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-isatty-0.0.22"],"Suites":[]},
   {"Version":"2e4880c47d6ea623f62e238d7048da1016d66666","Date":1778047536,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"c178a3a806b66db6450d5a8eebee0610e96f170b","Date":1777274884,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/ll-0.1.8"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"c24b5e385e95b270cc8a9912c3a70201c7100d72","Date":1774676743,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"39d0231cabb13e8406e6069d0aa4ea89dde0495a","Date":1774676488,"Tags":["ref=refs/heads/renovate/schneegans-dynamic-badges-action-1.x"],"Suites":[]},
   {"Version":"0702e022e0d963de30338e5f3b755e7cb0d70983","Date":1773596723,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"84ca902de122d2f524eec1d8c3af5135726ef3a9","Date":1773596607,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
-  {"Version":"f8b7fab43a6913be334dfeb5ec5bf2ed2ab19485","Date":1773325642,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"84ca902de122d2f524eec1d8c3af5135726ef3a9","Date":1773596607,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]}
 ]
