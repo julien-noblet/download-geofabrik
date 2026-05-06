@@ -1,4 +1,5 @@
 [
+  {"Version":"d506f0cead0a32349936d269c7524142a8a1b3aa","Date":1778047738,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"508d30d475971e8c2994dc117c5a867f5628c3ef","Date":1778047623,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.3.0"],"Suites":[]},
   {"Version":"6ae3a4786f85db7966a024b02c6c690318caae7a","Date":1778047618,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.5.1"],"Suites":[]},
   {"Version":"853ee2416a5efb61b4678c9716c08869589e7c67","Date":1778047613,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-isatty-0.0.22"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"b6078f85f3b42fad5b9afa4eba8802e41f163799","Date":1775608294,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"c2c2a6f6b68041822405d65c1fe62e5eb220778b","Date":1775608204,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"c24b5e385e95b270cc8a9912c3a70201c7100d72","Date":1774676743,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"39d0231cabb13e8406e6069d0aa4ea89dde0495a","Date":1774676488,"Tags":["ref=refs/heads/renovate/schneegans-dynamic-badges-action-1.x"],"Suites":[]},
-  {"Version":"0702e022e0d963de30338e5f3b755e7cb0d70983","Date":1773596723,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"39d0231cabb13e8406e6069d0aa4ea89dde0495a","Date":1774676488,"Tags":["ref=refs/heads/renovate/schneegans-dynamic-badges-action-1.x"],"Suites":[]}
 ]
