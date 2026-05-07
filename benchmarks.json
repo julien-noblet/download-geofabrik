@@ -1,4 +1,5 @@
 [
+  {"Version":"5214859b742ae311781430a3ffc583f205cdc9f6","Date":1778188462,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"6f9af18f8075ffe2a15a45340c8e248d23293861","Date":1778187860,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"0482a50e1e89dac15f92fc904a590b1be6d2eca8","Date":1778048427,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"26a676343d38cebbdf4a30d0df5ad83804081e71","Date":1778048285,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.3.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"35c20f98d4689944f3cf5dbb221226e40f1637ad","Date":1776746883,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.32.0"],"Suites":[]},
   {"Version":"1df043de1ece247571a85244c60e04c7625c6e47","Date":1776746847,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.48.0"],"Suites":[]},
   {"Version":"e59cc40d96b38101b875e243469fd8f8c1189b62","Date":1776746841,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/sys-0.39.0"],"Suites":[]},
-  {"Version":"c37281922490408e0c6db1a904e2b775c85be7ce","Date":1776746675,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.6"],"Suites":[]},
-  {"Version":"20fe8f1aee5b79a62f7b101267c3f8ba180c78d4","Date":1776746619,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"c37281922490408e0c6db1a904e2b775c85be7ce","Date":1776746675,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.6"],"Suites":[]}
 ]
