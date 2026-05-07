@@ -1822,7 +1822,7 @@ func (g *Geo2day) Exceptions(myElement *element.Element) *element.Element <span 
                 {"georgia", "us"},
         }
 
-        for _, exception := range exceptions </span><span class="cov10" title="216">{
+        for _, exception := range exceptions </span><span class="cov10" title="209">{
                 if myElement.ID == exception.ID &amp;&amp; myElement.Parent == exception.Parent </span><span class="cov5" title="12">{
                         myElement.ID = fmt.Sprintf("%s-%s", myElement.ID, myElement.Parent)
                 }</span>
@@ -1991,7 +1991,7 @@ func (g *Geofabrik) Collector() *colly.Collector <span class="cov4" title="4">{
         <span class="cov4" title="4">myCollector.OnHTML("#specialsubregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseSubregion(e, myCollector)
         }</span>)
-        <span class="cov4" title="3">myCollector.OnHTML("li", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+        <span class="cov4" title="4">myCollector.OnHTML("li", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseLi(e, myCollector)
         }</span>)
 
@@ -2468,7 +2468,7 @@ func NewScrapper(baseURL, startURL string, allowedDomains []string) *Scrapper <s
 }</span>
 
 // GetConfig initializes a *config.Config from fields.
-func (s *Scrapper) GetConfig() *config.Config <span class="cov5" title="26">{
+func (s *Scrapper) GetConfig() *config.Config <span class="cov5" title="27">{
         s.mu.RLock()
 
         if s.Config != nil </span><span class="cov2" title="4">{
@@ -2527,7 +2527,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
                 myCollector.SetRequestTimeout(s.Timeout)
         }</span>
 
-        <span class="cov3" title="10">myCollector.WithTransport(&amp;http.Transport{
+        <span class="cov4" title="11">myCollector.WithTransport(&amp;http.Transport{
                 Proxy: http.ProxyFromEnvironment,
                 DialContext: (&amp;net.Dialer{
                         Timeout:   defaultTimeout,
@@ -2555,7 +2555,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
         return s.StartURL
 }</span>
 
