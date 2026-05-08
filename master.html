@@ -1822,7 +1822,7 @@ func (g *Geo2day) Exceptions(myElement *element.Element) *element.Element <span 
                 {"georgia", "us"},
         }
 
-        for _, exception := range exceptions </span><span class="cov10" title="209">{
+        for _, exception := range exceptions </span><span class="cov10" title="216">{
                 if myElement.ID == exception.ID &amp;&amp; myElement.Parent == exception.Parent </span><span class="cov5" title="12">{
                         myElement.ID = fmt.Sprintf("%s-%s", myElement.ID, myElement.Parent)
                 }</span>
