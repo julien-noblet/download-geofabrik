@@ -1,4 +1,5 @@
 [
+  {"Version":"951fd962bfecd0c7d8f9d95ee6b5a9857b445fbc","Date":1778488617,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/errors-1.3.0"],"Suites":[]},
   {"Version":"066cca0918eff4db4b25eb4bb8487d54c9ddc919","Date":1778488612,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/goccy/go-json-0.10.6"],"Suites":[]},
   {"Version":"e8516bf972bc8a847f0bd448653d6f84100d5f76","Date":1778215442,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"0b5f4373832697179b1494f7cf24dab35a9d3283","Date":1778215337,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"e11be80c723acc94e1cf9438a3529d1294b492ce","Date":1776800676,"Tags":["ref=refs/heads/renovate/oleksiyrudenko-gha-git-credentials-2.x"],"Suites":[]},
   {"Version":"618184dfafb50da026e63024dcece59c359a5abb","Date":1776747136,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"1e9b7a9983ddab2587d7d4423ba2cd97735d599a","Date":1776747054,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xpath-1.3.6"],"Suites":[]},
-  {"Version":"8e99b08fff3e3266c379a90156e69ee2d6998528","Date":1776747000,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"35c20f98d4689944f3cf5dbb221226e40f1637ad","Date":1776746883,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.32.0"],"Suites":[]}
+  {"Version":"8e99b08fff3e3266c379a90156e69ee2d6998528","Date":1776747000,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
