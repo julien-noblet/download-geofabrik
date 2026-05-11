@@ -1,4 +1,5 @@
 [
+  {"Version":"de5e82965a618d0dc7110802f2677f1cb65c4f2a","Date":1778488653,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.10.1"],"Suites":[]},
   {"Version":"6b72eb269f9042fe8aa8bd9b493fa6d82280ac30","Date":1778488629,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.37.0"],"Suites":[]},
   {"Version":"0bea4f20dcd142d52f664e796e34bbae2bdd9d18","Date":1778488626,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.23"],"Suites":[]},
   {"Version":"951fd962bfecd0c7d8f9d95ee6b5a9857b445fbc","Date":1778488617,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/errors-1.3.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"b517e678be173c8b58ad76681d5c22e456fc585a","Date":1776830793,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"6ca09fe58eae86c07d61f9813ca2fbcad7bb8220","Date":1776830716,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.11"],"Suites":[]},
   {"Version":"9e39ab42199dc5d1970151f9823fddea781ce13d","Date":1776800881,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"e11be80c723acc94e1cf9438a3529d1294b492ce","Date":1776800676,"Tags":["ref=refs/heads/renovate/oleksiyrudenko-gha-git-credentials-2.x"],"Suites":[]},
-  {"Version":"618184dfafb50da026e63024dcece59c359a5abb","Date":1776747136,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"e11be80c723acc94e1cf9438a3529d1294b492ce","Date":1776800676,"Tags":["ref=refs/heads/renovate/oleksiyrudenko-gha-git-credentials-2.x"],"Suites":[]}
 ]
