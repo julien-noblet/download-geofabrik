@@ -1,4 +1,5 @@
 [
+  {"Version":"b51896816dfcfcfe7c0d9863e9de8452dd5065e3","Date":1779916392,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.10.1"],"Suites":[]},
   {"Version":"02318043a932367b47f5d622884e78dbb13254b0","Date":1779916282,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"de5e82965a618d0dc7110802f2677f1cb65c4f2a","Date":1778488653,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.10.1"],"Suites":[]},
   {"Version":"6b72eb269f9042fe8aa8bd9b493fa6d82280ac30","Date":1778488629,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.37.0"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"a8d1c699fb71edca953ffc50382e3b2a5cf28291","Date":1777274850,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.3.0"],"Suites":[]},
   {"Version":"f5c7ce665fb0e628eb978c90db42c04fdde99ef8","Date":1777274841,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-isatty-0.0.22"],"Suites":[]},
   {"Version":"b517e678be173c8b58ad76681d5c22e456fc585a","Date":1776830793,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"6ca09fe58eae86c07d61f9813ca2fbcad7bb8220","Date":1776830716,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.11"],"Suites":[]},
-  {"Version":"9e39ab42199dc5d1970151f9823fddea781ce13d","Date":1776800881,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"6ca09fe58eae86c07d61f9813ca2fbcad7bb8220","Date":1776830716,"Tags":["ref=refs/heads/dependabot/go_modules/google.golang.org/protobuf-1.36.11"],"Suites":[]}
 ]
