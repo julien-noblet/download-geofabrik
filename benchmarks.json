@@ -1,4 +1,5 @@
 [
+  {"Version":"6084d382a14735f1954b551027a581d8ec681c16","Date":1779916422,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.37.0"],"Suites":[]},
   {"Version":"f5e655b9a65485ccfe958fc4057e60ba09f3f76e","Date":1779916412,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/errors-1.3.0"],"Suites":[]},
   {"Version":"b51896816dfcfcfe7c0d9863e9de8452dd5065e3","Date":1779916392,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.10.1"],"Suites":[]},
   {"Version":"02318043a932367b47f5d622884e78dbb13254b0","Date":1779916282,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"2e4880c47d6ea623f62e238d7048da1016d66666","Date":1778047536,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"c178a3a806b66db6450d5a8eebee0610e96f170b","Date":1777274884,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/ll-0.1.8"],"Suites":[]},
   {"Version":"a8d1c699fb71edca953ffc50382e3b2a5cf28291","Date":1777274850,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.3.0"],"Suites":[]},
-  {"Version":"f5c7ce665fb0e628eb978c90db42c04fdde99ef8","Date":1777274841,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-isatty-0.0.22"],"Suites":[]},
-  {"Version":"b517e678be173c8b58ad76681d5c22e456fc585a","Date":1776830793,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"f5c7ce665fb0e628eb978c90db42c04fdde99ef8","Date":1777274841,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-isatty-0.0.22"],"Suites":[]}
 ]
