@@ -587,7 +587,7 @@ func (config *Config) Generate() ([]byte, error) <span class="cov3" title="6">{
 }
 
 // MergeElement merges a new element into the config.
-func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="1221">{
+func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="1223">{
         config.ElementsMutex.RLock()
         newElement, ok := config.Elements[elementPtr.ID]
         config.ElementsMutex.RUnlock()
@@ -608,7 +608,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
 
                 <span class="cov5" title="47">newElement.Meta = len(newElement.Formats) == 0
                 config.Elements[elementPtr.ID] = newElement</span>
-        } else<span class="cov9" title="1173"> {
+        } else<span class="cov9" title="1175"> {
                 config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
 
@@ -1311,7 +1311,7 @@ func visitAndWait(collector *colly.Collector, url string) <span class="cov2" tit
 
 // Cleanup sorts the formats in the configuration elements.
 func Cleanup(c *config.Config) <span class="cov3" title="5">{
-        for _, elem := range c.Elements </span><span class="cov10" title="557">{
+        for _, elem := range c.Elements </span><span class="cov10" title="558">{
                 slices.Sort(elem.Formats)
         }</span>
 }
@@ -1465,7 +1465,7 @@ func Convert(index *Index) (*config.Config, error) <span class="cov2" title="4">
                 ElementsMutex: &amp;sync.RWMutex{},
         }
 
-        for _, feature := range index.Features </span><span class="cov8" title="1109">{
+        for _, feature := range index.Features </span><span class="cov8" title="1111">{
                 if err := processFeature(cfg, &amp;feature); err != nil </span><span class="cov0" title="0">{
                         return nil, err
                 }</span>
@@ -1475,7 +1475,7 @@ func Convert(index *Index) (*config.Config, error) <span class="cov2" title="4">
 }
 
 // processFeature processes a single feature from the Geofabrik index.
-func processFeature(cfg *config.Config, feature *IndexElement) error <span class="cov8" title="1109">{
+func processFeature(cfg *config.Config, feature *IndexElement) error <span class="cov8" title="1111">{
         var elem element.Element
 
         slog.Debug("Processing feature", "ID", feature.ElementProperties.ID)
@@ -1490,27 +1490,27 @@ func processFeature(cfg *config.Config, feature *IndexElement) error <span class
                 return fmt.Errorf("error while merging element %v: %w", elem, err)
         }</span>
 
-        <span class="cov8" title="1109">return nil</span>
+        <span class="cov8" title="1111">return nil</span>
 }
 
 // getFormats returns the formats based on the URLs.
-func getFormats(urls map[string]string) []string <span class="cov8" title="1109">{
+func getFormats(urls map[string]string) []string <span class="cov8" title="1111">{
         myFormats := []string{}
 
-        for k := range urls </span><span class="cov10" title="6591">{
+        for k := range urls </span><span class="cov10" title="6603">{
                 switch k </span>{
-                case "pbf":<span class="cov8" title="1109">
+                case "pbf":<span class="cov8" title="1111">
                         myFormats = append(myFormats, formats.FormatOsmPbf, "osm.pbf.md5")</span>
                 case "bz2":<span class="cov0" title="0">
                         myFormats = append(myFormats, formats.FormatOsmBz2, "osm.bz2.md5")</span>
-                case "shp":<span class="cov8" title="1050">
+                case "shp":<span class="cov8" title="1052">
                         myFormats = append(myFormats, formats.FormatShpZip)</span>
-                case "history":<span class="cov8" title="1108">
+                case "history":<span class="cov8" title="1110">
                         myFormats = append(myFormats, formats.FormatOshPbf)</span>
                 }
         }
 
-        <span class="cov8" title="1109">myFormats = append(myFormats, formats.FormatPoly, formats.FormatKml, formats.FormatState)
+        <span class="cov8" title="1111">myFormats = append(myFormats, formats.FormatPoly, formats.FormatKml, formats.FormatState)
 
         return myFormats</span>
 }
@@ -2036,7 +2036,7 @@ func (g *Geofabrik) handleHTMLExtension(sub *colly.HTMLElement, href, myID strin
                 }
         }
 
-        <span class="cov9" title="19">if err := g.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+        <span class="cov9" title="18">if err := g.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
                 slog.Error("Can't merge", "name", myElement.Name, "error", err)
         }</span>
 
@@ -2527,7 +2527,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
                 myCollector.SetRequestTimeout(s.Timeout)
         }</span>
 
-        <span class="cov4" title="11">myCollector.WithTransport(&amp;http.Transport{
+        <span class="cov3" title="10">myCollector.WithTransport(&amp;http.Transport{
                 Proxy: http.ProxyFromEnvironment,
                 DialContext: (&amp;net.Dialer{
                         Timeout:   defaultTimeout,
@@ -2584,7 +2584,7 @@ func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinition
 }
 
 // FileExt returns filename and extension.
-func FileExt(url string) (filename, extension string) <span class="cov5" title="38">{
+func FileExt(url string) (filename, extension string) <span class="cov5" title="37">{
         urls := strings.Split(url, "/")
         f := strings.Split(urls[len(urls)-1], ".")
 
@@ -2691,7 +2691,7 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="2
         shortNames := make([]string, 0, len(fullFormatNames))
 
         for _, fullName := range fullFormatNames </span><span class="cov7" title="44">{
-                for _, format := range miniFormats </span><span class="cov10" title="227">{
+                for _, format := range miniFormats </span><span class="cov10" title="228">{
                         if fullName == format.FullName </span><span class="cov7" title="39">{
                                 shortNames = append(shortNames, format.ShortName)
 
