@@ -1128,8 +1128,8 @@ func (e *Element) HasParent() bool <span class="cov5" title="20">{
 }</span>
 
 // Contains checks if the format list contains a specific format.
-func (f *Formats) Contains(format string) bool <span class="cov9" title="167">{
-        for _, existingFormat := range *f </span><span class="cov10" title="234">{
+func (f *Formats) Contains(format string) bool <span class="cov9" title="166">{
+        for _, existingFormat := range *f </span><span class="cov10" title="233">{
                 if format == existingFormat </span><span class="cov8" title="72">{
                         return true
                 }</span>
@@ -2307,7 +2307,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="31">
         }</span>
 
         <span class="cov8" title="19">parent, parents := GetParent(href)
-        if !o.Config.Exist(parent) </span><span class="cov7" title="12">{
+        if !o.Config.Exist(parent) </span><span class="cov7" title="11">{
                 o.MakeParents(parent, parents)
         }</span>
 
@@ -2555,7 +2555,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
         return s.StartURL
 }</span>
 
@@ -2576,7 +2576,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="27">{
-        for f, i := range *def </span><span class="cov8" title="233">{
+        for f, i := range *def </span><span class="cov8" title="231">{
                 if format == i.ID </span><span class="cov5" title="25">{
                         s.Config.AddExtension(id, f)
                 }</span>
