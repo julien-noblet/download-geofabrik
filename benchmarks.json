@@ -1,4 +1,5 @@
 [
+  {"Version":"a11a960343519f6b77ddf5cd0f7afe7605787c6f","Date":1780353613,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.24"],"Suites":[]},
   {"Version":"d3acb64bb4e7c8b48a451dec1b22c059c91bc4b0","Date":1779943450,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"5b364f559c7fd491cb05f9730bf339633b96e570","Date":1779943362,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.23"],"Suites":[]},
   {"Version":"362a22cbb12ed81b9f7026e17d32fbbde0f2d8a0","Date":1779943352,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"e64d2271ebf7047fdd1c8d2b16cb0d856e3fe73a","Date":1778047801,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.3.0"],"Suites":[]},
   {"Version":"d506f0cead0a32349936d269c7524142a8a1b3aa","Date":1778047738,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"508d30d475971e8c2994dc117c5a867f5628c3ef","Date":1778047623,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.3.0"],"Suites":[]},
-  {"Version":"6ae3a4786f85db7966a024b02c6c690318caae7a","Date":1778047618,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.5.1"],"Suites":[]},
-  {"Version":"853ee2416a5efb61b4678c9716c08869589e7c67","Date":1778047613,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-isatty-0.0.22"],"Suites":[]}
+  {"Version":"6ae3a4786f85db7966a024b02c6c690318caae7a","Date":1778047618,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.5.1"],"Suites":[]}
 ]
