@@ -1,4 +1,5 @@
 [
+  {"Version":"2989e97e77898cb264c38ffa45214474aaaeb3f1","Date":1780453068,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"f2cd2b6bd0797a03e578eefcc752677b702c47db","Date":1780452830,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"bbf955dd02753f1c5f02ac0559ded1dceffb3342","Date":1780353621,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.6"],"Suites":[]},
   {"Version":"a11a960343519f6b77ddf5cd0f7afe7605787c6f","Date":1780353613,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.24"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"4b8688c1c11daeb2696e5716669a6ff6a01bf01c","Date":1778047958,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"dc4360b178d4f738c68416aba2d7e949dea4d1d2","Date":1778047823,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/go-viper/mapstructure/v2-2.5.0"],"Suites":[]},
   {"Version":"74a23191a232b48d9c4b2da4e42cee68a6d7161c","Date":1778047806,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.5.1"],"Suites":[]},
-  {"Version":"e64d2271ebf7047fdd1c8d2b16cb0d856e3fe73a","Date":1778047801,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.3.0"],"Suites":[]},
-  {"Version":"d506f0cead0a32349936d269c7524142a8a1b3aa","Date":1778047738,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"e64d2271ebf7047fdd1c8d2b16cb0d856e3fe73a","Date":1778047801,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.3.0"],"Suites":[]}
 ]
