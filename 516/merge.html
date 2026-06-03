@@ -2229,13 +2229,13 @@ func GetParent(href string) (parent string, parentList []string) <span class="co
         href = strings.TrimSuffix(href, "/")
 
         parentList = strings.Split(href, "/")
-        if len(parentList) &gt; minParentListLength </span><span class="cov9" title="25">{
+        if len(parentList) &gt; minParentListLength </span><span class="cov9" title="24">{
                 parent = parentList[len(parentList)-2]
         }</span> else<span class="cov4" title="4"> {
                 parent = ""
         }</span>
 
-        <span class="cov9" title="29">if strings.EqualFold(parent, "extracts") || strings.EqualFold(parent, "polygons") </span><span class="cov5" title="5">{
+        <span class="cov9" title="28">if strings.EqualFold(parent, "extracts") || strings.EqualFold(parent, "polygons") </span><span class="cov5" title="5">{
                 parent = ""
         }</span>
 
