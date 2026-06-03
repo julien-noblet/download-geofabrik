@@ -615,7 +615,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov9" title="1221">return nil</span>
+        <span class="cov9" title="1222">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
@@ -1538,7 +1538,7 @@ func ListAllRegions(configuration *config.Config, format string) error <span cla
         table := CreateTable(format)
         keys := GetSortedKeys(configuration)
 
-        for _, item := range keys </span><span class="cov8" title="6">{
+        for _, item := range keys </span><span class="cov8" title="7">{
                 err := table.Append(
                         item,
                         configuration.Elements[configuration.Elements[item].Parent].Name,
@@ -2354,7 +2354,7 @@ func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension strin
                 myElement.Meta = true
         }</span>
 
-        <span class="cov8" title="18">if !o.Config.Exist(name) </span><span class="cov7" title="12">{
+        <span class="cov8" title="18">if !o.Config.Exist(name) </span><span class="cov7" title="13">{
                 if extension != "" </span><span class="cov7" title="11">{
                         myElement.Formats = append(myElement.Formats, extension)
                 }</span>
@@ -2576,7 +2576,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="27">{
-        for f, i := range *def </span><span class="cov8" title="233">{
+        for f, i := range *def </span><span class="cov8" title="230">{
                 if format == i.ID </span><span class="cov5" title="25">{
                         s.Config.AddExtension(id, f)
                 }</span>
@@ -2668,7 +2668,7 @@ const (
 )
 
 // GetMiniFormats returns a string of short format names based on the provided full format names.
-func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="27">{
+func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="28">{
         miniFormats := []MiniFormat{
                 {ShortName: "s", FullName: FormatState},
                 {ShortName: "P", FullName: FormatOsmPbf},
@@ -2690,8 +2690,8 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="2
 
         shortNames := make([]string, 0, len(fullFormatNames))
 
-        for _, fullName := range fullFormatNames </span><span class="cov7" title="42">{
-                for _, format := range miniFormats </span><span class="cov9" title="204">{
+        for _, fullName := range fullFormatNames </span><span class="cov7" title="44">{
+                for _, format := range miniFormats </span><span class="cov10" title="228">{
                         if fullName == format.FullName </span><span class="cov7" title="39">{
                                 shortNames = append(shortNames, format.ShortName)
 
@@ -2700,7 +2700,7 @@ func GetMiniFormats(fullFormatNames []string) string <span class="cov6" title="2
                 }
         }
 
-        <span class="cov6" title="27">return strings.Join(shortNames, "")</span>
+        <span class="cov6" title="28">return strings.Join(shortNames, "")</span>
 }
 
 // GetFormats returns a slice of format strings based on the configuration map.
@@ -2727,8 +2727,8 @@ func GetFormats(config map[string]bool) []string <span class="cov5" title="13">{
 
         var formatList []string
 
-        for key, format := range options </span><span class="cov10" title="208">{
-                if enabled, ok := config[key]; ok &amp;&amp; enabled </span><span class="cov5" title="11">{
+        for key, format := range options </span><span class="cov9" title="208">{
+                if enabled, ok := config[key]; ok &amp;&amp; enabled </span><span class="cov4" title="11">{
                         formatList = append(formatList, format)
                 }</span>
         }
