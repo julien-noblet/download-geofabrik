@@ -1,4 +1,5 @@
 [
+  {"Version":"d1b6b4355b6c27a91bcd7fae2192a1957dcd6800","Date":1780453137,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-colorable-0.1.15"],"Suites":[]},
   {"Version":"85dbe8af123df195b5176b529d0849318810f683","Date":1780453133,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.37.0"],"Suites":[]},
   {"Version":"5d453772e8520cfad4d66978915ddb2c4db97d36","Date":1780453127,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.6"],"Suites":[]},
   {"Version":"2989e97e77898cb264c38ffa45214474aaaeb3f1","Date":1780453068,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"9de2191e3c30d0002188a94f3c2a46465b765246","Date":1778048215,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"fca63d87d0e458a9ba1ed7983eb93621a1a91eff","Date":1778048039,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.3.0"],"Suites":[]},
   {"Version":"8fe03df9cb09fcb11a4269a2a68414cf3a549bb1","Date":1778048036,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/xmlquery-1.5.1"],"Suites":[]},
-  {"Version":"4b8688c1c11daeb2696e5716669a6ff6a01bf01c","Date":1778047958,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"dc4360b178d4f738c68416aba2d7e949dea4d1d2","Date":1778047823,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/go-viper/mapstructure/v2-2.5.0"],"Suites":[]}
+  {"Version":"4b8688c1c11daeb2696e5716669a6ff6a01bf01c","Date":1778047958,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
