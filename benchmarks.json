@@ -1,4 +1,5 @@
 [
+  {"Version":"b8f8f82ac296621fa492b65fddf7bf41a764aeee","Date":1783457198,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"f1abf7f5b94c358be4f25999cc733889e745b611","Date":1783102340,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.55.0"],"Suites":[]},
   {"Version":"b0626ed12ceb577adfae06f6997548125fa3b9eb","Date":1781817144,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"feea5f90833c46461b08f94edb63d9a270d24ecc","Date":1780516938,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"0b5f4373832697179b1494f7cf24dab35a9d3283","Date":1778215337,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"5214859b742ae311781430a3ffc583f205cdc9f6","Date":1778188462,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"6f9af18f8075ffe2a15a45340c8e248d23293861","Date":1778187860,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"0482a50e1e89dac15f92fc904a590b1be6d2eca8","Date":1778048427,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"26a676343d38cebbdf4a30d0df5ad83804081e71","Date":1778048285,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/pelletier/go-toml/v2-2.3.0"],"Suites":[]}
+  {"Version":"0482a50e1e89dac15f92fc904a590b1be6d2eca8","Date":1778048427,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
