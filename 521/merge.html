@@ -619,7 +619,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(elementID string) bool <span class="cov6" title="82">{
+func (config *Config) Exist(elementID string) bool <span class="cov6" title="83">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
 
@@ -2359,7 +2359,7 @@ func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension strin
                         myElement.Formats = append(myElement.Formats, extension)
                 }</span>
 
-                <span class="cov7" title="12">if err := o.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+                <span class="cov7" title="13">if err := o.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
                         slog.Error("Can't merge", "name", myElement.Name, "error", err)
                 }</span>
         } else<span class="cov5" title="5"> {
