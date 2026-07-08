@@ -1822,7 +1822,7 @@ func (g *Geo2day) Exceptions(myElement *element.Element) *element.Element <span 
                 {"georgia", "us"},
         }
 
-        for _, exception := range exceptions </span><span class="cov10" title="216">{
+        for _, exception := range exceptions </span><span class="cov10" title="209">{
                 if myElement.ID == exception.ID &amp;&amp; myElement.Parent == exception.Parent </span><span class="cov5" title="12">{
                         myElement.ID = fmt.Sprintf("%s-%s", myElement.ID, myElement.Parent)
                 }</span>
@@ -1991,7 +1991,7 @@ func (g *Geofabrik) Collector() *colly.Collector <span class="cov4" title="4">{
         <span class="cov4" title="4">myCollector.OnHTML("#specialsubregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseSubregion(e, myCollector)
         }</span>)
-        <span class="cov4" title="4">myCollector.OnHTML("li", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+        <span class="cov4" title="3">myCollector.OnHTML("li", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseLi(e, myCollector)
         }</span>)
 
@@ -2598,7 +2598,7 @@ func GetParent(url string) (filename, path string) <span class="cov5" title="33"
                 return "", strings.Join(r[:len(r)-1], "/")
         }</span>
 
-        <span class="cov4" title="21">return r[len(r)-2], strings.Join(r[:len(r)-1], "/")</span>
+        <span class="cov4" title="20">return r[len(r)-2], strings.Join(r[:len(r)-1], "/")</span>
 }
 </pre>
 		
