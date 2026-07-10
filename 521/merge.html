@@ -1822,7 +1822,7 @@ func (g *Geo2day) Exceptions(myElement *element.Element) *element.Element <span 
                 {"georgia", "us"},
         }
 
-        for _, exception := range exceptions </span><span class="cov10" title="209">{
+        for _, exception := range exceptions </span><span class="cov10" title="216">{
                 if myElement.ID == exception.ID &amp;&amp; myElement.Parent == exception.Parent </span><span class="cov5" title="12">{
                         myElement.ID = fmt.Sprintf("%s-%s", myElement.ID, myElement.Parent)
                 }</span>
@@ -1991,7 +1991,7 @@ func (g *Geofabrik) Collector() *colly.Collector <span class="cov4" title="4">{
         <span class="cov4" title="4">myCollector.OnHTML("#specialsubregions", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseSubregion(e, myCollector)
         }</span>)
-        <span class="cov4" title="3">myCollector.OnHTML("li", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
+        <span class="cov4" title="4">myCollector.OnHTML("li", func(e *colly.HTMLElement) </span><span class="cov0" title="0">{
                 g.ParseLi(e, myCollector)
         }</span>)
 
@@ -2316,7 +2316,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="31">
                 return
         }</span>
 
-        <span class="cov8" title="18">if strings.Contains(passList, valsplit[0]) </span><span class="cov0" title="0">{
+        <span class="cov8" title="17">if strings.Contains(passList, valsplit[0]) </span><span class="cov0" title="0">{
                 return
         }</span>
 
@@ -2555,7 +2555,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
         return s.StartURL
 }</span>
 
@@ -2576,7 +2576,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="27">{
-        for f, i := range *def </span><span class="cov8" title="233">{
+        for f, i := range *def </span><span class="cov8" title="232">{
                 if format == i.ID </span><span class="cov5" title="25">{
                         s.Config.AddExtension(id, f)
                 }</span>
@@ -2598,7 +2598,7 @@ func GetParent(url string) (filename, path string) <span class="cov5" title="33"
                 return "", strings.Join(r[:len(r)-1], "/")
         }</span>
 
-        <span class="cov4" title="20">return r[len(r)-2], strings.Join(r[:len(r)-1], "/")</span>
+        <span class="cov4" title="21">return r[len(r)-2], strings.Join(r[:len(r)-1], "/")</span>
 }
 </pre>
 		
@@ -2727,7 +2727,7 @@ func GetFormats(config map[string]bool) []string <span class="cov5" title="13">{
 
         var formatList []string
 
-        for key, format := range options </span><span class="cov9" title="208">{
+        for key, format := range options </span><span class="cov9" title="201">{
                 if enabled, ok := config[key]; ok &amp;&amp; enabled </span><span class="cov4" title="11">{
                         formatList = append(formatList, format)
                 }</span>
