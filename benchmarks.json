@@ -1,4 +1,5 @@
 [
+  {"Version":"ad8e0a77eb85fa06f9d6ac1ad4e53649282490da","Date":1784054022,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]},
   {"Version":"0e243279b41ecda1ac8403be9458e88e8588c8d4","Date":1783677309,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"6d9684c78996908ad749f5ef17839518087e9d6e","Date":1783677207,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"08ab9316e5d6f816609eb0565287ef277e29efde","Date":1783676454,"Tags":["ref=refs/heads/renovate/schneegans-dynamic-badges-action-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"6084d382a14735f1954b551027a581d8ec681c16","Date":1779916422,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.37.0"],"Suites":[]},
   {"Version":"f5e655b9a65485ccfe958fc4057e60ba09f3f76e","Date":1779916412,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/errors-1.3.0"],"Suites":[]},
   {"Version":"b51896816dfcfcfe7c0d9863e9de8452dd5065e3","Date":1779916392,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.10.1"],"Suites":[]},
-  {"Version":"02318043a932367b47f5d622884e78dbb13254b0","Date":1779916282,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"de5e82965a618d0dc7110802f2677f1cb65c4f2a","Date":1778488653,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.10.1"],"Suites":[]}
+  {"Version":"02318043a932367b47f5d622884e78dbb13254b0","Date":1779916282,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
