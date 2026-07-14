@@ -615,11 +615,11 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov9" title="1221">return nil</span>
+        <span class="cov9" title="1222">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(elementID string) bool <span class="cov6" title="83">{
+func (config *Config) Exist(elementID string) bool <span class="cov6" title="82">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
 
@@ -2243,12 +2243,12 @@ func GetParent(href string) (parent string, parentList []string) <span class="co
 }
 
 // MakeParents creates parent elements recursively.
-func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span class="cov8" title="21">{
+func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span class="cov8" title="20">{
         if parent == "" </span><span class="cov5" title="5">{
                 return
         }</span>
 
-        <span class="cov8" title="16">gparent := getGparent(gparents)
+        <span class="cov8" title="15">gparent := getGparent(gparents)
 
         if !o.Config.Exist(parent) </span><span class="cov8" title="16">{
                 o.createAndMergeElement(parent, gparent)
@@ -2260,13 +2260,13 @@ func (o *OpenstreetmapFR) MakeParents(parent string, gparents []string) <span cl
 }
 
 // getGparent returns the grandparent from a list of parents.
-func getGparent(gparents []string) string <span class="cov8" title="16">{
+func getGparent(gparents []string) string <span class="cov8" title="15">{
         if len(gparents) &lt; minParentListLength </span><span class="cov1" title="1">{
                 return ""
         }</span>
 
-        <span class="cov8" title="15">gparent := gparents[len(gparents)-3]
-        if gparent == "http:" || gparent == "openstreetmap.fr" || gparent == "extracts" || gparent == "polygons" </span><span class="cov7" title="11">{
+        <span class="cov7" title="14">gparent := gparents[len(gparents)-3]
+        if gparent == "http:" || gparent == "openstreetmap.fr" || gparent == "extracts" || gparent == "polygons" </span><span class="cov7" title="10">{
                 return ""
         }</span>
 
@@ -2316,7 +2316,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) <span class="cov10" title="31">
                 return
         }</span>
 
-        <span class="cov8" title="17">if strings.Contains(passList, valsplit[0]) </span><span class="cov0" title="0">{
+        <span class="cov8" title="18">if strings.Contains(passList, valsplit[0]) </span><span class="cov0" title="0">{
                 return
         }</span>
 
@@ -2354,7 +2354,7 @@ func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension strin
                 myElement.Meta = true
         }</span>
 
-        <span class="cov8" title="18">if !o.Config.Exist(name) </span><span class="cov7" title="13">{
+        <span class="cov8" title="17">if !o.Config.Exist(name) </span><span class="cov7" title="13">{
                 if extension != "" </span><span class="cov7" title="11">{
                         myElement.Formats = append(myElement.Formats, extension)
                 }</span>
@@ -2576,7 +2576,7 @@ func (s *Scrapper) ParseFormatService(id, format string, def *formats.FormatDefi
 
 // AddExtension adds an extension to the configuration.
 func (s *Scrapper) AddExtension(id, format string, def *formats.FormatDefinitions) <span class="cov5" title="27">{
-        for f, i := range *def </span><span class="cov8" title="232">{
+        for f, i := range *def </span><span class="cov8" title="230">{
                 if format == i.ID </span><span class="cov5" title="25">{
                         s.Config.AddExtension(id, f)
                 }</span>
@@ -2727,7 +2727,7 @@ func GetFormats(config map[string]bool) []string <span class="cov5" title="13">{
 
         var formatList []string
 
-        for key, format := range options </span><span class="cov9" title="201">{
+        for key, format := range options </span><span class="cov9" title="208">{
                 if enabled, ok := config[key]; ok &amp;&amp; enabled </span><span class="cov4" title="11">{
                         formatList = append(formatList, format)
                 }</span>
