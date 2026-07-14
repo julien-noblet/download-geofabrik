@@ -1,4 +1,5 @@
 [
+  {"Version":"a2690d3d8e26d4298e56c70843c2304bd4a1a1d2","Date":1784054328,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"f8f2c1a6961944e734b4fba950b8293f47e7c46c","Date":1784054231,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ad8e0a77eb85fa06f9d6ac1ad4e53649282490da","Date":1784054022,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]},
   {"Version":"0e243279b41ecda1ac8403be9458e88e8588c8d4","Date":1783677309,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"362a22cbb12ed81b9f7026e17d32fbbde0f2d8a0","Date":1779943352,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"5d0dc52b35f9f8fbdc66419db62006f3e257da64","Date":1779916425,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.23"],"Suites":[]},
   {"Version":"6084d382a14735f1954b551027a581d8ec681c16","Date":1779916422,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.37.0"],"Suites":[]},
-  {"Version":"f5e655b9a65485ccfe958fc4057e60ba09f3f76e","Date":1779916412,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/errors-1.3.0"],"Suites":[]},
-  {"Version":"b51896816dfcfcfe7c0d9863e9de8452dd5065e3","Date":1779916392,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/fsnotify/fsnotify-1.10.1"],"Suites":[]}
+  {"Version":"f5e655b9a65485ccfe958fc4057e60ba09f3f76e","Date":1779916412,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/olekukonko/errors-1.3.0"],"Suites":[]}
 ]
