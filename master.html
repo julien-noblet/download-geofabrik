@@ -587,7 +587,7 @@ func (config *Config) Generate() ([]byte, error) <span class="cov3" title="6">{
 }
 
 // MergeElement merges a new element into the config.
-func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="1223">{
+func (config *Config) MergeElement(elementPtr *element.Element) error <span class="cov10" title="1222">{
         config.ElementsMutex.RLock()
         newElement, ok := config.Elements[elementPtr.ID]
         config.ElementsMutex.RUnlock()
@@ -615,11 +615,11 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov9" title="1222">return nil</span>
+        <span class="cov10" title="1222">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
-func (config *Config) Exist(elementID string) bool <span class="cov6" title="83">{
+func (config *Config) Exist(elementID string) bool <span class="cov6" title="82">{
         config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
 
@@ -1822,7 +1822,7 @@ func (g *Geo2day) Exceptions(myElement *element.Element) *element.Element <span 
                 {"georgia", "us"},
         }
 
-        for _, exception := range exceptions </span><span class="cov10" title="208">{
+        for _, exception := range exceptions </span><span class="cov10" title="216">{
                 if myElement.ID == exception.ID &amp;&amp; myElement.Parent == exception.Parent </span><span class="cov5" title="12">{
                         myElement.ID = fmt.Sprintf("%s-%s", myElement.ID, myElement.Parent)
                 }</span>
@@ -2001,7 +2001,7 @@ func (g *Geofabrik) Collector() *colly.Collector <span class="cov4" title="4">{
 // ParseSubregion parses the subregion information from the HTML.
 func (g *Geofabrik) ParseSubregion(e *colly.HTMLElement, myCollector *colly.Collector) <span class="cov4" title="4">{
         e.ForEach("td.subregion", func(_ int, el *colly.HTMLElement) </span><span class="cov9" title="19">{
-                el.ForEach("a", func(_ int, sub *colly.HTMLElement) </span><span class="cov9" title="19">{
+                el.ForEach("a", func(_ int, sub *colly.HTMLElement) </span><span class="cov9" title="18">{
                         href := sub.Request.AbsoluteURL(sub.Attr("href"))
                         myID, extension := scrapper.FileExt(href)
 
@@ -2359,7 +2359,7 @@ func (o *OpenstreetmapFR) addOrUpdateElement(parent, name, file, extension strin
                         myElement.Formats = append(myElement.Formats, extension)
                 }</span>
 
-                <span class="cov7" title="13">if err := o.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
+                <span class="cov7" title="12">if err := o.Config.MergeElement(&amp;myElement); err != nil </span><span class="cov0" title="0">{
                         slog.Error("Can't merge", "name", myElement.Name, "error", err)
                 }</span>
         } else<span class="cov5" title="5"> {
