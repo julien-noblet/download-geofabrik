@@ -1,4 +1,5 @@
 [
+  {"Version":"86e1c1489298ab541ce581e40d7f95f4cca5692b","Date":1786680828,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
   {"Version":"e2518d6bb78276ce5a3b5a4cc597144e6cff8f5c","Date":1786680821,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"beedc6b47b78b58905765704f4e5193277bafb05","Date":1786680733,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"4b4b9c15a88721de8915975755cfbe202a91d60c","Date":1786680551,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"f3c734043719ce42b2fc2cb1cd088e764160b492","Date":1780516842,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"d1b6b4355b6c27a91bcd7fae2192a1957dcd6800","Date":1780453137,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-colorable-0.1.15"],"Suites":[]},
   {"Version":"85dbe8af123df195b5176b529d0849318810f683","Date":1780453133,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/text-0.37.0"],"Suites":[]},
-  {"Version":"5d453772e8520cfad4d66978915ddb2c4db97d36","Date":1780453127,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.6"],"Suites":[]},
-  {"Version":"2989e97e77898cb264c38ffa45214474aaaeb3f1","Date":1780453068,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"5d453772e8520cfad4d66978915ddb2c4db97d36","Date":1780453127,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/antchfx/htmlquery-1.3.6"],"Suites":[]}
 ]
