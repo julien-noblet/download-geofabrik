@@ -615,7 +615,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov9" title="1222">return nil</span>
+        <span class="cov9" title="1221">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
@@ -1135,7 +1135,7 @@ func (f *Formats) Contains(format string) bool <span class="cov9" title="167">{
                 }</span>
         }
 
-        <span class="cov8" title="95">return false</span>
+        <span class="cov8" title="94">return false</span>
 }
 
 // CreateParentElement creates a parent element for the given element.
@@ -2468,7 +2468,7 @@ func NewScrapper(baseURL, startURL string, allowedDomains []string) *Scrapper <s
 }</span>
 
 // GetConfig initializes a *config.Config from fields.
-func (s *Scrapper) GetConfig() *config.Config <span class="cov5" title="26">{
+func (s *Scrapper) GetConfig() *config.Config <span class="cov5" title="27">{
         s.mu.RLock()
 
         if s.Config != nil </span><span class="cov2" title="4">{
@@ -2555,7 +2555,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1023">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
         return s.StartURL
 }</span>
 
