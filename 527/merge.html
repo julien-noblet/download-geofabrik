@@ -608,14 +608,14 @@ func (config *Config) MergeElement(elementPtr *element.Element) error <span clas
 
                 <span class="cov5" title="47">newElement.Meta = len(newElement.Formats) == 0
                 config.Elements[elementPtr.ID] = newElement</span>
-        } else<span class="cov9" title="1175"> {
+        } else<span class="cov9" title="1174"> {
                 config.ElementsMutex.Lock()
                 defer config.ElementsMutex.Unlock()
 
                 config.Elements[elementPtr.ID] = *elementPtr
         }</span>
 
-        <span class="cov9" title="1221">return nil</span>
+        <span class="cov9" title="1222">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
@@ -1135,7 +1135,7 @@ func (f *Formats) Contains(format string) bool <span class="cov9" title="167">{
                 }</span>
         }
 
-        <span class="cov8" title="94">return false</span>
+        <span class="cov8" title="95">return false</span>
 }
 
 // CreateParentElement creates a parent element for the given element.
@@ -2555,7 +2555,7 @@ func (s *Scrapper) Collector(_ ...interface{}) *colly.Collector <span class="cov
 }
 
 // GetStartURL returns StartURL.
-func (s *Scrapper) GetStartURL() string <span class="cov10" title="1024">{
+func (s *Scrapper) GetStartURL() string <span class="cov10" title="1022">{
         return s.StartURL
 }</span>
 
