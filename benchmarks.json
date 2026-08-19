@@ -1,4 +1,5 @@
 [
+  {"Version":"2eabdece680f565a02be978a1cc6dbacd692a5b1","Date":1787178473,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"b0b87ba8bc9ef5307974759efa354cc612560c78","Date":1787178454,"Tags":["ref=refs/heads/renovate/github.com-stretchr-testify-1.x"],"Suites":[]},
   {"Version":"490205807387a240c0b64a97d6c736f1d2de57d1","Date":1786960433,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
   {"Version":"64a872a0b2423f41d6420bcd4474e60e660a8840","Date":1786960428,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"56fad488e28d13d3e006b9a6fcd63a6a5f515d89","Date":1783457538,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"e4f27983dacf02b966fb71d31c669a6812e7247b","Date":1783457439,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"b8f8f82ac296621fa492b65fddf7bf41a764aeee","Date":1783457198,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"f1abf7f5b94c358be4f25999cc733889e745b611","Date":1783102340,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.55.0"],"Suites":[]},
-  {"Version":"b0626ed12ceb577adfae06f6997548125fa3b9eb","Date":1781817144,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]}
+  {"Version":"f1abf7f5b94c358be4f25999cc733889e745b611","Date":1783102340,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.55.0"],"Suites":[]}
 ]
