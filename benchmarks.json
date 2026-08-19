@@ -1,4 +1,5 @@
 [
+  {"Version":"7dc0792dc2ba67c47a6d8e40763d19e718707627","Date":1787178757,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"b9bba9a116596665f87e1741a48843e590a51889","Date":1787178752,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
   {"Version":"5f5c59b2579d503c3eb54ff3f0731b6b1d60f1f5","Date":1787178737,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"2bf79d1cd97b2ee697e3fe65058ce6fa6d405da9","Date":1787178634,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"27c505f56686bd4ddaa8fa298d127d2f6ed00d58","Date":1783490191,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"9d41950b1581cf239ea8200a97c4ee3ace1aecb7","Date":1783490098,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"91db1179a8dfc41d58270f6f7abba672c140153f","Date":1783489686,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
-  {"Version":"dde1368bd3b81557930bf6aea30cbd736ad6c941","Date":1783457574,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.55.0"],"Suites":[]},
-  {"Version":"56fad488e28d13d3e006b9a6fcd63a6a5f515d89","Date":1783457538,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]}
+  {"Version":"dde1368bd3b81557930bf6aea30cbd736ad6c941","Date":1783457574,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.55.0"],"Suites":[]}
 ]
