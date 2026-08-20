@@ -1,4 +1,5 @@
 [
+  {"Version":"85809963fb5e413325687f01914e4fb27e61ac39","Date":1787205143,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
   {"Version":"9ddad45b193de942bcbe9f63fab74ba6d8475cca","Date":1787205123,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"0d4dbdd1abd40fb64de2ec111233310876b82ae7","Date":1787205028,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"7064db24281d114116f6eb6501b4995d9386e13b","Date":1787201239,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"ad8e0a77eb85fa06f9d6ac1ad4e53649282490da","Date":1784054022,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]},
   {"Version":"0e243279b41ecda1ac8403be9458e88e8588c8d4","Date":1783677309,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"6d9684c78996908ad749f5ef17839518087e9d6e","Date":1783677207,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"08ab9316e5d6f816609eb0565287ef277e29efde","Date":1783676454,"Tags":["ref=refs/heads/renovate/schneegans-dynamic-badges-action-1.x"],"Suites":[]},
-  {"Version":"27c505f56686bd4ddaa8fa298d127d2f6ed00d58","Date":1783490191,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]}
+  {"Version":"08ab9316e5d6f816609eb0565287ef277e29efde","Date":1783676454,"Tags":["ref=refs/heads/renovate/schneegans-dynamic-badges-action-1.x"],"Suites":[]}
 ]
