@@ -620,7 +620,7 @@ func (config *Config) MergeElement(elementPtr *element.Element) error {
 
 // Exist checks if an element with the given ID exists in the config.
 func (config *Config) Exist(elementID string) bool {
-        <span class="cov6" title="82">config.ElementsMutex.RLock()
+        <span class="cov6" title="83">config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
 </span>
         <span class="cov6" title="83">result := reflect.DeepEqual(config.Elements[elementID], element.Element{})
@@ -2042,7 +2042,7 @@ func (g *Geofabrik) handleHTMLExtension(sub *colly.HTMLElement, href, myID strin
 
         <span class="cov9" title="19">slog.Debug("Add", "href", href)
 </span>
-        <span class="cov9" title="19">if err := myCollector.Visit(href); err != nil &amp;&amp; !errors.Is(err, &amp;colly.AlreadyVisitedError{}) </span>{
+        <span class="cov9" title="18">if err := myCollector.Visit(href); err != nil &amp;&amp; !errors.Is(err, &amp;colly.AlreadyVisitedError{}) </span>{
                 <span class="cov0" title="0">slog.Error("Can't get url", "error", err)
 </span>        }
 }
