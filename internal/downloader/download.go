@@ -2,6 +2,8 @@ package download
 
 import (
 	"context"
+	"crypto/md5" //nolint:gosec // MD5 is used to control with md5sum files
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"io"
@@ -10,6 +12,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"sync"
 	"time"
 
 	pb "github.com/cheggaaa/pb/v3"
@@ -37,9 +40,10 @@ var (
 
 // Downloader handles downloading files.
 type Downloader struct {
-	Config  *config.Config
-	Options *config.Options
-	client  *http.Client
+	Config   *config.Config
+	Options  *config.Options
+	client   *http.Client
+	lastHash sync.Map // map[string]string: filePath -> hexMD5 computed in-flight
 }
 
 // NewDownloader creates a new Downloader with connection pooling and high-throughput buffers.
@@ -130,7 +134,7 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 	return written, nil
 }
 
-// saveToFile saves the response body to a file atomically with progress bar support.
+// saveToFile saves the response body to a file atomically with single-pass MD5 computation and progress bar support.
 func (d *Downloader) saveToFile(fileName string, response *http.Response) (err error) {
 	if dir := filepath.Dir(fileName); dir != "" {
 		if merr := os.MkdirAll(dir, dirMode); merr != nil {
@@ -156,7 +160,10 @@ func (d *Downloader) saveToFile(fileName string, response *http.Response) (err e
 		}
 	}()
 
-	currentProgress, err := d.copyBody(file, response)
+	hasher := md5.New() //nolint:gosec // MD5 is used for checksum control with provider md5 files
+	writer := io.MultiWriter(file, hasher)
+
+	currentProgress, err := d.copyBody(writer, response)
 	if err != nil {
 		return fmt.Errorf("error while writing %s - %w", tmpFileName, err)
 	}
@@ -170,6 +177,10 @@ func (d *Downloader) saveToFile(fileName string, response *http.Response) (err e
 	if err := os.Rename(tmpFileName, fileName); err != nil {
 		return fmt.Errorf("error while renaming %s to %s - %w", tmpFileName, fileName, err)
 	}
+
+	var digest [md5.Size]byte
+	hasher.Sum(digest[:0])
+	d.lastHash.Store(fileName, hex.EncodeToString(digest[:]))
 
 	slog.Info("Downloaded", "file", fileName)
 	slog.Debug("Bytes downloaded", "bytes", currentProgress)
@@ -214,42 +225,72 @@ func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, ou
 	return nil
 }
 
-// Checksum downloads and verifies the checksum of a file.
+func (d *Downloader) verifyChecksum(targetFile, hashFile string) bool {
+	cachedVal, ok := d.lastHash.LoadAndDelete(targetFile)
+	if !ok {
+		return VerifyFileChecksum(targetFile, hashFile)
+	}
+
+	cachedDigest, isStr := cachedVal.(string)
+	if !isStr || cachedDigest == "" {
+		return VerifyFileChecksum(targetFile, hashFile)
+	}
+
+	slog.Debug("Using in-flight computed MD5", "file", targetFile, "hash", cachedDigest)
+
+	ret, err := CheckFileHash(hashFile, cachedDigest)
+	if err != nil {
+		slog.Error("Checksum error", "error", err)
+	}
+
+	if ret {
+		slog.Info("Checksum OK", "file", targetFile)
+	} else {
+		slog.Warn("Checksum MISMATCH", "file", targetFile)
+	}
+
+	return ret
+}
+
+// Checksum downloads and verifies the checksum of a file, using in-flight computed MD5 when available.
 func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string) bool {
 	if !d.Options.Check {
+		return false
+	}
+
+	ok, _, _ := config.IsHashable(d.Config, formatName)
+	if !ok {
+		slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+formatName)
+
 		return false
 	}
 
 	hashType := "md5"
 	fhash := formatName + "." + hashType
 
-	if ok, _, _ := config.IsHashable(d.Config, formatName); ok {
-		myElem, err := config.FindElem(d.Config, elementID)
-		if err != nil {
-			slog.Error("Element not found", "element", elementID, "error", err)
+	myElem, err := config.FindElem(d.Config, elementID)
+	if err != nil {
+		slog.Error("Element not found", "element", elementID, "error", err)
 
-			return false
-		}
-
-		myURL, err := config.Elem2URL(d.Config, myElem, fhash)
-		if err != nil {
-			slog.Error("URL generation failed", "error", err)
-
-			return false
-		}
-
-		outputPath := d.Options.OutputDirectory + elementID
-
-		if e := d.FromURL(ctx, myURL, outputPath+"."+fhash); e != nil {
-			slog.Error("Checksum download failed", "error", e)
-
-			return false
-		}
-
-		return VerifyFileChecksum(outputPath+"."+d.Config.Formats[formatName].ID, outputPath+"."+fhash)
+		return false
 	}
 
-	slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+formatName)
+	myURL, err := config.Elem2URL(d.Config, myElem, fhash)
+	if err != nil {
+		slog.Error("URL generation failed", "error", err)
 
-	return false
+		return false
+	}
+
+	outputPath := d.Options.OutputDirectory + elementID
+	targetFile := outputPath + "." + d.Config.Formats[formatName].ID
+	hashFile := outputPath + "." + fhash
+
+	if e := d.FromURL(ctx, myURL, hashFile); e != nil {
+		slog.Error("Checksum download failed", "error", e)
+
+		return false
+	}
+
+	return d.verifyChecksum(targetFile, hashFile)
 }

@@ -23,7 +23,7 @@ func RegisterGenerateCmd() {
 	generateCmd.Flags().BoolVarP(&generateProgress, "progress", "p", true, "Show progress bar")
 }
 
-func runGenerate(_ *cobra.Command, _ []string) error {
+func runGenerate(cmd *cobra.Command, _ []string) error {
 	cfgFile := viper.ConfigFileUsed()
 	if cfgFile == "" {
 		if service != "" {
@@ -35,7 +35,7 @@ func runGenerate(_ *cobra.Command, _ []string) error {
 
 	slog.Info("Generating config", "service", service, "file", cfgFile)
 
-	if err := generator.Generate(service, generateProgress, cfgFile); err != nil {
+	if err := generator.GenerateContext(cmd.Context(), service, generateProgress, cfgFile); err != nil {
 		slog.Error("Generation failed", "error", err)
 
 		return fmt.Errorf("generation failed: %w", err)
