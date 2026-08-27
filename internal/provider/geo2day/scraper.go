@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
@@ -20,9 +21,11 @@ const (
 	DefaultConfigFile  = "geo2day.yml"
 	BaseURL            = "https://geo2day.com"
 	StartURL           = "https://geo2day.com/"
-	defaultTimeout     = 30 * time.Second
+	defaultTimeout     = 15 * time.Second
 	defaultKeepAlive   = 30 * time.Second
 	defaultIdleTimeout = 90 * time.Second
+	concurrencyLimit   = 25
+	workChanCapacity   = 1000
 	minExtParts        = 2
 	minGeo2DayParts    = 4
 )
@@ -96,9 +99,93 @@ var exceptionList = []struct {
 	{"georgia", "us"},
 }
 
-// FetchCatalog scrapes the Geo2Day index and builds a catalog.Catalog.
+// FetchCatalog scrapes the Geo2Day index concurrently and builds a catalog.Catalog.
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.StartURL, http.NoBody)
+	cat := catalog.New()
+	cat.BaseURL = p.BaseURL
+	cat.Formats = DefaultFormats()
+
+	var (
+		visitedMu     sync.Mutex
+		visited       = make(map[string]bool)
+		workChan      = make(chan string, workChanCapacity)
+		activeWorkers sync.WaitGroup
+		errOnce       sync.Once
+		firstErr      error
+	)
+
+	sem := make(chan struct{}, concurrencyLimit)
+
+	recordErr := func(err error) {
+		errOnce.Do(func() {
+			firstErr = err
+		})
+	}
+
+	enqueue := func(targetURL string) {
+		visitedMu.Lock()
+		if visited[targetURL] {
+			visitedMu.Unlock()
+
+			return
+		}
+
+		visited[targetURL] = true
+		visitedMu.Unlock()
+
+		activeWorkers.Add(1)
+
+		go func() {
+			workChan <- targetURL
+		}()
+	}
+
+	enqueue(p.StartURL)
+
+	go func() {
+		for target := range workChan {
+			select {
+			case <-ctx.Done():
+				recordErr(fmt.Errorf("crawl context canceled: %w", ctx.Err()))
+				activeWorkers.Done()
+
+				continue
+
+			case sem <- struct{}{}:
+			}
+
+			go func(pageURL string) {
+				defer func() {
+					<-sem
+					activeWorkers.Done()
+				}()
+
+				subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
+				if err != nil {
+					recordErr(err)
+
+					return
+				}
+
+				for _, page := range subPages {
+					enqueue(page)
+				}
+			}(target)
+		}
+	}()
+
+	activeWorkers.Wait()
+	close(workChan)
+
+	if firstErr != nil {
+		return nil, firstErr
+	}
+
+	return cat, nil
+}
+
+func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
@@ -123,24 +210,73 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 		return nil, fmt.Errorf("cannot parse HTML: %w", err)
 	}
 
-	cat := catalog.New()
-	cat.BaseURL = p.BaseURL
-	cat.Formats = DefaultFormats()
+	var subPages []string
 
 	doc.Find("table td a").Each(func(_ int, selection *goquery.Selection) {
-		p.processLink(cat, selection)
+		href, exists := selection.Attr("href")
+		if !exists {
+			return
+		}
+
+		fullURL := p.resolveURL(href)
+		rawID, ext := splitFileExt(href)
+
+		if ext == "html" {
+			if strings.HasPrefix(fullURL, p.BaseURL) || strings.HasPrefix(fullURL, p.StartURL) {
+				subPages = append(subPages, fullURL)
+			}
+
+			p.processHTMLLink(cat, fullURL, rawID, selection.Text())
+
+			return
+		}
+
+		p.processFileLink(cat, href, rawID, ext, selection.Text())
 	})
 
-	return cat, nil
+	return subPages, nil
 }
 
-func (p *Provider) processLink(cat *catalog.Catalog, selection *goquery.Selection) {
-	href, exists := selection.Attr("href")
-	if !exists {
-		return
+func (p *Provider) resolveURL(ref string) string {
+	if strings.HasPrefix(ref, "http://") || strings.HasPrefix(ref, "https://") {
+		return ref
 	}
 
-	rawID, ext := splitFileExt(href)
+	trimmedBase := strings.TrimRight(p.BaseURL, "/")
+
+	if !strings.HasPrefix(ref, "/") {
+		ref = "/" + ref
+	}
+
+	return trimmedBase + ref
+}
+
+func (p *Provider) processHTMLLink(cat *catalog.Catalog, fullURL, rawID, name string) {
+	parent, parentPath := splitParent(fullURL)
+	elem := catalog.Element{
+		ID:     rawID,
+		Name:   name,
+		Parent: parent,
+		Meta:   true,
+	}
+
+	applyExceptions(&elem)
+
+	if !cat.Exist(parent) && parent != "" {
+		gparent, _ := splitParent(parentPath)
+		metaParent := catalog.Element{
+			ID:     parent,
+			Name:   parent,
+			Parent: gparent,
+			Meta:   true,
+		}
+		_ = cat.MergeElement(&metaParent)
+	}
+
+	_ = cat.MergeElement(&elem)
+}
+
+func (p *Provider) processFileLink(cat *catalog.Catalog, href, rawID, ext, name string) {
 	if rawID == "" {
 		return
 	}
@@ -148,15 +284,15 @@ func (p *Provider) processLink(cat *catalog.Catalog, selection *goquery.Selectio
 	parent, _ := splitParent(href)
 	elem := catalog.Element{
 		ID:     rawID,
-		Name:   selection.Text(),
+		Name:   name,
 		Parent: parent,
-		Meta:   ext == "html" || ext == "",
+		Meta:   false,
 	}
 
 	applyExceptions(&elem)
 	_ = cat.MergeElement(&elem)
 
-	if ext != "" && ext != "html" {
+	if ext != "" {
 		if ext == "pbf" {
 			ext = catalog.FormatOsmPbf
 		}

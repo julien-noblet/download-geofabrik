@@ -1,34 +1,34 @@
 formats:
-    csv:
-        ext: csv
+    csv.xz:
+        ext: csv.xz
         loc: .osm.csv.xz
         toloc: .osm.csv.xz
+    garmin-onroad.zip:
+        ext: garmin-onroad.zip
+        loc: .osm.garmin-onroad-latin1.zip
+    garmin-ontrail.zip:
+        ext: garmin-ontrail.zip
+        loc: .osm.garmin-ontrail-latin1.zip
+    garmin-opentopo.zip:
+        ext: garmin-opentopo.zip
+        loc: .osm.garmin-opentopo-latin1.zip
+    garmin-osm.zip:
+        ext: garmin-osm.zip
+        loc: .osm.garmin-osm.zip
     geojson:
         ext: geojson
         loc: .osm.geojson.xz
         toloc: .geojson.xz
-    mbtiles:
-        ext: mbtiles
+    mapsforge-osm.zip:
+        ext: mapsforge-osm.zip
+        loc: .osm.mapsforge-osm.zip
+    mbtiles.zip:
+        ext: mbtiles.zip
         loc: .osm.mbtiles-openmaptiles.zip
         toloc: osm.mbtiles-openmaptiles.zip
-    osm.garmin-onroad-latin1.zip:
-        ext: osm.garmin-onroad-latin1.zip
-        loc: .osm.garmin-onroad-latin1.zip
-    osm.garmin-ontrail-latin1.zip:
-        ext: osm.garmin-ontrail-latin1.zip
-        loc: .osm.garmin-ontrail-latin1.zip
-    osm.garmin-opentopo-latin1.zip:
-        ext: osm.garmin-opentopo-latin1.zip
-        loc: .osm.garmin-opentopo-latin1.zip
-    osm.garmin-osm.zip:
-        ext: osm.garmin-osm.zip
-        loc: .osm.garmin-osm.zip
     osm.gz:
         ext: osm.gz
         loc: .osm.gz
-    osm.mapsforge-osm.zip:
-        ext: osm.mapsforge-osm.zip
-        loc: .osm.mapsforge-osm.zip
     osm.pbf:
         ext: osm.pbf
         loc: .osm.pbf
@@ -44,15 +44,15 @@ elements:
         file: Aachen/Aachen
         name: Aachen
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -61,15 +61,15 @@ elements:
         file: Aarhus/Aarhus
         name: Aarhus
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -78,15 +78,15 @@ elements:
         file: Adelaide/Adelaide
         name: Adelaide
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -95,15 +95,15 @@ elements:
         file: Albuquerque/Albuquerque
         name: Albuquerque
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -112,15 +112,15 @@ elements:
         file: Alexandria/Alexandria
         name: Alexandria
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -129,15 +129,15 @@ elements:
         file: Amsterdam/Amsterdam
         name: Amsterdam
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -146,15 +146,15 @@ elements:
         file: Antwerpen/Antwerpen
         name: Antwerpen
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -163,15 +163,15 @@ elements:
         file: Arnhem/Arnhem
         name: Arnhem
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -180,15 +180,15 @@ elements:
         file: Auckland/Auckland
         name: Auckland
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -197,15 +197,15 @@ elements:
         file: Augsburg/Augsburg
         name: Augsburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -214,15 +214,15 @@ elements:
         file: Austin/Austin
         name: Austin
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -231,15 +231,15 @@ elements:
         file: Baghdad/Baghdad
         name: Baghdad
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -248,15 +248,15 @@ elements:
         file: Baku/Baku
         name: Baku
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -265,15 +265,15 @@ elements:
         file: Balaton/Balaton
         name: Balaton
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -282,15 +282,15 @@ elements:
         file: Bamberg/Bamberg
         name: Bamberg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -299,15 +299,15 @@ elements:
         file: Bangkok/Bangkok
         name: Bangkok
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -316,15 +316,15 @@ elements:
         file: Barcelona/Barcelona
         name: Barcelona
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -333,15 +333,15 @@ elements:
         file: Basel/Basel
         name: Basel
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -350,15 +350,15 @@ elements:
         file: Beijing/Beijing
         name: Beijing
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -367,15 +367,15 @@ elements:
         file: Beirut/Beirut
         name: Beirut
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -384,15 +384,15 @@ elements:
         file: Berkeley/Berkeley
         name: Berkeley
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -401,15 +401,15 @@ elements:
         file: Berlin/Berlin
         name: Berlin
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -418,15 +418,15 @@ elements:
         file: Bern/Bern
         name: Bern
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -435,15 +435,15 @@ elements:
         file: Bielefeld/Bielefeld
         name: Bielefeld
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -452,15 +452,15 @@ elements:
         file: Birmingham/Birmingham
         name: Birmingham
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -469,15 +469,15 @@ elements:
         file: Bochum/Bochum
         name: Bochum
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -486,15 +486,15 @@ elements:
         file: Bogota/Bogota
         name: Bogota
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -503,15 +503,15 @@ elements:
         file: Bombay/Bombay
         name: Bombay
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -520,15 +520,15 @@ elements:
         file: Bonn/Bonn
         name: Bonn
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -537,15 +537,15 @@ elements:
         file: Bordeaux/Bordeaux
         name: Bordeaux
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -554,15 +554,15 @@ elements:
         file: Boulder/Boulder
         name: Boulder
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -571,15 +571,15 @@ elements:
         file: BrandenburgHavel/BrandenburgHavel
         name: BrandenburgHavel
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -588,15 +588,15 @@ elements:
         file: Braunschweig/Braunschweig
         name: Braunschweig
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -605,15 +605,15 @@ elements:
         file: Bremen/Bremen
         name: Bremen
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -622,15 +622,15 @@ elements:
         file: Bremerhaven/Bremerhaven
         name: Bremerhaven
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -639,15 +639,15 @@ elements:
         file: Brisbane/Brisbane
         name: Brisbane
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -656,15 +656,15 @@ elements:
         file: Bristol/Bristol
         name: Bristol
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -673,15 +673,15 @@ elements:
         file: Brno/Brno
         name: Brno
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -690,15 +690,15 @@ elements:
         file: Bruegge/Bruegge
         name: Bruegge
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -707,15 +707,15 @@ elements:
         file: Bruessel/Bruessel
         name: Bruessel
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -724,15 +724,15 @@ elements:
         file: Budapest/Budapest
         name: Budapest
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -741,15 +741,15 @@ elements:
         file: BuenosAires/BuenosAires
         name: BuenosAires
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -758,15 +758,15 @@ elements:
         file: Cairo/Cairo
         name: Cairo
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -775,15 +775,15 @@ elements:
         file: Calgary/Calgary
         name: Calgary
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -792,15 +792,15 @@ elements:
         file: Cambridge/Cambridge
         name: Cambridge
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -809,15 +809,15 @@ elements:
         file: CambridgeMa/CambridgeMa
         name: CambridgeMa
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -826,15 +826,15 @@ elements:
         file: Canberra/Canberra
         name: Canberra
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -843,15 +843,15 @@ elements:
         file: CapeTown/CapeTown
         name: CapeTown
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -860,15 +860,15 @@ elements:
         file: Chemnitz/Chemnitz
         name: Chemnitz
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -877,15 +877,15 @@ elements:
         file: Chicago/Chicago
         name: Chicago
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -894,15 +894,15 @@ elements:
         file: ClermontFerrand/ClermontFerrand
         name: ClermontFerrand
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -911,15 +911,15 @@ elements:
         file: Colmar/Colmar
         name: Colmar
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -928,15 +928,15 @@ elements:
         file: Copenhagen/Copenhagen
         name: Copenhagen
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -945,15 +945,15 @@ elements:
         file: Cork/Cork
         name: Cork
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -962,15 +962,15 @@ elements:
         file: Corsica/Corsica
         name: Corsica
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -979,15 +979,15 @@ elements:
         file: Corvallis/Corvallis
         name: Corvallis
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -996,15 +996,15 @@ elements:
         file: Cottbus/Cottbus
         name: Cottbus
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1013,15 +1013,15 @@ elements:
         file: Cracow/Cracow
         name: Cracow
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1030,15 +1030,15 @@ elements:
         file: CraterLake/CraterLake
         name: CraterLake
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1047,15 +1047,15 @@ elements:
         file: Curitiba/Curitiba
         name: Curitiba
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1064,15 +1064,15 @@ elements:
         file: Cusco/Cusco
         name: Cusco
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1081,15 +1081,32 @@ elements:
         file: Dallas/Dallas
         name: Dallas
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
+            - osm.pbf
+            - poly
+            - shp.zip
+    Damaskus:
+        id: Damaskus
+        file: Damaskus/Damaskus
+        name: Damaskus
+        files:
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
+            - geojson
+            - mapsforge-osm.zip
+            - mbtiles.zip
+            - osm.gz
             - osm.pbf
             - poly
             - shp.zip
@@ -1098,15 +1115,15 @@ elements:
         file: Darmstadt/Darmstadt
         name: Darmstadt
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1115,15 +1132,15 @@ elements:
         file: Davis/Davis
         name: Davis
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1132,15 +1149,15 @@ elements:
         file: DenHaag/DenHaag
         name: DenHaag
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1149,15 +1166,15 @@ elements:
         file: Denver/Denver
         name: Denver
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1166,15 +1183,15 @@ elements:
         file: Dessau/Dessau
         name: Dessau
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1183,15 +1200,15 @@ elements:
         file: Dortmund/Dortmund
         name: Dortmund
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1200,15 +1217,15 @@ elements:
         file: Dresden/Dresden
         name: Dresden
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1217,15 +1234,15 @@ elements:
         file: Dublin/Dublin
         name: Dublin
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1234,15 +1251,15 @@ elements:
         file: Duesseldorf/Duesseldorf
         name: Duesseldorf
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1251,15 +1268,15 @@ elements:
         file: Duisburg/Duisburg
         name: Duisburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1268,15 +1285,15 @@ elements:
         file: Edinburgh/Edinburgh
         name: Edinburgh
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1285,15 +1302,15 @@ elements:
         file: Eindhoven/Eindhoven
         name: Eindhoven
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1302,15 +1319,15 @@ elements:
         file: Emden/Emden
         name: Emden
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1319,15 +1336,15 @@ elements:
         file: Erfurt/Erfurt
         name: Erfurt
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1336,15 +1353,15 @@ elements:
         file: Erlangen/Erlangen
         name: Erlangen
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1353,15 +1370,15 @@ elements:
         file: Eugene/Eugene
         name: Eugene
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1370,15 +1387,15 @@ elements:
         file: Flensburg/Flensburg
         name: Flensburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1387,15 +1404,15 @@ elements:
         file: FortCollins/FortCollins
         name: FortCollins
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1404,15 +1421,15 @@ elements:
         file: Frankfurt/Frankfurt
         name: Frankfurt
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1421,15 +1438,15 @@ elements:
         file: FrankfurtOder/FrankfurtOder
         name: FrankfurtOder
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1438,15 +1455,15 @@ elements:
         file: Freiburg/Freiburg
         name: Freiburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1455,15 +1472,15 @@ elements:
         file: Gdansk/Gdansk
         name: Gdansk
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1472,15 +1489,15 @@ elements:
         file: Genf/Genf
         name: Genf
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1489,15 +1506,15 @@ elements:
         file: Gent/Gent
         name: Gent
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1506,15 +1523,15 @@ elements:
         file: Gera/Gera
         name: Gera
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1523,15 +1540,15 @@ elements:
         file: Glasgow/Glasgow
         name: Glasgow
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1540,15 +1557,15 @@ elements:
         file: Gliwice/Gliwice
         name: Gliwice
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1557,15 +1574,15 @@ elements:
         file: Goerlitz/Goerlitz
         name: Goerlitz
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1574,15 +1591,15 @@ elements:
         file: Goeteborg/Goeteborg
         name: Goeteborg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1591,15 +1608,15 @@ elements:
         file: Goettingen/Goettingen
         name: Goettingen
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1608,15 +1625,15 @@ elements:
         file: Graz/Graz
         name: Graz
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1625,15 +1642,15 @@ elements:
         file: Groningen/Groningen
         name: Groningen
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1642,15 +1659,15 @@ elements:
         file: Halifax/Halifax
         name: Halifax
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1659,15 +1676,15 @@ elements:
         file: Halle/Halle
         name: Halle
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1676,15 +1693,15 @@ elements:
         file: Hamburg/Hamburg
         name: Hamburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1693,15 +1710,15 @@ elements:
         file: Hamm/Hamm
         name: Hamm
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1710,15 +1727,15 @@ elements:
         file: Hannover/Hannover
         name: Hannover
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1727,15 +1744,15 @@ elements:
         file: Heilbronn/Heilbronn
         name: Heilbronn
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1744,15 +1761,15 @@ elements:
         file: Helsinki/Helsinki
         name: Helsinki
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1761,15 +1778,15 @@ elements:
         file: Hertogenbosch/Hertogenbosch
         name: Hertogenbosch
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1778,15 +1795,15 @@ elements:
         file: Huntsville/Huntsville
         name: Huntsville
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1795,15 +1812,15 @@ elements:
         file: Innsbruck/Innsbruck
         name: Innsbruck
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1812,15 +1829,15 @@ elements:
         file: Istanbul/Istanbul
         name: Istanbul
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1829,15 +1846,15 @@ elements:
         file: Jena/Jena
         name: Jena
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1846,15 +1863,15 @@ elements:
         file: Jerusalem/Jerusalem
         name: Jerusalem
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1863,15 +1880,15 @@ elements:
         file: Johannesburg/Johannesburg
         name: Johannesburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1880,15 +1897,15 @@ elements:
         file: Kaiserslautern/Kaiserslautern
         name: Kaiserslautern
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1897,15 +1914,15 @@ elements:
         file: Karlsruhe/Karlsruhe
         name: Karlsruhe
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1914,15 +1931,15 @@ elements:
         file: Kassel/Kassel
         name: Kassel
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1931,15 +1948,15 @@ elements:
         file: Katowice/Katowice
         name: Katowice
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1948,15 +1965,15 @@ elements:
         file: Kaunas/Kaunas
         name: Kaunas
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1965,15 +1982,15 @@ elements:
         file: Kiel/Kiel
         name: Kiel
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1982,15 +1999,15 @@ elements:
         file: Kiew/Kiew
         name: Kiew
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -1999,15 +2016,15 @@ elements:
         file: Koblenz/Koblenz
         name: Koblenz
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2016,15 +2033,15 @@ elements:
         file: Koeln/Koeln
         name: Koeln
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2033,15 +2050,15 @@ elements:
         file: Konstanz/Konstanz
         name: Konstanz
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2050,15 +2067,15 @@ elements:
         file: LaPaz/LaPaz
         name: LaPaz
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2067,15 +2084,15 @@ elements:
         file: LaPlata/LaPlata
         name: LaPlata
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2084,15 +2101,15 @@ elements:
         file: LakeGarda/LakeGarda
         name: LakeGarda
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2101,15 +2118,15 @@ elements:
         file: Lausanne/Lausanne
         name: Lausanne
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2118,15 +2135,15 @@ elements:
         file: Leeds/Leeds
         name: Leeds
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2135,15 +2152,15 @@ elements:
         file: Leipzig/Leipzig
         name: Leipzig
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2152,15 +2169,15 @@ elements:
         file: Lima/Lima
         name: Lima
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2169,15 +2186,15 @@ elements:
         file: Linz/Linz
         name: Linz
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2186,15 +2203,15 @@ elements:
         file: Lisbon/Lisbon
         name: Lisbon
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2203,15 +2220,15 @@ elements:
         file: Liverpool/Liverpool
         name: Liverpool
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2220,15 +2237,15 @@ elements:
         file: Ljubljana/Ljubljana
         name: Ljubljana
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2237,15 +2254,15 @@ elements:
         file: Lodz/Lodz
         name: Lodz
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2254,15 +2271,15 @@ elements:
         file: London/London
         name: London
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2271,15 +2288,15 @@ elements:
         file: LosAngeles/LosAngeles
         name: LosAngeles
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2288,15 +2305,15 @@ elements:
         file: Luebeck/Luebeck
         name: Luebeck
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2305,15 +2322,15 @@ elements:
         file: Luxemburg/Luxemburg
         name: Luxemburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2322,15 +2339,15 @@ elements:
         file: Lyon/Lyon
         name: Lyon
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2339,15 +2356,15 @@ elements:
         file: Maastricht/Maastricht
         name: Maastricht
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2356,15 +2373,15 @@ elements:
         file: Madison/Madison
         name: Madison
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2373,15 +2390,15 @@ elements:
         file: Madrid/Madrid
         name: Madrid
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2390,15 +2407,15 @@ elements:
         file: Magdeburg/Magdeburg
         name: Magdeburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2407,15 +2424,15 @@ elements:
         file: Mainz/Mainz
         name: Mainz
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2424,15 +2441,15 @@ elements:
         file: Malmoe/Malmoe
         name: Malmoe
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2441,15 +2458,15 @@ elements:
         file: Manchester/Manchester
         name: Manchester
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2458,15 +2475,15 @@ elements:
         file: Mannheim/Mannheim
         name: Mannheim
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2475,15 +2492,15 @@ elements:
         file: Marseille/Marseille
         name: Marseille
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2492,15 +2509,15 @@ elements:
         file: Melbourne/Melbourne
         name: Melbourne
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2509,15 +2526,15 @@ elements:
         file: Memphis/Memphis
         name: Memphis
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2526,15 +2543,15 @@ elements:
         file: MexicoCity/MexicoCity
         name: MexicoCity
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2543,15 +2560,15 @@ elements:
         file: Miami/Miami
         name: Miami
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2560,15 +2577,15 @@ elements:
         file: Minsk/Minsk
         name: Minsk
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2577,15 +2594,15 @@ elements:
         file: Moenchengladbach/Moenchengladbach
         name: Moenchengladbach
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2594,15 +2611,15 @@ elements:
         file: Montevideo/Montevideo
         name: Montevideo
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2611,15 +2628,15 @@ elements:
         file: Montpellier/Montpellier
         name: Montpellier
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2628,15 +2645,15 @@ elements:
         file: Montreal/Montreal
         name: Montreal
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2645,15 +2662,15 @@ elements:
         file: Moscow/Moscow
         name: Moscow
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2662,15 +2679,15 @@ elements:
         file: Muenchen/Muenchen
         name: Muenchen
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2679,15 +2696,15 @@ elements:
         file: Muenster/Muenster
         name: Muenster
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2696,15 +2713,15 @@ elements:
         file: NewDelhi/NewDelhi
         name: NewDelhi
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2713,15 +2730,15 @@ elements:
         file: NewOrleans/NewOrleans
         name: NewOrleans
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2730,15 +2747,15 @@ elements:
         file: NewYork/NewYork
         name: NewYork
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2747,15 +2764,15 @@ elements:
         file: Nuernberg/Nuernberg
         name: Nuernberg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2764,15 +2781,15 @@ elements:
         file: Oldenburg/Oldenburg
         name: Oldenburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2781,15 +2798,15 @@ elements:
         file: Oranienburg/Oranienburg
         name: Oranienburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2798,15 +2815,15 @@ elements:
         file: Orlando/Orlando
         name: Orlando
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2815,15 +2832,15 @@ elements:
         file: Oslo/Oslo
         name: Oslo
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2832,15 +2849,15 @@ elements:
         file: Osnabrueck/Osnabrueck
         name: Osnabrueck
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2849,15 +2866,15 @@ elements:
         file: Ostrava/Ostrava
         name: Ostrava
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2866,15 +2883,15 @@ elements:
         file: Ottawa/Ottawa
         name: Ottawa
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2883,15 +2900,15 @@ elements:
         file: Paderborn/Paderborn
         name: Paderborn
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2900,15 +2917,15 @@ elements:
         file: Palma/Palma
         name: Palma
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2917,15 +2934,15 @@ elements:
         file: PaloAlto/PaloAlto
         name: PaloAlto
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2934,15 +2951,15 @@ elements:
         file: Paris/Paris
         name: Paris
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2951,15 +2968,15 @@ elements:
         file: Perth/Perth
         name: Perth
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2968,15 +2985,15 @@ elements:
         file: Philadelphia/Philadelphia
         name: Philadelphia
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -2985,15 +3002,15 @@ elements:
         file: PhnomPenh/PhnomPenh
         name: PhnomPenh
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3002,15 +3019,15 @@ elements:
         file: Portland/Portland
         name: Portland
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3019,15 +3036,15 @@ elements:
         file: PortlandME/PortlandME
         name: PortlandME
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3036,15 +3053,15 @@ elements:
         file: Porto/Porto
         name: Porto
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3053,15 +3070,15 @@ elements:
         file: PortoAlegre/PortoAlegre
         name: PortoAlegre
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3070,15 +3087,15 @@ elements:
         file: Potsdam/Potsdam
         name: Potsdam
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3087,15 +3104,15 @@ elements:
         file: Poznan/Poznan
         name: Poznan
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3104,15 +3121,15 @@ elements:
         file: Prag/Prag
         name: Prag
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3121,15 +3138,15 @@ elements:
         file: Providence/Providence
         name: Providence
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3138,15 +3155,15 @@ elements:
         file: Regensburg/Regensburg
         name: Regensburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3155,15 +3172,15 @@ elements:
         file: Riga/Riga
         name: Riga
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3172,15 +3189,15 @@ elements:
         file: RiodeJaneiro/RiodeJaneiro
         name: RiodeJaneiro
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3189,15 +3206,15 @@ elements:
         file: Rostock/Rostock
         name: Rostock
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3206,15 +3223,15 @@ elements:
         file: Rotterdam/Rotterdam
         name: Rotterdam
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3223,15 +3240,15 @@ elements:
         file: Ruegen/Ruegen
         name: Ruegen
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3240,15 +3257,15 @@ elements:
         file: Saarbruecken/Saarbruecken
         name: Saarbruecken
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3257,15 +3274,15 @@ elements:
         file: Sacramento/Sacramento
         name: Sacramento
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3274,15 +3291,15 @@ elements:
         file: Saigon/Saigon
         name: Saigon
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3291,15 +3308,15 @@ elements:
         file: Salzburg/Salzburg
         name: Salzburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3308,15 +3325,15 @@ elements:
         file: SanFrancisco/SanFrancisco
         name: SanFrancisco
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3325,15 +3342,15 @@ elements:
         file: SanJose/SanJose
         name: SanJose
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3342,15 +3359,15 @@ elements:
         file: SanktPetersburg/SanktPetersburg
         name: SanktPetersburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3359,15 +3376,15 @@ elements:
         file: SantaBarbara/SantaBarbara
         name: SantaBarbara
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3376,15 +3393,15 @@ elements:
         file: SantaCruz/SantaCruz
         name: SantaCruz
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3393,15 +3410,15 @@ elements:
         file: Santiago/Santiago
         name: Santiago
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3410,15 +3427,15 @@ elements:
         file: Sarajewo/Sarajewo
         name: Sarajewo
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3427,15 +3444,15 @@ elements:
         file: Schwerin/Schwerin
         name: Schwerin
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3444,15 +3461,15 @@ elements:
         file: Seattle/Seattle
         name: Seattle
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3461,15 +3478,15 @@ elements:
         file: Seoul/Seoul
         name: Seoul
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3478,15 +3495,15 @@ elements:
         file: Sheffield/Sheffield
         name: Sheffield
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3495,15 +3512,15 @@ elements:
         file: Singapore/Singapore
         name: Singapore
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3512,15 +3529,15 @@ elements:
         file: Sofia/Sofia
         name: Sofia
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3529,15 +3546,15 @@ elements:
         file: Stockholm/Stockholm
         name: Stockholm
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3546,15 +3563,15 @@ elements:
         file: Stockton/Stockton
         name: Stockton
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3563,15 +3580,15 @@ elements:
         file: Strassburg/Strassburg
         name: Strassburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3580,15 +3597,15 @@ elements:
         file: Stuttgart/Stuttgart
         name: Stuttgart
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3597,15 +3614,15 @@ elements:
         file: Sucre/Sucre
         name: Sucre
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3614,15 +3631,15 @@ elements:
         file: Sydney/Sydney
         name: Sydney
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3631,15 +3648,15 @@ elements:
         file: Szczecin/Szczecin
         name: Szczecin
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3648,15 +3665,15 @@ elements:
         file: Tallinn/Tallinn
         name: Tallinn
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3665,15 +3682,15 @@ elements:
         file: Tehran/Tehran
         name: Tehran
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3682,15 +3699,15 @@ elements:
         file: Tilburg/Tilburg
         name: Tilburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3699,15 +3716,15 @@ elements:
         file: Tokyo/Tokyo
         name: Tokyo
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3716,15 +3733,15 @@ elements:
         file: Toronto/Toronto
         name: Toronto
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3733,15 +3750,15 @@ elements:
         file: Toulouse/Toulouse
         name: Toulouse
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3750,15 +3767,15 @@ elements:
         file: Trondheim/Trondheim
         name: Trondheim
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3767,15 +3784,15 @@ elements:
         file: Tucson/Tucson
         name: Tucson
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3784,15 +3801,15 @@ elements:
         file: Turin/Turin
         name: Turin
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3801,15 +3818,15 @@ elements:
         file: UlanBator/UlanBator
         name: UlanBator
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3818,15 +3835,15 @@ elements:
         file: Ulm/Ulm
         name: Ulm
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3835,15 +3852,15 @@ elements:
         file: Usedom/Usedom
         name: Usedom
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3852,15 +3869,15 @@ elements:
         file: Utrecht/Utrecht
         name: Utrecht
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3869,15 +3886,15 @@ elements:
         file: Vancouver/Vancouver
         name: Vancouver
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3886,15 +3903,15 @@ elements:
         file: Victoria/Victoria
         name: Victoria
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3903,15 +3920,15 @@ elements:
         file: WarenMueritz/WarenMueritz
         name: WarenMueritz
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3920,15 +3937,15 @@ elements:
         file: Warsaw/Warsaw
         name: Warsaw
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3937,15 +3954,15 @@ elements:
         file: WashingtonDC/WashingtonDC
         name: WashingtonDC
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3954,15 +3971,15 @@ elements:
         file: Waterloo/Waterloo
         name: Waterloo
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3971,15 +3988,15 @@ elements:
         file: Wien/Wien
         name: Wien
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -3988,15 +4005,15 @@ elements:
         file: Wroclaw/Wroclaw
         name: Wroclaw
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -4005,15 +4022,15 @@ elements:
         file: Wuerzburg/Wuerzburg
         name: Wuerzburg
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -4022,15 +4039,15 @@ elements:
         file: Wuppertal/Wuppertal
         name: Wuppertal
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -4039,15 +4056,15 @@ elements:
         file: Zagreb/Zagreb
         name: Zagreb
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip
@@ -4056,15 +4073,15 @@ elements:
         file: Zuerich/Zuerich
         name: Zuerich
         files:
-            - csv
+            - csv.xz
+            - garmin-onroad.zip
+            - garmin-ontrail.zip
+            - garmin-opentopo.zip
+            - garmin-osm.zip
             - geojson
-            - mbtiles
-            - osm.garmin-onroad-latin1.zip
-            - osm.garmin-ontrail-latin1.zip
-            - osm.garmin-opentopo-latin1.zip
-            - osm.garmin-osm.zip
+            - mapsforge-osm.zip
+            - mbtiles.zip
             - osm.gz
-            - osm.mapsforge-osm.zip
             - osm.pbf
             - poly
             - shp.zip

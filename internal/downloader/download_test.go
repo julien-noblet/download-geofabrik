@@ -2,6 +2,10 @@ package download_test
 
 import (
 	"context"
+	"crypto/md5" //nolint:gosec // MD5 used by Geofabrik checksum format
+	"fmt"
+	"net/http"
+	"net/http/httptest"
 	"os"
 	"path/filepath"
 	"testing"
@@ -15,49 +19,49 @@ import (
 func Test_DownloadFromURL(t *testing.T) {
 	t.Parallel()
 
-	type args struct {
-		myURL string
-	}
-
 	tests := []struct {
 		name        string
-		args        args
+		path        string
 		fNodownload bool
 		fQuiet      bool
 		fProgress   bool
 		wantErr     bool
 	}{
 		{
-			name: "try fNodownload=true",
-			args: args{
-				myURL: "https://download.geofabrik.de/this_url_should_not_exist",
-			},
+			name:        "try fNodownload=true",
+			path:        "/this_url_should_not_exist",
 			fNodownload: true,
 			wantErr:     false,
 		},
 		{
-			name:        "404 error from geofabrik",
+			name:        "404 error from server",
+			path:        "/this_url_should_not_exist",
 			fNodownload: false,
-			args: args{
-				myURL: "https://download.geofabrik.de/this_url_should_not_exist",
-			},
-			wantErr: true,
+			wantErr:     true,
 		},
 		{
-			name:        "OK download from geofabrik",
+			name:        "OK download from mock server",
+			path:        "/europe/andorra.poly",
 			fNodownload: false,
 			fQuiet:      false,
 			fProgress:   true,
-			args: args{
-				myURL: "https://download.geofabrik.de/europe/andorra.poly",
-			},
-			wantErr: false,
+			wantErr:     false,
 		},
 	}
 
 	for _, thisTest := range tests {
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
+
+			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				switch r.URL.Path {
+				case "/europe/andorra.poly":
+					_, _ = w.Write([]byte("andorra poly content"))
+				default:
+					http.NotFound(w, r)
+				}
+			}))
+			defer ts.Close()
 
 			tmpDir := t.TempDir()
 			targetFile := filepath.Join(tmpDir, "download.test")
@@ -69,11 +73,11 @@ func Test_DownloadFromURL(t *testing.T) {
 				OutputDirectory: tmpDir + "/",
 				FormatFlags:     make(map[string]bool),
 			}
-			cfg := &config.Config{} // Empty config for FromURL
+			cfg := &config.Config{}
 
 			d := download.NewDownloader(cfg, opts)
 
-			if err := d.FromURL(context.Background(), thisTest.args.myURL, targetFile); (err != nil) != thisTest.wantErr {
+			if err := d.FromURL(context.Background(), ts.URL+thisTest.path, targetFile); (err != nil) != thisTest.wantErr {
 				t.Errorf("Downloader.FromURL() error = %v, wantErr %v", err, thisTest.wantErr)
 			}
 		})
@@ -83,32 +87,16 @@ func Test_DownloadFromURL(t *testing.T) {
 func TestFile(t *testing.T) {
 	t.Parallel()
 
-	type args struct {
-		configPtr *config.Config
-		element   string
-		format    string
-	}
-
 	tests := []struct {
 		name    string
-		args    args
+		element string
+		format  string
 		wantErr bool
 	}{
 		{
-			name: "TestFile",
-			args: args{
-				configPtr: &config.Config{
-					Formats: formats.FormatDefinitions{
-						formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "polygons/", BaseURL: ""},
-					},
-					Elements: element.MapElement{
-						"africa": element.Element{ID: "africa", Name: "Africa", Formats: []string{formats.FormatPoly}},
-					},
-					BaseURL: `https://download.openstreetmap.fr/`,
-				},
-				element: "africa",
-				format:  formats.FormatPoly,
-			},
+			name:    "TestFile",
+			element: "africa",
+			format:  formats.FormatPoly,
 			wantErr: false,
 		},
 	}
@@ -116,6 +104,26 @@ func TestFile(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
+
+			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				switch r.URL.Path {
+				case "/polygons/africa.poly", "//polygons/africa.poly":
+					_, _ = w.Write([]byte("africa poly data"))
+				default:
+					http.NotFound(w, r)
+				}
+			}))
+			defer ts.Close()
+
+			cfg := &config.Config{
+				Formats: formats.FormatDefinitions{
+					formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "polygons/", BaseURL: ""},
+				},
+				Elements: element.MapElement{
+					"africa": element.Element{ID: "africa", Name: "Africa", Formats: []string{formats.FormatPoly}},
+				},
+				BaseURL: ts.URL + "/",
+			}
 
 			tmpDir := t.TempDir()
 			outputFile := filepath.Join(tmpDir, "download.test")
@@ -126,9 +134,9 @@ func TestFile(t *testing.T) {
 				FormatFlags:     make(map[string]bool),
 			}
 
-			d := download.NewDownloader(tt.args.configPtr, opts)
+			d := download.NewDownloader(cfg, opts)
 
-			err := d.DownloadFile(context.Background(), tt.args.element, tt.args.format, outputFile)
+			err := d.DownloadFile(context.Background(), tt.element, tt.format, outputFile)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("DownloadFile() error = %v, wantErr %v", err, tt.wantErr)
 			}
@@ -139,37 +147,23 @@ func TestFile(t *testing.T) {
 func TestChecksum(t *testing.T) {
 	t.Parallel()
 
-	tmpDir := t.TempDir()
+	testData := []byte("dummy pbf content for checksum test")
+	hash := md5.Sum(testData) //nolint:gosec // MD5 used by Geofabrik checksum format
+	md5Content := fmt.Sprintf("%x  monaco-latest.osm.pbf\n", hash)
 
-	cfg := &config.Config{
-		Formats: formats.FormatDefinitions{
-			formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
-			"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-			formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly"},
-		},
-		Elements: element.MapElement{
-			"monaco": element.Element{ID: "monaco", Name: "Monaco", Formats: []string{formats.FormatOsmPbf, "osm.pbf.md5", formats.FormatPoly}},
-		},
-		BaseURL: "https://download.geofabrik.de/europe",
+	makeServer := func() *httptest.Server {
+		return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			switch r.URL.Path {
+			case "/europe/monaco-latest.osm.pbf":
+				_, _ = w.Write(testData)
+			case "/europe/monaco-latest.osm.pbf.md5":
+				_, _ = w.Write([]byte(md5Content))
+			default:
+				http.NotFound(w, r)
+			}
+		}))
 	}
 
-	opts := &config.Options{
-		Check:           true,
-		OutputDirectory: tmpDir + "/",
-		FormatFlags:     make(map[string]bool),
-	}
-
-	d := download.NewDownloader(cfg, opts)
-
-	// Download monaco first into tmpDir
-	targetFile := filepath.Join(tmpDir, "monaco.osm.pbf")
-
-	err := d.DownloadFile(context.Background(), "monaco", formats.FormatOsmPbf, targetFile)
-	if err != nil {
-		t.Fatalf("Failed setup download: %v", err)
-	}
-
-	// Test Checksum
 	tests := []struct {
 		name   string
 		format string
@@ -185,13 +179,34 @@ func TestChecksum(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			// Isolate options per parallel subtest to prevent data races
+			ts := makeServer()
+			defer ts.Close()
+
+			tmpDir := t.TempDir()
+			cfg := &config.Config{
+				Formats: formats.FormatDefinitions{
+					formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+					"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+					formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly"},
+				},
+				Elements: element.MapElement{
+					"monaco": element.Element{ID: "monaco", Name: "Monaco", Formats: []string{formats.FormatOsmPbf, "osm.pbf.md5", formats.FormatPoly}},
+				},
+				BaseURL: ts.URL + "/europe",
+			}
+
 			subOpts := &config.Options{
 				Check:           tt.check,
 				OutputDirectory: tmpDir + "/",
 				FormatFlags:     make(map[string]bool),
 			}
 			subDownloader := download.NewDownloader(cfg, subOpts)
+			targetFile := filepath.Join(tmpDir, "monaco.osm.pbf")
+
+			err := subDownloader.DownloadFile(context.Background(), "monaco", formats.FormatOsmPbf, targetFile)
+			if err != nil {
+				t.Fatalf("Failed setup download: %v", err)
+			}
 
 			got := subDownloader.Checksum(context.Background(), "monaco", tt.format)
 			if got != tt.want {
@@ -202,6 +217,18 @@ func TestChecksum(t *testing.T) {
 
 	t.Run("Checksum with non-existent element", func(t *testing.T) {
 		t.Parallel()
+
+		ts := makeServer()
+		defer ts.Close()
+
+		tmpDir := t.TempDir()
+		cfg := &config.Config{
+			Formats: formats.FormatDefinitions{
+				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+			},
+			Elements: element.MapElement{},
+			BaseURL:  ts.URL + "/europe",
+		}
 
 		subOpts := &config.Options{Check: true, OutputDirectory: tmpDir + "/"}
 		subDownloader := download.NewDownloader(cfg, subOpts)
@@ -214,6 +241,20 @@ func TestChecksum(t *testing.T) {
 
 	t.Run("Checksum with check=false", func(t *testing.T) {
 		t.Parallel()
+
+		ts := makeServer()
+		defer ts.Close()
+
+		tmpDir := t.TempDir()
+		cfg := &config.Config{
+			Formats: formats.FormatDefinitions{
+				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+			},
+			Elements: element.MapElement{
+				"monaco": element.Element{ID: "monaco", Name: "Monaco", Formats: []string{formats.FormatOsmPbf}},
+			},
+			BaseURL: ts.URL + "/europe",
+		}
 
 		subOpts := &config.Options{Check: false, OutputDirectory: tmpDir + "/"}
 		subDownloader := download.NewDownloader(cfg, subOpts)
