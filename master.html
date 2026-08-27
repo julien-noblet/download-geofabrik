@@ -2692,7 +2692,7 @@ func GetMiniFormats(fullFormatNames []string) string {
 </span>
         <span class="cov6" title="28">for _, fullName := range fullFormatNames </span>{
                 <span class="cov7" title="44">for _, format := range miniFormats </span>{
-                        <span class="cov10" title="228">if fullName == format.FullName </span>{
+                        <span class="cov10" title="215">if fullName == format.FullName </span>{
                                 <span class="cov7" title="39">shortNames = append(shortNames, format.ShortName)
 </span>
                                 <span class="cov7" title="39">break</span>
@@ -2729,7 +2729,7 @@ func GetFormats(config map[string]bool) []string {
 </span>
         <span class="cov5" title="13">for key, format := range options </span>{
                 <span class="cov9" title="208">if enabled, ok := config[key]; ok &amp;&amp; enabled </span>{
-                        <span class="cov4" title="11">formatList = append(formatList, format)
+                        <span class="cov5" title="11">formatList = append(formatList, format)
 </span>                }
         }
 
