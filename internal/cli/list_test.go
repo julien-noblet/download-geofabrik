@@ -6,7 +6,6 @@ import (
 
 	"github.com/julien-noblet/download-geofabrik/internal/cli"
 	"github.com/spf13/viper"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -49,5 +48,11 @@ func TestListCmd(t *testing.T) {
 	cli.RootCmd.SetArgs([]string{"list", "--config", configFile, "--markdown"})
 
 	err = cli.Execute()
-	assert.NoError(t, err)
+	require.NoError(t, err)
+
+	// Test json list
+	cli.RootCmd.SetArgs([]string{"list", "--config", configFile, "--json"})
+
+	err = cli.Execute()
+	require.NoError(t, err)
 }
