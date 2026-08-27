@@ -1,4 +1,5 @@
 [
+  {"Version":"e3567be7e8068324bf85e07f06f982990b8fc81c","Date":1787838047,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
   {"Version":"fa9385d36b0c26e3c0cfa5b1c643fbae2e780263","Date":1787242626,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
   {"Version":"369b8166048830bf034321b6625ac97ae788e108","Date":1787242617,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"5dbca79eebac9f6806800cfdc9378af63ee31d5b","Date":1787242517,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"00b68d6e2ee04fc09502b00812b354964b57dc93","Date":1786646686,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"abcc282d8a09e364a61acc333431c2e43bc0d780","Date":1784181525,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
   {"Version":"ba15866a7d92d4c322661b029baa9e34f20a7893","Date":1784054370,"Tags":["ref=refs/heads/dependabot/go_modules/golang.org/x/net-0.55.0"],"Suites":[]},
-  {"Version":"a2690d3d8e26d4298e56c70843c2304bd4a1a1d2","Date":1784054328,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
-  {"Version":"f8f2c1a6961944e734b4fba950b8293f47e7c46c","Date":1784054231,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"a2690d3d8e26d4298e56c70843c2304bd4a1a1d2","Date":1784054328,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]}
 ]
