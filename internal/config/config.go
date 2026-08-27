@@ -15,9 +15,11 @@ import (
 )
 
 const (
-	DefaultConfigFile = "geofabrik.yml"
-	DefaultService    = "geofabrik"
-	maxHierarchyDepth = 30
+	DefaultConfigFile  = "geofabrik.yml"
+	DefaultService     = "geofabrik"
+	maxHierarchyDepth  = 30
+	defaultBuilderSize = 64
+	twoBaseURLParts    = 2
 )
 
 var (
@@ -123,25 +125,33 @@ func (config *Config) AddExtension(elementID, format string) {
 
 // GetElement gets an element by ID or returns an error if not found.
 func (config *Config) GetElement(elementID string) (*element.Element, error) {
-	if config.Exist(elementID) {
-		config.ElementsMutex.RLock()
-		r := config.Elements[elementID]
-		config.ElementsMutex.RUnlock()
+	config.ElementsMutex.RLock()
+	elem, ok := config.Elements[elementID]
+	config.ElementsMutex.RUnlock()
 
-		return &r, nil
+	if !ok {
+		return nil, fmt.Errorf("%w: %s", ErrFindElem, elementID)
 	}
 
-	return nil, fmt.Errorf("%w: %s", ErrFindElem, elementID)
+	res := elem
+
+	return &res, nil
 }
 
 // FindElem finds an element in the config by ID.
-func FindElem(config *Config, e string) (*element.Element, error) {
-	res := config.Elements[e]
-	if res.ID == "" || res.ID != e {
-		return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, e)
+func FindElem(config *Config, elementID string) (*element.Element, error) {
+	if config == nil {
+		return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, elementID)
 	}
 
-	return &res, nil
+	res, ok := config.Elements[elementID]
+	if !ok || res.ID != elementID {
+		return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, elementID)
+	}
+
+	elemCopy := res
+
+	return &elemCopy, nil
 }
 
 // GetFile gets the file name of an element.
@@ -159,7 +169,7 @@ func buildPrefix(baseURL []string, defaultBaseURL string) string {
 	switch len(baseURL) {
 	case 1:
 		prefix = defaultBaseURL + "/" + strings.Join(baseURL, "/")
-	case 2: //nolint:mnd // Handles exactly 2 base URL components
+	case twoBaseURLParts:
 		prefix = strings.Join(baseURL, "/")
 	default:
 		prefix = defaultBaseURL
@@ -172,36 +182,65 @@ func buildPrefix(baseURL []string, defaultBaseURL string) string {
 	return prefix
 }
 
-func elem2preURLWithDepth(config *Config, elementPtr *element.Element, depth int, baseURL ...string) (string, error) {
-	if depth > maxHierarchyDepth {
-		return "", fmt.Errorf("%w for element %s (possible cycle in config)", ErrMaxHierarchyDepth, elementPtr.ID)
+func collectElementSegments(config *Config, startID string) ([]string, error) {
+	var segments [maxHierarchyDepth]string
+
+	count := 0
+	currID := startID
+
+	for count < maxHierarchyDepth {
+		elem, ok := config.Elements[currID]
+		if !ok || elem.ID == "" {
+			return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, currID)
+		}
+
+		file := elem.File
+		if file == "" {
+			file = elem.ID
+		}
+
+		segments[count] = file
+		count++
+
+		if elem.Parent == "" {
+			break
+		}
+
+		currID = elem.Parent
 	}
 
-	myElement, err := FindElem(config, elementPtr.ID)
+	if count >= maxHierarchyDepth {
+		return nil, fmt.Errorf("%w for element %s (possible cycle in config)", ErrMaxHierarchyDepth, startID)
+	}
+
+	return segments[:count], nil
+}
+
+// Elem2preURL generates a pre-URL for an element iteratively with single-allocation buffer.
+func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string) (string, error) {
+	if config == nil || elementPtr == nil {
+		return "", fmt.Errorf("%w: invalid nil argument", ErrFindElem)
+	}
+
+	segments, err := collectElementSegments(config, elementPtr.ID)
 	if err != nil {
 		return "", err
 	}
 
-	if myElement.HasParent() {
-		parent, err := FindElem(config, myElement.Parent)
-		if err != nil {
-			return "", err
-		}
+	var builder strings.Builder
+	builder.Grow(defaultBuilderSize)
 
-		res, err := elem2preURLWithDepth(config, parent, depth+1, baseURL...)
-		if err != nil {
-			return "", err
-		}
+	builder.WriteString(buildPrefix(baseURL, config.BaseURL))
 
-		return res + "/" + GetFile(myElement), nil
+	for i := len(segments) - 1; i >= 0; i-- {
+		builder.WriteString(segments[i])
+
+		if i > 0 {
+			builder.WriteByte('/')
+		}
 	}
 
-	return buildPrefix(baseURL, config.BaseURL) + GetFile(myElement), nil
-}
-
-// Elem2preURL generates a pre-URL for an element with cycle protection.
-func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string) (string, error) {
-	return elem2preURLWithDepth(config, elementPtr, 0, baseURL...)
+	return builder.String(), nil
 }
 
 // Elem2URL generates a URL for an element with the given extension.
@@ -210,9 +249,12 @@ func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, 
 		return "", fmt.Errorf("%w: %s", ErrFormatNotExist, ext)
 	}
 
-	format := config.Formats[ext]
-	baseURL, basePath := format.BaseURL, format.BasePath
+	format, ok := config.Formats[ext]
+	if !ok {
+		return "", fmt.Errorf("%w: %s", ErrFormatNotExist, ext)
+	}
 
+	baseURL, basePath := format.BaseURL, format.BasePath
 	if baseURL == "" {
 		baseURL = config.BaseURL
 	}
@@ -252,9 +294,9 @@ func LoadConfig(configFile string) (*Config, error) {
 func IsHashable(config *Config, format string) (isHashable bool, hash, extension string) {
 	if _, ok := config.Formats[format]; ok {
 		for _, h := range hashes {
-			hash := format + "." + h
-			if _, ok := config.Formats[hash]; ok {
-				return true, hash, h
+			hashKey := format + "." + h
+			if _, ok := config.Formats[hashKey]; ok {
+				return true, hashKey, h
 			}
 		}
 	}

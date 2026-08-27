@@ -2,7 +2,6 @@ package lists
 
 import (
 	"fmt"
-	"maps"
 	"os"
 	"slices"
 
@@ -65,11 +64,18 @@ func CreateTable(format string) *tablewriter.Table {
 	return tablewriter.NewTable(os.Stdout, opts...)
 }
 
-// GetSortedKeys returns the sorted keys of the configuration elements.
+// GetSortedKeys returns the sorted keys of the configuration elements with single-allocation pre-sizing.
 func GetSortedKeys(configuration *config.Config) []string {
-	if configuration == nil {
+	if configuration == nil || len(configuration.Elements) == 0 {
 		return nil
 	}
 
-	return slices.Sorted(maps.Keys(configuration.Elements))
+	keys := make([]string, 0, len(configuration.Elements))
+	for k := range configuration.Elements {
+		keys = append(keys, k)
+	}
+
+	slices.Sort(keys)
+
+	return keys
 }

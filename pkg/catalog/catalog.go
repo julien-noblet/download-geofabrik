@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"iter"
-	"maps"
 	"os"
 	"path/filepath"
 	"slices"
@@ -16,9 +15,11 @@ import (
 )
 
 const (
-	maxHierarchyDepth = 30
-	defaultDirPerm    = 0o750
-	defaultFilePerm   = 0o600
+	maxHierarchyDepth  = 30
+	defaultDirPerm     = 0o750
+	defaultFilePerm    = 0o600
+	defaultBuilderSize = 64
+	twoBaseURLParts    = 2
 )
 
 var (
@@ -235,12 +236,23 @@ func (c *Catalog) AddExtension(elementID, formatID string) {
 	}
 }
 
-// SortedKeys returns the lexicographically sorted list of all element IDs.
+// SortedKeys returns the lexicographically sorted list of all element IDs with single pre-allocation.
 func (c *Catalog) SortedKeys() []string {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
-	return slices.Sorted(maps.Keys(c.Elements))
+	if len(c.Elements) == 0 {
+		return nil
+	}
+
+	keys := make([]string, 0, len(c.Elements))
+	for k := range c.Elements {
+		keys = append(keys, k)
+	}
+
+	slices.Sort(keys)
+
+	return keys
 }
 
 // All returns a sequence iterator over all elements (Go 1.23+).
@@ -289,38 +301,63 @@ func (c *Catalog) ResolveURL(elem *Element, formatID string) (string, error) {
 	return preURL + format.Loc, nil
 }
 
-// ResolvePreURL recursively builds the URL path prefix with cycle protection.
-func (c *Catalog) ResolvePreURL(elem *Element, baseURL ...string) (string, error) {
-	return c.resolvePreURLWithDepth(elem, 0, baseURL...)
-}
+func (c *Catalog) collectHierarchySegments(startID string) ([]string, error) {
+	var segments [maxHierarchyDepth]string
 
-func (c *Catalog) resolvePreURLWithDepth(elem *Element, depth int, baseURL ...string) (string, error) {
-	if depth > maxHierarchyDepth {
-		return "", fmt.Errorf("%w for element %s", ErrMaxHierarchyDepth, elem.ID)
+	count := 0
+	currID := startID
+
+	for count < maxHierarchyDepth {
+		currentElem, exists := c.Elements[currID]
+		if !exists {
+			return nil, fmt.Errorf("%w: %s is not in catalog", ErrElementNotFound, currID)
+		}
+
+		segments[count] = currentElem.Filename()
+		count++
+
+		if !currentElem.HasParent() {
+			break
+		}
+
+		currID = currentElem.Parent
 	}
 
-	currentElem, err := c.Find(elem.ID)
+	if count >= maxHierarchyDepth {
+		return nil, fmt.Errorf("%w for element %s", ErrMaxHierarchyDepth, startID)
+	}
+
+	return segments[:count], nil
+}
+
+// ResolvePreURL iteratively builds the URL path prefix with cycle protection and minimal allocations.
+func (c *Catalog) ResolvePreURL(elem *Element, baseURL ...string) (string, error) {
+	if elem == nil {
+		return "", ErrNilElement
+	}
+
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+
+	segments, err := c.collectHierarchySegments(elem.ID)
 	if err != nil {
 		return "", err
 	}
 
-	if currentElem.HasParent() {
-		parentElem, err := c.Find(currentElem.Parent)
-		if err != nil {
-			return "", err
-		}
+	var builder strings.Builder
+	builder.Grow(defaultBuilderSize)
 
-		parentPreURL, err := c.resolvePreURLWithDepth(parentElem, depth+1, baseURL...)
-		if err != nil {
-			return "", err
-		}
+	builder.WriteString(buildURLPrefix(baseURL, c.BaseURL))
 
-		return parentPreURL + "/" + currentElem.Filename(), nil
+	for i := len(segments) - 1; i >= 0; i-- {
+		builder.WriteString(segments[i])
+
+		if i > 0 {
+			builder.WriteByte('/')
+		}
 	}
 
-	prefix := buildURLPrefix(baseURL, c.BaseURL)
-
-	return prefix + currentElem.Filename(), nil
+	return builder.String(), nil
 }
 
 func buildURLPrefix(baseURL []string, defaultBaseURL string) string {
@@ -329,7 +366,7 @@ func buildURLPrefix(baseURL []string, defaultBaseURL string) string {
 	switch len(baseURL) {
 	case 1:
 		prefix = defaultBaseURL + "/" + strings.Join(baseURL, "/")
-	case 2: //nolint:mnd // Exactly 2 components (baseURL, basePath)
+	case twoBaseURLParts:
 		prefix = strings.Join(baseURL, "/")
 	default:
 		prefix = defaultBaseURL

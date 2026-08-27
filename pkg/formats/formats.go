@@ -2,7 +2,6 @@ package formats
 
 import (
 	"slices"
-	"strings"
 )
 
 // Format represents a file format with various attributes.
@@ -12,7 +11,7 @@ type Format struct {
 	BasePath string `yaml:"basepath,omitempty"`
 	BaseURL  string `yaml:"baseurl,omitempty"`
 	ToLoc    string `yaml:"toloc,omitempty"`
-	Type     string `yaml:"type,omitempty"` // Added to match new config, though original didn't have it explicit?
+	Type     string `yaml:"type,omitempty"`
 }
 
 // FormatDefinitions is a map of format definitions.
@@ -63,69 +62,74 @@ const (
 	KeyGarminOpenTopo = "dgarminopentopo"
 )
 
+var miniFormatMap = map[string]byte{
+	FormatState:          's',
+	FormatOsmPbf:         'P',
+	FormatOsmGz:          'G',
+	FormatOsmBz2:         'B',
+	FormatOshPbf:         'H',
+	FormatPoly:           'p',
+	FormatShpZip:         'S',
+	FormatKml:            'k',
+	FormatGeoJSON:        'g',
+	FormatGarminOntrail:  't',
+	FormatGarminOnroad:   'r',
+	FormatGarminOpenTopo: 'o',
+	FormatGarminOSM:      'O',
+	FormatMapsforge:      'm',
+	FormatMBTiles:        'M',
+	FormatCSV:            'C',
+}
+
+type keyFormatPair struct {
+	key    string
+	format string
+}
+
+var keyFormatPairs = []keyFormatPair{
+	{KeyOsmPbf, FormatOsmPbf},
+	{KeyOshPbf, FormatOshPbf},
+	{KeyOsmGz, FormatOsmGz},
+	{KeyOsmBz2, FormatOsmBz2},
+	{KeyShpZip, FormatShpZip},
+	{KeyState, FormatState},
+	{KeyPoly, FormatPoly},
+	{KeyKml, FormatKml},
+	{KeyGeoJSON, FormatGeoJSON},
+	{KeyGarminOSM, FormatGarminOSM},
+	{KeyMapsforge, FormatMapsforge},
+	{KeyMBTiles, FormatMBTiles},
+	{KeyCSV, FormatCSV},
+	{KeyGarminOnroad, FormatGarminOnroad},
+	{KeyGarminOntrail, FormatGarminOntrail},
+	{KeyGarminOpenTopo, FormatGarminOpenTopo},
+}
+
 // GetMiniFormats returns a string of short format names based on the provided full format names.
 func GetMiniFormats(fullFormatNames []string) string {
-	miniFormats := []MiniFormat{
-		{ShortName: "s", FullName: FormatState},
-		{ShortName: "P", FullName: FormatOsmPbf},
-		{ShortName: "G", FullName: FormatOsmGz},
-		{ShortName: "B", FullName: FormatOsmBz2},
-		{ShortName: "H", FullName: FormatOshPbf},
-		{ShortName: "p", FullName: FormatPoly},
-		{ShortName: "S", FullName: FormatShpZip},
-		{ShortName: "k", FullName: FormatKml},
-		{ShortName: "g", FullName: FormatGeoJSON},
-		{ShortName: "t", FullName: FormatGarminOntrail},
-		{ShortName: "r", FullName: FormatGarminOnroad},
-		{ShortName: "o", FullName: FormatGarminOpenTopo},
-		{ShortName: "O", FullName: FormatGarminOSM},
-		{ShortName: "m", FullName: FormatMapsforge},
-		{ShortName: "M", FullName: FormatMBTiles},
-		{ShortName: "C", FullName: FormatCSV},
+	if len(fullFormatNames) == 0 {
+		return ""
 	}
 
-	shortNames := make([]string, 0, len(fullFormatNames))
+	buf := make([]byte, 0, len(fullFormatNames))
 
 	for _, fullName := range fullFormatNames {
-		for _, format := range miniFormats {
-			if fullName == format.FullName {
-				shortNames = append(shortNames, format.ShortName)
-
-				break
-			}
+		if b, ok := miniFormatMap[fullName]; ok {
+			buf = append(buf, b)
 		}
 	}
 
-	return strings.Join(shortNames, "")
+	return string(buf)
 }
 
 // GetFormats returns a slice of format strings based on the configuration map.
 // The config map should contain keys like KeyOsmPbf with boolean true/false.
 func GetFormats(config map[string]bool) []string {
-	options := map[string]string{
-		KeyOsmPbf:         FormatOsmPbf,
-		KeyOshPbf:         FormatOshPbf,
-		KeyOsmGz:          FormatOsmGz,
-		KeyOsmBz2:         FormatOsmBz2,
-		KeyShpZip:         FormatShpZip,
-		KeyState:          FormatState,
-		KeyPoly:           FormatPoly,
-		KeyKml:            FormatKml,
-		KeyGeoJSON:        FormatGeoJSON,
-		KeyGarminOSM:      FormatGarminOSM,
-		KeyMapsforge:      FormatMapsforge,
-		KeyMBTiles:        FormatMBTiles,
-		KeyCSV:            FormatCSV,
-		KeyGarminOnroad:   FormatGarminOnroad,
-		KeyGarminOntrail:  FormatGarminOntrail,
-		KeyGarminOpenTopo: FormatGarminOpenTopo,
-	}
+	formatList := make([]string, 0, len(config))
 
-	var formatList []string
-
-	for key, format := range options {
-		if enabled, ok := config[key]; ok && enabled {
-			formatList = append(formatList, format)
+	for _, pair := range keyFormatPairs {
+		if config[pair.key] {
+			formatList = append(formatList, pair.format)
 		}
 	}
 
