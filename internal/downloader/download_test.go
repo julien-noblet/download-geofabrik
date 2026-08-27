@@ -2,7 +2,7 @@ package download_test
 
 import (
 	"context"
-	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/julien-noblet/download-geofabrik/internal/config"
@@ -15,8 +15,7 @@ func Test_DownloadFromURL(t *testing.T) {
 	t.Parallel()
 
 	type args struct {
-		myURL    string
-		fileName string
+		myURL string
 	}
 
 	tests := []struct {
@@ -30,8 +29,7 @@ func Test_DownloadFromURL(t *testing.T) {
 		{
 			name: "try fNodownload=true",
 			args: args{
-				myURL:    "https://download.geofabrik.de/this_url_should_not_exist",
-				fileName: "/tmp/download-geofabrik.test",
+				myURL: "https://download.geofabrik.de/this_url_should_not_exist",
 			},
 			fNodownload: true,
 			wantErr:     false,
@@ -40,8 +38,7 @@ func Test_DownloadFromURL(t *testing.T) {
 			name:        "404 error from geofabrik",
 			fNodownload: false,
 			args: args{
-				myURL:    "https://download.geofabrik.de/this_url_should_not_exist",
-				fileName: "/tmp/download-geofabrik.test",
+				myURL: "https://download.geofabrik.de/this_url_should_not_exist",
 			},
 			wantErr: true,
 		},
@@ -51,8 +48,7 @@ func Test_DownloadFromURL(t *testing.T) {
 			fQuiet:      false,
 			fProgress:   true,
 			args: args{
-				myURL:    "https://download.geofabrik.de/europe/andorra.poly",
-				fileName: "/tmp/download-geofabrik.test",
+				myURL: "https://download.geofabrik.de/europe/andorra.poly",
 			},
 			wantErr: false,
 		},
@@ -62,18 +58,21 @@ func Test_DownloadFromURL(t *testing.T) {
 		t.Run(thisTest.name, func(t *testing.T) {
 			t.Parallel()
 
+			tmpDir := t.TempDir()
+			targetFile := filepath.Join(tmpDir, "download.test")
+
 			opts := &config.Options{
 				NoDownload:      thisTest.fNodownload,
 				Quiet:           thisTest.fQuiet,
 				Progress:        thisTest.fProgress,
-				OutputDirectory: "/tmp/",
+				OutputDirectory: tmpDir + "/",
 				FormatFlags:     make(map[string]bool),
 			}
 			cfg := &config.Config{} // Empty config for FromURL
 
 			d := download.NewDownloader(cfg, opts)
 
-			if err := d.FromURL(context.Background(), thisTest.args.myURL, thisTest.args.fileName); (err != nil) != thisTest.wantErr {
+			if err := d.FromURL(context.Background(), thisTest.args.myURL, targetFile); (err != nil) != thisTest.wantErr {
 				t.Errorf("Downloader.FromURL() error = %v, wantErr %v", err, thisTest.wantErr)
 			}
 		})
@@ -87,7 +86,6 @@ func TestFile(t *testing.T) {
 		configPtr *config.Config
 		element   string
 		format    string
-		output    string
 	}
 
 	tests := []struct {
@@ -109,7 +107,6 @@ func TestFile(t *testing.T) {
 				},
 				element: "africa",
 				format:  formats.FormatPoly,
-				output:  "/tmp/download-geofabrik.test",
 			},
 			wantErr: false,
 		},
@@ -119,15 +116,18 @@ func TestFile(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
+			tmpDir := t.TempDir()
+			outputFile := filepath.Join(tmpDir, "download.test")
+
 			opts := &config.Options{
 				Verbose:         true,
-				OutputDirectory: "/tmp/",
+				OutputDirectory: tmpDir + "/",
 				FormatFlags:     make(map[string]bool),
 			}
 
 			d := download.NewDownloader(tt.args.configPtr, opts)
 
-			err := d.DownloadFile(context.Background(), tt.args.element, tt.args.format, tt.args.output)
+			err := d.DownloadFile(context.Background(), tt.args.element, tt.args.format, outputFile)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("DownloadFile() error = %v, wantErr %v", err, tt.wantErr)
 			}
@@ -137,6 +137,8 @@ func TestFile(t *testing.T) {
 
 func TestChecksum(t *testing.T) {
 	t.Parallel()
+
+	tmpDir := t.TempDir()
 
 	cfg := &config.Config{
 		Formats: formats.FormatDefinitions{
@@ -152,20 +154,19 @@ func TestChecksum(t *testing.T) {
 
 	opts := &config.Options{
 		Check:           true,
-		OutputDirectory: "/tmp/",
+		OutputDirectory: tmpDir + "/",
 		FormatFlags:     make(map[string]bool),
 	}
 
 	d := download.NewDownloader(cfg, opts)
 
-	// Download monaco first
-	err := d.DownloadFile(context.Background(), "monaco", formats.FormatOsmPbf, "/tmp/monaco.osm.pbf")
+	// Download monaco first into tmpDir
+	targetFile := filepath.Join(tmpDir, "monaco.osm.pbf")
+
+	err := d.DownloadFile(context.Background(), "monaco", formats.FormatOsmPbf, targetFile)
 	if err != nil {
 		t.Fatalf("Failed setup download: %v", err)
 	}
-
-	t.Cleanup(func() { _ = os.Remove("/tmp/monaco.osm.pbf") })
-	t.Cleanup(func() { _ = os.Remove("/tmp/monaco.osm.pbf.md5") })
 
 	// Test Checksum
 	tests := []struct {
@@ -183,9 +184,15 @@ func TestChecksum(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			d.Options.Check = tt.check
+			// Isolate options per parallel subtest to prevent data races
+			subOpts := &config.Options{
+				Check:           tt.check,
+				OutputDirectory: tmpDir + "/",
+				FormatFlags:     make(map[string]bool),
+			}
+			subDownloader := download.NewDownloader(cfg, subOpts)
 
-			got := d.Checksum(context.Background(), "monaco", tt.format)
+			got := subDownloader.Checksum(context.Background(), "monaco", tt.format)
 			if got != tt.want {
 				t.Errorf("Checksum() = %v, want %v", got, tt.want)
 			}

@@ -3,7 +3,7 @@ package lists
 import (
 	"fmt"
 	"os"
-	"sort"
+	"slices"
 
 	"github.com/julien-noblet/download-geofabrik/internal/config"
 	"github.com/julien-noblet/download-geofabrik/pkg/formats"
@@ -66,15 +66,12 @@ func CreateTable(format string) *tablewriter.Table {
 
 // GetSortedKeys returns the sorted keys of the configuration elements.
 func GetSortedKeys(configuration *config.Config) []string {
-	keys := make(sort.StringSlice, len(configuration.Elements))
-	i := 0
-
+	keys := make([]string, 0, len(configuration.Elements))
 	for k := range configuration.Elements {
-		keys[i] = k
-		i++
+		keys = append(keys, k)
 	}
 
-	keys.Sort()
+	slices.Sort(keys)
 
 	return keys
 }

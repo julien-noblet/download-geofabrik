@@ -4,6 +4,7 @@ import (
 	"errors"
 	"log/slog"
 	"regexp"
+	"strings"
 
 	"github.com/gocolly/colly/v2"
 	"github.com/julien-noblet/download-geofabrik/internal/element"
@@ -87,9 +88,9 @@ func (b *Bbbike) ParseList(e *colly.HTMLElement, c *colly.Collector) {
 	})
 }
 
-// GetName extracts the name from the given string.
+// GetName extracts the city/region name from the given header string.
 func GetName(h3 string) string {
-	return h3[prefixLength:] // remove "OSM extracts for "
+	return strings.TrimSpace(strings.TrimPrefix(h3, "OSM extracts for "))
 }
 
 // ParseSidebar parses the sidebar information from the HTML.

@@ -175,3 +175,115 @@ func TestIsHashable(t *testing.T) {
 	isH, _, _ = config.IsHashable(cfg, "other")
 	assert.False(t, isH)
 }
+
+const geofabrikYml = "../../geofabrik.yml"
+
+func Benchmark_Exist_geofabrik_yml(b *testing.B) {
+	c, err := config.LoadConfig(geofabrikYml)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	for range b.N {
+		c.Exist("france")
+	}
+}
+
+func Benchmark_loadConfig_geofabrik_yml(b *testing.B) {
+	for range b.N {
+		_, _ = config.LoadConfig(geofabrikYml)
+	}
+}
+
+func Benchmark_GetElement_geofabrik_yml(b *testing.B) {
+	c, err := config.LoadConfig(geofabrikYml)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	for range b.N {
+		_, _ = c.GetElement("france")
+	}
+}
+
+func Benchmark_IsHashable_geofabrik_yml(b *testing.B) {
+	c, err := config.LoadConfig(geofabrikYml)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	for range b.N {
+		for f := range c.Formats {
+			config.IsHashable(c, f)
+		}
+	}
+}
+
+func Benchmark_findElem_parse_all_geofabrik_yml(b *testing.B) {
+	c, err := config.LoadConfig(geofabrikYml)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	for range b.N {
+		for k := range c.Elements {
+			_, _ = config.FindElem(c, k)
+		}
+	}
+}
+
+func Benchmark_GetElement_parse_all_geofabrik_yml(b *testing.B) {
+	c, err := config.LoadConfig(geofabrikYml)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	for range b.N {
+		for k := range c.Elements {
+			_, _ = c.GetElement(k)
+		}
+	}
+}
+
+func Benchmark_FindElem_parse_France_geofabrik_yml(b *testing.B) {
+	c, err := config.LoadConfig(geofabrikYml)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	for range b.N {
+		_, _ = config.FindElem(c, "france")
+	}
+}
+
+func Benchmark_Elem2preURL_parse_France_geofabrik_yml(b *testing.B) {
+	c, err := config.LoadConfig(geofabrikYml)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	france, err := config.FindElem(c, "france")
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	for range b.N {
+		_, _ = config.Elem2preURL(c, france)
+	}
+}
+
+func Benchmark_Elem2URL_parse_France_geofabrik_yml(b *testing.B) {
+	c, err := config.LoadConfig(geofabrikYml)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	france, err := config.FindElem(c, "france")
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	for range b.N {
+		_, _ = config.Elem2URL(c, france, formats.FormatState)
+	}
+}

@@ -2,6 +2,7 @@ package download_test
 
 import (
 	"os"
+	"path/filepath"
 	"testing"
 
 	download "github.com/julien-noblet/download-geofabrik/internal/downloader"
@@ -57,7 +58,8 @@ func Benchmark_hashFileMD5_LICENSE(b *testing.B) {
 
 func Benchmark_controlHash_LICENSE(b *testing.B) {
 	hash, _ := download.ComputeMD5Hash("../../LICENSE")
-	hashfile := "/tmp/download-geofabrik-test.hash"
+	tmpDir := b.TempDir()
+	hashfile := filepath.Join(tmpDir, "test.hash")
 
 	if err := os.WriteFile(hashfile, []byte(hash), 0o600); err != nil {
 		b.Errorf("Can't write file %s err: %v", hashfile, err)
@@ -71,6 +73,9 @@ func Benchmark_controlHash_LICENSE(b *testing.B) {
 }
 
 func Test_controlHash(t *testing.T) {
+	tmpDir := t.TempDir()
+	validHashFile := filepath.Join(tmpDir, "valid.md5")
+
 	type args struct {
 		hashfile string
 		hash     string
@@ -83,32 +88,31 @@ func Test_controlHash(t *testing.T) {
 		want       bool
 		wantErr    bool
 	}{
-		// TODO: Add test cases.
 		{
 			name:       "Check with LICENSE file",
 			fileToHash: "../../LICENSE",
-			args:       args{hashfile: "../../LICENSE.md5", hash: "65d26fcc2f35ea6a181ac777e42db1ea"},
+			args:       args{hashfile: validHashFile, hash: "65d26fcc2f35ea6a181ac777e42db1ea"},
 			want:       true,
 			wantErr:    false,
 		},
 		{
 			name:       "Check with LICENSE file wrong hash",
 			fileToHash: "../../LICENSE",
-			args:       args{hashfile: "../../LICENSE.md5", hash: "65d26fcc2f35ea6a181ac777e42db1eb"},
+			args:       args{hashfile: validHashFile, hash: "65d26fcc2f35ea6a181ac777e42db1eb"},
 			want:       false,
 			wantErr:    false,
 		},
 	}
 
+	hash, _ := download.ComputeMD5Hash("../../LICENSE")
+
+	hashfull := hash + " ../../LICENSE"
+
+	if err := os.WriteFile(validHashFile, []byte(hashfull), 0o600); err != nil {
+		t.Fatalf("can't write file %s err: %v", validHashFile, err)
+	}
+
 	for _, thisTest := range tests {
-		hash, _ := download.ComputeMD5Hash(thisTest.fileToHash)
-
-		hashfull := hash + " " + thisTest.fileToHash
-
-		if err := os.WriteFile(thisTest.args.hashfile, []byte(hashfull), 0o600); err != nil {
-			t.Errorf("can't write file %s err: %v", thisTest.args.hashfile, err)
-		}
-
 		t.Run(thisTest.name, func(t *testing.T) {
 			got, err := download.CheckFileHash(thisTest.args.hashfile, thisTest.args.hash)
 			if err != nil != thisTest.wantErr {

@@ -38,7 +38,7 @@ linters:
     - godox
     - goheader
     - gomoddirectives
-    - gomodguard
+    - gomodguard_v2
     - goprintffuncname
     - gosec
     - gosmopolitan
@@ -206,13 +206,16 @@ linters:
       - linters:
           - cyclop
           - dupl
+          - err113
           - exhaustruct
           - funlen
           - gochecknoinits
           - gocognit
+          - goconst
           - gocyclo
           - godox
           - maintidx
+          - mnd
           - paralleltest
           - varnamelen
         path: _test.go

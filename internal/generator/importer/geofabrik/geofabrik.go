@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"log/slog"
 	"net"
 	"net/http"
@@ -21,18 +20,13 @@ var (
 	GeofabrikIndexURL = `https://download.geofabrik.de/index-v1-nogeom.json`
 	GeofabrikBaseURL  = `https://download.geofabrik.de`
 
-	// ErrDownload          = "error while downloading %v, server returned code %d\nPlease use '%s generate' to re-create your yml file %w"
-	// ErrCreatingRequest   = "error while creating request for %s: %w"
-	// ErrDownloading       = "error while downloading %s: %w"
-	// ErrReadingResponse   = "error while reading response body: %w"
-	// ErrUnmarshallingBody = "error while unmarshalling response body: %w"
-	// ErrMergingElement    = "error while merging element %v: %w".
-
 	TimeoutDuration       = 60 * time.Second
 	KeepAliveDuration     = 30 * time.Second
-	IdleConnTimeout       = 5 * time.Second
+	IdleConnTimeout       = 90 * time.Second
 	TLSHandshakeTimeout   = 10 * time.Second
 	ExpectContinueTimeout = 5 * time.Second
+	MaxIdleConns          = 100
+	MaxIdleConnsPerHost   = 20
 )
 
 // HTTPClient is a reusable HTTP client.
@@ -42,9 +36,9 @@ var HTTPClient = &http.Client{
 		DialContext: (&net.Dialer{
 			Timeout:   TimeoutDuration,
 			KeepAlive: KeepAliveDuration,
-			DualStack: true,
 		}).DialContext,
-		MaxIdleConns:          0,
+		MaxIdleConns:          MaxIdleConns,
+		MaxIdleConnsPerHost:   MaxIdleConnsPerHost,
 		IdleConnTimeout:       IdleConnTimeout,
 		TLSHandshakeTimeout:   TLSHandshakeTimeout,
 		ExpectContinueTimeout: ExpectContinueTimeout,
@@ -86,7 +80,7 @@ type IndexElementProperties struct {
 	Iso3166_2 []string          `json:"iso3166-2,omitempty"`        //nolint:tagliatelle // That's geofabrik's field name
 }
 
-// GetIndex downloads the Geofabrik index and unmarshals the JSON response.
+// GetIndex downloads the Geofabrik index and streams JSON decoding.
 func GetIndex(url string) (*Index, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), TimeoutDuration)
 	defer cancel()
@@ -111,14 +105,9 @@ func GetIndex(url string) (*Index, error) {
 		return nil, handleHTTPError(response, url)
 	}
 
-	bodyBytes, err := io.ReadAll(response.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error while reading response body: %w", err)
-	}
-
 	var geofabrikIndex Index
-	if err := json.Unmarshal(bodyBytes, &geofabrikIndex); err != nil {
-		return nil, fmt.Errorf("error while unmarshalling response body: %w", err)
+	if err := json.NewDecoder(response.Body).Decode(&geofabrikIndex); err != nil {
+		return nil, fmt.Errorf("error while decoding response body: %w", err)
 	}
 
 	return &geofabrikIndex, nil

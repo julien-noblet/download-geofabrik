@@ -10,7 +10,7 @@ import (
 
 func Benchmark_miniFormats_parse_geofabrik_yml(b *testing.B) {
 	// run the Fib function b.N times
-	c, _ := config.LoadConfig("../geofabrik.yml")
+	c, _ := config.LoadConfig("../../geofabrik.yml")
 
 	for range make([]struct{}, b.N) {
 		for _, v := range c.Elements {
