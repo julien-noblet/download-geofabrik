@@ -27,6 +27,7 @@ const (
 	dirMode             = 0o755
 	maxIdleConns        = 100
 	maxIdleConnsPerHost = 20
+	streamBufferSize    = 128 * 1024 // 128KB buffer for optimal socket and disk throughput
 )
 
 var (
@@ -41,7 +42,7 @@ type Downloader struct {
 	client  *http.Client
 }
 
-// NewDownloader creates a new Downloader with connection pooling.
+// NewDownloader creates a new Downloader with connection pooling and high-throughput buffers.
 func NewDownloader(cfg *config.Config, opts *config.Options) *Downloader {
 	return &Downloader{
 		Config:  cfg,
@@ -58,6 +59,9 @@ func NewDownloader(cfg *config.Config, opts *config.Options) *Downloader {
 				IdleConnTimeout:       idleTimeout,
 				TLSHandshakeTimeout:   tlsTimeout,
 				ExpectContinueTimeout: continueTimeout,
+				DisableCompression:    true, // Avoid decompression CPU overhead for already-compressed OSM files
+				ReadBufferSize:        streamBufferSize,
+				WriteBufferSize:       streamBufferSize,
 			},
 		},
 	}
@@ -101,13 +105,16 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 }
 
 func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, error) {
+	bufPtr := getBuffer()
+	defer putBuffer(bufPtr)
+
 	if d.Options.Progress && !d.Options.Quiet && response.ContentLength > progressMinimal {
 		progressBar := pb.Full.Start64(response.ContentLength)
 		barReader := progressBar.NewProxyReader(response.Body)
 
 		defer progressBar.Finish()
 
-		written, err := io.Copy(dst, barReader)
+		written, err := io.CopyBuffer(dst, barReader, *bufPtr)
 		if err != nil {
 			return written, fmt.Errorf("error copying response with progress: %w", err)
 		}
@@ -115,7 +122,7 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 		return written, nil
 	}
 
-	written, err := io.Copy(dst, response.Body)
+	written, err := io.CopyBuffer(dst, response.Body, *bufPtr)
 	if err != nil {
 		return written, fmt.Errorf("error copying response body: %w", err)
 	}
