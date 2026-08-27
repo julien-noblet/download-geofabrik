@@ -4,25 +4,28 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"strings"
 	"time"
 
-	"github.com/PuerkitoBio/goquery"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
+	"golang.org/x/net/html"
 )
 
 var ErrFetchCatalog = errors.New("failed to fetch catalog")
 
 const (
-	ProviderName       = "bbbike"
-	DefaultConfigFile  = "bbbike.yml"
-	BaseURL            = "https://download.bbbike.org/osm/bbbike"
-	StartURL           = "https://download.bbbike.org/osm/bbbike/"
-	defaultTimeout     = 30 * time.Second
-	defaultKeepAlive   = 30 * time.Second
-	defaultIdleTimeout = 90 * time.Second
+	ProviderName               = "bbbike"
+	DefaultConfigFile          = "bbbike.yml"
+	BaseURL                    = "https://download.bbbike.org/osm/bbbike"
+	StartURL                   = "https://download.bbbike.org/osm/bbbike/"
+	defaultTimeout             = 30 * time.Second
+	defaultKeepAlive           = 30 * time.Second
+	defaultIdleTimeout         = 90 * time.Second
+	defaultMaxIdleConns        = 50
+	defaultMaxIdleConnsPerHost = 20
 )
 
 // Provider implements provider.Provider for download.bbbike.org.
@@ -45,7 +48,10 @@ func NewProvider() *Provider {
 					Timeout:   defaultTimeout,
 					KeepAlive: defaultKeepAlive,
 				}).DialContext,
-				IdleConnTimeout: defaultIdleTimeout,
+				MaxIdleConns:        defaultMaxIdleConns,
+				MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
+				IdleConnTimeout:     defaultIdleTimeout,
+				ForceAttemptHTTP2:   true,
 			},
 		},
 	}
@@ -121,37 +127,67 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 		return nil, fmt.Errorf("%w: unexpected HTTP status %d", ErrFetchCatalog, resp.StatusCode)
 	}
 
-	doc, err := goquery.NewDocumentFromReader(resp.Body)
-	if err != nil {
-		return nil, fmt.Errorf("cannot parse HTML: %w", err)
-	}
-
 	cat := catalog.New()
 	cat.BaseURL = p.BaseURL
 	cat.Formats = DefaultFormats()
 
-	doc.Find("a").Each(func(_ int, selection *goquery.Selection) {
-		href, exists := selection.Attr("href")
-		if !exists {
-			return
-		}
-
-		city := cleanCityName(href)
-		if city == "" {
-			return
-		}
-
-		elem := catalog.Element{
-			ID:      city,
-			Name:    city,
-			File:    city + "/" + city,
-			Formats: append(catalog.Formats(nil), standardBBBikeFormats...),
-		}
-
-		_ = cat.MergeElement(&elem)
-	})
+	if err := parseBBBikeHTML(resp.Body, cat); err != nil {
+		return nil, err
+	}
 
 	return cat, nil
+}
+
+func parseBBBikeHTML(reader io.Reader, cat *catalog.Catalog) error {
+	tokenizer := html.NewTokenizer(reader)
+
+	for {
+		tokenType := tokenizer.Next()
+
+		switch tokenType {
+		case html.ErrorToken:
+			if errors.Is(tokenizer.Err(), io.EOF) {
+				return nil
+			}
+
+			return fmt.Errorf("cannot parse HTML: %w", tokenizer.Err())
+
+		case html.StartTagToken, html.SelfClosingTagToken:
+			processAnchorTag(tokenizer, cat)
+
+		case html.TextToken, html.EndTagToken, html.CommentToken, html.DoctypeToken:
+			// Non-anchor tokens
+		}
+	}
+}
+
+func processAnchorTag(tokenizer *html.Tokenizer, cat *catalog.Catalog) {
+	tagName, hasAttr := tokenizer.TagName()
+	if string(tagName) != "a" || !hasAttr {
+		return
+	}
+
+	for {
+		key, val, more := tokenizer.TagAttr()
+		if string(key) == "href" {
+			city := cleanCityName(string(val))
+			if city != "" {
+				elem := catalog.Element{
+					ID:      city,
+					Name:    city,
+					File:    city + "/" + city,
+					Formats: append(catalog.Formats(nil), standardBBBikeFormats...),
+				}
+				_ = cat.MergeElement(&elem)
+			}
+
+			return
+		}
+
+		if !more {
+			return
+		}
+	}
 }
 
 func cleanCityName(href string) string {
