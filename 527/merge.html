@@ -1768,7 +1768,7 @@ func GetDefault() *Geo2day {
                 formats.FormatPoly:    {ID: formats.FormatPoly, Loc: ".poly"},
 </span>        }
 
-        <span class="cov5" title="14">return &amp;Geo2day{
+        <span class="cov5" title="13">return &amp;Geo2day{
                 Scrapper: &amp;scrapper.Scrapper{
                         PB:               progressBarCount,
                         Async:            true,
@@ -2230,12 +2230,12 @@ func GetParent(href string) (parent string, parentList []string) {
 </span>
         <span class="cov9" title="29">parentList = strings.Split(href, "/")
         if len(parentList) &gt; minParentListLength </span>{
-                <span class="cov9" title="25">parent = parentList[len(parentList)-2]
+                <span class="cov9" title="24">parent = parentList[len(parentList)-2]
 </span>        } else {
                 <span class="cov4" title="4">parent = ""
 </span>        }
 
-        <span class="cov9" title="29">if strings.EqualFold(parent, "extracts") || strings.EqualFold(parent, "polygons") </span>{
+        <span class="cov9" title="28">if strings.EqualFold(parent, "extracts") || strings.EqualFold(parent, "polygons") </span>{
                 <span class="cov5" title="5">parent = ""
 </span>        }
 
@@ -2306,7 +2306,7 @@ func (o *OpenstreetmapFR) ParseHref(href string) {
                 <span class="cov7" title="12">return
 </span>        }
 
-        <span class="cov8" title="19">parent, parents := GetParent(href)
+        <span class="cov8" title="18">parent, parents := GetParent(href)
         if !o.Config.Exist(parent) </span>{
                 <span class="cov7" title="12">o.MakeParents(parent, parents)
 </span>        }
@@ -2691,11 +2691,11 @@ func GetMiniFormats(fullFormatNames []string) string {
         <span class="cov6" title="28">shortNames := make([]string, 0, len(fullFormatNames))
 </span>
         <span class="cov6" title="28">for _, fullName := range fullFormatNames </span>{
-                <span class="cov7" title="44">for _, format := range miniFormats </span>{
-                        <span class="cov10" title="228">if fullName == format.FullName </span>{
-                                <span class="cov7" title="39">shortNames = append(shortNames, format.ShortName)
+                <span class="cov7" title="43">for _, format := range miniFormats </span>{
+                        <span class="cov10" title="227">if fullName == format.FullName </span>{
+                                <span class="cov7" title="38">shortNames = append(shortNames, format.ShortName)
 </span>
-                                <span class="cov7" title="39">break</span>
+                                <span class="cov7" title="38">break</span>
                         }
                 }
         }
