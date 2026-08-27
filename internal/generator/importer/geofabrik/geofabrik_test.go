@@ -56,3 +56,82 @@ func TestGetIndex(t *testing.T) {
 		})
 	}
 }
+
+func TestFormatDefinition(t *testing.T) {
+	t.Parallel()
+
+	defs := geofabrik.FormatDefinition()
+	assert.NotEmpty(t, defs)
+	assert.Contains(t, defs, "osm.pbf")
+	assert.Contains(t, defs, "osm.pbf.md5")
+	assert.Contains(t, defs, "osm.bz2")
+	assert.Contains(t, defs, "osm.bz2.md5")
+}
+
+func TestConvert_MockData(t *testing.T) {
+	t.Parallel()
+
+	mockIndex := &geofabrik.Index{
+		Features: []geofabrik.IndexElement{
+			{
+				ElementProperties: geofabrik.IndexElementProperties{
+					ID:     "europe",
+					Name:   "Europe",
+					Parent: "",
+					Urls: map[string]string{
+						"pbf":     "https://example.com/europe.pbf",
+						"bz2":     "https://example.com/europe.bz2",
+						"shp":     "https://example.com/europe.shp",
+						"history": "https://example.com/europe.history",
+					},
+				},
+			},
+			{
+				ElementProperties: geofabrik.IndexElementProperties{
+					ID:     "france",
+					Name:   "France",
+					Parent: "europe",
+					Urls: map[string]string{
+						"pbf": "https://example.com/france.pbf",
+					},
+				},
+			},
+		},
+	}
+
+	cfg, err := geofabrik.Convert(mockIndex)
+	require.NoError(t, err)
+	assert.NotNil(t, cfg)
+	assert.True(t, cfg.Exist("europe"))
+	assert.True(t, cfg.Exist("france"))
+
+	fr, err := cfg.GetElement("france")
+	require.NoError(t, err)
+	assert.Equal(t, "europe", fr.Parent)
+	assert.Contains(t, fr.Formats, "osm.pbf")
+	assert.Contains(t, fr.Formats, "osm.pbf.md5")
+}
+
+func Benchmark_FormatDefinition(b *testing.B) {
+	for range b.N {
+		_ = geofabrik.FormatDefinition()
+	}
+}
+
+func Benchmark_Convert(b *testing.B) {
+	mockIndex := &geofabrik.Index{
+		Features: []geofabrik.IndexElement{
+			{
+				ElementProperties: geofabrik.IndexElementProperties{
+					ID:   "france",
+					Name: "France",
+					Urls: map[string]string{"pbf": "url", "bz2": "url", "shp": "url"},
+				},
+			},
+		},
+	}
+
+	for range b.N {
+		_, _ = geofabrik.Convert(mockIndex)
+	}
+}

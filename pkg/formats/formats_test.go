@@ -9,13 +9,40 @@ import (
 )
 
 func Benchmark_miniFormats_parse_geofabrik_yml(b *testing.B) {
-	// run the Fib function b.N times
 	c, _ := config.LoadConfig("../../geofabrik.yml")
 
-	for range make([]struct{}, b.N) {
+	for range b.N {
 		for _, v := range c.Elements {
 			formats.GetMiniFormats(v.Formats)
 		}
+	}
+}
+
+func Benchmark_GetMiniFormats(b *testing.B) {
+	sample := []string{
+		formats.FormatState,
+		formats.FormatOsmBz2,
+		formats.FormatOsmPbf,
+		formats.FormatPoly,
+		formats.FormatKml,
+		formats.FormatShpZip,
+	}
+
+	for range b.N {
+		_ = formats.GetMiniFormats(sample)
+	}
+}
+
+func Benchmark_GetFormats(b *testing.B) {
+	flags := map[string]bool{
+		formats.KeyOsmPbf: true,
+		formats.KeyOshPbf: true,
+		formats.KeyShpZip: true,
+		formats.KeyState:  true,
+	}
+
+	for range b.N {
+		_ = formats.GetFormats(flags)
 	}
 }
 

@@ -56,3 +56,49 @@ func TestGetSortedKeys(t *testing.T) {
 	keys := lists.GetSortedKeys(mockConfig)
 	assert.Equal(t, []string{"region1", "region2"}, keys)
 }
+
+func TestCreateTable(t *testing.T) {
+	t.Parallel()
+
+	t.Run("Default format table", func(t *testing.T) {
+		t.Parallel()
+
+		table := lists.CreateTable("")
+		assert.NotNil(t, table)
+	})
+
+	t.Run("Markdown format table", func(t *testing.T) {
+		t.Parallel()
+
+		table := lists.CreateTable(lists.MarkdownFormat)
+		assert.NotNil(t, table)
+	})
+}
+
+func TestListAllRegions_Empty(t *testing.T) {
+	t.Parallel()
+
+	emptyConfig := &config.Config{
+		Elements: map[string]element.Element{},
+	}
+
+	err := lists.ListAllRegions(emptyConfig, "")
+	assert.NoError(t, err)
+}
+
+func Benchmark_GetSortedKeys(b *testing.B) {
+	c, err := config.LoadConfig("../../geofabrik.yml")
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	for range b.N {
+		_ = lists.GetSortedKeys(c)
+	}
+}
+
+func Benchmark_CreateTable(b *testing.B) {
+	for range b.N {
+		_ = lists.CreateTable(lists.MarkdownFormat)
+	}
+}

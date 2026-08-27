@@ -2,6 +2,7 @@ package download_test
 
 import (
 	"context"
+	"os"
 	"path/filepath"
 	"testing"
 
@@ -197,5 +198,127 @@ func TestChecksum(t *testing.T) {
 				t.Errorf("Checksum() = %v, want %v", got, tt.want)
 			}
 		})
+	}
+
+	t.Run("Checksum with non-existent element", func(t *testing.T) {
+		t.Parallel()
+
+		subOpts := &config.Options{Check: true, OutputDirectory: tmpDir + "/"}
+		subDownloader := download.NewDownloader(cfg, subOpts)
+
+		got := subDownloader.Checksum(context.Background(), "non_existent", formats.FormatOsmPbf)
+		if got {
+			t.Errorf("Checksum() = true, want false for non-existent element")
+		}
+	})
+
+	t.Run("Checksum with check=false", func(t *testing.T) {
+		t.Parallel()
+
+		subOpts := &config.Options{Check: false, OutputDirectory: tmpDir + "/"}
+		subDownloader := download.NewDownloader(cfg, subOpts)
+
+		got := subDownloader.Checksum(context.Background(), "monaco", formats.FormatOsmPbf)
+		if got {
+			t.Errorf("Checksum() = true, want false when Check is false")
+		}
+	})
+}
+
+func TestFileExist(t *testing.T) {
+	t.Parallel()
+
+	tmpDir := t.TempDir()
+	existingFile := filepath.Join(tmpDir, "exist.txt")
+
+	if err := os.WriteFile(existingFile, []byte("ok"), 0o600); err != nil {
+		t.Fatalf("failed to create test file: %v", err)
+	}
+
+	tests := []struct {
+		name string
+		path string
+		want bool
+	}{
+		{"Existing file", existingFile, true},
+		{"Existing directory", tmpDir, true},
+		{"Non-existing file", filepath.Join(tmpDir, "missing.txt"), false},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
+			got := download.FileExist(tt.path)
+			if got != tt.want {
+				t.Errorf("FileExist(%s) = %v, want %v", tt.path, got, tt.want)
+			}
+		})
+	}
+}
+
+func TestDownloadFile_Errors(t *testing.T) {
+	t.Parallel()
+
+	cfg := &config.Config{
+		Formats: formats.FormatDefinitions{
+			formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: ".osm.pbf"},
+		},
+		Elements: element.MapElement{
+			"valid_elem": element.Element{ID: "valid_elem", Formats: []string{formats.FormatOsmPbf}},
+		},
+		BaseURL: "http://invalid-host-that-does-not-exist.example.com",
+	}
+
+	opts := &config.Options{
+		OutputDirectory: t.TempDir() + "/",
+		FormatFlags:     make(map[string]bool),
+	}
+	d := download.NewDownloader(cfg, opts)
+
+	t.Run("Element not found", func(t *testing.T) {
+		t.Parallel()
+
+		err := d.DownloadFile(context.Background(), "unknown_id", formats.FormatOsmPbf, filepath.Join(t.TempDir(), "out.bin"))
+		if err == nil {
+			t.Errorf("expected error for unknown element, got nil")
+		}
+	})
+
+	t.Run("Format not available on element", func(t *testing.T) {
+		t.Parallel()
+
+		err := d.DownloadFile(context.Background(), "valid_elem", formats.FormatPoly, filepath.Join(t.TempDir(), "out.bin"))
+		if err == nil {
+			t.Errorf("expected error for unsupported format, got nil")
+		}
+	})
+
+	t.Run("Network connection error", func(t *testing.T) {
+		t.Parallel()
+
+		err := d.DownloadFile(context.Background(), "valid_elem", formats.FormatOsmPbf, filepath.Join(t.TempDir(), "out.bin"))
+		if err == nil {
+			t.Errorf("expected download error, got nil")
+		}
+	})
+}
+
+func Benchmark_FileExist(b *testing.B) {
+	tmpDir := b.TempDir()
+	f := filepath.Join(tmpDir, "test.txt")
+	_ = os.WriteFile(f, []byte("data"), 0o600)
+
+	for range b.N {
+		_ = download.FileExist(f)
+	}
+}
+
+func Benchmark_NewDownloader(b *testing.B) {
+	cfg := &config.Config{}
+	opts := &config.Options{}
+
+	for range b.N {
+		_ = download.NewDownloader(cfg, opts)
 	}
 }

@@ -346,3 +346,18 @@ func TestGeo2day_Collector(t *testing.T) {
 		assert.Equal(t, "france", idf.Parent)
 	}
 }
+
+func Benchmark_Exceptions(b *testing.B) {
+	g := geo2day.GetDefault()
+	elem := &element.Element{ID: "guyane", Parent: "france"}
+
+	for range b.N {
+		_ = g.Exceptions(elem)
+	}
+}
+
+func Benchmark_GetDefault(b *testing.B) {
+	for range b.N {
+		_ = geo2day.GetDefault()
+	}
+}

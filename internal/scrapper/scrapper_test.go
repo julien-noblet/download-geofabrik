@@ -704,3 +704,25 @@ func TestScrapper_ParseFormatService(t *testing.T) {
 		t.Errorf("ParseFormatService did not add format")
 	}
 }
+
+func Benchmark_GetParent(b *testing.B) {
+	url := "https://download.geofabrik.de/europe/france/paris.osm.pbf"
+
+	for range b.N {
+		_, _ = scrapper.GetParent(url)
+	}
+}
+
+func Benchmark_FileExt(b *testing.B) {
+	url := "https://download.geofabrik.de/europe/france.osm.pbf"
+
+	for range b.N {
+		_, _ = scrapper.FileExt(url)
+	}
+}
+
+func Benchmark_NewScrapper(b *testing.B) {
+	for range b.N {
+		_ = scrapper.NewScrapper("http://example.com", "http://example.com", []string{"example.com"})
+	}
+}

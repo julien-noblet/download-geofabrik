@@ -166,7 +166,66 @@ func Benchmark_contain_parse_geofabrik_yml_France_formats_osm_pbf(b *testing.B) 
 	}
 }
 
-func Test_MakeParent(t *testing.T) {
+func TestFormats_Contains(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name    string
+		format  string
+		formats element.Formats
+		want    bool
+	}{
+		{
+			name:    "empty formats list",
+			formats: element.Formats{},
+			format:  "osm.pbf",
+			want:    false,
+		},
+		{
+			name:    "contains first element",
+			formats: element.Formats{"osm.pbf", "osm.bz2", "shp.zip"},
+			format:  "osm.pbf",
+			want:    true,
+		},
+		{
+			name:    "contains middle element",
+			formats: element.Formats{"osm.pbf", "osm.bz2", "shp.zip"},
+			format:  "osm.bz2",
+			want:    true,
+		},
+		{
+			name:    "contains last element",
+			formats: element.Formats{"osm.pbf", "osm.bz2", "shp.zip"},
+			format:  "shp.zip",
+			want:    true,
+		},
+		{
+			name:    "does not contain element",
+			formats: element.Formats{"osm.pbf", "osm.bz2"},
+			format:  "shp.zip",
+			want:    false,
+		},
+		{
+			name:    "case sensitive mismatch",
+			formats: element.Formats{"OSM.PBF"},
+			format:  "osm.pbf",
+			want:    false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
+			got := tt.formats.Contains(tt.format)
+			if got != tt.want {
+				t.Errorf("Formats.Contains(%s) = %v, want %v", tt.format, got, tt.want)
+			}
+		})
+	}
+}
+
+func TestCreateParentElement(t *testing.T) {
 	t.Parallel()
 
 	type args struct {
@@ -196,21 +255,41 @@ func Test_MakeParent(t *testing.T) {
 		},
 	}
 
-	for _, thisTest := range tests {
-		t.Run(thisTest.name, func(t *testing.T) {
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			got := element.CreateParentElement(&thisTest.args.e, thisTest.args.gparent)
-			if got == nil && thisTest.want == nil {
+			got := element.CreateParentElement(&tt.args.e, tt.args.gparent)
+			if got == nil && tt.want == nil {
 				return
 			}
 
-			if got.ID != thisTest.want.ID ||
-				got.Name != thisTest.want.Name ||
-				got.Meta != thisTest.want.Meta ||
-				got.Parent != thisTest.want.Parent {
-				t.Errorf("element.MakeParent() = %+v,gparent = %+v, want %+v", got, thisTest.args.gparent, thisTest.want)
+			if got == nil || tt.want == nil {
+				t.Fatalf("element.CreateParentElement() = %v, want %v", got, tt.want)
+			}
+
+			if got.ID != tt.want.ID ||
+				got.Name != tt.want.Name ||
+				got.Meta != tt.want.Meta ||
+				got.Parent != tt.want.Parent {
+				t.Errorf("element.CreateParentElement() = %+v, gparent = %+v, want %+v", got, tt.args.gparent, tt.want)
 			}
 		})
+	}
+}
+
+func Benchmark_CreateParentElement(b *testing.B) {
+	elem := &element.Element{ID: "paris", Parent: "france"}
+
+	for range b.N {
+		_ = element.CreateParentElement(elem, "europe")
+	}
+}
+
+func Benchmark_CreateParentElement_NoParent(b *testing.B) {
+	elem := &element.Element{ID: "europe", Parent: ""}
+
+	for range b.N {
+		_ = element.CreateParentElement(elem, "")
 	}
 }

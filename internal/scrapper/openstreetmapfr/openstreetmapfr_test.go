@@ -456,10 +456,24 @@ func TestOpenstreetmapFR_makeParents(t *testing.T) {
 	}
 }
 
-func BenchmarkExeptions(b *testing.B) {
-	for range make([]struct{}, b.N) {
-		openstreetmapfr.Exceptions("north-east", "parent")
-		openstreetmapfr.Exceptions("central", "parent")
-		openstreetmapfr.Exceptions("unknown", "parent")
+func BenchmarkExceptions(b *testing.B) {
+	for range b.N {
+		_ = openstreetmapfr.Exceptions("north-east", "parent")
+		_ = openstreetmapfr.Exceptions("central", "parent")
+		_ = openstreetmapfr.Exceptions("unknown", "parent")
+	}
+}
+
+func Benchmark_GetDefault(b *testing.B) {
+	for range b.N {
+		_ = openstreetmapfr.GetDefault()
+	}
+}
+
+func Benchmark_GetParent(b *testing.B) {
+	href := "http://download.openstreetmap.fr/extracts/europe/france/ile-de-france/paris.osm.pbf"
+
+	for range b.N {
+		_, _ = openstreetmapfr.GetParent(href)
 	}
 }

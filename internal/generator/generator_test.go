@@ -543,3 +543,28 @@ func TestVisitAndWait_Error(_ *testing.T) {
 	// e.g. schemes must be present
 	visitAndWait(c, ":/invalid-url")
 }
+
+func Benchmark_Cleanup(b *testing.B) {
+	for range b.N {
+		cfg := SampleConfigValidPtr()
+		Cleanup(&cfg)
+	}
+}
+
+func Benchmark_Slice_Generate(b *testing.B) {
+	cfg := SampleConfigValidPtr()
+
+	for range b.N {
+		_, _ = cfg.Generate()
+	}
+}
+
+func Benchmark_Write(b *testing.B) {
+	cfg := SampleConfigValidPtr()
+	tmpDir := b.TempDir()
+	outFile := filepath.Join(tmpDir, "out.yml")
+
+	for range b.N {
+		_ = Write(&cfg, outFile)
+	}
+}
