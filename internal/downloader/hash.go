@@ -40,7 +40,14 @@ func CheckFileHash(hashfile, expectedHash string) (bool, error) {
 		return false, fmt.Errorf(readErrorMsg, hashfile, err)
 	}
 
-	fileHash := strings.Split(string(fileContent), " ")[0]
+	fields := strings.Fields(string(fileContent))
+	if len(fields) == 0 {
+		slog.Warn("Hash file is empty", "file", hashfile)
+
+		return false, nil
+	}
+
+	fileHash := fields[0]
 	slog.Info("Hash from file", "hash", fileHash)
 
 	return strings.EqualFold(expectedHash, fileHash), nil

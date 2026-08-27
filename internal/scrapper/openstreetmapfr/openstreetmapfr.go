@@ -199,11 +199,24 @@ func Exceptions(name, parent string) string {
 	return name
 }
 
+func shouldSkipHref(href string) bool {
+	return href == "" || strings.Contains(href, "?") || strings.Contains(href, "-latest") || strings.HasPrefix(href, "/")
+}
+
+func getExtension(valsplit []string) string {
+	extension := strings.Join(valsplit[1:], ".")
+	if strings.Contains(extension, "state.txt") {
+		return formats.FormatState
+	}
+
+	return extension
+}
+
 // ParseHref parses the href and updates the configuration.
 func (o *OpenstreetmapFR) ParseHref(href string) {
 	slog.Debug("Parsing", "href", href)
 
-	if strings.Contains(href, "?") || strings.Contains(href, "-latest") || href[0] == '/' {
+	if shouldSkipHref(href) {
 		return
 	}
 
@@ -213,22 +226,14 @@ func (o *OpenstreetmapFR) ParseHref(href string) {
 	}
 
 	valsplit := strings.Split(parents[len(parents)-1], ".")
-	if valsplit[0] == "" || len(strings.Split(href, "/")) <= minParentListLength {
-		return
-	}
-
-	if strings.Contains(passList, valsplit[0]) {
+	if valsplit[0] == "" || len(strings.Split(href, "/")) <= minParentListLength || strings.Contains(passList, valsplit[0]) {
 		return
 	}
 
 	name := Exceptions(valsplit[0], parent)
 	slog.Debug("Parsing", "name", name)
 
-	extension := strings.Join(valsplit[1:], ".")
-	if strings.Contains(extension, "state.txt") {
-		extension = formats.FormatState
-	}
-
+	extension := getExtension(valsplit)
 	slog.Debug("Add format", "extension", extension)
 
 	file := ""
@@ -285,7 +290,7 @@ func (o *OpenstreetmapFR) Parse(e *colly.HTMLElement, c *colly.Collector) {
 
 // isDirectory checks if the URL is a directory.
 func isDirectory(href string) bool {
-	return href[len(href)-1] == '/'
+	return strings.HasSuffix(href, "/")
 }
 
 // visitURL visits the URL and handles errors.

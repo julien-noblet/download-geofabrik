@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	geofabrikYml = "../geofabrik.yml"
+	geofabrikYml = "../../geofabrik.yml"
 )
 
 func sampleAfricaElementPtr() *element.Element {
@@ -143,7 +143,7 @@ func TestElement_HasParent(t *testing.T) {
 
 func Benchmark_contains_parse_geofabrik_yml(b *testing.B) {
 	myConfig, _ := config.LoadConfig(geofabrikYml)
-	sliceE := element.Formats{}
+	sliceE := make(element.Formats, 0, len(myConfig.Elements))
 
 	for key := range myConfig.Elements {
 		sliceE = append(sliceE, key)

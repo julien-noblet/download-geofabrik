@@ -9,6 +9,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"path/filepath"
 	"time"
 
 	pb "github.com/cheggaaa/pb/v3"
@@ -16,13 +17,16 @@ import (
 )
 
 const (
-	progressMinimal = 512 * 1024 // Don't display progress bar if size < 512kb
-	defaultTimeout  = 60 * time.Second
-	keepAlive       = 30 * time.Second
-	idleTimeout     = 5 * time.Second
-	tlsTimeout      = 10 * time.Second
-	continueTimeout = 5 * time.Second
-	fileMode        = 0o644
+	progressMinimal     = 512 * 1024 // Don't display progress bar if size < 512kb
+	defaultTimeout      = 60 * time.Second
+	keepAlive           = 30 * time.Second
+	idleTimeout         = 90 * time.Second
+	tlsTimeout          = 10 * time.Second
+	continueTimeout     = 5 * time.Second
+	fileMode            = 0o644
+	dirMode             = 0o755
+	maxIdleConns        = 100
+	maxIdleConnsPerHost = 20
 )
 
 var (
@@ -34,30 +38,27 @@ var (
 type Downloader struct {
 	Config  *config.Config
 	Options *config.Options
+	client  *http.Client
 }
 
-// NewDownloader creates a new Downloader.
+// NewDownloader creates a new Downloader with connection pooling.
 func NewDownloader(cfg *config.Config, opts *config.Options) *Downloader {
 	return &Downloader{
 		Config:  cfg,
 		Options: opts,
-	}
-}
-
-// createClient creates a configured HTTP client.
-func createClient() *http.Client {
-	return &http.Client{
-		Transport: &http.Transport{
-			Proxy: http.ProxyFromEnvironment,
-			DialContext: (&net.Dialer{
-				Timeout:   defaultTimeout,
-				KeepAlive: keepAlive,
-				DualStack: true,
-			}).DialContext,
-			MaxIdleConns:          0,
-			IdleConnTimeout:       idleTimeout,
-			TLSHandshakeTimeout:   tlsTimeout,
-			ExpectContinueTimeout: continueTimeout,
+		client: &http.Client{
+			Transport: &http.Transport{
+				Proxy: http.ProxyFromEnvironment,
+				DialContext: (&net.Dialer{
+					Timeout:   defaultTimeout,
+					KeepAlive: keepAlive,
+				}).DialContext,
+				MaxIdleConns:          maxIdleConns,
+				MaxIdleConnsPerHost:   maxIdleConnsPerHost,
+				IdleConnTimeout:       idleTimeout,
+				TLSHandshakeTimeout:   tlsTimeout,
+				ExpectContinueTimeout: continueTimeout,
+			},
 		},
 	}
 }
@@ -70,11 +71,14 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 		return nil
 	}
 
-	client := createClient()
-
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, myURL, http.NoBody)
 	if err != nil {
 		return fmt.Errorf("error creating request for %s - %w", myURL, err)
+	}
+
+	client := d.client
+	if client == nil {
+		client = http.DefaultClient
 	}
 
 	response, err := client.Do(req)
@@ -96,40 +100,68 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 	return d.saveToFile(fileName, response)
 }
 
-// saveToFile saves the response body to a file with progress bar support.
-func (d *Downloader) saveToFile(fileName string, response *http.Response) (err error) {
-	file, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY, fileMode)
-	if err != nil {
-		return fmt.Errorf("error while creating %s - %w", fileName, err)
-	}
-
-	defer func() {
-		if cerr := file.Close(); cerr != nil && err == nil {
-			err = fmt.Errorf("error while closing %s - %w", fileName, cerr)
-		}
-	}()
-
-	var (
-		output          io.Writer = file
-		currentProgress int64
-	)
-
-	// Display progress bar if requested, not quiet, and file is large enough
+func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, error) {
 	if d.Options.Progress && !d.Options.Quiet && response.ContentLength > progressMinimal {
 		progressBar := pb.Full.Start64(response.ContentLength)
 		barReader := progressBar.NewProxyReader(response.Body)
 
-		currentProgress, err = io.Copy(output, barReader)
+		defer progressBar.Finish()
+
+		written, err := io.Copy(dst, barReader)
 		if err != nil {
-			return fmt.Errorf("error while writing %s - %w", fileName, err)
+			return written, fmt.Errorf("error copying response with progress: %w", err)
 		}
 
-		progressBar.Finish()
-	} else {
-		currentProgress, err = io.Copy(output, response.Body)
-		if err != nil {
-			return fmt.Errorf("error while writing %s - %w", fileName, err)
+		return written, nil
+	}
+
+	written, err := io.Copy(dst, response.Body)
+	if err != nil {
+		return written, fmt.Errorf("error copying response body: %w", err)
+	}
+
+	return written, nil
+}
+
+// saveToFile saves the response body to a file atomically with progress bar support.
+func (d *Downloader) saveToFile(fileName string, response *http.Response) (err error) {
+	if dir := filepath.Dir(fileName); dir != "" {
+		if merr := os.MkdirAll(dir, dirMode); merr != nil {
+			return fmt.Errorf("error creating directory %s - %w", dir, merr)
 		}
+	}
+
+	tmpFileName := fileName + ".tmp"
+
+	file, err := os.OpenFile(tmpFileName, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, fileMode)
+	if err != nil {
+		return fmt.Errorf("error while creating %s - %w", tmpFileName, err)
+	}
+
+	fileClosed := false
+	defer func() {
+		if !fileClosed {
+			_ = file.Close()
+		}
+
+		if err != nil {
+			_ = os.Remove(tmpFileName)
+		}
+	}()
+
+	currentProgress, err := d.copyBody(file, response)
+	if err != nil {
+		return fmt.Errorf("error while writing %s - %w", tmpFileName, err)
+	}
+
+	fileClosed = true
+
+	if cerr := file.Close(); cerr != nil {
+		return fmt.Errorf("error while closing %s - %w", tmpFileName, cerr)
+	}
+
+	if err := os.Rename(tmpFileName, fileName); err != nil {
+		return fmt.Errorf("error while renaming %s to %s - %w", tmpFileName, fileName, err)
 	}
 
 	slog.Info("Downloaded", "file", fileName)

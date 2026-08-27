@@ -6,7 +6,6 @@ import (
 	"log/slog"
 	"os"
 	"path/filepath"
-	"reflect"
 	"strings"
 	"sync"
 
@@ -18,14 +17,16 @@ import (
 const (
 	DefaultConfigFile = "geofabrik.yml"
 	DefaultService    = "geofabrik"
+	maxHierarchyDepth = 30
 )
 
 var (
-	ErrElem2URL       = errors.New("can't find url")
-	ErrLoadConfig     = errors.New("can't load config")
-	ErrFindElem       = errors.New("element not found")
-	ErrParentMismatch = errors.New("can't merge")
-	ErrFormatNotExist = errors.New("format not exist")
+	ErrElem2URL          = errors.New("can't find url")
+	ErrLoadConfig        = errors.New("can't load config")
+	ErrFindElem          = errors.New("element not found")
+	ErrParentMismatch    = errors.New("can't merge")
+	ErrFormatNotExist    = errors.New("format not exist")
+	ErrMaxHierarchyDepth = errors.New("maximum hierarchy depth exceeded")
 
 	hashes = []string{"md5"}
 )
@@ -62,19 +63,16 @@ func (config *Config) Generate() ([]byte, error) {
 	return yml, nil
 }
 
-// MergeElement merges a new element into the config.
+// MergeElement merges a new element into the config safely using a write lock.
 func (config *Config) MergeElement(elementPtr *element.Element) error {
-	config.ElementsMutex.RLock()
-	newElement, ok := config.Elements[elementPtr.ID]
-	config.ElementsMutex.RUnlock()
+	config.ElementsMutex.Lock()
+	defer config.ElementsMutex.Unlock()
 
+	newElement, ok := config.Elements[elementPtr.ID]
 	if ok {
 		if newElement.Parent != elementPtr.Parent {
 			return fmt.Errorf("%w: Parent mismatch %s != %s (%s)", ErrParentMismatch, newElement.Parent, elementPtr.Parent, elementPtr.ID)
 		}
-
-		config.ElementsMutex.Lock()
-		defer config.ElementsMutex.Unlock()
 
 		for _, f := range elementPtr.Formats {
 			if !newElement.Formats.Contains(f) {
@@ -85,9 +83,6 @@ func (config *Config) MergeElement(elementPtr *element.Element) error {
 		newElement.Meta = len(newElement.Formats) == 0
 		config.Elements[elementPtr.ID] = newElement
 	} else {
-		config.ElementsMutex.Lock()
-		defer config.ElementsMutex.Unlock()
-
 		config.Elements[elementPtr.ID] = *elementPtr
 	}
 
@@ -99,30 +94,30 @@ func (config *Config) Exist(elementID string) bool {
 	config.ElementsMutex.RLock()
 	defer config.ElementsMutex.RUnlock()
 
-	result := reflect.DeepEqual(config.Elements[elementID], element.Element{})
+	_, exists := config.Elements[elementID]
 
-	return !result
+	return exists
 }
 
-// AddExtension adds an extension to an element.
+// AddExtension adds an extension to an element, creating it if not already present.
 func (config *Config) AddExtension(elementID, format string) {
-	config.ElementsMutex.RLock()
-	elem := config.Elements[elementID]
-	config.ElementsMutex.RUnlock()
+	config.ElementsMutex.Lock()
+	defer config.ElementsMutex.Unlock()
+
+	elem, ok := config.Elements[elementID]
+	if !ok {
+		elem = element.Element{
+			ID:      elementID,
+			Formats: element.Formats{},
+		}
+	}
 
 	if !elem.Formats.Contains(format) {
 		slog.Info("Add extension to element", "format", format, "id", elem.ID)
 
-		config.ElementsMutex.Lock()
-
 		elem.Formats = append(elem.Formats, format)
-
-		config.ElementsMutex.Unlock()
-
-		if err := config.MergeElement(&elem); err != nil {
-			slog.Error("can't merge element", "error", err, "name", elem.Name)
-			os.Exit(1) // Or handle better
-		}
+		elem.Meta = len(elem.Formats) == 0
+		config.Elements[elementID] = elem
 	}
 }
 
@@ -158,8 +153,30 @@ func GetFile(myElement *element.Element) string {
 	return myElement.ID
 }
 
-// Elem2preURL generates a pre-URL for an element.
-func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string) (string, error) {
+func buildPrefix(baseURL []string, defaultBaseURL string) string {
+	var prefix string
+
+	switch len(baseURL) {
+	case 1:
+		prefix = defaultBaseURL + "/" + strings.Join(baseURL, "/")
+	case 2: //nolint:mnd // Handles exactly 2 base URL components
+		prefix = strings.Join(baseURL, "/")
+	default:
+		prefix = defaultBaseURL
+	}
+
+	if !strings.HasSuffix(prefix, "/") {
+		prefix += "/"
+	}
+
+	return prefix
+}
+
+func elem2preURLWithDepth(config *Config, elementPtr *element.Element, depth int, baseURL ...string) (string, error) {
+	if depth > maxHierarchyDepth {
+		return "", fmt.Errorf("%w for element %s (possible cycle in config)", ErrMaxHierarchyDepth, elementPtr.ID)
+	}
+
 	myElement, err := FindElem(config, elementPtr.ID)
 	if err != nil {
 		return "", err
@@ -171,36 +188,20 @@ func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string)
 			return "", err
 		}
 
-		res, err := Elem2preURL(config, parent, baseURL...)
+		res, err := elem2preURLWithDepth(config, parent, depth+1, baseURL...)
 		if err != nil {
 			return "", err
 		}
 
-		res += "/" + GetFile(myElement)
-
-		return res, nil
+		return res + "/" + GetFile(myElement), nil
 	}
 
-	switch len(baseURL) {
-	case 1:
-		prefix := config.BaseURL + "/" + strings.Join(baseURL, "/")
-		if !strings.HasSuffix(prefix, "/") {
-			prefix += "/"
-		}
+	return buildPrefix(baseURL, config.BaseURL) + GetFile(myElement), nil
+}
 
-		return prefix + GetFile(myElement), nil
-
-	case 2: //nolint:mnd // This case handles exactly 2 base URL components
-		prefix := strings.Join(baseURL, "/")
-		if !strings.HasSuffix(prefix, "/") {
-			prefix += "/"
-		}
-
-		return prefix + GetFile(myElement), nil
-
-	default:
-		return config.BaseURL + "/" + GetFile(myElement), nil
-	}
+// Elem2preURL generates a pre-URL for an element with cycle protection.
+func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string) (string, error) {
+	return elem2preURLWithDepth(config, elementPtr, 0, baseURL...)
 }
 
 // Elem2URL generates a URL for an element with the given extension.

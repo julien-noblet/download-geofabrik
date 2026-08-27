@@ -12,14 +12,18 @@ import (
 )
 
 var (
+	// Version is the CLI version injected at build time.
+	Version = "dev"
+
 	cfgFile string
 	service string
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "download-geofabrik",
-	Short: "A command-line tool for downloading OSM files",
-	Long:  `download-geofabrik is a CLI tool that downloads OpenStreetMap data from Geofabrik.`,
+	Use:     "download-geofabrik",
+	Short:   "A command-line tool for downloading OSM files",
+	Long:    `download-geofabrik is a CLI tool that downloads OpenStreetMap data from Geofabrik.`,
+	Version: Version,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		return cmd.Help()
 	},
@@ -36,6 +40,8 @@ func Execute() error {
 		RegisterGenerateCmd()
 		RegisterListCmd()
 	})
+
+	rootCmd.Version = Version
 
 	if err := rootCmd.Execute(); err != nil {
 		return fmt.Errorf("root cmd execution failed: %w", err)
@@ -71,12 +77,30 @@ func initCLI() {
 	}
 }
 
+func setupLogging() {
+	var level slog.Level
+
+	switch {
+	case viper.GetBool("quiet"):
+		level = slog.LevelError
+	case viper.GetBool("verbose"):
+		level = slog.LevelDebug
+	default:
+		level = slog.LevelInfo
+	}
+
+	handler := slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: level})
+	slog.SetDefault(slog.New(handler))
+}
+
 func initConfig() {
+	setupLogging()
+
 	if cfgFile != "" {
 		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
 	} else {
-		// Search config in home directory with name ".download-geofabrik" (without extension).
+		// Search config in current directory.
 		viper.AddConfigPath(".")
 		viper.SetConfigType("yaml")
 
