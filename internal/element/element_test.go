@@ -176,6 +176,12 @@ func TestFormats_Contains(t *testing.T) {
 		want    bool
 	}{
 		{
+			name:    "nil formats list",
+			formats: nil,
+			format:  "osm.pbf",
+			want:    false,
+		},
+		{
 			name:    "empty formats list",
 			formats: element.Formats{},
 			format:  "osm.pbf",
@@ -223,6 +229,15 @@ func TestFormats_Contains(t *testing.T) {
 			}
 		})
 	}
+
+	t.Run("nil pointer receiver", func(t *testing.T) {
+		t.Parallel()
+
+		var f *element.Formats
+		if got := f.Contains("osm.pbf"); got {
+			t.Errorf("nil pointer receiver Formats.Contains() = true, want false")
+		}
+	})
 }
 
 func TestCreateParentElement(t *testing.T) {

@@ -55,6 +55,9 @@ func TestGetSortedKeys(t *testing.T) {
 
 	keys := lists.GetSortedKeys(mockConfig)
 	assert.Equal(t, []string{"region1", "region2"}, keys)
+
+	nilKeys := lists.GetSortedKeys(nil)
+	assert.Nil(t, nilKeys)
 }
 
 func TestCreateTable(t *testing.T) {

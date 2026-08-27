@@ -2,6 +2,7 @@ package lists
 
 import (
 	"fmt"
+	"maps"
 	"os"
 	"slices"
 
@@ -66,12 +67,9 @@ func CreateTable(format string) *tablewriter.Table {
 
 // GetSortedKeys returns the sorted keys of the configuration elements.
 func GetSortedKeys(configuration *config.Config) []string {
-	keys := make([]string, 0, len(configuration.Elements))
-	for k := range configuration.Elements {
-		keys = append(keys, k)
+	if configuration == nil {
+		return nil
 	}
 
-	slices.Sort(keys)
-
-	return keys
+	return slices.Sorted(maps.Keys(configuration.Elements))
 }
