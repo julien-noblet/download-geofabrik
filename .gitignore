@@ -64,3 +64,8 @@ dist/
 
 
 /download-geofabrik
+
+# direnv
+.direnv/
+.direnv
+
