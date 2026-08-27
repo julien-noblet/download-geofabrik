@@ -2,10 +2,15 @@ package geo2day_test
 
 import (
 	"context"
+	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
+	"testing/iotest"
+	"time"
 
 	"github.com/julien-noblet/download-geofabrik/internal/provider/geo2day"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
@@ -13,24 +18,38 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// buildMockHTML creates mock HTML pages with hrefs that use the test server's
-// BaseURL, which is required because splitParent needs full-URL paths to
-// correctly extract the parent component.
+type errTransport struct{}
+
+func (errTransport) RoundTrip(_ *http.Request) (*http.Response, error) {
+	return &http.Response{
+		StatusCode: http.StatusOK,
+		Body:       io.NopCloser(iotest.ErrReader(errors.New("read error"))),
+	}, nil
+}
+
+// buildMockHTML creates mock HTML pages with hrefs that exercise all branch paths:
+// absolute URLs, relative URLs with and without leading slashes, no-href links,
+// extensionless files, and duplicate links to test visited cache.
 func buildMockHTML(baseURL string) map[string]string {
 	return map[string]string{
-		// Root page: lists continents as .html sub-pages and continent-level files.
+		// Root page: lists continents with relative and absolute URLs, no-href links,
+		// and files with and without extensions.
 		"/": fmt.Sprintf(`<!DOCTYPE html>
 <html><body><table>
-  <tr><td><a href="%[1]s/europe.html">Europe</a></td></tr>
-  <tr><td><a href="%[1]s/africa.html">Africa</a></td></tr>
+  <tr><td><a name="no_href">no href tag</a></td></tr>
+  <tr><td><a href="/">root link</a></td></tr>
+  <tr><td><a href="/noextension">no ext file</a></td></tr>
+  <tr><td><a href="europe.html">Europe Relative</a></td></tr>
+  <tr><td><a href="/africa.html">Africa Absolute Slash</a></td></tr>
   <tr><td><a href="%[1]s/europe.pbf">Europe PBF</a></td></tr>
   <tr><td><a href="%[1]s/europe.poly">Europe Poly</a></td></tr>
   <tr><td><a href="%[1]s/africa.pbf">Africa PBF</a></td></tr>
 </table></body></html>`, baseURL),
 
-		// europe.html: lists countries + a sub-page for france
+		// europe.html: lists countries + a sub-page for france, and duplicates link to africa.html
 		"/europe.html": fmt.Sprintf(`<!DOCTYPE html>
 <html><body><table>
+  <tr><td><a href="/africa.html">Africa Duplicate</a></td></tr>
   <tr><td><a href="%[1]s/europe/france.html">France</a></td></tr>
   <tr><td><a href="%[1]s/europe/france.pbf">France PBF</a></td></tr>
   <tr><td><a href="%[1]s/europe/france.poly">France Poly</a></td></tr>
@@ -59,8 +78,6 @@ func buildMockHTML(baseURL string) map[string]string {
 
 // newMockGeo2DayServer creates a httptest server that routes requests
 // to the appropriate mock HTML page based on URL path.
-// It uses a two-phase init because the mock HTML needs the server URL
-// for constructing absolute hrefs.
 func newMockGeo2DayServer() *httptest.Server {
 	var pages map[string]string
 
@@ -156,7 +173,6 @@ func TestGeo2Day_FetchCatalog(t *testing.T) {
 func TestGeo2Day_FetchCatalog_Exceptions(t *testing.T) {
 	t.Parallel()
 
-	// Serve a page with guyane under south-america to test exception renaming
 	var baseURL string
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
@@ -177,7 +193,6 @@ func TestGeo2Day_FetchCatalog_Exceptions(t *testing.T) {
 	require.NoError(t, err)
 	require.NotNil(t, cat)
 
-	// guyane under south-america should become guyane-south-america
 	assert.True(t, cat.Exist("guyane-south-america"), "guyane under south-america should be renamed")
 }
 
@@ -196,12 +211,34 @@ func TestGeo2Day_FetchCatalog_HTTPError(t *testing.T) {
 	assert.ErrorIs(t, err, geo2day.ErrFetchCatalog)
 }
 
+func TestGeo2Day_FetchCatalog_HTMLParseError(t *testing.T) {
+	t.Parallel()
+
+	p := geo2day.NewProvider()
+	p.StartURL = "http://example.com"
+	p.Client = &http.Client{Transport: errTransport{}}
+
+	_, err := p.FetchCatalog(context.Background())
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "cannot parse HTML")
+}
+
 func TestGeo2Day_FetchCatalog_InvalidURL(t *testing.T) {
 	t.Parallel()
 
 	p := geo2day.NewProvider()
 	p.StartURL = "http://invalid-host-that-does-not-exist.test:9999/"
 	p.BaseURL = "http://invalid-host-that-does-not-exist.test:9999"
+
+	_, err := p.FetchCatalog(context.Background())
+	require.Error(t, err)
+}
+
+func TestGeo2Day_FetchCatalog_InvalidURLSyntax(t *testing.T) {
+	t.Parallel()
+
+	p := geo2day.NewProvider()
+	p.StartURL = "http://[::1]:namedport/"
 
 	_, err := p.FetchCatalog(context.Background())
 	require.Error(t, err)
@@ -218,6 +255,47 @@ func TestGeo2Day_FetchCatalog_ContextCancelled(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel() // Cancel immediately
 
+	_, err := p.FetchCatalog(ctx)
+	require.Error(t, err)
+}
+
+func TestGeo2Day_FetchCatalog_ContextCancelledDuringCrawl(t *testing.T) {
+	t.Parallel()
+
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	var baseURL string
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html")
+
+		if r.URL.Path == "/" {
+			var links strings.Builder
+
+			links.WriteString("<!DOCTYPE html><html><body><table>")
+
+			for i := range 60 {
+				fmt.Fprintf(&links, "<tr><td><a href=\"%s/sub%d.html\">Sub %d</a></td></tr>", baseURL, i, i)
+			}
+
+			links.WriteString("</table></body></html>")
+			_, _ = w.Write([]byte(links.String()))
+
+			return
+		}
+
+		// Cancel context on first subpage request
+		cancel()
+		time.Sleep(10 * time.Millisecond)
+
+		_, _ = w.Write([]byte(`<!DOCTYPE html><html><body><table></table></body></html>`))
+	}))
+	defer ts.Close()
+
+	baseURL = ts.URL
+
+	p := newTestProvider(ts)
 	_, err := p.FetchCatalog(ctx)
 	require.Error(t, err)
 }
@@ -311,7 +389,6 @@ func TestGeo2Day_FetchCatalog_ExternalLinksIgnored(t *testing.T) {
 	require.NoError(t, err)
 	require.NotNil(t, cat)
 
-	// External .html links should not be crawled, but france.pbf should be present
 	assert.True(t, cat.Exist("france"), "france should exist")
 }
 
