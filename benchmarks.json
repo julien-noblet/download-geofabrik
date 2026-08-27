@@ -1,4 +1,5 @@
 [
+  {"Version":"4cf4e1d519bfbf74f6b7a3866dabf3c41173fe7b","Date":1787852093,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"ad956621f687df79b2cec7309f414c0f82c1ea74","Date":1787852057,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"17195f192d47d6ee8baaf7fec5629851a9d70a22","Date":1787838385,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
   {"Version":"08f6728e46fc5e26deb8380aed15889c61af75a5","Date":1787838355,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"beedc6b47b78b58905765704f4e5193277bafb05","Date":1786680733,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"4b4b9c15a88721de8915975755cfbe202a91d60c","Date":1786680551,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"f10b50568c11bbe5ac293a45c75a2937812d7e30","Date":1786647036,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
-  {"Version":"06a8d4c923ab59fd2c1215ddf43c62b3f577f172","Date":1786647031,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
-  {"Version":"575acd59119908a13d8d4079653989dac5ca8b1a","Date":1786646910,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"06a8d4c923ab59fd2c1215ddf43c62b3f577f172","Date":1786647031,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]}
 ]
