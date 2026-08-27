@@ -1,5 +1,7 @@
 package element
 
+import "slices"
+
 // Element represents a part to download with formats, name, parent, etc.
 type Element struct {
 	ID      string  `yaml:"id"`
@@ -22,13 +24,11 @@ func (e *Element) HasParent() bool {
 
 // Contains checks if the format list contains a specific format.
 func (f *Formats) Contains(format string) bool {
-	for _, existingFormat := range *f {
-		if format == existingFormat {
-			return true
-		}
+	if f == nil {
+		return false
 	}
 
-	return false
+	return slices.Contains(*f, format)
 }
 
 // CreateParentElement creates a parent element for the given element.
