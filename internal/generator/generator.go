@@ -47,11 +47,21 @@ func Write(c *config.Config, filename string) error {
 
 // Generate generates the configuration based on the specified service.
 func Generate(service string, progress bool, configfile string) error {
-	return PerformGenerate(service, progress, configfile)
+	return GenerateContext(context.Background(), service, progress, configfile)
+}
+
+// GenerateContext generates the configuration based on the specified service with context.
+func GenerateContext(ctx context.Context, service string, progress bool, configfile string) error {
+	return PerformGenerateContext(ctx, service, progress, configfile)
 }
 
 // PerformGenerate handles the generation logic using registered providers.
-func PerformGenerate(service string, _ bool, configfile string) error {
+func PerformGenerate(service string, progress bool, configfile string) error {
+	return PerformGenerateContext(context.Background(), service, progress, configfile)
+}
+
+// PerformGenerateContext handles the generation logic using registered providers with context.
+func PerformGenerateContext(ctx context.Context, service string, _ bool, configfile string) error {
 	provider.RegisterDefaultProviders()
 
 	lookupService := service
@@ -66,7 +76,7 @@ func PerformGenerate(service string, _ bool, configfile string) error {
 
 	slog.Info("Fetching catalog from provider", "service", service, "description", prov.Description())
 
-	cat, err := prov.FetchCatalog(context.Background())
+	cat, err := prov.FetchCatalog(ctx)
 	if err != nil {
 		return fmt.Errorf("failed to fetch catalog from %s: %w", service, err)
 	}

@@ -66,13 +66,7 @@ func addFormatFlag(key, shorthand, usage string) {
 	downloadCmd.Flags().BoolVarP(&val, key, shorthand, false, usage)
 }
 
-func runDownload(_ *cobra.Command, args []string) error {
-	elementID := args[0]
-
-	// Prepare Options
-	// Note: rootCmd flags (config file, verbose) should be parsed already.
-	// I need to access them. They are bound to Viper in root.go (I need to ensure that).
-
+func buildDownloadOptions() (*config.Options, error) {
 	cfgFile := viper.ConfigFileUsed()
 	if cfgFile == "" {
 		if service != "" {
@@ -82,35 +76,54 @@ func runDownload(_ *cobra.Command, args []string) error {
 		}
 	}
 
+	outDir, err := resolveOutputDir(outputDir)
+	if err != nil {
+		return nil, err
+	}
+
 	opts := &config.Options{
 		ConfigFile:      cfgFile,
-		OutputDirectory: outputDir,
+		OutputDirectory: outDir,
 		Check:           check,
 		Verbose:         viper.GetBool("verbose"),
 		Quiet:           viper.GetBool("quiet"),
 		NoDownload:      noDownload,
 		Progress:        downloadProgress,
-		FormatFlags:     make(map[string]bool),
+		FormatFlags:     make(map[string]bool, len(formatFlags)),
 	}
 
-	// Fill format flags
 	for k, v := range formatFlags {
 		opts.FormatFlags[k] = *v
 	}
 
-	// Ensure output dir has separator?
-	if opts.OutputDirectory == "" {
+	return opts, nil
+}
+
+func resolveOutputDir(dir string) (string, error) {
+	if dir == "" {
 		wd, err := os.Getwd()
 		if err != nil {
-			return fmt.Errorf("failed to get working directory: %w", err)
+			return "", fmt.Errorf("failed to get working directory: %w", err)
 		}
 
-		opts.OutputDirectory = wd + string(os.PathSeparator)
-	} else if opts.OutputDirectory[len(opts.OutputDirectory)-1] != os.PathSeparator {
-		opts.OutputDirectory += string(os.PathSeparator)
+		return wd + string(os.PathSeparator), nil
 	}
 
-	// Load Config
+	if dir[len(dir)-1] != os.PathSeparator {
+		return dir + string(os.PathSeparator), nil
+	}
+
+	return dir, nil
+}
+
+func runDownload(cmd *cobra.Command, args []string) error {
+	elementID := args[0]
+
+	opts, err := buildDownloadOptions()
+	if err != nil {
+		return err
+	}
+
 	cfg, err := config.LoadConfig(opts.ConfigFile)
 	if err != nil {
 		slog.Error("Failed to load config", "file", opts.ConfigFile, "error", err)
@@ -118,32 +131,17 @@ func runDownload(_ *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to load config: %w", err)
 	}
 
-	// Determine active formats
 	activeFormats := formats.GetFormats(opts.FormatFlags)
+	if len(activeFormats) == 0 {
+		activeFormats = []string{formats.FormatOsmPbf}
+	}
 
 	downloaderInstance := downloader.NewDownloader(cfg, opts)
-
-	ctx := context.Background()
+	ctx := cmd.Context()
 
 	for _, format := range activeFormats {
-		// Filename calculation?
-		// original used `GetFilename`.
-		// `filename := GetFilename(viper.GetString(viperOutputDirectoryKey), viper.GetString(viperElementKey))`
-
-		// I should reconstruct the file path.
-		// `Downloader.DownloadFile` takes outputPath (e.g. dir/elementName.ext) or just dir/elementName?
-		// My implementation of `DownloadFile` takes `outputPath`.
-		// And checks `format` ID from config.
-
-		// Construct the base filename (without extension).
-		// Original: `r.FindStringSubmatch(outputDir + element)[0]` -> basically basename of element?
-		// No, if element is path?
-
-		// Construct the base filename (without extension).
-		outFile := opts.OutputDirectory + elementID
-		// Get format details for extension
 		formatDef := cfg.Formats[format]
-		targetFile := outFile + "." + formatDef.ID
+		targetFile := opts.OutputDirectory + elementID + "." + formatDef.ID
 
 		slog.Info("Processing", "element", elementID, "format", format)
 
