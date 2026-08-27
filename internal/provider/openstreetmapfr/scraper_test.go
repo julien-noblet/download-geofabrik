@@ -7,8 +7,10 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 	"testing/iotest"
+	"time"
 
 	"github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
@@ -36,6 +38,7 @@ func buildMockOSMFRHTML(baseURL string) map[string]string {
 	return map[string]string{
 		"/extracts/": fmt.Sprintf(`<!DOCTYPE html>
 <html><body><table>
+  <tr><td><a class="nav" title="help">no href tag</a></td></tr>
   <tr><td><a href="europe/">europe/</a></td></tr>
   <tr><td><a href="asia/">asia/</a></td></tr>
   <tr><td><a href="%[1]s/extracts/europe/">duplicate europe</a></td></tr>
@@ -240,4 +243,49 @@ func Benchmark_OSMFR_FetchCatalog_Mock(b *testing.B) {
 	for range b.N {
 		_, _ = p.FetchCatalog(ctx)
 	}
+}
+
+func TestOSMFR_FetchCatalog_ContextCancelledDuringCrawl(t *testing.T) {
+	t.Parallel()
+
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	var baseURL string
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html")
+
+		if r.URL.Path == "/extracts/" {
+			var links strings.Builder
+
+			links.WriteString("<!DOCTYPE html><html><body><table>")
+
+			for i := range 60 {
+				fmt.Fprintf(&links, "<tr><td><a href=\"%s/extracts/sub%d/\">Sub %d</a></td></tr>", baseURL, i, i)
+			}
+
+			links.WriteString("</table></body></html>")
+			_, _ = w.Write([]byte(links.String()))
+
+			return
+		}
+
+		// Cancel context on first subpage request
+		cancel()
+		time.Sleep(10 * time.Millisecond)
+
+		_, _ = w.Write([]byte(`<!DOCTYPE html><html><body><table></table></body></html>`))
+	}))
+	defer ts.Close()
+
+	baseURL = ts.URL
+
+	p := openstreetmapfr.NewProvider()
+	p.StartURL = ts.URL + "/extracts/"
+	p.BaseURL = ts.URL + "/extracts"
+	p.Client = ts.Client()
+
+	_, err := p.FetchCatalog(ctx)
+	require.Error(t, err)
 }

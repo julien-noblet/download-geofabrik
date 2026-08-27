@@ -4,13 +4,15 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"strings"
+	"sync"
 	"time"
 
-	"github.com/PuerkitoBio/goquery"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
+	"golang.org/x/net/html"
 )
 
 var ErrFetchCatalog = errors.New("failed to fetch catalog")
@@ -23,6 +25,10 @@ const (
 	defaultTimeout      = 30 * time.Second
 	defaultKeepAlive    = 30 * time.Second
 	defaultIdleTimeout  = 90 * time.Second
+	defaultMaxIdleConns = 100
+	concurrencyLimit    = 25
+	maxConnsMultiplier  = 2
+	workChanCapacity    = 1000
 	minParentListLength = 4
 )
 
@@ -99,7 +105,11 @@ func NewProvider() *Provider {
 					Timeout:   defaultTimeout,
 					KeepAlive: defaultKeepAlive,
 				}).DialContext,
-				IdleConnTimeout: defaultIdleTimeout,
+				MaxIdleConns:        defaultMaxIdleConns,
+				MaxIdleConnsPerHost: concurrencyLimit,
+				MaxConnsPerHost:     concurrencyLimit * maxConnsMultiplier,
+				IdleConnTimeout:     defaultIdleTimeout,
+				ForceAttemptHTTP2:   true,
 			},
 		},
 	}
@@ -130,41 +140,88 @@ func DefaultFormats() catalog.FormatDefinitions {
 	}
 }
 
-// FetchCatalog crawls the directory index of OpenStreetMap.fr and generates a Catalog.
+// FetchCatalog crawls the directory index of OpenStreetMap.fr concurrently and generates a Catalog.
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	cat := catalog.New()
 	cat.BaseURL = p.BaseURL
 	cat.Formats = DefaultFormats()
 
-	visited := make(map[string]bool)
-	queue := []string{p.StartURL}
+	var (
+		visitedMu     sync.Mutex
+		visited       = make(map[string]bool)
+		workChan      = make(chan string, workChanCapacity)
+		activeWorkers sync.WaitGroup
+		errOnce       sync.Once
+		firstErr      error
+	)
 
-	for len(queue) > 0 {
-		select {
-		case <-ctx.Done():
-			return nil, fmt.Errorf("context canceled during crawl: %w", ctx.Err())
-		default:
+	sem := make(chan struct{}, concurrencyLimit)
+
+	recordErr := func(err error) {
+		errOnce.Do(func() {
+			firstErr = err
+		})
+	}
+
+	enqueue := func(targetURL string) {
+		visitedMu.Lock()
+		if visited[targetURL] {
+			visitedMu.Unlock()
+
+			return
 		}
 
-		currentURL := queue[0]
-		queue = queue[1:]
+		visited[targetURL] = true
+		visitedMu.Unlock()
 
-		if visited[currentURL] {
-			continue
-		}
+		activeWorkers.Add(1)
 
-		visited[currentURL] = true
+		go func() {
+			workChan <- targetURL
+		}()
+	}
 
-		links, err := p.fetchAndProcessPage(ctx, currentURL, cat)
-		if err != nil {
-			return nil, err
-		}
+	enqueue(p.StartURL)
 
-		for _, link := range links {
-			if !visited[link] && strings.HasPrefix(link, p.StartURL) {
-				queue = append(queue, link)
+	go func() {
+		for target := range workChan {
+			select {
+			case <-ctx.Done():
+				recordErr(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
+				activeWorkers.Done()
+
+				continue
+
+			case sem <- struct{}{}:
 			}
+
+			go func(currentURL string) {
+				defer func() {
+					<-sem
+					activeWorkers.Done()
+				}()
+
+				links, err := p.fetchAndProcessPage(ctx, currentURL, cat)
+				if err != nil {
+					recordErr(err)
+
+					return
+				}
+
+				for _, link := range links {
+					if strings.HasPrefix(link, p.StartURL) {
+						enqueue(link)
+					}
+				}
+			}(target)
 		}
+	}()
+
+	activeWorkers.Wait()
+	close(workChan)
+
+	if firstErr != nil {
+		return nil, firstErr
 	}
 
 	return cat, nil
@@ -185,37 +242,68 @@ func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, c
 	if err != nil {
 		return nil, fmt.Errorf("error fetching %s: %w", currentURL, err)
 	}
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		_ = resp.Body.Close()
-
 		return nil, fmt.Errorf("%w: unexpected HTTP %d from %s", ErrFetchCatalog, resp.StatusCode, currentURL)
 	}
 
-	doc, err := goquery.NewDocumentFromReader(resp.Body)
-	resp.Body.Close()
+	return p.parseHTMLStream(resp.Body, currentURL, cat)
+}
 
-	if err != nil {
-		return nil, fmt.Errorf("error parsing HTML from %s: %w", currentURL, err)
-	}
-
+func (p *Provider) parseHTMLStream(reader io.Reader, currentURL string, cat *catalog.Catalog) ([]string, error) {
 	var subDirs []string
 
-	doc.Find("a").Each(func(_ int, selection *goquery.Selection) {
-		href, exists := selection.Attr("href")
-		if !exists || shouldSkipHref(href) {
-			return
+	tokenizer := html.NewTokenizer(reader)
+
+	for {
+		tokenType := tokenizer.Next()
+
+		switch tokenType {
+		case html.ErrorToken:
+			if errors.Is(tokenizer.Err(), io.EOF) {
+				return subDirs, nil
+			}
+
+			return nil, fmt.Errorf("error parsing HTML from %s: %w", currentURL, tokenizer.Err())
+
+		case html.StartTagToken, html.SelfClosingTagToken:
+			if subDir := p.handleAnchor(tokenizer, currentURL, cat); subDir != "" {
+				subDirs = append(subDirs, subDir)
+			}
+
+		case html.TextToken, html.EndTagToken, html.CommentToken, html.DoctypeToken:
+			// Non-anchor tokens
+		}
+	}
+}
+
+func (p *Provider) handleAnchor(tokenizer *html.Tokenizer, currentURL string, cat *catalog.Catalog) string {
+	tagName, hasAttr := tokenizer.TagName()
+	if string(tagName) != "a" || !hasAttr {
+		return ""
+	}
+
+	for {
+		key, val, more := tokenizer.TagAttr()
+		if string(key) == "href" {
+			href := string(val)
+			if !shouldSkipHref(href) {
+				fullURL := resolveURL(currentURL, href)
+				if strings.HasSuffix(href, "/") {
+					return fullURL
+				}
+
+				p.parseFileLink(cat, fullURL)
+			}
+
+			return ""
 		}
 
-		fullURL := resolveURL(currentURL, href)
-		if strings.HasSuffix(href, "/") {
-			subDirs = append(subDirs, fullURL)
-		} else {
-			p.parseFileLink(cat, fullURL)
+		if !more {
+			return ""
 		}
-	})
-
-	return subDirs, nil
+	}
 }
 
 func shouldSkipHref(href string) bool {

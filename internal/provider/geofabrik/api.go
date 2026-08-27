@@ -15,13 +15,17 @@ import (
 var ErrFetchCatalog = errors.New("failed to fetch catalog")
 
 const (
-	ProviderName       = "geofabrik"
-	DefaultConfigFile  = "geofabrik.yml"
-	GeofabrikIndexURL  = "https://download.geofabrik.de/index-v1-nogeom.json"
-	GeofabrikBaseURL   = "https://download.geofabrik.de"
-	defaultTimeout     = 60 * time.Second
-	defaultKeepAlive   = 30 * time.Second
-	defaultIdleTimeout = 90 * time.Second
+	ProviderName               = "geofabrik"
+	DefaultConfigFile          = "geofabrik.yml"
+	GeofabrikIndexURL          = "https://download.geofabrik.de/index-v1-nogeom.json"
+	GeofabrikBaseURL           = "https://download.geofabrik.de"
+	defaultTimeout             = 60 * time.Second
+	defaultKeepAlive           = 30 * time.Second
+	defaultIdleTimeout         = 90 * time.Second
+	defaultMaxIdleConns        = 20
+	defaultMaxIdleConnsPerHost = 10
+	alwaysPresentFormatsCount  = 3
+	formatPerURLMultiplier     = 2
 )
 
 // Provider implements provider.Provider for the Geofabrik service using JSON API.
@@ -44,7 +48,10 @@ func NewProvider() *Provider {
 					Timeout:   defaultTimeout,
 					KeepAlive: defaultKeepAlive,
 				}).DialContext,
-				IdleConnTimeout: defaultIdleTimeout,
+				MaxIdleConns:        defaultMaxIdleConns,
+				MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
+				IdleConnTimeout:     defaultIdleTimeout,
+				ForceAttemptHTTP2:   true,
 			},
 		},
 	}
@@ -139,7 +146,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 }
 
 func extractFormats(urls map[string]string) catalog.Formats {
-	var formatList catalog.Formats
+	formatList := make(catalog.Formats, 0, len(urls)*formatPerURLMultiplier+alwaysPresentFormatsCount)
 
 	for k := range urls {
 		switch k {
