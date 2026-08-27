@@ -1,7 +1,7 @@
 package formats
 
 import (
-	"sort"
+	"slices"
 	"strings"
 )
 
@@ -133,7 +133,7 @@ func GetFormats(config map[string]bool) []string {
 		formatList = append(formatList, FormatOsmPbf)
 	}
 
-	sort.Strings(formatList)
+	slices.Sort(formatList)
 
 	return formatList
 }

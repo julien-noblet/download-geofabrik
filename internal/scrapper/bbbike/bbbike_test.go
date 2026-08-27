@@ -456,3 +456,17 @@ func runBbbikeTest(
 		t.Errorf("parse fail, got \n%v, want \n%v", defaultBbbike.Config.Elements, want)
 	}
 }
+
+func Benchmark_GetName(b *testing.B) {
+	h3 := "OSM extracts for Paris"
+
+	for range b.N {
+		_ = bbbike.GetName(h3)
+	}
+}
+
+func Benchmark_GetDefault(b *testing.B) {
+	for range b.N {
+		_ = bbbike.GetDefault()
+	}
+}

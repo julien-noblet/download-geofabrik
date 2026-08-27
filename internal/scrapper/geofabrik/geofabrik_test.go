@@ -586,3 +586,9 @@ func TestGeofabrik_parseSubregion(t *testing.T) {
 		})
 	}
 }
+
+func Benchmark_GetDefault(b *testing.B) {
+	for range b.N {
+		_ = geofabrik.GetDefault()
+	}
+}

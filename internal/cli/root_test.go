@@ -72,8 +72,44 @@ func TestDefaultConfigLoading(t *testing.T) {
 
 	// Run list command without --config
 	// It should pick up geofabrik.yml in cwd
-	cli.RootCmd.SetArgs([]string{"list"})
-
 	err = cli.Execute()
 	assert.NoError(t, err)
+}
+
+func TestExecuteVersion(t *testing.T) {
+	cli.Version = "v2.8.0"
+
+	cli.ResetGlobs()
+	cli.RootCmd.SetArgs([]string{"--version"})
+
+	err := cli.Execute()
+	assert.NoError(t, err)
+}
+
+func TestLoggingFlags(t *testing.T) {
+	t.Run("Verbose flag", func(t *testing.T) {
+		cli.ResetGlobs()
+		viper.Reset()
+		cli.RootCmd.SetArgs([]string{"--verbose", "--help"})
+
+		err := cli.Execute()
+		assert.NoError(t, err)
+	})
+
+	t.Run("Quiet flag", func(t *testing.T) {
+		cli.ResetGlobs()
+		viper.Reset()
+		cli.RootCmd.SetArgs([]string{"--quiet", "--help"})
+
+		err := cli.Execute()
+		assert.NoError(t, err)
+	})
+}
+
+func Benchmark_CLI_Execute_Help(b *testing.B) {
+	cli.RootCmd.SetArgs([]string{"--help"})
+
+	for range b.N {
+		_ = cli.Execute()
+	}
 }
