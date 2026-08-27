@@ -2,9 +2,13 @@ package openstreetmapfr_test
 
 import (
 	"context"
+	"errors"
+	"fmt"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"testing/iotest"
 
 	"github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
@@ -12,69 +16,85 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-const mockOSMFRIndexHTML = `<!DOCTYPE html>
-<html>
-<body>
-<table>
+type errTransport struct{}
+
+func (errTransport) RoundTrip(_ *http.Request) (*http.Response, error) {
+	return &http.Response{
+		StatusCode: http.StatusOK,
+		Body:       io.NopCloser(iotest.ErrReader(errors.New("read error"))),
+	}, nil
+}
+
+// mock pages exercising all crawler branches:
+// - root extracts files (parent = extracts / polygons)
+// - subdirectories with and without trailing slashes
+// - full URLs (https://)
+// - duplicate directory links
+// - files with no extension, hidden files (.hidden)
+// - deep 4-level nesting (europe -> france -> ile_de_france -> paris).
+func buildMockOSMFRHTML(baseURL string) map[string]string {
+	return map[string]string{
+		"/extracts/": fmt.Sprintf(`<!DOCTYPE html>
+<html><body><table>
   <tr><td><a href="europe/">europe/</a></td></tr>
   <tr><td><a href="asia/">asia/</a></td></tr>
+  <tr><td><a href="%[1]s/extracts/europe/">duplicate europe</a></td></tr>
+  <tr><td><a href="direct.osm.pbf">direct.osm.pbf</a></td></tr>
+  <tr><td><a href="noextension">noextension</a></td></tr>
+  <tr><td><a href=".hidden">.hidden</a></td></tr>
   <tr><td><a href="../">parent</a></td></tr>
   <tr><td><a href="?C=N;O=D">sort</a></td></tr>
   <tr><td><a href="france-latest.osm.pbf">france-latest.osm.pbf</a></td></tr>
-</table>
-</body>
-</html>`
+</table></body></html>`, baseURL),
 
-const mockOSMFREuropeHTML = `<!DOCTYPE html>
-<html>
-<body>
-<table>
+		"/extracts/europe/": fmt.Sprintf(`<!DOCTYPE html>
+<html><body><table>
   <tr><td><a href="france.osm.pbf">france.osm.pbf</a></td></tr>
   <tr><td><a href="france.poly">france.poly</a></td></tr>
   <tr><td><a href="france.state.txt">france.state.txt</a></td></tr>
   <tr><td><a href="monaco.osm.pbf">monaco.osm.pbf</a></td></tr>
   <tr><td><a href="france/">france/</a></td></tr>
-</table>
-</body>
-</html>`
+  <tr><td><a href="%[1]s/extracts/europe/france/">absolute france</a></td></tr>
+</table></body></html>`, baseURL),
 
-const mockOSMFRFranceHTML = `<!DOCTYPE html>
-<html>
-<body>
-<table>
-  <tr><td><a href="ile_de_france.osm.pbf">ile_de_france.osm.pbf</a></td></tr>
-  <tr><td><a href="ile_de_france.poly">ile_de_france.poly</a></td></tr>
+		"/extracts/europe/france/": `<!DOCTYPE html>
+<html><body><table>
+  <tr><td><a href="ile_de_france/">ile_de_france/</a></td></tr>
   <tr><td><a href="south.osm.pbf">south.osm.pbf</a></td></tr>
-</table>
-</body>
-</html>`
+</table></body></html>`,
 
-const mockOSMFRAsiaHTML = `<!DOCTYPE html>
-<html>
-<body>
-<table>
+		"/extracts/europe/france/ile_de_france/": `<!DOCTYPE html>
+<html><body><table>
+  <tr><td><a href="paris.osm.pbf">paris.osm.pbf</a></td></tr>
+  <tr><td><a href="paris.poly">paris.poly</a></td></tr>
+</table></body></html>`,
+
+		"/extracts/asia/": `<!DOCTYPE html>
+<html><body><table>
   <tr><td><a href="japan.osm.pbf">japan.osm.pbf</a></td></tr>
-</table>
-</body>
-</html>`
+</table></body></html>`,
+	}
+}
 
 func newMockOSMFRServer() *httptest.Server {
-	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	var pages map[string]string
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html")
 
-		switch r.URL.Path {
-		case "/extracts/", "/extracts":
-			_, _ = w.Write([]byte(mockOSMFRIndexHTML))
-		case "/extracts/europe/", "/extracts/europe":
-			_, _ = w.Write([]byte(mockOSMFREuropeHTML))
-		case "/extracts/europe/france/", "/extracts/europe/france":
-			_, _ = w.Write([]byte(mockOSMFRFranceHTML))
-		case "/extracts/asia/", "/extracts/asia":
-			_, _ = w.Write([]byte(mockOSMFRAsiaHTML))
-		default:
-			_, _ = w.Write([]byte(`<!DOCTYPE html><html><body><table></table></body></html>`))
+		html, found := pages[r.URL.Path]
+		if found {
+			_, _ = w.Write([]byte(html))
+
+			return
 		}
+
+		_, _ = w.Write([]byte(`<!DOCTYPE html><html><body><table></table></body></html>`))
 	}))
+
+	pages = buildMockOSMFRHTML(ts.URL)
+
+	return ts
 }
 
 func TestOSMFR_FetchCatalog(t *testing.T) {
@@ -99,7 +119,8 @@ func TestOSMFR_FetchCatalog(t *testing.T) {
 	assert.True(t, cat.Exist("france"))
 	assert.True(t, cat.Exist("monaco"))
 	assert.True(t, cat.Exist("japan"))
-	assert.True(t, cat.Exist("ile_de_france"))
+	assert.True(t, cat.Exist("paris"))
+	assert.True(t, cat.Exist("direct"))
 
 	fr, exists := cat.Get("france")
 	assert.True(t, exists)
@@ -109,6 +130,23 @@ func TestOSMFR_FetchCatalog(t *testing.T) {
 
 	// Exception case: south under france should become france_south
 	assert.True(t, cat.Exist("france_south"))
+
+	// Deep nesting: paris should have parent ile_de_france
+	paris, exists := cat.Get("paris")
+	assert.True(t, exists)
+	assert.Equal(t, "ile_de_france", paris.Parent)
+}
+
+func TestOSMFR_FetchCatalog_HTMLParseError(t *testing.T) {
+	t.Parallel()
+
+	p := openstreetmapfr.NewProvider()
+	p.StartURL = "http://example.com"
+	p.Client = &http.Client{Transport: errTransport{}}
+
+	_, err := p.FetchCatalog(context.Background())
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "error parsing HTML")
 }
 
 func TestOSMFR_FetchCatalog_Errors(t *testing.T) {
@@ -133,6 +171,16 @@ func TestOSMFR_FetchCatalog_InvalidURL(t *testing.T) {
 
 	p := openstreetmapfr.NewProvider()
 	p.StartURL = "http://invalid-host-that-does-not-exist.test:9999/extracts/"
+
+	_, err := p.FetchCatalog(context.Background())
+	require.Error(t, err)
+}
+
+func TestOSMFR_FetchCatalog_InvalidURLSyntax(t *testing.T) {
+	t.Parallel()
+
+	p := openstreetmapfr.NewProvider()
+	p.StartURL = "http://[::1]:namedport/extracts/"
 
 	_, err := p.FetchCatalog(context.Background())
 	require.Error(t, err)

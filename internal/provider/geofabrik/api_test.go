@@ -53,6 +53,27 @@ const mockGeofabrikIndexJSON = `{
   ]
 }`
 
+const mockGeofabrikConflictJSON = `{
+  "features": [
+    {
+      "properties": {
+        "id": "france",
+        "name": "France",
+        "parent": "europe",
+        "urls": {"pbf": "https://download.geofabrik.de/europe/france-latest.osm.pbf"}
+      }
+    },
+    {
+      "properties": {
+        "id": "france",
+        "name": "France Conflicting",
+        "parent": "asia",
+        "urls": {"pbf": "https://download.geofabrik.de/asia/france-latest.osm.pbf"}
+      }
+    }
+  ]
+}`
+
 func TestGeofabrik_FetchCatalog(t *testing.T) {
 	t.Parallel()
 
@@ -123,6 +144,16 @@ func TestGeofabrik_FetchCatalog_InvalidURL(t *testing.T) {
 	require.Error(t, err)
 }
 
+func TestGeofabrik_FetchCatalog_InvalidURLSyntax(t *testing.T) {
+	t.Parallel()
+
+	p := geofabrik.NewProvider()
+	p.IndexURL = "http://[::1]:namedport/index.json"
+
+	_, err := p.FetchCatalog(context.Background())
+	require.Error(t, err)
+}
+
 func TestGeofabrik_FetchCatalog_InvalidJSON(t *testing.T) {
 	t.Parallel()
 
@@ -138,6 +169,24 @@ func TestGeofabrik_FetchCatalog_InvalidJSON(t *testing.T) {
 
 	_, err := p.FetchCatalog(context.Background())
 	require.Error(t, err)
+}
+
+func TestGeofabrik_FetchCatalog_MergeConflict(t *testing.T) {
+	t.Parallel()
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(mockGeofabrikConflictJSON))
+	}))
+	defer ts.Close()
+
+	p := geofabrik.NewProvider()
+	p.IndexURL = ts.URL
+	p.Client = ts.Client()
+
+	_, err := p.FetchCatalog(context.Background())
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "cannot merge element")
 }
 
 func TestGeofabrik_FetchCatalog_ContextCancelled(t *testing.T) {

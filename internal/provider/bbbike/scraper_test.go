@@ -2,9 +2,12 @@ package bbbike_test
 
 import (
 	"context"
+	"errors"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"testing/iotest"
 
 	"github.com/julien-noblet/download-geofabrik/internal/provider/bbbike"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
@@ -19,6 +22,7 @@ const mockBBBikeHTML = `<!DOCTYPE html>
 <div class="list">
   <table>
     <tbody>
+      <tr><td><a name="no_href">no href link</a></td></tr>
       <tr><td><a href="Aachen/">Aachen</a></td></tr>
       <tr><td><a href="Berlin/">Berlin</a></td></tr>
       <tr><td><a href="Paris/">Paris</a></td></tr>
@@ -51,6 +55,15 @@ func newProviderWithServer(ts *httptest.Server) *bbbike.Provider {
 	p.Client = ts.Client()
 
 	return p
+}
+
+type errTransport struct{}
+
+func (errTransport) RoundTrip(_ *http.Request) (*http.Response, error) {
+	return &http.Response{
+		StatusCode: http.StatusOK,
+		Body:       io.NopCloser(iotest.ErrReader(errors.New("read error"))),
+	}, nil
 }
 
 func TestBBBike_FetchCatalog(t *testing.T) {
@@ -107,6 +120,18 @@ func TestBBBike_FetchCatalog(t *testing.T) {
 	}
 }
 
+func TestBBBike_FetchCatalog_HTMLParseError(t *testing.T) {
+	t.Parallel()
+
+	p := bbbike.NewProvider()
+	p.StartURL = "http://example.com"
+	p.Client = &http.Client{Transport: errTransport{}}
+
+	_, err := p.FetchCatalog(context.Background())
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "cannot parse HTML")
+}
+
 func TestBBBike_FetchCatalog_HTTPError(t *testing.T) {
 	t.Parallel()
 
@@ -132,6 +157,16 @@ func TestBBBike_FetchCatalog_InvalidURL(t *testing.T) {
 	_, err := p.FetchCatalog(context.Background())
 	require.Error(t, err)
 	assert.ErrorIs(t, err, bbbike.ErrFetchCatalog)
+}
+
+func TestBBBike_FetchCatalog_InvalidURLSyntax(t *testing.T) {
+	t.Parallel()
+
+	p := bbbike.NewProvider()
+	p.StartURL = "http://[::1]:namedport/"
+
+	_, err := p.FetchCatalog(context.Background())
+	require.Error(t, err)
 }
 
 func TestBBBike_FetchCatalog_ContextCancelled(t *testing.T) {
