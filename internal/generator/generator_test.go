@@ -1,6 +1,8 @@
 package generator //nolint:testpackage // testing internal functions
 
 import (
+	"context"
+	"errors"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -8,6 +10,8 @@ import (
 
 	"github.com/julien-noblet/download-geofabrik/internal/config"
 	"github.com/julien-noblet/download-geofabrik/internal/element"
+	"github.com/julien-noblet/download-geofabrik/internal/provider"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -78,6 +82,87 @@ func TestGenerate_Unknown(t *testing.T) {
 	err := Generate("unknown_service", false, "/tmp/dummy.yml")
 	require.Error(t, err)
 	assert.ErrorIs(t, err, ErrUnknownService)
+}
+
+type mockGeneratorProvider struct {
+	catalogData *catalog.Catalog
+	name        string
+	shouldErr   bool
+}
+
+func (m *mockGeneratorProvider) Name() string              { return m.name }
+func (m *mockGeneratorProvider) Description() string       { return "Mock provider for generator tests" }
+func (m *mockGeneratorProvider) DefaultConfigFile() string { return m.name + ".yml" }
+func (m *mockGeneratorProvider) FetchCatalog(_ context.Context) (*catalog.Catalog, error) {
+	if m.shouldErr {
+		return nil, errors.New("mock fetch failed")
+	}
+
+	return m.catalogData, nil
+}
+
+func TestPerformGenerate_Success(t *testing.T) {
+	t.Parallel()
+
+	cat := catalog.New()
+	cat.Elements["test-elem"] = catalog.Element{
+		ID:      "test-elem",
+		Name:    "Test Element",
+		Formats: []string{formats.FormatPoly, formats.FormatOsmPbf},
+	}
+
+	prov := &mockGeneratorProvider{
+		name:        "mock-gen-success",
+		catalogData: cat,
+	}
+	provider.Register(prov)
+
+	tmpDir := t.TempDir()
+	outFile := filepath.Join(tmpDir, "out.yml")
+
+	err := PerformGenerate("mock-gen-success", false, outFile)
+	require.NoError(t, err)
+
+	loaded, err := catalog.LoadFile(outFile)
+	require.NoError(t, err)
+	assert.Contains(t, loaded.Elements, "test-elem")
+	// Verify formats were sorted
+	assert.Equal(t, catalog.Formats{formats.FormatOsmPbf, formats.FormatPoly}, loaded.Elements["test-elem"].Formats)
+}
+
+func TestPerformGenerate_FetchError(t *testing.T) {
+	t.Parallel()
+
+	prov := &mockGeneratorProvider{
+		name:      "mock-gen-err",
+		shouldErr: true,
+	}
+	provider.Register(prov)
+
+	tmpDir := t.TempDir()
+	outFile := filepath.Join(tmpDir, "out.yml")
+
+	err := PerformGenerate("mock-gen-err", false, outFile)
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "mock fetch failed")
+}
+
+func TestPerformGenerate_SaveError(t *testing.T) {
+	t.Parallel()
+
+	cat := catalog.New()
+	prov := &mockGeneratorProvider{
+		name:        "mock-gen-save-err",
+		catalogData: cat,
+	}
+	provider.Register(prov)
+
+	// An impossible directory path
+	outFile := "/dev/null/impossible/path.yml"
+
+	err := PerformGenerate("mock-gen-save-err", false, outFile)
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "failed to write config")
 }
 
 func Test_write(t *testing.T) {
