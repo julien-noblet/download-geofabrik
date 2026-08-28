@@ -1,0 +1,948 @@
+formats:
+    garmin-osm.zip:
+        ext: garmin-osm.zip
+        loc: .tar.gz
+        basepath: garmin
+    gpkg:
+        ext: gpkg
+        loc: .gpkg
+        basepath: gpkg
+    obf:
+        ext: obf
+        loc: .obf
+        basepath: obf
+    osm.pbf:
+        ext: osm.pbf
+        loc: .osm.pbf
+        basepath: pbf
+elements:
+    abruzzo:
+        id: abruzzo
+        file: regioni/13_Abruzzo
+        name: Abruzzo
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    agrigento:
+        id: agrigento
+        file: province/084_Agrigento
+        name: Agrigento
+        files:
+            - gpkg
+            - osm.pbf
+    alessandria:
+        id: alessandria
+        file: province/006_Alessandria
+        name: Alessandria
+        files:
+            - gpkg
+            - osm.pbf
+    ancona:
+        id: ancona
+        file: province/042_Ancona
+        name: Ancona
+        files:
+            - gpkg
+            - osm.pbf
+    aosta:
+        id: aosta
+        file: province/007_Aosta
+        name: Aosta
+        files:
+            - gpkg
+            - osm.pbf
+    arezzo:
+        id: arezzo
+        file: province/051_Arezzo
+        name: Arezzo
+        files:
+            - gpkg
+            - osm.pbf
+    ascoli-piceno:
+        id: ascoli-piceno
+        file: province/044_Ascoli_Piceno
+        name: Ascoli Piceno
+        files:
+            - gpkg
+            - osm.pbf
+    asti:
+        id: asti
+        file: province/005_Asti
+        name: Asti
+        files:
+            - gpkg
+            - osm.pbf
+    avellino:
+        id: avellino
+        file: province/064_Avellino
+        name: Avellino
+        files:
+            - gpkg
+            - osm.pbf
+    bari:
+        id: bari
+        file: province/072_Bari
+        name: Bari
+        files:
+            - gpkg
+            - osm.pbf
+    barletta-andria-trani:
+        id: barletta-andria-trani
+        file: province/110_Barletta_Andria_Trani
+        name: Barletta-Andria-Trani
+        files:
+            - gpkg
+            - osm.pbf
+    basilicata:
+        id: basilicata
+        file: regioni/17_Basilicata
+        name: Basilicata
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    belluno:
+        id: belluno
+        file: province/025_Belluno
+        name: Belluno
+        files:
+            - gpkg
+            - osm.pbf
+    benevento:
+        id: benevento
+        file: province/062_Benevento
+        name: Benevento
+        files:
+            - gpkg
+            - osm.pbf
+    bergamo:
+        id: bergamo
+        file: province/016_Bergamo
+        name: Bergamo
+        files:
+            - gpkg
+            - osm.pbf
+    biella:
+        id: biella
+        file: province/096_Biella
+        name: Biella
+        files:
+            - gpkg
+            - osm.pbf
+    bologna:
+        id: bologna
+        file: province/037_Bologna
+        name: Bologna
+        files:
+            - gpkg
+            - osm.pbf
+    bolzano:
+        id: bolzano
+        file: province/021_Bolzano
+        name: Bolzano
+        files:
+            - gpkg
+            - osm.pbf
+    brescia:
+        id: brescia
+        file: province/017_Brescia
+        name: Brescia
+        files:
+            - gpkg
+            - osm.pbf
+    brindisi:
+        id: brindisi
+        file: province/074_Brindisi
+        name: Brindisi
+        files:
+            - gpkg
+            - osm.pbf
+    cagliari:
+        id: cagliari
+        file: province/092_Cagliari
+        name: Cagliari
+        files:
+            - gpkg
+            - osm.pbf
+    calabria:
+        id: calabria
+        file: regioni/18_Calabria
+        name: Calabria
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    caltanissetta:
+        id: caltanissetta
+        file: province/085_Caltanissetta
+        name: Caltanissetta
+        files:
+            - gpkg
+            - osm.pbf
+    campania:
+        id: campania
+        file: regioni/15_Campania
+        name: Campania
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    campobasso:
+        id: campobasso
+        file: province/070_Campobasso
+        name: Campobasso
+        files:
+            - gpkg
+            - osm.pbf
+    caserta:
+        id: caserta
+        file: province/061_Caserta
+        name: Caserta
+        files:
+            - gpkg
+            - osm.pbf
+    catania:
+        id: catania
+        file: province/087_Catania
+        name: Catania
+        files:
+            - gpkg
+            - osm.pbf
+    catanzaro:
+        id: catanzaro
+        file: province/079_Catanzaro
+        name: Catanzaro
+        files:
+            - gpkg
+            - osm.pbf
+    chieti:
+        id: chieti
+        file: province/069_Chieti
+        name: Chieti
+        files:
+            - gpkg
+            - osm.pbf
+    como:
+        id: como
+        file: province/013_Como
+        name: Como
+        files:
+            - gpkg
+            - osm.pbf
+    cosenza:
+        id: cosenza
+        file: province/078_Cosenza
+        name: Cosenza
+        files:
+            - gpkg
+            - osm.pbf
+    cremona:
+        id: cremona
+        file: province/019_Cremona
+        name: Cremona
+        files:
+            - gpkg
+            - osm.pbf
+    crotone:
+        id: crotone
+        file: province/101_Crotone
+        name: Crotone
+        files:
+            - gpkg
+            - osm.pbf
+    cuneo:
+        id: cuneo
+        file: province/004_Cuneo
+        name: Cuneo
+        files:
+            - gpkg
+            - osm.pbf
+    emilia-romagna:
+        id: emilia-romagna
+        file: regioni/08_Emilia_Romagna
+        name: Emilia-Romagna
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    enna:
+        id: enna
+        file: province/086_Enna
+        name: Enna
+        files:
+            - gpkg
+            - osm.pbf
+    fermo:
+        id: fermo
+        file: province/109_Fermo
+        name: Fermo
+        files:
+            - gpkg
+            - osm.pbf
+    ferrara:
+        id: ferrara
+        file: province/038_Ferrara
+        name: Ferrara
+        files:
+            - gpkg
+            - osm.pbf
+    firenze:
+        id: firenze
+        file: province/048_Firenze
+        name: Firenze
+        files:
+            - gpkg
+            - osm.pbf
+    foggia:
+        id: foggia
+        file: province/071_Foggia
+        name: Foggia
+        files:
+            - gpkg
+            - osm.pbf
+    forli-cesena:
+        id: forli-cesena
+        file: province/040_Forlì_Cesena
+        name: Forlì-Cesena
+        files:
+            - gpkg
+            - osm.pbf
+    friuli-venezia-giulia:
+        id: friuli-venezia-giulia
+        file: regioni/06_Friuli_Venezia_Giulia
+        name: Friuli-Venezia Giulia
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    frosinone:
+        id: frosinone
+        file: province/060_Frosinone
+        name: Frosinone
+        files:
+            - gpkg
+            - osm.pbf
+    genova:
+        id: genova
+        file: province/010_Genova
+        name: Genova
+        files:
+            - gpkg
+            - osm.pbf
+    gorizia:
+        id: gorizia
+        file: province/031_Gorizia
+        name: Gorizia
+        files:
+            - gpkg
+            - osm.pbf
+    grosseto:
+        id: grosseto
+        file: province/053_Grosseto
+        name: Grosseto
+        files:
+            - gpkg
+            - osm.pbf
+    imperia:
+        id: imperia
+        file: province/008_Imperia
+        name: Imperia
+        files:
+            - gpkg
+            - osm.pbf
+    isernia:
+        id: isernia
+        file: province/094_Isernia
+        name: Isernia
+        files:
+            - gpkg
+            - osm.pbf
+    la-spezia:
+        id: la-spezia
+        file: province/011_La_Spezia
+        name: La Spezia
+        files:
+            - gpkg
+            - osm.pbf
+    laquila:
+        id: laquila
+        file: province/066_LAquila
+        name: L'Aquila
+        files:
+            - gpkg
+            - osm.pbf
+    latina:
+        id: latina
+        file: province/059_Latina
+        name: Latina
+        files:
+            - gpkg
+            - osm.pbf
+    lazio:
+        id: lazio
+        file: regioni/12_Lazio
+        name: Lazio
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    lecce:
+        id: lecce
+        file: province/075_Lecce
+        name: Lecce
+        files:
+            - gpkg
+            - osm.pbf
+    lecco:
+        id: lecco
+        file: province/097_Lecco
+        name: Lecco
+        files:
+            - gpkg
+            - osm.pbf
+    liguria:
+        id: liguria
+        file: regioni/07_Liguria
+        name: Liguria
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    livorno:
+        id: livorno
+        file: province/049_Livorno
+        name: Livorno
+        files:
+            - gpkg
+            - osm.pbf
+    lodi:
+        id: lodi
+        file: province/098_Lodi
+        name: Lodi
+        files:
+            - gpkg
+            - osm.pbf
+    lombardia:
+        id: lombardia
+        file: regioni/03_Lombardia
+        name: Lombardia
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    lucca:
+        id: lucca
+        file: province/046_Lucca
+        name: Lucca
+        files:
+            - gpkg
+            - osm.pbf
+    macerata:
+        id: macerata
+        file: province/043_Macerata
+        name: Macerata
+        files:
+            - gpkg
+            - osm.pbf
+    mantova:
+        id: mantova
+        file: province/020_Mantova
+        name: Mantova
+        files:
+            - gpkg
+            - osm.pbf
+    marche:
+        id: marche
+        file: regioni/11_Marche
+        name: Marche
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    massa-carrara:
+        id: massa-carrara
+        file: province/045_Massa_Carrara
+        name: Massa-Carrara
+        files:
+            - gpkg
+            - osm.pbf
+    matera:
+        id: matera
+        file: province/077_Matera
+        name: Matera
+        files:
+            - gpkg
+            - osm.pbf
+    messina:
+        id: messina
+        file: province/083_Messina
+        name: Messina
+        files:
+            - gpkg
+            - osm.pbf
+    milano:
+        id: milano
+        file: province/015_Milano
+        name: Milano
+        files:
+            - gpkg
+            - osm.pbf
+    modena:
+        id: modena
+        file: province/036_Modena
+        name: Modena
+        files:
+            - gpkg
+            - osm.pbf
+    molise:
+        id: molise
+        file: regioni/14_Molise
+        name: Molise
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    monza-brianza:
+        id: monza-brianza
+        file: province/108_Monza_e_Brianza
+        name: Monza e Brianza
+        files:
+            - gpkg
+            - osm.pbf
+    napoli:
+        id: napoli
+        file: province/063_Napoli
+        name: Napoli
+        files:
+            - gpkg
+            - osm.pbf
+    novara:
+        id: novara
+        file: province/003_Novara
+        name: Novara
+        files:
+            - gpkg
+            - osm.pbf
+    nuoro:
+        id: nuoro
+        file: province/091_Nuoro
+        name: Nuoro
+        files:
+            - gpkg
+            - osm.pbf
+    oristano:
+        id: oristano
+        file: province/095_Oristano
+        name: Oristano
+        files:
+            - gpkg
+            - osm.pbf
+    padova:
+        id: padova
+        file: province/028_Padova
+        name: Padova
+        files:
+            - gpkg
+            - osm.pbf
+    palermo:
+        id: palermo
+        file: province/082_Palermo
+        name: Palermo
+        files:
+            - gpkg
+            - osm.pbf
+    parma:
+        id: parma
+        file: province/034_Parma
+        name: Parma
+        files:
+            - gpkg
+            - osm.pbf
+    pavia:
+        id: pavia
+        file: province/018_Pavia
+        name: Pavia
+        files:
+            - gpkg
+            - osm.pbf
+    perugia:
+        id: perugia
+        file: province/054_Perugia
+        name: Perugia
+        files:
+            - gpkg
+            - osm.pbf
+    pesaro-urbino:
+        id: pesaro-urbino
+        file: province/041_Pesaro_e_Urbino
+        name: Pesaro e Urbino
+        files:
+            - gpkg
+            - osm.pbf
+    pescara:
+        id: pescara
+        file: province/068_Pescara
+        name: Pescara
+        files:
+            - gpkg
+            - osm.pbf
+    piacenza:
+        id: piacenza
+        file: province/033_Piacenza
+        name: Piacenza
+        files:
+            - gpkg
+            - osm.pbf
+    piemonte:
+        id: piemonte
+        file: regioni/01_Piemonte
+        name: Piemonte
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    pisa:
+        id: pisa
+        file: province/050_Pisa
+        name: Pisa
+        files:
+            - gpkg
+            - osm.pbf
+    pistoia:
+        id: pistoia
+        file: province/047_Pistoia
+        name: Pistoia
+        files:
+            - gpkg
+            - osm.pbf
+    pordenone:
+        id: pordenone
+        file: province/093_Pordenone
+        name: Pordenone
+        files:
+            - gpkg
+            - osm.pbf
+    potenza:
+        id: potenza
+        file: province/076_Potenza
+        name: Potenza
+        files:
+            - gpkg
+            - osm.pbf
+    prato:
+        id: prato
+        file: province/100_Prato
+        name: Prato
+        files:
+            - gpkg
+            - osm.pbf
+    puglia:
+        id: puglia
+        file: regioni/16_Puglia
+        name: Puglia
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    ragusa:
+        id: ragusa
+        file: province/088_Ragusa
+        name: Ragusa
+        files:
+            - gpkg
+            - osm.pbf
+    ravenna:
+        id: ravenna
+        file: province/039_Ravenna
+        name: Ravenna
+        files:
+            - gpkg
+            - osm.pbf
+    reggio-calabria:
+        id: reggio-calabria
+        file: province/080_Reggio_Calabria
+        name: Reggio Calabria
+        files:
+            - gpkg
+            - osm.pbf
+    reggio-emilia:
+        id: reggio-emilia
+        file: province/035_Reggio_Emilia
+        name: Reggio Emilia
+        files:
+            - gpkg
+            - osm.pbf
+    rieti:
+        id: rieti
+        file: province/057_Rieti
+        name: Rieti
+        files:
+            - gpkg
+            - osm.pbf
+    rimini:
+        id: rimini
+        file: province/099_Rimini
+        name: Rimini
+        files:
+            - gpkg
+            - osm.pbf
+    roma:
+        id: roma
+        file: province/058_Roma
+        name: Roma
+        files:
+            - gpkg
+            - osm.pbf
+    rovigo:
+        id: rovigo
+        file: province/029_Rovigo
+        name: Rovigo
+        files:
+            - gpkg
+            - osm.pbf
+    salerno:
+        id: salerno
+        file: province/065_Salerno
+        name: Salerno
+        files:
+            - gpkg
+            - osm.pbf
+    sardegna:
+        id: sardegna
+        file: regioni/20_Sardegna
+        name: Sardegna
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    sassari:
+        id: sassari
+        file: province/090_Sassari
+        name: Sassari
+        files:
+            - gpkg
+            - osm.pbf
+    savona:
+        id: savona
+        file: province/009_Savona
+        name: Savona
+        files:
+            - gpkg
+            - osm.pbf
+    sicilia:
+        id: sicilia
+        file: regioni/19_Sicilia
+        name: Sicilia
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    siena:
+        id: siena
+        file: province/052_Siena
+        name: Siena
+        files:
+            - gpkg
+            - osm.pbf
+    siracusa:
+        id: siracusa
+        file: province/089_Siracusa
+        name: Siracusa
+        files:
+            - gpkg
+            - osm.pbf
+    sondrio:
+        id: sondrio
+        file: province/014_Sondrio
+        name: Sondrio
+        files:
+            - gpkg
+            - osm.pbf
+    sud-sardegna:
+        id: sud-sardegna
+        file: province/111_Sud_Sardegna
+        name: Sud Sardegna
+        files:
+            - gpkg
+            - osm.pbf
+    taranto:
+        id: taranto
+        file: province/073_Taranto
+        name: Taranto
+        files:
+            - gpkg
+            - osm.pbf
+    teramo:
+        id: teramo
+        file: province/067_Teramo
+        name: Teramo
+        files:
+            - gpkg
+            - osm.pbf
+    terni:
+        id: terni
+        file: province/055_Terni
+        name: Terni
+        files:
+            - gpkg
+            - osm.pbf
+    torino:
+        id: torino
+        file: province/001_Torino
+        name: Torino
+        files:
+            - gpkg
+            - osm.pbf
+    toscana:
+        id: toscana
+        file: regioni/09_Toscana
+        name: Toscana
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    trapani:
+        id: trapani
+        file: province/081_Trapani
+        name: Trapani
+        files:
+            - gpkg
+            - osm.pbf
+    trentino-alto-adige:
+        id: trentino-alto-adige
+        file: regioni/04_Trentino_Alto_Adige
+        name: Trentino-Alto Adige
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    trento:
+        id: trento
+        file: province/022_Trento
+        name: Trento
+        files:
+            - gpkg
+            - osm.pbf
+    treviso:
+        id: treviso
+        file: province/026_Treviso
+        name: Treviso
+        files:
+            - gpkg
+            - osm.pbf
+    trieste:
+        id: trieste
+        file: province/032_Trieste
+        name: Trieste
+        files:
+            - gpkg
+            - osm.pbf
+    udine:
+        id: udine
+        file: province/030_Udine
+        name: Udine
+        files:
+            - gpkg
+            - osm.pbf
+    umbria:
+        id: umbria
+        file: regioni/10_Umbria
+        name: Umbria
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    valle-daosta:
+        id: valle-daosta
+        file: regioni/02_Valle_dAosta
+        name: Valle d'Aosta
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    varese:
+        id: varese
+        file: province/012_Varese
+        name: Varese
+        files:
+            - gpkg
+            - osm.pbf
+    veneto:
+        id: veneto
+        file: regioni/05_Veneto
+        name: Veneto
+        files:
+            - garmin-osm.zip
+            - gpkg
+            - obf
+            - osm.pbf
+    venezia:
+        id: venezia
+        file: province/027_Venezia
+        name: Venezia
+        files:
+            - gpkg
+            - osm.pbf
+    verbano-cusio-ossola:
+        id: verbano-cusio-ossola
+        file: province/103_Verbano_Cusio_Ossola
+        name: Verbano-Cusio-Ossola
+        files:
+            - gpkg
+            - osm.pbf
+    vercelli:
+        id: vercelli
+        file: province/002_Vercelli
+        name: Vercelli
+        files:
+            - gpkg
+            - osm.pbf
+    verona:
+        id: verona
+        file: province/023_Verona
+        name: Verona
+        files:
+            - gpkg
+            - osm.pbf
+    vibo-valentia:
+        id: vibo-valentia
+        file: province/102_Vibo_Valentia
+        name: Vibo Valentia
+        files:
+            - gpkg
+            - osm.pbf
+    vicenza:
+        id: vicenza
+        file: province/024_Vicenza
+        name: Vicenza
+        files:
+            - gpkg
+            - osm.pbf
+    viterbo:
+        id: viterbo
+        file: province/056_Viterbo
+        name: Viterbo
+        files:
+            - gpkg
+            - osm.pbf
+baseURL: https://osmit-estratti.wmcloud.org/output

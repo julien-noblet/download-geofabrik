@@ -1,0 +1,34 @@
+formats:
+    garmin-osm.zip:
+        ext: garmin-osm.zip
+        loc: -garmin.zip
+    obf:
+        ext: obf
+        loc: .obf
+    osm.pbf:
+        ext: osm.pbf
+        loc: .osm.pbf
+    poly:
+        ext: poly
+        loc: .poly
+elements:
+    switzerland:
+        id: switzerland
+        name: switzerland
+        files:
+            - garmin-osm.zip
+            - obf
+            - osm.pbf
+    switzerland-exact:
+        id: switzerland-exact
+        name: switzerland-exact
+        files:
+            - osm.pbf
+            - poly
+    switzerland-padded:
+        id: switzerland-padded
+        name: switzerland-padded
+        files:
+            - osm.pbf
+            - poly
+baseURL: https://planet.osm.ch

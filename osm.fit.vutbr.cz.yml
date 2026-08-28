@@ -1,0 +1,22 @@
+formats:
+    osm.bz2:
+        ext: osm.bz2
+        loc: -latest.osm.bz2
+        basepath: czech_republic/
+    osm.pbf:
+        ext: osm.pbf
+        loc: -latest.osm.pbf
+        basepath: czech_republic/
+    poly:
+        ext: poly
+        loc: .poly
+elements:
+    czech_republic:
+        id: czech_republic
+        file: czech-republic
+        name: Czech Republic
+        files:
+            - osm.bz2
+            - osm.pbf
+            - poly
+baseURL: https://osm.fit.vutbr.cz/extracts

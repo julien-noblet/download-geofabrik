@@ -20,6 +20,12 @@ const (
 	ServiceOpenStreetMapFR = "openstreetmap.fr"
 	ServiceGeo2Day         = "geo2day"
 	ServiceBBBike          = "bbbike"
+	ServiceMovisda         = "movisda"
+	ServiceOSMCH           = "planet.osm.ch"
+	ServiceOSMKewlLu       = "osm.kewl.lu"
+	ServiceOSMFitVutbr     = "osm.fit.vutbr.cz"
+	ServiceOSMIt           = "osmit-estratti"
+	ServiceOSMTW           = "osm.kcwu.csie.org"
 )
 
 var ErrUnknownService = errors.New("unknown service")

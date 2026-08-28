@@ -40,6 +40,10 @@ const (
 	FormatMapsforge      = "osm.mapsforge-osm.zip"          // BBBike only
 	FormatMBTiles        = "mbtiles"
 	FormatCSV            = "csv" // BBBike only
+	FormatOBF            = "obf"
+	FormatGPKG           = "gpkg"
+	FormatO5m            = "o5m"
+	FormatO5mZst         = "o5m.zst"
 )
 
 // Configuration keys.
@@ -60,6 +64,10 @@ const (
 	KeyGarminOnroad   = "dgarminonroad"
 	KeyGarminOntrail  = "dgarminontrail"
 	KeyGarminOpenTopo = "dgarminopentopo"
+	KeyOBF            = "dobf"
+	KeyGPKG           = "dgpkg"
+	KeyO5m            = "do5m"
+	KeyO5mZst         = "do5mZst"
 )
 
 var miniFormatMap = map[string]byte{
@@ -79,6 +87,10 @@ var miniFormatMap = map[string]byte{
 	FormatMapsforge:      'm',
 	FormatMBTiles:        'M',
 	FormatCSV:            'C',
+	FormatOBF:            'o',
+	FormatGPKG:           'K',
+	FormatO5m:            '5',
+	FormatO5mZst:         'Z',
 }
 
 type keyFormatPair struct {
@@ -103,6 +115,10 @@ var keyFormatPairs = []keyFormatPair{
 	{KeyGarminOnroad, FormatGarminOnroad},
 	{KeyGarminOntrail, FormatGarminOntrail},
 	{KeyGarminOpenTopo, FormatGarminOpenTopo},
+	{KeyOBF, FormatOBF},
+	{KeyGPKG, FormatGPKG},
+	{KeyO5m, FormatO5m},
+	{KeyO5mZst, FormatO5mZst},
 }
 
 // GetMiniFormats returns a string of short format names based on the provided full format names.

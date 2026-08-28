@@ -22,7 +22,7 @@ var (
 var rootCmd = &cobra.Command{
 	Use:     "download-geofabrik",
 	Short:   "A command-line tool for downloading OSM files",
-	Long:    `download-geofabrik is a CLI tool that downloads OpenStreetMap data from Geofabrik.`,
+	Long:    `download-geofabrik is a CLI tool for downloading OpenStreetMap data and extracts from multiple providers.`,
 	Version: Version,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		return cmd.Help()
@@ -55,7 +55,8 @@ func initCLI() {
 
 	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is geofabrik.yml)")
 	rootCmd.PersistentFlags().StringVarP(&service, "service", "s", config.DefaultService,
-		"Service to use (geofabrik, geofabrik-parse, openstreetmap.fr, geo2day, bbbike)")
+		"Service to use (geofabrik, geofabrik-parse, openstreetmap.fr, geo2day, bbbike, "+
+			"movisda, planet.osm.ch, osm.kewl.lu, osm.fit.vutbr.cz, osmit-estratti, osm.kcwu.csie.org)")
 	rootCmd.PersistentFlags().Bool("verbose", false, "Verbose mode")
 	rootCmd.PersistentFlags().Bool("quiet", false, "Quiet mode")
 

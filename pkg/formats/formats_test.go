@@ -169,6 +169,26 @@ func Test_getFormats(t *testing.T) {
 			flags: map[string]bool{formats.KeyGeoJSON: true},
 			want:  []string{formats.FormatGeoJSON},
 		},
+		{
+			name:  "dobf",
+			flags: map[string]bool{formats.KeyOBF: true},
+			want:  []string{formats.FormatOBF},
+		},
+		{
+			name:  "dgpkg",
+			flags: map[string]bool{formats.KeyGPKG: true},
+			want:  []string{formats.FormatGPKG},
+		},
+		{
+			name:  "do5m",
+			flags: map[string]bool{formats.KeyO5m: true},
+			want:  []string{formats.FormatO5m},
+		},
+		{
+			name:  "do5mZst",
+			flags: map[string]bool{formats.KeyO5mZst: true},
+			want:  []string{formats.FormatO5mZst},
+		},
 	}
 
 	for _, thisTest := range tests {

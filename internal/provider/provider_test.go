@@ -59,4 +59,10 @@ func TestRegisterDefaultProviders(t *testing.T) {
 	assert.Contains(t, list, "openstreetmap.fr")
 	assert.Contains(t, list, "bbbike")
 	assert.Contains(t, list, "geo2day")
+	assert.Contains(t, list, "movisda")
+	assert.Contains(t, list, "planet.osm.ch")
+	assert.Contains(t, list, "osm.kewl.lu")
+	assert.Contains(t, list, "osm.fit.vutbr.cz")
+	assert.Contains(t, list, "osmit-estratti")
+	assert.Contains(t, list, "osm.kcwu.csie.org")
 }
