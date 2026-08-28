@@ -8,7 +8,9 @@ import (
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"strconv"
 	"testing"
+	"time"
 
 	"github.com/julien-noblet/download-geofabrik/internal/config"
 	download "github.com/julien-noblet/download-geofabrik/internal/downloader"
@@ -295,6 +297,135 @@ func TestFileExist(t *testing.T) {
 				t.Errorf("FileExist(%s) = %v, want %v", tt.path, got, tt.want)
 			}
 		})
+	}
+}
+
+func TestChecksum_AdditionalScenarios(t *testing.T) {
+	t.Parallel()
+
+	testData := []byte("hello world osm data")
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case "/europe/monaco-latest.osm.pbf":
+			_, _ = w.Write(testData)
+		case "/europe/monaco-latest.osm.pbf.md5":
+			// Return a mismatched checksum
+			_, _ = w.Write([]byte("00000000000000000000000000000000  monaco-latest.osm.pbf\n"))
+		case "/europe/notfound.osm.pbf.md5":
+			http.NotFound(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	t.Cleanup(ts.Close)
+
+	cfg := &config.Config{
+		Formats: formats.FormatDefinitions{
+			formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
+			"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
+		},
+		Elements: element.MapElement{
+			"monaco":   element.Element{ID: "monaco", Name: "Monaco", Formats: []string{formats.FormatOsmPbf, "osm.pbf.md5"}},
+			"missing":  element.Element{ID: "missing", Name: "Missing", Formats: []string{formats.FormatOsmPbf, "osm.pbf.md5"}},
+			"no_fhash": element.Element{ID: "no_fhash", Name: "NoFHash", Formats: []string{formats.FormatOsmPbf}},
+		},
+		BaseURL: ts.URL + "/europe",
+	}
+
+	t.Run("Checksum mismatch", func(t *testing.T) {
+		t.Parallel()
+
+		subTmp := t.TempDir()
+		subOpts := &config.Options{Check: true, OutputDirectory: subTmp + "/"}
+		subD := download.NewDownloader(cfg, subOpts)
+		targetFile := filepath.Join(subTmp, "monaco.osm.pbf")
+		_ = subD.DownloadFile(context.Background(), "monaco", formats.FormatOsmPbf, targetFile)
+
+		got := subD.Checksum(context.Background(), "monaco", formats.FormatOsmPbf)
+		if got {
+			t.Errorf("Checksum() = true, want false on mismatch")
+		}
+	})
+
+	t.Run("Checksum download 404", func(t *testing.T) {
+		t.Parallel()
+
+		subTmp := t.TempDir()
+		subOpts := &config.Options{Check: true, OutputDirectory: subTmp + "/"}
+		subD := download.NewDownloader(cfg, subOpts)
+
+		got := subD.Checksum(context.Background(), "missing", formats.FormatOsmPbf)
+		if got {
+			t.Errorf("Checksum() = true, want false when md5 404s")
+		}
+	})
+
+	t.Run("Checksum Elem2URL failure", func(t *testing.T) {
+		t.Parallel()
+
+		subTmp := t.TempDir()
+		subOpts := &config.Options{Check: true, OutputDirectory: subTmp + "/"}
+		subD := download.NewDownloader(cfg, subOpts)
+
+		got := subD.Checksum(context.Background(), "no_fhash", formats.FormatOsmPbf)
+		if got {
+			t.Errorf("Checksum() = true, want false when format hash not defined")
+		}
+	})
+}
+
+func TestDownload_ProgressBar(t *testing.T) {
+	t.Parallel()
+
+	// Large payload > 512KB to trigger progress bar
+	largePayload := make([]byte, 600*1024)
+	for i := range largePayload {
+		largePayload[i] = byte(i % 256)
+	}
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Set("Content-Length", strconv.Itoa(len(largePayload)))
+		_, _ = w.Write(largePayload)
+	}))
+	defer ts.Close()
+
+	tmpDir := t.TempDir()
+	targetFile := filepath.Join(tmpDir, "large.bin")
+
+	opts := &config.Options{
+		Progress:        true,
+		Quiet:           false,
+		OutputDirectory: tmpDir + "/",
+		FormatFlags:     make(map[string]bool),
+	}
+	d := download.NewDownloader(&config.Config{}, opts)
+
+	err := d.FromURL(context.Background(), ts.URL+"/large.bin", targetFile)
+	if err != nil {
+		t.Fatalf("FromURL with progress bar failed: %v", err)
+	}
+}
+
+func TestDownload_ContextCanceled(t *testing.T) {
+	t.Parallel()
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		time.Sleep(100 * time.Millisecond)
+
+		_, _ = w.Write([]byte("data"))
+	}))
+	defer ts.Close()
+
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel() // Cancel immediately
+
+	tmpDir := t.TempDir()
+	d := download.NewDownloader(&config.Config{}, &config.Options{})
+
+	err := d.FromURL(ctx, ts.URL+"/canceled.bin", filepath.Join(tmpDir, "canceled.bin"))
+	if err == nil {
+		t.Errorf("expected error on canceled context, got nil")
 	}
 }
 
