@@ -1,0 +1,18 @@
+formats:
+    o5m:
+        ext: o5m
+        loc: -latest.o5m
+        basepath: recent/
+    o5m.zst:
+        ext: o5m.zst
+        loc: -latest.o5m.zst
+        basepath: recent/
+elements:
+    taiwan:
+        id: taiwan
+        file: taiwan
+        name: Taiwan
+        files:
+            - o5m
+            - o5m.zst
+baseURL: https://osm.kcwu.csie.org/download/tw-extract

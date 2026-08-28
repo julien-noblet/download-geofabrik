@@ -16,8 +16,32 @@ echo "" >> README.md
 echo "## List of elements from geo2day" >> README.md
 go run ./cmd/download-geofabrik --service "geo2day" list --markdown >> README.md
 echo "" >> README.md
+echo "## List of elements from movisda" >> README.md
+go run ./cmd/download-geofabrik --service "movisda" list --markdown >> README.md
+echo "" >> README.md
+echo "## List of elements from planet.osm.ch" >> README.md
+go run ./cmd/download-geofabrik --service "planet.osm.ch" list --markdown >> README.md
+echo "" >> README.md
+echo "## List of elements from osm.kewl.lu" >> README.md
+go run ./cmd/download-geofabrik --service "osm.kewl.lu" list --markdown >> README.md
+echo "" >> README.md
+echo "## List of elements from osm.fit.vutbr.cz" >> README.md
+go run ./cmd/download-geofabrik --service "osm.fit.vutbr.cz" list --markdown >> README.md
+echo "" >> README.md
+echo "## List of elements from osmit-estratti" >> README.md
+go run ./cmd/download-geofabrik --service "osmit-estratti" list --markdown >> README.md
+echo "" >> README.md
+echo "## List of elements from osm.kcwu.csie.org" >> README.md
+go run ./cmd/download-geofabrik --service "osm.kcwu.csie.org" list --markdown >> README.md
+echo "" >> README.md
 git add geofabrik.yml
 git add openstreetmap.fr.yml
 git add bbbike.yml
 git add geo2day.yml
+git add movisda.yml
+git add planet.osm.ch.yml
+git add osm.kewl.lu.yml
+git add osm.fit.vutbr.cz.yml
+git add osmit-estratti.yml
+git add osm.kcwu.csie.org.yml
 git add README.md

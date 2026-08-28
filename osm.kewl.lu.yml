@@ -1,0 +1,15 @@
+formats:
+    osm.bz2:
+        ext: osm.bz2
+        loc: .osm.bz2
+    osm.pbf:
+        ext: osm.pbf
+        loc: .osm.pbf
+elements:
+    luxembourg:
+        id: luxembourg
+        name: luxembourg
+        files:
+            - osm.bz2
+            - osm.pbf
+baseURL: https://osm.kewl.lu/luxembourg.osm

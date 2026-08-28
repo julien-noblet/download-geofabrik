@@ -23,6 +23,10 @@ const (
 	FormatGarminOnroad   = "garmin-onroad.zip"
 	FormatGarminOntrail  = "garmin-ontrail.zip"
 	FormatGarminOpenTopo = "garmin-opentopo.zip"
+	FormatOBF            = "obf"
+	FormatGPKG           = "gpkg"
+	FormatO5m            = "o5m"
+	FormatO5mZst         = "o5m.zst"
 )
 
 // Format flag keys used in CLI options and configurations.
@@ -43,6 +47,10 @@ const (
 	KeyGarminOnroad   = "dgarminOnroad"
 	KeyGarminOntrail  = "dgarminOntrail"
 	KeyGarminOpenTopo = "dgarminOpenTopo"
+	KeyOBF            = "dobf"
+	KeyGPKG           = "dgpkg"
+	KeyO5m            = "do5m"
+	KeyO5mZst         = "do5mZst"
 )
 
 // Format represents the metadata and URL resolution rules for a file format.
@@ -74,6 +82,10 @@ var defaultMiniFormats = []MiniFormat{
 	{FullName: FormatKml, ShortName: "k"},
 	{FullName: FormatShpZip, ShortName: "S"},
 	{FullName: FormatGeoJSON, ShortName: "g"},
+	{FullName: FormatOBF, ShortName: "o"},
+	{FullName: FormatGPKG, ShortName: "K"},
+	{FullName: FormatO5m, ShortName: "5"},
+	{FullName: FormatO5mZst, ShortName: "Z"},
 }
 
 // GetMiniFormats returns a compact string representation of the given format slice.
@@ -116,6 +128,10 @@ func GetFormats(flagMap map[string]bool) []string {
 		KeyGarminOnroad:   FormatGarminOnroad,
 		KeyGarminOntrail:  FormatGarminOntrail,
 		KeyGarminOpenTopo: FormatGarminOpenTopo,
+		KeyOBF:            FormatOBF,
+		KeyGPKG:           FormatGPKG,
+		KeyO5m:            FormatO5m,
+		KeyO5mZst:         FormatO5mZst,
 	}
 
 	var formats []string

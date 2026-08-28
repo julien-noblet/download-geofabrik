@@ -58,6 +58,10 @@ func RegisterDownloadCmd() {
 	addFormatFlag(formats.KeyGarminOnroad, "r", "Download Garmin Onroad")
 	addFormatFlag(formats.KeyGarminOntrail, "t", "Download Garmin Ontrail")
 	addFormatFlag(formats.KeyGarminOpenTopo, "o", "Download Garmin OpenTopo")
+	addFormatFlag(formats.KeyOBF, "", "Download OBF")
+	addFormatFlag(formats.KeyGPKG, "K", "Download GeoPackage")
+	addFormatFlag(formats.KeyO5m, "5", "Download o5m")
+	addFormatFlag(formats.KeyO5mZst, "Z", "Download o5m.zst")
 }
 
 func addFormatFlag(key, shorthand, usage string) {
