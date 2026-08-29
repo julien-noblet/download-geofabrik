@@ -39,6 +39,7 @@ func Execute() error {
 		RegisterDownloadCmd()
 		RegisterGenerateCmd()
 		RegisterListCmd()
+		RegisterMCPCmd()
 	})
 
 	rootCmd.Version = Version
