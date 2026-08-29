@@ -40,6 +40,7 @@
           ];
 
           shellHook = ''
+            export SHELL=/run/current-system/sw/bin/bash
             export GOPATH="''${GOPATH:-$HOME/go}"
             export PATH="$GOPATH/bin:$PATH"
           '';
