@@ -355,6 +355,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    andorra:
+        id: andorra
+        file: andorra
+        name: andorra
+        parent: europe
+        files:
+            - osm.pbf
+            - poly
+            - state
     angola:
         id: angola
         file: angola
@@ -674,7 +683,7 @@ elements:
         id: austria
         file: austria
         name: austria
-        parent: europe
+        parent: tmp
         files:
             - osm.pbf
             - poly
@@ -1106,7 +1115,7 @@ elements:
         id: brazil
         file: brazil
         name: brazil
-        parent: south-america
+        parent: tmp
         files:
             - osm.pbf
             - poly
@@ -2412,6 +2421,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    denmark:
+        id: denmark
+        file: denmark
+        name: denmark
+        parent: europe
+        files:
+            - osm.pbf
+            - poly
+            - state
     denver:
         id: denver
         file: denver
@@ -2655,6 +2673,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    egypt:
+        id: egypt
+        file: egypt
+        name: egypt
+        parent: africa
+        files:
+            - osm.pbf
+            - poly
+            - state
     el_dorado:
         id: el_dorado
         file: el_dorado
@@ -2822,14 +2849,8 @@ elements:
         file: europe
         name: europe
         files:
-            - poly
-    europe_france:
-        id: europe_france
-        file: france
-        name: europe_france
-        parent: europe
-        files:
             - osm.pbf
+            - osm.pbf.md5
             - poly
             - state
     euskadi:
@@ -3050,9 +3071,13 @@ elements:
             - state
     france:
         id: france
+        file: france
         name: france
         parent: europe
-        meta: true
+        files:
+            - osm.pbf
+            - poly
+            - state
     france_metro_dom_com_nc:
         id: france_metro_dom_com_nc
         file: france_metro_dom_com_nc
@@ -3336,7 +3361,7 @@ elements:
         id: gironde
         file: gironde
         name: gironde
-        parent: aquitaine
+        parent: tmp
         files:
             - osm.pbf
             - poly
@@ -3395,12 +3420,6 @@ elements:
             - osm.pbf
             - poly
             - state
-    google40770f7a526b2e5f:
-        id: google40770f7a526b2e5f
-        file: google40770f7a526b2e5f
-        name: google40770f7a526b2e5f
-        files:
-            - html
     gorontalo:
         id: gorontalo
         file: gorontalo
@@ -3622,6 +3641,15 @@ elements:
         file: hainan
         name: hainan
         parent: china
+        files:
+            - osm.pbf
+            - poly
+            - state
+    haiti:
+        id: haiti
+        file: haiti
+        name: haiti
+        parent: central-america
         files:
             - osm.pbf
             - poly
@@ -3865,6 +3893,15 @@ elements:
         file: hordaland
         name: hordaland
         parent: norway
+        files:
+            - osm.pbf
+            - poly
+            - state
+    hovedstaden:
+        id: hovedstaden
+        file: hovedstaden
+        name: hovedstaden
+        parent: denmark
         files:
             - osm.pbf
             - poly
@@ -4967,6 +5004,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    lebanon:
+        id: lebanon
+        file: lebanon
+        name: lebanon
+        parent: asia
+        files:
+            - osm.pbf
+            - poly
+            - state
     leiria:
         id: leiria
         file: leiria
@@ -5278,6 +5324,15 @@ elements:
         file: macau
         name: macau
         parent: china
+        files:
+            - osm.pbf
+            - poly
+            - state
+    madagascar:
+        id: madagascar
+        file: madagascar
+        name: madagascar
+        parent: africa
         files:
             - osm.pbf
             - poly
@@ -5826,6 +5881,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    midtjylland:
+        id: midtjylland
+        file: midtjylland
+        name: midtjylland
+        parent: denmark
+        files:
+            - osm.pbf
+            - poly
+            - state
     mimaropa:
         id: mimaropa
         file: mimaropa
@@ -5988,6 +6052,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    morocco:
+        id: morocco
+        file: morocco
+        name: morocco
+        parent: africa
+        files:
+            - osm.pbf
+            - poly
+            - state
     moscow:
         id: moscow
         file: moscow
@@ -6136,7 +6209,16 @@ elements:
         id: nayarit
         file: nayarit
         name: nayarit
-        parent: mexico
+        parent: tmp
+        files:
+            - osm.pbf
+            - poly
+            - state
+    negros_island_region:
+        id: negros_island_region
+        file: negros_island_region
+        name: negros_island_region
+        parent: philippines
         files:
             - osm.pbf
             - poly
@@ -6465,6 +6547,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    nordjylland:
+        id: nordjylland
+        file: nordjylland
+        name: nordjylland
+        parent: denmark
+        files:
+            - osm.pbf
+            - poly
+            - state
     nordland:
         id: nordland
         file: nordland
@@ -6511,7 +6602,10 @@ elements:
         file: north-america
         name: north-america
         files:
+            - osm.pbf
+            - osm.pbf.md5
             - poly
+            - state
     north-carolina:
         id: north-carolina
         file: north-carolina
@@ -6773,7 +6867,7 @@ elements:
         id: northwestern_ontario
         file: northwestern_ontario
         name: northwestern_ontario
-        parent: ontario
+        parent: tmp
         files:
             - osm.pbf
             - poly
@@ -6782,7 +6876,7 @@ elements:
         id: norway
         file: norway
         name: norway
-        parent: europe
+        parent: tmp
         files:
             - osm.pbf
             - poly
@@ -7771,12 +7865,6 @@ elements:
             - osm.pbf
             - poly
             - state
-    robots:
-        id: robots
-        file: robots
-        name: robots
-        files:
-            - txt
     rogaland:
         id: rogaland
         file: rogaland
@@ -8511,6 +8599,15 @@ elements:
             - osm.pbf
             - poly
             - state
+    sjaelland:
+        id: sjaelland
+        file: sjaelland
+        name: sjaelland
+        parent: denmark
+        files:
+            - osm.pbf
+            - poly
+            - state
     skane:
         id: skane
         file: skane
@@ -8869,7 +8966,6 @@ elements:
         name: spain
         parent: europe
         files:
-            - ""
             - osm.pbf
             - poly
             - state
@@ -9040,6 +9136,15 @@ elements:
         file: jura
         name: switzerland_jura
         parent: switzerland
+        files:
+            - osm.pbf
+            - poly
+            - state
+    syddanmark:
+        id: syddanmark
+        file: syddanmark
+        name: syddanmark
+        parent: denmark
         files:
             - osm.pbf
             - poly
@@ -9386,6 +9491,24 @@ elements:
             - osm.pbf
             - poly
             - state
+    tmp:
+        id: tmp
+        name: tmp
+        meta: true
+    tmp_north:
+        id: tmp_north
+        file: north
+        name: tmp_north
+        parent: tmp
+        files:
+            - poly
+    tmp_northeast:
+        id: tmp_northeast
+        file: northeast
+        name: tmp_northeast
+        parent: tmp
+        files:
+            - poly
     tocantins:
         id: tocantins
         file: tocantins
@@ -9759,7 +9882,7 @@ elements:
         id: upper_peninsula
         file: upper_peninsula
         name: upper_peninsula
-        parent: michigan
+        parent: tmp
         files:
             - osm.pbf
             - poly
