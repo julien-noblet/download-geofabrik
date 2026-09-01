@@ -1,4 +1,5 @@
 [
+  {"Version":"d63751d4883b75b9cdb7d9288d1258b3c83fb7ab","Date":1788245473,"Tags":["ref=refs/tags/v3.0.0"],"Suites":[]},
   {"Version":"3139c7101ea00cb98ef2fc07e69ec9515d7e0d44","Date":1788245448,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
   {"Version":"d3267bd40f33967d97fbc61a9970bf2f537ec477","Date":1788245439,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"d63751d4883b75b9cdb7d9288d1258b3c83fb7ab","Date":1788245426,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"2bf79d1cd97b2ee697e3fe65058ce6fa6d405da9","Date":1787178634,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"2eabdece680f565a02be978a1cc6dbacd692a5b1","Date":1787178473,"Tags":["ref=refs/heads/renovate/go-1.x"],"Suites":[]},
   {"Version":"b0b87ba8bc9ef5307974759efa354cc612560c78","Date":1787178454,"Tags":["ref=refs/heads/renovate/github.com-stretchr-testify-1.x"],"Suites":[]},
-  {"Version":"490205807387a240c0b64a97d6c736f1d2de57d1","Date":1786960433,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
-  {"Version":"64a872a0b2423f41d6420bcd4474e60e660a8840","Date":1786960428,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]}
+  {"Version":"490205807387a240c0b64a97d6c736f1d2de57d1","Date":1786960433,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]}
 ]
