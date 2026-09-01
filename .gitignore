@@ -51,6 +51,7 @@ _testmain.go
 # need for tests
 !LICENSE.md5
 !*.yml
+!*.md
 
 snap.login
 
