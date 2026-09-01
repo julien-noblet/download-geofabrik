@@ -1,26 +1,154 @@
-# download-geofabrik
+# 🗺️ download-geofabrik
 
-[![Join the chat at https://gitter.im/julien-noblet/download-geofabrik](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/julien-noblet/download-geofabrik?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/julien-noblet/a509e15ea4734ca3e8e98f32ab5369c0/raw/7344619caf8ac5bce291793711071a9636536fce/coverage.json)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjulien-noblet%2Fdownload-geofabrik.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjulien-noblet%2Fdownload-geofabrik?ref=badge_shield)
+<p align="center">
+  <strong>Fast, multi-provider OpenStreetMap data extract downloader & Model Context Protocol (MCP) server for LLMs.</strong>
+</p>
 
-## Version 2
-Warning! command line have changed from V1
-see [Usage](#usage)
+<p align="center">
+  <a href="https://github.com/julien-noblet/download-geofabrik/releases"><img src="https://img.shields.io/github/v/release/julien-noblet/download-geofabrik?style=flat-square" alt="GitHub release" /></a>
+  <a href="https://github.com/julien-noblet/download-geofabrik/actions/workflows/gotest.yml"><img src="https://img.shields.io/github/actions/workflow/status/julien-noblet/download-geofabrik/gotest.yml?branch=master&label=tests&style=flat-square" alt="Build Status" /></a>
+  <a href="https://gist.githubusercontent.com/julien-noblet/a509e15ea4734ca3e8e98f32ab5369c0/raw/7344619caf8ac5bce291793711071a9636536fce/coverage.json"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/julien-noblet/a509e15ea4734ca3e8e98f32ab5369c0/raw/7344619caf8ac5bce291793711071a9636536fce/coverage.json&style=flat-square" alt="Go Coverage" /></a>
+  <a href="https://goreportcard.com/report/github.com/julien-noblet/download-geofabrik"><img src="https://goreportcard.com/badge/github.com/julien-noblet/download-geofabrik?style=flat-square" alt="Go Report Card" /></a>
+  <a href="https://hub.docker.com/r/juliennoblet/download-geofabrik"><img src="https://img.shields.io/docker/pulls/juliennoblet/download-geofabrik?style=flat-square" alt="Docker Pulls" /></a>
+  <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/MCP-Enabled-purple?style=flat-square" alt="MCP Enabled" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MPL_2.0-blue.svg?style=flat-square" alt="License: MPL 2.0" /></a>
+</p>
 
-## Docker
-```shell
-docker run -it --rm -v $PWD:/data download-geofabrik:latest download element
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+  - [Pre-built Binaries](#pre-built-binaries)
+  - [Go Install](#go-install)
+  - [Docker](#docker)
+  - [Nix](#nix)
+- [Quick Start](#quick-start)
+  - [Basic Download](#basic-download)
+  - [Download from Another Provider](#download-from-another-provider)
+  - [Download Specific Formats](#download-specific-formats)
+  - [Custom Output Directory & Options](#custom-output-directory--options)
+  - [Exploring Elements](#exploring-elements)
+- [Supported Formats](#supported-formats)
+- [Model Context Protocol (MCP) Mode](#model-context-protocol-mcp-mode)
+  - [Configuration for MCP Clients](#configuration-for-mcp-clients)
+  - [Available MCP Tools](#available-mcp-tools)
+  - [Available MCP Resources](#available-mcp-resources)
+- [Catalog Maintenance](#catalog-maintenance)
+- [CLI Reference](#cli-reference)
+- [Available Extracts by Provider](#available-extracts-by-provider)
+- [License](#license)
+
+---
+
+## Features
+
+- 🌍 **10 OpenStreetMap Providers**: Download extracts from Geofabrik, OpenStreetMap France, BBBike, Geo2day, Movisda, Planet OSM Switzerland, OSM Luxembourg, FIT VUT Brno (Czech Republic), OpenStreetMap Italia, and OSM Taiwan.
+- 📦 **15+ Data Formats**: Download `.osm.pbf`, `.osh.pbf` (history), `.shp.zip` (Shapefiles), `.gpkg` (GeoPackage), `.mbtiles`, `.geojson`, `.poly` (Osmosis boundaries), `.kml`, `.map` (Mapsforge), `.obf` (OsmAnd), `.o5m`/`.o5m.zst`, Garmin maps, CSV, and more.
+- 🔒 **Automated Integrity & Smart Caching**: Built-in MD5 checksum verification (enabled by default). Automatically skips re-downloading files if the local copy matches the remote hash.
+- 🤖 **Native Model Context Protocol (MCP)**: Run as a local stdio MCP server for LLMs and AI agents (Claude Desktop, Antigravity, Cursor, Cline, etc.) to query catalogs, inspect metadata, and download extracts autonomously.
+- ⚡ **Lightweight & Portable**: Single static Go binary with minimal dependencies, responsive progress bar, and quiet/verbose output flags.
+- 🔄 **Remote Catalog Scraping**: Built-in `generate` command to scrape and update local YAML catalog definitions.
+
+---
+
+## Installation
+
+### Pre-built Binaries
+
+Download pre-compiled binaries for Linux, macOS, and Windows from the [GitHub Releases page](https://github.com/julien-noblet/download-geofabrik/releases).
+
+### Go Install
+
+```bash
+go install github.com/julien-noblet/download-geofabrik/cmd/download-geofabrik@latest
 ```
-where ```element``` is one of geofabrik's files.
-## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjulien-noblet%2Fdownload-geofabrik.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjulien-noblet%2Fdownload-geofabrik?ref=badge_large)
 
-## Usage
-```shell
-./download-geofabrik download element
+### Docker
+
+```bash
+docker run -it --rm -v "$PWD:/data" -w /data juliennoblet/download-geofabrik:latest download [element]
 ```
-where ```element``` is one of geofabrik's files.
-```shell
-./download-geofabrik --help-long
 
+### Nix
+
+Run directly with Nix Flakes:
+
+```bash
+nix run github:julien-noblet/download-geofabrik -- download [element]
+```
+
+Or enter a development shell:
+
+```bash
+nix develop github:julien-noblet/download-geofabrik
+```
+
+---
+
+## Quick Start
+
+### Basic Download
+
+Download the default `osm.pbf` extract from Geofabrik:
+
+```bash
+download-geofabrik download ile-de-france
+```
+
+### Download from Another Provider
+
+Use the `--service` flag to target alternative OSM data sources:
+
+```bash
+# Download from OpenStreetMap France
+download-geofabrik --service openstreetmap.fr download rhone-alpes
+
+# Download from BBBike
+download-geofabrik --service bbbike download Berlin
+```
+
+### Download Specific Formats
+
+Select one or more output formats simultaneously using shorthand flags:
+
+```bash
+# Download Shapefile (-S), Osmosis Poly boundary (-p), and GeoJSON (-g)
+download-geofabrik download -S -p -g ile-de-france
+
+# Download GeoPackage format (-K)
+download-geofabrik download -K monaco
+```
+
+### Custom Output Directory & Options
+
+```bash
+# Download to a specific destination folder
+download-geofabrik download --output-dir /tmp/osm-extracts ile-de-france
+
+# Skip checksum verification
+download-geofabrik download --no-check ile-de-france
+
+# Dry run (test URLs without downloading files)
+download-geofabrik download --nodownload ile-de-france
+```
+
+### Exploring Elements
+
+```bash
+# Interactive / readable table
+download-geofabrik list
+
+# Output as JSON for scripting
+download-geofabrik --service bbbike list --json
+
+# Output as Markdown table
+download-geofabrik --service openstreetmap.fr list --markdown
+```
+
+---
+
+## CLI Reference
+
+```text

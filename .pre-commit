@@ -2,38 +2,91 @@
 #
 go fmt ./...
 go mod tidy
+
 cat .README.md1 > README.md
 go run ./cmd/download-geofabrik --help >> README.md
 cat .README.md2 >> README.md
+echo "" >> README.md
+
+echo "<details>" >> README.md
+echo "<summary><strong>Geofabrik Extracts</strong> (default service)</summary>" >> README.md
+echo "" >> README.md
 go run ./cmd/download-geofabrik list --markdown >> README.md
 echo "" >> README.md
-echo "## List of elements from openstreetmap.fr" >> README.md
+echo "</details>" >> README.md
+echo "" >> README.md
+
+echo "<details>" >> README.md
+echo "<summary><strong>OpenStreetMap France Extracts (openstreetmap.fr)</strong></summary>" >> README.md
+echo "" >> README.md
 go run ./cmd/download-geofabrik --service "openstreetmap.fr" list --markdown >> README.md
 echo "" >> README.md
-echo "## List of elements from bbbike.org" >> README.md
+echo "</details>" >> README.md
+echo "" >> README.md
+
+echo "<details>" >> README.md
+echo "<summary><strong>BBBike Extracts (bbbike.org)</strong></summary>" >> README.md
+echo "" >> README.md
 go run ./cmd/download-geofabrik --service "bbbike" list --markdown >> README.md
 echo "" >> README.md
-echo "## List of elements from geo2day" >> README.md
+echo "</details>" >> README.md
+echo "" >> README.md
+
+echo "<details>" >> README.md
+echo "<summary><strong>Geo2day Extracts</strong></summary>" >> README.md
+echo "" >> README.md
 go run ./cmd/download-geofabrik --service "geo2day" list --markdown >> README.md
 echo "" >> README.md
-echo "## List of elements from movisda" >> README.md
+echo "</details>" >> README.md
+echo "" >> README.md
+
+echo "<details>" >> README.md
+echo "<summary><strong>Movisda Extracts</strong></summary>" >> README.md
+echo "" >> README.md
 go run ./cmd/download-geofabrik --service "movisda" list --markdown >> README.md
 echo "" >> README.md
-echo "## List of elements from planet.osm.ch" >> README.md
+echo "</details>" >> README.md
+echo "" >> README.md
+
+echo "<details>" >> README.md
+echo "<summary><strong>Planet OSM Switzerland Extracts (planet.osm.ch)</strong></summary>" >> README.md
+echo "" >> README.md
 go run ./cmd/download-geofabrik --service "planet.osm.ch" list --markdown >> README.md
 echo "" >> README.md
-echo "## List of elements from osm.kewl.lu" >> README.md
+echo "</details>" >> README.md
+echo "" >> README.md
+
+echo "<details>" >> README.md
+echo "<summary><strong>OSM Luxembourg Extracts (osm.kewl.lu)</strong></summary>" >> README.md
+echo "" >> README.md
 go run ./cmd/download-geofabrik --service "osm.kewl.lu" list --markdown >> README.md
 echo "" >> README.md
-echo "## List of elements from osm.fit.vutbr.cz" >> README.md
+echo "</details>" >> README.md
+echo "" >> README.md
+
+echo "<details>" >> README.md
+echo "<summary><strong>FIT VUT Brno Extracts (osm.fit.vutbr.cz)</strong></summary>" >> README.md
+echo "" >> README.md
 go run ./cmd/download-geofabrik --service "osm.fit.vutbr.cz" list --markdown >> README.md
 echo "" >> README.md
-echo "## List of elements from osmit-estratti" >> README.md
+echo "</details>" >> README.md
+echo "" >> README.md
+
+echo "<details>" >> README.md
+echo "<summary><strong>OpenStreetMap Italia Extracts (osmit-estratti)</strong></summary>" >> README.md
+echo "" >> README.md
 go run ./cmd/download-geofabrik --service "osmit-estratti" list --markdown >> README.md
 echo "" >> README.md
-echo "## List of elements from osm.kcwu.csie.org" >> README.md
+echo "</details>" >> README.md
+echo "" >> README.md
+
+echo "<details>" >> README.md
+echo "<summary><strong>OSM Taiwan Extracts (osm.kcwu.csie.org)</strong></summary>" >> README.md
+echo "" >> README.md
 go run ./cmd/download-geofabrik --service "osm.kcwu.csie.org" list --markdown >> README.md
 echo "" >> README.md
+echo "</details>" >> README.md
+
 git add geofabrik.yml
 git add openstreetmap.fr.yml
 git add bbbike.yml

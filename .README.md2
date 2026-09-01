@@ -1,16 +1,47 @@
 ```
 
+---
+
+## Supported Formats
+
+The following flags can be passed to the `download` command to select specific file formats:
+
+| Flag | Format Key | Extension | Description | Default |
+| :--- | :--- | :--- | :--- | :---: |
+| `-P` | `osm.pbf` | `.osm.pbf` | OpenStreetMap Protocolbuffer Binary Format | ✅ Yes |
+| `-H` | `osh.pbf` | `.osh.pbf` | OpenStreetMap History Protocolbuffer | |
+| `-S` | `shp.zip` | `.shp.zip` | ESRI Shapefiles in ZIP archive | |
+| `-K` | `gpkg` | `.gpkg` | OGC GeoPackage vector dataset | |
+| `-g` | `geojson` | `.geojson` | GeoJSON boundary / extract | |
+| `-p` | `poly` | `.poly` | Osmosis Polygon boundary | |
+| `-k` | `kml` | `.kml` | Keyhole Markup Language boundary | |
+| `-M` | `mbtiles` | `.mbtiles` | Vector / Raster Mapbox MBTiles | |
+| `-m` | `map` | `.map` | Mapsforge vector map format | |
+| `-G` | `osm.gz` | `.osm.gz` | Gzip-compressed OSM XML | |
+| `-B` | `osm.bz2` | `.osm.bz2` | Bzip2-compressed OSM XML | |
+| `-5` | `o5m` | `.o5m` | Packed OSM data format | |
+| `-Z` | `o5m.zst` | `.o5m.zst` | Zstandard-compressed o5m | |
+| `-O` | `garmin.osm` | `.zip` | Garmin GPS map | |
+| `-r` | `garmin.onroad` | `.zip` | Garmin On-Road map | |
+| `-t` | `garmin.ontrail`| `.zip` | Garmin On-Trail map | |
+| `-o` | `garmin.opentopo`| `.zip` | Garmin OpenTopo map | |
+| | `obf` | `.obf` | OsmAnd Binary Format | |
+| | `state` | `state.txt`| Replication state timestamp | |
+| `-C` | `csv` | `.csv` | City / POI list in CSV format | |
+
+---
+
 ## Model Context Protocol (MCP) Mode
 
-`download-geofabrik` includes a built-in **MCP server** allowing Large Language Models (LLMs) such as Claude Desktop, Antigravity, Cursor, and Cline to interact with OpenStreetMap catalogs.
+`download-geofabrik` includes a built-in **MCP server** allowing Large Language Models (LLMs) such as Claude Desktop, Antigravity, Cursor, Cline, and Roo Code to interact with OpenStreetMap catalogs.
 
-```shell
-./download-geofabrik mcp
+```bash
+download-geofabrik mcp
 ```
 
 ### Configuration for MCP Clients
 
-Add the following to your MCP client configuration (e.g., `claude_desktop_config.json` or `antigravity.json`):
+Add `download-geofabrik` to your MCP client configuration (e.g., `claude_desktop_config.json` or `antigravity.json`):
 
 ```json
 {
@@ -25,12 +56,12 @@ Add the following to your MCP client configuration (e.g., `claude_desktop_config
 
 ### Available MCP Tools
 
-- **`list_services`**: List all 10 supported OSM data providers (`geofabrik`, `bbbike`, `openstreetmap.fr`, `movisda`, `geo2day`, etc.) and their configuration status.
-- **`regenerate_catalog`**: Trigger remote catalog scraping and update local configuration files.
-- **`list_elements`**: Search and list regions, countries, and cities for any provider with available file formats (`osm.pbf`, `shp.zip`, `poly`, `mbtiles`, etc.), supporting search and pagination.
-- **`get_element`**: Retrieve detailed metadata for a specific extract, including resolved download URLs and MD5 checksum availability.
-- **`list_formats`**: List supported data formats and extensions across services.
-- **`download_element`**: Download OSM extracts for specified formats with checksum verification and `dry_run` simulation support.
+- `list_services`: List all 10 supported OSM data providers (`geofabrik`, `bbbike`, `openstreetmap.fr`, `movisda`, `geo2day`, etc.) and their configuration status.
+- `regenerate_catalog`: Trigger remote catalog scraping and update local configuration files.
+- `list_elements`: Search and list regions, countries, and cities for any provider with available file formats (`osm.pbf`, `shp.zip`, `poly`, `mbtiles`, etc.), supporting search and pagination.
+- `get_element`: Retrieve detailed metadata for a specific extract, including resolved download URLs and MD5 checksum availability.
+- `list_formats`: List supported data formats and extensions across services.
+- `download_element`: Download OSM extracts for specified formats with checksum verification and `dry_run` simulation support.
 
 ### Available MCP Resources
 
@@ -38,5 +69,30 @@ Add the following to your MCP client configuration (e.g., `claude_desktop_config
 - `geofabrik://formats`: JSON list of all supported file formats.
 - `geofabrik://catalog/{service}`: Full catalog elements and formats for the given service.
 
-## List of elements
+---
 
+## Catalog Maintenance
+
+The `generate` command queries upstream provider directories and regenerates the local YAML database files:
+
+```bash
+# Update Geofabrik catalog (geofabrik.yml)
+download-geofabrik generate
+
+# Update a specific provider catalog
+download-geofabrik --service openstreetmap.fr generate
+download-geofabrik --service bbbike generate
+download-geofabrik --service movisda generate
+```
+
+---
+
+## License
+
+This project is licensed under the [Mozilla Public License 2.0 (MPL-2.0)](LICENSE).
+
+---
+
+## Available Extracts by Provider
+
+Below is the complete list of elements and available formats across all supported providers. Click any provider below to expand its catalog table.
