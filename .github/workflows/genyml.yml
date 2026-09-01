@@ -34,35 +34,76 @@ jobs:
       - run: cat .README.md1 > README.md
       - run: go run cmd/download-geofabrik/main.go --help >> README.md
       - run: cat .README.md2 >> README.md
+      - run: echo "" >> README.md
+      - run: echo "<details>" >> README.md
+      - run: echo "<summary><strong>Geofabrik Extracts</strong> (default service)</summary>" >> README.md
+      - run: echo "" >> README.md
       - run: go run cmd/download-geofabrik/main.go list --markdown >> README.md
       - run: echo "" >> README.md
-      - run: echo "## List of elements from openstreetmap.fr" >> README.md
+      - run: echo "</details>" >> README.md
+      - run: echo "" >> README.md
+      - run: echo "<details>" >> README.md
+      - run: echo "<summary><strong>OpenStreetMap France Extracts (openstreetmap.fr)</strong></summary>" >> README.md
+      - run: echo "" >> README.md
       - run: go run cmd/download-geofabrik/main.go --service "openstreetmap.fr" list --markdown >> README.md
       - run: echo "" >> README.md
-      - run: echo "## List of elements from bbbike.org" >> README.md
+      - run: echo "</details>" >> README.md
+      - run: echo "" >> README.md
+      - run: echo "<details>" >> README.md
+      - run: echo "<summary><strong>BBBike Extracts (bbbike.org)</strong></summary>" >> README.md
+      - run: echo "" >> README.md
       - run: go run cmd/download-geofabrik/main.go --service "bbbike" list --markdown >> README.md
       - run: echo "" >> README.md
-      - run: echo "## List of elements from geo2day" >> README.md
+      - run: echo "</details>" >> README.md
+      - run: echo "" >> README.md
+      - run: echo "<details>" >> README.md
+      - run: echo "<summary><strong>Geo2day Extracts</strong></summary>" >> README.md
+      - run: echo "" >> README.md
       - run: go run cmd/download-geofabrik/main.go --service "geo2day" list --markdown >> README.md
       - run: echo "" >> README.md
-      - run: echo "## List of elements from movisda" >> README.md
+      - run: echo "</details>" >> README.md
+      - run: echo "" >> README.md
+      - run: echo "<details>" >> README.md
+      - run: echo "<summary><strong>Movisda Extracts</strong></summary>" >> README.md
+      - run: echo "" >> README.md
       - run: go run cmd/download-geofabrik/main.go --service "movisda" list --markdown >> README.md
       - run: echo "" >> README.md
-      - run: echo "## List of elements from planet.osm.ch" >> README.md
+      - run: echo "</details>" >> README.md
+      - run: echo "" >> README.md
+      - run: echo "<details>" >> README.md
+      - run: echo "<summary><strong>Planet OSM Switzerland Extracts (planet.osm.ch)</strong></summary>" >> README.md
+      - run: echo "" >> README.md
       - run: go run cmd/download-geofabrik/main.go --service "planet.osm.ch" list --markdown >> README.md
       - run: echo "" >> README.md
-      - run: echo "## List of elements from osm.kewl.lu" >> README.md
+      - run: echo "</details>" >> README.md
+      - run: echo "" >> README.md
+      - run: echo "<details>" >> README.md
+      - run: echo "<summary><strong>OSM Luxembourg Extracts (osm.kewl.lu)</strong></summary>" >> README.md
+      - run: echo "" >> README.md
       - run: go run cmd/download-geofabrik/main.go --service "osm.kewl.lu" list --markdown >> README.md
       - run: echo "" >> README.md
-      - run: echo "## List of elements from osm.fit.vutbr.cz" >> README.md
+      - run: echo "</details>" >> README.md
+      - run: echo "" >> README.md
+      - run: echo "<details>" >> README.md
+      - run: echo "<summary><strong>FIT VUT Brno Extracts (osm.fit.vutbr.cz)</strong></summary>" >> README.md
+      - run: echo "" >> README.md
       - run: go run cmd/download-geofabrik/main.go --service "osm.fit.vutbr.cz" list --markdown >> README.md
       - run: echo "" >> README.md
-      - run: echo "## List of elements from osmit-estratti" >> README.md
+      - run: echo "</details>" >> README.md
+      - run: echo "" >> README.md
+      - run: echo "<details>" >> README.md
+      - run: echo "<summary><strong>OpenStreetMap Italia Extracts (osmit-estratti)</strong></summary>" >> README.md
+      - run: echo "" >> README.md
       - run: go run cmd/download-geofabrik/main.go --service "osmit-estratti" list --markdown >> README.md
       - run: echo "" >> README.md
-      - run: echo "## List of elements from osm.kcwu.csie.org" >> README.md
+      - run: echo "</details>" >> README.md
+      - run: echo "" >> README.md
+      - run: echo "<details>" >> README.md
+      - run: echo "<summary><strong>OSM Taiwan Extracts (osm.kcwu.csie.org)</strong></summary>" >> README.md
+      - run: echo "" >> README.md
       - run: go run cmd/download-geofabrik/main.go --service "osm.kcwu.csie.org" list --markdown >> README.md
       - run: echo "" >> README.md
+      - run: echo "</details>" >> README.md
       - uses: actions-js/push@master
         with:
           message: generate yaml files
