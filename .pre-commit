@@ -3,89 +3,161 @@
 go fmt ./...
 go mod tidy
 
+mkdir -p docs/catalogs
+
 cat .README.md1 > README.md
 go run ./cmd/download-geofabrik --help >> README.md
 cat .README.md2 >> README.md
-echo "" >> README.md
 
-echo "<details>" >> README.md
-echo "<summary><strong>Geofabrik Extracts</strong> (default service)</summary>" >> README.md
-echo "" >> README.md
-go run ./cmd/download-geofabrik list --markdown >> README.md
-echo "" >> README.md
-echo "</details>" >> README.md
-echo "" >> README.md
+# Geofabrik
+cat << 'EOF' > docs/catalogs/geofabrik.md
+# Geofabrik Extracts Catalog
 
-echo "<details>" >> README.md
-echo "<summary><strong>OpenStreetMap France Extracts (openstreetmap.fr)</strong></summary>" >> README.md
-echo "" >> README.md
-go run ./cmd/download-geofabrik --service "openstreetmap.fr" list --markdown >> README.md
-echo "" >> README.md
-echo "</details>" >> README.md
-echo "" >> README.md
+[← Back to README](../../README.md)
 
-echo "<details>" >> README.md
-echo "<summary><strong>BBBike Extracts (bbbike.org)</strong></summary>" >> README.md
-echo "" >> README.md
-go run ./cmd/download-geofabrik --service "bbbike" list --markdown >> README.md
-echo "" >> README.md
-echo "</details>" >> README.md
-echo "" >> README.md
+- **Service Key**: `geofabrik` (default)
+- **Description**: Continents, countries, and regional OpenStreetMap extracts
+- **Example**: `download-geofabrik download ile-de-france`
 
-echo "<details>" >> README.md
-echo "<summary><strong>Geo2day Extracts</strong></summary>" >> README.md
-echo "" >> README.md
-go run ./cmd/download-geofabrik --service "geo2day" list --markdown >> README.md
-echo "" >> README.md
-echo "</details>" >> README.md
-echo "" >> README.md
+## Available Elements
 
-echo "<details>" >> README.md
-echo "<summary><strong>Movisda Extracts</strong></summary>" >> README.md
-echo "" >> README.md
-go run ./cmd/download-geofabrik --service "movisda" list --markdown >> README.md
-echo "" >> README.md
-echo "</details>" >> README.md
-echo "" >> README.md
+EOF
+go run ./cmd/download-geofabrik list --markdown >> docs/catalogs/geofabrik.md
 
-echo "<details>" >> README.md
-echo "<summary><strong>Planet OSM Switzerland Extracts (planet.osm.ch)</strong></summary>" >> README.md
-echo "" >> README.md
-go run ./cmd/download-geofabrik --service "planet.osm.ch" list --markdown >> README.md
-echo "" >> README.md
-echo "</details>" >> README.md
-echo "" >> README.md
+# OpenStreetMap France
+cat << 'EOF' > docs/catalogs/openstreetmap.fr.md
+# OpenStreetMap France Extracts Catalog
 
-echo "<details>" >> README.md
-echo "<summary><strong>OSM Luxembourg Extracts (osm.kewl.lu)</strong></summary>" >> README.md
-echo "" >> README.md
-go run ./cmd/download-geofabrik --service "osm.kewl.lu" list --markdown >> README.md
-echo "" >> README.md
-echo "</details>" >> README.md
-echo "" >> README.md
+[← Back to README](../../README.md)
 
-echo "<details>" >> README.md
-echo "<summary><strong>FIT VUT Brno Extracts (osm.fit.vutbr.cz)</strong></summary>" >> README.md
-echo "" >> README.md
-go run ./cmd/download-geofabrik --service "osm.fit.vutbr.cz" list --markdown >> README.md
-echo "" >> README.md
-echo "</details>" >> README.md
-echo "" >> README.md
+- **Service Key**: `openstreetmap.fr`
+- **Description**: High-detail extracts for French regions, departments, and worldwide extracts
+- **Example**: `download-geofabrik --service openstreetmap.fr download rhone-alpes`
 
-echo "<details>" >> README.md
-echo "<summary><strong>OpenStreetMap Italia Extracts (osmit-estratti)</strong></summary>" >> README.md
-echo "" >> README.md
-go run ./cmd/download-geofabrik --service "osmit-estratti" list --markdown >> README.md
-echo "" >> README.md
-echo "</details>" >> README.md
-echo "" >> README.md
+## Available Elements
 
-echo "<details>" >> README.md
-echo "<summary><strong>OSM Taiwan Extracts (osm.kcwu.csie.org)</strong></summary>" >> README.md
-echo "" >> README.md
-go run ./cmd/download-geofabrik --service "osm.kcwu.csie.org" list --markdown >> README.md
-echo "" >> README.md
-echo "</details>" >> README.md
+EOF
+go run ./cmd/download-geofabrik --service "openstreetmap.fr" list --markdown >> docs/catalogs/openstreetmap.fr.md
+
+# BBBike
+cat << 'EOF' > docs/catalogs/bbbike.md
+# BBBike Extracts Catalog
+
+[← Back to README](../../README.md)
+
+- **Service Key**: `bbbike`
+- **Description**: Extracts for 200+ major metropolitan cities worldwide
+- **Example**: `download-geofabrik --service bbbike download Berlin`
+
+## Available Elements
+
+EOF
+go run ./cmd/download-geofabrik --service "bbbike" list --markdown >> docs/catalogs/bbbike.md
+
+# Geo2day
+cat << 'EOF' > docs/catalogs/geo2day.md
+# Geo2day Extracts Catalog
+
+[← Back to README](../../README.md)
+
+- **Service Key**: `geo2day`
+- **Description**: Custom regional and metropolitan extracts
+- **Example**: `download-geofabrik --service geo2day download bretagne`
+
+## Available Elements
+
+EOF
+go run ./cmd/download-geofabrik --service "geo2day" list --markdown >> docs/catalogs/geo2day.md
+
+# Movisda
+cat << 'EOF' > docs/catalogs/movisda.md
+# Movisda Extracts Catalog
+
+[← Back to README](../../README.md)
+
+- **Service Key**: `movisda`
+- **Description**: Worldwide country and administrative subdivision extracts
+- **Example**: `download-geofabrik --service movisda download fr-idf`
+
+## Available Elements
+
+EOF
+go run ./cmd/download-geofabrik --service "movisda" list --markdown >> docs/catalogs/movisda.md
+
+# Planet OSM Switzerland
+cat << 'EOF' > docs/catalogs/planet.osm.ch.md
+# Planet OSM Switzerland Extracts Catalog
+
+[← Back to README](../../README.md)
+
+- **Service Key**: `planet.osm.ch`
+- **Description**: Switzerland national, cantonal, and cross-border extracts
+- **Example**: `download-geofabrik --service planet.osm.ch download switzerland`
+
+## Available Elements
+
+EOF
+go run ./cmd/download-geofabrik --service "planet.osm.ch" list --markdown >> docs/catalogs/planet.osm.ch.md
+
+# OSM Luxembourg
+cat << 'EOF' > docs/catalogs/osm.kewl.lu.md
+# OSM Luxembourg Extracts Catalog
+
+[← Back to README](../../README.md)
+
+- **Service Key**: `osm.kewl.lu`
+- **Description**: Daily extracts for the Grand Duchy of Luxembourg
+- **Example**: `download-geofabrik --service osm.kewl.lu download luxembourg`
+
+## Available Elements
+
+EOF
+go run ./cmd/download-geofabrik --service "osm.kewl.lu" list --markdown >> docs/catalogs/osm.kewl.lu.md
+
+# FIT VUT Brno
+cat << 'EOF' > docs/catalogs/osm.fit.vutbr.cz.md
+# FIT VUT Brno Extracts Catalog
+
+[← Back to README](../../README.md)
+
+- **Service Key**: `osm.fit.vutbr.cz`
+- **Description**: Czech Republic national and regional extracts
+- **Example**: `download-geofabrik --service osm.fit.vutbr.cz download czech-republic`
+
+## Available Elements
+
+EOF
+go run ./cmd/download-geofabrik --service "osm.fit.vutbr.cz" list --markdown >> docs/catalogs/osm.fit.vutbr.cz.md
+
+# OpenStreetMap Italia
+cat << 'EOF' > docs/catalogs/osmit-estratti.md
+# OpenStreetMap Italia Extracts Catalog
+
+[← Back to README](../../README.md)
+
+- **Service Key**: `osmit-estratti`
+- **Description**: Italy national, regional, and provincial extracts
+- **Example**: `download-geofabrik --service osmit-estratti download toscana`
+
+## Available Elements
+
+EOF
+go run ./cmd/download-geofabrik --service "osmit-estratti" list --markdown >> docs/catalogs/osmit-estratti.md
+
+# OSM Taiwan
+cat << 'EOF' > docs/catalogs/osm.kcwu.csie.org.md
+# OSM Taiwan Extracts Catalog
+
+[← Back to README](../../README.md)
+
+- **Service Key**: `osm.kcwu.csie.org`
+- **Description**: Taiwan extracts and change history
+- **Example**: `download-geofabrik --service osm.kcwu.csie.org download taiwan`
+
+## Available Elements
+
+EOF
+go run ./cmd/download-geofabrik --service "osm.kcwu.csie.org" list --markdown >> docs/catalogs/osm.kcwu.csie.org.md
 
 git add geofabrik.yml
 git add openstreetmap.fr.yml
@@ -97,4 +169,5 @@ git add osm.kewl.lu.yml
 git add osm.fit.vutbr.cz.yml
 git add osmit-estratti.yml
 git add osm.kcwu.csie.org.yml
+git add docs/catalogs/*.md
 git add README.md

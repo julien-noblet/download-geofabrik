@@ -87,12 +87,25 @@ download-geofabrik --service movisda generate
 
 ---
 
-## License
+## Supported Providers & Catalogs
 
-This project is licensed under the [Mozilla Public License 2.0 (MPL-2.0)](LICENSE).
+`download-geofabrik` supports 10 OpenStreetMap data providers. Browse the full extract lists for each provider using the links below:
+
+| Provider | Service Key | Description | Elements | Formats | Catalog Link |
+| :--- | :--- | :--- | :---: | :--- | :---: |
+| **Geofabrik** | `geofabrik` | Continents, countries, and regional extracts (default) | 564 | `osm.pbf`, `shp.zip`, `osm.bz2`, `poly`, `kml`, `mbtiles` | [View Catalog](docs/catalogs/geofabrik.md) |
+| **OpenStreetMap France** | `openstreetmap.fr` | High-detail extracts for French regions, departments, and world | 1,208 | `osm.pbf`, `shp.zip`, `poly`, `gpkg`, `geojson` | [View Catalog](docs/catalogs/openstreetmap.fr.md) |
+| **BBBike** | `bbbike` | Extracts for 200+ major metropolitan cities worldwide | 250 | `osm.pbf`, `shp.zip`, `osm.gz`, `gpkg`, `map`, `mbtiles`, Garmin | [View Catalog](docs/catalogs/bbbike.md) |
+| **Geo2day** | `geo2day` | Custom regional and metropolitan extracts | 13 | `osm.pbf`, `shp.zip`, `poly`, `geojson`, `gpkg`, `kml` | [View Catalog](docs/catalogs/geo2day.md) |
+| **Movisda** | `movisda` | Worldwide country and administrative subdivisions | 3,295 | `osm.pbf`, `poly`, `geojson` | [View Catalog](docs/catalogs/movisda.md) |
+| **Planet OSM Switzerland** | `planet.osm.ch` | Switzerland national and cantonal extracts | 7 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/planet.osm.ch.md) |
+| **OSM Luxembourg** | `osm.kewl.lu` | Daily extracts for Luxembourg | 3 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/osm.kewl.lu.md) |
+| **FIT VUT Brno** | `osm.fit.vutbr.cz` | Czech Republic national and regional extracts | 4 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/osm.fit.vutbr.cz.md) |
+| **OpenStreetMap Italia** | `osmit-estratti` | Italy national, regional, and provincial extracts | 131 | `osm.pbf`, `gpkg`, `poly` | [View Catalog](docs/catalogs/osmit-estratti.md) |
+| **OSM Taiwan** | `osm.kcwu.csie.org` | Taiwan extracts and change history | 3 | `o5m`, `o5m.zst` | [View Catalog](docs/catalogs/osm.kcwu.csie.org.md) |
 
 ---
 
-## Available Extracts by Provider
+## License
 
-Below is the complete list of elements and available formats across all supported providers. Click any provider below to expand its catalog table.
+This project is licensed under the [Mozilla Public License 2.0 (MPL-2.0)](LICENSE).
