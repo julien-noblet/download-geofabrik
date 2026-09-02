@@ -9,7 +9,7 @@ jobs:
   gotest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
       - uses: actions/setup-go@v6
