@@ -2,7 +2,7 @@ module github.com/julien-noblet/download-geofabrik
 
 require (
 	github.com/cheggaaa/pb/v3 v3.2.1
-	github.com/mark3labs/mcp-go v0.58.0
+	github.com/mark3labs/mcp-go v1.0.0
 	github.com/olekukonko/tablewriter v1.1.4
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/viper v1.21.0
