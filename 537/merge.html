@@ -1355,9 +1355,9 @@ const (
 
 var bufferPool = sync.Pool{
         New: func() any {
-                <span class="cov5" title="4">buf := make([]byte, bufferSize)
+                <span class="cov6" title="6">buf := make([]byte, bufferSize)
 </span>
-                <span class="cov5" title="4">return &amp;buf
+                <span class="cov6" title="6">return &amp;buf
 </span>        },
 }
 
@@ -2575,7 +2575,7 @@ func (s *Server) handleListFormats(ctx context.Context, request mcpSDK.CallToolR
 </span>                }
 
                 <span class="cov1" title="1">slices.SortFunc(formatSpecs, func(a, b FormatSpecification) int </span>{
-                        <span class="cov2" title="3">return strings.Compare(a.ID, b.ID)
+                        <span class="cov2" title="2">return strings.Compare(a.ID, b.ID)
 </span>                })
 
                 <span class="cov1" title="1">return jsonToolResult(formatSpecs)</span>
@@ -2619,7 +2619,7 @@ func collectGlobalFormats() []FormatSpecification {
 </span>        }
 
         <span class="cov2" title="2">slices.SortFunc(specs, func(a, b FormatSpecification) int </span>{
-                <span class="cov10" title="172">return strings.Compare(a.ID, b.ID)
+                <span class="cov10" title="166">return strings.Compare(a.ID, b.ID)
 </span>        })
 
         <span class="cov2" title="2">return specs</span>
@@ -3061,7 +3061,7 @@ func parseBBBikeHTML(reader io.Reader, cat *catalog.Catalog) error {
         <span class="cov3" title="5">for </span>{
                 <span class="cov10" title="355">tokenType := tokenizer.Next()
 </span>
-                <span class="cov9" title="354">switch tokenType </span>{
+                <span class="cov10" title="355">switch tokenType </span>{
                 case html.ErrorToken:
                         <span class="cov3" title="5">if errors.Is(tokenizer.Err(), io.EOF) </span>{
                                 <span class="cov3" title="4">return nil
@@ -3307,25 +3307,25 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
                 <span class="cov4" title="12">for target := range workChan </span>{
                         <span class="cov6" title="75">select </span>{
                         case &lt;-ctx.Done():
-                                <span class="cov5" title="23">recordErr(fmt.Errorf("crawl context canceled: %w", ctx.Err()))
+                                <span class="cov5" title="36">recordErr(fmt.Errorf("crawl context canceled: %w", ctx.Err()))
                                 activeWorkers.Done()
 </span>
-                                <span class="cov5" title="23">continue</span>
+                                <span class="cov5" title="36">continue</span>
 
-                        case sem &lt;- struct{}{}:<span class="cov6" title="52"></span>
+                        case sem &lt;- struct{}{}:<span class="cov5" title="39"></span>
                         }
 
-                        <span class="cov6" title="52">go func(pageURL string) </span>{
-                                <span class="cov6" title="52">defer func() </span>{
-                                        <span class="cov6" title="52">&lt;-sem
+                        <span class="cov5" title="39">go func(pageURL string) </span>{
+                                <span class="cov5" title="39">defer func() </span>{
+                                        <span class="cov5" title="39">&lt;-sem
                                         activeWorkers.Done()
 </span>                                }()
 
-                                <span class="cov6" title="52">subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
+                                <span class="cov5" title="39">subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
                                 if err != nil </span>{
-                                        <span class="cov5" title="43">recordErr(err)
+                                        <span class="cov5" title="30">recordErr(err)
 </span>
-                                        <span class="cov5" title="43">return
+                                        <span class="cov5" title="30">return
 </span>                                }
 
                                 <span class="cov3" title="9">for _, page := range subPages </span>{
@@ -3346,19 +3346,19 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 }
 
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
-        <span class="cov6" title="52">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
+        <span class="cov5" title="39">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("error creating request: %w", err)
 </span>        }
 
-        <span class="cov6" title="51">client := p.Client
+        <span class="cov5" title="38">client := p.Client
         if client == nil </span>{
                 <span class="cov1" title="1">client = http.DefaultClient
 </span>        }
 
-        <span class="cov6" title="51">resp, err := client.Do(req)
+        <span class="cov5" title="38">resp, err := client.Do(req)
         if err != nil </span>{
-                <span class="cov5" title="40">return nil, fmt.Errorf("%w: %w", ErrFetchCatalog, err)
+                <span class="cov5" title="27">return nil, fmt.Errorf("%w: %w", ErrFetchCatalog, err)
 </span>        }
         <span class="cov4" title="11">defer resp.Body.Close()
 </span>
@@ -3375,7 +3375,7 @@ func (p *Provider) parseHTMLStream(reader io.Reader, cat *catalog.Catalog) ([]st
         <span class="cov4" title="10">tokenizer := html.NewTokenizer(reader)
 </span>
         <span class="cov4" title="10">for </span>{
-                <span class="cov9" title="630">tokenType := tokenizer.Next()
+                <span class="cov9" title="629">tokenType := tokenizer.Next()
 </span>
                 <span class="cov9" title="630">switch tokenType </span>{
                 case html.ErrorToken:
@@ -3399,7 +3399,7 @@ func (p *Provider) parseHTMLStream(reader io.Reader, cat *catalog.Catalog) ([]st
 func (p *Provider) handleAnchor(tokenizer *html.Tokenizer, tokenType html.TokenType, cat *catalog.Catalog) string {
         <span class="cov8" title="285">tagName, hasAttr := tokenizer.TagName()
         if string(tagName) != "a" || !hasAttr </span>{
-                <span class="cov7" title="199">return ""
+                <span class="cov7" title="198">return ""
 </span>        }
 
         <span class="cov6" title="86">href := extractHref(tokenizer)
@@ -4096,25 +4096,25 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
                 <span class="cov3" title="8">for target := range workChan </span>{
                         <span class="cov6" title="72">select </span>{
                         case &lt;-ctx.Done():
-                                <span class="cov5" title="27">recordErr(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
+                                <span class="cov5" title="35">recordErr(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
                                 activeWorkers.Done()
 </span>
-                                <span class="cov5" title="27">continue</span>
+                                <span class="cov5" title="35">continue</span>
 
-                        case sem &lt;- struct{}{}:<span class="cov6" title="45"></span>
+                        case sem &lt;- struct{}{}:<span class="cov6" title="37"></span>
                         }
 
-                        <span class="cov6" title="45">go func(currentURL string) </span>{
-                                <span class="cov6" title="45">defer func() </span>{
-                                        <span class="cov6" title="45">&lt;-sem
+                        <span class="cov6" title="37">go func(currentURL string) </span>{
+                                <span class="cov6" title="37">defer func() </span>{
+                                        <span class="cov6" title="37">&lt;-sem
                                         activeWorkers.Done()
 </span>                                }()
 
-                                <span class="cov6" title="45">links, err := p.fetchAndProcessPage(ctx, currentURL, cat)
+                                <span class="cov6" title="37">links, err := p.fetchAndProcessPage(ctx, currentURL, cat)
                                 if err != nil </span>{
-                                        <span class="cov6" title="39">recordErr(err)
+                                        <span class="cov5" title="31">recordErr(err)
 </span>
-                                        <span class="cov6" title="39">return
+                                        <span class="cov5" title="31">return
 </span>                                }
 
                                 <span class="cov3" title="6">for _, link := range links </span>{
@@ -4137,19 +4137,19 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 }
 
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
-        <span class="cov6" title="45">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
+        <span class="cov6" title="37">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("error creating request: %w", err)
 </span>        }
 
-        <span class="cov6" title="44">client := p.Client
+        <span class="cov5" title="36">client := p.Client
         if client == nil </span>{
                 <span class="cov1" title="1">client = http.DefaultClient
 </span>        }
 
-        <span class="cov6" title="44">resp, err := client.Do(req)
+        <span class="cov5" title="36">resp, err := client.Do(req)
         if err != nil </span>{
-                <span class="cov5" title="36">return nil, fmt.Errorf("error fetching %s: %w", currentURL, err)
+                <span class="cov5" title="28">return nil, fmt.Errorf("error fetching %s: %w", currentURL, err)
 </span>        }
         <span class="cov3" title="8">defer resp.Body.Close()
 </span>
@@ -6396,10 +6396,10 @@ func GetMiniFormats(fullFormatNames []string) string {
 // GetFormats returns a slice of format strings based on the configuration map.
 // The config map should contain keys like KeyOsmPbf with boolean true/false.
 func GetFormats(config map[string]bool) []string {
-        <span class="cov5" title="16">formatList := make([]string, 0, len(config))
+        <span class="cov5" title="17">formatList := make([]string, 0, len(config))
 </span>
         <span class="cov5" title="17">for _, pair := range keyFormatPairs </span>{
-                <span class="cov10" title="338">if config[pair.key] </span>{
+                <span class="cov10" title="340">if config[pair.key] </span>{
                         <span class="cov5" title="15">formatList = append(formatList, pair.format)
 </span>                }
         }
@@ -6410,7 +6410,7 @@ func GetFormats(config map[string]bool) []string {
 
         <span class="cov5" title="17">slices.Sort(formatList)
 </span>
-        <span class="cov5" title="16">return formatList</span>
+        <span class="cov5" title="17">return formatList</span>
 }
 </pre>
 		
