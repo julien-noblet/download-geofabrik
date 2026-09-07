@@ -19,16 +19,6 @@
           '';
         };
         buildGoModule = pkgs.buildGo127Module;
-        upx = pkgs.upx.overrideAttrs (oldAttrs: rec {
-          version = "5.2.1";
-          src = pkgs.fetchFromGitHub {
-            owner = "upx";
-            repo = "upx";
-            tag = "v${version}";
-            fetchSubmodules = true;
-            hash = "sha256-Fy+BqntQcHLo5FGhWTP6gqe5OIGC6w7SMc+tlV+VqCM=";
-          };
-        });
       in
       {
         packages = {
@@ -36,7 +26,7 @@
             pname = "download-geofabrik";
             version = "unstable";
             src = ./.;
-            vendorHash = "sha256-KjGBhl8ZtD0TT0n/nrl186NREsiCYgqCcOzWOOJhRok=";
+            vendorHash = "sha256-08yBURftwCHqlZKnu6ek3mbkbTRF007iLgNvP9Xhf1g=";
             subPackages = [ "cmd/download-geofabrik" ];
             env.CGO_ENABLED = 0;
 
@@ -45,15 +35,11 @@
               "-w"
             ];
           };
-          upx = upx;
         };
 
         apps = {
           default = flake-utils.lib.mkApp {
             drv = self.packages.${system}.default;
-          };
-          upx = flake-utils.lib.mkApp {
-            drv = upx;
           };
         };
 
@@ -65,7 +51,6 @@
             pkgs.goreleaser
             pkgs.delve
             pkgs.gotools
-            upx
           ];
 
           shellHook = ''

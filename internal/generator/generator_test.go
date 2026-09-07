@@ -3,6 +3,7 @@ package generator //nolint:testpackage // testing internal functions
 import (
 	"context"
 	"errors"
+	"log/slog"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -230,6 +231,13 @@ func Benchmark_Slice_Generate(b *testing.B) {
 }
 
 func Benchmark_Write(b *testing.B) {
+	origLogger := slog.Default()
+
+	slog.SetDefault(slog.New(slog.DiscardHandler))
+	b.Cleanup(func() {
+		slog.SetDefault(origLogger)
+	})
+
 	cfg := SampleConfigValidPtr()
 	tmpDir := b.TempDir()
 	outFile := filepath.Join(tmpDir, "out.yml")

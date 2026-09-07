@@ -239,7 +239,7 @@ upx:
   - # Whether to enable it or not.
     #
     # Templates: allowed.
-    enabled: true # remove upx since I've issues with it
+    enabled: false # remove upx since I've issues with antivirus software
 
     goos:
       - linux
