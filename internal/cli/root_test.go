@@ -1,6 +1,7 @@
 package cli_test
 
 import (
+	"io"
 	"os"
 	"testing"
 
@@ -108,6 +109,12 @@ func TestLoggingFlags(t *testing.T) {
 
 func Benchmark_CLI_Execute_Help(b *testing.B) {
 	cli.RootCmd.SetArgs([]string{"--help"})
+	cli.RootCmd.SetOut(io.Discard)
+	cli.RootCmd.SetErr(io.Discard)
+	b.Cleanup(func() {
+		cli.RootCmd.SetOut(nil)
+		cli.RootCmd.SetErr(nil)
+	})
 
 	for range b.N {
 		_ = cli.Execute()
