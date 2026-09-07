@@ -204,6 +204,10 @@ linters:
       - std-error-handling
     rules:
       - linters:
+          - gocritic
+        path: internal/mcp/resources.go
+        text: "hugeParam"
+      - linters:
           - cyclop
           - dupl
           - err113

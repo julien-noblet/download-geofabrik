@@ -12,9 +12,10 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
-      - uses: actions/setup-go@v7
+      - uses: cachix/install-nix-action@v31
         with:
-          go-version: stable
-          check-latest: true
-          cache: true
-      - run: go test -v ./...
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Run tests
+        run: nix develop --command go test -v ./...
