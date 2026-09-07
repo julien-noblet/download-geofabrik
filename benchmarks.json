@@ -1,4 +1,5 @@
 [
+  {"Version":"affaa4cf5dfeeaac49e2bca6fda145720a5ef923","Date":1788752885,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"e2bfcbacf04bfd88f6e77bfb0a59931cb6dd3a0a","Date":1788752694,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"63726b81d6505ce555bf007eebb352dbfcdcd94a","Date":1788752665,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"8b01649bd735c90e82c42750dec0b50a72d1d7ec","Date":1788752491,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"08f6728e46fc5e26deb8380aed15889c61af75a5","Date":1787838355,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"b988194041733bab7aad2fef7b632a97d99ede3c","Date":1787838259,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"e3567be7e8068324bf85e07f06f982990b8fc81c","Date":1787838047,"Tags":["ref=refs/heads/renovate/github.com-puerkitobio-goquery-1.x"],"Suites":[]},
-  {"Version":"fa9385d36b0c26e3c0cfa5b1c643fbae2e780263","Date":1787242626,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
-  {"Version":"369b8166048830bf034321b6625ac97ae788e108","Date":1787242617,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]}
+  {"Version":"fa9385d36b0c26e3c0cfa5b1c643fbae2e780263","Date":1787242626,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]}
 ]
