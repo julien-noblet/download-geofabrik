@@ -29,7 +29,10 @@ jobs:
           fi
         done
     - name: Run Go benchmarks
-      run: go test -run=^$ -bench=. -benchmem -cpu 1,2 ./... | tee benchmark-output.txt
+      shell: bash
+      run: |
+        set -o pipefail
+        go test -run=^$ -bench=. -benchmem -cpu 1,2 ./... | tee benchmark-output.txt
     - name: Publish benchmark results
       uses: benchmark-action/github-action-benchmark@v1
       with:
