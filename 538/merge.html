@@ -79,7 +79,7 @@
 				
 				<option value="file11">github.com/julien-noblet/download-geofabrik/internal/generator/generator.go (90.7%)</option>
 				
-				<option value="file12">github.com/julien-noblet/download-geofabrik/internal/generator/importer/geofabrik/geofabrik.go (91.5%)</option>
+				<option value="file12">github.com/julien-noblet/download-geofabrik/internal/generator/importer/geofabrik/geofabrik.go (98.8%)</option>
 				
 				<option value="file13">github.com/julien-noblet/download-geofabrik/internal/lists/lists.go (93.3%)</option>
 				
@@ -685,23 +685,23 @@ type Options struct {
 
 // Generate Yaml config.
 func (config *Config) Generate() ([]byte, error) {
-        <span class="cov2" title="3">yml, err := yaml.Marshal(config)
+        <span class="cov4" title="3">yml, err := yaml.Marshal(config)
         if err != nil </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("failed to Marshal: %w", err)
 </span>        }
 
-        <span class="cov2" title="3">return yml, nil</span>
+        <span class="cov4" title="3">return yml, nil</span>
 }
 
 // MergeElement merges a new element into the config safely using a write lock.
 func (config *Config) MergeElement(elementPtr *element.Element) error {
-        <span class="cov10" title="560">config.ElementsMutex.Lock()
+        <span class="cov9" title="17">config.ElementsMutex.Lock()
         defer config.ElementsMutex.Unlock()
 </span>
-        <span class="cov10" title="560">newElement, ok := config.Elements[elementPtr.ID]
+        <span class="cov9" title="17">newElement, ok := config.Elements[elementPtr.ID]
         if ok </span>{
-                <span class="cov1" title="2">if newElement.Parent != elementPtr.Parent </span>{
-                        <span class="cov1" title="1">return fmt.Errorf("%w: Parent mismatch %s != %s (%s)", ErrParentMismatch, newElement.Parent, elementPtr.Parent, elementPtr.ID)
+                <span class="cov4" title="3">if newElement.Parent != elementPtr.Parent </span>{
+                        <span class="cov3" title="2">return fmt.Errorf("%w: Parent mismatch %s != %s (%s)", ErrParentMismatch, newElement.Parent, elementPtr.Parent, elementPtr.ID)
 </span>                }
 
                 <span class="cov1" title="1">for _, f := range elementPtr.Formats </span>{
@@ -713,20 +713,20 @@ func (config *Config) MergeElement(elementPtr *element.Element) error {
                 <span class="cov1" title="1">newElement.Meta = len(newElement.Formats) == 0
                 config.Elements[elementPtr.ID] = newElement</span>
         } else {
-                <span class="cov9" title="558">config.Elements[elementPtr.ID] = *elementPtr
+                <span class="cov9" title="14">config.Elements[elementPtr.ID] = *elementPtr
 </span>        }
 
-        <span class="cov9" title="559">return nil</span>
+        <span class="cov9" title="15">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
 func (config *Config) Exist(elementID string) bool {
-        <span class="cov2" title="4">config.ElementsMutex.RLock()
+        <span class="cov5" title="4">config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
 </span>
-        <span class="cov2" title="4">_, exists := config.Elements[elementID]
+        <span class="cov5" title="4">_, exists := config.Elements[elementID]
 </span>
-        <span class="cov2" title="4">return exists
+        <span class="cov5" title="4">return exists
 </span>}
 
 // AddExtension adds an extension to an element, creating it if not already present.
@@ -753,33 +753,33 @@ func (config *Config) AddExtension(elementID, format string) {
 
 // GetElement gets an element by ID or returns an error if not found.
 func (config *Config) GetElement(elementID string) (*element.Element, error) {
-        <span class="cov3" title="7">config.ElementsMutex.RLock()
+        <span class="cov6" title="7">config.ElementsMutex.RLock()
         elem, ok := config.Elements[elementID]
         config.ElementsMutex.RUnlock()
 </span>
-        <span class="cov3" title="7">if !ok </span>{
+        <span class="cov6" title="7">if !ok </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("%w: %s", ErrFindElem, elementID)
 </span>        }
 
-        <span class="cov3" title="7">res := elem
+        <span class="cov6" title="7">res := elem
 </span>
-        <span class="cov3" title="7">return &amp;res, nil</span>
+        <span class="cov6" title="7">return &amp;res, nil</span>
 }
 
 // FindElem finds an element in the config by ID.
 func FindElem(config *Config, elementID string) (*element.Element, error) {
-        <span class="cov4" title="16">if config == nil </span>{
+        <span class="cov9" title="16">if config == nil </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, elementID)
 </span>        }
 
-        <span class="cov4" title="16">res, ok := config.Elements[elementID]
+        <span class="cov9" title="16">res, ok := config.Elements[elementID]
         if !ok || res.ID != elementID </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, elementID)
 </span>        }
 
-        <span class="cov4" title="15">elemCopy := res
+        <span class="cov9" title="15">elemCopy := res
 </span>
-        <span class="cov4" title="15">return &amp;elemCopy, nil</span>
+        <span class="cov9" title="15">return &amp;elemCopy, nil</span>
 }
 
 // GetFile gets the file name of an element.
@@ -792,144 +792,144 @@ func GetFile(myElement *element.Element) string {
 }
 
 func buildPrefix(baseURL []string, defaultBaseURL string) string {
-        <span class="cov5" title="18">var prefix string
+        <span class="cov9" title="18">var prefix string
 </span>
-        <span class="cov5" title="18">switch len(baseURL) </span>{
+        <span class="cov9" title="18">switch len(baseURL) </span>{
         case 1:
                 <span class="cov1" title="1">prefix = defaultBaseURL + "/" + strings.Join(baseURL, "/")</span>
         case twoBaseURLParts:
-                <span class="cov4" title="15">prefix = strings.Join(baseURL, "/")</span>
+                <span class="cov9" title="15">prefix = strings.Join(baseURL, "/")</span>
         default:
-                <span class="cov1" title="2">prefix = defaultBaseURL</span>
+                <span class="cov3" title="2">prefix = defaultBaseURL</span>
         }
 
-        <span class="cov5" title="18">if !strings.HasSuffix(prefix, "/") </span>{
-                <span class="cov2" title="4">prefix += "/"
+        <span class="cov9" title="18">if !strings.HasSuffix(prefix, "/") </span>{
+                <span class="cov5" title="4">prefix += "/"
 </span>        }
 
-        <span class="cov5" title="18">return prefix</span>
+        <span class="cov9" title="18">return prefix</span>
 }
 
 func collectElementSegments(config *Config, startID string) ([]string, error) {
-        <span class="cov5" title="18">var segments [maxHierarchyDepth]string
+        <span class="cov9" title="18">var segments [maxHierarchyDepth]string
 </span>
-        <span class="cov5" title="18">count := 0
+        <span class="cov9" title="18">count := 0
         currID := startID
 </span>
-        <span class="cov5" title="18">for count &lt; maxHierarchyDepth </span>{
-                <span class="cov5" title="19">elem, ok := config.Elements[currID]
+        <span class="cov9" title="18">for count &lt; maxHierarchyDepth </span>{
+                <span class="cov10" title="19">elem, ok := config.Elements[currID]
                 if !ok || elem.ID == "" </span>{
                         <span class="cov0" title="0">return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, currID)
 </span>                }
 
-                <span class="cov5" title="19">file := elem.File
+                <span class="cov10" title="19">file := elem.File
                 if file == "" </span>{
-                        <span class="cov5" title="19">file = elem.ID
+                        <span class="cov10" title="19">file = elem.ID
 </span>                }
 
-                <span class="cov5" title="19">segments[count] = file
+                <span class="cov10" title="19">segments[count] = file
                 count++
 </span>
-                <span class="cov5" title="19">if elem.Parent == "" </span>{
-                        <span class="cov5" title="18">break</span>
+                <span class="cov10" title="19">if elem.Parent == "" </span>{
+                        <span class="cov9" title="18">break</span>
                 }
 
                 <span class="cov1" title="1">currID = elem.Parent</span>
         }
 
-        <span class="cov5" title="18">if count &gt;= maxHierarchyDepth </span>{
+        <span class="cov9" title="18">if count &gt;= maxHierarchyDepth </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("%w for element %s (possible cycle in config)", ErrMaxHierarchyDepth, startID)
 </span>        }
 
-        <span class="cov5" title="18">return segments[:count], nil</span>
+        <span class="cov9" title="18">return segments[:count], nil</span>
 }
 
 // Elem2preURL generates a pre-URL for an element iteratively with single-allocation buffer.
 func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string) (string, error) {
-        <span class="cov5" title="18">if config == nil || elementPtr == nil </span>{
+        <span class="cov9" title="18">if config == nil || elementPtr == nil </span>{
                 <span class="cov0" title="0">return "", fmt.Errorf("%w: invalid nil argument", ErrFindElem)
 </span>        }
 
-        <span class="cov5" title="18">segments, err := collectElementSegments(config, elementPtr.ID)
+        <span class="cov9" title="18">segments, err := collectElementSegments(config, elementPtr.ID)
         if err != nil </span>{
                 <span class="cov0" title="0">return "", err
 </span>        }
 
-        <span class="cov5" title="18">var builder strings.Builder
+        <span class="cov9" title="18">var builder strings.Builder
         builder.Grow(defaultBuilderSize)
 </span>
-        <span class="cov5" title="18">builder.WriteString(buildPrefix(baseURL, config.BaseURL))
+        <span class="cov9" title="18">builder.WriteString(buildPrefix(baseURL, config.BaseURL))
 </span>
-        <span class="cov5" title="18">for i := len(segments) - 1; i &gt;= 0; i-- </span>{
-                <span class="cov5" title="19">builder.WriteString(segments[i])
+        <span class="cov9" title="18">for i := len(segments) - 1; i &gt;= 0; i-- </span>{
+                <span class="cov10" title="19">builder.WriteString(segments[i])
 </span>
-                <span class="cov5" title="19">if i &gt; 0 </span>{
+                <span class="cov10" title="19">if i &gt; 0 </span>{
                         <span class="cov1" title="1">builder.WriteByte('/')
 </span>                }
         }
 
-        <span class="cov5" title="18">return builder.String(), nil</span>
+        <span class="cov9" title="18">return builder.String(), nil</span>
 }
 
 // Elem2URL generates a URL for an element with the given extension.
 func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, error) {
-        <span class="cov5" title="17">if !elementPtr.Formats.Contains(ext) </span>{
-                <span class="cov2" title="3">return "", fmt.Errorf("%w: %s", ErrFormatNotExist, ext)
+        <span class="cov9" title="17">if !elementPtr.Formats.Contains(ext) </span>{
+                <span class="cov4" title="3">return "", fmt.Errorf("%w: %s", ErrFormatNotExist, ext)
 </span>        }
 
-        <span class="cov4" title="14">format, ok := config.Formats[ext]
+        <span class="cov9" title="14">format, ok := config.Formats[ext]
         if !ok </span>{
                 <span class="cov0" title="0">return "", fmt.Errorf("%w: %s", ErrFormatNotExist, ext)
 </span>        }
 
-        <span class="cov4" title="14">baseURL, basePath := format.BaseURL, format.BasePath
+        <span class="cov9" title="14">baseURL, basePath := format.BaseURL, format.BasePath
         if baseURL == "" </span>{
-                <span class="cov4" title="14">baseURL = config.BaseURL
+                <span class="cov9" title="14">baseURL = config.BaseURL
 </span>        }
 
-        <span class="cov4" title="14">res, err := Elem2preURL(config, elementPtr, baseURL, basePath)
+        <span class="cov9" title="14">res, err := Elem2preURL(config, elementPtr, baseURL, basePath)
         if err != nil </span>{
                 <span class="cov0" title="0">return "", err
 </span>        }
 
-        <span class="cov4" title="14">return res + format.Loc, nil</span>
+        <span class="cov9" title="14">return res + format.Loc, nil</span>
 }
 
 // LoadConfig loads the configuration from the specified file.
 func LoadConfig(configFile string) (*Config, error) {
-        <span class="cov3" title="7">filename, _ := filepath.Abs(configFile)
+        <span class="cov6" title="7">filename, _ := filepath.Abs(configFile)
 </span>
-        <span class="cov3" title="7">fileContent, err := os.ReadFile(filename)
+        <span class="cov6" title="7">fileContent, err := os.ReadFile(filename)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("can't open %s: %w", filename, err)
 </span>        }
 
-        <span class="cov3" title="6">myConfigPtr := &amp;Config{
+        <span class="cov6" title="6">myConfigPtr := &amp;Config{
                 Formats:       formats.FormatDefinitions{},
                 Elements:      element.MapElement{},
                 ElementsMutex: &amp;sync.RWMutex{},
                 BaseURL:       "",
 </span>        }
 
-        <span class="cov3" title="6">if err := yaml.Unmarshal(fileContent, myConfigPtr); err != nil </span>{
+        <span class="cov6" title="6">if err := yaml.Unmarshal(fileContent, myConfigPtr); err != nil </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("can't unmarshal %s: %w", filename, err)
 </span>        }
 
-        <span class="cov3" title="6">return myConfigPtr, nil</span>
+        <span class="cov6" title="6">return myConfigPtr, nil</span>
 }
 
 // IsHashable checks if a format is hashable.
 func IsHashable(config *Config, format string) (isHashable bool, hash, extension string) {
-        <span class="cov4" title="9">if _, ok := config.Formats[format]; ok </span>{
-                <span class="cov3" title="8">for _, h := range hashes </span>{
-                        <span class="cov3" title="8">hashKey := format + "." + h
+        <span class="cov7" title="9">if _, ok := config.Formats[format]; ok </span>{
+                <span class="cov7" title="8">for _, h := range hashes </span>{
+                        <span class="cov7" title="8">hashKey := format + "." + h
                         if _, ok := config.Formats[hashKey]; ok </span>{
-                                <span class="cov3" title="5">return true, hashKey, h
+                                <span class="cov5" title="5">return true, hashKey, h
 </span>                        }
                 }
         }
 
-        <span class="cov2" title="4">return false, "", ""</span>
+        <span class="cov5" title="4">return false, "", ""</span>
 }
 </pre>
 		
@@ -1356,9 +1356,9 @@ const (
 
 var bufferPool = sync.Pool{
         New: func() any {
-                <span class="cov6" title="5">buf := make([]byte, bufferSize)
+                <span class="cov6" title="6">buf := make([]byte, bufferSize)
 </span>
-                <span class="cov6" title="5">return &amp;buf
+                <span class="cov6" title="6">return &amp;buf
 </span>        },
 }
 
@@ -1592,7 +1592,7 @@ var HTTPClient = &amp;http.Client{
 
 // FormatDefinition returns a map of format definitions.
 func FormatDefinition() formats.FormatDefinitions {
-        <span class="cov2" title="3">return formats.FormatDefinitions{
+        <span class="cov5" title="4">return formats.FormatDefinitions{
                 "osm.bz2.md5":         {ID: "osm.bz2.md5", Loc: "-latest.osm.bz2.md5"},
                 "osm.pbf.md5":         {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
                 formats.FormatKml:     {ID: formats.FormatKml, Loc: ".kml"},
@@ -1627,32 +1627,32 @@ type IndexElementProperties struct {
 
 // GetIndex downloads the Geofabrik index and streams JSON decoding.
 func GetIndex(url string) (*Index, error) {
-        <span class="cov1" title="2">ctx, cancel := context.WithTimeout(context.Background(), TimeoutDuration)
+        <span class="cov7" title="6">ctx, cancel := context.WithTimeout(context.Background(), TimeoutDuration)
         defer cancel()
 </span>
-        <span class="cov1" title="2">req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, http.NoBody)
+        <span class="cov7" title="6">req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, http.NoBody)
         if err != nil </span>{
-                <span class="cov0" title="0">return nil, fmt.Errorf("error while creating request for %s: %w", url, err)
+                <span class="cov1" title="1">return nil, fmt.Errorf("error while creating request for %s: %w", url, err)
 </span>        }
 
-        <span class="cov1" title="2">response, err := HTTPClient.Do(req)
+        <span class="cov6" title="5">response, err := HTTPClient.Do(req)
         if err != nil </span>{
-                <span class="cov0" title="0">return nil, fmt.Errorf("error while downloading %s: %w", url, err)
+                <span class="cov1" title="1">return nil, fmt.Errorf("error while downloading %s: %w", url, err)
 </span>        }
 
-        <span class="cov1" title="2">defer func() </span>{
-                <span class="cov1" title="2">if cerr := response.Body.Close(); cerr != nil &amp;&amp; err == nil </span>{
+        <span class="cov5" title="4">defer func() </span>{
+                <span class="cov5" title="4">if cerr := response.Body.Close(); cerr != nil &amp;&amp; err == nil </span>{
                         <span class="cov0" title="0">err = fmt.Errorf("close response: %w", cerr)
 </span>                }
         }()
 
-        <span class="cov1" title="2">if response.StatusCode != http.StatusOK </span>{
-                <span class="cov1" title="1">return nil, handleHTTPError(response, url)
+        <span class="cov5" title="4">if response.StatusCode != http.StatusOK </span>{
+                <span class="cov3" title="2">return nil, handleHTTPError(response, url)
 </span>        }
 
-        <span class="cov1" title="1">var geofabrikIndex Index
+        <span class="cov3" title="2">var geofabrikIndex Index
         if err := json.NewDecoder(response.Body).Decode(&amp;geofabrikIndex); err != nil </span>{
-                <span class="cov0" title="0">return nil, fmt.Errorf("error while decoding response body: %w", err)
+                <span class="cov1" title="1">return nil, fmt.Errorf("error while decoding response body: %w", err)
 </span>        }
 
         <span class="cov1" title="1">return &amp;geofabrikIndex, nil</span>
@@ -1660,74 +1660,74 @@ func GetIndex(url string) (*Index, error) {
 
 // handleHTTPError handles HTTP errors based on the status code.
 func handleHTTPError(response *http.Response, url string) error {
-        <span class="cov1" title="1">switch response.StatusCode </span>{
+        <span class="cov3" title="2">switch response.StatusCode </span>{
         case http.StatusNotFound:
                 <span class="cov1" title="1">return fmt.Errorf("error while downloading %s, server returned code %d\n"+
                         "Please use '%s generate' to re-create your yml file %w", url, response.StatusCode, os.Args[0], http.ErrNoLocation)</span>
 
         default:
-                <span class="cov0" title="0">return fmt.Errorf("error while downloading %s, server returned code %d\n"+
+                <span class="cov1" title="1">return fmt.Errorf("error while downloading %s, server returned code %d\n"+
                         "Please use '%s generate' to re-create your yml file %w", url, response.StatusCode, os.Args[0], http.ErrNotSupported)</span>
         }
 }
 
 // Convert converts the Geofabrik index to a config.Config object.
 func Convert(index *Index) (*config.Config, error) {
-        <span class="cov1" title="2">cfg := &amp;config.Config{
+        <span class="cov4" title="3">cfg := &amp;config.Config{
                 Formats:       FormatDefinition(),
                 BaseURL:       GeofabrikBaseURL,
                 Elements:      element.MapElement{},
                 ElementsMutex: &amp;sync.RWMutex{},
 </span>        }
 
-        <span class="cov1" title="2">for _, feature := range index.Features </span>{
-                <span class="cov8" title="557">if err := processFeature(cfg, &amp;feature); err != nil </span>{
-                        <span class="cov0" title="0">return nil, err
+        <span class="cov4" title="3">for _, feature := range index.Features </span>{
+                <span class="cov10" title="14">if err := processFeature(cfg, &amp;feature); err != nil </span>{
+                        <span class="cov1" title="1">return nil, err
 </span>                }
         }
 
-        <span class="cov1" title="2">return cfg, nil</span>
+        <span class="cov3" title="2">return cfg, nil</span>
 }
 
 // processFeature processes a single feature from the Geofabrik index.
 func processFeature(cfg *config.Config, feature *IndexElement) error {
-        <span class="cov8" title="557">var elem element.Element
+        <span class="cov10" title="14">var elem element.Element
 </span>
-        <span class="cov8" title="557">slog.Debug("Processing feature", "ID", feature.ElementProperties.ID)
+        <span class="cov10" title="14">slog.Debug("Processing feature", "ID", feature.ElementProperties.ID)
 </span>
-        <span class="cov8" title="557">elem.ID = feature.ElementProperties.ID
+        <span class="cov10" title="14">elem.ID = feature.ElementProperties.ID
         elem.Parent = feature.ElementProperties.Parent
         elem.Name = feature.ElementProperties.Name
 </span>
-        <span class="cov8" title="557">elem.Formats = append(elem.Formats, getFormats(feature.ElementProperties.Urls)...)
+        <span class="cov10" title="14">elem.Formats = append(elem.Formats, getFormats(feature.ElementProperties.Urls)...)
 </span>
-        <span class="cov8" title="557">if err := cfg.MergeElement(&amp;elem); err != nil </span>{
-                <span class="cov0" title="0">return fmt.Errorf("error while merging element %v: %w", elem, err)
+        <span class="cov10" title="14">if err := cfg.MergeElement(&amp;elem); err != nil </span>{
+                <span class="cov1" title="1">return fmt.Errorf("error while merging element %v: %w", elem, err)
 </span>        }
 
-        <span class="cov8" title="557">return nil</span>
+        <span class="cov9" title="13">return nil</span>
 }
 
 // getFormats returns the formats based on the URLs.
 func getFormats(urls map[string]string) []string {
-        <span class="cov8" title="557">myFormats := []string{}
+        <span class="cov10" title="14">myFormats := []string{}
 </span>
-        <span class="cov8" title="557">for k := range urls </span>{
-                <span class="cov10" title="3306">switch k </span>{
+        <span class="cov10" title="14">for k := range urls </span>{
+                <span class="cov9" title="12">switch k </span>{
                 case "pbf":
-                        <span class="cov8" title="557">myFormats = append(myFormats, formats.FormatOsmPbf, "osm.pbf.md5")</span>
+                        <span class="cov7" title="6">myFormats = append(myFormats, formats.FormatOsmPbf, "osm.pbf.md5")</span>
                 case "bz2":
-                        <span class="cov1" title="1">myFormats = append(myFormats, formats.FormatOsmBz2, "osm.bz2.md5")</span>
+                        <span class="cov3" title="2">myFormats = append(myFormats, formats.FormatOsmBz2, "osm.bz2.md5")</span>
                 case "shp":
-                        <span class="cov7" title="527">myFormats = append(myFormats, formats.FormatShpZip)</span>
+                        <span class="cov3" title="2">myFormats = append(myFormats, formats.FormatShpZip)</span>
                 case "history":
-                        <span class="cov8" title="556">myFormats = append(myFormats, formats.FormatOshPbf)</span>
+                        <span class="cov3" title="2">myFormats = append(myFormats, formats.FormatOshPbf)</span>
                 }
         }
 
-        <span class="cov8" title="557">myFormats = append(myFormats, formats.FormatPoly, formats.FormatKml, formats.FormatState)
+        <span class="cov10" title="14">myFormats = append(myFormats, formats.FormatPoly, formats.FormatKml, formats.FormatState)
 </span>
-        <span class="cov8" title="557">return myFormats</span>
+        <span class="cov10" title="14">return myFormats</span>
 }
 </pre>
 		
@@ -2576,7 +2576,7 @@ func (s *Server) handleListFormats(ctx context.Context, request mcpSDK.CallToolR
 </span>                }
 
                 <span class="cov1" title="1">slices.SortFunc(formatSpecs, func(a, b FormatSpecification) int </span>{
-                        <span class="cov2" title="3">return strings.Compare(a.ID, b.ID)
+                        <span class="cov2" title="2">return strings.Compare(a.ID, b.ID)
 </span>                })
 
                 <span class="cov1" title="1">return jsonToolResult(formatSpecs)</span>
@@ -2601,7 +2601,7 @@ func collectGlobalFormats() []FormatSpecification {
                 osmtw.DefaultFormats(),
 </span>        } {
                 <span class="cov6" title="20">for formatID, formatDef := range formatMap </span>{
-                        <span class="cov8" title="94">if _, exists := allDefs[formatID]; !exists </span>{
+                        <span class="cov9" title="94">if _, exists := allDefs[formatID]; !exists </span>{
                                 <span class="cov7" title="42">allDefs[formatID] = formatDef
 </span>                        }
                 }
@@ -2620,7 +2620,7 @@ func collectGlobalFormats() []FormatSpecification {
 </span>        }
 
         <span class="cov2" title="2">slices.SortFunc(specs, func(a, b FormatSpecification) int </span>{
-                <span class="cov10" title="166">return strings.Compare(a.ID, b.ID)
+                <span class="cov10" title="157">return strings.Compare(a.ID, b.ID)
 </span>        })
 
         <span class="cov2" title="2">return specs</span>
@@ -3308,25 +3308,25 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
                 <span class="cov4" title="12">for target := range workChan </span>{
                         <span class="cov6" title="75">select </span>{
                         case &lt;-ctx.Done():
-                                <span class="cov5" title="33">recordErr(fmt.Errorf("crawl context canceled: %w", ctx.Err()))
+                                <span class="cov5" title="22">recordErr(fmt.Errorf("crawl context canceled: %w", ctx.Err()))
                                 activeWorkers.Done()
 </span>
-                                <span class="cov5" title="33">continue</span>
+                                <span class="cov5" title="22">continue</span>
 
-                        case sem &lt;- struct{}{}:<span class="cov5" title="42"></span>
+                        case sem &lt;- struct{}{}:<span class="cov6" title="53"></span>
                         }
 
-                        <span class="cov5" title="42">go func(pageURL string) </span>{
-                                <span class="cov5" title="42">defer func() </span>{
-                                        <span class="cov5" title="42">&lt;-sem
+                        <span class="cov6" title="53">go func(pageURL string) </span>{
+                                <span class="cov6" title="53">defer func() </span>{
+                                        <span class="cov6" title="53">&lt;-sem
                                         activeWorkers.Done()
 </span>                                }()
 
-                                <span class="cov5" title="42">subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
+                                <span class="cov6" title="53">subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
                                 if err != nil </span>{
-                                        <span class="cov5" title="33">recordErr(err)
+                                        <span class="cov5" title="44">recordErr(err)
 </span>
-                                        <span class="cov5" title="33">return
+                                        <span class="cov5" title="44">return
 </span>                                }
 
                                 <span class="cov3" title="9">for _, page := range subPages </span>{
@@ -3347,19 +3347,19 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 }
 
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
-        <span class="cov5" title="42">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
+        <span class="cov6" title="53">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("error creating request: %w", err)
 </span>        }
 
-        <span class="cov5" title="41">client := p.Client
+        <span class="cov6" title="52">client := p.Client
         if client == nil </span>{
                 <span class="cov1" title="1">client = http.DefaultClient
 </span>        }
 
-        <span class="cov5" title="41">resp, err := client.Do(req)
+        <span class="cov6" title="52">resp, err := client.Do(req)
         if err != nil </span>{
-                <span class="cov5" title="30">return nil, fmt.Errorf("%w: %w", ErrFetchCatalog, err)
+                <span class="cov5" title="41">return nil, fmt.Errorf("%w: %w", ErrFetchCatalog, err)
 </span>        }
         <span class="cov4" title="11">defer resp.Body.Close()
 </span>
@@ -4097,25 +4097,25 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
                 <span class="cov3" title="8">for target := range workChan </span>{
                         <span class="cov6" title="72">select </span>{
                         case &lt;-ctx.Done():
-                                <span class="cov5" title="34">recordErr(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
+                                <span class="cov5" title="35">recordErr(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
                                 activeWorkers.Done()
 </span>
-                                <span class="cov5" title="34">continue</span>
+                                <span class="cov5" title="35">continue</span>
 
-                        case sem &lt;- struct{}{}:<span class="cov6" title="38"></span>
+                        case sem &lt;- struct{}{}:<span class="cov6" title="37"></span>
                         }
 
-                        <span class="cov6" title="38">go func(currentURL string) </span>{
-                                <span class="cov6" title="38">defer func() </span>{
-                                        <span class="cov6" title="38">&lt;-sem
+                        <span class="cov6" title="37">go func(currentURL string) </span>{
+                                <span class="cov6" title="37">defer func() </span>{
+                                        <span class="cov6" title="37">&lt;-sem
                                         activeWorkers.Done()
 </span>                                }()
 
-                                <span class="cov6" title="38">links, err := p.fetchAndProcessPage(ctx, currentURL, cat)
+                                <span class="cov6" title="37">links, err := p.fetchAndProcessPage(ctx, currentURL, cat)
                                 if err != nil </span>{
-                                        <span class="cov5" title="32">recordErr(err)
+                                        <span class="cov5" title="31">recordErr(err)
 </span>
-                                        <span class="cov5" title="32">return
+                                        <span class="cov5" title="31">return
 </span>                                }
 
                                 <span class="cov3" title="6">for _, link := range links </span>{
@@ -4138,19 +4138,19 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 }
 
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
-        <span class="cov6" title="38">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
+        <span class="cov6" title="37">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("error creating request: %w", err)
 </span>        }
 
-        <span class="cov6" title="37">client := p.Client
+        <span class="cov5" title="36">client := p.Client
         if client == nil </span>{
                 <span class="cov1" title="1">client = http.DefaultClient
 </span>        }
 
-        <span class="cov6" title="37">resp, err := client.Do(req)
+        <span class="cov5" title="36">resp, err := client.Do(req)
         if err != nil </span>{
-                <span class="cov5" title="29">return nil, fmt.Errorf("error fetching %s: %w", currentURL, err)
+                <span class="cov5" title="28">return nil, fmt.Errorf("error fetching %s: %w", currentURL, err)
 </span>        }
         <span class="cov3" title="8">defer resp.Body.Close()
 </span>
@@ -5058,7 +5058,7 @@ func sanitizeFileName(name string) string {
                 "'", "",
         )
 </span>
-        <span class="cov10" title="254">return replacer.Replace(name)
+        <span class="cov9" title="253">return replacer.Replace(name)
 </span>}
 </pre>
 		
@@ -5395,9 +5395,9 @@ func parseTaiwanHTML(reader io.Reader, cat *catalog.Catalog) error {
         <span class="cov3" title="4">tokenizer := html.NewTokenizer(reader)
 </span>
         <span class="cov3" title="4">for </span>{
-                <span class="cov10" title="239">tokenType := tokenizer.Next()
+                <span class="cov10" title="238">tokenType := tokenizer.Next()
 </span>
-                <span class="cov10" title="239">switch tokenType </span>{
+                <span class="cov10" title="238">switch tokenType </span>{
                 case html.ErrorToken:
                         <span class="cov3" title="4">if errors.Is(tokenizer.Err(), io.EOF) </span>{
                                 <span class="cov2" title="3">return nil
@@ -5408,7 +5408,7 @@ func parseTaiwanHTML(reader io.Reader, cat *catalog.Catalog) error {
                 case html.StartTagToken, html.SelfClosingTagToken:
                         <span class="cov8" title="84">processAnchorTag(tokenizer, cat)</span>
 
-                case html.TextToken, html.EndTagToken, html.CommentToken, html.DoctypeToken:<span class="cov9" title="151"></span>
+                case html.TextToken, html.EndTagToken, html.CommentToken, html.DoctypeToken:<span class="cov9" title="150"></span>
                         // Non-anchor tokens
                 }
         }
@@ -5793,11 +5793,11 @@ func (c *Catalog) AddElement(elem *Element) {
 
 // MergeElement adds a new element or merges formats if it already exists.
 func (c *Catalog) MergeElement(elem *Element) error {
-        <span class="cov9" title="417">if elem == nil || elem.ID == "" </span>{
+        <span class="cov10" title="418">if elem == nil || elem.ID == "" </span>{
                 <span class="cov0" title="0">return nil
 </span>        }
 
-        <span class="cov9" title="417">c.mu.Lock()
+        <span class="cov10" title="418">c.mu.Lock()
         defer c.mu.Unlock()
 </span>
         <span class="cov10" title="418">if c.Elements == nil </span>{
