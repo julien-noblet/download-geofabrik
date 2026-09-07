@@ -7,6 +7,7 @@
 <p align="center">
   <a href="https://github.com/julien-noblet/download-geofabrik/releases"><img src="https://img.shields.io/github/v/release/julien-noblet/download-geofabrik?style=flat-square" alt="GitHub release" /></a>
   <a href="https://github.com/julien-noblet/download-geofabrik/actions/workflows/gotest.yml"><img src="https://img.shields.io/github/actions/workflow/status/julien-noblet/download-geofabrik/gotest.yml?branch=master&label=tests&style=flat-square" alt="Build Status" /></a>
+  <a href="https://github.com/julien-noblet/download-geofabrik/actions/workflows/nix.yml"><img src="https://img.shields.io/github/actions/workflow/status/julien-noblet/download-geofabrik/nix.yml?branch=master&label=nix&style=flat-square" alt="Nix Status" /></a>
   <a href="https://gist.githubusercontent.com/julien-noblet/a509e15ea4734ca3e8e98f32ab5369c0/raw/7344619caf8ac5bce291793711071a9636536fce/coverage.json"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/julien-noblet/a509e15ea4734ca3e8e98f32ab5369c0/raw/7344619caf8ac5bce291793711071a9636536fce/coverage.json&style=flat-square" alt="Go Coverage" /></a>
   <a href="https://goreportcard.com/report/github.com/julien-noblet/download-geofabrik"><img src="https://goreportcard.com/badge/github.com/julien-noblet/download-geofabrik?style=flat-square" alt="Go Report Card" /></a>
   <a href="https://hub.docker.com/r/juliennoblet/download-geofabrik"><img src="https://img.shields.io/docker/pulls/juliennoblet/download-geofabrik?style=flat-square" alt="Docker Pulls" /></a>

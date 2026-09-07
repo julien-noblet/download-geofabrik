@@ -10,13 +10,15 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+        go = pkgs.go_1_27;
+        buildGoModule = pkgs.buildGo127Module;
       in
       {
-        packages.default = pkgs.buildGoModule {
+        packages.default = buildGoModule {
           pname = "download-geofabrik";
           version = "unstable";
           src = ./.;
-          vendorHash = "sha256-CSMeEBwyQb7broVgnm939baps+3IgR8UqnwXVtVw/lQ=";
+          vendorHash = "sha256-KjGBhl8ZtD0TT0n/nrl186NREsiCYgqCcOzWOOJhRok=";
           subPackages = [ "cmd/download-geofabrik" ];
 
           ldflags = [
@@ -30,17 +32,17 @@
         };
 
         devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
+          packages = [
             go
-            gopls
-            golangci-lint
-            goreleaser
-            delve
-            gotools
+            pkgs.gopls
+            pkgs.golangci-lint
+            pkgs.goreleaser
+            pkgs.delve
+            pkgs.gotools
           ];
 
           shellHook = ''
-            export SHELL=/run/current-system/sw/bin/bash
+            export SHELL="''${SHELL:-${pkgs.bashInteractive}/bin/bash}"
             export GOPATH="''${GOPATH:-$HOME/go}"
             export PATH="$GOPATH/bin:$PATH"
           '';
