@@ -102,8 +102,9 @@ func initConfig() {
 		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
 	} else {
-		// Search config in current directory.
+		// Search config in current directory and system directory.
 		viper.AddConfigPath(".")
+		viper.AddConfigPath("/etc/download-geofabrik")
 		viper.SetConfigType("yaml")
 
 		if service != "" {
