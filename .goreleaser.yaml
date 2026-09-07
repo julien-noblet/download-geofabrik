@@ -184,12 +184,14 @@ builds:
       - 386
       - arm
       - arm64
+      - loong64
       - mips
       - mips64
       - mips64le
       - mipsle
       - ppc64
       - ppc64le
+      - riscv64
       - s390x
 
     #goamd64:
@@ -235,7 +237,8 @@ upx:
     brute: true      
 
 archives:
-  - format: tar.gz
+  - formats:
+      - tar.gz
     # this name template makes the OS and Arch compatible with the results of `uname`.
     name_template: >-
       {{ .ProjectName }}_
@@ -247,7 +250,8 @@ archives:
     # use zip for windows archives
     format_overrides:
       - goos: windows
-        format: zip
+        formats:
+          - zip
     files:
       - license*
       - LICENSE*
@@ -255,9 +259,56 @@ archives:
       - changelog*
       - CHANGELOG*
       - bbbike.yml
-      - geofabrik.yml
-      - openstreetmap.fr.yml
       - geo2day.yml
+      - geofabrik.yml
+      - movisda.yml
+      - openstreetmap.fr.yml
+      - osm.fit.vutbr.cz.yml
+      - osm.kcwu.csie.org.yml
+      - osm.kewl.lu.yml
+      - osmit-estratti.yml
+      - planet.osm.ch.yml
+
+nfpms:
+  - id: packages
+    package_name: download-geofabrik
+    file_name_template: "{{ .PackageName }}_{{ .Version }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}"
+    formats:
+      - deb
+      - rpm
+      - apk
+      - archlinux
+    maintainer: Julien Noblet <julien.noblet@gmail.com>
+    description: A CLI tool for downloading OpenStreetMap data and extracts from multiple providers.
+    homepage: https://github.com/julien-noblet/download-geofabrik
+    license: MPL-2.0
+    bindir: /usr/bin
+    contents:
+      - src: ./LICENSE
+        dst: /usr/share/doc/download-geofabrik/LICENSE
+      - src: ./README.md
+        dst: /usr/share/doc/download-geofabrik/README.md
+      - src: ./bbbike.yml
+        dst: /etc/download-geofabrik/bbbike.yml
+      - src: ./geo2day.yml
+        dst: /etc/download-geofabrik/geo2day.yml
+      - src: ./geofabrik.yml
+        dst: /etc/download-geofabrik/geofabrik.yml
+      - src: ./movisda.yml
+        dst: /etc/download-geofabrik/movisda.yml
+      - src: ./openstreetmap.fr.yml
+        dst: /etc/download-geofabrik/openstreetmap.fr.yml
+      - src: ./osm.fit.vutbr.cz.yml
+        dst: /etc/download-geofabrik/osm.fit.vutbr.cz.yml
+      - src: ./osm.kcwu.csie.org.yml
+        dst: /etc/download-geofabrik/osm.kcwu.csie.org.yml
+      - src: ./osm.kewl.lu.yml
+        dst: /etc/download-geofabrik/osm.kewl.lu.yml
+      - src: ./osmit-estratti.yml
+        dst: /etc/download-geofabrik/osmit-estratti.yml
+      - src: ./planet.osm.ch.yml
+        dst: /etc/download-geofabrik/planet.osm.ch.yml
+
 checksum:
   name_template: 'checksums.txt'
 snapshot:
@@ -283,7 +334,13 @@ dockers:
     skip_push: auto
     dockerfile: Dockerfile
     extra_files:
-      - geofabrik.yml
-      - openstreetmap.fr.yml
       - bbbike.yml
       - geo2day.yml
+      - geofabrik.yml
+      - movisda.yml
+      - openstreetmap.fr.yml
+      - osm.fit.vutbr.cz.yml
+      - osm.kcwu.csie.org.yml
+      - osm.kewl.lu.yml
+      - osmit-estratti.yml
+      - planet.osm.ch.yml
