@@ -1,4 +1,5 @@
 [
+  {"Version":"70f713aae0f8d541645ee288ab63e3fd7d120f49","Date":1788755373,"Tags":["ref=refs/heads/feat/nix"],"Suites":[]},
   {"Version":"dd1e316ecd9b299e88f8606f8f877d258aa11624","Date":1788754490,"Tags":["ref=refs/heads/feat/nix"],"Suites":[]},
   {"Version":"8c3a64cdb2cdf7df93e16d94d721e01d5075802e","Date":1788753723,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"b75a437b571f2c6f179cc5de9f9b4ced7422adef","Date":1788753250,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.24"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"8e0802ac30dae8b78f5de53e4e8b9302e493abb8","Date":1787852167,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
   {"Version":"4cf4e1d519bfbf74f6b7a3866dabf3c41173fe7b","Date":1787852093,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"ad956621f687df79b2cec7309f414c0f82c1ea74","Date":1787852057,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"17195f192d47d6ee8baaf7fec5629851a9d70a22","Date":1787838385,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
-  {"Version":"08f6728e46fc5e26deb8380aed15889c61af75a5","Date":1787838355,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]}
+  {"Version":"17195f192d47d6ee8baaf7fec5629851a9d70a22","Date":1787838385,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]}
 ]
