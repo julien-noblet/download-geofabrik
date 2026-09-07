@@ -10,7 +10,7 @@ on:
 
 permissions:
   contents: write
-  # packages: write
+  packages: write
   # issues: write
 
 env:
@@ -36,6 +36,12 @@ jobs:
               echo "$p" >> "$GITHUB_PATH"
             fi
           done
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       # More assembly might be required: Docker logins, GPG, etc.
       # It all depends on your needs.
       - name: Run GoReleaser

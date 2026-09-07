@@ -342,7 +342,7 @@ changelog:
 
 dockers_v2:
   - images:
-      - "juliennoblet/{{.ProjectName}}"
+      - "ghcr.io/julien-noblet/{{.ProjectName}}"
     tags:
       - "latest"
       - "{{ .Tag }}"
