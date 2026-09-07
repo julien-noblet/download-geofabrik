@@ -1,4 +1,5 @@
 [
+  {"Version":"8b01649bd735c90e82c42750dec0b50a72d1d7ec","Date":1788752491,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
   {"Version":"17d8972c411dbe8256c37c12b72a4039dd36cf94","Date":1788752480,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"af4ec637b1421a91841fb11c47c77e344484417e","Date":1788752439,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"8f14aaff886103891a008d351553a4eb6d61956c","Date":1788440000,"Tags":["ref=refs/heads/renovate/github.com-mark3labs-mcp-go-1.x"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"fa9385d36b0c26e3c0cfa5b1c643fbae2e780263","Date":1787242626,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
   {"Version":"369b8166048830bf034321b6625ac97ae788e108","Date":1787242617,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
   {"Version":"5dbca79eebac9f6806800cfdc9378af63ee31d5b","Date":1787242517,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"7992b3723c4c3f4991857b9f373b76f92a009b93","Date":1787242166,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]},
-  {"Version":"85809963fb5e413325687f01914e4fb27e61ac39","Date":1787205143,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]}
+  {"Version":"7992b3723c4c3f4991857b9f373b76f92a009b93","Date":1787242166,"Tags":["ref=refs/heads/renovate/github.com-cheggaaa-pb-v3-3.x"],"Suites":[]}
 ]
