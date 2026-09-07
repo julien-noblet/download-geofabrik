@@ -10,6 +10,9 @@ on:
 permissions:
   contents: read
 
+env:
+  CGO_ENABLED: 0
+
 jobs:
   nix:
     name: Nix Flake Check & Build
