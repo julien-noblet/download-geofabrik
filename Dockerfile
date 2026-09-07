@@ -1,6 +1,7 @@
 FROM gcr.io/distroless/static-debian13:nonroot
+ARG TARGETPLATFORM
 WORKDIR /
-COPY download-geofabrik /download-geofabrik
+COPY $TARGETPLATFORM/download-geofabrik /download-geofabrik
 COPY bbbike.yml /bbbike.yml
 COPY geo2day.yml /geo2day.yml
 COPY geofabrik.yml /geofabrik.yml

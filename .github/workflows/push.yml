@@ -6,6 +6,8 @@ permissions:
   # contents permission to update benchmark contents in 'benchmarks' branch
   contents: write
 on: push
+env:
+  CGO_ENABLED: 0
 jobs:
   publish:
     runs-on: ubuntu-latest
