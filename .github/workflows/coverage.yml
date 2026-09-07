@@ -1,4 +1,7 @@
 name: "Go Coverage"
+concurrency:
+  group: gh-pages-publish
+  cancel-in-progress: false
 permissions:
   # contents permission to update benchmark contents in 'benchmarks' branch
   contents: write
