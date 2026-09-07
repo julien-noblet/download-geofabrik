@@ -17,9 +17,18 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/setup-go@v7
+    - uses: cachix/install-nix-action@v31
       with:
-        go-version: 1.27.1
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+    - uses: DeterminateSystems/magic-nix-cache-action@main
+    - name: Setup environment from Nix
+      run: |
+        nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
+          if [ -d "$p" ]; then
+            echo "$p" >> "$GITHUB_PATH"
+          fi
+        done
 
     - uses: actions/checkout@v7
       with:
@@ -76,9 +85,18 @@ jobs:
         # default fetch-depth is insufficent to find previous coverage notes
         fetch-depth: 10
 
-    - uses: actions/setup-go@v7
+    - uses: cachix/install-nix-action@v31
       with:
-        go-version: 1.27.1
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+    - uses: DeterminateSystems/magic-nix-cache-action@main
+    - name: Setup environment from Nix
+      run: |
+        nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
+          if [ -d "$p" ]; then
+            echo "$p" >> "$GITHUB_PATH"
+          fi
+        done
 
     - uses: gwatts/go-coverage-action@v2
       id: coverage
