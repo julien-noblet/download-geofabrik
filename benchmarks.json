@@ -1,4 +1,5 @@
 [
+  {"Version":"a8583bfb1008406cb5883fb876bda2dcad56280a","Date":1788815148,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/santhosh-tekuri/jsonschema/v6-6.0.3"],"Suites":[]},
   {"Version":"1797422bd20ab1b3ecb1b12a5bba53febb21c021","Date":1788812758,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"ebb43c3a470c3c9200d3d1b426c46cf7102ae085","Date":1788812744,"Tags":["ref=refs/heads/feat/nix"],"Suites":[]},
   {"Version":"c6298e90e48f0ba72c18ee153407e56cd95c3d4b","Date":1788764619,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/santhosh-tekuri/jsonschema/v6-6.0.3"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"d63751d4883b75b9cdb7d9288d1258b3c83fb7ab","Date":1788245473,"Tags":["ref=refs/tags/v3.0.0"],"Suites":[]},
   {"Version":"3139c7101ea00cb98ef2fc07e69ec9515d7e0d44","Date":1788245448,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
   {"Version":"d3267bd40f33967d97fbc61a9970bf2f537ec477","Date":1788245439,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
-  {"Version":"d63751d4883b75b9cdb7d9288d1258b3c83fb7ab","Date":1788245426,"Tags":["ref=refs/heads/master"],"Suites":[]},
-  {"Version":"9c6d0d2865312d94c410f23edb551ffb341ff5ff","Date":1788243865,"Tags":["ref=refs/heads/rework"],"Suites":[]}
+  {"Version":"d63751d4883b75b9cdb7d9288d1258b3c83fb7ab","Date":1788245426,"Tags":["ref=refs/heads/master"],"Suites":[]}
 ]
