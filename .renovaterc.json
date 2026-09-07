@@ -2,6 +2,12 @@
   "extends": [
     "config:recommended"
   ],
+  "nix": {
+    "enabled": true
+  },
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "automerge": true,
   "major": {
     "automerge": false
