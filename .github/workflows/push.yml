@@ -12,6 +12,18 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v7
+    - uses: cachix/install-nix-action@v31
+      with:
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+    - uses: DeterminateSystems/magic-nix-cache-action@main
+    - name: Setup environment from Nix
+      run: |
+        nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
+          if [ -d "$p" ]; then
+            echo "$p" >> "$GITHUB_PATH"
+          fi
+        done
     - name: gobenchdata publish
       uses: bobheadxi/gobenchdata@v1
       with:

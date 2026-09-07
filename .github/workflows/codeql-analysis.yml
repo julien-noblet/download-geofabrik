@@ -40,6 +40,19 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v7
 
+    - uses: cachix/install-nix-action@v31
+      with:
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+    - uses: DeterminateSystems/magic-nix-cache-action@main
+    - name: Setup environment from Nix
+      run: |
+        nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
+          if [ -d "$p" ]; then
+            echo "$p" >> "$GITHUB_PATH"
+          fi
+        done
+
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v4

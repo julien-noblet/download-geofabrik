@@ -21,12 +21,18 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - name: Set up Go
-        uses: actions/setup-go@v7
+      - uses: cachix/install-nix-action@v31
         with:
-          go-version: stable
-          check-latest: true
-          cache: true
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Setup environment from Nix
+        run: |
+          nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
+            if [ -d "$p" ]; then
+              echo "$p" >> "$GITHUB_PATH"
+            fi
+          done
       # More assembly might be required: Docker logins, GPG, etc.
       # It all depends on your needs.
       - name: Run GoReleaser
