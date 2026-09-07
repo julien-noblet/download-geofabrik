@@ -870,10 +870,10 @@
 | eg-bh      | Egypt                                        | Lake                                                        | gPp     |
 | eg-bns     | Egypt                                        | Bani Sweif                                                  | gPp     |
 | eg-c       | Egypt                                        | Cairo                                                       | gPp     |
-| eg-dk      | Egypt                                        | Ad Daqahliyya                                               | gPp     |
+| eg-dk      | Egypt                                        | Dakahlia Governorate                                        | gPp     |
 | eg-dt      | Egypt                                        | Damietta                                                    | gPp     |
 | eg-fym     | Egypt                                        | Faiyum                                                      | gPp     |
-| eg-gh      | Egypt                                        | Western                                                     | gPp     |
+| eg-gh      | Egypt                                        | Gharbiyya Governorate                                       | gPp     |
 | eg-gz      | Egypt                                        | Aj Jiza                                                     | gPp     |
 | eg-is      | Egypt                                        | Al Ismailiya                                                | gPp     |
 | eg-js      | Egypt                                        | South Sinai                                                 | gPp     |
@@ -882,11 +882,11 @@
 | eg-kn      | Egypt                                        | Qena                                                        | gPp     |
 | eg-lx      | Egypt                                        | Luxor                                                       | gPp     |
 | eg-mn      | Egypt                                        | Al Minya                                                    | gPp     |
-| eg-mnf     | Egypt                                        | El Minufiyya                                                | gPp     |
+| eg-mnf     | Egypt                                        | Monufia Governorate                                         | gPp     |
 | eg-mt      | Egypt                                        | Matruh                                                      | gPp     |
 | eg-pts     | Egypt                                        | Port Said                                                   | gPp     |
 | eg-shg     | Egypt                                        | Suhaj                                                       | gPp     |
-| eg-shr     | Egypt                                        | Eastern                                                     | gPp     |
+| eg-shr     | Egypt                                        | Al Sharqia Governorate                                      | gPp     |
 | eg-sin     | Egypt                                        | North Sinai                                                 | gPp     |
 | eg-suz     | Egypt                                        | Suez                                                        | gPp     |
 | eg-wad     | Egypt                                        | New Valley                                                  | gPp     |
@@ -2840,11 +2840,11 @@
 | tl-oe      | East Timor                                   | Oecussi-Ambeno                                              | gPp     |
 | tl-vi      | East Timor                                   | Viqueque                                                    | gPp     |
 | tm         |                                              | Turkmenistan                                                | gPp     |
-| tm-a       | Turkmenistan                                 | Ahal Region                                                 | gPp     |
-| tm-b       | Turkmenistan                                 | Balkan Region                                               | gPp     |
-| tm-d       | Turkmenistan                                 | Dashoguz Region                                             | gPp     |
-| tm-l       | Turkmenistan                                 | Lebap Region                                                | gPp     |
-| tm-m       | Turkmenistan                                 | Mary Region                                                 | gPp     |
+| tm-a       | Turkmenistan                                 | Ahal Province                                               | gPp     |
+| tm-b       | Turkmenistan                                 | Balkan Province                                             | gPp     |
+| tm-d       | Turkmenistan                                 | Daşoguz Province                                            | gPp     |
+| tm-l       | Turkmenistan                                 | Lebap Province                                              | gPp     |
+| tm-m       | Turkmenistan                                 | Mary Province                                               | gPp     |
 | tm-s       | Turkmenistan                                 | Ashgabat                                                    | gPp     |
 | tn         |                                              | Tunisia                                                     | gPp     |
 | tn-11      | Tunisia                                      | Tunis                                                       | gPp     |
