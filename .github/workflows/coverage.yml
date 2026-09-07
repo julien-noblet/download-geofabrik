@@ -19,6 +19,11 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v7
+      with:
+        # default fetch-depth is insufficent to find previous coverage notes
+        fetch-depth: 10
+
     - uses: cachix/install-nix-action@v31
       with:
         extra_nix_config: |
@@ -26,16 +31,12 @@ jobs:
     - uses: DeterminateSystems/magic-nix-cache-action@main
     - name: Setup environment from Nix
       run: |
+        set -o pipefail
         nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
           if [ -d "$p" ]; then
             echo "$p" >> "$GITHUB_PATH"
           fi
         done
-
-    - uses: actions/checkout@v7
-      with:
-        # default fetch-depth is insufficent to find previous coverage notes
-        fetch-depth: 10
 
     - uses: gwatts/go-coverage-action@v2
       id: coverage
