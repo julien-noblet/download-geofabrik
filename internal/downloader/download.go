@@ -275,6 +275,12 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 		return false
 	}
 
+	if !myElem.Formats.Contains(fhash) {
+		slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+d.Config.Formats[formatName].ID)
+
+		return false
+	}
+
 	myURL, err := config.Elem2URL(d.Config, myElem, fhash)
 	if err != nil {
 		slog.Error("URL generation failed", "error", err)

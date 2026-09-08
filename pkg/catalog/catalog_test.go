@@ -20,6 +20,18 @@ func TestCatalog_LoadFile(t *testing.T) {
 	assert.NotNil(t, cat)
 	assert.True(t, cat.Exist("france"))
 	assert.True(t, cat.Exist("europe"))
+	assert.True(t, cat.Exist("rhone-alpes"))
+	assert.True(t, cat.Exist("rhone_alpes"))
+	r1, found1 := cat.Get("rhone-alpes")
+	assert.True(t, found1)
+
+	r2, found2 := cat.Get("rhone_alpes")
+	assert.True(t, found2)
+	assert.Equal(t, r1.ID, r2.ID)
+
+	f1, err := cat.Find("rhone_alpes")
+	require.NoError(t, err)
+	assert.Equal(t, "rhone-alpes", f1.ID)
 	assert.False(t, cat.Exist("non_existent_region"))
 }
 

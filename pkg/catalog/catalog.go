@@ -119,9 +119,23 @@ func (c *Catalog) Exist(elementID string) bool {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
-	_, exists := c.Elements[elementID]
+	if _, exists := c.Elements[elementID]; exists {
+		return true
+	}
 
-	return exists
+	if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID {
+		if _, exists := c.Elements[altID]; exists {
+			return true
+		}
+	}
+
+	if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID {
+		if _, exists := c.Elements[altID]; exists {
+			return true
+		}
+	}
+
+	return false
 }
 
 // Get retrieves a copy of an element by ID.
@@ -129,9 +143,23 @@ func (c *Catalog) Get(elementID string) (Element, bool) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
-	elem, exists := c.Elements[elementID]
+	if elem, exists := c.Elements[elementID]; exists {
+		return elem, true
+	}
 
-	return elem, exists
+	if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID {
+		if elem, exists := c.Elements[altID]; exists {
+			return elem, true
+		}
+	}
+
+	if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID {
+		if elem, exists := c.Elements[altID]; exists {
+			return elem, true
+		}
+	}
+
+	return Element{}, false
 }
 
 // Find looks up an element pointer by ID or returns ErrElementNotFound.
@@ -139,14 +167,29 @@ func (c *Catalog) Find(elementID string) (*Element, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
-	elem, exists := c.Elements[elementID]
-	if !exists {
-		return nil, fmt.Errorf("%w: %s is not in catalog", ErrElementNotFound, elementID)
+	if elem, exists := c.Elements[elementID]; exists {
+		elemCopy := elem
+
+		return &elemCopy, nil
 	}
 
-	elemCopy := elem
+	if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID {
+		if elem, exists := c.Elements[altID]; exists {
+			elemCopy := elem
 
-	return &elemCopy, nil
+			return &elemCopy, nil
+		}
+	}
+
+	if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID {
+		if elem, exists := c.Elements[altID]; exists {
+			elemCopy := elem
+
+			return &elemCopy, nil
+		}
+	}
+
+	return nil, fmt.Errorf("%w: %s is not in catalog", ErrElementNotFound, elementID)
 }
 
 // AddElement inserts or replaces an element in the catalog.

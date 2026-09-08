@@ -96,9 +96,23 @@ func (config *Config) Exist(elementID string) bool {
 	config.ElementsMutex.RLock()
 	defer config.ElementsMutex.RUnlock()
 
-	_, exists := config.Elements[elementID]
+	if _, exists := config.Elements[elementID]; exists {
+		return true
+	}
 
-	return exists
+	if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID {
+		if _, exists := config.Elements[altID]; exists {
+			return true
+		}
+	}
+
+	if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID {
+		if _, exists := config.Elements[altID]; exists {
+			return true
+		}
+	}
+
+	return false
 }
 
 // AddExtension adds an extension to an element, creating it if not already present.
@@ -126,32 +140,40 @@ func (config *Config) AddExtension(elementID, format string) {
 // GetElement gets an element by ID or returns an error if not found.
 func (config *Config) GetElement(elementID string) (*element.Element, error) {
 	config.ElementsMutex.RLock()
-	elem, ok := config.Elements[elementID]
-	config.ElementsMutex.RUnlock()
+	defer config.ElementsMutex.RUnlock()
 
-	if !ok {
-		return nil, fmt.Errorf("%w: %s", ErrFindElem, elementID)
-	}
-
-	res := elem
-
-	return &res, nil
+	return FindElem(config, elementID)
 }
 
-// FindElem finds an element in the config by ID.
+// FindElem finds an element in the config by ID, with fallback for normalized hyphen/underscore variations.
 func FindElem(config *Config, elementID string) (*element.Element, error) {
 	if config == nil {
 		return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, elementID)
 	}
 
-	res, ok := config.Elements[elementID]
-	if !ok || res.ID != elementID {
-		return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, elementID)
+	if res, ok := config.Elements[elementID]; ok && res.ID != "" {
+		elemCopy := res
+
+		return &elemCopy, nil
 	}
 
-	elemCopy := res
+	if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID {
+		if res, ok := config.Elements[altID]; ok && res.ID != "" {
+			elemCopy := res
 
-	return &elemCopy, nil
+			return &elemCopy, nil
+		}
+	}
+
+	if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID {
+		if res, ok := config.Elements[altID]; ok && res.ID != "" {
+			elemCopy := res
+
+			return &elemCopy, nil
+		}
+	}
+
+	return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, elementID)
 }
 
 // GetFile gets the file name of an element.

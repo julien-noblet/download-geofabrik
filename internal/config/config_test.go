@@ -160,6 +160,52 @@ elements:
 	assert.True(t, cfg.Exist("e1"))
 }
 
+func TestFindElem_SeparatorNormalization(t *testing.T) {
+	content := `
+baseURL: https://test.com
+elements:
+  rhone_alpes:
+    id: rhone_alpes
+    name: Rhone-Alpes
+  ile-de-france:
+    id: ile-de-france
+    name: Ile-de-France
+`
+	tmpDir := t.TempDir()
+	f := filepath.Join(tmpDir, "config.yml")
+	err := os.WriteFile(f, []byte(content), 0o600)
+	require.NoError(t, err)
+
+	cfg, err := config.LoadConfig(f)
+	require.NoError(t, err)
+
+	// Direct lookup
+	e1, err := config.FindElem(cfg, "rhone_alpes")
+	require.NoError(t, err)
+	assert.Equal(t, "rhone_alpes", e1.ID)
+
+	// Hyphen fallback to underscore
+	e2, err := config.FindElem(cfg, "rhone-alpes")
+	require.NoError(t, err)
+	assert.Equal(t, "rhone_alpes", e2.ID)
+	assert.True(t, cfg.Exist("rhone-alpes"))
+
+	// Underscore fallback to hyphen
+	e3, err := config.FindElem(cfg, "ile_de_france")
+	require.NoError(t, err)
+	assert.Equal(t, "ile-de-france", e3.ID)
+	assert.True(t, cfg.Exist("ile_de_france"))
+
+	// Not found
+	_, err = config.FindElem(cfg, "nonexistent")
+	require.ErrorIs(t, err, config.ErrFindElem)
+	assert.False(t, cfg.Exist("nonexistent"))
+
+	// Nil config
+	_, err = config.FindElem(nil, "rhone_alpes")
+	require.ErrorIs(t, err, config.ErrFindElem)
+}
+
 func TestIsHashable(t *testing.T) {
 	cfg := &config.Config{
 		Formats: formats.FormatDefinitions{
