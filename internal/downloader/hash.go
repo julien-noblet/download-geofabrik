@@ -11,18 +11,9 @@ import (
 )
 
 const (
-	readErrorMsg         = "can't read %s: %w"
-	openErrorMsg         = "can't open %s: %w"
-	copyErrorMsg         = "can't copy %s: %w"
-	closeErrorMsg        = "can't close file: %w"
-	hashFileNotFoundMsg  = "Hash file %s not found"
-	hashFileReadErrorMsg = "Can't read hash file %s"
-	hashMismatchMsg      = "Checksum MISMATCH for %s"
-	hashMatchMsg         = "Checksum OK for %s"
-	hashingFileMsg       = "Hashing %s"
-	md5HashMsg           = "MD5 : %s"
-	checksumErrorMsg     = "checksum error"
-	hashFileErrorMsg     = "can't hash file"
+	readErrorMsg = "can't read %s: %w"
+	openErrorMsg = "can't open %s: %w"
+	copyErrorMsg = "can't copy %s: %w"
 )
 
 // CheckFileHash checks if the hash of a file matches the provided hash.
@@ -70,11 +61,8 @@ func ComputeMD5Hash(filePath string) (string, error) {
 		}
 	}()
 
-	bufPtr := getBuffer()
-	defer putBuffer(bufPtr)
-
 	hash := md5.New() //nolint:gosec // MD5 is used to control with md5sum files
-	if _, err := io.CopyBuffer(hash, file, *bufPtr); err != nil {
+	if _, err := io.Copy(hash, file); err != nil {
 		return "", fmt.Errorf(copyErrorMsg, filePath, err)
 	}
 

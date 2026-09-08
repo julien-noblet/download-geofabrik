@@ -12,10 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/julien-noblet/download-geofabrik/internal/config"
 	download "github.com/julien-noblet/download-geofabrik/internal/downloader"
-	"github.com/julien-noblet/download-geofabrik/internal/element"
-	"github.com/julien-noblet/download-geofabrik/pkg/formats"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 func Test_DownloadFromURL(t *testing.T) {
@@ -58,7 +56,7 @@ func Test_DownloadFromURL(t *testing.T) {
 			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				switch r.URL.Path {
 				case "/europe/andorra.poly":
-					_, _ = w.Write([]byte("andorra poly content"))
+					_, _ = w.Write([]byte("mock poly file content"))
 				default:
 					http.NotFound(w, r)
 				}
@@ -68,14 +66,14 @@ func Test_DownloadFromURL(t *testing.T) {
 			tmpDir := t.TempDir()
 			targetFile := filepath.Join(tmpDir, "download.test")
 
-			opts := &config.Options{
+			opts := &download.Options{
 				NoDownload:      thisTest.fNodownload,
 				Quiet:           thisTest.fQuiet,
 				Progress:        thisTest.fProgress,
 				OutputDirectory: tmpDir + "/",
 				FormatFlags:     make(map[string]bool),
 			}
-			cfg := &config.Config{}
+			cfg := catalog.New()
 
 			d := download.NewDownloader(cfg, opts)
 
@@ -98,7 +96,7 @@ func TestFile(t *testing.T) {
 		{
 			name:    "TestFile",
 			element: "africa",
-			format:  formats.FormatPoly,
+			format:  catalog.FormatPoly,
 			wantErr: false,
 		},
 	}
@@ -117,20 +115,15 @@ func TestFile(t *testing.T) {
 			}))
 			defer ts.Close()
 
-			cfg := &config.Config{
-				Formats: formats.FormatDefinitions{
-					formats.FormatPoly: {ID: formats.FormatPoly, Loc: ".poly", ToLoc: "", BasePath: "polygons/", BaseURL: ""},
-				},
-				Elements: element.MapElement{
-					"africa": element.Element{ID: "africa", Name: "Africa", Formats: []string{formats.FormatPoly}},
-				},
-				BaseURL: ts.URL + "/",
-			}
+			cfg := catalog.New()
+			cfg.Formats[catalog.FormatPoly] = catalog.Format{ID: catalog.FormatPoly, Loc: ".poly", BasePath: "polygons/"}
+			cfg.Elements["africa"] = catalog.Element{ID: "africa", Name: "Africa", Formats: []string{catalog.FormatPoly}}
+			cfg.BaseURL = ts.URL + "/"
 
 			tmpDir := t.TempDir()
 			outputFile := filepath.Join(tmpDir, "download.test")
 
-			opts := &config.Options{
+			opts := &download.Options{
 				Verbose:         true,
 				OutputDirectory: tmpDir + "/",
 				FormatFlags:     make(map[string]bool),
@@ -172,9 +165,9 @@ func TestChecksum(t *testing.T) {
 		check  bool
 		want   bool
 	}{
-		{"No Check Poly", formats.FormatPoly, false, false},
-		{"Check Poly (no MD5 def)", formats.FormatPoly, true, false},
-		{"Check PBF", formats.FormatOsmPbf, true, true},
+		{"No Check Poly", catalog.FormatPoly, false, false},
+		{"Check Poly (no MD5 def)", catalog.FormatPoly, true, false},
+		{"Check PBF", catalog.FormatOsmPbf, true, true},
 	}
 
 	for _, tt := range tests {
@@ -185,19 +178,14 @@ func TestChecksum(t *testing.T) {
 			defer ts.Close()
 
 			tmpDir := t.TempDir()
-			cfg := &config.Config{
-				Formats: formats.FormatDefinitions{
-					formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
-					"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-					formats.FormatPoly:   {ID: formats.FormatPoly, Loc: ".poly"},
-				},
-				Elements: element.MapElement{
-					"monaco": element.Element{ID: "monaco", Name: "Monaco", Formats: []string{formats.FormatOsmPbf, "osm.pbf.md5", formats.FormatPoly}},
-				},
-				BaseURL: ts.URL + "/europe",
-			}
+			cfg := catalog.New()
+			cfg.Formats[catalog.FormatOsmPbf] = catalog.Format{ID: catalog.FormatOsmPbf, Loc: "-latest.osm.pbf"}
+			cfg.Formats["osm.pbf.md5"] = catalog.Format{ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"}
+			cfg.Formats[catalog.FormatPoly] = catalog.Format{ID: catalog.FormatPoly, Loc: ".poly"}
+			cfg.Elements["monaco"] = catalog.Element{ID: "monaco", Name: "Monaco", Formats: []string{catalog.FormatOsmPbf, "osm.pbf.md5", catalog.FormatPoly}}
+			cfg.BaseURL = ts.URL + "/europe"
 
-			subOpts := &config.Options{
+			subOpts := &download.Options{
 				Check:           tt.check,
 				OutputDirectory: tmpDir + "/",
 				FormatFlags:     make(map[string]bool),
@@ -205,7 +193,7 @@ func TestChecksum(t *testing.T) {
 			subDownloader := download.NewDownloader(cfg, subOpts)
 			targetFile := filepath.Join(tmpDir, "monaco.osm.pbf")
 
-			err := subDownloader.DownloadFile(context.Background(), "monaco", formats.FormatOsmPbf, targetFile)
+			err := subDownloader.DownloadFile(context.Background(), "monaco", catalog.FormatOsmPbf, targetFile)
 			if err != nil {
 				t.Fatalf("Failed setup download: %v", err)
 			}
@@ -224,18 +212,14 @@ func TestChecksum(t *testing.T) {
 		defer ts.Close()
 
 		tmpDir := t.TempDir()
-		cfg := &config.Config{
-			Formats: formats.FormatDefinitions{
-				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
-			},
-			Elements: element.MapElement{},
-			BaseURL:  ts.URL + "/europe",
-		}
+		cfg := catalog.New()
+		cfg.Formats[catalog.FormatOsmPbf] = catalog.Format{ID: catalog.FormatOsmPbf, Loc: "-latest.osm.pbf"}
+		cfg.BaseURL = ts.URL + "/europe"
 
-		subOpts := &config.Options{Check: true, OutputDirectory: tmpDir + "/"}
+		subOpts := &download.Options{Check: true, OutputDirectory: tmpDir + "/"}
 		subDownloader := download.NewDownloader(cfg, subOpts)
 
-		got := subDownloader.Checksum(context.Background(), "non_existent", formats.FormatOsmPbf)
+		got := subDownloader.Checksum(context.Background(), "non_existent", catalog.FormatOsmPbf)
 		if got {
 			t.Errorf("Checksum() = true, want false for non-existent element")
 		}
@@ -248,20 +232,15 @@ func TestChecksum(t *testing.T) {
 		defer ts.Close()
 
 		tmpDir := t.TempDir()
-		cfg := &config.Config{
-			Formats: formats.FormatDefinitions{
-				formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
-			},
-			Elements: element.MapElement{
-				"monaco": element.Element{ID: "monaco", Name: "Monaco", Formats: []string{formats.FormatOsmPbf}},
-			},
-			BaseURL: ts.URL + "/europe",
-		}
+		cfg := catalog.New()
+		cfg.Formats[catalog.FormatOsmPbf] = catalog.Format{ID: catalog.FormatOsmPbf, Loc: "-latest.osm.pbf"}
+		cfg.Elements["monaco"] = catalog.Element{ID: "monaco", Name: "Monaco", Formats: []string{catalog.FormatOsmPbf}}
+		cfg.BaseURL = ts.URL + "/europe"
 
-		subOpts := &config.Options{Check: false, OutputDirectory: tmpDir + "/"}
+		subOpts := &download.Options{Check: false, OutputDirectory: tmpDir + "/"}
 		subDownloader := download.NewDownloader(cfg, subOpts)
 
-		got := subDownloader.Checksum(context.Background(), "monaco", formats.FormatOsmPbf)
+		got := subDownloader.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
 		if got {
 			t.Errorf("Checksum() = true, want false when Check is false")
 		}
@@ -320,31 +299,30 @@ func TestChecksum_AdditionalScenarios(t *testing.T) {
 	}))
 	t.Cleanup(ts.Close)
 
-	cfg := &config.Config{
-		Formats: formats.FormatDefinitions{
-			formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: "-latest.osm.pbf"},
-			"osm.pbf.md5":        {ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"},
-		},
-		Elements: element.MapElement{
-			"monaco":   element.Element{ID: "monaco", Name: "Monaco", Formats: []string{formats.FormatOsmPbf, "osm.pbf.md5"}},
-			"missing":  element.Element{ID: "missing", Name: "Missing", Formats: []string{formats.FormatOsmPbf, "osm.pbf.md5"}},
-			"no_fhash": element.Element{ID: "no_fhash", Name: "NoFHash", Formats: []string{formats.FormatOsmPbf}},
-		},
-		BaseURL: ts.URL + "/europe",
-	}
+	cfg := catalog.New()
+	cfg.Formats[catalog.FormatOsmPbf] = catalog.Format{ID: catalog.FormatOsmPbf, Loc: "-latest.osm.pbf"}
+	cfg.Formats["osm.pbf.md5"] = catalog.Format{ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"}
+	cfg.Elements["monaco"] = catalog.Element{ID: "monaco", Name: "Monaco", Formats: []string{catalog.FormatOsmPbf, "osm.pbf.md5"}}
+	cfg.Elements["missing"] = catalog.Element{ID: "missing", Name: "Missing", Formats: []string{catalog.FormatOsmPbf, "osm.pbf.md5"}}
+	cfg.Elements["no_fhash"] = catalog.Element{ID: "no_fhash", Name: "NoFHash", Formats: []string{catalog.FormatOsmPbf}}
+	cfg.BaseURL = ts.URL + "/europe"
 
 	t.Run("Checksum mismatch", func(t *testing.T) {
 		t.Parallel()
 
 		subTmp := t.TempDir()
-		subOpts := &config.Options{Check: true, OutputDirectory: subTmp + "/"}
+		subOpts := &download.Options{Check: true, OutputDirectory: subTmp + "/"}
 		subD := download.NewDownloader(cfg, subOpts)
 		targetFile := filepath.Join(subTmp, "monaco.osm.pbf")
-		_ = subD.DownloadFile(context.Background(), "monaco", formats.FormatOsmPbf, targetFile)
 
-		got := subD.Checksum(context.Background(), "monaco", formats.FormatOsmPbf)
+		err := subD.DownloadFile(context.Background(), "monaco", catalog.FormatOsmPbf, targetFile)
+		if err != nil {
+			t.Fatalf("DownloadFile failed: %v", err)
+		}
+
+		got := subD.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
 		if got {
-			t.Errorf("Checksum() = true, want false on mismatch")
+			t.Errorf("Checksum() = true, want false when MD5 does not match")
 		}
 	})
 
@@ -352,10 +330,10 @@ func TestChecksum_AdditionalScenarios(t *testing.T) {
 		t.Parallel()
 
 		subTmp := t.TempDir()
-		subOpts := &config.Options{Check: true, OutputDirectory: subTmp + "/"}
+		subOpts := &download.Options{Check: true, OutputDirectory: subTmp + "/"}
 		subD := download.NewDownloader(cfg, subOpts)
 
-		got := subD.Checksum(context.Background(), "missing", formats.FormatOsmPbf)
+		got := subD.Checksum(context.Background(), "missing", catalog.FormatOsmPbf)
 		if got {
 			t.Errorf("Checksum() = true, want false when md5 404s")
 		}
@@ -365,10 +343,10 @@ func TestChecksum_AdditionalScenarios(t *testing.T) {
 		t.Parallel()
 
 		subTmp := t.TempDir()
-		subOpts := &config.Options{Check: true, OutputDirectory: subTmp + "/"}
+		subOpts := &download.Options{Check: true, OutputDirectory: subTmp + "/"}
 		subD := download.NewDownloader(cfg, subOpts)
 
-		got := subD.Checksum(context.Background(), "no_fhash", formats.FormatOsmPbf)
+		got := subD.Checksum(context.Background(), "no_fhash", catalog.FormatOsmPbf)
 		if got {
 			t.Errorf("Checksum() = true, want false when format hash not defined")
 		}
@@ -393,13 +371,13 @@ func TestDownload_ProgressBar(t *testing.T) {
 	tmpDir := t.TempDir()
 	targetFile := filepath.Join(tmpDir, "large.bin")
 
-	opts := &config.Options{
+	opts := &download.Options{
 		Progress:        true,
 		Quiet:           false,
 		OutputDirectory: tmpDir + "/",
 		FormatFlags:     make(map[string]bool),
 	}
-	d := download.NewDownloader(&config.Config{}, opts)
+	d := download.NewDownloader(catalog.New(), opts)
 
 	err := d.FromURL(context.Background(), ts.URL+"/large.bin", targetFile)
 	if err != nil {
@@ -421,7 +399,7 @@ func TestDownload_ContextCanceled(t *testing.T) {
 	cancel() // Cancel immediately
 
 	tmpDir := t.TempDir()
-	d := download.NewDownloader(&config.Config{}, &config.Options{})
+	d := download.NewDownloader(catalog.New(), &download.Options{})
 
 	err := d.FromURL(ctx, ts.URL+"/canceled.bin", filepath.Join(tmpDir, "canceled.bin"))
 	if err == nil {
@@ -432,17 +410,12 @@ func TestDownload_ContextCanceled(t *testing.T) {
 func TestDownloadFile_Errors(t *testing.T) {
 	t.Parallel()
 
-	cfg := &config.Config{
-		Formats: formats.FormatDefinitions{
-			formats.FormatOsmPbf: {ID: formats.FormatOsmPbf, Loc: ".osm.pbf"},
-		},
-		Elements: element.MapElement{
-			"valid_elem": element.Element{ID: "valid_elem", Formats: []string{formats.FormatOsmPbf}},
-		},
-		BaseURL: "http://invalid-host-that-does-not-exist.example.com",
-	}
+	cfg := catalog.New()
+	cfg.Formats[catalog.FormatOsmPbf] = catalog.Format{ID: catalog.FormatOsmPbf, Loc: ".osm.pbf"}
+	cfg.Elements["valid_elem"] = catalog.Element{ID: "valid_elem", Formats: []string{catalog.FormatOsmPbf}}
+	cfg.BaseURL = "http://invalid-host-that-does-not-exist.example.com"
 
-	opts := &config.Options{
+	opts := &download.Options{
 		OutputDirectory: t.TempDir() + "/",
 		FormatFlags:     make(map[string]bool),
 	}
@@ -451,7 +424,7 @@ func TestDownloadFile_Errors(t *testing.T) {
 	t.Run("Element not found", func(t *testing.T) {
 		t.Parallel()
 
-		err := d.DownloadFile(context.Background(), "unknown_id", formats.FormatOsmPbf, filepath.Join(t.TempDir(), "out.bin"))
+		err := d.DownloadFile(context.Background(), "unknown_id", catalog.FormatOsmPbf, filepath.Join(t.TempDir(), "out.bin"))
 		if err == nil {
 			t.Errorf("expected error for unknown element, got nil")
 		}
@@ -469,7 +442,7 @@ func TestDownloadFile_Errors(t *testing.T) {
 	t.Run("Format not available on element", func(t *testing.T) {
 		t.Parallel()
 
-		err := d.DownloadFile(context.Background(), "valid_elem", formats.FormatPoly, filepath.Join(t.TempDir(), "out.bin"))
+		err := d.DownloadFile(context.Background(), "valid_elem", catalog.FormatPoly, filepath.Join(t.TempDir(), "out.bin"))
 		if err == nil {
 			t.Errorf("expected error for unsupported format, got nil")
 		}
@@ -478,7 +451,7 @@ func TestDownloadFile_Errors(t *testing.T) {
 	t.Run("Network connection error", func(t *testing.T) {
 		t.Parallel()
 
-		err := d.DownloadFile(context.Background(), "valid_elem", formats.FormatOsmPbf, filepath.Join(t.TempDir(), "out.bin"))
+		err := d.DownloadFile(context.Background(), "valid_elem", catalog.FormatOsmPbf, filepath.Join(t.TempDir(), "out.bin"))
 		if err == nil {
 			t.Errorf("expected download error, got nil")
 		}
@@ -496,8 +469,8 @@ func Benchmark_FileExist(b *testing.B) {
 }
 
 func Benchmark_NewDownloader(b *testing.B) {
-	cfg := &config.Config{}
-	opts := &config.Options{}
+	cfg := catalog.New()
+	opts := &download.Options{}
 
 	for range b.N {
 		_ = download.NewDownloader(cfg, opts)

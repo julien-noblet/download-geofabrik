@@ -7,10 +7,8 @@ import (
 	"os"
 	"strings"
 
-	config "github.com/julien-noblet/download-geofabrik/internal/config"
 	downloader "github.com/julien-noblet/download-geofabrik/internal/downloader"
-	"github.com/julien-noblet/download-geofabrik/internal/element"
-	"github.com/julien-noblet/download-geofabrik/pkg/formats"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -41,30 +39,29 @@ func RegisterDownloadCmd() {
 	downloadCmd.Flags().BoolVar(&downloadProgress, "progress", true, "Show progress bar")
 
 	// Add format flags
-	// These mimic the original kingpin flags
-	addFormatFlag(formats.KeyOsmPbf, "P", "Download osm.pbf (default)")
-	addFormatFlag(formats.KeyOshPbf, "H", "Download osh.pbf")
-	addFormatFlag(formats.KeyOsmGz, "G", "Download osm.gz")
-	addFormatFlag(formats.KeyOsmBz2, "B", "Download osm.bz2")
-	addFormatFlag(formats.KeyShpZip, "S", "Download shp.zip")
-	addFormatFlag(formats.KeyState, "", "Download state.txt")
-	addFormatFlag(formats.KeyPoly, "p", "Download poly")
-	addFormatFlag(formats.KeyKml, "k", "Download kml")
-	addFormatFlag(formats.KeyGeoJSON, "g", "Download GeoJSON")
-	addFormatFlag(formats.KeyGarminOSM, "O", "Download Garmin OSM")
+	addFormatFlag(catalog.KeyOsmPbf, "P", "Download osm.pbf (default)")
+	addFormatFlag(catalog.KeyOshPbf, "H", "Download osh.pbf")
+	addFormatFlag(catalog.KeyOsmGz, "G", "Download osm.gz")
+	addFormatFlag(catalog.KeyOsmBz2, "B", "Download osm.bz2")
+	addFormatFlag(catalog.KeyShpZip, "S", "Download shp.zip")
+	addFormatFlag(catalog.KeyState, "", "Download state.txt")
+	addFormatFlag(catalog.KeyPoly, "p", "Download poly")
+	addFormatFlag(catalog.KeyKml, "k", "Download kml")
+	addFormatFlag(catalog.KeyGeoJSON, "g", "Download GeoJSON")
+	addFormatFlag(catalog.KeyGarminOSM, "O", "Download Garmin OSM")
 
 	// Others...
-	addFormatFlag(formats.KeyMapsforge, "m", "Download Mapsforge")
-	addFormatFlag(formats.KeyMBTiles, "M", "Download MBTiles")
-	addFormatFlag(formats.KeyCSV, "C", "Download CSV")
-	addFormatFlag(formats.KeyGarminOnroad, "r", "Download Garmin Onroad")
-	addFormatFlag(formats.KeyGarminOntrail, "t", "Download Garmin Ontrail")
-	addFormatFlag(formats.KeyGarminOpenTopo, "o", "Download Garmin OpenTopo")
-	addFormatFlag(formats.KeyOBF, "", "Download OBF")
-	addFormatFlag(formats.KeyGPKG, "K", "Download GeoPackage")
-	addFormatFlag(formats.KeyO5m, "5", "Download o5m")
-	addFormatFlag(formats.KeyO5mZst, "Z", "Download o5m.zst")
-	addFormatFlag(formats.KeyPbf, "", "Download pbf")
+	addFormatFlag(catalog.KeyMapsforge, "m", "Download Mapsforge")
+	addFormatFlag(catalog.KeyMBTiles, "M", "Download MBTiles")
+	addFormatFlag(catalog.KeyCSV, "C", "Download CSV")
+	addFormatFlag(catalog.KeyGarminOnroad, "r", "Download Garmin Onroad")
+	addFormatFlag(catalog.KeyGarminOntrail, "t", "Download Garmin Ontrail")
+	addFormatFlag(catalog.KeyGarminOpenTopo, "o", "Download Garmin OpenTopo")
+	addFormatFlag(catalog.KeyOBF, "", "Download OBF")
+	addFormatFlag(catalog.KeyGPKG, "K", "Download GeoPackage")
+	addFormatFlag(catalog.KeyO5m, "5", "Download o5m")
+	addFormatFlag(catalog.KeyO5mZst, "Z", "Download o5m.zst")
+	addFormatFlag(catalog.KeyPbf, "", "Download pbf")
 }
 
 func addFormatFlag(key, shorthand, usage string) {
@@ -73,13 +70,13 @@ func addFormatFlag(key, shorthand, usage string) {
 	downloadCmd.Flags().BoolVarP(&val, key, shorthand, false, usage)
 }
 
-func buildDownloadOptions() (*config.Options, error) {
+func buildDownloadOptions() (*downloader.Options, error) {
 	cfgFile := viper.ConfigFileUsed()
 	if cfgFile == "" {
 		if service != "" {
 			cfgFile = service + ".yml"
 		} else {
-			cfgFile = config.DefaultConfigFile
+			cfgFile = catalog.DefaultConfigFile
 		}
 	}
 
@@ -88,7 +85,7 @@ func buildDownloadOptions() (*config.Options, error) {
 		return nil, err
 	}
 
-	opts := &config.Options{
+	opts := &downloader.Options{
 		ConfigFile:      cfgFile,
 		OutputDirectory: outDir,
 		Check:           check,
@@ -124,15 +121,15 @@ func resolveOutputDir(dir string) (string, error) {
 }
 
 var preferredDefaultFormats = []string{
-	formats.FormatOsmPbf,
-	formats.FormatPbf,
-	formats.FormatO5m,
-	formats.FormatOsmBz2,
-	formats.FormatOsmGz,
-	formats.FormatGeoJSON,
-	formats.FormatGPKG,
-	formats.FormatShpZip,
-	formats.FormatO5mZst,
+	catalog.FormatOsmPbf,
+	catalog.FormatPbf,
+	catalog.FormatO5m,
+	catalog.FormatOsmBz2,
+	catalog.FormatOsmGz,
+	catalog.FormatGeoJSON,
+	catalog.FormatGPKG,
+	catalog.FormatShpZip,
+	catalog.FormatO5mZst,
 }
 
 func hasExplicitFormat(flags map[string]bool) bool {
@@ -145,14 +142,14 @@ func hasExplicitFormat(flags map[string]bool) bool {
 	return false
 }
 
-func selectDefaultFormat(cfg *config.Config, elem *element.Element) string {
+func selectDefaultFormat(cat *catalog.Catalog, elem *catalog.Element) string {
 	if elem == nil {
-		return formats.FormatOsmPbf
+		return catalog.FormatOsmPbf
 	}
 
 	for _, pref := range preferredDefaultFormats {
 		if elem.Formats.Contains(pref) {
-			if _, ok := cfg.Formats[pref]; ok {
+			if _, ok := cat.Formats[pref]; ok {
 				return pref
 			}
 		}
@@ -163,30 +160,30 @@ func selectDefaultFormat(cfg *config.Config, elem *element.Element) string {
 			continue
 		}
 
-		if _, ok := cfg.Formats[format]; ok {
+		if _, ok := cat.Formats[format]; ok {
 			return format
 		}
 	}
 
-	return formats.FormatOsmPbf
+	return catalog.FormatOsmPbf
 }
 
-func resolveFormat(cfg *config.Config, elem *element.Element, format string) (string, bool) {
+func resolveFormat(cat *catalog.Catalog, elem *catalog.Element, format string) (string, bool) {
 	if elem.Formats.Contains(format) {
-		if _, exists := cfg.Formats[format]; exists {
+		if _, exists := cat.Formats[format]; exists {
 			return format, true
 		}
 	}
 
-	if format == formats.FormatOsmPbf && elem.Formats.Contains(formats.FormatPbf) {
-		if _, exists := cfg.Formats[formats.FormatPbf]; exists {
-			return formats.FormatPbf, true
+	if format == catalog.FormatOsmPbf && elem.Formats.Contains(catalog.FormatPbf) {
+		if _, exists := cat.Formats[catalog.FormatPbf]; exists {
+			return catalog.FormatPbf, true
 		}
 	}
 
-	if format == formats.FormatPbf && elem.Formats.Contains(formats.FormatOsmPbf) {
-		if _, exists := cfg.Formats[formats.FormatOsmPbf]; exists {
-			return formats.FormatOsmPbf, true
+	if format == catalog.FormatPbf && elem.Formats.Contains(catalog.FormatOsmPbf) {
+		if _, exists := cat.Formats[catalog.FormatOsmPbf]; exists {
+			return catalog.FormatOsmPbf, true
 		}
 	}
 
@@ -201,39 +198,39 @@ func runDownload(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	cfg, err := config.LoadConfig(opts.ConfigFile)
+	cat, err := catalog.LoadFile(opts.ConfigFile)
 	if err != nil {
 		slog.Error("Failed to load config", "file", opts.ConfigFile, "error", err)
 
 		return fmt.Errorf("failed to load config: %w", err)
 	}
 
-	myElem, err := config.FindElem(cfg, elementID)
+	myElem, err := cat.Find(elementID)
 	if err != nil {
 		slog.Error("Element not found", "element", elementID, "error", err)
 
-		return fmt.Errorf("%w: %s", config.ErrFindElem, elementID)
+		return fmt.Errorf("%w: %s", catalog.ErrElementNotFound, elementID)
 	}
 
 	var activeFormats []string
 	if hasExplicitFormat(opts.FormatFlags) {
-		activeFormats = formats.GetFormats(opts.FormatFlags)
+		activeFormats = catalog.GetFormats(opts.FormatFlags)
 	} else {
-		activeFormats = []string{selectDefaultFormat(cfg, myElem)}
+		activeFormats = []string{selectDefaultFormat(cat, myElem)}
 	}
 
-	downloaderInstance := downloader.NewDownloader(cfg, opts)
+	downloaderInstance := downloader.NewDownloader(cat, opts)
 	ctx := cmd.Context()
 
 	for _, rawFormat := range activeFormats {
-		format, ok := resolveFormat(cfg, myElem, rawFormat)
+		format, ok := resolveFormat(cat, myElem, rawFormat)
 		if !ok {
 			slog.Error("Format not available for element", "format", rawFormat, "element", elementID)
 
-			return fmt.Errorf("%w: %s for %s", config.ErrFormatNotExist, rawFormat, elementID)
+			return fmt.Errorf("%w: %s for %s", catalog.ErrFormatNotFound, rawFormat, elementID)
 		}
 
-		formatDef := cfg.Formats[format]
+		formatDef := cat.Formats[format]
 		targetFile := opts.OutputDirectory + elementID + "." + formatDef.ID
 
 		slog.Info("Processing", "element", elementID, "format", format)

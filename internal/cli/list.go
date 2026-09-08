@@ -5,7 +5,6 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/julien-noblet/download-geofabrik/internal/config"
 	"github.com/julien-noblet/download-geofabrik/internal/ui"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/spf13/cobra"
@@ -35,7 +34,7 @@ func runList(_ *cobra.Command, _ []string) error {
 		if service != "" {
 			cfgFile = service + ".yml"
 		} else {
-			cfgFile = config.DefaultConfigFile
+			cfgFile = catalog.DefaultConfigFile
 		}
 	}
 

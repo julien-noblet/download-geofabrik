@@ -7,14 +7,13 @@ This repository is a Go CLI for downloading OpenStreetMap extracts from multiple
 The most important runtime modules are:
 
 - `internal/cli`: Cobra commands and CLI setup (`download`, `generate`, `list`, `mcp`, root flags)
-- `internal/config`: default config/service naming and legacy config structures
+- `internal/cli`: Cobra commands and CLI setup (`download`, `generate`, `list`, `mcp`, root flags)
 - `internal/downloader`: HTTP download client, connection pooling, in-flight MD5 hashing, atomic writes
 - `internal/generator`: config generation logic orchestrating providers
 - `internal/mcp`: Model Context Protocol tools and resources served via stdio
 - `internal/provider`: provider registry and provider-specific scrapers / API clients (10 providers)
 - `internal/ui`: Table and JSON formatting for CLI output
 - `pkg/catalog`: Thread-safe OSM catalog domain model, element/format definitions, YAML serialization
-- `pkg/formats`: Shared format definitions, flag mappings, mini-format abbreviations
 
 ## Codebase Map & Routing Guide (Carte du Codebase)
 
@@ -27,27 +26,21 @@ Use this map to jump directly to the relevant file without scanning directories 
 | `cmd/download-geofabrik/main.go` | Entrypoint binary. Injects `cli.Version`, calls `cli.Execute()`. |
 | `internal/cli/root.go` | Root Cobra command, global flags (`--config/-c`, `--service/-s`, `--verbose`, `--quiet`), Viper bindings, `initConfig()`, `setupLogging()`. |
 | `internal/cli/download.go` | `download [element]` command. Format flags (`-P`, `-H`, `-G`, `-B`, `-S`, `-p`, `-k`, `-g`, `-O`, etc.), format resolution (`selectDefaultFormat`, `resolveFormat`), execution (`runDownload`, `processDownload`). |
-| `internal/cli/generate.go` | `generate` command (`-p/--progress`). Calls `generator.GenerateContext()`. |
+| `internal/cli/generate.go` | `generate` command (`-p/--progress`). Calls `generator.Generate()`. |
 | `internal/cli/list.go` | `list` command (`--markdown`, `--json`). Loads catalog, delegates to `internal/ui`. |
 | `internal/cli/mcp.go` | `mcp` command. Starts stdio Model Context Protocol server. |
-| `internal/config/config.go` | YAML schema (`Config`, `Options`), element searching (`FindElem`, `Exist` with hyphen/underscore fallback & dynamic Czech date `YYYY-MM-DD` resolution), URL resolution (`Elem2preURL`, `Elem2URL`), hashability check (`IsHashable`). |
 | `internal/downloader/download.go` | `Downloader` struct, connection-pooled HTTP client (`DisableCompression: true` for pre-compressed OSM), atomic file download (`saveToFile` with `.tmp`), in-flight MD5 calculation via `io.MultiWriter`, progress bar via `pb/v3`, checksum control (`Checksum`, `verifyChecksum`). |
 | `internal/downloader/hash.go` | Checksum verification: `ComputeMD5Hash`, `CheckFileHash`, `VerifyFileChecksum`. |
-| `internal/downloader/pool.go` | `sync.Pool` 128KB byte buffers (`getBuffer`, `putBuffer`) for zero-alloc streaming I/O. |
-| `internal/element/element.go` | Legacy element model (`Element`, `Formats`, `MapElement`). |
-| `internal/generator/generator.go` | Catalog generator driver (`PerformGenerateContext`). Resolves provider via `provider.Get()`, fetches catalog, sorts formats, writes YAML. |
-| `internal/generator/importer/geofabrik/geofabrik.go` | Legacy Geofabrik JSON index importer (`GetIndex`, `Convert`). |
-| `internal/lists/lists.go` | Legacy table formatting (`ListAllRegions`, `CreateTable`, `GetSortedKeys`). |
-| `internal/ui/printer.go` | CLI visual output: `PrintTable` (ASCII / Markdown via `tablewriter`) and `PrintJSON`. |
+| `internal/generator/generator.go` | Catalog generator driver (`Generate`). Resolves provider via `provider.Get()`, fetches catalog, sorts formats, writes YAML. |
+| `internal/ui/printer.go` | CLI visual output: `PrintTable` (ASCII / Markdown via standard library `text/tabwriter`) and `PrintJSON`. |
 | `internal/mcp/server.go` | MCP server setup (`Server`, `NewServer`, `ServeStdio`) using `mark3labs/mcp-go`. |
 | `internal/mcp/tools.go` | MCP tool handlers: `list_services`, `regenerate_catalog`, `list_elements`, `get_element`, `list_formats`, `download_element`. |
 | `internal/mcp/resources.go` | MCP resource handlers: `geofabrik://services`, `geofabrik://formats`, `geofabrik://catalog/{service}`. |
 | `internal/provider/provider.go` | `Provider` interface (`Name`, `Description`, `DefaultConfigFile`, `FetchCatalog`), thread-safe provider registry (`Register`, `Get`, `List`). |
-| `internal/provider/defaults.go` | `RegisterDefaultProviders()`: registers all 10 built-in providers. |
-| `pkg/catalog/catalog.go` | Core thread-safe domain model `Catalog` (`LoadFile`, `SaveFile`, `Find`, `MergeElement`, `SortedKeys`, `Elem2URL`). |
+| `internal/provider/defaults.go` | `RegisterDefaultProviders()`: registers all 10 built-in providers; `AllDefaultFormats()` returns format definitions across all providers. |
+| `pkg/catalog/catalog.go` | Core thread-safe domain model `Catalog` (`LoadFile`, `SaveFile`, `Find`, `MergeElement`, `SortedKeys`, `ResolveURL`). |
 | `pkg/catalog/element.go` | Catalog element model (`Element`: `ID`, `File`, `Name`, `Parent`, `Formats`, `Meta`). |
 | `pkg/catalog/format.go` | Format definitions & constants (`FormatOsmPbf`, `KeyOsmPbf`, etc.), `GetMiniFormats()`, `GetFormats()`. |
-| `pkg/formats/formats.go` | Shared format constants, CLI flag keys, abbreviation map (`miniFormatMap`), `GetFormats()`. |
 
 ### 2. Providers Matrix
 
