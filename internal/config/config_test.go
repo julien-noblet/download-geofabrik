@@ -206,6 +206,61 @@ elements:
 	require.ErrorIs(t, err, config.ErrFindElem)
 }
 
+func TestFindElem_DateResolution(t *testing.T) {
+	content := `
+baseURL: https://test.com
+formats:
+  osm.pbf:
+    ext: osm.pbf
+    loc: .osm.pbf
+    basepath: czech_republic/
+elements:
+  czech_republic:
+    id: czech_republic
+    name: Czech Republic
+    file: czech-republic
+    files:
+      - poly
+  latest:
+    id: latest
+    file: czech_republic-2026-09-06
+    name: Czech Republic (latest)
+    files:
+      - osm.pbf
+`
+	tmpDir := t.TempDir()
+	f := filepath.Join(tmpDir, "config.yml")
+	err := os.WriteFile(f, []byte(content), 0o600)
+	require.NoError(t, err)
+
+	cfg, err := config.LoadConfig(f)
+	require.NoError(t, err)
+
+	// Valid date resolution
+	e, err := config.FindElem(cfg, "2026-09-06")
+	require.NoError(t, err)
+	assert.Equal(t, "2026-09-06", e.ID)
+	assert.Equal(t, "czech_republic-2026-09-06", e.File)
+	assert.Equal(t, "Czech Republic 2026-09-06", e.Name)
+	assert.True(t, cfg.Exist("2026-09-06"))
+
+	// Historical date resolution
+	eHist, err := config.FindElem(cfg, "2006-04-03")
+	require.NoError(t, err)
+	assert.Equal(t, "2006-04-03", eHist.ID)
+	assert.Equal(t, "czech_republic-2006-04-03", eHist.File)
+
+	// URL generation for resolved date
+	url, err := config.Elem2URL(cfg, e, "osm.pbf")
+	require.NoError(t, err)
+	assert.Equal(t, "https://test.com/czech_republic/czech_republic-2026-09-06.osm.pbf", url)
+
+	// Invalid date
+	_, err = config.FindElem(cfg, "2026-99-99")
+	require.ErrorIs(t, err, config.ErrFindElem)
+	assert.False(t, cfg.Exist("2026-99-99"))
+}
+
 func TestIsHashable(t *testing.T) {
 	cfg := &config.Config{
 		Formats: formats.FormatDefinitions{

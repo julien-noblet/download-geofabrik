@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/julien-noblet/download-geofabrik/internal/element"
 	"github.com/julien-noblet/download-geofabrik/pkg/formats"
@@ -96,23 +97,41 @@ func (config *Config) Exist(elementID string) bool {
 	config.ElementsMutex.RLock()
 	defer config.ElementsMutex.RUnlock()
 
-	if _, exists := config.Elements[elementID]; exists {
+	if _, ok := findInElements(config.Elements, elementID); ok {
 		return true
 	}
 
+	if _, ok := resolveDateElement(config, elementID); ok {
+		return true
+	}
+
+	return false
+}
+
+func findInElements(elements element.MapElement, elementID string) (*element.Element, bool) {
+	if res, ok := elements[elementID]; ok && res.ID != "" {
+		elemCopy := res
+
+		return &elemCopy, true
+	}
+
 	if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID {
-		if _, exists := config.Elements[altID]; exists {
-			return true
+		if res, ok := elements[altID]; ok && res.ID != "" {
+			elemCopy := res
+
+			return &elemCopy, true
 		}
 	}
 
 	if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID {
-		if _, exists := config.Elements[altID]; exists {
-			return true
+		if res, ok := elements[altID]; ok && res.ID != "" {
+			elemCopy := res
+
+			return &elemCopy, true
 		}
 	}
 
-	return false
+	return nil, false
 }
 
 // AddExtension adds an extension to an element, creating it if not already present.
@@ -145,35 +164,53 @@ func (config *Config) GetElement(elementID string) (*element.Element, error) {
 	return FindElem(config, elementID)
 }
 
-// FindElem finds an element in the config by ID, with fallback for normalized hyphen/underscore variations.
+// FindElem finds an element in the config by ID, with fallback for normalized hyphen/underscore variations
+// and dynamic date-based elements (YYYY-MM-DD).
 func FindElem(config *Config, elementID string) (*element.Element, error) {
 	if config == nil {
 		return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, elementID)
 	}
 
-	if res, ok := config.Elements[elementID]; ok && res.ID != "" {
-		elemCopy := res
-
-		return &elemCopy, nil
+	if elem, ok := findInElements(config.Elements, elementID); ok {
+		return elem, nil
 	}
 
-	if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID {
-		if res, ok := config.Elements[altID]; ok && res.ID != "" {
-			elemCopy := res
-
-			return &elemCopy, nil
-		}
-	}
-
-	if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID {
-		if res, ok := config.Elements[altID]; ok && res.ID != "" {
-			elemCopy := res
-
-			return &elemCopy, nil
-		}
+	if dateElem, ok := resolveDateElement(config, elementID); ok {
+		return dateElem, nil
 	}
 
 	return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, elementID)
+}
+
+func resolveDateElement(config *Config, dateStr string) (*element.Element, bool) {
+	if _, err := time.Parse("2006-01-02", dateStr); err != nil {
+		return nil, false
+	}
+
+	if baseElem, ok := config.Elements["czech_republic"]; ok {
+		return &element.Element{
+			ID:      dateStr,
+			Name:    baseElem.Name + " " + dateStr,
+			File:    "czech_republic-" + dateStr,
+			Formats: element.Formats{formats.FormatOsmPbf, formats.FormatOsmBz2},
+		}, true
+	}
+
+	if latestElem, ok := config.Elements["latest"]; ok {
+		prefix := "czech_republic"
+		if idx := strings.Index(latestElem.File, "-"); idx != -1 {
+			prefix = latestElem.File[:idx]
+		}
+
+		return &element.Element{
+			ID:      dateStr,
+			Name:    latestElem.Name + " " + dateStr,
+			File:    prefix + "-" + dateStr,
+			Formats: element.Formats{formats.FormatOsmPbf, formats.FormatOsmBz2},
+		}, true
+	}
+
+	return nil, false
 }
 
 // GetFile gets the file name of an element.
@@ -211,24 +248,24 @@ func collectElementSegments(config *Config, startID string) ([]string, error) {
 	currID := startID
 
 	for count < maxHierarchyDepth {
-		elem, ok := config.Elements[currID]
-		if !ok || elem.ID == "" {
-			return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, currID)
+		elemPtr, err := FindElem(config, currID)
+		if err != nil {
+			return nil, err
 		}
 
-		file := elem.File
+		file := elemPtr.File
 		if file == "" {
-			file = elem.ID
+			file = elemPtr.ID
 		}
 
 		segments[count] = file
 		count++
 
-		if elem.Parent == "" {
+		if elemPtr.Parent == "" {
 			break
 		}
 
-		currID = elem.Parent
+		currID = elemPtr.Parent
 	}
 
 	if count >= maxHierarchyDepth {

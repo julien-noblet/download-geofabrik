@@ -10,6 +10,7 @@ import (
 	"slices"
 	"strings"
 	"sync"
+	"time"
 
 	"gopkg.in/yaml.v3"
 )
@@ -119,23 +120,9 @@ func (c *Catalog) Exist(elementID string) bool {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
-	if _, exists := c.Elements[elementID]; exists {
-		return true
-	}
+	_, exists := c.getElementLocked(elementID)
 
-	if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID {
-		if _, exists := c.Elements[altID]; exists {
-			return true
-		}
-	}
-
-	if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID {
-		if _, exists := c.Elements[altID]; exists {
-			return true
-		}
-	}
-
-	return false
+	return exists
 }
 
 // Get retrieves a copy of an element by ID.
@@ -143,6 +130,24 @@ func (c *Catalog) Get(elementID string) (Element, bool) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
+	return c.getElementLocked(elementID)
+}
+
+// Find looks up an element pointer by ID or returns ErrElementNotFound.
+func (c *Catalog) Find(elementID string) (*Element, error) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+
+	if elem, exists := c.getElementLocked(elementID); exists {
+		elemCopy := elem
+
+		return &elemCopy, nil
+	}
+
+	return nil, fmt.Errorf("%w: %s is not in catalog", ErrElementNotFound, elementID)
+}
+
+func (c *Catalog) getElementLocked(elementID string) (Element, bool) {
 	if elem, exists := c.Elements[elementID]; exists {
 		return elem, true
 	}
@@ -159,37 +164,42 @@ func (c *Catalog) Get(elementID string) (Element, bool) {
 		}
 	}
 
+	if elem, ok := c.resolveDateElement(elementID); ok {
+		return elem, true
+	}
+
 	return Element{}, false
 }
 
-// Find looks up an element pointer by ID or returns ErrElementNotFound.
-func (c *Catalog) Find(elementID string) (*Element, error) {
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-
-	if elem, exists := c.Elements[elementID]; exists {
-		elemCopy := elem
-
-		return &elemCopy, nil
+func (c *Catalog) resolveDateElement(dateStr string) (Element, bool) {
+	if _, err := time.Parse("2006-01-02", dateStr); err != nil {
+		return Element{}, false
 	}
 
-	if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID {
-		if elem, exists := c.Elements[altID]; exists {
-			elemCopy := elem
+	if baseElem, ok := c.Elements["czech_republic"]; ok {
+		return Element{
+			ID:      dateStr,
+			Name:    baseElem.Name + " " + dateStr,
+			File:    "czech_republic-" + dateStr,
+			Formats: Formats{FormatOsmPbf, FormatOsmBz2},
+		}, true
+	}
 
-			return &elemCopy, nil
+	if latestElem, ok := c.Elements["latest"]; ok {
+		prefix := "czech_republic"
+		if idx := strings.Index(latestElem.File, "-"); idx != -1 {
+			prefix = latestElem.File[:idx]
 		}
+
+		return Element{
+			ID:      dateStr,
+			Name:    latestElem.Name + " " + dateStr,
+			File:    prefix + "-" + dateStr,
+			Formats: Formats{FormatOsmPbf, FormatOsmBz2},
+		}, true
 	}
 
-	if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID {
-		if elem, exists := c.Elements[altID]; exists {
-			elemCopy := elem
-
-			return &elemCopy, nil
-		}
-	}
-
-	return nil, fmt.Errorf("%w: %s is not in catalog", ErrElementNotFound, elementID)
+	return Element{}, false
 }
 
 // AddElement inserts or replaces an element in the catalog.
@@ -351,7 +361,7 @@ func (c *Catalog) collectHierarchySegments(startID string) ([]string, error) {
 	currID := startID
 
 	for count < maxHierarchyDepth {
-		currentElem, exists := c.Elements[currID]
+		currentElem, exists := c.getElementLocked(currID)
 		if !exists {
 			return nil, fmt.Errorf("%w: %s is not in catalog", ErrElementNotFound, currID)
 		}
