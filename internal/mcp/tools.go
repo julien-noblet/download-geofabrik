@@ -11,22 +11,10 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/julien-noblet/download-geofabrik/internal/config"
 	downloader "github.com/julien-noblet/download-geofabrik/internal/downloader"
 	"github.com/julien-noblet/download-geofabrik/internal/generator"
 	"github.com/julien-noblet/download-geofabrik/internal/provider"
-	"github.com/julien-noblet/download-geofabrik/internal/provider/bbbike"
-	"github.com/julien-noblet/download-geofabrik/internal/provider/geo2day"
-	"github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik"
-	"github.com/julien-noblet/download-geofabrik/internal/provider/movisda"
-	"github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr"
-	"github.com/julien-noblet/download-geofabrik/internal/provider/osmch"
-	"github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr"
-	"github.com/julien-noblet/download-geofabrik/internal/provider/osmit"
-	"github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu"
-	"github.com/julien-noblet/download-geofabrik/internal/provider/osmtw"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
-	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 	mcpSDK "github.com/mark3labs/mcp-go/mcp"
 )
 
@@ -325,7 +313,7 @@ func (s *Server) handleRegenerateCatalog(ctx context.Context, request mcpSDK.Cal
 		targetFile = prov.DefaultConfigFile()
 	}
 
-	if genErr := generator.PerformGenerateContext(ctx, serviceName, false, targetFile); genErr != nil {
+	if genErr := generator.Generate(ctx, serviceName, targetFile); genErr != nil {
 		return mcpSDK.NewToolResultError(fmt.Sprintf("failed to regenerate catalog for %s: %v", serviceName, genErr)), nil
 	}
 
@@ -361,7 +349,7 @@ func (s *Server) regenerateAllCatalogs(ctx context.Context) (*mcpSDK.CallToolRes
 
 		targetFile := prov.DefaultConfigFile()
 
-		if genErr := generator.PerformGenerateContext(ctx, name, false, targetFile); genErr != nil {
+		if genErr := generator.Generate(ctx, name, targetFile); genErr != nil {
 			results[name] = map[string]any{fieldStatus: statusError, "error": genErr.Error()}
 
 			continue
@@ -389,7 +377,7 @@ func (s *Server) regenerateAllCatalogs(ctx context.Context) (*mcpSDK.CallToolRes
 
 //nolint:gocritic // parameter signature defined by mcpSDK.ToolHandlerFunc interface
 func (s *Server) handleListElements(ctx context.Context, request mcpSDK.CallToolRequest) (*mcpSDK.CallToolResult, error) {
-	serviceName := request.GetString("service", config.DefaultService)
+	serviceName := request.GetString("service", catalog.DefaultService)
 	customCfg := request.GetString("config_file", "")
 	searchQuery := strings.ToLower(strings.TrimSpace(request.GetString("search", "")))
 	parentFilter := strings.TrimSpace(request.GetString("parent", ""))
@@ -490,7 +478,7 @@ func (s *Server) handleGetElement(ctx context.Context, request mcpSDK.CallToolRe
 		return mcpSDK.NewToolResultError(errEmptyElementID.Error()), nil
 	}
 
-	serviceName := request.GetString("service", config.DefaultService)
+	serviceName := request.GetString("service", catalog.DefaultService)
 	customCfg := request.GetString("config_file", "")
 
 	cat, err := s.loadOrFetchCatalog(ctx, serviceName, customCfg)
@@ -580,18 +568,7 @@ func (s *Server) handleListFormats(ctx context.Context, request mcpSDK.CallToolR
 func collectGlobalFormats() []FormatSpecification {
 	allDefs := make(map[string]catalog.Format)
 
-	for _, formatMap := range []catalog.FormatDefinitions{
-		geofabrik.DefaultFormats(),
-		bbbike.DefaultFormats(),
-		openstreetmapfr.DefaultFormats(),
-		geo2day.DefaultFormats(),
-		movisda.DefaultFormats(),
-		osmch.DefaultFormats(),
-		osmkewllu.DefaultFormats(),
-		osmfitvutbr.DefaultFormats(),
-		osmit.DefaultFormats(),
-		osmtw.DefaultFormats(),
-	} {
+	for _, formatMap := range provider.AllDefaultFormats() {
 		for formatID, formatDef := range formatMap {
 			if _, exists := allDefs[formatID]; !exists {
 				allDefs[formatID] = formatDef
@@ -625,7 +602,7 @@ func (s *Server) handleDownloadElement(ctx context.Context, request mcpSDK.CallT
 		return mcpSDK.NewToolResultError(errEmptyElementID.Error()), nil
 	}
 
-	serviceName := request.GetString("service", config.DefaultService)
+	serviceName := request.GetString("service", catalog.DefaultService)
 	customCfg := request.GetString("config_file", "")
 	outDir := request.GetString("output_dir", "")
 	checkChecksum := request.GetBool("check_checksum", true)
@@ -686,15 +663,15 @@ func (s *Server) handleDownloadElement(ctx context.Context, request mcpSDK.CallT
 }
 
 var preferredCatalogDefaultFormats = []string{
-	formats.FormatOsmPbf,
-	formats.FormatPbf,
-	formats.FormatO5m,
-	formats.FormatOsmBz2,
-	formats.FormatOsmGz,
-	formats.FormatGeoJSON,
-	formats.FormatGPKG,
-	formats.FormatShpZip,
-	formats.FormatO5mZst,
+	catalog.FormatOsmPbf,
+	catalog.FormatPbf,
+	catalog.FormatO5m,
+	catalog.FormatOsmBz2,
+	catalog.FormatOsmGz,
+	catalog.FormatGeoJSON,
+	catalog.FormatGPKG,
+	catalog.FormatShpZip,
+	catalog.FormatO5mZst,
 }
 
 func resolveCatalogFormat(cat *catalog.Catalog, elem *catalog.Element, format string) (string, bool) {
@@ -704,15 +681,15 @@ func resolveCatalogFormat(cat *catalog.Catalog, elem *catalog.Element, format st
 		}
 	}
 
-	if format == formats.FormatOsmPbf && elem.ContainsFormat(formats.FormatPbf) {
-		if _, exists := cat.Formats[formats.FormatPbf]; exists {
-			return formats.FormatPbf, true
+	if format == catalog.FormatOsmPbf && elem.ContainsFormat(catalog.FormatPbf) {
+		if _, exists := cat.Formats[catalog.FormatPbf]; exists {
+			return catalog.FormatPbf, true
 		}
 	}
 
-	if format == formats.FormatPbf && elem.ContainsFormat(formats.FormatOsmPbf) {
-		if _, exists := cat.Formats[formats.FormatOsmPbf]; exists {
-			return formats.FormatOsmPbf, true
+	if format == catalog.FormatPbf && elem.ContainsFormat(catalog.FormatOsmPbf) {
+		if _, exists := cat.Formats[catalog.FormatOsmPbf]; exists {
+			return catalog.FormatOsmPbf, true
 		}
 	}
 
@@ -721,7 +698,7 @@ func resolveCatalogFormat(cat *catalog.Catalog, elem *catalog.Element, format st
 
 func resolveCatalogDefaultFormat(cat *catalog.Catalog, elem *catalog.Element) string {
 	if elem == nil {
-		return formats.FormatOsmPbf
+		return catalog.FormatOsmPbf
 	}
 
 	for _, pref := range preferredCatalogDefaultFormats {
@@ -742,7 +719,7 @@ func resolveCatalogDefaultFormat(cat *catalog.Catalog, elem *catalog.Element) st
 		}
 	}
 
-	return formats.FormatOsmPbf
+	return catalog.FormatOsmPbf
 }
 
 func resolveOutputDirectory(dir string) (string, error) {
@@ -810,12 +787,7 @@ func (s *Server) performDryRunDownload(params *dryRunParams) (*mcpSDK.CallToolRe
 }
 
 func (s *Server) performActualDownload(ctx context.Context, params *downloadExecutionParams) (*mcpSDK.CallToolResult, error) {
-	cfg, err := config.LoadConfig(params.cfgFile)
-	if err != nil {
-		return mcpSDK.NewToolResultError(fmt.Sprintf("failed to load configuration %s: %v", params.cfgFile, err)), nil
-	}
-
-	opts := &config.Options{
+	opts := &downloader.Options{
 		ConfigFile:      params.cfgFile,
 		OutputDirectory: params.outDir,
 		Check:           params.checkHash,
@@ -823,11 +795,11 @@ func (s *Server) performActualDownload(ctx context.Context, params *downloadExec
 		Quiet:           true,
 	}
 
-	downloaderInstance := downloader.NewDownloader(cfg, opts)
+	downloaderInstance := downloader.NewDownloader(params.cat, opts)
 	results := make([]DownloadFileResult, 0, len(params.formats))
 
 	for _, formatID := range params.formats {
-		formatDef, exists := cfg.Formats[formatID]
+		formatDef, exists := params.cat.Formats[formatID]
 		if !exists {
 			results = append(results, DownloadFileResult{
 				Format: formatID,
@@ -902,7 +874,7 @@ func (s *Server) ensureCatalogFile(ctx context.Context, serviceName, customCfg s
 	if _, statErr := os.Stat(targetFile); os.IsNotExist(statErr) {
 		slog.Info("Catalog file not found, generating on the fly", "service", serviceName, "file", targetFile)
 
-		if genErr := generator.PerformGenerateContext(ctx, serviceName, false, targetFile); genErr != nil {
+		if genErr := generator.Generate(ctx, serviceName, targetFile); genErr != nil {
 			return nil, "", fmt.Errorf("failed to generate catalog for %s: %w", serviceName, genErr)
 		}
 	}

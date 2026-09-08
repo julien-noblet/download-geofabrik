@@ -8,7 +8,6 @@ import (
 
 	"github.com/julien-noblet/download-geofabrik/internal/mcp"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
-	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 	mcpSDK "github.com/mark3labs/mcp-go/mcp"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -31,18 +30,18 @@ func createTestCatalog(tb testing.TB) string {
 	cat := catalog.New()
 	cat.BaseURL = "https://example.com/osm"
 	cat.Formats = catalog.FormatDefinitions{
-		formats.FormatOsmPbf: {
-			ID:   formats.FormatOsmPbf,
+		catalog.FormatOsmPbf: {
+			ID:   catalog.FormatOsmPbf,
 			Loc:  ".osm.pbf",
 			Type: "OpenStreetMap binary format",
 		},
-		formats.FormatPoly: {
-			ID:   formats.FormatPoly,
+		catalog.FormatPoly: {
+			ID:   catalog.FormatPoly,
 			Loc:  ".poly",
 			Type: "Polygon filter file",
 		},
-		formats.FormatOsmPbf + ".md5": {
-			ID:   formats.FormatOsmPbf + ".md5",
+		catalog.FormatOsmPbf + ".md5": {
+			ID:   catalog.FormatOsmPbf + ".md5",
 			Loc:  ".osm.pbf.md5",
 			Type: "MD5 checksum",
 		},
@@ -59,14 +58,14 @@ func createTestCatalog(tb testing.TB) string {
 		ID:      elementFrance,
 		Name:    "France",
 		Parent:  regionEurope,
-		Formats: catalog.Formats{formats.FormatOsmPbf, formats.FormatPoly},
+		Formats: catalog.Formats{catalog.FormatOsmPbf, catalog.FormatPoly},
 	}
 
 	cat.Elements[elementMonaco] = catalog.Element{
 		ID:      elementMonaco,
 		Name:    "Monaco",
 		Parent:  regionEurope,
-		Formats: catalog.Formats{formats.FormatOsmPbf},
+		Formats: catalog.Formats{catalog.FormatOsmPbf},
 	}
 
 	require.NoError(tb, cat.SaveFile(catPath))
@@ -310,7 +309,7 @@ func TestGetElementTool(t *testing.T) {
 	var pbfDetail *mcp.FormatURLDetail
 
 	for _, f := range detail.Formats {
-		if f.FormatID == formats.FormatOsmPbf {
+		if f.FormatID == catalog.FormatOsmPbf {
 			pbfDetail = &f
 
 			break
@@ -368,7 +367,7 @@ func TestDownloadElementToolDryRun(t *testing.T) {
 			Arguments: map[string]any{
 				"service":     serviceDefault,
 				"element_id":  elementFrance,
-				"formats":     []string{formats.FormatOsmPbf, formats.FormatPoly},
+				"formats":     []string{catalog.FormatOsmPbf, catalog.FormatPoly},
 				"config_file": catFile,
 				"output_dir":  outDir,
 				"dry_run":     true,
@@ -408,15 +407,15 @@ func TestDownloadElementToolDefaultFormatNonPbf(t *testing.T) {
 	cat := catalog.New()
 	cat.BaseURL = "https://example.com/tw"
 	cat.Formats = catalog.FormatDefinitions{
-		formats.FormatO5m: {
-			ID:  formats.FormatO5m,
+		catalog.FormatO5m: {
+			ID:  catalog.FormatO5m,
 			Loc: ".o5m",
 		},
 	}
 	cat.Elements["taiwan"] = catalog.Element{
 		ID:      "taiwan",
 		Name:    "Taiwan",
-		Formats: catalog.Formats{formats.FormatO5m},
+		Formats: catalog.Formats{catalog.FormatO5m},
 	}
 	require.NoError(t, cat.SaveFile(catPath))
 
@@ -451,7 +450,7 @@ func TestDownloadElementToolDefaultFormatNonPbf(t *testing.T) {
 	assert.True(t, dlResult.DryRun)
 	assert.Equal(t, "taiwan", dlResult.ElementID)
 	require.Len(t, dlResult.Files, 1)
-	assert.Equal(t, formats.FormatO5m, dlResult.Files[0].Format)
+	assert.Equal(t, catalog.FormatO5m, dlResult.Files[0].Format)
 }
 
 func TestRegenerateCatalogToolErrors(t *testing.T) {

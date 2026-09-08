@@ -16,6 +16,8 @@ import (
 )
 
 const (
+	DefaultConfigFile  = "geofabrik.yml"
+	DefaultService     = "geofabrik"
 	maxHierarchyDepth  = 30
 	defaultDirPerm     = 0o750
 	defaultFilePerm    = 0o600
@@ -29,6 +31,9 @@ var (
 	ErrFormatNotFound    = errors.New("format not found")
 	ErrParentMismatch    = errors.New("cannot merge element with conflicting parent")
 	ErrMaxHierarchyDepth = errors.New("maximum hierarchy depth exceeded (possible cycle in catalog)")
+	ErrElem2URL          = errors.New("can't find url")
+	ErrFormatNotExist    = ErrFormatNotFound
+	ErrFindElem          = ErrElementNotFound
 )
 
 var supportedHashes = []string{"md5"}
