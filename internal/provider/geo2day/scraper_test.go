@@ -390,6 +390,74 @@ func TestGeo2Day_FetchCatalog_ExternalLinksIgnored(t *testing.T) {
 	require.NotNil(t, cat)
 
 	assert.True(t, cat.Exist("france"), "france should exist")
+	assert.False(t, cat.Exist("europe"), "external europe should not exist")
+}
+
+func TestGeo2Day_FetchCatalog_FiltersUnwantedElements(t *testing.T) {
+	t.Parallel()
+
+	var baseURL string
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html")
+
+		if r.URL.Path == "/" {
+			_, _ = fmt.Fprintf(w, `<!DOCTYPE html>
+<html><body><table>
+  <tr><td><a href="#">Hash only</a></td></tr>
+  <tr><td><a href="#collapse1">Accordion</a></td></tr>
+  <tr><td><a href="mailto:info@geo2day.com">Mail</a></td></tr>
+  <tr><td><a href="javascript:void(0)">JS</a></td></tr>
+  <tr><td><a href="tel:+123456789">Phone</a></td></tr>
+  <tr><td><a href="index.html">Index Page</a></td></tr>
+  <tr><td><a href="/offer.pdf">Offer PDF</a></td></tr>
+  <tr><td><a href="https://en.wikipedia.org/wiki/GeoJSON">Wiki GeoJSON</a></td></tr>
+  <tr><td><a href="https://wiki.openstreetmap.org/wiki/Osmosis">Wiki Osmosis</a></td></tr>
+  <tr><td><a href="%[1]s/region/subregion.html">Subregion Link</a></td></tr>
+  <tr><td><a href="%[1]s/region/subregion.pbf?query=1#frag">[subregion.pbf]</a></td></tr>
+  <tr><td><a href="%[1]s/region/subregion.md5">9b30c1d6467c263f77cda00af0a3dbb7</a></td></tr>
+  <tr><td><a href="%[1]s/region/subregion2.pbf">1234567890123456789012345678901z</a></td></tr>
+  <tr><td><a href="%[1]s/lonely.pbf"></a></td></tr>
+</table></body></html>`, baseURL)
+
+			return
+		}
+
+		_, _ = w.Write([]byte(`<!DOCTYPE html><html><body><table></table></body></html>`))
+	}))
+	defer ts.Close()
+
+	baseURL = ts.URL
+
+	p := newTestProvider(ts)
+
+	cat, err := p.FetchCatalog(context.Background())
+	require.NoError(t, err)
+	require.NotNil(t, cat)
+
+	assert.False(t, cat.Exist("#"))
+	assert.False(t, cat.Exist("#collapse1"))
+	assert.False(t, cat.Exist("GeoJSON"))
+	assert.False(t, cat.Exist("Osmosis"))
+	assert.False(t, cat.Exist("offer"))
+	assert.False(t, cat.Exist("index"))
+
+	assert.True(t, cat.Exist("subregion"))
+	sub, exists := cat.Get("subregion")
+	assert.True(t, exists)
+	assert.Equal(t, "Subregion Link", sub.Name)
+	assert.Equal(t, "region", sub.Parent)
+	assert.True(t, sub.ContainsFormat(catalog.FormatOsmPbf))
+	assert.True(t, sub.ContainsFormat("osm.pbf.md5"))
+
+	// Auto-created parent "region" should exist
+	assert.True(t, cat.Exist("region"))
+
+	// Empty name defaults to ID
+	assert.True(t, cat.Exist("lonely"))
+	lonely, exists := cat.Get("lonely")
+	assert.True(t, exists)
+	assert.Equal(t, "lonely", lonely.Name)
 }
 
 func Benchmark_Geo2Day_FetchCatalog_Mock(b *testing.B) {

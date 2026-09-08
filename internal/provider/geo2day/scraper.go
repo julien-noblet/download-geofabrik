@@ -30,7 +30,7 @@ const (
 	defaultMaxIdleConns = 100
 	workChanCapacity    = 1000
 	minExtParts         = 2
-	minGeo2DayParts     = 4
+	FormatOsmPbfMd5     = "osm.pbf.md5"
 )
 
 // Provider implements provider.Provider for geo2day.com.
@@ -81,7 +81,7 @@ func (p *Provider) DefaultConfigFile() string {
 // DefaultFormats returns format definitions for Geo2Day.
 func DefaultFormats() catalog.FormatDefinitions {
 	return catalog.FormatDefinitions{
-		"osm.pbf.md5":         {ID: "osm.pbf.md5", Loc: ".md5"},
+		FormatOsmPbfMd5:       {ID: FormatOsmPbfMd5, Loc: ".md5"},
 		catalog.FormatGeoJSON: {ID: catalog.FormatGeoJSON, Loc: ".geojson"},
 		catalog.FormatOsmPbf:  {ID: catalog.FormatOsmPbf, Loc: ".pbf"},
 		catalog.FormatPoly:    {ID: catalog.FormatPoly, Loc: ".poly"},
@@ -188,6 +188,13 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 		return nil, firstErr
 	}
 
+	for id, elem := range cat.Elements {
+		if elem.Name == "" {
+			elem.Name = id
+			cat.Elements[id] = elem
+		}
+	}
+
 	return cat, nil
 }
 
@@ -249,35 +256,80 @@ func (p *Provider) handleAnchor(tokenizer *html.Tokenizer, tokenType html.TokenT
 	}
 
 	href := extractHref(tokenizer)
-	if href == "" {
+	if href == "" || shouldSkipHref(href, p.BaseURL, p.StartURL) {
 		return ""
 	}
 
-	var text string
-
-	if tokenType == html.StartTagToken {
-		if nextType := tokenizer.Next(); nextType == html.TextToken {
-			text = string(tokenizer.Text())
-		}
-	}
-
+	text := extractAnchorText(tokenizer, tokenType)
 	fullURL := p.resolveURL(href)
+
 	rawID, ext := splitFileExt(href)
+	if shouldSkipRawID(rawID) {
+		return ""
+	}
 
 	if ext == "html" {
-		var subPage string
-		if strings.HasPrefix(fullURL, p.BaseURL) || strings.HasPrefix(fullURL, p.StartURL) {
-			subPage = fullURL
-		}
-
-		p.processHTMLLink(cat, fullURL, rawID, text)
-
-		return subPage
+		return p.handleHTMLLink(cat, fullURL, rawID, text)
 	}
 
-	p.processFileLink(cat, href, rawID, ext, text)
+	if isSupportedFormat(ext) {
+		p.processFileLink(cat, href, rawID, ext, text)
+	}
 
 	return ""
+}
+
+func shouldSkipRawID(rawID string) bool {
+	return rawID == "" || strings.HasPrefix(rawID, "#")
+}
+
+func extractAnchorText(tokenizer *html.Tokenizer, tokenType html.TokenType) string {
+	if tokenType == html.StartTagToken {
+		if nextType := tokenizer.Next(); nextType == html.TextToken {
+			return strings.TrimSpace(string(tokenizer.Text()))
+		}
+	}
+
+	return ""
+}
+
+func (p *Provider) handleHTMLLink(cat *catalog.Catalog, fullURL, rawID, text string) string {
+	if rawID == "index" {
+		return ""
+	}
+
+	var subPage string
+	if strings.HasPrefix(fullURL, p.BaseURL) || strings.HasPrefix(fullURL, p.StartURL) {
+		subPage = fullURL
+	}
+
+	p.processHTMLLink(cat, fullURL, rawID, text)
+
+	return subPage
+}
+
+func shouldSkipHref(href, baseURL, startURL string) bool {
+	if strings.HasPrefix(href, "#") ||
+		strings.HasPrefix(href, "mailto:") ||
+		strings.HasPrefix(href, "javascript:") ||
+		strings.HasPrefix(href, "tel:") {
+		return true
+	}
+
+	if strings.HasPrefix(href, "http://") || strings.HasPrefix(href, "https://") {
+		return !strings.HasPrefix(href, baseURL) && !strings.HasPrefix(href, startURL)
+	}
+
+	return false
+}
+
+func isSupportedFormat(ext string) bool {
+	switch ext {
+	case "pbf", "osm.pbf", "poly", "geojson", "md5":
+		return true
+	default:
+		return false
+	}
 }
 
 func extractHref(tokenizer *html.Tokenizer) string {
@@ -332,15 +384,42 @@ func (p *Provider) processHTMLLink(cat *catalog.Catalog, fullURL, rawID, name st
 	_ = cat.MergeElement(&elem)
 }
 
+const md5HashLength = 32
+
+func isMD5Hash(s string) bool {
+	if len(s) != md5HashLength {
+		return false
+	}
+
+	for _, c := range s {
+		if (c < '0' || c > '9') && (c < 'a' || c > 'f') && (c < 'A' || c > 'F') {
+			return false
+		}
+	}
+
+	return true
+}
+
+func sanitizeFileName(name string) string {
+	name = strings.TrimSpace(name)
+	if (strings.HasPrefix(name, "[") && strings.HasSuffix(name, "]")) || isMD5Hash(name) {
+		return ""
+	}
+
+	return name
+}
+
 func (p *Provider) processFileLink(cat *catalog.Catalog, href, rawID, ext, name string) {
 	if rawID == "" {
 		return
 	}
 
 	parent, _ := splitParent(href)
+	cleanName := sanitizeFileName(name)
+
 	elem := catalog.Element{
 		ID:     rawID,
-		Name:   name,
+		Name:   cleanName,
 		Parent: parent,
 		Meta:   false,
 	}
@@ -348,16 +427,19 @@ func (p *Provider) processFileLink(cat *catalog.Catalog, href, rawID, ext, name 
 	applyExceptions(&elem)
 	_ = cat.MergeElement(&elem)
 
-	if ext != "" {
-		if ext == "pbf" {
-			ext = catalog.FormatOsmPbf
-		}
+	formatID := ext
 
-		cat.AddExtension(elem.ID, ext)
+	switch ext {
+	case "pbf":
+		formatID = catalog.FormatOsmPbf
+	case "md5":
+		formatID = FormatOsmPbfMd5
+	}
 
-		if ext == catalog.FormatOsmPbf {
-			cat.AddExtension(elem.ID, "osm.pbf.md5")
-		}
+	cat.AddExtension(elem.ID, formatID)
+
+	if formatID == catalog.FormatOsmPbf {
+		cat.AddExtension(elem.ID, FormatOsmPbfMd5)
 	}
 }
 
@@ -372,6 +454,10 @@ func applyExceptions(elem *catalog.Element) {
 }
 
 func splitFileExt(urlStr string) (filename, extension string) {
+	if idx := strings.IndexAny(urlStr, "?#"); idx != -1 {
+		urlStr = urlStr[:idx]
+	}
+
 	parts := strings.Split(urlStr, "/")
 	last := parts[len(parts)-1]
 
@@ -384,10 +470,31 @@ func splitFileExt(urlStr string) (filename, extension string) {
 }
 
 func splitParent(urlStr string) (parent, path string) {
-	parts := strings.Split(urlStr, "/")
-	if len(parts) < minGeo2DayParts {
-		return "", strings.Join(parts[:len(parts)-1], "/")
+	if idx := strings.IndexAny(urlStr, "?#"); idx != -1 {
+		urlStr = urlStr[:idx]
 	}
 
-	return parts[len(parts)-2], strings.Join(parts[:len(parts)-1], "/")
+	if idx := strings.Index(urlStr, "://"); idx != -1 {
+		urlStr = urlStr[idx+3:]
+		if slashIdx := strings.Index(urlStr, "/"); slashIdx != -1 {
+			urlStr = urlStr[slashIdx:]
+		} else {
+			return "", ""
+		}
+	}
+
+	trimmed := strings.Trim(urlStr, "/")
+	if trimmed == "" {
+		return "", ""
+	}
+
+	parts := strings.Split(trimmed, "/")
+	if len(parts) <= 1 {
+		return "", ""
+	}
+
+	parent = parts[len(parts)-2]
+	path = "/" + strings.Join(parts[:len(parts)-1], "/")
+
+	return parent, path
 }
