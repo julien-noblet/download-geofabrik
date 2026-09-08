@@ -25,7 +25,6 @@ const (
 	defaultIdleTimeout         = 90 * time.Second
 	defaultMaxIdleConns        = 20
 	defaultMaxIdleConnsPerHost = 10
-	minPrefixParts             = 2
 )
 
 // Provider implements provider.Provider for the Movisda administrative extracts service.
@@ -93,7 +92,6 @@ type geoJSONFeature struct {
 		Name       string `json:"name"`
 		NameEN     string `json:"name_en"`
 		Prefix     string `json:"prefix"`
-		Parent     string `json:"parent,omitempty"`
 		AdminLevel string `json:"admin_level"`
 		OSMID      int64  `json:"osm_id"`
 	} `json:"properties"`
@@ -140,9 +138,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 			continue
 		}
 
-		if err := cat.MergeElement(&elem); err != nil {
-			return nil, fmt.Errorf("cannot merge element %s: %w", elem.ID, err)
-		}
+		_ = cat.MergeElement(&elem)
 	}
 
 	return cat, nil
@@ -161,29 +157,10 @@ func buildElement(feat *geoJSONFeature) catalog.Element {
 		name = feat.Properties.Name
 	}
 
-	parent := feat.Properties.Parent
-	if parent == "" {
-		parent = determineParent(prefix, feat.Properties.AdminLevel)
-	}
-
 	return catalog.Element{
 		ID:      rawID,
 		Name:    name,
 		File:    prefix + "latest",
-		Parent:  parent,
 		Formats: append(catalog.Formats(nil), standardMovisdaFormats...),
 	}
-}
-
-func determineParent(prefix, adminLevel string) string {
-	if adminLevel == "2" {
-		return ""
-	}
-
-	parts := strings.Split(strings.Trim(prefix, "-"), "-")
-	if len(parts) >= minPrefixParts {
-		return strings.ToLower(parts[0])
-	}
-
-	return ""
 }
