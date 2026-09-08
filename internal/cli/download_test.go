@@ -301,3 +301,40 @@ func TestDownloadCmd_OSMTW(t *testing.T) {
 	err := cli.Execute()
 	require.NoError(t, err)
 }
+
+func TestDownloadCmd_PlanetOSMCH(t *testing.T) {
+	cli.ResetGlobs()
+	viper.Reset()
+
+	tmpDir := t.TempDir()
+
+	cli.RootCmd.SetArgs([]string{
+		"download", "switzerland",
+		"--service", "planet.osm.ch",
+		"--config", "../../planet.osm.ch.yml",
+		"--nodownload",
+		"--output-dir", tmpDir,
+	})
+
+	err := cli.Execute()
+	require.NoError(t, err)
+}
+
+func TestDownloadCmd_PlanetOSMCH_ExplicitP(t *testing.T) {
+	cli.ResetGlobs()
+	viper.Reset()
+
+	tmpDir := t.TempDir()
+
+	cli.RootCmd.SetArgs([]string{
+		"download", "switzerland",
+		"-P",
+		"--service", "planet.osm.ch",
+		"--config", "../../planet.osm.ch.yml",
+		"--nodownload",
+		"--output-dir", tmpDir,
+	})
+
+	err := cli.Execute()
+	require.NoError(t, err)
+}

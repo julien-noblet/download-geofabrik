@@ -62,6 +62,7 @@ func Test_GetMiniFormats(t *testing.T) {
 		{name: "No Formats", args: args{s: []string(nil)}, want: ""},
 		{name: "state only", args: args{s: []string{formats.FormatState}}, want: "s"},
 		{name: "osm.pbf only", args: args{s: []string{formats.FormatOsmPbf}}, want: "P"},
+		{name: "pbf only", args: args{s: []string{formats.FormatPbf}}, want: "P"},
 		{name: "osm.bz2 only", args: args{s: []string{formats.FormatOsmBz2}}, want: "B"},
 		{name: "osm.gz only", args: args{s: []string{formats.FormatOsmGz}}, want: "G"},
 		{name: "osh.pbf only", args: args{s: []string{formats.FormatOshPbf}}, want: "H"},
@@ -124,6 +125,11 @@ func Test_getFormats(t *testing.T) {
 			name:  "dosmPbf",
 			flags: map[string]bool{formats.KeyOsmPbf: true},
 			want:  []string{formats.FormatOsmPbf},
+		},
+		{
+			name:  "dPbf",
+			flags: map[string]bool{formats.KeyPbf: true},
+			want:  []string{formats.FormatPbf},
 		},
 		{
 			name:  "doshPbf",

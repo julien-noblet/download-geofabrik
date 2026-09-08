@@ -8,6 +8,7 @@ import (
 // Supported format identifiers.
 const (
 	FormatOsmPbf         = "osm.pbf"
+	FormatPbf            = "pbf"
 	FormatOsmBz2         = "osm.bz2"
 	FormatOsmGz          = "osm.gz"
 	FormatOshPbf         = "osh.pbf"
@@ -32,6 +33,7 @@ const (
 // Format flag keys used in CLI options and configurations.
 const (
 	KeyOsmPbf         = "dosmPbf"
+	KeyPbf            = "dPbf"
 	KeyOshPbf         = "doshPbf"
 	KeyOsmGz          = "dosmGz"
 	KeyOsmBz2         = "dosmBz2"
@@ -78,6 +80,7 @@ var defaultMiniFormats = []MiniFormat{
 	{FullName: FormatOsmGz, ShortName: "G"},
 	{FullName: FormatOshPbf, ShortName: "H"},
 	{FullName: FormatOsmPbf, ShortName: "P"},
+	{FullName: FormatPbf, ShortName: "P"},
 	{FullName: FormatPoly, ShortName: "p"},
 	{FullName: FormatKml, ShortName: "k"},
 	{FullName: FormatShpZip, ShortName: "S"},
@@ -113,6 +116,7 @@ func GetMiniFormats(formatList []string) string {
 func GetFormats(flagMap map[string]bool) []string {
 	flagToFormat := map[string]string{
 		KeyOsmPbf:         FormatOsmPbf,
+		KeyPbf:            FormatPbf,
 		KeyOshPbf:         FormatOshPbf,
 		KeyOsmGz:          FormatOsmGz,
 		KeyOsmBz2:         FormatOsmBz2,

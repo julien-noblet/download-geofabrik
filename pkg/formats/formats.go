@@ -26,6 +26,7 @@ type MiniFormat struct {
 const (
 	FormatState          = "state"
 	FormatOsmPbf         = "osm.pbf"
+	FormatPbf            = "pbf"
 	FormatOsmGz          = "osm.gz"
 	FormatOsmBz2         = "osm.bz2"
 	FormatOshPbf         = "osh.pbf"
@@ -49,6 +50,7 @@ const (
 // Configuration keys.
 const (
 	KeyOsmPbf         = "dosmPbf"
+	KeyPbf            = "dPbf"
 	KeyOshPbf         = "doshPbf"
 	KeyOsmGz          = "dosmGz"
 	KeyOsmBz2         = "dosmBz2"
@@ -73,6 +75,7 @@ const (
 var miniFormatMap = map[string]byte{
 	FormatState:          's',
 	FormatOsmPbf:         'P',
+	FormatPbf:            'P',
 	FormatOsmGz:          'G',
 	FormatOsmBz2:         'B',
 	FormatOshPbf:         'H',
@@ -100,6 +103,7 @@ type keyFormatPair struct {
 
 var keyFormatPairs = []keyFormatPair{
 	{KeyOsmPbf, FormatOsmPbf},
+	{KeyPbf, FormatPbf},
 	{KeyOshPbf, FormatOshPbf},
 	{KeyOsmGz, FormatOsmGz},
 	{KeyOsmBz2, FormatOsmBz2},
