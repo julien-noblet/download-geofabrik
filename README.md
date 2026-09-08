@@ -104,7 +104,7 @@ Use the `--service` flag to target alternative OSM data sources:
 
 ```bash
 # Download from OpenStreetMap France
-download-geofabrik --service openstreetmap.fr download rhone-alpes
+download-geofabrik --service openstreetmap.fr download rhone_alpes
 
 # Download from BBBike
 download-geofabrik --service bbbike download Berlin
