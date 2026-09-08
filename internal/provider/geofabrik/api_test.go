@@ -246,11 +246,9 @@ func Benchmark_Geofabrik_FetchCatalog_Mock(b *testing.B) {
 	p.IndexURL = ts.URL
 	p.Client = ts.Client()
 
-	ctx := context.Background()
+	ctx := b.Context()
 
-	b.ResetTimer()
-
-	for range b.N {
+	for b.Loop() {
 		_, _ = p.FetchCatalog(ctx)
 	}
 }

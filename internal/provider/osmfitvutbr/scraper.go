@@ -1,6 +1,7 @@
 package osmfitvutbr
 
 import (
+	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -88,10 +89,7 @@ func (p *Provider) fetchHTML(ctx context.Context, targetURL string) (io.ReadClos
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
-	}
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -236,8 +234,7 @@ func parseRootLink(href string, cat *catalog.Catalog, subdirs *[]string) {
 	}
 
 	// Direct polygon file (e.g. czech-republic.poly)
-	if strings.HasSuffix(href, ".poly") {
-		raw := strings.TrimSuffix(href, ".poly")
+	if raw, ok := strings.CutSuffix(href, ".poly"); ok {
 		elemID := strings.ReplaceAll(raw, "-", "_")
 		elem := catalog.Element{
 			ID:   elemID,
@@ -262,22 +259,18 @@ func parseSubdirLink(href, dir string, latestPbfDate, latestPbfBase, latestBz2Da
 	switch {
 	case strings.HasSuffix(href, ".osm.pbf"):
 		formatID = catalog.FormatOsmPbf
-		base = strings.TrimSuffix(href, ".osm.pbf")
+		base, _ = strings.CutSuffix(href, ".osm.pbf")
 
 	case strings.HasSuffix(href, ".osm.bz2"):
 		formatID = catalog.FormatOsmBz2
-		base = strings.TrimSuffix(href, ".osm.bz2")
+		base, _ = strings.CutSuffix(href, ".osm.bz2")
 
 	default:
 		return
 	}
 
-	if !strings.HasPrefix(base, dir+"-") {
-		return
-	}
-
-	date := strings.TrimPrefix(base, dir+"-")
-	if date == "" {
+	date, ok := strings.CutPrefix(base, dir+"-")
+	if !ok || date == "" {
 		return
 	}
 

@@ -1,6 +1,7 @@
 package openstreetmapfr
 
 import (
+	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -234,10 +235,7 @@ func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, c
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
-	}
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {

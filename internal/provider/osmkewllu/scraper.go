@@ -1,6 +1,7 @@
 package osmkewllu
 
 import (
+	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -88,10 +89,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
-	}
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -191,17 +189,15 @@ func shouldSkipHref(href string) bool {
 }
 
 func parseHrefToIDAndFormat(href string) (elemID, format string) {
-	switch {
-	case strings.HasSuffix(href, ".osm.pbf"):
-		targetID := strings.TrimSuffix(href, ".osm.pbf")
+	if targetID, ok := strings.CutSuffix(href, ".osm.pbf"); ok {
 		if strings.Contains(targetID, "-") {
 			return "", ""
 		}
 
 		return targetID, catalog.FormatOsmPbf
+	}
 
-	case strings.HasSuffix(href, ".osm.bz2"):
-		targetID := strings.TrimSuffix(href, ".osm.bz2")
+	if targetID, ok := strings.CutSuffix(href, ".osm.bz2"); ok {
 		if strings.Contains(targetID, "-") {
 			return "", ""
 		}

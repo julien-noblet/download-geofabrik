@@ -1,6 +1,7 @@
 package mcp
 
 import (
+	"cmp"
 	"context"
 	"encoding/json"
 	"errors"
@@ -387,13 +388,11 @@ func (s *Server) handleListElements(ctx context.Context, request mcpSDK.CallTool
 
 	if limit < 0 {
 		limit = defaultListLimit
-	} else if limit > maxListLimit {
-		limit = maxListLimit
+	} else {
+		limit = min(limit, maxListLimit)
 	}
 
-	if offset < 0 {
-		offset = 0
-	}
+	offset = max(offset, 0)
 
 	cat, err := s.loadOrFetchCatalog(ctx, serviceName, customCfg)
 	if err != nil {
@@ -439,8 +438,7 @@ func filterElements(cat *catalog.Catalog, searchQuery, parentFilter string) []El
 			}
 		}
 
-		formatsCopy := make([]string, len(elem.Formats))
-		copy(formatsCopy, elem.Formats)
+		formatsCopy := slices.Clone(elem.Formats)
 
 		filtered = append(filtered, ElementSummary{
 			ID:      elem.ID,
@@ -455,9 +453,7 @@ func filterElements(cat *catalog.Catalog, searchQuery, parentFilter string) []El
 }
 
 func applyPagination(items []ElementSummary, offset, limit int) []ElementSummary {
-	if offset < 0 {
-		offset = 0
-	}
+	offset = max(offset, 0)
 
 	total := len(items)
 	if offset >= total {
@@ -465,8 +461,8 @@ func applyPagination(items []ElementSummary, offset, limit int) []ElementSummary
 	}
 
 	end := total
-	if limit > 0 && offset+limit < total {
-		end = offset + limit
+	if limit > 0 {
+		end = min(total, offset+limit)
 	}
 
 	return items[offset:end]
@@ -940,10 +936,7 @@ func resolveFormatOrHashURL(cat *catalog.Catalog, elem *catalog.Element, formatI
 		return "", fmt.Errorf("%w: %s", errFormatMissing, formatID)
 	}
 
-	baseURL := formatDef.BaseURL
-	if baseURL == "" {
-		baseURL = cat.BaseURL
-	}
+	baseURL := cmp.Or(formatDef.BaseURL, cat.BaseURL)
 
 	preURL, err := cat.ResolvePreURL(elem, baseURL, formatDef.BasePath)
 	if err != nil {

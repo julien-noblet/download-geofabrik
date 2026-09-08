@@ -1,10 +1,12 @@
 package catalog
 
 import (
+	"cmp"
 	"errors"
 	"fmt"
 	"io"
 	"iter"
+	"maps"
 	"os"
 	"path/filepath"
 	"slices"
@@ -266,17 +268,9 @@ func applyElementMerge(target, source *Element) {
 		target.AddFormat(format)
 	}
 
-	if source.Parent != "" {
-		target.Parent = source.Parent
-	}
-
-	if source.Name != "" {
-		target.Name = source.Name
-	}
-
-	if source.File != "" {
-		target.File = source.File
-	}
+	target.Parent = cmp.Or(source.Parent, target.Parent)
+	target.Name = cmp.Or(source.Name, target.Name)
+	target.File = cmp.Or(source.File, target.File)
 
 	if source.Meta {
 		target.Meta = source.Meta
@@ -303,14 +297,7 @@ func (c *Catalog) SortedKeys() []string {
 		return nil
 	}
 
-	keys := make([]string, 0, len(c.Elements))
-	for k := range c.Elements {
-		keys = append(keys, k)
-	}
-
-	slices.Sort(keys)
-
-	return keys
+	return slices.Sorted(maps.Keys(c.Elements))
 }
 
 // All returns a sequence iterator over all elements (Go 1.23+).
@@ -346,10 +333,7 @@ func (c *Catalog) ResolveURL(elem *Element, formatID string) (string, error) {
 		return "", fmt.Errorf("%w: %s definition missing from catalog", ErrFormatNotFound, formatID)
 	}
 
-	baseURL := format.BaseURL
-	if baseURL == "" {
-		baseURL = catalogBaseURL
-	}
+	baseURL := cmp.Or(format.BaseURL, catalogBaseURL)
 
 	preURL, err := c.ResolvePreURL(elem, baseURL, format.BasePath)
 	if err != nil {
@@ -407,8 +391,8 @@ func (c *Catalog) ResolvePreURL(elem *Element, baseURL ...string) (string, error
 
 	builder.WriteString(buildURLPrefix(baseURL, c.BaseURL))
 
-	for i := len(segments) - 1; i >= 0; i-- {
-		builder.WriteString(segments[i])
+	for i, seg := range slices.Backward(segments) {
+		builder.WriteString(seg)
 
 		if i > 0 {
 			builder.WriteByte('/')

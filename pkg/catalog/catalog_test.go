@@ -320,7 +320,7 @@ func Benchmark_Catalog_Exist(b *testing.B) {
 		b.Fatal(err)
 	}
 
-	for range b.N {
+	for b.Loop() {
 		_ = cat.Exist("france")
 	}
 }
@@ -331,7 +331,7 @@ func Benchmark_Catalog_Get(b *testing.B) {
 		b.Fatal(err)
 	}
 
-	for range b.N {
+	for b.Loop() {
 		_, _ = cat.Get("france")
 	}
 }
@@ -342,7 +342,7 @@ func Benchmark_Catalog_Find(b *testing.B) {
 		b.Fatal(err)
 	}
 
-	for range b.N {
+	for b.Loop() {
 		_, _ = cat.Find("france")
 	}
 }
@@ -355,7 +355,7 @@ func Benchmark_Catalog_ResolveURL(b *testing.B) {
 
 	fr, _ := cat.Find("france")
 
-	for range b.N {
+	for b.Loop() {
 		_, _ = cat.ResolveURL(fr, catalog.FormatOsmPbf)
 	}
 }
@@ -366,7 +366,7 @@ func Benchmark_Catalog_SortedKeys(b *testing.B) {
 		b.Fatal(err)
 	}
 
-	for range b.N {
+	for b.Loop() {
 		_ = cat.SortedKeys()
 	}
 }

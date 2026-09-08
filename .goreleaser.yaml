@@ -228,6 +228,9 @@ builds:
     
     tool: "go1.27.1"
 
+    flags:
+      - -trimpath
+
     ldflags: >-
       -s -w
       -X main.version={{ .Version }}

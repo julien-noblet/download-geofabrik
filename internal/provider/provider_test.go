@@ -34,7 +34,7 @@ func TestProvider_Registry(t *testing.T) {
 	assert.Equal(t, "mock.yml", p.DefaultConfigFile())
 	assert.Equal(t, "Mock provider", p.Description())
 
-	cat, err := p.FetchCatalog(context.Background())
+	cat, err := p.FetchCatalog(t.Context())
 	require.NoError(t, err)
 	assert.NotNil(t, cat)
 
