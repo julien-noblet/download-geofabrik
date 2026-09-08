@@ -5,9 +5,10 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/mcp"
 	mcpSDK "github.com/mark3labs/mcp-go/mcp"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/mcp"
 )
 
 func FuzzMCPHandleMessage(f *testing.F) {

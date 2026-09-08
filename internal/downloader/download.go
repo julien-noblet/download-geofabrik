@@ -16,6 +16,7 @@ import (
 	"time"
 
 	pb "github.com/cheggaaa/pb/v3"
+
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 

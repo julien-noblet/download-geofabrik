@@ -11,11 +11,12 @@ import (
 	"slices"
 	"strings"
 
+	mcpSDK "github.com/mark3labs/mcp-go/mcp"
+
 	downloader "github.com/julien-noblet/download-geofabrik/internal/downloader"
 	"github.com/julien-noblet/download-geofabrik/internal/generator"
 	"github.com/julien-noblet/download-geofabrik/internal/provider"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
-	mcpSDK "github.com/mark3labs/mcp-go/mcp"
 )
 
 var (

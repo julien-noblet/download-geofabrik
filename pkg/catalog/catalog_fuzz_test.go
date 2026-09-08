@@ -4,9 +4,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/yaml.v3"
+
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 func FuzzCatalogUnmarshalYAML(f *testing.F) {

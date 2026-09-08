@@ -8,8 +8,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/julien-noblet/download-geofabrik/internal/provider"
 	mcpSDK "github.com/mark3labs/mcp-go/mcp"
+
+	"github.com/julien-noblet/download-geofabrik/internal/provider"
 )
 
 const (

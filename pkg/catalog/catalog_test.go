@@ -5,9 +5,10 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 const geofabrikYml = "../../geofabrik.yml"
