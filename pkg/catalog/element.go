@@ -16,12 +16,23 @@ func (f Formats) Contains(format string) bool {
 // Element represents a geographic region, extract, or meta-container.
 // Field alignment optimized.
 type Element struct {
-	ID      string  `json:"id"                yaml:"id"`
-	File    string  `json:"file,omitempty"    yaml:"file,omitempty"`
-	Name    string  `json:"name,omitempty"    yaml:"name,omitempty"`
-	Parent  string  `json:"parent,omitempty"  yaml:"parent,omitempty"`
+	// ID is the unique slug or identifier for this geographic extract (e.g., "europe/france").
+	ID string `json:"id" yaml:"id"`
+
+	// File is the extract filename template (or override) if different from ID.
+	File string `json:"file,omitempty" yaml:"file,omitempty"`
+
+	// Name is the human-readable display name of the geographic area.
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
+
+	// Parent is the identifier of the parent container element (e.g., continent or country).
+	Parent string `json:"parent,omitempty" yaml:"parent,omitempty"`
+
+	// Formats is the list of format identifiers available for this extract.
 	Formats Formats `json:"formats,omitempty" yaml:"files,omitempty"`
-	Meta    bool    `json:"meta,omitempty"    yaml:"meta,omitempty"`
+
+	// Meta indicates whether this element is an organizational category rather than a downloadable extract.
+	Meta bool `json:"meta,omitempty" yaml:"meta,omitempty"`
 }
 
 // HasParent returns true if the element has a parent identifier.

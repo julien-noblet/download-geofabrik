@@ -23,6 +23,7 @@ var listCmd = &cobra.Command{
 	RunE:  runList,
 }
 
+// RegisterListCmd registers the list command and its flags to rootCmd.
 func RegisterListCmd() {
 	rootCmd.AddCommand(listCmd)
 	listCmd.Flags().BoolVar(&markdown, "markdown", false, "Generate list in Markdown format")

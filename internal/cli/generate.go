@@ -19,6 +19,7 @@ var generateCmd = &cobra.Command{
 	RunE:  runGenerate,
 }
 
+// RegisterGenerateCmd registers the generate command and its flags to rootCmd.
 func RegisterGenerateCmd() {
 	rootCmd.AddCommand(generateCmd)
 	generateCmd.Flags().BoolVarP(&generateProgress, "progress", "p", true, "Show progress bar")
