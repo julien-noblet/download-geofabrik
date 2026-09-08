@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
+	"strings"
 
 	config "github.com/julien-noblet/download-geofabrik/internal/config"
 	downloader "github.com/julien-noblet/download-geofabrik/internal/downloader"
+	"github.com/julien-noblet/download-geofabrik/internal/element"
 	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -120,6 +122,53 @@ func resolveOutputDir(dir string) (string, error) {
 	return dir, nil
 }
 
+var preferredDefaultFormats = []string{
+	formats.FormatOsmPbf,
+	formats.FormatO5m,
+	formats.FormatOsmBz2,
+	formats.FormatOsmGz,
+	formats.FormatGeoJSON,
+	formats.FormatGPKG,
+	formats.FormatShpZip,
+	formats.FormatO5mZst,
+}
+
+func hasExplicitFormat(flags map[string]bool) bool {
+	for _, enabled := range flags {
+		if enabled {
+			return true
+		}
+	}
+
+	return false
+}
+
+func selectDefaultFormat(cfg *config.Config, elem *element.Element) string {
+	if elem == nil {
+		return formats.FormatOsmPbf
+	}
+
+	for _, pref := range preferredDefaultFormats {
+		if elem.Formats.Contains(pref) {
+			if _, ok := cfg.Formats[pref]; ok {
+				return pref
+			}
+		}
+	}
+
+	for _, format := range elem.Formats {
+		if strings.HasSuffix(format, ".md5") {
+			continue
+		}
+
+		if _, ok := cfg.Formats[format]; ok {
+			return format
+		}
+	}
+
+	return formats.FormatOsmPbf
+}
+
 func runDownload(cmd *cobra.Command, args []string) error {
 	elementID := args[0]
 
@@ -135,16 +184,31 @@ func runDownload(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to load config: %w", err)
 	}
 
-	activeFormats := formats.GetFormats(opts.FormatFlags)
-	if len(activeFormats) == 0 {
-		activeFormats = []string{formats.FormatOsmPbf}
+	myElem, err := config.FindElem(cfg, elementID)
+	if err != nil {
+		slog.Error("Element not found", "element", elementID, "error", err)
+
+		return fmt.Errorf("%w: %s", config.ErrFindElem, elementID)
+	}
+
+	var activeFormats []string
+	if hasExplicitFormat(opts.FormatFlags) {
+		activeFormats = formats.GetFormats(opts.FormatFlags)
+	} else {
+		activeFormats = []string{selectDefaultFormat(cfg, myElem)}
 	}
 
 	downloaderInstance := downloader.NewDownloader(cfg, opts)
 	ctx := cmd.Context()
 
 	for _, format := range activeFormats {
-		formatDef := cfg.Formats[format]
+		formatDef, exists := cfg.Formats[format]
+		if !exists || !myElem.Formats.Contains(format) {
+			slog.Error("Format not available for element", "format", format, "element", elementID)
+
+			return fmt.Errorf("%w: %s for %s", config.ErrFormatNotExist, format, elementID)
+		}
+
 		targetFile := opts.OutputDirectory + elementID + "." + formatDef.ID
 
 		slog.Info("Processing", "element", elementID, "format", format)

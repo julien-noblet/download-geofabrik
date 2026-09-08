@@ -457,6 +457,15 @@ func TestDownloadFile_Errors(t *testing.T) {
 		}
 	})
 
+	t.Run("Format not found in config", func(t *testing.T) {
+		t.Parallel()
+
+		err := d.DownloadFile(context.Background(), "valid_elem", "nonexistent_format", filepath.Join(t.TempDir(), "out.bin"))
+		if err == nil {
+			t.Errorf("expected error for nonexistent format in config, got nil")
+		}
+	})
+
 	t.Run("Format not available on element", func(t *testing.T) {
 		t.Parallel()
 
