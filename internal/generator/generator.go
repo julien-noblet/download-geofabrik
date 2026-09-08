@@ -10,6 +10,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/internal/provider"
 )
 
+// Supported provider service identifiers.
 const (
 	ServiceGeofabrik       = "geofabrik"
 	ServiceGeofabrikParse  = "geofabrik-parse"
@@ -24,9 +25,10 @@ const (
 	ServiceOSMTW           = "osm.kcwu.csie.org"
 )
 
+// ErrUnknownService is returned when the requested provider service is not registered.
 var ErrUnknownService = errors.New("unknown service")
 
-// Generate generates the configuration catalog file for the specified service.
+// Generate fetches the catalog from the specified service provider and saves it as a YAML file.
 func Generate(ctx context.Context, service, configfile string) error {
 	provider.RegisterDefaultProviders()
 

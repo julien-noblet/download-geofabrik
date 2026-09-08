@@ -44,7 +44,8 @@ func CheckFileHash(hashfile, expectedHash string) (bool, error) {
 	return strings.EqualFold(expectedHash, fileHash), nil
 }
 
-// ComputeMD5Hash computes the MD5 hash of a file.
+// ComputeMD5Hash computes the hexadecimal MD5 checksum of the file at filePath.
+// If the file does not exist, it returns ("", nil) without error.
 func ComputeMD5Hash(filePath string) (string, error) {
 	if !FileExist(filePath) {
 		return "", nil

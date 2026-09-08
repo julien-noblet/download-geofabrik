@@ -31,6 +31,7 @@ var downloadCmd = &cobra.Command{
 	RunE:  runDownload,
 }
 
+// RegisterDownloadCmd registers the download command and its flags to rootCmd.
 func RegisterDownloadCmd() {
 	rootCmd.AddCommand(downloadCmd)
 

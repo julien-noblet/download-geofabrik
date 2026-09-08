@@ -36,27 +36,51 @@ const (
 )
 
 var (
-	ErrFromURL          = errors.New("can't download element")
+	// ErrFromURL is returned when downloading an extract fails due to network or filesystem errors.
+	ErrFromURL = errors.New("can't download element")
+
+	// ErrServerStatusCode is returned when the remote HTTP server responds with a non-2xx status code.
 	ErrServerStatusCode = errors.New("server return code error")
 )
 
-// Options holds runtime options for downloader.
+// Options holds runtime options configuring downloader execution.
 type Options struct {
-	FormatFlags     map[string]bool
-	ConfigFile      string
-	Service         string
+	// FormatFlags maps format CLI keys to their enabled state.
+	FormatFlags map[string]bool
+
+	// ConfigFile specifies the path to the YAML catalog file.
+	ConfigFile string
+
+	// Service specifies the extract provider service identifier.
+	Service string
+
+	// OutputDirectory specifies the target directory for downloaded files.
 	OutputDirectory string
-	Check           bool
-	Verbose         bool
-	Quiet           bool
-	NoDownload      bool
-	Progress        bool
+
+	// Check controls whether checksum verification is performed after download.
+	Check bool
+
+	// Verbose enables detailed debug logging.
+	Verbose bool
+
+	// Quiet suppresses informational log output.
+	Quiet bool
+
+	// NoDownload enables dry-run mode, printing what would be downloaded without network transfer.
+	NoDownload bool
+
+	// Progress controls whether a progress bar is displayed during download.
+	Progress bool
 }
 
-// Downloader handles downloading files.
+// Downloader executes atomic extract downloads with in-flight hash computation and connection pooling.
 type Downloader struct {
-	Catalog  *catalog.Catalog
-	Options  *Options
+	// Catalog provides element metadata and format URL templates.
+	Catalog *catalog.Catalog
+
+	// Options contains execution options.
+	Options *Options
+
 	client   *http.Client
 	lastHash sync.Map // map[string]string: filePath -> hexMD5 computed in-flight
 }

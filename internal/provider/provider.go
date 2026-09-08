@@ -12,15 +12,26 @@ import (
 )
 
 var (
+	// ErrProviderNotFound is returned when a requested provider name is not in the registry.
 	ErrProviderNotFound = errors.New("provider not found")
-	ErrFetchCatalog     = errors.New("failed to fetch catalog")
+
+	// ErrFetchCatalog is returned when a provider fails to fetch or parse remote catalog data.
+	ErrFetchCatalog = errors.New("failed to fetch catalog")
 )
 
 // Provider defines the standard interface for an OSM data catalog provider.
 type Provider interface {
+	// Name returns the unique service identifier for the provider (e.g. "geofabrik").
 	Name() string
+
+	// Description returns a human-readable summary of the provider and its coverage.
 	Description() string
+
+	// DefaultConfigFile returns the default YAML filename used to cache the provider catalog.
 	DefaultConfigFile() string
+
+	// FetchCatalog scrapes or queries the provider API to build and return a complete *catalog.Catalog.
+	// It must respect context cancellation and timeouts.
 	FetchCatalog(ctx context.Context) (*catalog.Catalog, error)
 }
 
