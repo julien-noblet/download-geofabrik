@@ -237,11 +237,9 @@ func Benchmark_OSMFR_FetchCatalog_Mock(b *testing.B) {
 	p.BaseURL = ts.URL + "/extracts"
 	p.Client = ts.Client()
 
-	ctx := context.Background()
+	ctx := b.Context()
 
-	b.ResetTimer()
-
-	for range b.N {
+	for b.Loop() {
 		_, _ = p.FetchCatalog(ctx)
 	}
 }

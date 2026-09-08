@@ -463,7 +463,7 @@ func Benchmark_FileExist(b *testing.B) {
 	f := filepath.Join(tmpDir, "test.txt")
 	_ = os.WriteFile(f, []byte("data"), 0o600)
 
-	for range b.N {
+	for b.Loop() {
 		_ = download.FileExist(f)
 	}
 }
@@ -472,7 +472,7 @@ func Benchmark_NewDownloader(b *testing.B) {
 	cfg := catalog.New()
 	opts := &download.Options{}
 
-	for range b.N {
+	for b.Loop() {
 		_ = download.NewDownloader(cfg, opts)
 	}
 }

@@ -117,7 +117,7 @@ func Benchmark_CLI_Execute_Help(b *testing.B) {
 		cli.RootCmd.SetErr(nil)
 	})
 
-	for range b.N {
+	for b.Loop() {
 		_ = cli.Execute()
 	}
 }

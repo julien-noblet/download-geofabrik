@@ -1,7 +1,6 @@
 package mcp_test
 
 import (
-	"context"
 	"encoding/json"
 	"path/filepath"
 	"testing"
@@ -94,7 +93,7 @@ func TestListServicesTool(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 
 	tool := srv.MCPServer().GetTool("list_services")
 	require.NotNil(t, tool)
@@ -141,7 +140,7 @@ func TestListFormatsTool(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 
 	tool := srv.MCPServer().GetTool("list_formats")
 	require.NotNil(t, tool)
@@ -186,7 +185,7 @@ func TestListElementsTool(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 	catFile := createTestCatalog(t)
 
 	tool := srv.MCPServer().GetTool("list_elements")
@@ -274,7 +273,7 @@ func TestGetElementTool(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 	catFile := createTestCatalog(t)
 
 	tool := srv.MCPServer().GetTool("get_element")
@@ -355,7 +354,7 @@ func TestDownloadElementToolDryRun(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 	catFile := createTestCatalog(t)
 	outDir := t.TempDir()
 
@@ -400,7 +399,7 @@ func TestDownloadElementToolDefaultFormatNonPbf(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 
 	tempDir := t.TempDir()
 	catPath := filepath.Join(tempDir, "tw-catalog.yml")
@@ -458,7 +457,7 @@ func TestRegenerateCatalogToolErrors(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 
 	tool := srv.MCPServer().GetTool("regenerate_catalog")
 	require.NotNil(t, tool)
@@ -492,7 +491,7 @@ func TestResources(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 
 	resources := srv.MCPServer().ListResources()
 	require.NotEmpty(t, resources)

@@ -467,11 +467,9 @@ func Benchmark_Geo2Day_FetchCatalog_Mock(b *testing.B) {
 
 	p := newTestProvider(ts)
 
-	ctx := context.Background()
+	ctx := b.Context()
 
-	b.ResetTimer()
-
-	for range b.N {
+	for b.Loop() {
 		_, _ = p.FetchCatalog(ctx)
 	}
 }
