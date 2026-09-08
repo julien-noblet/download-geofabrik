@@ -6,10 +6,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/provider/movisda"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/provider/movisda"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 const mockMovisdaGeoJSON = `{

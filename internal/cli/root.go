@@ -6,9 +6,10 @@ import (
 	"os"
 	"sync"
 
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var (

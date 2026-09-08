@@ -6,11 +6,12 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/mcp"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	mcpSDK "github.com/mark3labs/mcp-go/mcp"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/mcp"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 const (

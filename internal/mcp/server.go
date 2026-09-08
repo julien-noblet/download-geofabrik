@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/julien-noblet/download-geofabrik/internal/provider"
 	"github.com/mark3labs/mcp-go/server"
+
+	"github.com/julien-noblet/download-geofabrik/internal/provider"
 )
 
 // Server encapsulates the Model Context Protocol (MCP) server for download-geofabrik.

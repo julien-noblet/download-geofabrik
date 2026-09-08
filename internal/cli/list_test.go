@@ -4,9 +4,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/cli"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/cli"
 )
 
 func TestListCmd(t *testing.T) {

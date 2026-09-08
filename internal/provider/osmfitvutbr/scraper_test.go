@@ -10,10 +10,11 @@ import (
 	"testing"
 	"testing/iotest"
 
-	"github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 const mockFitVutbrRootHTML = `<!DOCTYPE html>

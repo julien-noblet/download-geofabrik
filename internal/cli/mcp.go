@@ -3,8 +3,9 @@ package cli
 import (
 	"fmt"
 
-	"github.com/julien-noblet/download-geofabrik/internal/mcp"
 	"github.com/spf13/cobra"
+
+	"github.com/julien-noblet/download-geofabrik/internal/mcp"
 )
 
 var mcpCmd = &cobra.Command{

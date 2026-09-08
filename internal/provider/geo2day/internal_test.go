@@ -3,8 +3,9 @@ package geo2day
 import (
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 func TestSplitParent_EdgeCases(t *testing.T) {

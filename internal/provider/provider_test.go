@@ -4,10 +4,11 @@ import (
 	"context"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/provider"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/provider"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 type mockProvider struct {
