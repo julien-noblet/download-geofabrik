@@ -121,17 +121,10 @@ func TestDownloadCmd_NoDownload(t *testing.T) {
 }
 
 func TestDownloadCmd_InvalidArgs(t *testing.T) {
-	oldArgs := os.Args
+	cli.ResetGlobs()
+	cli.RootCmd.SetArgs([]string{"download"})
 
-	defer func() { os.Args = oldArgs }()
-
-	// Missing element arg
-	os.Args = []string{"download-geofabrik", "download"}
-
-	// Execute
-	// Note: cobra might print to stderr.
 	err := cli.Execute()
-
 	require.Error(t, err)
 
 	// Test invalid arguments (missing element)
