@@ -7694,7 +7694,7 @@ elements:
     eg-dk:
         id: eg-dk
         file: EG-DK-latest
-        name: Ad Daqahliyya
+        name: Dakahlia Governorate
         parent: eg
         files:
             - geojson
@@ -7721,7 +7721,7 @@ elements:
     eg-gh:
         id: eg-gh
         file: EG-GH-latest
-        name: Western
+        name: Gharbiyya Governorate
         parent: eg
         files:
             - geojson
@@ -7802,7 +7802,7 @@ elements:
     eg-mnf:
         id: eg-mnf
         file: EG-MNF-latest
-        name: El Minufiyya
+        name: Monufia Governorate
         parent: eg
         files:
             - geojson
@@ -7838,7 +7838,7 @@ elements:
     eg-shr:
         id: eg-shr
         file: EG-SHR-latest
-        name: Eastern
+        name: Al Sharqia Governorate
         parent: eg
         files:
             - geojson
@@ -25283,7 +25283,7 @@ elements:
     tm-a:
         id: tm-a
         file: TM-A-latest
-        name: Ahal Region
+        name: Ahal Province
         parent: tm
         files:
             - geojson
@@ -25292,7 +25292,7 @@ elements:
     tm-b:
         id: tm-b
         file: TM-B-latest
-        name: Balkan Region
+        name: Balkan Province
         parent: tm
         files:
             - geojson
@@ -25301,7 +25301,7 @@ elements:
     tm-d:
         id: tm-d
         file: TM-D-latest
-        name: Dashoguz Region
+        name: Daşoguz Province
         parent: tm
         files:
             - geojson
@@ -25310,7 +25310,7 @@ elements:
     tm-l:
         id: tm-l
         file: TM-L-latest
-        name: Lebap Region
+        name: Lebap Province
         parent: tm
         files:
             - geojson
@@ -25319,7 +25319,7 @@ elements:
     tm-m:
         id: tm-m
         file: TM-M-latest
-        name: Mary Region
+        name: Mary Province
         parent: tm
         files:
             - geojson
