@@ -67,9 +67,9 @@
 				
 				<option value="file5">github.com/julien-noblet/download-geofabrik/internal/cli/root.go (88.9%)</option>
 				
-				<option value="file6">github.com/julien-noblet/download-geofabrik/internal/config/config.go (91.7%)</option>
+				<option value="file6">github.com/julien-noblet/download-geofabrik/internal/config/config.go (93.1%)</option>
 				
-				<option value="file7">github.com/julien-noblet/download-geofabrik/internal/downloader/download.go (89.5%)</option>
+				<option value="file7">github.com/julien-noblet/download-geofabrik/internal/downloader/download.go (87.6%)</option>
 				
 				<option value="file8">github.com/julien-noblet/download-geofabrik/internal/downloader/hash.go (82.1%)</option>
 				
@@ -115,7 +115,7 @@
 				
 				<option value="file29">github.com/julien-noblet/download-geofabrik/internal/ui/printer.go (92.3%)</option>
 				
-				<option value="file30">github.com/julien-noblet/download-geofabrik/pkg/catalog/catalog.go (92.4%)</option>
+				<option value="file30">github.com/julien-noblet/download-geofabrik/pkg/catalog/catalog.go (89.8%)</option>
 				
 				<option value="file31">github.com/julien-noblet/download-geofabrik/pkg/catalog/element.go (94.1%)</option>
 				
@@ -685,23 +685,23 @@ type Options struct {
 
 // Generate Yaml config.
 func (config *Config) Generate() ([]byte, error) {
-        <span class="cov4" title="3">yml, err := yaml.Marshal(config)
+        <span class="cov3" title="3">yml, err := yaml.Marshal(config)
         if err != nil </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("failed to Marshal: %w", err)
 </span>        }
 
-        <span class="cov4" title="3">return yml, nil</span>
+        <span class="cov3" title="3">return yml, nil</span>
 }
 
 // MergeElement merges a new element into the config safely using a write lock.
 func (config *Config) MergeElement(elementPtr *element.Element) error {
-        <span class="cov9" title="17">config.ElementsMutex.Lock()
+        <span class="cov8" title="17">config.ElementsMutex.Lock()
         defer config.ElementsMutex.Unlock()
 </span>
-        <span class="cov9" title="17">newElement, ok := config.Elements[elementPtr.ID]
+        <span class="cov8" title="17">newElement, ok := config.Elements[elementPtr.ID]
         if ok </span>{
-                <span class="cov4" title="3">if newElement.Parent != elementPtr.Parent </span>{
-                        <span class="cov3" title="2">return fmt.Errorf("%w: Parent mismatch %s != %s (%s)", ErrParentMismatch, newElement.Parent, elementPtr.Parent, elementPtr.ID)
+                <span class="cov3" title="3">if newElement.Parent != elementPtr.Parent </span>{
+                        <span class="cov2" title="2">return fmt.Errorf("%w: Parent mismatch %s != %s (%s)", ErrParentMismatch, newElement.Parent, elementPtr.Parent, elementPtr.ID)
 </span>                }
 
                 <span class="cov1" title="1">for _, f := range elementPtr.Formats </span>{
@@ -713,21 +713,35 @@ func (config *Config) MergeElement(elementPtr *element.Element) error {
                 <span class="cov1" title="1">newElement.Meta = len(newElement.Formats) == 0
                 config.Elements[elementPtr.ID] = newElement</span>
         } else {
-                <span class="cov9" title="14">config.Elements[elementPtr.ID] = *elementPtr
+                <span class="cov8" title="14">config.Elements[elementPtr.ID] = *elementPtr
 </span>        }
 
-        <span class="cov9" title="15">return nil</span>
+        <span class="cov8" title="15">return nil</span>
 }
 
 // Exist checks if an element with the given ID exists in the config.
 func (config *Config) Exist(elementID string) bool {
-        <span class="cov5" title="4">config.ElementsMutex.RLock()
+        <span class="cov6" title="7">config.ElementsMutex.RLock()
         defer config.ElementsMutex.RUnlock()
 </span>
-        <span class="cov5" title="4">_, exists := config.Elements[elementID]
-</span>
-        <span class="cov5" title="4">return exists
-</span>}
+        <span class="cov6" title="7">if _, exists := config.Elements[elementID]; exists </span>{
+                <span class="cov4" title="4">return true
+</span>        }
+
+        <span class="cov3" title="3">if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID </span>{
+                <span class="cov1" title="1">if _, exists := config.Elements[altID]; exists </span>{
+                        <span class="cov1" title="1">return true
+</span>                }
+        }
+
+        <span class="cov2" title="2">if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID </span>{
+                <span class="cov1" title="1">if _, exists := config.Elements[altID]; exists </span>{
+                        <span class="cov1" title="1">return true
+</span>                }
+        }
+
+        <span class="cov1" title="1">return false</span>
+}
 
 // AddExtension adds an extension to an element, creating it if not already present.
 func (config *Config) AddExtension(elementID, format string) {
@@ -754,32 +768,40 @@ func (config *Config) AddExtension(elementID, format string) {
 // GetElement gets an element by ID or returns an error if not found.
 func (config *Config) GetElement(elementID string) (*element.Element, error) {
         <span class="cov6" title="7">config.ElementsMutex.RLock()
-        elem, ok := config.Elements[elementID]
-        config.ElementsMutex.RUnlock()
+        defer config.ElementsMutex.RUnlock()
 </span>
-        <span class="cov6" title="7">if !ok </span>{
-                <span class="cov0" title="0">return nil, fmt.Errorf("%w: %s", ErrFindElem, elementID)
-</span>        }
+        <span class="cov6" title="7">return FindElem(config, elementID)
+</span>}
 
-        <span class="cov6" title="7">res := elem
-</span>
-        <span class="cov6" title="7">return &amp;res, nil</span>
-}
-
-// FindElem finds an element in the config by ID.
+// FindElem finds an element in the config by ID, with fallback for normalized hyphen/underscore variations.
 func FindElem(config *Config, elementID string) (*element.Element, error) {
-        <span class="cov9" title="16">if config == nil </span>{
-                <span class="cov0" title="0">return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, elementID)
-</span>        }
-
-        <span class="cov9" title="16">res, ok := config.Elements[elementID]
-        if !ok || res.ID != elementID </span>{
+        <span class="cov10" title="28">if config == nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, elementID)
 </span>        }
 
-        <span class="cov9" title="15">elemCopy := res
+        <span class="cov9" title="27">if res, ok := config.Elements[elementID]; ok &amp;&amp; res.ID != "" </span>{
+                <span class="cov9" title="23">elemCopy := res
 </span>
-        <span class="cov9" title="15">return &amp;elemCopy, nil</span>
+                <span class="cov9" title="23">return &amp;elemCopy, nil
+</span>        }
+
+        <span class="cov4" title="4">if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID </span>{
+                <span class="cov1" title="1">if res, ok := config.Elements[altID]; ok &amp;&amp; res.ID != "" </span>{
+                        <span class="cov1" title="1">elemCopy := res
+</span>
+                        <span class="cov1" title="1">return &amp;elemCopy, nil
+</span>                }
+        }
+
+        <span class="cov3" title="3">if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID </span>{
+                <span class="cov2" title="2">if res, ok := config.Elements[altID]; ok &amp;&amp; res.ID != "" </span>{
+                        <span class="cov1" title="1">elemCopy := res
+</span>
+                        <span class="cov1" title="1">return &amp;elemCopy, nil
+</span>                }
+        }
+
+        <span class="cov2" title="2">return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, elementID)</span>
 }
 
 // GetFile gets the file name of an element.
@@ -792,144 +814,144 @@ func GetFile(myElement *element.Element) string {
 }
 
 func buildPrefix(baseURL []string, defaultBaseURL string) string {
-        <span class="cov9" title="18">var prefix string
+        <span class="cov8" title="18">var prefix string
 </span>
-        <span class="cov9" title="18">switch len(baseURL) </span>{
+        <span class="cov8" title="18">switch len(baseURL) </span>{
         case 1:
                 <span class="cov1" title="1">prefix = defaultBaseURL + "/" + strings.Join(baseURL, "/")</span>
         case twoBaseURLParts:
-                <span class="cov9" title="15">prefix = strings.Join(baseURL, "/")</span>
+                <span class="cov8" title="15">prefix = strings.Join(baseURL, "/")</span>
         default:
-                <span class="cov3" title="2">prefix = defaultBaseURL</span>
+                <span class="cov2" title="2">prefix = defaultBaseURL</span>
         }
 
-        <span class="cov9" title="18">if !strings.HasSuffix(prefix, "/") </span>{
-                <span class="cov5" title="4">prefix += "/"
+        <span class="cov8" title="18">if !strings.HasSuffix(prefix, "/") </span>{
+                <span class="cov4" title="4">prefix += "/"
 </span>        }
 
-        <span class="cov9" title="18">return prefix</span>
+        <span class="cov8" title="18">return prefix</span>
 }
 
 func collectElementSegments(config *Config, startID string) ([]string, error) {
-        <span class="cov9" title="18">var segments [maxHierarchyDepth]string
+        <span class="cov8" title="18">var segments [maxHierarchyDepth]string
 </span>
-        <span class="cov9" title="18">count := 0
+        <span class="cov8" title="18">count := 0
         currID := startID
 </span>
-        <span class="cov9" title="18">for count &lt; maxHierarchyDepth </span>{
-                <span class="cov10" title="19">elem, ok := config.Elements[currID]
+        <span class="cov8" title="18">for count &lt; maxHierarchyDepth </span>{
+                <span class="cov8" title="19">elem, ok := config.Elements[currID]
                 if !ok || elem.ID == "" </span>{
                         <span class="cov0" title="0">return nil, fmt.Errorf("%w: %s is not in config. Please use \"list\" command", ErrFindElem, currID)
 </span>                }
 
-                <span class="cov10" title="19">file := elem.File
+                <span class="cov8" title="19">file := elem.File
                 if file == "" </span>{
-                        <span class="cov10" title="19">file = elem.ID
+                        <span class="cov8" title="19">file = elem.ID
 </span>                }
 
-                <span class="cov10" title="19">segments[count] = file
+                <span class="cov8" title="19">segments[count] = file
                 count++
 </span>
-                <span class="cov10" title="19">if elem.Parent == "" </span>{
-                        <span class="cov9" title="18">break</span>
+                <span class="cov8" title="19">if elem.Parent == "" </span>{
+                        <span class="cov8" title="18">break</span>
                 }
 
                 <span class="cov1" title="1">currID = elem.Parent</span>
         }
 
-        <span class="cov9" title="18">if count &gt;= maxHierarchyDepth </span>{
+        <span class="cov8" title="18">if count &gt;= maxHierarchyDepth </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("%w for element %s (possible cycle in config)", ErrMaxHierarchyDepth, startID)
 </span>        }
 
-        <span class="cov9" title="18">return segments[:count], nil</span>
+        <span class="cov8" title="18">return segments[:count], nil</span>
 }
 
 // Elem2preURL generates a pre-URL for an element iteratively with single-allocation buffer.
 func Elem2preURL(config *Config, elementPtr *element.Element, baseURL ...string) (string, error) {
-        <span class="cov9" title="18">if config == nil || elementPtr == nil </span>{
+        <span class="cov8" title="18">if config == nil || elementPtr == nil </span>{
                 <span class="cov0" title="0">return "", fmt.Errorf("%w: invalid nil argument", ErrFindElem)
 </span>        }
 
-        <span class="cov9" title="18">segments, err := collectElementSegments(config, elementPtr.ID)
+        <span class="cov8" title="18">segments, err := collectElementSegments(config, elementPtr.ID)
         if err != nil </span>{
                 <span class="cov0" title="0">return "", err
 </span>        }
 
-        <span class="cov9" title="18">var builder strings.Builder
+        <span class="cov8" title="18">var builder strings.Builder
         builder.Grow(defaultBuilderSize)
 </span>
-        <span class="cov9" title="18">builder.WriteString(buildPrefix(baseURL, config.BaseURL))
+        <span class="cov8" title="18">builder.WriteString(buildPrefix(baseURL, config.BaseURL))
 </span>
-        <span class="cov9" title="18">for i := len(segments) - 1; i &gt;= 0; i-- </span>{
-                <span class="cov10" title="19">builder.WriteString(segments[i])
+        <span class="cov8" title="18">for i := len(segments) - 1; i &gt;= 0; i-- </span>{
+                <span class="cov8" title="19">builder.WriteString(segments[i])
 </span>
-                <span class="cov10" title="19">if i &gt; 0 </span>{
+                <span class="cov8" title="19">if i &gt; 0 </span>{
                         <span class="cov1" title="1">builder.WriteByte('/')
 </span>                }
         }
 
-        <span class="cov9" title="18">return builder.String(), nil</span>
+        <span class="cov8" title="18">return builder.String(), nil</span>
 }
 
 // Elem2URL generates a URL for an element with the given extension.
 func Elem2URL(config *Config, elementPtr *element.Element, ext string) (string, error) {
-        <span class="cov9" title="17">if !elementPtr.Formats.Contains(ext) </span>{
-                <span class="cov4" title="3">return "", fmt.Errorf("%w: %s", ErrFormatNotExist, ext)
+        <span class="cov8" title="16">if !elementPtr.Formats.Contains(ext) </span>{
+                <span class="cov2" title="2">return "", fmt.Errorf("%w: %s", ErrFormatNotExist, ext)
 </span>        }
 
-        <span class="cov9" title="14">format, ok := config.Formats[ext]
+        <span class="cov8" title="14">format, ok := config.Formats[ext]
         if !ok </span>{
                 <span class="cov0" title="0">return "", fmt.Errorf("%w: %s", ErrFormatNotExist, ext)
 </span>        }
 
-        <span class="cov9" title="14">baseURL, basePath := format.BaseURL, format.BasePath
+        <span class="cov8" title="14">baseURL, basePath := format.BaseURL, format.BasePath
         if baseURL == "" </span>{
-                <span class="cov9" title="14">baseURL = config.BaseURL
+                <span class="cov8" title="14">baseURL = config.BaseURL
 </span>        }
 
-        <span class="cov9" title="14">res, err := Elem2preURL(config, elementPtr, baseURL, basePath)
+        <span class="cov8" title="14">res, err := Elem2preURL(config, elementPtr, baseURL, basePath)
         if err != nil </span>{
                 <span class="cov0" title="0">return "", err
 </span>        }
 
-        <span class="cov9" title="14">return res + format.Loc, nil</span>
+        <span class="cov8" title="14">return res + format.Loc, nil</span>
 }
 
 // LoadConfig loads the configuration from the specified file.
 func LoadConfig(configFile string) (*Config, error) {
-        <span class="cov6" title="7">filename, _ := filepath.Abs(configFile)
+        <span class="cov6" title="8">filename, _ := filepath.Abs(configFile)
 </span>
-        <span class="cov6" title="7">fileContent, err := os.ReadFile(filename)
+        <span class="cov6" title="8">fileContent, err := os.ReadFile(filename)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("can't open %s: %w", filename, err)
 </span>        }
 
-        <span class="cov6" title="6">myConfigPtr := &amp;Config{
+        <span class="cov6" title="7">myConfigPtr := &amp;Config{
                 Formats:       formats.FormatDefinitions{},
                 Elements:      element.MapElement{},
                 ElementsMutex: &amp;sync.RWMutex{},
                 BaseURL:       "",
 </span>        }
 
-        <span class="cov6" title="6">if err := yaml.Unmarshal(fileContent, myConfigPtr); err != nil </span>{
+        <span class="cov6" title="7">if err := yaml.Unmarshal(fileContent, myConfigPtr); err != nil </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("can't unmarshal %s: %w", filename, err)
 </span>        }
 
-        <span class="cov6" title="6">return myConfigPtr, nil</span>
+        <span class="cov6" title="7">return myConfigPtr, nil</span>
 }
 
 // IsHashable checks if a format is hashable.
 func IsHashable(config *Config, format string) (isHashable bool, hash, extension string) {
-        <span class="cov7" title="9">if _, ok := config.Formats[format]; ok </span>{
-                <span class="cov7" title="8">for _, h := range hashes </span>{
-                        <span class="cov7" title="8">hashKey := format + "." + h
+        <span class="cov6" title="9">if _, ok := config.Formats[format]; ok </span>{
+                <span class="cov6" title="8">for _, h := range hashes </span>{
+                        <span class="cov6" title="8">hashKey := format + "." + h
                         if _, ok := config.Formats[hashKey]; ok </span>{
                                 <span class="cov5" title="5">return true, hashKey, h
 </span>                        }
                 }
         }
 
-        <span class="cov5" title="4">return false, "", ""</span>
+        <span class="cov4" title="4">return false, "", ""</span>
 }
 </pre>
 		
@@ -1210,11 +1232,17 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
                 <span class="cov0" title="0">return false
 </span>        }
 
-        <span class="cov4" title="4">myURL, err := config.Elem2URL(d.Config, myElem, fhash)
-        if err != nil </span>{
-                <span class="cov1" title="1">slog.Error("URL generation failed", "error", err)
+        <span class="cov4" title="4">if !myElem.Formats.Contains(fhash) </span>{
+                <span class="cov1" title="1">slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+d.Config.Formats[formatName].ID)
 </span>
                 <span class="cov1" title="1">return false
+</span>        }
+
+        <span class="cov4" title="3">myURL, err := config.Elem2URL(d.Config, myElem, fhash)
+        if err != nil </span>{
+                <span class="cov0" title="0">slog.Error("URL generation failed", "error", err)
+</span>
+                <span class="cov0" title="0">return false
 </span>        }
 
         <span class="cov4" title="3">outputPath := d.Options.OutputDirectory + elementID
@@ -1356,9 +1384,9 @@ const (
 
 var bufferPool = sync.Pool{
         New: func() any {
-                <span class="cov7" title="7">buf := make([]byte, bufferSize)
+                <span class="cov6" title="6">buf := make([]byte, bufferSize)
 </span>
-                <span class="cov7" title="7">return &amp;buf
+                <span class="cov6" title="6">return &amp;buf
 </span>        },
 }
 
@@ -1406,17 +1434,17 @@ func (e *Element) HasParent() bool {
 
 // Contains checks if the format list contains a specific format.
 func (f *Formats) Contains(format string) bool {
-        <span class="cov10" title="27">if f == nil </span>{
+        <span class="cov10" title="30">if f == nil </span>{
                 <span class="cov1" title="1">return false
 </span>        }
 
-        <span class="cov9" title="26">return slices.Contains(*f, format)</span>
+        <span class="cov9" title="29">return slices.Contains(*f, format)</span>
 }
 
 // CreateParentElement creates a parent element for the given element.
 // Useful for meta parents.
 func CreateParentElement(e *Element, grandparentID string) *Element {
-        <span class="cov4" title="3">if e.HasParent() </span>{
+        <span class="cov3" title="3">if e.HasParent() </span>{
                 <span class="cov2" title="2">return &amp;Element{
                         ID:      e.Parent,
                         File:    "",
@@ -2227,10 +2255,10 @@ func (s *Server) toolListElements() mcpSDK.Tool {
 </span>}
 
 func (s *Server) toolGetElement() mcpSDK.Tool {
-        <span class="cov4" title="8">desc := "Get detailed information about a specific element in a service, including resolved download URLs for each format " +
+        <span class="cov4" title="7">desc := "Get detailed information about a specific element in a service, including resolved download URLs for each format " +
                 "and checksum verification availability."
 </span>
-        <span class="cov4" title="8">return mcpSDK.NewTool("get_element",
+        <span class="cov4" title="7">return mcpSDK.NewTool("get_element",
                 mcpSDK.WithDescription(desc),
                 mcpSDK.WithString("element_id",
                         mcpSDK.Required(),
@@ -2293,21 +2321,21 @@ func (s *Server) handleListServices(_ context.Context, request mcpSDK.CallToolRe
         services := make([]ServiceInfo, 0, len(names))
 </span>
         <span class="cov1" title="1">for _, name := range names </span>{
-                <span class="cov4" title="10">prov, err := provider.Get(name)
+                <span class="cov5" title="10">prov, err := provider.Get(name)
                 if err != nil </span>{
                         <span class="cov0" title="0">continue</span>
                 }
 
-                <span class="cov4" title="10">defaultCfg := prov.DefaultConfigFile()
+                <span class="cov5" title="10">defaultCfg := prov.DefaultConfigFile()
                 hasLocal := false
 </span>
-                <span class="cov4" title="10">if checkLocal &amp;&amp; defaultCfg != "" </span>{
-                        <span class="cov4" title="10">if _, statErr := os.Stat(defaultCfg); statErr == nil </span>{
+                <span class="cov5" title="10">if checkLocal &amp;&amp; defaultCfg != "" </span>{
+                        <span class="cov5" title="10">if _, statErr := os.Stat(defaultCfg); statErr == nil </span>{
                                 <span class="cov0" title="0">hasLocal = true
 </span>                        }
                 }
 
-                <span class="cov4" title="10">services = append(services, ServiceInfo{
+                <span class="cov5" title="10">services = append(services, ServiceInfo{
                         Name:              prov.Name(),
                         Description:       prov.Description(),
                         DefaultConfigFile: defaultCfg,
@@ -2576,7 +2604,7 @@ func (s *Server) handleListFormats(ctx context.Context, request mcpSDK.CallToolR
 </span>                }
 
                 <span class="cov1" title="1">slices.SortFunc(formatSpecs, func(a, b FormatSpecification) int </span>{
-                        <span class="cov2" title="2">return strings.Compare(a.ID, b.ID)
+                        <span class="cov2" title="3">return strings.Compare(a.ID, b.ID)
 </span>                })
 
                 <span class="cov1" title="1">return jsonToolResult(formatSpecs)</span>
@@ -2620,7 +2648,7 @@ func collectGlobalFormats() []FormatSpecification {
 </span>        }
 
         <span class="cov2" title="2">slices.SortFunc(specs, func(a, b FormatSpecification) int </span>{
-                <span class="cov10" title="181">return strings.Compare(a.ID, b.ID)
+                <span class="cov10" title="173">return strings.Compare(a.ID, b.ID)
 </span>        })
 
         <span class="cov2" title="2">return specs</span>
@@ -3279,7 +3307,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
         <span class="cov4" title="13">sem := make(chan struct{}, concurrencyLimit)
 </span>
         <span class="cov4" title="13">recordErr := func(err error) </span>{
-                <span class="cov6" title="66">errOnce.Do(func() </span>{
+                <span class="cov6" title="65">errOnce.Do(func() </span>{
                         <span class="cov3" title="7">firstErr = err
 </span>                })
         }
@@ -3324,9 +3352,9 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 
                                 <span class="cov6" title="51">subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
                                 if err != nil </span>{
-                                        <span class="cov5" title="40">recordErr(err)
+                                        <span class="cov5" title="39">recordErr(err)
 </span>
-                                        <span class="cov5" title="40">return
+                                        <span class="cov5" title="39">return
 </span>                                }
 
                                 <span class="cov4" title="11">for _, page := range subPages </span>{
@@ -3366,7 +3394,7 @@ func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, c
 
         <span class="cov6" title="50">resp, err := client.Do(req)
         if err != nil </span>{
-                <span class="cov5" title="36">return nil, fmt.Errorf("%w: %w", ErrFetchCatalog, err)
+                <span class="cov5" title="37">return nil, fmt.Errorf("%w: %w", ErrFetchCatalog, err)
 </span>        }
         <span class="cov4" title="13">defer resp.Body.Close()
 </span>
@@ -3851,7 +3879,6 @@ const (
         defaultIdleTimeout         = 90 * time.Second
         defaultMaxIdleConns        = 20
         defaultMaxIdleConnsPerHost = 10
-        minPrefixParts             = 2
 )
 
 // Provider implements provider.Provider for the Movisda administrative extracts service.
@@ -3864,7 +3891,7 @@ type Provider struct {
 
 // NewProvider creates a new Movisda provider with tuned transport.
 func NewProvider() *Provider {
-        <span class="cov9" title="23">return &amp;Provider{
+        <span class="cov8" title="21">return &amp;Provider{
                 IndexURL: MovisdaIndexURL,
                 BaseURL:  MovisdaBaseURL,
                 Client: &amp;http.Client{
@@ -3900,7 +3927,7 @@ func (p *Provider) DefaultConfigFile() string {
 
 // DefaultFormats returns format definitions supported by Movisda.
 func DefaultFormats() catalog.FormatDefinitions {
-        <span class="cov6" title="7">return catalog.FormatDefinitions{
+        <span class="cov5" title="5">return catalog.FormatDefinitions{
                 catalog.FormatOsmPbf:  {ID: catalog.FormatOsmPbf, Loc: ".osm.pbf"},
                 catalog.FormatPoly:    {ID: catalog.FormatPoly, Loc: ".poly"},
                 catalog.FormatGeoJSON: {ID: catalog.FormatGeoJSON, Loc: ".geojson"},
@@ -3919,7 +3946,6 @@ type geoJSONFeature struct {
                 Name       string `json:"name"`
                 NameEN     string `json:"name_en"`
                 Prefix     string `json:"prefix"`
-                Parent     string `json:"parent,omitempty"`
                 AdminLevel string `json:"admin_level"`
                 OSMID      int64  `json:"osm_id"`
         } `json:"properties"`
@@ -3931,87 +3957,66 @@ type adminGeoJSON struct {
 
 // FetchCatalog downloads the Admin-latest.geojson index and builds a catalog.Catalog.
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
-        <span class="cov6" title="9">req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.IndexURL, http.NoBody)
+        <span class="cov6" title="7">req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.IndexURL, http.NoBody)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("cannot create request for %s: %w", p.IndexURL, err)
 </span>        }
 
-        <span class="cov6" title="8">client := p.Client
+        <span class="cov5" title="6">client := p.Client
         if client == nil </span>{
                 <span class="cov1" title="1">client = http.DefaultClient
 </span>        }
 
-        <span class="cov6" title="8">resp, err := client.Do(req)
+        <span class="cov5" title="6">resp, err := client.Do(req)
         if err != nil </span>{
                 <span class="cov2" title="2">return nil, fmt.Errorf("%w from %s: %w", ErrFetchCatalog, p.IndexURL, err)
 </span>        }
-        <span class="cov5" title="6">defer resp.Body.Close()
+        <span class="cov4" title="4">defer resp.Body.Close()
 </span>
-        <span class="cov5" title="6">if resp.StatusCode != http.StatusOK </span>{
+        <span class="cov4" title="4">if resp.StatusCode != http.StatusOK </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("%w: unexpected HTTP %d from %s", ErrFetchCatalog, resp.StatusCode, p.IndexURL)
 </span>        }
 
-        <span class="cov5" title="5">var geo adminGeoJSON
+        <span class="cov3" title="3">var geo adminGeoJSON
         if err := json.NewDecoder(resp.Body).Decode(&amp;geo); err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("cannot decode GeoJSON index: %w", err)
 </span>        }
 
-        <span class="cov4" title="4">cat := catalog.New()
+        <span class="cov2" title="2">cat := catalog.New()
         cat.BaseURL = p.BaseURL
         cat.Formats = DefaultFormats()
 </span>
-        <span class="cov4" title="4">for i := range geo.Features </span>{
-                <span class="cov7" title="14">elem := buildElement(&amp;geo.Features[i])
+        <span class="cov2" title="2">for i := range geo.Features </span>{
+                <span class="cov7" title="10">elem := buildElement(&amp;geo.Features[i])
                 if elem.ID == "" </span>{
                         <span class="cov2" title="2">continue</span>
                 }
 
-                <span class="cov7" title="12">if err := cat.MergeElement(&amp;elem); err != nil </span>{
-                        <span class="cov1" title="1">return nil, fmt.Errorf("cannot merge element %s: %w", elem.ID, err)
-</span>                }
+                <span class="cov6" title="8">_ = cat.MergeElement(&amp;elem)</span>
         }
 
-        <span class="cov3" title="3">return cat, nil</span>
+        <span class="cov2" title="2">return cat, nil</span>
 }
 
 func buildElement(feat *geoJSONFeature) catalog.Element {
-        <span class="cov7" title="14">prefix := feat.Properties.Prefix
+        <span class="cov7" title="10">prefix := feat.Properties.Prefix
 </span>
-        <span class="cov7" title="14">rawID := strings.ToLower(strings.Trim(prefix, "-"))
+        <span class="cov7" title="10">rawID := strings.ToLower(strings.Trim(prefix, "-"))
         if rawID == "" </span>{
                 <span class="cov2" title="2">return catalog.Element{}
 </span>        }
 
-        <span class="cov7" title="12">name := feat.Properties.NameEN
+        <span class="cov6" title="8">name := feat.Properties.NameEN
         if name == "" </span>{
-                <span class="cov5" title="6">name = feat.Properties.Name
+                <span class="cov4" title="4">name = feat.Properties.Name
 </span>        }
 
-        <span class="cov7" title="12">parent := feat.Properties.Parent
-        if parent == "" </span>{
-                <span class="cov7" title="10">parent = determineParent(prefix, feat.Properties.AdminLevel)
-</span>        }
-
-        <span class="cov7" title="12">return catalog.Element{
+        <span class="cov6" title="8">return catalog.Element{
                 ID:      rawID,
                 Name:    name,
                 File:    prefix + "latest",
-                Parent:  parent,
                 Formats: append(catalog.Formats(nil), standardMovisdaFormats...),
 </span>        }
-}
-
-func determineParent(prefix, adminLevel string) string {
-        <span class="cov7" title="10">if adminLevel == "2" </span>{
-                <span class="cov4" title="4">return ""
-</span>        }
-
-        <span class="cov5" title="6">parts := strings.Split(strings.Trim(prefix, "-"), "-")
-        if len(parts) &gt;= minPrefixParts </span>{
-                <span class="cov4" title="4">return strings.ToLower(parts[0])
-</span>        }
-
-        <span class="cov2" title="2">return ""</span>
 }
 </pre>
 		
@@ -4204,25 +4209,25 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
                 <span class="cov3" title="8">for target := range workChan </span>{
                         <span class="cov6" title="72">select </span>{
                         case &lt;-ctx.Done():
-                                <span class="cov5" title="20">recordErr(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
+                                <span class="cov5" title="27">recordErr(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
                                 activeWorkers.Done()
 </span>
-                                <span class="cov5" title="20">continue</span>
+                                <span class="cov5" title="27">continue</span>
 
-                        case sem &lt;- struct{}{}:<span class="cov6" title="52"></span>
+                        case sem &lt;- struct{}{}:<span class="cov6" title="45"></span>
                         }
 
-                        <span class="cov6" title="52">go func(currentURL string) </span>{
-                                <span class="cov6" title="52">defer func() </span>{
-                                        <span class="cov6" title="52">&lt;-sem
+                        <span class="cov6" title="45">go func(currentURL string) </span>{
+                                <span class="cov6" title="45">defer func() </span>{
+                                        <span class="cov6" title="45">&lt;-sem
                                         activeWorkers.Done()
 </span>                                }()
 
-                                <span class="cov6" title="52">links, err := p.fetchAndProcessPage(ctx, currentURL, cat)
+                                <span class="cov6" title="45">links, err := p.fetchAndProcessPage(ctx, currentURL, cat)
                                 if err != nil </span>{
-                                        <span class="cov6" title="46">recordErr(err)
+                                        <span class="cov6" title="39">recordErr(err)
 </span>
-                                        <span class="cov6" title="46">return
+                                        <span class="cov6" title="39">return
 </span>                                }
 
                                 <span class="cov3" title="6">for _, link := range links </span>{
@@ -4245,19 +4250,19 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 }
 
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
-        <span class="cov6" title="52">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
+        <span class="cov6" title="45">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("error creating request: %w", err)
 </span>        }
 
-        <span class="cov6" title="51">client := p.Client
+        <span class="cov6" title="44">client := p.Client
         if client == nil </span>{
                 <span class="cov1" title="1">client = http.DefaultClient
 </span>        }
 
-        <span class="cov6" title="51">resp, err := client.Do(req)
+        <span class="cov6" title="44">resp, err := client.Do(req)
         if err != nil </span>{
-                <span class="cov6" title="42">return nil, fmt.Errorf("error fetching %s: %w", currentURL, err)
+                <span class="cov5" title="36">return nil, fmt.Errorf("error fetching %s: %w", currentURL, err)
 </span>        }
         <span class="cov3" title="8">defer resp.Body.Close()
 </span>
@@ -5477,7 +5482,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
                 <span class="cov1" title="1">client = http.DefaultClient
 </span>        }
 
-        <span class="cov4" title="7">resp, err := client.Do(req)
+        <span class="cov3" title="6">resp, err := client.Do(req)
         if err != nil </span>{
                 <span class="cov2" title="2">return nil, fmt.Errorf("%w: %w", ErrFetchCatalog, err)
 </span>        }
@@ -5777,7 +5782,7 @@ type Catalog struct {
 
 // New creates an empty, initialized Catalog.
 func New() *Catalog {
-        <span class="cov7" title="82">return &amp;Catalog{
+        <span class="cov7" title="80">return &amp;Catalog{
                 Formats:  make(FormatDefinitions),
                 Elements: make(map[string]Element),
 </span>        }
@@ -5849,37 +5854,80 @@ func (c *Catalog) Save(w io.Writer) error {
 
 // Exist returns true if the element ID is present in the catalog.
 func (c *Catalog) Exist(elementID string) bool {
-        <span class="cov8" title="153">c.mu.RLock()
+        <span class="cov8" title="155">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
-        <span class="cov8" title="153">_, exists := c.Elements[elementID]
-</span>
-        <span class="cov8" title="153">return exists
-</span>}
+        <span class="cov8" title="155">if _, exists := c.Elements[elementID]; exists </span>{
+                <span class="cov7" title="64">return true
+</span>        }
+
+        <span class="cov7" title="91">if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID </span>{
+                <span class="cov1" title="1">if _, exists := c.Elements[altID]; exists </span>{
+                        <span class="cov0" title="0">return true
+</span>                }
+        }
+
+        <span class="cov7" title="91">if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID </span>{
+                <span class="cov3" title="5">if _, exists := c.Elements[altID]; exists </span>{
+                        <span class="cov1" title="1">return true
+</span>                }
+        }
+
+        <span class="cov7" title="90">return false</span>
+}
 
 // Get retrieves a copy of an element by ID.
 func (c *Catalog) Get(elementID string) (Element, bool) {
-        <span class="cov6" title="53">c.mu.RLock()
+        <span class="cov6" title="55">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
-        <span class="cov6" title="53">elem, exists := c.Elements[elementID]
-</span>
-        <span class="cov6" title="53">return elem, exists
-</span>}
+        <span class="cov6" title="55">if elem, exists := c.Elements[elementID]; exists </span>{
+                <span class="cov6" title="54">return elem, true
+</span>        }
+
+        <span class="cov1" title="1">if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID </span>{
+                <span class="cov0" title="0">if elem, exists := c.Elements[altID]; exists </span>{
+                        <span class="cov0" title="0">return elem, true
+</span>                }
+        }
+
+        <span class="cov1" title="1">if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID </span>{
+                <span class="cov1" title="1">if elem, exists := c.Elements[altID]; exists </span>{
+                        <span class="cov1" title="1">return elem, true
+</span>                }
+        }
+
+        <span class="cov0" title="0">return Element{}, false</span>
+}
 
 // Find looks up an element pointer by ID or returns ErrElementNotFound.
 func (c *Catalog) Find(elementID string) (*Element, error) {
-        <span class="cov3" title="5">c.mu.RLock()
+        <span class="cov3" title="6">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
-        <span class="cov3" title="5">elem, exists := c.Elements[elementID]
-        if !exists </span>{
-                <span class="cov1" title="1">return nil, fmt.Errorf("%w: %s is not in catalog", ErrElementNotFound, elementID)
+        <span class="cov3" title="6">if elem, exists := c.Elements[elementID]; exists </span>{
+                <span class="cov3" title="4">elemCopy := elem
+</span>
+                <span class="cov3" title="4">return &amp;elemCopy, nil
 </span>        }
 
-        <span class="cov3" title="4">elemCopy := elem
+        <span class="cov2" title="2">if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID </span>{
+                <span class="cov1" title="1">if elem, exists := c.Elements[altID]; exists </span>{
+                        <span class="cov0" title="0">elemCopy := elem
 </span>
-        <span class="cov3" title="4">return &amp;elemCopy, nil</span>
+                        <span class="cov0" title="0">return &amp;elemCopy, nil
+</span>                }
+        }
+
+        <span class="cov2" title="2">if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID </span>{
+                <span class="cov1" title="1">if elem, exists := c.Elements[altID]; exists </span>{
+                        <span class="cov1" title="1">elemCopy := elem
+</span>
+                        <span class="cov1" title="1">return &amp;elemCopy, nil
+</span>                }
+        }
+
+        <span class="cov1" title="1">return nil, fmt.Errorf("%w: %s is not in catalog", ErrElementNotFound, elementID)</span>
 }
 
 // AddElement inserts or replaces an element in the catalog.
@@ -5900,26 +5948,26 @@ func (c *Catalog) AddElement(elem *Element) {
 
 // MergeElement adds a new element or merges formats if it already exists.
 func (c *Catalog) MergeElement(elem *Element) error {
-        <span class="cov10" title="419">if elem == nil || elem.ID == "" </span>{
+        <span class="cov10" title="415">if elem == nil || elem.ID == "" </span>{
                 <span class="cov0" title="0">return nil
 </span>        }
 
-        <span class="cov10" title="419">c.mu.Lock()
+        <span class="cov10" title="415">c.mu.Lock()
         defer c.mu.Unlock()
 </span>
-        <span class="cov10" title="419">if c.Elements == nil </span>{
+        <span class="cov10" title="415">if c.Elements == nil </span>{
                 <span class="cov0" title="0">c.Elements = make(map[string]Element)
 </span>        }
 
-        <span class="cov10" title="419">existing, exists := c.Elements[elem.ID]
+        <span class="cov10" title="415">existing, exists := c.Elements[elem.ID]
         if !exists </span>{
-                <span class="cov9" title="386">c.Elements[elem.ID] = *elem
+                <span class="cov9" title="383">c.Elements[elem.ID] = *elem
 </span>
-                <span class="cov9" title="386">return nil
+                <span class="cov9" title="383">return nil
 </span>        }
 
-        <span class="cov6" title="33">if err := validateParentMerge(&amp;existing, elem); err != nil </span>{
-                <span class="cov2" title="3">return err
+        <span class="cov6" title="32">if err := validateParentMerge(&amp;existing, elem); err != nil </span>{
+                <span class="cov2" title="2">return err
 </span>        }
 
         <span class="cov6" title="30">applyElementMerge(&amp;existing, elem)
@@ -5929,8 +5977,8 @@ func (c *Catalog) MergeElement(elem *Element) error {
 }
 
 func validateParentMerge(existing, incoming *Element) error {
-        <span class="cov6" title="33">if existing.Parent != incoming.Parent &amp;&amp; existing.Parent != "" &amp;&amp; incoming.Parent != "" </span>{
-                <span class="cov2" title="3">return fmt.Errorf("%w: %s has parent %s, incoming has %s", ErrParentMismatch, incoming.ID, existing.Parent, incoming.Parent)
+        <span class="cov6" title="32">if existing.Parent != incoming.Parent &amp;&amp; existing.Parent != "" &amp;&amp; incoming.Parent != "" </span>{
+                <span class="cov2" title="2">return fmt.Errorf("%w: %s has parent %s, incoming has %s", ErrParentMismatch, incoming.ID, existing.Parent, incoming.Parent)
 </span>        }
 
         <span class="cov6" title="30">return nil</span>
@@ -6493,7 +6541,7 @@ func GetMiniFormats(fullFormatNames []string) string {
         <span class="cov5" title="24">buf := make([]byte, 0, len(fullFormatNames))
 </span>
         <span class="cov5" title="24">for _, fullName := range fullFormatNames </span>{
-                <span class="cov6" title="40">if b, ok := miniFormatMap[fullName]; ok </span>{
+                <span class="cov6" title="41">if b, ok := miniFormatMap[fullName]; ok </span>{
                         <span class="cov6" title="36">buf = append(buf, b)
 </span>                }
         }
