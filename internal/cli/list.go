@@ -5,10 +5,11 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/julien-noblet/download-geofabrik/internal/ui"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+
+	"github.com/julien-noblet/download-geofabrik/internal/ui"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var (

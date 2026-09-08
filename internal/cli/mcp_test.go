@@ -3,8 +3,9 @@ package cli_test
 import (
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/cli"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/julien-noblet/download-geofabrik/internal/cli"
 )
 
 func TestRegisterMCPCmd(t *testing.T) {

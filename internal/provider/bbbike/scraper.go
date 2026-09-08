@@ -10,8 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"golang.org/x/net/html"
+
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = errors.New("failed to fetch catalog")
