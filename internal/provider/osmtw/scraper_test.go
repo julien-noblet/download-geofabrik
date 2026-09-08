@@ -86,6 +86,8 @@ func TestOSMTW_FetchCatalog(t *testing.T) {
 	assert.Equal(t, "Taiwan", tw.Name)
 	assert.True(t, tw.ContainsFormat(catalog.FormatO5m))
 	assert.True(t, tw.ContainsFormat(catalog.FormatO5mZst))
+	assert.True(t, tw.ContainsFormat(catalog.FormatO5m+".md5"))
+	assert.True(t, tw.ContainsFormat(catalog.FormatO5mZst+".md5"))
 }
 
 func TestOSMTW_FetchCatalog_HTMLParseError(t *testing.T) {
@@ -189,6 +191,8 @@ func TestOSMTW_DefaultFormats(t *testing.T) {
 	formats := osmtw.DefaultFormats()
 	assert.Contains(t, formats, catalog.FormatO5m)
 	assert.Contains(t, formats, catalog.FormatO5mZst)
+	assert.Contains(t, formats, catalog.FormatO5m+".md5")
+	assert.Contains(t, formats, catalog.FormatO5mZst+".md5")
 }
 
 func Benchmark_OSMTW_FetchCatalog_Mock(b *testing.B) {

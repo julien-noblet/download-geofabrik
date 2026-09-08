@@ -26,6 +26,7 @@ const (
 	defaultIdleTimeout         = 90 * time.Second
 	defaultMaxIdleConns        = 20
 	defaultMaxIdleConnsPerHost = 10
+	recentBasePath             = "recent/"
 )
 
 // Provider implements provider.Provider for osm.kcwu.csie.org (Taiwan OSM extracts).
@@ -75,8 +76,10 @@ func (p *Provider) DefaultConfigFile() string {
 // DefaultFormats returns format definitions supported by osm.kcwu.csie.org.
 func DefaultFormats() catalog.FormatDefinitions {
 	return catalog.FormatDefinitions{
-		catalog.FormatO5m:    {ID: catalog.FormatO5m, Loc: "-latest.o5m", BasePath: "recent/"},
-		catalog.FormatO5mZst: {ID: catalog.FormatO5mZst, Loc: "-latest.o5m.zst", BasePath: "recent/"},
+		catalog.FormatO5m:             {ID: catalog.FormatO5m, Loc: "-latest.o5m", BasePath: recentBasePath},
+		catalog.FormatO5m + ".md5":    {ID: catalog.FormatO5m + ".md5", Loc: "-latest.o5m.md5", BasePath: recentBasePath},
+		catalog.FormatO5mZst:          {ID: catalog.FormatO5mZst, Loc: "-latest.o5m.zst", BasePath: recentBasePath},
+		catalog.FormatO5mZst + ".md5": {ID: catalog.FormatO5mZst + ".md5", Loc: "-latest.o5m.zst.md5", BasePath: recentBasePath},
 	}
 }
 
@@ -169,7 +172,7 @@ func parseLink(href string, cat *catalog.Catalog) {
 			ID:      "taiwan",
 			Name:    "Taiwan",
 			File:    "taiwan",
-			Formats: catalog.Formats{catalog.FormatO5m, catalog.FormatO5mZst},
+			Formats: catalog.Formats{catalog.FormatO5m, catalog.FormatO5m + ".md5", catalog.FormatO5mZst, catalog.FormatO5mZst + ".md5"},
 		}
 		_ = cat.MergeElement(&elem)
 	}

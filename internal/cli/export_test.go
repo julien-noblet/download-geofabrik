@@ -6,4 +6,12 @@ var RootCmd = rootCmd
 func ResetGlobs() {
 	cfgFile = ""
 	service = ""
+	outputDir = ""
+	check = true
+	noDownload = false
+	downloadProgress = true
+
+	for k := range formatFlags {
+		*formatFlags[k] = false
+	}
 }

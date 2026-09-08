@@ -108,6 +108,9 @@ download-geofabrik --service openstreetmap.fr download rhone_alpes
 
 # Download from BBBike
 download-geofabrik --service bbbike download Berlin
+
+# Download from OSM Taiwan (automatically uses provider's default format, o5m)
+download-geofabrik --service osm.kcwu.csie.org download taiwan
 ```
 
 ### Download Specific Formats
@@ -280,7 +283,7 @@ download-geofabrik --service movisda generate
 | **OSM Luxembourg** | `osm.kewl.lu` | Daily extracts for Luxembourg | 3 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/osm.kewl.lu.md) |
 | **FIT VUT Brno** | `osm.fit.vutbr.cz` | Czech Republic extracts by date | 2 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/osm.fit.vutbr.cz.md) |
 | **OpenStreetMap Italia** | `osmit-estratti` | Italy national, regional, and provincial extracts | 131 | `osm.pbf`, `gpkg`, `poly` | [View Catalog](docs/catalogs/osmit-estratti.md) |
-| **OSM Taiwan** | `osm.kcwu.csie.org` | Taiwan extracts and change history | 3 | `o5m`, `o5m.zst` | [View Catalog](docs/catalogs/osm.kcwu.csie.org.md) |
+| **OSM Taiwan** | `osm.kcwu.csie.org` | Taiwan extracts and change history | 1 | `o5m`, `o5m.zst` | [View Catalog](docs/catalogs/osm.kcwu.csie.org.md) |
 
 ---
 

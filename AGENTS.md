@@ -87,8 +87,8 @@ To minimize back-and-forth and context token consumption:
      - Provider tests in `scraper_test.go`
 4. **Verification sequence**:
    - 1. Run targeted tests: `go test ./internal/<modified_pkg>`
-   - 2. Run linter: `golangci-lint run` (fix any issues immediately)
-   - 3. Run targeted benchmarks on modified packages only: `go test -bench=. -benchmem ./internal/<modified_pkg>`
+   - 1. Run linter: `golangci-lint run` (fix any issues immediately)
+   - 1. Run targeted benchmarks on modified packages only: `go test -bench=. -benchmem ./internal/<modified_pkg>`
 
 ## Files to inspect first
 
@@ -104,3 +104,4 @@ To minimize back-and-forth and context token consumption:
 - Running full-suite benchmarks `go test -bench=. ./...` (consumes huge context and time; target modified packages).
 - Adding new dependencies for simple logic.
 - Modifying provider selection or config filenames without updating the corresponding tests and docs.
+- Modify directly the README.md. You can find the way to generate README.md from .github/workflows/genyml.yml file. Adapt the workflow to generate the catalog files too.

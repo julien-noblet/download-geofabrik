@@ -213,3 +213,91 @@ func TestDownloadCmd_DefaultOutputDir(t *testing.T) {
 	err = cli.Execute()
 	require.NoError(t, err)
 }
+
+func TestDownloadCmd_DefaultFormatNonPbf(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	cli.ResetGlobs()
+	viper.Reset()
+
+	configFile := tmpDir + "/non_pbf.yml"
+	content := `
+elements:
+  custom-elem:
+    id: "custom-elem"
+    files: ["o5m"]
+formats:
+  o5m:
+    ext: "o5m"
+    loc: "custom-elem.o5m"
+`
+	err := os.WriteFile(configFile, []byte(content), 0o600)
+	require.NoError(t, err)
+
+	cli.RootCmd.SetArgs([]string{"download", "custom-elem", "--config", configFile, "--nodownload", "--output-dir", tmpDir})
+
+	err = cli.Execute()
+	require.NoError(t, err)
+}
+
+func TestDownloadCmd_FormatNotAvailable(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	cli.ResetGlobs()
+	viper.Reset()
+
+	configFile := tmpDir + "/non_pbf.yml"
+	content := `
+elements:
+  custom-elem:
+    id: "custom-elem"
+    files: ["o5m"]
+formats:
+  o5m:
+    ext: "o5m"
+    loc: "custom-elem.o5m"
+`
+	err := os.WriteFile(configFile, []byte(content), 0o600)
+	require.NoError(t, err)
+
+	cli.RootCmd.SetArgs([]string{"download", "custom-elem", "-P", "--config", configFile, "--nodownload", "--output-dir", tmpDir})
+
+	err = cli.Execute()
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "format not exist")
+}
+
+func TestDownloadCmd_ElementNotFound(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	cli.ResetGlobs()
+	viper.Reset()
+
+	configFile := tmpDir + "/geofabrik.yml"
+	err := os.WriteFile(configFile, []byte(testConfigContent), 0o600)
+	require.NoError(t, err)
+
+	cli.RootCmd.SetArgs([]string{"download", "nonexistent-elem", "--config", configFile, "--nodownload", "--output-dir", tmpDir})
+
+	err = cli.Execute()
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "element not found")
+}
+
+func TestDownloadCmd_OSMTW(t *testing.T) {
+	cli.ResetGlobs()
+	viper.Reset()
+
+	tmpDir := t.TempDir()
+
+	cli.RootCmd.SetArgs([]string{
+		"download", "taiwan",
+		"--service", "osm.kcwu.csie.org",
+		"--config", "../../osm.kcwu.csie.org.yml",
+		"--nodownload",
+		"--output-dir", tmpDir,
+	})
+
+	err := cli.Execute()
+	require.NoError(t, err)
+}
