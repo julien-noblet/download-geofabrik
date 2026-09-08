@@ -396,6 +396,64 @@ func TestDownloadElementToolDryRun(t *testing.T) {
 	assert.Equal(t, "https://example.com/osm/europe/france.osm.pbf.md5", dlResult.Files[0].ChecksumURL)
 }
 
+func TestDownloadElementToolDefaultFormatNonPbf(t *testing.T) {
+	t.Parallel()
+
+	srv := mcp.NewServer(testVersion)
+	ctx := context.Background()
+
+	tempDir := t.TempDir()
+	catPath := filepath.Join(tempDir, "tw-catalog.yml")
+
+	cat := catalog.New()
+	cat.BaseURL = "https://example.com/tw"
+	cat.Formats = catalog.FormatDefinitions{
+		formats.FormatO5m: {
+			ID:  formats.FormatO5m,
+			Loc: ".o5m",
+		},
+	}
+	cat.Elements["taiwan"] = catalog.Element{
+		ID:      "taiwan",
+		Name:    "Taiwan",
+		Formats: catalog.Formats{formats.FormatO5m},
+	}
+	require.NoError(t, cat.SaveFile(catPath))
+
+	tool := srv.MCPServer().GetTool("download_element")
+	require.NotNil(t, tool)
+
+	callReq := mcpSDK.CallToolRequest{
+		Params: mcpSDK.CallToolParams{
+			Name: "download_element",
+			Arguments: map[string]any{
+				"service":     "osm.kcwu.csie.org",
+				"element_id":  "taiwan",
+				"config_file": catPath,
+				"output_dir":  tempDir,
+				"dry_run":     true,
+			},
+		},
+	}
+
+	res, err := tool.Handler(ctx, callReq)
+	require.NoError(t, err)
+	require.False(t, res.IsError)
+
+	textContent, ok := res.Content[0].(mcpSDK.TextContent)
+	require.True(t, ok)
+
+	var dlResult mcp.DownloadResult
+
+	err = json.Unmarshal([]byte(textContent.Text), &dlResult)
+	require.NoError(t, err)
+
+	assert.True(t, dlResult.DryRun)
+	assert.Equal(t, "taiwan", dlResult.ElementID)
+	require.Len(t, dlResult.Files, 1)
+	assert.Equal(t, formats.FormatO5m, dlResult.Files[0].Format)
+}
+
 func TestRegenerateCatalogToolErrors(t *testing.T) {
 	t.Parallel()
 

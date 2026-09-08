@@ -623,11 +623,6 @@ func (s *Server) handleDownloadElement(ctx context.Context, request mcpSDK.CallT
 	checkChecksum := request.GetBool("check_checksum", true)
 	dryRun := request.GetBool("dry_run", false)
 
-	requestedFormats := request.GetStringSlice("formats", []string{formats.FormatOsmPbf})
-	if len(requestedFormats) == 0 {
-		requestedFormats = []string{formats.FormatOsmPbf}
-	}
-
 	resolvedDir, err := resolveOutputDirectory(outDir)
 	if err != nil {
 		return mcpSDK.NewToolResultError(fmt.Sprintf("invalid output directory: %v", err)), nil
@@ -641,6 +636,15 @@ func (s *Server) handleDownloadElement(ctx context.Context, request mcpSDK.CallT
 	elem, err := cat.Find(elementID)
 	if err != nil {
 		return mcpSDK.NewToolResultError(fmt.Sprintf("element '%s' not found in %s: %v", elementID, serviceName, err)), nil
+	}
+
+	rawFormats := request.GetStringSlice("formats", nil)
+
+	var requestedFormats []string
+	if len(rawFormats) > 0 {
+		requestedFormats = rawFormats
+	} else {
+		requestedFormats = []string{resolveCatalogDefaultFormat(cat, elem)}
 	}
 
 	if dryRun {
@@ -662,6 +666,43 @@ func (s *Server) handleDownloadElement(ctx context.Context, request mcpSDK.CallT
 		formats:   requestedFormats,
 		checkHash: checkChecksum,
 	})
+}
+
+var preferredCatalogDefaultFormats = []string{
+	formats.FormatOsmPbf,
+	formats.FormatO5m,
+	formats.FormatOsmBz2,
+	formats.FormatOsmGz,
+	formats.FormatGeoJSON,
+	formats.FormatGPKG,
+	formats.FormatShpZip,
+	formats.FormatO5mZst,
+}
+
+func resolveCatalogDefaultFormat(cat *catalog.Catalog, elem *catalog.Element) string {
+	if elem == nil {
+		return formats.FormatOsmPbf
+	}
+
+	for _, pref := range preferredCatalogDefaultFormats {
+		if elem.ContainsFormat(pref) {
+			if _, ok := cat.Formats[pref]; ok {
+				return pref
+			}
+		}
+	}
+
+	for _, format := range elem.Formats {
+		if strings.HasSuffix(format, ".md5") {
+			continue
+		}
+
+		if _, ok := cat.Formats[format]; ok {
+			return format
+		}
+	}
+
+	return formats.FormatOsmPbf
 }
 
 func resolveOutputDirectory(dir string) (string, error) {

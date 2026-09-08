@@ -108,6 +108,9 @@ download-geofabrik --service openstreetmap.fr download rhone_alpes
 
 # Download from BBBike
 download-geofabrik --service bbbike download Berlin
+
+# Download from OSM Taiwan (automatically uses provider's default format, o5m)
+download-geofabrik --service osm.kcwu.csie.org download taiwan
 ```
 
 ### Download Specific Formats

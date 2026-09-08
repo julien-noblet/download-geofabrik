@@ -197,9 +197,14 @@ func FileExist(filePath string) bool {
 
 // DownloadFile downloads a file based on the configuration and element.
 func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, outputPath string) error {
-	// elementID and formatName are strings.
-	// config.FindElem uses d.Config.
-	format := d.Config.Formats[formatName].ID
+	formatDef, ok := d.Config.Formats[formatName]
+	if !ok {
+		slog.Error("Format not found in config", "format", formatName)
+
+		return fmt.Errorf("%w: %s", config.ErrFormatNotExist, formatName)
+	}
+
+	format := formatDef.ID
 
 	myElem, err := config.FindElem(d.Config, elementID)
 	if err != nil {
