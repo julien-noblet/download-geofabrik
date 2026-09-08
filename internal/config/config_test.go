@@ -52,17 +52,14 @@ func TestElem2preURL_NoParent_WithBaseURLArgs(t *testing.T) {
 	elem, err := cfg.GetElement("item")
 	require.NoError(t, err)
 
-	// Case 1: 1 arg
 	url, err := config.Elem2preURL(cfg, elem, "custom")
 	require.NoError(t, err)
 	assert.Equal(t, "https://example.com/custom/item", url)
 
-	// Case 2: 2 args
 	url, err = config.Elem2preURL(cfg, elem, "http://other.com", "path")
 	require.NoError(t, err)
 	assert.Equal(t, "http://other.com/path/item", url)
 
-	// Case default: 0 args
 	url, err = config.Elem2preURL(cfg, elem)
 	require.NoError(t, err)
 	assert.Equal(t, "https://example.com/item", url)
@@ -92,7 +89,6 @@ func TestMergeElement(t *testing.T) {
 	require.NoError(t, err)
 	assert.True(t, cfg.Exist("e1"))
 
-	// Merge update checks
 	el2 := &element.Element{ID: "e1", Parent: "p1", Formats: []string{"pbf"}}
 	err = cfg.MergeElement(el2)
 	require.NoError(t, err)
@@ -102,7 +98,6 @@ func TestMergeElement(t *testing.T) {
 	assert.Contains(t, e.Formats, "osm")
 	assert.Contains(t, e.Formats, "pbf")
 
-	// Parent mismatch
 	elBad := &element.Element{ID: "e1", Parent: "p2"}
 	err = cfg.MergeElement(elBad)
 	assert.ErrorIs(t, err, config.ErrParentMismatch)

@@ -10,15 +10,21 @@ import (
 func TestSplitParent_EdgeCases(t *testing.T) {
 	t.Parallel()
 
-	// Scheme without path
-	parent, path := splitParent("https://geo2day.com")
-	assert.Empty(t, parent)
-	assert.Empty(t, path)
+	t.Run("scheme without path", func(t *testing.T) {
+		t.Parallel()
 
-	// Slash only
-	parent, path = splitParent("/")
-	assert.Empty(t, parent)
-	assert.Empty(t, path)
+		parent, path := splitParent("https://geo2day.com")
+		assert.Empty(t, parent)
+		assert.Empty(t, path)
+	})
+
+	t.Run("slash only", func(t *testing.T) {
+		t.Parallel()
+
+		parent, path := splitParent("/")
+		assert.Empty(t, parent)
+		assert.Empty(t, path)
+	})
 }
 
 func TestProcessFileLink_EmptyRawID(t *testing.T) {

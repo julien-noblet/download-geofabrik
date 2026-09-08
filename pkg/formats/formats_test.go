@@ -58,7 +58,6 @@ func Test_GetMiniFormats(t *testing.T) {
 		want string
 		args args
 	}{
-		// TODO: Add test cases.
 		{name: "No Formats", args: args{s: []string(nil)}, want: ""},
 		{name: "state only", args: args{s: []string{formats.FormatState}}, want: "s"},
 		{name: "osm.pbf only", args: args{s: []string{formats.FormatOsmPbf}}, want: "P"},
@@ -79,9 +78,7 @@ func Test_GetMiniFormats(t *testing.T) {
 		{name: "state and kml", args: args{s: []string{formats.FormatState, formats.FormatKml}}, want: "sk"},
 		{name: "state and geojson", args: args{s: []string{formats.FormatState, formats.FormatGeoJSON}}, want: "sg"},
 		{name: "osm.pbf and geojson", args: args{s: []string{formats.FormatOsmPbf, formats.FormatGeoJSON}}, want: "Pg"},
-		// Not testing all combinaisons!
 		{name: "osm.pbf and shp.zip", args: args{s: []string{formats.FormatOsmPbf, formats.FormatShpZip}}, want: "PS"},
-		// With all
 		{
 			name: "All formats",
 			args: args{s: []string{

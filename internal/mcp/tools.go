@@ -402,6 +402,10 @@ func (s *Server) handleListElements(ctx context.Context, request mcpSDK.CallTool
 		limit = maxListLimit
 	}
 
+	if offset < 0 {
+		offset = 0
+	}
+
 	cat, err := s.loadOrFetchCatalog(ctx, serviceName, customCfg)
 	if err != nil {
 		return mcpSDK.NewToolResultError(fmt.Sprintf("failed to load catalog for %s: %v", serviceName, err)), nil
@@ -462,6 +466,10 @@ func filterElements(cat *catalog.Catalog, searchQuery, parentFilter string) []El
 }
 
 func applyPagination(items []ElementSummary, offset, limit int) []ElementSummary {
+	if offset < 0 {
+		offset = 0
+	}
+
 	total := len(items)
 	if offset >= total {
 		return []ElementSummary{}

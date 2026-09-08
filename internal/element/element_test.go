@@ -105,7 +105,6 @@ func TestElement_HasParent(t *testing.T) {
 		fields element.Element
 		want   bool
 	}{
-		// TODO: Add test cases.
 		{
 			name:   "us Have parent",
 			fields: sampleElementValidPtr()["us"],
