@@ -177,6 +177,7 @@ jobs:
 
           EOF
           ./result/bin/download-geofabrik --service "osm.kcwu.csie.org" list --markdown >> docs/catalogs/osm.kcwu.csie.org.md
+      - run: rm -f result
       - uses: actions-js/push@master
         with:
           message: generate yaml files

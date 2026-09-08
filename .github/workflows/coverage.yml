@@ -95,6 +95,7 @@ jobs:
     - uses: DeterminateSystems/magic-nix-cache-action@main
     - name: Setup environment from Nix
       run: |
+        set -o pipefail
         nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
           if [ -d "$p" ]; then
             echo "$p" >> "$GITHUB_PATH"
