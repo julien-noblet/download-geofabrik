@@ -92,12 +92,10 @@ func TestCatalog_ResolveURL(t *testing.T) {
 	require.NoError(t, err)
 	assert.Equal(t, "https://download.geofabrik.de/europe/france-latest.osm.pbf", url)
 
-	// Format not supported
 	_, err = cat.ResolveURL(fr, catalog.FormatShpZip)
 	require.Error(t, err)
 	require.ErrorIs(t, err, catalog.ErrFormatNotFound)
 
-	// Nil element
 	_, err = cat.ResolveURL(nil, catalog.FormatOsmPbf)
 	require.Error(t, err)
 }
@@ -132,7 +130,6 @@ func TestCatalog_MergeElement(t *testing.T) {
 		Formats: catalog.Formats{catalog.FormatOsmPbf},
 	})
 
-	// Merge with new format
 	err := cat.MergeElement(&catalog.Element{
 		ID:      "paris",
 		Parent:  "france",
@@ -145,7 +142,6 @@ func TestCatalog_MergeElement(t *testing.T) {
 	assert.True(t, paris.ContainsFormat(catalog.FormatOsmPbf))
 	assert.True(t, paris.ContainsFormat(catalog.FormatPoly))
 
-	// Conflicting parent error
 	err = cat.MergeElement(&catalog.Element{
 		ID:     "paris",
 		Parent: "germany",
@@ -200,7 +196,6 @@ func TestCatalog_AddExtension(t *testing.T) {
 	assert.True(t, exists)
 	assert.True(t, elem.ContainsFormat(catalog.FormatOsmPbf))
 
-	// Non-existent element should not panic
 	cat.AddExtension("unknown", catalog.FormatOsmPbf)
 }
 
@@ -295,24 +290,20 @@ func TestCatalog_DateResolution(t *testing.T) {
 		File: "czech_republic-2026-09-06",
 	})
 
-	// Direct exist & get
 	assert.True(t, cat.Exist("2026-09-06"))
 	elem, exists := cat.Get("2026-09-06")
 	assert.True(t, exists)
 	assert.Equal(t, "2026-09-06", elem.ID)
 	assert.Equal(t, "czech_republic-2026-09-06", elem.File)
 
-	// Find
 	elemPtr, err := cat.Find("2026-09-06")
 	require.NoError(t, err)
 	assert.Equal(t, "2026-09-06", elemPtr.ID)
 
-	// Resolve URL
 	url, err := cat.ResolveURL(elemPtr, catalog.FormatOsmPbf)
 	require.NoError(t, err)
 	assert.Equal(t, "https://test.com/czech_republic/czech_republic-2026-09-06.osm.pbf", url)
 
-	// Invalid date
 	assert.False(t, cat.Exist("invalid-date"))
 
 	_, exists = cat.Get("invalid-date")

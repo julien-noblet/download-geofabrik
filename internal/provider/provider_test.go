@@ -44,7 +44,6 @@ func TestProvider_Registry(t *testing.T) {
 	list := provider.List()
 	assert.Contains(t, list, "mock_test_provider")
 
-	// Nil / empty provider register
 	provider.Register(nil)
 	provider.Register(&mockProvider{name: ""})
 }

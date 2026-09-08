@@ -127,7 +127,6 @@ func TestPerformGenerate_Success(t *testing.T) {
 	loaded, err := catalog.LoadFile(outFile)
 	require.NoError(t, err)
 	assert.Contains(t, loaded.Elements, "test-elem")
-	// Verify formats were sorted
 	assert.Equal(t, catalog.Formats{formats.FormatOsmPbf, formats.FormatPoly}, loaded.Elements["test-elem"].Formats)
 }
 

@@ -18,35 +18,56 @@ func TestInternal_ResolveURL(t *testing.T) {
 func TestInternal_GetParent(t *testing.T) {
 	t.Parallel()
 
-	// Short path <= minParentListLength (4)
-	p, parts := getParent("http://example.com/file.pbf")
-	assert.Empty(t, p)
-	assert.Len(t, parts, 4)
+	t.Run("short path", func(t *testing.T) {
+		t.Parallel()
 
-	// Path with extracts as parent
-	p, _ = getParent("https://download.openstreetmap.fr/extracts/europe.pbf")
-	assert.Empty(t, p)
+		parent, parts := getParent("http://example.com/file.pbf")
+		assert.Empty(t, parent)
+		assert.Len(t, parts, 4)
+	})
 
-	// Path with polygons as parent
-	p, _ = getParent("https://download.openstreetmap.fr/polygons/europe.pbf")
-	assert.Empty(t, p)
+	t.Run("extracts as parent", func(t *testing.T) {
+		t.Parallel()
 
-	// Normal path
-	p, _ = getParent("https://download.openstreetmap.fr/extracts/europe/france.osm.pbf")
-	assert.Equal(t, "europe", p)
+		parent, _ := getParent("https://download.openstreetmap.fr/extracts/europe.pbf")
+		assert.Empty(t, parent)
+	})
+
+	t.Run("polygons as parent", func(t *testing.T) {
+		t.Parallel()
+
+		parent, _ := getParent("https://download.openstreetmap.fr/polygons/europe.pbf")
+		assert.Empty(t, parent)
+	})
+
+	t.Run("normal path", func(t *testing.T) {
+		t.Parallel()
+
+		parent, _ := getParent("https://download.openstreetmap.fr/extracts/europe/france.osm.pbf")
+		assert.Equal(t, "europe", parent)
+	})
 }
 
 func TestInternal_GetGparent(t *testing.T) {
 	t.Parallel()
 
-	// Short path < minParentListLength
-	assert.Empty(t, getGparent([]string{"a", "b"}))
+	t.Run("short path", func(t *testing.T) {
+		t.Parallel()
 
-	// Blocklisted gparent
-	assert.Empty(t, getGparent([]string{"https:", "", "download.openstreetmap.fr", "europe", "france.osm.pbf"}))
-	assert.Empty(t, getGparent([]string{"https:", "", "extracts", "europe", "france.osm.pbf"}))
-	assert.Empty(t, getGparent([]string{"https:", "", "polygons", "europe", "france.osm.pbf"}))
+		assert.Empty(t, getGparent([]string{"a", "b"}))
+	})
 
-	// Valid grandparent
-	assert.Equal(t, "europe", getGparent([]string{"https:", "", "download.openstreetmap.fr", "extracts", "europe", "france", "paris.osm.pbf"}))
+	t.Run("blocklisted gparent", func(t *testing.T) {
+		t.Parallel()
+
+		assert.Empty(t, getGparent([]string{"https:", "", "download.openstreetmap.fr", "europe", "france.osm.pbf"}))
+		assert.Empty(t, getGparent([]string{"https:", "", "extracts", "europe", "france.osm.pbf"}))
+		assert.Empty(t, getGparent([]string{"https:", "", "polygons", "europe", "france.osm.pbf"}))
+	})
+
+	t.Run("valid grandparent", func(t *testing.T) {
+		t.Parallel()
+
+		assert.Equal(t, "europe", getGparent([]string{"https:", "", "download.openstreetmap.fr", "extracts", "europe", "france", "paris.osm.pbf"}))
+	})
 }
