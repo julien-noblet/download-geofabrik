@@ -309,24 +309,34 @@ nfpms:
         dst: /usr/share/doc/download-geofabrik/README.md
       - src: ./bbbike.yml
         dst: /etc/download-geofabrik/bbbike.yml
+        type: config|noreplace
       - src: ./geo2day.yml
         dst: /etc/download-geofabrik/geo2day.yml
+        type: config|noreplace
       - src: ./geofabrik.yml
         dst: /etc/download-geofabrik/geofabrik.yml
+        type: config|noreplace
       - src: ./movisda.yml
         dst: /etc/download-geofabrik/movisda.yml
+        type: config|noreplace
       - src: ./openstreetmap.fr.yml
         dst: /etc/download-geofabrik/openstreetmap.fr.yml
+        type: config|noreplace
       - src: ./osm.fit.vutbr.cz.yml
         dst: /etc/download-geofabrik/osm.fit.vutbr.cz.yml
+        type: config|noreplace
       - src: ./osm.kcwu.csie.org.yml
         dst: /etc/download-geofabrik/osm.kcwu.csie.org.yml
+        type: config|noreplace
       - src: ./osm.kewl.lu.yml
         dst: /etc/download-geofabrik/osm.kewl.lu.yml
+        type: config|noreplace
       - src: ./osmit-estratti.yml
         dst: /etc/download-geofabrik/osmit-estratti.yml
+        type: config|noreplace
       - src: ./planet.osm.ch.yml
         dst: /etc/download-geofabrik/planet.osm.ch.yml
+        type: config|noreplace
 
 checksum:
   name_template: 'checksums.txt'
