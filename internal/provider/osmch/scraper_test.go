@@ -98,7 +98,7 @@ func TestOSMCH_FetchCatalog(t *testing.T) {
 
 	ch, exists := cat.Get("switzerland")
 	assert.True(t, exists)
-	assert.True(t, ch.ContainsFormat(catalog.FormatOsmPbf))
+	assert.True(t, ch.ContainsFormat(catalog.FormatPbf))
 	assert.True(t, ch.ContainsFormat(catalog.FormatOBF))
 	assert.True(t, ch.ContainsFormat(catalog.FormatGarminOSM))
 }
@@ -203,6 +203,7 @@ func TestOSMCH_DefaultFormats(t *testing.T) {
 
 	formats := osmch.DefaultFormats()
 	assert.Contains(t, formats, catalog.FormatOsmPbf)
+	assert.Contains(t, formats, catalog.FormatPbf)
 	assert.Contains(t, formats, catalog.FormatPoly)
 	assert.Contains(t, formats, catalog.FormatOBF)
 	assert.Contains(t, formats, catalog.FormatGarminOSM)

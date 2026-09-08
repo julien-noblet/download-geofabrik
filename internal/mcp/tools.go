@@ -642,7 +642,16 @@ func (s *Server) handleDownloadElement(ctx context.Context, request mcpSDK.CallT
 
 	var requestedFormats []string
 	if len(rawFormats) > 0 {
-		requestedFormats = rawFormats
+		requestedFormats = make([]string, 0, len(rawFormats))
+
+		for _, rawFormat := range rawFormats {
+			resolvedFormat, ok := resolveCatalogFormat(cat, elem, rawFormat)
+			if ok {
+				requestedFormats = append(requestedFormats, resolvedFormat)
+			} else {
+				requestedFormats = append(requestedFormats, rawFormat)
+			}
+		}
 	} else {
 		requestedFormats = []string{resolveCatalogDefaultFormat(cat, elem)}
 	}
@@ -670,6 +679,7 @@ func (s *Server) handleDownloadElement(ctx context.Context, request mcpSDK.CallT
 
 var preferredCatalogDefaultFormats = []string{
 	formats.FormatOsmPbf,
+	formats.FormatPbf,
 	formats.FormatO5m,
 	formats.FormatOsmBz2,
 	formats.FormatOsmGz,
@@ -677,6 +687,28 @@ var preferredCatalogDefaultFormats = []string{
 	formats.FormatGPKG,
 	formats.FormatShpZip,
 	formats.FormatO5mZst,
+}
+
+func resolveCatalogFormat(cat *catalog.Catalog, elem *catalog.Element, format string) (string, bool) {
+	if elem.ContainsFormat(format) {
+		if _, exists := cat.Formats[format]; exists {
+			return format, true
+		}
+	}
+
+	if format == formats.FormatOsmPbf && elem.ContainsFormat(formats.FormatPbf) {
+		if _, exists := cat.Formats[formats.FormatPbf]; exists {
+			return formats.FormatPbf, true
+		}
+	}
+
+	if format == formats.FormatPbf && elem.ContainsFormat(formats.FormatOsmPbf) {
+		if _, exists := cat.Formats[formats.FormatOsmPbf]; exists {
+			return formats.FormatOsmPbf, true
+		}
+	}
+
+	return format, false
 }
 
 func resolveCatalogDefaultFormat(cat *catalog.Catalog, elem *catalog.Element) string {
