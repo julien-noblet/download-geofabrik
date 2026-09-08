@@ -57,12 +57,23 @@ const (
 
 // Format represents the metadata and URL resolution rules for a file format.
 type Format struct {
-	ID       string `json:"id"                 yaml:"ext"`
-	Loc      string `json:"loc"                yaml:"loc"`
+	// ID is the file extension identifier (e.g., ".osm.pbf").
+	ID string `json:"id" yaml:"ext"`
+
+	// Loc is the relative URL pattern or suffix template for the format file.
+	Loc string `json:"loc" yaml:"loc"`
+
+	// BasePath is an optional intermediate path prefix within the provider URL hierarchy.
 	BasePath string `json:"basepath,omitempty" yaml:"basepath,omitempty"`
-	BaseURL  string `json:"baseurl,omitempty"  yaml:"baseurl,omitempty"`
-	ToLoc    string `json:"toloc,omitempty"    yaml:"toloc,omitempty"`
-	Type     string `json:"type,omitempty"     yaml:"type,omitempty"`
+
+	// BaseURL is an optional override for the root download base URL for this format.
+	BaseURL string `json:"baseurl,omitempty" yaml:"baseurl,omitempty"`
+
+	// ToLoc is an optional transformation target or link pattern.
+	ToLoc string `json:"toloc,omitempty" yaml:"toloc,omitempty"`
+
+	// Type specifies the format classification (e.g. data or checksum).
+	Type string `json:"type,omitempty" yaml:"type,omitempty"`
 }
 
 // FormatDefinitions maps format IDs to Format specifications.
@@ -70,7 +81,10 @@ type FormatDefinitions map[string]Format
 
 // MiniFormat maps full format names to single-letter display abbreviations.
 type MiniFormat struct {
-	FullName  string
+	// FullName is the format identifier string (e.g., "osm.pbf").
+	FullName string
+
+	// ShortName is the single-letter CLI table display abbreviation (e.g., "P").
 	ShortName string
 }
 

@@ -18,8 +18,12 @@ import (
 )
 
 const (
-	DefaultConfigFile  = "geofabrik.yml"
-	DefaultService     = "geofabrik"
+	// DefaultConfigFile is the default YAML catalog configuration filename.
+	DefaultConfigFile = "geofabrik.yml"
+
+	// DefaultService is the default provider service identifier.
+	DefaultService = "geofabrik"
+
 	maxHierarchyDepth  = 30
 	defaultDirPerm     = 0o750
 	defaultFilePerm    = 0o600
@@ -28,14 +32,29 @@ const (
 )
 
 var (
-	ErrNilElement        = errors.New("nil element")
-	ErrElementNotFound   = errors.New("element not found")
-	ErrFormatNotFound    = errors.New("format not found")
-	ErrParentMismatch    = errors.New("cannot merge element with conflicting parent")
+	// ErrNilElement is returned when an operation receives an unexpected nil Element pointer.
+	ErrNilElement = errors.New("nil element")
+
+	// ErrElementNotFound is returned when an element ID cannot be resolved in the catalog.
+	ErrElementNotFound = errors.New("element not found")
+
+	// ErrFormatNotFound is returned when a requested file format does not exist for an element.
+	ErrFormatNotFound = errors.New("format not found")
+
+	// ErrParentMismatch is returned when merging an element with a conflicting parent identifier.
+	ErrParentMismatch = errors.New("cannot merge element with conflicting parent")
+
+	// ErrMaxHierarchyDepth is returned when resolving hierarchical URLs exceeds the maximum depth limit, indicating a cycle.
 	ErrMaxHierarchyDepth = errors.New("maximum hierarchy depth exceeded (possible cycle in catalog)")
-	ErrElem2URL          = errors.New("can't find url")
-	ErrFormatNotExist    = ErrFormatNotFound
-	ErrFindElem          = ErrElementNotFound
+
+	// ErrElem2URL is returned when an element's download URL cannot be constructed.
+	ErrElem2URL = errors.New("can't find url")
+
+	// ErrFormatNotExist is an alias for ErrFormatNotFound kept for backward compatibility.
+	ErrFormatNotExist = ErrFormatNotFound
+
+	// ErrFindElem is an alias for ErrElementNotFound kept for backward compatibility.
+	ErrFindElem = ErrElementNotFound
 )
 
 var supportedHashes = []string{"md5"}
@@ -44,10 +63,16 @@ var supportedHashes = []string{"md5"}
 // It is fully thread-safe for concurrent read and write operations.
 // Field alignment optimized.
 type Catalog struct {
-	Formats  FormatDefinitions  `json:"formats"  yaml:"formats"`
+	// Formats maps format identifiers to their URL patterns and file templates.
+	Formats FormatDefinitions `json:"formats" yaml:"formats"`
+
+	// Elements maps element IDs to geographic element metadata.
 	Elements map[string]Element `json:"elements" yaml:"elements"`
-	BaseURL  string             `json:"baseURL"  yaml:"baseURL"` //nolint:tagliatelle // external yaml requirement
-	mu       sync.RWMutex
+
+	// BaseURL is the default root download URL for the provider.
+	BaseURL string `json:"baseURL" yaml:"baseURL"` //nolint:tagliatelle // external yaml requirement
+
+	mu sync.RWMutex
 }
 
 // New creates an empty, initialized Catalog.
