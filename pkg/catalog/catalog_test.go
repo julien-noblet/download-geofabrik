@@ -274,6 +274,54 @@ func TestFormat_GetMiniFormats(t *testing.T) {
 	assert.Empty(t, catalog.GetMiniFormats(nil))
 }
 
+func TestCatalog_DateResolution(t *testing.T) {
+	t.Parallel()
+
+	cat := catalog.New()
+	cat.BaseURL = "https://test.com"
+	cat.Formats[catalog.FormatOsmPbf] = catalog.Format{
+		ID:       catalog.FormatOsmPbf,
+		Loc:      ".osm.pbf",
+		BasePath: "czech_republic/",
+	}
+	cat.AddElement(&catalog.Element{
+		ID:   "czech_republic",
+		Name: "Czech Republic",
+		File: "czech-republic",
+	})
+	cat.AddElement(&catalog.Element{
+		ID:   "latest",
+		Name: "Czech Republic (latest)",
+		File: "czech_republic-2026-09-06",
+	})
+
+	// Direct exist & get
+	assert.True(t, cat.Exist("2026-09-06"))
+	elem, exists := cat.Get("2026-09-06")
+	assert.True(t, exists)
+	assert.Equal(t, "2026-09-06", elem.ID)
+	assert.Equal(t, "czech_republic-2026-09-06", elem.File)
+
+	// Find
+	elemPtr, err := cat.Find("2026-09-06")
+	require.NoError(t, err)
+	assert.Equal(t, "2026-09-06", elemPtr.ID)
+
+	// Resolve URL
+	url, err := cat.ResolveURL(elemPtr, catalog.FormatOsmPbf)
+	require.NoError(t, err)
+	assert.Equal(t, "https://test.com/czech_republic/czech_republic-2026-09-06.osm.pbf", url)
+
+	// Invalid date
+	assert.False(t, cat.Exist("invalid-date"))
+
+	_, exists = cat.Get("invalid-date")
+	assert.False(t, exists)
+
+	_, err = cat.Find("invalid-date")
+	require.ErrorIs(t, err, catalog.ErrElementNotFound)
+}
+
 func Benchmark_Catalog_Exist(b *testing.B) {
 	cat, err := catalog.LoadFile(geofabrikYml)
 	if err != nil {
