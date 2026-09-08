@@ -309,6 +309,8 @@ func shouldSkipHref(href, baseURL, startURL string) bool {
 	if strings.HasPrefix(href, "#") ||
 		strings.HasPrefix(href, "mailto:") ||
 		strings.HasPrefix(href, "javascript:") ||
+		strings.HasPrefix(href, "data:") ||
+		strings.HasPrefix(href, "vbscript:") ||
 		strings.HasPrefix(href, "tel:") {
 		return true
 	}
