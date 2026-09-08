@@ -71,6 +71,7 @@ func TestDefaultConfigLoading(t *testing.T) {
 	// Reset globs
 	cli.ResetGlobs()
 	viper.Reset()
+	cli.RootCmd.SetArgs([]string{"list"})
 
 	// Run list command without --config
 	// It should pick up geofabrik.yml in cwd

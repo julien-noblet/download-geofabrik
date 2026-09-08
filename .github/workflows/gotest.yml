@@ -1,12 +1,15 @@
 name: gotest
+
 on:
   pull_request:
   push:
     branches:
       - main
       - master
-env:
-  CGO_ENABLED: 0
+
+permissions:
+  contents: read
+
 jobs:
   gotest:
     runs-on: ubuntu-latest
@@ -19,5 +22,7 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
       - uses: DeterminateSystems/magic-nix-cache-action@main
-      - name: Run tests
-        run: nix develop --command go test -v ./...
+      - name: Verify go mod tidy
+        run: nix develop --command bash -c "go mod tidy && git diff --exit-code go.mod go.sum"
+      - name: Run unit & race tests
+        run: nix develop --command bash -c "CGO_ENABLED=1 go test -v -race -shuffle=on ./..."
