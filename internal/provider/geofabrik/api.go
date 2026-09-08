@@ -1,6 +1,7 @@
 package geofabrik
 
 import (
+	"cmp"
 	"context"
 	"encoding/json"
 	"errors"
@@ -105,10 +106,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 		return nil, fmt.Errorf("cannot create request for %s: %w", p.IndexURL, err)
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
-	}
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {

@@ -71,6 +71,10 @@
                 --zsh _download-geofabrik
             '';
 
+            flags = [
+              "-trimpath"
+            ];
+
             ldflags = [
               "-s"
               "-w"

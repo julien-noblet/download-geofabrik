@@ -1,12 +1,14 @@
 package movisda
 
 import (
+	"cmp"
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"net"
 	"net/http"
+	"slices"
 	"strings"
 	"time"
 
@@ -108,10 +110,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 		return nil, fmt.Errorf("cannot create request for %s: %w", p.IndexURL, err)
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
-	}
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -152,15 +151,12 @@ func buildElement(feat *geoJSONFeature) catalog.Element {
 		return catalog.Element{}
 	}
 
-	name := feat.Properties.NameEN
-	if name == "" {
-		name = feat.Properties.Name
-	}
+	name := cmp.Or(feat.Properties.NameEN, feat.Properties.Name)
 
 	return catalog.Element{
 		ID:      rawID,
 		Name:    name,
 		File:    prefix + "latest",
-		Formats: append(catalog.Formats(nil), standardMovisdaFormats...),
+		Formats: slices.Clone(standardMovisdaFormats),
 	}
 }

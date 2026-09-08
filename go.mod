@@ -1,5 +1,7 @@
 module github.com/julien-noblet/download-geofabrik
 
+go 1.27.0
+
 require (
 	github.com/cheggaaa/pb/v3 v3.2.1
 	github.com/mark3labs/mcp-go v1.0.0
@@ -34,5 +36,3 @@ require (
 	golang.org/x/sys v0.47.0 // indirect
 	golang.org/x/text v0.41.0 // indirect
 )
-
-go 1.27.0

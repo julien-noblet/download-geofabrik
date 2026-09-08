@@ -1,6 +1,7 @@
 package geo2day
 
 import (
+	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -190,10 +191,8 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	}
 
 	for id, elem := range cat.Elements {
-		if elem.Name == "" {
-			elem.Name = id
-			cat.Elements[id] = elem
-		}
+		elem.Name = cmp.Or(elem.Name, id)
+		cat.Elements[id] = elem
 	}
 
 	return cat, nil
@@ -205,10 +204,7 @@ func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, c
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
-	}
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {

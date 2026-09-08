@@ -1,6 +1,7 @@
 package download
 
 import (
+	"cmp"
 	"context"
 	"crypto/md5" //nolint:gosec // MD5 is used to control with md5sum files
 	"encoding/hex"
@@ -98,10 +99,7 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 		return fmt.Errorf("error creating request for %s - %w", myURL, err)
 	}
 
-	client := d.client
-	if client == nil {
-		client = http.DefaultClient
-	}
+	client := cmp.Or(d.client, http.DefaultClient)
 
 	response, err := client.Do(req)
 	if err != nil {

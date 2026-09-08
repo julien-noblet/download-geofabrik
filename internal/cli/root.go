@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"cmp"
 	"fmt"
 	"log/slog"
 	"os"
@@ -30,18 +31,18 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-var once sync.Once
+var setupCLI = sync.OnceFunc(func() {
+	initCLI()
+
+	RegisterDownloadCmd()
+	RegisterGenerateCmd()
+	RegisterListCmd()
+	RegisterMCPCmd()
+})
 
 // Execute adds all child commands to the root command and sets flags appropriately.
 func Execute() error {
-	once.Do(func() {
-		initCLI()
-
-		RegisterDownloadCmd()
-		RegisterGenerateCmd()
-		RegisterListCmd()
-		RegisterMCPCmd()
-	})
+	setupCLI()
 
 	rootCmd.Version = Version
 
@@ -108,11 +109,7 @@ func initConfig() {
 		viper.AddConfigPath("/etc/download-geofabrik")
 		viper.SetConfigType("yaml")
 
-		if service != "" {
-			viper.SetConfigName(service)
-		} else {
-			viper.SetConfigName(catalog.DefaultConfigFile)
-		}
+		viper.SetConfigName(cmp.Or(service, catalog.DefaultConfigFile))
 	}
 
 	viper.AutomaticEnv()

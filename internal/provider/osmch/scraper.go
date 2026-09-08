@@ -1,6 +1,7 @@
 package osmch
 
 import (
+	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -91,10 +92,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
-	}
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -192,21 +190,24 @@ func shouldSkipHref(href string) bool {
 }
 
 func parseHrefToIDAndFormat(href string) (elemID, format string) {
-	switch {
-	case strings.HasSuffix(href, ".osm.pbf"):
-		return strings.TrimSuffix(href, ".osm.pbf"), catalog.FormatOsmPbf
+	if trimmed, ok := strings.CutSuffix(href, ".osm.pbf"); ok {
+		return trimmed, catalog.FormatOsmPbf
+	}
 
-	case strings.HasSuffix(href, ".poly"):
-		return strings.TrimSuffix(href, ".poly"), catalog.FormatPoly
+	if trimmed, ok := strings.CutSuffix(href, ".poly"); ok {
+		return trimmed, catalog.FormatPoly
+	}
 
-	case strings.HasSuffix(href, ".obf"):
-		return strings.TrimSuffix(href, ".obf"), catalog.FormatOBF
+	if trimmed, ok := strings.CutSuffix(href, ".obf"); ok {
+		return trimmed, catalog.FormatOBF
+	}
 
-	case strings.HasSuffix(href, "-garmin.zip"):
-		return strings.TrimSuffix(href, "-garmin.zip"), catalog.FormatGarminOSM
+	if trimmed, ok := strings.CutSuffix(href, "-garmin.zip"); ok {
+		return trimmed, catalog.FormatGarminOSM
+	}
 
-	case strings.HasSuffix(href, ".pbf"):
-		return strings.TrimSuffix(href, ".pbf"), catalog.FormatPbf
+	if trimmed, ok := strings.CutSuffix(href, ".pbf"); ok {
+		return trimmed, catalog.FormatPbf
 	}
 
 	return "", ""

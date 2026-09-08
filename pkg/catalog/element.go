@@ -1,6 +1,9 @@
 package catalog
 
-import "slices"
+import (
+	"cmp"
+	"slices"
+)
 
 // Formats represents a list of format identifiers.
 type Formats []string
@@ -32,11 +35,7 @@ func (e *Element) Filename() string {
 		return ""
 	}
 
-	if e.File != "" {
-		return e.File
-	}
-
-	return e.ID
+	return cmp.Or(e.File, e.ID)
 }
 
 // ContainsFormat returns true if the element supports the given format.
