@@ -76,6 +76,7 @@ func (p *Provider) DefaultConfigFile() string {
 func DefaultFormats() catalog.FormatDefinitions {
 	return catalog.FormatDefinitions{
 		catalog.FormatOsmPbf:    {ID: catalog.FormatOsmPbf, Loc: ".osm.pbf"},
+		catalog.FormatPbf:       {ID: catalog.FormatPbf, Loc: ".pbf"},
 		catalog.FormatPoly:      {ID: catalog.FormatPoly, Loc: ".poly"},
 		catalog.FormatOBF:       {ID: catalog.FormatOBF, Loc: ".obf"},
 		catalog.FormatGarminOSM: {ID: catalog.FormatGarminOSM, Loc: "-garmin.zip"},
@@ -204,7 +205,7 @@ func parseHrefToIDAndFormat(href string) (elemID, format string) {
 		return strings.TrimSuffix(href, "-garmin.zip"), catalog.FormatGarminOSM
 
 	case strings.HasSuffix(href, ".pbf"):
-		return strings.TrimSuffix(href, ".pbf"), catalog.FormatOsmPbf
+		return strings.TrimSuffix(href, ".pbf"), catalog.FormatPbf
 	}
 
 	return "", ""

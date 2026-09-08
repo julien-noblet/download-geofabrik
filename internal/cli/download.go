@@ -64,6 +64,7 @@ func RegisterDownloadCmd() {
 	addFormatFlag(formats.KeyGPKG, "K", "Download GeoPackage")
 	addFormatFlag(formats.KeyO5m, "5", "Download o5m")
 	addFormatFlag(formats.KeyO5mZst, "Z", "Download o5m.zst")
+	addFormatFlag(formats.KeyPbf, "", "Download pbf")
 }
 
 func addFormatFlag(key, shorthand, usage string) {
@@ -124,6 +125,7 @@ func resolveOutputDir(dir string) (string, error) {
 
 var preferredDefaultFormats = []string{
 	formats.FormatOsmPbf,
+	formats.FormatPbf,
 	formats.FormatO5m,
 	formats.FormatOsmBz2,
 	formats.FormatOsmGz,
@@ -169,6 +171,28 @@ func selectDefaultFormat(cfg *config.Config, elem *element.Element) string {
 	return formats.FormatOsmPbf
 }
 
+func resolveFormat(cfg *config.Config, elem *element.Element, format string) (string, bool) {
+	if elem.Formats.Contains(format) {
+		if _, exists := cfg.Formats[format]; exists {
+			return format, true
+		}
+	}
+
+	if format == formats.FormatOsmPbf && elem.Formats.Contains(formats.FormatPbf) {
+		if _, exists := cfg.Formats[formats.FormatPbf]; exists {
+			return formats.FormatPbf, true
+		}
+	}
+
+	if format == formats.FormatPbf && elem.Formats.Contains(formats.FormatOsmPbf) {
+		if _, exists := cfg.Formats[formats.FormatOsmPbf]; exists {
+			return formats.FormatOsmPbf, true
+		}
+	}
+
+	return format, false
+}
+
 func runDownload(cmd *cobra.Command, args []string) error {
 	elementID := args[0]
 
@@ -201,14 +225,15 @@ func runDownload(cmd *cobra.Command, args []string) error {
 	downloaderInstance := downloader.NewDownloader(cfg, opts)
 	ctx := cmd.Context()
 
-	for _, format := range activeFormats {
-		formatDef, exists := cfg.Formats[format]
-		if !exists || !myElem.Formats.Contains(format) {
-			slog.Error("Format not available for element", "format", format, "element", elementID)
+	for _, rawFormat := range activeFormats {
+		format, ok := resolveFormat(cfg, myElem, rawFormat)
+		if !ok {
+			slog.Error("Format not available for element", "format", rawFormat, "element", elementID)
 
-			return fmt.Errorf("%w: %s for %s", config.ErrFormatNotExist, format, elementID)
+			return fmt.Errorf("%w: %s for %s", config.ErrFormatNotExist, rawFormat, elementID)
 		}
 
+		formatDef := cfg.Formats[format]
 		targetFile := opts.OutputDirectory + elementID + "." + formatDef.ID
 
 		slog.Info("Processing", "element", elementID, "format", format)
