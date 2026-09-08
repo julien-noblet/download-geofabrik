@@ -10,7 +10,7 @@
   <a href="https://github.com/julien-noblet/download-geofabrik/actions/workflows/nix.yml"><img src="https://img.shields.io/github/actions/workflow/status/julien-noblet/download-geofabrik/nix.yml?branch=master&label=nix&style=flat-square" alt="Nix Status" /></a>
   <a href="https://gist.githubusercontent.com/julien-noblet/a509e15ea4734ca3e8e98f32ab5369c0/raw/7344619caf8ac5bce291793711071a9636536fce/coverage.json"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/julien-noblet/a509e15ea4734ca3e8e98f32ab5369c0/raw/7344619caf8ac5bce291793711071a9636536fce/coverage.json&style=flat-square" alt="Go Coverage" /></a>
   <a href="https://goreportcard.com/report/github.com/julien-noblet/download-geofabrik"><img src="https://goreportcard.com/badge/github.com/julien-noblet/download-geofabrik?style=flat-square" alt="Go Report Card" /></a>
-  <a href="https://hub.docker.com/r/juliennoblet/download-geofabrik"><img src="https://img.shields.io/docker/pulls/juliennoblet/download-geofabrik?style=flat-square" alt="Docker Pulls" /></a>
+  <a href="https://github.com/julien-noblet/download-geofabrik/pkgs/container/download-geofabrik"><img src="https://img.shields.io/badge/GHCR-download--geofabrik-blue?style=flat-square&logo=github" alt="GitHub Container Registry" /></a>
   <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/MCP-Enabled-purple?style=flat-square" alt="MCP Enabled" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MPL_2.0-blue.svg?style=flat-square" alt="License: MPL 2.0" /></a>
 </p>
@@ -69,7 +69,7 @@ go install github.com/julien-noblet/download-geofabrik/cmd/download-geofabrik@la
 ### Docker
 
 ```bash
-docker run -it --rm -v "$PWD:/data" -w /data juliennoblet/download-geofabrik:latest download [element]
+docker run -it --rm -v "$PWD:/data" -w /data ghcr.io/julien-noblet/download-geofabrik:latest download [element]
 ```
 
 ### Nix
@@ -274,8 +274,8 @@ download-geofabrik --service movisda generate
 | **Geofabrik** | `geofabrik` | Continents, countries, and regional extracts (default) | 564 | `osm.pbf`, `shp.zip`, `osm.bz2`, `poly`, `kml`, `mbtiles` | [View Catalog](docs/catalogs/geofabrik.md) |
 | **OpenStreetMap France** | `openstreetmap.fr` | High-detail extracts for French regions, departments, and world | 1,208 | `osm.pbf`, `shp.zip`, `poly`, `gpkg`, `geojson` | [View Catalog](docs/catalogs/openstreetmap.fr.md) |
 | **BBBike** | `bbbike` | Extracts for 200+ major metropolitan cities worldwide | 250 | `osm.pbf`, `shp.zip`, `osm.gz`, `gpkg`, `map`, `mbtiles`, Garmin | [View Catalog](docs/catalogs/bbbike.md) |
-| **Geo2day** | `geo2day` | Custom regional and metropolitan extracts | 13 | `osm.pbf`, `shp.zip`, `poly`, `geojson`, `gpkg`, `kml` | [View Catalog](docs/catalogs/geo2day.md) |
-| **Movisda** | `movisda` | Worldwide country and administrative subdivisions | 3,295 | `osm.pbf`, `poly`, `geojson` | [View Catalog](docs/catalogs/movisda.md) |
+| **Geo2day** | `geo2day` | Custom regional and metropolitan extracts | 1,026 | `osm.pbf`, `poly`, `geojson` | [View Catalog](docs/catalogs/geo2day.md) |
+| **Movisda** | `movisda` | Worldwide country and administrative subdivisions | 3,291 | `osm.pbf`, `poly`, `geojson` | [View Catalog](docs/catalogs/movisda.md) |
 | **Planet OSM Switzerland** | `planet.osm.ch` | Switzerland national and cantonal extracts | 7 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/planet.osm.ch.md) |
 | **OSM Luxembourg** | `osm.kewl.lu` | Daily extracts for Luxembourg | 3 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/osm.kewl.lu.md) |
 | **FIT VUT Brno** | `osm.fit.vutbr.cz` | Czech Republic national and regional extracts | 4 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/osm.fit.vutbr.cz.md) |
