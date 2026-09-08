@@ -6,7 +6,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/julien-noblet/download-geofabrik/internal/config"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -55,7 +55,7 @@ func initCLI() {
 	cobra.OnInitialize(initConfig)
 
 	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is geofabrik.yml)")
-	rootCmd.PersistentFlags().StringVarP(&service, "service", "s", config.DefaultService,
+	rootCmd.PersistentFlags().StringVarP(&service, "service", "s", catalog.DefaultService,
 		"Service to use (geofabrik, geofabrik-parse, openstreetmap.fr, geo2day, bbbike, "+
 			"movisda, planet.osm.ch, osm.kewl.lu, osm.fit.vutbr.cz, osmit-estratti, osm.kcwu.csie.org)")
 	rootCmd.PersistentFlags().Bool("verbose", false, "Verbose mode")
@@ -110,7 +110,7 @@ func initConfig() {
 		if service != "" {
 			viper.SetConfigName(service)
 		} else {
-			viper.SetConfigName(config.DefaultConfigFile)
+			viper.SetConfigName(catalog.DefaultConfigFile)
 		}
 	}
 

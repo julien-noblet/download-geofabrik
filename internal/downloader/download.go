@@ -16,7 +16,7 @@ import (
 	"time"
 
 	pb "github.com/cheggaaa/pb/v3"
-	"github.com/julien-noblet/download-geofabrik/internal/config"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 const (
@@ -38,18 +38,31 @@ var (
 	ErrServerStatusCode = errors.New("server return code error")
 )
 
+// Options holds runtime options for downloader.
+type Options struct {
+	FormatFlags     map[string]bool
+	ConfigFile      string
+	Service         string
+	OutputDirectory string
+	Check           bool
+	Verbose         bool
+	Quiet           bool
+	NoDownload      bool
+	Progress        bool
+}
+
 // Downloader handles downloading files.
 type Downloader struct {
-	Config   *config.Config
-	Options  *config.Options
+	Catalog  *catalog.Catalog
+	Options  *Options
 	client   *http.Client
 	lastHash sync.Map // map[string]string: filePath -> hexMD5 computed in-flight
 }
 
 // NewDownloader creates a new Downloader with connection pooling and high-throughput buffers.
-func NewDownloader(cfg *config.Config, opts *config.Options) *Downloader {
+func NewDownloader(cat *catalog.Catalog, opts *Options) *Downloader {
 	return &Downloader{
-		Config:  cfg,
+		Catalog: cat,
 		Options: opts,
 		client: &http.Client{
 			Transport: &http.Transport{
@@ -109,16 +122,13 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 }
 
 func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, error) {
-	bufPtr := getBuffer()
-	defer putBuffer(bufPtr)
-
 	if d.Options.Progress && !d.Options.Quiet && response.ContentLength > progressMinimal {
 		progressBar := pb.Full.Start64(response.ContentLength)
 		barReader := progressBar.NewProxyReader(response.Body)
 
 		defer progressBar.Finish()
 
-		written, err := io.CopyBuffer(dst, barReader, *bufPtr)
+		written, err := io.Copy(dst, barReader)
 		if err != nil {
 			return written, fmt.Errorf("error copying response with progress: %w", err)
 		}
@@ -126,7 +136,7 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 		return written, nil
 	}
 
-	written, err := io.CopyBuffer(dst, response.Body, *bufPtr)
+	written, err := io.Copy(dst, response.Body)
 	if err != nil {
 		return written, fmt.Errorf("error copying response body: %w", err)
 	}
@@ -195,29 +205,29 @@ func FileExist(filePath string) bool {
 	return err == nil
 }
 
-// DownloadFile downloads a file based on the configuration and element.
+// DownloadFile downloads a file based on the catalog and element.
 func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, outputPath string) error {
-	formatDef, ok := d.Config.Formats[formatName]
+	formatDef, ok := d.Catalog.Formats[formatName]
 	if !ok {
 		slog.Error("Format not found in config", "format", formatName)
 
-		return fmt.Errorf("%w: %s", config.ErrFormatNotExist, formatName)
+		return fmt.Errorf("%w: %s", catalog.ErrFormatNotFound, formatName)
 	}
 
 	format := formatDef.ID
 
-	myElem, err := config.FindElem(d.Config, elementID)
+	myElem, err := d.Catalog.Find(elementID)
 	if err != nil {
 		slog.Error("Element not found", "element", elementID, "error", err)
 
-		return fmt.Errorf("%w: %s", config.ErrFindElem, elementID)
+		return fmt.Errorf("%w: %s", catalog.ErrElementNotFound, elementID)
 	}
 
-	myURL, err := config.Elem2URL(d.Config, myElem, format)
+	myURL, err := d.Catalog.ResolveURL(myElem, format)
 	if err != nil {
 		slog.Error("URL generation failed", "error", err)
 
-		return fmt.Errorf("%w: %w", config.ErrElem2URL, err)
+		return fmt.Errorf("can't find url: %w", err)
 	}
 
 	err = d.FromURL(ctx, myURL, outputPath)
@@ -263,7 +273,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 		return false
 	}
 
-	ok, _, _ := config.IsHashable(d.Config, formatName)
+	ok, _, _ := d.Catalog.IsHashable(formatName)
 	if !ok {
 		slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+formatName)
 
@@ -273,7 +283,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 	hashType := "md5"
 	fhash := formatName + "." + hashType
 
-	myElem, err := config.FindElem(d.Config, elementID)
+	myElem, err := d.Catalog.Find(elementID)
 	if err != nil {
 		slog.Error("Element not found", "element", elementID, "error", err)
 
@@ -281,12 +291,12 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 	}
 
 	if !myElem.Formats.Contains(fhash) {
-		slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+d.Config.Formats[formatName].ID)
+		slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+d.Catalog.Formats[formatName].ID)
 
 		return false
 	}
 
-	myURL, err := config.Elem2URL(d.Config, myElem, fhash)
+	myURL, err := d.Catalog.ResolveURL(myElem, fhash)
 	if err != nil {
 		slog.Error("URL generation failed", "error", err)
 
@@ -294,7 +304,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 	}
 
 	outputPath := d.Options.OutputDirectory + elementID
-	targetFile := outputPath + "." + d.Config.Formats[formatName].ID
+	targetFile := outputPath + "." + d.Catalog.Formats[formatName].ID
 	hashFile := outputPath + "." + fhash
 
 	if e := d.FromURL(ctx, myURL, hashFile); e != nil {

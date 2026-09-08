@@ -264,7 +264,7 @@ formats:
 
 	err = cli.Execute()
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "format not exist")
+	assert.Contains(t, err.Error(), "format not")
 }
 
 func TestDownloadCmd_ElementNotFound(t *testing.T) {

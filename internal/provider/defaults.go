@@ -11,6 +11,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/internal/provider/osmit"
 	"github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu"
 	"github.com/julien-noblet/download-geofabrik/internal/provider/osmtw"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 // RegisterDefaultProviders registers all built-in catalog providers.
@@ -25,4 +26,20 @@ func RegisterDefaultProviders() {
 	Register(osmfitvutbr.NewProvider())
 	Register(osmit.NewProvider())
 	Register(osmtw.NewProvider())
+}
+
+// AllDefaultFormats returns the default format definitions for all built-in providers.
+func AllDefaultFormats() []catalog.FormatDefinitions {
+	return []catalog.FormatDefinitions{
+		geofabrik.DefaultFormats(),
+		openstreetmapfr.DefaultFormats(),
+		bbbike.DefaultFormats(),
+		geo2day.DefaultFormats(),
+		movisda.DefaultFormats(),
+		osmch.DefaultFormats(),
+		osmkewllu.DefaultFormats(),
+		osmfitvutbr.DefaultFormats(),
+		osmit.DefaultFormats(),
+		osmtw.DefaultFormats(),
+	}
 }
