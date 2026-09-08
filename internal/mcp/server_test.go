@@ -22,10 +22,10 @@ const (
 	regionEurope   = "europe"
 )
 
-func createTestCatalog(t *testing.T) string {
-	t.Helper()
+func createTestCatalog(tb testing.TB) string {
+	tb.Helper()
 
-	tempDir := t.TempDir()
+	tempDir := tb.TempDir()
 	catPath := filepath.Join(tempDir, "test-catalog.yml")
 
 	cat := catalog.New()
@@ -69,7 +69,7 @@ func createTestCatalog(t *testing.T) string {
 		Formats: catalog.Formats{formats.FormatOsmPbf},
 	}
 
-	require.NoError(t, cat.SaveFile(catPath))
+	require.NoError(tb, cat.SaveFile(catPath))
 
 	return catPath
 }

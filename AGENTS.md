@@ -132,6 +132,14 @@ The CLI is typically executed as:
 - Tests are Go unit tests using `testing` and `testify/assert`.
 - Prefer table-driven tests and keep assertions specific to the real behavior.
 - Providers code should target 100% branch/statement coverage, or as close as reasonably possible.
+- **Fuzz testing**:
+  - Native Go fuzz tests (`testing.F`) are implemented across `internal/mcp`, `internal/provider/*`, and `pkg/catalog` (`*_fuzz_test.go` and `*_fuzz_internal_test.go`).
+  - Seed corpuses run automatically as part of normal test passes (`go test ./...`).
+  - Active mutation fuzzing can be run on-demand: `go test -fuzz=FuzzName -fuzztime=10s ./internal/mcp`.
+- **Test commenting conventions**:
+  - Keep tests self-documenting via explicit subtest names (`t.Run("descriptive case name", ...)`) and descriptive table fields.
+  - Avoid redundant comments that simply paraphrase the assertion or function call.
+  - Preserve all `//nolint:...` directives and comments explaining non-obvious edge cases, algorithmic constraints, or magic numbers.
 - **Linting conventions to respect on first edit**:
   - Variable naming (`varnamelen`): avoid single-letter loop variables like `f`, `k`, `v` in non-trivial scopes; use descriptive names (e.g., `format`, `elementID`).
   - String constants (`goconst`): define a `const` for any string literal repeated 3 or more times (e.g. paths, prefixes).
