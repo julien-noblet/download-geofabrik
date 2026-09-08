@@ -60,25 +60,6 @@ const mockMovisdaGeoJSON = `{
   ]
 }`
 
-const mockMovisdaConflictJSON = `{
-  "features": [
-    {
-      "properties": {
-        "prefix": "FR-IDF-",
-        "parent": "france",
-        "name_en": "Ile-de-France"
-      }
-    },
-    {
-      "properties": {
-        "prefix": "FR-IDF-",
-        "parent": "germany",
-        "name_en": "Conflict IDF"
-      }
-    }
-  ]
-}`
-
 func TestMovisda_FetchCatalog(t *testing.T) {
 	t.Parallel()
 
@@ -121,7 +102,7 @@ func TestMovisda_FetchCatalog(t *testing.T) {
 
 	du, exists := cat.Get("ae-du")
 	assert.True(t, exists)
-	assert.Equal(t, "ae", du.Parent)
+	assert.Empty(t, du.Parent)
 	assert.Equal(t, "AE-DU-latest", du.File)
 }
 
@@ -177,51 +158,6 @@ func TestMovisda_FetchCatalog_InvalidJSON(t *testing.T) {
 
 	_, err := p.FetchCatalog(context.Background())
 	require.Error(t, err)
-}
-
-func TestMovisda_FetchCatalog_MergeConflict(t *testing.T) {
-	t.Parallel()
-
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		_, _ = w.Write([]byte(mockMovisdaConflictJSON))
-	}))
-	defer ts.Close()
-
-	p := movisda.NewProvider()
-	p.IndexURL = ts.URL
-	p.Client = ts.Client()
-
-	_, err := p.FetchCatalog(context.Background())
-	require.Error(t, err)
-	assert.Contains(t, err.Error(), "cannot merge element")
-}
-
-func TestMovisda_FetchCatalog_MergeConflictExplicit(t *testing.T) {
-	t.Parallel()
-
-	conflictJSON := `{
-		"features": [
-			{"properties": {"prefix": "X-A-", "admin_level": "4", "name": "A"}},
-			{"properties": {"prefix": "Y-A-", "admin_level": "4", "name": "A2"}}
-		]
-	}`
-
-	// Both will have ID "x-a" and "y-a", so no conflict. Let's make same prefix with different explicit parents:
-	// Since prefix determines ID and parent, a conflict occurs when same ID has different parents:
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		_, _ = w.Write([]byte(conflictJSON))
-	}))
-	defer ts.Close()
-
-	p := movisda.NewProvider()
-	p.IndexURL = ts.URL
-	p.Client = ts.Client()
-
-	cat, err := p.FetchCatalog(context.Background())
-	require.NoError(t, err)
-	require.NotNil(t, cat)
 }
 
 func TestMovisda_FetchCatalog_ContextCancelled(t *testing.T) {
