@@ -11,9 +11,9 @@ import (
 )
 
 const (
-	readErrorMsg = "can't read %s: %w"
-	openErrorMsg = "can't open %s: %w"
-	copyErrorMsg = "can't copy %s: %w"
+	readErrorMsg = "cannot read %s: %w"
+	openErrorMsg = "cannot open %s: %w"
+	copyErrorMsg = "cannot copy %s: %w"
 )
 
 // CheckFileHash checks if the hash of a file matches the provided hash.
@@ -26,8 +26,6 @@ func CheckFileHash(hashfile, expectedHash string) (bool, error) {
 
 	fileContent, err := os.ReadFile(hashfile)
 	if err != nil {
-		slog.Warn("Can't read hash file", "file", hashfile, "error", err)
-
 		return false, fmt.Errorf(readErrorMsg, hashfile, err)
 	}
 
@@ -58,7 +56,7 @@ func ComputeMD5Hash(filePath string) (string, error) {
 
 	defer func() {
 		if err := file.Close(); err != nil {
-			slog.Error("Can't close file", "error", err)
+			slog.Warn("Failed to close file", "file", filePath, "error", err)
 		}
 	}()
 
@@ -79,7 +77,7 @@ func VerifyFileChecksum(file, hashfile string) bool {
 
 	hashed, err := ComputeMD5Hash(file)
 	if err != nil {
-		slog.Error("Can't hash file", "error", err)
+		slog.Error("Failed to hash file", "file", file, "error", err)
 
 		return false // Was Fatal before
 	}
@@ -88,13 +86,13 @@ func VerifyFileChecksum(file, hashfile string) bool {
 
 	ret, err := CheckFileHash(hashfile, hashed)
 	if err != nil {
-		slog.Error("Checksum error", "error", err)
+		slog.Error("Checksum error", "file", file, "hashfile", hashfile, "error", err)
 	}
 
 	if ret {
 		slog.Info("Checksum OK", "file", file)
 	} else {
-		slog.Warn("Checksum MISMATCH", "file", file)
+		slog.Error("Checksum MISMATCH", "file", file)
 	}
 
 	return ret

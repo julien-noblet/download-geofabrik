@@ -17,7 +17,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
-var ErrFetchCatalog = errors.New("failed to fetch catalog")
+var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
 	ProviderName        = "geo2day"
@@ -185,6 +185,12 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	var dispatcherWG sync.WaitGroup
 
 	dispatcherWG.Go(func() {
+		defer func() {
+			if r := recover(); r != nil {
+				crawlState.onError(fmt.Errorf("%w: panic in geo2day dispatcher: %v", ErrFetchCatalog, r))
+			}
+		}()
+
 		p.runDispatcher(crawlCtx, workChan, cat, crawlState)
 	})
 
@@ -200,12 +206,16 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 		return nil, firstErr
 	}
 
+	normalizeElementNames(cat)
+
+	return cat, nil
+}
+
+func normalizeElementNames(cat *catalog.Catalog) {
 	for id, elem := range cat.Elements {
 		elem.Name = cmp.Or(elem.Name, id)
 		cat.Elements[id] = elem
 	}
-
-	return cat, nil
 }
 
 type crawlContext struct {
@@ -239,6 +249,10 @@ func (p *Provider) runDispatcher(ctx context.Context, work <-chan string, cat *c
 
 func (p *Provider) processWorker(ctx context.Context, pageURL string, cat *catalog.Catalog, state *crawlContext) {
 	defer func() {
+		if r := recover(); r != nil {
+			state.onError(fmt.Errorf("%w: panic in geo2day worker for %s: %v", ErrFetchCatalog, pageURL, r))
+		}
+
 		<-state.tokens
 		state.workers.Done()
 	}()
@@ -258,7 +272,7 @@ func (p *Provider) processWorker(ctx context.Context, pageURL string, cat *catal
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
 	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
+		return nil, fmt.Errorf("creating request: %w", err)
 	}
 
 	client := cmp.Or(p.Client, http.DefaultClient)

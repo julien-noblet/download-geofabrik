@@ -305,8 +305,9 @@ func (s *Server) handleRegenerateCatalog(ctx context.Context, request mcpSDK.Cal
 		return s.regenerateAllCatalogs(ctx)
 	}
 
-	prov, _ := provider.Get(serviceName)
-	if prov == nil {
+	prov, err := provider.Get(serviceName)
+	if err != nil {
+		//nolint:nilerr // MCP tools report domain failures as ToolResultError with nil protocol error
 		return mcpSDK.NewToolResultError(fmt.Sprintf("%v: %s", errInvalidService, serviceName)), nil
 	}
 
@@ -320,11 +321,11 @@ func (s *Server) handleRegenerateCatalog(ctx context.Context, request mcpSDK.Cal
 	}
 
 	cat, loadErr := catalog.LoadFile(targetFile)
-	elementCount := 0
-
-	if loadErr == nil && cat != nil {
-		elementCount = cat.Len()
+	if loadErr != nil {
+		return mcpSDK.NewToolResultError(fmt.Sprintf("generated catalog but failed to load %s: %v", targetFile, loadErr)), nil
 	}
+
+	elementCount := cat.Len()
 
 	response := map[string]any{
 		fieldStatus:     statusSuccess,
@@ -344,7 +345,7 @@ func (s *Server) regenerateAllCatalogs(ctx context.Context) (*mcpSDK.CallToolRes
 	for _, name := range names {
 		prov, err := provider.Get(name)
 		if err != nil {
-			results[name] = map[string]any{fieldStatus: statusError, "error": err.Error()}
+			results[name] = map[string]any{fieldStatus: statusError, statusError: err.Error()}
 
 			continue
 		}
@@ -352,22 +353,22 @@ func (s *Server) regenerateAllCatalogs(ctx context.Context) (*mcpSDK.CallToolRes
 		targetFile := prov.DefaultConfigFile()
 
 		if genErr := generator.Generate(ctx, name, targetFile); genErr != nil {
-			results[name] = map[string]any{fieldStatus: statusError, "error": genErr.Error()}
+			results[name] = map[string]any{fieldStatus: statusError, statusError: genErr.Error()}
 
 			continue
 		}
 
-		cat, _ := catalog.LoadFile(targetFile)
-		count := 0
+		cat, loadErr := catalog.LoadFile(targetFile)
+		if loadErr != nil {
+			results[name] = map[string]any{fieldStatus: statusError, statusError: loadErr.Error()}
 
-		if cat != nil {
-			count = cat.Len()
+			continue
 		}
 
 		results[name] = map[string]any{
 			fieldStatus:     statusSuccess,
 			"configFile":    targetFile,
-			"totalElements": count,
+			"totalElements": cat.Len(),
 		}
 	}
 
@@ -862,15 +863,15 @@ func (s *Server) ensureCatalogFile(ctx context.Context, serviceName, customCfg s
 	if targetFile == "" {
 		prov, err := provider.Get(serviceName)
 		if err != nil {
-			return nil, "", fmt.Errorf("%w: %s", errInvalidService, serviceName)
+			return nil, "", fmt.Errorf("%w: %s: %w", errInvalidService, serviceName, err)
 		}
 
 		targetFile = prov.DefaultConfigFile()
 	}
 
-	if _, statErr := os.Stat(targetFile); os.IsNotExist(statErr) {
+	if _, statErr := os.Stat(targetFile); errors.Is(statErr, os.ErrNotExist) {
 		s.genMu.Lock()
-		if _, statErr2 := os.Stat(targetFile); os.IsNotExist(statErr2) {
+		if _, statErr2 := os.Stat(targetFile); errors.Is(statErr2, os.ErrNotExist) {
 			slog.Info("Catalog file not found, generating on the fly", "service", serviceName, "file", targetFile)
 
 			if genErr := generator.Generate(ctx, serviceName, targetFile); genErr != nil {
@@ -902,7 +903,7 @@ func (s *Server) loadOrFetchCatalog(ctx context.Context, serviceName, customCfg 
 
 	prov, err := provider.Get(serviceName)
 	if err != nil {
-		return nil, fmt.Errorf("%w: %s", errInvalidService, serviceName)
+		return nil, fmt.Errorf("%w: %s: %w", errInvalidService, serviceName, err)
 	}
 
 	defaultFile := prov.DefaultConfigFile()
@@ -911,6 +912,8 @@ func (s *Server) loadOrFetchCatalog(ctx context.Context, serviceName, customCfg 
 		if loadErr == nil {
 			return cat, nil
 		}
+
+		slog.Warn("Failed to load existing catalog file, falling back to live fetch", "file", defaultFile, "error", loadErr)
 	}
 
 	slog.Info("Fetching catalog live from provider", "service", serviceName)

@@ -231,15 +231,11 @@ func runDownload(cmd *cobra.Command, args []string) error {
 
 	cat, err := catalog.LoadFile(opts.ConfigFile)
 	if err != nil {
-		slog.Error("Failed to load config", "file", opts.ConfigFile, "error", err)
-
 		return fmt.Errorf("failed to load config: %w", err)
 	}
 
 	myElem, err := cat.Find(elementID)
 	if err != nil {
-		slog.Error("Element not found", "element", elementID, "error", err)
-
 		return fmt.Errorf("%w: %s", catalog.ErrElementNotFound, elementID)
 	}
 
@@ -256,8 +252,6 @@ func runDownload(cmd *cobra.Command, args []string) error {
 	for _, rawFormat := range activeFormats {
 		format, ok := resolveFormat(cat, myElem, rawFormat)
 		if !ok {
-			slog.Error("Format not available for element", "format", rawFormat, "element", elementID)
-
 			return fmt.Errorf("%w: %s for %s", catalog.ErrFormatNotFound, rawFormat, elementID)
 		}
 

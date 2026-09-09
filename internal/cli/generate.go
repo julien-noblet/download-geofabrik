@@ -38,8 +38,6 @@ func runGenerate(cmd *cobra.Command, _ []string) error {
 	slog.Info("Generating config", "service", service, "file", cfgFile)
 
 	if err := generator.Generate(cmd.Context(), service, cfgFile); err != nil {
-		slog.Error("Generation failed", "error", err)
-
 		return fmt.Errorf("generation failed: %w", err)
 	}
 

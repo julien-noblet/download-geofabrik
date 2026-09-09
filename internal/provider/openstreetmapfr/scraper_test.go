@@ -150,7 +150,7 @@ func TestOSMFR_FetchCatalog_HTMLParseError(t *testing.T) {
 
 	_, err := p.FetchCatalog(context.Background())
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "error parsing html")
+	assert.Contains(t, err.Error(), "parsing html")
 }
 
 func TestOSMFR_FetchCatalog_Errors(t *testing.T) {
