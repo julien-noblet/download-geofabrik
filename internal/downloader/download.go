@@ -1,4 +1,4 @@
-package download
+package downloader
 
 import (
 	"cmp"
@@ -85,8 +85,8 @@ type Downloader struct {
 	lastHash sync.Map // map[string]string: filePath -> hexMD5 computed in-flight
 }
 
-// NewDownloader creates a new Downloader with connection pooling and high-throughput buffers.
-func NewDownloader(cat *catalog.Catalog, opts *Options) *Downloader {
+// New creates a new Downloader with connection pooling and high-throughput buffers.
+func New(cat *catalog.Catalog, opts *Options) *Downloader {
 	return &Downloader{
 		Catalog: cat,
 		Options: opts,
@@ -108,6 +108,13 @@ func NewDownloader(cat *catalog.Catalog, opts *Options) *Downloader {
 			},
 		},
 	}
+}
+
+// NewDownloader creates a new Downloader with connection pooling and high-throughput buffers.
+//
+// Deprecated: Use New instead.
+func NewDownloader(cat *catalog.Catalog, opts *Options) *Downloader {
+	return New(cat, opts)
 }
 
 // FromURL downloads a file from a URL to a specified file path.
@@ -221,11 +228,18 @@ func (d *Downloader) saveToFile(fileName string, response *http.Response) (err e
 	return nil
 }
 
-// FileExist checks if a file exists at the given path.
-func FileExist(filePath string) bool {
+// FileExists checks if a file exists at the given path.
+func FileExists(filePath string) bool {
 	_, err := os.Stat(filePath)
 
 	return err == nil
+}
+
+// FileExist checks if a file exists at the given path.
+//
+// Deprecated: Use FileExists instead.
+func FileExist(filePath string) bool {
+	return FileExists(filePath)
 }
 
 // DownloadFile downloads a file based on the catalog and element.

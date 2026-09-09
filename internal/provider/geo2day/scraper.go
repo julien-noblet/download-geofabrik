@@ -43,8 +43,8 @@ type Provider struct {
 	StartURL string
 }
 
-// NewProvider creates a new Geo2Day scraper provider.
-func NewProvider() *Provider {
+// New creates a new Geo2Day scraper provider.
+func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
@@ -63,6 +63,13 @@ func NewProvider() *Provider {
 			},
 		},
 	}
+}
+
+// NewProvider creates a new Geo2Day scraper provider.
+//
+// Deprecated: Use New instead.
+func NewProvider() *Provider {
+	return New()
 }
 
 // Name returns the provider name.
@@ -213,7 +220,7 @@ func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, c
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%w: unexpected HTTP %d", ErrFetchCatalog, resp.StatusCode)
+		return nil, fmt.Errorf("%w: unexpected http %d", ErrFetchCatalog, resp.StatusCode)
 	}
 
 	return p.parseHTMLStream(resp.Body, cat)
@@ -233,7 +240,7 @@ func (p *Provider) parseHTMLStream(reader io.Reader, cat *catalog.Catalog) ([]st
 				return subPages, nil
 			}
 
-			return nil, fmt.Errorf("cannot parse HTML: %w", tokenizer.Err())
+			return nil, fmt.Errorf("cannot parse html: %w", tokenizer.Err())
 
 		case html.StartTagToken, html.SelfClosingTagToken:
 			if subPage := p.handleAnchor(tokenizer, tokenType, cat); subPage != "" {

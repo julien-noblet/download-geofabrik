@@ -100,7 +100,7 @@ func TestOSMKewlLu_FetchCatalog_HTMLParseError(t *testing.T) {
 
 	_, err := p.FetchCatalog(context.Background())
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "cannot parse HTML")
+	assert.Contains(t, err.Error(), "cannot parse html")
 }
 
 func TestOSMKewlLu_FetchCatalog_HTTPError(t *testing.T) {
