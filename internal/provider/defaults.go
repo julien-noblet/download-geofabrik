@@ -16,16 +16,16 @@ import (
 
 // RegisterDefaultProviders registers all built-in catalog providers.
 func RegisterDefaultProviders() {
-	Register(geofabrik.NewProvider())
-	Register(openstreetmapfr.NewProvider())
-	Register(bbbike.NewProvider())
-	Register(geo2day.NewProvider())
-	Register(movisda.NewProvider())
-	Register(osmch.NewProvider())
-	Register(osmkewllu.NewProvider())
-	Register(osmfitvutbr.NewProvider())
-	Register(osmit.NewProvider())
-	Register(osmtw.NewProvider())
+	Register(geofabrik.New())
+	Register(openstreetmapfr.New())
+	Register(bbbike.New())
+	Register(geo2day.New())
+	Register(movisda.New())
+	Register(osmch.New())
+	Register(osmkewllu.New())
+	Register(osmfitvutbr.New())
+	Register(osmit.New())
+	Register(osmtw.New())
 }
 
 // AllDefaultFormats returns the default format definitions for all built-in providers.

@@ -14,7 +14,7 @@ import (
 
 	mcpSDK "github.com/mark3labs/mcp-go/mcp"
 
-	downloader "github.com/julien-noblet/download-geofabrik/internal/downloader"
+	"github.com/julien-noblet/download-geofabrik/internal/downloader"
 	"github.com/julien-noblet/download-geofabrik/internal/generator"
 	"github.com/julien-noblet/download-geofabrik/internal/provider"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
@@ -792,7 +792,7 @@ func (s *Server) performActualDownload(ctx context.Context, params *downloadExec
 		Quiet:           true,
 	}
 
-	downloaderInstance := downloader.NewDownloader(params.cat, opts)
+	client := downloader.New(params.cat, opts)
 	results := make([]DownloadFileResult, 0, len(params.formats))
 
 	for _, formatID := range params.formats {
@@ -826,7 +826,7 @@ func (s *Server) performActualDownload(ctx context.Context, params *downloadExec
 
 		slog.Debug("MCP downloading element", "element", params.elem.ID, "format", formatID, "target", targetFile)
 
-		downloadErr := downloaderInstance.DownloadFile(ctx, params.elem.ID, formatID, targetFile)
+		downloadErr := client.DownloadFile(ctx, params.elem.ID, formatID, targetFile)
 		if downloadErr != nil {
 			fileRes.Error = downloadErr.Error()
 			fileRes.Status = "failed"
@@ -836,7 +836,7 @@ func (s *Server) performActualDownload(ctx context.Context, params *downloadExec
 		}
 
 		if params.checkHash {
-			checksumOK := downloaderInstance.Checksum(ctx, params.elem.ID, formatID)
+			checksumOK := client.Checksum(ctx, params.elem.ID, formatID)
 			fileRes.ChecksumVerified = checksumOK
 		}
 

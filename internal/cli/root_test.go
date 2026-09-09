@@ -91,7 +91,7 @@ func TestExecuteVersion(t *testing.T) {
 }
 
 func TestLoggingFlags(t *testing.T) {
-	t.Run("Verbose flag", func(t *testing.T) {
+	t.Run("verbose flag", func(t *testing.T) {
 		cli.ResetGlobs()
 		viper.Reset()
 		cli.RootCmd.SetArgs([]string{"--verbose", "--help"})
@@ -100,7 +100,7 @@ func TestLoggingFlags(t *testing.T) {
 		assert.NoError(t, err)
 	})
 
-	t.Run("Quiet flag", func(t *testing.T) {
+	t.Run("quiet flag", func(t *testing.T) {
 		cli.ResetGlobs()
 		viper.Reset()
 		cli.RootCmd.SetArgs([]string{"--quiet", "--help"})

@@ -1,4 +1,4 @@
-package download
+package downloader
 
 import (
 	"crypto/md5" //nolint:gosec // MD5 is used to control with md5sum files
@@ -18,7 +18,7 @@ const (
 
 // CheckFileHash checks if the hash of a file matches the provided hash.
 func CheckFileHash(hashfile, expectedHash string) (bool, error) {
-	if !FileExist(hashfile) {
+	if !FileExists(hashfile) {
 		slog.Warn("Hash file not found", "file", hashfile)
 
 		return false, nil
@@ -47,7 +47,7 @@ func CheckFileHash(hashfile, expectedHash string) (bool, error) {
 // ComputeMD5Hash computes the hexadecimal MD5 checksum of the file at filePath.
 // If the file does not exist, it returns ("", nil) without error.
 func ComputeMD5Hash(filePath string) (string, error) {
-	if !FileExist(filePath) {
+	if !FileExists(filePath) {
 		return "", nil
 	}
 

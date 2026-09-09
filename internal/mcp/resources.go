@@ -112,7 +112,7 @@ func (s *Server) handleResourceFormats(_ context.Context, request mcpSDK.ReadRes
 func (s *Server) handleResourceCatalogTemplate(ctx context.Context, request mcpSDK.ReadResourceRequest) ([]mcpSDK.ResourceContents, error) {
 	parsedURL, err := url.Parse(request.Params.URI)
 	if err != nil {
-		return nil, fmt.Errorf("invalid resource URI %s: %w", request.Params.URI, err)
+		return nil, fmt.Errorf("invalid resource uri %s: %w", request.Params.URI, err)
 	}
 
 	serviceName := strings.TrimPrefix(parsedURL.Path, "/")

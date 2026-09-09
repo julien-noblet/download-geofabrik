@@ -38,8 +38,8 @@ type Provider struct {
 	StartURL string
 }
 
-// NewProvider creates a new Swiss OSM (planet.osm.ch) scraper provider.
-func NewProvider() *Provider {
+// New creates a new Swiss OSM (planet.osm.ch) scraper provider.
+func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
@@ -57,6 +57,13 @@ func NewProvider() *Provider {
 			},
 		},
 	}
+}
+
+// NewProvider creates a new Swiss OSM (planet.osm.ch) scraper provider.
+//
+// Deprecated: Use New instead.
+func NewProvider() *Provider {
+	return New()
 }
 
 // Name returns the unique service name.
@@ -101,7 +108,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%w: unexpected HTTP status %d", ErrFetchCatalog, resp.StatusCode)
+		return nil, fmt.Errorf("%w: unexpected http status %d", ErrFetchCatalog, resp.StatusCode)
 	}
 
 	cat := catalog.New()
@@ -127,7 +134,7 @@ func parseOSMCHHTML(reader io.Reader, cat *catalog.Catalog) error {
 				return nil
 			}
 
-			return fmt.Errorf("cannot parse HTML: %w", tokenizer.Err())
+			return fmt.Errorf("cannot parse html: %w", tokenizer.Err())
 
 		case html.StartTagToken, html.SelfClosingTagToken:
 			processAnchorTag(tokenizer, cat)

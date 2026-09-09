@@ -37,8 +37,8 @@ type Provider struct {
 	BaseURL  string
 }
 
-// NewProvider creates a new Geofabrik API provider with tuned transport.
-func NewProvider() *Provider {
+// New creates a new Geofabrik API provider with tuned transport.
+func New() *Provider {
 	return &Provider{
 		IndexURL: GeofabrikIndexURL,
 		BaseURL:  GeofabrikBaseURL,
@@ -56,6 +56,13 @@ func NewProvider() *Provider {
 			},
 		},
 	}
+}
+
+// NewProvider creates a new Geofabrik API provider with tuned transport.
+//
+// Deprecated: Use New instead.
+func NewProvider() *Provider {
+	return New()
 }
 
 // Name returns the provider's unique service name.
@@ -115,12 +122,12 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%w: unexpected HTTP %d from %s", ErrFetchCatalog, resp.StatusCode, p.IndexURL)
+		return nil, fmt.Errorf("%w: unexpected http %d from %s", ErrFetchCatalog, resp.StatusCode, p.IndexURL)
 	}
 
 	var index indexJSON
 	if err := json.NewDecoder(resp.Body).Decode(&index); err != nil {
-		return nil, fmt.Errorf("cannot decode index JSON: %w", err)
+		return nil, fmt.Errorf("cannot decode index json: %w", err)
 	}
 
 	cat := catalog.New()

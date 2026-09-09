@@ -47,8 +47,11 @@ var (
 	// ErrMaxHierarchyDepth is returned when resolving hierarchical URLs exceeds the maximum depth limit, indicating a cycle.
 	ErrMaxHierarchyDepth = errors.New("maximum hierarchy depth exceeded (possible cycle in catalog)")
 
-	// ErrElem2URL is returned when an element's download URL cannot be constructed.
-	ErrElem2URL = errors.New("can't find url")
+	// ErrResolveURL is returned when an element's download URL cannot be constructed.
+	ErrResolveURL = errors.New("can't find url")
+
+	// ErrElem2URL is an alias for ErrResolveURL kept for backward compatibility.
+	ErrElem2URL = ErrResolveURL
 
 	// ErrFormatNotExist is an alias for ErrFormatNotFound kept for backward compatibility.
 	ErrFormatNotExist = ErrFormatNotFound
@@ -97,7 +100,7 @@ func LoadFile(filePath string) (*Catalog, error) {
 
 	cat := New()
 	if err := yaml.Unmarshal(data, cat); err != nil {
-		return nil, fmt.Errorf("cannot unmarshal YAML from %s: %w", absPath, err)
+		return nil, fmt.Errorf("cannot unmarshal yaml from %s: %w", absPath, err)
 	}
 
 	if cat.Elements == nil {
@@ -118,7 +121,7 @@ func (c *Catalog) SaveFile(filePath string) error {
 	c.mu.RUnlock()
 
 	if err != nil {
-		return fmt.Errorf("cannot marshal catalog to YAML: %w", err)
+		return fmt.Errorf("cannot marshal catalog to yaml: %w", err)
 	}
 
 	dir := filepath.Dir(filePath)
@@ -147,14 +150,19 @@ func (c *Catalog) Save(w io.Writer) error {
 	return nil
 }
 
-// Exist returns true if the element ID is present in the catalog.
-func (c *Catalog) Exist(elementID string) bool {
+// Exists returns true if the element ID is present in the catalog.
+func (c *Catalog) Exists(elementID string) bool {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
 	_, exists := c.getElementLocked(elementID)
 
 	return exists
+}
+
+// Exist is an alias for Exists kept for backward compatibility.
+func (c *Catalog) Exist(elementID string) bool {
+	return c.Exists(elementID)
 }
 
 // Get retrieves a copy of an element by ID.

@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	downloader "github.com/julien-noblet/download-geofabrik/internal/downloader"
+	"github.com/julien-noblet/download-geofabrik/internal/downloader"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
@@ -250,7 +250,7 @@ func runDownload(cmd *cobra.Command, args []string) error {
 		activeFormats = []string{selectDefaultFormat(cat, myElem)}
 	}
 
-	downloaderInstance := downloader.NewDownloader(cat, opts)
+	client := downloader.New(cat, opts)
 	ctx := cmd.Context()
 
 	for _, rawFormat := range activeFormats {
@@ -266,7 +266,7 @@ func runDownload(cmd *cobra.Command, args []string) error {
 
 		slog.Info("Processing", "element", elementID, "format", format)
 
-		if err := processDownload(ctx, downloaderInstance, opts.Check, elementID, format, targetFile); err != nil {
+		if err := processDownload(ctx, client, opts.Check, elementID, format, targetFile); err != nil {
 			return err
 		}
 	}
@@ -274,9 +274,9 @@ func runDownload(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-func processDownload(ctx context.Context, downloaderInstance *downloader.Downloader, check bool, elementID, format, targetFile string) error {
+func processDownload(ctx context.Context, client *downloader.Downloader, check bool, elementID, format, targetFile string) error {
 	if !check {
-		if err := downloaderInstance.DownloadFile(ctx, elementID, format, targetFile); err != nil {
+		if err := client.DownloadFile(ctx, elementID, format, targetFile); err != nil {
 			return fmt.Errorf("download failed: %w", err)
 		}
 
@@ -285,8 +285,8 @@ func processDownload(ctx context.Context, downloaderInstance *downloader.Downloa
 
 	shouldDownload := true
 
-	if downloader.FileExist(targetFile) {
-		if downloaderInstance.Checksum(ctx, elementID, format) {
+	if downloader.FileExists(targetFile) {
+		if client.Checksum(ctx, elementID, format) {
 			slog.Info("File already exists and checksum matches", "file", targetFile)
 
 			shouldDownload = false
@@ -296,11 +296,11 @@ func processDownload(ctx context.Context, downloaderInstance *downloader.Downloa
 	}
 
 	if shouldDownload {
-		if err := downloaderInstance.DownloadFile(ctx, elementID, format, targetFile); err != nil {
+		if err := client.DownloadFile(ctx, elementID, format, targetFile); err != nil {
 			return fmt.Errorf("download failed: %w", err)
 		}
 		// Verify again
-		downloaderInstance.Checksum(ctx, elementID, format)
+		client.Checksum(ctx, elementID, format)
 	}
 
 	return nil
