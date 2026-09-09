@@ -74,6 +74,10 @@ func NewProvider() *Provider {
 
 // Name returns the provider name.
 func (p *Provider) Name() string {
+	if p == nil {
+		return ""
+	}
+
 	return ProviderName
 }
 
@@ -116,7 +120,11 @@ var exceptionList = []struct {
 }
 
 // FetchCatalog scrapes the Geo2Day index concurrently and builds a catalog.Catalog.
-func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
+func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) { //nolint:cyclop // nil guard +1 branch
+	if p == nil {
+		return nil, catalog.ErrProviderNil
+	}
+
 	if err := ctx.Err(); err != nil {
 		return nil, fmt.Errorf("crawl context canceled: %w", err)
 	}
@@ -212,6 +220,10 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 }
 
 func normalizeElementNames(cat *catalog.Catalog) {
+	if cat == nil {
+		return
+	}
+
 	for id, elem := range cat.Elements {
 		elem.Name = cmp.Or(elem.Name, id)
 		cat.Elements[id] = elem

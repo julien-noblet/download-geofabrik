@@ -83,3 +83,15 @@ func (e *Element) CreateParentElement(grandparentID string) *Element {
 		Meta:    true,
 	}
 }
+
+// Clone returns a deep copy of the Element with an independent Formats slice.
+func (e *Element) Clone() Element {
+	if e == nil {
+		return Element{}
+	}
+
+	clone := *e
+	clone.Formats = slices.Clone(e.Formats)
+
+	return clone
+}

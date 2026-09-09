@@ -66,9 +66,10 @@ func ComputeMD5Hash(filePath string) (string, error) {
 	}
 
 	var digest [md5.Size]byte
-	hash.Sum(digest[:0])
 
-	return hex.EncodeToString(digest[:]), nil
+	sum := hash.Sum(digest[:0])
+
+	return hex.EncodeToString(sum), nil
 }
 
 // VerifyFileChecksum verifies the checksum of a file.

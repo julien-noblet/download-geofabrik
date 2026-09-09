@@ -56,6 +56,7 @@ func Generate(ctx context.Context, service, configfile string) error {
 
 	// Sort formats within each element for deterministic YAML output
 	for k, elem := range cat.Elements {
+		elem.Formats = slices.Clone(elem.Formats)
 		slices.Sort(elem.Formats)
 		cat.Elements[k] = elem
 	}

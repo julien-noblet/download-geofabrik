@@ -126,6 +126,10 @@ func NewProvider() *Provider {
 
 // Name returns the unique service name.
 func (p *Provider) Name() string {
+	if p == nil {
+		return ""
+	}
+
 	return ProviderName
 }
 
@@ -150,7 +154,11 @@ func DefaultFormats() catalog.FormatDefinitions {
 }
 
 // FetchCatalog crawls the directory index of OpenStreetMap.fr concurrently and generates a Catalog.
-func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
+func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) { //nolint:cyclop // nil guard +1 branch
+	if p == nil {
+		return nil, catalog.ErrProviderNil
+	}
+
 	if err := ctx.Err(); err != nil {
 		return nil, fmt.Errorf("context canceled: %w", err)
 	}

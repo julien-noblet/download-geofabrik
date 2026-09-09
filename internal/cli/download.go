@@ -2,6 +2,7 @@ package cli
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log/slog"
 	"os"
@@ -15,6 +16,9 @@ import (
 )
 
 var (
+	// ErrMissingElementArg is returned when the download command is called without an element argument.
+	ErrMissingElementArg = errors.New("missing required element argument")
+
 	// Flags for download command.
 	outputDir        string
 	check            bool
@@ -144,7 +148,7 @@ func resolveOutputDir(dir string) (string, error) {
 		return wd + string(os.PathSeparator), nil
 	}
 
-	if dir[len(dir)-1] != os.PathSeparator {
+	if !strings.HasSuffix(dir, string(os.PathSeparator)) {
 		return dir + string(os.PathSeparator), nil
 	}
 
@@ -174,7 +178,7 @@ func hasExplicitFormat(flags map[string]bool) bool {
 }
 
 func selectDefaultFormat(cat *catalog.Catalog, elem *catalog.Element) string {
-	if elem == nil {
+	if elem == nil || cat == nil || cat.Formats == nil {
 		return catalog.FormatOsmPbf
 	}
 
@@ -199,7 +203,11 @@ func selectDefaultFormat(cat *catalog.Catalog, elem *catalog.Element) string {
 	return catalog.FormatOsmPbf
 }
 
-func resolveFormat(cat *catalog.Catalog, elem *catalog.Element, format string) (string, bool) {
+func resolveFormat(cat *catalog.Catalog, elem *catalog.Element, format string) (string, bool) { //nolint:cyclop // nil guards +2 branches
+	if cat == nil || elem == nil || cat.Formats == nil {
+		return format, false
+	}
+
 	if elem.Formats.Contains(format) {
 		if _, exists := cat.Formats[format]; exists {
 			return format, true
@@ -222,6 +230,10 @@ func resolveFormat(cat *catalog.Catalog, elem *catalog.Element, format string) (
 }
 
 func runDownload(cmd *cobra.Command, args []string) error {
+	if len(args) == 0 {
+		return ErrMissingElementArg
+	}
+
 	elementID := args[0]
 
 	opts, err := buildDownloadOptions()
