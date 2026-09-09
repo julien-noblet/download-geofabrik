@@ -164,7 +164,7 @@ func TestOSMFitVutbr_FetchCatalog_HTMLParseError(t *testing.T) {
 
 	_, err := p.FetchCatalog(context.Background())
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "cannot parse HTML")
+	assert.Contains(t, err.Error(), "cannot parse html")
 }
 
 func TestOSMFitVutbr_FetchCatalog_SubdirHTMLParseError(t *testing.T) {
@@ -201,7 +201,7 @@ func TestOSMFitVutbr_FetchCatalog_SubdirHTMLParseError(t *testing.T) {
 
 	_, err := p.FetchCatalog(context.Background())
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "cannot parse HTML")
+	assert.Contains(t, err.Error(), "cannot parse html")
 }
 
 func TestOSMFitVutbr_FetchCatalog_HTTPError(t *testing.T) {

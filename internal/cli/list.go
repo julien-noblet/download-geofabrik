@@ -50,7 +50,7 @@ func runList(cmd *cobra.Command, _ []string) error {
 
 	if jsonOutput {
 		if err := ui.PrintJSON(cat, out); err != nil {
-			return fmt.Errorf("failed to output JSON: %w", err)
+			return fmt.Errorf("failed to output json: %w", err)
 		}
 
 		return nil

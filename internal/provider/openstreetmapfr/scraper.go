@@ -95,8 +95,8 @@ type Provider struct {
 	StartURL string
 }
 
-// NewProvider creates a new OpenStreetMap.fr scraper provider.
-func NewProvider() *Provider {
+// New creates a new OpenStreetMap.fr scraper provider.
+func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
@@ -115,6 +115,13 @@ func NewProvider() *Provider {
 			},
 		},
 	}
+}
+
+// NewProvider creates a new OpenStreetMap.fr scraper provider.
+//
+// Deprecated: Use New instead.
+func NewProvider() *Provider {
+	return New()
 }
 
 // Name returns the unique service name.
@@ -244,7 +251,7 @@ func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, c
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%w: unexpected HTTP %d from %s", ErrFetchCatalog, resp.StatusCode, currentURL)
+		return nil, fmt.Errorf("%w: unexpected http %d from %s", ErrFetchCatalog, resp.StatusCode, currentURL)
 	}
 
 	return p.parseHTMLStream(resp.Body, currentURL, cat)
@@ -264,7 +271,7 @@ func (p *Provider) parseHTMLStream(reader io.Reader, currentURL string, cat *cat
 				return subDirs, nil
 			}
 
-			return nil, fmt.Errorf("error parsing HTML from %s: %w", currentURL, tokenizer.Err())
+			return nil, fmt.Errorf("error parsing html from %s: %w", currentURL, tokenizer.Err())
 
 		case html.StartTagToken, html.SelfClosingTagToken:
 			if subDir := p.handleAnchor(tokenizer, currentURL, cat); subDir != "" {

@@ -97,7 +97,7 @@ func PrintJSON(cat *catalog.Catalog, writer io.Writer) error {
 	encoder.SetIndent("", "  ")
 
 	if err := encoder.Encode(cat); err != nil {
-		return fmt.Errorf("unable to encode JSON: %w", err)
+		return fmt.Errorf("unable to encode json: %w", err)
 	}
 
 	return nil
