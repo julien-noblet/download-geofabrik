@@ -38,6 +38,9 @@ var (
 	// ErrNilCatalog is returned when an operation receives an unexpected nil Catalog pointer.
 	ErrNilCatalog = errors.New("nil catalog")
 
+	// ErrProviderNil is returned when a provider method is called on a nil provider.
+	ErrProviderNil = errors.New("provider is nil")
+
 	// ErrElementNotFound is returned when an element ID cannot be resolved in the catalog.
 	ErrElementNotFound = errors.New("element not found")
 
@@ -204,6 +207,22 @@ func (c *Catalog) GetFormat(formatID string) (Format, bool) {
 	return format, exists
 }
 
+// AddFormat adds or updates a format definition thread-safely with lazy initialization.
+func (c *Catalog) AddFormat(format *Format) {
+	if c == nil || format == nil || format.ID == "" {
+		return
+	}
+
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	if c.Formats == nil {
+		c.Formats = make(FormatDefinitions)
+	}
+
+	c.Formats[format.ID] = *format
+}
+
 // Exists returns true if the element ID is present in the catalog.
 func (c *Catalog) Exists(elementID string) bool {
 	if c == nil {
@@ -316,9 +335,32 @@ func (c *Catalog) resolveDateElement(dateStr string) (Element, bool) {
 	return Element{}, false
 }
 
+// SubElement adds a child element and sets its parent relation thread-safely.
+func (c *Catalog) SubElement(parentID, childID string) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	if c.Elements == nil {
+		c.Elements = make(map[string]Element)
+	}
+
+	child, exists := c.Elements[childID]
+	if !exists {
+		child = Element{ID: childID}
+	}
+
+	child.Parent = parentID
+	c.Elements[childID] = child
+}
+
+// GetElements returns an Element by ID. Deprecated: use Get or Find instead.
+func (c *Catalog) GetElements(elementID string) (Element, bool) {
+	return c.Get(elementID)
+}
+
 // AddElement inserts or replaces an element in the catalog.
 func (c *Catalog) AddElement(elem *Element) {
-	if elem == nil || elem.ID == "" {
+	if c == nil || elem == nil || elem.ID == "" {
 		return
 	}
 
@@ -329,7 +371,9 @@ func (c *Catalog) AddElement(elem *Element) {
 		c.Elements = make(map[string]Element)
 	}
 
-	c.Elements[elem.ID] = *elem
+	elemCopy := *elem
+	elemCopy.Formats = slices.Clone(elem.Formats)
+	c.Elements[elem.ID] = elemCopy
 }
 
 // MergeElement adds a new element or merges formats if it already exists.
@@ -351,7 +395,9 @@ func (c *Catalog) MergeElement(elem *Element) error {
 
 	existing, exists := c.Elements[elem.ID]
 	if !exists {
-		c.Elements[elem.ID] = *elem
+		elemCopy := *elem
+		elemCopy.Formats = slices.Clone(elem.Formats)
+		c.Elements[elem.ID] = elemCopy
 
 		return nil
 	}
@@ -375,6 +421,7 @@ func validateParentMerge(existing, incoming *Element) error {
 }
 
 func applyElementMerge(target, source *Element) {
+	target.Formats = slices.Clone(target.Formats)
 	for _, format := range source.Formats {
 		target.AddFormat(format)
 	}
@@ -390,6 +437,10 @@ func applyElementMerge(target, source *Element) {
 
 // AddExtension adds a format to an existing element if present.
 func (c *Catalog) AddExtension(elementID, formatID string) {
+	if c == nil {
+		return
+	}
+
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
@@ -420,7 +471,7 @@ func (c *Catalog) SortedKeys() []string {
 // Callers must not invoke mutating methods on this Catalog within the iteration loop.
 func (c *Catalog) All() iter.Seq2[string, Element] {
 	return func(yield func(string, Element) bool) {
-		if c == nil {
+		if c == nil || yield == nil {
 			return
 		}
 
@@ -428,6 +479,7 @@ func (c *Catalog) All() iter.Seq2[string, Element] {
 		defer c.mu.RUnlock()
 
 		for k, v := range c.Elements {
+			v.Formats = slices.Clone(v.Formats)
 			if !yield(k, v) {
 				return
 			}
@@ -494,7 +546,7 @@ func (c *Catalog) collectHierarchySegments(startID string) ([]string, error) {
 		return nil, fmt.Errorf("%w: element %s", ErrMaxHierarchyDepth, startID)
 	}
 
-	return segments[:count], nil
+	return segments[:count:count], nil
 }
 
 // ResolvePreURL iteratively builds the URL path prefix with cycle protection and minimal allocations.

@@ -463,10 +463,12 @@ func applyPagination(items []ElementSummary, offset, limit int) []ElementSummary
 
 	end := total
 	if limit > 0 {
-		end = min(total, offset+limit)
+		if limit < total-offset {
+			end = offset + limit
+		}
 	}
 
-	return items[offset:end]
+	return slices.Clone(items[offset:end])
 }
 
 //nolint:gocritic // parameter signature defined by mcpSDK.ToolHandlerFunc interface
@@ -672,7 +674,11 @@ var preferredCatalogDefaultFormats = []string{
 	catalog.FormatO5mZst,
 }
 
-func resolveCatalogFormat(cat *catalog.Catalog, elem *catalog.Element, format string) (string, bool) {
+func resolveCatalogFormat(cat *catalog.Catalog, elem *catalog.Element, format string) (string, bool) { //nolint:cyclop // nil guards +2
+	if cat == nil || elem == nil || cat.Formats == nil {
+		return format, false
+	}
+
 	if elem.ContainsFormat(format) {
 		if _, exists := cat.Formats[format]; exists {
 			return format, true
@@ -695,7 +701,7 @@ func resolveCatalogFormat(cat *catalog.Catalog, elem *catalog.Element, format st
 }
 
 func resolveCatalogDefaultFormat(cat *catalog.Catalog, elem *catalog.Element) string {
-	if elem == nil {
+	if elem == nil || cat == nil || cat.Formats == nil {
 		return catalog.FormatOsmPbf
 	}
 
@@ -936,7 +942,7 @@ func jsonToolResult(v any) (*mcpSDK.CallToolResult, error) {
 }
 
 func resolveFormatOrHashURL(cat *catalog.Catalog, elem *catalog.Element, formatID string) (string, error) {
-	if elem == nil || formatID == "" {
+	if cat == nil || elem == nil || formatID == "" {
 		return "", errNilOrEmpty
 	}
 

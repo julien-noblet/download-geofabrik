@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
+	"maps"
 	"net"
 	"net/http"
 	"os"
@@ -87,13 +88,15 @@ type Downloader struct {
 
 // New creates a new Downloader with connection pooling and high-throughput buffers.
 func New(cat *catalog.Catalog, opts *Options) *Downloader {
-	if opts == nil {
-		opts = &Options{}
+	optsCopy := &Options{}
+	if opts != nil {
+		*optsCopy = *opts
+		optsCopy.FormatFlags = maps.Clone(opts.FormatFlags)
 	}
 
 	return &Downloader{
 		Catalog: cat,
-		Options: opts,
+		Options: optsCopy,
 		client: &http.Client{
 			Transport: &http.Transport{
 				Proxy: http.ProxyFromEnvironment,
@@ -121,11 +124,19 @@ func NewDownloader(cat *catalog.Catalog, opts *Options) *Downloader {
 	return New(cat, opts)
 }
 
+func (d *Downloader) opts() *Options {
+	if d == nil || d.Options == nil {
+		return &Options{}
+	}
+
+	return d.Options
+}
+
 // FromURL downloads a file from a URL to a specified file path.
 func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err error) {
 	slog.Debug("Downloading", "url", myURL, "file", fileName)
 
-	if d.Options.NoDownload {
+	if d.opts().NoDownload {
 		return nil
 	}
 
@@ -157,7 +168,8 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 }
 
 func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, error) {
-	if d.Options.Progress && !d.Options.Quiet && response.ContentLength > progressMinimal {
+	opts := d.opts()
+	if opts.Progress && !opts.Quiet && response.ContentLength > progressMinimal {
 		progressBar := pb.Full.Start64(response.ContentLength)
 		barReader := progressBar.NewProxyReader(response.Body)
 
@@ -173,21 +185,18 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 
 	written, err := io.Copy(dst, response.Body)
 	if err != nil {
-		return written, fmt.Errorf("copying response body: %w", err)
+		return written, fmt.Errorf("copying response: %w", err)
 	}
 
 	return written, nil
 }
 
-// saveToFile saves the response body to a file atomically with single-pass MD5 computation and progress bar support.
 func (d *Downloader) saveToFile(fileName string, response *http.Response) (err error) {
-	if dir := filepath.Dir(fileName); dir != "" {
-		if merr := os.MkdirAll(dir, dirMode); merr != nil {
-			return fmt.Errorf("creating directory %s: %w", dir, merr)
-		}
-	}
-
 	tmpFileName := fileName + ".tmp"
+
+	if err = os.MkdirAll(filepath.Dir(fileName), dirMode); err != nil {
+		return fmt.Errorf("creating directory %s: %w", filepath.Dir(fileName), err)
+	}
 
 	file, err := os.OpenFile(tmpFileName, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, fileMode)
 	if err != nil {
@@ -195,6 +204,7 @@ func (d *Downloader) saveToFile(fileName string, response *http.Response) (err e
 	}
 
 	fileClosed := false
+
 	defer func() {
 		if !fileClosed {
 			_ = file.Close()
@@ -205,12 +215,12 @@ func (d *Downloader) saveToFile(fileName string, response *http.Response) (err e
 		}
 	}()
 
-	hasher := md5.New() //nolint:gosec // MD5 is used for checksum control with provider md5 files
-	writer := io.MultiWriter(file, hasher)
+	hasher := md5.New() //nolint:gosec // MD5 is used to control with md5sum files
+	multiWriter := io.MultiWriter(file, hasher)
 
-	currentProgress, err := d.copyBody(writer, response)
+	currentProgress, err := d.copyBody(multiWriter, response)
 	if err != nil {
-		return fmt.Errorf("writing %s: %w", tmpFileName, err)
+		return err
 	}
 
 	fileClosed = true
@@ -224,8 +234,9 @@ func (d *Downloader) saveToFile(fileName string, response *http.Response) (err e
 	}
 
 	var digest [md5.Size]byte
-	hasher.Sum(digest[:0])
-	d.lastHash.Store(fileName, hex.EncodeToString(digest[:]))
+
+	sum := hasher.Sum(digest[:0])
+	d.lastHash.Store(fileName, hex.EncodeToString(sum))
 
 	slog.Info("Downloaded", "file", fileName)
 	slog.Debug("Bytes downloaded", "bytes", currentProgress)
@@ -249,7 +260,7 @@ func FileExist(filePath string) bool {
 
 // DownloadFile downloads a file based on the catalog and element.
 func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, outputPath string) error {
-	if d.Catalog == nil {
+	if d == nil || d.Catalog == nil {
 		return catalog.ErrNilCatalog
 	}
 
@@ -267,33 +278,32 @@ func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, ou
 
 	myURL, err := d.Catalog.ResolveURL(myElem, format)
 	if err != nil {
-		return fmt.Errorf("%w: %w", catalog.ErrResolveURL, err)
+		return fmt.Errorf("resolving url for %s: %w", elementID, err)
 	}
 
-	err = d.FromURL(ctx, myURL, outputPath)
-	if err != nil {
-		return fmt.Errorf("%w: downloading from %s: %w", ErrFromURL, myURL, err)
+	if err := d.FromURL(ctx, myURL, outputPath); err != nil {
+		return fmt.Errorf("downloading from url: %w", err)
 	}
 
 	return nil
 }
 
 func (d *Downloader) verifyChecksum(targetFile, hashFile string) bool {
-	cachedVal, ok := d.lastHash.LoadAndDelete(targetFile)
-	if !ok {
-		return VerifyFileChecksum(targetFile, hashFile)
-	}
+	var ret bool
 
-	cachedDigest, isStr := cachedVal.(string)
-	if !isStr || cachedDigest == "" {
-		return VerifyFileChecksum(targetFile, hashFile)
-	}
+	if inFlightHash, ok := d.lastHash.Load(targetFile); ok {
+		cachedDigest, isStr := inFlightHash.(string)
+		if !isStr || cachedDigest == "" {
+			slog.Debug("Cached hash invalid, reading file", "file", targetFile)
 
-	slog.Debug("Using in-flight computed MD5", "file", targetFile, "hash", cachedDigest)
+			ret = VerifyFileChecksum(targetFile, hashFile)
+		} else {
+			slog.Debug("Using in-flight hash", "file", targetFile, "hash", cachedDigest)
 
-	ret, err := CheckFileHash(hashFile, cachedDigest)
-	if err != nil {
-		slog.Error("Checksum error", "file", targetFile, "hashfile", hashFile, "error", err)
+			ret, _ = CheckFileHash(hashFile, cachedDigest)
+		}
+	} else {
+		ret = VerifyFileChecksum(targetFile, hashFile)
 	}
 
 	if ret {
@@ -307,7 +317,7 @@ func (d *Downloader) verifyChecksum(targetFile, hashFile string) bool {
 
 // Checksum downloads and verifies the checksum of a file, using in-flight computed MD5 when available.
 func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string) bool {
-	if d.Catalog == nil || !d.Options.Check {
+	if d == nil || d.Catalog == nil || !d.opts().Check {
 		return false
 	}
 
@@ -316,7 +326,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 		slog.Warn("No checksum provided",
 			"element", elementID,
 			"format", formatName,
-			"file", filepath.Join(d.Options.OutputDirectory, elementID+"."+formatName),
+			"file", filepath.Join(d.opts().OutputDirectory, elementID+"."+formatName),
 		)
 
 		return false
@@ -341,7 +351,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 		slog.Warn("No checksum provided",
 			"element", elementID,
 			"format", formatDef.ID,
-			"file", filepath.Join(d.Options.OutputDirectory, elementID+"."+formatDef.ID),
+			"file", filepath.Join(d.opts().OutputDirectory, elementID+"."+formatDef.ID),
 		)
 
 		return false
@@ -354,7 +364,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 		return false
 	}
 
-	outputPath := d.Options.OutputDirectory + elementID
+	outputPath := d.opts().OutputDirectory + elementID
 	targetFile := outputPath + "." + formatDef.ID
 	hashFile := outputPath + "." + fhash
 

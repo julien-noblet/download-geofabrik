@@ -10,6 +10,8 @@ import (
 	"net/http"
 	"strings"
 	"time"
+	"unicode"
+	"unicode/utf8"
 
 	"golang.org/x/net/html"
 
@@ -114,6 +116,10 @@ func (p *Provider) fetchHTML(ctx context.Context, targetURL string) (io.ReadClos
 
 // FetchCatalog scrapes the index of osm.fit.vutbr.cz and generates a catalog.Catalog.
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
+	if p == nil {
+		return nil, catalog.ErrProviderNil
+	}
+
 	body, err := p.fetchHTML(ctx, p.StartURL)
 	if err != nil {
 		return nil, fmt.Errorf("fetching root catalog: %w", err)
@@ -132,14 +138,15 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	for _, dir := range subdirs {
 		subURL := strings.TrimSuffix(p.StartURL, "/") + "/" + dir + "/"
 
-		subBody, err := p.fetchHTML(ctx, subURL)
-		if err != nil {
-			return nil, fmt.Errorf("fetching subdirectory %s: %w", dir, err)
-		}
+		err := func() error {
+			subBody, err := p.fetchHTML(ctx, subURL)
+			if err != nil {
+				return fmt.Errorf("fetching subdirectory %s: %w", dir, err)
+			}
+			defer subBody.Close()
 
-		err = parseFitVutbrSubdirHTML(subBody, cat, dir)
-		_ = subBody.Close()
-
+			return parseFitVutbrSubdirHTML(subBody, cat, dir)
+		}()
 		if err != nil {
 			return nil, fmt.Errorf("parsing subdirectory %s html: %w", dir, err)
 		}
@@ -323,8 +330,8 @@ func addLatestElement(cat *catalog.Catalog, dir, latestPbfBase, latestBz2Base st
 func formatName(name string) string {
 	words := strings.Split(name, "_")
 	for i, w := range words {
-		if w != "" {
-			words[i] = strings.ToUpper(w[:1]) + w[1:]
+		if r, size := utf8.DecodeRuneInString(w); size > 0 {
+			words[i] = string(unicode.ToUpper(r)) + w[size:]
 		}
 	}
 

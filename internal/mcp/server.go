@@ -2,6 +2,7 @@ package mcp
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log/slog"
 	"sync"
@@ -17,6 +18,9 @@ type Server struct {
 	version   string
 	genMu     sync.Mutex
 }
+
+// ErrServerNotInitialized is returned when ServeStdio is called on a nil or uninitialized Server.
+var ErrServerNotInitialized = errors.New("mcp server not initialized: use mcp.NewServer")
 
 // NewServer initializes a new download-geofabrik MCP server with all tools and resources.
 func NewServer(version string) *Server {
@@ -45,6 +49,10 @@ func NewServer(version string) *Server {
 
 // ServeStdio starts serving the MCP protocol over standard I/O (stdin/stdout).
 func (s *Server) ServeStdio(_ context.Context) error {
+	if s == nil || s.mcpServer == nil {
+		return ErrServerNotInitialized
+	}
+
 	slog.Info("Starting download-geofabrik MCP server on stdio", "version", s.version)
 
 	if err := server.ServeStdio(s.mcpServer); err != nil {

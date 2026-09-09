@@ -69,6 +69,10 @@ func NewProvider() *Provider {
 
 // Name returns the provider's name.
 func (p *Provider) Name() string {
+	if p == nil {
+		return ""
+	}
+
 	return ProviderName
 }
 
@@ -117,6 +121,10 @@ var standardBBBikeFormats = catalog.Formats{
 
 // FetchCatalog scrapes the BBBike cities index and builds a catalog.Catalog.
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
+	if p == nil {
+		return nil, catalog.ErrProviderNil
+	}
+
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.StartURL, http.NoBody)
 	if err != nil {
 		return nil, fmt.Errorf("creating request: %w", err)
