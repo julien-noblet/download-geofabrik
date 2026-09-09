@@ -37,7 +37,7 @@ const (
 
 var (
 	// ErrFromURL is returned when downloading an extract fails due to network or filesystem errors.
-	ErrFromURL = errors.New("can't download element")
+	ErrFromURL = errors.New("cannot download element")
 
 	// ErrServerStatusCode is returned when the remote HTTP server responds with a non-2xx status code.
 	ErrServerStatusCode = errors.New("server return code error")
@@ -87,6 +87,10 @@ type Downloader struct {
 
 // New creates a new Downloader with connection pooling and high-throughput buffers.
 func New(cat *catalog.Catalog, opts *Options) *Downloader {
+	if opts == nil {
+		opts = &Options{}
+	}
+
 	return &Downloader{
 		Catalog: cat,
 		Options: opts,
@@ -127,24 +131,25 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, myURL, http.NoBody)
 	if err != nil {
-		return fmt.Errorf("error creating request for %s - %w", myURL, err)
+		return fmt.Errorf("creating request for %s: %w", myURL, err)
 	}
 
 	client := cmp.Or(d.client, http.DefaultClient)
 
 	response, err := client.Do(req)
 	if err != nil {
-		return fmt.Errorf("error while downloading %s - %w", myURL, err)
+		return fmt.Errorf("downloading %s: %w", myURL, err)
 	}
 
 	defer func() {
-		if cerr := response.Body.Close(); cerr != nil && err == nil {
-			err = fmt.Errorf("error while closing response body for %s - %w", myURL, cerr)
+		if cerr := response.Body.Close(); cerr != nil {
+			closeErr := fmt.Errorf("closing response body for %s: %w", myURL, cerr)
+			err = errors.Join(err, closeErr)
 		}
 	}()
 
 	if response.StatusCode != http.StatusOK {
-		return fmt.Errorf("%w: error while downloading %v, server return code %d",
+		return fmt.Errorf("%w: downloading %s: server status code %d",
 			ErrServerStatusCode, myURL, response.StatusCode)
 	}
 
@@ -160,7 +165,7 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 
 		written, err := io.Copy(dst, barReader)
 		if err != nil {
-			return written, fmt.Errorf("error copying response with progress: %w", err)
+			return written, fmt.Errorf("copying response with progress: %w", err)
 		}
 
 		return written, nil
@@ -168,7 +173,7 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 
 	written, err := io.Copy(dst, response.Body)
 	if err != nil {
-		return written, fmt.Errorf("error copying response body: %w", err)
+		return written, fmt.Errorf("copying response body: %w", err)
 	}
 
 	return written, nil
@@ -178,7 +183,7 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 func (d *Downloader) saveToFile(fileName string, response *http.Response) (err error) {
 	if dir := filepath.Dir(fileName); dir != "" {
 		if merr := os.MkdirAll(dir, dirMode); merr != nil {
-			return fmt.Errorf("error creating directory %s - %w", dir, merr)
+			return fmt.Errorf("creating directory %s: %w", dir, merr)
 		}
 	}
 
@@ -186,7 +191,7 @@ func (d *Downloader) saveToFile(fileName string, response *http.Response) (err e
 
 	file, err := os.OpenFile(tmpFileName, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, fileMode)
 	if err != nil {
-		return fmt.Errorf("error while creating %s - %w", tmpFileName, err)
+		return fmt.Errorf("creating %s: %w", tmpFileName, err)
 	}
 
 	fileClosed := false
@@ -205,17 +210,17 @@ func (d *Downloader) saveToFile(fileName string, response *http.Response) (err e
 
 	currentProgress, err := d.copyBody(writer, response)
 	if err != nil {
-		return fmt.Errorf("error while writing %s - %w", tmpFileName, err)
+		return fmt.Errorf("writing %s: %w", tmpFileName, err)
 	}
 
 	fileClosed = true
 
 	if cerr := file.Close(); cerr != nil {
-		return fmt.Errorf("error while closing %s - %w", tmpFileName, cerr)
+		return fmt.Errorf("closing %s: %w", tmpFileName, cerr)
 	}
 
 	if err := os.Rename(tmpFileName, fileName); err != nil {
-		return fmt.Errorf("error while renaming %s to %s - %w", tmpFileName, fileName, err)
+		return fmt.Errorf("renaming %s to %s: %w", tmpFileName, fileName, err)
 	}
 
 	var digest [md5.Size]byte
@@ -244,10 +249,12 @@ func FileExist(filePath string) bool {
 
 // DownloadFile downloads a file based on the catalog and element.
 func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, outputPath string) error {
+	if d.Catalog == nil {
+		return catalog.ErrNilCatalog
+	}
+
 	formatDef, ok := d.Catalog.GetFormat(formatName)
 	if !ok {
-		slog.Error("Format not found in config", "format", formatName)
-
 		return fmt.Errorf("%w: %s", catalog.ErrFormatNotFound, formatName)
 	}
 
@@ -255,23 +262,17 @@ func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, ou
 
 	myElem, err := d.Catalog.Find(elementID)
 	if err != nil {
-		slog.Error("Element not found", "element", elementID, "error", err)
-
-		return fmt.Errorf("%w: %s", catalog.ErrElementNotFound, elementID)
+		return fmt.Errorf("finding element %s: %w", elementID, err)
 	}
 
 	myURL, err := d.Catalog.ResolveURL(myElem, format)
 	if err != nil {
-		slog.Error("URL generation failed", "error", err)
-
-		return fmt.Errorf("can't find url: %w", err)
+		return fmt.Errorf("%w: %w", catalog.ErrResolveURL, err)
 	}
 
 	err = d.FromURL(ctx, myURL, outputPath)
 	if err != nil {
-		slog.Error("Download failed", "error", err)
-
-		return fmt.Errorf("%w: %w", ErrFromURL, err)
+		return fmt.Errorf("%w: downloading from %s: %w", ErrFromURL, myURL, err)
 	}
 
 	return nil
@@ -292,13 +293,13 @@ func (d *Downloader) verifyChecksum(targetFile, hashFile string) bool {
 
 	ret, err := CheckFileHash(hashFile, cachedDigest)
 	if err != nil {
-		slog.Error("Checksum error", "error", err)
+		slog.Error("Checksum error", "file", targetFile, "hashfile", hashFile, "error", err)
 	}
 
 	if ret {
 		slog.Info("Checksum OK", "file", targetFile)
 	} else {
-		slog.Warn("Checksum MISMATCH", "file", targetFile)
+		slog.Error("Checksum MISMATCH", "file", targetFile)
 	}
 
 	return ret
@@ -306,13 +307,17 @@ func (d *Downloader) verifyChecksum(targetFile, hashFile string) bool {
 
 // Checksum downloads and verifies the checksum of a file, using in-flight computed MD5 when available.
 func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string) bool {
-	if !d.Options.Check {
+	if d.Catalog == nil || !d.Options.Check {
 		return false
 	}
 
 	isHashable, _, _ := d.Catalog.IsHashable(formatName)
 	if !isHashable {
-		slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+formatName)
+		slog.Warn("No checksum provided",
+			"element", elementID,
+			"format", formatName,
+			"file", filepath.Join(d.Options.OutputDirectory, elementID+"."+formatName),
+		)
 
 		return false
 	}
@@ -333,14 +338,18 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 	}
 
 	if !myElem.Formats.Contains(fhash) {
-		slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+formatDef.ID)
+		slog.Warn("No checksum provided",
+			"element", elementID,
+			"format", formatDef.ID,
+			"file", filepath.Join(d.Options.OutputDirectory, elementID+"."+formatDef.ID),
+		)
 
 		return false
 	}
 
 	myURL, err := d.Catalog.ResolveURL(myElem, fhash)
 	if err != nil {
-		slog.Error("URL generation failed", "error", err)
+		slog.Error("URL generation failed", "element", elementID, "hash_format", fhash, "error", err)
 
 		return false
 	}
@@ -349,8 +358,8 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 	targetFile := outputPath + "." + formatDef.ID
 	hashFile := outputPath + "." + fhash
 
-	if e := d.FromURL(ctx, myURL, hashFile); e != nil {
-		slog.Error("Checksum download failed", "error", e)
+	if err := d.FromURL(ctx, myURL, hashFile); err != nil {
+		slog.Error("Checksum download failed", "element", elementID, "url", myURL, "file", hashFile, "error", err)
 
 		return false
 	}

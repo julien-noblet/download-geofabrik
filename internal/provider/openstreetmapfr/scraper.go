@@ -17,7 +17,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
-var ErrFetchCatalog = errors.New("failed to fetch catalog")
+var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
 	ProviderName        = "openstreetmap.fr"
@@ -219,6 +219,12 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	var dispatcherWG sync.WaitGroup
 
 	dispatcherWG.Go(func() {
+		defer func() {
+			if r := recover(); r != nil {
+				crawlState.onError(fmt.Errorf("%w: panic in openstreetmapfr dispatcher: %v", ErrFetchCatalog, r))
+			}
+		}()
+
 		p.runDispatcher(crawlCtx, workChan, cat, crawlState)
 	})
 
@@ -268,6 +274,10 @@ func (p *Provider) runDispatcher(ctx context.Context, work <-chan string, cat *c
 
 func (p *Provider) processWorker(ctx context.Context, target string, cat *catalog.Catalog, state *crawlContext) {
 	defer func() {
+		if r := recover(); r != nil {
+			state.onError(fmt.Errorf("%w: panic in openstreetmapfr worker for %s: %v", ErrFetchCatalog, target, r))
+		}
+
 		<-state.tokens
 		state.workers.Done()
 	}()
@@ -289,14 +299,14 @@ func (p *Provider) processWorker(ctx context.Context, target string, cat *catalo
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
 	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
+		return nil, fmt.Errorf("creating request: %w", err)
 	}
 
 	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("error fetching %s: %w", currentURL, err)
+		return nil, fmt.Errorf("fetching %s: %w", currentURL, err)
 	}
 	defer resp.Body.Close()
 
@@ -321,7 +331,7 @@ func (p *Provider) parseHTMLStream(reader io.Reader, currentURL string, cat *cat
 				return subDirs, nil
 			}
 
-			return nil, fmt.Errorf("error parsing html from %s: %w", currentURL, tokenizer.Err())
+			return nil, fmt.Errorf("parsing html from %s: %w", currentURL, tokenizer.Err())
 
 		case html.StartTagToken, html.SelfClosingTagToken:
 			if subDir := p.handleAnchor(tokenizer, currentURL, cat); subDir != "" {

@@ -16,7 +16,7 @@ var (
 	ErrProviderNotFound = errors.New("provider not found")
 
 	// ErrFetchCatalog is returned when a provider fails to fetch or parse remote catalog data.
-	ErrFetchCatalog = errors.New("failed to fetch catalog")
+	ErrFetchCatalog = catalog.ErrFetchCatalog
 )
 
 // Provider defines the standard interface for an OSM data catalog provider.

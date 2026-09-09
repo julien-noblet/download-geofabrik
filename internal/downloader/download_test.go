@@ -12,6 +12,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
 	"github.com/julien-noblet/download-geofabrik/internal/downloader"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
@@ -460,6 +463,20 @@ func TestDownloadFile_Errors(t *testing.T) {
 			t.Errorf("expected download error, got nil")
 		}
 	})
+}
+
+func TestDownloader_NilGuards(t *testing.T) {
+	t.Parallel()
+
+	d := downloader.New(nil, nil)
+	require.NotNil(t, d)
+	require.NotNil(t, d.Options)
+
+	err := d.DownloadFile(context.Background(), "monaco", catalog.FormatOsmPbf, "/tmp/test")
+	require.ErrorIs(t, err, catalog.ErrNilCatalog)
+
+	ok := d.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
+	assert.False(t, ok)
 }
 
 func Benchmark_FileExist(b *testing.B) {

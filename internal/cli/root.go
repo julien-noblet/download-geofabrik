@@ -2,6 +2,7 @@ package cli
 
 import (
 	"cmp"
+	"errors"
 	"fmt"
 	"log/slog"
 	"os"
@@ -84,20 +85,11 @@ func initCLI() {
 	})
 
 	// Bind flags to viper
-	if err := viper.BindPFlag("config", rootCmd.PersistentFlags().Lookup("config")); err != nil {
-		fmt.Fprintf(os.Stderr, "Error binding config flag: %v\n", err)
-	}
-
-	if err := viper.BindPFlag("service", rootCmd.PersistentFlags().Lookup("service")); err != nil {
-		fmt.Fprintf(os.Stderr, "Error binding service flag: %v\n", err)
-	}
-
-	if err := viper.BindPFlag("verbose", rootCmd.PersistentFlags().Lookup("verbose")); err != nil {
-		fmt.Fprintf(os.Stderr, "Error binding verbose flag: %v\n", err)
-	}
-
-	if err := viper.BindPFlag("quiet", rootCmd.PersistentFlags().Lookup("quiet")); err != nil {
-		fmt.Fprintf(os.Stderr, "Error binding quiet flag: %v\n", err)
+	flags := []string{"config", "service", "verbose", "quiet"}
+	for _, flag := range flags {
+		if err := viper.BindPFlag(flag, rootCmd.PersistentFlags().Lookup(flag)); err != nil {
+			slog.Error("Failed to bind CLI flag", "flag", flag, "error", err)
+		}
 	}
 }
 
@@ -136,7 +128,12 @@ func initConfig() {
 	viper.SetEnvKeyReplacer(strings.NewReplacer("-", "_"))
 	viper.AutomaticEnv()
 
-	if err := viper.ReadInConfig(); err == nil {
+	if err := viper.ReadInConfig(); err != nil {
+		var configFileNotFound viper.ConfigFileNotFoundError
+		if !errors.As(err, &configFileNotFound) && cfgFile != "" {
+			slog.Warn("Error reading config file", "file", cfgFile, "error", err)
+		}
+	} else {
 		slog.Info("Using config file", "file", viper.ConfigFileUsed())
 	}
 }

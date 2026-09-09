@@ -35,6 +35,9 @@ var (
 	// ErrNilElement is returned when an operation receives an unexpected nil Element pointer.
 	ErrNilElement = errors.New("nil element")
 
+	// ErrNilCatalog is returned when an operation receives an unexpected nil Catalog pointer.
+	ErrNilCatalog = errors.New("nil catalog")
+
 	// ErrElementNotFound is returned when an element ID cannot be resolved in the catalog.
 	ErrElementNotFound = errors.New("element not found")
 
@@ -45,10 +48,13 @@ var (
 	ErrParentMismatch = errors.New("cannot merge element with conflicting parent")
 
 	// ErrMaxHierarchyDepth is returned when resolving hierarchical URLs exceeds the maximum depth limit, indicating a cycle.
-	ErrMaxHierarchyDepth = errors.New("maximum hierarchy depth exceeded (possible cycle in catalog)")
+	ErrMaxHierarchyDepth = errors.New("maximum hierarchy depth exceeded: potential cycle detected")
 
 	// ErrResolveURL is returned when an element's download URL cannot be constructed.
-	ErrResolveURL = errors.New("can't find url")
+	ErrResolveURL = errors.New("cannot resolve url")
+
+	// ErrFetchCatalog is returned when a provider fails to fetch or parse remote catalog data.
+	ErrFetchCatalog = errors.New("failed to fetch catalog")
 
 	// ErrElem2URL is an alias for ErrResolveURL kept for backward compatibility.
 	ErrElem2URL = ErrResolveURL
@@ -116,30 +122,36 @@ func LoadFile(filePath string) (*Catalog, error) {
 
 // SaveFile marshals the catalog to YAML and writes it atomically to a file.
 func (c *Catalog) SaveFile(filePath string) error {
+	if c == nil {
+		return ErrNilCatalog
+	}
+
 	c.mu.RLock()
 	data, err := yaml.Marshal(c)
 	c.mu.RUnlock()
 
 	if err != nil {
-		return fmt.Errorf("cannot marshal catalog to yaml: %w", err)
+		return fmt.Errorf("marshaling catalog to yaml: %w", err)
 	}
 
 	dir := filepath.Dir(filePath)
 	if dir != "" && dir != "." {
 		if err := os.MkdirAll(dir, defaultDirPerm); err != nil {
-			return fmt.Errorf("cannot create directory %s: %w", dir, err)
+			return fmt.Errorf("creating directory %s: %w", dir, err)
 		}
 	}
 
 	tmpPath := filePath + ".tmp"
 	if err := os.WriteFile(tmpPath, data, defaultFilePerm); err != nil {
-		return fmt.Errorf("cannot write catalog to %s: %w", tmpPath, err)
+		return fmt.Errorf("writing catalog to %s: %w", tmpPath, err)
 	}
 
 	if err := os.Rename(tmpPath, filePath); err != nil {
-		_ = os.Remove(tmpPath)
+		if rmErr := os.Remove(tmpPath); rmErr != nil {
+			return fmt.Errorf("renaming %s to %s: %w", tmpPath, filePath, errors.Join(err, fmt.Errorf("removing temporary file: %w", rmErr)))
+		}
 
-		return fmt.Errorf("cannot rename %s to %s: %w", tmpPath, filePath, err)
+		return fmt.Errorf("renaming %s to %s: %w", tmpPath, filePath, err)
 	}
 
 	return nil
@@ -147,16 +159,20 @@ func (c *Catalog) SaveFile(filePath string) error {
 
 // Save writes the catalog YAML to any io.Writer.
 func (c *Catalog) Save(writer io.Writer) error {
+	if c == nil {
+		return ErrNilCatalog
+	}
+
 	c.mu.RLock()
 	data, err := yaml.Marshal(c)
 	c.mu.RUnlock()
 
 	if err != nil {
-		return fmt.Errorf("cannot marshal catalog: %w", err)
+		return fmt.Errorf("marshaling catalog: %w", err)
 	}
 
 	if _, err := writer.Write(data); err != nil {
-		return fmt.Errorf("cannot write catalog: %w", err)
+		return fmt.Errorf("writing catalog: %w", err)
 	}
 
 	return nil
@@ -164,6 +180,10 @@ func (c *Catalog) Save(writer io.Writer) error {
 
 // Len returns the number of elements in the catalog thread-safely.
 func (c *Catalog) Len() int {
+	if c == nil {
+		return 0
+	}
+
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
@@ -172,6 +192,10 @@ func (c *Catalog) Len() int {
 
 // GetFormat retrieves a copy of the format definition by ID thread-safely.
 func (c *Catalog) GetFormat(formatID string) (Format, bool) {
+	if c == nil {
+		return Format{}, false
+	}
+
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
@@ -182,6 +206,10 @@ func (c *Catalog) GetFormat(formatID string) (Format, bool) {
 
 // Exists returns true if the element ID is present in the catalog.
 func (c *Catalog) Exists(elementID string) bool {
+	if c == nil {
+		return false
+	}
+
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
@@ -197,6 +225,10 @@ func (c *Catalog) Exist(elementID string) bool {
 
 // Get retrieves a copy of an element by ID.
 func (c *Catalog) Get(elementID string) (Element, bool) {
+	if c == nil {
+		return Element{}, false
+	}
+
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
@@ -212,6 +244,10 @@ func (c *Catalog) Get(elementID string) (Element, bool) {
 
 // Find looks up an element pointer by ID or returns ErrElementNotFound.
 func (c *Catalog) Find(elementID string) (*Element, error) {
+	if c == nil {
+		return nil, ErrNilCatalog
+	}
+
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
@@ -222,7 +258,7 @@ func (c *Catalog) Find(elementID string) (*Element, error) {
 		return &elemCopy, nil
 	}
 
-	return nil, fmt.Errorf("%w: %s is not in catalog", ErrElementNotFound, elementID)
+	return nil, fmt.Errorf("%w: %s", ErrElementNotFound, elementID)
 }
 
 func (c *Catalog) getElementLocked(elementID string) (Element, bool) {
@@ -298,6 +334,10 @@ func (c *Catalog) AddElement(elem *Element) {
 
 // MergeElement adds a new element or merges formats if it already exists.
 func (c *Catalog) MergeElement(elem *Element) error {
+	if c == nil {
+		return ErrNilCatalog
+	}
+
 	if elem == nil || elem.ID == "" {
 		return nil
 	}
@@ -359,8 +399,12 @@ func (c *Catalog) AddExtension(elementID, formatID string) {
 	}
 }
 
-// SortedKeys returns the lexicographically sorted list of all element IDs with single pre-allocation.
+// SortedKeys returns a sorted slice of all element IDs in the catalog.
 func (c *Catalog) SortedKeys() []string {
+	if c == nil {
+		return nil
+	}
+
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
@@ -376,6 +420,10 @@ func (c *Catalog) SortedKeys() []string {
 // Callers must not invoke mutating methods on this Catalog within the iteration loop.
 func (c *Catalog) All() iter.Seq2[string, Element] {
 	return func(yield func(string, Element) bool) {
+		if c == nil {
+			return
+		}
+
 		c.mu.RLock()
 		defer c.mu.RUnlock()
 
@@ -389,6 +437,10 @@ func (c *Catalog) All() iter.Seq2[string, Element] {
 
 // ResolveURL constructs the absolute download URL for an element and format.
 func (c *Catalog) ResolveURL(elem *Element, formatID string) (string, error) {
+	if c == nil {
+		return "", ErrNilCatalog
+	}
+
 	if elem == nil {
 		return "", ErrNilElement
 	}
@@ -403,14 +455,14 @@ func (c *Catalog) ResolveURL(elem *Element, formatID string) (string, error) {
 	c.mu.RUnlock()
 
 	if !formatExists {
-		return "", fmt.Errorf("%w: %s definition missing from catalog", ErrFormatNotFound, formatID)
+		return "", fmt.Errorf("%w: %s", ErrFormatNotFound, formatID)
 	}
 
 	baseURL := cmp.Or(format.BaseURL, catalogBaseURL)
 
 	preURL, err := c.ResolvePreURL(elem, baseURL, format.BasePath)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("resolving pre URL: %w", err)
 	}
 
 	return preURL + format.Loc, nil
@@ -425,7 +477,7 @@ func (c *Catalog) collectHierarchySegments(startID string) ([]string, error) {
 	for count < maxHierarchyDepth {
 		currentElem, exists := c.getElementLocked(currID)
 		if !exists {
-			return nil, fmt.Errorf("%w: %s is not in catalog", ErrElementNotFound, currID)
+			return nil, fmt.Errorf("%w: %s", ErrElementNotFound, currID)
 		}
 
 		segments[count] = currentElem.Filename()
@@ -439,7 +491,7 @@ func (c *Catalog) collectHierarchySegments(startID string) ([]string, error) {
 	}
 
 	if count >= maxHierarchyDepth {
-		return nil, fmt.Errorf("%w for element %s", ErrMaxHierarchyDepth, startID)
+		return nil, fmt.Errorf("%w: element %s", ErrMaxHierarchyDepth, startID)
 	}
 
 	return segments[:count], nil
@@ -447,6 +499,10 @@ func (c *Catalog) collectHierarchySegments(startID string) ([]string, error) {
 
 // ResolvePreURL iteratively builds the URL path prefix with cycle protection and minimal allocations.
 func (c *Catalog) ResolvePreURL(elem *Element, baseURL ...string) (string, error) {
+	if c == nil {
+		return "", ErrNilCatalog
+	}
+
 	if elem == nil {
 		return "", ErrNilElement
 	}
@@ -496,6 +552,10 @@ func buildURLPrefix(baseURL []string, defaultBaseURL string) string {
 
 // IsHashable checks if a given format has a corresponding hash definition (e.g. .md5).
 func (c *Catalog) IsHashable(formatID string) (ok bool, hashExt, hashType string) {
+	if c == nil {
+		return false, "", ""
+	}
+
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
