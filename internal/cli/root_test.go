@@ -5,6 +5,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -107,6 +108,17 @@ func TestLoggingFlags(t *testing.T) {
 		err := cli.Execute()
 		assert.NoError(t, err)
 	})
+}
+
+func TestRootCmd_ServiceFlagCompletion(t *testing.T) {
+	completionFunc, exists := cli.RootCmd.GetFlagCompletionFunc("service")
+	require.True(t, exists)
+	require.NotNil(t, completionFunc)
+
+	completions, directive := completionFunc(cli.RootCmd, []string{}, "geo")
+	assert.Equal(t, cobra.ShellCompDirectiveNoFileComp, directive)
+	assert.Contains(t, completions, "geofabrik")
+	assert.Contains(t, completions, "geo2day")
 }
 
 func Benchmark_CLI_Execute_Help(b *testing.B) {

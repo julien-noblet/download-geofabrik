@@ -3,7 +3,6 @@ package cli
 import (
 	"fmt"
 	"log/slog"
-	"os"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -30,7 +29,7 @@ func RegisterListCmd() {
 	listCmd.Flags().BoolVar(&jsonOutput, "json", false, "Output list in JSON format")
 }
 
-func runList(_ *cobra.Command, _ []string) error {
+func runList(cmd *cobra.Command, _ []string) error {
 	cfgFile := viper.ConfigFileUsed()
 	if cfgFile == "" {
 		if service != "" {
@@ -47,15 +46,17 @@ func runList(_ *cobra.Command, _ []string) error {
 		return fmt.Errorf("failed to load catalog: %w", err)
 	}
 
+	out := cmd.OutOrStdout()
+
 	if jsonOutput {
-		if err := ui.PrintJSON(cat, os.Stdout); err != nil {
+		if err := ui.PrintJSON(cat, out); err != nil {
 			return fmt.Errorf("failed to output JSON: %w", err)
 		}
 
 		return nil
 	}
 
-	if err := ui.PrintTable(cat, markdown, os.Stdout); err != nil {
+	if err := ui.PrintTable(cat, markdown, out); err != nil {
 		slog.Error("Failed to render table", "error", err)
 
 		return fmt.Errorf("failed to render table: %w", err)
