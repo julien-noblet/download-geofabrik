@@ -42,14 +42,28 @@ var (
 
 // Register registers a provider in the global registry.
 func Register(prov Provider) {
-	if prov == nil || prov.Name() == "" {
+	if prov == nil {
+		return
+	}
+
+	name := prov.Name()
+	if name == "" {
 		return
 	}
 
 	registryMu.Lock()
 	defer registryMu.Unlock()
 
-	registry[prov.Name()] = prov
+	registry[name] = prov
+}
+
+// Unregister removes a provider from the global registry by name.
+// This is primarily intended for test cleanup.
+func Unregister(name string) {
+	registryMu.Lock()
+	defer registryMu.Unlock()
+
+	delete(registry, name)
 }
 
 // Get retrieves a registered provider by name.

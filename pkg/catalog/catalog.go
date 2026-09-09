@@ -114,7 +114,7 @@ func LoadFile(filePath string) (*Catalog, error) {
 	return cat, nil
 }
 
-// SaveFile marshals the catalog to YAML and writes it to a file.
+// SaveFile marshals the catalog to YAML and writes it atomically to a file.
 func (c *Catalog) SaveFile(filePath string) error {
 	c.mu.RLock()
 	data, err := yaml.Marshal(c)
@@ -131,23 +131,53 @@ func (c *Catalog) SaveFile(filePath string) error {
 		}
 	}
 
-	if err := os.WriteFile(filePath, data, defaultFilePerm); err != nil {
-		return fmt.Errorf("cannot write catalog to %s: %w", filePath, err)
+	tmpPath := filePath + ".tmp"
+	if err := os.WriteFile(tmpPath, data, defaultFilePerm); err != nil {
+		return fmt.Errorf("cannot write catalog to %s: %w", tmpPath, err)
+	}
+
+	if err := os.Rename(tmpPath, filePath); err != nil {
+		_ = os.Remove(tmpPath)
+
+		return fmt.Errorf("cannot rename %s to %s: %w", tmpPath, filePath, err)
 	}
 
 	return nil
 }
 
 // Save writes the catalog YAML to any io.Writer.
-func (c *Catalog) Save(w io.Writer) error {
+func (c *Catalog) Save(writer io.Writer) error {
 	c.mu.RLock()
-	defer c.mu.RUnlock()
+	data, err := yaml.Marshal(c)
+	c.mu.RUnlock()
 
-	if err := yaml.NewEncoder(w).Encode(c); err != nil {
-		return fmt.Errorf("cannot encode catalog: %w", err)
+	if err != nil {
+		return fmt.Errorf("cannot marshal catalog: %w", err)
+	}
+
+	if _, err := writer.Write(data); err != nil {
+		return fmt.Errorf("cannot write catalog: %w", err)
 	}
 
 	return nil
+}
+
+// Len returns the number of elements in the catalog thread-safely.
+func (c *Catalog) Len() int {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+
+	return len(c.Elements)
+}
+
+// GetFormat retrieves a copy of the format definition by ID thread-safely.
+func (c *Catalog) GetFormat(formatID string) (Format, bool) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+
+	format, exists := c.Formats[formatID]
+
+	return format, exists
 }
 
 // Exists returns true if the element ID is present in the catalog.
@@ -170,7 +200,14 @@ func (c *Catalog) Get(elementID string) (Element, bool) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
-	return c.getElementLocked(elementID)
+	elem, exists := c.getElementLocked(elementID)
+	if !exists {
+		return Element{}, false
+	}
+
+	elem.Formats = slices.Clone(elem.Formats)
+
+	return elem, true
 }
 
 // Find looks up an element pointer by ID or returns ErrElementNotFound.
@@ -180,6 +217,7 @@ func (c *Catalog) Find(elementID string) (*Element, error) {
 
 	if elem, exists := c.getElementLocked(elementID); exists {
 		elemCopy := elem
+		elemCopy.Formats = slices.Clone(elem.Formats)
 
 		return &elemCopy, nil
 	}
@@ -334,6 +372,8 @@ func (c *Catalog) SortedKeys() []string {
 }
 
 // All returns a sequence iterator over all elements (Go 1.23+).
+// Note: The catalog read lock is held for the duration of the iteration.
+// Callers must not invoke mutating methods on this Catalog within the iteration loop.
 func (c *Catalog) All() iter.Seq2[string, Element] {
 	return func(yield func(string, Element) bool) {
 		c.mu.RLock()

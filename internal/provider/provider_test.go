@@ -27,6 +27,9 @@ func TestProvider_Registry(t *testing.T) {
 
 	mock := &mockProvider{name: "mock_test_provider"}
 	provider.Register(mock)
+	t.Cleanup(func() {
+		provider.Unregister("mock_test_provider")
+	})
 
 	p, err := provider.Get("mock_test_provider")
 	require.NoError(t, err)

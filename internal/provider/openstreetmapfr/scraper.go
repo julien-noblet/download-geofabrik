@@ -151,9 +151,16 @@ func DefaultFormats() catalog.FormatDefinitions {
 
 // FetchCatalog crawls the directory index of OpenStreetMap.fr concurrently and generates a Catalog.
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
+	if err := ctx.Err(); err != nil {
+		return nil, fmt.Errorf("context canceled: %w", err)
+	}
+
 	cat := catalog.New()
 	cat.BaseURL = p.BaseURL
 	cat.Formats = DefaultFormats()
+
+	crawlCtx, cancel := context.WithCancel(ctx)
+	defer cancel()
 
 	var (
 		visitedMu     sync.Mutex
@@ -164,15 +171,21 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 		firstErr      error
 	)
 
-	sem := make(chan struct{}, concurrencyLimit)
-
 	recordErr := func(err error) {
 		errOnce.Do(func() {
 			firstErr = err
+
+			cancel()
 		})
 	}
 
 	enqueue := func(targetURL string) {
+		if err := crawlCtx.Err(); err != nil {
+			recordErr(fmt.Errorf("context canceled during crawl: %w", err))
+
+			return
+		}
+
 		visitedMu.Lock()
 		if visited[targetURL] {
 			visitedMu.Unlock()
@@ -186,54 +199,91 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 		activeWorkers.Add(1)
 
 		go func() {
-			workChan <- targetURL
+			select {
+			case workChan <- targetURL:
+			case <-crawlCtx.Done():
+				activeWorkers.Done()
+			}
 		}()
+	}
+
+	crawlState := &crawlContext{
+		workers: &activeWorkers,
+		onError: recordErr,
+		enqueue: enqueue,
+		tokens:  make(chan struct{}, concurrencyLimit),
 	}
 
 	enqueue(p.StartURL)
 
-	go func() {
-		for target := range workChan {
-			select {
-			case <-ctx.Done():
-				recordErr(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
-				activeWorkers.Done()
+	var dispatcherWG sync.WaitGroup
 
-				continue
-
-			case sem <- struct{}{}:
-			}
-
-			go func(currentURL string) {
-				defer func() {
-					<-sem
-					activeWorkers.Done()
-				}()
-
-				links, err := p.fetchAndProcessPage(ctx, currentURL, cat)
-				if err != nil {
-					recordErr(err)
-
-					return
-				}
-
-				for _, link := range links {
-					if strings.HasPrefix(link, p.StartURL) {
-						enqueue(link)
-					}
-				}
-			}(target)
-		}
-	}()
+	dispatcherWG.Go(func() {
+		p.runDispatcher(crawlCtx, workChan, cat, crawlState)
+	})
 
 	activeWorkers.Wait()
 	close(workChan)
+	dispatcherWG.Wait()
+
+	if err := ctx.Err(); err != nil && firstErr == nil {
+		firstErr = fmt.Errorf("context canceled during crawl: %w", err)
+	}
 
 	if firstErr != nil {
 		return nil, firstErr
 	}
 
 	return cat, nil
+}
+
+type crawlContext struct {
+	workers *sync.WaitGroup
+	onError func(error)
+	enqueue func(string)
+	tokens  chan struct{}
+}
+
+func (p *Provider) runDispatcher(ctx context.Context, work <-chan string, cat *catalog.Catalog, state *crawlContext) {
+	for target := range work {
+		if ctx.Err() != nil {
+			state.workers.Done()
+
+			continue
+		}
+
+		select {
+		case <-ctx.Done():
+			state.onError(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
+			state.workers.Done()
+
+			continue
+
+		case state.tokens <- struct{}{}:
+		}
+
+		go p.processWorker(ctx, target, cat, state)
+	}
+}
+
+func (p *Provider) processWorker(ctx context.Context, target string, cat *catalog.Catalog, state *crawlContext) {
+	defer func() {
+		<-state.tokens
+		state.workers.Done()
+	}()
+
+	links, err := p.fetchAndProcessPage(ctx, target, cat)
+	if err != nil {
+		state.onError(err)
+
+		return
+	}
+
+	for _, link := range links {
+		if strings.HasPrefix(link, p.StartURL) {
+			state.enqueue(link)
+		}
+	}
 }
 
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
