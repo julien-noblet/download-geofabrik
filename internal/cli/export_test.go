@@ -3,6 +3,9 @@ package cli
 // RootCmd is exported for testing purposes only.
 var RootCmd = rootCmd
 
+// DownloadCmd is exported for testing purposes only.
+var DownloadCmd = downloadCmd
+
 func ResetGlobs() {
 	cfgFile = ""
 	service = ""
