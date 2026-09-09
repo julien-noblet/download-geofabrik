@@ -2,7 +2,9 @@ package catalog_test
 
 import (
 	"bytes"
+	"fmt"
 	"path/filepath"
+	"sync"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -312,6 +314,93 @@ func TestCatalog_DateResolution(t *testing.T) {
 
 	_, err = cat.Find("invalid-date")
 	require.ErrorIs(t, err, catalog.ErrElementNotFound)
+}
+
+func TestCatalog_ConcurrentAccess(t *testing.T) {
+	t.Parallel()
+
+	cat := catalog.New()
+	cat.BaseURL = "https://download.example.com"
+	cat.Formats[catalog.FormatOsmPbf] = catalog.Format{ID: catalog.FormatOsmPbf, Loc: ".osm.pbf"}
+
+	const (
+		numGoroutines = 20
+		iterations    = 50
+	)
+
+	var waitGroup sync.WaitGroup
+	waitGroup.Add(numGoroutines * 3)
+
+	// Writer goroutines: AddElement
+	for goroutineIdx := range numGoroutines {
+		go func(gID int) {
+			defer waitGroup.Done()
+
+			for iterIdx := range iterations {
+				elemID := fmt.Sprintf("elem_%d_%d", gID, iterIdx)
+				cat.AddElement(&catalog.Element{
+					ID:      elemID,
+					Name:    elemID,
+					Formats: catalog.Formats{catalog.FormatOsmPbf},
+				})
+			}
+		}(goroutineIdx)
+	}
+
+	// Reader goroutines: Len, Get, Find, Exists, GetFormat
+	for goroutineIdx := range numGoroutines {
+		go func(gID int) {
+			defer waitGroup.Done()
+
+			for iterIdx := range iterations {
+				elemID := fmt.Sprintf("elem_%d_%d", gID, iterIdx)
+				_ = cat.Len()
+				_, _ = cat.Get(elemID)
+				_, _ = cat.Find(elemID)
+				_ = cat.Exists(elemID)
+				_, _ = cat.GetFormat(catalog.FormatOsmPbf)
+			}
+		}(goroutineIdx)
+	}
+
+	// Modifier goroutines: AddExtension
+	for goroutineIdx := range numGoroutines {
+		go func(gID int) {
+			defer waitGroup.Done()
+
+			for iterIdx := range iterations {
+				elemID := fmt.Sprintf("elem_%d_%d", gID, iterIdx)
+				cat.AddExtension(elemID, "custom_format")
+			}
+		}(goroutineIdx)
+	}
+
+	waitGroup.Wait()
+	assert.Positive(t, cat.Len())
+}
+
+func TestCatalog_SliceAliasing(t *testing.T) {
+	t.Parallel()
+
+	cat := catalog.New()
+	cat.AddElement(&catalog.Element{
+		ID:      "test-element",
+		Formats: catalog.Formats{"format-a", "format-b"},
+	})
+
+	elem1, ok := cat.Get("test-element")
+	require.True(t, ok)
+
+	elem2, err := cat.Find("test-element")
+	require.NoError(t, err)
+
+	// Mutating the returned formats slice must NOT mutate the catalog's internal state
+	elem1.Formats[0] = "mutated-format"
+	elem2.Formats[1] = "mutated-format-2"
+
+	original, ok := cat.Get("test-element")
+	require.True(t, ok)
+	assert.Equal(t, catalog.Formats{"format-a", "format-b"}, original.Formats)
 }
 
 func Benchmark_Catalog_Exist(b *testing.B) {

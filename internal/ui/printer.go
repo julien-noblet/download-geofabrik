@@ -82,7 +82,7 @@ func printStandardTable(cat *catalog.Catalog, writer io.Writer) error {
 		return fmt.Errorf("unable to flush table: %w", err)
 	}
 
-	fmt.Fprintf(writer, "Total elements: %d\n", len(cat.Elements))
+	fmt.Fprintf(writer, "Total elements: %d\n", cat.Len())
 
 	return nil
 }

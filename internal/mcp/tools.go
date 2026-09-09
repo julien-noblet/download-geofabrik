@@ -323,7 +323,7 @@ func (s *Server) handleRegenerateCatalog(ctx context.Context, request mcpSDK.Cal
 	elementCount := 0
 
 	if loadErr == nil && cat != nil {
-		elementCount = len(cat.Elements)
+		elementCount = cat.Len()
 	}
 
 	response := map[string]any{
@@ -361,7 +361,7 @@ func (s *Server) regenerateAllCatalogs(ctx context.Context) (*mcpSDK.CallToolRes
 		count := 0
 
 		if cat != nil {
-			count = len(cat.Elements)
+			count = cat.Len()
 		}
 
 		results[name] = map[string]any{
@@ -405,7 +405,7 @@ func (s *Server) handleListElements(ctx context.Context, request mcpSDK.CallTool
 
 	result := ListElementsResult{
 		Service:       serviceName,
-		TotalElements: len(cat.Elements),
+		TotalElements: cat.Len(),
 		TotalMatched:  totalMatched,
 		Limit:         limit,
 		Offset:        offset,
@@ -869,11 +869,17 @@ func (s *Server) ensureCatalogFile(ctx context.Context, serviceName, customCfg s
 	}
 
 	if _, statErr := os.Stat(targetFile); os.IsNotExist(statErr) {
-		slog.Info("Catalog file not found, generating on the fly", "service", serviceName, "file", targetFile)
+		s.genMu.Lock()
+		if _, statErr2 := os.Stat(targetFile); os.IsNotExist(statErr2) {
+			slog.Info("Catalog file not found, generating on the fly", "service", serviceName, "file", targetFile)
 
-		if genErr := generator.Generate(ctx, serviceName, targetFile); genErr != nil {
-			return nil, "", fmt.Errorf("failed to generate catalog for %s: %w", serviceName, genErr)
+			if genErr := generator.Generate(ctx, serviceName, targetFile); genErr != nil {
+				s.genMu.Unlock()
+
+				return nil, "", fmt.Errorf("failed to generate catalog for %s: %w", serviceName, genErr)
+			}
 		}
+		s.genMu.Unlock()
 	}
 
 	cat, err := catalog.LoadFile(targetFile)
