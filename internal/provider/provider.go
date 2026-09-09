@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"maps"
+	"reflect"
 	"slices"
 	"sync"
 
@@ -42,7 +43,7 @@ var (
 
 // Register registers a provider in the global registry.
 func Register(prov Provider) {
-	if prov == nil {
+	if prov == nil || (reflect.ValueOf(prov).Kind() == reflect.Pointer && reflect.ValueOf(prov).IsNil()) {
 		return
 	}
 
