@@ -244,7 +244,7 @@ func FileExist(filePath string) bool {
 
 // DownloadFile downloads a file based on the catalog and element.
 func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, outputPath string) error {
-	formatDef, ok := d.Catalog.Formats[formatName]
+	formatDef, ok := d.Catalog.GetFormat(formatName)
 	if !ok {
 		slog.Error("Format not found in config", "format", formatName)
 
@@ -310,8 +310,8 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 		return false
 	}
 
-	ok, _, _ := d.Catalog.IsHashable(formatName)
-	if !ok {
+	isHashable, _, _ := d.Catalog.IsHashable(formatName)
+	if !isHashable {
 		slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+formatName)
 
 		return false
@@ -327,8 +327,13 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 		return false
 	}
 
+	formatDef, hasFormat := d.Catalog.GetFormat(formatName)
+	if !hasFormat {
+		return false
+	}
+
 	if !myElem.Formats.Contains(fhash) {
-		slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+d.Catalog.Formats[formatName].ID)
+		slog.Warn("No checksum provided", "file", d.Options.OutputDirectory+elementID+"."+formatDef.ID)
 
 		return false
 	}
@@ -341,7 +346,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 	}
 
 	outputPath := d.Options.OutputDirectory + elementID
-	targetFile := outputPath + "." + d.Catalog.Formats[formatName].ID
+	targetFile := outputPath + "." + formatDef.ID
 	hashFile := outputPath + "." + fhash
 
 	if e := d.FromURL(ctx, myURL, hashFile); e != nil {
@@ -349,6 +354,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 
 		return false
 	}
+	defer d.lastHash.Delete(hashFile)
 
 	return d.verifyChecksum(targetFile, hashFile)
 }

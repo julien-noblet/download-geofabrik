@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"sync"
 
 	"github.com/mark3labs/mcp-go/server"
 
@@ -14,6 +15,7 @@ import (
 type Server struct {
 	mcpServer *server.MCPServer
 	version   string
+	genMu     sync.Mutex
 }
 
 // NewServer initializes a new download-geofabrik MCP server with all tools and resources.
