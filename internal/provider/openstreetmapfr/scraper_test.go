@@ -12,10 +12,11 @@ import (
 	"testing/iotest"
 	"time"
 
-	"github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 type errTransport struct{}
@@ -149,7 +150,7 @@ func TestOSMFR_FetchCatalog_HTMLParseError(t *testing.T) {
 
 	_, err := p.FetchCatalog(context.Background())
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "error parsing HTML")
+	assert.Contains(t, err.Error(), "parsing html")
 }
 
 func TestOSMFR_FetchCatalog_Errors(t *testing.T) {
@@ -236,11 +237,9 @@ func Benchmark_OSMFR_FetchCatalog_Mock(b *testing.B) {
 	p.BaseURL = ts.URL + "/extracts"
 	p.Client = ts.Client()
 
-	ctx := context.Background()
+	ctx := b.Context()
 
-	b.ResetTimer()
-
-	for range b.N {
+	for b.Loop() {
 		_, _ = p.FetchCatalog(ctx)
 	}
 }

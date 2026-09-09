@@ -8,6 +8,9 @@ formats:
     osm.pbf:
         ext: osm.pbf
         loc: .osm.pbf
+    pbf:
+        ext: pbf
+        loc: .pbf
     poly:
         ext: poly
         loc: .poly
@@ -18,7 +21,7 @@ elements:
         files:
             - garmin-osm.zip
             - obf
-            - osm.pbf
+            - pbf
     switzerland-exact:
         id: switzerland-exact
         name: switzerland-exact

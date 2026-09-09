@@ -1,4 +1,4 @@
-package download
+package downloader
 
 import (
 	"crypto/md5" //nolint:gosec // MD5 is used to control with md5sum files
@@ -11,23 +11,14 @@ import (
 )
 
 const (
-	readErrorMsg         = "can't read %s: %w"
-	openErrorMsg         = "can't open %s: %w"
-	copyErrorMsg         = "can't copy %s: %w"
-	closeErrorMsg        = "can't close file: %w"
-	hashFileNotFoundMsg  = "Hash file %s not found"
-	hashFileReadErrorMsg = "Can't read hash file %s"
-	hashMismatchMsg      = "Checksum MISMATCH for %s"
-	hashMatchMsg         = "Checksum OK for %s"
-	hashingFileMsg       = "Hashing %s"
-	md5HashMsg           = "MD5 : %s"
-	checksumErrorMsg     = "checksum error"
-	hashFileErrorMsg     = "can't hash file"
+	readErrorMsg = "cannot read %s: %w"
+	openErrorMsg = "cannot open %s: %w"
+	copyErrorMsg = "cannot copy %s: %w"
 )
 
 // CheckFileHash checks if the hash of a file matches the provided hash.
 func CheckFileHash(hashfile, expectedHash string) (bool, error) {
-	if !FileExist(hashfile) {
+	if !FileExists(hashfile) {
 		slog.Warn("Hash file not found", "file", hashfile)
 
 		return false, nil
@@ -35,8 +26,6 @@ func CheckFileHash(hashfile, expectedHash string) (bool, error) {
 
 	fileContent, err := os.ReadFile(hashfile)
 	if err != nil {
-		slog.Warn("Can't read hash file", "file", hashfile, "error", err)
-
 		return false, fmt.Errorf(readErrorMsg, hashfile, err)
 	}
 
@@ -53,9 +42,10 @@ func CheckFileHash(hashfile, expectedHash string) (bool, error) {
 	return strings.EqualFold(expectedHash, fileHash), nil
 }
 
-// ComputeMD5Hash computes the MD5 hash of a file.
+// ComputeMD5Hash computes the hexadecimal MD5 checksum of the file at filePath.
+// If the file does not exist, it returns ("", nil) without error.
 func ComputeMD5Hash(filePath string) (string, error) {
-	if !FileExist(filePath) {
+	if !FileExists(filePath) {
 		return "", nil
 	}
 
@@ -66,22 +56,20 @@ func ComputeMD5Hash(filePath string) (string, error) {
 
 	defer func() {
 		if err := file.Close(); err != nil {
-			slog.Error("Can't close file", "error", err)
+			slog.Warn("Failed to close file", "file", filePath, "error", err)
 		}
 	}()
 
-	bufPtr := getBuffer()
-	defer putBuffer(bufPtr)
-
 	hash := md5.New() //nolint:gosec // MD5 is used to control with md5sum files
-	if _, err := io.CopyBuffer(hash, file, *bufPtr); err != nil {
+	if _, err := io.Copy(hash, file); err != nil {
 		return "", fmt.Errorf(copyErrorMsg, filePath, err)
 	}
 
 	var digest [md5.Size]byte
-	hash.Sum(digest[:0])
 
-	return hex.EncodeToString(digest[:]), nil
+	sum := hash.Sum(digest[:0])
+
+	return hex.EncodeToString(sum), nil
 }
 
 // VerifyFileChecksum verifies the checksum of a file.
@@ -90,7 +78,7 @@ func VerifyFileChecksum(file, hashfile string) bool {
 
 	hashed, err := ComputeMD5Hash(file)
 	if err != nil {
-		slog.Error("Can't hash file", "error", err)
+		slog.Error("Failed to hash file", "file", file, "error", err)
 
 		return false // Was Fatal before
 	}
@@ -99,13 +87,13 @@ func VerifyFileChecksum(file, hashfile string) bool {
 
 	ret, err := CheckFileHash(hashfile, hashed)
 	if err != nil {
-		slog.Error("Checksum error", "error", err)
+		slog.Error("Checksum error", "file", file, "hashfile", hashfile, "error", err)
 	}
 
 	if ret {
 		slog.Info("Checksum OK", "file", file)
 	} else {
-		slog.Warn("Checksum MISMATCH", "file", file)
+		slog.Error("Checksum MISMATCH", "file", file)
 	}
 
 	return ret

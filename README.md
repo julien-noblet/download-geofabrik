@@ -6,10 +6,13 @@
 
 <p align="center">
   <a href="https://github.com/julien-noblet/download-geofabrik/releases"><img src="https://img.shields.io/github/v/release/julien-noblet/download-geofabrik?style=flat-square" alt="GitHub release" /></a>
+  <a href="https://go.dev/"><img src="https://img.shields.io/badge/Go-1.27+-00ADD8?style=flat-square&logo=go" alt="Go Version" /></a>
+  <a href="https://pkg.go.dev/github.com/julien-noblet/download-geofabrik"><img src="https://pkg.go.dev/badge/github.com/julien-noblet/download-geofabrik.svg?style=flat-square" alt="Go Reference" /></a>
   <a href="https://github.com/julien-noblet/download-geofabrik/actions/workflows/gotest.yml"><img src="https://img.shields.io/github/actions/workflow/status/julien-noblet/download-geofabrik/gotest.yml?branch=master&label=tests&style=flat-square" alt="Build Status" /></a>
+  <a href="https://github.com/julien-noblet/download-geofabrik/actions/workflows/nix.yml"><img src="https://img.shields.io/github/actions/workflow/status/julien-noblet/download-geofabrik/nix.yml?branch=master&label=nix&style=flat-square" alt="Nix Status" /></a>
   <a href="https://gist.githubusercontent.com/julien-noblet/a509e15ea4734ca3e8e98f32ab5369c0/raw/7344619caf8ac5bce291793711071a9636536fce/coverage.json"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/julien-noblet/a509e15ea4734ca3e8e98f32ab5369c0/raw/7344619caf8ac5bce291793711071a9636536fce/coverage.json&style=flat-square" alt="Go Coverage" /></a>
   <a href="https://goreportcard.com/report/github.com/julien-noblet/download-geofabrik"><img src="https://goreportcard.com/badge/github.com/julien-noblet/download-geofabrik?style=flat-square" alt="Go Report Card" /></a>
-  <a href="https://hub.docker.com/r/juliennoblet/download-geofabrik"><img src="https://img.shields.io/docker/pulls/juliennoblet/download-geofabrik?style=flat-square" alt="Docker Pulls" /></a>
+  <a href="https://github.com/julien-noblet/download-geofabrik/pkgs/container/download-geofabrik"><img src="https://img.shields.io/badge/GHCR-download--geofabrik-blue?style=flat-square&logo=github" alt="GitHub Container Registry" /></a>
   <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/MCP-Enabled-purple?style=flat-square" alt="MCP Enabled" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MPL_2.0-blue.svg?style=flat-square" alt="License: MPL 2.0" /></a>
 </p>
@@ -30,14 +33,16 @@
   - [Download Specific Formats](#download-specific-formats)
   - [Custom Output Directory & Options](#custom-output-directory--options)
   - [Exploring Elements](#exploring-elements)
+- [CLI Reference](#cli-reference)
 - [Supported Formats](#supported-formats)
 - [Model Context Protocol (MCP) Mode](#model-context-protocol-mcp-mode)
   - [Configuration for MCP Clients](#configuration-for-mcp-clients)
   - [Available MCP Tools](#available-mcp-tools)
   - [Available MCP Resources](#available-mcp-resources)
 - [Catalog Maintenance](#catalog-maintenance)
-- [CLI Reference](#cli-reference)
 - [Supported Providers & Catalogs](#supported-providers--catalogs)
+- [Contributing](#contributing)
+- [Data Attribution](#data-attribution)
 - [License](#license)
 
 ---
@@ -61,6 +66,8 @@ Download pre-compiled binaries for Linux, macOS, and Windows from the [GitHub Re
 
 ### Go Install
 
+Requires **Go 1.27 or later**:
+
 ```bash
 go install github.com/julien-noblet/download-geofabrik/cmd/download-geofabrik@latest
 ```
@@ -68,7 +75,7 @@ go install github.com/julien-noblet/download-geofabrik/cmd/download-geofabrik@la
 ### Docker
 
 ```bash
-docker run -it --rm -v "$PWD:/data" -w /data juliennoblet/download-geofabrik:latest download [element]
+docker run -it --rm -v "$PWD:/data" -w /data ghcr.io/julien-noblet/download-geofabrik:latest -c /geofabrik.yml download [element]
 ```
 
 ### Nix
@@ -77,6 +84,12 @@ Run directly with Nix Flakes:
 
 ```bash
 nix run github:julien-noblet/download-geofabrik -- download [element]
+```
+
+Or install permanently to your Nix profile:
+
+```bash
+nix profile install github:julien-noblet/download-geofabrik
 ```
 
 Or enter a development shell:
@@ -103,10 +116,13 @@ Use the `--service` flag to target alternative OSM data sources:
 
 ```bash
 # Download from OpenStreetMap France
-download-geofabrik --service openstreetmap.fr download rhone-alpes
+download-geofabrik --service openstreetmap.fr download rhone_alpes
 
 # Download from BBBike
 download-geofabrik --service bbbike download Berlin
+
+# Download from OSM Taiwan (automatically uses provider's default format, o5m)
+download-geofabrik --service osm.kcwu.csie.org download taiwan
 ```
 
 ### Download Specific Formats
@@ -128,7 +144,7 @@ download-geofabrik download -K monaco
 download-geofabrik download --output-dir /tmp/osm-extracts ile-de-france
 
 # Skip checksum verification
-download-geofabrik download --no-check ile-de-france
+download-geofabrik download --check=false ile-de-france
 
 # Dry run (test URLs without downloading files)
 download-geofabrik download --nodownload ile-de-france
@@ -186,6 +202,7 @@ The following flags can be passed to the `download` command to select specific f
 | Flag | Format Key | Extension | Description | Default |
 | :--- | :--- | :--- | :--- | :---: |
 | `-P` | `osm.pbf` | `.osm.pbf` | OpenStreetMap Protocolbuffer Binary Format | ✅ Yes |
+| | `pbf` | `.pbf` | Standard Protocolbuffer (used by planet.osm.ch) | |
 | `-H` | `osh.pbf` | `.osh.pbf` | OpenStreetMap History Protocolbuffer | |
 | `-S` | `shp.zip` | `.shp.zip` | ESRI Shapefiles in ZIP archive | |
 | `-K` | `gpkg` | `.gpkg` | OGC GeoPackage vector dataset | |
@@ -218,7 +235,38 @@ download-geofabrik mcp
 
 ### Configuration for MCP Clients
 
-Add `download-geofabrik` to your MCP client configuration (e.g., `claude_desktop_config.json` or `antigravity.json`):
+Add `download-geofabrik` to your MCP client configuration using the absolute path to the binary (e.g. `/usr/local/bin/download-geofabrik` or `/home/user/go/bin/download-geofabrik`):
+
+#### Claude Desktop (`claude_desktop_config.json`)
+- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+- Linux: `~/.config/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "download-geofabrik": {
+      "command": "/path/to/download-geofabrik",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+#### Cursor (`.cursor/mcp.json` or Settings > Features > MCP)
+
+```json
+{
+  "mcpServers": {
+    "download-geofabrik": {
+      "command": "/path/to/download-geofabrik",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+#### Antigravity / Gemini CLI (`antigravity.json`)
 
 ```json
 {
@@ -230,6 +278,8 @@ Add `download-geofabrik` to your MCP client configuration (e.g., `claude_desktop
   }
 }
 ```
+
+*Note: If local `.yml` catalog files are not present, the MCP server automatically fetches the catalog on the fly from upstream providers.*
 
 ### Available MCP Tools
 
@@ -270,16 +320,35 @@ download-geofabrik --service movisda generate
 
 | Provider | Service Key | Description | Elements | Formats | Catalog Link |
 | :--- | :--- | :--- | :---: | :--- | :---: |
-| **Geofabrik** | `geofabrik` | Continents, countries, and regional extracts (default) | 564 | `osm.pbf`, `shp.zip`, `osm.bz2`, `poly`, `kml`, `mbtiles` | [View Catalog](docs/catalogs/geofabrik.md) |
-| **OpenStreetMap France** | `openstreetmap.fr` | High-detail extracts for French regions, departments, and world | 1,208 | `osm.pbf`, `shp.zip`, `poly`, `gpkg`, `geojson` | [View Catalog](docs/catalogs/openstreetmap.fr.md) |
-| **BBBike** | `bbbike` | Extracts for 200+ major metropolitan cities worldwide | 250 | `osm.pbf`, `shp.zip`, `osm.gz`, `gpkg`, `map`, `mbtiles`, Garmin | [View Catalog](docs/catalogs/bbbike.md) |
-| **Geo2day** | `geo2day` | Custom regional and metropolitan extracts | 13 | `osm.pbf`, `shp.zip`, `poly`, `geojson`, `gpkg`, `kml` | [View Catalog](docs/catalogs/geo2day.md) |
-| **Movisda** | `movisda` | Worldwide country and administrative subdivisions | 3,295 | `osm.pbf`, `poly`, `geojson` | [View Catalog](docs/catalogs/movisda.md) |
-| **Planet OSM Switzerland** | `planet.osm.ch` | Switzerland national and cantonal extracts | 7 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/planet.osm.ch.md) |
-| **OSM Luxembourg** | `osm.kewl.lu` | Daily extracts for Luxembourg | 3 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/osm.kewl.lu.md) |
-| **FIT VUT Brno** | `osm.fit.vutbr.cz` | Czech Republic national and regional extracts | 4 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/osm.fit.vutbr.cz.md) |
-| **OpenStreetMap Italia** | `osmit-estratti` | Italy national, regional, and provincial extracts | 131 | `osm.pbf`, `gpkg`, `poly` | [View Catalog](docs/catalogs/osmit-estratti.md) |
-| **OSM Taiwan** | `osm.kcwu.csie.org` | Taiwan extracts and change history | 3 | `o5m`, `o5m.zst` | [View Catalog](docs/catalogs/osm.kcwu.csie.org.md) |
+| **Geofabrik** | `geofabrik` | Continents, countries, and regional extracts (default) | 555 | `osm.pbf`, `shp.zip`, `osm.bz2`, `poly`, `kml`, `mbtiles` | [View Catalog](docs/catalogs/geofabrik.md) |
+| **OpenStreetMap France** | `openstreetmap.fr` | High-detail extracts for French regions, departments, and world | 1,204 | `osm.pbf`, `shp.zip`, `poly`, `gpkg`, `geojson` | [View Catalog](docs/catalogs/openstreetmap.fr.md) |
+| **BBBike** | `bbbike` | Extracts for 200+ major metropolitan cities worldwide | 238 | `osm.pbf`, `shp.zip`, `osm.gz`, `gpkg`, `map`, `mbtiles`, Garmin | [View Catalog](docs/catalogs/bbbike.md) |
+| **Geo2day** | `geo2day` | Custom regional and metropolitan extracts | 1,022 | `osm.pbf`, `poly`, `geojson` | [View Catalog](docs/catalogs/geo2day.md) |
+| **Movisda** | `movisda` | Worldwide country and administrative subdivisions | 3,291 | `osm.pbf`, `poly`, `geojson` | [View Catalog](docs/catalogs/movisda.md) |
+| **Planet OSM Switzerland** | `planet.osm.ch` | Switzerland national and cantonal extracts | 3 | `osm.pbf`, `pbf`, `poly`, `obf`, Garmin | [View Catalog](docs/catalogs/planet.osm.ch.md) |
+| **OSM Luxembourg** | `osm.kewl.lu` | Daily extracts for Luxembourg | 1 | `osm.pbf`, `osm.bz2` | [View Catalog](docs/catalogs/osm.kewl.lu.md) |
+| **FIT VUT Brno** | `osm.fit.vutbr.cz` | Czech Republic extracts by date | 2 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/osm.fit.vutbr.cz.md) |
+| **OpenStreetMap Italia** | `osmit-estratti` | Italy national, regional, and provincial extracts | 128 | `osm.pbf`, `gpkg`, `poly` | [View Catalog](docs/catalogs/osmit-estratti.md) |
+| **OSM Taiwan** | `osm.kcwu.csie.org` | Taiwan extracts and change history | 1 | `o5m`, `o5m.zst` | [View Catalog](docs/catalogs/osm.kcwu.csie.org.md) |
+
+---
+
+## Contributing
+
+Contributions are welcome! Please review [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on:
+- Setting up the hermetic development shell with Nix (`nix develop`) or Go 1.27+
+- Running unit and fuzz tests: `go test ./...`
+- Enforcing strict linter rules: `golangci-lint run`
+- Running targeted benchmarks on modified packages
+- Adding new OSM catalog providers step-by-step
+
+---
+
+## Data Attribution
+
+OpenStreetMap data is licensed under the [Open Data Commons Open Database License](https://opendatacommons.org/licenses/odbl/) (ODbL) by the OpenStreetMap Foundation (OSMF).
+- © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright)
+- Extract servers provided by Geofabrik GmbH, OpenStreetMap France, BBBike.org, Geo2day, Movisda, SOSM Switzerland, OSM Luxembourg, FIT VUT Brno, Wikimedia Italia, and the OSM Taiwan community.
 
 ---
 

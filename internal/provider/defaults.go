@@ -1,6 +1,8 @@
 package provider
 
 import (
+	"sync"
+
 	"github.com/julien-noblet/download-geofabrik/internal/provider/bbbike"
 	"github.com/julien-noblet/download-geofabrik/internal/provider/geo2day"
 	"github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik"
@@ -11,18 +13,40 @@ import (
 	"github.com/julien-noblet/download-geofabrik/internal/provider/osmit"
 	"github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu"
 	"github.com/julien-noblet/download-geofabrik/internal/provider/osmtw"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
+var registerOnce sync.Once
+
 // RegisterDefaultProviders registers all built-in catalog providers.
+// It is idempotent and safe for concurrent execution.
 func RegisterDefaultProviders() {
-	Register(geofabrik.NewProvider())
-	Register(openstreetmapfr.NewProvider())
-	Register(bbbike.NewProvider())
-	Register(geo2day.NewProvider())
-	Register(movisda.NewProvider())
-	Register(osmch.NewProvider())
-	Register(osmkewllu.NewProvider())
-	Register(osmfitvutbr.NewProvider())
-	Register(osmit.NewProvider())
-	Register(osmtw.NewProvider())
+	registerOnce.Do(func() {
+		Register(geofabrik.New())
+		Register(openstreetmapfr.New())
+		Register(bbbike.New())
+		Register(geo2day.New())
+		Register(movisda.New())
+		Register(osmch.New())
+		Register(osmkewllu.New())
+		Register(osmfitvutbr.New())
+		Register(osmit.New())
+		Register(osmtw.New())
+	})
+}
+
+// AllDefaultFormats returns the default format definitions for all built-in providers.
+func AllDefaultFormats() []catalog.FormatDefinitions {
+	return []catalog.FormatDefinitions{
+		geofabrik.DefaultFormats(),
+		openstreetmapfr.DefaultFormats(),
+		bbbike.DefaultFormats(),
+		geo2day.DefaultFormats(),
+		movisda.DefaultFormats(),
+		osmch.DefaultFormats(),
+		osmkewllu.DefaultFormats(),
+		osmfitvutbr.DefaultFormats(),
+		osmit.DefaultFormats(),
+		osmtw.DefaultFormats(),
+	}
 }

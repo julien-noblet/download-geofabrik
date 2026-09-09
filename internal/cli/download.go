@@ -2,18 +2,23 @@ package cli
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log/slog"
 	"os"
+	"strings"
 
-	config "github.com/julien-noblet/download-geofabrik/internal/config"
-	downloader "github.com/julien-noblet/download-geofabrik/internal/downloader"
-	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+
+	"github.com/julien-noblet/download-geofabrik/internal/downloader"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var (
+	// ErrMissingElementArg is returned when the download command is called without an element argument.
+	ErrMissingElementArg = errors.New("missing required element argument")
+
 	// Flags for download command.
 	outputDir        string
 	check            bool
@@ -27,9 +32,39 @@ var downloadCmd = &cobra.Command{
 	Use:   "download [element]",
 	Short: "Download element",
 	Args:  cobra.ExactArgs(1),
-	RunE:  runDownload,
+	ValidArgsFunction: func(_ *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		if len(args) != 0 {
+			return nil, cobra.ShellCompDirectiveNoFileComp
+		}
+
+		cfgFile := viper.ConfigFileUsed()
+		if cfgFile == "" {
+			if service != "" {
+				cfgFile = service + ".yml"
+			} else {
+				cfgFile = catalog.DefaultConfigFile
+			}
+		}
+
+		cat, err := catalog.LoadFile(cfgFile)
+		if err != nil {
+			return nil, cobra.ShellCompDirectiveNoFileComp
+		}
+
+		var matches []string
+
+		for _, key := range cat.SortedKeys() {
+			if strings.HasPrefix(key, toComplete) {
+				matches = append(matches, key)
+			}
+		}
+
+		return matches, cobra.ShellCompDirectiveNoFileComp
+	},
+	RunE: runDownload,
 }
 
+// RegisterDownloadCmd registers the download command and its flags to rootCmd.
 func RegisterDownloadCmd() {
 	rootCmd.AddCommand(downloadCmd)
 
@@ -39,29 +74,29 @@ func RegisterDownloadCmd() {
 	downloadCmd.Flags().BoolVar(&downloadProgress, "progress", true, "Show progress bar")
 
 	// Add format flags
-	// These mimic the original kingpin flags
-	addFormatFlag(formats.KeyOsmPbf, "P", "Download osm.pbf (default)")
-	addFormatFlag(formats.KeyOshPbf, "H", "Download osh.pbf")
-	addFormatFlag(formats.KeyOsmGz, "G", "Download osm.gz")
-	addFormatFlag(formats.KeyOsmBz2, "B", "Download osm.bz2")
-	addFormatFlag(formats.KeyShpZip, "S", "Download shp.zip")
-	addFormatFlag(formats.KeyState, "", "Download state.txt")
-	addFormatFlag(formats.KeyPoly, "p", "Download poly")
-	addFormatFlag(formats.KeyKml, "k", "Download kml")
-	addFormatFlag(formats.KeyGeoJSON, "g", "Download GeoJSON")
-	addFormatFlag(formats.KeyGarminOSM, "O", "Download Garmin OSM")
+	addFormatFlag(catalog.KeyOsmPbf, "P", "Download osm.pbf (default)")
+	addFormatFlag(catalog.KeyOshPbf, "H", "Download osh.pbf")
+	addFormatFlag(catalog.KeyOsmGz, "G", "Download osm.gz")
+	addFormatFlag(catalog.KeyOsmBz2, "B", "Download osm.bz2")
+	addFormatFlag(catalog.KeyShpZip, "S", "Download shp.zip")
+	addFormatFlag(catalog.KeyState, "", "Download state.txt")
+	addFormatFlag(catalog.KeyPoly, "p", "Download poly")
+	addFormatFlag(catalog.KeyKml, "k", "Download kml")
+	addFormatFlag(catalog.KeyGeoJSON, "g", "Download GeoJSON")
+	addFormatFlag(catalog.KeyGarminOSM, "O", "Download Garmin OSM")
 
 	// Others...
-	addFormatFlag(formats.KeyMapsforge, "m", "Download Mapsforge")
-	addFormatFlag(formats.KeyMBTiles, "M", "Download MBTiles")
-	addFormatFlag(formats.KeyCSV, "C", "Download CSV")
-	addFormatFlag(formats.KeyGarminOnroad, "r", "Download Garmin Onroad")
-	addFormatFlag(formats.KeyGarminOntrail, "t", "Download Garmin Ontrail")
-	addFormatFlag(formats.KeyGarminOpenTopo, "o", "Download Garmin OpenTopo")
-	addFormatFlag(formats.KeyOBF, "", "Download OBF")
-	addFormatFlag(formats.KeyGPKG, "K", "Download GeoPackage")
-	addFormatFlag(formats.KeyO5m, "5", "Download o5m")
-	addFormatFlag(formats.KeyO5mZst, "Z", "Download o5m.zst")
+	addFormatFlag(catalog.KeyMapsforge, "m", "Download Mapsforge")
+	addFormatFlag(catalog.KeyMBTiles, "M", "Download MBTiles")
+	addFormatFlag(catalog.KeyCSV, "C", "Download CSV")
+	addFormatFlag(catalog.KeyGarminOnroad, "r", "Download Garmin Onroad")
+	addFormatFlag(catalog.KeyGarminOntrail, "t", "Download Garmin Ontrail")
+	addFormatFlag(catalog.KeyGarminOpenTopo, "o", "Download Garmin OpenTopo")
+	addFormatFlag(catalog.KeyOBF, "", "Download OBF")
+	addFormatFlag(catalog.KeyGPKG, "K", "Download GeoPackage")
+	addFormatFlag(catalog.KeyO5m, "5", "Download o5m")
+	addFormatFlag(catalog.KeyO5mZst, "Z", "Download o5m.zst")
+	addFormatFlag(catalog.KeyPbf, "", "Download pbf")
 }
 
 func addFormatFlag(key, shorthand, usage string) {
@@ -70,13 +105,13 @@ func addFormatFlag(key, shorthand, usage string) {
 	downloadCmd.Flags().BoolVarP(&val, key, shorthand, false, usage)
 }
 
-func buildDownloadOptions() (*config.Options, error) {
+func buildDownloadOptions() (*downloader.Options, error) {
 	cfgFile := viper.ConfigFileUsed()
 	if cfgFile == "" {
 		if service != "" {
 			cfgFile = service + ".yml"
 		} else {
-			cfgFile = config.DefaultConfigFile
+			cfgFile = catalog.DefaultConfigFile
 		}
 	}
 
@@ -85,7 +120,7 @@ func buildDownloadOptions() (*config.Options, error) {
 		return nil, err
 	}
 
-	opts := &config.Options{
+	opts := &downloader.Options{
 		ConfigFile:      cfgFile,
 		OutputDirectory: outDir,
 		Check:           check,
@@ -113,14 +148,92 @@ func resolveOutputDir(dir string) (string, error) {
 		return wd + string(os.PathSeparator), nil
 	}
 
-	if dir[len(dir)-1] != os.PathSeparator {
+	if !strings.HasSuffix(dir, string(os.PathSeparator)) {
 		return dir + string(os.PathSeparator), nil
 	}
 
 	return dir, nil
 }
 
+var preferredDefaultFormats = []string{
+	catalog.FormatOsmPbf,
+	catalog.FormatPbf,
+	catalog.FormatO5m,
+	catalog.FormatOsmBz2,
+	catalog.FormatOsmGz,
+	catalog.FormatGeoJSON,
+	catalog.FormatGPKG,
+	catalog.FormatShpZip,
+	catalog.FormatO5mZst,
+}
+
+func hasExplicitFormat(flags map[string]bool) bool {
+	for _, enabled := range flags {
+		if enabled {
+			return true
+		}
+	}
+
+	return false
+}
+
+func selectDefaultFormat(cat *catalog.Catalog, elem *catalog.Element) string {
+	if elem == nil || cat == nil || cat.Formats == nil {
+		return catalog.FormatOsmPbf
+	}
+
+	for _, pref := range preferredDefaultFormats {
+		if elem.Formats.Contains(pref) {
+			if _, ok := cat.Formats[pref]; ok {
+				return pref
+			}
+		}
+	}
+
+	for _, format := range elem.Formats {
+		if strings.HasSuffix(format, ".md5") {
+			continue
+		}
+
+		if _, ok := cat.Formats[format]; ok {
+			return format
+		}
+	}
+
+	return catalog.FormatOsmPbf
+}
+
+func resolveFormat(cat *catalog.Catalog, elem *catalog.Element, format string) (string, bool) { //nolint:cyclop // nil guards +2 branches
+	if cat == nil || elem == nil || cat.Formats == nil {
+		return format, false
+	}
+
+	if elem.Formats.Contains(format) {
+		if _, exists := cat.Formats[format]; exists {
+			return format, true
+		}
+	}
+
+	if format == catalog.FormatOsmPbf && elem.Formats.Contains(catalog.FormatPbf) {
+		if _, exists := cat.Formats[catalog.FormatPbf]; exists {
+			return catalog.FormatPbf, true
+		}
+	}
+
+	if format == catalog.FormatPbf && elem.Formats.Contains(catalog.FormatOsmPbf) {
+		if _, exists := cat.Formats[catalog.FormatOsmPbf]; exists {
+			return catalog.FormatOsmPbf, true
+		}
+	}
+
+	return format, false
+}
+
 func runDownload(cmd *cobra.Command, args []string) error {
+	if len(args) == 0 {
+		return ErrMissingElementArg
+	}
+
 	elementID := args[0]
 
 	opts, err := buildDownloadOptions()
@@ -128,28 +241,38 @@ func runDownload(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	cfg, err := config.LoadConfig(opts.ConfigFile)
+	cat, err := catalog.LoadFile(opts.ConfigFile)
 	if err != nil {
-		slog.Error("Failed to load config", "file", opts.ConfigFile, "error", err)
-
 		return fmt.Errorf("failed to load config: %w", err)
 	}
 
-	activeFormats := formats.GetFormats(opts.FormatFlags)
-	if len(activeFormats) == 0 {
-		activeFormats = []string{formats.FormatOsmPbf}
+	myElem, err := cat.Find(elementID)
+	if err != nil {
+		return fmt.Errorf("%w: %s", catalog.ErrElementNotFound, elementID)
 	}
 
-	downloaderInstance := downloader.NewDownloader(cfg, opts)
+	var activeFormats []string
+	if hasExplicitFormat(opts.FormatFlags) {
+		activeFormats = catalog.GetFormats(opts.FormatFlags)
+	} else {
+		activeFormats = []string{selectDefaultFormat(cat, myElem)}
+	}
+
+	client := downloader.New(cat, opts)
 	ctx := cmd.Context()
 
-	for _, format := range activeFormats {
-		formatDef := cfg.Formats[format]
+	for _, rawFormat := range activeFormats {
+		format, ok := resolveFormat(cat, myElem, rawFormat)
+		if !ok {
+			return fmt.Errorf("%w: %s for %s", catalog.ErrFormatNotFound, rawFormat, elementID)
+		}
+
+		formatDef := cat.Formats[format]
 		targetFile := opts.OutputDirectory + elementID + "." + formatDef.ID
 
 		slog.Info("Processing", "element", elementID, "format", format)
 
-		if err := processDownload(ctx, downloaderInstance, opts.Check, elementID, format, targetFile); err != nil {
+		if err := processDownload(ctx, client, opts.Check, elementID, format, targetFile); err != nil {
 			return err
 		}
 	}
@@ -157,9 +280,9 @@ func runDownload(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-func processDownload(ctx context.Context, downloaderInstance *downloader.Downloader, check bool, elementID, format, targetFile string) error {
+func processDownload(ctx context.Context, client *downloader.Downloader, check bool, elementID, format, targetFile string) error {
 	if !check {
-		if err := downloaderInstance.DownloadFile(ctx, elementID, format, targetFile); err != nil {
+		if err := client.DownloadFile(ctx, elementID, format, targetFile); err != nil {
 			return fmt.Errorf("download failed: %w", err)
 		}
 
@@ -168,8 +291,8 @@ func processDownload(ctx context.Context, downloaderInstance *downloader.Downloa
 
 	shouldDownload := true
 
-	if downloader.FileExist(targetFile) {
-		if downloaderInstance.Checksum(ctx, elementID, format) {
+	if downloader.FileExists(targetFile) {
+		if client.Checksum(ctx, elementID, format) {
 			slog.Info("File already exists and checksum matches", "file", targetFile)
 
 			shouldDownload = false
@@ -179,11 +302,11 @@ func processDownload(ctx context.Context, downloaderInstance *downloader.Downloa
 	}
 
 	if shouldDownload {
-		if err := downloaderInstance.DownloadFile(ctx, elementID, format, targetFile); err != nil {
+		if err := client.DownloadFile(ctx, elementID, format, targetFile); err != nil {
 			return fmt.Errorf("download failed: %w", err)
 		}
 		// Verify again
-		downloaderInstance.Checksum(ctx, elementID, format)
+		client.Checksum(ctx, elementID, format)
 	}
 
 	return nil

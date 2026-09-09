@@ -3,9 +3,17 @@ formats:
         ext: o5m
         loc: -latest.o5m
         basepath: recent/
+    o5m.md5:
+        ext: o5m.md5
+        loc: -latest.o5m.md5
+        basepath: recent/
     o5m.zst:
         ext: o5m.zst
         loc: -latest.o5m.zst
+        basepath: recent/
+    o5m.zst.md5:
+        ext: o5m.zst.md5
+        loc: -latest.o5m.zst.md5
         basepath: recent/
 elements:
     taiwan:
@@ -14,5 +22,7 @@ elements:
         name: Taiwan
         files:
             - o5m
+            - o5m.md5
             - o5m.zst
+            - o5m.zst.md5
 baseURL: https://osm.kcwu.csie.org/download/tw-extract

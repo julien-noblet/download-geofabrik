@@ -1,6 +1,7 @@
 package osmtw
 
 import (
+	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -10,11 +11,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"golang.org/x/net/html"
+
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
-var ErrFetchCatalog = errors.New("failed to fetch catalog")
+var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
 	ProviderName               = "osm.kcwu.csie.org"
@@ -26,6 +28,7 @@ const (
 	defaultIdleTimeout         = 90 * time.Second
 	defaultMaxIdleConns        = 20
 	defaultMaxIdleConnsPerHost = 10
+	recentBasePath             = "recent/"
 )
 
 // Provider implements provider.Provider for osm.kcwu.csie.org (Taiwan OSM extracts).
@@ -36,8 +39,8 @@ type Provider struct {
 	StartURL string
 }
 
-// NewProvider creates a new Taiwan OSM scraper provider.
-func NewProvider() *Provider {
+// New creates a new Taiwan OSM scraper provider.
+func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
@@ -57,8 +60,19 @@ func NewProvider() *Provider {
 	}
 }
 
+// NewProvider creates a new Taiwan OSM scraper provider.
+//
+// Deprecated: Use New instead.
+func NewProvider() *Provider {
+	return New()
+}
+
 // Name returns the unique service name.
 func (p *Provider) Name() string {
+	if p == nil {
+		return ""
+	}
+
 	return ProviderName
 }
 
@@ -75,22 +89,25 @@ func (p *Provider) DefaultConfigFile() string {
 // DefaultFormats returns format definitions supported by osm.kcwu.csie.org.
 func DefaultFormats() catalog.FormatDefinitions {
 	return catalog.FormatDefinitions{
-		catalog.FormatO5m:    {ID: catalog.FormatO5m, Loc: "-latest.o5m", BasePath: "recent/"},
-		catalog.FormatO5mZst: {ID: catalog.FormatO5mZst, Loc: "-latest.o5m.zst", BasePath: "recent/"},
+		catalog.FormatO5m:             {ID: catalog.FormatO5m, Loc: "-latest.o5m", BasePath: recentBasePath},
+		catalog.FormatO5m + ".md5":    {ID: catalog.FormatO5m + ".md5", Loc: "-latest.o5m.md5", BasePath: recentBasePath},
+		catalog.FormatO5mZst:          {ID: catalog.FormatO5mZst, Loc: "-latest.o5m.zst", BasePath: recentBasePath},
+		catalog.FormatO5mZst + ".md5": {ID: catalog.FormatO5mZst + ".md5", Loc: "-latest.o5m.zst.md5", BasePath: recentBasePath},
 	}
 }
 
 // FetchCatalog scrapes the index of osm.kcwu.csie.org and generates a catalog.Catalog.
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.StartURL, http.NoBody)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
+	if p == nil {
+		return nil, catalog.ErrProviderNil
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.StartURL, http.NoBody)
+	if err != nil {
+		return nil, fmt.Errorf("creating request: %w", err)
 	}
+
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -99,7 +116,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%w: unexpected HTTP status %d", ErrFetchCatalog, resp.StatusCode)
+		return nil, fmt.Errorf("%w: unexpected http status %d", ErrFetchCatalog, resp.StatusCode)
 	}
 
 	cat := catalog.New()
@@ -107,7 +124,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	cat.Formats = DefaultFormats()
 
 	if err := parseTaiwanHTML(resp.Body, cat); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("parsing catalog html: %w", err)
 	}
 
 	return cat, nil
@@ -125,7 +142,7 @@ func parseTaiwanHTML(reader io.Reader, cat *catalog.Catalog) error {
 				return nil
 			}
 
-			return fmt.Errorf("cannot parse HTML: %w", tokenizer.Err())
+			return fmt.Errorf("cannot parse html: %w", tokenizer.Err())
 
 		case html.StartTagToken, html.SelfClosingTagToken:
 			processAnchorTag(tokenizer, cat)
@@ -169,7 +186,7 @@ func parseLink(href string, cat *catalog.Catalog) {
 			ID:      "taiwan",
 			Name:    "Taiwan",
 			File:    "taiwan",
-			Formats: catalog.Formats{catalog.FormatO5m, catalog.FormatO5mZst},
+			Formats: catalog.Formats{catalog.FormatO5m, catalog.FormatO5m + ".md5", catalog.FormatO5mZst, catalog.FormatO5mZst + ".md5"},
 		}
 		_ = cat.MergeElement(&elem)
 	}

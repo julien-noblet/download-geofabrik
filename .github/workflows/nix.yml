@@ -1,0 +1,43 @@
+name: Nix
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  CGO_ENABLED: 0
+
+jobs:
+  nix:
+    name: Nix Flake Check & Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Check Flake
+        run: nix flake check
+
+      - name: Build Package
+        run: nix build
+
+      - name: Run App
+        run: nix run . -- --version
+
+      - name: Run Tests in Nix DevShell
+        run: nix develop --command go test -v ./...

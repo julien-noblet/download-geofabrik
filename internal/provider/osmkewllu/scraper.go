@@ -1,6 +1,7 @@
 package osmkewllu
 
 import (
+	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -10,11 +11,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"golang.org/x/net/html"
+
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
-var ErrFetchCatalog = errors.New("failed to fetch catalog")
+var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
 	ProviderName               = "osm.kewl.lu"
@@ -36,8 +38,8 @@ type Provider struct {
 	StartURL string
 }
 
-// NewProvider creates a new Luxembourg OSM scraper provider.
-func NewProvider() *Provider {
+// New creates a new Luxembourg OSM scraper provider.
+func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
@@ -57,8 +59,19 @@ func NewProvider() *Provider {
 	}
 }
 
+// NewProvider creates a new Luxembourg OSM scraper provider.
+//
+// Deprecated: Use New instead.
+func NewProvider() *Provider {
+	return New()
+}
+
 // Name returns the unique service name.
 func (p *Provider) Name() string {
+	if p == nil {
+		return ""
+	}
+
 	return ProviderName
 }
 
@@ -82,15 +95,16 @@ func DefaultFormats() catalog.FormatDefinitions {
 
 // FetchCatalog scrapes the index of osm.kewl.lu and generates a catalog.Catalog.
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.StartURL, http.NoBody)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
+	if p == nil {
+		return nil, catalog.ErrProviderNil
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.StartURL, http.NoBody)
+	if err != nil {
+		return nil, fmt.Errorf("creating request: %w", err)
 	}
+
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -99,7 +113,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%w: unexpected HTTP status %d", ErrFetchCatalog, resp.StatusCode)
+		return nil, fmt.Errorf("%w: unexpected http status %d", ErrFetchCatalog, resp.StatusCode)
 	}
 
 	cat := catalog.New()
@@ -107,7 +121,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	cat.Formats = DefaultFormats()
 
 	if err := parseKewlLuHTML(resp.Body, cat); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("parsing catalog html: %w", err)
 	}
 
 	return cat, nil
@@ -125,7 +139,7 @@ func parseKewlLuHTML(reader io.Reader, cat *catalog.Catalog) error {
 				return nil
 			}
 
-			return fmt.Errorf("cannot parse HTML: %w", tokenizer.Err())
+			return fmt.Errorf("cannot parse html: %w", tokenizer.Err())
 
 		case html.StartTagToken, html.SelfClosingTagToken:
 			processAnchorTag(tokenizer, cat)
@@ -190,17 +204,15 @@ func shouldSkipHref(href string) bool {
 }
 
 func parseHrefToIDAndFormat(href string) (elemID, format string) {
-	switch {
-	case strings.HasSuffix(href, ".osm.pbf"):
-		targetID := strings.TrimSuffix(href, ".osm.pbf")
+	if targetID, ok := strings.CutSuffix(href, ".osm.pbf"); ok {
 		if strings.Contains(targetID, "-") {
 			return "", ""
 		}
 
 		return targetID, catalog.FormatOsmPbf
+	}
 
-	case strings.HasSuffix(href, ".osm.bz2"):
-		targetID := strings.TrimSuffix(href, ".osm.bz2")
+	if targetID, ok := strings.CutSuffix(href, ".osm.bz2"); ok {
 		if strings.Contains(targetID, "-") {
 			return "", ""
 		}

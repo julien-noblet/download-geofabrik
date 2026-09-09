@@ -1,11 +1,11 @@
-package download_test
+package downloader_test
 
 import (
 	"os"
 	"path/filepath"
 	"testing"
 
-	download "github.com/julien-noblet/download-geofabrik/internal/downloader"
+	"github.com/julien-noblet/download-geofabrik/internal/downloader"
 )
 
 func Test_hashFileMD5(t *testing.T) {
@@ -54,7 +54,7 @@ func Test_hashFileMD5(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			got, err := download.ComputeMD5Hash(tt.filePath)
+			got, err := downloader.ComputeMD5Hash(tt.filePath)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ComputeMD5Hash(%v) error = %v, wantErr %v", tt.filePath, err, tt.wantErr)
 
@@ -77,15 +77,15 @@ func requireNoError(t *testing.T, err error) {
 }
 
 func Benchmark_hashFileMD5_LICENSE(b *testing.B) {
-	for range b.N {
-		if _, err := download.ComputeMD5Hash("../../LICENSE"); err != nil {
+	for b.Loop() {
+		if _, err := downloader.ComputeMD5Hash("../../LICENSE"); err != nil {
 			b.Error(err.Error())
 		}
 	}
 }
 
 func Benchmark_controlHash_LICENSE(b *testing.B) {
-	hash, _ := download.ComputeMD5Hash("../../LICENSE")
+	hash, _ := downloader.ComputeMD5Hash("../../LICENSE")
 	tmpDir := b.TempDir()
 	hashfile := filepath.Join(tmpDir, "test.hash")
 
@@ -93,8 +93,8 @@ func Benchmark_controlHash_LICENSE(b *testing.B) {
 		b.Errorf("Can't write file %s err: %v", hashfile, err)
 	}
 
-	for range b.N {
-		if _, err := download.CheckFileHash(hashfile, hash); err != nil {
+	for b.Loop() {
+		if _, err := downloader.CheckFileHash(hashfile, hash); err != nil {
 			b.Error(err.Error())
 		}
 	}
@@ -109,7 +109,7 @@ func Test_controlHash(t *testing.T) {
 	requireNoError(t, os.WriteFile(emptyHashFile, []byte(""), 0o600))
 	requireNoError(t, os.WriteFile(whitespaceHashFile, []byte("   \n\t  "), 0o600))
 
-	hash, _ := download.ComputeMD5Hash("../../LICENSE")
+	hash, _ := downloader.ComputeMD5Hash("../../LICENSE")
 	hashfull := hash + "  ../../LICENSE\n"
 	requireNoError(t, os.WriteFile(validHashFile, []byte(hashfull), 0o600))
 
@@ -166,7 +166,7 @@ func Test_controlHash(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := download.CheckFileHash(tt.hashfile, tt.hash)
+			got, err := downloader.CheckFileHash(tt.hashfile, tt.hash)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("CheckFileHash() error = %v, wantErr %v", err, tt.wantErr)
 
@@ -189,7 +189,7 @@ func Test_VerifyFileChecksum(t *testing.T) {
 	wrongHashFile := filepath.Join(tmpDir, "wrong.bin.md5")
 
 	requireNoError(t, os.WriteFile(dataFile, []byte("data to verify"), 0o600))
-	hash, err := download.ComputeMD5Hash(dataFile)
+	hash, err := downloader.ComputeMD5Hash(dataFile)
 	requireNoError(t, err)
 
 	requireNoError(t, os.WriteFile(hashFile, []byte(hash+"  data.bin\n"), 0o600))
@@ -231,7 +231,7 @@ func Test_VerifyFileChecksum(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			if got := download.VerifyFileChecksum(tt.outputPath, tt.hashfile); got != tt.want {
+			if got := downloader.VerifyFileChecksum(tt.outputPath, tt.hashfile); got != tt.want {
 				t.Errorf("VerifyFileChecksum() = %v, want %v", got, tt.want)
 			}
 		})

@@ -4,10 +4,11 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/ui"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/ui"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 func createTestCatalog() *catalog.Catalog {

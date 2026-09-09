@@ -6,10 +6,13 @@
 
 <p align="center">
   <a href="https://github.com/julien-noblet/download-geofabrik/releases"><img src="https://img.shields.io/github/v/release/julien-noblet/download-geofabrik?style=flat-square" alt="GitHub release" /></a>
+  <a href="https://go.dev/"><img src="https://img.shields.io/badge/Go-1.27+-00ADD8?style=flat-square&logo=go" alt="Go Version" /></a>
+  <a href="https://pkg.go.dev/github.com/julien-noblet/download-geofabrik"><img src="https://pkg.go.dev/badge/github.com/julien-noblet/download-geofabrik.svg?style=flat-square" alt="Go Reference" /></a>
   <a href="https://github.com/julien-noblet/download-geofabrik/actions/workflows/gotest.yml"><img src="https://img.shields.io/github/actions/workflow/status/julien-noblet/download-geofabrik/gotest.yml?branch=master&label=tests&style=flat-square" alt="Build Status" /></a>
+  <a href="https://github.com/julien-noblet/download-geofabrik/actions/workflows/nix.yml"><img src="https://img.shields.io/github/actions/workflow/status/julien-noblet/download-geofabrik/nix.yml?branch=master&label=nix&style=flat-square" alt="Nix Status" /></a>
   <a href="https://gist.githubusercontent.com/julien-noblet/a509e15ea4734ca3e8e98f32ab5369c0/raw/7344619caf8ac5bce291793711071a9636536fce/coverage.json"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/julien-noblet/a509e15ea4734ca3e8e98f32ab5369c0/raw/7344619caf8ac5bce291793711071a9636536fce/coverage.json&style=flat-square" alt="Go Coverage" /></a>
   <a href="https://goreportcard.com/report/github.com/julien-noblet/download-geofabrik"><img src="https://goreportcard.com/badge/github.com/julien-noblet/download-geofabrik?style=flat-square" alt="Go Report Card" /></a>
-  <a href="https://hub.docker.com/r/juliennoblet/download-geofabrik"><img src="https://img.shields.io/docker/pulls/juliennoblet/download-geofabrik?style=flat-square" alt="Docker Pulls" /></a>
+  <a href="https://github.com/julien-noblet/download-geofabrik/pkgs/container/download-geofabrik"><img src="https://img.shields.io/badge/GHCR-download--geofabrik-blue?style=flat-square&logo=github" alt="GitHub Container Registry" /></a>
   <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/MCP-Enabled-purple?style=flat-square" alt="MCP Enabled" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MPL_2.0-blue.svg?style=flat-square" alt="License: MPL 2.0" /></a>
 </p>
@@ -30,14 +33,16 @@
   - [Download Specific Formats](#download-specific-formats)
   - [Custom Output Directory & Options](#custom-output-directory--options)
   - [Exploring Elements](#exploring-elements)
+- [CLI Reference](#cli-reference)
 - [Supported Formats](#supported-formats)
 - [Model Context Protocol (MCP) Mode](#model-context-protocol-mcp-mode)
   - [Configuration for MCP Clients](#configuration-for-mcp-clients)
   - [Available MCP Tools](#available-mcp-tools)
   - [Available MCP Resources](#available-mcp-resources)
 - [Catalog Maintenance](#catalog-maintenance)
-- [CLI Reference](#cli-reference)
 - [Supported Providers & Catalogs](#supported-providers--catalogs)
+- [Contributing](#contributing)
+- [Data Attribution](#data-attribution)
 - [License](#license)
 
 ---
@@ -61,6 +66,8 @@ Download pre-compiled binaries for Linux, macOS, and Windows from the [GitHub Re
 
 ### Go Install
 
+Requires **Go 1.27 or later**:
+
 ```bash
 go install github.com/julien-noblet/download-geofabrik/cmd/download-geofabrik@latest
 ```
@@ -68,7 +75,7 @@ go install github.com/julien-noblet/download-geofabrik/cmd/download-geofabrik@la
 ### Docker
 
 ```bash
-docker run -it --rm -v "$PWD:/data" -w /data juliennoblet/download-geofabrik:latest download [element]
+docker run -it --rm -v "$PWD:/data" -w /data ghcr.io/julien-noblet/download-geofabrik:latest -c /geofabrik.yml download [element]
 ```
 
 ### Nix
@@ -77,6 +84,12 @@ Run directly with Nix Flakes:
 
 ```bash
 nix run github:julien-noblet/download-geofabrik -- download [element]
+```
+
+Or install permanently to your Nix profile:
+
+```bash
+nix profile install github:julien-noblet/download-geofabrik
 ```
 
 Or enter a development shell:
@@ -103,10 +116,13 @@ Use the `--service` flag to target alternative OSM data sources:
 
 ```bash
 # Download from OpenStreetMap France
-download-geofabrik --service openstreetmap.fr download rhone-alpes
+download-geofabrik --service openstreetmap.fr download rhone_alpes
 
 # Download from BBBike
 download-geofabrik --service bbbike download Berlin
+
+# Download from OSM Taiwan (automatically uses provider's default format, o5m)
+download-geofabrik --service osm.kcwu.csie.org download taiwan
 ```
 
 ### Download Specific Formats
@@ -128,7 +144,7 @@ download-geofabrik download -K monaco
 download-geofabrik download --output-dir /tmp/osm-extracts ile-de-france
 
 # Skip checksum verification
-download-geofabrik download --no-check ile-de-france
+download-geofabrik download --check=false ile-de-france
 
 # Dry run (test URLs without downloading files)
 download-geofabrik download --nodownload ile-de-france

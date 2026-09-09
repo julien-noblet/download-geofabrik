@@ -9,10 +9,11 @@ import (
 	"testing"
 	"testing/iotest"
 
-	"github.com/julien-noblet/download-geofabrik/internal/provider/osmch"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/provider/osmch"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 const mockOSMCHHTML = `<!DOCTYPE html>
@@ -98,7 +99,7 @@ func TestOSMCH_FetchCatalog(t *testing.T) {
 
 	ch, exists := cat.Get("switzerland")
 	assert.True(t, exists)
-	assert.True(t, ch.ContainsFormat(catalog.FormatOsmPbf))
+	assert.True(t, ch.ContainsFormat(catalog.FormatPbf))
 	assert.True(t, ch.ContainsFormat(catalog.FormatOBF))
 	assert.True(t, ch.ContainsFormat(catalog.FormatGarminOSM))
 }
@@ -112,7 +113,7 @@ func TestOSMCH_FetchCatalog_HTMLParseError(t *testing.T) {
 
 	_, err := p.FetchCatalog(context.Background())
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "cannot parse HTML")
+	assert.Contains(t, err.Error(), "cannot parse html")
 }
 
 func TestOSMCH_FetchCatalog_HTTPError(t *testing.T) {
@@ -203,6 +204,7 @@ func TestOSMCH_DefaultFormats(t *testing.T) {
 
 	formats := osmch.DefaultFormats()
 	assert.Contains(t, formats, catalog.FormatOsmPbf)
+	assert.Contains(t, formats, catalog.FormatPbf)
 	assert.Contains(t, formats, catalog.FormatPoly)
 	assert.Contains(t, formats, catalog.FormatOBF)
 	assert.Contains(t, formats, catalog.FormatGarminOSM)
@@ -214,11 +216,9 @@ func Benchmark_OSMCH_FetchCatalog_Mock(b *testing.B) {
 
 	p := newProviderWithServer(ts)
 
-	ctx := context.Background()
+	ctx := b.Context()
 
-	b.ResetTimer()
-
-	for range b.N {
+	for b.Loop() {
 		_, _ = p.FetchCatalog(ctx)
 	}
 }

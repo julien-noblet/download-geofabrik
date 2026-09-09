@@ -4,14 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"text/tabwriter"
 
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
-	"github.com/olekukonko/tablewriter"
-	"github.com/olekukonko/tablewriter/tw"
 )
 
 const (
-	tableColumnCount = 4
+	tabPadding = 4
 )
 
 // PrintTable formats and outputs the catalog as an ASCII or Markdown table.
@@ -20,27 +19,19 @@ func PrintTable(cat *catalog.Catalog, isMarkdown bool, writer io.Writer) error {
 		return nil
 	}
 
-	opts := []tablewriter.Option{
-		tablewriter.WithHeader([]string{"ShortName", "Is in", "Long Name", "formats"}),
-		tablewriter.WithAlignment(tw.MakeAlign(tableColumnCount, tw.AlignLeft)),
-	}
-
 	if isMarkdown {
-		opts = append(opts, tablewriter.WithRendition(tw.Rendition{
-			Symbols: tw.NewSymbols(tw.StyleMarkdown),
-			Borders: tw.Border{
-				Left:   tw.On,
-				Top:    tw.Off,
-				Right:  tw.On,
-				Bottom: tw.Off,
-			},
-		}))
+		return printMarkdownTable(cat, writer)
 	}
 
-	table := tablewriter.NewTable(writer, opts...)
-	keys := cat.SortedKeys()
+	return printStandardTable(cat, writer)
+}
 
-	for _, elementID := range keys {
+func printMarkdownTable(cat *catalog.Catalog, writer io.Writer) error {
+	tabWriter := tabwriter.NewWriter(writer, 0, 0, 1, ' ', 0)
+	fmt.Fprintln(tabWriter, "| ShortName | Is in | Long Name | formats |")
+	fmt.Fprintln(tabWriter, "| --- | --- | --- | --- |")
+
+	for _, elementID := range cat.SortedKeys() {
 		elem, _ := cat.Get(elementID)
 		parentName := ""
 
@@ -50,24 +41,48 @@ func PrintTable(cat *catalog.Catalog, isMarkdown bool, writer io.Writer) error {
 			}
 		}
 
-		err := table.Append(
+		fmt.Fprintf(tabWriter, "| %s | %s | %s | %s |\n",
 			elementID,
 			parentName,
 			elem.Name,
 			catalog.GetMiniFormats(elem.Formats),
 		)
-		if err != nil {
-			return fmt.Errorf("unable to append row: %w", err)
+	}
+
+	if err := tabWriter.Flush(); err != nil {
+		return fmt.Errorf("unable to flush markdown table: %w", err)
+	}
+
+	return nil
+}
+
+func printStandardTable(cat *catalog.Catalog, writer io.Writer) error {
+	tabWriter := tabwriter.NewWriter(writer, 0, 0, tabPadding, ' ', 0)
+	fmt.Fprintln(tabWriter, "SHORTNAME\tIS IN\tLONG NAME\tFORMATS")
+
+	for _, elementID := range cat.SortedKeys() {
+		elem, _ := cat.Get(elementID)
+		parentName := ""
+
+		if elem.Parent != "" {
+			if parentElem, exists := cat.Get(elem.Parent); exists {
+				parentName = parentElem.Name
+			}
 		}
+
+		fmt.Fprintf(tabWriter, "%s\t%s\t%s\t%s\n",
+			elementID,
+			parentName,
+			elem.Name,
+			catalog.GetMiniFormats(elem.Formats),
+		)
 	}
 
-	if err := table.Render(); err != nil {
-		return fmt.Errorf("unable to render table: %w", err)
+	if err := tabWriter.Flush(); err != nil {
+		return fmt.Errorf("unable to flush table: %w", err)
 	}
 
-	if !isMarkdown {
-		fmt.Fprintf(writer, "Total elements: %d\n", len(cat.Elements))
-	}
+	fmt.Fprintf(writer, "Total elements: %d\n", cat.Len())
 
 	return nil
 }
@@ -82,7 +97,7 @@ func PrintJSON(cat *catalog.Catalog, writer io.Writer) error {
 	encoder.SetIndent("", "  ")
 
 	if err := encoder.Encode(cat); err != nil {
-		return fmt.Errorf("unable to encode JSON: %w", err)
+		return fmt.Errorf("unable to encode json: %w", err)
 	}
 
 	return nil

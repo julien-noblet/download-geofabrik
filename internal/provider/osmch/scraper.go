@@ -1,6 +1,7 @@
 package osmch
 
 import (
+	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -10,11 +11,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"golang.org/x/net/html"
+
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
-var ErrFetchCatalog = errors.New("failed to fetch catalog")
+var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
 	ProviderName               = "planet.osm.ch"
@@ -36,8 +38,8 @@ type Provider struct {
 	StartURL string
 }
 
-// NewProvider creates a new Swiss OSM (planet.osm.ch) scraper provider.
-func NewProvider() *Provider {
+// New creates a new Swiss OSM (planet.osm.ch) scraper provider.
+func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
@@ -57,8 +59,19 @@ func NewProvider() *Provider {
 	}
 }
 
+// NewProvider creates a new Swiss OSM (planet.osm.ch) scraper provider.
+//
+// Deprecated: Use New instead.
+func NewProvider() *Provider {
+	return New()
+}
+
 // Name returns the unique service name.
 func (p *Provider) Name() string {
+	if p == nil {
+		return ""
+	}
+
 	return ProviderName
 }
 
@@ -76,6 +89,7 @@ func (p *Provider) DefaultConfigFile() string {
 func DefaultFormats() catalog.FormatDefinitions {
 	return catalog.FormatDefinitions{
 		catalog.FormatOsmPbf:    {ID: catalog.FormatOsmPbf, Loc: ".osm.pbf"},
+		catalog.FormatPbf:       {ID: catalog.FormatPbf, Loc: ".pbf"},
 		catalog.FormatPoly:      {ID: catalog.FormatPoly, Loc: ".poly"},
 		catalog.FormatOBF:       {ID: catalog.FormatOBF, Loc: ".obf"},
 		catalog.FormatGarminOSM: {ID: catalog.FormatGarminOSM, Loc: "-garmin.zip"},
@@ -84,15 +98,16 @@ func DefaultFormats() catalog.FormatDefinitions {
 
 // FetchCatalog scrapes the index of planet.osm.ch and generates a catalog.Catalog.
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.StartURL, http.NoBody)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
+	if p == nil {
+		return nil, catalog.ErrProviderNil
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.StartURL, http.NoBody)
+	if err != nil {
+		return nil, fmt.Errorf("creating request: %w", err)
 	}
+
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -101,7 +116,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%w: unexpected HTTP status %d", ErrFetchCatalog, resp.StatusCode)
+		return nil, fmt.Errorf("%w: unexpected http status %d", ErrFetchCatalog, resp.StatusCode)
 	}
 
 	cat := catalog.New()
@@ -109,7 +124,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	cat.Formats = DefaultFormats()
 
 	if err := parseOSMCHHTML(resp.Body, cat); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("parsing catalog html: %w", err)
 	}
 
 	return cat, nil
@@ -127,7 +142,7 @@ func parseOSMCHHTML(reader io.Reader, cat *catalog.Catalog) error {
 				return nil
 			}
 
-			return fmt.Errorf("cannot parse HTML: %w", tokenizer.Err())
+			return fmt.Errorf("cannot parse html: %w", tokenizer.Err())
 
 		case html.StartTagToken, html.SelfClosingTagToken:
 			processAnchorTag(tokenizer, cat)
@@ -190,21 +205,24 @@ func shouldSkipHref(href string) bool {
 }
 
 func parseHrefToIDAndFormat(href string) (elemID, format string) {
-	switch {
-	case strings.HasSuffix(href, ".osm.pbf"):
-		return strings.TrimSuffix(href, ".osm.pbf"), catalog.FormatOsmPbf
+	if trimmed, ok := strings.CutSuffix(href, ".osm.pbf"); ok {
+		return trimmed, catalog.FormatOsmPbf
+	}
 
-	case strings.HasSuffix(href, ".poly"):
-		return strings.TrimSuffix(href, ".poly"), catalog.FormatPoly
+	if trimmed, ok := strings.CutSuffix(href, ".poly"); ok {
+		return trimmed, catalog.FormatPoly
+	}
 
-	case strings.HasSuffix(href, ".obf"):
-		return strings.TrimSuffix(href, ".obf"), catalog.FormatOBF
+	if trimmed, ok := strings.CutSuffix(href, ".obf"); ok {
+		return trimmed, catalog.FormatOBF
+	}
 
-	case strings.HasSuffix(href, "-garmin.zip"):
-		return strings.TrimSuffix(href, "-garmin.zip"), catalog.FormatGarminOSM
+	if trimmed, ok := strings.CutSuffix(href, "-garmin.zip"); ok {
+		return trimmed, catalog.FormatGarminOSM
+	}
 
-	case strings.HasSuffix(href, ".pbf"):
-		return strings.TrimSuffix(href, ".pbf"), catalog.FormatOsmPbf
+	if trimmed, ok := strings.CutSuffix(href, ".pbf"); ok {
+		return trimmed, catalog.FormatPbf
 	}
 
 	return "", ""

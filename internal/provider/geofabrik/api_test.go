@@ -6,10 +6,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 const mockGeofabrikIndexJSON = `{
@@ -245,11 +246,9 @@ func Benchmark_Geofabrik_FetchCatalog_Mock(b *testing.B) {
 	p.IndexURL = ts.URL
 	p.Client = ts.Client()
 
-	ctx := context.Background()
+	ctx := b.Context()
 
-	b.ResetTimer()
-
-	for range b.N {
+	for b.Loop() {
 		_, _ = p.FetchCatalog(ctx)
 	}
 }

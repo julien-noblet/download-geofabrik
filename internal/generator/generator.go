@@ -5,16 +5,14 @@ import (
 	"errors"
 	"fmt"
 	"log/slog"
-	"os"
-	"path/filepath"
 	"slices"
 
-	"github.com/julien-noblet/download-geofabrik/internal/config"
 	"github.com/julien-noblet/download-geofabrik/internal/provider"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
+// Supported provider service identifiers.
 const (
-	filePermission         = 0o600
 	ServiceGeofabrik       = "geofabrik"
 	ServiceGeofabrikParse  = "geofabrik-parse"
 	ServiceOpenStreetMapFR = "openstreetmap.fr"
@@ -28,46 +26,11 @@ const (
 	ServiceOSMTW           = "osm.kcwu.csie.org"
 )
 
+// ErrUnknownService is returned when the requested provider service is not registered.
 var ErrUnknownService = errors.New("unknown service")
 
-// Write writes the generated configuration to a file.
-func Write(c *config.Config, filename string) error {
-	out, err := c.Generate()
-	if err != nil {
-		return fmt.Errorf("failed to generate config: %w", err)
-	}
-
-	absFilename, err := filepath.Abs(filename)
-	if err != nil {
-		return fmt.Errorf("failed to get absolute path for filename: %w", err)
-	}
-
-	if err := os.WriteFile(absFilename, out, filePermission); err != nil {
-		return fmt.Errorf("failed to write file: %w", err)
-	}
-
-	slog.Info("Generated config file", "file", absFilename)
-
-	return nil
-}
-
-// Generate generates the configuration based on the specified service.
-func Generate(service string, progress bool, configfile string) error {
-	return GenerateContext(context.Background(), service, progress, configfile)
-}
-
-// GenerateContext generates the configuration based on the specified service with context.
-func GenerateContext(ctx context.Context, service string, progress bool, configfile string) error {
-	return PerformGenerateContext(ctx, service, progress, configfile)
-}
-
-// PerformGenerate handles the generation logic using registered providers.
-func PerformGenerate(service string, progress bool, configfile string) error {
-	return PerformGenerateContext(context.Background(), service, progress, configfile)
-}
-
-// PerformGenerateContext handles the generation logic using registered providers with context.
-func PerformGenerateContext(ctx context.Context, service string, _ bool, configfile string) error {
+// Generate fetches the catalog from the specified service provider and saves it as a YAML file.
+func Generate(ctx context.Context, service, configfile string) error {
 	provider.RegisterDefaultProviders()
 
 	lookupService := service
@@ -77,7 +40,7 @@ func PerformGenerateContext(ctx context.Context, service string, _ bool, configf
 
 	prov, err := provider.Get(lookupService)
 	if err != nil {
-		return fmt.Errorf("%w: %s", ErrUnknownService, service)
+		return fmt.Errorf("%w: %s: %w", ErrUnknownService, service, err)
 	}
 
 	slog.Info("Fetching catalog from provider", "service", service, "description", prov.Description())
@@ -87,8 +50,13 @@ func PerformGenerateContext(ctx context.Context, service string, _ bool, configf
 		return fmt.Errorf("failed to fetch catalog from %s: %w", service, err)
 	}
 
+	if cat == nil {
+		return fmt.Errorf("%w: provider %s returned nil catalog", catalog.ErrNilCatalog, service)
+	}
+
 	// Sort formats within each element for deterministic YAML output
 	for k, elem := range cat.Elements {
+		elem.Formats = slices.Clone(elem.Formats)
 		slices.Sort(elem.Formats)
 		cat.Elements[k] = elem
 	}
@@ -100,11 +68,4 @@ func PerformGenerateContext(ctx context.Context, service string, _ bool, configf
 	slog.Info("Generated config file", "file", configfile, "elements", len(cat.Elements))
 
 	return nil
-}
-
-// Cleanup sorts the formats in the configuration elements.
-func Cleanup(c *config.Config) {
-	for _, elem := range c.Elements {
-		slices.Sort(elem.Formats)
-	}
 }

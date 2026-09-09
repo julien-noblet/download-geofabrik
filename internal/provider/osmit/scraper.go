@@ -1,8 +1,8 @@
 package osmit
 
 import (
+	"cmp"
 	"context"
-	"errors"
 	"fmt"
 	"net"
 	"net/http"
@@ -12,7 +12,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
-var ErrFetchCatalog = errors.New("failed to fetch catalog")
+var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
 	ProviderName               = "osmit-estratti"
@@ -35,8 +35,8 @@ type Provider struct {
 	StartURL string
 }
 
-// NewProvider creates a new OSM Italy provider.
-func NewProvider() *Provider {
+// New creates a new OSM Italy provider.
+func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
@@ -56,8 +56,19 @@ func NewProvider() *Provider {
 	}
 }
 
+// NewProvider creates a new OSM Italy provider.
+//
+// Deprecated: Use New instead.
+func NewProvider() *Provider {
+	return New()
+}
+
 // Name returns the unique service name.
 func (p *Provider) Name() string {
+	if p == nil {
+		return ""
+	}
+
 	return ProviderName
 }
 
@@ -252,15 +263,16 @@ var italianProvinces = []provinceInfo{
 
 // FetchCatalog builds the OpenStreetMap Italy catalog after verifying server availability.
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.StartURL, http.NoBody)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
+	if p == nil {
+		return nil, catalog.ErrProviderNil
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.StartURL, http.NoBody)
+	if err != nil {
+		return nil, fmt.Errorf("creating request: %w", err)
 	}
+
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -269,7 +281,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%w: unexpected HTTP status %d", ErrFetchCatalog, resp.StatusCode)
+		return nil, fmt.Errorf("%w: unexpected http status %d", ErrFetchCatalog, resp.StatusCode)
 	}
 
 	cat := catalog.New()

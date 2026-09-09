@@ -1,6 +1,7 @@
 package osmfitvutbr
 
 import (
+	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -9,12 +10,15 @@ import (
 	"net/http"
 	"strings"
 	"time"
+	"unicode"
+	"unicode/utf8"
+
+	"golang.org/x/net/html"
 
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
-	"golang.org/x/net/html"
 )
 
-var ErrFetchCatalog = errors.New("failed to fetch catalog")
+var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
 	ProviderName               = "osm.fit.vutbr.cz"
@@ -36,8 +40,8 @@ type Provider struct {
 	StartURL string
 }
 
-// NewProvider creates a new FIT VUTBR Czechia scraper provider.
-func NewProvider() *Provider {
+// New creates a new FIT VUTBR Czechia scraper provider.
+func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
@@ -55,6 +59,13 @@ func NewProvider() *Provider {
 			},
 		},
 	}
+}
+
+// NewProvider creates a new FIT VUTBR Czechia scraper provider.
+//
+// Deprecated: Use New instead.
+func NewProvider() *Provider {
+	return New()
 }
 
 // Name returns the unique service name.
@@ -75,47 +86,79 @@ func (p *Provider) DefaultConfigFile() string {
 // DefaultFormats returns format definitions supported by osm.fit.vutbr.cz.
 func DefaultFormats() catalog.FormatDefinitions {
 	return catalog.FormatDefinitions{
-		catalog.FormatOsmPbf: {ID: catalog.FormatOsmPbf, Loc: "-latest.osm.pbf", BasePath: "czech_republic/"},
-		catalog.FormatOsmBz2: {ID: catalog.FormatOsmBz2, Loc: "-latest.osm.bz2", BasePath: "czech_republic/"},
+		catalog.FormatOsmPbf: {ID: catalog.FormatOsmPbf, Loc: ".osm.pbf", BasePath: "czech_republic/"},
+		catalog.FormatOsmBz2: {ID: catalog.FormatOsmBz2, Loc: ".osm.bz2", BasePath: "czech_republic/"},
 		catalog.FormatPoly:   {ID: catalog.FormatPoly, Loc: ".poly"},
 	}
 }
 
-// FetchCatalog scrapes the index of osm.fit.vutbr.cz and generates a catalog.Catalog.
-func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.StartURL, http.NoBody)
+func (p *Provider) fetchHTML(ctx context.Context, targetURL string) (io.ReadCloser, error) {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, targetURL, http.NoBody)
 	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
+		return nil, fmt.Errorf("creating request: %w", err)
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
-	}
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("%w: %w", ErrFetchCatalog, err)
 	}
-	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%w: unexpected HTTP status %d", ErrFetchCatalog, resp.StatusCode)
+		_ = resp.Body.Close()
+
+		return nil, fmt.Errorf("%w: unexpected http status %d", ErrFetchCatalog, resp.StatusCode)
 	}
+
+	return resp.Body, nil
+}
+
+// FetchCatalog scrapes the index of osm.fit.vutbr.cz and generates a catalog.Catalog.
+func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
+	if p == nil {
+		return nil, catalog.ErrProviderNil
+	}
+
+	body, err := p.fetchHTML(ctx, p.StartURL)
+	if err != nil {
+		return nil, fmt.Errorf("fetching root catalog: %w", err)
+	}
+	defer body.Close()
 
 	cat := catalog.New()
 	cat.BaseURL = p.BaseURL
 	cat.Formats = DefaultFormats()
 
-	if err := parseFitVutbrHTML(resp.Body, cat); err != nil {
-		return nil, err
+	subdirs, err := parseFitVutbrRootHTML(body, cat)
+	if err != nil {
+		return nil, fmt.Errorf("parsing root html: %w", err)
+	}
+
+	for _, dir := range subdirs {
+		subURL := strings.TrimSuffix(p.StartURL, "/") + "/" + dir + "/"
+
+		err := func() error {
+			subBody, err := p.fetchHTML(ctx, subURL)
+			if err != nil {
+				return fmt.Errorf("fetching subdirectory %s: %w", dir, err)
+			}
+			defer subBody.Close()
+
+			return parseFitVutbrSubdirHTML(subBody, cat, dir)
+		}()
+		if err != nil {
+			return nil, fmt.Errorf("parsing subdirectory %s html: %w", dir, err)
+		}
 	}
 
 	return cat, nil
 }
 
-func parseFitVutbrHTML(reader io.Reader, cat *catalog.Catalog) error {
+func parseFitVutbrRootHTML(reader io.Reader, cat *catalog.Catalog) ([]string, error) {
 	tokenizer := html.NewTokenizer(reader)
+
+	var subdirs []string
 
 	for {
 		tokenType := tokenizer.Next()
@@ -123,13 +166,15 @@ func parseFitVutbrHTML(reader io.Reader, cat *catalog.Catalog) error {
 		switch tokenType {
 		case html.ErrorToken:
 			if errors.Is(tokenizer.Err(), io.EOF) {
-				return nil
+				return subdirs, nil
 			}
 
-			return fmt.Errorf("cannot parse HTML: %w", tokenizer.Err())
+			return nil, fmt.Errorf("cannot parse html: %w", tokenizer.Err())
 
 		case html.StartTagToken, html.SelfClosingTagToken:
-			processAnchorTag(tokenizer, cat)
+			if href := extractHref(tokenizer); href != "" {
+				parseRootLink(href, cat, &subdirs)
+			}
 
 		case html.TextToken, html.EndTagToken, html.CommentToken, html.DoctypeToken:
 			// Non-anchor tokens
@@ -137,28 +182,59 @@ func parseFitVutbrHTML(reader io.Reader, cat *catalog.Catalog) error {
 	}
 }
 
-func processAnchorTag(tokenizer *html.Tokenizer, cat *catalog.Catalog) {
+func parseFitVutbrSubdirHTML(reader io.Reader, cat *catalog.Catalog, dir string) error {
+	tokenizer := html.NewTokenizer(reader)
+
+	var (
+		latestPbfDate string
+		latestPbfBase string
+		latestBz2Date string
+		latestBz2Base string
+	)
+
+	for {
+		tokenType := tokenizer.Next()
+
+		switch tokenType {
+		case html.ErrorToken:
+			if errors.Is(tokenizer.Err(), io.EOF) {
+				addLatestElement(cat, dir, latestPbfBase, latestBz2Base)
+
+				return nil
+			}
+
+			return fmt.Errorf("cannot parse html: %w", tokenizer.Err())
+
+		case html.StartTagToken, html.SelfClosingTagToken:
+			if href := extractHref(tokenizer); href != "" {
+				parseSubdirLink(href, dir, &latestPbfDate, &latestPbfBase, &latestBz2Date, &latestBz2Base)
+			}
+
+		case html.TextToken, html.EndTagToken, html.CommentToken, html.DoctypeToken:
+			// Non-anchor tokens
+		}
+	}
+}
+
+func extractHref(tokenizer *html.Tokenizer) string {
 	tagName, hasAttr := tokenizer.TagName()
 	if string(tagName) != "a" || !hasAttr {
-		return
+		return ""
 	}
 
 	for {
 		key, val, more := tokenizer.TagAttr()
 		if string(key) == "href" {
-			href := string(val)
-			parseLink(href, cat)
-
-			return
+			return string(val)
 		}
 
 		if !more {
-			return
+			return ""
 		}
 	}
 }
 
-func parseLink(href string, cat *catalog.Catalog) {
+func parseRootLink(href string, cat *catalog.Catalog, subdirs *[]string) {
 	if shouldSkipHref(href) {
 		return
 	}
@@ -166,19 +242,13 @@ func parseLink(href string, cat *catalog.Catalog) {
 	// Subdirectory representing an extract region (e.g. czech_republic/)
 	if strings.HasSuffix(href, "/") {
 		dir := strings.Trim(href, "/")
-		elem := catalog.Element{
-			ID:      dir,
-			Name:    formatName(dir),
-			Formats: catalog.Formats{catalog.FormatOsmPbf, catalog.FormatOsmBz2},
-		}
-		_ = cat.MergeElement(&elem)
+		*subdirs = append(*subdirs, dir)
 
 		return
 	}
 
 	// Direct polygon file (e.g. czech-republic.poly)
-	if strings.HasSuffix(href, ".poly") {
-		raw := strings.TrimSuffix(href, ".poly")
+	if raw, ok := strings.CutSuffix(href, ".poly"); ok {
 		elemID := strings.ReplaceAll(raw, "-", "_")
 		elem := catalog.Element{
 			ID:   elemID,
@@ -190,11 +260,78 @@ func parseLink(href string, cat *catalog.Catalog) {
 	}
 }
 
+func parseSubdirLink(href, dir string, latestPbfDate, latestPbfBase, latestBz2Date, latestBz2Base *string) {
+	if shouldSkipHref(href) {
+		return
+	}
+
+	var (
+		formatID string
+		base     string
+	)
+
+	switch {
+	case strings.HasSuffix(href, ".osm.pbf"):
+		formatID = catalog.FormatOsmPbf
+		base, _ = strings.CutSuffix(href, ".osm.pbf")
+
+	case strings.HasSuffix(href, ".osm.bz2"):
+		formatID = catalog.FormatOsmBz2
+		base, _ = strings.CutSuffix(href, ".osm.bz2")
+
+	default:
+		return
+	}
+
+	date, ok := strings.CutPrefix(base, dir+"-")
+	if !ok || date == "" {
+		return
+	}
+
+	updateLatest(formatID, date, base, latestPbfDate, latestPbfBase, latestBz2Date, latestBz2Base)
+}
+
+func updateLatest(formatID, date, base string, latestPbfDate, latestPbfBase, latestBz2Date, latestBz2Base *string) {
+	switch formatID {
+	case catalog.FormatOsmPbf:
+		if *latestPbfDate == "" || date > *latestPbfDate {
+			*latestPbfDate = date
+			*latestPbfBase = base
+		}
+
+	case catalog.FormatOsmBz2:
+		if *latestBz2Date == "" || date > *latestBz2Date {
+			*latestBz2Date = date
+			*latestBz2Base = base
+		}
+	}
+}
+
+func addLatestElement(cat *catalog.Catalog, dir, latestPbfBase, latestBz2Base string) {
+	if latestPbfBase != "" {
+		latestElem := catalog.Element{
+			ID:   "latest",
+			Name: formatName(dir) + " (latest)",
+			File: latestPbfBase,
+		}
+		_ = cat.MergeElement(&latestElem)
+		cat.AddExtension("latest", catalog.FormatOsmPbf)
+	} else if latestBz2Base != "" {
+		latestElem := catalog.Element{
+			ID:   "latest",
+			Name: formatName(dir) + " (latest)",
+			File: latestBz2Base,
+		}
+		_ = cat.MergeElement(&latestElem)
+		cat.AddExtension("latest", catalog.FormatOsmBz2)
+	}
+}
+
 func formatName(name string) string {
 	words := strings.Split(name, "_")
 	for i, w := range words {
-		if w != "" {
-			words[i] = strings.ToUpper(w[:1]) + w[1:]
+		if r, size := utf8.DecodeRuneInString(w); size > 0 {
+			words[i] = string(unicode.ToUpper(r)) + w[size:]
 		}
 	}
 

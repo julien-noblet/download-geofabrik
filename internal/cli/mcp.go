@@ -3,8 +3,9 @@ package cli
 import (
 	"fmt"
 
-	"github.com/julien-noblet/download-geofabrik/internal/mcp"
 	"github.com/spf13/cobra"
+
+	"github.com/julien-noblet/download-geofabrik/internal/mcp"
 )
 
 var mcpCmd = &cobra.Command{
@@ -25,7 +26,7 @@ func runMCP(cmd *cobra.Command, _ []string) error {
 	srv := mcp.NewServer(Version)
 
 	if err := srv.ServeStdio(cmd.Context()); err != nil {
-		return fmt.Errorf("failed to run MCP server: %w", err)
+		return fmt.Errorf("failed to run mcp server: %w", err)
 	}
 
 	return nil

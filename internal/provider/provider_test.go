@@ -4,10 +4,11 @@ import (
 	"context"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/provider"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/provider"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 type mockProvider struct {
@@ -26,6 +27,9 @@ func TestProvider_Registry(t *testing.T) {
 
 	mock := &mockProvider{name: "mock_test_provider"}
 	provider.Register(mock)
+	t.Cleanup(func() {
+		provider.Unregister("mock_test_provider")
+	})
 
 	p, err := provider.Get("mock_test_provider")
 	require.NoError(t, err)
@@ -33,7 +37,7 @@ func TestProvider_Registry(t *testing.T) {
 	assert.Equal(t, "mock.yml", p.DefaultConfigFile())
 	assert.Equal(t, "Mock provider", p.Description())
 
-	cat, err := p.FetchCatalog(context.Background())
+	cat, err := p.FetchCatalog(t.Context())
 	require.NoError(t, err)
 	assert.NotNil(t, cat)
 
@@ -44,7 +48,6 @@ func TestProvider_Registry(t *testing.T) {
 	list := provider.List()
 	assert.Contains(t, list, "mock_test_provider")
 
-	// Nil / empty provider register
 	provider.Register(nil)
 	provider.Register(&mockProvider{name: ""})
 }

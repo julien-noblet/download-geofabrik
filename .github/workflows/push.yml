@@ -1,23 +1,47 @@
-name: gobenchdata publish
+name: benchmark publish
 concurrency:
   group: gh-pages-publish
   cancel-in-progress: false
 permissions:
+  # deployments permission to update benchmark dashboard on GitHub Pages
+  deployments: write
   # contents permission to update benchmark contents in 'benchmarks' branch
   contents: write
 on: push
+env:
+  CGO_ENABLED: 0
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
       uses: actions/checkout@v7
-    - name: gobenchdata publish
-      uses: bobheadxi/gobenchdata@v1
+    - uses: cachix/install-nix-action@v31
       with:
-        PRUNE_COUNT: 30
-        GO_TEST_FLAGS: -cpu 1,2
-        PUBLISH: true
-        PUBLISH_BRANCH: gh-pages
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+    - uses: DeterminateSystems/magic-nix-cache-action@main
+    - name: Setup environment from Nix
+      run: |
+        set -o pipefail
+        nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
+          if [ -d "$p" ]; then
+            echo "$p" >> "$GITHUB_PATH"
+          fi
+        done
+    - name: Run Go benchmarks
+      shell: bash
+      run: |
+        set -o pipefail
+        go test -run=^$ -bench=. -benchmem -cpu 1,2 ./... | tee benchmark-output.txt
+    - name: Publish benchmark results
+      uses: benchmark-action/github-action-benchmark@v1
+      with:
+        name: download-geofabrik Go Benchmarks
+        tool: go
+        output-file-path: benchmark-output.txt
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        auto-push: true
+        gh-pages-branch: gh-pages
+        benchmark-data-dir-path: dev/bench
+        max-items-in-chart: 30

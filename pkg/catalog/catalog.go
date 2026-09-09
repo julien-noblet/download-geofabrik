@@ -1,20 +1,29 @@
 package catalog
 
 import (
+	"cmp"
 	"errors"
 	"fmt"
 	"io"
 	"iter"
+	"maps"
 	"os"
 	"path/filepath"
 	"slices"
 	"strings"
 	"sync"
+	"time"
 
 	"gopkg.in/yaml.v3"
 )
 
 const (
+	// DefaultConfigFile is the default YAML catalog configuration filename.
+	DefaultConfigFile = "geofabrik.yml"
+
+	// DefaultService is the default provider service identifier.
+	DefaultService = "geofabrik"
+
 	maxHierarchyDepth  = 30
 	defaultDirPerm     = 0o750
 	defaultFilePerm    = 0o600
@@ -23,11 +32,41 @@ const (
 )
 
 var (
-	ErrNilElement        = errors.New("nil element")
-	ErrElementNotFound   = errors.New("element not found")
-	ErrFormatNotFound    = errors.New("format not found")
-	ErrParentMismatch    = errors.New("cannot merge element with conflicting parent")
-	ErrMaxHierarchyDepth = errors.New("maximum hierarchy depth exceeded (possible cycle in catalog)")
+	// ErrNilElement is returned when an operation receives an unexpected nil Element pointer.
+	ErrNilElement = errors.New("nil element")
+
+	// ErrNilCatalog is returned when an operation receives an unexpected nil Catalog pointer.
+	ErrNilCatalog = errors.New("nil catalog")
+
+	// ErrProviderNil is returned when a provider method is called on a nil provider.
+	ErrProviderNil = errors.New("provider is nil")
+
+	// ErrElementNotFound is returned when an element ID cannot be resolved in the catalog.
+	ErrElementNotFound = errors.New("element not found")
+
+	// ErrFormatNotFound is returned when a requested file format does not exist for an element.
+	ErrFormatNotFound = errors.New("format not found")
+
+	// ErrParentMismatch is returned when merging an element with a conflicting parent identifier.
+	ErrParentMismatch = errors.New("cannot merge element with conflicting parent")
+
+	// ErrMaxHierarchyDepth is returned when resolving hierarchical URLs exceeds the maximum depth limit, indicating a cycle.
+	ErrMaxHierarchyDepth = errors.New("maximum hierarchy depth exceeded: potential cycle detected")
+
+	// ErrResolveURL is returned when an element's download URL cannot be constructed.
+	ErrResolveURL = errors.New("cannot resolve url")
+
+	// ErrFetchCatalog is returned when a provider fails to fetch or parse remote catalog data.
+	ErrFetchCatalog = errors.New("failed to fetch catalog")
+
+	// ErrElem2URL is an alias for ErrResolveURL kept for backward compatibility.
+	ErrElem2URL = ErrResolveURL
+
+	// ErrFormatNotExist is an alias for ErrFormatNotFound kept for backward compatibility.
+	ErrFormatNotExist = ErrFormatNotFound
+
+	// ErrFindElem is an alias for ErrElementNotFound kept for backward compatibility.
+	ErrFindElem = ErrElementNotFound
 )
 
 var supportedHashes = []string{"md5"}
@@ -36,10 +75,16 @@ var supportedHashes = []string{"md5"}
 // It is fully thread-safe for concurrent read and write operations.
 // Field alignment optimized.
 type Catalog struct {
-	Formats  FormatDefinitions  `json:"formats"  yaml:"formats"`
+	// Formats maps format identifiers to their URL patterns and file templates.
+	Formats FormatDefinitions `json:"formats" yaml:"formats"`
+
+	// Elements maps element IDs to geographic element metadata.
 	Elements map[string]Element `json:"elements" yaml:"elements"`
-	BaseURL  string             `json:"baseURL"  yaml:"baseURL"` //nolint:tagliatelle // external yaml requirement
-	mu       sync.RWMutex
+
+	// BaseURL is the default root download URL for the provider.
+	BaseURL string `json:"baseURL" yaml:"baseURL"` //nolint:tagliatelle // external yaml requirement
+
+	mu sync.RWMutex
 }
 
 // New creates an empty, initialized Catalog.
@@ -64,7 +109,7 @@ func LoadFile(filePath string) (*Catalog, error) {
 
 	cat := New()
 	if err := yaml.Unmarshal(data, cat); err != nil {
-		return nil, fmt.Errorf("cannot unmarshal YAML from %s: %w", absPath, err)
+		return nil, fmt.Errorf("cannot unmarshal yaml from %s: %w", absPath, err)
 	}
 
 	if cat.Elements == nil {
@@ -78,80 +123,244 @@ func LoadFile(filePath string) (*Catalog, error) {
 	return cat, nil
 }
 
-// SaveFile marshals the catalog to YAML and writes it to a file.
+// SaveFile marshals the catalog to YAML and writes it atomically to a file.
 func (c *Catalog) SaveFile(filePath string) error {
+	if c == nil {
+		return ErrNilCatalog
+	}
+
 	c.mu.RLock()
 	data, err := yaml.Marshal(c)
 	c.mu.RUnlock()
 
 	if err != nil {
-		return fmt.Errorf("cannot marshal catalog to YAML: %w", err)
+		return fmt.Errorf("marshaling catalog to yaml: %w", err)
 	}
 
 	dir := filepath.Dir(filePath)
 	if dir != "" && dir != "." {
 		if err := os.MkdirAll(dir, defaultDirPerm); err != nil {
-			return fmt.Errorf("cannot create directory %s: %w", dir, err)
+			return fmt.Errorf("creating directory %s: %w", dir, err)
 		}
 	}
 
-	if err := os.WriteFile(filePath, data, defaultFilePerm); err != nil {
-		return fmt.Errorf("cannot write catalog to %s: %w", filePath, err)
+	tmpPath := filePath + ".tmp"
+	if err := os.WriteFile(tmpPath, data, defaultFilePerm); err != nil {
+		return fmt.Errorf("writing catalog to %s: %w", tmpPath, err)
+	}
+
+	if err := os.Rename(tmpPath, filePath); err != nil {
+		if rmErr := os.Remove(tmpPath); rmErr != nil {
+			return fmt.Errorf("renaming %s to %s: %w", tmpPath, filePath, errors.Join(err, fmt.Errorf("removing temporary file: %w", rmErr)))
+		}
+
+		return fmt.Errorf("renaming %s to %s: %w", tmpPath, filePath, err)
 	}
 
 	return nil
 }
 
 // Save writes the catalog YAML to any io.Writer.
-func (c *Catalog) Save(w io.Writer) error {
-	c.mu.RLock()
-	defer c.mu.RUnlock()
+func (c *Catalog) Save(writer io.Writer) error {
+	if c == nil {
+		return ErrNilCatalog
+	}
 
-	if err := yaml.NewEncoder(w).Encode(c); err != nil {
-		return fmt.Errorf("cannot encode catalog: %w", err)
+	c.mu.RLock()
+	data, err := yaml.Marshal(c)
+	c.mu.RUnlock()
+
+	if err != nil {
+		return fmt.Errorf("marshaling catalog: %w", err)
+	}
+
+	if _, err := writer.Write(data); err != nil {
+		return fmt.Errorf("writing catalog: %w", err)
 	}
 
 	return nil
 }
 
-// Exist returns true if the element ID is present in the catalog.
-func (c *Catalog) Exist(elementID string) bool {
+// Len returns the number of elements in the catalog thread-safely.
+func (c *Catalog) Len() int {
+	if c == nil {
+		return 0
+	}
+
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
-	_, exists := c.Elements[elementID]
+	return len(c.Elements)
+}
+
+// GetFormat retrieves a copy of the format definition by ID thread-safely.
+func (c *Catalog) GetFormat(formatID string) (Format, bool) {
+	if c == nil {
+		return Format{}, false
+	}
+
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+
+	format, exists := c.Formats[formatID]
+
+	return format, exists
+}
+
+// AddFormat adds or updates a format definition thread-safely with lazy initialization.
+func (c *Catalog) AddFormat(format *Format) {
+	if c == nil || format == nil || format.ID == "" {
+		return
+	}
+
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	if c.Formats == nil {
+		c.Formats = make(FormatDefinitions)
+	}
+
+	c.Formats[format.ID] = *format
+}
+
+// Exists returns true if the element ID is present in the catalog.
+func (c *Catalog) Exists(elementID string) bool {
+	if c == nil {
+		return false
+	}
+
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+
+	_, exists := c.getElementLocked(elementID)
 
 	return exists
 }
 
+// Exist is an alias for Exists kept for backward compatibility.
+func (c *Catalog) Exist(elementID string) bool {
+	return c.Exists(elementID)
+}
+
 // Get retrieves a copy of an element by ID.
 func (c *Catalog) Get(elementID string) (Element, bool) {
+	if c == nil {
+		return Element{}, false
+	}
+
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
-	elem, exists := c.Elements[elementID]
+	elem, exists := c.getElementLocked(elementID)
+	if !exists {
+		return Element{}, false
+	}
 
-	return elem, exists
+	elem.Formats = slices.Clone(elem.Formats)
+
+	return elem, true
 }
 
 // Find looks up an element pointer by ID or returns ErrElementNotFound.
 func (c *Catalog) Find(elementID string) (*Element, error) {
+	if c == nil {
+		return nil, ErrNilCatalog
+	}
+
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
-	elem, exists := c.Elements[elementID]
-	if !exists {
-		return nil, fmt.Errorf("%w: %s is not in catalog", ErrElementNotFound, elementID)
+	if elem, exists := c.getElementLocked(elementID); exists {
+		elemCopy := elem
+		elemCopy.Formats = slices.Clone(elem.Formats)
+
+		return &elemCopy, nil
 	}
 
-	elemCopy := elem
+	return nil, fmt.Errorf("%w: %s", ErrElementNotFound, elementID)
+}
 
-	return &elemCopy, nil
+func (c *Catalog) getElementLocked(elementID string) (Element, bool) {
+	if elem, exists := c.Elements[elementID]; exists {
+		return elem, true
+	}
+
+	if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID {
+		if elem, exists := c.Elements[altID]; exists {
+			return elem, true
+		}
+	}
+
+	if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID {
+		if elem, exists := c.Elements[altID]; exists {
+			return elem, true
+		}
+	}
+
+	if elem, ok := c.resolveDateElement(elementID); ok {
+		return elem, true
+	}
+
+	return Element{}, false
+}
+
+func (c *Catalog) resolveDateElement(dateStr string) (Element, bool) {
+	if _, err := time.Parse("2006-01-02", dateStr); err != nil {
+		return Element{}, false
+	}
+
+	if baseElem, ok := c.Elements["czech_republic"]; ok {
+		return Element{
+			ID:      dateStr,
+			Name:    baseElem.Name + " " + dateStr,
+			File:    "czech_republic-" + dateStr,
+			Formats: Formats{FormatOsmPbf, FormatOsmBz2},
+		}, true
+	}
+
+	if latestElem, ok := c.Elements["latest"]; ok {
+		prefix := "czech_republic"
+		if idx := strings.Index(latestElem.File, "-"); idx != -1 {
+			prefix = latestElem.File[:idx]
+		}
+
+		return Element{
+			ID:      dateStr,
+			Name:    latestElem.Name + " " + dateStr,
+			File:    prefix + "-" + dateStr,
+			Formats: Formats{FormatOsmPbf, FormatOsmBz2},
+		}, true
+	}
+
+	return Element{}, false
+}
+
+// SubElement adds a child element and sets its parent relation thread-safely.
+func (c *Catalog) SubElement(parentID, childID string) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	if c.Elements == nil {
+		c.Elements = make(map[string]Element)
+	}
+
+	child, exists := c.Elements[childID]
+	if !exists {
+		child = Element{ID: childID}
+	}
+
+	child.Parent = parentID
+	c.Elements[childID] = child
+}
+
+// GetElements returns an Element by ID. Deprecated: use Get or Find instead.
+func (c *Catalog) GetElements(elementID string) (Element, bool) {
+	return c.Get(elementID)
 }
 
 // AddElement inserts or replaces an element in the catalog.
 func (c *Catalog) AddElement(elem *Element) {
-	if elem == nil || elem.ID == "" {
+	if c == nil || elem == nil || elem.ID == "" {
 		return
 	}
 
@@ -162,11 +371,17 @@ func (c *Catalog) AddElement(elem *Element) {
 		c.Elements = make(map[string]Element)
 	}
 
-	c.Elements[elem.ID] = *elem
+	elemCopy := *elem
+	elemCopy.Formats = slices.Clone(elem.Formats)
+	c.Elements[elem.ID] = elemCopy
 }
 
 // MergeElement adds a new element or merges formats if it already exists.
 func (c *Catalog) MergeElement(elem *Element) error {
+	if c == nil {
+		return ErrNilCatalog
+	}
+
 	if elem == nil || elem.ID == "" {
 		return nil
 	}
@@ -180,7 +395,9 @@ func (c *Catalog) MergeElement(elem *Element) error {
 
 	existing, exists := c.Elements[elem.ID]
 	if !exists {
-		c.Elements[elem.ID] = *elem
+		elemCopy := *elem
+		elemCopy.Formats = slices.Clone(elem.Formats)
+		c.Elements[elem.ID] = elemCopy
 
 		return nil
 	}
@@ -204,21 +421,14 @@ func validateParentMerge(existing, incoming *Element) error {
 }
 
 func applyElementMerge(target, source *Element) {
+	target.Formats = slices.Clone(target.Formats)
 	for _, format := range source.Formats {
 		target.AddFormat(format)
 	}
 
-	if source.Parent != "" {
-		target.Parent = source.Parent
-	}
-
-	if source.Name != "" {
-		target.Name = source.Name
-	}
-
-	if source.File != "" {
-		target.File = source.File
-	}
+	target.Parent = cmp.Or(source.Parent, target.Parent)
+	target.Name = cmp.Or(source.Name, target.Name)
+	target.File = cmp.Or(source.File, target.File)
 
 	if source.Meta {
 		target.Meta = source.Meta
@@ -227,6 +437,10 @@ func applyElementMerge(target, source *Element) {
 
 // AddExtension adds a format to an existing element if present.
 func (c *Catalog) AddExtension(elementID, formatID string) {
+	if c == nil {
+		return
+	}
+
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
@@ -236,8 +450,12 @@ func (c *Catalog) AddExtension(elementID, formatID string) {
 	}
 }
 
-// SortedKeys returns the lexicographically sorted list of all element IDs with single pre-allocation.
+// SortedKeys returns a sorted slice of all element IDs in the catalog.
 func (c *Catalog) SortedKeys() []string {
+	if c == nil {
+		return nil
+	}
+
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 
@@ -245,23 +463,23 @@ func (c *Catalog) SortedKeys() []string {
 		return nil
 	}
 
-	keys := make([]string, 0, len(c.Elements))
-	for k := range c.Elements {
-		keys = append(keys, k)
-	}
-
-	slices.Sort(keys)
-
-	return keys
+	return slices.Sorted(maps.Keys(c.Elements))
 }
 
 // All returns a sequence iterator over all elements (Go 1.23+).
+// Note: The catalog read lock is held for the duration of the iteration.
+// Callers must not invoke mutating methods on this Catalog within the iteration loop.
 func (c *Catalog) All() iter.Seq2[string, Element] {
 	return func(yield func(string, Element) bool) {
+		if c == nil || yield == nil {
+			return
+		}
+
 		c.mu.RLock()
 		defer c.mu.RUnlock()
 
 		for k, v := range c.Elements {
+			v.Formats = slices.Clone(v.Formats)
 			if !yield(k, v) {
 				return
 			}
@@ -271,6 +489,10 @@ func (c *Catalog) All() iter.Seq2[string, Element] {
 
 // ResolveURL constructs the absolute download URL for an element and format.
 func (c *Catalog) ResolveURL(elem *Element, formatID string) (string, error) {
+	if c == nil {
+		return "", ErrNilCatalog
+	}
+
 	if elem == nil {
 		return "", ErrNilElement
 	}
@@ -285,17 +507,14 @@ func (c *Catalog) ResolveURL(elem *Element, formatID string) (string, error) {
 	c.mu.RUnlock()
 
 	if !formatExists {
-		return "", fmt.Errorf("%w: %s definition missing from catalog", ErrFormatNotFound, formatID)
+		return "", fmt.Errorf("%w: %s", ErrFormatNotFound, formatID)
 	}
 
-	baseURL := format.BaseURL
-	if baseURL == "" {
-		baseURL = catalogBaseURL
-	}
+	baseURL := cmp.Or(format.BaseURL, catalogBaseURL)
 
 	preURL, err := c.ResolvePreURL(elem, baseURL, format.BasePath)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("resolving pre URL: %w", err)
 	}
 
 	return preURL + format.Loc, nil
@@ -308,9 +527,9 @@ func (c *Catalog) collectHierarchySegments(startID string) ([]string, error) {
 	currID := startID
 
 	for count < maxHierarchyDepth {
-		currentElem, exists := c.Elements[currID]
+		currentElem, exists := c.getElementLocked(currID)
 		if !exists {
-			return nil, fmt.Errorf("%w: %s is not in catalog", ErrElementNotFound, currID)
+			return nil, fmt.Errorf("%w: %s", ErrElementNotFound, currID)
 		}
 
 		segments[count] = currentElem.Filename()
@@ -324,14 +543,18 @@ func (c *Catalog) collectHierarchySegments(startID string) ([]string, error) {
 	}
 
 	if count >= maxHierarchyDepth {
-		return nil, fmt.Errorf("%w for element %s", ErrMaxHierarchyDepth, startID)
+		return nil, fmt.Errorf("%w: element %s", ErrMaxHierarchyDepth, startID)
 	}
 
-	return segments[:count], nil
+	return segments[:count:count], nil
 }
 
 // ResolvePreURL iteratively builds the URL path prefix with cycle protection and minimal allocations.
 func (c *Catalog) ResolvePreURL(elem *Element, baseURL ...string) (string, error) {
+	if c == nil {
+		return "", ErrNilCatalog
+	}
+
 	if elem == nil {
 		return "", ErrNilElement
 	}
@@ -349,8 +572,8 @@ func (c *Catalog) ResolvePreURL(elem *Element, baseURL ...string) (string, error
 
 	builder.WriteString(buildURLPrefix(baseURL, c.BaseURL))
 
-	for i := len(segments) - 1; i >= 0; i-- {
-		builder.WriteString(segments[i])
+	for i, seg := range slices.Backward(segments) {
+		builder.WriteString(seg)
 
 		if i > 0 {
 			builder.WriteByte('/')
@@ -381,6 +604,10 @@ func buildURLPrefix(baseURL []string, defaultBaseURL string) string {
 
 // IsHashable checks if a given format has a corresponding hash definition (e.g. .md5).
 func (c *Catalog) IsHashable(formatID string) (ok bool, hashExt, hashType string) {
+	if c == nil {
+		return false, "", ""
+	}
+
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 

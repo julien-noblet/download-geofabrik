@@ -1,4 +1,14 @@
 version: "2"
+
+run:
+  timeout: 5m
+  tests: true
+  concurrency: 4
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 50
+
 linters:
   enable:
     - asasalint
@@ -44,7 +54,6 @@ linters:
     - gosmopolitan
     - grouper
     - iface
-    - importas
     - inamedparam
     - interfacebloat
     - intrange
@@ -56,6 +65,7 @@ linters:
     - mirror
     - misspell
     - mnd
+    - modernize
     - musttag
     - nakedret
     - nestif
@@ -70,14 +80,11 @@ linters:
     - perfsprint
     - prealloc
     - predeclared
-    - promlinter
-    - protogetter
     - reassign
     - recvcheck
     - revive
     - rowserrcheck
     - sloglint
-    - spancheck
     - sqlclosecheck
     - staticcheck
     - tagalign
@@ -96,19 +103,23 @@ linters:
     - whitespace
     - wrapcheck
     - wsl_v5
-    - zerologlint
   disable:
+    - exhaustruct_v5
     - exhaustruct
     - gochecknoglobals
     - nonamedreturns
+    - importas
+    - promlinter
+    - protogetter
+    - spancheck
+    - zerologlint
   settings:
     depguard:
       rules:
         main:
           list-mode: lax
           allow:
-            - github.com/apex/log
-            - github.com/julen-noblet/download-geofabrik/*
+            - github.com/julien-noblet/download-geofabrik/*
     dupl:
       threshold: 150
     funlen:
@@ -166,19 +177,15 @@ linters:
         - unusedresult
         - unusedwrite
         - waitgroup
-      settings:
-        printf:
-          funcs:
-            - (github.com/golangci/golangci-lint/pkg/logutils.Log).Infof
-            - (github.com/golangci/golangci-lint/pkg/logutils.Log).Warnf
-            - (github.com/golangci/golangci-lint/pkg/logutils.Log).Errorf
-            - (github.com/golangci/golangci-lint/pkg/logutils.Log).Fatalf
     lll:
       line-length: 150
     misspell:
       locale: US
     nakedret:
       max-func-lines: 30
+    nolintlint:
+      require-explanation: true
+      require-specific: true
     prealloc:
       simple: true
       range-loops: true
@@ -204,9 +211,14 @@ linters:
       - std-error-handling
     rules:
       - linters:
+          - gocritic
+        path: internal/mcp/resources.go
+        text: "hugeParam"
+      - linters:
           - cyclop
           - dupl
           - err113
+          - exhaustruct_v5
           - exhaustruct
           - funlen
           - gochecknoinits
@@ -226,13 +238,17 @@ linters:
 formatters:
   enable:
     - gci
-    - gofmt
     - gofumpt
     - goimports
   settings:
+    gci:
+      sections:
+        - standard
+        - default
+        - prefix(github.com/julien-noblet/download-geofabrik)
     goimports:
       local-prefixes:
-        - github.com/golangci/golangci-lint
+        - github.com/julien-noblet/download-geofabrik
   exclusions:
     generated: lax
     paths:

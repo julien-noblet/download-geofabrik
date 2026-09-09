@@ -8,6 +8,7 @@ import (
 // Supported format identifiers.
 const (
 	FormatOsmPbf         = "osm.pbf"
+	FormatPbf            = "pbf"
 	FormatOsmBz2         = "osm.bz2"
 	FormatOsmGz          = "osm.gz"
 	FormatOshPbf         = "osh.pbf"
@@ -32,6 +33,7 @@ const (
 // Format flag keys used in CLI options and configurations.
 const (
 	KeyOsmPbf         = "dosmPbf"
+	KeyPbf            = "dPbf"
 	KeyOshPbf         = "doshPbf"
 	KeyOsmGz          = "dosmGz"
 	KeyOsmBz2         = "dosmBz2"
@@ -40,13 +42,13 @@ const (
 	KeyPoly           = "dpoly"
 	KeyKml            = "dkml"
 	KeyGeoJSON        = "dgeojson"
-	KeyGarminOSM      = "dgarminOSM"
-	KeyMapsforge      = "dmapsforge"
+	KeyGarminOSM      = "dgarmin"
+	KeyMapsforge      = "dmaps"
 	KeyMBTiles        = "dmbtiles"
 	KeyCSV            = "dcsv"
-	KeyGarminOnroad   = "dgarminOnroad"
-	KeyGarminOntrail  = "dgarminOntrail"
-	KeyGarminOpenTopo = "dgarminOpenTopo"
+	KeyGarminOnroad   = "dgarminonroad"
+	KeyGarminOntrail  = "dgarminontrail"
+	KeyGarminOpenTopo = "dgarminopentopo"
 	KeyOBF            = "dobf"
 	KeyGPKG           = "dgpkg"
 	KeyO5m            = "do5m"
@@ -55,12 +57,23 @@ const (
 
 // Format represents the metadata and URL resolution rules for a file format.
 type Format struct {
-	ID       string `json:"id"                 yaml:"ext"`
-	Loc      string `json:"loc"                yaml:"loc"`
+	// ID is the file extension identifier (e.g., ".osm.pbf").
+	ID string `json:"id" yaml:"ext"`
+
+	// Loc is the relative URL pattern or suffix template for the format file.
+	Loc string `json:"loc" yaml:"loc"`
+
+	// BasePath is an optional intermediate path prefix within the provider URL hierarchy.
 	BasePath string `json:"basepath,omitempty" yaml:"basepath,omitempty"`
-	BaseURL  string `json:"baseurl,omitempty"  yaml:"baseurl,omitempty"`
-	ToLoc    string `json:"toloc,omitempty"    yaml:"toloc,omitempty"`
-	Type     string `json:"type,omitempty"     yaml:"type,omitempty"`
+
+	// BaseURL is an optional override for the root download base URL for this format.
+	BaseURL string `json:"baseurl,omitempty" yaml:"baseurl,omitempty"`
+
+	// ToLoc is an optional transformation target or link pattern.
+	ToLoc string `json:"toloc,omitempty" yaml:"toloc,omitempty"`
+
+	// Type specifies the format classification (e.g. data or checksum).
+	Type string `json:"type,omitempty" yaml:"type,omitempty"`
 }
 
 // FormatDefinitions maps format IDs to Format specifications.
@@ -68,7 +81,10 @@ type FormatDefinitions map[string]Format
 
 // MiniFormat maps full format names to single-letter display abbreviations.
 type MiniFormat struct {
-	FullName  string
+	// FullName is the format identifier string (e.g., "osm.pbf").
+	FullName string
+
+	// ShortName is the single-letter CLI table display abbreviation (e.g., "P").
 	ShortName string
 }
 
@@ -78,6 +94,7 @@ var defaultMiniFormats = []MiniFormat{
 	{FullName: FormatOsmGz, ShortName: "G"},
 	{FullName: FormatOshPbf, ShortName: "H"},
 	{FullName: FormatOsmPbf, ShortName: "P"},
+	{FullName: FormatPbf, ShortName: "P"},
 	{FullName: FormatPoly, ShortName: "p"},
 	{FullName: FormatKml, ShortName: "k"},
 	{FullName: FormatShpZip, ShortName: "S"},
@@ -113,6 +130,7 @@ func GetMiniFormats(formatList []string) string {
 func GetFormats(flagMap map[string]bool) []string {
 	flagToFormat := map[string]string{
 		KeyOsmPbf:         FormatOsmPbf,
+		KeyPbf:            FormatPbf,
 		KeyOshPbf:         FormatOshPbf,
 		KeyOsmGz:          FormatOsmGz,
 		KeyOsmBz2:         FormatOsmBz2,

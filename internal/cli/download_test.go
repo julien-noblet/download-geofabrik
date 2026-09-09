@@ -4,10 +4,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/cli"
+	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/cli"
 )
 
 func TestDownloadCmd_NoDownload(t *testing.T) {
@@ -120,17 +122,10 @@ func TestDownloadCmd_NoDownload(t *testing.T) {
 }
 
 func TestDownloadCmd_InvalidArgs(t *testing.T) {
-	oldArgs := os.Args
+	cli.ResetGlobs()
+	cli.RootCmd.SetArgs([]string{"download"})
 
-	defer func() { os.Args = oldArgs }()
-
-	// Missing element arg
-	os.Args = []string{"download-geofabrik", "download"}
-
-	// Execute
-	// Note: cobra might print to stderr.
 	err := cli.Execute()
-
 	require.Error(t, err)
 
 	// Test invalid arguments (missing element)
@@ -212,4 +207,153 @@ func TestDownloadCmd_DefaultOutputDir(t *testing.T) {
 
 	err = cli.Execute()
 	require.NoError(t, err)
+}
+
+func TestDownloadCmd_DefaultFormatNonPbf(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	cli.ResetGlobs()
+	viper.Reset()
+
+	configFile := tmpDir + "/non_pbf.yml"
+	content := `
+elements:
+  custom-elem:
+    id: "custom-elem"
+    files: ["o5m"]
+formats:
+  o5m:
+    ext: "o5m"
+    loc: "custom-elem.o5m"
+`
+	err := os.WriteFile(configFile, []byte(content), 0o600)
+	require.NoError(t, err)
+
+	cli.RootCmd.SetArgs([]string{"download", "custom-elem", "--config", configFile, "--nodownload", "--output-dir", tmpDir})
+
+	err = cli.Execute()
+	require.NoError(t, err)
+}
+
+func TestDownloadCmd_FormatNotAvailable(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	cli.ResetGlobs()
+	viper.Reset()
+
+	configFile := tmpDir + "/non_pbf.yml"
+	content := `
+elements:
+  custom-elem:
+    id: "custom-elem"
+    files: ["o5m"]
+formats:
+  o5m:
+    ext: "o5m"
+    loc: "custom-elem.o5m"
+`
+	err := os.WriteFile(configFile, []byte(content), 0o600)
+	require.NoError(t, err)
+
+	cli.RootCmd.SetArgs([]string{"download", "custom-elem", "-P", "--config", configFile, "--nodownload", "--output-dir", tmpDir})
+
+	err = cli.Execute()
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "format not")
+}
+
+func TestDownloadCmd_ElementNotFound(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	cli.ResetGlobs()
+	viper.Reset()
+
+	configFile := tmpDir + "/geofabrik.yml"
+	err := os.WriteFile(configFile, []byte(testConfigContent), 0o600)
+	require.NoError(t, err)
+
+	cli.RootCmd.SetArgs([]string{"download", "nonexistent-elem", "--config", configFile, "--nodownload", "--output-dir", tmpDir})
+
+	err = cli.Execute()
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "element not found")
+}
+
+func TestDownloadCmd_OSMTW(t *testing.T) {
+	cli.ResetGlobs()
+	viper.Reset()
+
+	tmpDir := t.TempDir()
+
+	cli.RootCmd.SetArgs([]string{
+		"download", "taiwan",
+		"--service", "osm.kcwu.csie.org",
+		"--config", "../../osm.kcwu.csie.org.yml",
+		"--nodownload",
+		"--output-dir", tmpDir,
+	})
+
+	err := cli.Execute()
+	require.NoError(t, err)
+}
+
+func TestDownloadCmd_PlanetOSMCH(t *testing.T) {
+	cli.ResetGlobs()
+	viper.Reset()
+
+	tmpDir := t.TempDir()
+
+	cli.RootCmd.SetArgs([]string{
+		"download", "switzerland",
+		"--service", "planet.osm.ch",
+		"--config", "../../planet.osm.ch.yml",
+		"--nodownload",
+		"--output-dir", tmpDir,
+	})
+
+	err := cli.Execute()
+	require.NoError(t, err)
+}
+
+func TestDownloadCmd_PlanetOSMCH_ExplicitP(t *testing.T) {
+	cli.ResetGlobs()
+	viper.Reset()
+
+	tmpDir := t.TempDir()
+
+	cli.RootCmd.SetArgs([]string{
+		"download", "switzerland",
+		"-P",
+		"--service", "planet.osm.ch",
+		"--config", "../../planet.osm.ch.yml",
+		"--nodownload",
+		"--output-dir", tmpDir,
+	})
+
+	err := cli.Execute()
+	require.NoError(t, err)
+}
+
+func TestDownloadCmd_ValidArgsFunction(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	cli.ResetGlobs()
+	viper.Reset()
+
+	configFile := tmpDir + "/geofabrik.yml"
+
+	err := os.WriteFile(configFile, []byte(testConfigContent), 0o600)
+	require.NoError(t, err)
+
+	viper.SetConfigFile(configFile)
+
+	// Test element completion with prefix
+	completions, directive := cli.DownloadCmd.ValidArgsFunction(cli.DownloadCmd, []string{}, "test")
+	assert.Equal(t, cobra.ShellCompDirectiveNoFileComp, directive)
+	assert.Contains(t, completions, "test-elem")
+
+	// Test with already specified argument (no further completion)
+	completions, directive = cli.DownloadCmd.ValidArgsFunction(cli.DownloadCmd, []string{"test-elem"}, "")
+	assert.Equal(t, cobra.ShellCompDirectiveNoFileComp, directive)
+	assert.Empty(t, completions)
 }

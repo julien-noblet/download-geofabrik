@@ -1,13 +1,16 @@
 package cli_test
 
 import (
+	"io"
 	"os"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/cli"
+	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/cli"
 )
 
 func TestExecuteHelp(t *testing.T) {
@@ -69,6 +72,7 @@ func TestDefaultConfigLoading(t *testing.T) {
 	// Reset globs
 	cli.ResetGlobs()
 	viper.Reset()
+	cli.RootCmd.SetArgs([]string{"list"})
 
 	// Run list command without --config
 	// It should pick up geofabrik.yml in cwd
@@ -87,7 +91,7 @@ func TestExecuteVersion(t *testing.T) {
 }
 
 func TestLoggingFlags(t *testing.T) {
-	t.Run("Verbose flag", func(t *testing.T) {
+	t.Run("verbose flag", func(t *testing.T) {
 		cli.ResetGlobs()
 		viper.Reset()
 		cli.RootCmd.SetArgs([]string{"--verbose", "--help"})
@@ -96,7 +100,7 @@ func TestLoggingFlags(t *testing.T) {
 		assert.NoError(t, err)
 	})
 
-	t.Run("Quiet flag", func(t *testing.T) {
+	t.Run("quiet flag", func(t *testing.T) {
 		cli.ResetGlobs()
 		viper.Reset()
 		cli.RootCmd.SetArgs([]string{"--quiet", "--help"})
@@ -106,10 +110,27 @@ func TestLoggingFlags(t *testing.T) {
 	})
 }
 
+func TestRootCmd_ServiceFlagCompletion(t *testing.T) {
+	completionFunc, exists := cli.RootCmd.GetFlagCompletionFunc("service")
+	require.True(t, exists)
+	require.NotNil(t, completionFunc)
+
+	completions, directive := completionFunc(cli.RootCmd, []string{}, "geo")
+	assert.Equal(t, cobra.ShellCompDirectiveNoFileComp, directive)
+	assert.Contains(t, completions, "geofabrik")
+	assert.Contains(t, completions, "geo2day")
+}
+
 func Benchmark_CLI_Execute_Help(b *testing.B) {
 	cli.RootCmd.SetArgs([]string{"--help"})
+	cli.RootCmd.SetOut(io.Discard)
+	cli.RootCmd.SetErr(io.Discard)
+	b.Cleanup(func() {
+		cli.RootCmd.SetOut(nil)
+		cli.RootCmd.SetErr(nil)
+	})
 
-	for range b.N {
+	for b.Loop() {
 		_ = cli.Execute()
 	}
 }

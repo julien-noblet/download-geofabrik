@@ -4,7 +4,7 @@
 
 - **Service Key**: `openstreetmap.fr`
 - **Description**: High-detail extracts for French regions, departments, and worldwide extracts
-- **Example**: `download-geofabrik --service openstreetmap.fr download rhone-alpes`
+- **Example**: `download-geofabrik --service openstreetmap.fr download rhone_alpes`
 
 ## Available Elements
 

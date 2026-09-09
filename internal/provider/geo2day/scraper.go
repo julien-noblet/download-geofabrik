@@ -1,6 +1,7 @@
 package geo2day
 
 import (
+	"cmp"
 	"context"
 	"errors"
 	"fmt"
@@ -11,11 +12,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"golang.org/x/net/html"
+
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
-var ErrFetchCatalog = errors.New("failed to fetch catalog")
+var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
 	ProviderName        = "geo2day"
@@ -30,7 +32,7 @@ const (
 	defaultMaxIdleConns = 100
 	workChanCapacity    = 1000
 	minExtParts         = 2
-	minGeo2DayParts     = 4
+	FormatOsmPbfMd5     = "osm.pbf.md5"
 )
 
 // Provider implements provider.Provider for geo2day.com.
@@ -41,8 +43,8 @@ type Provider struct {
 	StartURL string
 }
 
-// NewProvider creates a new Geo2Day scraper provider.
-func NewProvider() *Provider {
+// New creates a new Geo2Day scraper provider.
+func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
@@ -63,8 +65,19 @@ func NewProvider() *Provider {
 	}
 }
 
+// NewProvider creates a new Geo2Day scraper provider.
+//
+// Deprecated: Use New instead.
+func NewProvider() *Provider {
+	return New()
+}
+
 // Name returns the provider name.
 func (p *Provider) Name() string {
+	if p == nil {
+		return ""
+	}
+
 	return ProviderName
 }
 
@@ -81,7 +94,7 @@ func (p *Provider) DefaultConfigFile() string {
 // DefaultFormats returns format definitions for Geo2Day.
 func DefaultFormats() catalog.FormatDefinitions {
 	return catalog.FormatDefinitions{
-		"osm.pbf.md5":         {ID: "osm.pbf.md5", Loc: ".md5"},
+		FormatOsmPbfMd5:       {ID: FormatOsmPbfMd5, Loc: ".md5"},
 		catalog.FormatGeoJSON: {ID: catalog.FormatGeoJSON, Loc: ".geojson"},
 		catalog.FormatOsmPbf:  {ID: catalog.FormatOsmPbf, Loc: ".pbf"},
 		catalog.FormatPoly:    {ID: catalog.FormatPoly, Loc: ".poly"},
@@ -107,10 +120,21 @@ var exceptionList = []struct {
 }
 
 // FetchCatalog scrapes the Geo2Day index concurrently and builds a catalog.Catalog.
-func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
+func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) { //nolint:cyclop // nil guard +1 branch
+	if p == nil {
+		return nil, catalog.ErrProviderNil
+	}
+
+	if err := ctx.Err(); err != nil {
+		return nil, fmt.Errorf("crawl context canceled: %w", err)
+	}
+
 	cat := catalog.New()
 	cat.BaseURL = p.BaseURL
 	cat.Formats = DefaultFormats()
+
+	crawlCtx, cancel := context.WithCancel(ctx)
+	defer cancel()
 
 	var (
 		visitedMu     sync.Mutex
@@ -121,15 +145,21 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 		firstErr      error
 	)
 
-	sem := make(chan struct{}, concurrencyLimit)
-
 	recordErr := func(err error) {
 		errOnce.Do(func() {
 			firstErr = err
+
+			cancel()
 		})
 	}
 
 	enqueue := func(targetURL string) {
+		if err := crawlCtx.Err(); err != nil {
+			recordErr(fmt.Errorf("crawl context canceled: %w", err))
+
+			return
+		}
+
 		visitedMu.Lock()
 		if visited[targetURL] {
 			visitedMu.Unlock()
@@ -143,64 +173,121 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 		activeWorkers.Add(1)
 
 		go func() {
-			workChan <- targetURL
+			select {
+			case workChan <- targetURL:
+			case <-crawlCtx.Done():
+				activeWorkers.Done()
+			}
 		}()
+	}
+
+	crawlState := &crawlContext{
+		workers: &activeWorkers,
+		onError: recordErr,
+		enqueue: enqueue,
+		tokens:  make(chan struct{}, concurrencyLimit),
 	}
 
 	enqueue(p.StartURL)
 
-	go func() {
-		for target := range workChan {
-			select {
-			case <-ctx.Done():
-				recordErr(fmt.Errorf("crawl context canceled: %w", ctx.Err()))
-				activeWorkers.Done()
+	var dispatcherWG sync.WaitGroup
 
-				continue
-
-			case sem <- struct{}{}:
+	dispatcherWG.Go(func() {
+		defer func() {
+			if r := recover(); r != nil {
+				crawlState.onError(fmt.Errorf("%w: panic in geo2day dispatcher: %v", ErrFetchCatalog, r))
 			}
+		}()
 
-			go func(pageURL string) {
-				defer func() {
-					<-sem
-					activeWorkers.Done()
-				}()
-
-				subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
-				if err != nil {
-					recordErr(err)
-
-					return
-				}
-
-				for _, page := range subPages {
-					enqueue(page)
-				}
-			}(target)
-		}
-	}()
+		p.runDispatcher(crawlCtx, workChan, cat, crawlState)
+	})
 
 	activeWorkers.Wait()
 	close(workChan)
+	dispatcherWG.Wait()
+
+	if err := ctx.Err(); err != nil && firstErr == nil {
+		firstErr = fmt.Errorf("crawl context canceled: %w", err)
+	}
 
 	if firstErr != nil {
 		return nil, firstErr
 	}
 
+	normalizeElementNames(cat)
+
 	return cat, nil
+}
+
+func normalizeElementNames(cat *catalog.Catalog) {
+	if cat == nil {
+		return
+	}
+
+	for id, elem := range cat.Elements {
+		elem.Name = cmp.Or(elem.Name, id)
+		cat.Elements[id] = elem
+	}
+}
+
+type crawlContext struct {
+	workers *sync.WaitGroup
+	onError func(error)
+	enqueue func(string)
+	tokens  chan struct{}
+}
+
+func (p *Provider) runDispatcher(ctx context.Context, work <-chan string, cat *catalog.Catalog, state *crawlContext) {
+	for target := range work {
+		if ctx.Err() != nil {
+			state.workers.Done()
+
+			continue
+		}
+
+		select {
+		case <-ctx.Done():
+			state.onError(fmt.Errorf("crawl context canceled: %w", ctx.Err()))
+			state.workers.Done()
+
+			continue
+
+		case state.tokens <- struct{}{}:
+		}
+
+		go p.processWorker(ctx, target, cat, state)
+	}
+}
+
+func (p *Provider) processWorker(ctx context.Context, pageURL string, cat *catalog.Catalog, state *crawlContext) {
+	defer func() {
+		if r := recover(); r != nil {
+			state.onError(fmt.Errorf("%w: panic in geo2day worker for %s: %v", ErrFetchCatalog, pageURL, r))
+		}
+
+		<-state.tokens
+		state.workers.Done()
+	}()
+
+	subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
+	if err != nil {
+		state.onError(err)
+
+		return
+	}
+
+	for _, page := range subPages {
+		state.enqueue(page)
+	}
 }
 
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
 	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
+		return nil, fmt.Errorf("creating request: %w", err)
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
-	}
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -209,7 +296,7 @@ func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, c
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%w: unexpected HTTP %d", ErrFetchCatalog, resp.StatusCode)
+		return nil, fmt.Errorf("%w: unexpected http %d", ErrFetchCatalog, resp.StatusCode)
 	}
 
 	return p.parseHTMLStream(resp.Body, cat)
@@ -229,7 +316,7 @@ func (p *Provider) parseHTMLStream(reader io.Reader, cat *catalog.Catalog) ([]st
 				return subPages, nil
 			}
 
-			return nil, fmt.Errorf("cannot parse HTML: %w", tokenizer.Err())
+			return nil, fmt.Errorf("cannot parse html: %w", tokenizer.Err())
 
 		case html.StartTagToken, html.SelfClosingTagToken:
 			if subPage := p.handleAnchor(tokenizer, tokenType, cat); subPage != "" {
@@ -249,35 +336,82 @@ func (p *Provider) handleAnchor(tokenizer *html.Tokenizer, tokenType html.TokenT
 	}
 
 	href := extractHref(tokenizer)
-	if href == "" {
+	if href == "" || shouldSkipHref(href, p.BaseURL, p.StartURL) {
 		return ""
 	}
 
-	var text string
-
-	if tokenType == html.StartTagToken {
-		if nextType := tokenizer.Next(); nextType == html.TextToken {
-			text = string(tokenizer.Text())
-		}
-	}
-
+	text := extractAnchorText(tokenizer, tokenType)
 	fullURL := p.resolveURL(href)
+
 	rawID, ext := splitFileExt(href)
+	if shouldSkipRawID(rawID) {
+		return ""
+	}
 
 	if ext == "html" {
-		var subPage string
-		if strings.HasPrefix(fullURL, p.BaseURL) || strings.HasPrefix(fullURL, p.StartURL) {
-			subPage = fullURL
-		}
-
-		p.processHTMLLink(cat, fullURL, rawID, text)
-
-		return subPage
+		return p.handleHTMLLink(cat, fullURL, rawID, text)
 	}
 
-	p.processFileLink(cat, href, rawID, ext, text)
+	if isSupportedFormat(ext) {
+		p.processFileLink(cat, href, rawID, ext, text)
+	}
 
 	return ""
+}
+
+func shouldSkipRawID(rawID string) bool {
+	return rawID == "" || strings.HasPrefix(rawID, "#")
+}
+
+func extractAnchorText(tokenizer *html.Tokenizer, tokenType html.TokenType) string {
+	if tokenType == html.StartTagToken {
+		if nextType := tokenizer.Next(); nextType == html.TextToken {
+			return strings.TrimSpace(string(tokenizer.Text()))
+		}
+	}
+
+	return ""
+}
+
+func (p *Provider) handleHTMLLink(cat *catalog.Catalog, fullURL, rawID, text string) string {
+	if rawID == "index" {
+		return ""
+	}
+
+	var subPage string
+	if strings.HasPrefix(fullURL, p.BaseURL) || strings.HasPrefix(fullURL, p.StartURL) {
+		subPage = fullURL
+	}
+
+	p.processHTMLLink(cat, fullURL, rawID, text)
+
+	return subPage
+}
+
+func shouldSkipHref(href, baseURL, startURL string) bool {
+	if strings.HasPrefix(href, "#") ||
+		strings.HasPrefix(href, "mailto:") ||
+		strings.HasPrefix(href, "javascript:") ||
+		strings.HasPrefix(href, "data:") ||
+		strings.HasPrefix(href, "vbscript:") ||
+		strings.HasPrefix(href, "tel:") {
+		return true
+	}
+
+	if strings.HasPrefix(href, "http://") || strings.HasPrefix(href, "https://") {
+		return !strings.HasPrefix(href, baseURL) && !strings.HasPrefix(href, startURL)
+	}
+
+	return false
+}
+
+func isSupportedFormat(ext string) bool {
+	switch ext {
+	case "pbf", "osm.pbf", "poly", "geojson", "md5":
+		return true
+	default:
+		return false
+	}
 }
 
 func extractHref(tokenizer *html.Tokenizer) string {
@@ -332,15 +466,42 @@ func (p *Provider) processHTMLLink(cat *catalog.Catalog, fullURL, rawID, name st
 	_ = cat.MergeElement(&elem)
 }
 
+const md5HashLength = 32
+
+func isMD5Hash(s string) bool {
+	if len(s) != md5HashLength {
+		return false
+	}
+
+	for _, c := range s {
+		if (c < '0' || c > '9') && (c < 'a' || c > 'f') && (c < 'A' || c > 'F') {
+			return false
+		}
+	}
+
+	return true
+}
+
+func sanitizeFileName(name string) string {
+	name = strings.TrimSpace(name)
+	if (strings.HasPrefix(name, "[") && strings.HasSuffix(name, "]")) || isMD5Hash(name) {
+		return ""
+	}
+
+	return name
+}
+
 func (p *Provider) processFileLink(cat *catalog.Catalog, href, rawID, ext, name string) {
 	if rawID == "" {
 		return
 	}
 
 	parent, _ := splitParent(href)
+	cleanName := sanitizeFileName(name)
+
 	elem := catalog.Element{
 		ID:     rawID,
-		Name:   name,
+		Name:   cleanName,
 		Parent: parent,
 		Meta:   false,
 	}
@@ -348,16 +509,19 @@ func (p *Provider) processFileLink(cat *catalog.Catalog, href, rawID, ext, name 
 	applyExceptions(&elem)
 	_ = cat.MergeElement(&elem)
 
-	if ext != "" {
-		if ext == "pbf" {
-			ext = catalog.FormatOsmPbf
-		}
+	formatID := ext
 
-		cat.AddExtension(elem.ID, ext)
+	switch ext {
+	case "pbf":
+		formatID = catalog.FormatOsmPbf
+	case "md5":
+		formatID = FormatOsmPbfMd5
+	}
 
-		if ext == catalog.FormatOsmPbf {
-			cat.AddExtension(elem.ID, "osm.pbf.md5")
-		}
+	cat.AddExtension(elem.ID, formatID)
+
+	if formatID == catalog.FormatOsmPbf {
+		cat.AddExtension(elem.ID, FormatOsmPbfMd5)
 	}
 }
 
@@ -372,6 +536,10 @@ func applyExceptions(elem *catalog.Element) {
 }
 
 func splitFileExt(urlStr string) (filename, extension string) {
+	if idx := strings.IndexAny(urlStr, "?#"); idx != -1 {
+		urlStr = urlStr[:idx]
+	}
+
 	parts := strings.Split(urlStr, "/")
 	last := parts[len(parts)-1]
 
@@ -384,10 +552,31 @@ func splitFileExt(urlStr string) (filename, extension string) {
 }
 
 func splitParent(urlStr string) (parent, path string) {
-	parts := strings.Split(urlStr, "/")
-	if len(parts) < minGeo2DayParts {
-		return "", strings.Join(parts[:len(parts)-1], "/")
+	if idx := strings.IndexAny(urlStr, "?#"); idx != -1 {
+		urlStr = urlStr[:idx]
 	}
 
-	return parts[len(parts)-2], strings.Join(parts[:len(parts)-1], "/")
+	if idx := strings.Index(urlStr, "://"); idx != -1 {
+		urlStr = urlStr[idx+3:]
+		if slashIdx := strings.Index(urlStr, "/"); slashIdx != -1 {
+			urlStr = urlStr[slashIdx:]
+		} else {
+			return "", ""
+		}
+	}
+
+	trimmed := strings.Trim(urlStr, "/")
+	if trimmed == "" {
+		return "", ""
+	}
+
+	parts := strings.Split(trimmed, "/")
+	if len(parts) <= 1 {
+		return "", ""
+	}
+
+	parent = parts[len(parts)-2]
+	path = "/" + strings.Join(parts[:len(parts)-1], "/")
+
+	return parent, path
 }

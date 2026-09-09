@@ -16,24 +16,26 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
-      - uses: actions/setup-go@v7
+      - uses: cachix/install-nix-action@v31
         with:
-          go-version: stable
-          check-latest: true
-          cache: true
-      - run: go run cmd/download-geofabrik/main.go generate
-      - run: go run cmd/download-geofabrik/main.go --service="openstreetmap.fr" generate
-      - run: go run cmd/download-geofabrik/main.go --service="bbbike" generate
-      - run: go run cmd/download-geofabrik/main.go --service="geo2day" generate
-      - run: go run cmd/download-geofabrik/main.go --service="movisda" generate
-      - run: go run cmd/download-geofabrik/main.go --service="planet.osm.ch" generate
-      - run: go run cmd/download-geofabrik/main.go --service="osm.kewl.lu" generate
-      - run: go run cmd/download-geofabrik/main.go --service="osm.fit.vutbr.cz" generate
-      - run: go run cmd/download-geofabrik/main.go --service="osmit-estratti" generate
-      - run: go run cmd/download-geofabrik/main.go --service="osm.kcwu.csie.org" generate
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Build binary with Nix
+        run: nix build
+      - run: ./result/bin/download-geofabrik generate
+      - run: ./result/bin/download-geofabrik --service="openstreetmap.fr" generate
+      - run: ./result/bin/download-geofabrik --service="bbbike" generate
+      - run: ./result/bin/download-geofabrik --service="geo2day" generate
+      - run: ./result/bin/download-geofabrik --service="movisda" generate
+      - run: ./result/bin/download-geofabrik --service="planet.osm.ch" generate
+      - run: ./result/bin/download-geofabrik --service="osm.kewl.lu" generate
+      - run: ./result/bin/download-geofabrik --service="osm.fit.vutbr.cz" generate
+      - run: ./result/bin/download-geofabrik --service="osmit-estratti" generate
+      - run: ./result/bin/download-geofabrik --service="osm.kcwu.csie.org" generate
       - run: mkdir -p docs/catalogs
       - run: cat .README.md1 > README.md
-      - run: go run cmd/download-geofabrik/main.go --help >> README.md
+      - run: ./result/bin/download-geofabrik --help >> README.md
       - run: cat .README.md2 >> README.md
       - run: |
           cat << 'EOF' > docs/catalogs/geofabrik.md
@@ -48,7 +50,7 @@ jobs:
           ## Available Elements
 
           EOF
-          go run cmd/download-geofabrik/main.go list --markdown >> docs/catalogs/geofabrik.md
+          ./result/bin/download-geofabrik list --markdown >> docs/catalogs/geofabrik.md
       - run: |
           cat << 'EOF' > docs/catalogs/openstreetmap.fr.md
           # OpenStreetMap France Extracts Catalog
@@ -57,12 +59,12 @@ jobs:
 
           - **Service Key**: `openstreetmap.fr`
           - **Description**: High-detail extracts for French regions, departments, and worldwide extracts
-          - **Example**: `download-geofabrik --service openstreetmap.fr download rhone-alpes`
+          - **Example**: `download-geofabrik --service openstreetmap.fr download rhone_alpes`
 
           ## Available Elements
 
           EOF
-          go run cmd/download-geofabrik/main.go --service "openstreetmap.fr" list --markdown >> docs/catalogs/openstreetmap.fr.md
+          ./result/bin/download-geofabrik --service "openstreetmap.fr" list --markdown >> docs/catalogs/openstreetmap.fr.md
       - run: |
           cat << 'EOF' > docs/catalogs/bbbike.md
           # BBBike Extracts Catalog
@@ -76,7 +78,7 @@ jobs:
           ## Available Elements
 
           EOF
-          go run cmd/download-geofabrik/main.go --service "bbbike" list --markdown >> docs/catalogs/bbbike.md
+          ./result/bin/download-geofabrik --service "bbbike" list --markdown >> docs/catalogs/bbbike.md
       - run: |
           cat << 'EOF' > docs/catalogs/geo2day.md
           # Geo2day Extracts Catalog
@@ -90,7 +92,7 @@ jobs:
           ## Available Elements
 
           EOF
-          go run cmd/download-geofabrik/main.go --service "geo2day" list --markdown >> docs/catalogs/geo2day.md
+          ./result/bin/download-geofabrik --service "geo2day" list --markdown >> docs/catalogs/geo2day.md
       - run: |
           cat << 'EOF' > docs/catalogs/movisda.md
           # Movisda Extracts Catalog
@@ -104,7 +106,7 @@ jobs:
           ## Available Elements
 
           EOF
-          go run cmd/download-geofabrik/main.go --service "movisda" list --markdown >> docs/catalogs/movisda.md
+          ./result/bin/download-geofabrik --service "movisda" list --markdown >> docs/catalogs/movisda.md
       - run: |
           cat << 'EOF' > docs/catalogs/planet.osm.ch.md
           # Planet OSM Switzerland Extracts Catalog
@@ -118,7 +120,7 @@ jobs:
           ## Available Elements
 
           EOF
-          go run cmd/download-geofabrik/main.go --service "planet.osm.ch" list --markdown >> docs/catalogs/planet.osm.ch.md
+          ./result/bin/download-geofabrik --service "planet.osm.ch" list --markdown >> docs/catalogs/planet.osm.ch.md
       - run: |
           cat << 'EOF' > docs/catalogs/osm.kewl.lu.md
           # OSM Luxembourg Extracts Catalog
@@ -132,7 +134,7 @@ jobs:
           ## Available Elements
 
           EOF
-          go run cmd/download-geofabrik/main.go --service "osm.kewl.lu" list --markdown >> docs/catalogs/osm.kewl.lu.md
+          ./result/bin/download-geofabrik --service "osm.kewl.lu" list --markdown >> docs/catalogs/osm.kewl.lu.md
       - run: |
           cat << 'EOF' > docs/catalogs/osm.fit.vutbr.cz.md
           # FIT VUT Brno Extracts Catalog
@@ -146,7 +148,7 @@ jobs:
           ## Available Elements
 
           EOF
-          go run cmd/download-geofabrik/main.go --service "osm.fit.vutbr.cz" list --markdown >> docs/catalogs/osm.fit.vutbr.cz.md
+          ./result/bin/download-geofabrik --service "osm.fit.vutbr.cz" list --markdown >> docs/catalogs/osm.fit.vutbr.cz.md
       - run: |
           cat << 'EOF' > docs/catalogs/osmit-estratti.md
           # OpenStreetMap Italia Extracts Catalog
@@ -160,7 +162,7 @@ jobs:
           ## Available Elements
 
           EOF
-          go run cmd/download-geofabrik/main.go --service "osmit-estratti" list --markdown >> docs/catalogs/osmit-estratti.md
+          ./result/bin/download-geofabrik --service "osmit-estratti" list --markdown >> docs/catalogs/osmit-estratti.md
       - run: |
           cat << 'EOF' > docs/catalogs/osm.kcwu.csie.org.md
           # OSM Taiwan Extracts Catalog
@@ -174,7 +176,8 @@ jobs:
           ## Available Elements
 
           EOF
-          go run cmd/download-geofabrik/main.go --service "osm.kcwu.csie.org" list --markdown >> docs/catalogs/osm.kcwu.csie.org.md
+          ./result/bin/download-geofabrik --service "osm.kcwu.csie.org" list --markdown >> docs/catalogs/osm.kcwu.csie.org.md
+      - run: rm -f result
       - uses: actions-js/push@master
         with:
           message: generate yaml files

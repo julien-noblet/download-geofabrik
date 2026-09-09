@@ -1,9 +1,9 @@
 package geofabrik
 
 import (
+	"cmp"
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net"
 	"net/http"
@@ -12,7 +12,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
-var ErrFetchCatalog = errors.New("failed to fetch catalog")
+var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
 	ProviderName               = "geofabrik"
@@ -36,8 +36,8 @@ type Provider struct {
 	BaseURL  string
 }
 
-// NewProvider creates a new Geofabrik API provider with tuned transport.
-func NewProvider() *Provider {
+// New creates a new Geofabrik API provider with tuned transport.
+func New() *Provider {
 	return &Provider{
 		IndexURL: GeofabrikIndexURL,
 		BaseURL:  GeofabrikBaseURL,
@@ -57,8 +57,19 @@ func NewProvider() *Provider {
 	}
 }
 
+// NewProvider creates a new Geofabrik API provider with tuned transport.
+//
+// Deprecated: Use New instead.
+func NewProvider() *Provider {
+	return New()
+}
+
 // Name returns the provider's unique service name.
 func (p *Provider) Name() string {
+	if p == nil {
+		return ""
+	}
+
 	return ProviderName
 }
 
@@ -100,15 +111,16 @@ type indexJSON struct {
 
 // FetchCatalog downloads the index JSON and builds a catalog.Catalog.
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.IndexURL, http.NoBody)
-	if err != nil {
-		return nil, fmt.Errorf("cannot create request for %s: %w", p.IndexURL, err)
+	if p == nil {
+		return nil, catalog.ErrProviderNil
 	}
 
-	client := p.Client
-	if client == nil {
-		client = http.DefaultClient
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.IndexURL, http.NoBody)
+	if err != nil {
+		return nil, fmt.Errorf("creating request for %s: %w", p.IndexURL, err)
 	}
+
+	client := cmp.Or(p.Client, http.DefaultClient)
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -117,12 +129,12 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("%w: unexpected HTTP %d from %s", ErrFetchCatalog, resp.StatusCode, p.IndexURL)
+		return nil, fmt.Errorf("%w: unexpected http %d from %s", ErrFetchCatalog, resp.StatusCode, p.IndexURL)
 	}
 
 	var index indexJSON
 	if err := json.NewDecoder(resp.Body).Decode(&index); err != nil {
-		return nil, fmt.Errorf("cannot decode index JSON: %w", err)
+		return nil, fmt.Errorf("decoding index json: %w", err)
 	}
 
 	cat := catalog.New()

@@ -9,10 +9,11 @@ import (
 	"testing"
 	"testing/iotest"
 
-	"github.com/julien-noblet/download-geofabrik/internal/provider/osmtw"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/provider/osmtw"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 const mockTaiwanHTML = `<!DOCTYPE html>
@@ -86,6 +87,8 @@ func TestOSMTW_FetchCatalog(t *testing.T) {
 	assert.Equal(t, "Taiwan", tw.Name)
 	assert.True(t, tw.ContainsFormat(catalog.FormatO5m))
 	assert.True(t, tw.ContainsFormat(catalog.FormatO5mZst))
+	assert.True(t, tw.ContainsFormat(catalog.FormatO5m+".md5"))
+	assert.True(t, tw.ContainsFormat(catalog.FormatO5mZst+".md5"))
 }
 
 func TestOSMTW_FetchCatalog_HTMLParseError(t *testing.T) {
@@ -97,7 +100,7 @@ func TestOSMTW_FetchCatalog_HTMLParseError(t *testing.T) {
 
 	_, err := p.FetchCatalog(context.Background())
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "cannot parse HTML")
+	assert.Contains(t, err.Error(), "cannot parse html")
 }
 
 func TestOSMTW_FetchCatalog_HTTPError(t *testing.T) {
@@ -189,6 +192,8 @@ func TestOSMTW_DefaultFormats(t *testing.T) {
 	formats := osmtw.DefaultFormats()
 	assert.Contains(t, formats, catalog.FormatO5m)
 	assert.Contains(t, formats, catalog.FormatO5mZst)
+	assert.Contains(t, formats, catalog.FormatO5m+".md5")
+	assert.Contains(t, formats, catalog.FormatO5mZst+".md5")
 }
 
 func Benchmark_OSMTW_FetchCatalog_Mock(b *testing.B) {
@@ -197,11 +202,9 @@ func Benchmark_OSMTW_FetchCatalog_Mock(b *testing.B) {
 
 	p := newProviderWithServer(ts)
 
-	ctx := context.Background()
+	ctx := b.Context()
 
-	b.ResetTimer()
-
-	for range b.N {
+	for b.Loop() {
 		_, _ = p.FetchCatalog(ctx)
 	}
 }

@@ -5,13 +5,26 @@
 
 version: 2
 updates:
-  - package-ecosystem: "gomod" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "gomod"
+    directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
     allow:
-      # Allow both direct and indirect updates for all packages
       - dependency-type: "all"
-    # Add assignees
+    assignees:
+      - "julien-noblet"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      actions:
+        patterns:
+          - "*"
     assignees:
       - "julien-noblet"

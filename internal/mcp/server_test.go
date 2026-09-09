@@ -1,17 +1,16 @@
 package mcp_test
 
 import (
-	"context"
 	"encoding/json"
 	"path/filepath"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/mcp"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
-	"github.com/julien-noblet/download-geofabrik/pkg/formats"
 	mcpSDK "github.com/mark3labs/mcp-go/mcp"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/mcp"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 const (
@@ -22,27 +21,27 @@ const (
 	regionEurope   = "europe"
 )
 
-func createTestCatalog(t *testing.T) string {
-	t.Helper()
+func createTestCatalog(tb testing.TB) string {
+	tb.Helper()
 
-	tempDir := t.TempDir()
+	tempDir := tb.TempDir()
 	catPath := filepath.Join(tempDir, "test-catalog.yml")
 
 	cat := catalog.New()
 	cat.BaseURL = "https://example.com/osm"
 	cat.Formats = catalog.FormatDefinitions{
-		formats.FormatOsmPbf: {
-			ID:   formats.FormatOsmPbf,
+		catalog.FormatOsmPbf: {
+			ID:   catalog.FormatOsmPbf,
 			Loc:  ".osm.pbf",
 			Type: "OpenStreetMap binary format",
 		},
-		formats.FormatPoly: {
-			ID:   formats.FormatPoly,
+		catalog.FormatPoly: {
+			ID:   catalog.FormatPoly,
 			Loc:  ".poly",
 			Type: "Polygon filter file",
 		},
-		formats.FormatOsmPbf + ".md5": {
-			ID:   formats.FormatOsmPbf + ".md5",
+		catalog.FormatOsmPbf + ".md5": {
+			ID:   catalog.FormatOsmPbf + ".md5",
 			Loc:  ".osm.pbf.md5",
 			Type: "MD5 checksum",
 		},
@@ -59,17 +58,17 @@ func createTestCatalog(t *testing.T) string {
 		ID:      elementFrance,
 		Name:    "France",
 		Parent:  regionEurope,
-		Formats: catalog.Formats{formats.FormatOsmPbf, formats.FormatPoly},
+		Formats: catalog.Formats{catalog.FormatOsmPbf, catalog.FormatPoly},
 	}
 
 	cat.Elements[elementMonaco] = catalog.Element{
 		ID:      elementMonaco,
 		Name:    "Monaco",
 		Parent:  regionEurope,
-		Formats: catalog.Formats{formats.FormatOsmPbf},
+		Formats: catalog.Formats{catalog.FormatOsmPbf},
 	}
 
-	require.NoError(t, cat.SaveFile(catPath))
+	require.NoError(tb, cat.SaveFile(catPath))
 
 	return catPath
 }
@@ -94,7 +93,7 @@ func TestListServicesTool(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 
 	tool := srv.MCPServer().GetTool("list_services")
 	require.NotNil(t, tool)
@@ -141,7 +140,7 @@ func TestListFormatsTool(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 
 	tool := srv.MCPServer().GetTool("list_formats")
 	require.NotNil(t, tool)
@@ -186,7 +185,7 @@ func TestListElementsTool(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 	catFile := createTestCatalog(t)
 
 	tool := srv.MCPServer().GetTool("list_elements")
@@ -274,7 +273,7 @@ func TestGetElementTool(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 	catFile := createTestCatalog(t)
 
 	tool := srv.MCPServer().GetTool("get_element")
@@ -310,7 +309,7 @@ func TestGetElementTool(t *testing.T) {
 	var pbfDetail *mcp.FormatURLDetail
 
 	for _, f := range detail.Formats {
-		if f.FormatID == formats.FormatOsmPbf {
+		if f.FormatID == catalog.FormatOsmPbf {
 			pbfDetail = &f
 
 			break
@@ -355,7 +354,7 @@ func TestDownloadElementToolDryRun(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 	catFile := createTestCatalog(t)
 	outDir := t.TempDir()
 
@@ -368,7 +367,7 @@ func TestDownloadElementToolDryRun(t *testing.T) {
 			Arguments: map[string]any{
 				"service":     serviceDefault,
 				"element_id":  elementFrance,
-				"formats":     []string{formats.FormatOsmPbf, formats.FormatPoly},
+				"formats":     []string{catalog.FormatOsmPbf, catalog.FormatPoly},
 				"config_file": catFile,
 				"output_dir":  outDir,
 				"dry_run":     true,
@@ -396,11 +395,69 @@ func TestDownloadElementToolDryRun(t *testing.T) {
 	assert.Equal(t, "https://example.com/osm/europe/france.osm.pbf.md5", dlResult.Files[0].ChecksumURL)
 }
 
+func TestDownloadElementToolDefaultFormatNonPbf(t *testing.T) {
+	t.Parallel()
+
+	srv := mcp.NewServer(testVersion)
+	ctx := t.Context()
+
+	tempDir := t.TempDir()
+	catPath := filepath.Join(tempDir, "tw-catalog.yml")
+
+	cat := catalog.New()
+	cat.BaseURL = "https://example.com/tw"
+	cat.Formats = catalog.FormatDefinitions{
+		catalog.FormatO5m: {
+			ID:  catalog.FormatO5m,
+			Loc: ".o5m",
+		},
+	}
+	cat.Elements["taiwan"] = catalog.Element{
+		ID:      "taiwan",
+		Name:    "Taiwan",
+		Formats: catalog.Formats{catalog.FormatO5m},
+	}
+	require.NoError(t, cat.SaveFile(catPath))
+
+	tool := srv.MCPServer().GetTool("download_element")
+	require.NotNil(t, tool)
+
+	callReq := mcpSDK.CallToolRequest{
+		Params: mcpSDK.CallToolParams{
+			Name: "download_element",
+			Arguments: map[string]any{
+				"service":     "osm.kcwu.csie.org",
+				"element_id":  "taiwan",
+				"config_file": catPath,
+				"output_dir":  tempDir,
+				"dry_run":     true,
+			},
+		},
+	}
+
+	res, err := tool.Handler(ctx, callReq)
+	require.NoError(t, err)
+	require.False(t, res.IsError)
+
+	textContent, ok := res.Content[0].(mcpSDK.TextContent)
+	require.True(t, ok)
+
+	var dlResult mcp.DownloadResult
+
+	err = json.Unmarshal([]byte(textContent.Text), &dlResult)
+	require.NoError(t, err)
+
+	assert.True(t, dlResult.DryRun)
+	assert.Equal(t, "taiwan", dlResult.ElementID)
+	require.Len(t, dlResult.Files, 1)
+	assert.Equal(t, catalog.FormatO5m, dlResult.Files[0].Format)
+}
+
 func TestRegenerateCatalogToolErrors(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 
 	tool := srv.MCPServer().GetTool("regenerate_catalog")
 	require.NotNil(t, tool)
@@ -434,7 +491,7 @@ func TestResources(t *testing.T) {
 	t.Parallel()
 
 	srv := mcp.NewServer(testVersion)
-	ctx := context.Background()
+	ctx := t.Context()
 
 	resources := srv.MCPServer().ListResources()
 	require.NotEmpty(t, resources)

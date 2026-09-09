@@ -15,9 +15,6 @@ before:
     # you may remove this if you don't need go generate
     - go generate ./...
     - go run cmd/download-geofabrik/main.go generate
-    - go run cmd/download-geofabrik/main.go --service="openstreetmap.fr" generate
-    - go run cmd/download-geofabrik/main.go --service="bbbike" generate
-    - go run cmd/download-geofabrik/main.go --service="geo2day" generate
     - mkdir -p docs/catalogs
     - cat .README.md1 > README.md
     - go run cmd/download-geofabrik/main.go --help >> README.md
@@ -184,12 +181,14 @@ builds:
       - 386
       - arm
       - arm64
+      - loong64
       - mips
       - mips64
       - mips64le
       - mipsle
       - ppc64
       - ppc64le
+      - riscv64
       - s390x
 
     #goamd64:
@@ -203,9 +202,34 @@ builds:
       - 6
       - 7
 
+    #go386:
+    #  - sse2
+    #  - softfloat
+      
+    #goppc64:
+    #  - power8
+    #  - power9
+    
+    #goriscv64:
+    #  - rva20u64
+    #  - rva22u64
+
+    #gomips:
+    #  - hardfloat
+    #  - softfloat
+
+    #goarm64:
+    #  - v8.0
+    #  - v9.0
+
     ignore:
       - goos: darwin
         goarch: 386
+    
+    tool: "go1.27.1"
+
+    flags:
+      - -trimpath
 
     ldflags: >-
       -s -w
@@ -218,7 +242,7 @@ upx:
   - # Whether to enable it or not.
     #
     # Templates: allowed.
-    enabled: false # remove upx since I've issues with it
+    enabled: false # remove upx since I've issues with antivirus software
 
     goos:
       - linux
@@ -235,7 +259,8 @@ upx:
     brute: true      
 
 archives:
-  - format: tar.gz
+  - formats:
+      - tar.gz
     # this name template makes the OS and Arch compatible with the results of `uname`.
     name_template: >-
       {{ .ProjectName }}_
@@ -247,7 +272,8 @@ archives:
     # use zip for windows archives
     format_overrides:
       - goos: windows
-        format: zip
+        formats:
+          - zip
     files:
       - license*
       - LICENSE*
@@ -255,9 +281,66 @@ archives:
       - changelog*
       - CHANGELOG*
       - bbbike.yml
-      - geofabrik.yml
-      - openstreetmap.fr.yml
       - geo2day.yml
+      - geofabrik.yml
+      - movisda.yml
+      - openstreetmap.fr.yml
+      - osm.fit.vutbr.cz.yml
+      - osm.kcwu.csie.org.yml
+      - osm.kewl.lu.yml
+      - osmit-estratti.yml
+      - planet.osm.ch.yml
+
+nfpms:
+  - id: packages
+    package_name: download-geofabrik
+    file_name_template: "{{ .PackageName }}_{{ .Version }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}"
+    formats:
+      - deb
+      - rpm
+      - apk
+      - archlinux
+    maintainer: Julien Noblet <julien.noblet@gmail.com>
+    description: A CLI tool for downloading OpenStreetMap data and extracts from multiple providers.
+    homepage: https://github.com/julien-noblet/download-geofabrik
+    license: MPL-2.0
+    bindir: /usr/bin
+    contents:
+      - src: ./LICENSE
+        dst: /usr/share/doc/download-geofabrik/LICENSE
+      - src: ./README.md
+        dst: /usr/share/doc/download-geofabrik/README.md
+      - src: ./bbbike.yml
+        dst: /etc/download-geofabrik/bbbike.yml
+        type: config|noreplace
+      - src: ./geo2day.yml
+        dst: /etc/download-geofabrik/geo2day.yml
+        type: config|noreplace
+      - src: ./geofabrik.yml
+        dst: /etc/download-geofabrik/geofabrik.yml
+        type: config|noreplace
+      - src: ./movisda.yml
+        dst: /etc/download-geofabrik/movisda.yml
+        type: config|noreplace
+      - src: ./openstreetmap.fr.yml
+        dst: /etc/download-geofabrik/openstreetmap.fr.yml
+        type: config|noreplace
+      - src: ./osm.fit.vutbr.cz.yml
+        dst: /etc/download-geofabrik/osm.fit.vutbr.cz.yml
+        type: config|noreplace
+      - src: ./osm.kcwu.csie.org.yml
+        dst: /etc/download-geofabrik/osm.kcwu.csie.org.yml
+        type: config|noreplace
+      - src: ./osm.kewl.lu.yml
+        dst: /etc/download-geofabrik/osm.kewl.lu.yml
+        type: config|noreplace
+      - src: ./osmit-estratti.yml
+        dst: /etc/download-geofabrik/osmit-estratti.yml
+        type: config|noreplace
+      - src: ./planet.osm.ch.yml
+        dst: /etc/download-geofabrik/planet.osm.ch.yml
+        type: config|noreplace
+
 checksum:
   name_template: 'checksums.txt'
 snapshot:
@@ -270,20 +353,26 @@ changelog:
       - "^docs:"
       - "^test:"
 
-dockers:
-  - goos: linux
-    goarch: amd64
-    #binaries:
-    #  - download-geofabrik
-    image_templates:
-      - "juliennoblet/{{.ProjectName}}:latest"
-      - "juliennoblet/{{.ProjectName}}:{{ .Tag }}"
-      - "juliennoblet/{{.ProjectName}}:v{{ .Major }}"
-      - "juliennoblet/{{.ProjectName}}:v{{ .Major }}.{{ .Minor }}"
-    skip_push: auto
+dockers_v2:
+  - images:
+      - "ghcr.io/julien-noblet/{{.ProjectName}}"
+    tags:
+      - "latest"
+      - "{{ .Tag }}"
+      - "v{{ .Major }}"
+      - "v{{ .Major }}.{{ .Minor }}"
     dockerfile: Dockerfile
+    platforms:
+      - linux/amd64
+      - linux/arm64
     extra_files:
-      - geofabrik.yml
-      - openstreetmap.fr.yml
       - bbbike.yml
       - geo2day.yml
+      - geofabrik.yml
+      - movisda.yml
+      - openstreetmap.fr.yml
+      - osm.fit.vutbr.cz.yml
+      - osm.kcwu.csie.org.yml
+      - osm.kewl.lu.yml
+      - osmit-estratti.yml
+      - planet.osm.ch.yml

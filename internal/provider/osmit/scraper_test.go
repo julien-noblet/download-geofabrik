@@ -6,10 +6,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/julien-noblet/download-geofabrik/internal/provider/osmit"
-	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/julien-noblet/download-geofabrik/internal/provider/osmit"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 const mockOSMItHTML = `<!DOCTYPE html><html><head><title>Estratti OSM Italia</title></head><body>OK</body></html>`
@@ -153,11 +154,9 @@ func Benchmark_OSMIt_FetchCatalog_Mock(b *testing.B) {
 
 	p := newProviderWithServer(ts)
 
-	ctx := context.Background()
+	ctx := b.Context()
 
-	b.ResetTimer()
-
-	for range b.N {
+	for b.Loop() {
 		_, _ = p.FetchCatalog(ctx)
 	}
 }

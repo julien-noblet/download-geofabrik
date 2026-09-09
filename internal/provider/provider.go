@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"maps"
+	"reflect"
 	"slices"
 	"sync"
 
@@ -12,15 +13,26 @@ import (
 )
 
 var (
+	// ErrProviderNotFound is returned when a requested provider name is not in the registry.
 	ErrProviderNotFound = errors.New("provider not found")
-	ErrFetchCatalog     = errors.New("failed to fetch catalog")
+
+	// ErrFetchCatalog is returned when a provider fails to fetch or parse remote catalog data.
+	ErrFetchCatalog = catalog.ErrFetchCatalog
 )
 
 // Provider defines the standard interface for an OSM data catalog provider.
 type Provider interface {
+	// Name returns the unique service identifier for the provider (e.g. "geofabrik").
 	Name() string
+
+	// Description returns a human-readable summary of the provider and its coverage.
 	Description() string
+
+	// DefaultConfigFile returns the default YAML filename used to cache the provider catalog.
 	DefaultConfigFile() string
+
+	// FetchCatalog scrapes or queries the provider API to build and return a complete *catalog.Catalog.
+	// It must respect context cancellation and timeouts.
 	FetchCatalog(ctx context.Context) (*catalog.Catalog, error)
 }
 
@@ -31,14 +43,28 @@ var (
 
 // Register registers a provider in the global registry.
 func Register(prov Provider) {
-	if prov == nil || prov.Name() == "" {
+	if prov == nil || (reflect.ValueOf(prov).Kind() == reflect.Pointer && reflect.ValueOf(prov).IsNil()) {
+		return
+	}
+
+	name := prov.Name()
+	if name == "" {
 		return
 	}
 
 	registryMu.Lock()
 	defer registryMu.Unlock()
 
-	registry[prov.Name()] = prov
+	registry[name] = prov
+}
+
+// Unregister removes a provider from the global registry by name.
+// This is primarily intended for test cleanup.
+func Unregister(name string) {
+	registryMu.Lock()
+	defer registryMu.Unlock()
+
+	delete(registry, name)
 }
 
 // Get retrieves a registered provider by name.
