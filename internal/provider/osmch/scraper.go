@@ -16,7 +16,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
-var ErrFetchCatalog = errors.New("failed to fetch catalog")
+var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
 	ProviderName               = "planet.osm.ch"
@@ -96,7 +96,7 @@ func DefaultFormats() catalog.FormatDefinitions {
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.StartURL, http.NoBody)
 	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
+		return nil, fmt.Errorf("creating request: %w", err)
 	}
 
 	client := cmp.Or(p.Client, http.DefaultClient)
@@ -116,7 +116,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	cat.Formats = DefaultFormats()
 
 	if err := parseOSMCHHTML(resp.Body, cat); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("parsing catalog html: %w", err)
 	}
 
 	return cat, nil

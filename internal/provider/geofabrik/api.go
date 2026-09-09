@@ -4,7 +4,6 @@ import (
 	"cmp"
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net"
 	"net/http"
@@ -13,7 +12,7 @@ import (
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
-var ErrFetchCatalog = errors.New("failed to fetch catalog")
+var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
 	ProviderName               = "geofabrik"
@@ -110,7 +109,7 @@ type indexJSON struct {
 func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, p.IndexURL, http.NoBody)
 	if err != nil {
-		return nil, fmt.Errorf("cannot create request for %s: %w", p.IndexURL, err)
+		return nil, fmt.Errorf("creating request for %s: %w", p.IndexURL, err)
 	}
 
 	client := cmp.Or(p.Client, http.DefaultClient)
@@ -127,7 +126,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 
 	var index indexJSON
 	if err := json.NewDecoder(resp.Body).Decode(&index); err != nil {
-		return nil, fmt.Errorf("cannot decode index json: %w", err)
+		return nil, fmt.Errorf("decoding index json: %w", err)
 	}
 
 	cat := catalog.New()

@@ -2,7 +2,6 @@ package cli
 
 import (
 	"fmt"
-	"log/slog"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -41,8 +40,6 @@ func runList(cmd *cobra.Command, _ []string) error {
 
 	cat, err := catalog.LoadFile(cfgFile)
 	if err != nil {
-		slog.Error("Failed to load catalog", "file", cfgFile, "error", err)
-
 		return fmt.Errorf("failed to load catalog: %w", err)
 	}
 
@@ -57,8 +54,6 @@ func runList(cmd *cobra.Command, _ []string) error {
 	}
 
 	if err := ui.PrintTable(cat, markdown, out); err != nil {
-		slog.Error("Failed to render table", "error", err)
-
 		return fmt.Errorf("failed to render table: %w", err)
 	}
 

@@ -100,3 +100,20 @@ func TestGenerate_SaveError(t *testing.T) {
 	require.Error(t, err)
 	assert.Contains(t, err.Error(), "failed to write config")
 }
+
+func TestGenerate_NilCatalog(t *testing.T) {
+	t.Parallel()
+
+	prov := &mockGeneratorProvider{
+		name:        "mock-gen-nil-cat",
+		catalogData: nil,
+	}
+	provider.Register(prov)
+
+	tmpDir := t.TempDir()
+	outFile := filepath.Join(tmpDir, "out.yml")
+
+	err := Generate(t.Context(), "mock-gen-nil-cat", outFile)
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "returned nil catalog")
+}

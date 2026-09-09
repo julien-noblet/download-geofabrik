@@ -8,6 +8,7 @@ import (
 	"slices"
 
 	"github.com/julien-noblet/download-geofabrik/internal/provider"
+	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 // Supported provider service identifiers.
@@ -39,7 +40,7 @@ func Generate(ctx context.Context, service, configfile string) error {
 
 	prov, err := provider.Get(lookupService)
 	if err != nil {
-		return fmt.Errorf("%w: %s", ErrUnknownService, service)
+		return fmt.Errorf("%w: %s: %w", ErrUnknownService, service, err)
 	}
 
 	slog.Info("Fetching catalog from provider", "service", service, "description", prov.Description())
@@ -47,6 +48,10 @@ func Generate(ctx context.Context, service, configfile string) error {
 	cat, err := prov.FetchCatalog(ctx)
 	if err != nil {
 		return fmt.Errorf("failed to fetch catalog from %s: %w", service, err)
+	}
+
+	if cat == nil {
+		return fmt.Errorf("%w: provider %s returned nil catalog", catalog.ErrNilCatalog, service)
 	}
 
 	// Sort formats within each element for deterministic YAML output

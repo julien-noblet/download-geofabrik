@@ -3,6 +3,7 @@ package catalog_test
 import (
 	"bytes"
 	"fmt"
+	"io"
 	"path/filepath"
 	"sync"
 	"testing"
@@ -412,6 +413,46 @@ func Benchmark_Catalog_Exist(b *testing.B) {
 	for b.Loop() {
 		_ = cat.Exist("france")
 	}
+}
+
+func TestCatalog_NilReceiver(t *testing.T) {
+	t.Parallel()
+
+	var cat *catalog.Catalog
+
+	assert.Equal(t, 0, cat.Len())
+	assert.Nil(t, cat.SortedKeys())
+	assert.False(t, cat.Exists("france"))
+	assert.False(t, cat.Exist("france"))
+
+	_, exists := cat.Get("france")
+	assert.False(t, exists)
+
+	_, hasFormat := cat.GetFormat(catalog.FormatOsmPbf)
+	assert.False(t, hasFormat)
+
+	isHashable, hashExt, hashType := cat.IsHashable(catalog.FormatOsmPbf)
+	assert.False(t, isHashable)
+	assert.Empty(t, hashExt)
+	assert.Empty(t, hashType)
+
+	_, err := cat.Find("france")
+	require.ErrorIs(t, err, catalog.ErrNilCatalog)
+
+	err = cat.SaveFile("somefile.yml")
+	require.ErrorIs(t, err, catalog.ErrNilCatalog)
+
+	err = cat.Save(io.Discard)
+	require.ErrorIs(t, err, catalog.ErrNilCatalog)
+
+	err = cat.MergeElement(&catalog.Element{ID: "test"})
+	require.ErrorIs(t, err, catalog.ErrNilCatalog)
+
+	_, err = cat.ResolveURL(&catalog.Element{ID: "test"}, catalog.FormatOsmPbf)
+	require.ErrorIs(t, err, catalog.ErrNilCatalog)
+
+	_, err = cat.ResolvePreURL(&catalog.Element{ID: "test"})
+	require.ErrorIs(t, err, catalog.ErrNilCatalog)
 }
 
 func Benchmark_Catalog_Get(b *testing.B) {
