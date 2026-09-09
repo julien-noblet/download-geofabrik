@@ -4,6 +4,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -331,4 +332,28 @@ func TestDownloadCmd_PlanetOSMCH_ExplicitP(t *testing.T) {
 
 	err := cli.Execute()
 	require.NoError(t, err)
+}
+
+func TestDownloadCmd_ValidArgsFunction(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	cli.ResetGlobs()
+	viper.Reset()
+
+	configFile := tmpDir + "/geofabrik.yml"
+
+	err := os.WriteFile(configFile, []byte(testConfigContent), 0o600)
+	require.NoError(t, err)
+
+	viper.SetConfigFile(configFile)
+
+	// Test element completion with prefix
+	completions, directive := cli.DownloadCmd.ValidArgsFunction(cli.DownloadCmd, []string{}, "test")
+	assert.Equal(t, cobra.ShellCompDirectiveNoFileComp, directive)
+	assert.Contains(t, completions, "test-elem")
+
+	// Test with already specified argument (no further completion)
+	completions, directive = cli.DownloadCmd.ValidArgsFunction(cli.DownloadCmd, []string{"test-elem"}, "")
+	assert.Equal(t, cobra.ShellCompDirectiveNoFileComp, directive)
+	assert.Empty(t, completions)
 }

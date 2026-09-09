@@ -28,7 +28,36 @@ var downloadCmd = &cobra.Command{
 	Use:   "download [element]",
 	Short: "Download element",
 	Args:  cobra.ExactArgs(1),
-	RunE:  runDownload,
+	ValidArgsFunction: func(_ *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		if len(args) != 0 {
+			return nil, cobra.ShellCompDirectiveNoFileComp
+		}
+
+		cfgFile := viper.ConfigFileUsed()
+		if cfgFile == "" {
+			if service != "" {
+				cfgFile = service + ".yml"
+			} else {
+				cfgFile = catalog.DefaultConfigFile
+			}
+		}
+
+		cat, err := catalog.LoadFile(cfgFile)
+		if err != nil {
+			return nil, cobra.ShellCompDirectiveNoFileComp
+		}
+
+		var matches []string
+
+		for _, key := range cat.SortedKeys() {
+			if strings.HasPrefix(key, toComplete) {
+				matches = append(matches, key)
+			}
+		}
+
+		return matches, cobra.ShellCompDirectiveNoFileComp
+	},
+	RunE: runDownload,
 }
 
 // RegisterDownloadCmd registers the download command and its flags to rootCmd.

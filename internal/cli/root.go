@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
+	"strings"
 	"sync"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
+	"github.com/julien-noblet/download-geofabrik/internal/provider"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
@@ -22,10 +24,12 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:     "download-geofabrik",
-	Short:   "A command-line tool for downloading OSM files",
-	Long:    `download-geofabrik is a CLI tool for downloading OpenStreetMap data and extracts from multiple providers.`,
-	Version: Version,
+	Use:           "download-geofabrik",
+	Short:         "A command-line tool for downloading OSM files",
+	Long:          `download-geofabrik is a CLI tool for downloading OpenStreetMap data and extracts from multiple providers.`,
+	Version:       Version,
+	SilenceUsage:  true,
+	SilenceErrors: true,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		return cmd.Help()
 	},
@@ -62,6 +66,22 @@ func initCLI() {
 			"movisda, planet.osm.ch, osm.kewl.lu, osm.fit.vutbr.cz, osmit-estratti, osm.kcwu.csie.org)")
 	rootCmd.PersistentFlags().Bool("verbose", false, "Verbose mode")
 	rootCmd.PersistentFlags().Bool("quiet", false, "Quiet mode")
+
+	_ = rootCmd.RegisterFlagCompletionFunc("service", func(_ *cobra.Command, _ []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		provider.RegisterDefaultProviders()
+
+		services := provider.List()
+
+		var matches []string
+
+		for _, s := range services {
+			if strings.HasPrefix(s, toComplete) {
+				matches = append(matches, s)
+			}
+		}
+
+		return matches, cobra.ShellCompDirectiveNoFileComp
+	})
 
 	// Bind flags to viper
 	if err := viper.BindPFlag("config", rootCmd.PersistentFlags().Lookup("config")); err != nil {
@@ -112,6 +132,8 @@ func initConfig() {
 		viper.SetConfigName(cmp.Or(service, catalog.DefaultConfigFile))
 	}
 
+	viper.SetEnvPrefix("DOWNLOAD_GEOFABRIK")
+	viper.SetEnvKeyReplacer(strings.NewReplacer("-", "_"))
 	viper.AutomaticEnv()
 
 	if err := viper.ReadInConfig(); err == nil {
