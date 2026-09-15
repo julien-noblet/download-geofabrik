@@ -1,4 +1,5 @@
 [
+  {"Version":"8eb3e14f4409f4f1d82a864ed33bf2773e35e658","Date":1789487549,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.30"],"Suites":[]},
   {"Version":"7bb2b408d1652b880b8bcabfe2bcc39469517a34","Date":1789487428,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"3e90c9472340dbe78552204b6944b8a831e323f2","Date":1789487177,"Tags":["ref=refs/heads/renovate/golang.orgx"],"Suites":[]},
   {"Version":"4e0134f4cc2299bea599592939f51d72ed3daf16","Date":1789487128,"Tags":["ref=refs/heads/master"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"0e9e49045fa4867beeef3efaee31c9dadda3e5da","Date":1788439957,"Tags":["ref=refs/heads/renovate/github.com-mark3labs-mcp-go-1.x"],"Suites":[]},
   {"Version":"0e9e49045fa4867beeef3efaee31c9dadda3e5da","Date":1788384696,"Tags":["ref=refs/heads/renovate/github.com-mark3labs-mcp-go-1.x"],"Suites":[]},
   {"Version":"a11aae1467de2bacd1c5539a9dfed3a97b324c7c","Date":1788329045,"Tags":["ref=refs/heads/renovate/actions-setup-go-7.x"],"Suites":[]},
-  {"Version":"4f837b7548ba92a9ad0aef3deef6b471a3c2a26c","Date":1788329028,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]},
-  {"Version":"89e69a61c8fce49d2f2014127f7017610d57ae01","Date":1788328928,"Tags":["ref=refs/heads/master"],"Suites":[]}
+  {"Version":"4f837b7548ba92a9ad0aef3deef6b471a3c2a26c","Date":1788329028,"Tags":["ref=refs/heads/renovate/actions-checkout-7.x"],"Suites":[]}
 ]
