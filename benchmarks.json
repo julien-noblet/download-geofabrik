@@ -1,4 +1,5 @@
 [
+  {"Version":"730e5ed23d62a1dcdce48419e42a8f9b6a1dc816","Date":1789516233,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.30"],"Suites":[]},
   {"Version":"74affecc645379044ad389e58af094d2fd8e64db","Date":1789516117,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"37260793ebec9929ed25c8249feff181672603c1","Date":1789516020,"Tags":["ref=refs/heads/renovate/github.com-olekukonko-tablewriter-1.x"],"Suites":[]},
   {"Version":"8eb3e14f4409f4f1d82a864ed33bf2773e35e658","Date":1789487549,"Tags":["ref=refs/heads/dependabot/go_modules/github.com/mattn/go-runewidth-0.0.30"],"Suites":[]},
@@ -27,6 +28,5 @@
   {"Version":"af4ec637b1421a91841fb11c47c77e344484417e","Date":1788752439,"Tags":["ref=refs/heads/master"],"Suites":[]},
   {"Version":"8f14aaff886103891a008d351553a4eb6d61956c","Date":1788440000,"Tags":["ref=refs/heads/renovate/github.com-mark3labs-mcp-go-1.x"],"Suites":[]},
   {"Version":"8f14aaff886103891a008d351553a4eb6d61956c","Date":1788439964,"Tags":["ref=refs/heads/renovate/github.com-mark3labs-mcp-go-1.x"],"Suites":[]},
-  {"Version":"0e9e49045fa4867beeef3efaee31c9dadda3e5da","Date":1788439957,"Tags":["ref=refs/heads/renovate/github.com-mark3labs-mcp-go-1.x"],"Suites":[]},
-  {"Version":"0e9e49045fa4867beeef3efaee31c9dadda3e5da","Date":1788384696,"Tags":["ref=refs/heads/renovate/github.com-mark3labs-mcp-go-1.x"],"Suites":[]}
+  {"Version":"0e9e49045fa4867beeef3efaee31c9dadda3e5da","Date":1788439957,"Tags":["ref=refs/heads/renovate/github.com-mark3labs-mcp-go-1.x"],"Suites":[]}
 ]
