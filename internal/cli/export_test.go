@@ -14,7 +14,7 @@ func ResetGlobs() {
 	noDownload = false
 	downloadProgress = true
 
-	for k := range formatFlags {
-		*formatFlags[k] = false
+	for _, flagDef := range formatFlagList {
+		_ = downloadCmd.Flags().Set(flagDef.key, "false")
 	}
 }

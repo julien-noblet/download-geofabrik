@@ -24,9 +24,37 @@ var (
 	check            bool
 	noDownload       bool
 	downloadProgress bool
-	// Format flags.
-	formatFlags = make(map[string]*bool)
 )
+
+type formatFlag struct {
+	key       string
+	shorthand string
+	usage     string
+}
+
+var formatFlagList = []formatFlag{
+	{key: catalog.KeyOsmPbf, shorthand: "P", usage: "Download osm.pbf (default)"},
+	{key: catalog.KeyOshPbf, shorthand: "H", usage: "Download osh.pbf"},
+	{key: catalog.KeyOsmGz, shorthand: "G", usage: "Download osm.gz"},
+	{key: catalog.KeyOsmBz2, shorthand: "B", usage: "Download osm.bz2"},
+	{key: catalog.KeyShpZip, shorthand: "S", usage: "Download shp.zip"},
+	{key: catalog.KeyState, shorthand: "", usage: "Download state.txt"},
+	{key: catalog.KeyPoly, shorthand: "p", usage: "Download poly"},
+	{key: catalog.KeyKml, shorthand: "k", usage: "Download kml"},
+	{key: catalog.KeyGeoJSON, shorthand: "g", usage: "Download GeoJSON"},
+	{key: catalog.KeyGarminOSM, shorthand: "O", usage: "Download Garmin OSM"},
+	{key: catalog.KeyMapsforge, shorthand: "m", usage: "Download Mapsforge"},
+	{key: catalog.KeyMBTiles, shorthand: "M", usage: "Download MBTiles"},
+	{key: catalog.KeyCSV, shorthand: "C", usage: "Download CSV"},
+	{key: catalog.KeyGarminOnroad, shorthand: "r", usage: "Download Garmin Onroad"},
+	{key: catalog.KeyGarminOntrail, shorthand: "t", usage: "Download Garmin Ontrail"},
+	{key: catalog.KeyGarminOpenTopo, shorthand: "o", usage: "Download Garmin OpenTopo"},
+	{key: catalog.KeyOBF, shorthand: "", usage: "Download OBF"},
+	{key: catalog.KeyGPKG, shorthand: "K", usage: "Download GeoPackage"},
+	{key: catalog.KeyO5m, shorthand: "5", usage: "Download o5m"},
+	{key: catalog.KeyO5mZst, shorthand: "Z", usage: "Download o5m.zst"},
+	{key: catalog.KeyPbf, shorthand: "", usage: "Download pbf"},
+}
 
 var downloadCmd = &cobra.Command{
 	Use:   "download [element]",
@@ -73,39 +101,12 @@ func RegisterDownloadCmd() {
 	downloadCmd.Flags().BoolVarP(&noDownload, "nodownload", "n", false, "Do not download file (test only)")
 	downloadCmd.Flags().BoolVar(&downloadProgress, "progress", true, "Show progress bar")
 
-	// Add format flags
-	addFormatFlag(catalog.KeyOsmPbf, "P", "Download osm.pbf (default)")
-	addFormatFlag(catalog.KeyOshPbf, "H", "Download osh.pbf")
-	addFormatFlag(catalog.KeyOsmGz, "G", "Download osm.gz")
-	addFormatFlag(catalog.KeyOsmBz2, "B", "Download osm.bz2")
-	addFormatFlag(catalog.KeyShpZip, "S", "Download shp.zip")
-	addFormatFlag(catalog.KeyState, "", "Download state.txt")
-	addFormatFlag(catalog.KeyPoly, "p", "Download poly")
-	addFormatFlag(catalog.KeyKml, "k", "Download kml")
-	addFormatFlag(catalog.KeyGeoJSON, "g", "Download GeoJSON")
-	addFormatFlag(catalog.KeyGarminOSM, "O", "Download Garmin OSM")
-
-	// Others...
-	addFormatFlag(catalog.KeyMapsforge, "m", "Download Mapsforge")
-	addFormatFlag(catalog.KeyMBTiles, "M", "Download MBTiles")
-	addFormatFlag(catalog.KeyCSV, "C", "Download CSV")
-	addFormatFlag(catalog.KeyGarminOnroad, "r", "Download Garmin Onroad")
-	addFormatFlag(catalog.KeyGarminOntrail, "t", "Download Garmin Ontrail")
-	addFormatFlag(catalog.KeyGarminOpenTopo, "o", "Download Garmin OpenTopo")
-	addFormatFlag(catalog.KeyOBF, "", "Download OBF")
-	addFormatFlag(catalog.KeyGPKG, "K", "Download GeoPackage")
-	addFormatFlag(catalog.KeyO5m, "5", "Download o5m")
-	addFormatFlag(catalog.KeyO5mZst, "Z", "Download o5m.zst")
-	addFormatFlag(catalog.KeyPbf, "", "Download pbf")
+	for _, flagDef := range formatFlagList {
+		downloadCmd.Flags().BoolP(flagDef.key, flagDef.shorthand, false, flagDef.usage)
+	}
 }
 
-func addFormatFlag(key, shorthand, usage string) {
-	val := false
-	formatFlags[key] = &val
-	downloadCmd.Flags().BoolVarP(&val, key, shorthand, false, usage)
-}
-
-func buildDownloadOptions() (*downloader.Options, error) {
+func buildDownloadOptions(cmd *cobra.Command) (*downloader.Options, error) {
 	cfgFile := viper.ConfigFileUsed()
 	if cfgFile == "" {
 		if service != "" {
@@ -128,11 +129,14 @@ func buildDownloadOptions() (*downloader.Options, error) {
 		Quiet:           viper.GetBool("quiet"),
 		NoDownload:      noDownload,
 		Progress:        downloadProgress,
-		FormatFlags:     make(map[string]bool, len(formatFlags)),
+		FormatFlags:     make(map[string]bool, len(formatFlagList)),
 	}
 
-	for k, v := range formatFlags {
-		opts.FormatFlags[k] = *v
+	flags := cmd.Flags()
+	for _, flagDef := range formatFlagList {
+		if enabled, err := flags.GetBool(flagDef.key); err == nil && enabled {
+			opts.FormatFlags[flagDef.key] = true
+		}
 	}
 
 	return opts, nil
@@ -236,7 +240,7 @@ func runDownload(cmd *cobra.Command, args []string) error {
 
 	elementID := args[0]
 
-	opts, err := buildDownloadOptions()
+	opts, err := buildDownloadOptions(cmd)
 	if err != nil {
 		return err
 	}
