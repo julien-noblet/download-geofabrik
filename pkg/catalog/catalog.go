@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"iter"
-	"maps"
 	"os"
 	"path/filepath"
 	"slices"
@@ -463,7 +462,14 @@ func (c *Catalog) SortedKeys() []string {
 		return nil
 	}
 
-	return slices.Sorted(maps.Keys(c.Elements))
+	keys := make([]string, 0, len(c.Elements))
+	for elementID := range c.Elements {
+		keys = append(keys, elementID)
+	}
+
+	slices.Sort(keys)
+
+	return keys
 }
 
 // All returns a sequence iterator over all elements (Go 1.23+).
