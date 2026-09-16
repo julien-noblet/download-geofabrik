@@ -1,2 +1,121 @@
-"# Production-Ready llms.txt for download-geofabrik\n\nHere is the complete, production-ready `llms.txt` designed specifically for `download-geofabrik` in accordance with the [llms.txt specification](https://llmstxt.org/) and Go documentation guidelines.\n\n```markdown\n# download-geofabrik\n\n> Fast, multi-provider OpenStreetMap data extract downloader and Model Context Protocol (MCP) server for LLMs.\n\n## Overview\n\n`download-geofabrik` is a lightweight Go command-line tool and stdio MCP server for querying, validating, and downloading OpenStreetMap (OSM) extracts and boundary polygons across 10 global and regional providers. It provides automated in-flight MD5 checksum verification, atomic file downloads with cache validation, remote catalog scraping, and native Model Context Protocol (MCP) integration for AI agents and LLMs.\n\n- **Repository**: https://github.com/julien-noblet/download-geofabrik\n- **Language & Runtime**: Go (1.27+), single static binary, no runtime C dependencies\n- **License**: Mozilla Public License 2.0 (MPL-2.0)\n- **Primary Interfaces**: CLI (Cobra/Viper) and MCP Server (`mark3labs/mcp-go` over stdio)\n\n---\n\n## Codebase Architecture & Key Files\n\n| File / Path | Role & Key Responsibilities |\n| :--- | :--- |\n| `cmd/download-geofabrik/main.go` | Application entrypoint. Injects `cli.Version` and executes root Cobra command. |\n| `internal/cli/root.go` | Root command setup, global persistent flags (`--config`, `--service`, `--verbose`, `--quiet`), Viper initialization, and `slog` logger setup. |\n| `internal/cli/download.go` | `download [element]` implementation, format flag resolution (`selectDefaultFormat`, `resolveFormat`), directory resolution, and download orchestration. |\n| `internal/cli/generate.go` | `generate` command implementation. Triggers remote provider scraping via `generator.Generate()`. |\n| `internal/cli/list.go` | `list` command implementation. Supports ASCII table, Markdown table (`--markdown`), and JSON (`--json`). |\n| `internal/cli/mcp.go` | `mcp` command. In
-<truncated 13311 bytes>
+# download-geofabrik
+
+> Fast, multi-provider OpenStreetMap data extract downloader and Model Context Protocol (MCP) server for LLMs.
+
+## Overview
+
+`download-geofabrik` is a lightweight Go command-line tool and stdio MCP server for querying, validating, and downloading OpenStreetMap (OSM) extracts and boundary polygons across 10 global and regional providers. It provides automated in-flight MD5 checksum verification, atomic file downloads with cache validation, remote catalog scraping, and native Model Context Protocol (MCP) integration for AI agents and LLMs.
+
+- **Repository**: https://github.com/julien-noblet/download-geofabrik
+- **Language & Runtime**: Go (1.27+), single static binary, no runtime C dependencies
+- **License**: Mozilla Public License 2.0 (MPL-2.0)
+- **Primary Interfaces**: CLI (Cobra/Viper) and MCP Server (`mark3labs/mcp-go` over stdio)
+
+---
+
+## Codebase Architecture & Key Files
+
+| File / Path | Role & Key Responsibilities |
+| :--- | :--- |
+| `cmd/download-geofabrik/main.go` | Application entrypoint. Injects `cli.Version` and executes root Cobra command. |
+| `internal/cli/root.go` | Root command setup, global persistent flags (`--config`, `--service`, `--verbose`, `--quiet`), Viper initialization, and `slog` logger setup. |
+| `internal/cli/download.go` | `download [element]` implementation, format flag resolution (`selectDefaultFormat`, `resolveFormat`), directory resolution, and download orchestration. |
+| `internal/cli/generate.go` | `generate` command implementation. Triggers remote provider scraping via `generator.Generate()`. |
+| `internal/cli/list.go` | `list` command implementation. Supports ASCII table, Markdown table (`--markdown`), and JSON (`--json`). |
+| `internal/cli/mcp.go` | `mcp` command. Initializes and starts the stdio Model Context Protocol server. |
+| `internal/downloader/download.go` | Core download engine: connection-pooled HTTP client (`DisableCompression: true`), atomic writes via `.tmp`, in-flight MD5 calculation with `io.MultiWriter`, progress bar (`pb/v3`). |
+| `internal/downloader/hash.go` | Checksum utilities: `ComputeMD5Hash`, `CheckFileHash`, `VerifyFileChecksum`. |
+| `internal/generator/generator.go` | Catalog generation coordinator. Dispatches to provider by name, formats elements, and serializes YAML catalog. |
+| `internal/provider/provider.go` | Provider interface specification (`Name`, `Description`, `DefaultConfigFile`, `FetchCatalog`) and thread-safe registry (`Register`, `Get`, `List`). |
+| `internal/provider/defaults.go` | Provider auto-registration (`RegisterDefaultProviders()`) and combined format definitions (`AllDefaultFormats()`). |
+| `internal/mcp/server.go` | MCP server lifecycle management (`Server`, `NewServer`, `ServeStdio`). |
+| `internal/mcp/tools.go` | MCP tool handlers: `list_services`, `regenerate_catalog`, `list_elements`, `get_element`, `list_formats`, `download_element`. |
+| `internal/mcp/resources.go` | MCP resource handlers: `geofabrik://services`, `geofabrik://formats`, `geofabrik://catalog/{service}`. |
+| `internal/ui/printer.go` | Terminal output rendering using standard library `text/tabwriter` (table, Markdown) and `encoding/json`. |
+| `pkg/catalog/catalog.go` | Domain model for OSM catalogs (`Catalog`). Thread-safe (`sync.RWMutex`), YAML serialization, tree traversal, and `ResolveURL`. |
+| `pkg/catalog/element.go` | Element model (`Element`): hierarchical metadata, parent-child links, format sets. |
+| `pkg/catalog/format.go` | Constant format keys (`KeyOsmPbf`, `FormatOsmPbf`, etc.) and format resolver utilities. |
+
+---
+
+## Supported Extract Providers
+
+10 built-in providers registered in `internal/provider/defaults.go`:
+
+1. **geofabrik** (`geofabrik.yml`): Global coverage via Geofabrik JSON API.
+2. **openstreetmap.fr** (`openstreetmap.fr.yml`): French administrative subdivisions, regions, and departments.
+3. **bbbike** (`bbbike.yml`): Over 200 worldwide metropolitan areas in multiple mobile formats (Garmin, Mapsforge, Osmand).
+4. **geo2day** (`geo2day.yml`): Russian and CIS regional extracts.
+5. **movisda** (`movisda.yml`): Global extracts organized via GeoJSON administrative hierarchy.
+6. **planet.osm.ch** (`planet.osm.ch.yml`): Switzerland daily extract and cantons.
+7. **osm.kewl.lu** (`osm.kewl.lu.yml`): Luxembourg regional and national extract.
+8. **osm.fit.vutbr.cz** (`osm.fit.vutbr.cz.yml`): Czech Republic and Slovakia extracts.
+9. **osmit-estratti** (`osmit-estratti.yml`): Italian administrative regions and extracts (Wikimedia Cloud).
+10. **osm.kcwu.csie.org** (`osm.kcwu.csie.org.yml`): Taiwan national and regional extracts.
+
+---
+
+## Model Context Protocol (MCP) Integration
+
+When running as an MCP server (`download-geofabrik mcp`), the application exposes the following capabilities:
+
+### Tools
+
+- `list_services`: List all registered OSM data providers with metadata and local catalog status.
+- `regenerate_catalog`: Scrape/fetch remote catalog data for a provider and write updated YAML to disk.
+- `list_elements`: Query catalog elements for a service with optional prefix filtering and pagination.
+- `get_element`: Retrieve details, parent hierarchy, and available format URLs for a specific element.
+- `list_formats`: List all supported file formats (OSM PBF, GeoJSON, Shapefiles, Garmin, etc.) and descriptions.
+- `download_element`: Download an element extract in desired format with checksum verification and optional dry-run.
+
+### Resources
+
+- `geofabrik://services`: JSON array of registered providers.
+- `geofabrik://formats`: JSON dictionary of all format specifications and flag keys.
+- `geofabrik://catalog/{service}`: Full catalog JSON representation for a given service provider.
+
+---
+
+## CLI Usage Cheatsheet
+
+```bash
+# Display help
+download-geofabrik --help
+
+# List available extracts from default service (geofabrik)
+download-geofabrik list
+
+# List extracts from a specific provider in Markdown format
+download-geofabrik list --service bbbike --markdown
+
+# List extracts in JSON format
+download-geofabrik list --service movisda --json
+
+# Dry-run extract download (no network transfer)
+download-geofabrik download luxembourg -n
+
+# Download extract in osm.pbf format (default)
+download-geofabrik download monaco
+
+# Download specific format (e.g. GeoJSON)
+download-geofabrik download monaco -g
+
+# Download with MD5 checksum verification
+download-geofabrik download monaco -C
+
+# Regenerate catalog file for a provider
+download-geofabrik generate --service openstreetmap.fr
+
+# Start MCP stdio server
+download-geofabrik mcp
+```
+
+---
+
+## Key Conventions for LLMs & AI Agents
+
+- **Always use dry-run (`-n` / `--nodownload`)** when verifying CLI commands to avoid gigabyte-sized extract downloads.
+- **Provider isolation**: Each provider has its own package under `internal/provider/<name>/` implementing the `Provider` interface.
+- **Atomic I/O**: Downloads stream to `.tmp` files and calculate MD5 in-flight before renaming to target path.
+- **Concurrency**: `pkg/catalog.Catalog` methods are safe for concurrent reading and writing via `sync.RWMutex`.
+- **Linter Compliance**: Go code must pass `golangci-lint run` (strictly enforces `varnamelen`, `goconst`, `wsl_v5`, `gci`).
