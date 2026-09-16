@@ -28,30 +28,37 @@ func PrintTable(cat *catalog.Catalog, isMarkdown bool, writer io.Writer) error {
 }
 
 func printMarkdownTable(cat *catalog.Catalog, writer io.Writer) error {
-	tabWriter := tabwriter.NewWriter(writer, 0, 0, 1, ' ', 0)
-	fmt.Fprintln(tabWriter, "| ShortName | Is in | Long Name | formats |")
-	fmt.Fprintln(tabWriter, "| --- | --- | --- | --- |")
+	bufWriter := bufio.NewWriter(writer)
+	defer func() {
+		_ = bufWriter.Flush()
+	}()
+
+	if _, err := bufWriter.WriteString("| ShortName | Is in | Long Name | formats |\n| --- | --- | --- | --- |\n"); err != nil {
+		return fmt.Errorf("writing markdown table header: %w", err)
+	}
+
+	parentNameCache := make(map[string]string)
 
 	for _, elementID := range cat.SortedKeys() {
 		elem, _ := cat.Get(elementID)
 		parentName := ""
 
 		if elem.Parent != "" {
-			if parentElem, exists := cat.Get(elem.Parent); exists {
+			cached, ok := parentNameCache[elem.Parent]
+			if ok {
+				parentName = cached
+			} else if parentElem, exists := cat.Get(elem.Parent); exists {
 				parentName = parentElem.Name
+				parentNameCache[elem.Parent] = parentName
 			}
 		}
 
-		fmt.Fprintf(tabWriter, "| %s | %s | %s | %s |\n",
+		fmt.Fprintf(bufWriter, "| %s | %s | %s | %s |\n",
 			elementID,
 			parentName,
 			elem.Name,
 			catalog.GetMiniFormats(elem.Formats),
 		)
-	}
-
-	if err := tabWriter.Flush(); err != nil {
-		return fmt.Errorf("unable to flush markdown table: %w", err)
 	}
 
 	return nil
@@ -61,13 +68,20 @@ func printStandardTable(cat *catalog.Catalog, writer io.Writer) error {
 	tabWriter := tabwriter.NewWriter(writer, 0, 0, tabPadding, ' ', 0)
 	fmt.Fprintln(tabWriter, "SHORTNAME\tIS IN\tLONG NAME\tFORMATS")
 
-	for _, elementID := range cat.SortedKeys() {
+	keys := cat.SortedKeys()
+	parentNameCache := make(map[string]string)
+
+	for _, elementID := range keys {
 		elem, _ := cat.Get(elementID)
 		parentName := ""
 
 		if elem.Parent != "" {
-			if parentElem, exists := cat.Get(elem.Parent); exists {
+			cached, ok := parentNameCache[elem.Parent]
+			if ok {
+				parentName = cached
+			} else if parentElem, exists := cat.Get(elem.Parent); exists {
 				parentName = parentElem.Name
+				parentNameCache[elem.Parent] = parentName
 			}
 		}
 
@@ -83,7 +97,7 @@ func printStandardTable(cat *catalog.Catalog, writer io.Writer) error {
 		return fmt.Errorf("unable to flush table: %w", err)
 	}
 
-	fmt.Fprintf(writer, "Total elements: %d\n", cat.Len())
+	fmt.Fprintf(writer, "Total elements: %d\n", len(keys))
 
 	return nil
 }
