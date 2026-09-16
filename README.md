@@ -328,7 +328,7 @@ download-geofabrik --service movisda generate
 | **Planet OSM Switzerland** | `planet.osm.ch` | Switzerland national and cantonal extracts | 3 | `osm.pbf`, `pbf`, `poly`, `obf`, Garmin | [View Catalog](docs/catalogs/planet.osm.ch.md) |
 | **OSM Luxembourg** | `osm.kewl.lu` | Daily extracts for Luxembourg | 1 | `osm.pbf`, `osm.bz2` | [View Catalog](docs/catalogs/osm.kewl.lu.md) |
 | **FIT VUT Brno** | `osm.fit.vutbr.cz` | Czech Republic extracts by date | 2 | `osm.pbf`, `osm.bz2`, `poly` | [View Catalog](docs/catalogs/osm.fit.vutbr.cz.md) |
-| **OpenStreetMap Italia** | `osmit-estratti` | Italy national, regional, and provincial extracts | 128 | `osm.pbf`, `gpkg`, `poly` | [View Catalog](docs/catalogs/osmit-estratti.md) |
+| **OpenStreetMap Italia** | `osmit-estratti` | Italy national, regional, and provincial extracts | 127 | `osm.pbf`, `gpkg`, `poly` | [View Catalog](docs/catalogs/osmit-estratti.md) |
 | **OSM Taiwan** | `osm.kcwu.csie.org` | Taiwan extracts and change history | 1 | `o5m`, `o5m.zst` | [View Catalog](docs/catalogs/osm.kcwu.csie.org.md) |
 
 ---
