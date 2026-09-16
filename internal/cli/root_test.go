@@ -1,7 +1,6 @@
 package cli_test
 
 import (
-	"io"
 	"os"
 	"testing"
 
@@ -119,18 +118,4 @@ func TestRootCmd_ServiceFlagCompletion(t *testing.T) {
 	assert.Equal(t, cobra.ShellCompDirectiveNoFileComp, directive)
 	assert.Contains(t, completions, "geofabrik")
 	assert.Contains(t, completions, "geo2day")
-}
-
-func Benchmark_CLI_Execute_Help(b *testing.B) {
-	cli.RootCmd.SetArgs([]string{"--help"})
-	cli.RootCmd.SetOut(io.Discard)
-	cli.RootCmd.SetErr(io.Discard)
-	b.Cleanup(func() {
-		cli.RootCmd.SetOut(nil)
-		cli.RootCmd.SetErr(nil)
-	})
-
-	for b.Loop() {
-		_ = cli.Execute()
-	}
 }

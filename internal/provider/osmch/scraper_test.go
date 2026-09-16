@@ -209,16 +209,3 @@ func TestOSMCH_DefaultFormats(t *testing.T) {
 	assert.Contains(t, formats, catalog.FormatOBF)
 	assert.Contains(t, formats, catalog.FormatGarminOSM)
 }
-
-func Benchmark_OSMCH_FetchCatalog_Mock(b *testing.B) {
-	ts := newMockServer(mockOSMCHHTML)
-	defer ts.Close()
-
-	p := newProviderWithServer(ts)
-
-	ctx := b.Context()
-
-	for b.Loop() {
-		_, _ = p.FetchCatalog(ctx)
-	}
-}

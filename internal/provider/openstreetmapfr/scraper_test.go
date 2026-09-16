@@ -228,22 +228,6 @@ func TestOSMFR_DefaultFormats(t *testing.T) {
 	assert.Contains(t, formats, "osm.pbf.md5")
 }
 
-func Benchmark_OSMFR_FetchCatalog_Mock(b *testing.B) {
-	ts := newMockOSMFRServer()
-	defer ts.Close()
-
-	p := openstreetmapfr.NewProvider()
-	p.StartURL = ts.URL + "/extracts/"
-	p.BaseURL = ts.URL + "/extracts"
-	p.Client = ts.Client()
-
-	ctx := b.Context()
-
-	for b.Loop() {
-		_, _ = p.FetchCatalog(ctx)
-	}
-}
-
 func TestOSMFR_FetchCatalog_ContextCancelledDuringCrawl(t *testing.T) {
 	t.Parallel()
 

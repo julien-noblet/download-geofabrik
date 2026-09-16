@@ -76,30 +76,6 @@ func requireNoError(t *testing.T, err error) {
 	}
 }
 
-func Benchmark_hashFileMD5_LICENSE(b *testing.B) {
-	for b.Loop() {
-		if _, err := downloader.ComputeMD5Hash("../../LICENSE"); err != nil {
-			b.Error(err.Error())
-		}
-	}
-}
-
-func Benchmark_controlHash_LICENSE(b *testing.B) {
-	hash, _ := downloader.ComputeMD5Hash("../../LICENSE")
-	tmpDir := b.TempDir()
-	hashfile := filepath.Join(tmpDir, "test.hash")
-
-	if err := os.WriteFile(hashfile, []byte(hash), 0o600); err != nil {
-		b.Errorf("Can't write file %s err: %v", hashfile, err)
-	}
-
-	for b.Loop() {
-		if _, err := downloader.CheckFileHash(hashfile, hash); err != nil {
-			b.Error(err.Error())
-		}
-	}
-}
-
 func Test_controlHash(t *testing.T) {
 	t.Parallel()
 

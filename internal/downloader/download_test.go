@@ -478,22 +478,3 @@ func TestDownloader_NilGuards(t *testing.T) {
 	ok := d.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
 	assert.False(t, ok)
 }
-
-func Benchmark_FileExist(b *testing.B) {
-	tmpDir := b.TempDir()
-	f := filepath.Join(tmpDir, "test.txt")
-	_ = os.WriteFile(f, []byte("data"), 0o600)
-
-	for b.Loop() {
-		_ = downloader.FileExists(f)
-	}
-}
-
-func Benchmark_NewDownloader(b *testing.B) {
-	cfg := catalog.New()
-	opts := &downloader.Options{}
-
-	for b.Loop() {
-		_ = downloader.New(cfg, opts)
-	}
-}
