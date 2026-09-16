@@ -2,7 +2,6 @@ package catalog
 
 import (
 	"slices"
-	"strings"
 )
 
 // Supported format identifiers.
@@ -88,21 +87,21 @@ type MiniFormat struct {
 	ShortName string
 }
 
-var defaultMiniFormats = []MiniFormat{
-	{FullName: FormatState, ShortName: "s"},
-	{FullName: FormatOsmBz2, ShortName: "B"},
-	{FullName: FormatOsmGz, ShortName: "G"},
-	{FullName: FormatOshPbf, ShortName: "H"},
-	{FullName: FormatOsmPbf, ShortName: "P"},
-	{FullName: FormatPbf, ShortName: "P"},
-	{FullName: FormatPoly, ShortName: "p"},
-	{FullName: FormatKml, ShortName: "k"},
-	{FullName: FormatShpZip, ShortName: "S"},
-	{FullName: FormatGeoJSON, ShortName: "g"},
-	{FullName: FormatOBF, ShortName: "o"},
-	{FullName: FormatGPKG, ShortName: "K"},
-	{FullName: FormatO5m, ShortName: "5"},
-	{FullName: FormatO5mZst, ShortName: "Z"},
+var miniFormatBytes = map[string]byte{
+	FormatState:   's',
+	FormatOsmBz2:  'B',
+	FormatOsmGz:   'G',
+	FormatOshPbf:  'H',
+	FormatOsmPbf:  'P',
+	FormatPbf:     'P',
+	FormatPoly:    'p',
+	FormatKml:     'k',
+	FormatShpZip:  'S',
+	FormatGeoJSON: 'g',
+	FormatOBF:     'o',
+	FormatGPKG:    'K',
+	FormatO5m:     '5',
+	FormatO5mZst:  'Z',
 }
 
 // GetMiniFormats returns a compact string representation of the given format slice.
@@ -111,19 +110,18 @@ func GetMiniFormats(formatList []string) string {
 		return ""
 	}
 
-	var shortNames []string
+	var buf [16]byte
+
+	idx := 0
 
 	for _, fullName := range formatList {
-		for _, mini := range defaultMiniFormats {
-			if fullName == mini.FullName {
-				shortNames = append(shortNames, mini.ShortName)
-
-				break
-			}
+		if ch, exists := miniFormatBytes[fullName]; exists && idx < len(buf) {
+			buf[idx] = ch
+			idx++
 		}
 	}
 
-	return strings.Join(shortNames, "")
+	return string(buf[:idx])
 }
 
 var defaultFlagToFormat = map[string]string{
