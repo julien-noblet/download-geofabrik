@@ -101,6 +101,8 @@ func Benchmark_controlHash_LICENSE(b *testing.B) {
 }
 
 func Test_controlHash(t *testing.T) {
+	t.Parallel()
+
 	tmpDir := t.TempDir()
 	validHashFile := filepath.Join(tmpDir, "valid.md5")
 	emptyHashFile := filepath.Join(tmpDir, "empty.md5")
@@ -166,6 +168,8 @@ func Test_controlHash(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			got, err := downloader.CheckFileHash(tt.hashfile, tt.hash)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("CheckFileHash() error = %v, wantErr %v", err, tt.wantErr)
