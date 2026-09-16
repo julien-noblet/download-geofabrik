@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"net"
 	"net/http"
 	"strings"
 	"sync"
@@ -14,25 +13,22 @@ import (
 
 	"golang.org/x/net/html"
 
+	"github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-	ProviderName        = "geo2day"
-	DefaultConfigFile   = "geo2day.yml"
-	BaseURL             = "https://geo2day.com"
-	StartURL            = "https://geo2day.com/"
-	defaultTimeout      = 15 * time.Second
-	defaultKeepAlive    = 30 * time.Second
-	defaultIdleTimeout  = 90 * time.Second
-	concurrencyLimit    = 25
-	maxConnsMultiplier  = 2
-	defaultMaxIdleConns = 100
-	workChanCapacity    = 1000
-	minExtParts         = 2
-	FormatOsmPbfMd5     = "osm.pbf.md5"
+	ProviderName      = "geo2day"
+	DefaultConfigFile = "geo2day.yml"
+	BaseURL           = "https://geo2day.com"
+	StartURL          = "https://geo2day.com/"
+	defaultTimeout    = 15 * time.Second
+	concurrencyLimit  = 25
+	workChanCapacity  = 1000
+	minExtParts       = 2
+	FormatOsmPbfMd5   = "osm.pbf.md5"
 )
 
 // Provider implements provider.Provider for geo2day.com.
@@ -48,20 +44,7 @@ func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
-		Client: &http.Client{
-			Transport: &http.Transport{
-				Proxy: http.ProxyFromEnvironment,
-				DialContext: (&net.Dialer{
-					Timeout:   defaultTimeout,
-					KeepAlive: defaultKeepAlive,
-				}).DialContext,
-				MaxIdleConns:        defaultMaxIdleConns,
-				MaxIdleConnsPerHost: concurrencyLimit,
-				MaxConnsPerHost:     concurrencyLimit * maxConnsMultiplier,
-				IdleConnTimeout:     defaultIdleTimeout,
-				ForceAttemptHTTP2:   true,
-			},
-		},
+		Client:   httpclient.NewCrawlerClientWithTimeout(defaultTimeout, concurrencyLimit),
 	}
 }
 

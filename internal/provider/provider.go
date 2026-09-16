@@ -5,10 +5,12 @@ import (
 	"errors"
 	"fmt"
 	"maps"
+	"net/http"
 	"reflect"
 	"slices"
 	"sync"
 
+	"github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
@@ -88,4 +90,9 @@ func List() []string {
 	defer registryMu.RUnlock()
 
 	return slices.Sorted(maps.Keys(registry))
+}
+
+// NewHTTPClient creates a pre-configured *http.Client optimized for scraping provider catalogs.
+func NewHTTPClient() *http.Client {
+	return httpclient.New()
 }

@@ -6,30 +6,24 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"net"
 	"net/http"
 	"strings"
-	"time"
 	"unicode"
 	"unicode/utf8"
 
 	"golang.org/x/net/html"
 
+	"github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-	ProviderName               = "osm.fit.vutbr.cz"
-	DefaultConfigFile          = "osm.fit.vutbr.cz.yml"
-	BaseURL                    = "https://osm.fit.vutbr.cz/extracts"
-	StartURL                   = "https://osm.fit.vutbr.cz/extracts/"
-	defaultTimeout             = 30 * time.Second
-	defaultKeepAlive           = 30 * time.Second
-	defaultIdleTimeout         = 90 * time.Second
-	defaultMaxIdleConns        = 20
-	defaultMaxIdleConnsPerHost = 10
+	ProviderName      = "osm.fit.vutbr.cz"
+	DefaultConfigFile = "osm.fit.vutbr.cz.yml"
+	BaseURL           = "https://osm.fit.vutbr.cz/extracts"
+	StartURL          = "https://osm.fit.vutbr.cz/extracts/"
 )
 
 // Provider implements provider.Provider for osm.fit.vutbr.cz (Czech Republic extracts).
@@ -45,19 +39,7 @@ func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
-		Client: &http.Client{
-			Transport: &http.Transport{
-				Proxy: http.ProxyFromEnvironment,
-				DialContext: (&net.Dialer{
-					Timeout:   defaultTimeout,
-					KeepAlive: defaultKeepAlive,
-				}).DialContext,
-				MaxIdleConns:        defaultMaxIdleConns,
-				MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-				IdleConnTimeout:     defaultIdleTimeout,
-				ForceAttemptHTTP2:   true,
-			},
-		},
+		Client:   httpclient.New(),
 	}
 }
 

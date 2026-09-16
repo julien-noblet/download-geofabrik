@@ -6,28 +6,22 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"net"
 	"net/http"
 	"strings"
-	"time"
 
 	"golang.org/x/net/html"
 
+	"github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-	ProviderName               = "osm.kewl.lu"
-	DefaultConfigFile          = "osm.kewl.lu.yml"
-	BaseURL                    = "https://osm.kewl.lu/luxembourg.osm"
-	StartURL                   = "https://osm.kewl.lu/luxembourg.osm/"
-	defaultTimeout             = 30 * time.Second
-	defaultKeepAlive           = 30 * time.Second
-	defaultIdleTimeout         = 90 * time.Second
-	defaultMaxIdleConns        = 20
-	defaultMaxIdleConnsPerHost = 10
+	ProviderName      = "osm.kewl.lu"
+	DefaultConfigFile = "osm.kewl.lu.yml"
+	BaseURL           = "https://osm.kewl.lu/luxembourg.osm"
+	StartURL          = "https://osm.kewl.lu/luxembourg.osm/"
 )
 
 // Provider implements provider.Provider for osm.kewl.lu (Luxembourg).
@@ -43,19 +37,7 @@ func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
-		Client: &http.Client{
-			Transport: &http.Transport{
-				Proxy: http.ProxyFromEnvironment,
-				DialContext: (&net.Dialer{
-					Timeout:   defaultTimeout,
-					KeepAlive: defaultKeepAlive,
-				}).DialContext,
-				MaxIdleConns:        defaultMaxIdleConns,
-				MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-				IdleConnTimeout:     defaultIdleTimeout,
-				ForceAttemptHTTP2:   true,
-			},
-		},
+		Client:   httpclient.New(),
 	}
 }
 

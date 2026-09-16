@@ -4,27 +4,21 @@ import (
 	"cmp"
 	"context"
 	"fmt"
-	"net"
 	"net/http"
 	"strings"
-	"time"
 
+	"github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-	ProviderName               = "osmit-estratti"
-	DefaultConfigFile          = "osmit-estratti.yml"
-	BaseURL                    = "https://osmit-estratti.wmcloud.org/output"
-	StartURL                   = "https://osmit-estratti.wmcloud.org/"
-	defaultTimeout             = 30 * time.Second
-	defaultKeepAlive           = 30 * time.Second
-	defaultIdleTimeout         = 90 * time.Second
-	defaultMaxIdleConns        = 20
-	defaultMaxIdleConnsPerHost = 10
-	minCodeAndNameParts        = 2
+	ProviderName        = "osmit-estratti"
+	DefaultConfigFile   = "osmit-estratti.yml"
+	BaseURL             = "https://osmit-estratti.wmcloud.org/output"
+	StartURL            = "https://osmit-estratti.wmcloud.org/"
+	minCodeAndNameParts = 2
 )
 
 // Provider implements provider.Provider for osmit-estratti.wmcloud.org (OSM Italy).
@@ -40,19 +34,7 @@ func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
-		Client: &http.Client{
-			Transport: &http.Transport{
-				Proxy: http.ProxyFromEnvironment,
-				DialContext: (&net.Dialer{
-					Timeout:   defaultTimeout,
-					KeepAlive: defaultKeepAlive,
-				}).DialContext,
-				MaxIdleConns:        defaultMaxIdleConns,
-				MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-				IdleConnTimeout:     defaultIdleTimeout,
-				ForceAttemptHTTP2:   true,
-			},
-		},
+		Client:   httpclient.New(),
 	}
 }
 
