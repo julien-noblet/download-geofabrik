@@ -7,7 +7,6 @@ This repository is a Go CLI for downloading OpenStreetMap extracts from multiple
 The most important runtime modules are:
 
 - `internal/cli`: Cobra commands and CLI setup (`download`, `generate`, `list`, `mcp`, root flags)
-- `internal/cli`: Cobra commands and CLI setup (`download`, `generate`, `list`, `mcp`, root flags)
 - `internal/downloader`: HTTP download client, connection pooling, in-flight MD5 hashing, atomic writes
 - `internal/generator`: config generation logic orchestrating providers
 - `internal/mcp`: Model Context Protocol tools and resources served via stdio
@@ -63,10 +62,10 @@ All providers implement `provider.Provider` (`internal/provider/provider.go`) an
 
 | Goal / Issue | Primary Files to Inspect / Modify | Secondary Files / Context |
 |---|---|---|
-| **Download failure / 404 / format error** | `internal/cli/download.go`<br>`internal/downloader/download.go` | `<service>.yml` (inspect format list)<br>`pkg/catalog/catalog.go` (`Elem2URL`) |
+| **Download failure / 404 / format error** | `internal/cli/download.go`<br>`internal/downloader/download.go` | `<service>.yml` (inspect format list)<br>`pkg/catalog/catalog.go` (`ResolveURL`) |
 | **Checksum / MD5 verification issue** | `internal/downloader/hash.go`<br>`internal/downloader/download.go` (`Checksum`, `verifyChecksum`) | `<service>.yml` (check `.md5` format presence) |
 | **Provider catalog scraping bug / outdated URLs** | `internal/provider/<service>/scraper.go` (or `api.go`) | `internal/provider/<service>/scraper_test.go`<br>`<service>.yml` |
-| **Add or update a file format** | 1. `pkg/formats/formats.go`<br>2. `pkg/catalog/format.go`<br>3. `internal/cli/download.go`<br>4. `internal/provider/<service>/scraper.go` (`DefaultFormats()`) | `<service>.yml`<br>`scraper_test.go` |
+| **Add or update a file format** | 1. `pkg/catalog/format.go`<br>2. `internal/cli/download.go`<br>3. `internal/provider/<service>/scraper.go` (`DefaultFormats()`) | `<service>.yml`<br>`scraper_test.go` |
 | **Add a new provider** | 1. `internal/provider/<newpkg>/scraper.go`<br>2. `internal/provider/defaults.go`<br>3. `internal/generator/generator.go` (add constant)<br>4. `internal/cli/root.go` (service flag help) | `.github/workflows/genyml.yml`<br>`<newpkg>.yml` |
 | **CLI command or flag modification** | `internal/cli/root.go`<br>`internal/cli/<command>.go` | `internal/cli/<command>_test.go` |
 | **MCP tool or resource update** | `internal/mcp/tools.go`<br>`internal/mcp/resources.go` | `internal/mcp/server.go`<br>`internal/mcp/server_test.go` |
@@ -74,8 +73,8 @@ All providers implement `provider.Provider` (`internal/provider/provider.go`) an
 
 ### 4. Data Flows & Execution Pipelines
 
-- **Download pipeline**: `cmd/.../main.go` &rarr; `cli.Execute()` &rarr; `runDownload()` &rarr; `config.LoadConfig(cfgFile)` &rarr; `config.FindElem()` &rarr; `selectDefaultFormat()` / `resolveFormat()` &rarr; `downloaderInstance.DownloadFile()` (atomic `.tmp` + in-flight MD5) &rarr; `downloaderInstance.Checksum()`.
-- **Generate pipeline**: `cmd/.../main.go` &rarr; `runGenerate()` &rarr; `generator.PerformGenerateContext()` &rarr; `provider.Get(service)` &rarr; `prov.FetchCatalog(ctx)` &rarr; sort formats &rarr; `cat.SaveFile(cfgFile)`.
+- **Download pipeline**: `cmd/.../main.go` &rarr; `cli.Execute()` &rarr; `runDownload()` &rarr; `catalog.LoadFile(cfgFile)` &rarr; `cat.Find()` &rarr; `selectDefaultFormat()` / `resolveFormat()` &rarr; `downloaderInstance.DownloadFile()` (atomic `.tmp` + in-flight MD5) &rarr; `downloaderInstance.Checksum()`.
+- **Generate pipeline**: `cmd/.../main.go` &rarr; `runGenerate()` &rarr; `generator.Generate(ctx, service, cfgFile)` &rarr; `provider.Get(service)` &rarr; `prov.FetchCatalog(ctx)` &rarr; sort formats &rarr; `cat.SaveFile(cfgFile)`.
 - **List pipeline**: `cmd/.../main.go` &rarr; `runList()` &rarr; `catalog.LoadFile(cfgFile)` &rarr; `ui.PrintTable()` (ASCII/Markdown) or `ui.PrintJSON()`.
 - **MCP server pipeline**: `cmd/.../main.go` &rarr; `runMCP()` &rarr; `mcp.NewServer(Version)` &rarr; register tools/resources &rarr; `srv.ServeStdio(ctx)`.
 
@@ -161,8 +160,8 @@ To minimize back-and-forth and context token consumption:
      - Provider tests in `scraper_test.go`
 4. **Verification sequence**:
    - 1. Run targeted tests: `go test ./internal/<modified_pkg>`
-   - 1. Run linter: `golangci-lint run` (fix any issues immediately)
-   - 1. Run targeted benchmarks on modified packages only: `go test -bench=. -benchmem ./internal/<modified_pkg>`
+   - 2. Run linter: `golangci-lint run` (fix any issues immediately)
+   - 3. Run targeted benchmarks on modified packages only: `go test -bench=. -benchmem ./internal/<modified_pkg>`
 
 ## Files to inspect first
 
