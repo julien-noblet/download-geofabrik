@@ -60,8 +60,16 @@ func ComputeMD5Hash(filePath string) (string, error) {
 		}
 	}()
 
+	bufPtr, ok := copyBufPool.Get().(*[]byte)
+	if !ok {
+		buf := make([]byte, streamBufferSize)
+		bufPtr = &buf
+	}
+
+	defer copyBufPool.Put(bufPtr)
+
 	hash := md5.New() //nolint:gosec // MD5 is used to control with md5sum files
-	if _, err := io.Copy(hash, file); err != nil {
+	if _, err := io.CopyBuffer(hash, file, *bufPtr); err != nil {
 		return "", fmt.Errorf(copyErrorMsg, filePath, err)
 	}
 

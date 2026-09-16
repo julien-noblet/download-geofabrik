@@ -1,6 +1,7 @@
 package ui
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -93,7 +94,12 @@ func PrintJSON(cat *catalog.Catalog, writer io.Writer) error {
 		return nil
 	}
 
-	encoder := json.NewEncoder(writer)
+	bufWriter := bufio.NewWriter(writer)
+	defer func() {
+		_ = bufWriter.Flush()
+	}()
+
+	encoder := json.NewEncoder(bufWriter)
 	encoder.SetIndent("", "  ")
 
 	if err := encoder.Encode(cat); err != nil {
