@@ -77,11 +77,12 @@ func NewWithConfig(cfg TransportConfig) *http.Client {
 				Timeout:   cfg.Timeout,
 				KeepAlive: cfg.KeepAlive,
 			}).DialContext,
-			MaxIdleConns:        cfg.MaxIdleConns,
-			MaxIdleConnsPerHost: cfg.MaxIdleConnsPerHost,
-			MaxConnsPerHost:     cfg.MaxConnsPerHost,
-			IdleConnTimeout:     cfg.IdleTimeout,
-			ForceAttemptHTTP2:   true,
+			MaxIdleConns:          cfg.MaxIdleConns,
+			MaxIdleConnsPerHost:   cfg.MaxIdleConnsPerHost,
+			MaxConnsPerHost:       cfg.MaxConnsPerHost,
+			IdleConnTimeout:       cfg.IdleTimeout,
+			ResponseHeaderTimeout: cfg.Timeout,
+			ForceAttemptHTTP2:     true,
 		},
 	}
 }

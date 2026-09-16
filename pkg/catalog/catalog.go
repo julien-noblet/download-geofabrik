@@ -2,6 +2,7 @@ package catalog
 
 import (
 	"cmp"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -92,6 +93,25 @@ func New() *Catalog {
 		Formats:  make(FormatDefinitions),
 		Elements: make(map[string]Element),
 	}
+}
+
+// MarshalJSON safely marshals the catalog to JSON under a read lock.
+func (c *Catalog) MarshalJSON() ([]byte, error) {
+	if c == nil {
+		return []byte("null"), nil
+	}
+
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+
+	type catalogAlias Catalog
+
+	data, err := json.Marshal((*catalogAlias)(c))
+	if err != nil {
+		return nil, fmt.Errorf("marshaling catalog to json: %w", err)
+	}
+
+	return data, nil
 }
 
 // LoadFile reads and parses a YAML catalog file from disk.

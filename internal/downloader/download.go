@@ -86,6 +86,14 @@ type Downloader struct {
 	lastHash sync.Map // map[string]string: filePath -> hexMD5 computed in-flight
 }
 
+var copyBufPool = sync.Pool{
+	New: func() any {
+		buf := make([]byte, streamBufferSize)
+
+		return &buf
+	},
+}
+
 // New creates a new Downloader with connection pooling and high-throughput buffers.
 func New(cat *catalog.Catalog, opts *Options) *Downloader {
 	optsCopy := &Options{}
@@ -108,7 +116,9 @@ func New(cat *catalog.Catalog, opts *Options) *Downloader {
 				MaxIdleConnsPerHost:   maxIdleConnsPerHost,
 				IdleConnTimeout:       idleTimeout,
 				TLSHandshakeTimeout:   tlsTimeout,
+				ResponseHeaderTimeout: defaultTimeout,
 				ExpectContinueTimeout: continueTimeout,
+				ForceAttemptHTTP2:     true,
 				DisableCompression:    true, // Avoid decompression CPU overhead for already-compressed OSM files
 				ReadBufferSize:        streamBufferSize,
 				WriteBufferSize:       streamBufferSize,
@@ -168,6 +178,14 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 }
 
 func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, error) {
+	bufPtr, ok := copyBufPool.Get().(*[]byte)
+	if !ok {
+		buf := make([]byte, streamBufferSize)
+		bufPtr = &buf
+	}
+
+	defer copyBufPool.Put(bufPtr)
+
 	opts := d.opts()
 	if opts.Progress && !opts.Quiet && response.ContentLength > progressMinimal {
 		progressBar := pb.Full.Start64(response.ContentLength)
@@ -175,7 +193,7 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 
 		defer progressBar.Finish()
 
-		written, err := io.Copy(dst, barReader)
+		written, err := io.CopyBuffer(dst, barReader, *bufPtr)
 		if err != nil {
 			return written, fmt.Errorf("copying response with progress: %w", err)
 		}
@@ -183,7 +201,7 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 		return written, nil
 	}
 
-	written, err := io.Copy(dst, response.Body)
+	written, err := io.CopyBuffer(dst, response.Body, *bufPtr)
 	if err != nil {
 		return written, fmt.Errorf("copying response: %w", err)
 	}
@@ -258,34 +276,21 @@ func FileExist(filePath string) bool {
 	return FileExists(filePath)
 }
 
-// DownloadFile downloads a file based on the catalog and element.
+// DownloadFile downloads an extract file by element ID and format name.
 func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, outputPath string) error {
-	if d == nil || d.Catalog == nil {
-		return catalog.ErrNilCatalog
-	}
-
-	formatDef, ok := d.Catalog.GetFormat(formatName)
-	if !ok {
-		return fmt.Errorf("%w: %s", catalog.ErrFormatNotFound, formatName)
-	}
-
-	format := formatDef.ID
-
 	myElem, err := d.Catalog.Find(elementID)
 	if err != nil {
 		return fmt.Errorf("finding element %s: %w", elementID, err)
 	}
 
-	myURL, err := d.Catalog.ResolveURL(myElem, format)
+	myURL, err := d.Catalog.ResolveURL(myElem, formatName)
 	if err != nil {
-		return fmt.Errorf("resolving url for %s: %w", elementID, err)
+		return fmt.Errorf("generating URL for %s (%s): %w", elementID, formatName, err)
 	}
 
-	if err := d.FromURL(ctx, myURL, outputPath); err != nil {
-		return fmt.Errorf("downloading from url: %w", err)
-	}
+	slog.Info("Starting download", "element", elementID, "format", formatName, "url", myURL)
 
-	return nil
+	return d.FromURL(ctx, myURL, outputPath)
 }
 
 func (d *Downloader) verifyChecksum(targetFile, hashFile string) bool {
@@ -374,6 +379,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 		return false
 	}
 	defer d.lastHash.Delete(hashFile)
+	defer d.lastHash.Delete(targetFile)
 
 	return d.verifyChecksum(targetFile, hashFile)
 }
