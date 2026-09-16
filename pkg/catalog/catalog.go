@@ -27,7 +27,7 @@ const (
 	maxHierarchyDepth  = 30
 	defaultDirPerm     = 0o750
 	defaultFilePerm    = 0o600
-	defaultBuilderSize = 64
+	defaultBuilderSize = 128
 	twoBaseURLParts    = 2
 )
 
@@ -505,7 +505,6 @@ func (c *Catalog) All() iter.Seq2[string, Element] {
 		defer c.mu.RUnlock()
 
 		for k, v := range c.Elements {
-			v.Formats = slices.Clone(v.Formats)
 			if !yield(k, v) {
 				return
 			}
@@ -546,20 +545,24 @@ func (c *Catalog) ResolveURL(elem *Element, formatID string) (string, error) {
 	return preURL + format.Loc, nil
 }
 
-func (c *Catalog) collectHierarchySegments(startID string) ([]string, error) {
-	var segments [maxHierarchyDepth]string
+type hierarchySegments struct {
+	items [maxHierarchyDepth]string
+	count int
+}
 
-	count := 0
+func (c *Catalog) collectHierarchySegments(startID string) (hierarchySegments, error) {
+	var segments hierarchySegments
+
 	currID := startID
 
-	for count < maxHierarchyDepth {
+	for segments.count < maxHierarchyDepth {
 		currentElem, exists := c.getElementLocked(currID)
 		if !exists {
-			return nil, fmt.Errorf("%w: %s", ErrElementNotFound, currID)
+			return hierarchySegments{}, fmt.Errorf("%w: %s", ErrElementNotFound, currID)
 		}
 
-		segments[count] = currentElem.Filename()
-		count++
+		segments.items[segments.count] = currentElem.Filename()
+		segments.count++
 
 		if !currentElem.HasParent() {
 			break
@@ -568,11 +571,11 @@ func (c *Catalog) collectHierarchySegments(startID string) ([]string, error) {
 		currID = currentElem.Parent
 	}
 
-	if count >= maxHierarchyDepth {
-		return nil, fmt.Errorf("%w: element %s", ErrMaxHierarchyDepth, startID)
+	if segments.count >= maxHierarchyDepth {
+		return hierarchySegments{}, fmt.Errorf("%w: element %s", ErrMaxHierarchyDepth, startID)
 	}
 
-	return segments[:count:count], nil
+	return segments, nil
 }
 
 // ResolvePreURL iteratively builds the URL path prefix with cycle protection and minimal allocations.
@@ -598,8 +601,8 @@ func (c *Catalog) ResolvePreURL(elem *Element, baseURL ...string) (string, error
 
 	builder.WriteString(buildURLPrefix(baseURL, c.BaseURL))
 
-	for i, seg := range slices.Backward(segments) {
-		builder.WriteString(seg)
+	for i := segments.count - 1; i >= 0; i-- {
+		builder.WriteString(segments.items[i])
 
 		if i > 0 {
 			builder.WriteByte('/')
