@@ -455,6 +455,77 @@ func TestCatalog_NilReceiver(t *testing.T) {
 	require.ErrorIs(t, err, catalog.ErrNilCatalog)
 }
 
+func TestCatalog_AddFormat(t *testing.T) {
+	t.Parallel()
+
+	cat := catalog.New()
+	cat.AddFormat(&catalog.Format{
+		ID:  catalog.FormatOsmPbf,
+		Loc: ".osm.pbf",
+	})
+
+	format, exists := cat.GetFormat(catalog.FormatOsmPbf)
+	require.True(t, exists)
+	assert.Equal(t, catalog.FormatOsmPbf, format.ID)
+	assert.Equal(t, ".osm.pbf", format.Loc)
+
+	// nil guards
+	var nilCat *catalog.Catalog
+	nilCat.AddFormat(&catalog.Format{ID: "test"})
+	cat.AddFormat(nil)
+	cat.AddFormat(&catalog.Format{ID: ""})
+}
+
+func TestCatalog_SubElement_GetElements(t *testing.T) {
+	t.Parallel()
+
+	cat := catalog.New()
+	cat.SubElement("europe", "france")
+
+	elem, exists := cat.GetElements("france")
+	require.True(t, exists)
+	assert.Equal(t, "france", elem.ID)
+	assert.Equal(t, "europe", elem.Parent)
+}
+
+func TestElement_Clone(t *testing.T) {
+	t.Parallel()
+
+	elem := catalog.Element{
+		ID:      "france",
+		Name:    "France",
+		Formats: catalog.Formats{catalog.FormatOsmPbf},
+	}
+
+	clone := elem.Clone()
+	assert.Equal(t, elem.ID, clone.ID)
+	assert.Equal(t, elem.Name, clone.Name)
+	assert.Equal(t, elem.Formats, clone.Formats)
+
+	// Mutating clone should not mutate original Formats
+	clone.Formats[0] = "mutated"
+	assert.Equal(t, catalog.FormatOsmPbf, elem.Formats[0])
+
+	var nilElem *catalog.Element
+	assert.Empty(t, nilElem.Clone().ID)
+}
+
+func TestCatalog_ResolveDateElement(t *testing.T) {
+	t.Parallel()
+
+	cat := catalog.New()
+	cat.Elements["latest"] = catalog.Element{
+		ID:   "latest",
+		Name: "Czech Republic (latest)",
+		File: "czech_republic-2026-09-06",
+	}
+
+	elem, exists := cat.Get("2026-09-06")
+	require.True(t, exists)
+	assert.Equal(t, "2026-09-06", elem.ID)
+	assert.Equal(t, "czech_republic-2026-09-06", elem.File)
+}
+
 func Benchmark_Catalog_Get(b *testing.B) {
 	cat, err := catalog.LoadFile(geofabrikYml)
 	if err != nil {

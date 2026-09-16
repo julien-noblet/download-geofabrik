@@ -1,7 +1,9 @@
 package mcp_test
 
 import (
+	"context"
 	"encoding/json"
+	"fmt"
 	"path/filepath"
 	"testing"
 
@@ -10,6 +12,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/julien-noblet/download-geofabrik/internal/mcp"
+	"github.com/julien-noblet/download-geofabrik/internal/provider"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
@@ -521,4 +524,75 @@ func TestResources(t *testing.T) {
 	resFormats, err := fmtResource.Handler(ctx, reqFormats)
 	require.NoError(t, err)
 	require.NotEmpty(t, resFormats)
+}
+
+type mockCatalogProvider struct {
+	name       string
+	configFile string
+}
+
+func (m *mockCatalogProvider) Name() string {
+	return m.name
+}
+
+func (m *mockCatalogProvider) Description() string {
+	return "Mock provider for testing"
+}
+
+func (m *mockCatalogProvider) DefaultConfigFile() string {
+	return m.configFile
+}
+
+func (m *mockCatalogProvider) FetchCatalog(_ context.Context) (*catalog.Catalog, error) {
+	cat, err := catalog.LoadFile(m.configFile)
+	if err != nil {
+		return nil, fmt.Errorf("failed to load catalog file: %w", err)
+	}
+
+	return cat, nil
+}
+
+func TestResourceCatalogTemplate(t *testing.T) {
+	t.Parallel()
+
+	catPath := createTestCatalog(t)
+	mockProv := &mockCatalogProvider{
+		name:       "mock-template-service",
+		configFile: catPath,
+	}
+	provider.Register(mockProv)
+	t.Cleanup(func() {
+		provider.Unregister("mock-template-service")
+	})
+
+	srv := mcp.NewServer(testVersion)
+	ctx := t.Context()
+
+	// 1. Read valid catalog template resource
+	msg, err := json.Marshal(map[string]any{
+		"jsonrpc": "2.0",
+		"id":      1,
+		"method":  "resources/read",
+		"params": map[string]any{
+			"uri": "geofabrik://catalog/mock-template-service",
+		},
+	})
+	require.NoError(t, err)
+
+	resp := srv.MCPServer().HandleMessage(ctx, msg)
+	require.NotNil(t, resp)
+
+	// 2. Read unknown service catalog
+	errMsg, err := json.Marshal(map[string]any{
+		"jsonrpc": "2.0",
+		"id":      2,
+		"method":  "resources/read",
+		"params": map[string]any{
+			"uri": "geofabrik://catalog/unknown-service-xyz",
+		},
+	})
+	require.NoError(t, err)
+
+	errResp := srv.MCPServer().HandleMessage(ctx, errMsg)
+	require.NotNil(t, errResp)
 }
