@@ -71,3 +71,7 @@ dist/
 .direnv/
 .direnv
 
+.agents/
+.claude/
+agent/
+skills-lock.json
