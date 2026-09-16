@@ -404,17 +404,6 @@ func TestCatalog_SliceAliasing(t *testing.T) {
 	assert.Equal(t, catalog.Formats{"format-a", "format-b"}, original.Formats)
 }
 
-func Benchmark_Catalog_Exist(b *testing.B) {
-	cat, err := catalog.LoadFile(geofabrikYml)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	for b.Loop() {
-		_ = cat.Exist("france")
-	}
-}
-
 func TestCatalog_NilReceiver(t *testing.T) {
 	t.Parallel()
 
@@ -524,50 +513,4 @@ func TestCatalog_ResolveDateElement(t *testing.T) {
 	require.True(t, exists)
 	assert.Equal(t, "2026-09-06", elem.ID)
 	assert.Equal(t, "czech_republic-2026-09-06", elem.File)
-}
-
-func Benchmark_Catalog_Get(b *testing.B) {
-	cat, err := catalog.LoadFile(geofabrikYml)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	for b.Loop() {
-		_, _ = cat.Get("france")
-	}
-}
-
-func Benchmark_Catalog_Find(b *testing.B) {
-	cat, err := catalog.LoadFile(geofabrikYml)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	for b.Loop() {
-		_, _ = cat.Find("france")
-	}
-}
-
-func Benchmark_Catalog_ResolveURL(b *testing.B) {
-	cat, err := catalog.LoadFile(geofabrikYml)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	fr, _ := cat.Find("france")
-
-	for b.Loop() {
-		_, _ = cat.ResolveURL(fr, catalog.FormatOsmPbf)
-	}
-}
-
-func Benchmark_Catalog_SortedKeys(b *testing.B) {
-	cat, err := catalog.LoadFile(geofabrikYml)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	for b.Loop() {
-		_ = cat.SortedKeys()
-	}
 }

@@ -460,16 +460,3 @@ func TestGeo2Day_FetchCatalog_FiltersUnwantedElements(t *testing.T) {
 	assert.True(t, exists)
 	assert.Equal(t, "lonely", lonely.Name)
 }
-
-func Benchmark_Geo2Day_FetchCatalog_Mock(b *testing.B) {
-	ts := newMockGeo2DayServer()
-	defer ts.Close()
-
-	p := newTestProvider(ts)
-
-	ctx := b.Context()
-
-	for b.Loop() {
-		_, _ = p.FetchCatalog(ctx)
-	}
-}

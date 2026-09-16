@@ -267,16 +267,3 @@ func TestBBBike_FetchCatalog_CityFileField(t *testing.T) {
 		assert.Equal(t, city+"/"+city, elem.File, "File field for %s", city)
 	}
 }
-
-func Benchmark_BBBike_FetchCatalog_Mock(b *testing.B) {
-	ts := newMockServer(mockBBBikeHTML)
-	defer ts.Close()
-
-	p := newProviderWithServer(ts)
-
-	ctx := b.Context()
-
-	for b.Loop() {
-		_, _ = p.FetchCatalog(ctx)
-	}
-}

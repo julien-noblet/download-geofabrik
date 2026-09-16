@@ -363,16 +363,3 @@ type roundTripperFunc func(*http.Request) (*http.Response, error)
 func (f roundTripperFunc) RoundTrip(req *http.Request) (*http.Response, error) {
 	return f(req)
 }
-
-func Benchmark_OSMFitVutbr_FetchCatalog_Mock(b *testing.B) {
-	ts := newMockServer(mockFitVutbrRootHTML, mockFitVutbrSubdirHTML)
-	defer ts.Close()
-
-	p := newProviderWithServer(ts)
-
-	ctx := b.Context()
-
-	for b.Loop() {
-		_, _ = p.FetchCatalog(ctx)
-	}
-}
