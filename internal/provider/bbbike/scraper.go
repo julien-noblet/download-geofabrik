@@ -6,29 +6,23 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"net"
 	"net/http"
 	"slices"
 	"strings"
-	"time"
 
 	"golang.org/x/net/html"
 
+	"github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-	ProviderName               = "bbbike"
-	DefaultConfigFile          = "bbbike.yml"
-	BaseURL                    = "https://download.bbbike.org/osm/bbbike"
-	StartURL                   = "https://download.bbbike.org/osm/bbbike/"
-	defaultTimeout             = 30 * time.Second
-	defaultKeepAlive           = 30 * time.Second
-	defaultIdleTimeout         = 90 * time.Second
-	defaultMaxIdleConns        = 50
-	defaultMaxIdleConnsPerHost = 20
+	ProviderName      = "bbbike"
+	DefaultConfigFile = "bbbike.yml"
+	BaseURL           = "https://download.bbbike.org/osm/bbbike"
+	StartURL          = "https://download.bbbike.org/osm/bbbike/"
 )
 
 // Provider implements provider.Provider for download.bbbike.org.
@@ -44,19 +38,7 @@ func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
-		Client: &http.Client{
-			Transport: &http.Transport{
-				Proxy: http.ProxyFromEnvironment,
-				DialContext: (&net.Dialer{
-					Timeout:   defaultTimeout,
-					KeepAlive: defaultKeepAlive,
-				}).DialContext,
-				MaxIdleConns:        defaultMaxIdleConns,
-				MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-				IdleConnTimeout:     defaultIdleTimeout,
-				ForceAttemptHTTP2:   true,
-			},
-		},
+		Client:   httpclient.New(),
 	}
 }
 

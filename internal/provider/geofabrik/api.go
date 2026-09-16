@@ -5,27 +5,23 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"net"
 	"net/http"
 	"time"
 
+	"github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-	ProviderName               = "geofabrik"
-	DefaultConfigFile          = "geofabrik.yml"
-	GeofabrikIndexURL          = "https://download.geofabrik.de/index-v1-nogeom.json"
-	GeofabrikBaseURL           = "https://download.geofabrik.de"
-	defaultTimeout             = 60 * time.Second
-	defaultKeepAlive           = 30 * time.Second
-	defaultIdleTimeout         = 90 * time.Second
-	defaultMaxIdleConns        = 20
-	defaultMaxIdleConnsPerHost = 10
-	alwaysPresentFormatsCount  = 3
-	formatPerURLMultiplier     = 2
+	ProviderName              = "geofabrik"
+	DefaultConfigFile         = "geofabrik.yml"
+	GeofabrikIndexURL         = "https://download.geofabrik.de/index-v1-nogeom.json"
+	GeofabrikBaseURL          = "https://download.geofabrik.de"
+	defaultTimeout            = 60 * time.Second
+	alwaysPresentFormatsCount = 3
+	formatPerURLMultiplier    = 2
 )
 
 // Provider implements provider.Provider for the Geofabrik service using JSON API.
@@ -41,19 +37,7 @@ func New() *Provider {
 	return &Provider{
 		IndexURL: GeofabrikIndexURL,
 		BaseURL:  GeofabrikBaseURL,
-		Client: &http.Client{
-			Transport: &http.Transport{
-				Proxy: http.ProxyFromEnvironment,
-				DialContext: (&net.Dialer{
-					Timeout:   defaultTimeout,
-					KeepAlive: defaultKeepAlive,
-				}).DialContext,
-				MaxIdleConns:        defaultMaxIdleConns,
-				MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-				IdleConnTimeout:     defaultIdleTimeout,
-				ForceAttemptHTTP2:   true,
-			},
-		},
+		Client:   httpclient.NewWithTimeout(defaultTimeout),
 	}
 }
 

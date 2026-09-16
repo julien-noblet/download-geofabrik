@@ -5,27 +5,23 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"net"
 	"net/http"
 	"slices"
 	"strings"
 	"time"
 
+	"github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-	ProviderName               = "movisda"
-	DefaultConfigFile          = "movisda.yml"
-	MovisdaIndexURL            = "https://osm.download.movisda.io/admin/Admin-latest.geojson"
-	MovisdaBaseURL             = "https://osm.download.movisda.io/admin"
-	defaultTimeout             = 60 * time.Second
-	defaultKeepAlive           = 30 * time.Second
-	defaultIdleTimeout         = 90 * time.Second
-	defaultMaxIdleConns        = 20
-	defaultMaxIdleConnsPerHost = 10
+	ProviderName      = "movisda"
+	DefaultConfigFile = "movisda.yml"
+	MovisdaIndexURL   = "https://osm.download.movisda.io/admin/Admin-latest.geojson"
+	MovisdaBaseURL    = "https://osm.download.movisda.io/admin"
+	defaultTimeout    = 60 * time.Second
 )
 
 // Provider implements provider.Provider for the Movisda administrative extracts service.
@@ -41,19 +37,7 @@ func New() *Provider {
 	return &Provider{
 		IndexURL: MovisdaIndexURL,
 		BaseURL:  MovisdaBaseURL,
-		Client: &http.Client{
-			Transport: &http.Transport{
-				Proxy: http.ProxyFromEnvironment,
-				DialContext: (&net.Dialer{
-					Timeout:   defaultTimeout,
-					KeepAlive: defaultKeepAlive,
-				}).DialContext,
-				MaxIdleConns:        defaultMaxIdleConns,
-				MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-				IdleConnTimeout:     defaultIdleTimeout,
-				ForceAttemptHTTP2:   true,
-			},
-		},
+		Client:   httpclient.NewWithTimeout(defaultTimeout),
 	}
 }
 

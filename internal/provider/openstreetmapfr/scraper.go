@@ -6,14 +6,13 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"net"
 	"net/http"
 	"strings"
 	"sync"
-	"time"
 
 	"golang.org/x/net/html"
 
+	"github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
@@ -24,12 +23,7 @@ const (
 	DefaultConfigFile   = "openstreetmap.fr.yml"
 	BaseURL             = "https://download.openstreetmap.fr/extracts"
 	StartURL            = "https://download.openstreetmap.fr/extracts/"
-	defaultTimeout      = 30 * time.Second
-	defaultKeepAlive    = 30 * time.Second
-	defaultIdleTimeout  = 90 * time.Second
-	defaultMaxIdleConns = 100
 	concurrencyLimit    = 25
-	maxConnsMultiplier  = 2
 	workChanCapacity    = 1000
 	minParentListLength = 4
 )
@@ -100,20 +94,7 @@ func New() *Provider {
 	return &Provider{
 		BaseURL:  BaseURL,
 		StartURL: StartURL,
-		Client: &http.Client{
-			Transport: &http.Transport{
-				Proxy: http.ProxyFromEnvironment,
-				DialContext: (&net.Dialer{
-					Timeout:   defaultTimeout,
-					KeepAlive: defaultKeepAlive,
-				}).DialContext,
-				MaxIdleConns:        defaultMaxIdleConns,
-				MaxIdleConnsPerHost: concurrencyLimit,
-				MaxConnsPerHost:     concurrencyLimit * maxConnsMultiplier,
-				IdleConnTimeout:     defaultIdleTimeout,
-				ForceAttemptHTTP2:   true,
-			},
-		},
+		Client:   httpclient.NewCrawlerClient(concurrencyLimit),
 	}
 }
 
