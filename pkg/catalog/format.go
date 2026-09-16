@@ -126,42 +126,42 @@ func GetMiniFormats(formatList []string) string {
 	return strings.Join(shortNames, "")
 }
 
+var defaultFlagToFormat = map[string]string{
+	KeyOsmPbf:         FormatOsmPbf,
+	KeyPbf:            FormatPbf,
+	KeyOshPbf:         FormatOshPbf,
+	KeyOsmGz:          FormatOsmGz,
+	KeyOsmBz2:         FormatOsmBz2,
+	KeyShpZip:         FormatShpZip,
+	KeyState:          FormatState,
+	KeyPoly:           FormatPoly,
+	KeyKml:            FormatKml,
+	KeyGeoJSON:        FormatGeoJSON,
+	KeyGarminOSM:      FormatGarminOSM,
+	KeyMapsforge:      FormatMapsforge,
+	KeyMBTiles:        FormatMBTiles,
+	KeyCSV:            FormatCSV,
+	KeyGarminOnroad:   FormatGarminOnroad,
+	KeyGarminOntrail:  FormatGarminOntrail,
+	KeyGarminOpenTopo: FormatGarminOpenTopo,
+	KeyOBF:            FormatOBF,
+	KeyGPKG:           FormatGPKG,
+	KeyO5m:            FormatO5m,
+	KeyO5mZst:         FormatO5mZst,
+}
+
 // GetFormats converts a map of enabled boolean flags into a sorted slice of format IDs.
 func GetFormats(flagMap map[string]bool) []string {
-	flagToFormat := map[string]string{
-		KeyOsmPbf:         FormatOsmPbf,
-		KeyPbf:            FormatPbf,
-		KeyOshPbf:         FormatOshPbf,
-		KeyOsmGz:          FormatOsmGz,
-		KeyOsmBz2:         FormatOsmBz2,
-		KeyShpZip:         FormatShpZip,
-		KeyState:          FormatState,
-		KeyPoly:           FormatPoly,
-		KeyKml:            FormatKml,
-		KeyGeoJSON:        FormatGeoJSON,
-		KeyGarminOSM:      FormatGarminOSM,
-		KeyMapsforge:      FormatMapsforge,
-		KeyMBTiles:        FormatMBTiles,
-		KeyCSV:            FormatCSV,
-		KeyGarminOnroad:   FormatGarminOnroad,
-		KeyGarminOntrail:  FormatGarminOntrail,
-		KeyGarminOpenTopo: FormatGarminOpenTopo,
-		KeyOBF:            FormatOBF,
-		KeyGPKG:           FormatGPKG,
-		KeyO5m:            FormatO5m,
-		KeyO5mZst:         FormatO5mZst,
-	}
-
 	var formats []string
 
-	for key, format := range flagToFormat {
+	for key, format := range defaultFlagToFormat {
 		if enabled, ok := flagMap[key]; ok && enabled {
 			formats = append(formats, format)
 		}
 	}
 
 	if len(formats) == 0 {
-		formats = append(formats, FormatOsmPbf)
+		return []string{FormatOsmPbf}
 	}
 
 	slices.Sort(formats)
