@@ -57,7 +57,7 @@
 				
 				<option value="file0">github.com/julien-noblet/download-geofabrik/cmd/download-geofabrik/main.go (0.0%)</option>
 				
-				<option value="file1">github.com/julien-noblet/download-geofabrik/internal/cli/download.go (86.4%)</option>
+				<option value="file1">github.com/julien-noblet/download-geofabrik/internal/cli/download.go (78.7%)</option>
 				
 				<option value="file2">github.com/julien-noblet/download-geofabrik/internal/cli/generate.go (84.6%)</option>
 				
@@ -69,15 +69,15 @@
 				
 				<option value="file6">github.com/julien-noblet/download-geofabrik/internal/downloader/download.go (86.1%)</option>
 				
-				<option value="file7">github.com/julien-noblet/download-geofabrik/internal/downloader/hash.go (85.2%)</option>
+				<option value="file7">github.com/julien-noblet/download-geofabrik/internal/downloader/hash.go (84.1%)</option>
 				
-				<option value="file8">github.com/julien-noblet/download-geofabrik/internal/generator/generator.go (96.6%)</option>
+				<option value="file8">github.com/julien-noblet/download-geofabrik/internal/generator/generator.go (96.3%)</option>
 				
-				<option value="file9">github.com/julien-noblet/download-geofabrik/internal/mcp/resources.go (67.3%)</option>
+				<option value="file9">github.com/julien-noblet/download-geofabrik/internal/mcp/resources.go (88.5%)</option>
 				
 				<option value="file10">github.com/julien-noblet/download-geofabrik/internal/mcp/server.go (79.5%)</option>
 				
-				<option value="file11">github.com/julien-noblet/download-geofabrik/internal/mcp/tools.go (64.9%)</option>
+				<option value="file11">github.com/julien-noblet/download-geofabrik/internal/mcp/tools.go (66.8%)</option>
 				
 				<option value="file12">github.com/julien-noblet/download-geofabrik/internal/provider/bbbike/scraper.go (97.1%)</option>
 				
@@ -87,29 +87,31 @@
 				
 				<option value="file15">github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik/api.go (96.4%)</option>
 				
-				<option value="file16">github.com/julien-noblet/download-geofabrik/internal/provider/movisda/api.go (96.2%)</option>
+				<option value="file16">github.com/julien-noblet/download-geofabrik/internal/provider/httpclient/client.go (100.0%)</option>
 				
-				<option value="file17">github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr/scraper.go (95.8%)</option>
+				<option value="file17">github.com/julien-noblet/download-geofabrik/internal/provider/movisda/api.go (96.2%)</option>
 				
-				<option value="file18">github.com/julien-noblet/download-geofabrik/internal/provider/osmch/scraper.go (97.6%)</option>
+				<option value="file18">github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr/scraper.go (93.8%)</option>
 				
-				<option value="file19">github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr/scraper.go (99.4%)</option>
+				<option value="file19">github.com/julien-noblet/download-geofabrik/internal/provider/osmch/scraper.go (97.6%)</option>
 				
-				<option value="file20">github.com/julien-noblet/download-geofabrik/internal/provider/osmit/scraper.go (95.7%)</option>
+				<option value="file20">github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr/scraper.go (99.4%)</option>
 				
-				<option value="file21">github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu/scraper.go (97.6%)</option>
+				<option value="file21">github.com/julien-noblet/download-geofabrik/internal/provider/osmit/scraper.go (95.7%)</option>
 				
-				<option value="file22">github.com/julien-noblet/download-geofabrik/internal/provider/osmtw/scraper.go (97.1%)</option>
+				<option value="file22">github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu/scraper.go (97.6%)</option>
 				
-				<option value="file23">github.com/julien-noblet/download-geofabrik/internal/provider/provider.go (100.0%)</option>
+				<option value="file23">github.com/julien-noblet/download-geofabrik/internal/provider/osmtw/scraper.go (97.1%)</option>
 				
-				<option value="file24">github.com/julien-noblet/download-geofabrik/internal/ui/printer.go (94.6%)</option>
+				<option value="file24">github.com/julien-noblet/download-geofabrik/internal/provider/provider.go (97.1%)</option>
 				
-				<option value="file25">github.com/julien-noblet/download-geofabrik/pkg/catalog/catalog.go (84.8%)</option>
+				<option value="file25">github.com/julien-noblet/download-geofabrik/internal/ui/printer.go (93.3%)</option>
 				
-				<option value="file26">github.com/julien-noblet/download-geofabrik/pkg/catalog/element.go (60.9%)</option>
+				<option value="file26">github.com/julien-noblet/download-geofabrik/pkg/catalog/catalog.go (92.0%)</option>
 				
-				<option value="file27">github.com/julien-noblet/download-geofabrik/pkg/catalog/format.go (100.0%)</option>
+				<option value="file27">github.com/julien-noblet/download-geofabrik/pkg/catalog/element.go (95.7%)</option>
+				
+				<option value="file28">github.com/julien-noblet/download-geofabrik/pkg/catalog/format.go (100.0%)</option>
 				
 				</select>
 			</div>
@@ -179,9 +181,37 @@ var (
         check            bool
         noDownload       bool
         downloadProgress bool
-        // Format flags.
-        formatFlags = make(map[string]*bool)
 )
+
+type formatFlag struct {
+        key       string
+        shorthand string
+        usage     string
+}
+
+var formatFlagList = []formatFlag{
+        {key: catalog.KeyOsmPbf, shorthand: "P", usage: "Download osm.pbf (default)"},
+        {key: catalog.KeyOshPbf, shorthand: "H", usage: "Download osh.pbf"},
+        {key: catalog.KeyOsmGz, shorthand: "G", usage: "Download osm.gz"},
+        {key: catalog.KeyOsmBz2, shorthand: "B", usage: "Download osm.bz2"},
+        {key: catalog.KeyShpZip, shorthand: "S", usage: "Download shp.zip"},
+        {key: catalog.KeyState, shorthand: "", usage: "Download state.txt"},
+        {key: catalog.KeyPoly, shorthand: "p", usage: "Download poly"},
+        {key: catalog.KeyKml, shorthand: "k", usage: "Download kml"},
+        {key: catalog.KeyGeoJSON, shorthand: "g", usage: "Download GeoJSON"},
+        {key: catalog.KeyGarminOSM, shorthand: "O", usage: "Download Garmin OSM"},
+        {key: catalog.KeyMapsforge, shorthand: "m", usage: "Download Mapsforge"},
+        {key: catalog.KeyMBTiles, shorthand: "M", usage: "Download MBTiles"},
+        {key: catalog.KeyCSV, shorthand: "C", usage: "Download CSV"},
+        {key: catalog.KeyGarminOnroad, shorthand: "r", usage: "Download Garmin Onroad"},
+        {key: catalog.KeyGarminOntrail, shorthand: "t", usage: "Download Garmin Ontrail"},
+        {key: catalog.KeyGarminOpenTopo, shorthand: "o", usage: "Download Garmin OpenTopo"},
+        {key: catalog.KeyOBF, shorthand: "", usage: "Download OBF"},
+        {key: catalog.KeyGPKG, shorthand: "K", usage: "Download GeoPackage"},
+        {key: catalog.KeyO5m, shorthand: "5", usage: "Download o5m"},
+        {key: catalog.KeyO5mZst, shorthand: "Z", usage: "Download o5m.zst"},
+        {key: catalog.KeyPbf, shorthand: "", usage: "Download pbf"},
+}
 
 var downloadCmd = &amp;cobra.Command{
         Use:   "download [element]",
@@ -228,39 +258,12 @@ func RegisterDownloadCmd() {
         downloadCmd.Flags().BoolVarP(&amp;noDownload, "nodownload", "n", false, "Do not download file (test only)")
         downloadCmd.Flags().BoolVar(&amp;downloadProgress, "progress", true, "Show progress bar")
 </span>
-        // Add format flags
-        <span class="cov1" title="1">addFormatFlag(catalog.KeyOsmPbf, "P", "Download osm.pbf (default)")
-        addFormatFlag(catalog.KeyOshPbf, "H", "Download osh.pbf")
-        addFormatFlag(catalog.KeyOsmGz, "G", "Download osm.gz")
-        addFormatFlag(catalog.KeyOsmBz2, "B", "Download osm.bz2")
-        addFormatFlag(catalog.KeyShpZip, "S", "Download shp.zip")
-        addFormatFlag(catalog.KeyState, "", "Download state.txt")
-        addFormatFlag(catalog.KeyPoly, "p", "Download poly")
-        addFormatFlag(catalog.KeyKml, "k", "Download kml")
-        addFormatFlag(catalog.KeyGeoJSON, "g", "Download GeoJSON")
-        addFormatFlag(catalog.KeyGarminOSM, "O", "Download Garmin OSM")
-</span>
-        // Others...
-        <span class="cov1" title="1">addFormatFlag(catalog.KeyMapsforge, "m", "Download Mapsforge")
-        addFormatFlag(catalog.KeyMBTiles, "M", "Download MBTiles")
-        addFormatFlag(catalog.KeyCSV, "C", "Download CSV")
-        addFormatFlag(catalog.KeyGarminOnroad, "r", "Download Garmin Onroad")
-        addFormatFlag(catalog.KeyGarminOntrail, "t", "Download Garmin Ontrail")
-        addFormatFlag(catalog.KeyGarminOpenTopo, "o", "Download Garmin OpenTopo")
-        addFormatFlag(catalog.KeyOBF, "", "Download OBF")
-        addFormatFlag(catalog.KeyGPKG, "K", "Download GeoPackage")
-        addFormatFlag(catalog.KeyO5m, "5", "Download o5m")
-        addFormatFlag(catalog.KeyO5mZst, "Z", "Download o5m.zst")
-        addFormatFlag(catalog.KeyPbf, "", "Download pbf")
-</span>}
+        <span class="cov1" title="1">for _, flagDef := range formatFlagList </span>{
+                <span class="cov6" title="21">downloadCmd.Flags().BoolP(flagDef.key, flagDef.shorthand, false, flagDef.usage)
+</span>        }
+}
 
-func addFormatFlag(key, shorthand, usage string) {
-        <span class="cov6" title="21">val := false
-        formatFlags[key] = &amp;val
-        downloadCmd.Flags().BoolVarP(&amp;val, key, shorthand, false, usage)
-</span>}
-
-func buildDownloadOptions() (*downloader.Options, error) {
+func buildDownloadOptions(cmd *cobra.Command) (*downloader.Options, error) {
         <span class="cov4" title="10">cfgFile := viper.ConfigFileUsed()
         if cfgFile == "" </span>{
                 <span class="cov0" title="0">if service != "" </span>{
@@ -283,12 +286,15 @@ func buildDownloadOptions() (*downloader.Options, error) {
                 Quiet:           viper.GetBool("quiet"),
                 NoDownload:      noDownload,
                 Progress:        downloadProgress,
-                FormatFlags:     make(map[string]bool, len(formatFlags)),
+                FormatFlags:     make(map[string]bool, len(formatFlagList)),
 </span>        }
 
-        <span class="cov4" title="10">for k, v := range formatFlags </span>{
-                <span class="cov10" title="210">opts.FormatFlags[k] = *v
-</span>        }
+        <span class="cov4" title="10">flags := cmd.Flags()
+        for _, flagDef := range formatFlagList </span>{
+                <span class="cov10" title="210">if enabled, err := flags.GetBool(flagDef.key); err == nil &amp;&amp; enabled </span>{
+                        <span class="cov2" title="2">opts.FormatFlags[flagDef.key] = true
+</span>                }
+        }
 
         <span class="cov4" title="10">return opts, nil</span>
 }
@@ -324,7 +330,7 @@ var preferredDefaultFormats = []string{
 
 func hasExplicitFormat(flags map[string]bool) bool {
         <span class="cov4" title="9">for _, enabled := range flags </span>{
-                <span class="cov9" title="174">if enabled </span>{
+                <span class="cov2" title="2">if enabled </span>{
                         <span class="cov2" title="2">return true
 </span>                }
         }
@@ -391,7 +397,7 @@ func runDownload(cmd *cobra.Command, args []string) error {
 
         <span class="cov4" title="10">elementID := args[0]
 </span>
-        <span class="cov4" title="10">opts, err := buildDownloadOptions()
+        <span class="cov4" title="10">opts, err := buildDownloadOptions(cmd)
         if err != nil </span>{
                 <span class="cov0" title="0">return err
 </span>        }
@@ -842,6 +848,14 @@ type Downloader struct {
         lastHash sync.Map // map[string]string: filePath -&gt; hexMD5 computed in-flight
 }
 
+var copyBufPool = sync.Pool{
+        New: func() any {
+                <span class="cov4" title="4">buf := make([]byte, streamBufferSize)
+</span>
+                <span class="cov4" title="4">return &amp;buf
+</span>        },
+}
+
 // New creates a new Downloader with connection pooling and high-throughput buffers.
 func New(cat *catalog.Catalog, opts *Options) *Downloader {
         <span class="cov8" title="25">optsCopy := &amp;Options{}
@@ -864,7 +878,9 @@ func New(cat *catalog.Catalog, opts *Options) *Downloader {
                                 MaxIdleConnsPerHost:   maxIdleConnsPerHost,
                                 IdleConnTimeout:       idleTimeout,
                                 TLSHandshakeTimeout:   tlsTimeout,
+                                ResponseHeaderTimeout: defaultTimeout,
                                 ExpectContinueTimeout: continueTimeout,
+                                ForceAttemptHTTP2:     true,
                                 DisableCompression:    true, // Avoid decompression CPU overhead for already-compressed OSM files
                                 ReadBufferSize:        streamBufferSize,
                                 WriteBufferSize:       streamBufferSize,
@@ -924,6 +940,14 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 }
 
 func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, error) {
+        <span class="cov5" title="9">bufPtr, ok := copyBufPool.Get().(*[]byte)
+        if !ok </span>{
+                <span class="cov0" title="0">buf := make([]byte, streamBufferSize)
+                bufPtr = &amp;buf
+</span>        }
+
+        <span class="cov5" title="9">defer copyBufPool.Put(bufPtr)
+</span>
         <span class="cov5" title="9">opts := d.opts()
         if opts.Progress &amp;&amp; !opts.Quiet &amp;&amp; response.ContentLength &gt; progressMinimal </span>{
                 <span class="cov1" title="1">progressBar := pb.Full.Start64(response.ContentLength)
@@ -931,7 +955,7 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 </span>
                 <span class="cov1" title="1">defer progressBar.Finish()
 </span>
-                <span class="cov1" title="1">written, err := io.Copy(dst, barReader)
+                <span class="cov1" title="1">written, err := io.CopyBuffer(dst, barReader, *bufPtr)
                 if err != nil </span>{
                         <span class="cov0" title="0">return written, fmt.Errorf("copying response with progress: %w", err)
 </span>                }
@@ -939,7 +963,7 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
                 <span class="cov1" title="1">return written, nil</span>
         }
 
-        <span class="cov5" title="8">written, err := io.Copy(dst, response.Body)
+        <span class="cov5" title="8">written, err := io.CopyBuffer(dst, response.Body, *bufPtr)
         if err != nil </span>{
                 <span class="cov0" title="0">return written, fmt.Errorf("copying response: %w", err)
 </span>        }
@@ -1014,34 +1038,21 @@ func FileExist(filePath string) bool {
         <span class="cov3" title="3">return FileExists(filePath)
 </span>}
 
-// DownloadFile downloads a file based on the catalog and element.
+// DownloadFile downloads an extract file by element ID and format name.
 func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, outputPath string) error {
-        <span class="cov7" title="18">if d == nil || d.Catalog == nil </span>{
-                <span class="cov1" title="1">return catalog.ErrNilCatalog
+        <span class="cov7" title="18">myElem, err := d.Catalog.Find(elementID)
+        if err != nil </span>{
+                <span class="cov2" title="2">return fmt.Errorf("finding element %s: %w", elementID, err)
 </span>        }
 
-        <span class="cov7" title="17">formatDef, ok := d.Catalog.GetFormat(formatName)
-        if !ok </span>{
-                <span class="cov2" title="2">return fmt.Errorf("%w: %s", catalog.ErrFormatNotFound, formatName)
+        <span class="cov7" title="16">myURL, err := d.Catalog.ResolveURL(myElem, formatName)
+        if err != nil </span>{
+                <span class="cov2" title="2">return fmt.Errorf("generating URL for %s (%s): %w", elementID, formatName, err)
 </span>        }
 
-        <span class="cov7" title="15">format := formatDef.ID
+        <span class="cov6" title="14">slog.Info("Starting download", "element", elementID, "format", formatName, "url", myURL)
 </span>
-        <span class="cov7" title="15">myElem, err := d.Catalog.Find(elementID)
-        if err != nil </span>{
-                <span class="cov1" title="1">return fmt.Errorf("finding element %s: %w", elementID, err)
-</span>        }
-
-        <span class="cov6" title="14">myURL, err := d.Catalog.ResolveURL(myElem, format)
-        if err != nil </span>{
-                <span class="cov0" title="0">return fmt.Errorf("resolving url for %s: %w", elementID, err)
-</span>        }
-
-        <span class="cov6" title="14">if err := d.FromURL(ctx, myURL, outputPath); err != nil </span>{
-                <span class="cov1" title="1">return fmt.Errorf("downloading from url: %w", err)
-</span>        }
-
-        <span class="cov6" title="13">return nil</span>
+        <span class="cov6" title="14">return d.FromURL(ctx, myURL, outputPath)</span>
 }
 
 func (d *Downloader) verifyChecksum(targetFile, hashFile string) bool {
@@ -1130,6 +1141,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
                 <span class="cov1" title="1">return false
 </span>        }
         <span class="cov3" title="3">defer d.lastHash.Delete(hashFile)
+        defer d.lastHash.Delete(targetFile)
 </span>
         <span class="cov3" title="3">return d.verifyChecksum(targetFile, hashFile)</span>
 }
@@ -1197,8 +1209,16 @@ func ComputeMD5Hash(filePath string) (string, error) {
 </span>                }
         }()
 
+        <span class="cov8" title="8">bufPtr, ok := copyBufPool.Get().(*[]byte)
+        if !ok </span>{
+                <span class="cov0" title="0">buf := make([]byte, streamBufferSize)
+                bufPtr = &amp;buf
+</span>        }
+
+        <span class="cov8" title="8">defer copyBufPool.Put(bufPtr)
+</span>
         <span class="cov8" title="8">hash := md5.New() //nolint:gosec // MD5 is used to control with md5sum files
-        if _, err := io.Copy(hash, file); err != nil </span>{
+        if _, err := io.CopyBuffer(hash, file, *bufPtr); err != nil </span>{
                 <span class="cov0" title="0">return "", fmt.Errorf(copyErrorMsg, filePath, err)
 </span>        }
 
@@ -1294,10 +1314,8 @@ func Generate(ctx context.Context, service, configfile string) error {
 </span>        }
 
         // Sort formats within each element for deterministic YAML output
-        <span class="cov4" title="2">for k, elem := range cat.Elements </span>{
-                <span class="cov1" title="1">elem.Formats = slices.Clone(elem.Formats)
-                slices.Sort(elem.Formats)
-                cat.Elements[k] = elem
+        <span class="cov4" title="2">for _, elem := range cat.Elements </span>{
+                <span class="cov1" title="1">slices.Sort(elem.Formats)
 </span>        }
 
         <span class="cov4" title="2">if err := cat.SaveFile(configfile); err != nil </span>{
@@ -1332,7 +1350,7 @@ const (
 )
 
 func (s *Server) registerResources() {
-        <span class="cov10" title="14">s.mcpServer.AddResource(
+        <span class="cov10" title="15">s.mcpServer.AddResource(
                 mcpSDK.NewResource(
                         uriSchemeServices,
                         "OSM Data Services",
@@ -1342,7 +1360,7 @@ func (s *Server) registerResources() {
                 s.handleResourceServices,
         )
 </span>
-        <span class="cov10" title="14">s.mcpServer.AddResource(
+        <span class="cov10" title="15">s.mcpServer.AddResource(
                 mcpSDK.NewResource(
                         uriSchemeFormats,
                         "OSM File Formats",
@@ -1352,7 +1370,7 @@ func (s *Server) registerResources() {
                 s.handleResourceFormats,
         )
 </span>
-        <span class="cov10" title="14">s.mcpServer.AddResourceTemplate(
+        <span class="cov10" title="15">s.mcpServer.AddResourceTemplate(
                 mcpSDK.NewResourceTemplate(
                         "geofabrik://catalog/{service}",
                         "Service Catalog",
@@ -1368,21 +1386,21 @@ func (s *Server) handleResourceServices(_ context.Context, request mcpSDK.ReadRe
         services := make([]ServiceInfo, 0, len(names))
 </span>
         <span class="cov1" title="1">for _, name := range names </span>{
-                <span class="cov8" title="10">prov, err := provider.Get(name)
+                <span class="cov8" title="11">prov, err := provider.Get(name)
                 if err != nil </span>{
                         <span class="cov0" title="0">continue</span>
                 }
 
-                <span class="cov8" title="10">defaultCfg := prov.DefaultConfigFile()
+                <span class="cov8" title="11">defaultCfg := prov.DefaultConfigFile()
                 hasLocal := false
 </span>
-                <span class="cov8" title="10">if defaultCfg != "" </span>{
-                        <span class="cov8" title="10">if _, statErr := os.Stat(defaultCfg); statErr == nil </span>{
-                                <span class="cov0" title="0">hasLocal = true
+                <span class="cov8" title="11">if defaultCfg != "" </span>{
+                        <span class="cov8" title="11">if _, statErr := os.Stat(defaultCfg); statErr == nil </span>{
+                                <span class="cov1" title="1">hasLocal = true
 </span>                        }
                 }
 
-                <span class="cov8" title="10">services = append(services, ServiceInfo{
+                <span class="cov8" title="11">services = append(services, ServiceInfo{
                         Name:              prov.Name(),
                         Description:       prov.Description(),
                         DefaultConfigFile: defaultCfg,
@@ -1422,27 +1440,27 @@ func (s *Server) handleResourceFormats(_ context.Context, request mcpSDK.ReadRes
 }
 
 func (s *Server) handleResourceCatalogTemplate(ctx context.Context, request mcpSDK.ReadResourceRequest) ([]mcpSDK.ResourceContents, error) {
-        <span class="cov0" title="0">parsedURL, err := url.Parse(request.Params.URI)
+        <span class="cov3" title="2">parsedURL, err := url.Parse(request.Params.URI)
         if err != nil </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("invalid resource uri %s: %w", request.Params.URI, err)
 </span>        }
 
-        <span class="cov0" title="0">serviceName := strings.TrimPrefix(parsedURL.Path, "/")
+        <span class="cov3" title="2">serviceName := strings.TrimPrefix(parsedURL.Path, "/")
         if serviceName == "" </span>{
                 <span class="cov0" title="0">serviceName = parsedURL.Host
 </span>        }
 
-        <span class="cov0" title="0">cat, err := s.loadOrFetchCatalog(ctx, serviceName, "")
+        <span class="cov3" title="2">cat, err := s.loadOrFetchCatalog(ctx, serviceName, "")
         if err != nil </span>{
-                <span class="cov0" title="0">return nil, fmt.Errorf("failed to load catalog for %s: %w", serviceName, err)
+                <span class="cov1" title="1">return nil, fmt.Errorf("failed to load catalog for %s: %w", serviceName, err)
 </span>        }
 
-        <span class="cov0" title="0">data, err := json.MarshalIndent(cat, "", "  ")
+        <span class="cov1" title="1">data, err := json.MarshalIndent(cat, "", "  ")
         if err != nil </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("failed to marshal catalog for %s: %w", serviceName, err)
 </span>        }
 
-        <span class="cov0" title="0">return []mcpSDK.ResourceContents{
+        <span class="cov1" title="1">return []mcpSDK.ResourceContents{
                 mcpSDK.TextResourceContents{
                         URI:      request.Params.URI,
                         MIMEType: mimeTypeJSON,
@@ -1478,9 +1496,9 @@ var ErrServerNotInitialized = errors.New("mcp server not initialized: use mcp.Ne
 
 // NewServer initializes a new download-geofabrik MCP server with all tools and resources.
 func NewServer(version string) *Server {
-        <span class="cov8" title="14">provider.RegisterDefaultProviders()
+        <span class="cov8" title="15">provider.RegisterDefaultProviders()
 </span>
-        <span class="cov8" title="14">mcpServer := server.NewMCPServer(
+        <span class="cov8" title="15">mcpServer := server.NewMCPServer(
                 "download-geofabrik",
                 version,
                 server.WithToolCapabilities(false),
@@ -1490,15 +1508,15 @@ func NewServer(version string) *Server {
                         "listing available data formats, regenerating catalogs, and downloading extracts."),
         )
 </span>
-        <span class="cov8" title="14">serverInstance := &amp;Server{
+        <span class="cov8" title="15">serverInstance := &amp;Server{
                 mcpServer: mcpServer,
                 version:   version,
 </span>        }
 
-        <span class="cov8" title="14">serverInstance.registerTools()
+        <span class="cov8" title="15">serverInstance.registerTools()
         serverInstance.registerResources()
 </span>
-        <span class="cov8" title="14">return serverInstance
+        <span class="cov8" title="15">return serverInstance
 </span>}
 
 // ServeStdio starts serving the MCP protocol over standard I/O (stdin/stdout).
@@ -1518,7 +1536,7 @@ func (s *Server) ServeStdio(_ context.Context) error {
 
 // MCPServer returns the underlying mark3labs MCPServer instance (useful for testing).
 func (s *Server) MCPServer() *server.MCPServer {
-        <span class="cov10" title="20">return s.mcpServer
+        <span class="cov10" title="22">return s.mcpServer
 </span>}
 </pre>
 		
@@ -1664,7 +1682,7 @@ type downloadExecutionParams struct {
 }
 
 func (s *Server) registerTools() {
-        <span class="cov5" title="14">s.mcpServer.AddTool(s.toolListServices(), s.handleListServices)
+        <span class="cov5" title="15">s.mcpServer.AddTool(s.toolListServices(), s.handleListServices)
         s.mcpServer.AddTool(s.toolRegenerateCatalog(), s.handleRegenerateCatalog)
         s.mcpServer.AddTool(s.toolListElements(), s.handleListElements)
         s.mcpServer.AddTool(s.toolGetElement(), s.handleGetElement)
@@ -1673,10 +1691,10 @@ func (s *Server) registerTools() {
 </span>}
 
 func (s *Server) toolListServices() mcpSDK.Tool {
-        <span class="cov5" title="14">desc := "List all available OpenStreetMap data provider services (e.g. geofabrik, openstreetmap.fr, bbbike, geo2day, movisda, etc.) " +
+        <span class="cov5" title="15">desc := "List all available OpenStreetMap data provider services (e.g. geofabrik, openstreetmap.fr, bbbike, geo2day, movisda, etc.) " +
                 "with metadata and local config status."
 </span>
-        <span class="cov5" title="14">return mcpSDK.NewTool("list_services",
+        <span class="cov5" title="15">return mcpSDK.NewTool("list_services",
                 mcpSDK.WithDescription(desc),
                 mcpSDK.WithBoolean("check_local",
                         mcpSDK.Description("Check whether local YAML configuration files exist on disk (default: true)."),
@@ -1685,7 +1703,7 @@ func (s *Server) toolListServices() mcpSDK.Tool {
 </span>}
 
 func (s *Server) toolRegenerateCatalog() mcpSDK.Tool {
-        <span class="cov5" title="14">return mcpSDK.NewTool("regenerate_catalog",
+        <span class="cov5" title="15">return mcpSDK.NewTool("regenerate_catalog",
                 mcpSDK.WithDescription("Fetch the latest OSM catalog from the specified service provider and save or update the local YAML configuration file."),
                 mcpSDK.WithString("service",
                         mcpSDK.Required(),
@@ -1698,10 +1716,10 @@ func (s *Server) toolRegenerateCatalog() mcpSDK.Tool {
 </span>}
 
 func (s *Server) toolListElements() mcpSDK.Tool {
-        <span class="cov5" title="14">desc := "List and search elements (regions, countries, cities) in a service catalog to discover available file formats " +
+        <span class="cov5" title="15">desc := "List and search elements (regions, countries, cities) in a service catalog to discover available file formats " +
                 "(osm.pbf, shp.zip, poly, etc.) and metadata."
 </span>
-        <span class="cov5" title="14">return mcpSDK.NewTool("list_elements",
+        <span class="cov5" title="15">return mcpSDK.NewTool("list_elements",
                 mcpSDK.WithDescription(desc),
                 mcpSDK.WithString("service",
                         mcpSDK.Description("Service name to query (default: 'geofabrik')."),
@@ -1725,10 +1743,10 @@ func (s *Server) toolListElements() mcpSDK.Tool {
 </span>}
 
 func (s *Server) toolGetElement() mcpSDK.Tool {
-        <span class="cov5" title="14">desc := "Get detailed information about a specific element in a service, including resolved download URLs for each format " +
+        <span class="cov5" title="15">desc := "Get detailed information about a specific element in a service, including resolved download URLs for each format " +
                 "and checksum verification availability."
 </span>
-        <span class="cov5" title="14">return mcpSDK.NewTool("get_element",
+        <span class="cov5" title="15">return mcpSDK.NewTool("get_element",
                 mcpSDK.WithDescription(desc),
                 mcpSDK.WithString("element_id",
                         mcpSDK.Required(),
@@ -1744,7 +1762,7 @@ func (s *Server) toolGetElement() mcpSDK.Tool {
 </span>}
 
 func (s *Server) toolListFormats() mcpSDK.Tool {
-        <span class="cov5" title="14">return mcpSDK.NewTool("list_formats",
+        <span class="cov5" title="15">return mcpSDK.NewTool("list_formats",
                 mcpSDK.WithDescription("List file format definitions supported across services or defined in a specific service catalog."),
                 mcpSDK.WithString("service",
                         mcpSDK.Description("Optional service name to get format definitions specific to that provider."),
@@ -1756,7 +1774,7 @@ func (s *Server) toolListFormats() mcpSDK.Tool {
 </span>}
 
 func (s *Server) toolDownloadElement() mcpSDK.Tool {
-        <span class="cov5" title="14">return mcpSDK.NewTool("download_element",
+        <span class="cov5" title="15">return mcpSDK.NewTool("download_element",
                 mcpSDK.WithDescription("Download an OSM extract for a given element and format(s) from a provider service."),
                 mcpSDK.WithString("element_id",
                         mcpSDK.Required(),
@@ -1791,21 +1809,21 @@ func (s *Server) handleListServices(_ context.Context, request mcpSDK.CallToolRe
         services := make([]ServiceInfo, 0, len(names))
 </span>
         <span class="cov2" title="2">for _, name := range names </span>{
-                <span class="cov5" title="20">prov, err := provider.Get(name)
+                <span class="cov5" title="21">prov, err := provider.Get(name)
                 if err != nil </span>{
                         <span class="cov0" title="0">continue</span>
                 }
 
-                <span class="cov5" title="20">defaultCfg := prov.DefaultConfigFile()
+                <span class="cov5" title="21">defaultCfg := prov.DefaultConfigFile()
                 hasLocal := false
 </span>
-                <span class="cov5" title="20">if checkLocal &amp;&amp; defaultCfg != "" </span>{
-                        <span class="cov5" title="20">if _, statErr := os.Stat(defaultCfg); statErr == nil </span>{
-                                <span class="cov0" title="0">hasLocal = true
+                <span class="cov5" title="21">if checkLocal &amp;&amp; defaultCfg != "" </span>{
+                        <span class="cov5" title="21">if _, statErr := os.Stat(defaultCfg); statErr == nil </span>{
+                                <span class="cov1" title="1">hasLocal = true
 </span>                        }
                 }
 
-                <span class="cov5" title="20">services = append(services, ServiceInfo{
+                <span class="cov5" title="21">services = append(services, ServiceInfo{
                         Name:              prov.Name(),
                         Description:       prov.Description(),
                         DefaultConfigFile: defaultCfg,
@@ -2080,7 +2098,7 @@ func (s *Server) handleListFormats(ctx context.Context, request mcpSDK.CallToolR
 </span>                }
 
                 <span class="cov3" title="5">slices.SortFunc(formatSpecs, func(a, b FormatSpecification) int </span>{
-                        <span class="cov4" title="12">return strings.Compare(a.ID, b.ID)
+                        <span class="cov5" title="13">return strings.Compare(a.ID, b.ID)
 </span>                })
 
                 <span class="cov3" title="5">return jsonToolResult(formatSpecs)</span>
@@ -2113,7 +2131,7 @@ func collectGlobalFormats() []FormatSpecification {
 </span>        }
 
         <span class="cov2" title="3">slices.SortFunc(specs, func(a, b FormatSpecification) int </span>{
-                <span class="cov10" title="320">return strings.Compare(a.ID, b.ID)
+                <span class="cov10" title="315">return strings.Compare(a.ID, b.ID)
 </span>        })
 
         <span class="cov2" title="3">return specs</span>
@@ -2422,7 +2440,7 @@ func (s *Server) ensureCatalogFile(ctx context.Context, serviceName, customCfg s
 }
 
 func (s *Server) loadOrFetchCatalog(ctx context.Context, serviceName, customCfg string) (*catalog.Catalog, error) {
-        <span class="cov5" title="19">if customCfg != "" </span>{
+        <span class="cov5" title="21">if customCfg != "" </span>{
                 <span class="cov5" title="19">cat, err := catalog.LoadFile(customCfg)
                 if err != nil </span>{
                         <span class="cov0" title="0">return nil, fmt.Errorf("failed to load custom catalog %s: %w", customCfg, err)
@@ -2431,16 +2449,16 @@ func (s *Server) loadOrFetchCatalog(ctx context.Context, serviceName, customCfg 
                 <span class="cov5" title="19">return cat, nil</span>
         }
 
-        <span class="cov0" title="0">prov, err := provider.Get(serviceName)
+        <span class="cov2" title="2">prov, err := provider.Get(serviceName)
         if err != nil </span>{
-                <span class="cov0" title="0">return nil, fmt.Errorf("%w: %s: %w", errInvalidService, serviceName, err)
+                <span class="cov1" title="1">return nil, fmt.Errorf("%w: %s: %w", errInvalidService, serviceName, err)
 </span>        }
 
-        <span class="cov0" title="0">defaultFile := prov.DefaultConfigFile()
+        <span class="cov1" title="1">defaultFile := prov.DefaultConfigFile()
         if _, statErr := os.Stat(defaultFile); statErr == nil </span>{
-                <span class="cov0" title="0">cat, loadErr := catalog.LoadFile(defaultFile)
+                <span class="cov1" title="1">cat, loadErr := catalog.LoadFile(defaultFile)
                 if loadErr == nil </span>{
-                        <span class="cov0" title="0">return cat, nil
+                        <span class="cov1" title="1">return cat, nil
 </span>                }
 
                 <span class="cov0" title="0">slog.Warn("Failed to load existing catalog file, falling back to live fetch", "file", defaultFile, "error", loadErr)</span>
@@ -2494,29 +2512,23 @@ import (
         "errors"
         "fmt"
         "io"
-        "net"
         "net/http"
         "slices"
         "strings"
-        "time"
 
         "golang.org/x/net/html"
 
+        "github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
         "github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-        ProviderName               = "bbbike"
-        DefaultConfigFile          = "bbbike.yml"
-        BaseURL                    = "https://download.bbbike.org/osm/bbbike"
-        StartURL                   = "https://download.bbbike.org/osm/bbbike/"
-        defaultTimeout             = 30 * time.Second
-        defaultKeepAlive           = 30 * time.Second
-        defaultIdleTimeout         = 90 * time.Second
-        defaultMaxIdleConns        = 50
-        defaultMaxIdleConnsPerHost = 20
+        ProviderName      = "bbbike"
+        DefaultConfigFile = "bbbike.yml"
+        BaseURL           = "https://download.bbbike.org/osm/bbbike"
+        StartURL          = "https://download.bbbike.org/osm/bbbike/"
 )
 
 // Provider implements provider.Provider for download.bbbike.org.
@@ -2532,19 +2544,7 @@ func New() *Provider {
         <span class="cov4" title="13">return &amp;Provider{
                 BaseURL:  BaseURL,
                 StartURL: StartURL,
-                Client: &amp;http.Client{
-                        Transport: &amp;http.Transport{
-                                Proxy: http.ProxyFromEnvironment,
-                                DialContext: (&amp;net.Dialer{
-                                        Timeout:   defaultTimeout,
-                                        KeepAlive: defaultKeepAlive,
-                                }).DialContext,
-                                MaxIdleConns:        defaultMaxIdleConns,
-                                MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-                                IdleConnTimeout:     defaultIdleTimeout,
-                                ForceAttemptHTTP2:   true,
-                        },
-                },
+                Client:   httpclient.New(),
 </span>        }
 }
 
@@ -2731,8 +2731,8 @@ var registerOnce sync.Once
 // RegisterDefaultProviders registers all built-in catalog providers.
 // It is idempotent and safe for concurrent execution.
 func RegisterDefaultProviders() {
-        <span class="cov10" title="22">registerOnce.Do(func() </span>{
-                <span class="cov5" title="4">Register(geofabrik.New())
+        <span class="cov10" title="23">registerOnce.Do(func() </span>{
+                <span class="cov4" title="4">Register(geofabrik.New())
                 Register(openstreetmapfr.New())
                 Register(bbbike.New())
                 Register(geo2day.New())
@@ -2770,7 +2770,6 @@ import (
         "errors"
         "fmt"
         "io"
-        "net"
         "net/http"
         "strings"
         "sync"
@@ -2778,25 +2777,22 @@ import (
 
         "golang.org/x/net/html"
 
+        "github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
         "github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-        ProviderName        = "geo2day"
-        DefaultConfigFile   = "geo2day.yml"
-        BaseURL             = "https://geo2day.com"
-        StartURL            = "https://geo2day.com/"
-        defaultTimeout      = 15 * time.Second
-        defaultKeepAlive    = 30 * time.Second
-        defaultIdleTimeout  = 90 * time.Second
-        concurrencyLimit    = 25
-        maxConnsMultiplier  = 2
-        defaultMaxIdleConns = 100
-        workChanCapacity    = 1000
-        minExtParts         = 2
-        FormatOsmPbfMd5     = "osm.pbf.md5"
+        ProviderName      = "geo2day"
+        DefaultConfigFile = "geo2day.yml"
+        BaseURL           = "https://geo2day.com"
+        StartURL          = "https://geo2day.com/"
+        defaultTimeout    = 15 * time.Second
+        concurrencyLimit  = 25
+        workChanCapacity  = 1000
+        minExtParts       = 2
+        FormatOsmPbfMd5   = "osm.pbf.md5"
 )
 
 // Provider implements provider.Provider for geo2day.com.
@@ -2812,20 +2808,7 @@ func New() *Provider {
         <span class="cov4" title="19">return &amp;Provider{
                 BaseURL:  BaseURL,
                 StartURL: StartURL,
-                Client: &amp;http.Client{
-                        Transport: &amp;http.Transport{
-                                Proxy: http.ProxyFromEnvironment,
-                                DialContext: (&amp;net.Dialer{
-                                        Timeout:   defaultTimeout,
-                                        KeepAlive: defaultKeepAlive,
-                                }).DialContext,
-                                MaxIdleConns:        defaultMaxIdleConns,
-                                MaxIdleConnsPerHost: concurrencyLimit,
-                                MaxConnsPerHost:     concurrencyLimit * maxConnsMultiplier,
-                                IdleConnTimeout:     defaultIdleTimeout,
-                                ForceAttemptHTTP2:   true,
-                        },
-                },
+                Client:   httpclient.NewCrawlerClientWithTimeout(defaultTimeout, concurrencyLimit),
 </span>        }
 }
 
@@ -2910,7 +2893,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
         )
 </span>
         <span class="cov4" title="12">recordErr := func(err error) </span>{
-                <span class="cov3" title="6">errOnce.Do(func() </span>{
+                <span class="cov5" title="28">errOnce.Do(func() </span>{
                         <span class="cov3" title="6">firstErr = err
 </span>
                         <span class="cov3" title="6">cancel()
@@ -2938,9 +2921,9 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 </span>
                 <span class="cov6" title="76">go func() </span>{
                         <span class="cov6" title="76">select </span>{
-                        case workChan &lt;- targetURL:<span class="cov6" title="51"></span>
+                        case workChan &lt;- targetURL:<span class="cov6" title="57"></span>
                         case &lt;-crawlCtx.Done():
-                                <span class="cov5" title="25">activeWorkers.Done()</span>
+                                <span class="cov4" title="19">activeWorkers.Done()</span>
                         }
                 }()
         }
@@ -3003,41 +2986,41 @@ type crawlContext struct {
 
 func (p *Provider) runDispatcher(ctx context.Context, work &lt;-chan string, cat *catalog.Catalog, state *crawlContext) {
         <span class="cov4" title="12">for target := range work </span>{
-                <span class="cov6" title="51">if ctx.Err() != nil </span>{
-                        <span class="cov5" title="34">state.workers.Done()
+                <span class="cov6" title="57">if ctx.Err() != nil </span>{
+                        <span class="cov4" title="18">state.workers.Done()
 </span>
-                        <span class="cov5" title="34">continue</span>
+                        <span class="cov4" title="18">continue</span>
                 }
 
-                <span class="cov4" title="17">select </span>{
+                <span class="cov5" title="39">select </span>{
                 case &lt;-ctx.Done():
                         <span class="cov0" title="0">state.onError(fmt.Errorf("crawl context canceled: %w", ctx.Err()))
                         state.workers.Done()
 </span>
                         <span class="cov0" title="0">continue</span>
 
-                case state.tokens &lt;- struct{}{}:<span class="cov4" title="17"></span>
+                case state.tokens &lt;- struct{}{}:<span class="cov5" title="39"></span>
                 }
 
-                <span class="cov4" title="17">go p.processWorker(ctx, target, cat, state)</span>
+                <span class="cov5" title="39">go p.processWorker(ctx, target, cat, state)</span>
         }
 }
 
 func (p *Provider) processWorker(ctx context.Context, pageURL string, cat *catalog.Catalog, state *crawlContext) {
-        <span class="cov4" title="17">defer func() </span>{
-                <span class="cov4" title="17">if r := recover(); r != nil </span>{
+        <span class="cov5" title="39">defer func() </span>{
+                <span class="cov5" title="39">if r := recover(); r != nil </span>{
                         <span class="cov0" title="0">state.onError(fmt.Errorf("%w: panic in geo2day worker for %s: %v", ErrFetchCatalog, pageURL, r))
 </span>                }
 
-                <span class="cov4" title="17">&lt;-state.tokens
+                <span class="cov5" title="39">&lt;-state.tokens
                 state.workers.Done()</span>
         }()
 
-        <span class="cov4" title="17">subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
+        <span class="cov5" title="39">subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
         if err != nil </span>{
-                <span class="cov3" title="6">state.onError(err)
+                <span class="cov5" title="28">state.onError(err)
 </span>
-                <span class="cov3" title="6">return
+                <span class="cov5" title="28">return
 </span>        }
 
         <span class="cov4" title="11">for _, page := range subPages </span>{
@@ -3046,16 +3029,16 @@ func (p *Provider) processWorker(ctx context.Context, pageURL string, cat *catal
 }
 
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
-        <span class="cov4" title="17">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
+        <span class="cov5" title="39">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("creating request: %w", err)
 </span>        }
 
-        <span class="cov4" title="16">client := cmp.Or(p.Client, http.DefaultClient)
+        <span class="cov5" title="38">client := cmp.Or(p.Client, http.DefaultClient)
 </span>
-        <span class="cov4" title="16">resp, err := client.Do(req)
+        <span class="cov5" title="38">resp, err := client.Do(req)
         if err != nil </span>{
-                <span class="cov2" title="3">return nil, fmt.Errorf("%w: %w", ErrFetchCatalog, err)
+                <span class="cov5" title="25">return nil, fmt.Errorf("%w: %w", ErrFetchCatalog, err)
 </span>        }
         <span class="cov4" title="13">defer resp.Body.Close()
 </span>
@@ -3353,27 +3336,23 @@ import (
         "context"
         "encoding/json"
         "fmt"
-        "net"
         "net/http"
         "time"
 
+        "github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
         "github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-        ProviderName               = "geofabrik"
-        DefaultConfigFile          = "geofabrik.yml"
-        GeofabrikIndexURL          = "https://download.geofabrik.de/index-v1-nogeom.json"
-        GeofabrikBaseURL           = "https://download.geofabrik.de"
-        defaultTimeout             = 60 * time.Second
-        defaultKeepAlive           = 30 * time.Second
-        defaultIdleTimeout         = 90 * time.Second
-        defaultMaxIdleConns        = 20
-        defaultMaxIdleConnsPerHost = 10
-        alwaysPresentFormatsCount  = 3
-        formatPerURLMultiplier     = 2
+        ProviderName              = "geofabrik"
+        DefaultConfigFile         = "geofabrik.yml"
+        GeofabrikIndexURL         = "https://download.geofabrik.de/index-v1-nogeom.json"
+        GeofabrikBaseURL          = "https://download.geofabrik.de"
+        defaultTimeout            = 60 * time.Second
+        alwaysPresentFormatsCount = 3
+        formatPerURLMultiplier    = 2
 )
 
 // Provider implements provider.Provider for the Geofabrik service using JSON API.
@@ -3389,19 +3368,7 @@ func New() *Provider {
         <span class="cov8" title="12">return &amp;Provider{
                 IndexURL: GeofabrikIndexURL,
                 BaseURL:  GeofabrikBaseURL,
-                Client: &amp;http.Client{
-                        Transport: &amp;http.Transport{
-                                Proxy: http.ProxyFromEnvironment,
-                                DialContext: (&amp;net.Dialer{
-                                        Timeout:   defaultTimeout,
-                                        KeepAlive: defaultKeepAlive,
-                                }).DialContext,
-                                MaxIdleConns:        defaultMaxIdleConns,
-                                MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-                                IdleConnTimeout:     defaultIdleTimeout,
-                                ForceAttemptHTTP2:   true,
-                        },
-                },
+                Client:   httpclient.NewWithTimeout(defaultTimeout),
 </span>        }
 }
 
@@ -3527,34 +3494,120 @@ func extractFormats(urls map[string]string) catalog.Formats {
 }
 </pre>
 		
-		<pre class="file" id="file16" style="display: none">package movisda
+		<pre class="file" id="file16" style="display: none">package httpclient
+
+import (
+        "net"
+        "net/http"
+        "time"
+)
+
+const (
+        defaultTimeout             = 30 * time.Second
+        defaultKeepAlive           = 30 * time.Second
+        defaultIdleTimeout         = 90 * time.Second
+        defaultMaxIdleConns        = 20
+        defaultMaxIdleConnsPerHost = 10
+        crawlerMaxIdleConns        = 100
+        crawlerConnsMultiplier     = 2
+)
+
+// TransportConfig holds parameters for configuring the provider HTTP transport.
+type TransportConfig struct {
+        Timeout             time.Duration
+        KeepAlive           time.Duration
+        IdleTimeout         time.Duration
+        MaxIdleConns        int
+        MaxIdleConnsPerHost int
+        MaxConnsPerHost     int
+}
+
+// DefaultTransportConfig returns the standard configuration used by default scrapers.
+func DefaultTransportConfig() TransportConfig {
+        <span class="cov9" title="101">return TransportConfig{
+                Timeout:             defaultTimeout,
+                KeepAlive:           defaultKeepAlive,
+                IdleTimeout:         defaultIdleTimeout,
+                MaxIdleConns:        defaultMaxIdleConns,
+                MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
+                MaxConnsPerHost:     0,
+</span>        }
+}
+
+// New creates a pre-configured *http.Client optimized for scraping provider catalogs with default 30s timeout.
+func New() *http.Client {
+        <span class="cov8" title="77">return NewWithConfig(DefaultTransportConfig())
+</span>}
+
+// NewWithTimeout creates a pre-configured *http.Client with a custom dialer timeout.
+func NewWithTimeout(timeout time.Duration) *http.Client {
+        <span class="cov6" title="24">cfg := DefaultTransportConfig()
+        cfg.Timeout = timeout
+</span>
+        <span class="cov6" title="24">return NewWithConfig(cfg)
+</span>}
+
+// NewCrawlerClient creates a pre-configured *http.Client tuned for high-concurrency crawlers with default 30s timeout.
+func NewCrawlerClient(concurrencyLimit int) *http.Client {
+        <span class="cov5" title="14">return NewCrawlerClientWithTimeout(defaultTimeout, concurrencyLimit)
+</span>}
+
+// NewCrawlerClientWithTimeout creates a pre-configured *http.Client tuned for high-concurrency crawlers with custom timeout.
+func NewCrawlerClientWithTimeout(timeout time.Duration, concurrencyLimit int) *http.Client {
+        <span class="cov7" title="34">return NewWithConfig(TransportConfig{
+                Timeout:             timeout,
+                KeepAlive:           defaultKeepAlive,
+                IdleTimeout:         defaultIdleTimeout,
+                MaxIdleConns:        crawlerMaxIdleConns,
+                MaxIdleConnsPerHost: concurrencyLimit,
+                MaxConnsPerHost:     concurrencyLimit * crawlerConnsMultiplier,
+        })
+</span>}
+
+// NewWithConfig creates a pre-configured *http.Client with the given transport configuration.
+func NewWithConfig(cfg TransportConfig) *http.Client {
+        <span class="cov10" title="135">return &amp;http.Client{
+                Transport: &amp;http.Transport{
+                        Proxy: http.ProxyFromEnvironment,
+                        DialContext: (&amp;net.Dialer{
+                                Timeout:   cfg.Timeout,
+                                KeepAlive: cfg.KeepAlive,
+                        }).DialContext,
+                        MaxIdleConns:          cfg.MaxIdleConns,
+                        MaxIdleConnsPerHost:   cfg.MaxIdleConnsPerHost,
+                        MaxConnsPerHost:       cfg.MaxConnsPerHost,
+                        IdleConnTimeout:       cfg.IdleTimeout,
+                        ResponseHeaderTimeout: cfg.Timeout,
+                        ForceAttemptHTTP2:     true,
+                },
+</span>        }
+}
+</pre>
+		
+		<pre class="file" id="file17" style="display: none">package movisda
 
 import (
         "cmp"
         "context"
         "encoding/json"
         "fmt"
-        "net"
         "net/http"
         "slices"
         "strings"
         "time"
 
+        "github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
         "github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-        ProviderName               = "movisda"
-        DefaultConfigFile          = "movisda.yml"
-        MovisdaIndexURL            = "https://osm.download.movisda.io/admin/Admin-latest.geojson"
-        MovisdaBaseURL             = "https://osm.download.movisda.io/admin"
-        defaultTimeout             = 60 * time.Second
-        defaultKeepAlive           = 30 * time.Second
-        defaultIdleTimeout         = 90 * time.Second
-        defaultMaxIdleConns        = 20
-        defaultMaxIdleConnsPerHost = 10
+        ProviderName      = "movisda"
+        DefaultConfigFile = "movisda.yml"
+        MovisdaIndexURL   = "https://osm.download.movisda.io/admin/Admin-latest.geojson"
+        MovisdaBaseURL    = "https://osm.download.movisda.io/admin"
+        defaultTimeout    = 60 * time.Second
 )
 
 // Provider implements provider.Provider for the Movisda administrative extracts service.
@@ -3570,19 +3623,7 @@ func New() *Provider {
         <span class="cov8" title="11">return &amp;Provider{
                 IndexURL: MovisdaIndexURL,
                 BaseURL:  MovisdaBaseURL,
-                Client: &amp;http.Client{
-                        Transport: &amp;http.Transport{
-                                Proxy: http.ProxyFromEnvironment,
-                                DialContext: (&amp;net.Dialer{
-                                        Timeout:   defaultTimeout,
-                                        KeepAlive: defaultKeepAlive,
-                                }).DialContext,
-                                MaxIdleConns:        defaultMaxIdleConns,
-                                MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-                                IdleConnTimeout:     defaultIdleTimeout,
-                                ForceAttemptHTTP2:   true,
-                        },
-                },
+                Client:   httpclient.NewWithTimeout(defaultTimeout),
 </span>        }
 }
 
@@ -3705,7 +3746,7 @@ func buildElement(feat *geoJSONFeature) catalog.Element {
 }
 </pre>
 		
-		<pre class="file" id="file17" style="display: none">package openstreetmapfr
+		<pre class="file" id="file18" style="display: none">package openstreetmapfr
 
 import (
         "cmp"
@@ -3713,14 +3754,13 @@ import (
         "errors"
         "fmt"
         "io"
-        "net"
         "net/http"
         "strings"
         "sync"
-        "time"
 
         "golang.org/x/net/html"
 
+        "github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
         "github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
@@ -3731,12 +3771,7 @@ const (
         DefaultConfigFile   = "openstreetmap.fr.yml"
         BaseURL             = "https://download.openstreetmap.fr/extracts"
         StartURL            = "https://download.openstreetmap.fr/extracts/"
-        defaultTimeout      = 30 * time.Second
-        defaultKeepAlive    = 30 * time.Second
-        defaultIdleTimeout  = 90 * time.Second
-        defaultMaxIdleConns = 100
         concurrencyLimit    = 25
-        maxConnsMultiplier  = 2
         workChanCapacity    = 1000
         minParentListLength = 4
 )
@@ -3807,20 +3842,7 @@ func New() *Provider {
         <span class="cov4" title="13">return &amp;Provider{
                 BaseURL:  BaseURL,
                 StartURL: StartURL,
-                Client: &amp;http.Client{
-                        Transport: &amp;http.Transport{
-                                Proxy: http.ProxyFromEnvironment,
-                                DialContext: (&amp;net.Dialer{
-                                        Timeout:   defaultTimeout,
-                                        KeepAlive: defaultKeepAlive,
-                                }).DialContext,
-                                MaxIdleConns:        defaultMaxIdleConns,
-                                MaxIdleConnsPerHost: concurrencyLimit,
-                                MaxConnsPerHost:     concurrencyLimit * maxConnsMultiplier,
-                                IdleConnTimeout:     defaultIdleTimeout,
-                                ForceAttemptHTTP2:   true,
-                        },
-                },
+                Client:   httpclient.NewCrawlerClient(concurrencyLimit),
 </span>        }
 }
 
@@ -3887,7 +3909,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
         )
 </span>
         <span class="cov3" title="7">recordErr := func(err error) </span>{
-                <span class="cov5" title="31">errOnce.Do(func() </span>{
+                <span class="cov5" title="21">errOnce.Do(func() </span>{
                         <span class="cov3" title="6">firstErr = err
 </span>
                         <span class="cov3" title="6">cancel()
@@ -3915,9 +3937,9 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 </span>
                 <span class="cov6" title="71">go func() </span>{
                         <span class="cov6" title="71">select </span>{
-                        case workChan &lt;- targetURL:<span class="cov6" title="71"></span>
+                        case workChan &lt;- targetURL:<span class="cov6" title="50"></span>
                         case &lt;-crawlCtx.Done():
-                                <span class="cov0" title="0">activeWorkers.Done()</span>
+                                <span class="cov5" title="21">activeWorkers.Done()</span>
                         }
                 }()
         }
@@ -3967,41 +3989,41 @@ type crawlContext struct {
 
 func (p *Provider) runDispatcher(ctx context.Context, work &lt;-chan string, cat *catalog.Catalog, state *crawlContext) {
         <span class="cov3" title="7">for target := range work </span>{
-                <span class="cov6" title="71">if ctx.Err() != nil </span>{
-                        <span class="cov5" title="34">state.workers.Done()
+                <span class="cov6" title="50">if ctx.Err() != nil </span>{
+                        <span class="cov5" title="23">state.workers.Done()
 </span>
-                        <span class="cov5" title="34">continue</span>
+                        <span class="cov5" title="23">continue</span>
                 }
 
-                <span class="cov5" title="37">select </span>{
+                <span class="cov5" title="27">select </span>{
                 case &lt;-ctx.Done():
-                        <span class="cov1" title="1">state.onError(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
+                        <span class="cov0" title="0">state.onError(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
                         state.workers.Done()
 </span>
-                        <span class="cov1" title="1">continue</span>
+                        <span class="cov0" title="0">continue</span>
 
-                case state.tokens &lt;- struct{}{}:<span class="cov5" title="36"></span>
+                case state.tokens &lt;- struct{}{}:<span class="cov5" title="27"></span>
                 }
 
-                <span class="cov5" title="36">go p.processWorker(ctx, target, cat, state)</span>
+                <span class="cov5" title="27">go p.processWorker(ctx, target, cat, state)</span>
         }
 }
 
 func (p *Provider) processWorker(ctx context.Context, target string, cat *catalog.Catalog, state *crawlContext) {
-        <span class="cov5" title="36">defer func() </span>{
-                <span class="cov5" title="36">if r := recover(); r != nil </span>{
+        <span class="cov5" title="27">defer func() </span>{
+                <span class="cov5" title="27">if r := recover(); r != nil </span>{
                         <span class="cov0" title="0">state.onError(fmt.Errorf("%w: panic in openstreetmapfr worker for %s: %v", ErrFetchCatalog, target, r))
 </span>                }
 
-                <span class="cov5" title="36">&lt;-state.tokens
+                <span class="cov5" title="27">&lt;-state.tokens
                 state.workers.Done()</span>
         }()
 
-        <span class="cov5" title="36">links, err := p.fetchAndProcessPage(ctx, target, cat)
+        <span class="cov5" title="27">links, err := p.fetchAndProcessPage(ctx, target, cat)
         if err != nil </span>{
-                <span class="cov5" title="30">state.onError(err)
+                <span class="cov5" title="21">state.onError(err)
 </span>
-                <span class="cov5" title="30">return
+                <span class="cov5" title="21">return
 </span>        }
 
         <span class="cov3" title="6">for _, link := range links </span>{
@@ -4012,16 +4034,16 @@ func (p *Provider) processWorker(ctx context.Context, target string, cat *catalo
 }
 
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
-        <span class="cov5" title="36">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
+        <span class="cov5" title="27">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("creating request: %w", err)
 </span>        }
 
-        <span class="cov5" title="35">client := cmp.Or(p.Client, http.DefaultClient)
+        <span class="cov5" title="26">client := cmp.Or(p.Client, http.DefaultClient)
 </span>
-        <span class="cov5" title="35">resp, err := client.Do(req)
+        <span class="cov5" title="26">resp, err := client.Do(req)
         if err != nil </span>{
-                <span class="cov5" title="27">return nil, fmt.Errorf("fetching %s: %w", currentURL, err)
+                <span class="cov4" title="18">return nil, fmt.Errorf("fetching %s: %w", currentURL, err)
 </span>        }
         <span class="cov3" title="8">defer resp.Body.Close()
 </span>
@@ -4190,7 +4212,7 @@ func exceptions(name, parent string) string {
 }
 </pre>
 		
-		<pre class="file" id="file18" style="display: none">package osmch
+		<pre class="file" id="file19" style="display: none">package osmch
 
 import (
         "cmp"
@@ -4198,28 +4220,22 @@ import (
         "errors"
         "fmt"
         "io"
-        "net"
         "net/http"
         "strings"
-        "time"
 
         "golang.org/x/net/html"
 
+        "github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
         "github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-        ProviderName               = "planet.osm.ch"
-        DefaultConfigFile          = "planet.osm.ch.yml"
-        BaseURL                    = "https://planet.osm.ch"
-        StartURL                   = "https://planet.osm.ch/"
-        defaultTimeout             = 30 * time.Second
-        defaultKeepAlive           = 30 * time.Second
-        defaultIdleTimeout         = 90 * time.Second
-        defaultMaxIdleConns        = 20
-        defaultMaxIdleConnsPerHost = 10
+        ProviderName      = "planet.osm.ch"
+        DefaultConfigFile = "planet.osm.ch.yml"
+        BaseURL           = "https://planet.osm.ch"
+        StartURL          = "https://planet.osm.ch/"
 )
 
 // Provider implements provider.Provider for planet.osm.ch.
@@ -4235,19 +4251,7 @@ func New() *Provider {
         <span class="cov4" title="12">return &amp;Provider{
                 BaseURL:  BaseURL,
                 StartURL: StartURL,
-                Client: &amp;http.Client{
-                        Transport: &amp;http.Transport{
-                                Proxy: http.ProxyFromEnvironment,
-                                DialContext: (&amp;net.Dialer{
-                                        Timeout:   defaultTimeout,
-                                        KeepAlive: defaultKeepAlive,
-                                }).DialContext,
-                                MaxIdleConns:        defaultMaxIdleConns,
-                                MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-                                IdleConnTimeout:     defaultIdleTimeout,
-                                ForceAttemptHTTP2:   true,
-                        },
-                },
+                Client:   httpclient.New(),
 </span>        }
 }
 
@@ -4421,7 +4425,7 @@ func parseHrefToIDAndFormat(href string) (elemID, format string) {
 }
 </pre>
 		
-		<pre class="file" id="file19" style="display: none">package osmfitvutbr
+		<pre class="file" id="file20" style="display: none">package osmfitvutbr
 
 import (
         "cmp"
@@ -4429,30 +4433,24 @@ import (
         "errors"
         "fmt"
         "io"
-        "net"
         "net/http"
         "strings"
-        "time"
         "unicode"
         "unicode/utf8"
 
         "golang.org/x/net/html"
 
+        "github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
         "github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-        ProviderName               = "osm.fit.vutbr.cz"
-        DefaultConfigFile          = "osm.fit.vutbr.cz.yml"
-        BaseURL                    = "https://osm.fit.vutbr.cz/extracts"
-        StartURL                   = "https://osm.fit.vutbr.cz/extracts/"
-        defaultTimeout             = 30 * time.Second
-        defaultKeepAlive           = 30 * time.Second
-        defaultIdleTimeout         = 90 * time.Second
-        defaultMaxIdleConns        = 20
-        defaultMaxIdleConnsPerHost = 10
+        ProviderName      = "osm.fit.vutbr.cz"
+        DefaultConfigFile = "osm.fit.vutbr.cz.yml"
+        BaseURL           = "https://osm.fit.vutbr.cz/extracts"
+        StartURL          = "https://osm.fit.vutbr.cz/extracts/"
 )
 
 // Provider implements provider.Provider for osm.fit.vutbr.cz (Czech Republic extracts).
@@ -4468,19 +4466,7 @@ func New() *Provider {
         <span class="cov4" title="17">return &amp;Provider{
                 BaseURL:  BaseURL,
                 StartURL: StartURL,
-                Client: &amp;http.Client{
-                        Transport: &amp;http.Transport{
-                                Proxy: http.ProxyFromEnvironment,
-                                DialContext: (&amp;net.Dialer{
-                                        Timeout:   defaultTimeout,
-                                        KeepAlive: defaultKeepAlive,
-                                }).DialContext,
-                                MaxIdleConns:        defaultMaxIdleConns,
-                                MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-                                IdleConnTimeout:     defaultIdleTimeout,
-                                ForceAttemptHTTP2:   true,
-                        },
-                },
+                Client:   httpclient.New(),
 </span>        }
 }
 
@@ -4774,33 +4760,27 @@ func shouldSkipHref(href string) bool {
 </span>}
 </pre>
 		
-		<pre class="file" id="file20" style="display: none">package osmit
+		<pre class="file" id="file21" style="display: none">package osmit
 
 import (
         "cmp"
         "context"
         "fmt"
-        "net"
         "net/http"
         "strings"
-        "time"
 
+        "github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
         "github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-        ProviderName               = "osmit-estratti"
-        DefaultConfigFile          = "osmit-estratti.yml"
-        BaseURL                    = "https://osmit-estratti.wmcloud.org/output"
-        StartURL                   = "https://osmit-estratti.wmcloud.org/"
-        defaultTimeout             = 30 * time.Second
-        defaultKeepAlive           = 30 * time.Second
-        defaultIdleTimeout         = 90 * time.Second
-        defaultMaxIdleConns        = 20
-        defaultMaxIdleConnsPerHost = 10
-        minCodeAndNameParts        = 2
+        ProviderName        = "osmit-estratti"
+        DefaultConfigFile   = "osmit-estratti.yml"
+        BaseURL             = "https://osmit-estratti.wmcloud.org/output"
+        StartURL            = "https://osmit-estratti.wmcloud.org/"
+        minCodeAndNameParts = 2
 )
 
 // Provider implements provider.Provider for osmit-estratti.wmcloud.org (OSM Italy).
@@ -4816,19 +4796,7 @@ func New() *Provider {
         <span class="cov4" title="10">return &amp;Provider{
                 BaseURL:  BaseURL,
                 StartURL: StartURL,
-                Client: &amp;http.Client{
-                        Transport: &amp;http.Transport{
-                                Proxy: http.ProxyFromEnvironment,
-                                DialContext: (&amp;net.Dialer{
-                                        Timeout:   defaultTimeout,
-                                        KeepAlive: defaultKeepAlive,
-                                }).DialContext,
-                                MaxIdleConns:        defaultMaxIdleConns,
-                                MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-                                IdleConnTimeout:     defaultIdleTimeout,
-                                ForceAttemptHTTP2:   true,
-                        },
-                },
+                Client:   httpclient.New(),
 </span>        }
 }
 
@@ -5100,7 +5068,7 @@ func sanitizeFileName(name string) string {
 </span>}
 </pre>
 		
-		<pre class="file" id="file21" style="display: none">package osmkewllu
+		<pre class="file" id="file22" style="display: none">package osmkewllu
 
 import (
         "cmp"
@@ -5108,28 +5076,22 @@ import (
         "errors"
         "fmt"
         "io"
-        "net"
         "net/http"
         "strings"
-        "time"
 
         "golang.org/x/net/html"
 
+        "github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
         "github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-        ProviderName               = "osm.kewl.lu"
-        DefaultConfigFile          = "osm.kewl.lu.yml"
-        BaseURL                    = "https://osm.kewl.lu/luxembourg.osm"
-        StartURL                   = "https://osm.kewl.lu/luxembourg.osm/"
-        defaultTimeout             = 30 * time.Second
-        defaultKeepAlive           = 30 * time.Second
-        defaultIdleTimeout         = 90 * time.Second
-        defaultMaxIdleConns        = 20
-        defaultMaxIdleConnsPerHost = 10
+        ProviderName      = "osm.kewl.lu"
+        DefaultConfigFile = "osm.kewl.lu.yml"
+        BaseURL           = "https://osm.kewl.lu/luxembourg.osm"
+        StartURL          = "https://osm.kewl.lu/luxembourg.osm/"
 )
 
 // Provider implements provider.Provider for osm.kewl.lu (Luxembourg).
@@ -5145,19 +5107,7 @@ func New() *Provider {
         <span class="cov4" title="12">return &amp;Provider{
                 BaseURL:  BaseURL,
                 StartURL: StartURL,
-                Client: &amp;http.Client{
-                        Transport: &amp;http.Transport{
-                                Proxy: http.ProxyFromEnvironment,
-                                DialContext: (&amp;net.Dialer{
-                                        Timeout:   defaultTimeout,
-                                        KeepAlive: defaultKeepAlive,
-                                }).DialContext,
-                                MaxIdleConns:        defaultMaxIdleConns,
-                                MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-                                IdleConnTimeout:     defaultIdleTimeout,
-                                ForceAttemptHTTP2:   true,
-                        },
-                },
+                Client:   httpclient.New(),
 </span>        }
 }
 
@@ -5326,7 +5276,7 @@ func parseHrefToIDAndFormat(href string) (elemID, format string) {
 }
 </pre>
 		
-		<pre class="file" id="file22" style="display: none">package osmtw
+		<pre class="file" id="file23" style="display: none">package osmtw
 
 import (
         "cmp"
@@ -5334,29 +5284,23 @@ import (
         "errors"
         "fmt"
         "io"
-        "net"
         "net/http"
         "strings"
-        "time"
 
         "golang.org/x/net/html"
 
+        "github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
         "github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
 var ErrFetchCatalog = catalog.ErrFetchCatalog
 
 const (
-        ProviderName               = "osm.kcwu.csie.org"
-        DefaultConfigFile          = "osm.kcwu.csie.org.yml"
-        BaseURL                    = "https://osm.kcwu.csie.org/download/tw-extract"
-        StartURL                   = "https://osm.kcwu.csie.org/download/tw-extract/"
-        defaultTimeout             = 30 * time.Second
-        defaultKeepAlive           = 30 * time.Second
-        defaultIdleTimeout         = 90 * time.Second
-        defaultMaxIdleConns        = 20
-        defaultMaxIdleConnsPerHost = 10
-        recentBasePath             = "recent/"
+        ProviderName      = "osm.kcwu.csie.org"
+        DefaultConfigFile = "osm.kcwu.csie.org.yml"
+        BaseURL           = "https://osm.kcwu.csie.org/download/tw-extract"
+        StartURL          = "https://osm.kcwu.csie.org/download/tw-extract/"
+        recentBasePath    = "recent/"
 )
 
 // Provider implements provider.Provider for osm.kcwu.csie.org (Taiwan OSM extracts).
@@ -5372,19 +5316,7 @@ func New() *Provider {
         <span class="cov5" title="12">return &amp;Provider{
                 BaseURL:  BaseURL,
                 StartURL: StartURL,
-                Client: &amp;http.Client{
-                        Transport: &amp;http.Transport{
-                                Proxy: http.ProxyFromEnvironment,
-                                DialContext: (&amp;net.Dialer{
-                                        Timeout:   defaultTimeout,
-                                        KeepAlive: defaultKeepAlive,
-                                }).DialContext,
-                                MaxIdleConns:        defaultMaxIdleConns,
-                                MaxIdleConnsPerHost: defaultMaxIdleConnsPerHost,
-                                IdleConnTimeout:     defaultIdleTimeout,
-                                ForceAttemptHTTP2:   true,
-                        },
-                },
+                Client:   httpclient.New(),
 </span>        }
 }
 
@@ -5533,17 +5465,19 @@ func shouldSkipHref(href string) bool {
 </span>}
 </pre>
 		
-		<pre class="file" id="file23" style="display: none">package provider
+		<pre class="file" id="file24" style="display: none">package provider
 
 import (
         "context"
         "errors"
         "fmt"
         "maps"
+        "net/http"
         "reflect"
         "slices"
         "sync"
 
+        "github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
         "github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
@@ -5578,43 +5512,43 @@ var (
 
 // Register registers a provider in the global registry.
 func Register(prov Provider) {
-        <span class="cov10" title="47">if prov == nil || (reflect.ValueOf(prov).Kind() == reflect.Pointer &amp;&amp; reflect.ValueOf(prov).IsNil()) </span>{
+        <span class="cov10" title="48">if prov == nil || (reflect.ValueOf(prov).Kind() == reflect.Pointer &amp;&amp; reflect.ValueOf(prov).IsNil()) </span>{
                 <span class="cov1" title="1">return
 </span>        }
 
-        <span class="cov9" title="46">name := prov.Name()
+        <span class="cov9" title="47">name := prov.Name()
         if name == "" </span>{
                 <span class="cov1" title="1">return
 </span>        }
 
-        <span class="cov9" title="45">registryMu.Lock()
+        <span class="cov9" title="46">registryMu.Lock()
         defer registryMu.Unlock()
 </span>
-        <span class="cov9" title="45">registry[name] = prov</span>
+        <span class="cov9" title="46">registry[name] = prov</span>
 }
 
 // Unregister removes a provider from the global registry by name.
 // This is primarily intended for test cleanup.
 func Unregister(name string) {
-        <span class="cov1" title="1">registryMu.Lock()
+        <span class="cov2" title="2">registryMu.Lock()
         defer registryMu.Unlock()
 </span>
-        <span class="cov1" title="1">delete(registry, name)
+        <span class="cov2" title="2">delete(registry, name)
 </span>}
 
 // Get retrieves a registered provider by name.
 //
 //nolint:ireturn // Factory function returning interface
 func Get(name string) (Provider, error) {
-        <span class="cov9" title="39">registryMu.RLock()
+        <span class="cov9" title="43">registryMu.RLock()
         defer registryMu.RUnlock()
 </span>
-        <span class="cov9" title="39">prov, exists := registry[name]
+        <span class="cov9" title="43">prov, exists := registry[name]
         if !exists </span>{
-                <span class="cov4" title="4">return nil, fmt.Errorf("%w: %s", ErrProviderNotFound, name)
+                <span class="cov4" title="5">return nil, fmt.Errorf("%w: %s", ErrProviderNotFound, name)
 </span>        }
 
-        <span class="cov9" title="35">return prov, nil</span>
+        <span class="cov9" title="38">return prov, nil</span>
 }
 
 // List returns all registered provider names sorted alphabetically.
@@ -5624,11 +5558,17 @@ func List() []string {
 </span>
         <span class="cov5" title="6">return slices.Sorted(maps.Keys(registry))
 </span>}
+
+// NewHTTPClient creates a pre-configured *http.Client optimized for scraping provider catalogs.
+func NewHTTPClient() *http.Client {
+        <span class="cov0" title="0">return httpclient.New()
+</span>}
 </pre>
 		
-		<pre class="file" id="file24" style="display: none">package ui
+		<pre class="file" id="file25" style="display: none">package ui
 
 import (
+        "bufio"
         "encoding/json"
         "fmt"
         "io"
@@ -5655,31 +5595,38 @@ func PrintTable(cat *catalog.Catalog, isMarkdown bool, writer io.Writer) error {
 }
 
 func printMarkdownTable(cat *catalog.Catalog, writer io.Writer) error {
-        <span class="cov4" title="2">tabWriter := tabwriter.NewWriter(writer, 0, 0, 1, ' ', 0)
-        fmt.Fprintln(tabWriter, "| ShortName | Is in | Long Name | formats |")
-        fmt.Fprintln(tabWriter, "| --- | --- | --- | --- |")
+        <span class="cov4" title="2">bufWriter := bufio.NewWriter(writer)
+        defer func() </span>{
+                <span class="cov4" title="2">_ = bufWriter.Flush()
+</span>        }()
+
+        <span class="cov4" title="2">if _, err := bufWriter.WriteString("| ShortName | Is in | Long Name | formats |\n| --- | --- | --- | --- |\n"); err != nil </span>{
+                <span class="cov0" title="0">return fmt.Errorf("writing markdown table header: %w", err)
+</span>        }
+
+        <span class="cov4" title="2">parentNameCache := make(map[string]string)
 </span>
         <span class="cov4" title="2">for _, elementID := range cat.SortedKeys() </span>{
                 <span class="cov7" title="3">elem, _ := cat.Get(elementID)
                 parentName := ""
 </span>
                 <span class="cov7" title="3">if elem.Parent != "" </span>{
-                        <span class="cov1" title="1">if parentElem, exists := cat.Get(elem.Parent); exists </span>{
+                        <span class="cov1" title="1">cached, ok := parentNameCache[elem.Parent]
+                        if ok </span>{
+                                <span class="cov0" title="0">parentName = cached
+</span>                        } else <span class="cov1" title="1">if parentElem, exists := cat.Get(elem.Parent); exists </span>{
                                 <span class="cov1" title="1">parentName = parentElem.Name
+                                parentNameCache[elem.Parent] = parentName
 </span>                        }
                 }
 
-                <span class="cov7" title="3">fmt.Fprintf(tabWriter, "| %s | %s | %s | %s |\n",
+                <span class="cov7" title="3">fmt.Fprintf(bufWriter, "| %s | %s | %s | %s |\n",
                         elementID,
                         parentName,
                         elem.Name,
                         catalog.GetMiniFormats(elem.Formats),
                 )</span>
         }
-
-        <span class="cov4" title="2">if err := tabWriter.Flush(); err != nil </span>{
-                <span class="cov0" title="0">return fmt.Errorf("unable to flush markdown table: %w", err)
-</span>        }
 
         <span class="cov4" title="2">return nil</span>
 }
@@ -5688,13 +5635,20 @@ func printStandardTable(cat *catalog.Catalog, writer io.Writer) error {
         <span class="cov4" title="2">tabWriter := tabwriter.NewWriter(writer, 0, 0, tabPadding, ' ', 0)
         fmt.Fprintln(tabWriter, "SHORTNAME\tIS IN\tLONG NAME\tFORMATS")
 </span>
-        <span class="cov4" title="2">for _, elementID := range cat.SortedKeys() </span>{
+        <span class="cov4" title="2">keys := cat.SortedKeys()
+        parentNameCache := make(map[string]string)
+</span>
+        <span class="cov4" title="2">for _, elementID := range keys </span>{
                 <span class="cov7" title="3">elem, _ := cat.Get(elementID)
                 parentName := ""
 </span>
                 <span class="cov7" title="3">if elem.Parent != "" </span>{
-                        <span class="cov1" title="1">if parentElem, exists := cat.Get(elem.Parent); exists </span>{
+                        <span class="cov1" title="1">cached, ok := parentNameCache[elem.Parent]
+                        if ok </span>{
+                                <span class="cov0" title="0">parentName = cached
+</span>                        } else <span class="cov1" title="1">if parentElem, exists := cat.Get(elem.Parent); exists </span>{
                                 <span class="cov1" title="1">parentName = parentElem.Name
+                                parentNameCache[elem.Parent] = parentName
 </span>                        }
                 }
 
@@ -5710,7 +5664,7 @@ func printStandardTable(cat *catalog.Catalog, writer io.Writer) error {
                 <span class="cov0" title="0">return fmt.Errorf("unable to flush table: %w", err)
 </span>        }
 
-        <span class="cov4" title="2">fmt.Fprintf(writer, "Total elements: %d\n", cat.Len())
+        <span class="cov4" title="2">fmt.Fprintf(writer, "Total elements: %d\n", len(keys))
 </span>
         <span class="cov4" title="2">return nil</span>
 }
@@ -5721,7 +5675,12 @@ func PrintJSON(cat *catalog.Catalog, writer io.Writer) error {
                 <span class="cov1" title="1">return nil
 </span>        }
 
-        <span class="cov7" title="3">encoder := json.NewEncoder(writer)
+        <span class="cov7" title="3">bufWriter := bufio.NewWriter(writer)
+        defer func() </span>{
+                <span class="cov7" title="3">_ = bufWriter.Flush()
+</span>        }()
+
+        <span class="cov7" title="3">encoder := json.NewEncoder(bufWriter)
         encoder.SetIndent("", "  ")
 </span>
         <span class="cov7" title="3">if err := encoder.Encode(cat); err != nil </span>{
@@ -5732,15 +5691,15 @@ func PrintJSON(cat *catalog.Catalog, writer io.Writer) error {
 }
 </pre>
 		
-		<pre class="file" id="file25" style="display: none">package catalog
+		<pre class="file" id="file26" style="display: none">package catalog
 
 import (
         "cmp"
+        "encoding/json"
         "errors"
         "fmt"
         "io"
         "iter"
-        "maps"
         "os"
         "path/filepath"
         "slices"
@@ -5761,7 +5720,7 @@ const (
         maxHierarchyDepth  = 30
         defaultDirPerm     = 0o750
         defaultFilePerm    = 0o600
-        defaultBuilderSize = 64
+        defaultBuilderSize = 128
         twoBaseURLParts    = 2
 )
 
@@ -5823,67 +5782,86 @@ type Catalog struct {
 
 // New creates an empty, initialized Catalog.
 func New() *Catalog {
-        <span class="cov6" title="198">return &amp;Catalog{
+        <span class="cov6" title="203">return &amp;Catalog{
                 Formats:  make(FormatDefinitions),
                 Elements: make(map[string]Element),
 </span>        }
 }
 
+// MarshalJSON safely marshals the catalog to JSON under a read lock.
+func (c *Catalog) MarshalJSON() ([]byte, error) {
+        <span class="cov2" title="4">if c == nil </span>{
+                <span class="cov0" title="0">return []byte("null"), nil
+</span>        }
+
+        <span class="cov2" title="4">c.mu.RLock()
+        defer c.mu.RUnlock()
+</span>
+        <span class="cov2" title="4">type catalogAlias Catalog
+</span>
+        <span class="cov2" title="4">data, err := json.Marshal((*catalogAlias)(c))
+        if err != nil </span>{
+                <span class="cov0" title="0">return nil, fmt.Errorf("marshaling catalog to json: %w", err)
+</span>        }
+
+        <span class="cov2" title="4">return data, nil</span>
+}
+
 // LoadFile reads and parses a YAML catalog file from disk.
 func LoadFile(filePath string) (*Catalog, error) {
-        <span class="cov5" title="46">absPath, err := filepath.Abs(filePath)
+        <span class="cov5" title="47">absPath, err := filepath.Abs(filePath)
         if err != nil </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("invalid path %s: %w", filePath, err)
 </span>        }
 
-        <span class="cov5" title="46">data, err := os.ReadFile(absPath)
+        <span class="cov5" title="47">data, err := os.ReadFile(absPath)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("cannot read file %s: %w", absPath, err)
 </span>        }
 
-        <span class="cov5" title="45">cat := New()
+        <span class="cov5" title="46">cat := New()
         if err := yaml.Unmarshal(data, cat); err != nil </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("cannot unmarshal yaml from %s: %w", absPath, err)
 </span>        }
 
-        <span class="cov5" title="45">if cat.Elements == nil </span>{
+        <span class="cov5" title="46">if cat.Elements == nil </span>{
                 <span class="cov0" title="0">cat.Elements = make(map[string]Element)
 </span>        }
 
-        <span class="cov5" title="45">if cat.Formats == nil </span>{
+        <span class="cov5" title="46">if cat.Formats == nil </span>{
                 <span class="cov0" title="0">cat.Formats = make(FormatDefinitions)
 </span>        }
 
-        <span class="cov5" title="45">return cat, nil</span>
+        <span class="cov5" title="46">return cat, nil</span>
 }
 
 // SaveFile marshals the catalog to YAML and writes it atomically to a file.
 func (c *Catalog) SaveFile(filePath string) error {
-        <span class="cov3" title="13">if c == nil </span>{
+        <span class="cov3" title="14">if c == nil </span>{
                 <span class="cov1" title="1">return ErrNilCatalog
 </span>        }
 
-        <span class="cov3" title="12">c.mu.RLock()
+        <span class="cov3" title="13">c.mu.RLock()
         data, err := yaml.Marshal(c)
         c.mu.RUnlock()
 </span>
-        <span class="cov3" title="12">if err != nil </span>{
+        <span class="cov3" title="13">if err != nil </span>{
                 <span class="cov0" title="0">return fmt.Errorf("marshaling catalog to yaml: %w", err)
 </span>        }
 
-        <span class="cov3" title="12">dir := filepath.Dir(filePath)
+        <span class="cov3" title="13">dir := filepath.Dir(filePath)
         if dir != "" &amp;&amp; dir != "." </span>{
-                <span class="cov3" title="12">if err := os.MkdirAll(dir, defaultDirPerm); err != nil </span>{
+                <span class="cov3" title="13">if err := os.MkdirAll(dir, defaultDirPerm); err != nil </span>{
                         <span class="cov1" title="1">return fmt.Errorf("creating directory %s: %w", dir, err)
 </span>                }
         }
 
-        <span class="cov3" title="11">tmpPath := filePath + ".tmp"
+        <span class="cov3" title="12">tmpPath := filePath + ".tmp"
         if err := os.WriteFile(tmpPath, data, defaultFilePerm); err != nil </span>{
                 <span class="cov0" title="0">return fmt.Errorf("writing catalog to %s: %w", tmpPath, err)
 </span>        }
 
-        <span class="cov3" title="11">if err := os.Rename(tmpPath, filePath); err != nil </span>{
+        <span class="cov3" title="12">if err := os.Rename(tmpPath, filePath); err != nil </span>{
                 <span class="cov0" title="0">if rmErr := os.Remove(tmpPath); rmErr != nil </span>{
                         <span class="cov0" title="0">return fmt.Errorf("renaming %s to %s: %w", tmpPath, filePath, errors.Join(err, fmt.Errorf("removing temporary file: %w", rmErr)))
 </span>                }
@@ -5891,7 +5869,7 @@ func (c *Catalog) SaveFile(filePath string) error {
                 <span class="cov0" title="0">return fmt.Errorf("renaming %s to %s: %w", tmpPath, filePath, err)</span>
         }
 
-        <span class="cov3" title="11">return nil</span>
+        <span class="cov3" title="12">return nil</span>
 }
 
 // Save writes the catalog YAML to any io.Writer.
@@ -5917,58 +5895,58 @@ func (c *Catalog) Save(writer io.Writer) error {
 
 // Len returns the number of elements in the catalog thread-safely.
 func (c *Catalog) Len() int {
-        <span class="cov8" title="1011">if c == nil </span>{
+        <span class="cov8" title="1006">if c == nil </span>{
                 <span class="cov1" title="1">return 0
 </span>        }
 
-        <span class="cov8" title="1009">c.mu.RLock()
+        <span class="cov8" title="1004">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
-        <span class="cov8" title="1011">return len(c.Elements)</span>
+        <span class="cov8" title="1006">return len(c.Elements)</span>
 }
 
 // GetFormat retrieves a copy of the format definition by ID thread-safely.
 func (c *Catalog) GetFormat(formatID string) (Format, bool) {
-        <span class="cov8" title="1022">if c == nil </span>{
+        <span class="cov8" title="1001">if c == nil </span>{
                 <span class="cov1" title="1">return Format{}, false
 </span>        }
 
-        <span class="cov8" title="1021">c.mu.RLock()
+        <span class="cov8" title="1000">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
-        <span class="cov8" title="1022">format, exists := c.Formats[formatID]
+        <span class="cov8" title="1003">format, exists := c.Formats[formatID]
 </span>
-        <span class="cov8" title="1022">return format, exists</span>
+        <span class="cov8" title="997">return format, exists</span>
 }
 
 // AddFormat adds or updates a format definition thread-safely with lazy initialization.
 func (c *Catalog) AddFormat(format *Format) {
-        <span class="cov0" title="0">if c == nil || format == nil || format.ID == "" </span>{
-                <span class="cov0" title="0">return
+        <span class="cov2" title="4">if c == nil || format == nil || format.ID == "" </span>{
+                <span class="cov2" title="3">return
 </span>        }
 
-        <span class="cov0" title="0">c.mu.Lock()
+        <span class="cov1" title="1">c.mu.Lock()
         defer c.mu.Unlock()
 </span>
-        <span class="cov0" title="0">if c.Formats == nil </span>{
+        <span class="cov1" title="1">if c.Formats == nil </span>{
                 <span class="cov0" title="0">c.Formats = make(FormatDefinitions)
 </span>        }
 
-        <span class="cov0" title="0">c.Formats[format.ID] = *format</span>
+        <span class="cov1" title="1">c.Formats[format.ID] = *format</span>
 }
 
 // Exists returns true if the element ID is present in the catalog.
 func (c *Catalog) Exists(elementID string) bool {
-        <span class="cov8" title="1166">if c == nil </span>{
+        <span class="cov8" title="1165">if c == nil </span>{
                 <span class="cov1" title="2">return false
 </span>        }
 
-        <span class="cov8" title="1164">c.mu.RLock()
+        <span class="cov8" title="1162">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
         <span class="cov8" title="1164">_, exists := c.getElementLocked(elementID)
 </span>
-        <span class="cov8" title="1162">return exists</span>
+        <span class="cov8" title="1154">return exists</span>
 }
 
 // Exist is an alias for Exists kept for backward compatibility.
@@ -5978,72 +5956,72 @@ func (c *Catalog) Exist(elementID string) bool {
 
 // Get retrieves a copy of an element by ID.
 func (c *Catalog) Get(elementID string) (Element, bool) {
-        <span class="cov8" title="1086">if c == nil </span>{
+        <span class="cov8" title="1085">if c == nil </span>{
                 <span class="cov1" title="1">return Element{}, false
 </span>        }
 
-        <span class="cov8" title="1085">c.mu.RLock()
+        <span class="cov8" title="1084">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
-        <span class="cov8" title="1085">elem, exists := c.getElementLocked(elementID)
+        <span class="cov8" title="1086">elem, exists := c.getElementLocked(elementID)
         if !exists </span>{
-                <span class="cov8" title="799">return Element{}, false
+                <span class="cov8" title="951">return Element{}, false
 </span>        }
 
-        <span class="cov7" title="286">elem.Formats = slices.Clone(elem.Formats)
+        <span class="cov6" title="135">elem.Formats = slices.Clone(elem.Formats)
 </span>
-        <span class="cov7" title="286">return elem, true</span>
+        <span class="cov6" title="135">return elem, true</span>
 }
 
 // Find looks up an element pointer by ID or returns ErrElementNotFound.
 func (c *Catalog) Find(elementID string) (*Element, error) {
-        <span class="cov8" title="1059">if c == nil </span>{
-                <span class="cov1" title="1">return nil, ErrNilCatalog
+        <span class="cov8" title="1061">if c == nil </span>{
+                <span class="cov1" title="2">return nil, ErrNilCatalog
 </span>        }
 
-        <span class="cov8" title="1058">c.mu.RLock()
+        <span class="cov8" title="1059">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
-        <span class="cov8" title="1058">if elem, exists := c.getElementLocked(elementID); exists </span>{
-                <span class="cov7" title="252">elemCopy := elem
+        <span class="cov8" title="1056">if elem, exists := c.getElementLocked(elementID); exists </span>{
+                <span class="cov6" title="100">elemCopy := elem
                 elemCopy.Formats = slices.Clone(elem.Formats)
 </span>
-                <span class="cov7" title="252">return &amp;elemCopy, nil
+                <span class="cov6" title="100">return &amp;elemCopy, nil
 </span>        }
 
-        <span class="cov8" title="805">return nil, fmt.Errorf("%w: %s", ErrElementNotFound, elementID)</span>
+        <span class="cov8" title="956">return nil, fmt.Errorf("%w: %s", ErrElementNotFound, elementID)</span>
 }
 
 func (c *Catalog) getElementLocked(elementID string) (Element, bool) {
-        <span class="cov10" title="3387">if elem, exists := c.Elements[elementID]; exists </span>{
-                <span class="cov8" title="888">return elem, true
+        <span class="cov10" title="3380">if elem, exists := c.Elements[elementID]; exists </span>{
+                <span class="cov7" title="428">return elem, true
 </span>        }
 
-        <span class="cov9" title="2500">if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID </span>{
-                <span class="cov3" title="13">if elem, exists := c.Elements[altID]; exists </span>{
+        <span class="cov9" title="2943">if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID </span>{
+                <span class="cov3" title="14">if elem, exists := c.Elements[altID]; exists </span>{
                         <span class="cov0" title="0">return elem, true
 </span>                }
         }
 
-        <span class="cov9" title="2501">if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID </span>{
-                <span class="cov9" title="2391">if elem, exists := c.Elements[altID]; exists </span>{
+        <span class="cov9" title="2943">if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID </span>{
+                <span class="cov9" title="2840">if elem, exists := c.Elements[altID]; exists </span>{
                         <span class="cov3" title="7">return elem, true
 </span>                }
         }
 
-        <span class="cov9" title="2489">if elem, ok := c.resolveDateElement(elementID); ok </span>{
-                <span class="cov3" title="7">return elem, true
+        <span class="cov9" title="2924">if elem, ok := c.resolveDateElement(elementID); ok </span>{
+                <span class="cov3" title="8">return elem, true
 </span>        }
 
-        <span class="cov9" title="2485">return Element{}, false</span>
+        <span class="cov9" title="2928">return Element{}, false</span>
 }
 
 func (c *Catalog) resolveDateElement(dateStr string) (Element, bool) {
-        <span class="cov9" title="2486">if _, err := time.Parse("2006-01-02", dateStr); err != nil </span>{
-                <span class="cov9" title="2486">return Element{}, false
+        <span class="cov9" title="2930">if _, err := time.Parse("2006-01-02", dateStr); err != nil </span>{
+                <span class="cov9" title="2930">return Element{}, false
 </span>        }
 
-        <span class="cov3" title="7">if baseElem, ok := c.Elements["czech_republic"]; ok </span>{
+        <span class="cov3" title="8">if baseElem, ok := c.Elements["czech_republic"]; ok </span>{
                 <span class="cov3" title="7">return Element{
                         ID:      dateStr,
                         Name:    baseElem.Name + " " + dateStr,
@@ -6052,13 +6030,13 @@ func (c *Catalog) resolveDateElement(dateStr string) (Element, bool) {
                 }, true
 </span>        }
 
-        <span class="cov0" title="0">if latestElem, ok := c.Elements["latest"]; ok </span>{
-                <span class="cov0" title="0">prefix := "czech_republic"
+        <span class="cov1" title="1">if latestElem, ok := c.Elements["latest"]; ok </span>{
+                <span class="cov1" title="1">prefix := "czech_republic"
                 if idx := strings.Index(latestElem.File, "-"); idx != -1 </span>{
-                        <span class="cov0" title="0">prefix = latestElem.File[:idx]
+                        <span class="cov1" title="1">prefix = latestElem.File[:idx]
 </span>                }
 
-                <span class="cov0" title="0">return Element{
+                <span class="cov1" title="1">return Element{
                         ID:      dateStr,
                         Name:    latestElem.Name + " " + dateStr,
                         File:    prefix + "-" + dateStr,
@@ -6071,25 +6049,25 @@ func (c *Catalog) resolveDateElement(dateStr string) (Element, bool) {
 
 // SubElement adds a child element and sets its parent relation thread-safely.
 func (c *Catalog) SubElement(parentID, childID string) {
-        <span class="cov0" title="0">c.mu.Lock()
+        <span class="cov1" title="1">c.mu.Lock()
         defer c.mu.Unlock()
 </span>
-        <span class="cov0" title="0">if c.Elements == nil </span>{
+        <span class="cov1" title="1">if c.Elements == nil </span>{
                 <span class="cov0" title="0">c.Elements = make(map[string]Element)
 </span>        }
 
-        <span class="cov0" title="0">child, exists := c.Elements[childID]
+        <span class="cov1" title="1">child, exists := c.Elements[childID]
         if !exists </span>{
-                <span class="cov0" title="0">child = Element{ID: childID}
+                <span class="cov1" title="1">child = Element{ID: childID}
 </span>        }
 
-        <span class="cov0" title="0">child.Parent = parentID
+        <span class="cov1" title="1">child.Parent = parentID
         c.Elements[childID] = child</span>
 }
 
 // GetElements returns an Element by ID. Deprecated: use Get or Find instead.
 func (c *Catalog) GetElements(elementID string) (Element, bool) {
-        <span class="cov0" title="0">return c.Get(elementID)
+        <span class="cov1" title="1">return c.Get(elementID)
 </span>}
 
 // AddElement inserts or replaces an element in the catalog.
@@ -6179,7 +6157,7 @@ func (c *Catalog) AddExtension(elementID, formatID string) {
         defer c.mu.Unlock()
 </span>
         <span class="cov8" title="1086">if elem, exists := c.Elements[elementID]; exists </span>{
-                <span class="cov8" title="975">elem.AddFormat(formatID)
+                <span class="cov7" title="324">elem.AddFormat(formatID)
                 c.Elements[elementID] = elem
 </span>        }
 }
@@ -6197,7 +6175,14 @@ func (c *Catalog) SortedKeys() []string {
                 <span class="cov1" title="2">return nil
 </span>        }
 
-        <span class="cov4" title="16">return slices.Sorted(maps.Keys(c.Elements))</span>
+        <span class="cov4" title="16">keys := make([]string, 0, len(c.Elements))
+        for elementID := range c.Elements </span>{
+                <span class="cov8" title="590">keys = append(keys, elementID)
+</span>        }
+
+        <span class="cov4" title="16">slices.Sort(keys)
+</span>
+        <span class="cov4" title="16">return keys</span>
 }
 
 // All returns a sequence iterator over all elements (Go 1.23+).
@@ -6213,8 +6198,7 @@ func (c *Catalog) All() iter.Seq2[string, Element] {
                 defer c.mu.RUnlock()
 </span>
                 <span class="cov1" title="1">for k, v := range c.Elements </span>{
-                        <span class="cov2" title="3">v.Formats = slices.Clone(v.Formats)
-                        if !yield(k, v) </span>{
+                        <span class="cov2" title="3">if !yield(k, v) </span>{
                                 <span class="cov0" title="0">return
 </span>                        }
                 }
@@ -6223,16 +6207,16 @@ func (c *Catalog) All() iter.Seq2[string, Element] {
 
 // ResolveURL constructs the absolute download URL for an element and format.
 func (c *Catalog) ResolveURL(elem *Element, formatID string) (string, error) {
-        <span class="cov5" title="41">if c == nil </span>{
+        <span class="cov5" title="43">if c == nil </span>{
                 <span class="cov1" title="1">return "", ErrNilCatalog
 </span>        }
 
-        <span class="cov5" title="40">if elem == nil </span>{
+        <span class="cov5" title="42">if elem == nil </span>{
                 <span class="cov1" title="1">return "", ErrNilElement
 </span>        }
 
-        <span class="cov5" title="39">if !elem.ContainsFormat(formatID) </span>{
-                <span class="cov2" title="5">return "", fmt.Errorf("%w: %s on element %s", ErrFormatNotFound, formatID, elem.ID)
+        <span class="cov5" title="41">if !elem.ContainsFormat(formatID) </span>{
+                <span class="cov3" title="7">return "", fmt.Errorf("%w: %s on element %s", ErrFormatNotFound, formatID, elem.ID)
 </span>        }
 
         <span class="cov4" title="34">c.mu.RLock()
@@ -6254,20 +6238,24 @@ func (c *Catalog) ResolveURL(elem *Element, formatID string) (string, error) {
         <span class="cov4" title="33">return preURL + format.Loc, nil</span>
 }
 
-func (c *Catalog) collectHierarchySegments(startID string) ([]string, error) {
-        <span class="cov5" title="39">var segments [maxHierarchyDepth]string
+type hierarchySegments struct {
+        items [maxHierarchyDepth]string
+        count int
+}
+
+func (c *Catalog) collectHierarchySegments(startID string) (hierarchySegments, error) {
+        <span class="cov5" title="39">var segments hierarchySegments
 </span>
-        <span class="cov5" title="39">count := 0
-        currID := startID
+        <span class="cov5" title="39">currID := startID
 </span>
-        <span class="cov5" title="39">for count &lt; maxHierarchyDepth </span>{
+        <span class="cov5" title="39">for segments.count &lt; maxHierarchyDepth </span>{
                 <span class="cov5" title="85">currentElem, exists := c.getElementLocked(currID)
                 if !exists </span>{
-                        <span class="cov0" title="0">return nil, fmt.Errorf("%w: %s", ErrElementNotFound, currID)
+                        <span class="cov0" title="0">return hierarchySegments{}, fmt.Errorf("%w: %s", ErrElementNotFound, currID)
 </span>                }
 
-                <span class="cov5" title="85">segments[count] = currentElem.Filename()
-                count++
+                <span class="cov5" title="85">segments.items[segments.count] = currentElem.Filename()
+                segments.count++
 </span>
                 <span class="cov5" title="85">if !currentElem.HasParent() </span>{
                         <span class="cov5" title="38">break</span>
@@ -6276,11 +6264,11 @@ func (c *Catalog) collectHierarchySegments(startID string) ([]string, error) {
                 <span class="cov5" title="47">currID = currentElem.Parent</span>
         }
 
-        <span class="cov5" title="39">if count &gt;= maxHierarchyDepth </span>{
-                <span class="cov1" title="1">return nil, fmt.Errorf("%w: element %s", ErrMaxHierarchyDepth, startID)
+        <span class="cov5" title="39">if segments.count &gt;= maxHierarchyDepth </span>{
+                <span class="cov1" title="1">return hierarchySegments{}, fmt.Errorf("%w: element %s", ErrMaxHierarchyDepth, startID)
 </span>        }
 
-        <span class="cov5" title="38">return segments[:count:count], nil</span>
+        <span class="cov5" title="38">return segments, nil</span>
 }
 
 // ResolvePreURL iteratively builds the URL path prefix with cycle protection and minimal allocations.
@@ -6306,8 +6294,8 @@ func (c *Catalog) ResolvePreURL(elem *Element, baseURL ...string) (string, error
 </span>
         <span class="cov5" title="38">builder.WriteString(buildURLPrefix(baseURL, c.BaseURL))
 </span>
-        <span class="cov5" title="38">for i, seg := range slices.Backward(segments) </span>{
-                <span class="cov5" title="55">builder.WriteString(seg)
+        <span class="cov5" title="38">for i := segments.count - 1; i &gt;= 0; i-- </span>{
+                <span class="cov5" title="55">builder.WriteString(segments.items[i])
 </span>
                 <span class="cov5" title="55">if i &gt; 0 </span>{
                         <span class="cov4" title="17">builder.WriteByte('/')
@@ -6358,7 +6346,7 @@ func (c *Catalog) IsHashable(formatID string) (ok bool, hashExt, hashType string
 }
 </pre>
 		
-		<pre class="file" id="file26" style="display: none">package catalog
+		<pre class="file" id="file27" style="display: none">package catalog
 
 import (
         "cmp"
@@ -6370,7 +6358,7 @@ type Formats []string
 
 // Contains checks if a format identifier exists in the formats list.
 func (f Formats) Contains(format string) bool {
-        <span class="cov10" title="1184">return slices.Contains(f, format)
+        <span class="cov10" title="535">return slices.Contains(f, format)
 </span>}
 
 // Element represents a geographic region, extract, or meta-container.
@@ -6397,35 +6385,35 @@ type Element struct {
 
 // HasParent returns true if the element has a parent identifier.
 func (e *Element) HasParent() bool {
-        <span class="cov6" title="88">return e != nil &amp;&amp; e.Parent != ""
+        <span class="cov7" title="88">return e != nil &amp;&amp; e.Parent != ""
 </span>}
 
 // Filename returns the explicit filename if set, or defaults to the element ID.
 func (e *Element) Filename() string {
-        <span class="cov6" title="88">if e == nil </span>{
+        <span class="cov7" title="88">if e == nil </span>{
                 <span class="cov1" title="1">return ""
 </span>        }
 
-        <span class="cov6" title="87">return cmp.Or(e.File, e.ID)</span>
+        <span class="cov7" title="87">return cmp.Or(e.File, e.ID)</span>
 }
 
 // ContainsFormat returns true if the element supports the given format.
 func (e *Element) ContainsFormat(format string) bool {
-        <span class="cov9" title="1157">if e == nil </span>{
+        <span class="cov9" title="508">if e == nil </span>{
                 <span class="cov1" title="1">return false
 </span>        }
 
-        <span class="cov9" title="1156">return e.Formats.Contains(format)</span>
+        <span class="cov9" title="507">return e.Formats.Contains(format)</span>
 }
 
 // AddFormat adds a format if it does not already exist.
 func (e *Element) AddFormat(format string) {
-        <span class="cov9" title="990">if e == nil || format == "" </span>{
+        <span class="cov9" title="339">if e == nil || format == "" </span>{
                 <span class="cov0" title="0">return
 </span>        }
 
-        <span class="cov9" title="990">if !e.ContainsFormat(format) </span>{
-                <span class="cov9" title="977">e.Formats = append(e.Formats, format)
+        <span class="cov9" title="339">if !e.ContainsFormat(format) </span>{
+                <span class="cov9" title="326">e.Formats = append(e.Formats, format)
 </span>        }
 }
 
@@ -6446,22 +6434,21 @@ func (e *Element) CreateParentElement(grandparentID string) *Element {
 
 // Clone returns a deep copy of the Element with an independent Formats slice.
 func (e *Element) Clone() Element {
-        <span class="cov0" title="0">if e == nil </span>{
-                <span class="cov0" title="0">return Element{}
+        <span class="cov1" title="2">if e == nil </span>{
+                <span class="cov1" title="1">return Element{}
 </span>        }
 
-        <span class="cov0" title="0">clone := *e
+        <span class="cov1" title="1">clone := *e
         clone.Formats = slices.Clone(e.Formats)
 </span>
-        <span class="cov0" title="0">return clone</span>
+        <span class="cov1" title="1">return clone</span>
 }
 </pre>
 		
-		<pre class="file" id="file27" style="display: none">package catalog
+		<pre class="file" id="file28" style="display: none">package catalog
 
 import (
         "slices"
-        "strings"
 )
 
 // Supported format identifiers.
@@ -6547,21 +6534,21 @@ type MiniFormat struct {
         ShortName string
 }
 
-var defaultMiniFormats = []MiniFormat{
-        {FullName: FormatState, ShortName: "s"},
-        {FullName: FormatOsmBz2, ShortName: "B"},
-        {FullName: FormatOsmGz, ShortName: "G"},
-        {FullName: FormatOshPbf, ShortName: "H"},
-        {FullName: FormatOsmPbf, ShortName: "P"},
-        {FullName: FormatPbf, ShortName: "P"},
-        {FullName: FormatPoly, ShortName: "p"},
-        {FullName: FormatKml, ShortName: "k"},
-        {FullName: FormatShpZip, ShortName: "S"},
-        {FullName: FormatGeoJSON, ShortName: "g"},
-        {FullName: FormatOBF, ShortName: "o"},
-        {FullName: FormatGPKG, ShortName: "K"},
-        {FullName: FormatO5m, ShortName: "5"},
-        {FullName: FormatO5mZst, ShortName: "Z"},
+var miniFormatBytes = map[string]byte{
+        FormatState:   's',
+        FormatOsmBz2:  'B',
+        FormatOsmGz:   'G',
+        FormatOshPbf:  'H',
+        FormatOsmPbf:  'P',
+        FormatPbf:     'P',
+        FormatPoly:    'p',
+        FormatKml:     'k',
+        FormatShpZip:  'S',
+        FormatGeoJSON: 'g',
+        FormatOBF:     'o',
+        FormatGPKG:    'K',
+        FormatO5m:     '5',
+        FormatO5mZst:  'Z',
 }
 
 // GetMiniFormats returns a compact string representation of the given format slice.
@@ -6570,62 +6557,61 @@ func GetMiniFormats(formatList []string) string {
                 <span class="cov3" title="3">return ""
 </span>        }
 
-        <span class="cov4" title="6">var shortNames []string
+        <span class="cov4" title="6">var buf [16]byte
+</span>
+        <span class="cov4" title="6">idx := 0
 </span>
         <span class="cov4" title="6">for _, fullName := range formatList </span>{
-                <span class="cov5" title="10">for _, mini := range defaultMiniFormats </span>{
-                        <span class="cov8" title="43">if fullName == mini.FullName </span>{
-                                <span class="cov5" title="10">shortNames = append(shortNames, mini.ShortName)
-</span>
-                                <span class="cov5" title="10">break</span>
-                        }
-                }
+                <span class="cov5" title="10">if ch, exists := miniFormatBytes[fullName]; exists &amp;&amp; idx &lt; len(buf) </span>{
+                        <span class="cov5" title="10">buf[idx] = ch
+                        idx++
+</span>                }
         }
 
-        <span class="cov4" title="6">return strings.Join(shortNames, "")</span>
+        <span class="cov4" title="6">return string(buf[:idx])</span>
+}
+
+var defaultFlagToFormat = map[string]string{
+        KeyOsmPbf:         FormatOsmPbf,
+        KeyPbf:            FormatPbf,
+        KeyOshPbf:         FormatOshPbf,
+        KeyOsmGz:          FormatOsmGz,
+        KeyOsmBz2:         FormatOsmBz2,
+        KeyShpZip:         FormatShpZip,
+        KeyState:          FormatState,
+        KeyPoly:           FormatPoly,
+        KeyKml:            FormatKml,
+        KeyGeoJSON:        FormatGeoJSON,
+        KeyGarminOSM:      FormatGarminOSM,
+        KeyMapsforge:      FormatMapsforge,
+        KeyMBTiles:        FormatMBTiles,
+        KeyCSV:            FormatCSV,
+        KeyGarminOnroad:   FormatGarminOnroad,
+        KeyGarminOntrail:  FormatGarminOntrail,
+        KeyGarminOpenTopo: FormatGarminOpenTopo,
+        KeyOBF:            FormatOBF,
+        KeyGPKG:           FormatGPKG,
+        KeyO5m:            FormatO5m,
+        KeyO5mZst:         FormatO5mZst,
 }
 
 // GetFormats converts a map of enabled boolean flags into a sorted slice of format IDs.
 func GetFormats(flagMap map[string]bool) []string {
-        <span class="cov3" title="4">flagToFormat := map[string]string{
-                KeyOsmPbf:         FormatOsmPbf,
-                KeyPbf:            FormatPbf,
-                KeyOshPbf:         FormatOshPbf,
-                KeyOsmGz:          FormatOsmGz,
-                KeyOsmBz2:         FormatOsmBz2,
-                KeyShpZip:         FormatShpZip,
-                KeyState:          FormatState,
-                KeyPoly:           FormatPoly,
-                KeyKml:            FormatKml,
-                KeyGeoJSON:        FormatGeoJSON,
-                KeyGarminOSM:      FormatGarminOSM,
-                KeyMapsforge:      FormatMapsforge,
-                KeyMBTiles:        FormatMBTiles,
-                KeyCSV:            FormatCSV,
-                KeyGarminOnroad:   FormatGarminOnroad,
-                KeyGarminOntrail:  FormatGarminOntrail,
-                KeyGarminOpenTopo: FormatGarminOpenTopo,
-                KeyOBF:            FormatOBF,
-                KeyGPKG:           FormatGPKG,
-                KeyO5m:            FormatO5m,
-                KeyO5mZst:         FormatO5mZst,
-</span>        }
-
         <span class="cov3" title="4">var formats []string
 </span>
-        <span class="cov3" title="4">for key, format := range flagToFormat </span>{
+        <span class="cov3" title="4">for key, format := range defaultFlagToFormat </span>{
                 <span class="cov10" title="84">if enabled, ok := flagMap[key]; ok &amp;&amp; enabled </span>{
                         <span class="cov3" title="4">formats = append(formats, format)
 </span>                }
         }
 
         <span class="cov3" title="4">if len(formats) == 0 </span>{
-                <span class="cov1" title="1">formats = append(formats, FormatOsmPbf)
+                <span class="cov1" title="1">return []string{FormatOsmPbf}
 </span>        }
 
-        <span class="cov3" title="4">slices.Sort(formats)
+        <span class="cov3" title="3">slices.Sort(formats)
 </span>
-        <span class="cov3" title="4">return formats</span>
+        <span class="cov3" title="3">return formats</span>
 }
 </pre>
 		
