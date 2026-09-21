@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1789966677281,
+  "lastUpdate": 1789966875353,
   "repoUrl": "https://github.com/julien-noblet/download-geofabrik",
   "entries": {
     "download-geofabrik Go Benchmarks": [
@@ -8988,6 +8988,1290 @@ window.BENCHMARK_DATA = {
             "value": 23992,
             "unit": "allocs/op",
             "extra": "130 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "336416f4c8c1b025c71c8477fdbd283c81994121",
+          "message": "chore(deps): update docker/setup-qemu-action action to v4",
+          "timestamp": "2026-09-21T04:54:49Z",
+          "tree_id": "829602db3f5a0dd69cdfc254087d9dbf2c48bba2",
+          "url": "https://github.com/julien-noblet/download-geofabrik/commit/336416f4c8c1b025c71c8477fdbd283c81994121"
+        },
+        "date": 1789966872902,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "BenchmarkCLIExecuteHelp (github.com/julien-noblet/download-geofabrik/internal/cli)",
+            "value": 18167,
+            "unit": "ns/op\t    8075 B/op\t     125 allocs/op",
+            "extra": "58635 times"
+          },
+          {
+            "name": "BenchmarkCLIExecuteHelp (github.com/julien-noblet/download-geofabrik/internal/cli) - ns/op",
+            "value": 18167,
+            "unit": "ns/op",
+            "extra": "58635 times"
+          },
+          {
+            "name": "BenchmarkCLIExecuteHelp (github.com/julien-noblet/download-geofabrik/internal/cli) - B/op",
+            "value": 8075,
+            "unit": "B/op",
+            "extra": "58635 times"
+          },
+          {
+            "name": "BenchmarkCLIExecuteHelp (github.com/julien-noblet/download-geofabrik/internal/cli) - allocs/op",
+            "value": 125,
+            "unit": "allocs/op",
+            "extra": "58635 times"
+          },
+          {
+            "name": "BenchmarkCLIExecuteHelp (github.com/julien-noblet/download-geofabrik/internal/cli)",
+            "value": 13760,
+            "unit": "ns/op\t    8075 B/op\t     125 allocs/op",
+            "extra": "83065 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCLIExecuteHelp (github.com/julien-noblet/download-geofabrik/internal/cli) - ns/op",
+            "value": 13760,
+            "unit": "ns/op",
+            "extra": "83065 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCLIExecuteHelp (github.com/julien-noblet/download-geofabrik/internal/cli) - B/op",
+            "value": 8075,
+            "unit": "B/op",
+            "extra": "83065 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCLIExecuteHelp (github.com/julien-noblet/download-geofabrik/internal/cli) - allocs/op",
+            "value": 125,
+            "unit": "allocs/op",
+            "extra": "83065 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFileExists (github.com/julien-noblet/download-geofabrik/internal/downloader)",
+            "value": 2130,
+            "unit": "ns/op\t     288 B/op\t       2 allocs/op",
+            "extra": "592389 times"
+          },
+          {
+            "name": "BenchmarkFileExists (github.com/julien-noblet/download-geofabrik/internal/downloader) - ns/op",
+            "value": 2130,
+            "unit": "ns/op",
+            "extra": "592389 times"
+          },
+          {
+            "name": "BenchmarkFileExists (github.com/julien-noblet/download-geofabrik/internal/downloader) - B/op",
+            "value": 288,
+            "unit": "B/op",
+            "extra": "592389 times"
+          },
+          {
+            "name": "BenchmarkFileExists (github.com/julien-noblet/download-geofabrik/internal/downloader) - allocs/op",
+            "value": 2,
+            "unit": "allocs/op",
+            "extra": "592389 times"
+          },
+          {
+            "name": "BenchmarkFileExists (github.com/julien-noblet/download-geofabrik/internal/downloader)",
+            "value": 2153,
+            "unit": "ns/op\t     288 B/op\t       2 allocs/op",
+            "extra": "582243 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFileExists (github.com/julien-noblet/download-geofabrik/internal/downloader) - ns/op",
+            "value": 2153,
+            "unit": "ns/op",
+            "extra": "582243 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFileExists (github.com/julien-noblet/download-geofabrik/internal/downloader) - B/op",
+            "value": 288,
+            "unit": "B/op",
+            "extra": "582243 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFileExists (github.com/julien-noblet/download-geofabrik/internal/downloader) - allocs/op",
+            "value": 2,
+            "unit": "allocs/op",
+            "extra": "582243 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkNewDownloader (github.com/julien-noblet/download-geofabrik/internal/downloader)",
+            "value": 223.8,
+            "unit": "ns/op\t     800 B/op\t       6 allocs/op",
+            "extra": "5389502 times"
+          },
+          {
+            "name": "BenchmarkNewDownloader (github.com/julien-noblet/download-geofabrik/internal/downloader) - ns/op",
+            "value": 223.8,
+            "unit": "ns/op",
+            "extra": "5389502 times"
+          },
+          {
+            "name": "BenchmarkNewDownloader (github.com/julien-noblet/download-geofabrik/internal/downloader) - B/op",
+            "value": 800,
+            "unit": "B/op",
+            "extra": "5389502 times"
+          },
+          {
+            "name": "BenchmarkNewDownloader (github.com/julien-noblet/download-geofabrik/internal/downloader) - allocs/op",
+            "value": 6,
+            "unit": "allocs/op",
+            "extra": "5389502 times"
+          },
+          {
+            "name": "BenchmarkNewDownloader (github.com/julien-noblet/download-geofabrik/internal/downloader)",
+            "value": 227.6,
+            "unit": "ns/op\t     800 B/op\t       6 allocs/op",
+            "extra": "5517296 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkNewDownloader (github.com/julien-noblet/download-geofabrik/internal/downloader) - ns/op",
+            "value": 227.6,
+            "unit": "ns/op",
+            "extra": "5517296 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkNewDownloader (github.com/julien-noblet/download-geofabrik/internal/downloader) - B/op",
+            "value": 800,
+            "unit": "B/op",
+            "extra": "5517296 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkNewDownloader (github.com/julien-noblet/download-geofabrik/internal/downloader) - allocs/op",
+            "value": 6,
+            "unit": "allocs/op",
+            "extra": "5517296 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkDownloadFileStreamMD5 (github.com/julien-noblet/download-geofabrik/internal/downloader)",
+            "value": 375141,
+            "unit": "ns/op\t 174.70 MB/s\t    7676 B/op\t      93 allocs/op",
+            "extra": "3094 times"
+          },
+          {
+            "name": "BenchmarkDownloadFileStreamMD5 (github.com/julien-noblet/download-geofabrik/internal/downloader) - ns/op",
+            "value": 375141,
+            "unit": "ns/op",
+            "extra": "3094 times"
+          },
+          {
+            "name": "BenchmarkDownloadFileStreamMD5 (github.com/julien-noblet/download-geofabrik/internal/downloader) - MB/s",
+            "value": 174.7,
+            "unit": "MB/s",
+            "extra": "3094 times"
+          },
+          {
+            "name": "BenchmarkDownloadFileStreamMD5 (github.com/julien-noblet/download-geofabrik/internal/downloader) - B/op",
+            "value": 7676,
+            "unit": "B/op",
+            "extra": "3094 times"
+          },
+          {
+            "name": "BenchmarkDownloadFileStreamMD5 (github.com/julien-noblet/download-geofabrik/internal/downloader) - allocs/op",
+            "value": 93,
+            "unit": "allocs/op",
+            "extra": "3094 times"
+          },
+          {
+            "name": "BenchmarkDownloadFileStreamMD5 (github.com/julien-noblet/download-geofabrik/internal/downloader)",
+            "value": 356700,
+            "unit": "ns/op\t 183.73 MB/s\t    7621 B/op\t      93 allocs/op",
+            "extra": "3372 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkDownloadFileStreamMD5 (github.com/julien-noblet/download-geofabrik/internal/downloader) - ns/op",
+            "value": 356700,
+            "unit": "ns/op",
+            "extra": "3372 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkDownloadFileStreamMD5 (github.com/julien-noblet/download-geofabrik/internal/downloader) - MB/s",
+            "value": 183.73,
+            "unit": "MB/s",
+            "extra": "3372 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkDownloadFileStreamMD5 (github.com/julien-noblet/download-geofabrik/internal/downloader) - B/op",
+            "value": 7621,
+            "unit": "B/op",
+            "extra": "3372 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkDownloadFileStreamMD5 (github.com/julien-noblet/download-geofabrik/internal/downloader) - allocs/op",
+            "value": 93,
+            "unit": "allocs/op",
+            "extra": "3372 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkComputeMD5Hash (github.com/julien-noblet/download-geofabrik/internal/downloader)",
+            "value": 36876,
+            "unit": "ns/op\t   33393 B/op\t       8 allocs/op",
+            "extra": "33087 times"
+          },
+          {
+            "name": "BenchmarkComputeMD5Hash (github.com/julien-noblet/download-geofabrik/internal/downloader) - ns/op",
+            "value": 36876,
+            "unit": "ns/op",
+            "extra": "33087 times"
+          },
+          {
+            "name": "BenchmarkComputeMD5Hash (github.com/julien-noblet/download-geofabrik/internal/downloader) - B/op",
+            "value": 33393,
+            "unit": "B/op",
+            "extra": "33087 times"
+          },
+          {
+            "name": "BenchmarkComputeMD5Hash (github.com/julien-noblet/download-geofabrik/internal/downloader) - allocs/op",
+            "value": 8,
+            "unit": "allocs/op",
+            "extra": "33087 times"
+          },
+          {
+            "name": "BenchmarkComputeMD5Hash (github.com/julien-noblet/download-geofabrik/internal/downloader)",
+            "value": 36598,
+            "unit": "ns/op\t   33366 B/op\t       8 allocs/op",
+            "extra": "32829 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkComputeMD5Hash (github.com/julien-noblet/download-geofabrik/internal/downloader) - ns/op",
+            "value": 36598,
+            "unit": "ns/op",
+            "extra": "32829 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkComputeMD5Hash (github.com/julien-noblet/download-geofabrik/internal/downloader) - B/op",
+            "value": 33366,
+            "unit": "B/op",
+            "extra": "32829 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkComputeMD5Hash (github.com/julien-noblet/download-geofabrik/internal/downloader) - allocs/op",
+            "value": 8,
+            "unit": "allocs/op",
+            "extra": "32829 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCheckFileHash (github.com/julien-noblet/download-geofabrik/internal/downloader)",
+            "value": 10937,
+            "unit": "ns/op\t    1256 B/op\t      10 allocs/op",
+            "extra": "112050 times"
+          },
+          {
+            "name": "BenchmarkCheckFileHash (github.com/julien-noblet/download-geofabrik/internal/downloader) - ns/op",
+            "value": 10937,
+            "unit": "ns/op",
+            "extra": "112050 times"
+          },
+          {
+            "name": "BenchmarkCheckFileHash (github.com/julien-noblet/download-geofabrik/internal/downloader) - B/op",
+            "value": 1256,
+            "unit": "B/op",
+            "extra": "112050 times"
+          },
+          {
+            "name": "BenchmarkCheckFileHash (github.com/julien-noblet/download-geofabrik/internal/downloader) - allocs/op",
+            "value": 10,
+            "unit": "allocs/op",
+            "extra": "112050 times"
+          },
+          {
+            "name": "BenchmarkCheckFileHash (github.com/julien-noblet/download-geofabrik/internal/downloader)",
+            "value": 10435,
+            "unit": "ns/op\t    1256 B/op\t      10 allocs/op",
+            "extra": "115510 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCheckFileHash (github.com/julien-noblet/download-geofabrik/internal/downloader) - ns/op",
+            "value": 10435,
+            "unit": "ns/op",
+            "extra": "115510 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCheckFileHash (github.com/julien-noblet/download-geofabrik/internal/downloader) - B/op",
+            "value": 1256,
+            "unit": "B/op",
+            "extra": "115510 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCheckFileHash (github.com/julien-noblet/download-geofabrik/internal/downloader) - allocs/op",
+            "value": 10,
+            "unit": "allocs/op",
+            "extra": "115510 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/bbbike)",
+            "value": 138949,
+            "unit": "ns/op\t   17409 B/op\t     194 allocs/op",
+            "extra": "10000 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/bbbike) - ns/op",
+            "value": 138949,
+            "unit": "ns/op",
+            "extra": "10000 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/bbbike) - B/op",
+            "value": 17409,
+            "unit": "B/op",
+            "extra": "10000 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/bbbike) - allocs/op",
+            "value": 194,
+            "unit": "allocs/op",
+            "extra": "10000 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/bbbike)",
+            "value": 140022,
+            "unit": "ns/op\t   17394 B/op\t     194 allocs/op",
+            "extra": "8248 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/bbbike) - ns/op",
+            "value": 140022,
+            "unit": "ns/op",
+            "extra": "8248 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/bbbike) - B/op",
+            "value": 17394,
+            "unit": "B/op",
+            "extra": "8248 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/bbbike) - allocs/op",
+            "value": 194,
+            "unit": "allocs/op",
+            "extra": "8248 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geo2day)",
+            "value": 438366,
+            "unit": "ns/op\t   73867 B/op\t     648 allocs/op",
+            "extra": "2582 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geo2day) - ns/op",
+            "value": 438366,
+            "unit": "ns/op",
+            "extra": "2582 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geo2day) - B/op",
+            "value": 73867,
+            "unit": "B/op",
+            "extra": "2582 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geo2day) - allocs/op",
+            "value": 648,
+            "unit": "allocs/op",
+            "extra": "2582 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geo2day)",
+            "value": 438467,
+            "unit": "ns/op\t   73826 B/op\t     648 allocs/op",
+            "extra": "2758 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geo2day) - ns/op",
+            "value": 438467,
+            "unit": "ns/op",
+            "extra": "2758 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geo2day) - B/op",
+            "value": 73826,
+            "unit": "B/op",
+            "extra": "2758 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geo2day) - allocs/op",
+            "value": 648,
+            "unit": "allocs/op",
+            "extra": "2758 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik)",
+            "value": 132219,
+            "unit": "ns/op\t   14733 B/op\t     109 allocs/op",
+            "extra": "9084 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik) - ns/op",
+            "value": 132219,
+            "unit": "ns/op",
+            "extra": "9084 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik) - B/op",
+            "value": 14733,
+            "unit": "B/op",
+            "extra": "9084 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik) - allocs/op",
+            "value": 109,
+            "unit": "allocs/op",
+            "extra": "9084 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik)",
+            "value": 132073,
+            "unit": "ns/op\t   14716 B/op\t     109 allocs/op",
+            "extra": "9666 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik) - ns/op",
+            "value": 132073,
+            "unit": "ns/op",
+            "extra": "9666 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik) - B/op",
+            "value": 14716,
+            "unit": "B/op",
+            "extra": "9666 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/geofabrik) - allocs/op",
+            "value": 109,
+            "unit": "allocs/op",
+            "extra": "9666 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/movisda)",
+            "value": 129703,
+            "unit": "ns/op\t   13044 B/op\t     104 allocs/op",
+            "extra": "9120 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/movisda) - ns/op",
+            "value": 129703,
+            "unit": "ns/op",
+            "extra": "9120 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/movisda) - B/op",
+            "value": 13044,
+            "unit": "B/op",
+            "extra": "9120 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/movisda) - allocs/op",
+            "value": 104,
+            "unit": "allocs/op",
+            "extra": "9120 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/movisda)",
+            "value": 129098,
+            "unit": "ns/op\t   13026 B/op\t     104 allocs/op",
+            "extra": "9422 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/movisda) - ns/op",
+            "value": 129098,
+            "unit": "ns/op",
+            "extra": "9422 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/movisda) - B/op",
+            "value": 13026,
+            "unit": "B/op",
+            "extra": "9422 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/movisda) - allocs/op",
+            "value": 104,
+            "unit": "allocs/op",
+            "extra": "9422 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr)",
+            "value": 542698,
+            "unit": "ns/op\t   82332 B/op\t     678 allocs/op",
+            "extra": "2170 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr) - ns/op",
+            "value": 542698,
+            "unit": "ns/op",
+            "extra": "2170 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr) - B/op",
+            "value": 82332,
+            "unit": "B/op",
+            "extra": "2170 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr) - allocs/op",
+            "value": 678,
+            "unit": "allocs/op",
+            "extra": "2170 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr)",
+            "value": 547157,
+            "unit": "ns/op\t   82265 B/op\t     678 allocs/op",
+            "extra": "2096 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr) - ns/op",
+            "value": 547157,
+            "unit": "ns/op",
+            "extra": "2096 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr) - B/op",
+            "value": 82265,
+            "unit": "B/op",
+            "extra": "2096 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/openstreetmapfr) - allocs/op",
+            "value": 678,
+            "unit": "allocs/op",
+            "extra": "2096 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmch)",
+            "value": 135724,
+            "unit": "ns/op\t   15558 B/op\t     224 allocs/op",
+            "extra": "8348 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmch) - ns/op",
+            "value": 135724,
+            "unit": "ns/op",
+            "extra": "8348 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmch) - B/op",
+            "value": 15558,
+            "unit": "B/op",
+            "extra": "8348 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmch) - allocs/op",
+            "value": 224,
+            "unit": "allocs/op",
+            "extra": "8348 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmch)",
+            "value": 136155,
+            "unit": "ns/op\t   15546 B/op\t     224 allocs/op",
+            "extra": "9145 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmch) - ns/op",
+            "value": 136155,
+            "unit": "ns/op",
+            "extra": "9145 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmch) - B/op",
+            "value": 15546,
+            "unit": "B/op",
+            "extra": "9145 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmch) - allocs/op",
+            "value": 224,
+            "unit": "allocs/op",
+            "extra": "9145 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr)",
+            "value": 259243,
+            "unit": "ns/op\t   27396 B/op\t     354 allocs/op",
+            "extra": "4712 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr) - ns/op",
+            "value": 259243,
+            "unit": "ns/op",
+            "extra": "4712 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr) - B/op",
+            "value": 27396,
+            "unit": "B/op",
+            "extra": "4712 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr) - allocs/op",
+            "value": 354,
+            "unit": "allocs/op",
+            "extra": "4712 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr)",
+            "value": 257994,
+            "unit": "ns/op\t   27369 B/op\t     354 allocs/op",
+            "extra": "4540 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr) - ns/op",
+            "value": 257994,
+            "unit": "ns/op",
+            "extra": "4540 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr) - B/op",
+            "value": 27369,
+            "unit": "B/op",
+            "extra": "4540 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmfitvutbr) - allocs/op",
+            "value": 354,
+            "unit": "allocs/op",
+            "extra": "4540 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmit)",
+            "value": 378243,
+            "unit": "ns/op\t  947173 B/op\t    1256 allocs/op",
+            "extra": "3044 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmit) - ns/op",
+            "value": 378243,
+            "unit": "ns/op",
+            "extra": "3044 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmit) - B/op",
+            "value": 947173,
+            "unit": "B/op",
+            "extra": "3044 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmit) - allocs/op",
+            "value": 1256,
+            "unit": "allocs/op",
+            "extra": "3044 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmit)",
+            "value": 380641,
+            "unit": "ns/op\t  947654 B/op\t    1256 allocs/op",
+            "extra": "3154 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmit) - ns/op",
+            "value": 380641,
+            "unit": "ns/op",
+            "extra": "3154 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmit) - B/op",
+            "value": 947654,
+            "unit": "B/op",
+            "extra": "3154 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmit) - allocs/op",
+            "value": 1256,
+            "unit": "allocs/op",
+            "extra": "3154 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu)",
+            "value": 135440,
+            "unit": "ns/op\t   15127 B/op\t     208 allocs/op",
+            "extra": "8979 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu) - ns/op",
+            "value": 135440,
+            "unit": "ns/op",
+            "extra": "8979 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu) - B/op",
+            "value": 15127,
+            "unit": "B/op",
+            "extra": "8979 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu) - allocs/op",
+            "value": 208,
+            "unit": "allocs/op",
+            "extra": "8979 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu)",
+            "value": 134664,
+            "unit": "ns/op\t   15112 B/op\t     208 allocs/op",
+            "extra": "9751 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu) - ns/op",
+            "value": 134664,
+            "unit": "ns/op",
+            "extra": "9751 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu) - B/op",
+            "value": 15112,
+            "unit": "B/op",
+            "extra": "9751 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmkewllu) - allocs/op",
+            "value": 208,
+            "unit": "allocs/op",
+            "extra": "9751 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmtw)",
+            "value": 129075,
+            "unit": "ns/op\t   14517 B/op\t     174 allocs/op",
+            "extra": "9280 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmtw) - ns/op",
+            "value": 129075,
+            "unit": "ns/op",
+            "extra": "9280 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmtw) - B/op",
+            "value": 14517,
+            "unit": "B/op",
+            "extra": "9280 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmtw) - allocs/op",
+            "value": 174,
+            "unit": "allocs/op",
+            "extra": "9280 times"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmtw)",
+            "value": 128707,
+            "unit": "ns/op\t   14507 B/op\t     174 allocs/op",
+            "extra": "10000 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmtw) - ns/op",
+            "value": 128707,
+            "unit": "ns/op",
+            "extra": "10000 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmtw) - B/op",
+            "value": 14507,
+            "unit": "B/op",
+            "extra": "10000 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFetchCatalogMock (github.com/julien-noblet/download-geofabrik/internal/provider/osmtw) - allocs/op",
+            "value": 174,
+            "unit": "allocs/op",
+            "extra": "10000 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPrintTableStandard (github.com/julien-noblet/download-geofabrik/internal/ui)",
+            "value": 547154,
+            "unit": "ns/op\t  290016 B/op\t    3969 allocs/op",
+            "extra": "2170 times"
+          },
+          {
+            "name": "BenchmarkPrintTableStandard (github.com/julien-noblet/download-geofabrik/internal/ui) - ns/op",
+            "value": 547154,
+            "unit": "ns/op",
+            "extra": "2170 times"
+          },
+          {
+            "name": "BenchmarkPrintTableStandard (github.com/julien-noblet/download-geofabrik/internal/ui) - B/op",
+            "value": 290016,
+            "unit": "B/op",
+            "extra": "2170 times"
+          },
+          {
+            "name": "BenchmarkPrintTableStandard (github.com/julien-noblet/download-geofabrik/internal/ui) - allocs/op",
+            "value": 3969,
+            "unit": "allocs/op",
+            "extra": "2170 times"
+          },
+          {
+            "name": "BenchmarkPrintTableStandard (github.com/julien-noblet/download-geofabrik/internal/ui)",
+            "value": 551296,
+            "unit": "ns/op\t  290017 B/op\t    3969 allocs/op",
+            "extra": "2161 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPrintTableStandard (github.com/julien-noblet/download-geofabrik/internal/ui) - ns/op",
+            "value": 551296,
+            "unit": "ns/op",
+            "extra": "2161 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPrintTableStandard (github.com/julien-noblet/download-geofabrik/internal/ui) - B/op",
+            "value": 290017,
+            "unit": "B/op",
+            "extra": "2161 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPrintTableStandard (github.com/julien-noblet/download-geofabrik/internal/ui) - allocs/op",
+            "value": 3969,
+            "unit": "allocs/op",
+            "extra": "2161 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPrintTableMarkdown (github.com/julien-noblet/download-geofabrik/internal/ui)",
+            "value": 339781,
+            "unit": "ns/op\t  122583 B/op\t    3363 allocs/op",
+            "extra": "3372 times"
+          },
+          {
+            "name": "BenchmarkPrintTableMarkdown (github.com/julien-noblet/download-geofabrik/internal/ui) - ns/op",
+            "value": 339781,
+            "unit": "ns/op",
+            "extra": "3372 times"
+          },
+          {
+            "name": "BenchmarkPrintTableMarkdown (github.com/julien-noblet/download-geofabrik/internal/ui) - B/op",
+            "value": 122583,
+            "unit": "B/op",
+            "extra": "3372 times"
+          },
+          {
+            "name": "BenchmarkPrintTableMarkdown (github.com/julien-noblet/download-geofabrik/internal/ui) - allocs/op",
+            "value": 3363,
+            "unit": "allocs/op",
+            "extra": "3372 times"
+          },
+          {
+            "name": "BenchmarkPrintTableMarkdown (github.com/julien-noblet/download-geofabrik/internal/ui)",
+            "value": 343477,
+            "unit": "ns/op\t  122582 B/op\t    3363 allocs/op",
+            "extra": "3481 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPrintTableMarkdown (github.com/julien-noblet/download-geofabrik/internal/ui) - ns/op",
+            "value": 343477,
+            "unit": "ns/op",
+            "extra": "3481 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPrintTableMarkdown (github.com/julien-noblet/download-geofabrik/internal/ui) - B/op",
+            "value": 122582,
+            "unit": "B/op",
+            "extra": "3481 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPrintTableMarkdown (github.com/julien-noblet/download-geofabrik/internal/ui) - allocs/op",
+            "value": 3363,
+            "unit": "allocs/op",
+            "extra": "3481 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPrintJSON (github.com/julien-noblet/download-geofabrik/internal/ui)",
+            "value": 961586,
+            "unit": "ns/op\t  333256 B/op\t     573 allocs/op",
+            "extra": "1232 times"
+          },
+          {
+            "name": "BenchmarkPrintJSON (github.com/julien-noblet/download-geofabrik/internal/ui) - ns/op",
+            "value": 961586,
+            "unit": "ns/op",
+            "extra": "1232 times"
+          },
+          {
+            "name": "BenchmarkPrintJSON (github.com/julien-noblet/download-geofabrik/internal/ui) - B/op",
+            "value": 333256,
+            "unit": "B/op",
+            "extra": "1232 times"
+          },
+          {
+            "name": "BenchmarkPrintJSON (github.com/julien-noblet/download-geofabrik/internal/ui) - allocs/op",
+            "value": 573,
+            "unit": "allocs/op",
+            "extra": "1232 times"
+          },
+          {
+            "name": "BenchmarkPrintJSON (github.com/julien-noblet/download-geofabrik/internal/ui)",
+            "value": 1025464,
+            "unit": "ns/op\t  334982 B/op\t     573 allocs/op",
+            "extra": "1209 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPrintJSON (github.com/julien-noblet/download-geofabrik/internal/ui) - ns/op",
+            "value": 1025464,
+            "unit": "ns/op",
+            "extra": "1209 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPrintJSON (github.com/julien-noblet/download-geofabrik/internal/ui) - B/op",
+            "value": 334982,
+            "unit": "B/op",
+            "extra": "1209 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPrintJSON (github.com/julien-noblet/download-geofabrik/internal/ui) - allocs/op",
+            "value": 573,
+            "unit": "allocs/op",
+            "extra": "1209 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogExist (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 27.03,
+            "unit": "ns/op\t       0 B/op\t       0 allocs/op",
+            "extra": "44838097 times"
+          },
+          {
+            "name": "BenchmarkCatalogExist (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 27.03,
+            "unit": "ns/op",
+            "extra": "44838097 times"
+          },
+          {
+            "name": "BenchmarkCatalogExist (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 0,
+            "unit": "B/op",
+            "extra": "44838097 times"
+          },
+          {
+            "name": "BenchmarkCatalogExist (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 0,
+            "unit": "allocs/op",
+            "extra": "44838097 times"
+          },
+          {
+            "name": "BenchmarkCatalogExist (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 26.7,
+            "unit": "ns/op\t       0 B/op\t       0 allocs/op",
+            "extra": "45029012 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogExist (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 26.7,
+            "unit": "ns/op",
+            "extra": "45029012 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogExist (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 0,
+            "unit": "B/op",
+            "extra": "45029012 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogExist (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 0,
+            "unit": "allocs/op",
+            "extra": "45029012 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogGet (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 104.2,
+            "unit": "ns/op\t      96 B/op\t       1 allocs/op",
+            "extra": "11689591 times"
+          },
+          {
+            "name": "BenchmarkCatalogGet (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 104.2,
+            "unit": "ns/op",
+            "extra": "11689591 times"
+          },
+          {
+            "name": "BenchmarkCatalogGet (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 96,
+            "unit": "B/op",
+            "extra": "11689591 times"
+          },
+          {
+            "name": "BenchmarkCatalogGet (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 1,
+            "unit": "allocs/op",
+            "extra": "11689591 times"
+          },
+          {
+            "name": "BenchmarkCatalogGet (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 102.8,
+            "unit": "ns/op\t      96 B/op\t       1 allocs/op",
+            "extra": "11775556 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogGet (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 102.8,
+            "unit": "ns/op",
+            "extra": "11775556 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogGet (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 96,
+            "unit": "B/op",
+            "extra": "11775556 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogGet (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 1,
+            "unit": "allocs/op",
+            "extra": "11775556 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogFind (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 126.1,
+            "unit": "ns/op\t     192 B/op\t       2 allocs/op",
+            "extra": "9313440 times"
+          },
+          {
+            "name": "BenchmarkCatalogFind (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 126.1,
+            "unit": "ns/op",
+            "extra": "9313440 times"
+          },
+          {
+            "name": "BenchmarkCatalogFind (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 192,
+            "unit": "B/op",
+            "extra": "9313440 times"
+          },
+          {
+            "name": "BenchmarkCatalogFind (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 2,
+            "unit": "allocs/op",
+            "extra": "9313440 times"
+          },
+          {
+            "name": "BenchmarkCatalogFind (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 126.1,
+            "unit": "ns/op\t     192 B/op\t       2 allocs/op",
+            "extra": "9218541 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogFind (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 126.1,
+            "unit": "ns/op",
+            "extra": "9218541 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogFind (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 192,
+            "unit": "B/op",
+            "extra": "9218541 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogFind (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 2,
+            "unit": "allocs/op",
+            "extra": "9218541 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogResolveURL (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 330,
+            "unit": "ns/op\t     224 B/op\t       3 allocs/op",
+            "extra": "3622977 times"
+          },
+          {
+            "name": "BenchmarkCatalogResolveURL (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 330,
+            "unit": "ns/op",
+            "extra": "3622977 times"
+          },
+          {
+            "name": "BenchmarkCatalogResolveURL (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 224,
+            "unit": "B/op",
+            "extra": "3622977 times"
+          },
+          {
+            "name": "BenchmarkCatalogResolveURL (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 3,
+            "unit": "allocs/op",
+            "extra": "3622977 times"
+          },
+          {
+            "name": "BenchmarkCatalogResolveURL (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 333,
+            "unit": "ns/op\t     224 B/op\t       3 allocs/op",
+            "extra": "3628617 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogResolveURL (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 333,
+            "unit": "ns/op",
+            "extra": "3628617 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogResolveURL (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 224,
+            "unit": "B/op",
+            "extra": "3628617 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogResolveURL (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 3,
+            "unit": "allocs/op",
+            "extra": "3628617 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogSortedKeys (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 73139,
+            "unit": "ns/op\t    9472 B/op\t       1 allocs/op",
+            "extra": "16333 times"
+          },
+          {
+            "name": "BenchmarkCatalogSortedKeys (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 73139,
+            "unit": "ns/op",
+            "extra": "16333 times"
+          },
+          {
+            "name": "BenchmarkCatalogSortedKeys (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 9472,
+            "unit": "B/op",
+            "extra": "16333 times"
+          },
+          {
+            "name": "BenchmarkCatalogSortedKeys (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 1,
+            "unit": "allocs/op",
+            "extra": "16333 times"
+          },
+          {
+            "name": "BenchmarkCatalogSortedKeys (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 72540,
+            "unit": "ns/op\t    9472 B/op\t       1 allocs/op",
+            "extra": "16519 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogSortedKeys (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 72540,
+            "unit": "ns/op",
+            "extra": "16519 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogSortedKeys (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 9472,
+            "unit": "B/op",
+            "extra": "16519 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogSortedKeys (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 1,
+            "unit": "allocs/op",
+            "extra": "16519 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogLoadFile (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 8733962,
+            "unit": "ns/op\t 2984570 B/op\t   60446 allocs/op",
+            "extra": "136 times"
+          },
+          {
+            "name": "BenchmarkCatalogLoadFile (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 8733962,
+            "unit": "ns/op",
+            "extra": "136 times"
+          },
+          {
+            "name": "BenchmarkCatalogLoadFile (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 2984570,
+            "unit": "B/op",
+            "extra": "136 times"
+          },
+          {
+            "name": "BenchmarkCatalogLoadFile (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 60446,
+            "unit": "allocs/op",
+            "extra": "136 times"
+          },
+          {
+            "name": "BenchmarkCatalogLoadFile (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 8757363,
+            "unit": "ns/op\t 2984573 B/op\t   60446 allocs/op",
+            "extra": "136 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogLoadFile (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 8757363,
+            "unit": "ns/op",
+            "extra": "136 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogLoadFile (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 2984573,
+            "unit": "B/op",
+            "extra": "136 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogLoadFile (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 60446,
+            "unit": "allocs/op",
+            "extra": "136 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogSaveFile (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 9966669,
+            "unit": "ns/op\t15164524 B/op\t   23996 allocs/op",
+            "extra": "120 times"
+          },
+          {
+            "name": "BenchmarkCatalogSaveFile (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 9966669,
+            "unit": "ns/op",
+            "extra": "120 times"
+          },
+          {
+            "name": "BenchmarkCatalogSaveFile (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 15164524,
+            "unit": "B/op",
+            "extra": "120 times"
+          },
+          {
+            "name": "BenchmarkCatalogSaveFile (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 23996,
+            "unit": "allocs/op",
+            "extra": "120 times"
+          },
+          {
+            "name": "BenchmarkCatalogSaveFile (github.com/julien-noblet/download-geofabrik/pkg/catalog)",
+            "value": 9283562,
+            "unit": "ns/op\t15164654 B/op\t   23997 allocs/op",
+            "extra": "129 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogSaveFile (github.com/julien-noblet/download-geofabrik/pkg/catalog) - ns/op",
+            "value": 9283562,
+            "unit": "ns/op",
+            "extra": "129 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogSaveFile (github.com/julien-noblet/download-geofabrik/pkg/catalog) - B/op",
+            "value": 15164654,
+            "unit": "B/op",
+            "extra": "129 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkCatalogSaveFile (github.com/julien-noblet/download-geofabrik/pkg/catalog) - allocs/op",
+            "value": 23997,
+            "unit": "allocs/op",
+            "extra": "129 times\n2 procs"
           }
         ]
       }
