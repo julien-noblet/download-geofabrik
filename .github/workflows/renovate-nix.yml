@@ -1,0 +1,43 @@
+name: Renovate Nix Hash
+
+on:
+  pull_request_target:
+    types: [opened, synchronize]
+    paths:
+      - 'go.mod'
+      - 'go.sum'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-vendor-hash:
+    if: github.event.pull_request.head.repo.full_name == github.repository && startsWith(github.head_ref, 'renovate/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.TOKEN || secrets.GITHUB_TOKEN }}
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Update vendorHash in flake.nix
+        run: |
+          sed -i 's|vendorHash = ".*";|vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";|' flake.nix
+          NEW_HASH=$(nix build --no-link 2>&1 | sed -n 's/.*got: *\(sha256-[^ ]*\).*/\1/p' | head -n1)
+          if [ -n "$NEW_HASH" ]; then
+            sed -i "s|vendorHash = \".*\";|vendorHash = \"$NEW_HASH\";|" flake.nix
+          fi
+
+          if ! git diff --quiet flake.nix; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git commit -am "fix(nix): update vendorHash in flake.nix"
+            git push
+          fi
