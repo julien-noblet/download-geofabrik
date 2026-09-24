@@ -4,7 +4,7 @@ go 1.27.0
 
 require (
 	github.com/cheggaaa/pb/v3 v3.2.1
-	github.com/mark3labs/mcp-go v1.1.0
+	github.com/mark3labs/mcp-go v1.1.1
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/viper v1.21.0
 	github.com/stretchr/testify v1.12.1
