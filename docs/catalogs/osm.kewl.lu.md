@@ -8,6 +8,6 @@
 
 ## Available Elements
 
-| SHORT NAME | IS IN | LONG NAME  | FORMATS |
-|------------|-------|------------|---------|
-| luxembourg |       | luxembourg | BP      |
+| ShortName | Is in | Long Name | formats |
+| --- | --- | --- | --- |
+| luxembourg |  | luxembourg | BP |

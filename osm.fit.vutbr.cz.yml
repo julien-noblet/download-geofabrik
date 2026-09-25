@@ -19,7 +19,7 @@ elements:
             - poly
     latest:
         id: latest
-        file: czech_republic-2026-09-06
+        file: czech_republic-2026-09-23
         name: Czech Republic (latest)
         files:
             - osm.pbf
