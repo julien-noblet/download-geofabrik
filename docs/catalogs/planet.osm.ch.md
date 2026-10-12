@@ -8,8 +8,8 @@
 
 ## Available Elements
 
-| SHORT NAME         | IS IN | LONG NAME          | FORMATS |
-|--------------------|-------|--------------------|---------|
-| switzerland        |       | switzerland        | oP      |
-| switzerland-exact  |       | switzerland-exact  | Pp      |
-| switzerland-padded |       | switzerland-padded | Pp      |
+| ShortName | Is in | Long Name | formats |
+| --- | --- | --- | --- |
+| switzerland |  | switzerland | oP |
+| switzerland-exact |  | switzerland-exact | Pp |
+| switzerland-padded |  | switzerland-padded | Pp |
