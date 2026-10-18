@@ -8,6 +8,6 @@
 
 ## Available Elements
 
-| SHORT NAME | IS IN | LONG NAME | FORMATS |
-|------------|-------|-----------|---------|
-| taiwan     |       | Taiwan    | 5Z      |
+| ShortName | Is in | Long Name | formats |
+| --- | --- | --- | --- |
+| taiwan |  | Taiwan | 5Z |

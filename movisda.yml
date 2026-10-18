@@ -721,6 +721,14 @@ elements:
             - geojson
             - osm.pbf
             - poly
+    ao-xxx:
+        id: ao-xxx
+        file: AO-XXX-latest
+        name: Icolo e Bengo Province
+        files:
+            - geojson
+            - osm.pbf
+            - poly
     ao-zai:
         id: ao-zai
         file: AO-ZAI-latest
@@ -9353,58 +9361,162 @@ elements:
             - geojson
             - osm.pbf
             - poly
-    hu-hu10:
-        id: hu-hu10
-        file: HU-HU10-latest
-        name: Central Hungary
+    hu-ba:
+        id: hu-ba
+        file: HU-BA-latest
+        name: Baranya
         files:
             - geojson
             - osm.pbf
             - poly
-    hu-hu21:
-        id: hu-hu21
-        file: HU-HU21-latest
-        name: Central Transdanubia
+    hu-be:
+        id: hu-be
+        file: HU-BE-latest
+        name: Békés
         files:
             - geojson
             - osm.pbf
             - poly
-    hu-hu22:
-        id: hu-hu22
-        file: HU-HU22-latest
-        name: Western Transdanubia
+    hu-bk:
+        id: hu-bk
+        file: HU-BK-latest
+        name: Bács-Kiskun
         files:
             - geojson
             - osm.pbf
             - poly
-    hu-hu23:
-        id: hu-hu23
-        file: HU-HU23-latest
-        name: Southern Transdanubia
+    hu-bu:
+        id: hu-bu
+        file: HU-BU-latest
+        name: Budapest
         files:
             - geojson
             - osm.pbf
             - poly
-    hu-hu31:
-        id: hu-hu31
-        file: HU-HU31-latest
-        name: North Hungary
+    hu-bz:
+        id: hu-bz
+        file: HU-BZ-latest
+        name: Borsod-Abaúj-Zemplén
         files:
             - geojson
             - osm.pbf
             - poly
-    hu-hu32:
-        id: hu-hu32
-        file: HU-HU32-latest
-        name: North Great Plain
+    hu-cs:
+        id: hu-cs
+        file: HU-CS-latest
+        name: Csongrád-Csanád
         files:
             - geojson
             - osm.pbf
             - poly
-    hu-hu33:
-        id: hu-hu33
-        file: HU-HU33-latest
-        name: South Great Plain
+    hu-fe:
+        id: hu-fe
+        file: HU-FE-latest
+        name: Fejér
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-gs:
+        id: hu-gs
+        file: HU-GS-latest
+        name: Győr-Moson-Sopron
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-hb:
+        id: hu-hb
+        file: HU-HB-latest
+        name: Hajdú-Bihar
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-he:
+        id: hu-he
+        file: HU-HE-latest
+        name: Heves
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-jn:
+        id: hu-jn
+        file: HU-JN-latest
+        name: Jász-Nagykun-Szolnok
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-ke:
+        id: hu-ke
+        file: HU-KE-latest
+        name: Komárom-Esztergom
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-no:
+        id: hu-no
+        file: HU-NO-latest
+        name: Nógrád
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-pe:
+        id: hu-pe
+        file: HU-PE-latest
+        name: Pest
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-so:
+        id: hu-so
+        file: HU-SO-latest
+        name: Somogy
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-sz:
+        id: hu-sz
+        file: HU-SZ-latest
+        name: Szabolcs-Szatmár-Bereg
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-to:
+        id: hu-to
+        file: HU-TO-latest
+        name: Tolna
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-va:
+        id: hu-va
+        file: HU-VA-latest
+        name: Vas
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-ve:
+        id: hu-ve
+        file: HU-VE-latest
+        name: Veszprém
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    hu-za:
+        id: hu-za
+        file: HU-ZA-latest
+        name: Zala
         files:
             - geojson
             - osm.pbf
@@ -14757,6 +14869,78 @@ elements:
         id: ml-10
         file: ML-10-latest
         name: Taoudénit Region
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    ml-11:
+        id: ml-11
+        file: ML-11-latest
+        name: Nioro Region
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    ml-12:
+        id: ml-12
+        file: ML-12-latest
+        name: Kita Region
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    ml-13:
+        id: ml-13
+        file: ML-13-latest
+        name: Dioïla Region
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    ml-14:
+        id: ml-14
+        file: ML-14-latest
+        name: Nara Region
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    ml-15:
+        id: ml-15
+        file: ML-15-latest
+        name: Bougouni Region
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    ml-16:
+        id: ml-16
+        file: ML-16-latest
+        name: Koutiala Region
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    ml-17:
+        id: ml-17
+        file: ML-17-latest
+        name: San Region
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    ml-18:
+        id: ml-18
+        file: ML-18-latest
+        name: Douentza Region
+        files:
+            - geojson
+            - osm.pbf
+            - poly
+    ml-19:
+        id: ml-19
+        file: ML-19-latest
+        name: Bandiagara Region
         files:
             - geojson
             - osm.pbf
