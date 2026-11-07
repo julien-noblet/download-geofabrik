@@ -1,7 +1,13 @@
 package cli_test
 
 import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+	"net/http/httptest"
 	"os"
+	"os/exec"
+	"path/filepath"
 	"testing"
 
 	"github.com/spf13/cobra"
@@ -11,6 +17,146 @@ import (
 
 	"github.com/julien-noblet/download-geofabrik/internal/cli"
 )
+
+const (
+	downloadHelperProcessEnv = "DOWNLOAD_GEOFABRIK_TEST_HELPER"
+	downloadHelperArgsEnv    = "DOWNLOAD_GEOFABRIK_TEST_ARGS"
+	downloadHelperErrorEnv   = "DOWNLOAD_GEOFABRIK_TEST_ERROR"
+
+	testDownloadElement = "test-elem"
+	testGeoJSONPath     = "/test-elem/success.geojson"
+	testOsmPbfPath      = "/test-elem/failure.osm.pbf"
+	testGeoJSONContent  = `{"type":"FeatureCollection","features":[]}`
+	testOsmPbfContent   = "osm.pbf test content"
+)
+
+func TestDownloadCLIHelperProcess(t *testing.T) {
+	if os.Getenv(downloadHelperProcessEnv) != "1" {
+		return
+	}
+
+	var args []string
+	if err := json.Unmarshal([]byte(os.Getenv(downloadHelperArgsEnv)), &args); err != nil {
+		t.Fatalf("decode CLI arguments: %v", err)
+	}
+
+	cli.RootCmd.SetArgs(args)
+
+	err := cli.Execute()
+
+	expectedError := os.Getenv(downloadHelperErrorEnv)
+	if expectedError == "" {
+		require.NoError(t, err)
+
+		return
+	}
+
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), expectedError)
+}
+
+func TestDownloadMultiFormatCLIOutcomes(t *testing.T) {
+	tests := []struct {
+		name        string
+		expectedErr string
+		failOsmPbf  bool
+	}{
+		{
+			name: "all formats download successfully",
+		},
+		{
+			name:        "returns an error after one format succeeds",
+			failOsmPbf:  true,
+			expectedErr: "server status code 503",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				switch r.URL.Path {
+				case testGeoJSONPath:
+					_, _ = w.Write([]byte(testGeoJSONContent))
+
+				case testOsmPbfPath:
+					if test.failOsmPbf {
+						http.Error(w, "unavailable", http.StatusServiceUnavailable)
+
+						return
+					}
+
+					_, _ = w.Write([]byte(testOsmPbfContent))
+
+				default:
+					http.NotFound(w, r)
+				}
+			}))
+			t.Cleanup(server.Close)
+
+			configFile := filepath.Join(t.TempDir(), "catalog.yml")
+			configContent := fmt.Sprintf(`
+elements:
+  %s:
+    id: %s
+    files: ["geojson", "osm.pbf"]
+formats:
+  geojson:
+    ext: "geojson"
+    loc: "/success.geojson"
+    baseurl: %q
+  osm.pbf:
+    ext: "osm.pbf"
+    loc: "/failure.osm.pbf"
+    baseurl: %q
+`, testDownloadElement, testDownloadElement, server.URL, server.URL)
+			require.NoError(t, os.WriteFile(configFile, []byte(configContent), 0o600))
+
+			outputDir := t.TempDir()
+			runDownloadCLIHelper(t, []string{
+				"download",
+				testDownloadElement,
+				"--config", configFile,
+				"--output-dir", outputDir,
+				"--check=false",
+				"--progress=false",
+				"-g",
+				"-P",
+			}, test.expectedErr)
+
+			geoJSON, err := os.ReadFile(filepath.Join(outputDir, testDownloadElement+".geojson"))
+			require.NoError(t, err)
+			assert.JSONEq(t, testGeoJSONContent, string(geoJSON))
+
+			osmPbf, err := os.ReadFile(filepath.Join(outputDir, testDownloadElement+".osm.pbf"))
+			if test.failOsmPbf {
+				require.ErrorIs(t, err, os.ErrNotExist)
+
+				return
+			}
+
+			require.NoError(t, err)
+			assert.Equal(t, []byte(testOsmPbfContent), osmPbf)
+		})
+	}
+}
+
+func runDownloadCLIHelper(t *testing.T, args []string, expectedError string) {
+	t.Helper()
+
+	encodedArgs, err := json.Marshal(args)
+	require.NoError(t, err)
+
+	cmd := exec.CommandContext(t.Context(), os.Args[0], "-test.run=^TestDownloadCLIHelperProcess$") //nolint:gosec // os.Args[0] is this test binary.
+
+	cmd.Env = append(os.Environ(),
+		downloadHelperProcessEnv+"=1",
+		downloadHelperArgsEnv+"="+string(encodedArgs),
+		downloadHelperErrorEnv+"="+expectedError,
+	)
+
+	output, err := cmd.CombinedOutput()
+	require.NoError(t, err, "CLI helper failed: %s", output)
+}
 
 func TestDownloadCmd_NoDownload(t *testing.T) {
 	// Setup
