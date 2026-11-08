@@ -100,8 +100,11 @@ download-geofabrik download monaco
 # Download specific format (e.g. GeoJSON)
 download-geofabrik download monaco -g
 
-# Download with MD5 checksum verification
+# Download CSV format
 download-geofabrik download monaco -C
+
+# Download with MD5 checksum verification
+download-geofabrik download monaco --check
 
 # Regenerate catalog file for a provider
 download-geofabrik generate --service openstreetmap.fr
