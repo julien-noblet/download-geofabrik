@@ -47,6 +47,9 @@ var (
 
 	// ErrServerStatusCode is returned when the remote HTTP server responds with a non-2xx status code.
 	ErrServerStatusCode = errors.New("server return code error")
+
+	// ErrDestinationExists is returned when a download destination already exists and force is disabled.
+	ErrDestinationExists = errors.New("destination file already exists")
 )
 
 // Options holds runtime options configuring downloader execution.
@@ -74,6 +77,9 @@ type Options struct {
 
 	// NoDownload enables dry-run mode, printing what would be downloaded without network transfer.
 	NoDownload bool
+
+	// Force permits replacing an existing output file.
+	Force bool
 
 	// Progress controls whether a progress bar is displayed during download.
 	Progress bool
@@ -154,14 +160,22 @@ func (d *Downloader) opts() *Options {
 
 // FromURL downloads a file from a URL to a specified file path.
 func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err error) {
+	return d.fromURL(ctx, myURL, fileName, d.opts().Force)
+}
+
+func (d *Downloader) fromURL(ctx context.Context, myURL, fileName string, force bool) (err error) {
 	slog.Debug("Downloading", "url", myURL, "file", fileName)
 
 	if d.opts().NoDownload {
 		return nil
 	}
 
+	if checkErr := d.checkDestination(fileName, force); checkErr != nil {
+		return checkErr
+	}
+
 	for retriesPerformed := 0; ; retriesPerformed++ {
-		retryable, retryAfter, downloadErr := d.downloadOnce(ctx, myURL, fileName)
+		retryable, retryAfter, downloadErr := d.downloadOnce(ctx, myURL, fileName, force)
 		if downloadErr == nil {
 			return nil
 		}
@@ -184,7 +198,7 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 	}
 }
 
-func (d *Downloader) downloadOnce(ctx context.Context, myURL, fileName string) (retryable bool, retryAfter string, err error) {
+func (d *Downloader) downloadOnce(ctx context.Context, myURL, fileName string, force bool) (retryable bool, retryAfter string, err error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, myURL, http.NoBody)
 	if err != nil {
 		return false, "", fmt.Errorf("creating request for %s: %w", myURL, err)
@@ -211,11 +225,25 @@ func (d *Downloader) downloadOnce(ctx context.Context, myURL, fileName string) (
 		return isRetryableStatus(response.StatusCode), response.Header.Get("Retry-After"), statusErr
 	}
 
-	err = d.saveToFile(fileName, response)
+	err = d.saveToFile(fileName, response, force)
 
 	var readErr *responseReadError
 
 	return errors.As(err, &readErr), "", err
+}
+
+func (d *Downloader) checkDestination(fileName string, force bool) error {
+	if force {
+		return nil
+	}
+
+	if _, err := os.Lstat(fileName); err == nil {
+		return fmt.Errorf("%w: %s", ErrDestinationExists, fileName)
+	} else if !errors.Is(err, os.ErrNotExist) {
+		return fmt.Errorf("checking destination %s: %w", fileName, err)
+	}
+
+	return nil
 }
 
 func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, error) {
@@ -364,7 +392,7 @@ func waitContext(ctx context.Context, delay time.Duration) error {
 	}
 }
 
-func (d *Downloader) saveToFile(fileName string, response *http.Response) (err error) {
+func (d *Downloader) saveToFile(fileName string, response *http.Response, force bool) (err error) {
 	tmpFileName := fileName + ".tmp"
 
 	if err = os.MkdirAll(filepath.Dir(fileName), dirMode); err != nil {
@@ -402,8 +430,8 @@ func (d *Downloader) saveToFile(fileName string, response *http.Response) (err e
 		return fmt.Errorf("closing %s: %w", tmpFileName, cerr)
 	}
 
-	if err := os.Rename(tmpFileName, fileName); err != nil {
-		return fmt.Errorf("renaming %s to %s: %w", tmpFileName, fileName, err)
+	if err := publishFile(tmpFileName, fileName, force); err != nil {
+		return err
 	}
 
 	var digest [md5.Size]byte
@@ -413,6 +441,30 @@ func (d *Downloader) saveToFile(fileName string, response *http.Response) (err e
 
 	slog.Info("Downloaded", "file", fileName)
 	slog.Debug("Bytes downloaded", "bytes", currentProgress)
+
+	return nil
+}
+
+func publishFile(tmpFileName, fileName string, force bool) error {
+	if force {
+		if err := os.Rename(tmpFileName, fileName); err != nil {
+			return fmt.Errorf("renaming %s to %s: %w", tmpFileName, fileName, err)
+		}
+
+		return nil
+	}
+
+	if err := os.Link(tmpFileName, fileName); err != nil {
+		if errors.Is(err, os.ErrExist) {
+			return fmt.Errorf("%w: %s", ErrDestinationExists, fileName)
+		}
+
+		return fmt.Errorf("publishing %s as %s: %w", tmpFileName, fileName, err)
+	}
+
+	if err := os.Remove(tmpFileName); err != nil {
+		return fmt.Errorf("removing temporary file %s: %w", tmpFileName, err)
+	}
 
 	return nil
 }
@@ -448,40 +500,46 @@ func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, ou
 	return d.FromURL(ctx, myURL, outputPath)
 }
 
-func (d *Downloader) verifyChecksum(targetFile, hashFile string) bool {
-	var ret bool
+func (d *Downloader) verifyChecksum(targetFile, hashFile string) (bool, error) {
+	var (
+		ret bool
+		err error
+	)
 
 	if inFlightHash, ok := d.lastHash.Load(targetFile); ok {
 		cachedDigest, isStr := inFlightHash.(string)
 		if !isStr || cachedDigest == "" {
 			slog.Debug("Cached hash invalid, reading file", "file", targetFile)
 
-			ret = VerifyFileChecksum(targetFile, hashFile)
+			ret, err = VerifyFileChecksum(targetFile, hashFile)
 		} else {
 			slog.Debug("Using in-flight hash", "file", targetFile, "hash", cachedDigest)
 
-			ret, _ = CheckFileHash(hashFile, cachedDigest)
+			ret, err = CheckFileHash(hashFile, cachedDigest)
 		}
 	} else {
-		ret = VerifyFileChecksum(targetFile, hashFile)
+		ret, err = VerifyFileChecksum(targetFile, hashFile)
+	}
+
+	if err != nil {
+		return false, err
 	}
 
 	if ret {
 		slog.Info("Checksum OK", "file", targetFile)
-	} else {
-		slog.Error("Checksum MISMATCH", "file", targetFile)
 	}
 
-	return ret
+	return ret, nil
 }
 
-// Checksum downloads and verifies the checksum of a file, using in-flight computed MD5 when available.
-func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string) bool {
-	if d == nil || d.Catalog == nil || !d.opts().Check {
-		return false
-	}
+type checksumInfo struct {
+	url        string
+	formatID   string
+	hashFormat string
+}
 
-	isHashable, _, _ := d.Catalog.IsHashable(formatName)
+func (d *Downloader) checksumInfo(elementID, formatName string) (checksumInfo, bool, error) {
+	isHashable, hashFormat, _ := d.Catalog.IsHashable(formatName)
 	if !isHashable {
 		slog.Warn("No checksum provided",
 			"element", elementID,
@@ -489,52 +547,78 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 			"file", filepath.Join(d.opts().OutputDirectory, elementID+"."+formatName),
 		)
 
-		return false
+		return checksumInfo{}, false, nil
 	}
-
-	hashType := "md5"
-	fhash := formatName + "." + hashType
 
 	myElem, err := d.Catalog.Find(elementID)
 	if err != nil {
-		slog.Error("Element not found", "element", elementID, "error", err)
-
-		return false
+		return checksumInfo{}, false, fmt.Errorf("finding element %s for checksum: %w", elementID, err)
 	}
 
 	formatDef, hasFormat := d.Catalog.GetFormat(formatName)
 	if !hasFormat {
-		return false
+		return checksumInfo{}, false, fmt.Errorf("%w: %s", catalog.ErrFormatNotFound, formatName)
 	}
 
-	if !myElem.Formats.Contains(fhash) {
+	if !myElem.Formats.Contains(hashFormat) {
 		slog.Warn("No checksum provided",
 			"element", elementID,
 			"format", formatDef.ID,
 			"file", filepath.Join(d.opts().OutputDirectory, elementID+"."+formatDef.ID),
 		)
 
-		return false
+		return checksumInfo{}, false, nil
 	}
 
-	myURL, err := d.Catalog.ResolveURL(myElem, fhash)
+	myURL, err := d.Catalog.ResolveURL(myElem, hashFormat)
 	if err != nil {
-		slog.Error("URL generation failed", "element", elementID, "hash_format", fhash, "error", err)
+		slog.Warn("Checksum unavailable",
+			"element", elementID,
+			"hash_format", hashFormat,
+			"error", err,
+		)
 
-		return false
+		return checksumInfo{}, false, nil
 	}
 
-	outputPath := d.opts().OutputDirectory + elementID
-	targetFile := outputPath + "." + formatDef.ID
-	hashFile := outputPath + "." + fhash
+	return checksumInfo{
+		url:        myURL,
+		formatID:   formatDef.ID,
+		hashFormat: hashFormat,
+	}, true, nil
+}
 
-	if err := d.FromURL(ctx, myURL, hashFile); err != nil {
-		slog.Error("Checksum download failed", "element", elementID, "url", myURL, "file", hashFile, "error", err)
+// Checksum downloads and verifies the checksum of a file, using in-flight computed MD5 when available.
+func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string) (bool, error) {
+	if d == nil || d.Catalog == nil || !d.opts().Check {
+		return false, nil
+	}
 
-		return false
+	checksum, available, err := d.checksumInfo(elementID, formatName)
+	if err != nil {
+		return false, err
+	}
+
+	if !available {
+		return false, nil
+	}
+
+	outputPath := filepath.Join(d.opts().OutputDirectory, elementID)
+	targetFile := outputPath + "." + checksum.formatID
+	hashFile := outputPath + "." + checksum.hashFormat
+
+	if downloadErr := d.FromURL(ctx, checksum.url, hashFile); downloadErr != nil {
+		slog.Warn("Checksum unavailable", "element", elementID, "url", checksum.url, "file", hashFile, "error", downloadErr)
+
+		return false, nil
 	}
 	defer d.lastHash.Delete(hashFile)
 	defer d.lastHash.Delete(targetFile)
 
-	return d.verifyChecksum(targetFile, hashFile)
+	verified, err := d.verifyChecksum(targetFile, hashFile)
+	if err != nil {
+		return false, fmt.Errorf("verifying checksum for %s: %w", targetFile, err)
+	}
+
+	return verified, nil
 }

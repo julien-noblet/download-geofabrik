@@ -12,6 +12,7 @@ func ResetGlobs() {
 	outputDir = ""
 	check = true
 	noDownload = false
+	force = false
 	downloadProgress = true
 	downloadRetries = defaultDownloadRetries
 

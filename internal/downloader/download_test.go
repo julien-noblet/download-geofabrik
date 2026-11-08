@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -17,6 +18,11 @@ import (
 
 	"github.com/julien-noblet/download-geofabrik/internal/downloader"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
+)
+
+const (
+	existingDownloadContent = "existing download content"
+	replacementContent      = "replacement download content"
 )
 
 func Test_DownloadFromURL(t *testing.T) {
@@ -85,6 +91,87 @@ func Test_DownloadFromURL(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestFromURLProtectsExistingDestination(t *testing.T) {
+	t.Parallel()
+
+	var requestCount atomic.Int64
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		requestCount.Add(1)
+
+		_, _ = w.Write([]byte(replacementContent))
+	}))
+	t.Cleanup(server.Close)
+
+	targetFile := filepath.Join(t.TempDir(), "extract.osm.pbf")
+	require.NoError(t, os.WriteFile(targetFile, []byte(existingDownloadContent), 0o600))
+
+	client := downloader.New(catalog.New(), &downloader.Options{Quiet: true})
+	err := client.FromURL(t.Context(), server.URL, targetFile)
+
+	require.ErrorIs(t, err, downloader.ErrDestinationExists)
+	assert.Equal(t, int64(0), requestCount.Load())
+	assert.FileExists(t, targetFile)
+	assert.NoFileExists(t, targetFile+".tmp")
+
+	content, err := os.ReadFile(targetFile)
+	require.NoError(t, err)
+	assert.Equal(t, existingDownloadContent, string(content))
+}
+
+func TestFromURLForceReplacesExistingDestination(t *testing.T) {
+	t.Parallel()
+
+	var requestCount atomic.Int64
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		requestCount.Add(1)
+
+		_, _ = w.Write([]byte(replacementContent))
+	}))
+	t.Cleanup(server.Close)
+
+	targetFile := filepath.Join(t.TempDir(), "extract.osm.pbf")
+	require.NoError(t, os.WriteFile(targetFile, []byte(existingDownloadContent), 0o600))
+
+	client := downloader.New(catalog.New(), &downloader.Options{Force: true, Quiet: true})
+	require.NoError(t, client.FromURL(t.Context(), server.URL, targetFile))
+
+	assert.Equal(t, int64(1), requestCount.Load())
+	assert.NoFileExists(t, targetFile+".tmp")
+
+	content, err := os.ReadFile(targetFile)
+	require.NoError(t, err)
+	assert.Equal(t, replacementContent, string(content))
+}
+
+func TestFromURLRejectsDestinationCreatedDuringDownload(t *testing.T) {
+	t.Parallel()
+
+	targetFile := filepath.Join(t.TempDir(), "extract.osm.pbf")
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		if err := os.WriteFile(targetFile, []byte(existingDownloadContent), 0o600); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+
+			return
+		}
+
+		_, _ = w.Write([]byte(replacementContent))
+	}))
+	t.Cleanup(server.Close)
+
+	client := downloader.New(catalog.New(), &downloader.Options{Quiet: true})
+	err := client.FromURL(t.Context(), server.URL, targetFile)
+
+	require.ErrorIs(t, err, downloader.ErrDestinationExists)
+	assert.FileExists(t, targetFile)
+	assert.NoFileExists(t, targetFile+".tmp")
+
+	content, err := os.ReadFile(targetFile)
+	require.NoError(t, err)
+	assert.Equal(t, existingDownloadContent, string(content))
 }
 
 func TestFile(t *testing.T) {
@@ -201,7 +288,9 @@ func TestChecksum(t *testing.T) {
 				t.Fatalf("Failed setup download: %v", err)
 			}
 
-			got := subDownloader.Checksum(context.Background(), "monaco", tt.format)
+			got, err := subDownloader.Checksum(context.Background(), "monaco", tt.format)
+			require.NoError(t, err)
+
 			if got != tt.want {
 				t.Errorf("Checksum() = %v, want %v", got, tt.want)
 			}
@@ -222,7 +311,9 @@ func TestChecksum(t *testing.T) {
 		subOpts := &downloader.Options{Check: true, OutputDirectory: tmpDir + "/"}
 		subDownloader := downloader.New(cfg, subOpts)
 
-		got := subDownloader.Checksum(context.Background(), "non_existent", catalog.FormatOsmPbf)
+		got, err := subDownloader.Checksum(context.Background(), "non_existent", catalog.FormatOsmPbf)
+		require.NoError(t, err)
+
 		if got {
 			t.Errorf("Checksum() = true, want false for non-existent element")
 		}
@@ -243,7 +334,9 @@ func TestChecksum(t *testing.T) {
 		subOpts := &downloader.Options{Check: false, OutputDirectory: tmpDir + "/"}
 		subDownloader := downloader.New(cfg, subOpts)
 
-		got := subDownloader.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
+		got, err := subDownloader.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
+		require.NoError(t, err)
+
 		if got {
 			t.Errorf("Checksum() = true, want false when Check is false")
 		}
@@ -327,7 +420,9 @@ func TestChecksum_AdditionalScenarios(t *testing.T) {
 			t.Fatalf("DownloadFile failed: %v", err)
 		}
 
-		got := subD.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
+		got, err := subD.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
+		require.ErrorIs(t, err, downloader.ErrChecksumMismatch)
+
 		if got {
 			t.Errorf("Checksum() = true, want false when MD5 does not match")
 		}
@@ -340,7 +435,9 @@ func TestChecksum_AdditionalScenarios(t *testing.T) {
 		subOpts := &downloader.Options{Check: true, OutputDirectory: subTmp + "/"}
 		subD := downloader.New(cfg, subOpts)
 
-		got := subD.Checksum(context.Background(), "missing", catalog.FormatOsmPbf)
+		got, err := subD.Checksum(context.Background(), "missing", catalog.FormatOsmPbf)
+		require.NoError(t, err)
+
 		if got {
 			t.Errorf("Checksum() = true, want false when md5 404s")
 		}
@@ -353,7 +450,9 @@ func TestChecksum_AdditionalScenarios(t *testing.T) {
 		subOpts := &downloader.Options{Check: true, OutputDirectory: subTmp + "/"}
 		subD := downloader.New(cfg, subOpts)
 
-		got := subD.Checksum(context.Background(), "no_fhash", catalog.FormatOsmPbf)
+		got, err := subD.Checksum(context.Background(), "no_fhash", catalog.FormatOsmPbf)
+		require.NoError(t, err)
+
 		if got {
 			t.Errorf("Checksum() = true, want false when format hash not defined")
 		}
@@ -475,6 +574,7 @@ func TestDownloader_NilGuards(t *testing.T) {
 	err := d.DownloadFile(context.Background(), "monaco", catalog.FormatOsmPbf, "/tmp/test")
 	require.ErrorIs(t, err, catalog.ErrNilCatalog)
 
-	ok := d.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
+	ok, err := d.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
+	require.NoError(t, err)
 	assert.False(t, ok)
 }

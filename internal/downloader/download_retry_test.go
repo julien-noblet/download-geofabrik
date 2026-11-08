@@ -284,7 +284,9 @@ func TestChecksumRetriesSidecarFetch(t *testing.T) {
 	targetFile := filepath.Join(outputDir, "monaco.osm.pbf")
 	require.NoError(t, os.WriteFile(targetFile, content, 0o600))
 
-	assert.True(t, d.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf))
+	checksumOK, err := d.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
+	require.NoError(t, err)
+	assert.True(t, checksumOK)
 	assert.EqualValues(t, 2, sidecarRequests.Load())
 	assert.Equal(t, 1, waits)
 }
@@ -325,7 +327,9 @@ func TestChecksumMismatchDoesNotRetry(t *testing.T) {
 	}
 
 	require.NoError(t, os.WriteFile(filepath.Join(outputDir, "monaco.osm.pbf"), content, 0o600))
-	assert.False(t, d.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf))
+	checksumOK, err := d.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
+	assert.False(t, checksumOK)
+	require.ErrorContains(t, err, "checksum mismatch")
 	assert.EqualValues(t, 1, requestCount.Load())
 	assert.Zero(t, waits)
 }
