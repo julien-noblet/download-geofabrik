@@ -232,8 +232,11 @@ func (s *Server) toolListFormats() mcpSDK.Tool {
 }
 
 func (s *Server) toolDownloadElement() mcpSDK.Tool {
+	desc := "Download an OSM extract for a given element and format(s) from a provider service. " +
+		"Existing destination files are not overwritten."
+
 	return mcpSDK.NewTool("download_element",
-		mcpSDK.WithDescription("Download an OSM extract for a given element and format(s) from a provider service."),
+		mcpSDK.WithDescription(desc),
 		mcpSDK.WithString("element_id",
 			mcpSDK.Required(),
 			mcpSDK.Description("Element identifier to download (e.g. 'monaco', 'france', 'berlin')."),
