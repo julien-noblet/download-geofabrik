@@ -19,12 +19,18 @@ var (
 	// ErrMissingElementArg is returned when the download command is called without an element argument.
 	ErrMissingElementArg = errors.New("missing required element argument")
 
+	// ErrInvalidRetryCount is returned when --retries is negative.
+	ErrInvalidRetryCount = errors.New("--retries must be non-negative")
+
 	// Flags for download command.
 	outputDir        string
 	check            bool
 	noDownload       bool
 	downloadProgress bool
+	downloadRetries  int
 )
+
+const defaultDownloadRetries = 2
 
 type formatFlag struct {
 	key       string
@@ -100,6 +106,12 @@ func RegisterDownloadCmd() {
 	downloadCmd.Flags().BoolVar(&check, "check", true, "Control with checksum (default). Use --no-check to discard control")
 	downloadCmd.Flags().BoolVarP(&noDownload, "nodownload", "n", false, "Do not download file (test only)")
 	downloadCmd.Flags().BoolVar(&downloadProgress, "progress", true, "Show progress bar")
+	downloadCmd.Flags().IntVar(
+		&downloadRetries,
+		"retries",
+		defaultDownloadRetries,
+		"Number of additional attempts for transient download failures",
+	)
 
 	for _, flagDef := range formatFlagList {
 		downloadCmd.Flags().BoolP(flagDef.key, flagDef.shorthand, false, flagDef.usage)
@@ -121,6 +133,10 @@ func buildDownloadOptions(cmd *cobra.Command) (*downloader.Options, error) {
 		return nil, err
 	}
 
+	if downloadRetries < 0 {
+		return nil, ErrInvalidRetryCount
+	}
+
 	opts := &downloader.Options{
 		ConfigFile:      cfgFile,
 		OutputDirectory: outDir,
@@ -129,6 +145,7 @@ func buildDownloadOptions(cmd *cobra.Command) (*downloader.Options, error) {
 		Quiet:           viper.GetBool("quiet"),
 		NoDownload:      noDownload,
 		Progress:        downloadProgress,
+		Retries:         downloadRetries,
 		FormatFlags:     make(map[string]bool, len(formatFlagList)),
 	}
 
