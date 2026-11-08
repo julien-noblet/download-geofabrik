@@ -1442,18 +1442,6 @@ elements:
             - poly
             - shp.zip
             - state.txt
-    enfield:
-        id: enfield
-        name: Enfield
-        parent: greater-london
-        files:
-            - kml
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
-            - poly
-            - shp.zip
-            - state.txt
     england:
         id: england
         name: England
