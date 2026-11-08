@@ -1,6 +1,7 @@
 package cli_test
 
 import (
+	"crypto/md5" //nolint:gosec // MD5 is used by provider checksum files.
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -8,6 +9,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"sync/atomic"
 	"testing"
 
 	"github.com/spf13/cobra"
@@ -136,6 +138,218 @@ formats:
 
 			require.NoError(t, err)
 			assert.Equal(t, []byte(testOsmPbfContent), osmPbf)
+		})
+	}
+}
+
+func TestDownloadCLI_ChecksumOutcomes(t *testing.T) {
+	tests := []struct {
+		name             string
+		checksumContent  string
+		expectedError    string
+		existingContent  string
+		includeChecksum  bool
+		checksumNotFound bool
+		force            bool
+	}{
+		{
+			name:            "checksum mismatch fails the command",
+			includeChecksum: true,
+			checksumContent: "00000000000000000000000000000000  failure.osm.pbf\n",
+			expectedError:   "checksum mismatch",
+		},
+		{
+			name:            "force redownloads a stale file before mismatch fails",
+			checksumContent: "00000000000000000000000000000000  failure.osm.pbf\n",
+			expectedError:   "checksum mismatch",
+			existingContent: "stale content",
+			includeChecksum: true,
+			force:           true,
+		},
+		{
+			name: "missing checksum allows the command to succeed",
+		},
+		{
+			name:             "unavailable advertised checksum allows the command to succeed",
+			includeChecksum:  true,
+			checksumNotFound: true,
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				switch r.URL.Path {
+				case testOsmPbfPath:
+					_, _ = w.Write([]byte(testOsmPbfContent))
+
+				case testOsmPbfPath + ".md5":
+					if test.checksumNotFound {
+						http.NotFound(w, r)
+
+						return
+					}
+
+					_, _ = fmt.Fprint(w, test.checksumContent)
+
+				default:
+					http.NotFound(w, r)
+				}
+			}))
+			t.Cleanup(server.Close)
+
+			elementFiles := `["osm.pbf"]`
+			if test.includeChecksum {
+				elementFiles = `["osm.pbf", "osm.pbf.md5"]`
+			}
+
+			configContent := fmt.Sprintf(`
+elements:
+  %s:
+    id: %s
+    files: %s
+formats:
+  osm.pbf:
+    ext: "osm.pbf"
+    loc: "/failure.osm.pbf"
+    baseurl: %q
+  osm.pbf.md5:
+    ext: "osm.pbf.md5"
+    loc: "/failure.osm.pbf.md5"
+    baseurl: %q
+`,
+				testDownloadElement, testDownloadElement, elementFiles,
+				server.URL,
+				server.URL,
+			)
+			configFile := filepath.Join(t.TempDir(), "catalog.yml")
+			require.NoError(t, os.WriteFile(configFile, []byte(configContent), 0o600))
+
+			outputDir := t.TempDir()
+
+			targetFile := filepath.Join(outputDir, testDownloadElement+".osm.pbf")
+			if test.existingContent != "" {
+				require.NoError(t, os.WriteFile(targetFile, []byte(test.existingContent), 0o600))
+			}
+
+			args := []string{
+				"download",
+				testDownloadElement,
+				"--config", configFile,
+				"--output-dir", outputDir,
+				"--progress=false",
+			}
+			if test.force {
+				args = append(args, "--force")
+			}
+
+			runDownloadCLIHelper(t, args, test.expectedError)
+
+			downloadedFile, err := os.ReadFile(targetFile)
+			require.NoError(t, err)
+			assert.Equal(t, testOsmPbfContent, string(downloadedFile))
+		})
+	}
+}
+
+func TestDownloadCLIExistingDestinationRequiresForce(t *testing.T) {
+	tests := []struct {
+		name        string
+		expectedErr string
+		existing    bool
+		force       bool
+	}{
+		{
+			name:        "rejects an existing file with a matching checksum by default",
+			expectedErr: "destination file already exists",
+			existing:    true,
+		},
+		{
+			name:     "force replaces an existing file with a matching checksum",
+			existing: true,
+			force:    true,
+		},
+		{
+			name:  "force downloads when the destination is absent",
+			force: true,
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			var dataRequestCount atomic.Int32
+
+			var checksumRequestCount atomic.Int32
+
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				switch r.URL.Path {
+				case "/test-elem/test-elem.osm.pbf":
+					dataRequestCount.Add(1)
+
+					_, _ = w.Write([]byte(testOsmPbfContent))
+
+				case "/test-elem/test-elem.osm.pbf.md5":
+					checksumRequestCount.Add(1)
+
+					hash := md5.Sum([]byte(testOsmPbfContent)) //nolint:gosec // MD5 is used by provider checksum files.
+					_, _ = fmt.Fprintf(w, "%x  test-elem.osm.pbf\n", hash)
+
+				default:
+					http.NotFound(w, r)
+				}
+			}))
+			t.Cleanup(server.Close)
+
+			configFile := filepath.Join(t.TempDir(), "catalog.yml")
+			configContent := fmt.Sprintf(`
+elements:
+  %s:
+    id: %s
+    files: ["osm.pbf", "osm.pbf.md5"]
+formats:
+  osm.pbf:
+    ext: "osm.pbf"
+    loc: "/test-elem.osm.pbf"
+    baseurl: %q
+  osm.pbf.md5:
+    ext: "osm.pbf.md5"
+    loc: "/test-elem.osm.pbf.md5"
+    baseurl: %q
+`, testDownloadElement, testDownloadElement, server.URL, server.URL)
+			require.NoError(t, os.WriteFile(configFile, []byte(configContent), 0o600))
+
+			outputDir := t.TempDir()
+
+			targetFile := filepath.Join(outputDir, testDownloadElement+".osm.pbf")
+			if test.existing {
+				require.NoError(t, os.WriteFile(targetFile, []byte(testOsmPbfContent), 0o600))
+			}
+
+			args := []string{
+				"download",
+				testDownloadElement,
+				"--config", configFile,
+				"--output-dir", outputDir,
+				"--progress=false",
+			}
+			if test.force {
+				args = append(args, "--force")
+			}
+
+			runDownloadCLIHelper(t, args, test.expectedErr)
+
+			content, err := os.ReadFile(targetFile)
+			require.NoError(t, err)
+			assert.Equal(t, testOsmPbfContent, string(content))
+			assert.NoFileExists(t, targetFile+".tmp")
+
+			if test.expectedErr != "" {
+				assert.Equal(t, int32(0), dataRequestCount.Load())
+				assert.Equal(t, int32(0), checksumRequestCount.Load())
+			} else {
+				assert.Equal(t, int32(1), dataRequestCount.Load())
+				assert.Equal(t, int32(1), checksumRequestCount.Load())
+			}
 		})
 	}
 }

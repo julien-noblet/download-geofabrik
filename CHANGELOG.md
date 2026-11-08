@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Changed
+- Downloads now fail when the destination already exists; pass `--force` to replace it. This applies even when the existing file matches its checksum.
+
 ### Chore
 - **deps:** update module yaml to v2.2.8 ([#231](https://github.com/julien-noblet/download-geofabrik/issues/231))
 - **deps:** update module stretchr/testify to v1.5.1

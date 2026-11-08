@@ -1,6 +1,7 @@
 package downloader_test
 
 import (
+	"errors"
 	"os"
 	"path/filepath"
 	"testing"
@@ -117,7 +118,7 @@ func Test_controlHash(t *testing.T) {
 			hashfile: validHashFile,
 			hash:     "65d26fcc2f35ea6a181ac777e42db1eb",
 			want:     false,
-			wantErr:  false,
+			wantErr:  true,
 		},
 		{
 			name:     "Check non existent hashfile",
@@ -180,6 +181,7 @@ func Test_VerifyFileChecksum(t *testing.T) {
 		outputPath string
 		hashfile   string
 		want       bool
+		wantErr    bool
 	}{
 		{
 			name:       "Valid checksum",
@@ -192,6 +194,7 @@ func Test_VerifyFileChecksum(t *testing.T) {
 			outputPath: dataFile,
 			hashfile:   wrongHashFile,
 			want:       false,
+			wantErr:    true,
 		},
 		{
 			name:       "Missing hashfile",
@@ -204,6 +207,7 @@ func Test_VerifyFileChecksum(t *testing.T) {
 			outputPath: filepath.Join(tmpDir, "missing.bin"),
 			hashfile:   hashFile,
 			want:       false,
+			wantErr:    true,
 		},
 	}
 
@@ -211,7 +215,18 @@ func Test_VerifyFileChecksum(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			if got := downloader.VerifyFileChecksum(tt.outputPath, tt.hashfile); got != tt.want {
+			got, err := downloader.VerifyFileChecksum(tt.outputPath, tt.hashfile)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("VerifyFileChecksum() error = %v, wantErr %v", err, tt.wantErr)
+
+				return
+			}
+
+			if tt.wantErr && !errors.Is(err, downloader.ErrChecksumMismatch) {
+				t.Errorf("VerifyFileChecksum() error = %v, want %v", err, downloader.ErrChecksumMismatch)
+			}
+
+			if got != tt.want {
 				t.Errorf("VerifyFileChecksum() = %v, want %v", got, tt.want)
 			}
 		})

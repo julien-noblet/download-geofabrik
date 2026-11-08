@@ -23,6 +23,7 @@ var (
 	outputDir        string
 	check            bool
 	noDownload       bool
+	force            bool
 	downloadProgress bool
 )
 
@@ -99,6 +100,7 @@ func RegisterDownloadCmd() {
 	downloadCmd.Flags().StringVarP(&outputDir, "output-dir", "d", "", "Set output directory")
 	downloadCmd.Flags().BoolVar(&check, "check", true, "Control with checksum (default). Use --no-check to discard control")
 	downloadCmd.Flags().BoolVarP(&noDownload, "nodownload", "n", false, "Do not download file (test only)")
+	downloadCmd.Flags().BoolVar(&force, "force", false, "Replace existing destination files")
 	downloadCmd.Flags().BoolVar(&downloadProgress, "progress", true, "Show progress bar")
 
 	for _, flagDef := range formatFlagList {
@@ -128,6 +130,7 @@ func buildDownloadOptions(cmd *cobra.Command) (*downloader.Options, error) {
 		Verbose:         viper.GetBool("verbose"),
 		Quiet:           viper.GetBool("quiet"),
 		NoDownload:      noDownload,
+		Force:           force,
 		Progress:        downloadProgress,
 		FormatFlags:     make(map[string]bool, len(formatFlagList)),
 	}
@@ -276,7 +279,7 @@ func runDownload(cmd *cobra.Command, args []string) error {
 
 		slog.Info("Processing", "element", elementID, "format", format)
 
-		if err := processDownload(ctx, client, opts.Check, elementID, format, targetFile); err != nil {
+		if err := processDownload(ctx, client, opts.Check, opts.Force, elementID, format, targetFile); err != nil {
 			return err
 		}
 	}
@@ -284,33 +287,58 @@ func runDownload(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-func processDownload(ctx context.Context, client *downloader.Downloader, check bool, elementID, format, targetFile string) error {
-	if !check {
-		if err := client.DownloadFile(ctx, elementID, format, targetFile); err != nil {
-			return fmt.Errorf("download failed: %w", err)
-		}
+func processDownload(ctx context.Context, client *downloader.Downloader, check, force bool, elementID, format, targetFile string) error {
+	if err := rejectExistingDestination(client, targetFile, force); err != nil {
+		return err
+	}
+
+	if !check || force {
+		return downloadAndVerify(ctx, client, check, elementID, format, targetFile)
+	}
+
+	if !downloader.FileExists(targetFile) {
+		return downloadAndVerify(ctx, client, check, elementID, format, targetFile)
+	}
+
+	verified, err := client.Checksum(ctx, elementID, format)
+	if err != nil {
+		return fmt.Errorf("checksum verification failed: %w", err)
+	}
+
+	if verified {
+		slog.Info("File already exists and checksum matches", "file", targetFile)
 
 		return nil
 	}
 
-	shouldDownload := true
+	slog.Warn("Checksum mismatch or verification failed, re-downloading", "file", targetFile)
 
-	if downloader.FileExists(targetFile) {
-		if client.Checksum(ctx, elementID, format) {
-			slog.Info("File already exists and checksum matches", "file", targetFile)
+	return downloadAndVerify(ctx, client, check, elementID, format, targetFile)
+}
 
-			shouldDownload = false
-		} else {
-			slog.Warn("Checksum mismatch or verification failed, re-downloading", "file", targetFile)
-		}
+func rejectExistingDestination(client *downloader.Downloader, targetFile string, force bool) error {
+	if force || client.Options.NoDownload {
+		return nil
 	}
 
-	if shouldDownload {
-		if err := client.DownloadFile(ctx, elementID, format, targetFile); err != nil {
-			return fmt.Errorf("download failed: %w", err)
+	if _, err := os.Lstat(targetFile); err == nil {
+		return fmt.Errorf("%w: %s (use --force to replace it)", downloader.ErrDestinationExists, targetFile)
+	} else if !errors.Is(err, os.ErrNotExist) {
+		return fmt.Errorf("checking destination %s: %w", targetFile, err)
+	}
+
+	return nil
+}
+
+func downloadAndVerify(ctx context.Context, client *downloader.Downloader, check bool, elementID, format, targetFile string) error {
+	if err := client.DownloadFile(ctx, elementID, format, targetFile); err != nil {
+		return fmt.Errorf("download failed: %w", err)
+	}
+
+	if check {
+		if _, err := client.Checksum(ctx, elementID, format); err != nil {
+			return fmt.Errorf("checksum verification failed: %w", err)
 		}
-		// Verify again
-		client.Checksum(ctx, elementID, format)
 	}
 
 	return nil
