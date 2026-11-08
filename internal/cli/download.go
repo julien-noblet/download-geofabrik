@@ -264,24 +264,52 @@ func runDownload(cmd *cobra.Command, args []string) error {
 
 	client := downloader.New(cat, opts)
 	ctx := cmd.Context()
+	successfulFormats := make([]string, 0, len(activeFormats))
+	failedFormats := make([]string, 0, len(activeFormats))
+
+	var formatErrors []error
 
 	for _, rawFormat := range activeFormats {
-		format, ok := resolveFormat(cat, myElem, rawFormat)
-		if !ok {
-			return fmt.Errorf("%w: %s for %s", catalog.ErrFormatNotFound, rawFormat, elementID)
+		formatID, err := downloadFormat(ctx, myElem, client, elementID, rawFormat)
+		if err != nil {
+			formatErr := fmt.Errorf("%s (%s): %w", elementID, formatID, err)
+			failedFormats = append(failedFormats, formatID)
+			formatErrors = append(formatErrors, formatErr)
+
+			continue
 		}
 
-		formatDef := cat.Formats[format]
-		targetFile := opts.OutputDirectory + elementID + "." + formatDef.ID
+		successfulFormats = append(successfulFormats, formatID)
+	}
 
-		slog.Info("Processing", "element", elementID, "format", format)
+	if !opts.Quiet {
+		slog.Info("Download summary", "element", elementID,
+			"successful_formats", successfulFormats, "failed_formats", failedFormats)
+	}
 
-		if err := processDownload(ctx, client, opts.Check, elementID, format, targetFile); err != nil {
-			return err
-		}
+	if len(formatErrors) > 0 {
+		return fmt.Errorf("one or more formats failed: %w", errors.Join(formatErrors...))
 	}
 
 	return nil
+}
+
+func downloadFormat(ctx context.Context, elem *catalog.Element, client *downloader.Downloader, elementID, rawFormat string) (string, error) {
+	format, ok := resolveFormat(client.Catalog, elem, rawFormat)
+	if !ok {
+		return rawFormat, catalog.ErrFormatNotFound
+	}
+
+	formatDef := client.Catalog.Formats[format]
+	targetFile := client.Options.OutputDirectory + elementID + "." + formatDef.ID
+
+	slog.Info("Processing", "element", elementID, "format", format)
+
+	if err := processDownload(ctx, client, client.Options.Check, elementID, format, targetFile); err != nil {
+		return formatDef.ID, err
+	}
+
+	return formatDef.ID, nil
 }
 
 func processDownload(ctx context.Context, client *downloader.Downloader, check bool, elementID, format, targetFile string) error {
