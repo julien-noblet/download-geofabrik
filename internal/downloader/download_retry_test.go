@@ -327,6 +327,7 @@ func TestChecksumMismatchDoesNotRetry(t *testing.T) {
 	}
 
 	require.NoError(t, os.WriteFile(filepath.Join(outputDir, "monaco.osm.pbf"), content, 0o600))
+
 	checksumOK, err := d.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
 	assert.False(t, checksumOK)
 	require.ErrorContains(t, err, "checksum mismatch")

@@ -174,6 +174,10 @@ func (d *Downloader) fromURL(ctx context.Context, myURL, fileName string, force 
 		return checkErr
 	}
 
+	return d.downloadWithRetries(ctx, myURL, fileName, force)
+}
+
+func (d *Downloader) downloadWithRetries(ctx context.Context, myURL, fileName string, force bool) error {
 	for retriesPerformed := 0; ; retriesPerformed++ {
 		retryable, retryAfter, downloadErr := d.downloadOnce(ctx, myURL, fileName, force)
 		if downloadErr == nil {
