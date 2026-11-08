@@ -42,6 +42,9 @@ var (
 
 	// ErrServerStatusCode is returned when the remote HTTP server responds with a non-2xx status code.
 	ErrServerStatusCode = errors.New("server return code error")
+
+	// ErrDestinationExists is returned when a download destination already exists and force is disabled.
+	ErrDestinationExists = errors.New("destination file already exists")
 )
 
 // Options holds runtime options configuring downloader execution.
@@ -69,6 +72,9 @@ type Options struct {
 
 	// NoDownload enables dry-run mode, printing what would be downloaded without network transfer.
 	NoDownload bool
+
+	// Force permits replacing an existing output file.
+	Force bool
 
 	// Progress controls whether a progress bar is displayed during download.
 	Progress bool
@@ -144,10 +150,18 @@ func (d *Downloader) opts() *Options {
 
 // FromURL downloads a file from a URL to a specified file path.
 func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err error) {
+	return d.fromURL(ctx, myURL, fileName, d.opts().Force)
+}
+
+func (d *Downloader) fromURL(ctx context.Context, myURL, fileName string, force bool) (err error) {
 	slog.Debug("Downloading", "url", myURL, "file", fileName)
 
 	if d.opts().NoDownload {
 		return nil
+	}
+
+	if checkErr := d.checkDestination(fileName, force); checkErr != nil {
+		return checkErr
 	}
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, myURL, http.NoBody)
@@ -174,7 +188,21 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 			ErrServerStatusCode, myURL, response.StatusCode)
 	}
 
-	return d.saveToFile(fileName, response)
+	return d.saveToFile(fileName, response, force)
+}
+
+func (d *Downloader) checkDestination(fileName string, force bool) error {
+	if force {
+		return nil
+	}
+
+	if _, err := os.Lstat(fileName); err == nil {
+		return fmt.Errorf("%w: %s", ErrDestinationExists, fileName)
+	} else if !errors.Is(err, os.ErrNotExist) {
+		return fmt.Errorf("checking destination %s: %w", fileName, err)
+	}
+
+	return nil
 }
 
 func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, error) {
@@ -209,7 +237,7 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 	return written, nil
 }
 
-func (d *Downloader) saveToFile(fileName string, response *http.Response) (err error) {
+func (d *Downloader) saveToFile(fileName string, response *http.Response, force bool) (err error) {
 	tmpFileName := fileName + ".tmp"
 
 	if err = os.MkdirAll(filepath.Dir(fileName), dirMode); err != nil {
@@ -247,8 +275,8 @@ func (d *Downloader) saveToFile(fileName string, response *http.Response) (err e
 		return fmt.Errorf("closing %s: %w", tmpFileName, cerr)
 	}
 
-	if err := os.Rename(tmpFileName, fileName); err != nil {
-		return fmt.Errorf("renaming %s to %s: %w", tmpFileName, fileName, err)
+	if err := publishFile(tmpFileName, fileName, force); err != nil {
+		return err
 	}
 
 	var digest [md5.Size]byte
@@ -258,6 +286,30 @@ func (d *Downloader) saveToFile(fileName string, response *http.Response) (err e
 
 	slog.Info("Downloaded", "file", fileName)
 	slog.Debug("Bytes downloaded", "bytes", currentProgress)
+
+	return nil
+}
+
+func publishFile(tmpFileName, fileName string, force bool) error {
+	if force {
+		if err := os.Rename(tmpFileName, fileName); err != nil {
+			return fmt.Errorf("renaming %s to %s: %w", tmpFileName, fileName, err)
+		}
+
+		return nil
+	}
+
+	if err := os.Link(tmpFileName, fileName); err != nil {
+		if errors.Is(err, os.ErrExist) {
+			return fmt.Errorf("%w: %s", ErrDestinationExists, fileName)
+		}
+
+		return fmt.Errorf("publishing %s as %s: %w", tmpFileName, fileName, err)
+	}
+
+	if err := os.Remove(tmpFileName); err != nil {
+		return fmt.Errorf("removing temporary file %s: %w", tmpFileName, err)
+	}
 
 	return nil
 }
@@ -373,7 +425,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 	targetFile := outputPath + "." + formatDef.ID
 	hashFile := outputPath + "." + fhash
 
-	if err := d.FromURL(ctx, myURL, hashFile); err != nil {
+	if err := d.fromURL(ctx, myURL, hashFile, true); err != nil {
 		slog.Error("Checksum download failed", "element", elementID, "url", myURL, "file", hashFile, "error", err)
 
 		return false

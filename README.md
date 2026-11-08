@@ -51,7 +51,7 @@
 
 - 🌍 **10 OpenStreetMap Providers**: Download extracts from Geofabrik, OpenStreetMap France, BBBike, Geo2day, Movisda, Planet OSM Switzerland, OSM Luxembourg, FIT VUT Brno (Czech Republic), OpenStreetMap Italia, and OSM Taiwan.
 - 📦 **15+ Data Formats**: Download `.osm.pbf`, `.osh.pbf` (history), `.shp.zip` (Shapefiles), `.gpkg` (GeoPackage), `.mbtiles`, `.geojson`, `.poly` (Osmosis boundaries), `.kml`, `.map` (Mapsforge), `.obf` (OsmAnd), `.o5m`/`.o5m.zst`, Garmin maps, CSV, and more.
-- 🔒 **Automated Integrity & Smart Caching**: Built-in MD5 checksum verification (enabled by default). Automatically skips re-downloading files if the local copy matches the remote hash.
+- 🔒 **Integrity Checks & Safe Downloads**: Built-in MD5 checksum verification (enabled by default). Existing destination files are never replaced unless you explicitly pass `--force`.
 - 🤖 **Native Model Context Protocol (MCP)**: Run as a local stdio MCP server for LLMs and AI agents (Claude Desktop, Antigravity, Cursor, Cline, etc.) to query catalogs, inspect metadata, and download extracts autonomously.
 - ⚡ **Lightweight & Portable**: Single static Go binary with minimal dependencies, responsive progress bar, and quiet/verbose output flags.
 - 🔄 **Remote Catalog Scraping**: Built-in `generate` command to scrape and update local YAML catalog definitions.
@@ -142,6 +142,9 @@ download-geofabrik download -K monaco
 ```bash
 # Download to a specific destination folder
 download-geofabrik download --output-dir /tmp/osm-extracts ile-de-france
+
+# Explicitly replace an existing destination file
+download-geofabrik download --force ile-de-france
 
 # Skip checksum verification
 download-geofabrik download --check=false ile-de-france
@@ -288,7 +291,7 @@ Add `download-geofabrik` to your MCP client configuration using the absolute pat
 - `list_elements`: Search and list regions, countries, and cities for any provider with available file formats (`osm.pbf`, `shp.zip`, `poly`, `mbtiles`, etc.), supporting search and pagination.
 - `get_element`: Retrieve detailed metadata for a specific extract, including resolved download URLs and MD5 checksum availability.
 - `list_formats`: List supported data formats and extensions across services.
-- `download_element`: Download OSM extracts for specified formats with checksum verification and `dry_run` simulation support.
+- `download_element`: Download OSM extracts for specified formats with checksum verification and `dry_run` simulation support. Existing destination files are not overwritten.
 
 ### Available MCP Resources
 

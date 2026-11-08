@@ -95,7 +95,7 @@ Add `download-geofabrik` to your MCP client configuration using the absolute pat
 - `list_elements`: Search and list regions, countries, and cities for any provider with available file formats (`osm.pbf`, `shp.zip`, `poly`, `mbtiles`, etc.), supporting search and pagination.
 - `get_element`: Retrieve detailed metadata for a specific extract, including resolved download URLs and MD5 checksum availability.
 - `list_formats`: List supported data formats and extensions across services.
-- `download_element`: Download OSM extracts for specified formats with checksum verification and `dry_run` simulation support.
+- `download_element`: Download OSM extracts for specified formats with checksum verification and `dry_run` simulation support. Existing destination files are not overwritten.
 
 ### Available MCP Resources
 
