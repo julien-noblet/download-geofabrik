@@ -140,6 +140,108 @@ formats:
 	}
 }
 
+func TestDownloadCLI_ChecksumOutcomes(t *testing.T) {
+	tests := []struct {
+		name             string
+		checksumContent  string
+		expectedError    string
+		existingContent  string
+		includeChecksum  bool
+		checksumNotFound bool
+	}{
+		{
+			name:            "checksum mismatch fails the command",
+			includeChecksum: true,
+			checksumContent: "00000000000000000000000000000000  failure.osm.pbf\n",
+			expectedError:   "checksum mismatch",
+		},
+		{
+			name:            "stale existing file is redownloaded before mismatch fails",
+			checksumContent: "00000000000000000000000000000000  failure.osm.pbf\n",
+			expectedError:   "checksum mismatch",
+			existingContent: "stale content",
+			includeChecksum: true,
+		},
+		{
+			name: "missing checksum allows the command to succeed",
+		},
+		{
+			name:             "unavailable advertised checksum allows the command to succeed",
+			includeChecksum:  true,
+			checksumNotFound: true,
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				switch r.URL.Path {
+				case testOsmPbfPath:
+					_, _ = w.Write([]byte(testOsmPbfContent))
+
+				case testOsmPbfPath + ".md5":
+					if test.checksumNotFound {
+						http.NotFound(w, r)
+
+						return
+					}
+
+					_, _ = w.Write([]byte(test.checksumContent))
+
+				default:
+					http.NotFound(w, r)
+				}
+			}))
+			t.Cleanup(server.Close)
+
+			elementFiles := `["osm.pbf"]`
+			if test.includeChecksum {
+				elementFiles = `["osm.pbf", "osm.pbf.md5"]`
+			}
+
+			configContent := fmt.Sprintf(`
+elements:
+  %s:
+    id: %s
+    files: %s
+formats:
+  osm.pbf:
+    ext: "osm.pbf"
+    loc: "/failure.osm.pbf"
+    baseurl: %q
+  osm.pbf.md5:
+    ext: "osm.pbf.md5"
+    loc: "/failure.osm.pbf.md5"
+    baseurl: %q
+`,
+				testDownloadElement, testDownloadElement, elementFiles,
+				server.URL,
+				server.URL,
+			)
+			configFile := filepath.Join(t.TempDir(), "catalog.yml")
+			require.NoError(t, os.WriteFile(configFile, []byte(configContent), 0o600))
+
+			outputDir := t.TempDir()
+			if test.existingContent != "" {
+				targetFile := filepath.Join(outputDir, testDownloadElement+".osm.pbf")
+				require.NoError(t, os.WriteFile(targetFile, []byte(test.existingContent), 0o600))
+			}
+
+			runDownloadCLIHelper(t, []string{
+				"download",
+				testDownloadElement,
+				"--config", configFile,
+				"--output-dir", outputDir,
+				"--progress=false",
+			}, test.expectedError)
+
+			downloadedFile, err := os.ReadFile(filepath.Join(outputDir, testDownloadElement+".osm.pbf"))
+			require.NoError(t, err)
+			assert.Equal(t, testOsmPbfContent, string(downloadedFile))
+		})
+	}
+}
+
 func runDownloadCLIHelper(t *testing.T, args []string, expectedError string) {
 	t.Helper()
 
