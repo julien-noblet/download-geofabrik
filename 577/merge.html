@@ -57,7 +57,7 @@
 				
 				<option value="file0">github.com/julien-noblet/download-geofabrik/cmd/download-geofabrik/main.go (0.0%)</option>
 				
-				<option value="file1">github.com/julien-noblet/download-geofabrik/internal/cli/download.go (78.7%)</option>
+				<option value="file1">github.com/julien-noblet/download-geofabrik/internal/cli/download.go (73.3%)</option>
 				
 				<option value="file2">github.com/julien-noblet/download-geofabrik/internal/cli/generate.go (84.6%)</option>
 				
@@ -67,9 +67,9 @@
 				
 				<option value="file5">github.com/julien-noblet/download-geofabrik/internal/cli/root.go (94.8%)</option>
 				
-				<option value="file6">github.com/julien-noblet/download-geofabrik/internal/downloader/download.go (86.1%)</option>
+				<option value="file6">github.com/julien-noblet/download-geofabrik/internal/downloader/download.go (87.4%)</option>
 				
-				<option value="file7">github.com/julien-noblet/download-geofabrik/internal/downloader/hash.go (84.1%)</option>
+				<option value="file7">github.com/julien-noblet/download-geofabrik/internal/downloader/hash.go (89.6%)</option>
 				
 				<option value="file8">github.com/julien-noblet/download-geofabrik/internal/generator/generator.go (96.3%)</option>
 				
@@ -77,7 +77,7 @@
 				
 				<option value="file10">github.com/julien-noblet/download-geofabrik/internal/mcp/server.go (79.5%)</option>
 				
-				<option value="file11">github.com/julien-noblet/download-geofabrik/internal/mcp/tools.go (66.6%)</option>
+				<option value="file11">github.com/julien-noblet/download-geofabrik/internal/mcp/tools.go (74.2%)</option>
 				
 				<option value="file12">github.com/julien-noblet/download-geofabrik/internal/provider/bbbike/scraper.go (97.1%)</option>
 				
@@ -180,6 +180,7 @@ var (
         outputDir        string
         check            bool
         noDownload       bool
+        force            bool
         downloadProgress bool
 )
 
@@ -256,6 +257,7 @@ func RegisterDownloadCmd() {
         <span class="cov1" title="1">downloadCmd.Flags().StringVarP(&amp;outputDir, "output-dir", "d", "", "Set output directory")
         downloadCmd.Flags().BoolVar(&amp;check, "check", true, "Control with checksum (default). Use --no-check to discard control")
         downloadCmd.Flags().BoolVarP(&amp;noDownload, "nodownload", "n", false, "Do not download file (test only)")
+        downloadCmd.Flags().BoolVar(&amp;force, "force", false, "Replace existing destination files")
         downloadCmd.Flags().BoolVar(&amp;downloadProgress, "progress", true, "Show progress bar")
 </span>
         <span class="cov1" title="1">for _, flagDef := range formatFlagList </span>{
@@ -285,6 +287,7 @@ func buildDownloadOptions(cmd *cobra.Command) (*downloader.Options, error) {
                 Verbose:         viper.GetBool("verbose"),
                 Quiet:           viper.GetBool("quiet"),
                 NoDownload:      noDownload,
+                Force:           force,
                 Progress:        downloadProgress,
                 FormatFlags:     make(map[string]bool, len(formatFlagList)),
 </span>        }
@@ -433,7 +436,7 @@ func runDownload(cmd *cobra.Command, args []string) error {
 </span>
                 <span class="cov4" title="8">slog.Info("Processing", "element", elementID, "format", format)
 </span>
-                <span class="cov4" title="8">if err := processDownload(ctx, client, opts.Check, elementID, format, targetFile); err != nil </span>{
+                <span class="cov4" title="8">if err := processDownload(ctx, client, opts.Check, opts.Force, elementID, format, targetFile); err != nil </span>{
                         <span class="cov0" title="0">return err
 </span>                }
         }
@@ -441,36 +444,61 @@ func runDownload(cmd *cobra.Command, args []string) error {
         <span class="cov4" title="8">return nil</span>
 }
 
-func processDownload(ctx context.Context, client *downloader.Downloader, check bool, elementID, format, targetFile string) error {
-        <span class="cov4" title="8">if !check </span>{
-                <span class="cov2" title="2">if err := client.DownloadFile(ctx, elementID, format, targetFile); err != nil </span>{
-                        <span class="cov0" title="0">return fmt.Errorf("download failed: %w", err)
-</span>                }
+func processDownload(ctx context.Context, client *downloader.Downloader, check, force bool, elementID, format, targetFile string) error {
+        <span class="cov4" title="8">if err := rejectExistingDestination(client, targetFile, force); err != nil </span>{
+                <span class="cov0" title="0">return err
+</span>        }
 
-                <span class="cov2" title="2">return nil</span>
-        }
+        <span class="cov4" title="8">if !check || force </span>{
+                <span class="cov2" title="2">return downloadAndVerify(ctx, client, check, elementID, format, targetFile)
+</span>        }
 
-        <span class="cov4" title="6">shouldDownload := true
+        <span class="cov4" title="6">if !downloader.FileExists(targetFile) </span>{
+                <span class="cov4" title="6">return downloadAndVerify(ctx, client, check, elementID, format, targetFile)
+</span>        }
+
+        <span class="cov0" title="0">verified, err := client.Checksum(ctx, elementID, format)
+        if err != nil </span>{
+                <span class="cov0" title="0">return fmt.Errorf("checksum verification failed: %w", err)
+</span>        }
+
+        <span class="cov0" title="0">if verified </span>{
+                <span class="cov0" title="0">slog.Info("File already exists and checksum matches", "file", targetFile)
 </span>
-        <span class="cov4" title="6">if downloader.FileExists(targetFile) </span>{
-                <span class="cov0" title="0">if client.Checksum(ctx, elementID, format) </span>{
-                        <span class="cov0" title="0">slog.Info("File already exists and checksum matches", "file", targetFile)
+                <span class="cov0" title="0">return nil
+</span>        }
+
+        <span class="cov0" title="0">slog.Warn("Checksum mismatch or verification failed, re-downloading", "file", targetFile)
 </span>
-                        <span class="cov0" title="0">shouldDownload = false
-</span>                } else {
-                        <span class="cov0" title="0">slog.Warn("Checksum mismatch or verification failed, re-downloading", "file", targetFile)
+        <span class="cov0" title="0">return downloadAndVerify(ctx, client, check, elementID, format, targetFile)</span>
+}
+
+func rejectExistingDestination(client *downloader.Downloader, targetFile string, force bool) error {
+        <span class="cov4" title="8">if force || client.Options.NoDownload </span>{
+                <span class="cov4" title="8">return nil
+</span>        }
+
+        <span class="cov0" title="0">if _, err := os.Lstat(targetFile); err == nil </span>{
+                <span class="cov0" title="0">return fmt.Errorf("%w: %s (use --force to replace it)", downloader.ErrDestinationExists, targetFile)
+</span>        } else <span class="cov0" title="0">if !errors.Is(err, os.ErrNotExist) </span>{
+                <span class="cov0" title="0">return fmt.Errorf("checking destination %s: %w", targetFile, err)
+</span>        }
+
+        <span class="cov0" title="0">return nil</span>
+}
+
+func downloadAndVerify(ctx context.Context, client *downloader.Downloader, check bool, elementID, format, targetFile string) error {
+        <span class="cov4" title="8">if err := client.DownloadFile(ctx, elementID, format, targetFile); err != nil </span>{
+                <span class="cov0" title="0">return fmt.Errorf("download failed: %w", err)
+</span>        }
+
+        <span class="cov4" title="8">if check </span>{
+                <span class="cov4" title="6">if _, err := client.Checksum(ctx, elementID, format); err != nil </span>{
+                        <span class="cov0" title="0">return fmt.Errorf("checksum verification failed: %w", err)
 </span>                }
         }
 
-        <span class="cov4" title="6">if shouldDownload </span>{
-                <span class="cov4" title="6">if err := client.DownloadFile(ctx, elementID, format, targetFile); err != nil </span>{
-                        <span class="cov0" title="0">return fmt.Errorf("download failed: %w", err)
-</span>                }
-                // Verify again
-                <span class="cov4" title="6">client.Checksum(ctx, elementID, format)</span>
-        }
-
-        <span class="cov4" title="6">return nil</span>
+        <span class="cov4" title="8">return nil</span>
 }
 </pre>
 		
@@ -804,6 +832,9 @@ var (
 
         // ErrServerStatusCode is returned when the remote HTTP server responds with a non-2xx status code.
         ErrServerStatusCode = errors.New("server return code error")
+
+        // ErrDestinationExists is returned when a download destination already exists and force is disabled.
+        ErrDestinationExists = errors.New("destination file already exists")
 )
 
 // Options holds runtime options configuring downloader execution.
@@ -832,6 +863,9 @@ type Options struct {
         // NoDownload enables dry-run mode, printing what would be downloaded without network transfer.
         NoDownload bool
 
+        // Force permits replacing an existing output file.
+        Force bool
+
         // Progress controls whether a progress bar is displayed during download.
         Progress bool
 }
@@ -858,13 +892,13 @@ var copyBufPool = sync.Pool{
 
 // New creates a new Downloader with connection pooling and high-throughput buffers.
 func New(cat *catalog.Catalog, opts *Options) *Downloader {
-        <span class="cov8" title="25">optsCopy := &amp;Options{}
+        <span class="cov7" title="29">optsCopy := &amp;Options{}
         if opts != nil </span>{
-                <span class="cov8" title="24">*optsCopy = *opts
+                <span class="cov7" title="28">*optsCopy = *opts
                 optsCopy.FormatFlags = maps.Clone(opts.FormatFlags)
 </span>        }
 
-        <span class="cov8" title="25">return &amp;Downloader{
+        <span class="cov7" title="29">return &amp;Downloader{
                 Catalog: cat,
                 Options: optsCopy,
                 client: &amp;http.Client{
@@ -897,58 +931,80 @@ func NewDownloader(cat *catalog.Catalog, opts *Options) *Downloader {
 </span>}
 
 func (d *Downloader) opts() *Options {
-        <span class="cov10" title="58">if d == nil || d.Options == nil </span>{
+        <span class="cov10" title="91">if d == nil || d.Options == nil </span>{
                 <span class="cov0" title="0">return &amp;Options{}
 </span>        }
 
-        <span class="cov10" title="58">return d.Options</span>
+        <span class="cov10" title="91">return d.Options</span>
 }
 
 // FromURL downloads a file from a URL to a specified file path.
 func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err error) {
-        <span class="cov7" title="23">slog.Debug("Downloading", "url", myURL, "file", fileName)
+        <span class="cov7" title="27">return d.fromURL(ctx, myURL, fileName, d.opts().Force)
+</span>}
+
+func (d *Downloader) fromURL(ctx context.Context, myURL, fileName string, force bool) (err error) {
+        <span class="cov7" title="27">slog.Debug("Downloading", "url", myURL, "file", fileName)
 </span>
-        <span class="cov7" title="23">if d.opts().NoDownload </span>{
-                <span class="cov6" title="10">return nil
+        <span class="cov7" title="27">if d.opts().NoDownload </span>{
+                <span class="cov5" title="10">return nil
 </span>        }
 
-        <span class="cov6" title="13">req, err := http.NewRequestWithContext(ctx, http.MethodGet, myURL, http.NoBody)
+        <span class="cov6" title="17">if checkErr := d.checkDestination(fileName, force); checkErr != nil </span>{
+                <span class="cov2" title="2">return checkErr
+</span>        }
+
+        <span class="cov6" title="15">req, err := http.NewRequestWithContext(ctx, http.MethodGet, myURL, http.NoBody)
         if err != nil </span>{
                 <span class="cov0" title="0">return fmt.Errorf("creating request for %s: %w", myURL, err)
 </span>        }
 
-        <span class="cov6" title="13">client := cmp.Or(d.client, http.DefaultClient)
+        <span class="cov6" title="15">client := cmp.Or(d.client, http.DefaultClient)
 </span>
-        <span class="cov6" title="13">response, err := client.Do(req)
+        <span class="cov6" title="15">response, err := client.Do(req)
         if err != nil </span>{
                 <span class="cov2" title="2">return fmt.Errorf("downloading %s: %w", myURL, err)
 </span>        }
 
-        <span class="cov6" title="11">defer func() </span>{
-                <span class="cov6" title="11">if cerr := response.Body.Close(); cerr != nil </span>{
+        <span class="cov6" title="13">defer func() </span>{
+                <span class="cov6" title="13">if cerr := response.Body.Close(); cerr != nil </span>{
                         <span class="cov0" title="0">closeErr := fmt.Errorf("closing response body for %s: %w", myURL, cerr)
                         err = errors.Join(err, closeErr)
 </span>                }
         }()
 
-        <span class="cov6" title="11">if response.StatusCode != http.StatusOK </span>{
+        <span class="cov6" title="13">if response.StatusCode != http.StatusOK </span>{
                 <span class="cov2" title="2">return fmt.Errorf("%w: downloading %s: server status code %d",
                         ErrServerStatusCode, myURL, response.StatusCode)
 </span>        }
 
-        <span class="cov5" title="9">return d.saveToFile(fileName, response)</span>
+        <span class="cov5" title="11">return d.saveToFile(fileName, response, force)</span>
+}
+
+func (d *Downloader) checkDestination(fileName string, force bool) error {
+        <span class="cov6" title="17">if force </span>{
+                <span class="cov1" title="1">return nil
+</span>        }
+
+        <span class="cov6" title="16">if _, err := os.Lstat(fileName); err == nil </span>{
+                <span class="cov2" title="2">return fmt.Errorf("%w: %s", ErrDestinationExists, fileName)
+</span>        } else <span class="cov6" title="14">if !errors.Is(err, os.ErrNotExist) </span>{
+                <span class="cov0" title="0">return fmt.Errorf("checking destination %s: %w", fileName, err)
+</span>        }
+
+        <span class="cov6" title="14">return nil</span>
 }
 
 func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, error) {
-        <span class="cov5" title="9">bufPtr, ok := copyBufPool.Get().(*[]byte)
+        <span class="cov5" title="11">bufPtr, ok := copyBufPool.Get().(*[]byte)
         if !ok </span>{
                 <span class="cov0" title="0">buf := make([]byte, streamBufferSize)
                 bufPtr = &amp;buf
 </span>        }
 
-        <span class="cov5" title="9">defer copyBufPool.Put(bufPtr)
+        <span class="cov5" title="11">defer copyBufPool.Put(bufPtr)
 </span>
-        <span class="cov5" title="9">opts := d.opts()
+        <span class="cov5" title="11">opts := d.opts()
         if opts.Progress &amp;&amp; !opts.Quiet &amp;&amp; response.ContentLength &gt; progressMinimal </span>{
                 <span class="cov1" title="1">progressBar := pb.Full.Start64(response.ContentLength)
                 barReader := progressBar.NewProxyReader(response.Body)
@@ -963,64 +1019,88 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
                 <span class="cov1" title="1">return written, nil</span>
         }
 
-        <span class="cov5" title="8">written, err := io.CopyBuffer(dst, response.Body, *bufPtr)
+        <span class="cov5" title="10">written, err := io.CopyBuffer(dst, response.Body, *bufPtr)
         if err != nil </span>{
                 <span class="cov0" title="0">return written, fmt.Errorf("copying response: %w", err)
 </span>        }
 
-        <span class="cov5" title="8">return written, nil</span>
+        <span class="cov5" title="10">return written, nil</span>
 }
 
-func (d *Downloader) saveToFile(fileName string, response *http.Response) (err error) {
-        <span class="cov5" title="9">tmpFileName := fileName + ".tmp"
+func (d *Downloader) saveToFile(fileName string, response *http.Response, force bool) (err error) {
+        <span class="cov5" title="11">tmpFileName := fileName + ".tmp"
 </span>
-        <span class="cov5" title="9">if err = os.MkdirAll(filepath.Dir(fileName), dirMode); err != nil </span>{
+        <span class="cov5" title="11">if err = os.MkdirAll(filepath.Dir(fileName), dirMode); err != nil </span>{
                 <span class="cov0" title="0">return fmt.Errorf("creating directory %s: %w", filepath.Dir(fileName), err)
 </span>        }
 
-        <span class="cov5" title="9">file, err := os.OpenFile(tmpFileName, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, fileMode)
+        <span class="cov5" title="11">file, err := os.OpenFile(tmpFileName, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, fileMode)
         if err != nil </span>{
                 <span class="cov0" title="0">return fmt.Errorf("creating %s: %w", tmpFileName, err)
 </span>        }
 
-        <span class="cov5" title="9">fileClosed := false
+        <span class="cov5" title="11">fileClosed := false
 </span>
-        <span class="cov5" title="9">defer func() </span>{
-                <span class="cov5" title="9">if !fileClosed </span>{
+        <span class="cov5" title="11">defer func() </span>{
+                <span class="cov5" title="11">if !fileClosed </span>{
                         <span class="cov0" title="0">_ = file.Close()
 </span>                }
 
-                <span class="cov5" title="9">if err != nil </span>{
-                        <span class="cov0" title="0">_ = os.Remove(tmpFileName)
+                <span class="cov5" title="11">if err != nil </span>{
+                        <span class="cov1" title="1">_ = os.Remove(tmpFileName)
 </span>                }
         }()
 
-        <span class="cov5" title="9">hasher := md5.New() //nolint:gosec // MD5 is used to control with md5sum files
+        <span class="cov5" title="11">hasher := md5.New() //nolint:gosec // MD5 is used to control with md5sum files
         multiWriter := io.MultiWriter(file, hasher)
 </span>
-        <span class="cov5" title="9">currentProgress, err := d.copyBody(multiWriter, response)
+        <span class="cov5" title="11">currentProgress, err := d.copyBody(multiWriter, response)
         if err != nil </span>{
                 <span class="cov0" title="0">return err
 </span>        }
 
-        <span class="cov5" title="9">fileClosed = true
+        <span class="cov5" title="11">fileClosed = true
 </span>
-        <span class="cov5" title="9">if cerr := file.Close(); cerr != nil </span>{
+        <span class="cov5" title="11">if cerr := file.Close(); cerr != nil </span>{
                 <span class="cov0" title="0">return fmt.Errorf("closing %s: %w", tmpFileName, cerr)
 </span>        }
 
-        <span class="cov5" title="9">if err := os.Rename(tmpFileName, fileName); err != nil </span>{
-                <span class="cov0" title="0">return fmt.Errorf("renaming %s to %s: %w", tmpFileName, fileName, err)
+        <span class="cov5" title="11">if err := publishFile(tmpFileName, fileName, force); err != nil </span>{
+                <span class="cov1" title="1">return err
 </span>        }
 
-        <span class="cov5" title="9">var digest [md5.Size]byte
+        <span class="cov5" title="10">var digest [md5.Size]byte
 </span>
-        <span class="cov5" title="9">sum := hasher.Sum(digest[:0])
+        <span class="cov5" title="10">sum := hasher.Sum(digest[:0])
         d.lastHash.Store(fileName, hex.EncodeToString(sum))
 </span>
-        <span class="cov5" title="9">slog.Info("Downloaded", "file", fileName)
+        <span class="cov5" title="10">slog.Info("Downloaded", "file", fileName)
         slog.Debug("Bytes downloaded", "bytes", currentProgress)
 </span>
+        <span class="cov5" title="10">return nil</span>
+}
+
+func publishFile(tmpFileName, fileName string, force bool) error {
+        <span class="cov5" title="11">if force </span>{
+                <span class="cov1" title="1">if err := os.Rename(tmpFileName, fileName); err != nil </span>{
+                        <span class="cov0" title="0">return fmt.Errorf("renaming %s to %s: %w", tmpFileName, fileName, err)
+</span>                }
+
+                <span class="cov1" title="1">return nil</span>
+        }
+
+        <span class="cov5" title="10">if err := os.Link(tmpFileName, fileName); err != nil </span>{
+                <span class="cov1" title="1">if errors.Is(err, os.ErrExist) </span>{
+                        <span class="cov1" title="1">return fmt.Errorf("%w: %s", ErrDestinationExists, fileName)
+</span>                }
+
+                <span class="cov0" title="0">return fmt.Errorf("publishing %s as %s: %w", tmpFileName, fileName, err)</span>
+        }
+
+        <span class="cov5" title="9">if err := os.Remove(tmpFileName); err != nil </span>{
+                <span class="cov0" title="0">return fmt.Errorf("removing temporary file %s: %w", tmpFileName, err)
+</span>        }
+
         <span class="cov5" title="9">return nil</span>
 }
 
@@ -1040,110 +1120,142 @@ func FileExist(filePath string) bool {
 
 // DownloadFile downloads an extract file by element ID and format name.
 func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, outputPath string) error {
-        <span class="cov7" title="18">myElem, err := d.Catalog.Find(elementID)
+        <span class="cov6" title="19">myElem, err := d.Catalog.Find(elementID)
         if err != nil </span>{
                 <span class="cov2" title="2">return fmt.Errorf("finding element %s: %w", elementID, err)
 </span>        }
 
-        <span class="cov7" title="16">myURL, err := d.Catalog.ResolveURL(myElem, formatName)
+        <span class="cov6" title="17">myURL, err := d.Catalog.ResolveURL(myElem, formatName)
         if err != nil </span>{
                 <span class="cov2" title="2">return fmt.Errorf("generating URL for %s (%s): %w", elementID, formatName, err)
 </span>        }
 
-        <span class="cov6" title="14">slog.Info("Starting download", "element", elementID, "format", formatName, "url", myURL)
+        <span class="cov6" title="15">slog.Info("Starting download", "element", elementID, "format", formatName, "url", myURL)
 </span>
-        <span class="cov6" title="14">return d.FromURL(ctx, myURL, outputPath)</span>
+        <span class="cov6" title="15">return d.FromURL(ctx, myURL, outputPath)</span>
 }
 
-func (d *Downloader) verifyChecksum(targetFile, hashFile string) bool {
-        <span class="cov3" title="3">var ret bool
+func (d *Downloader) verifyChecksum(targetFile, hashFile string) (bool, error) {
+        <span class="cov3" title="3">var (
+                ret bool
+                err error
+        )
 </span>
         <span class="cov3" title="3">if inFlightHash, ok := d.lastHash.Load(targetFile); ok </span>{
                 <span class="cov2" title="2">cachedDigest, isStr := inFlightHash.(string)
                 if !isStr || cachedDigest == "" </span>{
                         <span class="cov0" title="0">slog.Debug("Cached hash invalid, reading file", "file", targetFile)
 </span>
-                        <span class="cov0" title="0">ret = VerifyFileChecksum(targetFile, hashFile)
+                        <span class="cov0" title="0">ret, err = VerifyFileChecksum(targetFile, hashFile)
 </span>                } else {
                         <span class="cov2" title="2">slog.Debug("Using in-flight hash", "file", targetFile, "hash", cachedDigest)
 </span>
-                        <span class="cov2" title="2">ret, _ = CheckFileHash(hashFile, cachedDigest)
+                        <span class="cov2" title="2">ret, err = CheckFileHash(hashFile, cachedDigest)
 </span>                }
         } else {
-                <span class="cov1" title="1">ret = VerifyFileChecksum(targetFile, hashFile)
+                <span class="cov1" title="1">ret, err = VerifyFileChecksum(targetFile, hashFile)
 </span>        }
 
-        <span class="cov3" title="3">if ret </span>{
+        <span class="cov3" title="3">if err != nil </span>{
+                <span class="cov1" title="1">return false, err
+</span>        }
+
+        <span class="cov2" title="2">if ret </span>{
                 <span class="cov1" title="1">slog.Info("Checksum OK", "file", targetFile)
-</span>        } else {
-                <span class="cov2" title="2">slog.Error("Checksum MISMATCH", "file", targetFile)
 </span>        }
 
-        <span class="cov3" title="3">return ret</span>
+        <span class="cov2" title="2">return ret, nil</span>
 }
 
-// Checksum downloads and verifies the checksum of a file, using in-flight computed MD5 when available.
-func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string) bool {
-        <span class="cov7" title="15">if d == nil || d.Catalog == nil || !d.opts().Check </span>{
-                <span class="cov3" title="3">return false
-</span>        }
+type checksumInfo struct {
+        url        string
+        formatID   string
+        hashFormat string
+}
 
-        <span class="cov6" title="12">isHashable, _, _ := d.Catalog.IsHashable(formatName)
+func (d *Downloader) checksumInfo(elementID, formatName string) (checksumInfo, bool, error) {
+        <span class="cov5" title="12">isHashable, hashFormat, _ := d.Catalog.IsHashable(formatName)
         if !isHashable </span>{
-                <span class="cov5" title="7">slog.Warn("No checksum provided",
+                <span class="cov4" title="7">slog.Warn("No checksum provided",
                         "element", elementID,
                         "format", formatName,
                         "file", filepath.Join(d.opts().OutputDirectory, elementID+"."+formatName),
                 )
 </span>
-                <span class="cov5" title="7">return false
+                <span class="cov4" title="7">return checksumInfo{}, false, nil
 </span>        }
 
-        <span class="cov4" title="5">hashType := "md5"
-        fhash := formatName + "." + hashType
-</span>
         <span class="cov4" title="5">myElem, err := d.Catalog.Find(elementID)
         if err != nil </span>{
-                <span class="cov0" title="0">slog.Error("Element not found", "element", elementID, "error", err)
-</span>
-                <span class="cov0" title="0">return false
+                <span class="cov0" title="0">return checksumInfo{}, false, fmt.Errorf("finding element %s for checksum: %w", elementID, err)
 </span>        }
 
         <span class="cov4" title="5">formatDef, hasFormat := d.Catalog.GetFormat(formatName)
         if !hasFormat </span>{
-                <span class="cov0" title="0">return false
+                <span class="cov0" title="0">return checksumInfo{}, false, fmt.Errorf("%w: %s", catalog.ErrFormatNotFound, formatName)
 </span>        }
 
-        <span class="cov4" title="5">if !myElem.Formats.Contains(fhash) </span>{
+        <span class="cov4" title="5">if !myElem.Formats.Contains(hashFormat) </span>{
                 <span class="cov1" title="1">slog.Warn("No checksum provided",
                         "element", elementID,
                         "format", formatDef.ID,
                         "file", filepath.Join(d.opts().OutputDirectory, elementID+"."+formatDef.ID),
                 )
 </span>
-                <span class="cov1" title="1">return false
+                <span class="cov1" title="1">return checksumInfo{}, false, nil
 </span>        }
 
-        <span class="cov4" title="4">myURL, err := d.Catalog.ResolveURL(myElem, fhash)
+        <span class="cov3" title="4">myURL, err := d.Catalog.ResolveURL(myElem, hashFormat)
         if err != nil </span>{
-                <span class="cov0" title="0">slog.Error("URL generation failed", "element", elementID, "hash_format", fhash, "error", err)
+                <span class="cov0" title="0">slog.Warn("Checksum unavailable",
+                        "element", elementID,
+                        "hash_format", hashFormat,
+                        "error", err,
+                )
 </span>
-                <span class="cov0" title="0">return false
+                <span class="cov0" title="0">return checksumInfo{}, false, nil
 </span>        }
 
-        <span class="cov4" title="4">outputPath := d.opts().OutputDirectory + elementID
-        targetFile := outputPath + "." + formatDef.ID
-        hashFile := outputPath + "." + fhash
+        <span class="cov3" title="4">return checksumInfo{
+                url:        myURL,
+                formatID:   formatDef.ID,
+                hashFormat: hashFormat,
+        }, true, nil</span>
+}
+
+// Checksum downloads and verifies the checksum of a file, using in-flight computed MD5 when available.
+func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string) (bool, error) {
+        <span class="cov6" title="15">if d == nil || d.Catalog == nil || !d.opts().Check </span>{
+                <span class="cov3" title="3">return false, nil
+</span>        }
+
+        <span class="cov5" title="12">checksum, available, err := d.checksumInfo(elementID, formatName)
+        if err != nil </span>{
+                <span class="cov0" title="0">return false, err
+</span>        }
+
+        <span class="cov5" title="12">if !available </span>{
+                <span class="cov5" title="8">return false, nil
+</span>        }
+
+        <span class="cov3" title="4">outputPath := filepath.Join(d.opts().OutputDirectory, elementID)
+        targetFile := outputPath + "." + checksum.formatID
+        hashFile := outputPath + "." + checksum.hashFormat
 </span>
-        <span class="cov4" title="4">if err := d.FromURL(ctx, myURL, hashFile); err != nil </span>{
-                <span class="cov1" title="1">slog.Error("Checksum download failed", "element", elementID, "url", myURL, "file", hashFile, "error", err)
+        <span class="cov3" title="4">if downloadErr := d.FromURL(ctx, checksum.url, hashFile); downloadErr != nil </span>{
+                <span class="cov1" title="1">slog.Warn("Checksum unavailable", "element", elementID, "url", checksum.url, "file", hashFile, "error", downloadErr)
 </span>
-                <span class="cov1" title="1">return false
+                <span class="cov1" title="1">return false, nil
 </span>        }
         <span class="cov3" title="3">defer d.lastHash.Delete(hashFile)
         defer d.lastHash.Delete(targetFile)
 </span>
-        <span class="cov3" title="3">return d.verifyChecksum(targetFile, hashFile)</span>
+        <span class="cov3" title="3">verified, err := d.verifyChecksum(targetFile, hashFile)
+        if err != nil </span>{
+                <span class="cov1" title="1">return false, fmt.Errorf("verifying checksum for %s: %w", targetFile, err)
+</span>        }
+
+        <span class="cov2" title="2">return verified, nil</span>
 }
 </pre>
 		
@@ -1152,6 +1264,7 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 import (
         "crypto/md5" //nolint:gosec // MD5 is used to control with md5sum files
         "encoding/hex"
+        "errors"
         "fmt"
         "io"
         "log/slog"
@@ -1164,6 +1277,9 @@ const (
         openErrorMsg = "cannot open %s: %w"
         copyErrorMsg = "cannot copy %s: %w"
 )
+
+// ErrChecksumMismatch indicates that a file's calculated hash differs from its published checksum.
+var ErrChecksumMismatch = errors.New("checksum mismatch")
 
 // CheckFileHash checks if the hash of a file matches the provided hash.
 func CheckFileHash(hashfile, expectedHash string) (bool, error) {
@@ -1188,7 +1304,11 @@ func CheckFileHash(hashfile, expectedHash string) (bool, error) {
         <span class="cov8" title="8">fileHash := fields[0]
         slog.Info("Hash from file", "hash", fileHash)
 </span>
-        <span class="cov8" title="8">return strings.EqualFold(expectedHash, fileHash), nil</span>
+        <span class="cov8" title="8">if !strings.EqualFold(expectedHash, fileHash) </span>{
+                <span class="cov5" title="4">return false, fmt.Errorf("%w: %s", ErrChecksumMismatch, hashfile)
+</span>        }
+
+        <span class="cov5" title="4">return true, nil</span>
 }
 
 // ComputeMD5Hash computes the hexadecimal MD5 checksum of the file at filePath.
@@ -1230,30 +1350,26 @@ func ComputeMD5Hash(filePath string) (string, error) {
 }
 
 // VerifyFileChecksum verifies the checksum of a file.
-func VerifyFileChecksum(file, hashfile string) bool {
+func VerifyFileChecksum(file, hashfile string) (bool, error) {
         <span class="cov6" title="5">slog.Info("Hashing file", "file", file)
 </span>
         <span class="cov6" title="5">hashed, err := ComputeMD5Hash(file)
         if err != nil </span>{
-                <span class="cov0" title="0">slog.Error("Failed to hash file", "file", file, "error", err)
-</span>
-                <span class="cov0" title="0">return false // Was Fatal before
+                <span class="cov0" title="0">return false, fmt.Errorf("hashing file %s: %w", file, err)
 </span>        }
 
         <span class="cov6" title="5">slog.Debug("MD5 Hash", "hash", hashed)
 </span>
         <span class="cov6" title="5">ret, err := CheckFileHash(hashfile, hashed)
         if err != nil </span>{
-                <span class="cov0" title="0">slog.Error("Checksum error", "file", file, "hashfile", hashfile, "error", err)
+                <span class="cov3" title="2">return false, fmt.Errorf("checking checksum for %s: %w", file, err)
 </span>        }
 
-        <span class="cov6" title="5">if ret </span>{
+        <span class="cov4" title="3">if ret </span>{
                 <span class="cov1" title="1">slog.Info("Checksum OK", "file", file)
-</span>        } else {
-                <span class="cov5" title="4">slog.Error("Checksum MISMATCH", "file", file)
 </span>        }
 
-        <span class="cov6" title="5">return ret</span>
+        <span class="cov4" title="3">return ret, nil</span>
 }
 </pre>
 		
@@ -1350,7 +1466,7 @@ const (
 )
 
 func (s *Server) registerResources() {
-        <span class="cov10" title="15">s.mcpServer.AddResource(
+        <span class="cov10" title="16">s.mcpServer.AddResource(
                 mcpSDK.NewResource(
                         uriSchemeServices,
                         "OSM Data Services",
@@ -1360,7 +1476,7 @@ func (s *Server) registerResources() {
                 s.handleResourceServices,
         )
 </span>
-        <span class="cov10" title="15">s.mcpServer.AddResource(
+        <span class="cov10" title="16">s.mcpServer.AddResource(
                 mcpSDK.NewResource(
                         uriSchemeFormats,
                         "OSM File Formats",
@@ -1370,7 +1486,7 @@ func (s *Server) registerResources() {
                 s.handleResourceFormats,
         )
 </span>
-        <span class="cov10" title="15">s.mcpServer.AddResourceTemplate(
+        <span class="cov10" title="16">s.mcpServer.AddResourceTemplate(
                 mcpSDK.NewResourceTemplate(
                         "geofabrik://catalog/{service}",
                         "Service Catalog",
@@ -1496,9 +1612,9 @@ var ErrServerNotInitialized = errors.New("mcp server not initialized: use mcp.Ne
 
 // NewServer initializes a new download-geofabrik MCP server with all tools and resources.
 func NewServer(version string) *Server {
-        <span class="cov8" title="15">provider.RegisterDefaultProviders()
+        <span class="cov8" title="16">provider.RegisterDefaultProviders()
 </span>
-        <span class="cov8" title="15">mcpServer := server.NewMCPServer(
+        <span class="cov8" title="16">mcpServer := server.NewMCPServer(
                 "download-geofabrik",
                 version,
                 server.WithToolCapabilities(false),
@@ -1508,15 +1624,15 @@ func NewServer(version string) *Server {
                         "listing available data formats, regenerating catalogs, and downloading extracts."),
         )
 </span>
-        <span class="cov8" title="15">serverInstance := &amp;Server{
+        <span class="cov8" title="16">serverInstance := &amp;Server{
                 mcpServer: mcpServer,
                 version:   version,
 </span>        }
 
-        <span class="cov8" title="15">serverInstance.registerTools()
+        <span class="cov8" title="16">serverInstance.registerTools()
         serverInstance.registerResources()
 </span>
-        <span class="cov8" title="15">return serverInstance
+        <span class="cov8" title="16">return serverInstance
 </span>}
 
 // ServeStdio starts serving the MCP protocol over standard I/O (stdin/stdout).
@@ -1536,7 +1652,7 @@ func (s *Server) ServeStdio(_ context.Context) error {
 
 // MCPServer returns the underlying mark3labs MCPServer instance (useful for testing).
 func (s *Server) MCPServer() *server.MCPServer {
-        <span class="cov10" title="22">return s.mcpServer
+        <span class="cov10" title="23">return s.mcpServer
 </span>}
 </pre>
 		
@@ -1575,6 +1691,7 @@ const (
         fieldStatus      = "status"
         statusSuccess    = "success"
         statusError      = "error"
+        statusFailed     = "failed"
 )
 
 // ServiceInfo describes an available OSM data provider.
@@ -1682,7 +1799,7 @@ type downloadExecutionParams struct {
 }
 
 func (s *Server) registerTools() {
-        <span class="cov5" title="15">s.mcpServer.AddTool(s.toolListServices(), s.handleListServices)
+        <span class="cov5" title="16">s.mcpServer.AddTool(s.toolListServices(), s.handleListServices)
         s.mcpServer.AddTool(s.toolRegenerateCatalog(), s.handleRegenerateCatalog)
         s.mcpServer.AddTool(s.toolListElements(), s.handleListElements)
         s.mcpServer.AddTool(s.toolGetElement(), s.handleGetElement)
@@ -1691,10 +1808,10 @@ func (s *Server) registerTools() {
 </span>}
 
 func (s *Server) toolListServices() mcpSDK.Tool {
-        <span class="cov5" title="15">desc := "List all available OpenStreetMap data provider services (e.g. geofabrik, openstreetmap.fr, bbbike, geo2day, movisda, etc.) " +
+        <span class="cov5" title="16">desc := "List all available OpenStreetMap data provider services (e.g. geofabrik, openstreetmap.fr, bbbike, geo2day, movisda, etc.) " +
                 "with metadata and local config status."
 </span>
-        <span class="cov5" title="15">return mcpSDK.NewTool("list_services",
+        <span class="cov5" title="16">return mcpSDK.NewTool("list_services",
                 mcpSDK.WithDescription(desc),
                 mcpSDK.WithBoolean("check_local",
                         mcpSDK.Description("Check whether local YAML configuration files exist on disk (default: true)."),
@@ -1703,7 +1820,7 @@ func (s *Server) toolListServices() mcpSDK.Tool {
 </span>}
 
 func (s *Server) toolRegenerateCatalog() mcpSDK.Tool {
-        <span class="cov5" title="15">return mcpSDK.NewTool("regenerate_catalog",
+        <span class="cov5" title="16">return mcpSDK.NewTool("regenerate_catalog",
                 mcpSDK.WithDescription("Fetch the latest OSM catalog from the specified service provider and save or update the local YAML configuration file."),
                 mcpSDK.WithString("service",
                         mcpSDK.Required(),
@@ -1716,10 +1833,10 @@ func (s *Server) toolRegenerateCatalog() mcpSDK.Tool {
 </span>}
 
 func (s *Server) toolListElements() mcpSDK.Tool {
-        <span class="cov5" title="15">desc := "List and search elements (regions, countries, cities) in a service catalog to discover available file formats " +
+        <span class="cov5" title="16">desc := "List and search elements (regions, countries, cities) in a service catalog to discover available file formats " +
                 "(osm.pbf, shp.zip, poly, etc.) and metadata."
 </span>
-        <span class="cov5" title="15">return mcpSDK.NewTool("list_elements",
+        <span class="cov5" title="16">return mcpSDK.NewTool("list_elements",
                 mcpSDK.WithDescription(desc),
                 mcpSDK.WithString("service",
                         mcpSDK.Description("Service name to query (default: 'geofabrik')."),
@@ -1743,10 +1860,10 @@ func (s *Server) toolListElements() mcpSDK.Tool {
 </span>}
 
 func (s *Server) toolGetElement() mcpSDK.Tool {
-        <span class="cov5" title="15">desc := "Get detailed information about a specific element in a service, including resolved download URLs for each format " +
+        <span class="cov5" title="16">desc := "Get detailed information about a specific element in a service, including resolved download URLs for each format " +
                 "and checksum verification availability."
 </span>
-        <span class="cov5" title="15">return mcpSDK.NewTool("get_element",
+        <span class="cov5" title="16">return mcpSDK.NewTool("get_element",
                 mcpSDK.WithDescription(desc),
                 mcpSDK.WithString("element_id",
                         mcpSDK.Required(),
@@ -1762,7 +1879,7 @@ func (s *Server) toolGetElement() mcpSDK.Tool {
 </span>}
 
 func (s *Server) toolListFormats() mcpSDK.Tool {
-        <span class="cov5" title="15">return mcpSDK.NewTool("list_formats",
+        <span class="cov5" title="16">return mcpSDK.NewTool("list_formats",
                 mcpSDK.WithDescription("List file format definitions supported across services or defined in a specific service catalog."),
                 mcpSDK.WithString("service",
                         mcpSDK.Description("Optional service name to get format definitions specific to that provider."),
@@ -1774,8 +1891,11 @@ func (s *Server) toolListFormats() mcpSDK.Tool {
 </span>}
 
 func (s *Server) toolDownloadElement() mcpSDK.Tool {
-        <span class="cov5" title="15">return mcpSDK.NewTool("download_element",
-                mcpSDK.WithDescription("Download an OSM extract for a given element and format(s) from a provider service."),
+        <span class="cov5" title="16">desc := "Download an OSM extract for a given element and format(s) from a provider service. " +
+                "Existing destination files are not overwritten."
+</span>
+        <span class="cov5" title="16">return mcpSDK.NewTool("download_element",
+                mcpSDK.WithDescription(desc),
                 mcpSDK.WithString("element_id",
                         mcpSDK.Required(),
                         mcpSDK.Description("Element identifier to download (e.g. 'monaco', 'france', 'berlin')."),
@@ -1809,21 +1929,21 @@ func (s *Server) handleListServices(_ context.Context, request mcpSDK.CallToolRe
         services := make([]ServiceInfo, 0, len(names))
 </span>
         <span class="cov2" title="2">for _, name := range names </span>{
-                <span class="cov5" title="20">prov, err := provider.Get(name)
+                <span class="cov5" title="21">prov, err := provider.Get(name)
                 if err != nil </span>{
                         <span class="cov0" title="0">continue</span>
                 }
 
-                <span class="cov5" title="20">defaultCfg := prov.DefaultConfigFile()
+                <span class="cov5" title="21">defaultCfg := prov.DefaultConfigFile()
                 hasLocal := false
 </span>
-                <span class="cov5" title="20">if checkLocal &amp;&amp; defaultCfg != "" </span>{
-                        <span class="cov5" title="20">if _, statErr := os.Stat(defaultCfg); statErr == nil </span>{
-                                <span class="cov0" title="0">hasLocal = true
+                <span class="cov5" title="21">if checkLocal &amp;&amp; defaultCfg != "" </span>{
+                        <span class="cov5" title="21">if _, statErr := os.Stat(defaultCfg); statErr == nil </span>{
+                                <span class="cov1" title="1">hasLocal = true
 </span>                        }
                 }
 
-                <span class="cov5" title="20">services = append(services, ServiceInfo{
+                <span class="cov5" title="21">services = append(services, ServiceInfo{
                         Name:              prov.Name(),
                         Description:       prov.Description(),
                         DefaultConfigFile: defaultCfg,
@@ -1972,7 +2092,7 @@ func filterElements(cat *catalog.Catalog, searchQuery, parentFilter string) []El
                         <span class="cov4" title="11">continue</span>
                 }
 
-                <span class="cov5" title="13">if searchQuery != "" </span>{
+                <span class="cov4" title="13">if searchQuery != "" </span>{
                         <span class="cov3" title="5">idMatch := strings.Contains(strings.ToLower(elem.ID), searchQuery)
                         nameMatch := strings.Contains(strings.ToLower(elem.Name), searchQuery)
 </span>
@@ -2098,7 +2218,7 @@ func (s *Server) handleListFormats(ctx context.Context, request mcpSDK.CallToolR
 </span>                }
 
                 <span class="cov3" title="5">slices.SortFunc(formatSpecs, func(a, b FormatSpecification) int </span>{
-                        <span class="cov4" title="11">return strings.Compare(a.ID, b.ID)
+                        <span class="cov4" title="10">return strings.Compare(a.ID, b.ID)
 </span>                })
 
                 <span class="cov3" title="5">return jsonToolResult(formatSpecs)</span>
@@ -2131,7 +2251,7 @@ func collectGlobalFormats() []FormatSpecification {
 </span>        }
 
         <span class="cov2" title="3">slices.SortFunc(specs, func(a, b FormatSpecification) int </span>{
-                <span class="cov10" title="309">return strings.Compare(a.ID, b.ID)
+                <span class="cov10" title="327">return strings.Compare(a.ID, b.ID)
 </span>        })
 
         <span class="cov2" title="3">return specs</span>
@@ -2139,42 +2259,42 @@ func collectGlobalFormats() []FormatSpecification {
 
 //nolint:gocritic // parameter signature defined by mcpSDK.ToolHandlerFunc interface
 func (s *Server) handleDownloadElement(ctx context.Context, request mcpSDK.CallToolRequest) (*mcpSDK.CallToolResult, error) {
-        <span class="cov4" title="7">elementID := strings.TrimSpace(request.GetString("element_id", ""))
+        <span class="cov4" title="8">elementID := strings.TrimSpace(request.GetString("element_id", ""))
         if elementID == "" </span>{
                 <span class="cov1" title="1">return mcpSDK.NewToolResultError(errEmptyElementID.Error()), nil
 </span>        }
 
-        <span class="cov3" title="6">serviceName := request.GetString("service", catalog.DefaultService)
+        <span class="cov4" title="7">serviceName := request.GetString("service", catalog.DefaultService)
         customCfg := request.GetString("config_file", "")
         outDir := request.GetString("output_dir", "")
         checkChecksum := request.GetBool("check_checksum", true)
         dryRun := request.GetBool("dry_run", false)
 </span>
-        <span class="cov3" title="6">resolvedDir, err := resolveOutputDirectory(outDir)
+        <span class="cov4" title="7">resolvedDir, err := resolveOutputDirectory(outDir)
         if err != nil </span>{
                 <span class="cov0" title="0">return mcpSDK.NewToolResultError(fmt.Sprintf("invalid output directory: %v", err)), nil
 </span>        }
 
-        <span class="cov3" title="6">cat, cfgFile, err := s.ensureCatalogFile(ctx, serviceName, customCfg)
+        <span class="cov4" title="7">cat, cfgFile, err := s.ensureCatalogFile(ctx, serviceName, customCfg)
         if err != nil </span>{
                 <span class="cov0" title="0">return mcpSDK.NewToolResultError(fmt.Sprintf("failed to prepare catalog for %s: %v", serviceName, err)), nil
 </span>        }
 
-        <span class="cov3" title="6">elem, err := cat.Find(elementID)
+        <span class="cov4" title="7">elem, err := cat.Find(elementID)
         if err != nil </span>{
                 <span class="cov2" title="2">return mcpSDK.NewToolResultError(fmt.Sprintf("element '%s' not found in %s: %v", elementID, serviceName, err)), nil
 </span>        }
 
-        <span class="cov3" title="4">rawFormats := request.GetStringSlice("formats", nil)
+        <span class="cov3" title="5">rawFormats := request.GetStringSlice("formats", nil)
 </span>
-        <span class="cov3" title="4">var requestedFormats []string
+        <span class="cov3" title="5">var requestedFormats []string
         if len(rawFormats) &gt; 0 </span>{
-                <span class="cov2" title="3">requestedFormats = make([]string, 0, len(rawFormats))
+                <span class="cov3" title="4">requestedFormats = make([]string, 0, len(rawFormats))
 </span>
-                <span class="cov2" title="3">for _, rawFormat := range rawFormats </span>{
-                        <span class="cov3" title="4">resolvedFormat, ok := resolveCatalogFormat(cat, elem, rawFormat)
+                <span class="cov3" title="4">for _, rawFormat := range rawFormats </span>{
+                        <span class="cov3" title="5">resolvedFormat, ok := resolveCatalogFormat(cat, elem, rawFormat)
                         if ok </span>{
-                                <span class="cov2" title="3">requestedFormats = append(requestedFormats, resolvedFormat)
+                                <span class="cov3" title="4">requestedFormats = append(requestedFormats, resolvedFormat)
 </span>                        } else {
                                 <span class="cov1" title="1">requestedFormats = append(requestedFormats, rawFormat)
 </span>                        }
@@ -2183,7 +2303,7 @@ func (s *Server) handleDownloadElement(ctx context.Context, request mcpSDK.CallT
                 <span class="cov1" title="1">requestedFormats = []string{resolveCatalogDefaultFormat(cat, elem)}
 </span>        }
 
-        <span class="cov3" title="4">if dryRun </span>{
+        <span class="cov3" title="5">if dryRun </span>{
                 <span class="cov3" title="4">return s.performDryRunDownload(&amp;dryRunParams{
                         cat:     cat,
                         elem:    elem,
@@ -2193,7 +2313,7 @@ func (s *Server) handleDownloadElement(ctx context.Context, request mcpSDK.CallT
                 })
 </span>        }
 
-        <span class="cov0" title="0">return s.performActualDownload(ctx, &amp;downloadExecutionParams{
+        <span class="cov1" title="1">return s.performActualDownload(ctx, &amp;downloadExecutionParams{
                 cat:       cat,
                 elem:      elem,
                 cfgFile:   cfgFile,
@@ -2217,13 +2337,13 @@ var preferredCatalogDefaultFormats = []string{
 }
 
 func resolveCatalogFormat(cat *catalog.Catalog, elem *catalog.Element, format string) (string, bool) { //nolint:cyclop // nil guards +2
-        <span class="cov3" title="4">if cat == nil || elem == nil || cat.Formats == nil </span>{
+        <span class="cov3" title="5">if cat == nil || elem == nil || cat.Formats == nil </span>{
                 <span class="cov0" title="0">return format, false
 </span>        }
 
-        <span class="cov3" title="4">if elem.ContainsFormat(format) </span>{
-                <span class="cov2" title="3">if _, exists := cat.Formats[format]; exists </span>{
-                        <span class="cov2" title="3">return format, true
+        <span class="cov3" title="5">if elem.ContainsFormat(format) </span>{
+                <span class="cov3" title="4">if _, exists := cat.Formats[format]; exists </span>{
+                        <span class="cov3" title="4">return format, true
 </span>                }
         }
 
@@ -2269,7 +2389,7 @@ func resolveCatalogDefaultFormat(cat *catalog.Catalog, elem *catalog.Element) st
 }
 
 func resolveOutputDirectory(dir string) (string, error) {
-        <span class="cov3" title="6">if dir == "" </span>{
+        <span class="cov4" title="7">if dir == "" </span>{
                 <span class="cov1" title="1">workingDir, err := os.Getwd()
                 if err != nil </span>{
                         <span class="cov0" title="0">return "", fmt.Errorf("failed to get working directory: %w", err)
@@ -2278,16 +2398,16 @@ func resolveOutputDirectory(dir string) (string, error) {
                 <span class="cov1" title="1">return workingDir + string(os.PathSeparator), nil</span>
         }
 
-        <span class="cov3" title="5">absDir, err := filepath.Abs(dir)
+        <span class="cov3" title="6">absDir, err := filepath.Abs(dir)
         if err != nil </span>{
                 <span class="cov0" title="0">return "", fmt.Errorf("invalid path %s: %w", dir, err)
 </span>        }
 
-        <span class="cov3" title="5">if !strings.HasSuffix(absDir, string(os.PathSeparator)) </span>{
-                <span class="cov3" title="5">absDir += string(os.PathSeparator)
+        <span class="cov3" title="6">if !strings.HasSuffix(absDir, string(os.PathSeparator)) </span>{
+                <span class="cov3" title="6">absDir += string(os.PathSeparator)
 </span>        }
 
-        <span class="cov3" title="5">return absDir, nil</span>
+        <span class="cov3" title="6">return absDir, nil</span>
 }
 
 func (s *Server) performDryRunDownload(params *dryRunParams) (*mcpSDK.CallToolResult, error) {
@@ -2333,7 +2453,7 @@ func (s *Server) performDryRunDownload(params *dryRunParams) (*mcpSDK.CallToolRe
 }
 
 func (s *Server) performActualDownload(ctx context.Context, params *downloadExecutionParams) (*mcpSDK.CallToolResult, error) {
-        <span class="cov0" title="0">opts := &amp;downloader.Options{
+        <span class="cov1" title="1">opts := &amp;downloader.Options{
                 ConfigFile:      params.cfgFile,
                 OutputDirectory: params.outDir,
                 Check:           params.checkHash,
@@ -2341,53 +2461,61 @@ func (s *Server) performActualDownload(ctx context.Context, params *downloadExec
                 Quiet:           true,
 </span>        }
 
-        <span class="cov0" title="0">client := downloader.New(params.cat, opts)
+        <span class="cov1" title="1">client := downloader.New(params.cat, opts)
         results := make([]DownloadFileResult, 0, len(params.formats))
 </span>
-        <span class="cov0" title="0">for _, formatID := range params.formats </span>{
-                <span class="cov0" title="0">formatDef, exists := params.cat.Formats[formatID]
+        <span class="cov1" title="1">for _, formatID := range params.formats </span>{
+                <span class="cov1" title="1">formatDef, exists := params.cat.Formats[formatID]
                 if !exists </span>{
                         <span class="cov0" title="0">results = append(results, DownloadFileResult{
                                 Format: formatID,
                                 Error:  "unknown format: " + formatID,
-                                Status: "failed",
+                                Status: statusFailed,
                         })
 </span>
                         <span class="cov0" title="0">continue</span>
                 }
 
-                <span class="cov0" title="0">targetFile := params.outDir + params.elem.ID + "." + formatDef.ID
+                <span class="cov1" title="1">targetFile := params.outDir + params.elem.ID + "." + formatDef.ID
                 fileRes := DownloadFileResult{
                         Format:     formatID,
                         TargetFile: targetFile,
 </span>                }
 
-                <span class="cov0" title="0">downloadURL, urlErr := params.cat.ResolveURL(params.elem, formatID)
+                <span class="cov1" title="1">downloadURL, urlErr := params.cat.ResolveURL(params.elem, formatID)
                 if urlErr == nil </span>{
-                        <span class="cov0" title="0">fileRes.DownloadURL = downloadURL
+                        <span class="cov1" title="1">fileRes.DownloadURL = downloadURL
 </span>                }
 
-                <span class="cov0" title="0">if hashable, hashExt, _ := params.cat.IsHashable(formatID); hashable </span>{
+                <span class="cov1" title="1">if hashable, hashExt, _ := params.cat.IsHashable(formatID); hashable </span>{
                         <span class="cov0" title="0">if hashURL, hashErr := resolveFormatOrHashURL(params.cat, params.elem, hashExt); hashErr == nil </span>{
                                 <span class="cov0" title="0">fileRes.ChecksumURL = hashURL
 </span>                        }
                 }
 
-                <span class="cov0" title="0">slog.Debug("MCP downloading element", "element", params.elem.ID, "format", formatID, "target", targetFile)
+                <span class="cov1" title="1">slog.Debug("MCP downloading element", "element", params.elem.ID, "format", formatID, "target", targetFile)
 </span>
-                <span class="cov0" title="0">downloadErr := client.DownloadFile(ctx, params.elem.ID, formatID, targetFile)
+                <span class="cov1" title="1">downloadErr := client.DownloadFile(ctx, params.elem.ID, formatID, targetFile)
                 if downloadErr != nil </span>{
-                        <span class="cov0" title="0">fileRes.Error = downloadErr.Error()
-                        fileRes.Status = "failed"
+                        <span class="cov1" title="1">fileRes.Error = downloadErr.Error()
+                        fileRes.Status = statusFailed
                         results = append(results, fileRes)
 </span>
-                        <span class="cov0" title="0">continue</span>
+                        <span class="cov1" title="1">continue</span>
                 }
 
                 <span class="cov0" title="0">if params.checkHash </span>{
-                        <span class="cov0" title="0">checksumOK := client.Checksum(ctx, params.elem.ID, formatID)
-                        fileRes.ChecksumVerified = checksumOK
-</span>                }
+                        <span class="cov0" title="0">checksumOK, checksumErr := client.Checksum(ctx, params.elem.ID, formatID)
+                        if checksumErr != nil </span>{
+                                <span class="cov0" title="0">fileRes.Error = checksumErr.Error()
+                                fileRes.Status = statusFailed
+                                results = append(results, fileRes)
+</span>
+                                <span class="cov0" title="0">continue</span>
+                        }
+
+                        <span class="cov0" title="0">fileRes.ChecksumVerified = checksumOK</span>
+                }
 
                 <span class="cov0" title="0">if statInfo, statErr := os.Stat(targetFile); statErr == nil </span>{
                         <span class="cov0" title="0">fileRes.FileSizeBytes = statInfo.Size()
@@ -2397,7 +2525,7 @@ func (s *Server) performActualDownload(ctx context.Context, params *downloadExec
                 results = append(results, fileRes)</span>
         }
 
-        <span class="cov0" title="0">return jsonToolResult(DownloadResult{
+        <span class="cov1" title="1">return jsonToolResult(DownloadResult{
                 Service:   params.service,
                 ElementID: params.elem.ID,
                 OutputDir: params.outDir,
@@ -2407,7 +2535,7 @@ func (s *Server) performActualDownload(ctx context.Context, params *downloadExec
 }
 
 func (s *Server) ensureCatalogFile(ctx context.Context, serviceName, customCfg string) (*catalog.Catalog, string, error) {
-        <span class="cov3" title="6">targetFile := customCfg
+        <span class="cov4" title="7">targetFile := customCfg
         if targetFile == "" </span>{
                 <span class="cov0" title="0">prov, err := provider.Get(serviceName)
                 if err != nil </span>{
@@ -2417,7 +2545,7 @@ func (s *Server) ensureCatalogFile(ctx context.Context, serviceName, customCfg s
                 <span class="cov0" title="0">targetFile = prov.DefaultConfigFile()</span>
         }
 
-        <span class="cov3" title="6">if _, statErr := os.Stat(targetFile); errors.Is(statErr, os.ErrNotExist) </span>{
+        <span class="cov4" title="7">if _, statErr := os.Stat(targetFile); errors.Is(statErr, os.ErrNotExist) </span>{
                 <span class="cov0" title="0">s.genMu.Lock()
                 if _, statErr2 := os.Stat(targetFile); errors.Is(statErr2, os.ErrNotExist) </span>{
                         <span class="cov0" title="0">slog.Info("Catalog file not found, generating on the fly", "service", serviceName, "file", targetFile)
@@ -2431,12 +2559,12 @@ func (s *Server) ensureCatalogFile(ctx context.Context, serviceName, customCfg s
                 <span class="cov0" title="0">s.genMu.Unlock()</span>
         }
 
-        <span class="cov3" title="6">cat, err := catalog.LoadFile(targetFile)
+        <span class="cov4" title="7">cat, err := catalog.LoadFile(targetFile)
         if err != nil </span>{
                 <span class="cov0" title="0">return nil, "", fmt.Errorf("failed to load catalog %s: %w", targetFile, err)
 </span>        }
 
-        <span class="cov3" title="6">return cat, targetFile, nil</span>
+        <span class="cov4" title="7">return cat, targetFile, nil</span>
 }
 
 func (s *Server) loadOrFetchCatalog(ctx context.Context, serviceName, customCfg string) (*catalog.Catalog, error) {
@@ -2475,12 +2603,12 @@ func (s *Server) loadOrFetchCatalog(ctx context.Context, serviceName, customCfg 
 }
 
 func jsonToolResult(v any) (*mcpSDK.CallToolResult, error) {
-        <span class="cov5" title="24">data, err := json.MarshalIndent(v, "", "  ")
+        <span class="cov6" title="25">data, err := json.MarshalIndent(v, "", "  ")
         if err != nil </span>{
                 <span class="cov0" title="0">return mcpSDK.NewToolResultError(fmt.Sprintf("failed to serialize response: %v", err)), nil
 </span>        }
 
-        <span class="cov5" title="24">return mcpSDK.NewToolResultText(string(data)), nil</span>
+        <span class="cov6" title="25">return mcpSDK.NewToolResultText(string(data)), nil</span>
 }
 
 func resolveFormatOrHashURL(cat *catalog.Catalog, elem *catalog.Element, formatID string) (string, error) {
@@ -2647,7 +2775,7 @@ func parseBBBikeHTML(reader io.Reader, cat *catalog.Catalog) error {
         <span class="cov4" title="10">for </span>{
                 <span class="cov10" title="387">tokenType := tokenizer.Next()
 </span>
-                <span class="cov10" title="387">switch tokenType </span>{
+                <span class="cov9" title="386">switch tokenType </span>{
                 case html.ErrorToken:
                         <span class="cov4" title="10">if errors.Is(tokenizer.Err(), io.EOF) </span>{
                                 <span class="cov4" title="9">return nil
@@ -2731,7 +2859,7 @@ var registerOnce sync.Once
 // RegisterDefaultProviders registers all built-in catalog providers.
 // It is idempotent and safe for concurrent execution.
 func RegisterDefaultProviders() {
-        <span class="cov10" title="23">registerOnce.Do(func() </span>{
+        <span class="cov10" title="24">registerOnce.Do(func() </span>{
                 <span class="cov4" title="4">Register(geofabrik.New())
                 Register(openstreetmapfr.New())
                 Register(bbbike.New())
@@ -2893,7 +3021,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
         )
 </span>
         <span class="cov4" title="12">recordErr := func(err error) </span>{
-                <span class="cov3" title="10">errOnce.Do(func() </span>{
+                <span class="cov4" title="19">errOnce.Do(func() </span>{
                         <span class="cov3" title="6">firstErr = err
 </span>
                         <span class="cov3" title="6">cancel()
@@ -2921,9 +3049,9 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 </span>
                 <span class="cov6" title="76">go func() </span>{
                         <span class="cov6" title="76">select </span>{
-                        case workChan &lt;- targetURL:<span class="cov6" title="51"></span>
+                        case workChan &lt;- targetURL:<span class="cov6" title="52"></span>
                         case &lt;-crawlCtx.Done():
-                                <span class="cov5" title="25">activeWorkers.Done()</span>
+                                <span class="cov5" title="24">activeWorkers.Done()</span>
                         }
                 }()
         }
@@ -2986,41 +3114,41 @@ type crawlContext struct {
 
 func (p *Provider) runDispatcher(ctx context.Context, work &lt;-chan string, cat *catalog.Catalog, state *crawlContext) {
         <span class="cov4" title="12">for target := range work </span>{
-                <span class="cov6" title="51">if ctx.Err() != nil </span>{
-                        <span class="cov5" title="30">state.workers.Done()
+                <span class="cov6" title="52">if ctx.Err() != nil </span>{
+                        <span class="cov4" title="22">state.workers.Done()
 </span>
-                        <span class="cov5" title="30">continue</span>
+                        <span class="cov4" title="22">continue</span>
                 }
 
-                <span class="cov4" title="21">select </span>{
+                <span class="cov5" title="30">select </span>{
                 case &lt;-ctx.Done():
                         <span class="cov0" title="0">state.onError(fmt.Errorf("crawl context canceled: %w", ctx.Err()))
                         state.workers.Done()
 </span>
                         <span class="cov0" title="0">continue</span>
 
-                case state.tokens &lt;- struct{}{}:<span class="cov4" title="21"></span>
+                case state.tokens &lt;- struct{}{}:<span class="cov5" title="30"></span>
                 }
 
-                <span class="cov4" title="21">go p.processWorker(ctx, target, cat, state)</span>
+                <span class="cov5" title="30">go p.processWorker(ctx, target, cat, state)</span>
         }
 }
 
 func (p *Provider) processWorker(ctx context.Context, pageURL string, cat *catalog.Catalog, state *crawlContext) {
-        <span class="cov4" title="21">defer func() </span>{
-                <span class="cov4" title="21">if r := recover(); r != nil </span>{
+        <span class="cov5" title="30">defer func() </span>{
+                <span class="cov5" title="30">if r := recover(); r != nil </span>{
                         <span class="cov0" title="0">state.onError(fmt.Errorf("%w: panic in geo2day worker for %s: %v", ErrFetchCatalog, pageURL, r))
 </span>                }
 
-                <span class="cov4" title="21">&lt;-state.tokens
+                <span class="cov5" title="30">&lt;-state.tokens
                 state.workers.Done()</span>
         }()
 
-        <span class="cov4" title="21">subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
+        <span class="cov5" title="30">subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
         if err != nil </span>{
-                <span class="cov3" title="10">state.onError(err)
+                <span class="cov4" title="19">state.onError(err)
 </span>
-                <span class="cov3" title="10">return
+                <span class="cov4" title="19">return
 </span>        }
 
         <span class="cov4" title="11">for _, page := range subPages </span>{
@@ -3029,16 +3157,16 @@ func (p *Provider) processWorker(ctx context.Context, pageURL string, cat *catal
 }
 
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
-        <span class="cov4" title="21">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
+        <span class="cov5" title="30">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("creating request: %w", err)
 </span>        }
 
-        <span class="cov4" title="20">client := cmp.Or(p.Client, http.DefaultClient)
+        <span class="cov5" title="29">client := cmp.Or(p.Client, http.DefaultClient)
 </span>
-        <span class="cov4" title="20">resp, err := client.Do(req)
+        <span class="cov5" title="29">resp, err := client.Do(req)
         if err != nil </span>{
-                <span class="cov3" title="7">return nil, fmt.Errorf("%w: %w", ErrFetchCatalog, err)
+                <span class="cov4" title="16">return nil, fmt.Errorf("%w: %w", ErrFetchCatalog, err)
 </span>        }
         <span class="cov4" title="13">defer resp.Body.Close()
 </span>
@@ -3055,9 +3183,9 @@ func (p *Provider) parseHTMLStream(reader io.Reader, cat *catalog.Catalog) ([]st
         <span class="cov4" title="17">tokenizer := html.NewTokenizer(reader)
 </span>
         <span class="cov4" title="17">for </span>{
-                <span class="cov9" title="774">tokenType := tokenizer.Next()
+                <span class="cov9" title="772">tokenType := tokenizer.Next()
 </span>
-                <span class="cov9" title="774">switch tokenType </span>{
+                <span class="cov9" title="772">switch tokenType </span>{
                 case html.ErrorToken:
                         <span class="cov4" title="17">if errors.Is(tokenizer.Err(), io.EOF) </span>{
                                 <span class="cov4" title="16">return subPages, nil
@@ -3909,7 +4037,7 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
         )
 </span>
         <span class="cov3" title="7">recordErr := func(err error) </span>{
-                <span class="cov4" title="11">errOnce.Do(func() </span>{
+                <span class="cov5" title="20">errOnce.Do(func() </span>{
                         <span class="cov3" title="6">firstErr = err
 </span>
                         <span class="cov3" title="6">cancel()
@@ -3937,9 +4065,9 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 </span>
                 <span class="cov6" title="71">go func() </span>{
                         <span class="cov6" title="71">select </span>{
-                        case workChan &lt;- targetURL:<span class="cov6" title="40"></span>
+                        case workChan &lt;- targetURL:<span class="cov6" title="59"></span>
                         case &lt;-crawlCtx.Done():
-                                <span class="cov5" title="31">activeWorkers.Done()</span>
+                                <span class="cov4" title="12">activeWorkers.Done()</span>
                         }
                 }()
         }
@@ -3989,41 +4117,41 @@ type crawlContext struct {
 
 func (p *Provider) runDispatcher(ctx context.Context, work &lt;-chan string, cat *catalog.Catalog, state *crawlContext) {
         <span class="cov3" title="7">for target := range work </span>{
-                <span class="cov6" title="40">if ctx.Err() != nil </span>{
-                        <span class="cov5" title="23">state.workers.Done()
+                <span class="cov6" title="59">if ctx.Err() != nil </span>{
+                        <span class="cov5" title="33">state.workers.Done()
 </span>
-                        <span class="cov5" title="23">continue</span>
+                        <span class="cov5" title="33">continue</span>
                 }
 
-                <span class="cov4" title="17">select </span>{
+                <span class="cov5" title="26">select </span>{
                 case &lt;-ctx.Done():
                         <span class="cov0" title="0">state.onError(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
                         state.workers.Done()
 </span>
                         <span class="cov0" title="0">continue</span>
 
-                case state.tokens &lt;- struct{}{}:<span class="cov4" title="17"></span>
+                case state.tokens &lt;- struct{}{}:<span class="cov5" title="26"></span>
                 }
 
-                <span class="cov4" title="17">go p.processWorker(ctx, target, cat, state)</span>
+                <span class="cov5" title="26">go p.processWorker(ctx, target, cat, state)</span>
         }
 }
 
 func (p *Provider) processWorker(ctx context.Context, target string, cat *catalog.Catalog, state *crawlContext) {
-        <span class="cov4" title="17">defer func() </span>{
-                <span class="cov4" title="17">if r := recover(); r != nil </span>{
+        <span class="cov5" title="26">defer func() </span>{
+                <span class="cov5" title="26">if r := recover(); r != nil </span>{
                         <span class="cov0" title="0">state.onError(fmt.Errorf("%w: panic in openstreetmapfr worker for %s: %v", ErrFetchCatalog, target, r))
 </span>                }
 
-                <span class="cov4" title="17">&lt;-state.tokens
+                <span class="cov5" title="26">&lt;-state.tokens
                 state.workers.Done()</span>
         }()
 
-        <span class="cov4" title="17">links, err := p.fetchAndProcessPage(ctx, target, cat)
+        <span class="cov5" title="26">links, err := p.fetchAndProcessPage(ctx, target, cat)
         if err != nil </span>{
-                <span class="cov4" title="11">state.onError(err)
+                <span class="cov5" title="20">state.onError(err)
 </span>
-                <span class="cov4" title="11">return
+                <span class="cov5" title="20">return
 </span>        }
 
         <span class="cov3" title="6">for _, link := range links </span>{
@@ -4034,16 +4162,16 @@ func (p *Provider) processWorker(ctx context.Context, target string, cat *catalo
 }
 
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
-        <span class="cov4" title="17">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
+        <span class="cov5" title="26">req, err := http.NewRequestWithContext(ctx, http.MethodGet, currentURL, http.NoBody)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("creating request: %w", err)
 </span>        }
 
-        <span class="cov4" title="16">client := cmp.Or(p.Client, http.DefaultClient)
+        <span class="cov5" title="25">client := cmp.Or(p.Client, http.DefaultClient)
 </span>
-        <span class="cov4" title="16">resp, err := client.Do(req)
+        <span class="cov5" title="25">resp, err := client.Do(req)
         if err != nil </span>{
-                <span class="cov3" title="8">return nil, fmt.Errorf("fetching %s: %w", currentURL, err)
+                <span class="cov4" title="17">return nil, fmt.Errorf("fetching %s: %w", currentURL, err)
 </span>        }
         <span class="cov3" title="8">defer resp.Body.Close()
 </span>
@@ -4062,7 +4190,7 @@ func (p *Provider) parseHTMLStream(reader io.Reader, currentURL string, cat *cat
         <span class="cov4" title="13">for </span>{
                 <span class="cov10" title="673">tokenType := tokenizer.Next()
 </span>
-                <span class="cov10" title="673">switch tokenType </span>{
+                <span class="cov9" title="671">switch tokenType </span>{
                 case html.ErrorToken:
                         <span class="cov4" title="13">if errors.Is(tokenizer.Err(), io.EOF) </span>{
                                 <span class="cov4" title="12">return subDirs, nil
@@ -5064,7 +5192,7 @@ func sanitizeFileName(name string) string {
                 "'", "",
         )
 </span>
-        <span class="cov9" title="253">return replacer.Replace(name)
+        <span class="cov10" title="254">return replacer.Replace(name)
 </span>}
 </pre>
 		
@@ -5183,9 +5311,9 @@ func parseKewlLuHTML(reader io.Reader, cat *catalog.Catalog) error {
         <span class="cov4" title="9">tokenizer := html.NewTokenizer(reader)
 </span>
         <span class="cov4" title="9">for </span>{
-                <span class="cov10" title="304">tokenType := tokenizer.Next()
+                <span class="cov10" title="312">tokenType := tokenizer.Next()
 </span>
-                <span class="cov10" title="304">switch tokenType </span>{
+                <span class="cov10" title="312">switch tokenType </span>{
                 case html.ErrorToken:
                         <span class="cov4" title="9">if errors.Is(tokenizer.Err(), io.EOF) </span>{
                                 <span class="cov4" title="8">return nil
@@ -5194,16 +5322,16 @@ func parseKewlLuHTML(reader io.Reader, cat *catalog.Catalog) error {
                         <span class="cov1" title="1">return fmt.Errorf("cannot parse html: %w", tokenizer.Err())</span>
 
                 case html.StartTagToken, html.SelfClosingTagToken:
-                        <span class="cov8" title="108">processAnchorTag(tokenizer, cat)</span>
+                        <span class="cov8" title="109">processAnchorTag(tokenizer, cat)</span>
 
-                case html.TextToken, html.EndTagToken, html.CommentToken, html.DoctypeToken:<span class="cov9" title="190"></span>
+                case html.TextToken, html.EndTagToken, html.CommentToken, html.DoctypeToken:<span class="cov9" title="194"></span>
                         // Non-anchor tokens
                 }
         }
 }
 
 func processAnchorTag(tokenizer *html.Tokenizer, cat *catalog.Catalog) {
-        <span class="cov8" title="107">tagName, hasAttr := tokenizer.TagName()
+        <span class="cov8" title="109">tagName, hasAttr := tokenizer.TagName()
         if string(tagName) != "a" || !hasAttr </span>{
                 <span class="cov7" title="73">return
 </span>        }
@@ -5396,7 +5524,7 @@ func parseTaiwanHTML(reader io.Reader, cat *catalog.Catalog) error {
         <span class="cov4" title="9">for </span>{
                 <span class="cov10" title="264">tokenType := tokenizer.Next()
 </span>
-                <span class="cov9" title="262">switch tokenType </span>{
+                <span class="cov10" title="264">switch tokenType </span>{
                 case html.ErrorToken:
                         <span class="cov4" title="9">if errors.Is(tokenizer.Err(), io.EOF) </span>{
                                 <span class="cov4" title="8">return nil
@@ -5405,7 +5533,7 @@ func parseTaiwanHTML(reader io.Reader, cat *catalog.Catalog) error {
                         <span class="cov1" title="1">return fmt.Errorf("cannot parse html: %w", tokenizer.Err())</span>
 
                 case html.StartTagToken, html.SelfClosingTagToken:
-                        <span class="cov8" title="90">processAnchorTag(tokenizer, cat)</span>
+                        <span class="cov8" title="91">processAnchorTag(tokenizer, cat)</span>
 
                 case html.TextToken, html.EndTagToken, html.CommentToken, html.DoctypeToken:<span class="cov9" title="164"></span>
                         // Non-anchor tokens
@@ -5540,15 +5668,15 @@ func Unregister(name string) {
 //
 //nolint:ireturn // Factory function returning interface
 func Get(name string) (Provider, error) {
-        <span class="cov9" title="41">registryMu.RLock()
+        <span class="cov9" title="42">registryMu.RLock()
         defer registryMu.RUnlock()
 </span>
-        <span class="cov9" title="41">prov, exists := registry[name]
+        <span class="cov9" title="42">prov, exists := registry[name]
         if !exists </span>{
                 <span class="cov4" title="5">return nil, fmt.Errorf("%w: %s", ErrProviderNotFound, name)
 </span>        }
 
-        <span class="cov9" title="36">return prov, nil</span>
+        <span class="cov9" title="37">return prov, nil</span>
 }
 
 // List returns all registered provider names sorted alphabetically.
@@ -5782,7 +5910,7 @@ type Catalog struct {
 
 // New creates an empty, initialized Catalog.
 func New() *Catalog {
-        <span class="cov6" title="203">return &amp;Catalog{
+        <span class="cov6" title="208">return &amp;Catalog{
                 Formats:  make(FormatDefinitions),
                 Elements: make(map[string]Element),
 </span>        }
@@ -5809,59 +5937,59 @@ func (c *Catalog) MarshalJSON() ([]byte, error) {
 
 // LoadFile reads and parses a YAML catalog file from disk.
 func LoadFile(filePath string) (*Catalog, error) {
-        <span class="cov5" title="47">absPath, err := filepath.Abs(filePath)
+        <span class="cov5" title="48">absPath, err := filepath.Abs(filePath)
         if err != nil </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("invalid path %s: %w", filePath, err)
 </span>        }
 
-        <span class="cov5" title="47">data, err := os.ReadFile(absPath)
+        <span class="cov5" title="48">data, err := os.ReadFile(absPath)
         if err != nil </span>{
                 <span class="cov1" title="1">return nil, fmt.Errorf("cannot read file %s: %w", absPath, err)
 </span>        }
 
-        <span class="cov5" title="46">cat := New()
+        <span class="cov5" title="47">cat := New()
         if err := yaml.Unmarshal(data, cat); err != nil </span>{
                 <span class="cov0" title="0">return nil, fmt.Errorf("cannot unmarshal yaml from %s: %w", absPath, err)
 </span>        }
 
-        <span class="cov5" title="46">if cat.Elements == nil </span>{
+        <span class="cov5" title="47">if cat.Elements == nil </span>{
                 <span class="cov0" title="0">cat.Elements = make(map[string]Element)
 </span>        }
 
-        <span class="cov5" title="46">if cat.Formats == nil </span>{
+        <span class="cov5" title="47">if cat.Formats == nil </span>{
                 <span class="cov0" title="0">cat.Formats = make(FormatDefinitions)
 </span>        }
 
-        <span class="cov5" title="46">return cat, nil</span>
+        <span class="cov5" title="47">return cat, nil</span>
 }
 
 // SaveFile marshals the catalog to YAML and writes it atomically to a file.
 func (c *Catalog) SaveFile(filePath string) error {
-        <span class="cov3" title="14">if c == nil </span>{
+        <span class="cov3" title="15">if c == nil </span>{
                 <span class="cov1" title="1">return ErrNilCatalog
 </span>        }
 
-        <span class="cov3" title="13">c.mu.RLock()
+        <span class="cov3" title="14">c.mu.RLock()
         data, err := yaml.Marshal(c)
         c.mu.RUnlock()
 </span>
-        <span class="cov3" title="13">if err != nil </span>{
+        <span class="cov3" title="14">if err != nil </span>{
                 <span class="cov0" title="0">return fmt.Errorf("marshaling catalog to yaml: %w", err)
 </span>        }
 
-        <span class="cov3" title="13">dir := filepath.Dir(filePath)
+        <span class="cov3" title="14">dir := filepath.Dir(filePath)
         if dir != "" &amp;&amp; dir != "." </span>{
-                <span class="cov3" title="13">if err := os.MkdirAll(dir, defaultDirPerm); err != nil </span>{
+                <span class="cov3" title="14">if err := os.MkdirAll(dir, defaultDirPerm); err != nil </span>{
                         <span class="cov1" title="1">return fmt.Errorf("creating directory %s: %w", dir, err)
 </span>                }
         }
 
-        <span class="cov3" title="12">tmpPath := filePath + ".tmp"
+        <span class="cov3" title="13">tmpPath := filePath + ".tmp"
         if err := os.WriteFile(tmpPath, data, defaultFilePerm); err != nil </span>{
                 <span class="cov0" title="0">return fmt.Errorf("writing catalog to %s: %w", tmpPath, err)
 </span>        }
 
-        <span class="cov3" title="12">if err := os.Rename(tmpPath, filePath); err != nil </span>{
+        <span class="cov3" title="13">if err := os.Rename(tmpPath, filePath); err != nil </span>{
                 <span class="cov0" title="0">if rmErr := os.Remove(tmpPath); rmErr != nil </span>{
                         <span class="cov0" title="0">return fmt.Errorf("renaming %s to %s: %w", tmpPath, filePath, errors.Join(err, fmt.Errorf("removing temporary file: %w", rmErr)))
 </span>                }
@@ -5869,7 +5997,7 @@ func (c *Catalog) SaveFile(filePath string) error {
                 <span class="cov0" title="0">return fmt.Errorf("renaming %s to %s: %w", tmpPath, filePath, err)</span>
         }
 
-        <span class="cov3" title="12">return nil</span>
+        <span class="cov3" title="13">return nil</span>
 }
 
 // Save writes the catalog YAML to any io.Writer.
@@ -5895,28 +6023,28 @@ func (c *Catalog) Save(writer io.Writer) error {
 
 // Len returns the number of elements in the catalog thread-safely.
 func (c *Catalog) Len() int {
-        <span class="cov8" title="1009">if c == nil </span>{
+        <span class="cov8" title="1008">if c == nil </span>{
                 <span class="cov1" title="1">return 0
-</span>        }
-
-        <span class="cov8" title="1008">c.mu.RLock()
-        defer c.mu.RUnlock()
-</span>
-        <span class="cov8" title="1004">return len(c.Elements)</span>
-}
-
-// GetFormat retrieves a copy of the format definition by ID thread-safely.
-func (c *Catalog) GetFormat(formatID string) (Format, bool) {
-        <span class="cov8" title="1006">if c == nil </span>{
-                <span class="cov1" title="1">return Format{}, false
 </span>        }
 
         <span class="cov8" title="1005">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
-        <span class="cov8" title="1005">format, exists := c.Formats[formatID]
+        <span class="cov8" title="1005">return len(c.Elements)</span>
+}
+
+// GetFormat retrieves a copy of the format definition by ID thread-safely.
+func (c *Catalog) GetFormat(formatID string) (Format, bool) {
+        <span class="cov8" title="1004">if c == nil </span>{
+                <span class="cov1" title="1">return Format{}, false
+</span>        }
+
+        <span class="cov8" title="1002">c.mu.RLock()
+        defer c.mu.RUnlock()
 </span>
-        <span class="cov8" title="1002">return format, exists</span>
+        <span class="cov8" title="1006">format, exists := c.Formats[formatID]
+</span>
+        <span class="cov8" title="1004">return format, exists</span>
 }
 
 // AddFormat adds or updates a format definition thread-safely with lazy initialization.
@@ -5937,16 +6065,16 @@ func (c *Catalog) AddFormat(format *Format) {
 
 // Exists returns true if the element ID is present in the catalog.
 func (c *Catalog) Exists(elementID string) bool {
-        <span class="cov8" title="1167">if c == nil </span>{
+        <span class="cov8" title="1165">if c == nil </span>{
                 <span class="cov1" title="2">return false
 </span>        }
 
-        <span class="cov8" title="1165">c.mu.RLock()
+        <span class="cov8" title="1163">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
-        <span class="cov8" title="1162">_, exists := c.getElementLocked(elementID)
+        <span class="cov8" title="1164">_, exists := c.getElementLocked(elementID)
 </span>
-        <span class="cov8" title="1164">return exists</span>
+        <span class="cov8" title="1151">return exists</span>
 }
 
 // Exist is an alias for Exists kept for backward compatibility.
@@ -5956,69 +6084,69 @@ func (c *Catalog) Exist(elementID string) bool {
 
 // Get retrieves a copy of an element by ID.
 func (c *Catalog) Get(elementID string) (Element, bool) {
-        <span class="cov8" title="1085">if c == nil </span>{
+        <span class="cov8" title="1084">if c == nil </span>{
                 <span class="cov1" title="1">return Element{}, false
 </span>        }
 
-        <span class="cov8" title="1084">c.mu.RLock()
+        <span class="cov8" title="1083">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
         <span class="cov8" title="1086">elem, exists := c.getElementLocked(elementID)
         if !exists </span>{
-                <span class="cov8" title="800">return Element{}, false
+                <span class="cov8" title="884">return Element{}, false
 </span>        }
 
-        <span class="cov7" title="286">elem.Formats = slices.Clone(elem.Formats)
+        <span class="cov6" title="195">elem.Formats = slices.Clone(elem.Formats)
 </span>
-        <span class="cov7" title="286">return elem, true</span>
+        <span class="cov6" title="195">return elem, true</span>
 }
 
 // Find looks up an element pointer by ID or returns ErrElementNotFound.
 func (c *Catalog) Find(elementID string) (*Element, error) {
-        <span class="cov8" title="1060">if c == nil </span>{
+        <span class="cov8" title="1062">if c == nil </span>{
                 <span class="cov1" title="2">return nil, ErrNilCatalog
 </span>        }
 
-        <span class="cov8" title="1058">c.mu.RLock()
+        <span class="cov8" title="1060">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
-        <span class="cov8" title="1059">if elem, exists := c.getElementLocked(elementID); exists </span>{
-                <span class="cov7" title="251">elemCopy := elem
+        <span class="cov8" title="1061">if elem, exists := c.getElementLocked(elementID); exists </span>{
+                <span class="cov6" title="164">elemCopy := elem
                 elemCopy.Formats = slices.Clone(elem.Formats)
 </span>
-                <span class="cov7" title="251">return &amp;elemCopy, nil
+                <span class="cov6" title="164">return &amp;elemCopy, nil
 </span>        }
 
-        <span class="cov8" title="808">return nil, fmt.Errorf("%w: %s", ErrElementNotFound, elementID)</span>
+        <span class="cov8" title="896">return nil, fmt.Errorf("%w: %s", ErrElementNotFound, elementID)</span>
 }
 
 func (c *Catalog) getElementLocked(elementID string) (Element, bool) {
-        <span class="cov10" title="3370">if elem, exists := c.Elements[elementID]; exists </span>{
-                <span class="cov8" title="880">return elem, true
+        <span class="cov10" title="3389">if elem, exists := c.Elements[elementID]; exists </span>{
+                <span class="cov8" title="614">return elem, true
 </span>        }
 
-        <span class="cov9" title="2500">if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID </span>{
+        <span class="cov9" title="2777">if altID := strings.ReplaceAll(elementID, "-", "_"); altID != elementID </span>{
                 <span class="cov3" title="14">if elem, exists := c.Elements[altID]; exists </span>{
                         <span class="cov0" title="0">return elem, true
 </span>                }
         }
 
-        <span class="cov9" title="2503">if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID </span>{
-                <span class="cov9" title="2398">if elem, exists := c.Elements[altID]; exists </span>{
+        <span class="cov9" title="2772">if altID := strings.ReplaceAll(elementID, "_", "-"); altID != elementID </span>{
+                <span class="cov9" title="2652">if elem, exists := c.Elements[altID]; exists </span>{
                         <span class="cov3" title="7">return elem, true
 </span>                }
         }
 
-        <span class="cov9" title="2496">if elem, ok := c.resolveDateElement(elementID); ok </span>{
+        <span class="cov9" title="2746">if elem, ok := c.resolveDateElement(elementID); ok </span>{
                 <span class="cov3" title="8">return elem, true
 </span>        }
 
-        <span class="cov9" title="2502">return Element{}, false</span>
+        <span class="cov9" title="2729">return Element{}, false</span>
 }
 
 func (c *Catalog) resolveDateElement(dateStr string) (Element, bool) {
-        <span class="cov9" title="2492">if _, err := time.Parse("2006-01-02", dateStr); err != nil </span>{
-                <span class="cov9" title="2496">return Element{}, false
+        <span class="cov9" title="2739">if _, err := time.Parse("2006-01-02", dateStr); err != nil </span>{
+                <span class="cov9" title="2743">return Element{}, false
 </span>        }
 
         <span class="cov3" title="8">if baseElem, ok := c.Elements["czech_republic"]; ok </span>{
@@ -6157,7 +6285,7 @@ func (c *Catalog) AddExtension(elementID, formatID string) {
         defer c.mu.Unlock()
 </span>
         <span class="cov8" title="1086">if elem, exists := c.Elements[elementID]; exists </span>{
-                <span class="cov8" title="988">elem.AddFormat(formatID)
+                <span class="cov8" title="587">elem.AddFormat(formatID)
                 c.Elements[elementID] = elem
 </span>        }
 }
@@ -6207,35 +6335,35 @@ func (c *Catalog) All() iter.Seq2[string, Element] {
 
 // ResolveURL constructs the absolute download URL for an element and format.
 func (c *Catalog) ResolveURL(elem *Element, formatID string) (string, error) {
-        <span class="cov5" title="43">if c == nil </span>{
+        <span class="cov5" title="45">if c == nil </span>{
                 <span class="cov1" title="1">return "", ErrNilCatalog
 </span>        }
 
-        <span class="cov5" title="42">if elem == nil </span>{
+        <span class="cov5" title="44">if elem == nil </span>{
                 <span class="cov1" title="1">return "", ErrNilElement
 </span>        }
 
-        <span class="cov5" title="41">if !elem.ContainsFormat(formatID) </span>{
+        <span class="cov5" title="43">if !elem.ContainsFormat(formatID) </span>{
                 <span class="cov3" title="7">return "", fmt.Errorf("%w: %s on element %s", ErrFormatNotFound, formatID, elem.ID)
 </span>        }
 
-        <span class="cov4" title="34">c.mu.RLock()
+        <span class="cov4" title="36">c.mu.RLock()
         format, formatExists := c.Formats[formatID]
         catalogBaseURL := c.BaseURL
         c.mu.RUnlock()
 </span>
-        <span class="cov4" title="34">if !formatExists </span>{
+        <span class="cov4" title="36">if !formatExists </span>{
                 <span class="cov0" title="0">return "", fmt.Errorf("%w: %s", ErrFormatNotFound, formatID)
 </span>        }
 
-        <span class="cov4" title="34">baseURL := cmp.Or(format.BaseURL, catalogBaseURL)
+        <span class="cov4" title="36">baseURL := cmp.Or(format.BaseURL, catalogBaseURL)
 </span>
-        <span class="cov4" title="34">preURL, err := c.ResolvePreURL(elem, baseURL, format.BasePath)
+        <span class="cov4" title="36">preURL, err := c.ResolvePreURL(elem, baseURL, format.BasePath)
         if err != nil </span>{
                 <span class="cov1" title="1">return "", fmt.Errorf("resolving pre URL: %w", err)
 </span>        }
 
-        <span class="cov4" title="33">return preURL + format.Loc, nil</span>
+        <span class="cov4" title="35">return preURL + format.Loc, nil</span>
 }
 
 type hierarchySegments struct {
@@ -6244,105 +6372,105 @@ type hierarchySegments struct {
 }
 
 func (c *Catalog) collectHierarchySegments(startID string) (hierarchySegments, error) {
-        <span class="cov5" title="39">var segments hierarchySegments
+        <span class="cov5" title="41">var segments hierarchySegments
 </span>
-        <span class="cov5" title="39">currID := startID
+        <span class="cov5" title="41">currID := startID
 </span>
-        <span class="cov5" title="39">for segments.count &lt; maxHierarchyDepth </span>{
-                <span class="cov5" title="85">currentElem, exists := c.getElementLocked(currID)
+        <span class="cov5" title="41">for segments.count &lt; maxHierarchyDepth </span>{
+                <span class="cov5" title="87">currentElem, exists := c.getElementLocked(currID)
                 if !exists </span>{
                         <span class="cov0" title="0">return hierarchySegments{}, fmt.Errorf("%w: %s", ErrElementNotFound, currID)
 </span>                }
 
-                <span class="cov5" title="85">segments.items[segments.count] = currentElem.Filename()
+                <span class="cov5" title="87">segments.items[segments.count] = currentElem.Filename()
                 segments.count++
 </span>
-                <span class="cov5" title="85">if !currentElem.HasParent() </span>{
-                        <span class="cov5" title="38">break</span>
+                <span class="cov5" title="87">if !currentElem.HasParent() </span>{
+                        <span class="cov5" title="40">break</span>
                 }
 
                 <span class="cov5" title="47">currID = currentElem.Parent</span>
         }
 
-        <span class="cov5" title="39">if segments.count &gt;= maxHierarchyDepth </span>{
+        <span class="cov5" title="41">if segments.count &gt;= maxHierarchyDepth </span>{
                 <span class="cov1" title="1">return hierarchySegments{}, fmt.Errorf("%w: element %s", ErrMaxHierarchyDepth, startID)
 </span>        }
 
-        <span class="cov5" title="38">return segments, nil</span>
+        <span class="cov5" title="40">return segments, nil</span>
 }
 
 // ResolvePreURL iteratively builds the URL path prefix with cycle protection and minimal allocations.
 func (c *Catalog) ResolvePreURL(elem *Element, baseURL ...string) (string, error) {
-        <span class="cov5" title="40">if c == nil </span>{
+        <span class="cov5" title="42">if c == nil </span>{
                 <span class="cov1" title="1">return "", ErrNilCatalog
 </span>        }
 
-        <span class="cov5" title="39">if elem == nil </span>{
+        <span class="cov5" title="41">if elem == nil </span>{
                 <span class="cov0" title="0">return "", ErrNilElement
 </span>        }
 
-        <span class="cov5" title="39">c.mu.RLock()
+        <span class="cov5" title="41">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
-        <span class="cov5" title="39">segments, err := c.collectHierarchySegments(elem.ID)
+        <span class="cov5" title="41">segments, err := c.collectHierarchySegments(elem.ID)
         if err != nil </span>{
                 <span class="cov1" title="1">return "", err
 </span>        }
 
-        <span class="cov5" title="38">var builder strings.Builder
+        <span class="cov5" title="40">var builder strings.Builder
         builder.Grow(defaultBuilderSize)
 </span>
-        <span class="cov5" title="38">builder.WriteString(buildURLPrefix(baseURL, c.BaseURL))
+        <span class="cov5" title="40">builder.WriteString(buildURLPrefix(baseURL, c.BaseURL))
 </span>
-        <span class="cov5" title="38">for i := segments.count - 1; i &gt;= 0; i-- </span>{
-                <span class="cov5" title="55">builder.WriteString(segments.items[i])
+        <span class="cov5" title="40">for i := segments.count - 1; i &gt;= 0; i-- </span>{
+                <span class="cov5" title="57">builder.WriteString(segments.items[i])
 </span>
-                <span class="cov5" title="55">if i &gt; 0 </span>{
+                <span class="cov5" title="57">if i &gt; 0 </span>{
                         <span class="cov4" title="17">builder.WriteByte('/')
 </span>                }
         }
 
-        <span class="cov5" title="38">return builder.String(), nil</span>
+        <span class="cov5" title="40">return builder.String(), nil</span>
 }
 
 func buildURLPrefix(baseURL []string, defaultBaseURL string) string {
-        <span class="cov5" title="38">var prefix string
+        <span class="cov5" title="40">var prefix string
 </span>
-        <span class="cov5" title="38">switch len(baseURL) </span>{
+        <span class="cov5" title="40">switch len(baseURL) </span>{
         case 1:
                 <span class="cov0" title="0">prefix = defaultBaseURL + "/" + strings.Join(baseURL, "/")</span>
         case twoBaseURLParts:
-                <span class="cov5" title="38">prefix = strings.Join(baseURL, "/")</span>
+                <span class="cov5" title="40">prefix = strings.Join(baseURL, "/")</span>
         default:
                 <span class="cov0" title="0">prefix = defaultBaseURL</span>
         }
 
-        <span class="cov5" title="38">if !strings.HasSuffix(prefix, "/") </span>{
+        <span class="cov5" title="40">if !strings.HasSuffix(prefix, "/") </span>{
                 <span class="cov0" title="0">prefix += "/"
 </span>        }
 
-        <span class="cov5" title="38">return prefix</span>
+        <span class="cov5" title="40">return prefix</span>
 }
 
 // IsHashable checks if a given format has a corresponding hash definition (e.g. .md5).
 func (c *Catalog) IsHashable(formatID string) (ok bool, hashExt, hashType string) {
-        <span class="cov4" title="25">if c == nil </span>{
+        <span class="cov4" title="26">if c == nil </span>{
                 <span class="cov1" title="1">return false, "", ""
 </span>        }
 
-        <span class="cov4" title="24">c.mu.RLock()
+        <span class="cov4" title="25">c.mu.RLock()
         defer c.mu.RUnlock()
 </span>
-        <span class="cov4" title="24">if _, exists := c.Formats[formatID]; exists </span>{
-                <span class="cov4" title="23">for _, h := range supportedHashes </span>{
-                        <span class="cov4" title="23">candidate := formatID + "." + h
+        <span class="cov4" title="25">if _, exists := c.Formats[formatID]; exists </span>{
+                <span class="cov4" title="24">for _, h := range supportedHashes </span>{
+                        <span class="cov4" title="24">candidate := formatID + "." + h
                         if _, exists := c.Formats[candidate]; exists </span>{
                                 <span class="cov3" title="11">return true, candidate, h
 </span>                        }
                 }
         }
 
-        <span class="cov3" title="13">return false, "", ""</span>
+        <span class="cov3" title="14">return false, "", ""</span>
 }
 </pre>
 		
@@ -6358,7 +6486,7 @@ type Formats []string
 
 // Contains checks if a format identifier exists in the formats list.
 func (f Formats) Contains(format string) bool {
-        <span class="cov10" title="1199">return slices.Contains(f, format)
+        <span class="cov10" title="801">return slices.Contains(f, format)
 </span>}
 
 // Element represents a geographic region, extract, or meta-container.
@@ -6385,35 +6513,35 @@ type Element struct {
 
 // HasParent returns true if the element has a parent identifier.
 func (e *Element) HasParent() bool {
-        <span class="cov6" title="88">return e != nil &amp;&amp; e.Parent != ""
+        <span class="cov7" title="90">return e != nil &amp;&amp; e.Parent != ""
 </span>}
 
 // Filename returns the explicit filename if set, or defaults to the element ID.
 func (e *Element) Filename() string {
-        <span class="cov6" title="88">if e == nil </span>{
+        <span class="cov7" title="90">if e == nil </span>{
                 <span class="cov1" title="1">return ""
 </span>        }
 
-        <span class="cov6" title="87">return cmp.Or(e.File, e.ID)</span>
+        <span class="cov7" title="89">return cmp.Or(e.File, e.ID)</span>
 }
 
 // ContainsFormat returns true if the element supports the given format.
 func (e *Element) ContainsFormat(format string) bool {
-        <span class="cov9" title="1172">if e == nil </span>{
+        <span class="cov9" title="774">if e == nil </span>{
                 <span class="cov1" title="1">return false
 </span>        }
 
-        <span class="cov9" title="1171">return e.Formats.Contains(format)</span>
+        <span class="cov9" title="773">return e.Formats.Contains(format)</span>
 }
 
 // AddFormat adds a format if it does not already exist.
 func (e *Element) AddFormat(format string) {
-        <span class="cov9" title="1003">if e == nil || format == "" </span>{
+        <span class="cov9" title="602">if e == nil || format == "" </span>{
                 <span class="cov0" title="0">return
 </span>        }
 
-        <span class="cov9" title="1003">if !e.ContainsFormat(format) </span>{
-                <span class="cov9" title="990">e.Formats = append(e.Formats, format)
+        <span class="cov9" title="602">if !e.ContainsFormat(format) </span>{
+                <span class="cov9" title="589">e.Formats = append(e.Formats, format)
 </span>        }
 }
 
