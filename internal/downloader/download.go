@@ -150,28 +150,33 @@ func (d *Downloader) FromURL(ctx context.Context, myURL, fileName string) (err e
 		return nil
 	}
 
+	urlForError := "remote URL"
+	if d.opts().Verbose {
+		urlForError = myURL
+	}
+
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, myURL, http.NoBody)
 	if err != nil {
-		return fmt.Errorf("creating request for %s: %w", myURL, err)
+		return fmt.Errorf("creating request for %s: %w", urlForError, err)
 	}
 
 	client := cmp.Or(d.client, http.DefaultClient)
 
 	response, err := client.Do(req)
 	if err != nil {
-		return fmt.Errorf("downloading %s: %w", myURL, err)
+		return fmt.Errorf("downloading %s: %w", urlForError, err)
 	}
 
 	defer func() {
 		if cerr := response.Body.Close(); cerr != nil {
-			closeErr := fmt.Errorf("closing response body for %s: %w", myURL, cerr)
+			closeErr := fmt.Errorf("closing response body for %s: %w", urlForError, cerr)
 			err = errors.Join(err, closeErr)
 		}
 	}()
 
 	if response.StatusCode != http.StatusOK {
 		return fmt.Errorf("%w: downloading %s: server status code %d",
-			ErrServerStatusCode, myURL, response.StatusCode)
+			ErrServerStatusCode, urlForError, response.StatusCode)
 	}
 
 	return d.saveToFile(fileName, response)
@@ -288,7 +293,7 @@ func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, ou
 		return fmt.Errorf("generating URL for %s (%s): %w", elementID, formatName, err)
 	}
 
-	slog.Info("Starting download", "element", elementID, "format", formatName, "url", myURL)
+	slog.Info("Starting download", "element", elementID, "format", formatName)
 
 	return d.FromURL(ctx, myURL, outputPath)
 }
