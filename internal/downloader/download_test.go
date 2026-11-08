@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -17,6 +18,11 @@ import (
 
 	"github.com/julien-noblet/download-geofabrik/internal/downloader"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
+)
+
+const (
+	existingDownloadContent = "existing download content"
+	replacementContent      = "replacement download content"
 )
 
 func Test_DownloadFromURL(t *testing.T) {
@@ -85,6 +91,87 @@ func Test_DownloadFromURL(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestFromURLProtectsExistingDestination(t *testing.T) {
+	t.Parallel()
+
+	var requestCount atomic.Int64
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		requestCount.Add(1)
+
+		_, _ = w.Write([]byte(replacementContent))
+	}))
+	t.Cleanup(server.Close)
+
+	targetFile := filepath.Join(t.TempDir(), "extract.osm.pbf")
+	require.NoError(t, os.WriteFile(targetFile, []byte(existingDownloadContent), 0o600))
+
+	client := downloader.New(catalog.New(), &downloader.Options{Quiet: true})
+	err := client.FromURL(t.Context(), server.URL, targetFile)
+
+	require.ErrorIs(t, err, downloader.ErrDestinationExists)
+	assert.Equal(t, int64(0), requestCount.Load())
+	assert.FileExists(t, targetFile)
+	assert.NoFileExists(t, targetFile+".tmp")
+
+	content, err := os.ReadFile(targetFile)
+	require.NoError(t, err)
+	assert.Equal(t, existingDownloadContent, string(content))
+}
+
+func TestFromURLForceReplacesExistingDestination(t *testing.T) {
+	t.Parallel()
+
+	var requestCount atomic.Int64
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		requestCount.Add(1)
+
+		_, _ = w.Write([]byte(replacementContent))
+	}))
+	t.Cleanup(server.Close)
+
+	targetFile := filepath.Join(t.TempDir(), "extract.osm.pbf")
+	require.NoError(t, os.WriteFile(targetFile, []byte(existingDownloadContent), 0o600))
+
+	client := downloader.New(catalog.New(), &downloader.Options{Force: true, Quiet: true})
+	require.NoError(t, client.FromURL(t.Context(), server.URL, targetFile))
+
+	assert.Equal(t, int64(1), requestCount.Load())
+	assert.NoFileExists(t, targetFile+".tmp")
+
+	content, err := os.ReadFile(targetFile)
+	require.NoError(t, err)
+	assert.Equal(t, replacementContent, string(content))
+}
+
+func TestFromURLRejectsDestinationCreatedDuringDownload(t *testing.T) {
+	t.Parallel()
+
+	targetFile := filepath.Join(t.TempDir(), "extract.osm.pbf")
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		if err := os.WriteFile(targetFile, []byte(existingDownloadContent), 0o600); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+
+			return
+		}
+
+		_, _ = w.Write([]byte(replacementContent))
+	}))
+	t.Cleanup(server.Close)
+
+	client := downloader.New(catalog.New(), &downloader.Options{Quiet: true})
+	err := client.FromURL(t.Context(), server.URL, targetFile)
+
+	require.ErrorIs(t, err, downloader.ErrDestinationExists)
+	assert.FileExists(t, targetFile)
+	assert.NoFileExists(t, targetFile+".tmp")
+
+	content, err := os.ReadFile(targetFile)
+	require.NoError(t, err)
+	assert.Equal(t, existingDownloadContent, string(content))
 }
 
 func TestFile(t *testing.T) {

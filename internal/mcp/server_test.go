@@ -4,7 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"net/http/httptest"
+	"os"
 	"path/filepath"
+	"sync/atomic"
 	"testing"
 
 	mcpSDK "github.com/mark3labs/mcp-go/mcp"
@@ -396,6 +400,75 @@ func TestDownloadElementToolDryRun(t *testing.T) {
 	assert.Equal(t, "dry_run", dlResult.Files[0].Status)
 	assert.Equal(t, "https://example.com/osm/europe/france.osm.pbf", dlResult.Files[0].DownloadURL)
 	assert.Equal(t, "https://example.com/osm/europe/france.osm.pbf.md5", dlResult.Files[0].ChecksumURL)
+}
+
+func TestDownloadElementToolDoesNotOverwriteExistingDestination(t *testing.T) {
+	t.Parallel()
+
+	var requestCount atomic.Int32
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		requestCount.Add(1)
+
+		_, _ = w.Write([]byte("replacement content"))
+	}))
+	t.Cleanup(server.Close)
+
+	tempDir := t.TempDir()
+	catPath := filepath.Join(tempDir, "test-catalog.yml")
+	cat := catalog.New()
+	cat.BaseURL = server.URL
+	cat.Formats = catalog.FormatDefinitions{
+		catalog.FormatOsmPbf: {
+			ID:  catalog.FormatOsmPbf,
+			Loc: ".osm.pbf",
+		},
+	}
+	cat.Elements[elementFrance] = catalog.Element{
+		ID:      elementFrance,
+		Name:    "France",
+		Formats: catalog.Formats{catalog.FormatOsmPbf},
+	}
+	require.NoError(t, cat.SaveFile(catPath))
+
+	outputDir := t.TempDir()
+	targetFile := filepath.Join(outputDir, elementFrance+".osm.pbf")
+	require.NoError(t, os.WriteFile(targetFile, []byte("existing content"), 0o600))
+
+	tool := mcp.NewServer(testVersion).MCPServer().GetTool("download_element")
+	require.NotNil(t, tool)
+
+	callReq := mcpSDK.CallToolRequest{
+		Params: mcpSDK.CallToolParams{
+			Name: "download_element",
+			Arguments: map[string]any{
+				"service":     serviceDefault,
+				"element_id":  elementFrance,
+				"formats":     []string{catalog.FormatOsmPbf},
+				"config_file": catPath,
+				"output_dir":  outputDir,
+			},
+		},
+	}
+
+	res, err := tool.Handler(t.Context(), callReq)
+	require.NoError(t, err)
+	require.False(t, res.IsError)
+
+	textContent, ok := res.Content[0].(mcpSDK.TextContent)
+	require.True(t, ok)
+
+	var dlResult mcp.DownloadResult
+	require.NoError(t, json.Unmarshal([]byte(textContent.Text), &dlResult))
+	require.Len(t, dlResult.Files, 1)
+	assert.Equal(t, "failed", dlResult.Files[0].Status)
+	assert.Contains(t, dlResult.Files[0].Error, "destination file already exists")
+	assert.Equal(t, int32(0), requestCount.Load())
+	assert.NoFileExists(t, targetFile+".tmp")
+
+	content, err := os.ReadFile(targetFile)
+	require.NoError(t, err)
+	assert.Equal(t, "existing content", string(content))
 }
 
 func TestDownloadElementToolDefaultFormatNonPbf(t *testing.T) {
