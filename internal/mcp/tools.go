@@ -33,6 +33,7 @@ const (
 	fieldStatus      = "status"
 	statusSuccess    = "success"
 	statusError      = "error"
+	statusFailed     = "failed"
 )
 
 // ServiceInfo describes an available OSM data provider.
@@ -811,7 +812,7 @@ func (s *Server) performActualDownload(ctx context.Context, params *downloadExec
 			results = append(results, DownloadFileResult{
 				Format: formatID,
 				Error:  "unknown format: " + formatID,
-				Status: "failed",
+				Status: statusFailed,
 			})
 
 			continue
@@ -839,14 +840,22 @@ func (s *Server) performActualDownload(ctx context.Context, params *downloadExec
 		downloadErr := client.DownloadFile(ctx, params.elem.ID, formatID, targetFile)
 		if downloadErr != nil {
 			fileRes.Error = downloadErr.Error()
-			fileRes.Status = "failed"
+			fileRes.Status = statusFailed
 			results = append(results, fileRes)
 
 			continue
 		}
 
 		if params.checkHash {
-			checksumOK := client.Checksum(ctx, params.elem.ID, formatID)
+			checksumOK, checksumErr := client.Checksum(ctx, params.elem.ID, formatID)
+			if checksumErr != nil {
+				fileRes.Error = checksumErr.Error()
+				fileRes.Status = statusFailed
+				results = append(results, fileRes)
+
+				continue
+			}
+
 			fileRes.ChecksumVerified = checksumOK
 		}
 

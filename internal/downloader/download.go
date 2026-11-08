@@ -345,40 +345,46 @@ func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, ou
 	return d.FromURL(ctx, myURL, outputPath)
 }
 
-func (d *Downloader) verifyChecksum(targetFile, hashFile string) bool {
-	var ret bool
+func (d *Downloader) verifyChecksum(targetFile, hashFile string) (bool, error) {
+	var (
+		ret bool
+		err error
+	)
 
 	if inFlightHash, ok := d.lastHash.Load(targetFile); ok {
 		cachedDigest, isStr := inFlightHash.(string)
 		if !isStr || cachedDigest == "" {
 			slog.Debug("Cached hash invalid, reading file", "file", targetFile)
 
-			ret = VerifyFileChecksum(targetFile, hashFile)
+			ret, err = VerifyFileChecksum(targetFile, hashFile)
 		} else {
 			slog.Debug("Using in-flight hash", "file", targetFile, "hash", cachedDigest)
 
-			ret, _ = CheckFileHash(hashFile, cachedDigest)
+			ret, err = CheckFileHash(hashFile, cachedDigest)
 		}
 	} else {
-		ret = VerifyFileChecksum(targetFile, hashFile)
+		ret, err = VerifyFileChecksum(targetFile, hashFile)
+	}
+
+	if err != nil {
+		return false, err
 	}
 
 	if ret {
 		slog.Info("Checksum OK", "file", targetFile)
-	} else {
-		slog.Error("Checksum MISMATCH", "file", targetFile)
 	}
 
-	return ret
+	return ret, nil
 }
 
-// Checksum downloads and verifies the checksum of a file, using in-flight computed MD5 when available.
-func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string) bool {
-	if d == nil || d.Catalog == nil || !d.opts().Check {
-		return false
-	}
+type checksumInfo struct {
+	url        string
+	formatID   string
+	hashFormat string
+}
 
-	isHashable, _, _ := d.Catalog.IsHashable(formatName)
+func (d *Downloader) checksumInfo(elementID, formatName string) (checksumInfo, bool, error) {
+	isHashable, hashFormat, _ := d.Catalog.IsHashable(formatName)
 	if !isHashable {
 		slog.Warn("No checksum provided",
 			"element", elementID,
@@ -386,52 +392,78 @@ func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string)
 			"file", filepath.Join(d.opts().OutputDirectory, elementID+"."+formatName),
 		)
 
-		return false
+		return checksumInfo{}, false, nil
 	}
-
-	hashType := "md5"
-	fhash := formatName + "." + hashType
 
 	myElem, err := d.Catalog.Find(elementID)
 	if err != nil {
-		slog.Error("Element not found", "element", elementID, "error", err)
-
-		return false
+		return checksumInfo{}, false, fmt.Errorf("finding element %s for checksum: %w", elementID, err)
 	}
 
 	formatDef, hasFormat := d.Catalog.GetFormat(formatName)
 	if !hasFormat {
-		return false
+		return checksumInfo{}, false, fmt.Errorf("%w: %s", catalog.ErrFormatNotFound, formatName)
 	}
 
-	if !myElem.Formats.Contains(fhash) {
+	if !myElem.Formats.Contains(hashFormat) {
 		slog.Warn("No checksum provided",
 			"element", elementID,
 			"format", formatDef.ID,
 			"file", filepath.Join(d.opts().OutputDirectory, elementID+"."+formatDef.ID),
 		)
 
-		return false
+		return checksumInfo{}, false, nil
 	}
 
-	myURL, err := d.Catalog.ResolveURL(myElem, fhash)
+	myURL, err := d.Catalog.ResolveURL(myElem, hashFormat)
 	if err != nil {
-		slog.Error("URL generation failed", "element", elementID, "hash_format", fhash, "error", err)
+		slog.Warn("Checksum unavailable",
+			"element", elementID,
+			"hash_format", hashFormat,
+			"error", err,
+		)
 
-		return false
+		return checksumInfo{}, false, nil
 	}
 
-	outputPath := d.opts().OutputDirectory + elementID
-	targetFile := outputPath + "." + formatDef.ID
-	hashFile := outputPath + "." + fhash
+	return checksumInfo{
+		url:        myURL,
+		formatID:   formatDef.ID,
+		hashFormat: hashFormat,
+	}, true, nil
+}
 
-	if err := d.fromURL(ctx, myURL, hashFile, true); err != nil {
-		slog.Error("Checksum download failed", "element", elementID, "url", myURL, "file", hashFile, "error", err)
+// Checksum downloads and verifies the checksum of a file, using in-flight computed MD5 when available.
+func (d *Downloader) Checksum(ctx context.Context, elementID, formatName string) (bool, error) {
+	if d == nil || d.Catalog == nil || !d.opts().Check {
+		return false, nil
+	}
 
-		return false
+	checksum, available, err := d.checksumInfo(elementID, formatName)
+	if err != nil {
+		return false, err
+	}
+
+	if !available {
+		return false, nil
+	}
+
+	outputPath := filepath.Join(d.opts().OutputDirectory, elementID)
+	targetFile := outputPath + "." + checksum.formatID
+	hashFile := outputPath + "." + checksum.hashFormat
+
+	if downloadErr := d.FromURL(ctx, checksum.url, hashFile); downloadErr != nil {
+		slog.Warn("Checksum unavailable", "element", elementID, "url", checksum.url, "file", hashFile, "error", downloadErr)
+
+		return false, nil
 	}
 	defer d.lastHash.Delete(hashFile)
 	defer d.lastHash.Delete(targetFile)
 
-	return d.verifyChecksum(targetFile, hashFile)
+	verified, err := d.verifyChecksum(targetFile, hashFile)
+	if err != nil {
+		return false, fmt.Errorf("verifying checksum for %s: %w", targetFile, err)
+	}
+
+	return verified, nil
 }

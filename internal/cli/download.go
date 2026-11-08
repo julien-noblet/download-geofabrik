@@ -300,7 +300,12 @@ func processDownload(ctx context.Context, client *downloader.Downloader, check, 
 		return downloadAndVerify(ctx, client, check, elementID, format, targetFile)
 	}
 
-	if client.Checksum(ctx, elementID, format) {
+	verified, err := client.Checksum(ctx, elementID, format)
+	if err != nil {
+		return fmt.Errorf("checksum verification failed: %w", err)
+	}
+
+	if verified {
 		slog.Info("File already exists and checksum matches", "file", targetFile)
 
 		return nil
@@ -331,7 +336,9 @@ func downloadAndVerify(ctx context.Context, client *downloader.Downloader, check
 	}
 
 	if check {
-		client.Checksum(ctx, elementID, format)
+		if _, err := client.Checksum(ctx, elementID, format); err != nil {
+			return fmt.Errorf("checksum verification failed: %w", err)
+		}
 	}
 
 	return nil
