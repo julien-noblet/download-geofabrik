@@ -54,7 +54,7 @@
             pname = "download-geofabrik";
             version = "unstable";
             src = ./.;
-            vendorHash = "sha256-FI9J1KY1LCsn0F8uOsdos+QV8WhIiRGqMApDjo0Fcf4=";
+            vendorHash = "sha256-CVJXhHpUbuwSBomhV7WvLFr7KvdW4CzBueyZEyBypJ4=";
             subPackages = [ "cmd/download-geofabrik" ];
             env.CGO_ENABLED = 0;
 
