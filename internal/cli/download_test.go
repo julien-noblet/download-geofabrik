@@ -121,6 +121,7 @@ formats:
 				"--output-dir", outputDir,
 				"--check=false",
 				"--progress=false",
+				"--retries=0",
 				"-g",
 				"-P",
 			}, test.expectedErr)
@@ -140,6 +141,43 @@ formats:
 			assert.Equal(t, []byte(testOsmPbfContent), osmPbf)
 		})
 	}
+}
+
+func TestDownloadRetriesFlagZero(t *testing.T) {
+	var requestCount atomic.Int32
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		requestCount.Add(1)
+		http.Error(w, "unavailable", http.StatusServiceUnavailable)
+	}))
+	t.Cleanup(server.Close)
+
+	configFile := filepath.Join(t.TempDir(), "catalog.yml")
+	configContent := fmt.Sprintf(`
+elements:
+  %s:
+    id: %s
+    files: ["osm.pbf"]
+formats:
+  osm.pbf:
+    ext: "osm.pbf"
+    loc: "/extract.osm.pbf"
+    baseurl: %q
+`, testDownloadElement, testDownloadElement, server.URL)
+	require.NoError(t, os.WriteFile(configFile, []byte(configContent), 0o600))
+
+	runDownloadCLIHelper(t, []string{
+		"download",
+		testDownloadElement,
+		"--config", configFile,
+		"--output-dir", t.TempDir(),
+		"--check=false",
+		"--progress=false",
+		"--retries=0",
+		"-P",
+	}, "server status code 503")
+
+	assert.EqualValues(t, 1, requestCount.Load())
 }
 
 func TestDownloadCLI_ChecksumOutcomes(t *testing.T) {
