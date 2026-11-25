@@ -3,8 +3,7 @@ concurrency:
   group: gh-pages-publish
   cancel-in-progress: false
 permissions:
-  # contents permission to update benchmark contents in 'benchmarks' branch
-  contents: write
+  contents: read
 on:
   pull_request:
   push:
@@ -18,6 +17,8 @@ env:
 jobs:
   coverage:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v7
       with:
