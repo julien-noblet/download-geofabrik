@@ -3,8 +3,7 @@ concurrency:
   group: gh-pages-publish
   cancel-in-progress: false
 permissions:
-  # contents permission to update benchmark contents in 'benchmarks' branch
-  contents: write
+  contents: read
 on:
   pull_request:
   push:
@@ -18,6 +17,9 @@ env:
 jobs:
   coverage:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
     - uses: actions/checkout@v7
       with:
@@ -28,15 +30,20 @@ jobs:
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - uses: DeterminateSystems/magic-nix-cache-action@main
-    - name: Setup environment from Nix
+    - uses: cachix/cachix-action@v16
+      with:
+        name: devenv
+    - name: Install devenv
+      run: nix profile add nixpkgs#devenv
+    - name: Setup environment from devenv
       run: |
         set -o pipefail
-        nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
+        devenv --no-tui shell -- printenv PATH | tr ":" "\n" | while read -r p; do
           if [ -d "$p" ]; then
             echo "$p" >> "$GITHUB_PATH"
           fi
         done
+        rm -f .git/hooks/pre-commit .git/hooks/pre-push .pre-commit-config.yaml
 
     - uses: gwatts/go-coverage-action@v2
       id: coverage
@@ -53,26 +60,32 @@ jobs:
         ignore-pattern: |
           \.pb\.go$
           \_string\.go$
-        
+
         # A url that the html report will be accessible at, once your
         # workflow uploads it.  Used in the pull request comment.
         report-url: https://julien-noblet.github.io/download-geofabrik/${{ github.ref_name}}.html
-        
+
     - name: Generate coverage tree map
+      env:
+        REF_NAME: ${{ github.ref_name }}
+        GOCOV_AGG_PATHNAME: ${{ steps.coverage.outputs.gocov-agg-pathname }}
       run: |
-        mkdir -p ${{ github.ref_name}}
-        mkdir -p /tmp/${{ github.ref_name}}
-        go run github.com/nikolaydubina/go-cover-treemap@latest -coverprofile ${{ steps.coverage.outputs.gocov-agg-pathname }} -only-folders=true > /tmp/${{ github.ref_name}}.svg
+        mkdir -p "$REF_NAME"
+        mkdir -p "/tmp/$REF_NAME"
+        go run github.com/nikolaydubina/go-cover-treemap@latest -coverprofile "$GOCOV_AGG_PATHNAME" -only-folders=true > "/tmp/$REF_NAME.svg"
     - name: Commit files
+      env:
+        REF_NAME: ${{ github.ref_name }}
+        REPORT_PATHNAME: ${{ steps.coverage.outputs.report-pathname }}
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git fetch --all
         git checkout gh-pages
-        mkdir -p ${{ github.ref_name}}
-        cp -r ${{ steps.coverage.outputs.report-pathname }} ${{ github.ref_name}}.html
-        cp /tmp/${{ github.ref_name}}.svg ${{ github.ref_name}}.svg
-        git add ${{ github.ref_name}}.html ${{ github.ref_name}}.svg
+        mkdir -p "$REF_NAME"
+        cp -r "$REPORT_PATHNAME" "$REF_NAME.html"
+        cp "/tmp/$REF_NAME.svg" "$REF_NAME.svg"
+        git add "$REF_NAME.html" "$REF_NAME.svg"
         git commit -m "Upload coverage report"
     - name: Push changes
       uses: ad-m/github-push-action@master
@@ -92,15 +105,20 @@ jobs:
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - uses: DeterminateSystems/magic-nix-cache-action@main
-    - name: Setup environment from Nix
+    - uses: cachix/cachix-action@v16
+      with:
+        name: devenv
+    - name: Install devenv
+      run: nix profile add nixpkgs#devenv
+    - name: Setup environment from devenv
       run: |
         set -o pipefail
-        nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
+        devenv --no-tui shell -- printenv PATH | tr ":" "\n" | while read -r p; do
           if [ -d "$p" ]; then
             echo "$p" >> "$GITHUB_PATH"
           fi
         done
+        rm -f .git/hooks/pre-commit .git/hooks/pre-push .pre-commit-config.yaml
 
     - uses: gwatts/go-coverage-action@v2
       id: coverage
@@ -117,11 +135,11 @@ jobs:
         ignore-pattern: |
           \.pb\.go$
           \_string\.go$
-        
+
         # A url that the html report will be accessible at, once your
         # workflow uploads it.  Used in the pull request comment.
         report-url: https://julien-noblet.github.io/download-geofabrik/${{ github.ref_name}}.html
-       
+
     - name: Create Awesome Badge
       uses: schneegans/dynamic-badges-action@v1.9.0
       with:
@@ -131,4 +149,3 @@ jobs:
         label: Go Coverage
         message: ${{ steps.coverage.outputs.coverage-pct-1dp }}%
         color: ${{ steps.coverage.outputs.meets-threshold == 'true' && 'green' || 'red' }}
-       

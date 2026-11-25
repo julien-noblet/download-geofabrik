@@ -20,15 +20,20 @@ jobs:
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - uses: DeterminateSystems/magic-nix-cache-action@main
-    - name: Setup environment from Nix
+    - uses: cachix/cachix-action@v16
+      with:
+        name: devenv
+    - name: Install devenv
+      run: nix profile add nixpkgs#devenv
+    - name: Setup environment from devenv
       run: |
         set -o pipefail
-        nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
+        devenv --no-tui shell -- printenv PATH | tr ":" "\n" | while read -r p; do
           if [ -d "$p" ]; then
             echo "$p" >> "$GITHUB_PATH"
           fi
         done
+        rm -f .git/hooks/pre-commit .git/hooks/pre-push .pre-commit-config.yaml
     - name: Run Go benchmarks
       shell: bash
       run: |

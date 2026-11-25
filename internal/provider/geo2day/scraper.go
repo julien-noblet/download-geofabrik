@@ -8,12 +8,12 @@ import (
 	"io"
 	"net/http"
 	"strings"
-	"sync"
 	"time"
 
 	"golang.org/x/net/html"
 
 	"github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
+	"github.com/julien-noblet/download-geofabrik/internal/provider/scraperutil"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
@@ -103,7 +103,7 @@ var exceptionList = []struct {
 }
 
 // FetchCatalog scrapes the Geo2Day index concurrently and builds a catalog.Catalog.
-func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) { //nolint:cyclop // nil guard +1 branch
+func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	if p == nil {
 		return nil, catalog.ErrProviderNil
 	}
@@ -116,85 +116,19 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	cat.BaseURL = p.BaseURL
 	cat.Formats = DefaultFormats()
 
-	crawlCtx, cancel := context.WithCancel(ctx)
-	defer cancel()
-
-	var (
-		visitedMu     sync.Mutex
-		visited       = make(map[string]bool)
-		workChan      = make(chan string, workChanCapacity)
-		activeWorkers sync.WaitGroup
-		errOnce       sync.Once
-		firstErr      error
-	)
-
-	recordErr := func(err error) {
-		errOnce.Do(func() {
-			firstErr = err
-
-			cancel()
-		})
+	crawlCfg := scraperutil.CrawlConfig{
+		StartURL:         p.StartURL,
+		ProviderName:     "geo2day",
+		PanicErr:         ErrFetchCatalog,
+		WorkChanCapacity: workChanCapacity,
+		ConcurrencyLimit: concurrencyLimit,
 	}
 
-	enqueue := func(targetURL string) {
-		if err := crawlCtx.Err(); err != nil {
-			recordErr(fmt.Errorf("crawl context canceled: %w", err))
-
-			return
-		}
-
-		visitedMu.Lock()
-		if visited[targetURL] {
-			visitedMu.Unlock()
-
-			return
-		}
-
-		visited[targetURL] = true
-		visitedMu.Unlock()
-
-		activeWorkers.Add(1)
-
-		go func() {
-			select {
-			case workChan <- targetURL:
-			case <-crawlCtx.Done():
-				activeWorkers.Done()
-			}
-		}()
-	}
-
-	crawlState := &crawlContext{
-		workers: &activeWorkers,
-		onError: recordErr,
-		enqueue: enqueue,
-		tokens:  make(chan struct{}, concurrencyLimit),
-	}
-
-	enqueue(p.StartURL)
-
-	var dispatcherWG sync.WaitGroup
-
-	dispatcherWG.Go(func() {
-		defer func() {
-			if r := recover(); r != nil {
-				crawlState.onError(fmt.Errorf("%w: panic in geo2day dispatcher: %v", ErrFetchCatalog, r))
-			}
-		}()
-
-		p.runDispatcher(crawlCtx, workChan, cat, crawlState)
+	err := scraperutil.Crawl(ctx, crawlCfg, func(crawlCtx context.Context, pageURL string) ([]string, error) {
+		return p.fetchAndProcessPage(crawlCtx, pageURL, cat)
 	})
-
-	activeWorkers.Wait()
-	close(workChan)
-	dispatcherWG.Wait()
-
-	if err := ctx.Err(); err != nil && firstErr == nil {
-		firstErr = fmt.Errorf("crawl context canceled: %w", err)
-	}
-
-	if firstErr != nil {
-		return nil, firstErr
+	if err != nil {
+		return nil, fmt.Errorf("crawling geo2day: %w", err)
 	}
 
 	normalizeElementNames(cat)
@@ -210,57 +144,6 @@ func normalizeElementNames(cat *catalog.Catalog) {
 	for id, elem := range cat.Elements {
 		elem.Name = cmp.Or(elem.Name, id)
 		cat.Elements[id] = elem
-	}
-}
-
-type crawlContext struct {
-	workers *sync.WaitGroup
-	onError func(error)
-	enqueue func(string)
-	tokens  chan struct{}
-}
-
-func (p *Provider) runDispatcher(ctx context.Context, work <-chan string, cat *catalog.Catalog, state *crawlContext) {
-	for target := range work {
-		if ctx.Err() != nil {
-			state.workers.Done()
-
-			continue
-		}
-
-		select {
-		case <-ctx.Done():
-			state.onError(fmt.Errorf("crawl context canceled: %w", ctx.Err()))
-			state.workers.Done()
-
-			continue
-
-		case state.tokens <- struct{}{}:
-		}
-
-		go p.processWorker(ctx, target, cat, state)
-	}
-}
-
-func (p *Provider) processWorker(ctx context.Context, pageURL string, cat *catalog.Catalog, state *crawlContext) {
-	defer func() {
-		if r := recover(); r != nil {
-			state.onError(fmt.Errorf("%w: panic in geo2day worker for %s: %v", ErrFetchCatalog, pageURL, r))
-		}
-
-		<-state.tokens
-		state.workers.Done()
-	}()
-
-	subPages, err := p.fetchAndProcessPage(ctx, pageURL, cat)
-	if err != nil {
-		state.onError(err)
-
-		return
-	}
-
-	for _, page := range subPages {
-		state.enqueue(page)
 	}
 }
 

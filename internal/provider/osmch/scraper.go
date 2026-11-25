@@ -3,15 +3,13 @@ package osmch
 import (
 	"cmp"
 	"context"
-	"errors"
 	"fmt"
 	"io"
 	"net/http"
 	"strings"
 
-	"golang.org/x/net/html"
-
 	"github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
+	"github.com/julien-noblet/download-geofabrik/internal/provider/scraperutil"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
@@ -113,66 +111,11 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 }
 
 func parseOSMCHHTML(reader io.Reader, cat *catalog.Catalog) error {
-	tokenizer := html.NewTokenizer(reader)
-
-	for {
-		tokenType := tokenizer.Next()
-
-		switch tokenType {
-		case html.ErrorToken:
-			if errors.Is(tokenizer.Err(), io.EOF) {
-				return nil
-			}
-
-			return fmt.Errorf("cannot parse html: %w", tokenizer.Err())
-
-		case html.StartTagToken, html.SelfClosingTagToken:
-			processAnchorTag(tokenizer, cat)
-
-		case html.TextToken, html.EndTagToken, html.CommentToken, html.DoctypeToken:
-			// Non-anchor tokens
-		}
-	}
-}
-
-func processAnchorTag(tokenizer *html.Tokenizer, cat *catalog.Catalog) {
-	tagName, hasAttr := tokenizer.TagName()
-	if string(tagName) != "a" || !hasAttr {
-		return
+	if err := scraperutil.ParseFlatDirectory(reader, cat, shouldSkipHref, parseHrefToIDAndFormat); err != nil {
+		return fmt.Errorf("parsing osmch directory: %w", err)
 	}
 
-	for {
-		key, val, more := tokenizer.TagAttr()
-		if string(key) == "href" {
-			href := string(val)
-			parseFileLink(href, cat)
-
-			return
-		}
-
-		if !more {
-			return
-		}
-	}
-}
-
-func parseFileLink(href string, cat *catalog.Catalog) {
-	if shouldSkipHref(href) {
-		return
-	}
-
-	elementID, formatID := parseHrefToIDAndFormat(href)
-	if elementID == "" || formatID == "" {
-		return
-	}
-
-	elem := catalog.Element{
-		ID:   elementID,
-		Name: elementID,
-	}
-
-	_ = cat.MergeElement(&elem)
-	cat.AddExtension(elementID, formatID)
+	return nil
 }
 
 func shouldSkipHref(href string) bool {
