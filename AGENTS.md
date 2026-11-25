@@ -37,6 +37,7 @@ Use this map to jump directly to the relevant file without scanning directories 
 | `internal/mcp/resources.go`       | MCP resource handlers: `geofabrik://services`, `geofabrik://formats`, `geofabrik://catalog/{service}`.                                                                                                                                                                              |
 | `internal/provider/provider.go`   | `Provider` interface (`Name`, `Description`, `DefaultConfigFile`, `FetchCatalog`), thread-safe provider registry (`Register`, `Get`, `List`).                                                                                                                                       |
 | `internal/provider/defaults.go`   | `RegisterDefaultProviders()`: registers all 10 built-in providers; `AllDefaultFormats()` returns format definitions across all providers.                                                                                                                                           |
+| `internal/provider/scraperutil/`  | Shared concurrent URL crawler (`Crawl`, `CrawlConfig`, `PageFunc`) and flat HTML directory parser (`ParseAnchorHrefs`, `ParseFlatDirectory`, `HrefParser`).                                                                                                                         |
 | `pkg/catalog/catalog.go`          | Core thread-safe domain model `Catalog` (`LoadFile`, `SaveFile`, `Find`, `MergeElement`, `SortedKeys`, `ResolveURL`).                                                                                                                                                               |
 | `pkg/catalog/element.go`          | Catalog element model (`Element`: `ID`, `File`, `Name`, `Parent`, `Formats`, `Meta`).                                                                                                                                                                                               |
 | `pkg/catalog/format.go`           | Format definitions & constants (`FormatOsmPbf`, `KeyOsmPbf`, etc.), `GetMiniFormats()`, `GetFormats()`.                                                                                                                                                                             |
@@ -110,6 +111,15 @@ Build the CLI binary:
 go build ./cmd/download-geofabrik
 ```
 
+Run the full `devenv` check suite (git-hooks, `go test ./...`, `golangci-lint run`, `go build`, `nix build`):
+
+```bash
+devenv --no-tui test
+devenv tasks run go:test | go:lint | go:vuln | go:build
+```
+
+Note: `devenv.nix` sets `CGO_ENABLED=0` by default; pass `CGO_ENABLED=1` when running `go test -race ./...`.
+
 The CLI is typically executed as:
 
 ```bash
@@ -178,3 +188,5 @@ To minimize back-and-forth and context token consumption:
 - Adding new dependencies for simple logic.
 - Modifying provider selection or config filenames without updating the corresponding tests and docs.
 - Modify directly the README.md. You can find the way to generate README.md from .github/workflows/genyml.yml file. Adapt the workflow to generate the catalog files too.
+- Modifying `LICENSE` or letting formatters/whitespace hooks touch it (`internal/downloader/hash_test.go` asserts its exact MD5 `65d26fcc2f35ea6a181ac777e42db1ea`).
+- Re-implementing concurrent BFS crawlers or HTML `<a>` directory loops in new providers; reuse `internal/provider/scraperutil`.
