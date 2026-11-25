@@ -78,20 +78,24 @@ go build -o download-geofabrik ./cmd/download-geofabrik
 ## Development Workflow
 
 1. **Fork & Branch**: Create a feature or fix branch from `master` / `main`:
+
    ```bash
    git checkout -b feat/my-new-feature
    ```
+
 2. **Make Changes**: Follow package boundaries and coding conventions.
 3. **Verify Locally**:
    - Run tests: `go test ./...`
    - Run linter: `golangci-lint run`
    - Verify flake: `nix flake check`
 4. **Commit**: Use [Conventional Commits](https://www.conventionalcommits.org/):
+
    ```text
    feat(provider): add support for osm-chile extracts
    fix(downloader): handle http 429 rate-limiting with exponential backoff
    test(catalog): add table-driven tests for MergeElement
    ```
+
 5. **Push & Open PR**: Push to your fork and submit a Pull Request.
 
 ---
@@ -154,9 +158,11 @@ go test -fuzz=FuzzProviderScraper -fuzztime=15s ./internal/provider/osmch
 ### Benchmarks
 
 - **Target only modified packages** when benchmarking to avoid huge execution times and log dumps:
+
   ```bash
   go test -bench=. -benchmem ./internal/cli
   ```
+
 - **Do not run `./...` benchmarks** across the whole repository.
 
 ---
@@ -177,38 +183,52 @@ type Provider interface {
 Follow this step-by-step checklist to integrate a new provider:
 
 ### Step 1: Create the Provider Package
+
 Create a new package under `internal/provider/<name>/` (e.g. `internal/provider/osmcl/`):
+
 - `scraper.go` (or `api.go` if the provider has a JSON/GeoJSON endpoint).
 - Implement `Name()`, `Description()`, `DefaultConfigFile()`, and `FetchCatalog(ctx)`.
 - Define `DefaultFormats() catalog.FormatDefinitions` (ensure `.md5` format is mapped if supported).
 
 ### Step 2: Implement Scraper Tests
+
 Create `scraper_test.go` in `internal/provider/<name>/`:
+
 - Use `net/http/httptest` to mock remote server responses.
 - Test successful parsing, network timeouts, invalid HTML/JSON, and empty inputs.
 - Provider code should target 100% statement and branch test coverage.
 
 ### Step 3: Register in Defaults
+
 Update `internal/provider/defaults.go`:
+
 - In `RegisterDefaultProviders()`: Add `Register(<name>.NewProvider())`.
 - In `AllDefaultFormats()`: Append `<name>.DefaultFormats()`.
 
 ### Step 4: Add Service Constant
+
 In `internal/generator/generator.go`:
+
 - Define `Service<ProviderName> = "<provider-key>"`.
 
 ### Step 5: Update CLI Help
+
 In `internal/cli/root.go`:
+
 - Append the new provider key to the `--service` flag help description.
 
 ### Step 6: Generate Catalog YAML
+
 Run the catalog generator to scrape and generate the initial catalog file:
+
 ```bash
 ./download-geofabrik --service="<provider-key>" generate
 ```
+
 This generates `<provider-key>.yml` at the repository root.
 
 ### Step 7: Update Automation & Build Files
+
 - Update `.pre-commit`: Add the catalog generation command, catalog doc markdown command, and `git add <provider-key>.yml`.
 - Update `.github/workflows/genyml.yml`: Add generation step and catalog doc markdown generation.
 - Update `.goreleaser.yaml`: Add `./<provider-key>.yml` to `extra_files` under `dockers_v2`.

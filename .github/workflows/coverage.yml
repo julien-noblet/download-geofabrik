@@ -28,11 +28,15 @@ jobs:
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - uses: DeterminateSystems/magic-nix-cache-action@main
-    - name: Setup environment from Nix
+    - uses: cachix/cachix-action@v16
+      with:
+        name: devenv
+    - name: Install devenv
+      run: nix profile add nixpkgs#devenv
+    - name: Setup environment from devenv
       run: |
         set -o pipefail
-        nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
+        devenv --no-tui shell -- printenv PATH | tr ":" "\n" | while read -r p; do
           if [ -d "$p" ]; then
             echo "$p" >> "$GITHUB_PATH"
           fi
@@ -53,11 +57,11 @@ jobs:
         ignore-pattern: |
           \.pb\.go$
           \_string\.go$
-        
+
         # A url that the html report will be accessible at, once your
         # workflow uploads it.  Used in the pull request comment.
         report-url: https://julien-noblet.github.io/download-geofabrik/${{ github.ref_name}}.html
-        
+
     - name: Generate coverage tree map
       run: |
         mkdir -p ${{ github.ref_name}}
@@ -92,11 +96,15 @@ jobs:
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - uses: DeterminateSystems/magic-nix-cache-action@main
-    - name: Setup environment from Nix
+    - uses: cachix/cachix-action@v16
+      with:
+        name: devenv
+    - name: Install devenv
+      run: nix profile add nixpkgs#devenv
+    - name: Setup environment from devenv
       run: |
         set -o pipefail
-        nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
+        devenv --no-tui shell -- printenv PATH | tr ":" "\n" | while read -r p; do
           if [ -d "$p" ]; then
             echo "$p" >> "$GITHUB_PATH"
           fi
@@ -117,11 +125,11 @@ jobs:
         ignore-pattern: |
           \.pb\.go$
           \_string\.go$
-        
+
         # A url that the html report will be accessible at, once your
         # workflow uploads it.  Used in the pull request comment.
         report-url: https://julien-noblet.github.io/download-geofabrik/${{ github.ref_name}}.html
-       
+
     - name: Create Awesome Badge
       uses: schneegans/dynamic-badges-action@v1.9.0
       with:
@@ -131,4 +139,3 @@ jobs:
         label: Go Coverage
         message: ${{ steps.coverage.outputs.coverage-pct-1dp }}%
         color: ${{ steps.coverage.outputs.meets-threshold == 'true' && 'green' || 'red' }}
-       

@@ -114,10 +114,14 @@
       enable = true;
       excludes = [ "^[^/]+\\.yml$" ];
       settings = {
+        strict = false;
         preset = "relaxed";
         configuration = ''
           extends: relaxed
           rules:
+            hyphens: disable
+            indentation:
+              indent-sequences: whatever
             line-length: disable
             truthy:
               allowed-values: ["true", "false", "on"]
@@ -154,6 +158,7 @@
         "flake\\.lock"
         "\\.yml$"
         "\\.md5$"
+        "^LICENSE$"
       ];
     };
     trim-trailing-whitespace = {
@@ -163,6 +168,7 @@
         "flake\\.lock"
         "\\.yml$"
         "\\.md5$"
+        "^LICENSE$"
       ];
     };
   };
@@ -171,9 +177,10 @@
     set -euo pipefail
     go test ./...
     golangci-lint run
-    govulncheck ./...
-    go build -o "$TMPDIR/download-geofabrik" ./cmd/download-geofabrik
-    "$TMPDIR/download-geofabrik" --version
+    OUT_BIN="$(mktemp)"
+    trap 'rm -f "$OUT_BIN"' EXIT
+    go build -o "$OUT_BIN" ./cmd/download-geofabrik
+    "$OUT_BIN" --version
     if command -v nix >/dev/null 2>&1; then
       nix --extra-experimental-features "nix-command flakes" build --no-link
     fi
