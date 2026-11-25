@@ -26,7 +26,7 @@ jobs:
         # default fetch-depth is insufficent to find previous coverage notes
         fetch-depth: 10
 
-    - uses: cachix/install-nix-action@v31
+    - uses: cachix/install-nix-action@v32
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
@@ -101,7 +101,7 @@ jobs:
         # default fetch-depth is insufficent to find previous coverage notes
         fetch-depth: 10
 
-    - uses: cachix/install-nix-action@v31
+    - uses: cachix/install-nix-action@v32
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
