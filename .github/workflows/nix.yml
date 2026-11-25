@@ -53,7 +53,7 @@ jobs:
             experimental-features = nix-command flakes
 
       - name: Setup Cachix (devenv)
-        uses: cachix/cachix-action@v16
+        uses: cachix/cachix-action@v17
         with:
           name: devenv
 
