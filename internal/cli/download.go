@@ -25,7 +25,10 @@ var (
 	noDownload       bool
 	force            bool
 	downloadProgress bool
+	downloadRetries  int
 )
+
+const defaultDownloadRetries = 2
 
 type formatFlag struct {
 	key       string
@@ -102,6 +105,12 @@ func RegisterDownloadCmd() {
 	downloadCmd.Flags().BoolVarP(&noDownload, "nodownload", "n", false, "Do not download file (test only)")
 	downloadCmd.Flags().BoolVar(&force, "force", false, "Replace existing destination files")
 	downloadCmd.Flags().BoolVar(&downloadProgress, "progress", true, "Show progress bar")
+	downloadCmd.Flags().IntVar(
+		&downloadRetries,
+		"retries",
+		defaultDownloadRetries,
+		"Number of additional attempts for transient download failures",
+	)
 
 	for _, flagDef := range formatFlagList {
 		downloadCmd.Flags().BoolP(flagDef.key, flagDef.shorthand, false, flagDef.usage)
@@ -132,6 +141,7 @@ func buildDownloadOptions(cmd *cobra.Command) (*downloader.Options, error) {
 		NoDownload:      noDownload,
 		Force:           force,
 		Progress:        downloadProgress,
+		Retries:         max(downloadRetries, 0),
 		FormatFlags:     make(map[string]bool, len(formatFlagList)),
 	}
 
