@@ -8,11 +8,11 @@ import (
 	"io"
 	"net/http"
 	"strings"
-	"sync"
 
 	"golang.org/x/net/html"
 
 	"github.com/julien-noblet/download-geofabrik/internal/provider/httpclient"
+	"github.com/julien-noblet/download-geofabrik/internal/provider/scraperutil"
 	"github.com/julien-noblet/download-geofabrik/pkg/catalog"
 )
 
@@ -135,7 +135,7 @@ func DefaultFormats() catalog.FormatDefinitions {
 }
 
 // FetchCatalog crawls the directory index of OpenStreetMap.fr concurrently and generates a Catalog.
-func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) { //nolint:cyclop // nil guard +1 branch
+func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	if p == nil {
 		return nil, catalog.ErrProviderNil
 	}
@@ -148,141 +148,34 @@ func (p *Provider) FetchCatalog(ctx context.Context) (*catalog.Catalog, error) {
 	cat.BaseURL = p.BaseURL
 	cat.Formats = DefaultFormats()
 
-	crawlCtx, cancel := context.WithCancel(ctx)
-	defer cancel()
-
-	var (
-		visitedMu     sync.Mutex
-		visited       = make(map[string]bool)
-		workChan      = make(chan string, workChanCapacity)
-		activeWorkers sync.WaitGroup
-		errOnce       sync.Once
-		firstErr      error
-	)
-
-	recordErr := func(err error) {
-		errOnce.Do(func() {
-			firstErr = err
-
-			cancel()
-		})
+	crawlCfg := scraperutil.CrawlConfig{
+		StartURL:         p.StartURL,
+		ProviderName:     "openstreetmapfr",
+		PanicErr:         ErrFetchCatalog,
+		WorkChanCapacity: workChanCapacity,
+		ConcurrencyLimit: concurrencyLimit,
 	}
 
-	enqueue := func(targetURL string) {
-		if err := crawlCtx.Err(); err != nil {
-			recordErr(fmt.Errorf("context canceled during crawl: %w", err))
-
-			return
+	err := scraperutil.Crawl(ctx, crawlCfg, func(crawlCtx context.Context, target string) ([]string, error) {
+		links, pageErr := p.fetchAndProcessPage(crawlCtx, target, cat)
+		if pageErr != nil {
+			return nil, pageErr
 		}
 
-		visitedMu.Lock()
-		if visited[targetURL] {
-			visitedMu.Unlock()
-
-			return
+		subPages := make([]string, 0, len(links))
+		for _, link := range links {
+			if strings.HasPrefix(link, p.StartURL) {
+				subPages = append(subPages, link)
+			}
 		}
 
-		visited[targetURL] = true
-		visitedMu.Unlock()
-
-		activeWorkers.Add(1)
-
-		go func() {
-			select {
-			case workChan <- targetURL:
-			case <-crawlCtx.Done():
-				activeWorkers.Done()
-			}
-		}()
-	}
-
-	crawlState := &crawlContext{
-		workers: &activeWorkers,
-		onError: recordErr,
-		enqueue: enqueue,
-		tokens:  make(chan struct{}, concurrencyLimit),
-	}
-
-	enqueue(p.StartURL)
-
-	var dispatcherWG sync.WaitGroup
-
-	dispatcherWG.Go(func() {
-		defer func() {
-			if r := recover(); r != nil {
-				crawlState.onError(fmt.Errorf("%w: panic in openstreetmapfr dispatcher: %v", ErrFetchCatalog, r))
-			}
-		}()
-
-		p.runDispatcher(crawlCtx, workChan, cat, crawlState)
+		return subPages, nil
 	})
-
-	activeWorkers.Wait()
-	close(workChan)
-	dispatcherWG.Wait()
-
-	if err := ctx.Err(); err != nil && firstErr == nil {
-		firstErr = fmt.Errorf("context canceled during crawl: %w", err)
-	}
-
-	if firstErr != nil {
-		return nil, firstErr
+	if err != nil {
+		return nil, fmt.Errorf("crawling openstreetmapfr: %w", err)
 	}
 
 	return cat, nil
-}
-
-type crawlContext struct {
-	workers *sync.WaitGroup
-	onError func(error)
-	enqueue func(string)
-	tokens  chan struct{}
-}
-
-func (p *Provider) runDispatcher(ctx context.Context, work <-chan string, cat *catalog.Catalog, state *crawlContext) {
-	for target := range work {
-		if ctx.Err() != nil {
-			state.workers.Done()
-
-			continue
-		}
-
-		select {
-		case <-ctx.Done():
-			state.onError(fmt.Errorf("context canceled during crawl: %w", ctx.Err()))
-			state.workers.Done()
-
-			continue
-
-		case state.tokens <- struct{}{}:
-		}
-
-		go p.processWorker(ctx, target, cat, state)
-	}
-}
-
-func (p *Provider) processWorker(ctx context.Context, target string, cat *catalog.Catalog, state *crawlContext) {
-	defer func() {
-		if r := recover(); r != nil {
-			state.onError(fmt.Errorf("%w: panic in openstreetmapfr worker for %s: %v", ErrFetchCatalog, target, r))
-		}
-
-		<-state.tokens
-		state.workers.Done()
-	}()
-
-	links, err := p.fetchAndProcessPage(ctx, target, cat)
-	if err != nil {
-		state.onError(err)
-
-		return
-	}
-
-	for _, link := range links {
-		if strings.HasPrefix(link, p.StartURL) {
-			state.enqueue(link)
-		}
-	}
 }
 
 func (p *Provider) fetchAndProcessPage(ctx context.Context, currentURL string, cat *catalog.Catalog) ([]string, error) {
