@@ -296,7 +296,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     australia-oceania:
         id: australia-oceania
@@ -366,7 +365,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     bahamas:
         id: bahamas
@@ -414,7 +412,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     bedfordshire:
         id: bedfordshire
@@ -664,7 +661,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     buckinghamshire:
         id: buckinghamshire
@@ -985,7 +981,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     chongqing:
         id: chongqing
@@ -1225,7 +1220,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     dach:
         id: dach
@@ -1416,7 +1410,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     egypt:
         id: egypt
@@ -1434,18 +1427,6 @@ elements:
         id: el-salvador
         name: El Salvador
         parent: central-america
-        files:
-            - kml
-            - osh.pbf
-            - osm.pbf
-            - osm.pbf.md5
-            - poly
-            - shp.zip
-            - state.txt
-    enfield:
-        id: enfield
-        name: Enfield
-        parent: greater-london
         files:
             - kml
             - osh.pbf
@@ -1867,7 +1848,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     guangdong:
         id: guangdong
@@ -2239,7 +2219,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     indonesia:
         id: indonesia
@@ -2251,7 +2230,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     inner-mongolia:
         id: inner-mongolia
@@ -2530,7 +2508,7 @@ elements:
     kaliningrad:
         id: kaliningrad
         name: Kaliningrad
-        parent: russia
+        parent: northwestern-fed-district
         files:
             - kml
             - osh.pbf
@@ -3173,7 +3151,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     mauritania:
         id: mauritania
@@ -3209,7 +3186,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     mazowieckie:
         id: mazowieckie
@@ -3485,7 +3461,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     new-brunswick:
         id: new-brunswick
@@ -3557,7 +3532,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     niederbayern:
         id: niederbayern
@@ -3737,7 +3711,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     norfolk:
         id: norfolk
@@ -3927,7 +3900,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     nottinghamshire:
         id: nottinghamshire
@@ -3963,7 +3935,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     nusa-tenggara:
         id: nusa-tenggara
@@ -4442,7 +4413,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     rheinland-pfalz:
         id: rheinland-pfalz
@@ -5012,7 +4982,6 @@ elements:
             - osm.pbf
             - osm.pbf.md5
             - poly
-            - shp.zip
             - state.txt
     sri-lanka:
         id: sri-lanka
@@ -5484,7 +5453,7 @@ elements:
             - state.txt
     ukraine:
         id: ukraine
-        name: Ukraine (with Crimea)
+        name: Ukraine
         parent: europe
         files:
             - kml
@@ -5555,7 +5524,7 @@ elements:
     us-midwest:
         id: us-midwest
         name: US Midwest
-        parent: north-america
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5566,7 +5535,7 @@ elements:
     us-northeast:
         id: us-northeast
         name: US Northeast
-        parent: north-america
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5577,7 +5546,7 @@ elements:
     us-pacific:
         id: us-pacific
         name: US Pacific
-        parent: north-america
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5588,7 +5557,7 @@ elements:
     us-south:
         id: us-south
         name: US South
-        parent: north-america
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5599,7 +5568,7 @@ elements:
     us-west:
         id: us-west
         name: US West
-        parent: north-america
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5609,8 +5578,8 @@ elements:
             - state.txt
     us/alabama:
         id: us/alabama
-        name: us/alabama
-        parent: north-america
+        name: Alabama
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5621,8 +5590,8 @@ elements:
             - state.txt
     us/alaska:
         id: us/alaska
-        name: us/alaska
-        parent: north-america
+        name: Alaska
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5633,8 +5602,8 @@ elements:
             - state.txt
     us/arizona:
         id: us/arizona
-        name: us/arizona
-        parent: north-america
+        name: Arizona
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5645,8 +5614,8 @@ elements:
             - state.txt
     us/arkansas:
         id: us/arkansas
-        name: us/arkansas
-        parent: north-america
+        name: Arkansas
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5657,8 +5626,8 @@ elements:
             - state.txt
     us/california:
         id: us/california
-        name: us/california
-        parent: north-america
+        name: California
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5668,8 +5637,8 @@ elements:
             - state.txt
     us/colorado:
         id: us/colorado
-        name: us/colorado
-        parent: north-america
+        name: Colorado
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5680,8 +5649,8 @@ elements:
             - state.txt
     us/connecticut:
         id: us/connecticut
-        name: us/connecticut
-        parent: north-america
+        name: Connecticut
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5692,8 +5661,8 @@ elements:
             - state.txt
     us/delaware:
         id: us/delaware
-        name: us/delaware
-        parent: north-america
+        name: Delaware
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5704,8 +5673,8 @@ elements:
             - state.txt
     us/district-of-columbia:
         id: us/district-of-columbia
-        name: us/district-of-columbia
-        parent: north-america
+        name: District of Columbia
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5716,8 +5685,8 @@ elements:
             - state.txt
     us/florida:
         id: us/florida
-        name: us/florida
-        parent: north-america
+        name: Florida
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5729,7 +5698,7 @@ elements:
     us/georgia:
         id: us/georgia
         name: Georgia
-        parent: north-america
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5740,8 +5709,8 @@ elements:
             - state.txt
     us/hawaii:
         id: us/hawaii
-        name: us/hawaii
-        parent: north-america
+        name: Hawaii
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5752,8 +5721,8 @@ elements:
             - state.txt
     us/idaho:
         id: us/idaho
-        name: us/idaho
-        parent: north-america
+        name: Idaho
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5764,8 +5733,8 @@ elements:
             - state.txt
     us/illinois:
         id: us/illinois
-        name: us/illinois
-        parent: north-america
+        name: Illinois
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5776,8 +5745,8 @@ elements:
             - state.txt
     us/indiana:
         id: us/indiana
-        name: us/indiana
-        parent: north-america
+        name: Indiana
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5788,8 +5757,8 @@ elements:
             - state.txt
     us/iowa:
         id: us/iowa
-        name: us/iowa
-        parent: north-america
+        name: Iowa
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5800,8 +5769,8 @@ elements:
             - state.txt
     us/kansas:
         id: us/kansas
-        name: us/kansas
-        parent: north-america
+        name: Kansas
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5812,8 +5781,8 @@ elements:
             - state.txt
     us/kentucky:
         id: us/kentucky
-        name: us/kentucky
-        parent: north-america
+        name: Kentucky
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5824,8 +5793,8 @@ elements:
             - state.txt
     us/louisiana:
         id: us/louisiana
-        name: us/louisiana
-        parent: north-america
+        name: Louisiana
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5836,8 +5805,8 @@ elements:
             - state.txt
     us/maine:
         id: us/maine
-        name: us/maine
-        parent: north-america
+        name: Maine
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5848,8 +5817,8 @@ elements:
             - state.txt
     us/maryland:
         id: us/maryland
-        name: us/maryland
-        parent: north-america
+        name: Maryland
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5860,8 +5829,8 @@ elements:
             - state.txt
     us/massachusetts:
         id: us/massachusetts
-        name: us/massachusetts
-        parent: north-america
+        name: Massachusetts
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5872,8 +5841,8 @@ elements:
             - state.txt
     us/michigan:
         id: us/michigan
-        name: us/michigan
-        parent: north-america
+        name: Michigan
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5884,8 +5853,8 @@ elements:
             - state.txt
     us/minnesota:
         id: us/minnesota
-        name: us/minnesota
-        parent: north-america
+        name: Minnesota
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5896,8 +5865,8 @@ elements:
             - state.txt
     us/mississippi:
         id: us/mississippi
-        name: us/mississippi
-        parent: north-america
+        name: Mississippi
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5908,8 +5877,8 @@ elements:
             - state.txt
     us/missouri:
         id: us/missouri
-        name: us/missouri
-        parent: north-america
+        name: Missouri
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5920,8 +5889,8 @@ elements:
             - state.txt
     us/montana:
         id: us/montana
-        name: us/montana
-        parent: north-america
+        name: Montana
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5932,8 +5901,8 @@ elements:
             - state.txt
     us/nebraska:
         id: us/nebraska
-        name: us/nebraska
-        parent: north-america
+        name: Nebraska
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5944,8 +5913,8 @@ elements:
             - state.txt
     us/nevada:
         id: us/nevada
-        name: us/nevada
-        parent: north-america
+        name: Nevada
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5956,8 +5925,8 @@ elements:
             - state.txt
     us/new-hampshire:
         id: us/new-hampshire
-        name: us/new-hampshire
-        parent: north-america
+        name: New Hampshire
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5968,8 +5937,8 @@ elements:
             - state.txt
     us/new-jersey:
         id: us/new-jersey
-        name: us/new-jersey
-        parent: north-america
+        name: New Jersey
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5980,8 +5949,8 @@ elements:
             - state.txt
     us/new-mexico:
         id: us/new-mexico
-        name: us/new-mexico
-        parent: north-america
+        name: New Mexico
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -5992,8 +5961,8 @@ elements:
             - state.txt
     us/new-york:
         id: us/new-york
-        name: us/new-york
-        parent: north-america
+        name: New York
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6004,8 +5973,8 @@ elements:
             - state.txt
     us/north-carolina:
         id: us/north-carolina
-        name: us/north-carolina
-        parent: north-america
+        name: North Carolina
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6016,8 +5985,8 @@ elements:
             - state.txt
     us/north-dakota:
         id: us/north-dakota
-        name: us/north-dakota
-        parent: north-america
+        name: North Dakota
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6028,8 +5997,8 @@ elements:
             - state.txt
     us/ohio:
         id: us/ohio
-        name: us/ohio
-        parent: north-america
+        name: Ohio
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6040,8 +6009,8 @@ elements:
             - state.txt
     us/oklahoma:
         id: us/oklahoma
-        name: us/oklahoma
-        parent: north-america
+        name: Oklahoma
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6052,8 +6021,8 @@ elements:
             - state.txt
     us/oregon:
         id: us/oregon
-        name: us/oregon
-        parent: north-america
+        name: Oregon
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6064,8 +6033,8 @@ elements:
             - state.txt
     us/pennsylvania:
         id: us/pennsylvania
-        name: us/pennsylvania
-        parent: north-america
+        name: Pennsylvania
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6076,8 +6045,8 @@ elements:
             - state.txt
     us/puerto-rico:
         id: us/puerto-rico
-        name: us/puerto-rico
-        parent: north-america
+        name: Puerto Rico
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6088,8 +6057,8 @@ elements:
             - state.txt
     us/rhode-island:
         id: us/rhode-island
-        name: us/rhode-island
-        parent: north-america
+        name: Rhode Island
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6100,8 +6069,8 @@ elements:
             - state.txt
     us/south-carolina:
         id: us/south-carolina
-        name: us/south-carolina
-        parent: north-america
+        name: South Carolina
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6112,8 +6081,8 @@ elements:
             - state.txt
     us/south-dakota:
         id: us/south-dakota
-        name: us/south-dakota
-        parent: north-america
+        name: South Dakota
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6124,8 +6093,8 @@ elements:
             - state.txt
     us/tennessee:
         id: us/tennessee
-        name: us/tennessee
-        parent: north-america
+        name: Tennessee
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6136,8 +6105,8 @@ elements:
             - state.txt
     us/texas:
         id: us/texas
-        name: us/texas
-        parent: north-america
+        name: Texas
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6148,8 +6117,8 @@ elements:
             - state.txt
     us/us-virgin-islands:
         id: us/us-virgin-islands
-        name: us/us-virgin-islands
-        parent: north-america
+        name: Virgin Islands
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6160,8 +6129,8 @@ elements:
             - state.txt
     us/utah:
         id: us/utah
-        name: us/utah
-        parent: north-america
+        name: Utah
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6172,8 +6141,8 @@ elements:
             - state.txt
     us/vermont:
         id: us/vermont
-        name: us/vermont
-        parent: north-america
+        name: Vermont
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6184,8 +6153,8 @@ elements:
             - state.txt
     us/virginia:
         id: us/virginia
-        name: us/virginia
-        parent: north-america
+        name: Virginia
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6196,8 +6165,8 @@ elements:
             - state.txt
     us/washington:
         id: us/washington
-        name: us/washington
-        parent: north-america
+        name: Washington
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6208,8 +6177,8 @@ elements:
             - state.txt
     us/west-virginia:
         id: us/west-virginia
-        name: us/west-virginia
-        parent: north-america
+        name: West Virginia
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6220,8 +6189,8 @@ elements:
             - state.txt
     us/wisconsin:
         id: us/wisconsin
-        name: us/wisconsin
-        parent: north-america
+        name: Wisconsin
+        parent: us
         files:
             - kml
             - osh.pbf
@@ -6232,8 +6201,8 @@ elements:
             - state.txt
     us/wyoming:
         id: us/wyoming
-        name: us/wyoming
-        parent: north-america
+        name: Wyoming
+        parent: us
         files:
             - kml
             - osh.pbf
