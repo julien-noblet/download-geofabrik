@@ -12,9 +12,7 @@ permissions:
 
 jobs:
   fix-vendor-hash:
-    if: |
-      github.event.pull_request.head.repo.full_name == github.repository &&
-      (startsWith(github.head_ref, 'renovate/') || startsWith(github.head_ref, 'dependabot/') || github.actor == 'dependabot[bot]')
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7

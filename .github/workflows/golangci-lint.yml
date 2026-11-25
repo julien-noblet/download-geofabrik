@@ -22,6 +22,10 @@ jobs:
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes
-      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: cachix/cachix-action@v16
+        with:
+          name: devenv
+      - name: Install devenv
+        run: nix profile add nixpkgs#devenv
       - name: Run golangci-lint
-        run: nix develop --command golangci-lint run
+        run: devenv --no-tui shell -- golangci-lint run

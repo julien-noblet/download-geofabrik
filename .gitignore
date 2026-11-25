@@ -67,11 +67,15 @@ dist/
 
 /download-geofabrik
 
-# direnv
-.direnv/
-.direnv
-
 .agents/
 .claude/
 agent/
 skills-lock.json
+
+# Devenv
+.devenv*
+devenv.local.nix
+devenv.local.yaml
+
+# pre-commit
+.pre-commit-config.yaml
