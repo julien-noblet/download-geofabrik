@@ -30,7 +30,7 @@ jobs:
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - uses: cachix/cachix-action@v16
+    - uses: cachix/cachix-action@v17
       with:
         name: devenv
     - name: Install devenv
@@ -105,7 +105,7 @@ jobs:
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - uses: cachix/cachix-action@v16
+    - uses: cachix/cachix-action@v17
       with:
         name: devenv
     - name: Install devenv
