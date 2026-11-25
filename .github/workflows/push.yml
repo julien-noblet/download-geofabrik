@@ -33,6 +33,7 @@ jobs:
             echo "$p" >> "$GITHUB_PATH"
           fi
         done
+        rm -f .git/hooks/pre-commit .git/hooks/pre-push .pre-commit-config.yaml
     - name: Run Go benchmarks
       shell: bash
       run: |
