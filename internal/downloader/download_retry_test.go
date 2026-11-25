@@ -140,34 +140,40 @@ func TestFromURLRetriesTransientStatuses(t *testing.T) {
 func TestFromURLRetriesNetworkErrors(t *testing.T) {
 	t.Parallel()
 
-	var requestCount atomic.Int32
-
-	d := New(catalog.New(), &Options{Retries: 1})
-
-	d.wait = func(_ context.Context, delay time.Duration) error {
-		assert.Equal(t, initialRetryDelay, delay)
-
-		return nil
-	}
-	d.client = &http.Client{
-		Transport: roundTripperFunc(func(request *http.Request) (*http.Response, error) {
-			if requestCount.Add(1) == 1 {
-				return nil, &net.OpError{Op: "dial", Net: "tcp", Err: syscall.ECONNRESET}
-			}
-
-			return &http.Response{
-				StatusCode: http.StatusOK,
-				Header:     make(http.Header),
-				Body:       io.NopCloser(http.NoBody),
-				Request:    request,
-			}, nil
-		}),
+	tests := []struct {
+		networkErr error
+		name       string
+	}{
+		{name: "net.OpError", networkErr: &net.OpError{Op: "dial", Net: "tcp", Err: syscall.ECONNRESET}},
+		{name: "io.EOF", networkErr: io.EOF},
+		{name: "io.ErrUnexpectedEOF", networkErr: io.ErrUnexpectedEOF},
 	}
 
-	err := d.FromURL(context.Background(), "http://example.test/extract", filepath.Join(t.TempDir(), "extract.bin"))
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			t.Parallel()
 
-	require.NoError(t, err)
-	assert.EqualValues(t, 2, requestCount.Load())
+			var requestCount atomic.Int32
+
+			d := newRetryTestDownloader(t, 1, func(request *http.Request) (*http.Response, error) {
+				if requestCount.Add(1) == 1 {
+					return nil, test.networkErr
+				}
+
+				return &http.Response{
+					StatusCode: http.StatusOK,
+					Header:     make(http.Header),
+					Body:       io.NopCloser(http.NoBody),
+					Request:    request,
+				}, nil
+			})
+
+			err := d.FromURL(context.Background(), "http://example.test/extract", filepath.Join(t.TempDir(), "extract.bin"))
+
+			require.NoError(t, err)
+			assert.EqualValues(t, 2, requestCount.Load())
+		})
+	}
 }
 
 func TestFromURLRetriesResponseReadErrors(t *testing.T) {
@@ -175,31 +181,23 @@ func TestFromURLRetriesResponseReadErrors(t *testing.T) {
 
 	var requestCount atomic.Int32
 
-	d := New(catalog.New(), &Options{Retries: 1})
-	d.wait = func(_ context.Context, delay time.Duration) error {
-		assert.Equal(t, initialRetryDelay, delay)
-
-		return nil
-	}
-	d.client = &http.Client{
-		Transport: roundTripperFunc(func(request *http.Request) (*http.Response, error) {
-			if requestCount.Add(1) == 1 {
-				return &http.Response{
-					StatusCode: http.StatusOK,
-					Header:     make(http.Header),
-					Body:       &failingReadCloser{},
-					Request:    request,
-				}, nil
-			}
-
+	d := newRetryTestDownloader(t, 1, func(request *http.Request) (*http.Response, error) {
+		if requestCount.Add(1) == 1 {
 			return &http.Response{
 				StatusCode: http.StatusOK,
 				Header:     make(http.Header),
-				Body:       io.NopCloser(strings.NewReader("complete")),
+				Body:       &failingReadCloser{},
 				Request:    request,
 			}, nil
-		}),
-	}
+		}
+
+		return &http.Response{
+			StatusCode: http.StatusOK,
+			Header:     make(http.Header),
+			Body:       io.NopCloser(strings.NewReader("complete")),
+			Request:    request,
+		}, nil
+	})
 
 	outputPath := filepath.Join(t.TempDir(), "extract.bin")
 	require.NoError(t, d.FromURL(context.Background(), "http://example.test/extract", outputPath))
@@ -258,37 +256,13 @@ func TestChecksumRetriesSidecarFetch(t *testing.T) {
 	}))
 	t.Cleanup(server.Close)
 
-	outputDir := t.TempDir()
-	cfg := catalog.New()
-	cfg.Formats[catalog.FormatOsmPbf] = catalog.Format{ID: catalog.FormatOsmPbf, Loc: "-latest.osm.pbf"}
-	cfg.Formats["osm.pbf.md5"] = catalog.Format{ID: "osm.pbf.md5", Loc: "-latest.osm.pbf.md5"}
-	cfg.Elements["monaco"] = catalog.Element{
-		ID:      "monaco",
-		Name:    "Monaco",
-		Formats: []string{catalog.FormatOsmPbf, "osm.pbf.md5"},
-	}
-	cfg.BaseURL = server.URL
-
-	d := New(cfg, &Options{Check: true, Retries: 1, OutputDirectory: outputDir + string(os.PathSeparator)})
-
-	var waits int
-
-	d.wait = func(_ context.Context, delay time.Duration) error {
-		waits++
-
-		assert.Equal(t, initialRetryDelay, delay)
-
-		return nil
-	}
-
-	targetFile := filepath.Join(outputDir, "monaco.osm.pbf")
-	require.NoError(t, os.WriteFile(targetFile, content, 0o600))
+	d, waits := newChecksumTestDownloader(t, server.URL, 1, content)
 
 	checksumOK, err := d.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
 	require.NoError(t, err)
 	assert.True(t, checksumOK)
 	assert.EqualValues(t, 2, sidecarRequests.Load())
-	assert.Equal(t, 1, waits)
+	assert.Equal(t, 1, *waits)
 }
 
 func TestChecksumMismatchDoesNotRetry(t *testing.T) {
@@ -305,6 +279,63 @@ func TestChecksumMismatchDoesNotRetry(t *testing.T) {
 	}))
 	t.Cleanup(server.Close)
 
+	d, waits := newChecksumTestDownloader(t, server.URL, 2, content)
+
+	checksumOK, err := d.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
+	assert.False(t, checksumOK)
+	require.ErrorContains(t, err, "checksum mismatch")
+	assert.EqualValues(t, 1, requestCount.Load())
+	assert.Zero(t, *waits)
+}
+
+func TestParseRetryAfterDeltaSeconds(t *testing.T) {
+	t.Parallel()
+
+	now := time.Now()
+
+	tests := []struct {
+		name   string
+		value  string
+		want   time.Duration
+		wantOK bool
+	}{
+		{name: "caps above maxRetryDelay", value: strconv.Itoa(int(maxRetryDelay/time.Second) + 1), want: maxRetryDelay, wantOK: true},
+		{name: "zero seconds", value: "0", want: 0, wantOK: true},
+		{name: "negative seconds rejected", value: "-1", wantOK: false},
+		{name: "invalid string rejected", value: "not-a-date", wantOK: false},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			t.Parallel()
+
+			delay, ok := parseRetryAfter(test.value, now)
+			assert.Equal(t, test.wantOK, ok)
+
+			if test.wantOK {
+				assert.Equal(t, test.want, delay)
+			}
+		})
+	}
+}
+
+func newRetryTestDownloader(t *testing.T, retries int, transport roundTripperFunc) *Downloader {
+	t.Helper()
+
+	d := New(catalog.New(), &Options{Retries: retries})
+	d.wait = func(_ context.Context, delay time.Duration) error {
+		assert.Equal(t, initialRetryDelay, delay)
+
+		return nil
+	}
+	d.client = &http.Client{Transport: transport}
+
+	return d
+}
+
+func newChecksumTestDownloader(t *testing.T, serverURL string, retries int, content []byte) (downloader *Downloader, waitCount *int) {
+	t.Helper()
+
 	outputDir := t.TempDir()
 	cfg := catalog.New()
 	cfg.Formats[catalog.FormatOsmPbf] = catalog.Format{ID: catalog.FormatOsmPbf, Loc: "-latest.osm.pbf"}
@@ -314,43 +345,23 @@ func TestChecksumMismatchDoesNotRetry(t *testing.T) {
 		Name:    "Monaco",
 		Formats: []string{catalog.FormatOsmPbf, "osm.pbf.md5"},
 	}
-	cfg.BaseURL = server.URL
+	cfg.BaseURL = serverURL
 
-	d := New(cfg, &Options{Check: true, Retries: 2, OutputDirectory: outputDir + string(os.PathSeparator)})
+	d := New(cfg, &Options{Check: true, Retries: retries, OutputDirectory: outputDir + string(os.PathSeparator)})
 
 	var waits int
 
-	d.wait = func(_ context.Context, _ time.Duration) error {
+	d.wait = func(_ context.Context, delay time.Duration) error {
 		waits++
+
+		assert.Equal(t, initialRetryDelay, delay)
 
 		return nil
 	}
 
 	require.NoError(t, os.WriteFile(filepath.Join(outputDir, "monaco.osm.pbf"), content, 0o600))
 
-	checksumOK, err := d.Checksum(context.Background(), "monaco", catalog.FormatOsmPbf)
-	assert.False(t, checksumOK)
-	require.ErrorContains(t, err, "checksum mismatch")
-	assert.EqualValues(t, 1, requestCount.Load())
-	assert.Zero(t, waits)
-}
-
-func TestParseRetryAfterDeltaSeconds(t *testing.T) {
-	t.Parallel()
-
-	delay, ok := parseRetryAfter(strconv.Itoa(int(maxRetryDelay/time.Second)+1), time.Now())
-	require.True(t, ok)
-	assert.Equal(t, maxRetryDelay, delay)
-
-	delay, ok = parseRetryAfter("0", time.Now())
-	require.True(t, ok)
-	assert.Zero(t, delay)
-
-	_, ok = parseRetryAfter("-1", time.Now())
-	assert.False(t, ok)
-
-	_, ok = parseRetryAfter("not-a-date", time.Now())
-	assert.False(t, ok)
+	return d, &waits
 }
 
 type roundTripperFunc func(*http.Request) (*http.Response, error)
@@ -367,7 +378,7 @@ func (r *failingReadCloser) Read(buffer []byte) (int, error) {
 	if !r.readOnce {
 		r.readOnce = true
 
-		return copy(buffer, "partial"), syscall.ECONNRESET
+		return copy(buffer, "partial"), &net.OpError{Op: "read", Net: "tcp", Err: syscall.ECONNRESET}
 	}
 
 	return 0, io.EOF

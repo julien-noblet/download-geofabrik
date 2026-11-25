@@ -12,7 +12,6 @@ import (
 	"maps"
 	"net"
 	"net/http"
-	"net/url"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -238,7 +237,7 @@ func (d *Downloader) downloadOnce(ctx context.Context, myURL, fileName string, f
 
 	var readErr *responseReadError
 
-	return errors.As(err, &readErr), "", err
+	return errors.As(err, &readErr) && isTransientNetworkError(readErr.err), "", err
 }
 
 func (d *Downloader) checkDestination(fileName string, force bool) error {
@@ -267,25 +266,17 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 	opts := d.opts()
 
 	source := &trackingReader{reader: response.Body}
+
+	var reader io.Reader = source
+
 	if opts.Progress && !opts.Quiet && response.ContentLength > progressMinimal {
 		progressBar := pb.Full.Start64(response.ContentLength)
-		barReader := progressBar.NewProxyReader(source)
+		reader = progressBar.NewProxyReader(source)
 
 		defer progressBar.Finish()
-
-		written, err := io.CopyBuffer(dst, barReader, *bufPtr)
-		if err != nil {
-			if source.err != nil {
-				return written, &responseReadError{err: source.err}
-			}
-
-			return written, fmt.Errorf("copying response with progress: %w", err)
-		}
-
-		return written, nil
 	}
 
-	written, err := io.CopyBuffer(dst, source, *bufPtr)
+	written, err := io.CopyBuffer(dst, reader, *bufPtr)
 	if err != nil {
 		if source.err != nil {
 			return written, &responseReadError{err: source.err}
@@ -306,9 +297,7 @@ func (r *trackingReader) Read(buffer []byte) (int, error) {
 	bytesRead, err := r.reader.Read(buffer)
 	if err != nil && !errors.Is(err, io.EOF) {
 		r.err = err
-	}
 
-	if err != nil && !errors.Is(err, io.EOF) {
 		return bytesRead, fmt.Errorf("reading response body: %w", err)
 	}
 
@@ -339,16 +328,15 @@ func isTransientNetworkError(err error) bool {
 		return false
 	}
 
-	var requestErr *url.Error
-	if !errors.As(err, &requestErr) {
-		return false
-	}
-
-	if _, ok := errors.AsType[*net.OpError](requestErr.Err); ok {
+	if errors.Is(err, io.EOF) || errors.Is(err, io.ErrUnexpectedEOF) {
 		return true
 	}
 
-	networkErr, ok := errors.AsType[net.Error](requestErr.Err)
+	if _, ok := errors.AsType[*net.OpError](err); ok {
+		return true
+	}
+
+	networkErr, ok := errors.AsType[net.Error](err)
 
 	return ok && networkErr.Timeout()
 }

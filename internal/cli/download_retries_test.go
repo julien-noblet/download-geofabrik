@@ -18,17 +18,30 @@ func TestDownloadRetriesFlag(t *testing.T) {
 	require.NotNil(t, retriesFlag)
 	require.Equal(t, "2", retriesFlag.DefValue)
 
-	require.NoError(t, downloadCmd.Flags().Set("retries", "0"))
-	options, err := buildDownloadOptions(downloadCmd)
-	require.NoError(t, err)
-	require.Zero(t, options.Retries)
+	tests := []struct {
+		name      string
+		flagValue string
+		wantErr   string
+		want      int
+	}{
+		{name: "zero disables retries", flagValue: "0", want: 0},
+		{name: "positive value", flagValue: "1", want: 1},
+		{name: "negative value returns error", flagValue: "-1", wantErr: "--retries must be non-negative"},
+	}
 
-	require.NoError(t, downloadCmd.Flags().Set("retries", "1"))
-	options, err = buildDownloadOptions(downloadCmd)
-	require.NoError(t, err)
-	require.Equal(t, 1, options.Retries)
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			require.NoError(t, downloadCmd.Flags().Set("retries", test.flagValue))
 
-	require.NoError(t, downloadCmd.Flags().Set("retries", "-1"))
-	_, err = buildDownloadOptions(downloadCmd)
-	require.ErrorContains(t, err, "--retries must be non-negative")
+			options, err := buildDownloadOptions(downloadCmd)
+			if test.wantErr != "" {
+				require.ErrorContains(t, err, test.wantErr)
+
+				return
+			}
+
+			require.NoError(t, err)
+			require.Equal(t, test.want, options.Retries)
+		})
+	}
 }
