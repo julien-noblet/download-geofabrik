@@ -110,6 +110,11 @@ func TestLoggingFlags(t *testing.T) {
 }
 
 func TestRootCmd_ServiceFlagCompletion(t *testing.T) {
+	cli.ResetGlobs()
+	viper.Reset()
+	cli.RootCmd.SetArgs([]string{"--help"})
+	require.NoError(t, cli.Execute())
+
 	completionFunc, exists := cli.RootCmd.GetFlagCompletionFunc("service")
 	require.True(t, exists)
 	require.NotNil(t, completionFunc)

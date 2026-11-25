@@ -193,3 +193,35 @@ func TestOSMKewlLu_DefaultFormats(t *testing.T) {
 	assert.Contains(t, formats, catalog.FormatOsmPbf)
 	assert.Contains(t, formats, catalog.FormatOsmBz2)
 }
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (fn roundTripFunc) RoundTrip(req *http.Request) (*http.Response, error) {
+	return fn(req)
+}
+
+func TestOSMKewlLu_NilProviderName(t *testing.T) {
+	t.Parallel()
+
+	var nilProvider *osmkewllu.Provider
+
+	assert.Empty(t, nilProvider.Name())
+}
+
+func TestOSMKewlLu_FetchCatalog_BodyReadError(t *testing.T) {
+	t.Parallel()
+
+	provider := osmkewllu.New()
+	provider.Client = &http.Client{
+		Transport: roundTripFunc(func(_ *http.Request) (*http.Response, error) {
+			return &http.Response{
+				StatusCode: http.StatusOK,
+				Body:       io.NopCloser(iotest.ErrReader(errors.New("read error"))),
+			}, nil
+		}),
+	}
+
+	_, err := provider.FetchCatalog(context.Background())
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "parsing catalog html")
+}

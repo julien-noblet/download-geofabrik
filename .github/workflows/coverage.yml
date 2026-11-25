@@ -42,6 +42,7 @@ jobs:
             echo "$p" >> "$GITHUB_PATH"
           fi
         done
+        rm -f .git/hooks/pre-commit .git/hooks/pre-push .pre-commit-config.yaml
 
     - uses: gwatts/go-coverage-action@v2
       id: coverage
@@ -116,6 +117,7 @@ jobs:
             echo "$p" >> "$GITHUB_PATH"
           fi
         done
+        rm -f .git/hooks/pre-commit .git/hooks/pre-push .pre-commit-config.yaml
 
     - uses: gwatts/go-coverage-action@v2
       id: coverage
