@@ -19,9 +19,6 @@ var (
 	// ErrMissingElementArg is returned when the download command is called without an element argument.
 	ErrMissingElementArg = errors.New("missing required element argument")
 
-	// ErrInvalidRetryCount is returned when --retries is negative.
-	ErrInvalidRetryCount = errors.New("--retries must be non-negative")
-
 	// Flags for download command.
 	outputDir        string
 	check            bool
@@ -135,10 +132,6 @@ func buildDownloadOptions(cmd *cobra.Command) (*downloader.Options, error) {
 		return nil, err
 	}
 
-	if downloadRetries < 0 {
-		return nil, ErrInvalidRetryCount
-	}
-
 	opts := &downloader.Options{
 		ConfigFile:      cfgFile,
 		OutputDirectory: outDir,
@@ -148,7 +141,7 @@ func buildDownloadOptions(cmd *cobra.Command) (*downloader.Options, error) {
 		NoDownload:      noDownload,
 		Force:           force,
 		Progress:        downloadProgress,
-		Retries:         downloadRetries,
+		Retries:         max(downloadRetries, 0),
 		FormatFlags:     make(map[string]bool, len(formatFlagList)),
 	}
 
