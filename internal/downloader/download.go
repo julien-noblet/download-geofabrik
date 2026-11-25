@@ -176,19 +176,25 @@ func (d *Downloader) fromURL(ctx context.Context, myURL, fileName string, force 
 	return d.downloadWithRetries(ctx, myURL, fileName, force)
 }
 
+type retryDecision struct {
+	delay     time.Duration
+	retryable bool
+	hasDelay  bool
+}
+
 func (d *Downloader) downloadWithRetries(ctx context.Context, myURL, fileName string, force bool) error {
 	for retriesPerformed := 0; ; retriesPerformed++ {
-		retryable, retryAfter, downloadErr := d.downloadOnce(ctx, myURL, fileName, force)
+		decision, downloadErr := d.downloadOnce(ctx, myURL, fileName, force)
 		if downloadErr == nil {
 			return nil
 		}
 
-		if !retryable || errors.Is(downloadErr, context.Canceled) ||
+		if !decision.retryable || errors.Is(downloadErr, context.Canceled) ||
 			errors.Is(downloadErr, context.DeadlineExceeded) || retriesPerformed >= d.opts().Retries {
 			return downloadErr
 		}
 
-		delay := retryDelay(retriesPerformed, retryAfter, time.Now())
+		delay := retryDelay(retriesPerformed, decision)
 
 		wait := d.wait
 		if wait == nil {
@@ -201,7 +207,7 @@ func (d *Downloader) downloadWithRetries(ctx context.Context, myURL, fileName st
 	}
 }
 
-func (d *Downloader) downloadOnce(ctx context.Context, myURL, fileName string, force bool) (retryable bool, retryAfter string, err error) {
+func (d *Downloader) downloadOnce(ctx context.Context, myURL, fileName string, force bool) (decision retryDecision, err error) {
 	urlForError := "remote URL"
 	if d.opts().Verbose {
 		urlForError = myURL
@@ -209,14 +215,14 @@ func (d *Downloader) downloadOnce(ctx context.Context, myURL, fileName string, f
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, myURL, http.NoBody)
 	if err != nil {
-		return false, "", fmt.Errorf("creating request for %s: %w", urlForError, err)
+		return retryDecision{}, fmt.Errorf("creating request for %s: %w", urlForError, err)
 	}
 
 	client := cmp.Or(d.client, http.DefaultClient)
 
 	response, err := client.Do(req)
 	if err != nil {
-		return isTransientNetworkError(err), "", fmt.Errorf("downloading %s: %w", urlForError, err)
+		return retryDecision{retryable: isTransientNetworkError(err)}, fmt.Errorf("downloading %s: %w", urlForError, err)
 	}
 
 	defer func() {
@@ -230,14 +236,20 @@ func (d *Downloader) downloadOnce(ctx context.Context, myURL, fileName string, f
 		statusErr := fmt.Errorf("%w: downloading %s: server status code %d",
 			ErrServerStatusCode, urlForError, response.StatusCode)
 
-		return isRetryableStatus(response.StatusCode), response.Header.Get("Retry-After"), statusErr
+		delay, hasDelay := parseRetryAfter(response.Header.Get("Retry-After"), time.Now())
+
+		return retryDecision{
+			retryable: isRetryableStatus(response.StatusCode),
+			delay:     delay,
+			hasDelay:  hasDelay,
+		}, statusErr
 	}
 
 	err = d.saveToFile(fileName, response, force)
 
 	var readErr *responseReadError
 
-	return errors.As(err, &readErr) && isTransientNetworkError(readErr.err), "", err
+	return retryDecision{retryable: errors.As(err, &readErr) && isTransientNetworkError(readErr.err)}, err
 }
 
 func (d *Downloader) checkDestination(fileName string, force bool) error {
@@ -265,7 +277,7 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 
 	opts := d.opts()
 
-	source := &trackingReader{reader: response.Body}
+	source := &errCapturingReader{reader: response.Body}
 
 	var reader io.Reader = source
 
@@ -288,21 +300,18 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 	return written, nil
 }
 
-type trackingReader struct {
+type errCapturingReader struct {
 	reader io.Reader
 	err    error
 }
 
-func (r *trackingReader) Read(buffer []byte) (int, error) {
+func (r *errCapturingReader) Read(buffer []byte) (int, error) {
 	bytesRead, err := r.reader.Read(buffer)
 	if err != nil && !errors.Is(err, io.EOF) {
 		r.err = err
-
-		return bytesRead, fmt.Errorf("reading response body: %w", err)
 	}
 
-	// io.EOF must remain identifiable as the end-of-stream sentinel.
-	//nolint:wrapcheck // io.Reader.Read must return io.EOF unchanged.
+	//nolint:wrapcheck // Raw stream errors and io.EOF are wrapped by copyBody via responseReadError.
 	return bytesRead, err
 }
 
@@ -341,9 +350,9 @@ func isTransientNetworkError(err error) bool {
 	return ok && networkErr.Timeout()
 }
 
-func retryDelay(retriesPerformed int, retryAfter string, now time.Time) time.Duration {
-	if delay, ok := parseRetryAfter(retryAfter, now); ok {
-		return min(delay, maxRetryDelay)
+func retryDelay(retriesPerformed int, decision retryDecision) time.Duration {
+	if decision.hasDelay {
+		return min(decision.delay, maxRetryDelay)
 	}
 
 	delay := initialRetryDelay
@@ -374,7 +383,7 @@ func parseRetryAfter(value string, now time.Time) (time.Duration, bool) {
 		return 0, false
 	}
 
-	return max(retryTime.Sub(now), 0), true
+	return min(max(retryTime.Sub(now), 0), maxRetryDelay), true
 }
 
 func waitContext(ctx context.Context, delay time.Duration) error {

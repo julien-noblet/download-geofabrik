@@ -231,7 +231,10 @@ func TestRetryDelay(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			t.Parallel()
 
-			assert.Equal(t, test.want, retryDelay(test.retries, test.retryAfter, now))
+			delay, hasDelay := parseRetryAfter(test.retryAfter, now)
+			decision := retryDecision{delay: delay, hasDelay: hasDelay}
+
+			assert.Equal(t, test.want, retryDelay(test.retries, decision))
 		})
 	}
 }
