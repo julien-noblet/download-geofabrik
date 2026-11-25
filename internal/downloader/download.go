@@ -189,8 +189,7 @@ func (d *Downloader) downloadWithRetries(ctx context.Context, myURL, fileName st
 			return nil
 		}
 
-		if !decision.retryable || errors.Is(downloadErr, context.Canceled) ||
-			errors.Is(downloadErr, context.DeadlineExceeded) || retriesPerformed >= d.opts().Retries {
+		if !decision.retryable || isContextErr(downloadErr) || retriesPerformed >= d.opts().Retries {
 			return downloadErr
 		}
 
@@ -332,8 +331,12 @@ func isRetryableStatus(statusCode int) bool {
 		statusCode >= http.StatusInternalServerError && statusCode <= 599
 }
 
+func isContextErr(err error) bool {
+	return errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded)
+}
+
 func isTransientNetworkError(err error) bool {
-	if errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded) {
+	if isContextErr(err) {
 		return false
 	}
 
