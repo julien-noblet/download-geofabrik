@@ -9,6 +9,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 	"sync/atomic"
 	"testing"
 
@@ -54,6 +55,7 @@ func TestDownloadCLIHelperProcess(t *testing.T) {
 	}
 
 	require.Error(t, err)
+	_, _ = fmt.Fprintln(os.Stderr, err)
 	assert.Contains(t, err.Error(), expectedError)
 }
 
@@ -61,15 +63,33 @@ func TestDownloadMultiFormatCLIOutcomes(t *testing.T) {
 	tests := []struct {
 		name        string
 		expectedErr string
+		failGeoJSON bool
 		failOsmPbf  bool
+		verbose     bool
+		quiet       bool
 	}{
 		{
 			name: "all formats download successfully",
 		},
 		{
-			name:        "returns an error after one format succeeds",
+			name:        "continues after the first format fails",
+			failGeoJSON: true,
+			expectedErr: "test-elem (geojson): download failed: server return code error:",
+		},
+		{
+			name:        "reports failure after an earlier format succeeds",
 			failOsmPbf:  true,
-			expectedErr: "server status code 503",
+			expectedErr: "test-elem (osm.pbf): download failed: server return code error:",
+		},
+		{
+			name:        "includes full URL in verbose errors",
+			failGeoJSON: true,
+			verbose:     true,
+			expectedErr: "test-elem (geojson): download failed: server return code error:",
+		},
+		{
+			name:  "quiet mode suppresses the summary",
+			quiet: true,
 		},
 	}
 
@@ -78,6 +98,12 @@ func TestDownloadMultiFormatCLIOutcomes(t *testing.T) {
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				switch r.URL.Path {
 				case testGeoJSONPath:
+					if test.failGeoJSON {
+						http.Error(w, "unavailable", http.StatusServiceUnavailable)
+
+						return
+					}
+
 					_, _ = w.Write([]byte(testGeoJSONContent))
 
 				case testOsmPbfPath:
@@ -114,20 +140,40 @@ formats:
 			require.NoError(t, os.WriteFile(configFile, []byte(configContent), 0o600))
 
 			outputDir := t.TempDir()
-			runDownloadCLIHelper(t, []string{
+			output := runDownloadCLIHelper(t, []string{
 				"download",
 				testDownloadElement,
 				"--config", configFile,
 				"--output-dir", outputDir,
 				"--check=false",
 				"--progress=false",
-				"-g",
-				"-P",
+				"--retries=0",
+				"--verbose=" + strconv.FormatBool(test.verbose),
+				"--quiet=" + strconv.FormatBool(test.quiet),
+				"-g", "-P",
 			}, test.expectedErr)
 
+			if test.quiet {
+				assert.NotContains(t, output, "Download summary")
+			} else {
+				assert.Contains(t, output, "Download summary")
+				assert.Contains(t, output, "successful_formats")
+				assert.Contains(t, output, "failed_formats")
+			}
+
+			if test.verbose {
+				assert.Contains(t, output, server.URL+testGeoJSONPath)
+			} else {
+				assert.NotContains(t, output, server.URL)
+			}
+
 			geoJSON, err := os.ReadFile(filepath.Join(outputDir, testDownloadElement+".geojson"))
-			require.NoError(t, err)
-			assert.JSONEq(t, testGeoJSONContent, string(geoJSON))
+			if test.failGeoJSON {
+				require.ErrorIs(t, err, os.ErrNotExist)
+			} else {
+				require.NoError(t, err)
+				assert.JSONEq(t, testGeoJSONContent, string(geoJSON))
+			}
 
 			osmPbf, err := os.ReadFile(filepath.Join(outputDir, testDownloadElement+".osm.pbf"))
 			if test.failOsmPbf {
@@ -140,6 +186,43 @@ formats:
 			assert.Equal(t, []byte(testOsmPbfContent), osmPbf)
 		})
 	}
+}
+
+func TestDownloadRetriesFlagZero(t *testing.T) {
+	var requestCount atomic.Int32
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		requestCount.Add(1)
+		http.Error(w, "unavailable", http.StatusServiceUnavailable)
+	}))
+	t.Cleanup(server.Close)
+
+	configFile := filepath.Join(t.TempDir(), "catalog.yml")
+	configContent := fmt.Sprintf(`
+elements:
+  %s:
+    id: %s
+    files: ["osm.pbf"]
+formats:
+  osm.pbf:
+    ext: "osm.pbf"
+    loc: "/extract.osm.pbf"
+    baseurl: %q
+`, testDownloadElement, testDownloadElement, server.URL)
+	require.NoError(t, os.WriteFile(configFile, []byte(configContent), 0o600))
+
+	runDownloadCLIHelper(t, []string{
+		"download",
+		testDownloadElement,
+		"--config", configFile,
+		"--output-dir", t.TempDir(),
+		"--check=false",
+		"--progress=false",
+		"--retries=0",
+		"-P",
+	}, "server status code 503")
+
+	assert.EqualValues(t, 1, requestCount.Load())
 }
 
 func TestDownloadCLI_ChecksumOutcomes(t *testing.T) {
@@ -354,7 +437,7 @@ formats:
 	}
 }
 
-func runDownloadCLIHelper(t *testing.T, args []string, expectedError string) {
+func runDownloadCLIHelper(t *testing.T, args []string, expectedError string) string {
 	t.Helper()
 
 	encodedArgs, err := json.Marshal(args)
@@ -370,6 +453,8 @@ func runDownloadCLIHelper(t *testing.T, args []string, expectedError string) {
 
 	output, err := cmd.CombinedOutput()
 	require.NoError(t, err, "CLI helper failed: %s", output)
+
+	return string(output)
 }
 
 func TestDownloadCmd_NoDownload(t *testing.T) {

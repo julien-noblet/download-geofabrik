@@ -40,15 +40,19 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v7
 
-    - uses: cachix/install-nix-action@v31
+    - uses: cachix/install-nix-action@v32
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - uses: DeterminateSystems/magic-nix-cache-action@main
-    - name: Setup environment from Nix
+    - uses: cachix/cachix-action@v17
+      with:
+        name: devenv
+    - name: Install devenv
+      run: nix profile add nixpkgs#devenv
+    - name: Setup environment from devenv
       run: |
         set -o pipefail
-        nix develop --command bash -c 'echo "$PATH" | tr ":" "\n"' | while read -r p; do
+        devenv --no-tui shell -- printenv PATH | tr ":" "\n" | while read -r p; do
           if [ -d "$p" ]; then
             echo "$p" >> "$GITHUB_PATH"
           fi
@@ -62,11 +66,11 @@ jobs:
         # If you wish to specify custom queries, you can do so here or in a config file.
         # By default, queries listed here will override any specified in a config file.
         # Prefix the list here with "+" to use these queries and those in the config file.
-        
+
         # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-        
+
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: Autobuild
@@ -75,7 +79,7 @@ jobs:
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
 
-    #   If the Autobuild fails above, remove it and uncomment the following three lines. 
+    #   If the Autobuild fails above, remove it and uncomment the following three lines.
     #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
 
     # - run: |

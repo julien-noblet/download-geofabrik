@@ -17,12 +17,16 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
-      - uses: cachix/install-nix-action@v31
+      - uses: cachix/install-nix-action@v32
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes
-      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: cachix/cachix-action@v17
+        with:
+          name: devenv
+      - name: Install devenv
+        run: nix profile add nixpkgs#devenv
       - name: Verify go mod tidy
-        run: nix develop --command bash -c "go mod tidy && git diff --exit-code go.mod go.sum"
+        run: devenv --no-tui shell -- bash -c "go mod tidy && git diff --exit-code go.mod go.sum"
       - name: Run unit & race tests
-        run: nix develop --command bash -c "CGO_ENABLED=1 go test -v -race -shuffle=on ./..."
+        run: devenv --no-tui shell -- bash -c "CGO_ENABLED=1 go test -v -race -shuffle=on ./..."

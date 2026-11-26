@@ -12,16 +12,14 @@ permissions:
 
 jobs:
   fix-vendor-hash:
-    if: |
-      github.event.pull_request.head.repo.full_name == github.repository &&
-      (startsWith(github.head_ref, 'renovate/') || startsWith(github.head_ref, 'dependabot/') || github.actor == 'dependabot[bot]')
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
 
-      - uses: cachix/install-nix-action@v31
+      - uses: cachix/install-nix-action@v32
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes

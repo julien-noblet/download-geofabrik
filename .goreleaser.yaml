@@ -160,7 +160,6 @@ before:
       EOF
       go run cmd/download-geofabrik/main.go --service "osm.kcwu.csie.org" list --markdown >> docs/catalogs/osm.kcwu.csie.org.md
 
-
 builds:
   - main: ./cmd/download-geofabrik/main.go
     env:
@@ -205,11 +204,11 @@ builds:
     #go386:
     #  - sse2
     #  - softfloat
-      
+
     #goppc64:
     #  - power8
     #  - power9
-    
+
     #goriscv64:
     #  - rva20u64
     #  - rva22u64
@@ -225,7 +224,7 @@ builds:
     ignore:
       - goos: darwin
         goarch: 386
-    
+
     tool: "go1.27.1"
 
     flags:
@@ -256,7 +255,7 @@ upx:
     lzma: true
 
     # Whether to try all methods and filters (slow).
-    brute: true      
+    brute: true
 
 archives:
   - formats:
@@ -342,7 +341,7 @@ nfpms:
         type: config|noreplace
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 snapshot:
   version_template: "{{ .Tag }}-next"
 

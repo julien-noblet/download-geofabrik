@@ -1,10 +1,6 @@
 {
-  "extends": [
-    "config:recommended"
-  ],
-  "postUpdateOptions": [
-    "gomodTidy"
-  ],
+  "extends": ["config:recommended"],
+  "postUpdateOptions": ["gomodTidy"],
   "nix": {
     "enabled": true
   },
@@ -18,14 +14,10 @@
   "packageRules": [
     {
       "groupName": "golang.org/x",
-      "matchPackageNames": [
-        "/golang.org/x/"
-      ]
+      "matchPackageNames": ["/golang.org/x/"]
     },
     {
-      "matchDepTypes": [
-        "devDependencies"
-      ],
+      "matchDepTypes": ["devDependencies"],
       "automerge": true
     }
   ],

@@ -14,6 +14,8 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
+	"strings"
 	"sync"
 	"time"
 
@@ -34,6 +36,8 @@ const (
 	maxIdleConns        = 100
 	maxIdleConnsPerHost = 20
 	streamBufferSize    = 128 * 1024 // 128KB buffer for optimal socket and disk throughput
+	initialRetryDelay   = time.Second
+	maxRetryDelay       = 30 * time.Second
 )
 
 var (
@@ -78,6 +82,9 @@ type Options struct {
 
 	// Progress controls whether a progress bar is displayed during download.
 	Progress bool
+
+	// Retries is the number of additional attempts for transient download failures.
+	Retries int
 }
 
 // Downloader executes atomic extract downloads with in-flight hash computation and connection pooling.
@@ -89,6 +96,7 @@ type Downloader struct {
 	Options *Options
 
 	client   *http.Client
+	wait     func(context.Context, time.Duration) error
 	lastHash sync.Map // map[string]string: filePath -> hexMD5 computed in-flight
 }
 
@@ -130,6 +138,7 @@ func New(cat *catalog.Catalog, opts *Options) *Downloader {
 				WriteBufferSize:       streamBufferSize,
 			},
 		},
+		wait: waitContext,
 	}
 }
 
@@ -164,31 +173,82 @@ func (d *Downloader) fromURL(ctx context.Context, myURL, fileName string, force 
 		return checkErr
 	}
 
+	return d.downloadWithRetries(ctx, myURL, fileName, force)
+}
+
+type retryDecision struct {
+	delay     time.Duration
+	retryable bool
+	hasDelay  bool
+}
+
+func (d *Downloader) downloadWithRetries(ctx context.Context, myURL, fileName string, force bool) error {
+	for retriesPerformed := 0; ; retriesPerformed++ {
+		decision, downloadErr := d.downloadOnce(ctx, myURL, fileName, force)
+		if downloadErr == nil {
+			return nil
+		}
+
+		if !decision.retryable || isContextErr(downloadErr) || retriesPerformed >= d.opts().Retries {
+			return downloadErr
+		}
+
+		delay := retryDelay(retriesPerformed, decision)
+
+		wait := d.wait
+		if wait == nil {
+			wait = waitContext
+		}
+
+		if waitErr := wait(ctx, delay); waitErr != nil {
+			return errors.Join(downloadErr, fmt.Errorf("waiting before retry: %w", waitErr))
+		}
+	}
+}
+
+func (d *Downloader) downloadOnce(ctx context.Context, myURL, fileName string, force bool) (decision retryDecision, err error) {
+	urlForError := "remote URL"
+	if d.opts().Verbose {
+		urlForError = myURL
+	}
+
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, myURL, http.NoBody)
 	if err != nil {
-		return fmt.Errorf("creating request for %s: %w", myURL, err)
+		return retryDecision{}, fmt.Errorf("creating request for %s: %w", urlForError, err)
 	}
 
 	client := cmp.Or(d.client, http.DefaultClient)
 
 	response, err := client.Do(req)
 	if err != nil {
-		return fmt.Errorf("downloading %s: %w", myURL, err)
+		return retryDecision{retryable: isTransientNetworkError(err)}, fmt.Errorf("downloading %s: %w", urlForError, err)
 	}
 
 	defer func() {
 		if cerr := response.Body.Close(); cerr != nil {
-			closeErr := fmt.Errorf("closing response body for %s: %w", myURL, cerr)
+			closeErr := fmt.Errorf("closing response body for %s: %w", urlForError, cerr)
 			err = errors.Join(err, closeErr)
 		}
 	}()
 
 	if response.StatusCode != http.StatusOK {
-		return fmt.Errorf("%w: downloading %s: server status code %d",
-			ErrServerStatusCode, myURL, response.StatusCode)
+		statusErr := fmt.Errorf("%w: downloading %s: server status code %d",
+			ErrServerStatusCode, urlForError, response.StatusCode)
+
+		delay, hasDelay := parseRetryAfter(response.Header.Get("Retry-After"), time.Now())
+
+		return retryDecision{
+			retryable: isRetryableStatus(response.StatusCode),
+			delay:     delay,
+			hasDelay:  hasDelay,
+		}, statusErr
 	}
 
-	return d.saveToFile(fileName, response, force)
+	err = d.saveToFile(fileName, response, force)
+
+	var readErr *responseReadError
+
+	return retryDecision{retryable: errors.As(err, &readErr) && isTransientNetworkError(readErr.err)}, err
 }
 
 func (d *Downloader) checkDestination(fileName string, force bool) error {
@@ -215,26 +275,130 @@ func (d *Downloader) copyBody(dst io.Writer, response *http.Response) (int64, er
 	defer copyBufPool.Put(bufPtr)
 
 	opts := d.opts()
+
+	source := &errCapturingReader{reader: response.Body}
+
+	var reader io.Reader = source
+
 	if opts.Progress && !opts.Quiet && response.ContentLength > progressMinimal {
 		progressBar := pb.Full.Start64(response.ContentLength)
-		barReader := progressBar.NewProxyReader(response.Body)
+		reader = progressBar.NewProxyReader(source)
 
 		defer progressBar.Finish()
-
-		written, err := io.CopyBuffer(dst, barReader, *bufPtr)
-		if err != nil {
-			return written, fmt.Errorf("copying response with progress: %w", err)
-		}
-
-		return written, nil
 	}
 
-	written, err := io.CopyBuffer(dst, response.Body, *bufPtr)
+	written, err := io.CopyBuffer(dst, reader, *bufPtr)
 	if err != nil {
+		if source.err != nil {
+			return written, &responseReadError{err: source.err}
+		}
+
 		return written, fmt.Errorf("copying response: %w", err)
 	}
 
 	return written, nil
+}
+
+type errCapturingReader struct {
+	reader io.Reader
+	err    error
+}
+
+func (r *errCapturingReader) Read(buffer []byte) (int, error) {
+	bytesRead, err := r.reader.Read(buffer)
+	if err != nil && !errors.Is(err, io.EOF) {
+		r.err = err
+	}
+
+	//nolint:wrapcheck // Raw stream errors and io.EOF are wrapped by copyBody via responseReadError.
+	return bytesRead, err
+}
+
+type responseReadError struct {
+	err error
+}
+
+func (e *responseReadError) Error() string {
+	return fmt.Sprintf("reading response body: %v", e.err)
+}
+
+func (e *responseReadError) Unwrap() error {
+	return e.err
+}
+
+func isRetryableStatus(statusCode int) bool {
+	return statusCode == http.StatusTooManyRequests ||
+		statusCode >= http.StatusInternalServerError && statusCode <= 599
+}
+
+func isContextErr(err error) bool {
+	return errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded)
+}
+
+func isTransientNetworkError(err error) bool {
+	if isContextErr(err) {
+		return false
+	}
+
+	if errors.Is(err, io.EOF) || errors.Is(err, io.ErrUnexpectedEOF) {
+		return true
+	}
+
+	if _, ok := errors.AsType[*net.OpError](err); ok {
+		return true
+	}
+
+	networkErr, ok := errors.AsType[net.Error](err)
+
+	return ok && networkErr.Timeout()
+}
+
+func retryDelay(retriesPerformed int, decision retryDecision) time.Duration {
+	if decision.hasDelay {
+		return min(decision.delay, maxRetryDelay)
+	}
+
+	delay := initialRetryDelay
+	for range retriesPerformed {
+		if delay >= maxRetryDelay/2 {
+			return maxRetryDelay
+		}
+
+		delay *= 2
+	}
+
+	return delay
+}
+
+func parseRetryAfter(value string, now time.Time) (time.Duration, bool) {
+	value = strings.TrimSpace(value)
+
+	if seconds, err := strconv.ParseInt(value, 10, 64); err == nil && seconds >= 0 {
+		if seconds >= int64(maxRetryDelay/time.Second) {
+			return maxRetryDelay, true
+		}
+
+		return time.Duration(seconds) * time.Second, true
+	}
+
+	retryTime, err := http.ParseTime(value)
+	if err != nil {
+		return 0, false
+	}
+
+	return min(max(retryTime.Sub(now), 0), maxRetryDelay), true
+}
+
+func waitContext(ctx context.Context, delay time.Duration) error {
+	timer := time.NewTimer(delay)
+	defer timer.Stop()
+
+	select {
+	case <-ctx.Done():
+		return fmt.Errorf("waiting for retry: %w", ctx.Err())
+	case <-timer.C:
+		return nil
+	}
 }
 
 func (d *Downloader) saveToFile(fileName string, response *http.Response, force bool) (err error) {
@@ -340,7 +504,7 @@ func (d *Downloader) DownloadFile(ctx context.Context, elementID, formatName, ou
 		return fmt.Errorf("generating URL for %s (%s): %w", elementID, formatName, err)
 	}
 
-	slog.Info("Starting download", "element", elementID, "format", formatName, "url", myURL)
+	slog.Info("Starting download", "element", elementID, "format", formatName)
 
 	return d.FromURL(ctx, myURL, outputPath)
 }
